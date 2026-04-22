@@ -1,0 +1,63 @@
+---
+/**
+ * FAQ Schema Component — Dark theme version
+ * Renders both visible FAQ content AND FAQPage JSON-LD schema.
+ * Core AEO component — AI engines extract these directly.
+ */
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  faqs: FAQ[];
+  heading?: string;
+}
+
+const { faqs, heading = 'Frequently Asked Questions' } = Astro.props;
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<section class="section-sm dark-section-elevated" id="faq" itemscope itemtype="https://schema.org/FAQPage">
+  <div class="container-narrow">
+    <h2 class="accent-underline mb-10">{heading}</h2>
+    <div class="space-y-4">
+      {faqs.map((faq) => (
+        <details
+          class="group border border-[var(--color-border-dark)] rounded-lg overflow-hidden bg-[var(--color-black-card)]"
+          itemscope
+          itemprop="mainEntity"
+          itemtype="https://schema.org/Question"
+        >
+          <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-[var(--color-dark-elevated)] transition-colors duration-200">
+            <h3 class="text-base font-semibold text-white pr-4 m-0" itemprop="name" style="font-size: 1.05rem; font-family: var(--font-body);">
+              {faq.question}
+            </h3>
+            <span class="text-[var(--color-cbgl-blue-light)] text-xl flex-shrink-0 transition-transform duration-200 group-open:rotate-45">+</span>
+          </summary>
+          <div
+            class="px-5 pb-5 text-white/60 leading-relaxed"
+            itemscope
+            itemprop="acceptedAnswer"
+            itemtype="https://schema.org/Answer"
+          >
+            <p itemprop="text">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', ...faqSchema }, null, 0)} />

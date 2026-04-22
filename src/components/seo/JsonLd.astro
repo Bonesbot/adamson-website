@@ -1,0 +1,19 @@
+---
+/**
+ * JSON-LD Structured Data Component
+ * Renders Schema.org structured data for AEO optimization.
+ * Accepts a single schema object or an array of schemas.
+ */
+interface Props {
+  data: Record<string, any> | Record<string, any>[];
+}
+
+const { data } = Astro.props;
+
+// Wrap in @graph if multiple schemas
+const structuredData = Array.isArray(data)
+  ? { '@context': 'https://schema.org', '@graph': data }
+  : { '@context': 'https://schema.org', ...data };
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData, null, 0)} />

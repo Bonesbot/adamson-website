@@ -1,0 +1,48 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import AreaCard from '@/components/market/AreaCard.astro';
+import areasData from '@/data/areas.json';
+
+const description = 'Explore luxury real estate markets across Sarasota\'s barrier islands — Longboat Key, Lido Key, Siesta Key, St. Armands, Bird Key, and greater Sarasota. Market data, pricing trends, and neighborhood guides.';
+
+const jsonLd = {
+  '@type': 'CollectionPage',
+  name: 'Areas We Serve — Sarasota Luxury Real Estate',
+  description: description,
+  url: 'https://ryanadamsonrealty.com/areas',
+};
+---
+
+<BaseLayout title="Areas We Serve" description={description} jsonLd={jsonLd}>
+
+  <!-- Hero -->
+  <section class="relative pt-32 pb-20">
+    <div class="absolute inset-0" style="background-color: var(--color-navy);" />
+    <div class="relative z-10 container text-center">
+      <p class="font-accent text-xs uppercase tracking-[0.3em] text-[var(--color-gold)] mb-3">
+        Explore
+      </p>
+      <h1 class="font-display text-white mb-4">Areas We Serve</h1>
+      <p class="text-lg text-white/70 max-w-2xl mx-auto">
+        From exclusive barrier island estates to vibrant downtown waterfront living — discover Sarasota's most coveted communities.
+      </p>
+    </div>
+  </section>
+
+  <!-- Area Grid -->
+  <section class="section bg-[var(--color-warm-white)]">
+    <div class="container">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {areasData.areas.map((area) => (
+          <AreaCard
+            name={area.name}
+            slug={area.slug}
+            tagline={area.tagline}
+            medianPrice={area.marketStats.medianPrice}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

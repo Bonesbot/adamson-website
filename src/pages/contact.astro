@@ -1,0 +1,131 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const description = 'Contact Ryan Adamson for luxury real estate inquiries in Sarasota, Longboat Key, Lido Key, Siesta Key, and the barrier islands. Schedule a consultation today.';
+
+const jsonLd = {
+  '@type': 'ContactPage',
+  name: 'Contact Ryan Adamson',
+  description: description,
+  url: 'https://ryanadamsonrealty.com/contact',
+};
+---
+
+<BaseLayout title="Contact" description={description} jsonLd={jsonLd}>
+
+  <!-- Hero -->
+  <section class="relative pt-32 pb-20">
+    <div class="absolute inset-0" style="background-color: var(--color-navy);" />
+    <div class="relative z-10 container text-center">
+      <p class="font-accent text-xs uppercase tracking-[0.3em] text-[var(--color-gold)] mb-3">
+        Let's Connect
+      </p>
+      <h1 class="font-display text-white mb-4">Get in Touch</h1>
+      <p class="text-lg text-white/70 max-w-xl mx-auto">
+        Whether you're buying, selling, or exploring the market — I'd love to hear from you.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="section bg-white">
+    <div class="container-narrow">
+      <form
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        class="space-y-6"
+      >
+        <!-- Honeypot -->
+        <p class="hidden">
+          <label>Don't fill this out: <input name="bot-field" /></label>
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label for="name" class="block font-accent text-xs uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              class="w-full px-4 py-3 border border-[var(--color-border)] rounded-lg focus:outline-none focus:border-[var(--color-gold)] transition-colors bg-[var(--color-warm-white)]"
+              placeholder="Your name"
+            />
+          </div>
+          <div>
+            <label for="email" class="block font-accent text-xs uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full px-4 py-3 border border-[var(--color-border)] rounded-lg focus:outline-none focus:border-[var(--color-gold)] transition-colors bg-[var(--color-warm-white)]"
+              placeholder="your@email.com"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="phone" class="block font-accent text-xs uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+            Phone <span class="normal-case tracking-normal text-[var(--color-text-light)]">(optional)</span>
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            class="w-full px-4 py-3 border border-[var(--color-border)] rounded-lg focus:outline-none focus:border-[var(--color-gold)] transition-colors bg-[var(--color-warm-white)]"
+            placeholder="(941) 555-0000"
+          />
+        </div>
+
+        <div>
+          <label for="interest" class="block font-accent text-xs uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+            I'm Interested In
+          </label>
+          <select
+            id="interest"
+            name="interest"
+            class="w-full px-4 py-3 border border-[var(--color-border)] rounded-lg focus:outline-none focus:border-[var(--color-gold)] transition-colors bg-[var(--color-warm-white)]"
+          >
+            <option value="">Select an option</option>
+            <option value="buying">Buying a Home</option>
+            <option value="selling">Selling a Home</option>
+            <option value="market-info">Market Information</option>
+            <option value="relocation">Relocating to Sarasota</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="message" class="block font-accent text-xs uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+            Message
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            required
+            class="w-full px-4 py-3 border border-[var(--color-border)] rounded-lg focus:outline-none focus:border-[var(--color-gold)] transition-colors bg-[var(--color-warm-white)] resize-vertical"
+            placeholder="Tell me about what you're looking for..."
+          ></textarea>
+        </div>
+
+        <div class="text-center pt-2">
+          <button
+            type="submit"
+            class="inline-flex items-center justify-center font-accent text-xs uppercase tracking-wider px-10 py-4 bg-[var(--color-gold)] text-[var(--color-navy)] hover:bg-[var(--color-gold-light)] font-semibold rounded transition-all duration-200"
+          >
+            Send Message
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</BaseLayout>

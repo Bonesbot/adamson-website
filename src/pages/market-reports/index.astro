@@ -1,0 +1,45 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const description = 'Monthly and quarterly real estate market reports for Sarasota, Longboat Key, Lido Key, Siesta Key, and the barrier islands. MLS-sourced data and expert analysis from Ryan Adamson.';
+
+const jsonLd = {
+  '@type': 'CollectionPage',
+  name: 'Market Reports — Sarasota Luxury Real Estate',
+  description: description,
+  url: 'https://ryanadamsonrealty.com/market-reports',
+};
+---
+
+<BaseLayout title="Market Reports" description={description} jsonLd={jsonLd}>
+
+  <!-- Hero -->
+  <section class="relative pt-32 pb-20">
+    <div class="absolute inset-0" style="background-color: var(--color-navy);" />
+    <div class="relative z-10 container text-center">
+      <p class="font-accent text-xs uppercase tracking-[0.3em] text-[var(--color-gold)] mb-3">
+        Data & Insights
+      </p>
+      <h1 class="font-display text-white mb-4">Market Reports</h1>
+      <p class="text-lg text-white/70 max-w-2xl mx-auto">
+        Real data from the Sarasota MLS, analyzed and presented to help you understand the luxury market.
+      </p>
+    </div>
+  </section>
+
+  <!-- Coming Soon Placeholder -->
+  <section class="section bg-white">
+    <div class="container-narrow text-center">
+      <div class="py-16">
+        <p class="font-accent text-xs uppercase tracking-[0.2em] text-[var(--color-gold)] mb-4">
+          Coming Soon
+        </p>
+        <h2 class="mb-4">Monthly Market Reports</h2>
+        <p class="text-[var(--color-text-muted)] max-w-lg mx-auto leading-relaxed">
+          Detailed monthly and quarterly market reports with MLS-sourced data for each community we serve are on the way. Check back soon for the latest insights on pricing trends, inventory levels, and market conditions.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

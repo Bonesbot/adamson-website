@@ -1,0 +1,296 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   RYAN ADAMSON LUXURY RE — Design Tokens
+   Inspired by AdamsonFL.com + CBGL brand
+   ============================================ */
+
+:root {
+  /* ---- Primary Palette ---- */
+  /* Sharp black base — dominant background color (matches existing site feel) */
+  --color-black: #000000;
+  --color-black-soft: #0A0A0A;
+  --color-black-card: #111111;
+  --color-dark: #1A1A1A;
+  --color-dark-elevated: #222222;
+
+  /* Coldwell Banker Global Luxury (CBGL) blues */
+  --color-cbgl-blue: #2D4280;        /* CBGL primary — deep luxury blue */
+  --color-cbgl-blue-light: #52a8ff;  /* CBGL secondary — bright sky blue */
+  --color-cbgl-blue-glow: #52a8ff33; /* Glow/accent use at low opacity */
+
+  /* Legacy navy — kept for flexibility, but CBGL blue is primary brand */
+  --color-navy: #1B2A4A;
+  --color-navy-light: #243656;
+  --color-charcoal: #2C3E50;
+
+  /* Gold accent — luxury warmth, CTAs, highlights */
+  --color-gold: #C5A55A;
+  --color-gold-light: #E8D5A3;
+  --color-gold-pale: #F5EDD6;
+
+  /* Light surfaces (used sparingly — site is dark-dominant) */
+  --color-warm-white: #FAFAF8;
+  --color-pure-white: #FFFFFF;
+  --color-off-white: #F5F5F5;
+
+  /* Text */
+  --color-text: #1A1A1A;
+  --color-text-muted: #6B7280;
+  --color-text-light: #9CA3AF;
+  --color-text-on-dark: #FFFFFF;
+  --color-text-on-dark-muted: #FFFFFFB3;  /* white/70 */
+  --color-text-on-dark-subtle: #FFFFFF66;  /* white/40 */
+
+  /* Borders */
+  --color-border: #E5E7EB;
+  --color-border-light: #F3F4F6;
+  --color-border-dark: #FFFFFF1A;  /* white/10 — for dark bg sections */
+
+  /* ---- Typography ---- */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-accent: 'Montserrat', 'Inter', system-ui, sans-serif;
+
+  /* ---- Spacing ---- */
+  --spacing-section: 6rem;
+  --spacing-section-sm: 4rem;
+
+  /* ---- Container ---- */
+  --container-max: 1280px;
+  --container-narrow: 800px;
+
+  /* ---- Transitions ---- */
+  --transition-base: 200ms ease;
+  --transition-slow: 400ms ease;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-black-soft);
+  line-height: 1.7;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Default heading color depends on context — dark bg pages get white,
+   light bg sections override inline. This keeps the dark-first approach. */
+h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); color: var(--color-text-on-dark); }
+h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); color: var(--color-text-on-dark); }
+h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); color: var(--color-text-on-dark); }
+h4 { font-size: clamp(1.1rem, 2vw, 1.25rem); color: var(--color-text-on-dark); }
+
+/* Override for light-background sections */
+.light-section h1,
+.light-section h2,
+.light-section h3,
+.light-section h4 {
+  color: var(--color-black);
+}
+
+/* Links */
+a {
+  color: var(--color-cbgl-blue-light);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+a:hover {
+  color: var(--color-gold);
+}
+
+/* ---- Accent Underlines ---- */
+/* Gold version (default) */
+.accent-underline::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--color-gold);
+  margin-top: 0.75rem;
+}
+
+.accent-underline-center::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--color-gold);
+  margin: 0.75rem auto 0;
+}
+
+/* CBGL blue version */
+.accent-underline-blue::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--color-cbgl-blue-light);
+  margin-top: 0.75rem;
+}
+
+/* Section spacing */
+.section {
+  padding: var(--spacing-section) 0;
+}
+
+.section-sm {
+  padding: var(--spacing-section-sm) 0;
+}
+
+/* Container */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.container-narrow {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ============================================
+   Dark-First Section Patterns
+   (Matching AdamsonFL.com's dark aesthetic)
+   ============================================ */
+
+/* Dark section — primary pattern (black bg, white text) */
+.dark-section {
+  background-color: var(--color-black-soft);
+  color: var(--color-text-on-dark);
+}
+
+/* Elevated dark section — slightly lighter for visual depth */
+.dark-section-elevated {
+  background-color: var(--color-dark);
+  color: var(--color-text-on-dark);
+}
+
+/* Light section — used for contrast breaks */
+.light-section {
+  background-color: var(--color-pure-white);
+  color: var(--color-text);
+}
+
+.light-section a {
+  color: var(--color-cbgl-blue);
+}
+
+.light-section a:hover {
+  color: var(--color-gold);
+}
+
+/* CBGL blue section — for branded accent bands */
+.cbgl-section {
+  background-color: var(--color-cbgl-blue);
+  color: var(--color-text-on-dark);
+}
+
+/* ============================================
+   Video Hero Support
+   ============================================ */
+
+.video-hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.video-hero video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+}
+
+.video-hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.3) 40%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  z-index: 1;
+}
+
+.video-hero .content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.text-gold { color: var(--color-gold); }
+.text-cbgl-blue { color: var(--color-cbgl-blue); }
+.text-cbgl-blue-light { color: var(--color-cbgl-blue-light); }
+.text-navy { color: var(--color-navy); }
+
+.bg-black-soft { background-color: var(--color-black-soft); }
+.bg-dark { background-color: var(--color-dark); }
+.bg-navy { background-color: var(--color-navy); }
+.bg-cbgl-blue { background-color: var(--color-cbgl-blue); }
+.bg-warm-white { background-color: var(--color-warm-white); }
+
+.font-display { font-family: var(--font-display); }
+.font-accent { font-family: var(--font-accent); }
+
+/* Bold uppercase labels — matches AdamsonFL.com section headers */
+.section-label {
+  font-family: var(--font-accent);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Subtle glow for CBGL blue accents on dark backgrounds */
+.cbgl-glow {
+  box-shadow: 0 0 20px var(--color-cbgl-blue-glow);
+}

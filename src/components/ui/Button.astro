@@ -1,0 +1,39 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'outline' | 'cbgl' | 'black';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  class: className = '',
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+
+const baseClasses = 'inline-flex items-center justify-center font-accent uppercase tracking-wider transition-all duration-200 rounded';
+
+const variantClasses = {
+  primary: 'bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] font-semibold',
+  secondary: 'bg-[var(--color-cbgl-blue)] text-white hover:bg-[var(--color-cbgl-blue-light)] font-semibold',
+  outline: 'border-2 border-white text-white hover:bg-white hover:text-black font-semibold',
+  cbgl: 'bg-[var(--color-cbgl-blue-light)] text-white hover:bg-[var(--color-cbgl-blue)] font-semibold',
+  black: 'bg-black text-white hover:bg-[var(--color-dark)] font-semibold border border-white/10',
+};
+
+const sizeClasses = {
+  sm: 'text-xs px-4 py-2',
+  md: 'text-xs px-6 py-3',
+  lg: 'text-sm px-8 py-4',
+};
+
+const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
+---
+
+<Tag href={href} class={classes}>
+  <slot />
+</Tag>

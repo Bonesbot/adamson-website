@@ -1,0 +1,117 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import MarketStats from '@/components/market/MarketStats.astro';
+import FAQSchema from '@/components/seo/FAQSchema.astro';
+import Button from '@/components/ui/Button.astro';
+import areasData from '@/data/areas.json';
+
+export function getStaticPaths() {
+  return areasData.areas.map((area) => ({
+    params: { slug: area.slug },
+    props: { area },
+  }));
+}
+
+const { area } = Astro.props;
+
+const description = `${area.name} real estate market data, pricing trends, and neighborhood guide. Median home price: ${area.marketStats.medianPrice}. Expert insights from Ryan Adamson, Coldwell Banker St. Armands.`;
+
+const jsonLd = [
+  {
+    '@type': 'Place',
+    name: area.name,
+    description: area.description,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: area.name,
+      addressRegion: 'FL',
+      postalCode: area.zipCodes[0],
+      addressCountry: 'US',
+    },
+  },
+  {
+    '@type': 'WebPage',
+    name: `${area.name} Real Estate Market Guide`,
+    description: description,
+    url: `https://ryanadamsonrealty.com/areas/${area.slug}`,
+    author: {
+      '@type': 'RealEstateAgent',
+      name: 'Ryan Adamson',
+      worksFor: { '@type': 'Organization', name: 'Coldwell Banker Realty — St. Armands' },
+    },
+    about: {
+      '@type': 'Place',
+      name: area.name,
+    },
+  },
+];
+---
+
+<BaseLayout title={`${area.name} Real Estate`} description={description} jsonLd={jsonLd}>
+
+  <!-- Hero -->
+  <section class="relative pt-32 pb-20 overflow-hidden">
+    <div
+      class="absolute inset-0 bg-cover bg-center"
+      style={`background-image: url('/images/areas/${area.slug}.jpg'); background-color: var(--color-black);`}
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/90" />
+
+    <div class="relative z-10 container">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">
+        Area Guide
+      </p>
+      <h1 class="font-display text-white mb-4">{area.name}</h1>
+      <p class="text-lg text-white/70 max-w-2xl leading-relaxed">
+        {area.tagline}
+      </p>
+    </div>
+  </section>
+
+  <!-- Overview (Light break for readability) -->
+  <section class="section light-section">
+    <div class="container-narrow">
+      <h2 class="accent-underline mb-6">About {area.name}</h2>
+      <p class="text-[var(--color-text-muted)] leading-relaxed text-lg mb-8">
+        {area.description}
+      </p>
+
+      {area.highlights && area.highlights.length > 0 && (
+        <div class="flex flex-wrap gap-3">
+          {area.highlights.map((highlight: string) => (
+            <span class="inline-block bg-[var(--color-cbgl-blue)]/10 text-[var(--color-cbgl-blue)] font-accent text-xs uppercase tracking-wider px-4 py-2 rounded-full border border-[var(--color-cbgl-blue)]/20">
+              {highlight}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Market Stats (Dark) -->
+  <MarketStats areaName={area.name} stats={area.marketStats} />
+
+  <!-- FAQ Section (Dark elevated) -->
+  {area.faqs && area.faqs.length > 0 && (
+    <FAQSchema
+      faqs={area.faqs}
+      heading={`${area.name} Real Estate FAQ`}
+    />
+  )}
+
+  <!-- CTA (CBGL Blue) -->
+  <section class="cbgl-section py-16">
+    <div class="container text-center">
+      <h2 class="font-display text-2xl text-white mb-4">
+        Interested in {area.name}?
+      </h2>
+      <p class="text-white/70 mb-8 max-w-lg mx-auto">
+        Get personalized market insights and property recommendations from a local expert.
+      </p>
+      <Button href="/contact" variant="primary" size="lg">
+        Talk to Ryan
+      </Button>
+    </div>
+  </section>
+
+</BaseLayout>

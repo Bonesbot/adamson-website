@@ -1,0 +1,119 @@
+---
+/**
+ * Site Header — Dark, bold navigation
+ * Matches AdamsonFL.com feel: dark bar, dual logos, uppercase nav.
+ * Starts transparent over hero, solidifies on scroll.
+ */
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'Areas', href: '/areas' },
+  { label: 'Market Reports', href: '/market-reports' },
+  { label: 'About Ryan', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+  id="site-header"
+>
+  <div class="container">
+    <nav class="flex items-center justify-between h-20" aria-label="Main navigation">
+      <!-- Logos — Adamson Group + Coldwell Banker (side by side like existing site) -->
+      <a href="/" class="flex items-center gap-4 group">
+        <!-- Adamson Group Logo (inverted to white for dark bg) -->
+        <img
+          src="/images/logos/adamson-group-black.png"
+          alt="Adamson Group"
+          class="h-12 w-auto invert brightness-0 invert"
+          style="filter: invert(1) brightness(100);"
+        />
+        <!-- Divider -->
+        <span class="hidden sm:block w-px h-8 bg-white/20"></span>
+        <!-- Coldwell Banker Logo (white version for dark bg) -->
+        <img
+          src="/images/logos/cb-horz-white.png"
+          alt="Coldwell Banker Realty"
+          class="hidden sm:block h-10 w-auto"
+        />
+      </a>
+
+      <!-- Desktop Navigation -->
+      <ul class="hidden md:flex items-center gap-8" role="list">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={[
+                'font-accent text-xs uppercase tracking-[0.15em] font-semibold transition-colors duration-200',
+                currentPath === item.href
+                  ? 'text-[var(--color-cbgl-blue-light)]'
+                  : 'text-white/90 hover:text-[var(--color-gold)]',
+              ]}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Mobile Menu Button -->
+      <button
+        class="md:hidden text-white p-2"
+        id="mobile-menu-toggle"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="hidden md:hidden bg-black/95 backdrop-blur-md" id="mobile-menu">
+    <ul class="container py-6 space-y-4" role="list">
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class:list={[
+              'block font-accent text-sm uppercase tracking-wider py-2 transition-colors',
+              currentPath === item.href
+                ? 'text-[var(--color-cbgl-blue-light)]'
+                : 'text-white/80 hover:text-[var(--color-gold)]',
+            ]}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<script>
+  // Header scroll behavior — transparent to solid black
+  const header = document.getElementById('site-header')!;
+  const updateHeader = () => {
+    if (window.scrollY > 50) {
+      header.classList.add('bg-black', 'shadow-lg', 'shadow-black/50');
+    } else {
+      header.classList.remove('bg-black', 'shadow-lg', 'shadow-black/50');
+    }
+  };
+  window.addEventListener('scroll', updateHeader, { passive: true });
+  updateHeader();
+
+  // Mobile menu toggle
+  const toggle = document.getElementById('mobile-menu-toggle')!;
+  const menu = document.getElementById('mobile-menu')!;
+  toggle.addEventListener('click', () => {
+    const isOpen = !menu.classList.contains('hidden');
+    menu.classList.toggle('hidden');
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+</script>

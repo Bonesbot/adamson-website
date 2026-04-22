@@ -1,0 +1,92 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/ui/Button.astro';
+
+const description = 'Meet Ryan Adamson, luxury real estate specialist at Coldwell Banker St. Armands. Serving Sarasota, Longboat Key, Lido Key, Siesta Key, and the barrier islands with expert market knowledge and personalized service.';
+
+const jsonLd = {
+  '@type': 'ProfilePage',
+  mainEntity: {
+    '@type': 'RealEstateAgent',
+    name: 'Ryan Adamson',
+    jobTitle: 'Luxury Real Estate Specialist',
+    description: description,
+    url: 'https://ryanadamsonrealty.com/about',
+    image: '/images/ryan-adamson.jpg',
+    worksFor: {
+      '@type': 'RealEstateAgent',
+      name: 'Coldwell Banker Realty — St. Armands',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'St. Armands Circle',
+        addressLocality: 'Sarasota',
+        addressRegion: 'FL',
+        postalCode: '34236',
+      },
+    },
+    areaServed: ['Sarasota', 'Longboat Key', 'Lido Key', 'Siesta Key', 'St. Armands', 'Bird Key'],
+    knowsAbout: ['Luxury Real Estate', 'Waterfront Properties', 'Barrier Island Living', 'Sarasota Real Estate Market'],
+  },
+};
+---
+
+<BaseLayout title="About Ryan Adamson" description={description} jsonLd={jsonLd}>
+
+  <!-- Hero -->
+  <section class="relative pt-32 pb-20">
+    <div class="absolute inset-0" style="background-color: var(--color-navy);" />
+    <div class="relative z-10 container">
+      <p class="font-accent text-xs uppercase tracking-[0.3em] text-[var(--color-gold)] mb-3">
+        About
+      </p>
+      <h1 class="font-display text-white">Ryan Adamson</h1>
+    </div>
+  </section>
+
+  <!-- Bio Section -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-12 items-start">
+        <!-- Photo -->
+        <div class="md:col-span-2">
+          <div class="aspect-[3/4] rounded-lg overflow-hidden bg-[var(--color-border-light)]">
+            <img
+              src="/images/ryan-adamson.jpg"
+              alt="Ryan Adamson, Luxury Real Estate Specialist"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <!-- Bio Content -->
+        <div class="md:col-span-3">
+          <h2 class="accent-underline mb-6">Luxury Real Estate Specialist</h2>
+          <p class="font-accent text-sm uppercase tracking-wider text-[var(--color-gold)] mb-6">
+            Coldwell Banker Realty — St. Armands Circle
+          </p>
+
+          <div class="space-y-4 text-[var(--color-text-muted)] leading-relaxed">
+            <p>
+              <!-- TODO: Replace with Ryan's actual bio copy -->
+              Ryan Adamson brings deep local expertise and a client-first approach to luxury real estate on Sarasota's barrier islands. Specializing in waterfront properties across Longboat Key, Lido Key, Siesta Key, and the surrounding communities, Ryan combines market intelligence with personalized service to help buyers and sellers navigate one of Florida's most dynamic luxury markets.
+            </p>
+            <p>
+              Based at Coldwell Banker's St. Armands Circle office, Ryan leverages the global network and trusted reputation of one of real estate's most recognized brands while delivering the hands-on, local knowledge that only comes from truly knowing these communities.
+            </p>
+            <p>
+              Whether you're searching for a Gulf-front estate, a bayfront condo with sunset views, or looking to maximize the sale of your island property, Ryan provides the data-driven insights and white-glove service that luxury buyers and sellers expect.
+            </p>
+          </div>
+
+          <div class="mt-8">
+            <Button href="/contact" variant="primary" size="md">
+              Get in Touch
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

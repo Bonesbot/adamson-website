@@ -1,0 +1,62 @@
+---
+/**
+ * Market Stats Grid — Dark card style on dark background.
+ * Semantic HTML for AEO — AI engines can extract these stats directly.
+ */
+interface Stats {
+  medianPrice: string;
+  avgDom: string;
+  activeListings: string;
+  soldLast90Days: string;
+  yoyPriceChange: string;
+  pricePerSqFt: string;
+  lastUpdated: string;
+}
+
+interface Props {
+  areaName: string;
+  stats: Stats;
+}
+
+const { areaName, stats } = Astro.props;
+
+const statItems = [
+  { label: 'Median Price', value: stats.medianPrice, icon: '$' },
+  { label: 'Price / Sq Ft', value: stats.pricePerSqFt, icon: '▣' },
+  { label: 'Avg Days on Market', value: stats.avgDom, icon: '◷' },
+  { label: 'Active Listings', value: stats.activeListings, icon: '⌂' },
+  { label: 'Sold (90 Days)', value: stats.soldLast90Days, icon: '✓' },
+  { label: 'YoY Price Change', value: stats.yoyPriceChange, icon: '↗' },
+];
+---
+
+<section class="section-sm dark-section" aria-label={`${areaName} market statistics`}>
+  <div class="container">
+    <div class="text-center mb-10">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-2">
+        Market Data
+      </p>
+      <h2 class="accent-underline-center">
+        {areaName} by the Numbers
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto">
+      {statItems.map((stat) => (
+        <div class="bg-[var(--color-black-card)] rounded-lg p-6 text-center border border-[var(--color-border-dark)] hover:border-[var(--color-cbgl-blue-light)]/30 transition-colors">
+          <span class="text-2xl mb-2 block text-[var(--color-cbgl-blue-light)] opacity-50">{stat.icon}</span>
+          <p class="font-display text-2xl md:text-3xl font-bold text-white mb-1">
+            {stat.value}
+          </p>
+          <p class="font-accent text-xs uppercase tracking-wider text-white/50">
+            {stat.label}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <p class="text-center text-xs text-white/30 mt-6">
+      Data sourced from Stellar MLS. Last updated {stats.lastUpdated}. Statistics are approximate and subject to change.
+    </p>
+  </div>
+</section>

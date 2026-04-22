@@ -1,0 +1,112 @@
+---
+/**
+ * Site Footer — Dark, structured, matches AdamsonFL.com pattern
+ * Three-column layout: Quick Links, Resources, Contact Info
+ * Includes MLS disclaimer and CBGL blue accent line.
+ */
+const currentYear = new Date().getFullYear();
+
+const quickLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'About Ryan', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const resources = [
+  { label: 'Market Reports', href: '/market-reports' },
+  { label: 'Search Homes', href: '/areas' },
+];
+
+const areas = [
+  { label: 'Sarasota', href: '/areas/sarasota' },
+  { label: 'Longboat Key', href: '/areas/longboat-key' },
+  { label: 'Lido Key', href: '/areas/lido-key' },
+  { label: 'Siesta Key', href: '/areas/siesta-key' },
+  { label: 'St. Armands', href: '/areas/st-armands' },
+  { label: 'Bird Key', href: '/areas/bird-key' },
+];
+---
+
+<!-- CBGL blue accent line at top of footer -->
+<div class="h-1 bg-gradient-to-r from-[var(--color-cbgl-blue)] via-[var(--color-cbgl-blue-light)] to-[var(--color-cbgl-blue)]"></div>
+
+<footer class="bg-black text-white/80">
+  <div class="container py-16">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+
+      <!-- Brand Column -->
+      <div>
+        <img
+          src="/images/logos/adamson-group-black.png"
+          alt="Adamson Group"
+          class="h-14 w-auto mb-4"
+          style="filter: invert(1) brightness(100);"
+        />
+        <p class="font-accent text-xs uppercase tracking-[0.2em] text-[var(--color-cbgl-blue-light)] mb-4">
+          Coldwell Banker Global Luxury
+        </p>
+        <p class="text-sm leading-relaxed text-white/50">
+          Specializing in luxury waterfront properties across Sarasota's barrier islands and coastal communities.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="font-accent text-xs uppercase tracking-[0.15em] text-white font-semibold mb-4">Quick Links</h4>
+        <ul class="space-y-2" role="list">
+          {quickLinks.map((item) => (
+            <li>
+              <a href={item.href} class="text-sm text-white/50 hover:text-[var(--color-gold)] transition-colors flex items-center gap-2">
+                <span class="text-[var(--color-cbgl-blue-light)] text-xs">&rarr;</span>
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Areas -->
+      <div>
+        <h4 class="font-accent text-xs uppercase tracking-[0.15em] text-white font-semibold mb-4">Areas We Serve</h4>
+        <ul class="space-y-2" role="list">
+          {areas.map((area) => (
+            <li>
+              <a href={area.href} class="text-sm text-white/50 hover:text-[var(--color-gold)] transition-colors flex items-center gap-2">
+                <span class="text-[var(--color-cbgl-blue-light)] text-xs">&rarr;</span>
+                {area.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div>
+        <h4 class="font-accent text-xs uppercase tracking-[0.15em] text-white font-semibold mb-4">Contact Info</h4>
+        <div class="space-y-3 text-sm text-white/50">
+          <p>
+            <a href="mailto:Ryan@Adamson-Group.com" class="hover:text-[var(--color-gold)] transition-colors">
+              Ryan@Adamson-Group.com
+            </a>
+          </p>
+          <p>423 St Armands Cir, Sarasota, FL 34236</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="mt-12 pt-8 border-t border-white/10">
+      <p class="text-xs text-white/30 text-center mb-4">
+        Disclaimer: All information contained on this website is deemed reliable but not guaranteed. All properties are subject to prior sale, change, or withdrawal notice. Market data sourced from Stellar MLS. Statistics are approximate and subject to change.
+      </p>
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-white/30">
+          &copy; {currentYear} Adamson Group. Coldwell Banker Realty. All rights reserved.
+        </p>
+        <p class="text-xs text-white/30">
+          Equal Housing Opportunity. Each office is independently owned and operated.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

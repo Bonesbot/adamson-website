@@ -1,0 +1,65 @@
+---
+import '@/styles/global.css';
+import Header from '@/components/layout/Header.astro';
+import Footer from '@/components/layout/Footer.astro';
+import Meta from '@/components/seo/Meta.astro';
+import JsonLd from '@/components/seo/JsonLd.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  jsonLd?: Record<string, any> | Record<string, any>[];
+  noIndex?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogImage = '/images/og-default.jpg',
+  canonicalUrl,
+  jsonLd,
+  noIndex = false,
+} = Astro.props;
+
+const siteTitle = 'Ryan Adamson | Luxury Real Estate — Sarasota & Barrier Islands';
+const fullTitle = title === 'Home' ? siteTitle : `${title} | Ryan Adamson Realty`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <Meta
+      title={fullTitle}
+      description={description}
+      ogImage={ogImage}
+      canonicalUrl={canonicalUrl || Astro.url.href}
+      noIndex={noIndex}
+    />
+
+    {jsonLd && <JsonLd data={jsonLd} />}
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

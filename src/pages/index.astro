@@ -1,0 +1,233 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import AreaCard from '@/components/market/AreaCard.astro';
+import Button from '@/components/ui/Button.astro';
+
+const description = 'Ryan Adamson is a luxury real estate specialist at Coldwell Banker St. Armands, serving Sarasota, Longboat Key, Lido Key, Siesta Key, and the barrier islands. Expert market insights and waterfront properties.';
+
+const areas = [
+  { name: 'Longboat Key', slug: 'longboat-key', tagline: 'Gulf-to-bay island living', medianPrice: '$1.2M' },
+  { name: 'Lido Key', slug: 'lido-key', tagline: 'Steps from St. Armands Circle', medianPrice: '$950K' },
+  { name: 'Siesta Key', slug: 'siesta-key', tagline: 'World-famous white sand beaches', medianPrice: '$850K' },
+  { name: 'Sarasota', slug: 'sarasota', tagline: 'Culture, dining & waterfront', medianPrice: '$550K' },
+  { name: 'St. Armands', slug: 'st-armands', tagline: 'Iconic island shopping & dining', medianPrice: '$1.1M' },
+  { name: 'Bird Key', slug: 'bird-key', tagline: 'Private island community', medianPrice: '$1.5M' },
+];
+
+// JSON-LD structured data for homepage
+const jsonLd = [
+  {
+    '@type': 'RealEstateAgent',
+    name: 'Ryan Adamson',
+    description: 'Luxury real estate specialist serving Sarasota and the barrier islands.',
+    url: 'https://ryanadamsonrealty.com',
+    telephone: '', // Add phone number
+    email: 'Ryan@Adamson-Group.com',
+    image: '/images/ryan-adamson.jpg',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '423 St Armands Cir',
+      addressLocality: 'Sarasota',
+      addressRegion: 'FL',
+      postalCode: '34236',
+      addressCountry: 'US',
+    },
+    areaServed: [
+      { '@type': 'City', name: 'Sarasota', sameAs: 'https://en.wikipedia.org/wiki/Sarasota,_Florida' },
+      { '@type': 'Place', name: 'Longboat Key' },
+      { '@type': 'Place', name: 'Lido Key' },
+      { '@type': 'Place', name: 'Siesta Key' },
+      { '@type': 'Place', name: 'St. Armands' },
+      { '@type': 'Place', name: 'Bird Key' },
+    ],
+    worksFor: {
+      '@type': 'RealEstateAgent',
+      name: 'Coldwell Banker Realty — St. Armands',
+    },
+  },
+  {
+    '@type': 'WebSite',
+    name: 'Ryan Adamson Luxury Real Estate',
+    url: 'https://ryanadamsonrealty.com',
+    description: description,
+  },
+];
+---
+
+<BaseLayout title="Home" description={description} jsonLd={jsonLd}>
+
+  <!-- ====== VIDEO HERO SECTION ====== -->
+  <section class="video-hero flex items-center justify-center">
+    <!-- Video Background -->
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      poster="/images/hero-poster.jpg"
+    >
+      <source src="/videos/hero-banner.webm" type="video/webm" />
+      <!-- TODO: Add mp4 version for Safari fallback -->
+      <!-- <source src="/videos/hero-banner.mp4" type="video/mp4" /> -->
+    </video>
+
+    <!-- Dark Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Hero Content -->
+    <div class="content text-center px-6 max-w-3xl mx-auto">
+      <!-- Logos -->
+      <div class="flex items-center justify-center gap-6 mb-8">
+        <img
+          src="/images/logos/adamson-group-black.png"
+          alt="Adamson Group"
+          class="h-16 w-auto"
+          style="filter: invert(1) brightness(100);"
+        />
+        <span class="w-px h-10 bg-white/30"></span>
+        <img src="/images/logos/cb-full-horz-white.png" alt="Coldwell Banker Realty" class="h-12 w-auto" />
+      </div>
+
+      <h1 class="font-display text-white mb-4" style="line-height: 1.1;">
+        Luxury Real Estate on Sarasota's Barrier Islands
+      </h1>
+
+      <!-- Tagline bar — matches existing site's "INTEGRITY | PASSION | PROFESSIONALISM" -->
+      <p class="font-accent text-sm uppercase tracking-[0.3em] text-white/80 mb-10">
+        Integrity &nbsp;|&nbsp; Passion &nbsp;|&nbsp; Professionalism
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button href="/areas" variant="primary" size="lg">
+          Explore Areas
+        </Button>
+        <Button href="/contact" variant="outline" size="lg">
+          Get in Touch
+        </Button>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-10">
+      <svg class="w-6 h-6 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- ====== FEATURED PROPERTIES PLACEHOLDER ====== -->
+  <!-- Phase 2: IDX listing cards will go here -->
+
+  <!-- ====== AREAS SECTION (Dark) ====== -->
+  <section class="section dark-section">
+    <div class="container">
+      <div class="text-center mb-14">
+        <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">
+          Areas We Serve
+        </p>
+        <h2 class="accent-underline-center">
+          Sarasota's Most Coveted Communities
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {areas.map((area) => (
+          <AreaCard
+            name={area.name}
+            slug={area.slug}
+            tagline={area.tagline}
+            medianPrice={area.medianPrice}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== VALUE PROPOSITION (Light break) ====== -->
+  <section class="section light-section">
+    <div class="container-narrow text-center">
+      <p class="section-label text-[var(--color-cbgl-blue)] mb-3">
+        Why Ryan Adamson
+      </p>
+      <h2 class="accent-underline-center mb-10">
+        Local Expertise, Luxury Service
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
+        <div>
+          <h3 class="text-lg mb-3" style="font-family: var(--font-body); font-weight: 600;">
+            Market Intelligence
+          </h3>
+          <p class="text-[var(--color-text-muted)] text-sm leading-relaxed">
+            Real-time data from the Sarasota MLS, analyzed and presented to help you make confident decisions in the luxury market.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-lg mb-3" style="font-family: var(--font-body); font-weight: 600;">
+            Island Specialist
+          </h3>
+          <p class="text-[var(--color-text-muted)] text-sm leading-relaxed">
+            Deep knowledge of every barrier island community — from Longboat Key estates to Siesta Key beachfront — with insights you won't find online.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-lg mb-3" style="font-family: var(--font-body); font-weight: 600;">
+            Coldwell Banker Network
+          </h3>
+          <p class="text-[var(--color-text-muted)] text-sm leading-relaxed">
+            Backed by the global reach and trusted reputation of Coldwell Banker, connecting luxury buyers and sellers across markets.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SPECIALTIES SECTION (Dark, matching AdamsonFL.com layout) ====== -->
+  <section class="section dark-section-elevated">
+    <div class="container">
+      <div class="text-center mb-12">
+        <p class="section-label text-[var(--color-gold)] mb-3">
+          Offering the Premiere Relocation Services
+        </p>
+        <h2>Ryan Specialties</h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          { label: 'Buyers Agent', image: '/images/specialties/buyers-agent.jpg' },
+          { label: 'Listing Agent', image: '/images/specialties/listing-agent.jpg' },
+          { label: 'Relocation', image: '/images/specialties/relocation.jpg' },
+          { label: 'Consulting', image: '/images/specialties/consulting.jpg' },
+        ].map((specialty) => (
+          <div class="relative aspect-[4/3] rounded-lg overflow-hidden group cursor-pointer">
+            <div
+              class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+              style={`background-image: url('${specialty.image}'); background-color: var(--color-dark-elevated);`}
+            />
+            <div class="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors duration-300" />
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="font-accent text-sm uppercase tracking-[0.2em] font-semibold text-white">
+                {specialty.label}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CTA SECTION (CBGL Blue) ====== -->
+  <section class="cbgl-section py-20">
+    <div class="container text-center">
+      <h2 class="font-display text-3xl text-white mb-4">
+        Ready to Find Your Place in Paradise?
+      </h2>
+      <p class="text-white/70 mb-8 max-w-lg mx-auto">
+        Whether you're buying, selling, or exploring the Sarasota luxury market, let's start the conversation.
+      </p>
+      <Button href="/contact" variant="primary" size="lg">
+        Schedule a Consultation
+      </Button>
+    </div>
+  </section>
+
+</BaseLayout>
