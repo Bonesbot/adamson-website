@@ -6,22 +6,23 @@ import areasFallback from '@/data/areas.json';
 
 const description = 'Explore luxury real estate markets across Sarasota\'s barrier islands — Longboat Key, Lido Key, Siesta Key, St. Armands, Bird Key, and greater Sarasota. Market data, pricing trends, and neighborhood guides.';
 
-// Fetch from Sanity, fall back to static JSON
-let sanityAreas = await getAreas();
-const areas = sanityAreas && sanityAreas.length > 0
-  ? sanityAreas.map((a: any) => ({
-      name: a.name,
-      slug: a.slug,
-      tagline: a.tagline,
-      medianPrice: a.marketStats?.medianPrice || '',
-      imageSrc: a.cardImage || undefined,
-    }))
-  : areasFallback.areas.map((a) => ({
-      name: a.name,
-      slug: a.slug,
-      tagline: a.tagline,
-      medianPrice: a.marketStats.medianPrice,
-    }));
+// Fallback JSON is the source of truth for which areas exist.
+// Sanity entries with matching slugs override their content.
+const sanityAreas = (await getAreas()) || [];
+const sanityBySlug = new Map<string, any>(
+  sanityAreas.filter((a: any) => a?.slug).map((a: any) => [a.slug, a])
+);
+
+const areas = areasFallback.areas.map((fallback) => {
+  const sanity = sanityBySlug.get(fallback.slug);
+  return {
+    name: sanity?.name || fallback.name,
+    slug: fallback.slug,
+    tagline: sanity?.tagline || fallback.tagline,
+    medianPrice: sanity?.marketStats?.medianPrice || fallback.marketStats.medianPrice,
+    imageSrc: sanity?.cardImage || undefined,
+  };
+});
 
 const jsonLd = {
   '@type': 'CollectionPage',
