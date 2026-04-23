@@ -239,9 +239,11 @@ AG_website/
 - [ ] Scheduled rebuild configuration on Netlify
 
 ### Phase 1.5 — CMS Integration
-- [ ] Set up Sanity Studio
-- [ ] Define content schemas (areas, reports, pages)
-- [ ] Migrate static content to Sanity
+- [x] Set up Sanity Studio (project ID: l8q8hky0, org: Adamson-Group)
+- [x] Define content schemas (area, marketReport, siteSettings)
+- [x] Create Sanity client + GROQ queries (src/lib/sanity.ts)
+- [ ] Migrate static JSON content into Sanity
+- [ ] Switch Astro pages to fetch from Sanity instead of static JSON
 - [ ] Webhook-triggered builds on content change
 
 ### Phase 2 — Enhanced Features

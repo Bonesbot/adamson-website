@@ -2,17 +2,27 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import AreaCard from '@/components/market/AreaCard.astro';
 import Button from '@/components/ui/Button.astro';
+import { getAreas, getSiteSettings } from '@/lib/sanity';
+import areasFallback from '@/data/areas.json';
 
 const description = 'Ryan Adamson is a luxury real estate specialist at Coldwell Banker St. Armands, serving Sarasota, Longboat Key, Lido Key, Siesta Key, and the barrier islands. Expert market insights and waterfront properties.';
 
-const areas = [
-  { name: 'Longboat Key', slug: 'longboat-key', tagline: 'Gulf-to-bay island living', medianPrice: '$1.2M' },
-  { name: 'Lido Key', slug: 'lido-key', tagline: 'Steps from St. Armands Circle', medianPrice: '$950K' },
-  { name: 'Siesta Key', slug: 'siesta-key', tagline: 'World-famous white sand beaches', medianPrice: '$850K' },
-  { name: 'Sarasota', slug: 'sarasota', tagline: 'Culture, dining & waterfront', medianPrice: '$550K' },
-  { name: 'St. Armands', slug: 'st-armands', tagline: 'Iconic island shopping & dining', medianPrice: '$1.1M' },
-  { name: 'Bird Key', slug: 'bird-key', tagline: 'Private island community', medianPrice: '$1.5M' },
-];
+// Fetch from Sanity, fall back to static JSON if Sanity is empty
+let sanityAreas = await getAreas();
+const areas = sanityAreas && sanityAreas.length > 0
+  ? sanityAreas.map((a: any) => ({
+      name: a.name,
+      slug: a.slug,
+      tagline: a.tagline,
+      medianPrice: a.marketStats?.medianPrice || '',
+      imageSrc: a.cardImage || undefined,
+    }))
+  : areasFallback.areas.map((a) => ({
+      name: a.name,
+      slug: a.slug,
+      tagline: a.tagline,
+      medianPrice: a.marketStats.medianPrice,
+    }));
 
 // JSON-LD structured data for homepage
 const jsonLd = [

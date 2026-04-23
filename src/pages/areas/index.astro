@@ -1,9 +1,27 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import AreaCard from '@/components/market/AreaCard.astro';
-import areasData from '@/data/areas.json';
+import { getAreas } from '@/lib/sanity';
+import areasFallback from '@/data/areas.json';
 
 const description = 'Explore luxury real estate markets across Sarasota\'s barrier islands — Longboat Key, Lido Key, Siesta Key, St. Armands, Bird Key, and greater Sarasota. Market data, pricing trends, and neighborhood guides.';
+
+// Fetch from Sanity, fall back to static JSON
+let sanityAreas = await getAreas();
+const areas = sanityAreas && sanityAreas.length > 0
+  ? sanityAreas.map((a: any) => ({
+      name: a.name,
+      slug: a.slug,
+      tagline: a.tagline,
+      medianPrice: a.marketStats?.medianPrice || '',
+      imageSrc: a.cardImage || undefined,
+    }))
+  : areasFallback.areas.map((a) => ({
+      name: a.name,
+      slug: a.slug,
+      tagline: a.tagline,
+      medianPrice: a.marketStats.medianPrice,
+    }));
 
 const jsonLd = {
   '@type': 'CollectionPage',
@@ -17,9 +35,9 @@ const jsonLd = {
 
   <!-- Hero -->
   <section class="relative pt-32 pb-20">
-    <div class="absolute inset-0" style="background-color: var(--color-navy);" />
+    <div class="absolute inset-0" style="background-color: var(--color-black);" />
     <div class="relative z-10 container text-center">
-      <p class="font-accent text-xs uppercase tracking-[0.3em] text-[var(--color-gold)] mb-3">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">
         Explore
       </p>
       <h1 class="font-display text-white mb-4">Areas We Serve</h1>
@@ -30,15 +48,16 @@ const jsonLd = {
   </section>
 
   <!-- Area Grid -->
-  <section class="section bg-[var(--color-warm-white)]">
+  <section class="section dark-section">
     <div class="container">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {areasData.areas.map((area) => (
+        {areas.map((area) => (
           <AreaCard
             name={area.name}
             slug={area.slug}
             tagline={area.tagline}
-            medianPrice={area.marketStats.medianPrice}
+            medianPrice={area.medianPrice}
+            imageSrc={area.imageSrc}
           />
         ))}
       </div>

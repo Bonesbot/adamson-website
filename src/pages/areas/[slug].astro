@@ -3,18 +3,34 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import MarketStats from '@/components/market/MarketStats.astro';
 import FAQSchema from '@/components/seo/FAQSchema.astro';
 import Button from '@/components/ui/Button.astro';
-import areasData from '@/data/areas.json';
+import { getAreas, getAreaBySlug } from '@/lib/sanity';
+import areasFallback from '@/data/areas.json';
 
-export function getStaticPaths() {
-  return areasData.areas.map((area) => ({
+export async function getStaticPaths() {
+  // Try Sanity first, fall back to static JSON
+  let sanityAreas = await getAreas();
+  const areas = sanityAreas && sanityAreas.length > 0
+    ? sanityAreas
+    : areasFallback.areas;
+
+  return areas.map((area: any) => ({
     params: { slug: area.slug },
-    props: { area },
   }));
 }
 
-const { area } = Astro.props;
+const { slug } = Astro.params;
 
-const description = `${area.name} real estate market data, pricing trends, and neighborhood guide. Median home price: ${area.marketStats.medianPrice}. Expert insights from Ryan Adamson, Coldwell Banker St. Armands.`;
+// Fetch area data — Sanity first, fallback to JSON
+let area = await getAreaBySlug(slug!);
+if (!area) {
+  area = areasFallback.areas.find((a) => a.slug === slug);
+}
+
+if (!area) {
+  return Astro.redirect('/areas');
+}
+
+const description = `${area.name} real estate market data, pricing trends, and neighborhood guide. Median home price: ${area.marketStats?.medianPrice || 'N/A'}. Expert insights from Ryan Adamson, Coldwell Banker St. Armands.`;
 
 const jsonLd = [
   {
@@ -25,7 +41,7 @@ const jsonLd = [
       '@type': 'PostalAddress',
       addressLocality: area.name,
       addressRegion: 'FL',
-      postalCode: area.zipCodes[0],
+      postalCode: area.zipCodes?.[0] || '',
       addressCountry: 'US',
     },
   },
@@ -39,10 +55,6 @@ const jsonLd = [
       name: 'Ryan Adamson',
       worksFor: { '@type': 'Organization', name: 'Coldwell Banker Realty — St. Armands' },
     },
-    about: {
-      '@type': 'Place',
-      name: area.name,
-    },
   },
 ];
 ---
@@ -53,7 +65,7 @@ const jsonLd = [
   <section class="relative pt-32 pb-20 overflow-hidden">
     <div
       class="absolute inset-0 bg-cover bg-center"
-      style={`background-image: url('/images/areas/${area.slug}.jpg'); background-color: var(--color-black);`}
+      style={`background-image: url('${area.heroImage || `/images/areas/${area.slug}.jpg`}'); background-color: var(--color-black);`}
     />
     <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/90" />
 
@@ -68,7 +80,7 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- Overview (Light break for readability) -->
+  <!-- Overview -->
   <section class="section light-section">
     <div class="container-narrow">
       <h2 class="accent-underline mb-6">About {area.name}</h2>
@@ -88,10 +100,12 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- Market Stats (Dark) -->
-  <MarketStats areaName={area.name} stats={area.marketStats} />
+  <!-- Market Stats -->
+  {area.marketStats && (
+    <MarketStats areaName={area.name} stats={area.marketStats} />
+  )}
 
-  <!-- FAQ Section (Dark elevated) -->
+  <!-- FAQ Section -->
   {area.faqs && area.faqs.length > 0 && (
     <FAQSchema
       faqs={area.faqs}
@@ -99,7 +113,7 @@ const jsonLd = [
     />
   )}
 
-  <!-- CTA (CBGL Blue) -->
+  <!-- CTA -->
   <section class="cbgl-section py-16">
     <div class="container text-center">
       <h2 class="font-display text-2xl text-white mb-4">
