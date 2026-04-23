@@ -1,24 +1,23 @@
 {
   "areaSlug": "bird-key",
-  "source": "preliminary",
+  "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-04-23T00:00:00Z",
+  "lastUpdated": "2026-04-23T19:41:28.325526+00:00",
   "counts": {
     "sold": 4,
     "pending": 3,
     "total": 7
   },
   "metrics": {
-    "avgPrice": "$3,950,000",
-    "avgPricePerSqFt": "$1,125",
-    "avgYearBuilt": 1992,
-    "avgLivingSqFt": "3,510",
-    "avgLotSqFt": "15,800",
-    "avgDom": 112
+    "avgPrice": "$3,870,000",
+    "avgPricePerSqFt": "$1,116",
+    "avgYearBuilt": 1981,
+    "avgLivingSqFt": "3,453",
+    "avgLotSqFt": "14,426",
+    "avgDom": 115
   },
   "range": {
-    "minPrice": "$1,850,000",
+    "minPrice": "$1,950,000",
     "maxPrice": "$7,200,000"
-  },
-  "note": "Preliminary demo values. Replace by running: python scripts/fetch_area_stats.py bird-key"
+  }
 }
