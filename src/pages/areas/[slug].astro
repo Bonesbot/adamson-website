@@ -113,12 +113,14 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- Market Stats -->
-  {area.marketStats && (
+  <!-- Market Stats — legacy placeholder block. Suppressed automatically
+       whenever a detailedStats JSON file exists for this area, so the
+       live MLS pipeline table becomes the single source of truth. -->
+  {area.marketStats && !detailedStats && (
     <MarketStats areaName={area.name} stats={area.marketStats} />
   )}
 
-  <!-- Detailed Sold + Pending Market Table (data pipeline) -->
+  <!-- Detailed Sold + Pending Market Table (live MLS pipeline) -->
   {detailedStats && (
     <DetailedMarketTable areaName={area.name} stats={detailedStats} />
   )}
