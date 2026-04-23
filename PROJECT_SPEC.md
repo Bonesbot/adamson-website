@@ -22,7 +22,7 @@
 | **Styling** | Tailwind CSS 4 | Utility-first, fast iteration, luxury design tokens |
 | **Language** | TypeScript | Type safety across components and data pipelines |
 | **CMS** | Sanity v3 (Studio) | WordPress-level editing UX, structured content, free tier, API for automation |
-| **Data Warehouse** | Google BigQuery | MLS extract pipeline already in progress. Build-time queries → JSON → Astro pages |
+| **Data Warehouse** | Supabase (Postgres) | Full SQL, visual table editor, REST API, free tier. Replaces BigQuery — simpler, cheaper, more accessible. |
 | **Hosting** | Netlify | Auto-deploy from GitHub, free SSL, forms, edge functions, scheduled rebuilds. Site deploys to Netlify CDN (global edge). Custom domain (e.g. adamsonfl.com or new domain) pointed via DNS. |
 | **Version Control** | GitHub | Standard git workflow, triggers Netlify builds |
 
@@ -82,27 +82,161 @@ AEO is the primary differentiator. Every architectural decision serves this goal
 
 ## Data Pipeline
 
+**Architecture**: AEO-first — every data decision serves the goal of giving AI engines authoritative, structured, citable answers about the Sarasota luxury market.
+
 ```
-Stellar MLS → [Manual/Automated Export] → Google BigQuery
-                                              ↓
-                                    Build-time Node script
-                                              ↓
-                                    JSON data files in /src/data/
-                                              ↓
-                                    Astro pages consume JSON at build
-                                              ↓
-                                    Static HTML with real market data
+Stellar MLS → [CSV/API Export] → Supabase (Postgres)
+                                      ↓
+                              SQL Views (aggregation by area)
+                                      ↓
+                              Supabase REST API
+                                      ↓
+                              Push script → Sanity CMS (market stats fields)
+                                      ↓
+                              Sanity webhook → Netlify rebuild
+                                      ↓
+                              Astro generates static HTML with real data
+                                      ↓
+                              JSON-LD + FAQ schemas + clean semantic HTML
+                                      ↓
+                              AI engines cite your data as authoritative source
 ```
 
-### BigQuery Tables (Expected)
-- `listings_active` — Current active listings
-- `listings_sold` — Recently sold (comps, trends)
-- `market_stats` — Aggregated stats by area/month (median price, DOM, inventory, volume)
+### Supabase Tables (Planned)
 
-### Build-Time Data Flow
-1. `scripts/fetch-market-data.ts` — Queries BigQuery, writes JSON to `src/data/`
-2. Astro pages import JSON and render at build time
-3. Netlify scheduled builds (daily or weekly) keep data fresh
+**Core Tables:**
+- `raw_listings` — Raw MLS listing data (active + sold), includes `location` column as PostGIS `geography(Point, 4326)` for lat/long
+- `areas` — Area definitions (name, slug, zip codes)
+- `zone_polygons` — Geospatial zone boundaries (drawn in geojson.io, stored as PostGIS `geography(Polygon, 4326)`)
+- `subdivision_aliases` — Maps MLS subdivision name variants to canonical names (see Subdivision Normalization below)
+- `unmatched_subdivisions` — Queue for low-confidence fuzzy matches needing manual review
+- `audit_log` — Track when data was last updated and by what process
+
+**SQL Views:**
+- `vw_market_stats_by_area` — Aggregated stats per area (median price, DOM, inventory, volume, YoY)
+- `vw_market_stats_by_zone` — Aggregated stats per geospatial zone (beachfront, bayside, etc.)
+- `vw_beachfront_stats` — Gulf-front properties only, per area
+- `vw_bayside_stats` — Bay-side properties only, per area
+- `vw_market_trends_monthly` — Monthly trend data for charts/reports
+- `vw_subdivision_stats` — Stats by normalized subdivision name
+
+**Required Postgres Extensions:**
+- `postgis` — Geospatial queries (ST_Within, ST_Contains, geography types)
+- `pg_trgm` — Trigram-based fuzzy text matching for subdivision normalization
+
+---
+
+### Geospatial Zone Segmentation (PostGIS)
+
+**Purpose:** Segment listings into hyper-specific geographic zones beyond just "Longboat Key" — distinguishing Gulf-front from bayside, north end from south end, village-adjacent from remote, etc. This enables the most granular, authoritative market data on the web for these areas.
+
+**Architecture:**
+1. Enable PostGIS extension in Supabase (one-click in dashboard)
+2. Each listing in `raw_listings` stores lat/long as a PostGIS `geography(Point, 4326)` column
+3. Zone boundaries are drawn using [geojson.io](https://geojson.io) — a free tool where you draw polygons on a map and export GeoJSON coordinates
+4. Polygons are stored in `zone_polygons` table with fields: `id`, `area_slug`, `zone_name` (e.g. "Longboat Key Gulf-Front"), `zone_type` (e.g. "beachfront", "bayside", "golf_course"), `boundary` (PostGIS geography)
+5. Segmentation queries use `ST_Within()`:
+   ```sql
+   SELECT * FROM raw_listings
+   WHERE ST_Within(
+     location,
+     (SELECT boundary FROM zone_polygons WHERE zone_name = 'Longboat Key Gulf-Front')
+   );
+   ```
+6. Aggregation views (`vw_beachfront_stats`, `vw_bayside_stats`, `vw_market_stats_by_zone`) auto-compute stats per zone using JOINs against `zone_polygons`
+
+**AEO Benefit:** Enables hyper-specific answers no competitor can provide:
+- "What is the median price for Gulf-front homes on Longboat Key?" → `vw_beachfront_stats`
+- "How do bayside condos compare to beachfront on Lido Key?" → `vw_bayside_stats` vs `vw_beachfront_stats`
+- "What's the average price per sq ft for waterfront on Bird Key?" → zone-filtered aggregation
+
+These granular answers get baked into area pages as FAQ schema, making Ryan's site the definitive source AI engines cite for Sarasota sub-market data.
+
+---
+
+### Subdivision Name Normalization
+
+**Problem:** MLS data contains inconsistent subdivision names. The same community appears under multiple spellings, abbreviations, and typos — e.g., "Ritz Carlton Residences Ph 2", "Ritz-Carlton Res.", "Ritz Carlton Condo" are all the same place. Without normalization, aggregation queries fragment data across these variants, producing inaccurate stats and weakening AEO authority.
+
+**Architecture:**
+
+**`subdivision_aliases` table:**
+| Column | Type | Description |
+|--------|------|-------------|
+| `id` | serial | Primary key |
+| `mls_name` | text | Exact string from MLS data (the variant) |
+| `canonical_name` | text | Normalized/official name |
+| `confidence` | numeric | Match confidence (1.0 = exact/manual, 0.0–0.99 = fuzzy) |
+| `matched_by` | text | How this alias was created: 'manual', 'exact', 'trigram', 'claude' |
+| `created_at` | timestamptz | When the alias was added |
+
+**`unmatched_subdivisions` table:**
+| Column | Type | Description |
+|--------|------|-------------|
+| `id` | serial | Primary key |
+| `mls_name` | text | The unmatched subdivision string |
+| `best_candidate` | text | Closest trigram match found |
+| `similarity_score` | numeric | pg_trgm similarity score of best candidate |
+| `status` | text | 'pending', 'resolved', 'ignored' |
+| `resolved_to` | text | Canonical name if manually resolved |
+| `created_at` | timestamptz | When first encountered |
+
+**Normalization Flow (runs on insert via Postgres trigger):**
+1. New listing arrives in `raw_listings` with an MLS subdivision name
+2. Trigger function `fn_normalize_subdivision()` fires:
+   a. **Exact match** — Check `subdivision_aliases` for exact `mls_name` match → use `canonical_name` (confidence: 1.0)
+   b. **Fuzzy match** — If no exact match, use `pg_trgm` `similarity()` function against known canonical names:
+      ```sql
+      SELECT canonical_name, similarity(mls_name, canonical_name) AS score
+      FROM (SELECT DISTINCT canonical_name FROM subdivision_aliases) AS names
+      WHERE similarity(mls_name, canonical_name) > 0.6
+      ORDER BY score DESC
+      LIMIT 1;
+      ```
+   c. **High confidence (score > 0.8)** — Auto-assign canonical name, add to `subdivision_aliases` with `matched_by = 'trigram'`
+   d. **Low confidence (score 0.6–0.8)** — Insert into `unmatched_subdivisions` queue with the best candidate for human review
+   e. **No match (score < 0.6)** — Insert into `unmatched_subdivisions` with `best_candidate = NULL`
+3. The `raw_listings` row gets a `canonical_subdivision` column populated by the trigger
+
+**Canonical Name Source of Truth:**
+- The canonical name list lives in Supabase — NOT in application code
+- Queryable, auditable, and maintainable via SQL or Supabase's visual table editor
+- Ryan or BonesBot can add/edit canonical names directly in the dashboard
+
+**AI-Assisted Cleanup (Optional):**
+- A periodic script reads the `unmatched_subdivisions` queue
+- Sends batch to Claude API with context: "Given these MLS subdivision name variants and this list of known canonical names, suggest the best match for each"
+- Claude's suggestions are inserted into `subdivision_aliases` with `matched_by = 'claude'` and reviewed confidence scores
+- Human reviews and approves via Supabase dashboard or a simple admin UI
+
+**AEO Benefit:** Clean, normalized subdivision data means accurate per-subdivision stats. The site can authoritatively answer questions like "What is the average home price in Ritz Carlton Residences on Lido Key?" without data being fragmented across 5 different MLS spellings of the same community.
+
+---
+
+### AEO Data Strategy
+
+The data pipeline exists to answer the questions AI engines ask:
+- "What is the average home price on Longboat Key?" → median price from vw_market_stats_by_area
+- "What do Gulf-front homes cost on Longboat Key vs bayside?" → vw_beachfront_stats vs vw_bayside_stats
+- "How has the Siesta Key market changed this year?" → YoY from vw_market_trends_monthly
+- "How many homes are for sale in Sarasota?" → active inventory from vw_market_stats_by_area
+- "What is the average price in Ritz Carlton Residences?" → vw_subdivision_stats (normalized)
+
+Every stat gets baked into:
+1. Visible HTML text (human-readable)
+2. JSON-LD structured data (machine-readable)
+3. FAQ schema answers (AI-extractable)
+
+### Data Flow
+1. MLS data → Supabase `raw_listings` table (manual CSV upload or API)
+2. Insert trigger normalizes subdivision names via `fn_normalize_subdivision()`
+3. PostGIS assigns listings to geographic zones via `ST_Within()`
+4. SQL views auto-aggregate by area, zone, and subdivision
+5. `scripts/sync-market-data.ts` — Reads Supabase views, pushes stats to Sanity via API
+6. Sanity webhook triggers Netlify rebuild
+7. Astro pages render fresh data as static HTML with full schema markup
+8. Scheduled runs (daily/weekly) keep everything current
+9. Periodic Claude pass cleans up unmatched subdivision queue
 
 ---
 
@@ -242,9 +376,10 @@ AG_website/
 - [x] Set up Sanity Studio (project ID: l8q8hky0, org: Adamson-Group)
 - [x] Define content schemas (area, marketReport, siteSettings)
 - [x] Create Sanity client + GROQ queries (src/lib/sanity.ts)
-- [ ] Migrate static JSON content into Sanity
-- [ ] Switch Astro pages to fetch from Sanity instead of static JSON
-- [ ] Webhook-triggered builds on content change
+- [x] Migrate static JSON content into Sanity (fallback still in place)
+- [x] Switch Astro pages to fetch from Sanity (with static JSON fallback)
+- [x] Netlify build hook created
+- [x] Sanity webhook → Netlify auto-deploy on publish
 
 ### Phase 2 — Enhanced Features
 - [ ] IDX integration (listings search)
@@ -267,6 +402,7 @@ AG_website/
 | 2026-04-22 | Dark-first design w/ CBGL colors | Matches AdamsonFL.com feel. Black base (#000/#0A0A0A), CBGL blue (#2D4280/#52a8ff), gold accents. Sharp, confident luxury. |
 | 2026-04-22 | Video hero banner | Carry over the video banner from existing site for hero section. |
 | 2026-04-22 | Dual logo placement | Adamson Group logo + Coldwell Banker logo side-by-side in header/hero (matches existing site). |
+| 2026-04-22 | Supabase over BigQuery | BigQuery was overkill and had API issues. Supabase = full Postgres, visual editor, REST API, free tier. Better fit for 6-area market aggregation. |
 
 ---
 
@@ -293,4 +429,13 @@ AG_website/
   - `cb-square.png` / `cb-white-block.png` — Additional CB logo variants
   - `hero-banner.webm` — Video placeholder for hero section (TODO: replace with Ryan's actual aerial/waterfront video)
 - **Still needed**: Area photography (Longboat Key, Lido Key, etc.), Ryan's headshot, actual hero video from AdamsonFL.com, white version of Adamson Group logo
-- **Next**: Get logos/video/images from existing site, npm install + local dev server, connect BigQuery pipeline
+- Wired all design assets from design_assets/ into public/
+- Fixed Tailwind v3 compatibility, got site running locally
+- Deployed to Netlify via GitHub (bonesbot/adamson-website)
+- Set up Sanity CMS (project ID: l8q8hky0, org: Adamson-Group)
+- Built schemas: area, marketReport, siteSettings
+- Deployed Sanity Studio to adamson-website.sanity.studio
+- Switched Astro pages to fetch from Sanity with static JSON fallback
+- Set up Netlify build hook + Sanity webhook for auto-deploy on publish
+- **Full loop working**: Edit in Sanity → auto-deploy → live site updated
+- **Next session**: Supabase data pipeline → Sanity, populate all 6 areas in Sanity, about page with real bio, area photography, custom domain setup

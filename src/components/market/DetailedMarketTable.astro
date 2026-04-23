@@ -1,0 +1,192 @@
+---
+/**
+ * Detailed Market Table — renders the 6 sold+pending metrics for a submarket.
+ *
+ * Data is baked in at build time from src/data/<slug>-stats.json (refreshed
+ * by scripts/fetch_area_stats.py). Semantic HTML + explicit schema.org Dataset
+ * markup so AI crawlers can extract and cite the numbers.
+ */
+
+interface DetailedStats {
+  areaSlug: string;
+  source: string;
+  status: string;
+  lastUpdated: string;
+  counts: {
+    sold: number;
+    pending: number;
+    total: number;
+  };
+  metrics: {
+    avgPrice?: string;
+    avgPricePerSqFt?: string;
+    avgYearBuilt?: number;
+    avgLivingSqFt?: string;
+    avgLotSqFt?: string;
+    avgDom?: number;
+  };
+  range?: {
+    minPrice?: string;
+    maxPrice?: string;
+  };
+  note?: string;
+}
+
+interface Props {
+  areaName: string;
+  stats: DetailedStats;
+}
+
+const { areaName, stats } = Astro.props;
+
+const updated = new Date(stats.lastUpdated);
+const updatedFmt = updated.toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+});
+
+const rows = [
+  { label: "Average Price", value: stats.metrics.avgPrice, suffix: "" },
+  { label: "Average Price / Sq Ft", value: stats.metrics.avgPricePerSqFt, suffix: "" },
+  { label: "Average Year Built", value: stats.metrics.avgYearBuilt?.toString(), suffix: "" },
+  { label: "Average Living Area", value: stats.metrics.avgLivingSqFt, suffix: "sq ft" },
+  { label: "Average Lot Size", value: stats.metrics.avgLotSqFt, suffix: "sq ft" },
+  { label: "Average Days on Market", value: stats.metrics.avgDom?.toString(), suffix: "days" },
+];
+
+const hasData = stats.status === "ok" && stats.counts.total > 0;
+const isPreliminary = stats.source === "preliminary";
+---
+
+<section
+  class="section dark-section"
+  aria-labelledby={`${stats.areaSlug}-detailed-stats-heading`}
+>
+  <div class="container-narrow">
+    <div class="mb-8">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-2">
+        Sold + Pending Activity
+      </p>
+      <h2
+        id={`${stats.areaSlug}-detailed-stats-heading`}
+        class="accent-underline"
+      >
+        {areaName} Closed Market Snapshot
+      </h2>
+      {hasData ? (
+        <p class="text-[var(--color-text-on-dark-muted)] mt-4 leading-relaxed">
+          Averages across <strong class="text-white">{stats.counts.sold}</strong> sold and
+          <strong class="text-white">{stats.counts.pending}</strong> pending listings in the
+          {areaName} submarket. Pre-list and withdrawn activity excluded.
+          {stats.range?.minPrice && stats.range?.maxPrice && (
+            <>
+              {' '}Price range:
+              <strong class="text-white">{stats.range.minPrice}</strong> –
+              <strong class="text-white">{stats.range.maxPrice}</strong>.
+            </>
+          )}
+        </p>
+      ) : (
+        <p class="text-[var(--color-text-on-dark-muted)] mt-4 leading-relaxed">
+          No sold or pending listings currently tracked for {areaName}. Check back soon.
+        </p>
+      )}
+    </div>
+
+    {hasData && (
+      <div class="overflow-hidden rounded-lg border border-[var(--color-border-dark)] bg-[var(--color-black-card)]">
+        <table class="w-full">
+          <caption class="sr-only">
+            {areaName} sold and pending market statistics
+          </caption>
+          <thead>
+            <tr class="border-b border-[var(--color-border-dark)]">
+              <th
+                scope="col"
+                class="px-6 py-4 text-left font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue-light)]"
+              >
+                Metric
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-4 text-right font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue-light)]"
+              >
+                Value
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, idx) => (
+              <tr
+                class={`${idx !== rows.length - 1 ? "border-b border-[var(--color-border-dark)]" : ""} hover:bg-[var(--color-dark-elevated)]/40 transition-colors`}
+              >
+                <th
+                  scope="row"
+                  class="px-6 py-5 text-left font-body text-[var(--color-text-on-dark-muted)] font-normal"
+                >
+                  {row.label}
+                </th>
+                <td class="px-6 py-5 text-right">
+                  {row.value ? (
+                    <span class="font-display text-xl md:text-2xl font-bold text-white">
+                      {row.value}
+                      {row.suffix && (
+                        <span class="ml-2 text-sm font-body font-normal text-[var(--color-text-on-dark-subtle)]">
+                          {row.suffix}
+                        </span>
+                      )}
+                    </span>
+                  ) : (
+                    <span class="font-body text-sm text-[var(--color-text-on-dark-subtle)] italic">
+                      n/a
+                    </span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+
+    <p class="text-xs text-[var(--color-text-on-dark-subtle)] mt-6 leading-relaxed">
+      Data sourced from Stellar MLS via the Adamson Group data pipeline.
+      Last updated {updatedFmt}.
+      {isPreliminary && (
+        <span class="text-[var(--color-gold)]">
+          &nbsp;Preliminary values — refreshing against the live MLS feed shortly.
+        </span>
+      )}
+    </p>
+  </div>
+</section>
+
+{hasData && (
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Dataset",
+      name: `${areaName} Sold + Pending Real Estate Market Statistics`,
+      description: `Average price, price per square foot, year built, living area, lot size, and days on market for sold and pending listings in ${areaName}, Sarasota, FL.`,
+      url: `https://ryanadamsonrealty.com/areas/${stats.areaSlug}`,
+      dateModified: stats.lastUpdated,
+      creator: {
+        "@type": "RealEstateAgent",
+        name: "Ryan Adamson",
+        worksFor: {
+          "@type": "Organization",
+          name: "Coldwell Banker Realty — St. Armands",
+        },
+      },
+      variableMeasured: rows
+        .filter((r) => r.value)
+        .map((r) => ({
+          "@type": "PropertyValue",
+          name: r.label,
+          value: `${r.value}${r.suffix ? " " + r.suffix : ""}`,
+        })),
+    })}
+  />
+)}
