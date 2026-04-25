@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 
 export default defineConfig({
-  site: 'https://ryanadamsonrealty.com', // Update with final domain
+  site: 'https://adamsonfl.com', // Update with final domain
   integrations: [
     tailwind(),
     sitemap(),
