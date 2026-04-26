@@ -1,0 +1,364 @@
+---
+/**
+ * AreaMarketSummary — AEO-optimized rich market summary for an area.
+ *
+ * Consumes the enriched stats JSON produced by scripts/fetch_area_summary.py.
+ * Renders semantic HTML + multiple JSON-LD blocks (Dataset, ItemList of recent
+ * sales) so AI engines can extract specific, dated, sourced market facts.
+ *
+ * Designed to be additive — sits below DetailedMarketTable on area pages.
+ * Gracefully no-ops if the enriched fields are missing.
+ */
+
+interface PropertyTypeRow { type: string; count: number; }
+interface BuildingClassRow { class: string; count: number; }
+interface SoldComp {
+  listingId: string;
+  address: string;
+  subdivision?: string;
+  soldPrice: string;
+  soldDate: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  livingSqFt?: string;
+  yearBuilt?: number;
+  propertyType?: string;
+  isWaterfront?: boolean;
+}
+
+interface EnrichedStats {
+  areaSlug: string;
+  status: string;
+  lastUpdated: string;
+  active?: {
+    count: number;
+    medianPrice?: string;
+    medianPricePerSqFt?: string;
+    waterfrontCount?: number;
+    newConstructionCount?: number;
+  };
+  sold?: {
+    count: number;
+    medianPrice?: string;
+    medianDom?: number;
+    saleToListRatio?: string;
+  };
+  fees?: {
+    medianMonthlyAssociation?: string;
+    medianMonthlyCondoFee?: string;
+  };
+  priceBands?: {
+    under900k: number;
+    band900kTo1_5m: number;
+    band1_5mTo3m: number;
+    band3mPlus: number;
+  };
+  propertyTypes?: PropertyTypeRow[];
+  buildingClasses?: BuildingClassRow[];
+  recentSoldComps?: SoldComp[];
+}
+
+interface Props {
+  areaName: string;
+  areaSlug: string;
+  stats: EnrichedStats;
+}
+
+const { areaName, areaSlug, stats } = Astro.props;
+
+const updatedFmt = new Date(stats.lastUpdated).toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+});
+
+const hasActive = stats.active && stats.active.count > 0;
+const hasSold = stats.sold && stats.sold.count > 0;
+const hasComps = stats.recentSoldComps && stats.recentSoldComps.length > 0;
+const hasBands = stats.priceBands && (
+  stats.priceBands.under900k +
+  stats.priceBands.band900kTo1_5m +
+  stats.priceBands.band1_5mTo3m +
+  stats.priceBands.band3mPlus
+) > 0;
+const hasBldg = stats.buildingClasses && stats.buildingClasses.length > 0;
+
+// Pct helpers
+const pct = (n: number, d: number) => d > 0 ? ((n / d) * 100).toFixed(0) : "0";
+
+const waterfrontPct = stats.active?.count
+  ? pct(stats.active.waterfrontCount || 0, stats.active.count)
+  : "0";
+const newConstructionPct = stats.active?.count
+  ? pct(stats.active.newConstructionCount || 0, stats.active.count)
+  : "0";
+
+// Dataset JSON-LD with PropertyValue entries
+const datasetSchema = {
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  name: `${areaName} Active Real Estate Market Summary`,
+  description: `Live MLS-sourced active inventory, pricing, and recent sold comparables for ${areaName}, Sarasota, FL — refreshed from Stellar MLS.`,
+  url: `https://adamsonfl.com/areas/${areaSlug}`,
+  dateModified: stats.lastUpdated,
+  datePublished: stats.lastUpdated,
+  creator: {
+    "@type": "RealEstateAgent",
+    name: "Ryan Adamson",
+    worksFor: { "@type": "Organization", name: "Coldwell Banker Realty — St. Armands" },
+  },
+  isBasedOn: { "@type": "Dataset", name: "Stellar MLS" },
+  variableMeasured: [
+    hasActive && stats.active?.medianPrice && {
+      "@type": "PropertyValue", name: "Active Median List Price", value: stats.active.medianPrice,
+    },
+    hasActive && stats.active?.medianPricePerSqFt && {
+      "@type": "PropertyValue", name: "Active Median Price per Sq Ft", value: stats.active.medianPricePerSqFt,
+    },
+    hasActive && {
+      "@type": "PropertyValue", name: "Active Listing Count", value: stats.active!.count,
+    },
+    hasSold && stats.sold?.medianPrice && {
+      "@type": "PropertyValue", name: "Sold Median Price", value: stats.sold.medianPrice,
+    },
+    hasSold && stats.sold?.medianDom !== undefined && {
+      "@type": "PropertyValue", name: "Median Days on Market (Sold)", value: stats.sold.medianDom,
+    },
+    hasSold && stats.sold?.saleToListRatio && {
+      "@type": "PropertyValue", name: "Sale-to-List Ratio", value: stats.sold.saleToListRatio,
+    },
+    stats.fees?.medianMonthlyCondoFee && {
+      "@type": "PropertyValue", name: "Median Monthly Condo Fee", value: stats.fees.medianMonthlyCondoFee,
+    },
+  ].filter(Boolean),
+};
+
+// ItemList of recent sold comps
+const soldCompsSchema = hasComps ? {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: `Recent ${areaName} Sold Real Estate Comparables`,
+  description: `The 5 most recent sold listings in ${areaName} from the Sarasota MLS.`,
+  numberOfItems: stats.recentSoldComps!.length,
+  itemListOrder: "https://schema.org/ItemListOrderDescending",
+  itemListElement: stats.recentSoldComps!.map((c, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "Residence",
+      name: c.address,
+      address: { "@type": "PostalAddress", addressLocality: areaName, addressRegion: "FL" },
+      ...(c.bedrooms != null ? { numberOfBedrooms: c.bedrooms } : {}),
+      ...(c.bathrooms != null ? { numberOfBathroomsTotal: c.bathrooms } : {}),
+      ...(c.yearBuilt != null ? { yearBuilt: c.yearBuilt } : {}),
+      ...(c.livingSqFt ? { floorSize: { "@type": "QuantitativeValue", value: c.livingSqFt, unitCode: "FTK" } } : {}),
+    },
+    additionalProperty: [
+      { "@type": "PropertyValue", name: "Sold Price", value: c.soldPrice },
+      { "@type": "PropertyValue", name: "Sold Date", value: c.soldDate },
+      ...(c.subdivision ? [{ "@type": "PropertyValue", name: "Subdivision", value: c.subdivision }] : []),
+      { "@type": "PropertyValue", name: "Waterfront", value: c.isWaterfront ? "Yes" : "No" },
+    ],
+  })),
+} : null;
+---
+
+{(hasActive || hasSold) && (
+  <section class="section dark-section-elevated" aria-labelledby={`${areaSlug}-summary-heading`}>
+    <div class="container-narrow">
+      <div class="mb-10">
+        <p class="section-label text-[var(--color-cbgl-blue-light)] mb-2">
+          Active Market Snapshot
+        </p>
+        <h2 id={`${areaSlug}-summary-heading`} class="accent-underline">
+          {areaName} Active Inventory & Recent Sales
+        </h2>
+        <p class="text-[var(--color-text-on-dark-muted)] mt-4 leading-relaxed">
+          A live snapshot of the {areaName} luxury real estate market — built directly
+          from the Sarasota MLS feed and refreshed regularly. Data through {updatedFmt}.
+        </p>
+      </div>
+
+      {hasActive && (
+        <div class="mb-10">
+          <h3 class="font-display text-xl text-white mb-4">Active Inventory</h3>
+          <dl class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
+              <dt class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Active Listings</dt>
+              <dd class="font-display text-2xl font-bold text-white">{stats.active!.count}</dd>
+            </div>
+            {stats.active!.medianPrice && (
+              <div class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
+                <dt class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Median List Price</dt>
+                <dd class="font-display text-2xl font-bold text-white">{stats.active!.medianPrice}</dd>
+              </div>
+            )}
+            {stats.active!.medianPricePerSqFt && (
+              <div class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
+                <dt class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Median Price / Sq Ft</dt>
+                <dd class="font-display text-2xl font-bold text-white">{stats.active!.medianPricePerSqFt}</dd>
+              </div>
+            )}
+            <div class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
+              <dt class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Waterfront Share</dt>
+              <dd class="font-display text-2xl font-bold text-white">{waterfrontPct}%</dd>
+            </div>
+          </dl>
+          <p class="text-sm text-[var(--color-text-on-dark-muted)] mt-4 leading-relaxed">
+            Of {stats.active!.count} active listings, <strong class="text-white">{stats.active!.waterfrontCount || 0}</strong> are
+            waterfront ({waterfrontPct}%) and <strong class="text-white">{stats.active!.newConstructionCount || 0}</strong> are
+            new construction built in 2020 or later ({newConstructionPct}%).
+          </p>
+        </div>
+      )}
+
+      {hasBands && (
+        <div class="mb-10">
+          <h3 class="font-display text-xl text-white mb-4">Active Inventory by Price Band</h3>
+          <div class="overflow-hidden rounded-lg border border-[var(--color-border-dark)] bg-[var(--color-black-card)]">
+            <table class="w-full">
+              <caption class="sr-only">{areaName} active listings grouped by price band</caption>
+              <thead>
+                <tr class="border-b border-[var(--color-border-dark)]">
+                  <th scope="col" class="px-6 py-3 text-left font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue-light)]">Price Band</th>
+                  <th scope="col" class="px-6 py-3 text-right font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue-light)]">Active Listings</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-[var(--color-border-dark)]">
+                  <th scope="row" class="px-6 py-3 text-left font-body text-[var(--color-text-on-dark-muted)] font-normal">Under $900k</th>
+                  <td class="px-6 py-3 text-right font-display text-lg text-white">{stats.priceBands!.under900k}</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border-dark)]">
+                  <th scope="row" class="px-6 py-3 text-left font-body text-[var(--color-text-on-dark-muted)] font-normal">$900k – $1.5M</th>
+                  <td class="px-6 py-3 text-right font-display text-lg text-white">{stats.priceBands!.band900kTo1_5m}</td>
+                </tr>
+                <tr class="border-b border-[var(--color-border-dark)]">
+                  <th scope="row" class="px-6 py-3 text-left font-body text-[var(--color-text-on-dark-muted)] font-normal">$1.5M – $3M</th>
+                  <td class="px-6 py-3 text-right font-display text-lg text-white">{stats.priceBands!.band1_5mTo3m}</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="px-6 py-3 text-left font-body text-[var(--color-text-on-dark-muted)] font-normal">$3M and above</th>
+                  <td class="px-6 py-3 text-right font-display text-lg text-white">{stats.priceBands!.band3mPlus}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {hasBldg && stats.buildingClasses!.length > 1 && (
+        <div class="mb-10">
+          <h3 class="font-display text-xl text-white mb-4">Active Inventory by Building Type</h3>
+          <ul class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {stats.buildingClasses!.map((bc) => (
+              <li class="bg-[var(--color-black-card)] rounded-lg p-4 border border-[var(--color-border-dark)] flex justify-between items-center">
+                <span class="font-accent text-xs uppercase tracking-wider text-white/60 capitalize">{bc.class.replace('-', ' ')}</span>
+                <span class="font-display text-xl font-bold text-white">{bc.count}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {hasSold && (
+        <div class="mb-10">
+          <h3 class="font-display text-xl text-white mb-4">Recent Sold Activity</h3>
+          <dl class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
+              <dt class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Sold Listings</dt>
+              <dd class="font-display text-2xl font-bold text-white">{stats.sold!.count}</dd>
+            </div>
+            {stats.sold!.medianPrice && (
+              <div class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
+                <dt class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Median Sold Price</dt>
+                <dd class="font-display text-2xl font-bold text-white">{stats.sold!.medianPrice}</dd>
+              </div>
+            )}
+            {stats.sold!.medianDom !== undefined && stats.sold!.medianDom !== null && (
+              <div class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
+                <dt class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Median Days on Market</dt>
+                <dd class="font-display text-2xl font-bold text-white">{stats.sold!.medianDom}</dd>
+              </div>
+            )}
+            {stats.sold!.saleToListRatio && (
+              <div class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
+                <dt class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Sale-to-List Ratio</dt>
+                <dd class="font-display text-2xl font-bold text-white">{stats.sold!.saleToListRatio}</dd>
+              </div>
+            )}
+          </dl>
+        </div>
+      )}
+
+      {hasComps && (
+        <div class="mb-10">
+          <h3 class="font-display text-xl text-white mb-4">Most Recent Sold Comparables</h3>
+          <div class="overflow-hidden rounded-lg border border-[var(--color-border-dark)] bg-[var(--color-black-card)]">
+            <table class="w-full text-sm">
+              <caption class="sr-only">5 most recent sold listings in {areaName}</caption>
+              <thead>
+                <tr class="border-b border-[var(--color-border-dark)]">
+                  <th scope="col" class="px-4 py-3 text-left font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue-light)]">Address</th>
+                  <th scope="col" class="px-4 py-3 text-left font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue-light)]">Sold</th>
+                  <th scope="col" class="px-4 py-3 text-left font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue-light)]">Date</th>
+                  <th scope="col" class="px-4 py-3 text-left font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue-light)]">Bd / Ba</th>
+                  <th scope="col" class="px-4 py-3 text-left font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue-light)]">Sq Ft</th>
+                  <th scope="col" class="px-4 py-3 text-left font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue-light)]">Built</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stats.recentSoldComps!.map((c) => (
+                  <tr class="border-b border-[var(--color-border-dark)] last:border-b-0 hover:bg-[var(--color-dark-elevated)]/40">
+                    <td class="px-4 py-3 text-white">
+                      {c.address}
+                      {c.isWaterfront && <span class="ml-2 text-xs text-[var(--color-cbgl-blue-light)]">(waterfront)</span>}
+                      {c.subdivision && <span class="block text-xs text-white/40 mt-0.5">{c.subdivision}</span>}
+                    </td>
+                    <td class="px-4 py-3 font-display font-bold text-white">{c.soldPrice}</td>
+                    <td class="px-4 py-3 text-white/60">{c.soldDate}</td>
+                    <td class="px-4 py-3 text-white/60">{c.bedrooms ?? '—'} / {c.bathrooms ?? '—'}</td>
+                    <td class="px-4 py-3 text-white/60">{c.livingSqFt ?? '—'}</td>
+                    <td class="px-4 py-3 text-white/60">{c.yearBuilt ?? '—'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {(stats.fees?.medianMonthlyCondoFee || stats.fees?.medianMonthlyAssociation) && (
+        <div class="mb-6">
+          <h3 class="font-display text-xl text-white mb-4">Typical Monthly Costs</h3>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {stats.fees.medianMonthlyCondoFee && (
+              <li class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
+                <p class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Median Condo Fee</p>
+                <p class="font-display text-2xl font-bold text-white">{stats.fees.medianMonthlyCondoFee}<span class="text-sm text-white/40 font-normal ml-1">/ month</span></p>
+              </li>
+            )}
+            {stats.fees.medianMonthlyAssociation && (
+              <li class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
+                <p class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Median Total HOA</p>
+                <p class="font-display text-2xl font-bold text-white">{stats.fees.medianMonthlyAssociation}<span class="text-sm text-white/40 font-normal ml-1">/ month</span></p>
+              </li>
+            )}
+          </ul>
+        </div>
+      )}
+
+      <p class="text-xs text-[var(--color-text-on-dark-subtle)] mt-8 leading-relaxed">
+        Active inventory and recent sold data sourced directly from the Sarasota Stellar MLS feed
+        via the Adamson Group data pipeline. Geographic boundaries enforced via PostGIS — listings
+        are assigned to {areaName} based on actual coordinates, not just postal code. Data through {updatedFmt}.
+        All figures approximate and subject to change.
+      </p>
+    </div>
+  </section>
+)}
+
+<script type="application/ld+json" set:html={JSON.stringify(datasetSchema)} />
+{soldCompsSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(soldCompsSchema)} />
+)}

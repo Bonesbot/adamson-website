@@ -1,0 +1,134 @@
+{
+  "areaSlug": "downtown-sarasota",
+  "source": "supabase",
+  "status": "ok",
+  "lastUpdated": "2026-04-26T21:16:50.500742+00:00",
+  "counts": {
+    "sold": 31,
+    "pending": 66,
+    "active": 251,
+    "total": 97
+  },
+  "metrics": {
+    "avgPrice": "$2,844,711",
+    "avgPricePerSqFt": "$1,044",
+    "avgYearBuilt": 2011,
+    "avgLivingSqFt": "2,456",
+    "avgLotSqFt": "49,525",
+    "avgDom": 89
+  },
+  "range": {
+    "minPrice": "$500,000",
+    "maxPrice": "$12,499,000"
+  },
+  "active": {
+    "count": 251,
+    "medianPrice": "$1,659,000",
+    "medianPricePerSqFt": "$885",
+    "waterfrontCount": 66,
+    "newConstructionCount": 101
+  },
+  "sold": {
+    "count": 31,
+    "medianPrice": "$1,350,000",
+    "medianDom": 109,
+    "saleToListRatio": "86.5%"
+  },
+  "fees": {
+    "medianMonthlyAssociation": "$1,944",
+    "medianMonthlyCondoFee": "$2,083"
+  },
+  "priceBands": {
+    "under900k": 55,
+    "band900kTo1_5m": 63,
+    "band1_5mTo3m": 66,
+    "band3mPlus": 67
+  },
+  "propertyTypes": [
+    {
+      "type": "Residential",
+      "count": 251
+    }
+  ],
+  "buildingClasses": [
+    {
+      "class": "high-rise",
+      "count": 134
+    },
+    {
+      "class": "low-rise",
+      "count": 60
+    },
+    {
+      "class": "mid-rise",
+      "count": 49
+    }
+  ],
+  "recentSoldComps": [
+    {
+      "listingId": "A4681396",
+      "address": "1350 MAIN ST #PH-1701",
+      "subdivision": "1350 MAIN RESIDENTIAL",
+      "soldPrice": "$1,700,000",
+      "soldDate": "2026-04-22",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,216",
+      "yearBuilt": 2007,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4671529",
+      "address": "1064 N TAMIAMI TRL #1116",
+      "subdivision": "BROADWAY PROMENADE",
+      "soldPrice": "$515,000",
+      "soldDate": "2026-04-22",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,425",
+      "yearBuilt": 2007,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4641930",
+      "address": "280 GOLDEN GATE PT #400",
+      "subdivision": "AQUA",
+      "soldPrice": "$7,500,000",
+      "soldDate": "2026-04-17",
+      "bedrooms": 4,
+      "bathrooms": 6.0,
+      "livingSqFt": "7,645",
+      "yearBuilt": 2016,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4668615",
+      "address": "258 GOLDEN GATE PT #801",
+      "subdivision": "MAJESTIC BAY",
+      "soldPrice": "$2,800,000",
+      "soldDate": "2026-04-16",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,031",
+      "yearBuilt": 2004,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4601273",
+      "address": "35 WATERGATE DR #503",
+      "subdivision": "THE TOWER RESIDENCES",
+      "soldPrice": "$1,925,000",
+      "soldDate": "2026-04-16",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,990",
+      "yearBuilt": 2003,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    }
+  ]
+}

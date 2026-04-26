@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import MarketStats from '@/components/market/MarketStats.astro';
 import DetailedMarketTable from '@/components/market/DetailedMarketTable.astro';
+import AreaMarketSummary from '@/components/market/AreaMarketSummary.astro';
 import FAQSchema from '@/components/seo/FAQSchema.astro';
 import Button from '@/components/ui/Button.astro';
 import { getAreas, getAreaBySlug } from '@/lib/sanity';
@@ -43,7 +44,16 @@ for (const [path, mod] of Object.entries(statsModules)) {
   }
 }
 
-const description = `${area.name} real estate market data, pricing trends, and neighborhood guide. Median home price: ${area.marketStats?.medianPrice || 'N/A'}. Expert insights from Ryan Adamson, Coldwell Banker St. Armands.`;
+// Headline price for meta description + WebPage JSON-LD schema.
+// Prefer the live pipeline avg sold price (so AI crawlers see the same
+// number rendered in the DetailedMarketTable). Fall back to the legacy
+// median from areas.json / Sanity for areas not yet on the pipeline.
+const headlinePrice =
+  detailedStats?.metrics?.avgPrice
+    ? `Average sold price: ${detailedStats.metrics.avgPrice}`
+    : `Median home price: ${area.marketStats?.medianPrice || 'N/A'}`;
+
+const description = `${area.name} real estate market data, pricing trends, and neighborhood guide. ${headlinePrice}. Expert insights from Ryan Adamson, Coldwell Banker St. Armands.`;
 
 const jsonLd = [
   {
@@ -123,6 +133,11 @@ const jsonLd = [
   <!-- Detailed Sold + Pending Market Table (live MLS pipeline) -->
   {detailedStats && (
     <DetailedMarketTable areaName={area.name} stats={detailedStats} />
+  )}
+
+  <!-- Enriched AEO market summary — active inventory, price bands, sold comps -->
+  {detailedStats && (detailedStats.active || detailedStats.sold) && (
+    <AreaMarketSummary areaName={area.name} areaSlug={area.slug} stats={detailedStats} />
   )}
 
   <!-- FAQ Section -->

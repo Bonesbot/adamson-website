@@ -47,6 +47,13 @@ AEO is the primary differentiator. Every architectural decision serves this goal
 - **Monthly market reports**: Auto-generated from BigQuery data, published as blog posts with structured data
 - **FAQ sections**: On every page, marked up with `FAQPage` schema
 
+### Post-Deploy Audit Ritual (MANDATORY)
+After every Netlify deploy that changes public-facing content, schema, robots/sitemaps, or page templates, run [`AEO_AUDIT_PLAYBOOK.md`](./AEO_AUDIT_PLAYBOOK.md) against the live site.
+
+The audit is performed **cold** — as a fresh AI agent looking for Sarasota real estate data — without first reading project context. Findings are reconciled against [`AEO_TODO.md`](./AEO_TODO.md), which is the durable list of open AEO work.
+
+The playbook is the single source of truth for how an audit is run; do not improvise. Update it when the audit methodology changes.
+
 ---
 
 ## Site Map & Page Architecture
@@ -102,27 +109,60 @@ Stellar MLS → [CSV/API Export] → Supabase (Postgres)
                               AI engines cite your data as authoritative source
 ```
 
-### Supabase Tables (Planned)
+### Supabase Tables (DEPLOYED — Session 2)
 
-**Core Tables:**
-- `raw_listings` — Raw MLS listing data (active + sold), includes `location` column as PostGIS `geography(Point, 4326)` for lat/long
-- `areas` — Area definitions (name, slug, zip codes)
+**Core Tables (7):**
+- `import_batches` — Audit trail for every CSV import: file hash, detected submarket, area breakdown, row counts (inserted/updated/unchanged), status
+- `raw_listings` — 135 columns: 100 MLS fields (snake_case) + PostGIS location + JSONB raw_mls_data + pipeline tracking (data_hash, change_count, first_seen_at) + 18 enriched/computed columns + 8 parsed array columns
+- `areas` — Area definitions with slug and zip_codes array (6 seeded: Longboat Key, Downtown Sarasota, Lido Key, Siesta Key, St. Armands, Bird Key)
 - `zone_polygons` — Geospatial zone boundaries (drawn in geojson.io, stored as PostGIS `geography(Polygon, 4326)`)
-- `subdivision_aliases` — Maps MLS subdivision name variants to canonical names (see Subdivision Normalization below)
+- `subdivision_aliases` — Maps MLS subdivision name variants to canonical names with confidence scores and match method tracking
 - `unmatched_subdivisions` — Queue for low-confidence fuzzy matches needing manual review
-- `audit_log` — Track when data was last updated and by what process
+- `audit_log` — System audit trail for data operations
 
-**SQL Views:**
-- `vw_market_stats_by_area` — Aggregated stats per area (median price, DOM, inventory, volume, YoY)
-- `vw_market_stats_by_zone` — Aggregated stats per geospatial zone (beachfront, bayside, etc.)
-- `vw_beachfront_stats` — Gulf-front properties only, per area
-- `vw_bayside_stats` — Bay-side properties only, per area
+**Enriched/Computed Columns (auto-populated by trigger on insert/update):**
+- `detected_area` — Area slug from zip code lookup against areas table
+- `location` — PostGIS geography point from lat/long
+- `monthly_association_cost` — TotalAnnualFees / 12
+- `has_natural_gas` — Parsed from Utilities field
+- `is_gated` / `gate_type` — Parsed from CommunityFeatures (guarded vs unguarded)
+- `has_dog_park`, `has_golf`, `has_fitness_center`, `has_tennis`, `has_pickleball`, `has_pool_community`, `has_restaurant` — Lifestyle booleans from CommunityFeatures
+- `has_elevator` — From BuildingElevatorYN
+- `building_class` — low-rise (1-4 stories), mid-rise (5-9), high-rise (10+)
+- `has_dock`, `is_waterfront` — From DockYN, WaterfrontYN
+- `is_turnkey` — Furnished IN ('Furnished', 'Turnkey')
+- `big_dog_friendly` — MaxPetWeight >= 50
+- `canonical_subdivision` — Normalized name from subdivision_aliases lookup
+- 8 parsed text arrays: community_features, water_extras, water_view, waterfront_features, lot_features, utilities, construction_materials, pets_allowed
+
+**SQL Views (7):**
+- `vw_market_stats_by_area` — Active/pending market snapshot by area (median price, avg price, DOM, price/sqft, inventory)
+- `vw_market_stats_sold` — Sold listings stats for last 12 months by area
+- `vw_market_stats_by_zone` — Market stats within geospatial zones (PostGIS joins)
+- `vw_subdivision_stats` — Market metrics by normalized subdivision
 - `vw_market_trends_monthly` — Monthly trend data for charts/reports
-- `vw_subdivision_stats` — Stats by normalized subdivision name
+- `vw_data_freshness_by_area` — Monitoring: fresh/stale/critical status per area
+- `vw_import_batch_summary` — Admin dashboard: import batch history and stats
+
+**Indexes (25+):** B-tree on query fields, GIST on geography, GIN on arrays and JSONB, trigram on subdivision names
 
 **Required Postgres Extensions:**
 - `postgis` — Geospatial queries (ST_Within, ST_Contains, geography types)
 - `pg_trgm` — Trigram-based fuzzy text matching for subdivision normalization
+
+### Ingest Script (DEPLOYED — Session 2)
+
+**File:** `supabase/ingest_mls.py` — Python script running on BonesBot Windows mini-PC
+- Direct Postgres connection via psycopg2 (Session Pooler: `aws-1-us-east-1.pooler.supabase.com:5432`)
+- Three-layer dedup: file SHA-256 hash → ListingId upsert → row data hash change detection
+- Auto-detects submarket from CSV data content (zip codes), not filename
+- Creates import_batch record, upserts all rows, finalizes with counts
+- Archives processed CSVs to `mls-imports/processed/` with timestamp
+- Trigger `fn_compute_enrichments()` auto-populates all derived columns on insert/update
+- Logs to `logs/ingest.log`
+- Supports `--dry-run` mode and specific file paths as CLI args
+
+**Daily workflow:** Export CSV from Stellar MLS → drop in `mls-imports/` → `python supabase\ingest_mls.py`
 
 ---
 
@@ -151,6 +191,67 @@ Stellar MLS → [CSV/API Export] → Supabase (Postgres)
 - "What's the average price per sq ft for waterfront on Bird Key?" → zone-filtered aggregation
 
 These granular answers get baked into area pages as FAQ schema, making Ryan's site the definitive source AI engines cite for Sarasota sub-market data.
+
+---
+
+### Two-Layer GIS Architecture (Decision: 2026-04-25)
+
+**Strategic refinement of the original `zone_polygons` design.** The original schema mixed administrative geography ("Longboat Key") and feature geography ("beachfront") into a single `zone_polygons` table differentiated by `zone_type`. As the AEO use case sharpens around the $900k+ luxury buyer, that conflation becomes a liability. The two concepts answer different questions and should be treated as **orthogonal layers**, not a single typed table.
+
+**Layer 1 — Area polygons (administrative / marketing geography)**
+- Answers: *"Where is this property?"*
+- Mutually exclusive — every listing belongs to exactly one area
+- Used for grouping, segmentation, market reports, pulse pages
+- Scale: ~15–30 polygons (Lido Key, Downtown Sarasota, West of the Trail / 34239, 34231 luxury pockets, Longboat Key, Siesta Key, St. Armands, Bird Key, Bayfront / Hudson Bayou, etc.)
+- Stored in: `area_polygons` table (`id`, `slug`, `name`, `geom`, `parent_id` for nested areas, `precedence` int for boundary-edge tie-breaking, `polygon_version` int)
+- Listing column: single `area_slug` text (or `area_id` FK), populated by trigger
+
+**Layer 2 — Feature polygons (geographic attributes / MLS truth filter)**
+- Answers: *"What does this property touch / have / sit on?"*
+- Overlapping — a Lido Key listing can be beachfront AND walkable-to-St-Armands AND no-bridge-Gulf-access simultaneously
+- Used as a **truth filter against agent-entered MLS data**, which is notoriously dirty (agents flag canal-front parcels as "Waterfront: Yes," generic "beach access" properties as beachfront, etc.). PostGIS-derived booleans against actual coastline / bay / waterway polygons give ground truth.
+- Scale: ~10–20 polygons (beachfront, bayfront, Gulf-access-no-bridge, deep-water dock zone, ICW frontage, walkable-to-St-Armands radius, walkable-downtown radius, gated-community polygons, etc.)
+- Stored in: `feature_polygons` table (`id`, `feature_type` enum, `name`, `geom`, `polygon_version` int)
+- Listing columns: wide row of indexed booleans — `is_beachfront_verified`, `is_bayfront_verified`, `is_gulf_access_no_bridge`, `is_deep_water_dock`, `is_icw_frontage`, `is_walkable_st_armands`, etc., populated by trigger
+
+**Critical pattern: keep both MLS-reported AND GIS-verified columns**
+- Original MLS field stays in `mls_waterfront_raw`, `mls_view_raw`, etc. — never overwritten
+- GIS-derived truth lands in `is_beachfront_verified`, `is_bayfront_verified`, etc.
+- Surfaces two valuable affordances:
+  1. **Data-quality flag:** mismatches (agent says waterfront, GIS says no) become an admin-dashboard widget — opportunities or errors worth investigating
+  2. **Citable claim:** the public site can say *"GIS-verified beachfront"* as a quality marker no competitor can credibly make
+
+**The two layers do NOT interact at the spatial-join level.** They live as independent indexed columns on the listing row. They only combine at the query layer in plain SQL `WHERE` clauses:
+- *"Beachfront properties on Lido Key"* → `WHERE area_slug = 'lido-key' AND is_beachfront_verified = true`
+- *"$900k+ bayfront condos in 34239"* → `WHERE area_slug = '34239' AND is_bayfront_verified = true AND list_price >= 900000 AND property_type = 'Condominium'`
+
+**Compute once at write time, never at read time.** The trigger fires on listing INSERT/UPDATE (and on geometry change), runs point-in-polygon against every area polygon and every feature polygon, stores results as cached columns. All downstream queries (dashboards, market reports, pulse pages, buyer search) read indexed booleans, never touch geometry.
+
+**Performance reality (not a concern):**
+- Sarasota MLS scale: ~50k incremental listings/year × ~30 polygons = sub-second GIS work per nightly import
+- PostGIS GIST-indexed point-in-polygon: microseconds per test
+- Daily import GIS overhead: single-digit seconds total
+- Supabase free tier handles this without breathing
+- The only performance trap is running spatial queries at read time — this design forbids that
+
+**Polygon versioning (build this early):**
+- Each polygon row carries a `polygon_version` integer
+- Each listing row carries `area_tagged_with_version`, `features_tagged_with_version`
+- When a polygon is redrawn, bump the polygon's version
+- A `retag_listings.py` script finds listings where versions don't match and re-runs trigger logic for just those rows
+- Cheap to build, saves you forever as polygons evolve
+
+**Migration path from the existing `zone_polygons` table:**
+1. Create new `area_polygons` and `feature_polygons` tables alongside the existing `zone_polygons`
+2. Backfill from existing data: `zone_type IN ('area','submarket')` rows → `area_polygons`; `zone_type IN ('beachfront','bayside','golf_course',...)` rows → `feature_polygons`
+3. Update enrichment trigger `fn_compute_enrichments()` to read from new tables
+4. Backfill listing columns
+5. Deprecate `zone_polygons` once views are migrated (keep around for one version as a safety net)
+
+**MVP build order (prioritized for AEO use case):**
+1. **All area polygons drawn first** — foundation for every market report. Cannot run a defensible "Lido Key median price" query until every listing has a clean `area_slug`. Target areas: Lido Key, Downtown Sarasota, West of the Trail (34239), 34231 luxury pockets (Oyster Bay, etc.), Longboat Key, Siesta Key, St. Armands, Bird Key.
+2. **Three highest-value feature polygons next** — `is_beachfront_verified`, `is_bayfront_verified`, `is_gulf_access_no_bridge`. These three alone unlock the truth-filter for the most common buyer queries and clean segmentation for pulse pages.
+3. **Long-tail features later** — walkability radii, dock-depth zones, ICW frontage, school-district polygons. Layered in as content needs grow.
 
 ---
 
@@ -403,6 +504,10 @@ AG_website/
 | 2026-04-22 | Video hero banner | Carry over the video banner from existing site for hero section. |
 | 2026-04-22 | Dual logo placement | Adamson Group logo + Coldwell Banker logo side-by-side in header/hero (matches existing site). |
 | 2026-04-22 | Supabase over BigQuery | BigQuery was overkill and had API issues. Supabase = full Postgres, visual editor, REST API, free tier. Better fit for 6-area market aggregation. |
+| 2026-04-23 | Direct Postgres over PostgREST for ingest | PostgREST schema cache caused persistent "column not found" errors. psycopg2 direct connection via Session Pooler is more reliable for bulk data loading. |
+| 2026-04-23 | `listing_view` column name | PostgreSQL reserved word `view` caused silent CREATE TABLE failures. Renamed to `listing_view`. |
+| 2026-04-23 | Single broad MLS export strategy | Post-backfill: one daily Sarasota-wide CSV export instead of per-area searches. PostGIS handles area separation downstream. |
+| 2026-04-23 | 100-field MLS export | Iterated through 3 CSV format versions (86→100 columns). Added BuildingElevatorYN, StoriesTotal, TotalAnnualFees, Utilities, CommunityFeatures for lifestyle query support. |
 
 ---
 
@@ -439,3 +544,59 @@ AG_website/
 - Set up Netlify build hook + Sanity webhook for auto-deploy on publish
 - **Full loop working**: Edit in Sanity → auto-deploy → live site updated
 - **Next session**: Supabase data pipeline → Sanity, populate all 6 areas in Sanity, about page with real bio, area photography, custom domain setup
+
+### Session 2 — 2026-04-23
+- Designed and deployed full Supabase schema (7 tables, 7 views, 1 trigger function, 25+ indexes, 6 seeded areas)
+- Built trigger function `fn_compute_enrichments()` that auto-computes 18 derived fields + 8 parsed arrays on every insert/update
+- Iterated MLS CSV export format from 86 → 100 columns (added elevator, stories, utilities, community features, annual fees, dock details)
+- Built Python ingest script (`supabase/ingest_mls.py`) with three-layer dedup (file hash, ListingId upsert, row data hash)
+- Resolved multiple deployment issues: PostgreSQL reserved word `view`, Supabase SQL Editor silent failures, PostgREST cache staleness, IPv4/IPv6 connection routing
+- Successfully loaded 721 listings (221 + 500 from two CSV files) — all enrichments verified working
+- Stored Supabase credentials in `.env` (gitignored): project URL, anon key, service role key, database URL (Session Pooler)
+- Created detailed memory files for: pipeline requirements, MLS field structure, single export strategy, field enrichment rules, buyer query UI vision
+- **Data in Supabase**: 721 listings across Longboat Key (203) and Downtown Sarasota (518), with PostGIS locations, lifestyle booleans, building class, monthly HOA, and all computed fields populated
+- **Next**: Reporting/dashboard tooling, freshness monitoring, Ryan admin dashboard, daily email alerts, wire market stats views into Astro site pages
+
+### Session 3 — 2026-04-23 (continued)
+- Built Streamlit dashboard (`dashboard.py`) with 4 pages: Pipeline Health, Market Overview, Lifestyle Search, Subdivisions
+- Connects directly to Supabase Postgres via psycopg2 (Session Pooler), bypassing PostgREST
+- Added currency formatting ($1,234,567 — no decimals) across all dollar fields in metrics, tables, and charts
+- Pulled brand assets from Google Drive: AG logos (4 variants), CB Global Luxury logo, CB Color Palette doc
+- Applied full brand treatment: Dark Blue (#012169) sidebar, AG logo at top, CB Global Luxury logo in footer, Georgia serif headings, gold (#C5A55A) accent headers/dividers, full 10-color CB palette
+- Pipeline Health set as default landing page (most useful for daily ops)
+- Subdivisions page split into Active vs Sold/Pending: separate queries merged with outer join, grouped bar chart comparing median prices, split DOM charts, full data table with Active #/Median/$/SqFt/DOM and Sold #/Median/$/SqFt/DOM columns — prevents overpriced active listings from skewing sold/closed market reality
+- Brand assets saved to `assets/logos/` (ag_logo_1–4.png, cb_global_luxury.jpg)
+- Dashboard tested and working on BonesBot mini-PC (localhost:8501)
+- **Still pending**: Data freshness alerting logic, daily summary email to Ryan, Streamlit Cloud deployment, wire market stats views into Astro site, PostGIS zone polygons, subdivision normalization seed data, sync script (Supabase views → Sanity CMS → Netlify rebuild)
+
+---
+
+## ⏭️ NEXT STEP: Point AdamsonFL.com to Netlify
+
+> This is the immediate next step when Ryan returns to the website project.
+
+### Steps
+
+1. **Netlify → Domain Settings**
+   - Go to the Netlify dashboard for the `adamson-website` site
+   - Navigate to **Domain management → Add a domain**
+   - Enter `adamsonfl.com` (and `www.adamsonfl.com`)
+   - Netlify will provide DNS target values (an A record IP and/or CNAME)
+
+2. **SiteGround → DNS Zone Editor**
+   - Log into SiteGround (where the domain is currently registered/hosted)
+   - Go to **Domain → DNS Zone Editor** for `adamsonfl.com`
+   - Update the **A record** for `@` (root domain) to point to Netlify's load balancer IP: `75.2.60.5`
+   - Update (or create) a **CNAME record** for `www` pointing to the Netlify subdomain (e.g. `adamson-website.netlify.app`)
+   - Remove any conflicting A/CNAME records for `@` or `www`
+
+3. **Wait for propagation** — DNS changes typically take 5–30 minutes, can take up to 48 hours.
+
+4. **Netlify → Verify & provision SSL**
+   - Once DNS propagates, Netlify will auto-provision a free Let's Encrypt SSL certificate
+   - Verify both `adamsonfl.com` and `www.adamsonfl.com` show the new site
+
+### Notes
+- The existing SiteGround site is a throwaway demo — no data to preserve
+- If SiteGround is only being used for DNS (domain registrar), the hosting plan can be cancelled after cutover
+- Alternatively, the domain can be transferred to Netlify DNS for simpler management long-term

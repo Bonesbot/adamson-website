@@ -1,0 +1,134 @@
+{
+  "areaSlug": "lido-key",
+  "source": "supabase",
+  "status": "ok",
+  "lastUpdated": "2026-04-26T21:16:49.921407+00:00",
+  "counts": {
+    "sold": 14,
+    "pending": 18,
+    "active": 101,
+    "total": 32
+  },
+  "metrics": {
+    "avgPrice": "$3,011,184",
+    "avgPricePerSqFt": "$1,045",
+    "avgYearBuilt": 1988,
+    "avgLivingSqFt": "2,153",
+    "avgLotSqFt": "117,617",
+    "avgDom": 88
+  },
+  "range": {
+    "minPrice": "$500,000",
+    "maxPrice": "$20,000,000"
+  },
+  "active": {
+    "count": 101,
+    "medianPrice": "$1,925,000",
+    "medianPricePerSqFt": "$927",
+    "waterfrontCount": 50,
+    "newConstructionCount": 19
+  },
+  "sold": {
+    "count": 14,
+    "medianPrice": "$1,475,000",
+    "medianDom": 78,
+    "saleToListRatio": "87.5%"
+  },
+  "fees": {
+    "medianMonthlyAssociation": "$1,458",
+    "medianMonthlyCondoFee": "$1,572"
+  },
+  "priceBands": {
+    "under900k": 29,
+    "band900kTo1_5m": 14,
+    "band1_5mTo3m": 20,
+    "band3mPlus": 38
+  },
+  "propertyTypes": [
+    {
+      "type": "Residential",
+      "count": 101
+    }
+  ],
+  "buildingClasses": [
+    {
+      "class": "low-rise",
+      "count": 49
+    },
+    {
+      "class": "high-rise",
+      "count": 26
+    },
+    {
+      "class": "mid-rise",
+      "count": 13
+    }
+  ],
+  "recentSoldComps": [
+    {
+      "listingId": "A4670769",
+      "address": "1750 BENJAMIN FRANKLIN DR #9G",
+      "subdivision": "KEY TOWER SOUTH",
+      "soldPrice": "$650,000",
+      "soldDate": "2026-04-16",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,548",
+      "yearBuilt": 1970,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4686994",
+      "address": "1800 BENJAMIN FRANKLIN DR #B1006",
+      "subdivision": "L ELEGANCE ON LIDO BEACH",
+      "soldPrice": "$2,500,000",
+      "soldDate": "2026-04-15",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,070",
+      "yearBuilt": 1996,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4687494",
+      "address": "171 WHITTIER DR",
+      "subdivision": "LIDO BEACH DIV A",
+      "soldPrice": "$15,800,000",
+      "soldDate": "2026-04-10",
+      "bedrooms": 5,
+      "bathrooms": 6.5,
+      "livingSqFt": "6,367",
+      "yearBuilt": 2023,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4682945",
+      "address": "1800 BENJAMIN FRANKLIN DR #B708",
+      "subdivision": "L ELEGANCE ON LIDO BEACH",
+      "soldPrice": "$1,800,000",
+      "soldDate": "2026-04-10",
+      "bedrooms": 2,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,700",
+      "yearBuilt": 1996,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4673028",
+      "address": "1800 BENJAMIN FRANKLIN DR #B809",
+      "subdivision": "L ELEGANCE ON LIDO BEACH",
+      "soldPrice": "$2,400,000",
+      "soldDate": "2026-04-08",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,230",
+      "yearBuilt": 1996,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    }
+  ]
+}
