@@ -19,7 +19,7 @@ const areas = areasFallback.areas.map((fallback) => {
     name: sanity?.name || fallback.name,
     slug: fallback.slug,
     tagline: sanity?.tagline || fallback.tagline,
-    medianPrice: sanity?.marketStats?.medianPrice || fallback.marketStats.medianPrice,
+    medianPrice: sanity?.marketStats?.medianPrice || fallback.marketStats?.medianPrice || "",
     imageSrc: sanity?.cardImage || undefined,
   };
 });
