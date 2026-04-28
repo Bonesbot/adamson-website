@@ -34,7 +34,13 @@ if ENV_FILE.exists():
                 key, val = line.split("=", 1)
                 os.environ.setdefault(key.strip(), val.strip())
 
+# Prefer env var (local), fall back to st.secrets (Streamlit Cloud)
 DATABASE_URL = os.environ.get("DATABASE_URL", "")
+if not DATABASE_URL:
+    try:
+        DATABASE_URL = st.secrets["DATABASE_URL"]
+    except Exception:
+        DATABASE_URL = ""
 
 # Brand colors — CB Color Palette from brand guidelines
 NAVY = "#2D4280"          # Subtle CB Blue (favorite)
