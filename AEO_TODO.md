@@ -34,7 +34,7 @@
 - [ ] **Bring all five remaining area pages to Longboat Key parity.**
   Pages affected: `/areas/sarasota/`, `/areas/lido-key/`, `/areas/siesta-key/`, `/areas/st-armands/`, `/areas/bird-key/`.
   Each needs: stat grid (median, $/sqft, DOM, active, sold-90d, YoY%), 3-question FAQ block with both microdata and JSON-LD `FAQPage`, "last updated" date, Stellar MLS attribution.
-  *Pattern:* See area page rollout — draw polygon → fetch_area_stats.py → commit `<slug>-stats.json` → Netlify rebuild.
+  *Pattern:* See area page rollout — draw polygon → fetch_area_summary.py → commit `<slug>-stats.json` → Netlify rebuild.
 
 - [ ] **Replace the `<!-- TODO: Replace with Ryan's actual bio copy -->` comment in `/about/` with real bio.**
   This comment is in production HTML right now. Get Ryan's actual bio.
