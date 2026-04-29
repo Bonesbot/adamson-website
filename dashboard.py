@@ -574,4 +574,21 @@ elif page == "Pipeline Health":
             rows_inserted AS inserted,
             rows_updated AS updated,
             rows_unchanged AS unchanged,
-            stat
+            status
+        FROM import_batches
+        WHERE status != 'failed'
+        ORDER BY imported_at DESC
+        LIMIT 25
+    """)
+
+    st.dataframe(batches, use_container_width=True, hide_index=True)
+
+# ---------------------------------------------------------------------------
+# Footer
+# ---------------------------------------------------------------------------
+
+st.sidebar.divider()
+if CB_LOGO.exists():
+    st.sidebar.image(str(CB_LOGO), use_column_width=True)
+st.sidebar.caption("Adamson Group Data Pipeline v1.0")
+st.sidebar.caption("Powered by Supabase + Streamlit")
