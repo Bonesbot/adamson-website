@@ -14,6 +14,14 @@
 
 ---
 
+## Local Workspace (canonical path)
+
+**Project root**: `C:\Users\Bones\automation\AG_website` — single source of truth for all edits, scheduled tasks, and Cowork sessions.
+
+**History**: From an earlier setup, a duplicate copy lived at `C:\Users\Bones\.claude\AG_website`. On 2026-04-29 the duplicate was renamed to `C:\Users\Bones\.claude\AG_website_BACKUP_2026-04-29_PRE-CONSOLIDATION` and the Cowork project workspace was repointed at `automation\AG_website` to eliminate silent drift between scheduled-task runs and live edits. Any `.claude\AG_website` reference in old transcripts, memory entries, or scripts is **stale** — read it as `automation\AG_website`. The backup folder may be deleted once the consolidation has been validated for a few days.
+
+---
+
 ## Tech Stack
 
 | Layer | Technology | Why |
@@ -587,16 +595,4 @@ AG_website/
    - Log into SiteGround (where the domain is currently registered/hosted)
    - Go to **Domain → DNS Zone Editor** for `adamsonfl.com`
    - Update the **A record** for `@` (root domain) to point to Netlify's load balancer IP: `75.2.60.5`
-   - Update (or create) a **CNAME record** for `www` pointing to the Netlify subdomain (e.g. `adamson-website.netlify.app`)
-   - Remove any conflicting A/CNAME records for `@` or `www`
-
-3. **Wait for propagation** — DNS changes typically take 5–30 minutes, can take up to 48 hours.
-
-4. **Netlify → Verify & provision SSL**
-   - Once DNS propagates, Netlify will auto-provision a free Let's Encrypt SSL certificate
-   - Verify both `adamsonfl.com` and `www.adamsonfl.com` show the new site
-
-### Notes
-- The existing SiteGround site is a throwaway demo — no data to preserve
-- If SiteGround is only being used for DNS (domain registrar), the hosting plan can be cancelled after cutover
-- Alternatively, the domain can be transferred to Netlify DNS for simpler management long-term
+   - Update (or create
