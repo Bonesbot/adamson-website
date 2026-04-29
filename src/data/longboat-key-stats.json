@@ -1,0 +1,134 @@
+{
+  "areaSlug": "longboat-key",
+  "source": "supabase",
+  "status": "ok",
+  "lastUpdated": "2026-04-29T11:34:43.508892+00:00",
+  "counts": {
+    "sold": 35,
+    "pending": 47,
+    "active": 380,
+    "total": 82
+  },
+  "metrics": {
+    "avgPrice": "$2,188,459",
+    "avgPricePerSqFt": "$891",
+    "avgYearBuilt": 1983,
+    "avgLivingSqFt": "2,074",
+    "avgLotSqFt": "186,145",
+    "avgDom": 109
+  },
+  "range": {
+    "minPrice": "$259,000",
+    "maxPrice": "$38,450,000"
+  },
+  "active": {
+    "count": 380,
+    "medianPrice": "$1,059,188",
+    "medianPricePerSqFt": "$693",
+    "waterfrontCount": 294,
+    "newConstructionCount": 28
+  },
+  "sold": {
+    "count": 35,
+    "medianPrice": "$1,062,000",
+    "medianDom": 100,
+    "saleToListRatio": "88.0%"
+  },
+  "fees": {
+    "medianMonthlyAssociation": "$1,607",
+    "medianMonthlyCondoFee": "$1,665"
+  },
+  "priceBands": {
+    "under900k": 158,
+    "band900kTo1_5m": 81,
+    "band1_5mTo3m": 83,
+    "band3mPlus": 58
+  },
+  "propertyTypes": [
+    {
+      "type": "Residential",
+      "count": 380
+    }
+  ],
+  "buildingClasses": [
+    {
+      "class": "low-rise",
+      "count": 265
+    },
+    {
+      "class": "mid-rise",
+      "count": 51
+    },
+    {
+      "class": "high-rise",
+      "count": 35
+    }
+  ],
+  "recentSoldComps": [
+    {
+      "listingId": "A4681778",
+      "address": "2155 HARBOURSIDE DR #804",
+      "subdivision": "HARBOR OAKS PH I & II",
+      "soldPrice": "$740,000",
+      "soldDate": "2026-04-28",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,119",
+      "yearBuilt": 1984,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4673592",
+      "address": "610 YARDARM LN",
+      "subdivision": "COUNTRY CLUB SHORES SEC 02",
+      "soldPrice": "$3,950,000",
+      "soldDate": "2026-04-27",
+      "bedrooms": 4,
+      "bathrooms": 4.5,
+      "livingSqFt": "4,138",
+      "yearBuilt": 2003,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "J1000344",
+      "address": "5960 GULF OF MEXICO DR",
+      "subdivision": "LONGBOAT KEY",
+      "soldPrice": "$3,050,000",
+      "soldDate": "2026-04-27",
+      "bedrooms": 4,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,624",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4674302",
+      "address": "6841 LONGBOAT DR S",
+      "subdivision": "LONGBEACH ON LONGBOAT KEY",
+      "soldPrice": "$900,000",
+      "soldDate": "2026-04-27",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,380",
+      "yearBuilt": 1935,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4648003",
+      "address": "6951 GULF OF MEXICO DR #14",
+      "subdivision": "SEA PINES",
+      "soldPrice": "$840,000",
+      "soldDate": "2026-04-27",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,170",
+      "yearBuilt": 1973,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    }
+  ]
+}
