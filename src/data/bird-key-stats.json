@@ -2,10 +2,11 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-04-23T20:25:41.364557+00:00",
+  "lastUpdated": "2026-04-29T11:34:46.587222+00:00",
   "counts": {
     "sold": 4,
     "pending": 3,
+    "active": 25,
     "total": 7
   },
   "metrics": {
@@ -17,7 +18,96 @@
     "avgDom": 115
   },
   "range": {
-    "minPrice": "$1,950,000",
-    "maxPrice": "$7,200,000"
-  }
+    "minPrice": "$1,325,000",
+    "maxPrice": "$11,300,000"
+  },
+  "active": {
+    "count": 25,
+    "medianPrice": "$4,595,000",
+    "medianPricePerSqFt": "$1,186",
+    "waterfrontCount": 10,
+    "newConstructionCount": 5
+  },
+  "sold": {
+    "count": 4,
+    "medianPrice": "$3,400,000",
+    "medianDom": 66,
+    "saleToListRatio": "91.3%"
+  },
+  "fees": {
+    "medianMonthlyAssociation": "$110",
+    "medianMonthlyCondoFee": null
+  },
+  "priceBands": {
+    "under900k": 0,
+    "band900kTo1_5m": 1,
+    "band1_5mTo3m": 8,
+    "band3mPlus": 16
+  },
+  "propertyTypes": [
+    {
+      "type": "Residential",
+      "count": 25
+    }
+  ],
+  "buildingClasses": [
+    {
+      "class": "low-rise",
+      "count": 18
+    }
+  ],
+  "recentSoldComps": [
+    {
+      "listingId": "A4655760",
+      "address": "483 PARTRIDGE CIR",
+      "subdivision": "BIRD KEY SUB",
+      "soldPrice": "$1,995,000",
+      "soldDate": "2026-04-22",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,392",
+      "yearBuilt": 1970,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4679736",
+      "address": "635 MOURNING DOVE DR",
+      "subdivision": "BIRD KEY SUB",
+      "soldPrice": "$7,200,000",
+      "soldDate": "2026-04-13",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "3,653",
+      "yearBuilt": 1966,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4670926",
+      "address": "335 BOB WHITE WAY",
+      "subdivision": "BIRD KEY SUB",
+      "soldPrice": "$3,300,000",
+      "soldDate": "2026-04-07",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,844",
+      "yearBuilt": 2019,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4681977",
+      "address": "488 MEADOW LARK DR",
+      "subdivision": "BIRD KEY SUB",
+      "soldPrice": "$3,500,000",
+      "soldDate": "2026-04-02",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,970",
+      "yearBuilt": 1970,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    }
+  ]
 }
