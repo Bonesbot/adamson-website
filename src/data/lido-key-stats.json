@@ -2,58 +2,58 @@
   "areaSlug": "lido-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-04-26T21:16:49.921407+00:00",
+  "lastUpdated": "2026-04-29T11:34:44.131812+00:00",
   "counts": {
-    "sold": 14,
-    "pending": 18,
-    "active": 101,
-    "total": 32
+    "sold": 18,
+    "pending": 15,
+    "active": 127,
+    "total": 33
   },
   "metrics": {
-    "avgPrice": "$3,011,184",
-    "avgPricePerSqFt": "$1,045",
-    "avgYearBuilt": 1988,
-    "avgLivingSqFt": "2,153",
+    "avgPrice": "$2,925,421",
+    "avgPricePerSqFt": "$1,028",
+    "avgYearBuilt": 1987,
+    "avgLivingSqFt": "2,107",
     "avgLotSqFt": "117,617",
-    "avgDom": 88
+    "avgDom": 90
   },
   "range": {
-    "minPrice": "$500,000",
+    "minPrice": "$275,000",
     "maxPrice": "$20,000,000"
   },
   "active": {
-    "count": 101,
-    "medianPrice": "$1,925,000",
-    "medianPricePerSqFt": "$927",
-    "waterfrontCount": 50,
-    "newConstructionCount": 19
+    "count": 127,
+    "medianPrice": "$1,700,000",
+    "medianPricePerSqFt": "$904",
+    "waterfrontCount": 62,
+    "newConstructionCount": 20
   },
   "sold": {
-    "count": 14,
-    "medianPrice": "$1,475,000",
-    "medianDom": 78,
-    "saleToListRatio": "87.5%"
+    "count": 18,
+    "medianPrice": "$1,197,500",
+    "medianDom": 86,
+    "saleToListRatio": "86.9%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,458",
-    "medianMonthlyCondoFee": "$1,572"
+    "medianMonthlyAssociation": "$1,283",
+    "medianMonthlyCondoFee": "$1,458"
   },
   "priceBands": {
-    "under900k": 29,
+    "under900k": 46,
     "band900kTo1_5m": 14,
-    "band1_5mTo3m": 20,
-    "band3mPlus": 38
+    "band1_5mTo3m": 21,
+    "band3mPlus": 46
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 101
+      "count": 127
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 49
+      "count": 74
     },
     {
       "class": "high-rise",
@@ -66,6 +66,58 @@
   ],
   "recentSoldComps": [
     {
+      "listingId": "A4676094",
+      "address": "2110 BENJAMIN FRANKLIN DR #303",
+      "subdivision": "LIDO HARBOUR SOUTH",
+      "soldPrice": "$540,000",
+      "soldDate": "2026-04-28",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,248",
+      "yearBuilt": 1968,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4675563",
+      "address": "1336 BENJAMIN FRANKLIN DR #2A",
+      "subdivision": "MARK TWAIN",
+      "soldPrice": "$1,100,000",
+      "soldDate": "2026-04-24",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,587",
+      "yearBuilt": 1966,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4664887",
+      "address": "769 JOHN RINGLING BLVD #3",
+      "subdivision": "SARASOTA HARBOR EAST",
+      "soldPrice": "$410,000",
+      "soldDate": "2026-04-24",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "641",
+      "yearBuilt": 1965,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4677053",
+      "address": "1 BENJAMIN FRANKLIN DR #55",
+      "subdivision": "ST ARMAND TOWERS NORTH",
+      "soldPrice": "$900,000",
+      "soldDate": "2026-04-22",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,389",
+      "yearBuilt": 1968,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "A4670769",
       "address": "1750 BENJAMIN FRANKLIN DR #9G",
       "subdivision": "KEY TOWER SOUTH",
@@ -77,58 +129,6 @@
       "yearBuilt": 1970,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4686994",
-      "address": "1800 BENJAMIN FRANKLIN DR #B1006",
-      "subdivision": "L ELEGANCE ON LIDO BEACH",
-      "soldPrice": "$2,500,000",
-      "soldDate": "2026-04-15",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,070",
-      "yearBuilt": 1996,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4687494",
-      "address": "171 WHITTIER DR",
-      "subdivision": "LIDO BEACH DIV A",
-      "soldPrice": "$15,800,000",
-      "soldDate": "2026-04-10",
-      "bedrooms": 5,
-      "bathrooms": 6.5,
-      "livingSqFt": "6,367",
-      "yearBuilt": 2023,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4682945",
-      "address": "1800 BENJAMIN FRANKLIN DR #B708",
-      "subdivision": "L ELEGANCE ON LIDO BEACH",
-      "soldPrice": "$1,800,000",
-      "soldDate": "2026-04-10",
-      "bedrooms": 2,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,700",
-      "yearBuilt": 1996,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4673028",
-      "address": "1800 BENJAMIN FRANKLIN DR #B809",
-      "subdivision": "L ELEGANCE ON LIDO BEACH",
-      "soldPrice": "$2,400,000",
-      "soldDate": "2026-04-08",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,230",
-      "yearBuilt": 1996,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ]
 }
