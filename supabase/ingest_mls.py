@@ -62,7 +62,7 @@ ARCHIVE_FOLDER = os.environ.get(
     str(PROJECT_ROOT / "mls-imports" / "processed")
 )
 
-BATCH_SIZE = 50
+BATCH_SIZE = 150
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -461,6 +461,13 @@ def upsert_listings(cur, rows, batch_id):
         inserted += batch_inserted
         updated += batch_updated
         unchanged += batch_unchanged
+
+        # Commit per-batch so partial runs are durable. If the process is killed
+        # mid-ingest (e.g. by a workspace bash timeout), the next run's
+        # existing-hash check above will mark already-loaded listings as
+        # unchanged and skip them, letting the work resume rather than starting
+        # over from row 0.
+        cur.connection.commit()
 
         log.info(
             f"  Batch {i // BATCH_SIZE + 1}: "
