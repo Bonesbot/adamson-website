@@ -1,0 +1,127 @@
+---
+// src/pages/idx-wrapper.astro
+//
+// IDX Broker Dynamic Wrapper template.
+// IDX Broker fetches this page server-side and splices live MLS search/detail
+// content between the <!--IDX-Wrapper-Start--> and <!--IDX-Wrapper-Stop--> sentinels.
+//
+// Verified against the canonical repo: matches the import style used in
+// src/pages/index.astro (uses the @/ alias, not relative paths).
+
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const title = "Search Sarasota & Bradenton MLS Listings | The Adamson Group";
+const description = "Live Stellar MLS property search for Sarasota, Longboat Key, Lido Key, Siesta Key, St. Armands, Bird Key, and Lakewood Ranch. Powered by IDX Broker.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="section dark-section idx-wrapper-section">
+    <div class="container">
+      <div class="text-center mb-10">
+        <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">
+          Live MLS Search
+        </p>
+        <h1 class="font-display text-3xl md:text-4xl text-white mb-4 accent-underline-center">
+          Sarasota & Barrier Islands Property Search
+        </h1>
+        <p class="text-white/60 text-sm max-w-2xl mx-auto">
+          Real-time listings from Stellar MLS. Save searches, set alerts, and reach Ryan directly with any question on the homes that interest you.
+        </p>
+      </div>
+
+      <!-- IDX Broker injects rendered listing/search/detail content between these two sentinels. -->
+      <!-- Do NOT remove or modify the comments below. IDX's parser locates them by exact string. -->
+      <div class="idx-wrapper-shell">
+        <!--IDX-Wrapper-Start-->
+        <div id="idxStart" style="display:none"></div>
+        <noscript>
+          <p class="text-white/70 text-center py-12">
+            JavaScript is required to load live MLS listings. Please enable JavaScript or
+            <a href="/contact" class="text-[var(--color-gold)] underline">contact Ryan directly</a>.
+          </p>
+        </noscript>
+        <div class="idx-loading">
+          <p class="text-white/50 text-sm font-accent uppercase tracking-[0.2em]">
+            Loading live listings…
+          </p>
+        </div>
+        <div id="idxStop" style="display:none"></div>
+        <!--IDX-Wrapper-Stop-->
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  /* --------------------------------------------------------------------- */
+  /* IDX Broker brand alignment                                            */
+  /* IDX renders its own markup with class names like .IDX-resultsCell,    */
+  /* .IDX-quicksearchSubmit, etc. We override only the highest-impact      */
+  /* visuals so listings feel native to adamsonfl.com without breaking IDX */
+  /* internal layout rules.                                                */
+  /* --------------------------------------------------------------------- */
+
+  .idx-wrapper-section {
+    min-height: 80vh;
+    padding-top: 120px; /* clearance under fixed site header */
+  }
+
+  .idx-wrapper-shell {
+    background: var(--color-dark-elevated, #1a1a1a);
+    border-radius: 8px;
+    padding: 1.5rem;
+    min-height: 600px;
+  }
+
+  .idx-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+  }
+
+  /* Hide the loading message once IDX renders its own content */
+  .idx-wrapper-shell:has(.IDX-wrapper) .idx-loading,
+  .idx-wrapper-shell:has(.IDX-resultsContainer) .idx-loading,
+  .idx-wrapper-shell:has(.IDX-detailsBody) .idx-loading {
+    display: none;
+  }
+
+  /* Typography — match site fonts inside IDX content */
+  .IDX-wrapper, .IDX-wrapper * {
+    font-family: var(--font-body, 'Inter', system-ui, sans-serif) !important;
+  }
+  .IDX-wrapper h1, .IDX-wrapper h2, .IDX-wrapper h3,
+  .IDX-detailsHeader, .IDX-resultsAddress {
+    font-family: var(--font-display, 'Playfair Display', Georgia, serif) !important;
+  }
+
+  /* Primary action color — gold */
+  .IDX-quicksearchSubmit,
+  .IDX-detailsContactBtn,
+  .IDX-btn-primary,
+  .IDX-saveSearch button,
+  .IDX-results .IDX-resultsLink {
+    background-color: var(--color-gold, #c9a961) !important;
+    color: #000 !important;
+    border-color: var(--color-gold, #c9a961) !important;
+  }
+  .IDX-quicksearchSubmit:hover,
+  .IDX-detailsContactBtn:hover,
+  .IDX-btn-primary:hover {
+    background-color: var(--color-gold-light, #d4b87a) !important;
+  }
+
+  /* Secondary accent — CBGL blue */
+  .IDX-resultsPrice,
+  .IDX-detailsPrice {
+    color: var(--color-cbgl-blue-light, #5b9bd5) !important;
+  }
+
+  /* Result cards — soft elevated background */
+  .IDX-resultsCell, .IDX-detailsBody {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border-radius: 6px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+</style>

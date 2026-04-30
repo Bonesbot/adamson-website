@@ -1,0 +1,163 @@
+---
+// src/components/IdxQuickSearch.astro
+//
+// Drop-in IDX Broker quick-search widget for the homepage hero or a CTA section.
+// Sends submitted searches to /idx/results, which Netlify proxies to IDX.
+//
+// USAGE in src/pages/index.astro (or wherever):
+//   ---
+//   import IdxQuickSearch from '@/components/IdxQuickSearch.astro';
+//   ---
+//   <IdxQuickSearch widgetId="REPLACE_ME" />
+//
+// The `widgetId` comes from IDX dashboard:
+//   IDX Broker → Widgets → Add Widget → "Quick Search" → save → copy the
+//   numeric ID from the embed snippet (looks like idxwidgetsrc-12345).
+// Until you create the widget, leave widgetId empty and the form below
+// will fall back to a hand-rolled search bar that posts to /idx/results.
+
+interface Props {
+  widgetId?: string;
+  /** Visual style: 'hero' for full-width transparent over a video/image, 'card' for a contained box. */
+  variant?: 'hero' | 'card';
+}
+
+const { widgetId = '', variant = 'hero' } = Astro.props;
+---
+
+{widgetId ? (
+  <!-- IDX Broker widget mode -->
+  <div class={`idx-quicksearch idx-quicksearch--${variant}`}>
+    <div id={`idxwidgetsrc-${widgetId}`}></div>
+    <script
+      is:inline
+      defer
+      type="text/javascript"
+      charset="UTF-8"
+      id={`idxwidgetsrc-script-${widgetId}`}
+      src={`https://adamsonfl.idxbroker.com/idx/widgets/${widgetId}`}
+    ></script>
+  </div>
+) : (
+  <!-- Fallback: native form posting to /idx/results (proxied to IDX) -->
+  <form
+    class={`idx-quicksearch idx-quicksearch--${variant} idx-quicksearch--fallback`}
+    action="/idx/results"
+    method="get"
+    role="search"
+    aria-label="Property search"
+  >
+    <input type="hidden" name="srch" value="advanced" />
+    <input type="hidden" name="hp" value="1" />
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+      <select name="ccz" aria-label="Search by" class="qs-input">
+        <option value="city">City</option>
+        <option value="zipcode">Zip Code</option>
+        <option value="county">County</option>
+      </select>
+
+      <input
+        type="text"
+        name="city[]"
+        placeholder="City, ZIP, or area"
+        class="qs-input md:col-span-2"
+        aria-label="Location"
+      />
+
+      <button type="submit" class="qs-submit">
+        Search Listings
+      </button>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3">
+      <select name="lp" aria-label="Min price" class="qs-input">
+        <option value="">Min Price</option>
+        <option value="500000">$500K</option>
+        <option value="1000000">$1M</option>
+        <option value="2000000">$2M</option>
+        <option value="5000000">$5M</option>
+        <option value="10000000">$10M</option>
+      </select>
+      <select name="hp" aria-label="Max price" class="qs-input">
+        <option value="">Max Price</option>
+        <option value="1000000">$1M</option>
+        <option value="2000000">$2M</option>
+        <option value="5000000">$5M</option>
+        <option value="10000000">$10M</option>
+        <option value="25000000">$25M+</option>
+      </select>
+      <select name="bd" aria-label="Bedrooms" class="qs-input">
+        <option value="">Beds</option>
+        <option value="2">2+</option>
+        <option value="3">3+</option>
+        <option value="4">4+</option>
+        <option value="5">5+</option>
+      </select>
+      <select name="tb" aria-label="Bathrooms" class="qs-input">
+        <option value="">Baths</option>
+        <option value="2">2+</option>
+        <option value="3">3+</option>
+        <option value="4">4+</option>
+      </select>
+    </div>
+  </form>
+)}
+
+<style>
+  .idx-quicksearch {
+    width: 100%;
+  }
+
+  .idx-quicksearch--card {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .idx-quicksearch--hero {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.25rem;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(6px);
+    border-radius: 6px;
+  }
+
+  .qs-input {
+    background: rgba(255, 255, 255, 0.95);
+    color: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-body, 'Inter', sans-serif);
+    font-size: 0.875rem;
+    width: 100%;
+  }
+
+  .qs-input:focus {
+    outline: 2px solid var(--color-gold, #c9a961);
+    outline-offset: 1px;
+  }
+
+  .qs-submit {
+    background: var(--color-gold, #c9a961);
+    color: #000;
+    font-family: var(--font-accent, 'Montserrat', sans-serif);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    border: 0;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .qs-submit:hover {
+    background: var(--color-gold-light, #d4b87a);
+  }
+</style>

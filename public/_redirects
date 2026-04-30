@@ -1,0 +1,20 @@
+# public/_redirects
+# Netlify edge redirects for adamsonfl.com
+#
+# Verified against the canonical repo: NO existing public/_redirects file,
+# so this is a fresh create. Drop straight into public/_redirects.
+
+# ---------------------------------------------------------------------------
+# IDX Broker Dynamic Wrapper proxy
+# ---------------------------------------------------------------------------
+# Status 200 = proxy (URL stays adamsonfl.com); 301/302 would change the URL.
+# IDX serves its own canonical tags so SEO-wise this is the recommended path.
+
+/idx/*           https://adamsonfl.idxbroker.com/idx/:splat              200
+/idx             https://adamsonfl.idxbroker.com/idx                     200
+
+# Common IDX paths that don't sit under /idx/ — proxy these too if you use them.
+# Uncomment as needed once you've enabled the corresponding features in IDX dashboard.
+# /search/*      https://adamsonfl.idxbroker.com/idx/search/:splat        200
+# /listings/*    https://adamsonfl.idxbroker.com/idx/results/:splat       200
+# /featured/*    https://adamsonfl.idxbroker.com/idx/featured/:splat      200

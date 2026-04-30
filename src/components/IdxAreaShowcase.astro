@@ -1,0 +1,94 @@
+---
+// src/components/IdxAreaShowcase.astro
+//
+// Drops a Saved-Link / Showcase widget under each area page's AEO content.
+// This is the "Supplement" pattern: your custom Astro AEO copy + Supabase
+// stats own the SEO/AEO surface, and this widget shows live current
+// inventory below it for the visitor.
+//
+// USAGE in src/pages/areas/longboat-key.astro:
+//   ---
+//   import IdxAreaShowcase from '@/components/IdxAreaShowcase.astro';
+//   ---
+//   <IdxAreaShowcase
+//     widgetId="98765"
+//     areaName="Longboat Key"
+//     viewAllUrl="/idx/results?ccz=city&city[]=Longboat+Key"
+//   />
+//
+// To create a Saved-Link Showcase widget per area:
+//   1. IDX dashboard → Saved Links → Add Saved Link → filter to that area
+//      (city, polygon, MLS area code, etc.) → save.
+//   2. IDX dashboard → Widgets → Add Widget → choose "Showcase" or
+//      "Map Showcase" → bind it to the Saved Link → save.
+//   3. Copy the widget's numeric ID into widgetId.
+
+interface Props {
+  widgetId: string;
+  areaName: string;
+  /** Optional: where the "View all" CTA points. Should be an /idx/... URL. */
+  viewAllUrl?: string;
+  /** Optional sub-heading; defaults to "Active Listings". */
+  label?: string;
+}
+
+const {
+  widgetId,
+  areaName,
+  viewAllUrl,
+  label = 'Active Listings',
+} = Astro.props;
+---
+
+<section class="section dark-section idx-area-showcase">
+  <div class="container">
+    <div class="text-center mb-10">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">
+        {label}
+      </p>
+      <h2 class="accent-underline-center">
+        Currently for Sale in {areaName}
+      </h2>
+      <p class="text-white/60 text-sm max-w-xl mx-auto mt-3">
+        Live from Stellar MLS. Updated continuously.
+      </p>
+    </div>
+
+    <div class="idx-showcase-frame">
+      <div id={`idxwidgetsrc-${widgetId}`}></div>
+      <script
+        is:inline
+        defer
+        type="text/javascript"
+        charset="UTF-8"
+        id={`idxwidgetsrc-script-${widgetId}`}
+        src={`https://adamsonfl.idxbroker.com/idx/widgets/${widgetId}`}
+      ></script>
+    </div>
+
+    {viewAllUrl && (
+      <div class="text-center mt-10">
+        <a
+          href={viewAllUrl}
+          class="inline-flex items-center justify-center font-accent uppercase tracking-wider transition-all duration-200 rounded bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] font-semibold text-sm px-8 py-4"
+        >
+          View All {areaName} Listings
+        </a>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .idx-area-showcase {
+    /* Inherits .section + .dark-section from your global styles */
+  }
+
+  .idx-showcase-frame {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 300px;
+  }
+</style>
