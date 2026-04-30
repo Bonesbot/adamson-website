@@ -1,6 +1,7 @@
 [build]
-  command = "rm -f runtime.txt && npm run build"
+  command = "npm run build"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "20"
+  MISE_DISABLE_TOOLS = "python"
