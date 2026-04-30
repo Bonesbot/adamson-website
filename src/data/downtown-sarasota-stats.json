@@ -2,19 +2,19 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-04-29T12:33:52.408047+00:00",
+  "lastUpdated": "2026-04-30T11:05:52.440749+00:00",
   "counts": {
-    "sold": 35,
-    "pending": 70,
+    "sold": 36,
+    "pending": 71,
     "active": 273,
-    "total": 105
+    "total": 107
   },
   "metrics": {
-    "avgPrice": "$2,922,980",
-    "avgPricePerSqFt": "$1,064",
-    "avgYearBuilt": 2011,
-    "avgLivingSqFt": "2,454",
-    "avgLotSqFt": "47,436",
+    "avgPrice": "$2,880,961",
+    "avgPricePerSqFt": "$1,051",
+    "avgYearBuilt": 2010,
+    "avgLivingSqFt": "2,445",
+    "avgLotSqFt": "47,123",
     "avgDom": 92
   },
   "range": {
@@ -23,25 +23,25 @@
   },
   "active": {
     "count": 273,
-    "medianPrice": "$1,499,000",
-    "medianPricePerSqFt": "$842",
+    "medianPrice": "$1,499,500",
+    "medianPricePerSqFt": "$840",
     "waterfrontCount": 66,
     "newConstructionCount": 99
   },
   "sold": {
-    "count": 35,
-    "medianPrice": "$1,350,000",
-    "medianDom": 114,
+    "count": 36,
+    "medianPrice": "$1,260,000",
+    "medianDom": 112,
     "saleToListRatio": "86.5%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,833",
+    "medianMonthlyAssociation": "$1,837",
     "medianMonthlyCondoFee": "$1,992"
   },
   "priceBands": {
-    "under900k": 75,
+    "under900k": 74,
     "band900kTo1_5m": 63,
-    "band1_5mTo3m": 68,
+    "band1_5mTo3m": 69,
     "band3mPlus": 67
   },
   "propertyTypes": [
@@ -53,11 +53,11 @@
   "buildingClasses": [
     {
       "class": "high-rise",
-      "count": 147
+      "count": 148
     },
     {
       "class": "low-rise",
-      "count": 65
+      "count": 64
     },
     {
       "class": "mid-rise",
@@ -65,6 +65,19 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4676201",
+      "address": "1740 ALDERMAN ST #12",
+      "subdivision": "HUDSON OAKS",
+      "soldPrice": "$450,000",
+      "soldDate": "2026-04-29",
+      "bedrooms": 2,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,264",
+      "yearBuilt": 1984,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4671352",
       "address": "500 S PALM AVE #31",
@@ -114,19 +127,6 @@
       "bathrooms": 2.0,
       "livingSqFt": "1,114",
       "yearBuilt": 2005,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4681396",
-      "address": "1350 MAIN ST #PH-1701",
-      "subdivision": "1350 MAIN RESIDENTIAL",
-      "soldPrice": "$1,700,000",
-      "soldDate": "2026-04-22",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,216",
-      "yearBuilt": 2007,
       "propertyType": "Residential",
       "isWaterfront": false
     }
