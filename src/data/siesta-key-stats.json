@@ -2,44 +2,44 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-04-29T12:33:51.760215+00:00",
+  "lastUpdated": "2026-04-30T11:05:51.844565+00:00",
   "counts": {
-    "sold": 10,
-    "pending": 15,
-    "active": 410,
-    "total": 25
+    "sold": 11,
+    "pending": 16,
+    "active": 409,
+    "total": 27
   },
   "metrics": {
-    "avgPrice": "$1,243,932",
-    "avgPricePerSqFt": "$751",
-    "avgYearBuilt": 1977,
-    "avgLivingSqFt": "1,555",
-    "avgLotSqFt": "105,742",
-    "avgDom": 109
+    "avgPrice": "$1,188,789",
+    "avgPricePerSqFt": "$750",
+    "avgYearBuilt": 1976,
+    "avgLivingSqFt": "1,491",
+    "avgLotSqFt": "102,042",
+    "avgDom": 104
   },
   "range": {
     "minPrice": "$299,999",
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 410,
-    "medianPrice": "$1,237,000",
+    "count": 409,
+    "medianPrice": "$1,249,000",
     "medianPricePerSqFt": "$772",
     "waterfrontCount": 225,
     "newConstructionCount": 58
   },
   "sold": {
-    "count": 10,
-    "medianPrice": "$807,500",
-    "medianDom": 50,
+    "count": 11,
+    "medianPrice": "$800,000",
+    "medianDom": 55,
     "saleToListRatio": "90.8%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,133",
-    "medianMonthlyCondoFee": "$1,278"
+    "medianMonthlyCondoFee": "$1,277"
   },
   "priceBands": {
-    "under900k": 160,
+    "under900k": 159,
     "band900kTo1_5m": 82,
     "band1_5mTo3m": 74,
     "band3mPlus": 94
@@ -47,7 +47,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 410
+      "count": 409
     }
   ],
   "buildingClasses": [
@@ -57,7 +57,7 @@
     },
     {
       "class": "mid-rise",
-      "count": 73
+      "count": 72
     },
     {
       "class": "high-rise",
@@ -65,6 +65,19 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4680784",
+      "address": "24 SANDY COVE RD #A6-D",
+      "subdivision": "SANDY COVE",
+      "soldPrice": "$450,000",
+      "soldDate": "2026-04-29",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "561",
+      "yearBuilt": 1968,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4671897",
       "address": "6140 MIDNIGHT PASS RD #A10",
@@ -114,19 +127,6 @@
       "bathrooms": 2.0,
       "livingSqFt": "2,467",
       "yearBuilt": 1963,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4678810",
-      "address": "4822 OCEAN BLVD #9A",
-      "subdivision": "SIESTA TOWERS",
-      "soldPrice": "$985,000",
-      "soldDate": "2026-04-22",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,435",
-      "yearBuilt": 1973,
       "propertyType": "Residential",
       "isWaterfront": true
     }
