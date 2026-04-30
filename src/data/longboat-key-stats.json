@@ -2,62 +2,62 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-04-29T12:33:50.400749+00:00",
+  "lastUpdated": "2026-04-30T11:05:50.630384+00:00",
   "counts": {
-    "sold": 35,
-    "pending": 47,
-    "active": 380,
-    "total": 82
+    "sold": 37,
+    "pending": 48,
+    "active": 382,
+    "total": 85
   },
   "metrics": {
-    "avgPrice": "$2,188,459",
-    "avgPricePerSqFt": "$891",
+    "avgPrice": "$2,138,325",
+    "avgPricePerSqFt": "$877",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,074",
-    "avgLotSqFt": "186,145",
-    "avgDom": 109
+    "avgLivingSqFt": "2,055",
+    "avgLotSqFt": "191,545",
+    "avgDom": 106
   },
   "range": {
     "minPrice": "$259,000",
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 380,
+    "count": 382,
     "medianPrice": "$1,059,188",
     "medianPricePerSqFt": "$693",
-    "waterfrontCount": 294,
-    "newConstructionCount": 28
+    "waterfrontCount": 293,
+    "newConstructionCount": 29
   },
   "sold": {
-    "count": 35,
+    "count": 37,
     "medianPrice": "$1,062,000",
-    "medianDom": 100,
-    "saleToListRatio": "88.0%"
+    "medianDom": 97,
+    "saleToListRatio": "87.7%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,607",
-    "medianMonthlyCondoFee": "$1,665"
+    "medianMonthlyCondoFee": "$1,663"
   },
   "priceBands": {
     "under900k": 158,
-    "band900kTo1_5m": 81,
-    "band1_5mTo3m": 83,
+    "band900kTo1_5m": 82,
+    "band1_5mTo3m": 84,
     "band3mPlus": 58
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 380
+      "count": 382
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 265
+      "count": 266
     },
     {
       "class": "mid-rise",
-      "count": 51
+      "count": 50
     },
     {
       "class": "high-rise",
@@ -65,6 +65,32 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4683894",
+      "address": "2016 HARBOURSIDE DR #317",
+      "subdivision": "FAIRWAY BAY 2 PH 1",
+      "soldPrice": "$890,000",
+      "soldDate": "2026-04-29",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,442",
+      "yearBuilt": 1984,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4645760",
+      "address": "2675 GULF OF MEXICO DR #403",
+      "subdivision": "VEINTE",
+      "soldPrice": "$1,200,000",
+      "soldDate": "2026-04-28",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,896",
+      "yearBuilt": 1979,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4681778",
       "address": "2155 HARBOURSIDE DR #804",
@@ -101,32 +127,6 @@
       "bathrooms": 2.5,
       "livingSqFt": "2,624",
       "yearBuilt": 1980,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4674302",
-      "address": "6841 LONGBOAT DR S",
-      "subdivision": "LONGBEACH ON LONGBOAT KEY",
-      "soldPrice": "$900,000",
-      "soldDate": "2026-04-27",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,380",
-      "yearBuilt": 1935,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4648003",
-      "address": "6951 GULF OF MEXICO DR #14",
-      "subdivision": "SEA PINES",
-      "soldPrice": "$840,000",
-      "soldDate": "2026-04-27",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,170",
-      "yearBuilt": 1973,
       "propertyType": "Residential",
       "isWaterfront": true
     }
