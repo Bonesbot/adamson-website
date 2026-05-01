@@ -2,62 +2,62 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-04-30T11:05:51.844565+00:00",
+  "lastUpdated": "2026-05-01T11:01:36.080550+00:00",
   "counts": {
-    "sold": 11,
+    "sold": 17,
     "pending": 16,
-    "active": 409,
-    "total": 27
+    "active": 414,
+    "total": 33
   },
   "metrics": {
-    "avgPrice": "$1,188,789",
-    "avgPricePerSqFt": "$750",
-    "avgYearBuilt": 1976,
-    "avgLivingSqFt": "1,491",
-    "avgLotSqFt": "102,042",
-    "avgDom": 104
+    "avgPrice": "$1,350,752",
+    "avgPricePerSqFt": "$766",
+    "avgYearBuilt": 1975,
+    "avgLivingSqFt": "1,580",
+    "avgLotSqFt": "122,639",
+    "avgDom": 96
   },
   "range": {
     "minPrice": "$299,999",
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 409,
-    "medianPrice": "$1,249,000",
+    "count": 414,
+    "medianPrice": "$1,237,000",
     "medianPricePerSqFt": "$772",
-    "waterfrontCount": 225,
+    "waterfrontCount": 228,
     "newConstructionCount": 58
   },
   "sold": {
-    "count": 11,
+    "count": 17,
     "medianPrice": "$800,000",
-    "medianDom": 55,
-    "saleToListRatio": "90.8%"
+    "medianDom": 52,
+    "saleToListRatio": "90.7%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,133",
-    "medianMonthlyCondoFee": "$1,277"
+    "medianMonthlyCondoFee": "$1,276"
   },
   "priceBands": {
-    "under900k": 159,
+    "under900k": 162,
     "band900kTo1_5m": 82,
-    "band1_5mTo3m": 74,
-    "band3mPlus": 94
+    "band1_5mTo3m": 77,
+    "band3mPlus": 93
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 409
+      "count": 414
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 250
+      "count": 254
     },
     {
       "class": "mid-rise",
-      "count": 72
+      "count": 73
     },
     {
       "class": "high-rise",
@@ -66,67 +66,67 @@
   ],
   "recentSoldComps": [
     {
-      "listingId": "A4680784",
-      "address": "24 SANDY COVE RD #A6-D",
-      "subdivision": "SANDY COVE",
-      "soldPrice": "$450,000",
-      "soldDate": "2026-04-29",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "561",
-      "yearBuilt": 1968,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4671897",
-      "address": "6140 MIDNIGHT PASS RD #A10",
-      "subdivision": "HORIZONS WEST",
-      "soldPrice": "$815,000",
-      "soldDate": "2026-04-28",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,068",
-      "yearBuilt": 1967,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4673783",
-      "address": "5830 MIDNIGHT PASS RD #94",
-      "subdivision": "JAMAICA ROYALE",
-      "soldPrice": "$575,000",
-      "soldDate": "2026-04-27",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "921",
-      "yearBuilt": 1970,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "N6143045",
-      "address": "5790 MIDNIGHT PASS RD #406",
-      "subdivision": "GULF & BAY CLUB PH 1",
-      "soldPrice": "$1,120,000",
-      "soldDate": "2026-04-23",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,433",
-      "yearBuilt": 1979,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4676472",
-      "address": "843 NORSOTA WAY",
+      "listingId": "A4687909",
+      "address": "679 NORSOTA WAY",
       "subdivision": "BAY ISLAND",
-      "soldPrice": "$4,900,000",
-      "soldDate": "2026-04-22",
-      "bedrooms": 3,
+      "soldPrice": "$7,200,000",
+      "soldDate": "2026-04-30",
+      "bedrooms": 4,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,788",
+      "yearBuilt": 1926,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4681050",
+      "address": "8600 MIDNIGHT PASS RD #301",
+      "subdivision": "HIDDEN LAGOON BEACH CLUB",
+      "soldPrice": "$2,150,000",
+      "soldDate": "2026-04-30",
+      "bedrooms": 2,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,730",
+      "yearBuilt": 1985,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4683014",
+      "address": "5770 MIDNIGHT PASS RD #404",
+      "subdivision": "GULF & BAY CLUB PH 3",
+      "soldPrice": "$1,250,000",
+      "soldDate": "2026-04-30",
+      "bedrooms": 2,
       "bathrooms": 2.0,
-      "livingSqFt": "2,467",
-      "yearBuilt": 1963,
+      "livingSqFt": "1,337",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4675956",
+      "address": "1087 LAKE HOUSE CIR #C104",
+      "subdivision": "OUR HOUSE AT THE BCH PHII",
+      "soldPrice": "$795,000",
+      "soldDate": "2026-04-30",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,352",
+      "yearBuilt": 1981,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4670929",
+      "address": "5855 MIDNIGHT PASS RD #318",
+      "subdivision": "HARBOR TOWERS Y & R",
+      "soldPrice": "$650,000",
+      "soldDate": "2026-04-30",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,755",
+      "yearBuilt": 1976,
       "propertyType": "Residential",
       "isWaterfront": true
     }
