@@ -2,69 +2,121 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-04-30T11:05:52.440749+00:00",
+  "lastUpdated": "2026-05-01T11:01:36.665030+00:00",
   "counts": {
-    "sold": 36,
-    "pending": 71,
-    "active": 273,
-    "total": 107
+    "sold": 42,
+    "pending": 70,
+    "active": 269,
+    "total": 112
   },
   "metrics": {
-    "avgPrice": "$2,880,961",
-    "avgPricePerSqFt": "$1,051",
+    "avgPrice": "$2,810,717",
+    "avgPricePerSqFt": "$1,030",
     "avgYearBuilt": 2010,
-    "avgLivingSqFt": "2,445",
-    "avgLotSqFt": "47,123",
-    "avgDom": 92
+    "avgLivingSqFt": "2,430",
+    "avgLotSqFt": "46,701",
+    "avgDom": 90
   },
   "range": {
     "minPrice": "$329,900",
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 273,
+    "count": 269,
     "medianPrice": "$1,499,500",
-    "medianPricePerSqFt": "$840",
+    "medianPricePerSqFt": "$842",
     "waterfrontCount": 66,
     "newConstructionCount": 99
   },
   "sold": {
-    "count": 36,
-    "medianPrice": "$1,260,000",
-    "medianDom": 112,
-    "saleToListRatio": "86.5%"
+    "count": 42,
+    "medianPrice": "$1,392,000",
+    "medianDom": 111,
+    "saleToListRatio": "86.1%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,837",
+    "medianMonthlyAssociation": "$1,835",
     "medianMonthlyCondoFee": "$1,992"
   },
   "priceBands": {
-    "under900k": 74,
-    "band900kTo1_5m": 63,
-    "band1_5mTo3m": 69,
+    "under900k": 73,
+    "band900kTo1_5m": 62,
+    "band1_5mTo3m": 67,
     "band3mPlus": 67
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 273
+      "count": 269
     }
   ],
   "buildingClasses": [
     {
       "class": "high-rise",
-      "count": 148
+      "count": 146
     },
     {
       "class": "low-rise",
-      "count": 64
+      "count": 63
     },
     {
       "class": "mid-rise",
-      "count": 53
+      "count": 52
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4653446",
+      "address": "33 S PALM AVE #1101",
+      "subdivision": "THE DEMARCAY",
+      "soldPrice": "$2,050,000",
+      "soldDate": "2026-04-30",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,229",
+      "yearBuilt": 2024,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4666387",
+      "address": "301 QUAY COMMONS #503",
+      "subdivision": "BAYSO SARASOTA CONDOMINIUM",
+      "soldPrice": "$1,475,000",
+      "soldDate": "2026-04-30",
+      "bedrooms": 2,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,829",
+      "yearBuilt": 2023,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4669892",
+      "address": "1255 N GULFSTREAM AVE #1101",
+      "subdivision": "BAY PLAZA",
+      "soldPrice": "$1,389,000",
+      "soldDate": "2026-04-30",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,901",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4675978",
+      "address": "750 N TAMIAMI TRL #1005",
+      "subdivision": "RENAISSANCE 1",
+      "soldPrice": "$560,000",
+      "soldDate": "2026-04-30",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "695",
+      "yearBuilt": 2001,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4676201",
       "address": "1740 ALDERMAN ST #12",
@@ -77,58 +129,6 @@
       "yearBuilt": 1984,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4671352",
-      "address": "500 S PALM AVE #31",
-      "subdivision": "TESSERA",
-      "soldPrice": "$2,400,000",
-      "soldDate": "2026-04-23",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,830",
-      "yearBuilt": 2000,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4668387",
-      "address": "1901 MORRILL ST",
-      "subdivision": "TOWLES",
-      "soldPrice": "$2,100,000",
-      "soldDate": "2026-04-23",
-      "bedrooms": 7,
-      "bathrooms": 6.5,
-      "livingSqFt": "4,155",
-      "yearBuilt": 1949,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4669115",
-      "address": "1771 RINGLING BLVD #704",
-      "subdivision": "RIVO AT RINGLING",
-      "soldPrice": "$707,000",
-      "soldDate": "2026-04-23",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,735",
-      "yearBuilt": 2006,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4684971",
-      "address": "100 CENTRAL AVE #C521",
-      "subdivision": "ONE HUNDRED CENTRAL",
-      "soldPrice": "$596,000",
-      "soldDate": "2026-04-23",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,114",
-      "yearBuilt": 2005,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ]
 }
