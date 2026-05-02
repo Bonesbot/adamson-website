@@ -2,62 +2,62 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-01T11:01:34.902801+00:00",
+  "lastUpdated": "2026-05-02T10:54:28.715116+00:00",
   "counts": {
-    "sold": 45,
-    "pending": 47,
-    "active": 381,
-    "total": 92
+    "sold": 51,
+    "pending": 46,
+    "active": 384,
+    "total": 97
   },
   "metrics": {
-    "avgPrice": "$2,184,572",
-    "avgPricePerSqFt": "$858",
+    "avgPrice": "$2,153,280",
+    "avgPricePerSqFt": "$845",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,131",
-    "avgLotSqFt": "185,413",
-    "avgDom": 106
+    "avgLivingSqFt": "2,145",
+    "avgLotSqFt": "174,799",
+    "avgDom": 104
   },
   "range": {
     "minPrice": "$259,000",
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 381,
-    "medianPrice": "$1,075,000",
-    "medianPricePerSqFt": "$695",
-    "waterfrontCount": 293,
+    "count": 384,
+    "medianPrice": "$1,050,000",
+    "medianPricePerSqFt": "$686",
+    "waterfrontCount": 296,
     "newConstructionCount": 30
   },
   "sold": {
-    "count": 45,
+    "count": 51,
     "medianPrice": "$1,150,000",
-    "medianDom": 97,
-    "saleToListRatio": "87.7%"
+    "medianDom": 84,
+    "saleToListRatio": "88.3%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,603",
+    "medianMonthlyAssociation": "$1,607",
     "medianMonthlyCondoFee": "$1,663"
   },
   "priceBands": {
-    "under900k": 156,
+    "under900k": 160,
     "band900kTo1_5m": 82,
     "band1_5mTo3m": 84,
-    "band3mPlus": 59
+    "band3mPlus": 58
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 381
+      "count": 384
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 264
+      "count": 267
     },
     {
       "class": "mid-rise",
-      "count": 50
+      "count": 51
     },
     {
       "class": "high-rise",
@@ -65,6 +65,58 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4687630",
+      "address": "3030 GRAND BAY BLVD #384",
+      "subdivision": "GRAND BAY 3",
+      "soldPrice": "$1,750,000",
+      "soldDate": "2026-05-01",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,550",
+      "yearBuilt": 1998,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4677082",
+      "address": "1135 GULF OF MEXICO DR #605",
+      "subdivision": "BEACHPLACE I",
+      "soldPrice": "$1,600,000",
+      "soldDate": "2026-05-01",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,503",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4681067",
+      "address": "3030 GRAND BAY BLVD #323",
+      "subdivision": "GRAND BAY 3",
+      "soldPrice": "$1,200,000",
+      "soldDate": "2026-05-01",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,550",
+      "yearBuilt": 1998,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4685789",
+      "address": "3540 GULF OF MEXICO DR #102",
+      "subdivision": "BUTTONWOOD COVE",
+      "soldPrice": "$575,000",
+      "soldDate": "2026-05-01",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,284",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4665431",
       "address": "865 LONGBOAT CLUB RD",
@@ -77,58 +129,6 @@
       "yearBuilt": 2001,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4690802",
-      "address": "5581 GULF OF MEXICO DR",
-      "subdivision": "LONGBOAT KEY",
-      "soldPrice": "$14,000,000",
-      "soldDate": "2026-04-30",
-      "bedrooms": 10,
-      "bathrooms": 16.5,
-      "livingSqFt": "8,529",
-      "yearBuilt": 1952,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4680593",
-      "address": "655 LONGBOAT CLUB RD #1PH",
-      "subdivision": "REGENT PLACE PH 1",
-      "soldPrice": "$4,950,000",
-      "soldDate": "2026-04-30",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "3,139",
-      "yearBuilt": 1995,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4658145",
-      "address": "3576 FAIR OAKS WAY",
-      "subdivision": "QUEENS HARBOUR",
-      "soldPrice": "$2,800,000",
-      "soldDate": "2026-04-30",
-      "bedrooms": 3,
-      "bathrooms": 5.5,
-      "livingSqFt": "3,727",
-      "yearBuilt": 1990,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4682110",
-      "address": "601 NORTON ST",
-      "subdivision": "SLEEPY LAGOON PARK 2",
-      "soldPrice": "$1,545,000",
-      "soldDate": "2026-04-30",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,956",
-      "yearBuilt": 1986,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ]
 }
