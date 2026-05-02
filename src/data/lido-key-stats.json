@@ -2,16 +2,16 @@
   "areaSlug": "lido-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-01T11:01:35.490065+00:00",
+  "lastUpdated": "2026-05-02T10:54:29.340150+00:00",
   "counts": {
-    "sold": 18,
-    "pending": 16,
-    "active": 127,
+    "sold": 21,
+    "pending": 13,
+    "active": 128,
     "total": 34
   },
   "metrics": {
-    "avgPrice": "$3,024,821",
-    "avgPricePerSqFt": "$1,048",
+    "avgPrice": "$3,012,409",
+    "avgPricePerSqFt": "$1,041",
     "avgYearBuilt": 1988,
     "avgLivingSqFt": "2,190",
     "avgLotSqFt": "115,640",
@@ -22,32 +22,32 @@
     "maxPrice": "$20,000,000"
   },
   "active": {
-    "count": 127,
-    "medianPrice": "$1,675,000",
+    "count": 128,
+    "medianPrice": "$1,612,000",
     "medianPricePerSqFt": "$903",
-    "waterfrontCount": 61,
+    "waterfrontCount": 62,
     "newConstructionCount": 20
   },
   "sold": {
-    "count": 18,
-    "medianPrice": "$1,197,500",
-    "medianDom": 86,
-    "saleToListRatio": "86.9%"
+    "count": 21,
+    "medianPrice": "$1,150,000",
+    "medianDom": 87,
+    "saleToListRatio": "86.5%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,283",
+    "medianMonthlyAssociation": "$1,294",
     "medianMonthlyCondoFee": "$1,458"
   },
   "priceBands": {
     "under900k": 47,
     "band900kTo1_5m": 14,
-    "band1_5mTo3m": 20,
+    "band1_5mTo3m": 21,
     "band3mPlus": 46
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 127
+      "count": 128
     }
   ],
   "buildingClasses": [
@@ -57,7 +57,7 @@
     },
     {
       "class": "high-rise",
-      "count": 24
+      "count": 25
     },
     {
       "class": "mid-rise",
@@ -65,6 +65,45 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4675488",
+      "address": "1750 BENJAMIN FRANKLIN DR #1D",
+      "subdivision": "KEY TOWER SOUTH",
+      "soldPrice": "$1,300,000",
+      "soldDate": "2026-05-01",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,403",
+      "yearBuilt": 1970,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4670179",
+      "address": "1800 BENJAMIN FRANKLIN DR #A202",
+      "subdivision": "L ELEGANCE ON LIDO BEACH",
+      "soldPrice": "$1,150,000",
+      "soldDate": "2026-05-01",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,980",
+      "yearBuilt": 1996,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4643282",
+      "address": "1001 BENJAMIN FRANKLIN DR #510",
+      "subdivision": "LIDO TOWERS",
+      "soldPrice": "$675,000",
+      "soldDate": "2026-05-01",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,224",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4676094",
       "address": "2110 BENJAMIN FRANKLIN DR #303",
@@ -88,45 +127,6 @@
       "bathrooms": 2.0,
       "livingSqFt": "1,587",
       "yearBuilt": 1966,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4664887",
-      "address": "769 JOHN RINGLING BLVD #3",
-      "subdivision": "SARASOTA HARBOR EAST",
-      "soldPrice": "$410,000",
-      "soldDate": "2026-04-24",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "641",
-      "yearBuilt": 1965,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4677053",
-      "address": "1 BENJAMIN FRANKLIN DR #55",
-      "subdivision": "ST ARMAND TOWERS NORTH",
-      "soldPrice": "$900,000",
-      "soldDate": "2026-04-22",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,389",
-      "yearBuilt": 1968,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4670769",
-      "address": "1750 BENJAMIN FRANKLIN DR #9G",
-      "subdivision": "KEY TOWER SOUTH",
-      "soldPrice": "$650,000",
-      "soldDate": "2026-04-16",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,548",
-      "yearBuilt": 1970,
       "propertyType": "Residential",
       "isWaterfront": true
     }
