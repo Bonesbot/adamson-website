@@ -2,16 +2,16 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-01T11:01:36.665030+00:00",
+  "lastUpdated": "2026-05-02T10:54:30.623553+00:00",
   "counts": {
-    "sold": 42,
-    "pending": 70,
-    "active": 269,
+    "sold": 43,
+    "pending": 69,
+    "active": 270,
     "total": 112
   },
   "metrics": {
-    "avgPrice": "$2,810,717",
-    "avgPricePerSqFt": "$1,030",
+    "avgPrice": "$2,808,530",
+    "avgPricePerSqFt": "$1,029",
     "avgYearBuilt": 2010,
     "avgLivingSqFt": "2,430",
     "avgLotSqFt": "46,701",
@@ -22,38 +22,38 @@
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 269,
-    "medianPrice": "$1,499,500",
-    "medianPricePerSqFt": "$842",
+    "count": 270,
+    "medianPrice": "$1,512,250",
+    "medianPricePerSqFt": "$843",
     "waterfrontCount": 66,
     "newConstructionCount": 99
   },
   "sold": {
-    "count": 42,
-    "medianPrice": "$1,392,000",
-    "medianDom": 111,
-    "saleToListRatio": "86.1%"
+    "count": 43,
+    "medianPrice": "$1,395,000",
+    "medianDom": 113,
+    "saleToListRatio": "85.6%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,835",
+    "medianMonthlyAssociation": "$1,837",
     "medianMonthlyCondoFee": "$1,992"
   },
   "priceBands": {
     "under900k": 73,
     "band900kTo1_5m": 62,
     "band1_5mTo3m": 67,
-    "band3mPlus": 67
+    "band3mPlus": 68
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 269
+      "count": 270
     }
   ],
   "buildingClasses": [
     {
       "class": "high-rise",
-      "count": 146
+      "count": 147
     },
     {
       "class": "low-rise",
@@ -65,6 +65,19 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4652440",
+      "address": "420 GOLDEN GATE PT #200A",
+      "subdivision": "THE GRANDE RIVIERA",
+      "soldPrice": "$2,750,000",
+      "soldDate": "2026-05-01",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,620",
+      "yearBuilt": 2005,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4653446",
       "address": "33 S PALM AVE #1101",
@@ -116,19 +129,6 @@
       "yearBuilt": 2001,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4676201",
-      "address": "1740 ALDERMAN ST #12",
-      "subdivision": "HUDSON OAKS",
-      "soldPrice": "$450,000",
-      "soldDate": "2026-04-29",
-      "bedrooms": 2,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,264",
-      "yearBuilt": 1984,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ]
 }
