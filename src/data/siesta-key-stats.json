@@ -2,69 +2,95 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-01T11:01:36.080550+00:00",
+  "lastUpdated": "2026-05-02T10:54:29.973864+00:00",
   "counts": {
-    "sold": 17,
-    "pending": 16,
-    "active": 414,
-    "total": 33
+    "sold": 19,
+    "pending": 17,
+    "active": 418,
+    "total": 36
   },
   "metrics": {
-    "avgPrice": "$1,350,752",
-    "avgPricePerSqFt": "$766",
-    "avgYearBuilt": 1975,
-    "avgLivingSqFt": "1,580",
-    "avgLotSqFt": "122,639",
-    "avgDom": 96
+    "avgPrice": "$1,365,675",
+    "avgPricePerSqFt": "$754",
+    "avgYearBuilt": 1976,
+    "avgLivingSqFt": "1,619",
+    "avgLotSqFt": "127,918",
+    "avgDom": 102
   },
   "range": {
     "minPrice": "$299,999",
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 414,
-    "medianPrice": "$1,237,000",
+    "count": 418,
+    "medianPrice": "$1,212,500",
     "medianPricePerSqFt": "$772",
-    "waterfrontCount": 228,
-    "newConstructionCount": 58
+    "waterfrontCount": 232,
+    "newConstructionCount": 57
   },
   "sold": {
-    "count": 17,
-    "medianPrice": "$800,000",
+    "count": 19,
+    "medianPrice": "$795,000",
     "medianDom": 52,
-    "saleToListRatio": "90.7%"
+    "saleToListRatio": "91.1%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,133",
-    "medianMonthlyCondoFee": "$1,276"
+    "medianMonthlyCondoFee": "$1,263"
   },
   "priceBands": {
     "under900k": 162,
-    "band900kTo1_5m": 82,
-    "band1_5mTo3m": 77,
-    "band3mPlus": 93
+    "band900kTo1_5m": 85,
+    "band1_5mTo3m": 79,
+    "band3mPlus": 92
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 414
+      "count": 418
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 254
+      "count": 258
     },
     {
       "class": "mid-rise",
-      "count": 73
+      "count": 72
     },
     {
       "class": "high-rise",
-      "count": 14
+      "count": 15
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4611665",
+      "address": "6236 MIDNIGHT PASS RD #304",
+      "subdivision": "SIESTA DUNES BEACH",
+      "soldPrice": "$790,000",
+      "soldDate": "2026-05-01",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,150",
+      "yearBuilt": 1979,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4678715",
+      "address": "1125 W PEPPERTREE DR #302",
+      "subdivision": "PEPPERTREE BAY III",
+      "soldPrice": "$500,500",
+      "soldDate": "2026-05-01",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,163",
+      "yearBuilt": 1974,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4687909",
       "address": "679 NORSOTA WAY",
@@ -101,32 +127,6 @@
       "bathrooms": 2.0,
       "livingSqFt": "1,337",
       "yearBuilt": 1980,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4675956",
-      "address": "1087 LAKE HOUSE CIR #C104",
-      "subdivision": "OUR HOUSE AT THE BCH PHII",
-      "soldPrice": "$795,000",
-      "soldDate": "2026-04-30",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,352",
-      "yearBuilt": 1981,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4670929",
-      "address": "5855 MIDNIGHT PASS RD #318",
-      "subdivision": "HARBOR TOWERS Y & R",
-      "soldPrice": "$650,000",
-      "soldDate": "2026-04-30",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,755",
-      "yearBuilt": 1976,
       "propertyType": "Residential",
       "isWaterfront": true
     }
