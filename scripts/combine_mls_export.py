@@ -150,6 +150,19 @@ def main():
     target = args.target_dir
     status_path = args.status_out
 
+    # --- Step 0: pipeline-script integrity check ---
+    # Catches FUSE-mount corruption of the four pipeline scripts before any
+    # work begins. Hard-fails the run with failed_step="integrity_check" so the
+    # daily email draft surfaces it.
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from _integrity_check import verify as _verify_integrity, IntegrityError
+        _verify_integrity(Path(__file__).resolve().parent.parent)
+    except IntegrityError as _exc:
+        fail(status, status_path, "integrity_check",
+             f"Pipeline script integrity mismatch: {_exc}",
+             exit_code=2)
+
     # --- Step 1: discover batches ---
     if not staging.is_dir():
         fail(status, status_path, "discover_batches",
