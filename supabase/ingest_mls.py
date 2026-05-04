@@ -654,22 +654,34 @@ def main():
         )
         sys.exit(1)
 
-    log.info(f"MLS Ingest Pipeline — {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    log.info(f"Database: {DATABASE_URL.split('@')[1] if '@' in DATABASE_URL else 'configured'}")
+    import argparse
+    parser = argparse.ArgumentParser(description="MLS CSV → Supabase Ingest")
+    parser.add_argument("csv_file", nargs="?", default=None,
+                        help="Path to a specific CSV file (omit to process all in watch folder)")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="Preview changes without writing to Supabase")
+    args = parser.parse_args()
 
-    dry_run = "--dry-run" in sys.argv
-    if dry_run:
-        log.info("*** DRY RUN MODE — no data will be written ***")
+    # Build display-safe DB identifier
+    try:
+        from urllib.parse import urlparse
+        _p = urlparse(DATABASE_URL)
+        db_display = f"{_p.hostname}:{_p.port or 5432}{_p.path}"
+    except Exception:
+        db_display = "configured"
 
-    file_args = [a for a in sys.argv[1:] if a != "--dry-run" and not a.startswith("-")]
+    log.info(f"MLS Ingest Pipeline — {datetime.now():%Y-%m-%d %H:%M:%S}")
+    log.info(f"Database: {db_display}")
 
-    if file_args:
+    if args.csv_file:
         conn = get_connection()
-        for fpath in file_args:
-            ingest_csv(fpath, conn, dry_run=dry_run)
+        result = ingest_csv(Path(args.csv_file), conn, dry_run=args.dry_run)
         conn.close()
+        sys.exit(0 if result["status"] in ("completed", "skipped_duplicate", "dry_run") else 1)
     else:
-        ingest_all(dry_run=dry_run)
+        results = ingest_all(dry_run=args.dry_run)
+        errors = sum(1 for r in results if r.get("status") == "error")
+        sys.exit(1 if errors else 0)
 
 if __name__ == "__main__":
     main()
