@@ -2,58 +2,58 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-03T10:56:38.606733+00:00",
+  "lastUpdated": "2026-05-05T17:34:09.893708+00:00",
   "counts": {
-    "sold": 51,
-    "pending": 46,
-    "active": 384,
-    "total": 97
+    "sold": 54,
+    "pending": 51,
+    "active": 381,
+    "total": 105
   },
   "metrics": {
-    "avgPrice": "$2,153,280",
-    "avgPricePerSqFt": "$845",
-    "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,145",
-    "avgLotSqFt": "174,799",
-    "avgDom": 104
+    "avgPrice": "$2,074,591",
+    "avgPricePerSqFt": "$821",
+    "avgYearBuilt": 1982,
+    "avgLivingSqFt": "2,135",
+    "avgLotSqFt": "173,079",
+    "avgDom": 100
   },
   "range": {
     "minPrice": "$259,000",
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 384,
+    "count": 381,
     "medianPrice": "$1,050,000",
-    "medianPricePerSqFt": "$686",
-    "waterfrontCount": 296,
+    "medianPricePerSqFt": "$689",
+    "waterfrontCount": 292,
     "newConstructionCount": 30
   },
   "sold": {
-    "count": 51,
-    "medianPrice": "$1,150,000",
-    "medianDom": 84,
-    "saleToListRatio": "88.3%"
+    "count": 54,
+    "medianPrice": "$1,175,000",
+    "medianDom": 80,
+    "saleToListRatio": "88.5%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,607",
-    "medianMonthlyCondoFee": "$1,663"
+    "medianMonthlyAssociation": "$1,608",
+    "medianMonthlyCondoFee": "$1,678"
   },
   "priceBands": {
-    "under900k": 160,
+    "under900k": 159,
     "band900kTo1_5m": 82,
-    "band1_5mTo3m": 84,
+    "band1_5mTo3m": 82,
     "band3mPlus": 58
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 384
+      "count": 381
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 267
+      "count": 265
     },
     {
       "class": "mid-rise",
@@ -61,10 +61,49 @@
     },
     {
       "class": "high-rise",
-      "count": 35
+      "count": 34
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4676554",
+      "address": "1145 GULF OF MEXICO DR #603",
+      "subdivision": "BEACHPLACE 1",
+      "soldPrice": "$1,599,000",
+      "soldDate": "2026-05-05",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,503",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4682349",
+      "address": "2120 HARBOURSIDE DR #628",
+      "subdivision": "FAIRWAY BAY 3",
+      "soldPrice": "$1,650,000",
+      "soldDate": "2026-05-04",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,616",
+      "yearBuilt": 1988,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4675727",
+      "address": "3500 GULF OF MEXICO DR #104",
+      "subdivision": "BUTTONWOOD COVE",
+      "soldPrice": "$615,000",
+      "soldDate": "2026-05-04",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,486",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4687630",
       "address": "3030 GRAND BAY BLVD #384",
@@ -90,45 +129,6 @@
       "yearBuilt": 1980,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4681067",
-      "address": "3030 GRAND BAY BLVD #323",
-      "subdivision": "GRAND BAY 3",
-      "soldPrice": "$1,200,000",
-      "soldDate": "2026-05-01",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,550",
-      "yearBuilt": 1998,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4685789",
-      "address": "3540 GULF OF MEXICO DR #102",
-      "subdivision": "BUTTONWOOD COVE",
-      "soldPrice": "$575,000",
-      "soldDate": "2026-05-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,284",
-      "yearBuilt": 1980,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4665431",
-      "address": "865 LONGBOAT CLUB RD",
-      "subdivision": "REGENT COURT",
-      "soldPrice": "$17,500,000",
-      "soldDate": "2026-04-30",
-      "bedrooms": 6,
-      "bathrooms": 7.0,
-      "livingSqFt": "9,328",
-      "yearBuilt": 2001,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ]
 }
