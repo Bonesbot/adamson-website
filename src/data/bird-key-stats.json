@@ -2,58 +2,58 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-05T17:34:12.798233+00:00",
+  "lastUpdated": "2026-05-05T19:26:58.815163+00:00",
   "counts": {
-    "sold": 4,
-    "pending": 4,
-    "active": 25,
-    "total": 8
+    "sold": 26,
+    "pending": 5,
+    "active": 24,
+    "total": 31
   },
   "metrics": {
-    "avgPrice": "$4,251,875",
-    "avgPricePerSqFt": "$1,146",
-    "avgYearBuilt": 1983,
-    "avgLivingSqFt": "3,659",
-    "avgLotSqFt": "14,498",
-    "avgDom": 111
+    "avgPrice": "$4,129,032",
+    "avgPricePerSqFt": "$1,096",
+    "avgYearBuilt": 1988,
+    "avgLivingSqFt": "3,698",
+    "avgLotSqFt": "14,383",
+    "avgDom": 115
   },
   "range": {
-    "minPrice": "$1,325,000",
+    "minPrice": "$1,150,000",
     "maxPrice": "$11,900,000"
   },
   "active": {
-    "count": 25,
+    "count": 24,
     "medianPrice": "$4,495,000",
-    "medianPricePerSqFt": "$1,186",
+    "medianPricePerSqFt": "$1,171",
     "waterfrontCount": 10,
     "newConstructionCount": 6
   },
   "sold": {
-    "count": 4,
-    "medianPrice": "$3,400,000",
-    "medianDom": 66,
-    "saleToListRatio": "91.3%"
+    "count": 26,
+    "medianPrice": "$3,805,000",
+    "medianDom": 38,
+    "saleToListRatio": "87.9%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$110",
+    "medianMonthlyAssociation": "$89",
     "medianMonthlyCondoFee": null
   },
   "priceBands": {
     "under900k": 0,
     "band900kTo1_5m": 1,
     "band1_5mTo3m": 8,
-    "band3mPlus": 16
+    "band3mPlus": 15
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 25
+      "count": 24
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 17
+      "count": 16
     }
   ],
   "recentSoldComps": [
@@ -108,6 +108,19 @@
       "yearBuilt": 1970,
       "propertyType": "Residential",
       "isWaterfront": true
+    },
+    {
+      "listingId": "A4674585",
+      "address": "509 SPOONBILL WAY",
+      "subdivision": "BIRD KEY SUB",
+      "soldPrice": "$1,525,000",
+      "soldDate": "2026-03-10",
+      "bedrooms": 4,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,365",
+      "yearBuilt": 1971,
+      "propertyType": "Residential",
+      "isWaterfront": false
     }
   ]
 }
