@@ -2,69 +2,95 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-03T10:56:39.838446+00:00",
+  "lastUpdated": "2026-05-05T17:34:11.122648+00:00",
   "counts": {
-    "sold": 19,
-    "pending": 19,
-    "active": 417,
-    "total": 38
+    "sold": 23,
+    "pending": 21,
+    "active": 422,
+    "total": 44
   },
   "metrics": {
-    "avgPrice": "$1,324,534",
-    "avgPricePerSqFt": "$743",
+    "avgPrice": "$1,281,791",
+    "avgPricePerSqFt": "$736",
     "avgYearBuilt": 1976,
-    "avgLivingSqFt": "1,591",
-    "avgLotSqFt": "127,918",
-    "avgDom": 101
+    "avgLivingSqFt": "1,573",
+    "avgLotSqFt": "120,627",
+    "avgDom": 96
   },
   "range": {
     "minPrice": "$299,999",
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 417,
-    "medianPrice": "$1,225,000",
-    "medianPricePerSqFt": "$772",
-    "waterfrontCount": 231,
-    "newConstructionCount": 57
+    "count": 422,
+    "medianPrice": "$1,200,000",
+    "medianPricePerSqFt": "$770",
+    "waterfrontCount": 235,
+    "newConstructionCount": 58
   },
   "sold": {
-    "count": 19,
-    "medianPrice": "$795,000",
-    "medianDom": 52,
-    "saleToListRatio": "91.1%"
+    "count": 23,
+    "medianPrice": "$790,000",
+    "medianDom": 55,
+    "saleToListRatio": "90.0%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,133",
-    "medianMonthlyCondoFee": "$1,263"
+    "medianMonthlyCondoFee": "$1,262"
   },
   "priceBands": {
-    "under900k": 161,
-    "band900kTo1_5m": 85,
-    "band1_5mTo3m": 79,
+    "under900k": 166,
+    "band900kTo1_5m": 84,
+    "band1_5mTo3m": 80,
     "band3mPlus": 92
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 417
+      "count": 422
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 258
+      "count": 263
     },
     {
       "class": "mid-rise",
-      "count": 71
+      "count": 72
     },
     {
       "class": "high-rise",
-      "count": 15
+      "count": 14
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4671178",
+      "address": "513 VENICE LN",
+      "subdivision": "SIESTA BEACH",
+      "soldPrice": "$2,050,000",
+      "soldDate": "2026-05-04",
+      "bedrooms": 5,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,009",
+      "yearBuilt": 1993,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4678087",
+      "address": "6006 MIDNIGHT PASS RD #44",
+      "subdivision": "CASA MAR",
+      "soldPrice": "$592,500",
+      "soldDate": "2026-05-04",
+      "bedrooms": 2,
+      "bathrooms": 1.5,
+      "livingSqFt": "840",
+      "yearBuilt": 1960,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4611665",
       "address": "6236 MIDNIGHT PASS RD #304",
@@ -79,54 +105,28 @@
       "isWaterfront": true
     },
     {
-      "listingId": "A4678715",
-      "address": "1125 W PEPPERTREE DR #302",
-      "subdivision": "PEPPERTREE BAY III",
-      "soldPrice": "$500,500",
+      "listingId": "A4666702",
+      "address": "5911 MIDNIGHT PASS RD #206",
+      "subdivision": "BOCA SIESTA",
+      "soldPrice": "$680,000",
       "soldDate": "2026-05-01",
       "bedrooms": 2,
       "bathrooms": 2.0,
-      "livingSqFt": "1,163",
-      "yearBuilt": 1974,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4687909",
-      "address": "679 NORSOTA WAY",
-      "subdivision": "BAY ISLAND",
-      "soldPrice": "$7,200,000",
-      "soldDate": "2026-04-30",
-      "bedrooms": 4,
-      "bathrooms": 3.5,
-      "livingSqFt": "3,788",
-      "yearBuilt": 1926,
+      "livingSqFt": "1,447",
+      "yearBuilt": 1984,
       "propertyType": "Residential",
       "isWaterfront": true
     },
     {
-      "listingId": "A4681050",
-      "address": "8600 MIDNIGHT PASS RD #301",
-      "subdivision": "HIDDEN LAGOON BEACH CLUB",
-      "soldPrice": "$2,150,000",
-      "soldDate": "2026-04-30",
-      "bedrooms": 2,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,730",
-      "yearBuilt": 1985,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4683014",
-      "address": "5770 MIDNIGHT PASS RD #404",
-      "subdivision": "GULF & BAY CLUB PH 3",
-      "soldPrice": "$1,250,000",
-      "soldDate": "2026-04-30",
+      "listingId": "A4673053",
+      "address": "8767 MIDNIGHT PASS RD #403F",
+      "subdivision": "ISLAND REEF II PH 1 2 & 3",
+      "soldPrice": "$570,000",
+      "soldDate": "2026-05-01",
       "bedrooms": 2,
       "bathrooms": 2.0,
-      "livingSqFt": "1,337",
-      "yearBuilt": 1980,
+      "livingSqFt": "1,303",
+      "yearBuilt": 1979,
       "propertyType": "Residential",
       "isWaterfront": true
     }
