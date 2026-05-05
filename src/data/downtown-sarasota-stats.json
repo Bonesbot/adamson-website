@@ -2,19 +2,19 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-03T10:56:40.418818+00:00",
+  "lastUpdated": "2026-05-05T17:34:11.690321+00:00",
   "counts": {
-    "sold": 43,
-    "pending": 70,
-    "active": 269,
-    "total": 113
+    "sold": 45,
+    "pending": 72,
+    "active": 266,
+    "total": 117
   },
   "metrics": {
-    "avgPrice": "$2,797,826",
-    "avgPricePerSqFt": "$1,025",
+    "avgPrice": "$2,745,422",
+    "avgPricePerSqFt": "$1,013",
     "avgYearBuilt": 2010,
-    "avgLivingSqFt": "2,435",
-    "avgLotSqFt": "47,883",
+    "avgLivingSqFt": "2,415",
+    "avgLotSqFt": "49,200",
     "avgDom": 91
   },
   "range": {
@@ -22,42 +22,42 @@
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 269,
-    "medianPrice": "$1,499,500",
-    "medianPricePerSqFt": "$844",
+    "count": 266,
+    "medianPrice": "$1,499,250",
+    "medianPricePerSqFt": "$841",
     "waterfrontCount": 66,
     "newConstructionCount": 99
   },
   "sold": {
-    "count": 43,
-    "medianPrice": "$1,395,000",
-    "medianDom": 113,
-    "saleToListRatio": "85.6%"
+    "count": 45,
+    "medianPrice": "$1,389,000",
+    "medianDom": 109,
+    "saleToListRatio": "86.1%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,837",
+    "medianMonthlyAssociation": "$1,835",
     "medianMonthlyCondoFee": "$1,992"
   },
   "priceBands": {
-    "under900k": 73,
+    "under900k": 72,
     "band900kTo1_5m": 62,
-    "band1_5mTo3m": 66,
+    "band1_5mTo3m": 64,
     "band3mPlus": 68
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 269
+      "count": 266
     }
   ],
   "buildingClasses": [
     {
       "class": "high-rise",
-      "count": 146
+      "count": 144
     },
     {
       "class": "low-rise",
-      "count": 63
+      "count": 62
     },
     {
       "class": "mid-rise",
@@ -65,6 +65,19 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4687151",
+      "address": "111 S PINEAPPLE AVE #811",
+      "subdivision": "MARK SARASOTA CONDO",
+      "soldPrice": "$1,250,000",
+      "soldDate": "2026-05-05",
+      "bedrooms": 2,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,580",
+      "yearBuilt": 2019,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4652440",
       "address": "420 GOLDEN GATE PT #200A",
@@ -77,6 +90,19 @@
       "yearBuilt": 2005,
       "propertyType": "Residential",
       "isWaterfront": true
+    },
+    {
+      "listingId": "A4685150",
+      "address": "101 S GULFSTREAM AVE #7D",
+      "subdivision": "DOLPHIN TOWER",
+      "soldPrice": "$525,000",
+      "soldDate": "2026-05-01",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,200",
+      "yearBuilt": 1974,
+      "propertyType": "Residential",
+      "isWaterfront": false
     },
     {
       "listingId": "A4653446",
@@ -101,32 +127,6 @@
       "bathrooms": 3.0,
       "livingSqFt": "1,829",
       "yearBuilt": 2023,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4669892",
-      "address": "1255 N GULFSTREAM AVE #1101",
-      "subdivision": "BAY PLAZA",
-      "soldPrice": "$1,389,000",
-      "soldDate": "2026-04-30",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,901",
-      "yearBuilt": 1982,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4675978",
-      "address": "750 N TAMIAMI TRL #1005",
-      "subdivision": "RENAISSANCE 1",
-      "soldPrice": "$560,000",
-      "soldDate": "2026-04-30",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "695",
-      "yearBuilt": 2001,
       "propertyType": "Residential",
       "isWaterfront": false
     }
