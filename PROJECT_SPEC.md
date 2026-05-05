@@ -1,4 +1,24 @@
 # Ryan Adamson — Luxury Real Estate Website
+## ⚠️ CRITICAL: FUSE Mount Corruption Rule
+
+The Cowork/Windows FUSE mount silently corrupts AG_website code files when written through it from a Linux session. Confirmed failure modes:
+
+- **`Edit` and `Write` tools truncate files** when growing them (writes get capped at the file's pre-existing byte count). Reports "success" while leaving the file mid-line truncated.
+- **Bash reads** (`cat`, `tail`, `sha256sum`) sometimes show truncated views of files that are intact on Windows-side NTFS.
+- **`git add`/`commit`/`push` from Linux corrupt `.git/index`** even when the working tree is clean.
+
+**Hard rules for any Cowork session working on this project:**
+
+1. **Never use `Edit` or `Write` on AG_website code files** (`scripts/*.py`, `supabase/*.py`, `streamlit/*.py`, `src/**/*.astro`, etc.). To mutate code, fetch it from `origin/main` via the GitHub Contents API, mutate it in pure Python, and `PUT` it back. Reference impl: `outputs/recovery_2026-05-03/01_apply_ingest_argparse.py`.
+2. **Never run local `git` write operations** (add/commit/rm/push) from inside Cowork's Linux sandbox. Use the Contents API for pushes; if a grouped commit is needed, ask the user to do it from Windows PowerShell.
+3. **Use the `Read` tool**, not `cat`/`tail`/`head`, to inspect AG_website file contents — `Read` uses the host NTFS view and is reliable. To verify file content via hash, use `git show origin/main:<path> | sha256sum`, never bare `sha256sum <path>`.
+4. **The daily `mls-export` scheduled task self-heals at run start** by fetching canonical pipeline scripts from `origin/main` via Contents API (Step 0.6). Manual interactive sessions still must follow rules 1–3 to avoid re-corrupting files between scheduled runs.
+5. **Defense in depth:** `scripts/_integrity_check.py` (manifest at `scripts/EXPECTED_HASHES.json`) verifies the four pipeline scripts' SHA-256s at the top of `combine_mls_export.py`'s `main()`. On mismatch the run hard-fails with `failed_step="integrity_check"`.
+
+If FUSE damage is detected on the working tree (e.g., a file ends mid-word with `\ No newline at end of file`), recover via Windows PowerShell: `cd C:\Users\Bones\automation\AG_website ; git fetch ; git checkout origin/main -- <path>`. Windows-side git is unaffected.
+
+---
+
 ## Project Specification & Session Context
 
 > **Purpose**: This file is the "project memory" for BonesBot/Claude sessions. Drop it into any new Cowork session to restore full context.
