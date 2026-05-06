@@ -2,19 +2,19 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-05T19:26:49.009393+00:00",
+  "lastUpdated": "2026-05-06T12:43:05.205335+00:00",
   "counts": {
-    "sold": 439,
+    "sold": 440,
     "pending": 75,
-    "active": 380,
-    "total": 514
+    "active": 383,
+    "total": 515
   },
   "metrics": {
-    "avgPrice": "$1,863,265",
-    "avgPricePerSqFt": "$731",
+    "avgPrice": "$1,860,084",
+    "avgPricePerSqFt": "$730",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,195",
-    "avgLotSqFt": "195,792",
+    "avgLivingSqFt": "2,194",
+    "avgLotSqFt": "195,260",
     "avgDom": 95
   },
   "range": {
@@ -22,14 +22,14 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 380,
+    "count": 383,
     "medianPrice": "$1,050,000",
-    "medianPricePerSqFt": "$690",
-    "waterfrontCount": 291,
+    "medianPricePerSqFt": "$689",
+    "waterfrontCount": 292,
     "newConstructionCount": 30
   },
   "sold": {
-    "count": 439,
+    "count": 440,
     "medianPrice": "$1,100,000",
     "medianDom": 66,
     "saleToListRatio": "87.2%"
@@ -39,21 +39,21 @@
     "medianMonthlyCondoFee": "$1,707"
   },
   "priceBands": {
-    "under900k": 158,
+    "under900k": 159,
     "band900kTo1_5m": 82,
-    "band1_5mTo3m": 82,
-    "band3mPlus": 58
+    "band1_5mTo3m": 83,
+    "band3mPlus": 59
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 380
+      "count": 383
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 264
+      "count": 267
     },
     {
       "class": "mid-rise",
@@ -65,6 +65,19 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4665165",
+      "address": "1581 GULF OF MEXICO DR #507",
+      "subdivision": "ST. REGIS LONGBOAT KEY",
+      "soldPrice": "$2,975,000",
+      "soldDate": "2026-05-05",
+      "bedrooms": 1,
+      "bathrooms": 1.5,
+      "livingSqFt": "1,721",
+      "yearBuilt": 2024,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4676554",
       "address": "1145 GULF OF MEXICO DR #603",
@@ -114,19 +127,6 @@
       "bathrooms": 2.5,
       "livingSqFt": "2,550",
       "yearBuilt": 1998,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4677082",
-      "address": "1135 GULF OF MEXICO DR #605",
-      "subdivision": "BEACHPLACE I",
-      "soldPrice": "$1,600,000",
-      "soldDate": "2026-05-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,503",
-      "yearBuilt": 1980,
       "propertyType": "Residential",
       "isWaterfront": true
     }
