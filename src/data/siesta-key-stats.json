@@ -2,19 +2,19 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-05T19:26:50.210944+00:00",
+  "lastUpdated": "2026-05-06T12:43:06.308941+00:00",
   "counts": {
-    "sold": 436,
-    "pending": 76,
-    "active": 422,
-    "total": 512
+    "sold": 437,
+    "pending": 78,
+    "active": 419,
+    "total": 515
   },
   "metrics": {
-    "avgPrice": "$1,407,573",
+    "avgPrice": "$1,406,133",
     "avgPricePerSqFt": "$683",
     "avgYearBuilt": 1977,
     "avgLivingSqFt": "1,887",
-    "avgLotSqFt": "82,196",
+    "avgLotSqFt": "82,072",
     "avgDom": 103
   },
   "range": {
@@ -22,14 +22,14 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 422,
+    "count": 419,
     "medianPrice": "$1,200,000",
-    "medianPricePerSqFt": "$770",
-    "waterfrontCount": 235,
+    "medianPricePerSqFt": "$772",
+    "waterfrontCount": 233,
     "newConstructionCount": 58
   },
   "sold": {
-    "count": 436,
+    "count": 437,
     "medianPrice": "$875,000",
     "medianDom": 72,
     "saleToListRatio": "87.2%"
@@ -39,25 +39,25 @@
     "medianMonthlyCondoFee": "$1,263"
   },
   "priceBands": {
-    "under900k": 166,
-    "band900kTo1_5m": 84,
-    "band1_5mTo3m": 80,
+    "under900k": 165,
+    "band900kTo1_5m": 83,
+    "band1_5mTo3m": 79,
     "band3mPlus": 92
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 422
+      "count": 419
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 263
+      "count": 261
     },
     {
       "class": "mid-rise",
-      "count": 72
+      "count": 71
     },
     {
       "class": "high-rise",
@@ -65,6 +65,19 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4684885",
+      "address": "1275 SIESTA BAYSIDE DR #1275",
+      "subdivision": "GULF & BAY CLUB BAYSIDE",
+      "soldPrice": "$940,000",
+      "soldDate": "2026-05-05",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,645",
+      "yearBuilt": 1988,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4671178",
       "address": "513 VENICE LN",
@@ -114,19 +127,6 @@
       "bathrooms": 2.0,
       "livingSqFt": "1,447",
       "yearBuilt": 1984,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4673053",
-      "address": "8767 MIDNIGHT PASS RD #403F",
-      "subdivision": "ISLAND REEF II PH 1 2 & 3",
-      "soldPrice": "$570,000",
-      "soldDate": "2026-05-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,303",
-      "yearBuilt": 1979,
       "propertyType": "Residential",
       "isWaterfront": true
     }
