@@ -2,19 +2,19 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-06T12:43:06.308941+00:00",
+  "lastUpdated": "2026-05-07T11:34:33.413641+00:00",
   "counts": {
-    "sold": 437,
-    "pending": 78,
-    "active": 419,
-    "total": 515
+    "sold": 442,
+    "pending": 74,
+    "active": 420,
+    "total": 516
   },
   "metrics": {
-    "avgPrice": "$1,406,133",
-    "avgPricePerSqFt": "$683",
+    "avgPrice": "$1,403,614",
+    "avgPricePerSqFt": "$682",
     "avgYearBuilt": 1977,
-    "avgLivingSqFt": "1,887",
-    "avgLotSqFt": "82,072",
+    "avgLivingSqFt": "1,886",
+    "avgLotSqFt": "82,364",
     "avgDom": 103
   },
   "range": {
@@ -22,38 +22,38 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 419,
-    "medianPrice": "$1,200,000",
+    "count": 420,
+    "medianPrice": "$1,212,500",
     "medianPricePerSqFt": "$772",
-    "waterfrontCount": 233,
+    "waterfrontCount": 235,
     "newConstructionCount": 58
   },
   "sold": {
-    "count": 437,
+    "count": 442,
     "medianPrice": "$875,000",
-    "medianDom": 72,
-    "saleToListRatio": "87.2%"
+    "medianDom": 71,
+    "saleToListRatio": "87.3%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,133",
     "medianMonthlyCondoFee": "$1,263"
   },
   "priceBands": {
-    "under900k": 165,
-    "band900kTo1_5m": 83,
+    "under900k": 164,
+    "band900kTo1_5m": 84,
     "band1_5mTo3m": 79,
-    "band3mPlus": 92
+    "band3mPlus": 93
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 419
+      "count": 420
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 261
+      "count": 262
     },
     {
       "class": "mid-rise",
@@ -65,6 +65,32 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "TB8451655",
+      "address": "5830 MIDNIGHT PASS RD #705",
+      "subdivision": "JAMAICA ROYALE TOWER II",
+      "soldPrice": "$1,113,000",
+      "soldDate": "2026-05-06",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,285",
+      "yearBuilt": 1976,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4685194",
+      "address": "1054 SUN N SEA DR #106",
+      "subdivision": "BEACH CLUB AT SIESTA KEY",
+      "soldPrice": "$655,000",
+      "soldDate": "2026-05-06",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "800",
+      "yearBuilt": 2009,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4684885",
       "address": "1275 SIESTA BAYSIDE DR #1275",
@@ -79,54 +105,28 @@
       "isWaterfront": false
     },
     {
-      "listingId": "A4671178",
-      "address": "513 VENICE LN",
-      "subdivision": "SIESTA BEACH",
-      "soldPrice": "$2,050,000",
+      "listingId": "A4683506",
+      "address": "9397 MIDNIGHT PASS RD #901",
+      "subdivision": "POINTE ON MIDNIGHT PASS",
+      "soldPrice": "$820,000",
+      "soldDate": "2026-05-05",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,630",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4667661",
+      "address": "915 SEASIDE DR #407",
+      "subdivision": "SIESTA KEY BEACH RESIDENCES II",
+      "soldPrice": "$2,700,000",
       "soldDate": "2026-05-04",
-      "bedrooms": 5,
+      "bedrooms": 3,
       "bathrooms": 3.5,
-      "livingSqFt": "3,009",
-      "yearBuilt": 1993,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4678087",
-      "address": "6006 MIDNIGHT PASS RD #44",
-      "subdivision": "CASA MAR",
-      "soldPrice": "$592,500",
-      "soldDate": "2026-05-04",
-      "bedrooms": 2,
-      "bathrooms": 1.5,
-      "livingSqFt": "840",
-      "yearBuilt": 1960,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4611665",
-      "address": "6236 MIDNIGHT PASS RD #304",
-      "subdivision": "SIESTA DUNES BEACH",
-      "soldPrice": "$790,000",
-      "soldDate": "2026-05-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,150",
-      "yearBuilt": 1979,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4666702",
-      "address": "5911 MIDNIGHT PASS RD #206",
-      "subdivision": "BOCA SIESTA",
-      "soldPrice": "$680,000",
-      "soldDate": "2026-05-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,447",
-      "yearBuilt": 1984,
+      "livingSqFt": "2,255",
+      "yearBuilt": 2009,
       "propertyType": "Residential",
       "isWaterfront": true
     }
