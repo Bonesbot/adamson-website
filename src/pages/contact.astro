@@ -33,11 +33,16 @@ const jsonLd = {
       <form
         name="contact"
         method="POST"
+        action="/thank-you"
         data-netlify="true"
+        data-netlify-recaptcha="true"
         netlify-honeypot="bot-field"
         class="space-y-6"
       >
-        <!-- Honeypot -->
+        <!-- Hidden form-name field — required by Netlify when using JS-based form submissions or custom action -->
+        <input type="hidden" name="form-name" value="contact" />
+
+        <!-- Honeypot — invisible field that real users won't fill in. Bots usually do, and Netlify rejects those. -->
         <p class="hidden">
           <label>Don't fill this out: <input name="bot-field" /></label>
         </p>
@@ -114,6 +119,11 @@ const jsonLd = {
             class="w-full px-4 py-3 border border-[var(--color-border)] rounded-lg focus:outline-none focus:border-[var(--color-gold)] transition-colors bg-[var(--color-warm-white)] resize-vertical"
             placeholder="Tell me about what you're looking for..."
           ></textarea>
+        </div>
+
+        <!-- hCaptcha widget — Netlify renders the actual challenge here based on dashboard config -->
+        <div class="flex justify-center pt-2">
+          <div data-netlify-recaptcha="true"></div>
         </div>
 
         <div class="text-center pt-2">

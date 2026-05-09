@@ -1,0 +1,57 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/ui/Button.astro';
+
+const description = "Thank you for reaching out to Ryan Adamson. Your message has been received and Ryan will be in touch shortly.";
+---
+
+<BaseLayout title="Thank You" description={description}>
+
+  <!-- Hero -->
+  <section class="relative pt-32 pb-20">
+    <div class="absolute inset-0" style="background-color: var(--color-navy);" />
+    <div class="relative z-10 container text-center">
+      <p class="font-accent text-xs uppercase tracking-[0.3em] text-[var(--color-gold)] mb-3">
+        Message Received
+      </p>
+      <h1 class="font-display text-white mb-4">Thank You</h1>
+      <p class="text-lg text-white/70 max-w-xl mx-auto">
+        Your message is on its way to Ryan. He'll be in touch within one business day.
+      </p>
+    </div>
+  </section>
+
+  <!-- Body -->
+  <section class="section bg-white">
+    <div class="container-narrow text-center">
+      <div class="max-w-md mx-auto mb-10">
+        <img
+          src="/images/ryan-adamson.jpg"
+          alt="Ryan Adamson"
+          class="w-32 h-32 rounded-full object-cover mx-auto mb-6 shadow-lg"
+          loading="lazy"
+        />
+        <p class="font-accent text-xs uppercase tracking-[0.25em] text-[var(--color-text-muted)] mb-2">
+          Ryan Adamson
+        </p>
+        <p class="font-accent text-xs uppercase tracking-wider text-[var(--color-gold)]">
+          Coldwell Banker Realty &mdash; St. Armands Circle
+        </p>
+      </div>
+
+      <p class="text-[var(--color-text-muted)] leading-relaxed mb-10 max-w-xl mx-auto">
+        While you wait, feel free to explore the latest market reports for Sarasota's barrier islands or browse the area pages to get a feel for the communities I serve.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button href="/market-reports" variant="primary" size="md">
+          View Market Reports
+        </Button>
+        <Button href="/areas" variant="outline" size="md">
+          Explore Areas
+        </Button>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
