@@ -223,18 +223,30 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- ====== CTA SECTION (CBGL Blue) ====== -->
-  <section class="cbgl-section py-20">
-    <div class="container text-center">
-      <h2 class="font-display text-3xl text-white mb-4">
-        Ready to Find Your Place in Paradise?
-      </h2>
-      <p class="text-white/70 mb-8 max-w-lg mx-auto">
-        Whether you're buying, selling, or exploring the Sarasota luxury market, let's start the conversation.
-      </p>
-      <Button href="/contact" variant="primary" size="lg">
-        Schedule a Consultation
-      </Button>
+  <!-- ====== CTA SECTION (CBGL Blue) — with Ryan portrait on desktop ====== -->
+  <section class="cbgl-section py-20 overflow-hidden">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+        <div class="hidden md:block md:col-span-2">
+          <img
+            src="/images/ryan-adamson-transparent.webp"
+            alt="Ryan Adamson, Coldwell Banker Realty"
+            class="w-full max-w-xs mx-auto"
+            loading="lazy"
+          />
+        </div>
+        <div class="md:col-span-3 text-center md:text-left">
+          <h2 class="font-display text-3xl text-white mb-4">
+            Ready to Find Your Place in Paradise?
+          </h2>
+          <p class="text-white/70 mb-8 max-w-lg mx-auto md:mx-0">
+            Whether you're buying, selling, or exploring the Sarasota luxury market, let's start the conversation.
+          </p>
+          <Button href="/contact" variant="primary" size="lg">
+            Schedule a Consultation
+          </Button>
+        </div>
+      </div>
     </div>
   </section>
 
