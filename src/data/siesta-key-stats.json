@@ -2,36 +2,36 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-07T11:34:33.413641+00:00",
+  "lastUpdated": "2026-05-09T10:02:22.107571+00:00",
   "counts": {
-    "sold": 442,
-    "pending": 74,
-    "active": 420,
-    "total": 516
+    "sold": 445,
+    "pending": 75,
+    "active": 418,
+    "total": 520
   },
   "metrics": {
-    "avgPrice": "$1,403,614",
-    "avgPricePerSqFt": "$682",
-    "avgYearBuilt": 1977,
-    "avgLivingSqFt": "1,886",
-    "avgLotSqFt": "82,364",
-    "avgDom": 103
+    "avgPrice": "$1,404,050",
+    "avgPricePerSqFt": "$681",
+    "avgYearBuilt": 1978,
+    "avgLivingSqFt": "1,889",
+    "avgLotSqFt": "81,963",
+    "avgDom": 104
   },
   "range": {
     "minPrice": "$299,999",
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 420,
-    "medianPrice": "$1,212,500",
+    "count": 418,
+    "medianPrice": "$1,200,000",
     "medianPricePerSqFt": "$772",
-    "waterfrontCount": 235,
-    "newConstructionCount": 58
+    "waterfrontCount": 232,
+    "newConstructionCount": 57
   },
   "sold": {
-    "count": 442,
+    "count": 445,
     "medianPrice": "$875,000",
-    "medianDom": 71,
+    "medianDom": 70,
     "saleToListRatio": "87.3%"
   },
   "fees": {
@@ -39,21 +39,21 @@
     "medianMonthlyCondoFee": "$1,263"
   },
   "priceBands": {
-    "under900k": 164,
+    "under900k": 163,
     "band900kTo1_5m": 84,
     "band1_5mTo3m": 79,
-    "band3mPlus": 93
+    "band3mPlus": 92
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 420
+      "count": 418
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 262
+      "count": 260
     },
     {
       "class": "mid-rise",
@@ -61,10 +61,36 @@
     },
     {
       "class": "high-rise",
-      "count": 14
+      "count": 15
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4688233",
+      "address": "312 CANAL RD",
+      "subdivision": "SARASOTA BEACH",
+      "soldPrice": "$1,525,000",
+      "soldDate": "2026-05-07",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,792",
+      "yearBuilt": 1986,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4683051",
+      "address": "3460 FLAMINGO AVE",
+      "subdivision": "BAY ISLAND",
+      "soldPrice": "$6,300,000",
+      "soldDate": "2026-05-06",
+      "bedrooms": 5,
+      "bathrooms": 6.5,
+      "livingSqFt": "6,030",
+      "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "TB8451655",
       "address": "5830 MIDNIGHT PASS RD #705",
@@ -92,41 +118,15 @@
       "isWaterfront": false
     },
     {
-      "listingId": "A4684885",
-      "address": "1275 SIESTA BAYSIDE DR #1275",
-      "subdivision": "GULF & BAY CLUB BAYSIDE",
-      "soldPrice": "$940,000",
-      "soldDate": "2026-05-05",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,645",
-      "yearBuilt": 1988,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4683506",
-      "address": "9397 MIDNIGHT PASS RD #901",
-      "subdivision": "POINTE ON MIDNIGHT PASS",
-      "soldPrice": "$820,000",
-      "soldDate": "2026-05-05",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,630",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4667661",
-      "address": "915 SEASIDE DR #407",
-      "subdivision": "SIESTA KEY BEACH RESIDENCES II",
-      "soldPrice": "$2,700,000",
-      "soldDate": "2026-05-04",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,255",
-      "yearBuilt": 2009,
+      "listingId": "A4673426",
+      "address": "6006 MIDNIGHT PASS RD #11",
+      "subdivision": "CASA MAR",
+      "soldPrice": "$415,000",
+      "soldDate": "2026-05-06",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "600",
+      "yearBuilt": 1960,
       "propertyType": "Residential",
       "isWaterfront": true
     }
