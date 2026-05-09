@@ -2,16 +2,16 @@
   "areaSlug": "lido-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-07T11:34:32.827696+00:00",
+  "lastUpdated": "2026-05-09T10:02:21.567412+00:00",
   "counts": {
-    "sold": 81,
-    "pending": 17,
-    "active": 131,
+    "sold": 82,
+    "pending": 16,
+    "active": 132,
     "total": 98
   },
   "metrics": {
-    "avgPrice": "$2,551,115",
-    "avgPricePerSqFt": "$944",
+    "avgPrice": "$2,549,330",
+    "avgPricePerSqFt": "$943",
     "avgYearBuilt": 1983,
     "avgLivingSqFt": "2,230",
     "avgLotSqFt": "78,405",
@@ -22,15 +22,15 @@
     "maxPrice": "$20,000,000"
   },
   "active": {
-    "count": 131,
-    "medianPrice": "$1,675,000",
+    "count": 132,
+    "medianPrice": "$1,687,500",
     "medianPricePerSqFt": "$903",
     "waterfrontCount": 62,
     "newConstructionCount": 21
   },
   "sold": {
-    "count": 81,
-    "medianPrice": "$1,345,000",
+    "count": 82,
+    "medianPrice": "$1,322,500",
     "medianDom": 88,
     "saleToListRatio": "84.3%"
   },
@@ -42,18 +42,18 @@
     "under900k": 47,
     "band900kTo1_5m": 15,
     "band1_5mTo3m": 21,
-    "band3mPlus": 48
+    "band3mPlus": 49
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 131
+      "count": 132
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 76
+      "count": 77
     },
     {
       "class": "high-rise",
@@ -65,6 +65,19 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4684981",
+      "address": "101 BENJAMIN FRANKLIN DR #73",
+      "subdivision": "ST ARMAND TOWERS",
+      "soldPrice": "$1,020,000",
+      "soldDate": "2026-05-04",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,275",
+      "yearBuilt": 1968,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4679193",
       "address": "800 BENJAMIN FRANKLIN DR #308",
@@ -116,19 +129,6 @@
       "yearBuilt": 1980,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4676094",
-      "address": "2110 BENJAMIN FRANKLIN DR #303",
-      "subdivision": "LIDO HARBOUR SOUTH",
-      "soldPrice": "$540,000",
-      "soldDate": "2026-04-28",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,248",
-      "yearBuilt": 1968,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ]
 }
