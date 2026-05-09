@@ -246,11 +246,11 @@ a:hover {
 
 /* Mobile: shorten hero so the landscape video doesn't get over-zoomed.
    At 100vh on a phone, a 16:9 video is scaled height-first to fill, leaving
-   only ~26% of the width visible. 60vh keeps a substantial hero presence
-   while showing nearly half the frame width. */
+   only ~26% of the width visible. 65vh keeps a substantial hero presence
+   while showing more of the frame width and giving content room to breathe. */
 @media (max-width: 768px) {
   .video-hero {
-    min-height: 60vh;
+    min-height: 65vh;
   }
 }
 

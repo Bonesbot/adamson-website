@@ -84,8 +84,8 @@ const jsonLd = [
 
     <!-- Hero Content -->
     <div class="content text-center px-6 max-w-3xl mx-auto">
-      <!-- Logos -->
-      <div class="flex items-center justify-center gap-6 mb-8">
+      <!-- Logos — hidden on mobile (top nav already shows both brands) -->
+      <div class="hidden sm:flex items-center justify-center gap-6 mb-8">
         <img
           src="/images/logos/adamson-group-black.png"
           alt="Adamson Group"
@@ -96,12 +96,12 @@ const jsonLd = [
         <img src="/images/logos/cb-full-horz-white.png" alt="Coldwell Banker Realty" class="h-12 w-auto" />
       </div>
 
-      <h1 class="font-display text-white mb-4" style="line-height: 1.1;">
+      <h1 class="font-display text-white mb-4 text-3xl sm:text-5xl md:text-6xl" style="line-height: 1.15;">
         Luxury Real Estate on Sarasota's Barrier Islands
       </h1>
 
       <!-- Tagline bar — matches existing site's "INTEGRITY | PASSION | PROFESSIONALISM" -->
-      <p class="font-accent text-sm uppercase tracking-[0.3em] text-white/80 mb-10">
+      <p class="font-accent text-xs sm:text-sm uppercase tracking-[0.25em] sm:tracking-[0.3em] text-white/80 mb-6 sm:mb-10">
         Integrity &nbsp;|&nbsp; Passion &nbsp;|&nbsp; Professionalism
       </p>
 
