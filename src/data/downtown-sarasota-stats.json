@@ -2,18 +2,18 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-07T11:34:33.999171+00:00",
+  "lastUpdated": "2026-05-09T10:02:22.663002+00:00",
   "counts": {
-    "sold": 223,
-    "pending": 75,
-    "active": 267,
-    "total": 298
+    "sold": 224,
+    "pending": 73,
+    "active": 270,
+    "total": 297
   },
   "metrics": {
-    "avgPrice": "$1,937,524",
-    "avgPricePerSqFt": "$833",
+    "avgPrice": "$1,941,610",
+    "avgPricePerSqFt": "$834",
     "avgYearBuilt": 2003,
-    "avgLivingSqFt": "2,049",
+    "avgLivingSqFt": "2,050",
     "avgLotSqFt": "51,491",
     "avgDom": 99
   },
@@ -22,42 +22,42 @@
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 267,
-    "medianPrice": "$1,499,000",
-    "medianPricePerSqFt": "$840",
-    "waterfrontCount": 67,
-    "newConstructionCount": 99
+    "count": 270,
+    "medianPrice": "$1,499,250",
+    "medianPricePerSqFt": "$841",
+    "waterfrontCount": 69,
+    "newConstructionCount": 100
   },
   "sold": {
-    "count": 223,
-    "medianPrice": "$1,160,000",
-    "medianDom": 87,
+    "count": 224,
+    "medianPrice": "$1,165,000",
+    "medianDom": 86,
     "saleToListRatio": "91.5%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,693",
+    "medianMonthlyAssociation": "$1,683",
     "medianMonthlyCondoFee": "$1,768"
   },
   "priceBands": {
-    "under900k": 73,
+    "under900k": 74,
     "band900kTo1_5m": 62,
-    "band1_5mTo3m": 64,
+    "band1_5mTo3m": 66,
     "band3mPlus": 68
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 267
+      "count": 270
     }
   ],
   "buildingClasses": [
     {
       "class": "high-rise",
-      "count": 143
+      "count": 145
     },
     {
       "class": "low-rise",
-      "count": 64
+      "count": 65
     },
     {
       "class": "mid-rise",
@@ -65,6 +65,19 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4664512",
+      "address": "1155 N GULFSTREAM AVE #508",
+      "subdivision": "VUE SARASOTA BAY",
+      "soldPrice": "$1,475,000",
+      "soldDate": "2026-05-08",
+      "bedrooms": 2,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,591",
+      "yearBuilt": 2017,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4687151",
       "address": "111 S PINEAPPLE AVE #811",
@@ -114,19 +127,6 @@
       "bathrooms": 3.5,
       "livingSqFt": "2,229",
       "yearBuilt": 2024,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4666387",
-      "address": "301 QUAY COMMONS #503",
-      "subdivision": "BAYSO SARASOTA CONDOMINIUM",
-      "soldPrice": "$1,475,000",
-      "soldDate": "2026-04-30",
-      "bedrooms": 2,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,829",
-      "yearBuilt": 2023,
       "propertyType": "Residential",
       "isWaterfront": false
     }
