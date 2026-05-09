@@ -1,0 +1,52 @@
+---
+/**
+ * ProjectStubBody — lightweight body for stub project pages (spec §7).
+ * Stub = hero + quick-facts panel + IDX feed + booking CTA only.
+ * URL exists, schema in place, indexable from launch (when prototype goes live).
+ *
+ * Per spec build_depth definition: "Fill out in Phase 2."
+ */
+import QuickFactsPanel from './QuickFactsPanel.astro';
+import IdxListingGrid from './IdxListingGrid.astro';
+import SchedulerEmbed from './SchedulerEmbed.astro';
+
+interface Props {
+  project: any;
+}
+
+const { project } = Astro.props;
+---
+
+<section class="section dark-section">
+  <div class="container">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div class="lg:col-span-2 space-y-6">
+        <div class="bg-black border border-white/10 rounded-lg p-8">
+          <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Stub page</p>
+          <h2 class="font-display text-2xl text-white mb-4">About {project.name}</h2>
+          <p class="text-white/70 leading-relaxed mb-4">
+            FILL_IN: 300-500 word editorial overview in Ryan's voice. This page is currently
+            a Phase-1 stub &mdash; per spec &sect;7, full build-out scheduled for Phase 2.
+          </p>
+          <p class="text-white/50 text-sm">
+            Hero, quick facts, and live availability are wired up. Add editorial overview,
+            photo gallery, floor plans, amenities, location callouts, comparable projects,
+            and project FAQ to elevate this to a full project page.
+          </p>
+        </div>
+
+        <h3 class="font-display text-2xl text-white mb-4">Currently for sale</h3>
+        <IdxListingGrid
+          subdivisions={project.mls_subdivision && !String(project.mls_subdivision).startsWith('FILL_IN') ? [project.mls_subdivision] : []}
+          heading=""
+          limit={3}
+        />
+      </div>
+      <div>
+        <QuickFactsPanel project={project} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<SchedulerEmbed projectName={project.name} />

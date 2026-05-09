@@ -1,0 +1,61 @@
+---
+/**
+ * BreadcrumbNav — auto-builds breadcrumb trail from URL pathname.
+ * Renders both visible nav and BreadcrumbList JSON-LD per spec §13.
+ *
+ * Maps known new-construction segments to friendly labels.
+ */
+interface Props {
+  /** Optional override for the leaf label (e.g. project name). */
+  leafLabel?: string;
+}
+
+const { leafLabel } = Astro.props;
+
+const labelMap: Record<string, string> = {
+  'new-construction': 'New Construction',
+  'downtown-sarasota': 'Downtown Sarasota',
+  'barrier-islands': 'Barrier Islands',
+};
+
+const segments = Astro.url.pathname.split('/').filter(Boolean);
+const crumbs: { label: string; href: string }[] = [
+  { label: 'Home', href: '/' },
+];
+let acc = '';
+for (let i = 0; i < segments.length; i++) {
+  acc += '/' + segments[i];
+  const isLast = i === segments.length - 1;
+  const fallback = segments[i].replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+  crumbs.push({
+    label: isLast && leafLabel ? leafLabel : labelMap[segments[i]] ?? fallback,
+    href: acc,
+  });
+}
+
+const breadcrumbSchema = {
+  '@type': 'BreadcrumbList',
+  itemListElement: crumbs.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.label,
+    item: `https://adamsonfl.com${c.href}`,
+  })),
+};
+---
+
+<nav class="container py-4 text-xs text-white/60 font-accent uppercase tracking-wider" aria-label="Breadcrumb">
+  <ol class="flex flex-wrap items-center gap-2" role="list">
+    {crumbs.map((c, i) => (
+      <li class="flex items-center gap-2">
+        {i > 0 && <span class="text-white/30">/</span>}
+        {i === crumbs.length - 1
+          ? <span class="text-[var(--color-cbgl-blue-light)]">{c.label}</span>
+          : <a href={c.href} class="hover:text-[var(--color-gold)]">{c.label}</a>
+        }
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', ...breadcrumbSchema }, null, 0)} />

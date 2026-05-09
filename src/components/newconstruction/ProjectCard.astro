@@ -1,0 +1,71 @@
+---
+/**
+ * ProjectCard — reusable card for grids and carousels.
+ * Mirrors the AreaCard treatment but with project metadata.
+ */
+interface Props {
+  slug: string;
+  name: string;
+  tagline?: string;
+  status?: string;
+  priceRange?: string;
+  area: string;
+  island?: string | null;
+  cardImage?: string;
+  variant?: 'compact' | 'full';
+}
+
+const {
+  slug,
+  name,
+  tagline,
+  status,
+  priceRange,
+  area,
+  island,
+  cardImage = '/images/new-construction/placeholder-card.jpg',
+  variant = 'full',
+} = Astro.props;
+
+const areaLabel = area === 'downtown-sarasota'
+  ? 'Downtown Sarasota'
+  : island
+    ? island.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+    : 'Barrier Islands';
+---
+
+<a
+  href={`/new-construction/${slug}`}
+  class="group block relative overflow-hidden rounded-lg aspect-[3/4] bg-[var(--color-charcoal)]"
+>
+  <div
+    class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+    style={`background-image: url('${cardImage}');`}
+  />
+  <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+
+  {status && (
+    <div class="absolute top-4 left-4">
+      <span class="font-accent text-[10px] uppercase tracking-[0.2em] font-semibold bg-[var(--color-cbgl-blue)] text-white px-3 py-1 rounded">
+        {status}
+      </span>
+    </div>
+  )}
+
+  <div class="absolute bottom-0 left-0 right-0 p-6">
+    <p class="font-accent text-[10px] uppercase tracking-[0.2em] text-white/60 mb-2">
+      {areaLabel}
+    </p>
+    <h3 class="font-display text-2xl font-bold text-white mb-1 group-hover:text-[var(--color-gold-light)] transition-colors">
+      {name}
+    </h3>
+    {tagline && variant === 'full' && (
+      <p class="text-sm text-white/70 mb-3 line-clamp-2">{tagline}</p>
+    )}
+    {priceRange && (
+      <p class="font-accent text-xs uppercase tracking-wider text-[var(--color-gold)]">
+        {priceRange}
+      </p>
+    )}
+  </div>
+</a>

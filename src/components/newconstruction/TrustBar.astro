@@ -1,0 +1,35 @@
+---
+/**
+ * TrustBar — credentials strip rendered below the hero.
+ * Defaults to Ryan's named credentials per spec §4 trust strip.
+ * Customize via items prop; pass empty to hide.
+ */
+interface Props {
+  items?: string[];
+}
+
+const {
+  items = [
+    'Certified Luxury Home Marketing Specialist (CLHMS)',
+    'Million Dollar Guild Member',
+    'Coldwell Banker Global Luxury',
+    /* FILL_IN: years in market, e.g. '15+ Years on Sarasota Coast' */
+    /* FILL_IN: volume credential, e.g. '$200M+ in Luxury Sales' */
+  ],
+} = Astro.props;
+---
+
+<section class="bg-black border-y border-white/10">
+  <div class="container py-6">
+    <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+      {items.map((item, i) => (
+        <>
+          {i > 0 && <span class="hidden sm:inline text-white/15">&middot;</span>}
+          <span class="font-accent text-xs uppercase tracking-[0.2em] text-white/70">
+            {item}
+          </span>
+        </>
+      ))}
+    </div>
+  </div>
+</section>

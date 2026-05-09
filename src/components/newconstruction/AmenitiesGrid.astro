@@ -1,0 +1,45 @@
+---
+/**
+ * AmenitiesGrid — icon grid + short paragraph each. Per spec §5 section 6.
+ * Today renders a generic dot icon; swap in lucide or custom SVGs later.
+ */
+interface Amenity {
+  name: string;
+  description?: string;
+}
+
+interface Props {
+  amenities: (string | Amenity)[];
+}
+
+const { amenities } = Astro.props;
+
+const normalized = amenities.map((a) =>
+  typeof a === 'string' ? { name: a, description: '' } : a
+);
+---
+
+<section class="section dark-section">
+  <div class="container">
+    <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Building amenities</p>
+    <h2 class="accent-underline mb-10">Resident Experience</h2>
+
+    {normalized.length === 0 ? (
+      <p class="text-orange-400/70 italic">FILL_IN: amenity list in projects.json &middot; spec §5 section 6 wants icon grid + short paragraph per amenity.</p>
+    ) : (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {normalized.map((a) => (
+          <div class="bg-black border border-white/10 rounded-lg p-6">
+            <div class="w-10 h-10 rounded-full bg-[var(--color-cbgl-blue)]/20 flex items-center justify-center mb-4">
+              <span class="text-[var(--color-cbgl-blue-light)]">&#10038;</span>
+            </div>
+            <h3 class="font-display text-lg text-white mb-2">{a.name}</h3>
+            {a.description && (
+              <p class="text-sm text-white/60 leading-relaxed">{a.description}</p>
+            )}
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</section>

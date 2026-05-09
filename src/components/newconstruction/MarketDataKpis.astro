@@ -1,0 +1,67 @@
+---
+/**
+ * MarketDataKpis — three KPI tiles.
+ * Per spec §4 section 6: Median $/sf, Avg DOM, Inventory, all with deltas.
+ *
+ * Today: hardcoded stub. Wire to vw_market_stats_by_area in Supabase
+ * via the existing pipeline (PROJECT_SPEC.md §"Data Pipeline").
+ */
+interface Kpi {
+  label: string;
+  value: string;
+  delta?: string;
+  deltaDirection?: 'up' | 'down' | 'flat';
+}
+
+interface Props {
+  scope?: string;       // e.g. "Downtown Sarasota" or "All new construction"
+  kpis?: Kpi[];
+  asOf?: string;        // e.g. "April 2026"
+  source?: string;      // e.g. "Stellar MLS"
+}
+
+const {
+  scope = 'Sarasota New Construction',
+  kpis = [
+    { label: 'Median $/sqft', value: '$895', delta: '+6.4% YoY', deltaDirection: 'up' },
+    { label: 'Avg Days on Market', value: '74', delta: '-12 vs last year', deltaDirection: 'down' },
+    { label: 'Active Inventory', value: '38', delta: '+5 vs Q4', deltaDirection: 'up' },
+  ],
+  asOf = 'FILL_IN: e.g. "April 2026"',
+  source = 'Stellar MLS',
+} = Astro.props;
+
+const arrowFor = (d?: 'up' | 'down' | 'flat') =>
+  d === 'up' ? '▲' : d === 'down' ? '▼' : '–';
+const colorFor = (label: string, d?: 'up' | 'down' | 'flat') => {
+  // For DOM, "down" is good news. For price/inventory, "up" is the headline.
+  const goodIsDown = label.toLowerCase().includes('days on market');
+  if (!d || d === 'flat') return 'text-white/50';
+  if (goodIsDown) return d === 'down' ? 'text-emerald-400' : 'text-rose-400';
+  return d === 'up' ? 'text-emerald-400' : 'text-rose-400';
+};
+---
+
+<section class="section dark-section">
+  <div class="container">
+    <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Market snapshot</p>
+    <h2 class="accent-underline mb-3">{scope}</h2>
+    <p class="text-white/50 text-sm mb-10">As of {asOf} &middot; Source: {source}</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {kpis.map((k) => (
+        <div class="bg-black border border-white/10 rounded-lg p-8 hover:border-[var(--color-cbgl-blue)] transition-colors">
+          <p class="font-accent text-xs uppercase tracking-[0.2em] text-white/50 mb-3">
+            {k.label}
+          </p>
+          <p class="font-display text-5xl text-white font-bold mb-3">{k.value}</p>
+          {k.delta && (
+            <p class={`text-sm font-accent uppercase tracking-wider ${colorFor(k.label, k.deltaDirection)}`}>
+              {arrowFor(k.deltaDirection)} {k.delta}
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

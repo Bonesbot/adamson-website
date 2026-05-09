@@ -1,0 +1,66 @@
+---
+/**
+ * ComparableProjects — auto-generated row of 3 similar projects.
+ * Per spec §5 section 9: similar by area + price band.
+ *
+ * Picks 3 from `allProjects` excluding currentSlug, preferring same area
+ * and (when present) same island.
+ */
+import ProjectCard from './ProjectCard.astro';
+
+interface Project {
+  slug: string;
+  name: string;
+  tagline?: string;
+  status?: string;
+  price_range?: string;
+  area: string;
+  island?: string | null;
+  card_image?: string;
+}
+
+interface Props {
+  currentSlug: string;
+  currentArea: string;
+  currentIsland?: string | null;
+  allProjects: Project[];
+}
+
+const { currentSlug, currentArea, currentIsland, allProjects } = Astro.props;
+
+// Score: same island > same area > everything else
+const scored = allProjects
+  .filter((p) => p.slug !== currentSlug)
+  .map((p) => {
+    let score = 0;
+    if (currentIsland && p.island === currentIsland) score += 10;
+    if (p.area === currentArea) score += 5;
+    return { project: p, score };
+  })
+  .sort((a, b) => b.score - a.score)
+  .slice(0, 3)
+  .map((x) => x.project);
+---
+
+{scored.length > 0 && (
+  <section class="section dark-section">
+    <div class="container">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">More to consider</p>
+      <h2 class="accent-underline mb-10">Comparable Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {scored.map((p) => (
+          <ProjectCard
+            slug={p.slug}
+            name={p.name}
+            tagline={p.tagline}
+            status={p.status}
+            priceRange={p.price_range}
+            area={p.area}
+            island={p.island}
+            cardImage={p.card_image}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+)}

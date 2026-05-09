@@ -1,0 +1,118 @@
+---
+/**
+ * IslandSubSection — per-island sub-block on the Barrier Islands pillar page.
+ * Per spec §6b: H2 with island as named entity, editorial intro, project
+ * cards (or empty-state message), mini IDX feed, 3-5 island-specific FAQ.
+ *
+ * Carries the long-tail SEO + AEO load. Reads as a complete answer to
+ * "<Island> new construction" even when the project list is empty.
+ */
+import ProjectCard from './ProjectCard.astro';
+import IdxListingGrid from './IdxListingGrid.astro';
+
+interface Project {
+  slug: string;
+  name: string;
+  tagline?: string;
+  status?: string;
+  price_range?: string;
+  area: string;
+  island?: string | null;
+  card_image?: string;
+}
+
+interface Faq { question: string; answer: string; }
+
+interface Props {
+  islandSlug: string;
+  islandName: string;
+  anchor: string;
+  tagline?: string;
+  editorial: string;
+  projects: Project[];
+  islandFaqs: Faq[];
+  /** Drives the per-island IDX feed filter. */
+  zipCodes?: string[];
+  subdivisionKeywords?: string[];
+}
+
+const {
+  islandSlug,
+  islandName,
+  anchor,
+  tagline,
+  editorial,
+  projects,
+  islandFaqs,
+  zipCodes = [],
+  subdivisionKeywords = [],
+} = Astro.props;
+---
+
+<section id={anchor} class="section dark-section-elevated scroll-mt-20">
+  <div class="container">
+    <div class="max-w-3xl mb-10">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Barrier Islands</p>
+      <h2 class="accent-underline mb-4">{islandName} New Construction</h2>
+      {tagline && <p class="text-xl text-white/80 mb-4">{tagline}</p>}
+      <div class="text-white/70 leading-relaxed text-lg whitespace-pre-line">
+        {editorial}
+      </div>
+    </div>
+
+    {projects.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        {projects.map((p) => (
+          <ProjectCard
+            slug={p.slug}
+            name={p.name}
+            tagline={p.tagline}
+            status={p.status}
+            priceRange={p.price_range}
+            area={p.area}
+            island={p.island}
+            cardImage={p.card_image}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="bg-black border border-white/10 rounded-lg p-8 mb-12 text-center">
+        <p class="text-white/70 mb-4">
+          No active new-construction projects on {islandName} at this time. Resale availability through the listings below.
+        </p>
+        <a href="#vip" class="font-accent text-xs uppercase tracking-[0.2em] font-semibold text-[var(--color-gold)] hover:underline">
+          Get notified when a {islandName} project announces &rarr;
+        </a>
+      </div>
+    )}
+
+    <h3 class="font-display text-xl text-white mb-6">Currently for sale on {islandName}</h3>
+    <IdxListingGrid
+      island={islandSlug}
+      zipCodes={zipCodes}
+      subdivisionKeywords={subdivisionKeywords}
+      limit={3}
+    />
+
+    {islandFaqs.length > 0 && (
+      <div class="mt-12">
+        <h3 class="font-display text-xl text-white mb-6">{islandName} FAQ</h3>
+        <div class="space-y-3">
+          {islandFaqs.map((f) => (
+            <details class="group border border-white/10 rounded-lg overflow-hidden bg-black">
+              <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-[var(--color-dark-elevated)] transition-colors">
+                <span class="text-base font-semibold text-white pr-4" style="font-family: var(--font-body);">
+                  {f.question}
+                </span>
+                <span class="text-[var(--color-cbgl-blue-light)] text-xl flex-shrink-0 transition-transform group-open:rotate-45">+</span>
+              </summary>
+              <div class="px-5 pb-5 text-white/60 leading-relaxed">
+                <p>{f.answer}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</section>

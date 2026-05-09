@@ -1,0 +1,82 @@
+---
+/**
+ * LocationBlock — embedded map + walk-to/drive-to callouts.
+ * Per spec §5 section 7. Today the map is a static placeholder.
+ */
+interface Callout {
+  label: string;
+  distance: string;
+  type?: 'walk' | 'drive' | 'bike';
+}
+
+interface Props {
+  address?: string;
+  lat?: number | null;
+  lng?: number | null;
+  callouts?: Callout[];
+}
+
+const {
+  address,
+  lat,
+  lng,
+  callouts = [
+    /* FILL_IN: walk/drive-to anchors specific to this project, e.g.
+       { label: 'St. Armands Circle', distance: '8 min walk', type: 'walk' },
+       { label: 'Lido Beach', distance: '12 min walk', type: 'walk' },
+       { label: 'SRQ International Airport', distance: '14 min drive', type: 'drive' }, */
+  ],
+} = Astro.props;
+
+const iconFor = (type?: 'walk' | 'drive' | 'bike') =>
+  type === 'drive' ? '🚗' : type === 'bike' ? '🚲' : '🚶';
+---
+
+<section class="section dark-section-elevated">
+  <div class="container">
+    <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Location</p>
+    <h2 class="accent-underline mb-3">Where you'll be</h2>
+    {address && <p class="text-white/70 mb-8">{address}</p>}
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Map placeholder -->
+      <div class="lg:col-span-2 bg-black border border-white/10 rounded-lg overflow-hidden">
+        <div class="aspect-[16/10] bg-[var(--color-dark)] flex items-center justify-center">
+          <div class="text-center">
+            <svg class="w-12 h-12 text-white/20 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <p class="font-accent text-xs uppercase tracking-[0.2em] text-white/40">
+              {lat && lng ? `Map @ ${lat}, ${lng}` : 'Map placeholder &mdash; lat/lng FILL_IN in projects.json'}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Callouts -->
+      <div class="bg-black border border-white/10 rounded-lg p-6">
+        <h3 class="font-accent text-xs uppercase tracking-[0.2em] text-white/60 font-semibold mb-4">
+          Nearby
+        </h3>
+        {callouts.length === 0 ? (
+          <p class="text-orange-400/70 italic text-sm">FILL_IN: walk/drive-to callouts in this project's data.</p>
+        ) : (
+          <ul class="space-y-3" role="list">
+            {callouts.map((c) => (
+              <li class="flex items-start justify-between gap-3 text-sm">
+                <span class="text-white">
+                  <span class="mr-2" aria-hidden="true">{iconFor(c.type)}</span>
+                  {c.label}
+                </span>
+                <span class="text-white/50 font-accent text-xs uppercase tracking-wider">
+                  {c.distance}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

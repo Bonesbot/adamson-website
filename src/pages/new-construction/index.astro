@@ -1,0 +1,190 @@
+---
+/**
+ * /new-construction — HUB PAGE (PROTOTYPE — NOT PUBLISHED)
+ *
+ * Composes the 10 sections from spec §4. noIndex + sitemap exclusion +
+ * draft banner triple-gate this against accidental publication.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import DraftBanner from '@/components/newconstruction/DraftBanner.astro';
+import Hero from '@/components/newconstruction/Hero.astro';
+import TrustBar from '@/components/newconstruction/TrustBar.astro';
+import ProjectMap from '@/components/newconstruction/ProjectMap.astro';
+import ProjectComparisonTable from '@/components/newconstruction/ProjectComparisonTable.astro';
+import AreaSection from '@/components/newconstruction/AreaSection.astro';
+import IdxListingGrid from '@/components/newconstruction/IdxListingGrid.astro';
+import MarketDataKpis from '@/components/newconstruction/MarketDataKpis.astro';
+import MarketTrendChart from '@/components/newconstruction/MarketTrendChart.astro';
+import WhyRyanBlock from '@/components/newconstruction/WhyRyanBlock.astro';
+import FAQSchema from '@/components/seo/FAQSchema.astro';
+import SchedulerEmbed from '@/components/newconstruction/SchedulerEmbed.astro';
+import VipForm from '@/components/newconstruction/VipForm.astro';
+import RelatedContent from '@/components/newconstruction/RelatedContent.astro';
+import StickyMobileCta from '@/components/newconstruction/StickyMobileCta.astro';
+import DisclosureFooter from '@/components/newconstruction/DisclosureFooter.astro';
+import projectsData from '@/data/newconstruction/projects.json';
+import faqData from '@/data/newconstruction/faq.json';
+
+const projects = projectsData.projects;
+const downtownProjects = projects.filter((p) => p.area === 'downtown-sarasota');
+const islandProjects = projects.filter((p) => p.area === 'barrier-islands');
+
+const pins = projects.map((p) => ({
+  slug: p.slug,
+  name: p.name,
+  area: p.area,
+  island: p.island,
+  status: p.status,
+  lat: p.lat,
+  lng: p.lng,
+}));
+
+const description =
+  "Sarasota's luxury new-construction hub: 8 active projects across Downtown Sarasota and the barrier islands (Lido, Longboat, Siesta), with live availability, pricing, and pre-construction VIP access.";
+
+// JSON-LD per spec §13: hub page = CollectionPage + Place(s) + RealEstateAgent + FAQPage + BreadcrumbList
+const jsonLd: Record<string, any>[] = [
+  {
+    '@type': 'CollectionPage',
+    name: "Sarasota's Luxury New Construction",
+    description,
+    url: 'https://adamsonfl.com/new-construction',
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: projects.map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'Place',
+          name: p.name,
+          url: `https://adamsonfl.com/new-construction/${p.slug}`,
+        },
+      })),
+    },
+  },
+  // Per spec §13: all four named entities even though only two pillar pages exist
+  { '@type': 'Place', name: 'Downtown Sarasota', address: { '@type': 'PostalAddress', addressLocality: 'Sarasota', addressRegion: 'FL', addressCountry: 'US' } },
+  { '@type': 'Place', name: 'Lido Key', address: { '@type': 'PostalAddress', addressLocality: 'Sarasota', addressRegion: 'FL', addressCountry: 'US' } },
+  { '@type': 'Place', name: 'Longboat Key', address: { '@type': 'PostalAddress', addressLocality: 'Longboat Key', addressRegion: 'FL', addressCountry: 'US' } },
+  { '@type': 'Place', name: 'Siesta Key', address: { '@type': 'PostalAddress', addressLocality: 'Sarasota', addressRegion: 'FL', addressCountry: 'US' } },
+  {
+    '@type': 'RealEstateAgent',
+    name: 'Ryan Adamson',
+    url: 'https://adamsonfl.com',
+    jobTitle: 'Luxury Real Estate Agent',
+    worksFor: { '@type': 'RealEstateOrganization', name: 'Coldwell Banker Realty — St. Armands' },
+    hasCredential: [
+      { '@type': 'EducationalOccupationalCredential', name: 'Certified Luxury Home Marketing Specialist (CLHMS)' },
+      { '@type': 'EducationalOccupationalCredential', name: 'Million Dollar Guild' },
+    ],
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: faqData.faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://adamsonfl.com/' },
+      { '@type': 'ListItem', position: 2, name: 'New Construction', item: 'https://adamsonfl.com/new-construction' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Luxury New Construction in Sarasota"
+  description={description}
+  canonicalUrl="https://adamsonfl.com/new-construction"
+  jsonLd={jsonLd}
+  noIndex={true}
+>
+  <DraftBanner />
+
+  <!-- 1. Hero -->
+  <Hero
+    eyebrow="New Construction Hub"
+    headline="Sarasota's Luxury New Construction — From Pre-Construction to Move-In Ready"
+    subhead="FILL_IN: 1-sentence subhead in Ryan's voice — what makes this hub the authoritative source for Sarasota new-construction buyers right now."
+    primaryCtaLabel="Book a Private Tour"
+    primaryCtaHref="#schedule"
+    secondaryCtaLabel="Join the VIP List"
+    secondaryCtaHref="#vip"
+    image="/images/new-construction/hub-hero.jpg"
+    tall={true}
+  />
+
+  <!-- 1b. Trust strip -->
+  <TrustBar />
+
+  <!-- 2. Interactive map -->
+  <ProjectMap pins={pins} />
+
+  <!-- 3. At-a-glance comparison table -->
+  <ProjectComparisonTable projects={projects} />
+
+  <!-- 4a. Downtown Sarasota area block -->
+  <AreaSection
+    eyebrow="Downtown Sarasota"
+    heading="Downtown Sarasota"
+    intro="FILL_IN: 1-paragraph editorial intro to Downtown Sarasota new construction in Ryan's voice. Cover what's been built since 2020, what's currently in pre-construction, the price range, who's buying, and what differentiates downtown from the islands as a buying decision."
+    projects={downtownProjects.slice(0, 3)}
+    viewAllHref="/new-construction/downtown-sarasota"
+    variant="dark"
+  />
+
+  <!-- 4b. Barrier Islands area block -->
+  <AreaSection
+    eyebrow="Barrier Islands"
+    heading="Barrier Islands"
+    intro="FILL_IN: 1-paragraph editorial intro covering Lido, Longboat, and Siesta as a single barrier-island market. Note Rosewood is the only confirmed full-build Phase-1 project; mention what's in pre-development on Longboat and the resale-driven nature of Siesta."
+    projects={islandProjects.length > 0 ? islandProjects.slice(0, 3) : downtownProjects.slice(0, 3)}
+    viewAllHref="/new-construction/barrier-islands"
+    variant="elevated"
+  />
+
+  <!-- 5. Active listings (IDX) -->
+  <section class="section dark-section">
+    <div class="container">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Currently available</p>
+      <h2 class="accent-underline mb-3">Currently Available in Sarasota New Construction</h2>
+      <p class="text-white/60 mb-10 max-w-2xl">
+        Live MLS listings filtered to the 8 projects in the comparison table above.
+      </p>
+      <IdxListingGrid heading="" limit={6} />
+      <a href="#vip" class="inline-block mt-8 font-accent text-sm uppercase tracking-[0.15em] font-semibold text-[var(--color-cbgl-blue-light)] hover:text-[var(--color-gold)]">
+        View all active listings &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- 6. Market data snapshot -->
+  <MarketDataKpis />
+  <MarketTrendChart />
+
+  <!-- 7. Why Ryan -->
+  <WhyRyanBlock />
+
+  <!-- 8. FAQ -->
+  <FAQSchema
+    faqs={faqData.faqs}
+    heading="Sarasota New Construction FAQ"
+  />
+
+  <!-- 9. Booking + VIP form -->
+  <SchedulerEmbed />
+  <VipForm />
+
+  <!-- 10. Related editorial -->
+  <RelatedContent />
+
+  <!-- Sticky mobile CTA -->
+  <StickyMobileCta />
+
+  <!-- Disclosures -->
+  <DisclosureFooter showListingAttribution={true} showFactAttribution={true} />
+</BaseLayout>

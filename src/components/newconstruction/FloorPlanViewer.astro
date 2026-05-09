@@ -1,0 +1,59 @@
+---
+/**
+ * FloorPlanViewer — PLACEHOLDER PDF/PNG floor-plan gallery.
+ * Per spec §5 section 5: each plan shows name, sqft, beds/baths, $price,
+ * and an "Inquire about this residence" button.
+ */
+interface Plan {
+  name: string;
+  sqft?: string | number;
+  beds?: string | number;
+  baths?: string | number;
+  price?: string;
+  thumbnail?: string;
+  pdf?: string;
+}
+
+interface Props {
+  plans?: Plan[];
+}
+
+const { plans = [] } = Astro.props;
+---
+
+<section class="section dark-section-elevated">
+  <div class="container">
+    <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Floor plans</p>
+    <h2 class="accent-underline mb-10">Available Residences</h2>
+
+    {plans.length === 0 ? (
+      <div class="bg-black border border-white/10 rounded-lg p-12 text-center">
+        <p class="text-orange-400/70 italic mb-2">FILL_IN: floor plan PDFs/images.</p>
+        <p class="text-white/50 text-sm">
+          Per spec §5 section 5: each plan needs name, sqft, beds/baths, price,
+          and an "Inquire" CTA. Developer-supplied with permission, manually uploaded.
+        </p>
+      </div>
+    ) : (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {plans.map((p) => (
+          <article class="bg-black border border-white/10 rounded-lg overflow-hidden">
+            <div class="aspect-[4/3] bg-[var(--color-charcoal)] bg-cover bg-center" style={p.thumbnail ? `background-image: url('${p.thumbnail}')` : ''} />
+            <div class="p-5">
+              <h3 class="font-display text-xl text-white mb-2">{p.name}</h3>
+              <div class="flex items-center gap-3 text-xs text-white/60 font-accent uppercase tracking-wider mb-3">
+                {p.beds && <span>{p.beds} BD</span>}
+                {p.baths && <><span>&middot;</span><span>{p.baths} BA</span></>}
+                {p.sqft && <><span>&middot;</span><span>{p.sqft} sqft</span></>}
+              </div>
+              {p.price && <p class="text-[var(--color-gold)] font-semibold mb-4">{p.price}</p>}
+              <a href="#schedule" class="block text-center font-accent text-xs uppercase tracking-[0.15em] bg-[var(--color-cbgl-blue)] text-white px-4 py-2 rounded hover:bg-[var(--color-cbgl-blue-light)]">
+                Inquire about this residence
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
+  </div>
+</section>

@@ -1,0 +1,106 @@
+---
+/**
+ * ProjectComparisonTable — sortable, sticky-header table.
+ * Per spec §4 section 3: "Critical for AEO — AI engines lift tables verbatim."
+ *
+ * Sortable via lightweight client JS. No external deps.
+ * Renders a hidden plain-text caption that AI crawlers can extract cleanly.
+ */
+interface Project {
+  slug: string;
+  name: string;
+  area: string;
+  island?: string | null;
+  status?: string;
+  total_residences?: string | number;
+  price_range?: string;
+  estimated_completion?: string;
+  developer?: string;
+}
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+
+const areaLabel = (area: string, island: string | null | undefined) =>
+  area === 'downtown-sarasota' ? 'Downtown Sarasota' :
+  island ? island.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()) :
+  'Barrier Islands';
+---
+
+<section class="section dark-section-elevated">
+  <div class="container">
+    <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">At a glance</p>
+    <h2 class="accent-underline mb-8">Compare All Projects</h2>
+
+    <div class="overflow-x-auto rounded-lg border border-white/10 bg-black">
+      <table class="w-full text-left text-sm" id="project-comparison-table">
+        <caption class="sr-only">
+          Comparison of luxury new-construction projects in Sarasota and the barrier islands, including area, status, residence count, starting price, completion year, and developer.
+        </caption>
+        <thead class="bg-[var(--color-dark)] text-white">
+          <tr class="font-accent text-xs uppercase tracking-[0.15em]">
+            <th class="px-4 py-4 cursor-pointer hover:text-[var(--color-gold)]" data-sort="name">Project &uarr;&darr;</th>
+            <th class="px-4 py-4 cursor-pointer hover:text-[var(--color-gold)]" data-sort="area">Area &uarr;&darr;</th>
+            <th class="px-4 py-4 cursor-pointer hover:text-[var(--color-gold)]" data-sort="status">Status &uarr;&darr;</th>
+            <th class="px-4 py-4 cursor-pointer hover:text-[var(--color-gold)] text-right" data-sort="residences">Residences &uarr;&darr;</th>
+            <th class="px-4 py-4 cursor-pointer hover:text-[var(--color-gold)]" data-sort="price">Price From &uarr;&darr;</th>
+            <th class="px-4 py-4 cursor-pointer hover:text-[var(--color-gold)]" data-sort="completion">Completion &uarr;&darr;</th>
+            <th class="px-4 py-4 cursor-pointer hover:text-[var(--color-gold)]" data-sort="developer">Developer &uarr;&darr;</th>
+          </tr>
+        </thead>
+        <tbody class="text-white/80">
+          {projects.map((p) => (
+            <tr class="border-t border-white/5 hover:bg-[var(--color-dark)] transition-colors">
+              <td class="px-4 py-4 font-semibold">
+                <a href={`/new-construction/${p.slug}`} class="text-white hover:text-[var(--color-gold)]">
+                  {p.name}
+                </a>
+              </td>
+              <td class="px-4 py-4 text-white/60">{areaLabel(p.area, p.island)}</td>
+              <td class="px-4 py-4">
+                <span class="inline-block bg-[var(--color-cbgl-blue)]/20 text-[var(--color-cbgl-blue-light)] font-accent text-[10px] uppercase tracking-wider px-2 py-1 rounded">
+                  {p.status || 'FILL_IN'}
+                </span>
+              </td>
+              <td class="px-4 py-4 text-right text-white/60">{p.total_residences || '—'}</td>
+              <td class="px-4 py-4 text-[var(--color-gold)] font-semibold">{p.price_range || '—'}</td>
+              <td class="px-4 py-4 text-white/60">{p.estimated_completion || '—'}</td>
+              <td class="px-4 py-4 text-white/60">{p.developer || '—'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Lightweight sort — header click reorders rows. No external deps.
+  const table = document.getElementById('project-comparison-table') as HTMLTableElement | null;
+  if (table) {
+    const tbody = table.querySelector('tbody')!;
+    const getKey = (row: HTMLTableRowElement, idx: number) =>
+      (row.cells[idx]?.textContent || '').trim().toLowerCase();
+    const headers = table.querySelectorAll<HTMLTableCellElement>('thead th[data-sort]');
+    headers.forEach((th, idx) => {
+      let asc = true;
+      th.addEventListener('click', () => {
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        rows.sort((a, b) => {
+          const ka = getKey(a as HTMLTableRowElement, idx);
+          const kb = getKey(b as HTMLTableRowElement, idx);
+          // Numeric sort if both look like numbers
+          const na = parseFloat(ka.replace(/[^\d.]/g, ''));
+          const nb = parseFloat(kb.replace(/[^\d.]/g, ''));
+          if (!isNaN(na) && !isNaN(nb)) return asc ? na - nb : nb - na;
+          return asc ? ka.localeCompare(kb) : kb.localeCompare(ka);
+        });
+        asc = !asc;
+        rows.forEach((r) => tbody.appendChild(r));
+      });
+    });
+  }
+</script>

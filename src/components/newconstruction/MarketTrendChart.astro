@@ -1,0 +1,65 @@
+---
+/**
+ * MarketTrendChart — PLACEHOLDER for the 24-month trend chart (spec §4 section 6).
+ *
+ * Today: renders a series toggle stub with a colored panel. The hub page
+ * wants Downtown vs each barrier island toggles.
+ *
+ * To wire: drop in Chart.js, Recharts, or a static D3/SVG render of
+ * monthly median $/sqft pulled from vw_market_trends_monthly in Supabase.
+ */
+interface Series {
+  label: string;
+  /** Color token for the series in the legend. */
+  color: string;
+}
+
+interface Props {
+  series?: Series[];
+  range?: string;
+}
+
+const {
+  series = [
+    { label: 'Downtown Sarasota', color: 'var(--color-cbgl-blue-light)' },
+    { label: 'Lido Key', color: 'var(--color-gold)' },
+    { label: 'Longboat Key', color: '#6FB1FC' },
+    { label: 'Siesta Key', color: '#E8D5A3' },
+  ],
+  range = '24 months',
+} = Astro.props;
+---
+
+<section class="section dark-section-elevated">
+  <div class="container">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+      <div>
+        <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Trend</p>
+        <h2 class="accent-underline">Median $/sqft &mdash; trailing {range}</h2>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        {series.map((s) => (
+          <span class="inline-flex items-center gap-2 text-xs text-white/70 font-accent uppercase tracking-wider">
+            <span class="w-3 h-3 rounded-full" style={`background-color: ${s.color};`} aria-hidden="true"></span>
+            {s.label}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <div class="bg-black border border-white/10 rounded-lg p-8">
+      <div class="aspect-[16/7] bg-[var(--color-dark)] rounded flex items-center justify-center relative overflow-hidden">
+        <!-- Decorative trend lines for visual placeholder -->
+        <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 400 180">
+          <polyline points="0,140 40,135 80,120 120,118 160,100 200,95 240,80 280,75 320,65 360,55 400,50" fill="none" stroke="var(--color-cbgl-blue-light)" stroke-width="2" opacity="0.6" />
+          <polyline points="0,150 40,145 80,140 120,130 160,128 200,120 240,118 280,110 320,108 360,100 400,95" fill="none" stroke="var(--color-gold)" stroke-width="2" opacity="0.6" />
+          <polyline points="0,155 40,150 80,148 120,145 160,140 200,138 240,135 280,128 320,125 360,120 400,118" fill="none" stroke="#6FB1FC" stroke-width="2" opacity="0.6" />
+          <polyline points="0,160 40,158 80,155 120,152 160,150 200,148 240,145 280,142 320,138 360,135 400,130" fill="none" stroke="#E8D5A3" stroke-width="2" opacity="0.6" />
+        </svg>
+        <p class="relative z-10 font-accent text-xs uppercase tracking-[0.2em] text-white/40 bg-black/60 px-4 py-2 rounded">
+          Chart.js / Recharts placeholder &mdash; wire to vw_market_trends_monthly
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

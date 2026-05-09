@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "purpose": "Maps the three barrier islands to the MLS area / subdivision / postal code values used by IdxListingGrid to filter Stellar MLS listings to that island. Per spec §6b, these values drive the per-island IDX feeds inside the Barrier Islands pillar page.",
+    "note": "Once Ryan confirms the actual MLS Area Major / Area Minor values used by Stellar for each island, replace the FILL_IN_MLS_AREA arrays. Postal codes are seeded from the existing src/data/areas.json."
+  },
+  "islands": [
+    {
+      "slug": "lido-key",
+      "name": "Lido Key",
+      "anchor": "lido-key",
+      "tagline": "FILL_IN: 1-sentence island positioning in Ryan's voice",
+      "editorial": "FILL_IN: 250-400 words on Lido Key as a buying decision specifically — proximity to St. Armands Circle, Gulf vs bay orientation, beachfront condo character, who's buying, what compares well, what to know about flood zones and rebuilding standards. Reads as a complete answer to 'Lido Key new construction' even when the project list is empty.",
+      "zip_codes": ["34236"],
+      "mls_area_majors": ["FILL_IN_MLS_AREA: e.g. 'Sarasota'"],
+      "mls_area_minors": ["FILL_IN_MLS_AREA: e.g. 'Lido Key'"],
+      "subdivision_keywords": ["Lido", "Lido Beach", "Lido Shores"],
+      "lat_center": 27.31,
+      "lng_center": -82.575,
+      "island_faqs": [
+        { "question": "FILL_IN: e.g. 'Is there new construction on Lido Key right now?'", "answer": "FILL_IN: 50-120 words. Date-stamp." },
+        { "question": "FILL_IN", "answer": "FILL_IN" },
+        { "question": "FILL_IN", "answer": "FILL_IN" }
+      ]
+    },
+    {
+      "slug": "longboat-key",
+      "name": "Longboat Key",
+      "anchor": "longboat-key",
+      "tagline": "FILL_IN: 1-sentence island positioning",
+      "editorial": "FILL_IN: 250-400 words. Longboat is the 10-mile barrier island stretching to Anna Maria — gulf-to-bay properties, the country club / resort core mid-island, the quieter north-end estates, the south-end proximity to St. Armands. Cover the building-height regulations that have constrained new construction here historically, and what is currently in pre-development. Reads as a complete answer even when the project list is empty.",
+      "zip_codes": ["34228"],
+      "mls_area_majors": ["FILL_IN_MLS_AREA"],
+      "mls_area_minors": ["FILL_IN_MLS_AREA: e.g. 'Longboat Key'"],
+      "subdivision_keywords": ["Longboat", "Bay Isles", "Harbourside", "Sleepy Lagoon"],
+      "lat_center": 27.385,
+      "lng_center": -82.643,
+      "island_faqs": [
+        { "question": "FILL_IN", "answer": "FILL_IN" },
+        { "question": "FILL_IN", "answer": "FILL_IN" },
+        { "question": "FILL_IN", "answer": "FILL_IN" }
+      ]
+    },
+    {
+      "slug": "siesta-key",
+      "name": "Siesta Key",
+      "anchor": "siesta-key",
+      "tagline": "FILL_IN: 1-sentence positioning",
+      "editorial": "FILL_IN: 250-400 words on Siesta as a luxury new-construction destination — quartz-sand beaches, Siesta Village vs Crescent Beach vs Turtle Beach, the rental-economics pull (vacation rental allowances differ from Lido and Longboat), and the resale-vs-new dynamic. Reads as a complete answer even when the project list is empty.",
+      "zip_codes": ["34242"],
+      "mls_area_majors": ["FILL_IN_MLS_AREA"],
+      "mls_area_minors": ["FILL_IN_MLS_AREA: e.g. 'Siesta Key'"],
+      "subdivision_keywords": ["Siesta", "Crescent Beach", "Turtle Beach", "Sanderling"],
+      "lat_center": 27.265,
+      "lng_center": -82.55,
+      "island_faqs": [
+        { "question": "FILL_IN", "answer": "FILL_IN" },
+        { "question": "FILL_IN", "answer": "FILL_IN" },
+        { "question": "FILL_IN", "answer": "FILL_IN" }
+      ]
+    }
+  ]
+}

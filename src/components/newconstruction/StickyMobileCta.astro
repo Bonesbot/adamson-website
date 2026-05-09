@@ -1,0 +1,22 @@
+---
+/**
+ * StickyMobileCta — persistent bottom-of-viewport CTA on mobile only.
+ * Per spec §4: "Sticky bottom-of-viewport 'Book a Tour' button on mobile."
+ */
+interface Props {
+  label?: string;
+  href?: string;
+}
+
+const { label = 'Book a Private Tour', href = '#schedule' } = Astro.props;
+---
+
+<a
+  href={href}
+  class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-gold)] text-black text-center font-accent text-sm uppercase tracking-[0.15em] font-semibold py-4 shadow-lg shadow-black/50"
+>
+  {label}
+</a>
+
+<!-- Spacer so footer content isn't hidden behind the sticky CTA on mobile -->
+<div class="md:hidden h-16" aria-hidden="true"></div>

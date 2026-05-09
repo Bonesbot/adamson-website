@@ -1,0 +1,46 @@
+---
+/**
+ * DisclosureFooter — fair housing + IDX attribution + accuracy disclaimer.
+ * Per spec §5 (project page) and §9 (compliance). Required on every page
+ * displaying listings or developer-sourced facts.
+ */
+interface Props {
+  /** Show only the listing-data attribution (Stellar MLS) — for pages with IDX feed. */
+  showListingAttribution?: boolean;
+  /** Show the developer-fact attribution — for project / area pages. */
+  showFactAttribution?: boolean;
+  /** Date last verified — used in fact attribution line. */
+  lastVerified?: string;
+}
+
+const {
+  showListingAttribution = true,
+  showFactAttribution = false,
+  lastVerified,
+} = Astro.props;
+---
+
+<section class="bg-black border-t border-white/10">
+  <div class="container py-8 text-xs text-white/40 leading-relaxed space-y-3">
+    <p>
+      All information contained on this page is deemed reliable but not guaranteed.
+      All properties and project details are subject to prior sale, change, or withdrawal without notice.
+      Square footage, residence counts, pricing, and completion timelines are approximate and subject to change.
+    </p>
+    {showListingAttribution && (
+      <p>
+        Listing data sourced from Stellar MLS. Listings courtesy of cooperating brokerages.
+        IDX information provided exclusively for consumers' personal, non-commercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing.
+      </p>
+    )}
+    {showFactAttribution && (
+      <p>
+        Project facts {lastVerified ? <>last verified <strong class="text-white/60">{lastVerified}</strong></> : 'compiled'} from publicly available developer marketing materials.
+        Listing data: Stellar MLS.
+      </p>
+    )}
+    <p class="text-white/30">
+      Equal Housing Opportunity. Adamson Group at Coldwell Banker Realty &mdash; St. Armands. Each office is independently owned and operated.
+    </p>
+  </div>
+</section>

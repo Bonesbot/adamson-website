@@ -1,0 +1,95 @@
+---
+/**
+ * VipForm — VIP list email capture (spec §9 lead capture).
+ * Wired to Netlify Forms via data-netlify="true" attribute.
+ * Includes honeypot anti-spam, GDPR consent checkbox, and interest checkboxes
+ * for Downtown / Lido / Longboat / Siesta.
+ */
+interface Props {
+  /** Anchor id for #vip links. */
+  id?: string;
+}
+
+const { id = 'vip' } = Astro.props;
+---
+
+<section id={id} class="section dark-section scroll-mt-20">
+  <div class="container">
+    <div class="max-w-2xl mx-auto bg-black border border-white/10 rounded-lg p-8 md:p-12">
+      <p class="section-label text-[var(--color-gold)] mb-3">VIP List</p>
+      <h2 class="font-display text-3xl text-white mb-3" style="line-height: 1.2;">
+        Get on the list before launch
+      </h2>
+      <p class="text-white/70 mb-8 leading-relaxed">
+        Pre-construction releases, pricing, and reservation windows often clear before they hit public listings. Get notified directly when a project that fits your interests opens.
+      </p>
+
+      <form
+        name="new-construction-vip"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        class="space-y-5"
+      >
+        <input type="hidden" name="form-name" value="new-construction-vip" />
+        <p class="hidden">
+          <label>Don't fill this out: <input name="bot-field" /></label>
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="vip-name" class="block text-xs font-accent uppercase tracking-wider text-white/60 mb-2">First Name</label>
+            <input
+              id="vip-name"
+              type="text"
+              name="firstName"
+              required
+              class="w-full bg-[var(--color-dark)] border border-white/10 rounded px-4 py-3 text-white placeholder-white/30 focus:border-[var(--color-cbgl-blue-light)] focus:outline-none"
+            />
+          </div>
+          <div>
+            <label for="vip-email" class="block text-xs font-accent uppercase tracking-wider text-white/60 mb-2">Email</label>
+            <input
+              id="vip-email"
+              type="email"
+              name="email"
+              required
+              class="w-full bg-[var(--color-dark)] border border-white/10 rounded px-4 py-3 text-white placeholder-white/30 focus:border-[var(--color-cbgl-blue-light)] focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <fieldset>
+          <legend class="block text-xs font-accent uppercase tracking-wider text-white/60 mb-3">I'm interested in</legend>
+          <div class="grid grid-cols-2 gap-3">
+            {[
+              { value: 'downtown-sarasota', label: 'Downtown Sarasota' },
+              { value: 'lido-key', label: 'Lido Key' },
+              { value: 'longboat-key', label: 'Longboat Key' },
+              { value: 'siesta-key', label: 'Siesta Key' },
+            ].map((opt) => (
+              <label class="flex items-center gap-3 cursor-pointer text-white/80 hover:text-white">
+                <input type="checkbox" name="interest" value={opt.value} class="accent-[var(--color-gold)]" />
+                <span class="text-sm">{opt.label}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <label class="flex items-start gap-3 cursor-pointer text-white/60 text-sm">
+          <input type="checkbox" name="consent" required class="mt-1 accent-[var(--color-gold)]" />
+          <span>
+            I agree to receive emails about new-construction releases from Adamson Group. Unsubscribe anytime.
+          </span>
+        </label>
+
+        <button
+          type="submit"
+          class="w-full font-accent text-xs uppercase tracking-[0.2em] font-semibold bg-[var(--color-gold)] text-black px-6 py-4 rounded hover:bg-[var(--color-gold-light)] transition-colors"
+        >
+          Add me to the VIP list
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

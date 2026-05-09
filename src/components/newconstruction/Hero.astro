@@ -1,0 +1,87 @@
+---
+/**
+ * Hero — full-bleed image hero with section label, headline, subhead,
+ * dual CTAs, and optional trust strip. Mirrors the existing site's
+ * hero treatment (dark gradient overlay, Playfair display headline).
+ *
+ * Used by hub, area pillar, and project pages. Variant via props.
+ */
+import Button from '@/components/ui/Button.astro';
+
+interface Props {
+  /** Background image URL. Falls back to a colored block. */
+  image?: string;
+  /** Small uppercase label above the headline (e.g. "New Construction Hub"). */
+  eyebrow?: string;
+  /** H1 headline. */
+  headline: string;
+  /** 1-sentence subhead in Ryan's voice. */
+  subhead?: string;
+  /** Primary CTA — usually "Book a Private Tour". */
+  primaryCtaLabel?: string;
+  primaryCtaHref?: string;
+  /** Secondary CTA — usually "Join the Pre-Construction VIP List". */
+  secondaryCtaLabel?: string;
+  secondaryCtaHref?: string;
+  /** Optional trust-strip items rendered below CTAs (CLHMS, Million Dollar Guild, years, volume). */
+  trustItems?: string[];
+  /** Tall variant for hub page. */
+  tall?: boolean;
+}
+
+const {
+  image,
+  eyebrow,
+  headline,
+  subhead,
+  primaryCtaLabel = 'Book a Private Tour',
+  primaryCtaHref = '#schedule',
+  secondaryCtaLabel = 'Join the VIP List',
+  secondaryCtaHref = '#vip',
+  trustItems = [],
+  tall = false,
+} = Astro.props;
+
+const bgStyle = image
+  ? `background-image: url('${image}'); background-color: var(--color-black);`
+  : `background-color: var(--color-black-soft);`;
+---
+
+<section class:list={['relative overflow-hidden', tall ? 'pt-32 pb-32 md:pt-48 md:pb-40' : 'pt-32 pb-24']}>
+  <div class="absolute inset-0 bg-cover bg-center" style={bgStyle} />
+  <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/90" />
+
+  <div class="relative z-10 container">
+    {eyebrow && (
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-4">{eyebrow}</p>
+    )}
+    <h1 class="font-display text-white mb-4 max-w-4xl" style="line-height: 1.1;">
+      {headline}
+    </h1>
+    {subhead && (
+      <p class="text-lg md:text-xl text-white/75 max-w-2xl leading-relaxed mb-8">
+        {subhead}
+      </p>
+    )}
+
+    <div class="flex flex-col sm:flex-row gap-4">
+      <Button href={primaryCtaHref} variant="primary" size="lg">
+        {primaryCtaLabel}
+      </Button>
+      <Button href={secondaryCtaHref} variant="outline" size="lg">
+        {secondaryCtaLabel}
+      </Button>
+    </div>
+
+    {trustItems.length > 0 && (
+      <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-white/60">
+        {trustItems.map((item, i) => (
+          <>
+            {i > 0 && <span class="text-white/20">|</span>}
+            <span class="font-accent text-xs uppercase tracking-[0.15em]">{item}</span>
+          </>
+        ))}
+      </div>
+    )}
+  </div>
+</section>

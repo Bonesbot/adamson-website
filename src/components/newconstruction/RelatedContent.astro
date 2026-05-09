@@ -1,0 +1,41 @@
+---
+/**
+ * RelatedContent — 3 most recent blog posts tagged "new-construction".
+ * Per spec §4 section 10. Today: stub cards; wire to Sanity content
+ * collection or src/content/ collection later.
+ */
+interface Props {
+  tag?: string;
+  limit?: number;
+}
+
+const { tag = 'new-construction', limit = 3 } = Astro.props;
+
+// Stub content — replace with Astro content collection / Sanity query
+const stub = [
+  { slug: 'sarasota-pre-construction-2026-q2-update', title: 'FILL_IN: e.g. "Sarasota Pre-Construction — Q2 2026 Update"', excerpt: 'FILL_IN: 1-sentence excerpt.', date: 'FILL_IN' },
+  { slug: 'how-to-evaluate-developer-reputation', title: 'FILL_IN: e.g. "How to Evaluate a Sarasota Developer Before You Reserve"', excerpt: 'FILL_IN', date: 'FILL_IN' },
+  { slug: 'florida-condo-fees-after-sb-4d', title: 'FILL_IN: e.g. "What SB 4-D Means for HOA Fees on New Sarasota Buildings"', excerpt: 'FILL_IN', date: 'FILL_IN' },
+];
+---
+
+<section class="section dark-section-elevated">
+  <div class="container">
+    <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">From the journal</p>
+    <h2 class="accent-underline mb-10">Related Reading</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {stub.slice(0, limit).map((post) => (
+        <a href={`/market-reports/${post.slug}`} class="block bg-black border border-white/10 rounded-lg p-6 hover:border-[var(--color-cbgl-blue)] transition-colors group">
+          <p class="font-accent text-[10px] uppercase tracking-[0.2em] text-white/40 mb-2">{post.date}</p>
+          <h3 class="font-display text-lg text-white mb-3 group-hover:text-[var(--color-gold-light)]">{post.title}</h3>
+          <p class="text-sm text-white/60 leading-relaxed">{post.excerpt}</p>
+        </a>
+      ))}
+    </div>
+
+    <p class="mt-8 text-xs text-white/30 font-accent uppercase tracking-wider">
+      STUB &mdash; wire to Astro content collection or Sanity query filtered by tag: {tag}
+    </p>
+  </div>
+</section>

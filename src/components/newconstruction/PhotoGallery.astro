@@ -1,0 +1,65 @@
+---
+/**
+ * PhotoGallery — photo gallery with provenance support per spec §11.
+ * Today: simple grid. Lightbox can be added later (e.g. via PhotoSwipe).
+ *
+ * Each image accepts the spec §11 metadata model fields. If photo_credit_required
+ * is true and credit text is missing, surfaces an admin-only warning rather than
+ * publishing without credit.
+ */
+interface Photo {
+  src: string;
+  alt: string;
+  caption?: string;
+  photo_credit_required?: boolean;
+  photo_credit_text?: string;
+}
+
+interface Props {
+  photos?: Photo[];
+}
+
+const { photos = [] } = Astro.props;
+---
+
+<section class="section dark-section">
+  <div class="container">
+    <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Gallery</p>
+    <h2 class="accent-underline mb-10">Inside the Building</h2>
+
+    {photos.length === 0 ? (
+      <div class="bg-black border border-white/10 rounded-lg p-12 text-center">
+        <p class="text-orange-400/70 italic mb-2">FILL_IN: photo gallery.</p>
+        <p class="text-white/50 text-sm max-w-xl mx-auto">
+          Per spec &sect;11: every image must carry full provenance metadata
+          (source_type, source_party, permission_reference, approved_uses) before
+          it can publish. Owned shoots recommended for full-build projects.
+        </p>
+      </div>
+    ) : (
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        {photos.map((p) => {
+          const missingCredit = p.photo_credit_required && !p.photo_credit_text;
+          return (
+            <figure class="relative group">
+              {missingCredit ? (
+                <div class="aspect-square bg-orange-900/30 border border-orange-500/40 rounded p-4 text-center flex items-center justify-center">
+                  <p class="text-xs text-orange-300">Image withheld &mdash; missing photo credit</p>
+                </div>
+              ) : (
+                <>
+                  <img src={p.src} alt={p.alt} loading="lazy" class="w-full aspect-square object-cover rounded" />
+                  {p.photo_credit_required && p.photo_credit_text && (
+                    <figcaption class="absolute bottom-1 right-1 text-[10px] text-white/70 bg-black/60 px-2 py-0.5 rounded">
+                      Photo: {p.photo_credit_text}
+                    </figcaption>
+                  )}
+                </>
+              )}
+            </figure>
+          );
+        })}
+      </div>
+    )}
+  </div>
+</section>

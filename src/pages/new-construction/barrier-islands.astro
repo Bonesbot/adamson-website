@@ -1,0 +1,160 @@
+---
+/**
+ * /new-construction/barrier-islands — BARRIER ISLANDS PILLAR (PROTOTYPE)
+ *
+ * Multi-area template per spec §6b. Anchored sub-sections #lido-key,
+ * #longboat-key, #siesta-key. Each island sub-section is fully named
+ * and editorial-complete in Phase 1 EVEN WHEN the project list is empty,
+ * so the island as an entity exists for SEO/AEO.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import DraftBanner from '@/components/newconstruction/DraftBanner.astro';
+import BreadcrumbNav from '@/components/newconstruction/BreadcrumbNav.astro';
+import Hero from '@/components/newconstruction/Hero.astro';
+import ProjectMap from '@/components/newconstruction/ProjectMap.astro';
+import ProjectCard from '@/components/newconstruction/ProjectCard.astro';
+import IslandSubSection from '@/components/newconstruction/IslandSubSection.astro';
+import MarketDataKpis from '@/components/newconstruction/MarketDataKpis.astro';
+import FAQSchema from '@/components/seo/FAQSchema.astro';
+import SchedulerEmbed from '@/components/newconstruction/SchedulerEmbed.astro';
+import StickyMobileCta from '@/components/newconstruction/StickyMobileCta.astro';
+import DisclosureFooter from '@/components/newconstruction/DisclosureFooter.astro';
+import projectsData from '@/data/newconstruction/projects.json';
+import islandsData from '@/data/newconstruction/islands.json';
+
+const projects = projectsData.projects.filter((p) => p.area === 'barrier-islands');
+const pins = projects.map((p) => ({
+  slug: p.slug, name: p.name, area: p.area, island: p.island, status: p.status, lat: p.lat, lng: p.lng,
+}));
+
+const description =
+  "Luxury new-construction projects on Sarasota's barrier islands — Lido Key, Longboat Key, and Siesta Key. Current availability, per-island pre-construction pipeline, and live MLS resale.";
+
+const pillarFaqs = [
+  /* FILL_IN: 4-6 cross-island FAQ pairs. Per-island FAQ live inside each IslandSubSection. */
+  { question: 'FILL_IN: e.g. "What new luxury construction is happening on the Sarasota barrier islands right now?"', answer: 'FILL_IN: 50-120 words covering Rosewood + named projects in pre-development.' },
+  { question: 'FILL_IN: e.g. "How do Lido, Longboat, and Siesta differ for a luxury new-construction buyer?"', answer: 'FILL_IN' },
+];
+
+// Per spec §13: Place schemas for each named island, even if project list is empty.
+const jsonLd: Record<string, any>[] = [
+  {
+    '@type': 'CollectionPage',
+    name: "Sarasota's Barrier Islands — Luxury New Construction",
+    description,
+    url: 'https://adamsonfl.com/new-construction/barrier-islands',
+  },
+  ...islandsData.islands.map((isl) => ({
+    '@type': 'Place',
+    name: isl.name,
+    address: { '@type': 'PostalAddress', addressLocality: isl.name, addressRegion: 'FL', postalCode: isl.zip_codes?.[0] || '', addressCountry: 'US' },
+  })),
+  ...islandsData.islands.map((isl) => ({
+    '@type': 'CollectionPage',
+    name: `${isl.name} New Construction`,
+    url: `https://adamsonfl.com/new-construction/barrier-islands#${isl.anchor}`,
+  })),
+  {
+    '@type': 'FAQPage',
+    mainEntity: pillarFaqs.map((f) => ({
+      '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://adamsonfl.com/' },
+      { '@type': 'ListItem', position: 2, name: 'New Construction', item: 'https://adamsonfl.com/new-construction' },
+      { '@type': 'ListItem', position: 3, name: 'Barrier Islands', item: 'https://adamsonfl.com/new-construction/barrier-islands' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Barrier Islands Luxury New Construction — Lido, Longboat, Siesta"
+  description={description}
+  canonicalUrl="https://adamsonfl.com/new-construction/barrier-islands"
+  jsonLd={jsonLd}
+  noIndex={true}
+>
+  <DraftBanner />
+
+  <Hero
+    eyebrow="Area Pillar"
+    headline="Barrier Islands Luxury New Construction — Lido Key, Longboat Key, Siesta Key"
+    subhead="FILL_IN: 1-sentence subhead positioning the three islands as a single barrier-island market for luxury new-construction buyers."
+    image="/images/new-construction/barrier-islands-hero.jpg"
+  />
+
+  <BreadcrumbNav leafLabel="Barrier Islands" />
+
+  <!-- Cross-island editorial overview -->
+  <section class="section light-section">
+    <div class="container-narrow">
+      <h2 class="accent-underline mb-6">About Barrier Islands New Construction</h2>
+      <p class="text-[var(--color-text-muted)] leading-relaxed text-lg whitespace-pre-line">
+        FILL_IN: 400-600 word editorial. Cover the barrier-island lifestyle as a buying decision vs. downtown — beach access vs walkability, height/setback regulations on each island, drive times to mainland and SRQ, post-Ian rebuild standards, vacation-rental economics differences (Siesta vs Lido vs Longboat), and what each island's new-construction pipeline looks like in this cycle. Lead with the answer.
+      </p>
+    </div>
+  </section>
+
+  <!-- Combined map (3 islands color-coded) -->
+  <ProjectMap pins={pins} />
+
+  <!-- All projects across the islands (sortable card grid) -->
+  <section class="section dark-section">
+    <div class="container">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">All projects</p>
+      <h2 class="accent-underline mb-10">All Barrier Islands Projects</h2>
+      {projects.length === 0 ? (
+        <p class="text-orange-400/70 italic">FILL_IN: only Rosewood Residences Lido Key is in projects.json today (build_depth=full). When Longboat or Siesta projects launch, add them and they'll appear here automatically.</p>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {projects.map((p) => (
+            <ProjectCard
+              slug={p.slug}
+              name={p.name}
+              tagline={p.tagline}
+              status={p.status}
+              priceRange={p.price_range}
+              area={p.area}
+              island={p.island}
+              cardImage={p.card_image}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Per-island sub-sections with #anchor IDs -->
+  {islandsData.islands.map((isl) => {
+    const islandProjects = projects.filter((p) => p.island === isl.slug);
+    return (
+      <IslandSubSection
+        islandSlug={isl.slug}
+        islandName={isl.name}
+        anchor={isl.anchor}
+        tagline={isl.tagline}
+        editorial={isl.editorial}
+        projects={islandProjects}
+        islandFaqs={isl.island_faqs}
+        zipCodes={isl.zip_codes}
+        subdivisionKeywords={isl.subdivision_keywords}
+      />
+    );
+  })}
+
+  <!-- Combined market data with island toggles -->
+  <MarketDataKpis scope="Barrier Islands (combined)" />
+
+  <!-- Cross-island FAQ -->
+  <FAQSchema faqs={pillarFaqs} heading="Barrier Islands New Construction FAQ" />
+
+  <!-- Booking -->
+  <SchedulerEmbed />
+
+  <StickyMobileCta />
+  <DisclosureFooter showListingAttribution={true} showFactAttribution={true} />
+</BaseLayout>

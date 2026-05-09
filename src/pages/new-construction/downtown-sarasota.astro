@@ -1,0 +1,168 @@
+---
+/**
+ * /new-construction/downtown-sarasota — DOWNTOWN PILLAR (PROTOTYPE)
+ *
+ * Single-area template per spec §6a.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import DraftBanner from '@/components/newconstruction/DraftBanner.astro';
+import BreadcrumbNav from '@/components/newconstruction/BreadcrumbNav.astro';
+import Hero from '@/components/newconstruction/Hero.astro';
+import ProjectMap from '@/components/newconstruction/ProjectMap.astro';
+import ProjectCard from '@/components/newconstruction/ProjectCard.astro';
+import IdxListingGrid from '@/components/newconstruction/IdxListingGrid.astro';
+import MarketDataKpis from '@/components/newconstruction/MarketDataKpis.astro';
+import FAQSchema from '@/components/seo/FAQSchema.astro';
+import SchedulerEmbed from '@/components/newconstruction/SchedulerEmbed.astro';
+import StickyMobileCta from '@/components/newconstruction/StickyMobileCta.astro';
+import DisclosureFooter from '@/components/newconstruction/DisclosureFooter.astro';
+import projectsData from '@/data/newconstruction/projects.json';
+
+const projects = projectsData.projects.filter((p) => p.area === 'downtown-sarasota');
+const pins = projects.map((p) => ({
+  slug: p.slug, name: p.name, area: p.area, island: p.island, status: p.status, lat: p.lat, lng: p.lng,
+}));
+
+const description =
+  'Luxury new-construction condominiums and pre-construction projects in Downtown Sarasota — current availability, pricing, completion timelines, and developer details.';
+
+const areaFaqs = [
+  /* FILL_IN: 8-12 Q&A pairs in Ryan's voice. Stems below — replace with full questions and 50-120 word answers. */
+  { question: 'FILL_IN: e.g. "What new condos are being built in Downtown Sarasota?"', answer: 'FILL_IN: 50-120 words.' },
+  { question: 'FILL_IN: e.g. "What is the price range for new construction in Downtown Sarasota?"', answer: 'FILL_IN' },
+  { question: 'FILL_IN: e.g. "Which downtown buildings have walk-to-bayfront access?"', answer: 'FILL_IN' },
+  { question: 'FILL_IN: e.g. "How does Downtown Sarasota compare to the barrier islands for a luxury buyer?"', answer: 'FILL_IN' },
+];
+
+const jsonLd: Record<string, any>[] = [
+  { '@type': 'Place', name: 'Downtown Sarasota', address: { '@type': 'PostalAddress', addressLocality: 'Sarasota', addressRegion: 'FL', addressCountry: 'US' } },
+  {
+    '@type': 'CollectionPage',
+    name: 'Downtown Sarasota Luxury New Construction',
+    description,
+    url: 'https://adamsonfl.com/new-construction/downtown-sarasota',
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: projects.map((p, i) => ({
+        '@type': 'ListItem', position: i + 1,
+        item: { '@type': 'Place', name: p.name, url: `https://adamsonfl.com/new-construction/${p.slug}` },
+      })),
+    },
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: areaFaqs.map((f) => ({
+      '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://adamsonfl.com/' },
+      { '@type': 'ListItem', position: 2, name: 'New Construction', item: 'https://adamsonfl.com/new-construction' },
+      { '@type': 'ListItem', position: 3, name: 'Downtown Sarasota', item: 'https://adamsonfl.com/new-construction/downtown-sarasota' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Downtown Sarasota Luxury New Construction"
+  description={description}
+  canonicalUrl="https://adamsonfl.com/new-construction/downtown-sarasota"
+  jsonLd={jsonLd}
+  noIndex={true}
+>
+  <DraftBanner />
+
+  <Hero
+    eyebrow="Area Pillar"
+    headline="Downtown Sarasota Luxury New Construction"
+    subhead="FILL_IN: 1-sentence positioning in Ryan's voice on what defines Downtown Sarasota new construction in this market cycle."
+    image="/images/new-construction/downtown-sarasota-hero.jpg"
+  />
+
+  <BreadcrumbNav leafLabel="Downtown Sarasota" />
+
+  <!-- Editorial overview -->
+  <section class="section light-section">
+    <div class="container-narrow">
+      <h2 class="accent-underline mb-6">About Downtown Sarasota New Construction</h2>
+      <p class="text-[var(--color-text-muted)] leading-relaxed text-lg whitespace-pre-line">
+        FILL_IN: 400-600 word editorial in Ryan's voice. Cover area identity (cultural anchors — Van Wezel, Selby Gardens, Burns Court, Marie Selby), who's buying (urban luxury vs island lifestyle), the vertical-build wave since 2020, height/setback constraints driving project economics, the current bayfront redevelopment, lifestyle anchors (walkability, dining, marina). Lead with the answer; specific numbers; date-stamped claims; no marketing adjectives.
+      </p>
+    </div>
+  </section>
+
+  <!-- Map -->
+  <ProjectMap pins={pins} />
+
+  <!-- All Downtown projects -->
+  <section class="section dark-section">
+    <div class="container">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">All Projects</p>
+      <h2 class="accent-underline mb-10">Downtown Sarasota Pre-Construction & New Construction</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {projects.map((p) => (
+          <ProjectCard
+            slug={p.slug}
+            name={p.name}
+            tagline={p.tagline}
+            status={p.status}
+            priceRange={p.price_range}
+            area={p.area}
+            island={p.island}
+            cardImage={p.card_image}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- IDX feed filtered to Downtown -->
+  <section class="section dark-section-elevated">
+    <div class="container">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Currently for sale</p>
+      <h2 class="accent-underline mb-3">Active Downtown Sarasota Listings</h2>
+      <p class="text-white/60 mb-10 max-w-2xl">
+        New-construction-era resale in Downtown Sarasota (year-built 2020 or later, $1M+).
+      </p>
+      <IdxListingGrid heading="" limit={6} />
+    </div>
+  </section>
+
+  <!-- Area market data -->
+  <MarketDataKpis scope="Downtown Sarasota" />
+
+  <!-- Lifestyle anchors -->
+  <section class="section dark-section">
+    <div class="container">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Lifestyle</p>
+      <h2 class="accent-underline mb-10">What's Within Walking Distance</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-white/70">
+        <div class="bg-black border border-white/10 rounded-lg p-6">
+          <h3 class="font-display text-lg text-white mb-3">Walk Score</h3>
+          <p class="text-3xl font-display text-[var(--color-gold)] mb-2">FILL_IN</p>
+          <p class="text-sm">FILL_IN: typical walk score for downtown new-builds; what specifically is walkable from each cluster.</p>
+        </div>
+        <div class="bg-black border border-white/10 rounded-lg p-6">
+          <h3 class="font-display text-lg text-white mb-3">Schools</h3>
+          <p class="text-sm">FILL_IN: Sarasota County school ratings, Pine View / Booker reference, public-school assignment for downtown addresses.</p>
+        </div>
+        <div class="bg-black border border-white/10 rounded-lg p-6">
+          <h3 class="font-display text-lg text-white mb-3">Anchors</h3>
+          <p class="text-sm">FILL_IN: Van Wezel, Selby Gardens, Sarasota Opera House, Burns Court, the bayfront, Marina Jack.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <FAQSchema faqs={areaFaqs} heading="Downtown Sarasota New Construction FAQ" />
+
+  <!-- Booking -->
+  <SchedulerEmbed />
+
+  <StickyMobileCta />
+  <DisclosureFooter showListingAttribution={true} showFactAttribution={true} />
+</BaseLayout>

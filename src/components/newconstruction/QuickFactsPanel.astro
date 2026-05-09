@@ -1,0 +1,93 @@
+---
+/**
+ * QuickFactsPanel — sticky right rail on project page (desktop) /
+ * accordion on mobile. All fields per spec §5 section 2.
+ *
+ * Renders FILL_IN values dimly so Ryan can scan and find blanks.
+ */
+interface Project {
+  name: string;
+  address?: string;
+  area: string;
+  island?: string | null;
+  developer?: string;
+  architect?: string;
+  interior_designer?: string;
+  status?: string;
+  total_residences?: string | number;
+  floors?: string | number;
+  residence_types?: string;
+  price_range?: string;
+  sqft_range?: string;
+  estimated_completion?: string;
+  reservation_deposit_pct?: string;
+  hoa_fee_range?: string;
+  pet_policy?: string;
+  short_term_rental_policy?: string;
+  flood_zone?: string;
+  hurricane_impact?: string;
+  construction_type?: string;
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+const areaLabel = project.area === 'downtown-sarasota'
+  ? 'Downtown Sarasota'
+  : project.island
+    ? `Barrier Islands &mdash; ${project.island.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}`
+    : 'Barrier Islands';
+
+const facts: { label: string; value: any }[] = [
+  { label: 'Address', value: project.address },
+  { label: 'Area', value: areaLabel },
+  { label: 'Status', value: project.status },
+  { label: 'Developer', value: project.developer },
+  { label: 'Architect', value: project.architect },
+  { label: 'Interior Designer', value: project.interior_designer },
+  { label: 'Total Residences', value: project.total_residences },
+  { label: 'Floors', value: project.floors },
+  { label: 'Residence Types', value: project.residence_types },
+  { label: 'Price Range', value: project.price_range },
+  { label: 'Sq Ft Range', value: project.sqft_range },
+  { label: 'Estimated Completion', value: project.estimated_completion },
+  { label: 'Reservation Deposit', value: project.reservation_deposit_pct },
+  { label: 'HOA Fee Range', value: project.hoa_fee_range },
+  { label: 'Pet Policy', value: project.pet_policy },
+  { label: 'Short-Term Rental Policy', value: project.short_term_rental_policy },
+  { label: 'Flood Zone', value: project.flood_zone },
+  { label: 'Hurricane Impact', value: project.hurricane_impact },
+  { label: 'Construction Type', value: project.construction_type },
+];
+
+const isFill = (v: any) => !v || (typeof v === 'string' && v.startsWith('FILL_IN'));
+---
+
+<aside class="bg-black border border-white/10 rounded-lg overflow-hidden lg:sticky lg:top-24">
+  <div class="bg-[var(--color-cbgl-blue)] px-6 py-4">
+    <p class="font-accent text-xs uppercase tracking-[0.2em] text-white font-semibold">
+      Quick Facts
+    </p>
+  </div>
+  <dl class="divide-y divide-white/5">
+    {facts.map((f) => (
+      <div class="px-6 py-4">
+        <dt class="font-accent text-[10px] uppercase tracking-[0.15em] text-white/40 mb-1">
+          {f.label}
+        </dt>
+        <dd class:list={['text-sm', isFill(f.value) ? 'text-orange-400/70 italic' : 'text-white']} set:html={f.value || 'FILL_IN'} />
+      </div>
+    ))}
+  </dl>
+  <div class="p-6 border-t border-white/10">
+    <a href="#schedule" class="block w-full text-center font-accent text-xs uppercase tracking-[0.15em] font-semibold bg-[var(--color-gold)] text-black px-4 py-3 rounded hover:bg-[var(--color-gold-light)]">
+      Book a Private Tour
+    </a>
+    <a href="#brief" class="block w-full text-center font-accent text-xs uppercase tracking-[0.15em] font-semibold border border-white/20 text-white px-4 py-3 rounded mt-3 hover:bg-white/10">
+      Get the Project Brief
+    </a>
+  </div>
+</aside>

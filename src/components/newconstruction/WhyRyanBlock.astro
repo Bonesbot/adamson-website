@@ -1,0 +1,72 @@
+---
+/**
+ * WhyRyanBlock — 2-column block with headshot + bio focused on
+ * new-construction expertise (spec §4 section 7).
+ * Reservations strategy, pre-con contracts, developer reputation knowledge.
+ */
+import Button from '@/components/ui/Button.astro';
+---
+
+<section class="section light-section">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="aspect-[4/5] bg-[var(--color-charcoal)] rounded-lg overflow-hidden">
+          <img
+            src="/images/ryan-adamson.jpg"
+            alt="Ryan Adamson, Adamson Group at Coldwell Banker Realty &mdash; St. Armands"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+      <div>
+        <p class="section-label text-[var(--color-cbgl-blue)] mb-3">Why Ryan</p>
+        <h2 class="font-display text-3xl text-[var(--color-text)] mb-6 accent-underline">
+          New construction is its own discipline
+        </h2>
+        <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
+          {/* FILL_IN: 2-3 paragraphs in Ryan's voice on new-construction-specific
+              expertise: reservations strategy, deposit milestone math, contract
+              clauses that matter (FF&E, escrow, completion-date triggers,
+              substitution language), how to evaluate developer reputation,
+              how to compare amenities packages across competing buildings. */}
+          FILL_IN: 2-3 paragraphs on Ryan's new-construction expertise — reservations strategy, contract clauses that matter, developer reputation evaluation, amenity package comparison across competing buildings.
+        </p>
+
+        <ul class="space-y-2 mb-8 text-sm text-[var(--color-text-muted)]" role="list">
+          <li class="flex items-center gap-2">
+            <span class="text-[var(--color-gold)]">&#10003;</span>
+            Certified Luxury Home Marketing Specialist (CLHMS)
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-[var(--color-gold)]">&#10003;</span>
+            Million Dollar Guild Member
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-[var(--color-gold)]">&#10003;</span>
+            Coldwell Banker Global Luxury &mdash; St. Armands
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-[var(--color-gold)]">&#10003;</span>
+            FILL_IN: years on the Sarasota coast
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-[var(--color-gold)]">&#10003;</span>
+            FILL_IN: total luxury volume / specific deal types
+          </li>
+        </ul>
+
+        <Button href="/about" variant="secondary" size="md">More about Ryan</Button>
+      </div>
+    </div>
+
+    <!-- Testimonials placeholder -->
+    <div class="mt-16 max-w-3xl mx-auto text-center">
+      <p class="section-label text-[var(--color-cbgl-blue)] mb-6">From recent clients</p>
+      <p class="text-orange-500 italic">
+        FILL_IN: 2-3 named-client testimonials &mdash; spec &sect;4 section 7 wants these specifically for the new-construction expertise pitch.
+      </p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,198 @@
+---
+/**
+ * /new-construction/[slug] — DYNAMIC PROJECT PAGE (PROTOTYPE)
+ *
+ * Routes through projects.json:
+ *   build_depth: 'full'  → all 12 sections from spec §5
+ *   build_depth: 'stub'  → hero + quick-facts + IDX + booking only (spec §7)
+ *
+ * Per spec §13: each project page emits Place + nested Residence per
+ * floor plan + RealEstateListing per active listing + FAQPage + BreadcrumbList.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import DraftBanner from '@/components/newconstruction/DraftBanner.astro';
+import BreadcrumbNav from '@/components/newconstruction/BreadcrumbNav.astro';
+import Hero from '@/components/newconstruction/Hero.astro';
+import QuickFactsPanel from '@/components/newconstruction/QuickFactsPanel.astro';
+import PhotoGallery from '@/components/newconstruction/PhotoGallery.astro';
+import FloorPlanViewer from '@/components/newconstruction/FloorPlanViewer.astro';
+import AmenitiesGrid from '@/components/newconstruction/AmenitiesGrid.astro';
+import LocationBlock from '@/components/newconstruction/LocationBlock.astro';
+import IdxListingGrid from '@/components/newconstruction/IdxListingGrid.astro';
+import ComparableProjects from '@/components/newconstruction/ComparableProjects.astro';
+import FAQSchema from '@/components/seo/FAQSchema.astro';
+import SchedulerEmbed from '@/components/newconstruction/SchedulerEmbed.astro';
+import StickyMobileCta from '@/components/newconstruction/StickyMobileCta.astro';
+import DisclosureFooter from '@/components/newconstruction/DisclosureFooter.astro';
+import ProjectStubBody from '@/components/newconstruction/ProjectStubBody.astro';
+import projectsData from '@/data/newconstruction/projects.json';
+
+export async function getStaticPaths() {
+  return projectsData.projects.map((p: any) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const project = projectsData.projects.find((p: any) => p.slug === slug);
+
+if (!project) {
+  return Astro.redirect('/new-construction');
+}
+
+const isFull = project.build_depth === 'full';
+
+const description = project.tagline && !project.tagline.startsWith('FILL_IN')
+  ? project.tagline
+  : `${project.name} — luxury new construction in ${project.area === 'downtown-sarasota' ? 'Downtown Sarasota' : (project.island || 'the Sarasota barrier islands')}. Pricing, residences, completion timeline, and current availability.`;
+
+const projectFaqs = (project.project_faqs || []).filter(
+  (f: any) => f.question && !String(f.question).startsWith('FILL_IN')
+);
+// If Ryan hasn't filled FAQs yet, use placeholder so FAQPage schema renders something
+const faqsForRender = projectFaqs.length > 0
+  ? projectFaqs
+  : (project.project_faqs || []);
+
+const jsonLd: Record<string, any>[] = [
+  {
+    '@type': 'Place',
+    name: project.name,
+    description: description,
+    url: `https://adamsonfl.com/new-construction/${project.slug}`,
+    address: project.address && !String(project.address).startsWith('FILL_IN') ? {
+      '@type': 'PostalAddress',
+      streetAddress: project.address,
+      addressLocality: 'Sarasota',
+      addressRegion: 'FL',
+      addressCountry: 'US',
+    } : undefined,
+  },
+  faqsForRender.length > 0 && {
+    '@type': 'FAQPage',
+    mainEntity: faqsForRender.map((f: any) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://adamsonfl.com/' },
+      { '@type': 'ListItem', position: 2, name: 'New Construction', item: 'https://adamsonfl.com/new-construction' },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: project.area === 'downtown-sarasota' ? 'Downtown Sarasota' : 'Barrier Islands',
+        item: project.area === 'downtown-sarasota'
+          ? 'https://adamsonfl.com/new-construction/downtown-sarasota'
+          : 'https://adamsonfl.com/new-construction/barrier-islands',
+      },
+      { '@type': 'ListItem', position: 4, name: project.name, item: `https://adamsonfl.com/new-construction/${project.slug}` },
+    ],
+  },
+].filter(Boolean) as Record<string, any>[];
+
+const lastVerified = project.last_verified && !String(project.last_verified).startsWith('FILL_IN')
+  ? project.last_verified : undefined;
+---
+
+<BaseLayout
+  title={project.name}
+  description={description}
+  canonicalUrl={`https://adamsonfl.com/new-construction/${project.slug}`}
+  jsonLd={jsonLd}
+  noIndex={true}
+>
+  <DraftBanner />
+
+  <Hero
+    eyebrow={isFull ? 'Featured Project' : 'Project'}
+    headline={project.name}
+    subhead={project.tagline && !String(project.tagline).startsWith('FILL_IN') ? project.tagline : 'FILL_IN: 1-sentence positioning in Ryan\'s voice for this project.'}
+    primaryCtaLabel={`Book a Private Tour of ${project.name}`}
+    primaryCtaHref="#schedule"
+    secondaryCtaLabel="Get the Project Brief"
+    secondaryCtaHref="#brief"
+    image={project.hero_image}
+  />
+
+  <BreadcrumbNav leafLabel={project.name} />
+
+  {isFull ? (
+    <>
+      <!-- Editorial overview + Quick Facts side rail -->
+      <section class="section dark-section">
+        <div class="container">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <div class="lg:col-span-2">
+              <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">About</p>
+              <h2 class="accent-underline mb-6">About {project.name}</h2>
+              <div class="text-white/70 text-lg leading-relaxed whitespace-pre-line">
+                {project.editorial_overview && !String(project.editorial_overview).startsWith('FILL_IN')
+                  ? project.editorial_overview
+                  : <span class="text-orange-400/70 italic">{project.editorial_overview || 'FILL_IN: 300-500 word editorial overview in Ryan\'s voice.'}</span>
+                }
+              </div>
+            </div>
+            <div>
+              <QuickFactsPanel project={project} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Photo gallery -->
+      <PhotoGallery />
+
+      <!-- Floor plans -->
+      <FloorPlanViewer />
+
+      <!-- Amenities -->
+      <AmenitiesGrid amenities={project.amenities || []} />
+
+      <!-- Location -->
+      <LocationBlock address={project.address} lat={project.lat} lng={project.lng} />
+
+      <!-- Live availability (IDX filtered to project subdivision) -->
+      <section class="section dark-section">
+        <div class="container">
+          <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Availability</p>
+          <h2 class="accent-underline mb-3">Currently Available at {project.name}</h2>
+          <p class="text-white/60 mb-10 max-w-2xl">
+            Resale and pre-construction availability through the Stellar MLS feed.
+          </p>
+          <IdxListingGrid
+            heading=""
+            subdivisions={project.mls_subdivision && !String(project.mls_subdivision).startsWith('FILL_IN') ? [project.mls_subdivision] : []}
+            limit={6}
+          />
+        </div>
+      </section>
+
+      <!-- Comparable projects -->
+      <ComparableProjects
+        currentSlug={project.slug}
+        currentArea={project.area}
+        currentIsland={project.island}
+        allProjects={projectsData.projects}
+      />
+
+      <!-- Project FAQ -->
+      {faqsForRender.length > 0 && (
+        <FAQSchema faqs={faqsForRender} heading={`${project.name} FAQ`} />
+      )}
+
+      <!-- Booking -->
+      <SchedulerEmbed projectName={project.name} />
+    </>
+  ) : (
+    <ProjectStubBody project={project} />
+  )}
+
+  <StickyMobileCta label={`Tour ${project.name}`} />
+  <DisclosureFooter
+    showListingAttribution={true}
+    showFactAttribution={true}
+    lastVerified={lastVerified}
+  />
+</BaseLayout>

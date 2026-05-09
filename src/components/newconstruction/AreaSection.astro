@@ -1,0 +1,73 @@
+---
+/**
+ * AreaSection — hub-page area block.
+ * Per spec §4 section 4: H2 + 1-paragraph editorial + 3 featured project
+ * cards + "View all <area> →" link.
+ */
+import ProjectCard from './ProjectCard.astro';
+
+interface Project {
+  slug: string;
+  name: string;
+  tagline?: string;
+  status?: string;
+  price_range?: string;
+  area: string;
+  island?: string | null;
+  card_image?: string;
+}
+
+interface Props {
+  /** Section eyebrow label (e.g. "Downtown Sarasota"). */
+  eyebrow: string;
+  /** H2 headline. */
+  heading: string;
+  /** 1-paragraph editorial intro in Ryan's voice. */
+  intro: string;
+  /** Up to 3 featured projects for the carousel. */
+  projects: Project[];
+  /** Link to the area pillar page. */
+  viewAllHref: string;
+  /** Background variant — alternate light/dark for visual rhythm. */
+  variant?: 'dark' | 'light' | 'elevated';
+}
+
+const { eyebrow, heading, intro, projects, viewAllHref, variant = 'dark' } = Astro.props;
+
+const sectionClass =
+  variant === 'light' ? 'section light-section' :
+  variant === 'elevated' ? 'section dark-section-elevated' :
+  'section dark-section';
+
+const introClass = variant === 'light' ? 'text-[var(--color-text-muted)]' : 'text-white/70';
+const linkClass = variant === 'light' ? 'text-[var(--color-cbgl-blue)]' : 'text-[var(--color-cbgl-blue-light)]';
+---
+
+<section class={sectionClass}>
+  <div class="container">
+    <div class="max-w-3xl mb-12">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">{eyebrow}</p>
+      <h2 class="accent-underline mb-6">{heading}</h2>
+      <p class={`text-lg leading-relaxed ${introClass}`}>{intro}</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      {projects.slice(0, 3).map((p) => (
+        <ProjectCard
+          slug={p.slug}
+          name={p.name}
+          tagline={p.tagline}
+          status={p.status}
+          priceRange={p.price_range}
+          area={p.area}
+          island={p.island}
+          cardImage={p.card_image}
+        />
+      ))}
+    </div>
+
+    <a href={viewAllHref} class={`font-accent text-sm uppercase tracking-[0.15em] font-semibold ${linkClass} hover:text-[var(--color-gold)]`}>
+      View all {heading} &rarr;
+    </a>
+  </div>
+</section>
