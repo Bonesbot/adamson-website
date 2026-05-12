@@ -2,19 +2,19 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-11T13:28:57.656273+00:00",
+  "lastUpdated": "2026-05-12T11:28:01.279951+00:00",
   "counts": {
-    "sold": 445,
-    "pending": 74,
-    "active": 423,
-    "total": 519
+    "sold": 447,
+    "pending": 76,
+    "active": 422,
+    "total": 523
   },
   "metrics": {
-    "avgPrice": "$1,405,532",
-    "avgPricePerSqFt": "$682",
+    "avgPrice": "$1,405,355",
+    "avgPricePerSqFt": "$681",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,890",
-    "avgLotSqFt": "81,963",
+    "avgLivingSqFt": "1,895",
+    "avgLotSqFt": "81,650",
     "avgDom": 104
   },
   "range": {
@@ -22,16 +22,16 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 423,
+    "count": 422,
     "medianPrice": "$1,200,000",
-    "medianPricePerSqFt": "$770",
-    "waterfrontCount": 236,
-    "newConstructionCount": 57
+    "medianPricePerSqFt": "$773",
+    "waterfrontCount": 234,
+    "newConstructionCount": 59
   },
   "sold": {
-    "count": 445,
+    "count": 447,
     "medianPrice": "$875,000",
-    "medianDom": 70,
+    "medianDom": 69,
     "saleToListRatio": "87.3%"
   },
   "fees": {
@@ -39,15 +39,15 @@
     "medianMonthlyCondoFee": "$1,263"
   },
   "priceBands": {
-    "under900k": 166,
-    "band900kTo1_5m": 86,
-    "band1_5mTo3m": 78,
+    "under900k": 165,
+    "band900kTo1_5m": 85,
+    "band1_5mTo3m": 79,
     "band3mPlus": 93
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 423
+      "count": 422
     }
   ],
   "buildingClasses": [
@@ -65,6 +65,32 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4684751",
+      "address": "1660 SUMMERHOUSE LN #402",
+      "subdivision": "SUMMER COVE ON SIESTA",
+      "soldPrice": "$1,700,000",
+      "soldDate": "2026-05-11",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,110",
+      "yearBuilt": 2007,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4686908",
+      "address": "915 SEASIDE DR #310",
+      "subdivision": "SIESTA KEY BEACH RESIDENCES II",
+      "soldPrice": "$1,200,000",
+      "soldDate": "2026-05-11",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,900",
+      "yearBuilt": 2009,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4688233",
       "address": "312 CANAL RD",
@@ -101,32 +127,6 @@
       "bathrooms": 2.0,
       "livingSqFt": "1,285",
       "yearBuilt": 1976,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4685194",
-      "address": "1054 SUN N SEA DR #106",
-      "subdivision": "BEACH CLUB AT SIESTA KEY",
-      "soldPrice": "$655,000",
-      "soldDate": "2026-05-06",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "800",
-      "yearBuilt": 2009,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4673426",
-      "address": "6006 MIDNIGHT PASS RD #11",
-      "subdivision": "CASA MAR",
-      "soldPrice": "$415,000",
-      "soldDate": "2026-05-06",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "600",
-      "yearBuilt": 1960,
       "propertyType": "Residential",
       "isWaterfront": true
     }
