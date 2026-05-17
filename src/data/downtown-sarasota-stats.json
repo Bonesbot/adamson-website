@@ -2,62 +2,62 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-12T11:28:01.844047+00:00",
+  "lastUpdated": "2026-05-17T20:08:05.368905+00:00",
   "counts": {
-    "sold": 224,
-    "pending": 73,
-    "active": 271,
-    "total": 297
+    "sold": 228,
+    "pending": 74,
+    "active": 274,
+    "total": 302
   },
   "metrics": {
-    "avgPrice": "$1,941,610",
+    "avgPrice": "$1,947,953",
     "avgPricePerSqFt": "$834",
     "avgYearBuilt": 2003,
-    "avgLivingSqFt": "2,050",
-    "avgLotSqFt": "51,491",
-    "avgDom": 99
+    "avgLivingSqFt": "2,059",
+    "avgLotSqFt": "51,002",
+    "avgDom": 98
   },
   "range": {
     "minPrice": "$260,000",
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 271,
-    "medianPrice": "$1,499,000",
-    "medianPricePerSqFt": "$840",
-    "waterfrontCount": 70,
-    "newConstructionCount": 100
+    "count": 274,
+    "medianPrice": "$1,497,000",
+    "medianPricePerSqFt": "$836",
+    "waterfrontCount": 69,
+    "newConstructionCount": 98
   },
   "sold": {
-    "count": 224,
-    "medianPrice": "$1,165,000",
+    "count": 228,
+    "medianPrice": "$1,160,000",
     "medianDom": 86,
     "saleToListRatio": "91.5%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,683",
+    "medianMonthlyAssociation": "$1,688",
     "medianMonthlyCondoFee": "$1,768"
   },
   "priceBands": {
-    "under900k": 75,
-    "band900kTo1_5m": 62,
+    "under900k": 79,
+    "band900kTo1_5m": 61,
     "band1_5mTo3m": 66,
     "band3mPlus": 68
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 271
+      "count": 274
     }
   ],
   "buildingClasses": [
     {
       "class": "high-rise",
-      "count": 145
+      "count": 146
     },
     {
       "class": "low-rise",
-      "count": 66
+      "count": 69
     },
     {
       "class": "mid-rise",
@@ -65,6 +65,58 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4674559",
+      "address": "888 BLVD OF THE ARTS #1205",
+      "subdivision": "CONDO ON THE BAY TOWER I",
+      "soldPrice": "$1,021,000",
+      "soldDate": "2026-05-15",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,729",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4680336",
+      "address": "1221 N PALM AVE #303",
+      "subdivision": "FRANCES CARLTON",
+      "soldPrice": "$387,000",
+      "soldDate": "2026-05-14",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "675",
+      "yearBuilt": 1924,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4684837",
+      "address": "211 COSMOPOLITAN CT #211",
+      "subdivision": "Q",
+      "soldPrice": "$1,105,000",
+      "soldDate": "2026-05-13",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,588",
+      "yearBuilt": 2018,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4692719",
+      "address": "253 GOLDEN GATE POINT #503",
+      "subdivision": "GOLDEN GATE POINT",
+      "soldPrice": "$3,000,000",
+      "soldDate": "2026-05-12",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,068",
+      "yearBuilt": 2025,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4664512",
       "address": "1155 N GULFSTREAM AVE #508",
@@ -75,58 +127,6 @@
       "bathrooms": 2.5,
       "livingSqFt": "1,591",
       "yearBuilt": 2017,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4687151",
-      "address": "111 S PINEAPPLE AVE #811",
-      "subdivision": "MARK SARASOTA CONDO",
-      "soldPrice": "$1,250,000",
-      "soldDate": "2026-05-05",
-      "bedrooms": 2,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,580",
-      "yearBuilt": 2019,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4652440",
-      "address": "420 GOLDEN GATE PT #200A",
-      "subdivision": "THE GRANDE RIVIERA",
-      "soldPrice": "$2,750,000",
-      "soldDate": "2026-05-01",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,620",
-      "yearBuilt": 2005,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4685150",
-      "address": "101 S GULFSTREAM AVE #7D",
-      "subdivision": "DOLPHIN TOWER",
-      "soldPrice": "$525,000",
-      "soldDate": "2026-05-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,200",
-      "yearBuilt": 1974,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4653446",
-      "address": "33 S PALM AVE #1101",
-      "subdivision": "THE DEMARCAY",
-      "soldPrice": "$2,050,000",
-      "soldDate": "2026-04-30",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,229",
-      "yearBuilt": 2024,
       "propertyType": "Residential",
       "isWaterfront": false
     }
