@@ -2,58 +2,58 @@
   "areaSlug": "lido-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-12T11:28:00.719665+00:00",
+  "lastUpdated": "2026-05-17T20:08:04.274049+00:00",
   "counts": {
-    "sold": 82,
-    "pending": 18,
-    "active": 130,
-    "total": 100
+    "sold": 84,
+    "pending": 19,
+    "active": 128,
+    "total": 103
   },
   "metrics": {
-    "avgPrice": "$2,572,843",
-    "avgPricePerSqFt": "$942",
+    "avgPrice": "$2,521,669",
+    "avgPricePerSqFt": "$930",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,261",
-    "avgLotSqFt": "76,313",
-    "avgDom": 117
+    "avgLivingSqFt": "2,236",
+    "avgLotSqFt": "77,315",
+    "avgDom": 118
   },
   "range": {
     "minPrice": "$275,000",
     "maxPrice": "$20,000,000"
   },
   "active": {
-    "count": 130,
-    "medianPrice": "$1,612,000",
-    "medianPricePerSqFt": "$903",
-    "waterfrontCount": 61,
+    "count": 128,
+    "medianPrice": "$1,524,500",
+    "medianPricePerSqFt": "$914",
+    "waterfrontCount": 60,
     "newConstructionCount": 21
   },
   "sold": {
-    "count": 82,
+    "count": 84,
     "medianPrice": "$1,322,500",
     "medianDom": 88,
-    "saleToListRatio": "84.3%"
+    "saleToListRatio": "84.5%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,341",
+    "medianMonthlyAssociation": "$1,323",
     "medianMonthlyCondoFee": "$1,458"
   },
   "priceBands": {
     "under900k": 47,
-    "band900kTo1_5m": 15,
-    "band1_5mTo3m": 20,
+    "band900kTo1_5m": 14,
+    "band1_5mTo3m": 19,
     "band3mPlus": 48
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 130
+      "count": 128
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 75
+      "count": 73
     },
     {
       "class": "high-rise",
@@ -65,6 +65,32 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4686209",
+      "address": "500 S WASHINGTON DR #19B",
+      "subdivision": "KINGSTON ARMS",
+      "soldPrice": "$538,500",
+      "soldDate": "2026-05-12",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "770",
+      "yearBuilt": 1963,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4658677",
+      "address": "1102 BENJAMIN FRANKLIN DR #310",
+      "subdivision": "LIDO SURF & SAND",
+      "soldPrice": "$1,450,000",
+      "soldDate": "2026-05-11",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,763",
+      "yearBuilt": 1976,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4684981",
       "address": "101 BENJAMIN FRANKLIN DR #73",
@@ -103,32 +129,6 @@
       "yearBuilt": 1970,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4670179",
-      "address": "1800 BENJAMIN FRANKLIN DR #A202",
-      "subdivision": "L ELEGANCE ON LIDO BEACH",
-      "soldPrice": "$1,150,000",
-      "soldDate": "2026-05-01",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,980",
-      "yearBuilt": 1996,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4643282",
-      "address": "1001 BENJAMIN FRANKLIN DR #510",
-      "subdivision": "LIDO TOWERS",
-      "soldPrice": "$675,000",
-      "soldDate": "2026-05-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,224",
-      "yearBuilt": 1980,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ]
 }
