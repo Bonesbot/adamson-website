@@ -34,8 +34,8 @@ const jsonLd = {
         name="contact"
         method="POST"
         action="/thank-you"
+        netlify
         data-netlify="true"
-        data-netlify-recaptcha="true"
         netlify-honeypot="bot-field"
         class="space-y-6"
       >
@@ -119,11 +119,6 @@ const jsonLd = {
             class="w-full px-4 py-3 border border-[var(--color-border)] rounded-lg focus:outline-none focus:border-[var(--color-gold)] transition-colors bg-[var(--color-warm-white)] resize-vertical"
             placeholder="Tell me about what you're looking for..."
           ></textarea>
-        </div>
-
-        <!-- hCaptcha widget — Netlify renders the actual challenge here based on dashboard config -->
-        <div class="flex justify-center pt-2">
-          <div data-netlify-recaptcha="true"></div>
         </div>
 
         <div class="text-center pt-2">
