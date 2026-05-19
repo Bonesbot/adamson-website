@@ -121,6 +121,14 @@ const jsonLd = {
           ></textarea>
         </div>
 
+        <!-- Netlify-managed reCAPTCHA v2 ("I'm not a robot" checkbox).
+             The attribute on a child div (NOT on the <form> tag) is the correct
+             placement — Netlify replaces this div with the widget at deploy time
+             using its own managed Google keys. -->
+        <div class="flex justify-center pt-2">
+          <div data-netlify-recaptcha="true"></div>
+        </div>
+
         <div class="text-center pt-2">
           <button
             type="submit"
