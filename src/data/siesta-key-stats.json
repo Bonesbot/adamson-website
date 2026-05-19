@@ -2,19 +2,19 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-18T10:56:57.556881+00:00",
+  "lastUpdated": "2026-05-19T11:02:53.121250+00:00",
   "counts": {
-    "sold": 458,
-    "pending": 75,
-    "active": 422,
+    "sold": 459,
+    "pending": 74,
+    "active": 425,
     "total": 533
   },
   "metrics": {
-    "avgPrice": "$1,411,467",
+    "avgPrice": "$1,409,421",
     "avgPricePerSqFt": "$680",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,907",
-    "avgLotSqFt": "80,496",
+    "avgLivingSqFt": "1,905",
+    "avgLotSqFt": "80,689",
     "avgDom": 105
   },
   "range": {
@@ -22,16 +22,16 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 422,
-    "medianPrice": "$1,237,000",
-    "medianPricePerSqFt": "$778",
-    "waterfrontCount": 239,
+    "count": 425,
+    "medianPrice": "$1,225,000",
+    "medianPricePerSqFt": "$776",
+    "waterfrontCount": 241,
     "newConstructionCount": 59
   },
   "sold": {
-    "count": 458,
+    "count": 459,
     "medianPrice": "$875,000",
-    "medianDom": 68,
+    "medianDom": 69,
     "saleToListRatio": "87.4%"
   },
   "fees": {
@@ -40,20 +40,20 @@
   },
   "priceBands": {
     "under900k": 167,
-    "band900kTo1_5m": 79,
+    "band900kTo1_5m": 82,
     "band1_5mTo3m": 83,
     "band3mPlus": 93
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 422
+      "count": 425
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 260
+      "count": 262
     },
     {
       "class": "mid-rise",
@@ -75,6 +75,19 @@
       "bathrooms": 4.0,
       "livingSqFt": "2,819",
       "yearBuilt": 2020,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4633988",
+      "address": "915 SEASIDE DR #604",
+      "subdivision": "RESIDENCES ON SIESTA KEY BEACH, HYATT RESIDENCES",
+      "soldPrice": "$1,400,000",
+      "soldDate": "2026-05-15",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,920",
+      "yearBuilt": 2009,
       "propertyType": "Residential",
       "isWaterfront": true
     },
@@ -116,19 +129,6 @@
       "yearBuilt": 1979,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4681042",
-      "address": "523 REID ST",
-      "subdivision": "OCEAN BEACH REP",
-      "soldPrice": "$595,000",
-      "soldDate": "2026-05-13",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,249",
-      "yearBuilt": 1967,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ]
 }
