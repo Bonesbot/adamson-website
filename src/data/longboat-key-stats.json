@@ -2,36 +2,36 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-18T10:56:56.394666+00:00",
+  "lastUpdated": "2026-05-19T11:02:52.021123+00:00",
   "counts": {
-    "sold": 454,
-    "pending": 87,
-    "active": 371,
-    "total": 541
+    "sold": 459,
+    "pending": 85,
+    "active": 368,
+    "total": 544
   },
   "metrics": {
-    "avgPrice": "$1,854,873",
-    "avgPricePerSqFt": "$729",
+    "avgPrice": "$1,845,368",
+    "avgPricePerSqFt": "$728",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,191",
-    "avgLotSqFt": "194,176",
-    "avgDom": 96
+    "avgLivingSqFt": "2,186",
+    "avgLotSqFt": "194,114",
+    "avgDom": 95
   },
   "range": {
     "minPrice": "$165,000",
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 371,
-    "medianPrice": "$1,049,000",
-    "medianPricePerSqFt": "$684",
-    "waterfrontCount": 283,
+    "count": 368,
+    "medianPrice": "$1,049,500",
+    "medianPricePerSqFt": "$685",
+    "waterfrontCount": 282,
     "newConstructionCount": 29
   },
   "sold": {
-    "count": 454,
+    "count": 459,
     "medianPrice": "$1,100,000",
-    "medianDom": 66,
+    "medianDom": 68,
     "saleToListRatio": "87.2%"
   },
   "fees": {
@@ -39,25 +39,25 @@
     "medianMonthlyCondoFee": "$1,689"
   },
   "priceBands": {
-    "under900k": 153,
-    "band900kTo1_5m": 82,
+    "under900k": 151,
+    "band900kTo1_5m": 81,
     "band1_5mTo3m": 78,
     "band3mPlus": 58
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 371
+      "count": 368
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 261
+      "count": 259
     },
     {
       "class": "mid-rise",
-      "count": 50
+      "count": 49
     },
     {
       "class": "high-rise",
@@ -65,6 +65,58 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4665992",
+      "address": "6161 GULF OF MEXICO DR",
+      "subdivision": "SLEEPY LAGOON",
+      "soldPrice": "$8,000,000",
+      "soldDate": "2026-05-18",
+      "bedrooms": 4,
+      "bathrooms": 4.5,
+      "livingSqFt": "4,224",
+      "yearBuilt": 1997,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4670094",
+      "address": "5840 GULF OF MEXICO DR",
+      "subdivision": "LONGBOAT KEY",
+      "soldPrice": "$4,500,000",
+      "soldDate": "2026-05-18",
+      "bedrooms": 4,
+      "bathrooms": 5.0,
+      "livingSqFt": "4,145",
+      "yearBuilt": 2022,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4682918",
+      "address": "1211 GULF OF MEXICO DR #610",
+      "subdivision": "PROMENADE",
+      "soldPrice": "$1,278,000",
+      "soldDate": "2026-05-18",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,827",
+      "yearBuilt": 1985,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4666887",
+      "address": "6477 GULFSIDE RD",
+      "subdivision": "SLEEPY LAGOON",
+      "soldPrice": "$8,350,000",
+      "soldDate": "2026-05-15",
+      "bedrooms": 6,
+      "bathrooms": 6.5,
+      "livingSqFt": "5,862",
+      "yearBuilt": 2002,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4657701",
       "address": "1000 LONGBOAT CLUB ROAD #1105",
@@ -77,58 +129,6 @@
       "yearBuilt": 1972,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4676816",
-      "address": "1965 GULF OF MEXICO DR #G5-407",
-      "subdivision": "SEAPLACE III",
-      "soldPrice": "$720,000",
-      "soldDate": "2026-05-15",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,257",
-      "yearBuilt": 1977,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4685764",
-      "address": "4234 GULF OF MEXICO DR #J1",
-      "subdivision": "PELICAN HARBOUR & BEACH CLUB",
-      "soldPrice": "$555,000",
-      "soldDate": "2026-05-15",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,150",
-      "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4680591",
-      "address": "2039 GULF OF MEXICO DR #G3-108",
-      "subdivision": "SEAPLACE I",
-      "soldPrice": "$525,000",
-      "soldDate": "2026-05-14",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "933",
-      "yearBuilt": 1974,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4672952",
-      "address": "651 BROADWAY ST",
-      "subdivision": "LONGBEACH ON LONGBOAT KEY",
-      "soldPrice": "$2,600,000",
-      "soldDate": "2026-05-13",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "3,320",
-      "yearBuilt": 2003,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ]
 }
