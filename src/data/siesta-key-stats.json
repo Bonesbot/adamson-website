@@ -2,19 +2,19 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-19T11:02:53.121250+00:00",
+  "lastUpdated": "2026-05-20T10:56:23.130199+00:00",
   "counts": {
-    "sold": 459,
-    "pending": 74,
-    "active": 425,
+    "sold": 460,
+    "pending": 73,
+    "active": 427,
     "total": 533
   },
   "metrics": {
-    "avgPrice": "$1,409,421",
+    "avgPrice": "$1,409,155",
     "avgPricePerSqFt": "$680",
     "avgYearBuilt": 1978,
     "avgLivingSqFt": "1,905",
-    "avgLotSqFt": "80,689",
+    "avgLotSqFt": "80,670",
     "avgDom": 105
   },
   "range": {
@@ -22,42 +22,42 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 425,
-    "medianPrice": "$1,225,000",
-    "medianPricePerSqFt": "$776",
-    "waterfrontCount": 241,
-    "newConstructionCount": 59
+    "count": 427,
+    "medianPrice": "$1,200,000",
+    "medianPricePerSqFt": "$774",
+    "waterfrontCount": 243,
+    "newConstructionCount": 60
   },
   "sold": {
-    "count": 459,
-    "medianPrice": "$875,000",
+    "count": 460,
+    "medianPrice": "$877,500",
     "medianDom": 69,
-    "saleToListRatio": "87.4%"
+    "saleToListRatio": "87.3%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,133",
     "medianMonthlyCondoFee": "$1,263"
   },
   "priceBands": {
-    "under900k": 167,
+    "under900k": 168,
     "band900kTo1_5m": 82,
     "band1_5mTo3m": 83,
-    "band3mPlus": 93
+    "band3mPlus": 94
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 425
+      "count": 427
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 262
+      "count": 263
     },
     {
       "class": "mid-rise",
-      "count": 73
+      "count": 74
     },
     {
       "class": "high-rise",
@@ -65,6 +65,19 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4667008",
+      "address": "5362 SHADOW LAWN DR",
+      "subdivision": "SIESTA ISLES",
+      "soldPrice": "$4,490,000",
+      "soldDate": "2026-05-19",
+      "bedrooms": 3,
+      "bathrooms": 4.0,
+      "livingSqFt": "4,294",
+      "yearBuilt": 2023,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4677832",
       "address": "4881 OXFORD DR",
@@ -114,19 +127,6 @@
       "bathrooms": 2.0,
       "livingSqFt": "1,464",
       "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4679696",
-      "address": "5780 MIDNIGHT PASS RD #207",
-      "subdivision": "GULF & BAY CLUB PH 2",
-      "soldPrice": "$990,000",
-      "soldDate": "2026-05-15",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,473",
-      "yearBuilt": 1979,
       "propertyType": "Residential",
       "isWaterfront": true
     }
