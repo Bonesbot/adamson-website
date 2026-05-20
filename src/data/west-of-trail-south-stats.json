@@ -1,0 +1,130 @@
+{
+  "areaSlug": "west-of-trail-south",
+  "source": "supabase",
+  "status": "ok",
+  "lastUpdated": "2026-05-20T19:14:41.739410+00:00",
+  "counts": {
+    "sold": 69,
+    "pending": 10,
+    "active": 49,
+    "total": 79
+  },
+  "metrics": {
+    "avgPrice": "$723,853",
+    "avgPricePerSqFt": "$346",
+    "avgYearBuilt": 1985,
+    "avgLivingSqFt": "2,004",
+    "avgLotSqFt": "61,652",
+    "avgDom": 92
+  },
+  "range": {
+    "minPrice": "$160,000",
+    "maxPrice": "$4,975,000"
+  },
+  "active": {
+    "count": 49,
+    "medianPrice": "$559,900",
+    "medianPricePerSqFt": "$319",
+    "waterfrontCount": 12,
+    "newConstructionCount": 3
+  },
+  "sold": {
+    "count": 69,
+    "medianPrice": "$624,900",
+    "medianDom": 83,
+    "saleToListRatio": "86.4%"
+  },
+  "fees": {
+    "medianMonthlyAssociation": "$1,167",
+    "medianMonthlyCondoFee": "$992"
+  },
+  "priceBands": {
+    "under900k": 38,
+    "band900kTo1_5m": 2,
+    "band1_5mTo3m": 5,
+    "band3mPlus": 4
+  },
+  "propertyTypes": [
+    {
+      "type": "Residential",
+      "count": 49
+    }
+  ],
+  "buildingClasses": [
+    {
+      "class": "low-rise",
+      "count": 43
+    },
+    {
+      "class": "mid-rise",
+      "count": 2
+    }
+  ],
+  "recentSoldComps": [
+    {
+      "listingId": "A4670504",
+      "address": "5027 KESTRAL PARK #64",
+      "subdivision": "LANDINGS CARRIAGEHOUSE I",
+      "soldPrice": "$495,000",
+      "soldDate": "2026-05-15",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,656",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4685955",
+      "address": "1855 SHERWOOD ST",
+      "subdivision": "FLORENCE",
+      "soldPrice": "$852,500",
+      "soldDate": "2026-05-12",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,380",
+      "yearBuilt": 1953,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4678523",
+      "address": "5430 EAGLES POINT CIR #104",
+      "subdivision": "EAGLES POINT AT THE LANDINGS 2",
+      "soldPrice": "$375,000",
+      "soldDate": "2026-05-11",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,608",
+      "yearBuilt": 1995,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4676715",
+      "address": "4672 PINE HARRIER DR",
+      "subdivision": "THE LANDINGS",
+      "soldPrice": "$995,000",
+      "soldDate": "2026-05-06",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,558",
+      "yearBuilt": 1985,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "J1000715",
+      "address": "4872 PEREGRINE PT",
+      "subdivision": "THE LANDINGS",
+      "soldPrice": "$830,000",
+      "soldDate": "2026-05-06",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,083",
+      "yearBuilt": 1984,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    }
+  ]
+}
