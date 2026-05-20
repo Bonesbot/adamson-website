@@ -156,7 +156,10 @@ INSERT INTO areas (name, slug, zip_codes, description) VALUES
     ('Downtown Sarasota', 'downtown-sarasota', ARRAY['34236'], 'Urban core, high-rise condos, vibrant cultural scene'),
     ('St. Armands and Lido', 'st-armands-lido', ARRAY['34236'], 'Lido Key barrier island including St. Armands Circle — beachfront condos, Circle-side estates'),
     ('Siesta Key', 'siesta-key', ARRAY['34242'], 'Famous white-sand beach, mixed residential and resort'),
-    ('Bird Key', 'bird-key', ARRAY['34236'], 'Exclusive gated island community with golf course')
+    ('Bird Key', 'bird-key', ARRAY['34236'], 'Exclusive gated island community with golf course'),
+    ('West of Trail', 'west-of-trail-core', ARRAY['34239','34236'], 'Cherokee Park, Hudson Bayou, McClellan Park, Avondale, Oyster Bay — legacy mainland luxury corridor'),
+    ('West of Trail - North', 'west-of-trail-north', ARRAY['34234','34236'], 'Indian Beach, Sapphire Shores, Bay Haven — bayfront-adjacent estates north of downtown'),
+    ('West of Trail - South', 'west-of-trail-south', ARRAY['34231','34239'], 'Phillippi Estates, Bay Shore, deep-water canal communities approaching Siesta Key')
 ON CONFLICT (name) DO NOTHING;
 
 -- ===== Grants =====
