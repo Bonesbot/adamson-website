@@ -2,19 +2,19 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-19T11:02:53.668572+00:00",
+  "lastUpdated": "2026-05-20T10:56:23.711214+00:00",
   "counts": {
-    "sold": 228,
-    "pending": 75,
-    "active": 273,
-    "total": 303
+    "sold": 229,
+    "pending": 77,
+    "active": 274,
+    "total": 306
   },
   "metrics": {
-    "avgPrice": "$1,946,788",
-    "avgPricePerSqFt": "$833",
+    "avgPrice": "$1,935,460",
+    "avgPricePerSqFt": "$830",
     "avgYearBuilt": 2003,
-    "avgLivingSqFt": "2,062",
-    "avgLotSqFt": "50,851",
+    "avgLivingSqFt": "2,055",
+    "avgLotSqFt": "51,829",
     "avgDom": 98
   },
   "range": {
@@ -22,32 +22,32 @@
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 273,
-    "medianPrice": "$1,495,000",
-    "medianPricePerSqFt": "$838",
-    "waterfrontCount": 69,
+    "count": 274,
+    "medianPrice": "$1,497,000",
+    "medianPricePerSqFt": "$843",
+    "waterfrontCount": 70,
     "newConstructionCount": 98
   },
   "sold": {
-    "count": 228,
+    "count": 229,
     "medianPrice": "$1,160,000",
     "medianDom": 86,
     "saleToListRatio": "91.5%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,688",
-    "medianMonthlyCondoFee": "$1,768"
+    "medianMonthlyAssociation": "$1,683",
+    "medianMonthlyCondoFee": "$1,767"
   },
   "priceBands": {
     "under900k": 79,
-    "band900kTo1_5m": 61,
-    "band1_5mTo3m": 65,
+    "band900kTo1_5m": 60,
+    "band1_5mTo3m": 67,
     "band3mPlus": 68
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 273
+      "count": 274
     }
   ],
   "buildingClasses": [
@@ -61,10 +61,23 @@
     },
     {
       "class": "mid-rise",
-      "count": 52
+      "count": 53
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "N6142475",
+      "address": "332 COCOANUT AVE #505",
+      "subdivision": "332 COCOANUT",
+      "soldPrice": "$869,000",
+      "soldDate": "2026-05-18",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "992",
+      "yearBuilt": 2021,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4674559",
       "address": "888 BLVD OF THE ARTS #1205",
@@ -114,19 +127,6 @@
       "bathrooms": 3.5,
       "livingSqFt": "3,068",
       "yearBuilt": 2025,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4664512",
-      "address": "1155 N GULFSTREAM AVE #508",
-      "subdivision": "VUE SARASOTA BAY",
-      "soldPrice": "$1,475,000",
-      "soldDate": "2026-05-08",
-      "bedrooms": 2,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,591",
-      "yearBuilt": 2017,
       "propertyType": "Residential",
       "isWaterfront": false
     }
