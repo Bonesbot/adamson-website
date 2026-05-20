@@ -18,3 +18,16 @@
 # /search/*      https://adamsonfl.idxbroker.com/idx/search/:splat        200
 # /listings/*    https://adamsonfl.idxbroker.com/idx/results/:splat       200
 # /featured/*    https://adamsonfl.idxbroker.com/idx/featured/:splat      200
+
+# ---------------------------------------------------------------------------
+# Area slug consolidation — 2026-05-19
+# ---------------------------------------------------------------------------
+# Lido Key + St. Armands merged into a single area page. The Lido Key polygon
+# already covers all of St. Armands Circle and the north-end residential
+# streets, so listings from both communities now render on one page.
+# Preserve any existing inbound links / search rankings via 301.
+
+/areas/lido-key      /areas/st-armands-lido                                301
+/areas/lido-key/*    /areas/st-armands-lido/:splat                          301
+/areas/st-armands    /areas/st-armands-lido                                301
+/areas/st-armands/*  /areas/st-armands-lido/:splat                          301
