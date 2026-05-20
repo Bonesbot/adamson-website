@@ -154,9 +154,8 @@ COMMENT ON VIEW vw_import_batch_summary IS 'Admin dashboard: import batch histor
 INSERT INTO areas (name, slug, zip_codes, description) VALUES
     ('Longboat Key', 'longboat-key', ARRAY['34228'], 'Barrier island luxury community, beachfront and bayside'),
     ('Downtown Sarasota', 'downtown-sarasota', ARRAY['34236'], 'Urban core, high-rise condos, vibrant cultural scene'),
-    ('Lido Key', 'lido-key', ARRAY['34236'], 'Beach community with family appeal'),
+    ('St. Armands and Lido', 'st-armands-lido', ARRAY['34236'], 'Lido Key barrier island including St. Armands Circle — beachfront condos, Circle-side estates'),
     ('Siesta Key', 'siesta-key', ARRAY['34242'], 'Famous white-sand beach, mixed residential and resort'),
-    ('St. Armands', 'st-armands', ARRAY['34236'], 'Upscale shopping and dining, beachfront estates'),
     ('Bird Key', 'bird-key', ARRAY['34236'], 'Exclusive gated island community with golf course')
 ON CONFLICT (name) DO NOTHING;
 
