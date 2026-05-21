@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import MarketStats from '@/components/market/MarketStats.astro';
 import DetailedMarketTable from '@/components/market/DetailedMarketTable.astro';
 import AreaMarketSummary from '@/components/market/AreaMarketSummary.astro';
+import CondoTiersTable from '@/components/market/CondoTiersTable.astro';
 import FAQSchema from '@/components/seo/FAQSchema.astro';
 import Button from '@/components/ui/Button.astro';
 import { getAreas, getAreaBySlug } from '@/lib/sanity';
@@ -133,6 +134,18 @@ const jsonLd = [
   <!-- Detailed Sold + Pending Market Table (live MLS pipeline) -->
   {detailedStats && (
     <DetailedMarketTable areaName={area.name} stats={detailedStats} />
+  )}
+
+
+  <!-- Condo tier table — active inventory grouped by construction era -->
+  {detailedStats && detailedStats.condoTiers && detailedStats.condoTiers.length > 0 && (
+    <CondoTiersTable
+      areaName={area.name}
+      areaSlug={area.slug}
+      tiers={detailedStats.condoTiers}
+      scope={detailedStats.condoTiersScope}
+      lastUpdated={detailedStats.lastUpdated}
+    />
   )}
 
   <!-- Enriched AEO market summary — active inventory, price bands, sold comps -->
