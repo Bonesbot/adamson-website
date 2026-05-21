@@ -239,7 +239,7 @@ def compute_summary(slug, conn):
 
     condo_tiers_list, condo_tiers_scope = compute_condo_tiers(slug, conn)
 
-    return {
+    result = {
         "areaSlug": slug,
         "source": "supabase",
         "status": "ok",
@@ -312,6 +312,17 @@ def compute_summary(slug, conn):
         "condoTiers": condo_tiers_list,
         "condoTiersScope": condo_tiers_scope,
     }
+
+    # _condo_heavy_trim: when this submarket has meaningful condo inventory,
+    # suppress two fields that produce misleading or duplicative content on
+    # the area page. avgLotSqFt sums whole-tower lots into a single number;
+    # buildingClasses is replaced conceptually by the CondoTiersTable.
+    if condo_tiers_list and any(t['activeCount'] for t in condo_tiers_list):
+        if 'metrics' in result:
+            result['metrics']['avgLotSqFt'] = None
+        result['buildingClasses'] = []
+
+    return result
 
 
 def main():
