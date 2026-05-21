@@ -2,19 +2,19 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-20T10:56:23.130199+00:00",
+  "lastUpdated": "2026-05-21T10:53:04.499116+00:00",
   "counts": {
-    "sold": 460,
-    "pending": 73,
-    "active": 427,
-    "total": 533
+    "sold": 461,
+    "pending": 71,
+    "active": 429,
+    "total": 532
   },
   "metrics": {
-    "avgPrice": "$1,409,155",
+    "avgPrice": "$1,409,172",
     "avgPricePerSqFt": "$680",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,905",
-    "avgLotSqFt": "80,670",
+    "avgLivingSqFt": "1,903",
+    "avgLotSqFt": "80,863",
     "avgDom": 105
   },
   "range": {
@@ -22,38 +22,38 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 427,
+    "count": 429,
     "medianPrice": "$1,200,000",
-    "medianPricePerSqFt": "$774",
-    "waterfrontCount": 243,
+    "medianPricePerSqFt": "$772",
+    "waterfrontCount": 244,
     "newConstructionCount": 60
   },
   "sold": {
-    "count": 460,
-    "medianPrice": "$877,500",
+    "count": 461,
+    "medianPrice": "$880,000",
     "medianDom": 69,
-    "saleToListRatio": "87.3%"
+    "saleToListRatio": "87.4%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,133",
     "medianMonthlyCondoFee": "$1,263"
   },
   "priceBands": {
-    "under900k": 168,
-    "band900kTo1_5m": 82,
+    "under900k": 169,
+    "band900kTo1_5m": 83,
     "band1_5mTo3m": 83,
     "band3mPlus": 94
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 427
+      "count": 429
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 263
+      "count": 264
     },
     {
       "class": "mid-rise",
@@ -61,10 +61,23 @@
     },
     {
       "class": "high-rise",
-      "count": 15
+      "count": 16
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4687678",
+      "address": "704 TROPICAL CIR",
+      "subdivision": "SIESTA BEACH",
+      "soldPrice": "$1,425,000",
+      "soldDate": "2026-05-20",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,073",
+      "yearBuilt": 1976,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4667008",
       "address": "5362 SHADOW LAWN DR",
@@ -114,19 +127,6 @@
       "bathrooms": 2.0,
       "livingSqFt": "1,730",
       "yearBuilt": 1971,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4685512",
-      "address": "19 WHISPERING SANDS DR #302",
-      "subdivision": "WHISPERING SANDS SEC 7",
-      "soldPrice": "$1,340,900",
-      "soldDate": "2026-05-15",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,464",
-      "yearBuilt": 1973,
       "propertyType": "Residential",
       "isWaterfront": true
     }
