@@ -14,7 +14,7 @@
     "avgPricePerSqFt": "$930",
     "avgYearBuilt": 1983,
     "avgLivingSqFt": "2,236",
-    "avgLotSqFt": "77,315",
+    "avgLotSqFt": null,
     "avgDom": 118
   },
   "range": {
@@ -50,20 +50,7 @@
       "count": 129
     }
   ],
-  "buildingClasses": [
-    {
-      "class": "low-rise",
-      "count": 73
-    },
-    {
-      "class": "high-rise",
-      "count": 25
-    },
-    {
-      "class": "mid-rise",
-      "count": 15
-    }
-  ],
+  "buildingClasses": [],
   "recentSoldComps": [
     {
       "listingId": "A4686209",
@@ -130,5 +117,55 @@
       "propertyType": "Residential",
       "isWaterfront": true
     }
-  ]
+  ],
+  "condoTiers": [
+    {
+      "tier": "pre1990",
+      "label": "Pre-1990 (Vintage)",
+      "rangeLabel": "before 1990",
+      "activeCount": 60,
+      "avgPrice": "$736,540",
+      "avgPricePerSqFt": "$672",
+      "avgLivingSqFt": "1,107",
+      "avgDom": 167
+    },
+    {
+      "tier": "1990to2005",
+      "label": "1990 \u2013 2005",
+      "rangeLabel": "1990 through 2005",
+      "activeCount": 9,
+      "avgPrice": "$2,594,222",
+      "avgPricePerSqFt": "$1,011",
+      "avgLivingSqFt": "2,487",
+      "avgDom": 125
+    },
+    {
+      "tier": "2006to2019",
+      "label": "2006 \u2013 2019",
+      "rangeLabel": "2006 through 2019",
+      "activeCount": 0,
+      "avgPrice": null,
+      "avgPricePerSqFt": null,
+      "avgLivingSqFt": null,
+      "avgDom": null
+    },
+    {
+      "tier": "2020plus",
+      "label": "2020 & Newer",
+      "rangeLabel": "2020 or newer",
+      "activeCount": 6,
+      "avgPrice": "$9,475,000",
+      "avgPricePerSqFt": "$2,213",
+      "avgLivingSqFt": "4,236",
+      "avgDom": 456
+    }
+  ],
+  "condoTiersScope": {
+    "propertySubTypes": [
+      "Condominium",
+      "Villa",
+      "Townhouse"
+    ],
+    "status": "Active"
+  }
 }
