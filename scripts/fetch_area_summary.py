@@ -183,7 +183,7 @@ GROUP BY tier;
 """
 
 CONDO_TIER_DEFS = [
-    ('pre1990',    'Pre-1990 (Vintage)', 'before 1990'),
+    ('pre1990',    'Pre-1990',           'before 1990'),
     ('1990to2005', '1990 \u2013 2005',  '1990 through 2005'),
     ('2006to2019', '2006 \u2013 2019',  '2006 through 2019'),
     ('2020plus',   '2020 & Newer',       '2020 or newer'),
