@@ -1,0 +1,193 @@
+---
+/**
+ * CondoTiersTable — active condo/villa/townhouse inventory grouped by
+ * construction era. Sits inside the metrics block (between
+ * DetailedMarketTable and AreaMarketSummary) on area pages that ship a
+ * `condoTiers` array in their stats JSON.
+ *
+ * The tier definitions are baked into the JSON (label + range) so this
+ * component is dumb: it iterates and renders. Empty tiers render as
+ * a "—" placeholder so the four-tier grid stays visually consistent
+ * across areas where one era is missing inventory.
+ */
+
+interface CondoTier {
+  tier: string;
+  label: string;
+  rangeLabel: string;
+  activeCount: number;
+  avgPrice: string | null;
+  avgPricePerSqFt: string | null;
+  avgLivingSqFt: string | null;
+  avgDom: number | null;
+}
+
+interface Scope {
+  propertySubTypes?: string[];
+  status?: string;
+}
+
+interface Props {
+  areaName: string;
+  areaSlug: string;
+  tiers: CondoTier[];
+  scope?: Scope;
+  lastUpdated: string;
+}
+
+const { areaName, areaSlug, tiers, scope, lastUpdated } = Astro.props;
+
+const updatedFmt = new Date(lastUpdated).toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+});
+
+const subTypeList = (scope?.propertySubTypes ?? ["Condominium", "Villa", "Townhouse"])
+  .join(", ");
+
+const totalActive = tiers.reduce((sum, t) => sum + (t.activeCount || 0), 0);
+
+// JSON-LD dataset for AI crawlers
+const datasetSchema = {
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  name: `${areaName} Condo Market by Construction Era`,
+  description: `Active ${subTypeList} inventory in ${areaName} grouped by year built — average price, price per square foot, living area, and days on market for each construction era.`,
+  url: `https://adamsonfl.com/areas/${areaSlug}`,
+  dateModified: lastUpdated,
+  creator: {
+    "@type": "RealEstateAgent",
+    name: "Ryan Adamson",
+    worksFor: { "@type": "Organization", name: "Coldwell Banker Realty — St. Armands" },
+  },
+  isBasedOn: { "@type": "Dataset", name: "Stellar MLS" },
+  variableMeasured: tiers.flatMap((t) => {
+    if (!t.activeCount) return [];
+    return [
+      { "@type": "PropertyValue", name: `${t.label} — Active Listings`, value: t.activeCount },
+      ...(t.avgPrice
+        ? [{ "@type": "PropertyValue", name: `${t.label} — Average Price`, value: t.avgPrice }]
+        : []),
+      ...(t.avgPricePerSqFt
+        ? [{ "@type": "PropertyValue", name: `${t.label} — Average Price / Sq Ft`, value: t.avgPricePerSqFt }]
+        : []),
+      ...(t.avgLivingSqFt
+        ? [{ "@type": "PropertyValue", name: `${t.label} — Average Living Area`, value: `${t.avgLivingSqFt} sq ft` }]
+        : []),
+      ...(t.avgDom != null
+        ? [{ "@type": "PropertyValue", name: `${t.label} — Average Days on Market`, value: t.avgDom }]
+        : []),
+    ];
+  }),
+};
+---
+
+{tiers && tiers.length > 0 && (
+  <section
+    class="section dark-section"
+    aria-labelledby={`${areaSlug}-condo-tiers-heading`}
+  >
+    <div class="container-narrow">
+      <div class="mb-8">
+        <p class="section-label text-[var(--color-cbgl-blue-light)] mb-2">
+          Condo Market by Era
+        </p>
+        <h2
+          id={`${areaSlug}-condo-tiers-heading`}
+          class="accent-underline"
+        >
+          {areaName} Active Condos by Construction Era
+        </h2>
+        <p class="text-[var(--color-text-on-dark-muted)] mt-4 leading-relaxed">
+          Active {subTypeList.toLowerCase()} inventory in {areaName} —
+          <strong class="text-white">{totalActive}</strong> listings split across four construction
+          eras. Newer towers carry a meaningful price premium; vintage mid-century buildings still
+          dominate volume.
+        </p>
+      </div>
+
+      <div class="overflow-x-auto rounded-lg border border-[var(--color-border-dark)] bg-[var(--color-black-card)]">
+        <table class="w-full text-sm">
+          <caption class="sr-only">
+            {areaName} active condo, villa, and townhouse listings grouped by construction era
+          </caption>
+          <thead>
+            <tr class="border-b border-[var(--color-border-dark)]">
+              <th scope="col" class="px-4 py-3 text-left font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue-light)]">
+                Era
+              </th>
+              <th scope="col" class="px-4 py-3 text-right font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue-light)]">
+                Active
+              </th>
+              <th scope="col" class="px-4 py-3 text-right font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue-light)]">
+                Avg Price
+              </th>
+              <th scope="col" class="px-4 py-3 text-right font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue-light)]">
+                Avg $/Sq Ft
+              </th>
+              <th scope="col" class="px-4 py-3 text-right font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue-light)]">
+                Avg Living
+              </th>
+              <th scope="col" class="px-4 py-3 text-right font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue-light)]">
+                Avg DOM
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {tiers.map((t, idx) => (
+              <tr
+                class={`${idx !== tiers.length - 1 ? "border-b border-[var(--color-border-dark)]" : ""} hover:bg-[var(--color-dark-elevated)]/40 transition-colors`}
+              >
+                <th
+                  scope="row"
+                  class="px-4 py-4 text-left font-body text-white font-normal"
+                >
+                  <span class="block font-display font-bold">{t.label}</span>
+                  <span class="block text-xs text-white/40 mt-0.5">Built {t.rangeLabel}</span>
+                </th>
+                <td class="px-4 py-4 text-right font-display text-lg font-bold text-white">
+                  {t.activeCount > 0 ? t.activeCount : <span class="text-white/30">—</span>}
+                </td>
+                <td class="px-4 py-4 text-right font-display text-base text-white">
+                  {t.avgPrice ?? <span class="text-white/30">—</span>}
+                </td>
+                <td class="px-4 py-4 text-right text-white/80">
+                  {t.avgPricePerSqFt ?? <span class="text-white/30">—</span>}
+                </td>
+                <td class="px-4 py-4 text-right text-white/80">
+                  {t.avgLivingSqFt ? (
+                    <>
+                      {t.avgLivingSqFt}
+                      <span class="ml-1 text-xs text-white/40">sq ft</span>
+                    </>
+                  ) : (
+                    <span class="text-white/30">—</span>
+                  )}
+                </td>
+                <td class="px-4 py-4 text-right text-white/80">
+                  {t.avgDom != null ? (
+                    <>
+                      {t.avgDom}
+                      <span class="ml-1 text-xs text-white/40">days</span>
+                    </>
+                  ) : (
+                    <span class="text-white/30">—</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-xs text-[var(--color-text-on-dark-subtle)] mt-6 leading-relaxed">
+        Scope: active {subTypeList.toLowerCase()} listings only. Single-family residences are
+        excluded so the era-over-era price-per-square-foot comparison stays apples-to-apples.
+        Data sourced from Stellar MLS via the Adamson Group data pipeline. Last updated {updatedFmt}.
+      </p>
+    </div>
+
+    <script type="application/ld+json" set:html={JSON.stringify(datasetSchema)} />
+  </section>
+)}
