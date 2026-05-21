@@ -155,6 +155,65 @@ LIMIT 5;
 """
 
 
+CONDO_TIER_QUERY = """
+WITH t AS (
+    SELECT
+        CASE
+            WHEN year_built < 1990 THEN 'pre1990'
+            WHEN year_built BETWEEN 1990 AND 2005 THEN '1990to2005'
+            WHEN year_built BETWEEN 2006 AND 2019 THEN '2006to2019'
+            WHEN year_built >= 2020 THEN '2020plus'
+            ELSE 'unknown'
+        END AS tier,
+        current_price, living_area, days_on_market
+    FROM raw_listings
+    WHERE detected_area = %(slug)s
+      AND mls_status = 'Active'
+      AND property_sub_type IN ('Condominium','Villa','Townhouse')
+)
+SELECT
+    tier,
+    COUNT(*) AS active_count,
+    AVG(current_price)                              FILTER (WHERE current_price IS NOT NULL) AS avg_price,
+    AVG(current_price / NULLIF(living_area,0))      FILTER (WHERE living_area > 0)           AS avg_psf,
+    AVG(living_area)                                FILTER (WHERE living_area > 0)           AS avg_living,
+    AVG(days_on_market)                             FILTER (WHERE days_on_market IS NOT NULL) AS avg_dom
+FROM t
+GROUP BY tier;
+"""
+
+CONDO_TIER_DEFS = [
+    ('pre1990',    'Pre-1990 (Vintage)', 'before 1990'),
+    ('1990to2005', '1990 \u2013 2005',  '1990 through 2005'),
+    ('2006to2019', '2006 \u2013 2019',  '2006 through 2019'),
+    ('2020plus',   '2020 & Newer',       '2020 or newer'),
+]
+
+
+def compute_condo_tiers(slug, conn):
+    """Active condo/villa/townhouse inventory, grouped by construction era.
+    Returns (tiers_list, scope_dict). Empty list if the area has no condos."""
+    with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+        cur.execute(CONDO_TIER_QUERY, {"slug": slug})
+        by_tier = {r['tier']: r for r in cur.fetchall()}
+    if not any(r.get('active_count') for r in by_tier.values()):
+        return [], None
+    out = []
+    for key, label, range_label in CONDO_TIER_DEFS:
+        r = by_tier.get(key) or {}
+        out.append({
+            'tier': key,
+            'label': label,
+            'rangeLabel': range_label,
+            'activeCount': int(r.get('active_count') or 0),
+            'avgPrice': fmt_currency(r.get('avg_price')),
+            'avgPricePerSqFt': fmt_currency(r.get('avg_psf')),
+            'avgLivingSqFt': fmt_sqft(r.get('avg_living')),
+            'avgDom': fmt_int(r.get('avg_dom')),
+        })
+    scope = {'propertySubTypes': ['Condominium', 'Villa', 'Townhouse'], 'status': 'Active'}
+    return out, scope
+
 def compute_summary(slug, conn):
     with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
         cur.execute(HEADLINE_QUERY, {"slug": slug})
@@ -177,6 +236,8 @@ def compute_summary(slug, conn):
             "counts": {"active": 0, "pending": 0, "sold": 0, "total": 0},
             "metrics": {},
         }
+
+    condo_tiers_list, condo_tiers_scope = compute_condo_tiers(slug, conn)
 
     return {
         "areaSlug": slug,
@@ -248,6 +309,8 @@ def compute_summary(slug, conn):
             }
             for c in comps
         ],
+        "condoTiers": condo_tiers_list,
+        "condoTiersScope": condo_tiers_scope,
     }
 
 
