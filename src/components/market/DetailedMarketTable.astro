@@ -46,7 +46,7 @@ const updatedFmt = updated.toLocaleDateString("en-US", {
   year: "numeric",
 });
 
-const rows = [
+const rawRows = [
   { label: "Average Price", value: stats.metrics.avgPrice, suffix: "" },
   { label: "Average Price / Sq Ft", value: stats.metrics.avgPricePerSqFt, suffix: "" },
   { label: "Average Year Built", value: stats.metrics.avgYearBuilt?.toString(), suffix: "" },
@@ -54,6 +54,9 @@ const rows = [
   { label: "Average Lot Size", value: stats.metrics.avgLotSqFt, suffix: "sq ft" },
   { label: "Average Days on Market", value: stats.metrics.avgDom?.toString(), suffix: "days" },
 ];
+// Skip rows that have no value — keeps the table dense and area-relevant
+// (e.g. condo-heavy submarkets have no meaningful avgLotSqFt).
+const rows = rawRows.filter((r) => r.value);
 
 const hasData = stats.status === "ok" && stats.counts.total > 0;
 const isPreliminary = stats.source === "preliminary";
