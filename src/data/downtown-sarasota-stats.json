@@ -2,52 +2,52 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-20T10:56:23.711214+00:00",
+  "lastUpdated": "2026-05-21T10:53:05.087237+00:00",
   "counts": {
-    "sold": 229,
-    "pending": 77,
-    "active": 274,
-    "total": 306
+    "sold": 241,
+    "pending": 80,
+    "active": 280,
+    "total": 321
   },
   "metrics": {
-    "avgPrice": "$1,935,460",
-    "avgPricePerSqFt": "$830",
+    "avgPrice": "$1,857,594",
+    "avgPricePerSqFt": "$805",
     "avgYearBuilt": 2003,
-    "avgLivingSqFt": "2,055",
-    "avgLotSqFt": "51,829",
-    "avgDom": 98
+    "avgLivingSqFt": "2,004",
+    "avgLotSqFt": "77,302",
+    "avgDom": 100
   },
   "range": {
-    "minPrice": "$260,000",
+    "minPrice": "$198,000",
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 274,
-    "medianPrice": "$1,497,000",
-    "medianPricePerSqFt": "$843",
-    "waterfrontCount": 70,
-    "newConstructionCount": 98
+    "count": 280,
+    "medianPrice": "$1,495,000",
+    "medianPricePerSqFt": "$841",
+    "waterfrontCount": 71,
+    "newConstructionCount": 99
   },
   "sold": {
-    "count": 229,
-    "medianPrice": "$1,160,000",
-    "medianDom": 86,
-    "saleToListRatio": "91.5%"
+    "count": 241,
+    "medianPrice": "$1,125,000",
+    "medianDom": 88,
+    "saleToListRatio": "91.0%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,683",
-    "medianMonthlyCondoFee": "$1,767"
+    "medianMonthlyAssociation": "$1,655",
+    "medianMonthlyCondoFee": "$1,733"
   },
   "priceBands": {
-    "under900k": 79,
-    "band900kTo1_5m": 60,
-    "band1_5mTo3m": 67,
-    "band3mPlus": 68
+    "under900k": 83,
+    "band900kTo1_5m": 62,
+    "band1_5mTo3m": 66,
+    "band3mPlus": 69
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 274
+      "count": 280
     }
   ],
   "buildingClasses": [
@@ -57,11 +57,11 @@
     },
     {
       "class": "low-rise",
-      "count": 69
+      "count": 73
     },
     {
       "class": "mid-rise",
-      "count": 53
+      "count": 54
     }
   ],
   "recentSoldComps": [
@@ -77,6 +77,19 @@
       "yearBuilt": 2021,
       "propertyType": "Residential",
       "isWaterfront": false
+    },
+    {
+      "listingId": "A4642099",
+      "address": "11 SUNSET DR #303",
+      "subdivision": "SUNSET TOWERS",
+      "soldPrice": "$625,000",
+      "soldDate": "2026-05-16",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,433",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": true
     },
     {
       "listingId": "A4674559",
@@ -114,19 +127,6 @@
       "bathrooms": 3.5,
       "livingSqFt": "2,588",
       "yearBuilt": 2018,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4692719",
-      "address": "253 GOLDEN GATE POINT #503",
-      "subdivision": "GOLDEN GATE POINT",
-      "soldPrice": "$3,000,000",
-      "soldDate": "2026-05-12",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "3,068",
-      "yearBuilt": 2025,
       "propertyType": "Residential",
       "isWaterfront": false
     }
