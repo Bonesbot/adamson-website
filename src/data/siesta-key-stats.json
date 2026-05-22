@@ -2,19 +2,19 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-21T10:53:04.499116+00:00",
+  "lastUpdated": "2026-05-22T11:53:26.178402+00:00",
   "counts": {
-    "sold": 461,
-    "pending": 71,
-    "active": 429,
-    "total": 532
+    "sold": 463,
+    "pending": 72,
+    "active": 427,
+    "total": 535
   },
   "metrics": {
-    "avgPrice": "$1,409,172",
+    "avgPrice": "$1,404,683",
     "avgPricePerSqFt": "$680",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,903",
-    "avgLotSqFt": "80,863",
+    "avgLivingSqFt": "1,899",
+    "avgLotSqFt": null,
     "avgDom": 105
   },
   "range": {
@@ -22,49 +22,62 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 429,
-    "medianPrice": "$1,200,000",
-    "medianPricePerSqFt": "$772",
-    "waterfrontCount": 244,
+    "count": 427,
+    "medianPrice": "$1,249,000",
+    "medianPricePerSqFt": "$774",
+    "waterfrontCount": 242,
     "newConstructionCount": 60
   },
   "sold": {
-    "count": 461,
-    "medianPrice": "$880,000",
+    "count": 463,
+    "medianPrice": "$875,000",
     "medianDom": 69,
-    "saleToListRatio": "87.4%"
+    "saleToListRatio": "87.3%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,133",
     "medianMonthlyCondoFee": "$1,263"
   },
   "priceBands": {
-    "under900k": 169,
+    "under900k": 166,
     "band900kTo1_5m": 83,
-    "band1_5mTo3m": 83,
+    "band1_5mTo3m": 84,
     "band3mPlus": 94
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 429
+      "count": 427
     }
   ],
-  "buildingClasses": [
-    {
-      "class": "low-rise",
-      "count": 264
-    },
-    {
-      "class": "mid-rise",
-      "count": 74
-    },
-    {
-      "class": "high-rise",
-      "count": 16
-    }
-  ],
+  "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4680015",
+      "address": "8767 MIDNIGHT PASS RD #101F",
+      "subdivision": "ISLAND REEF II PH 1 2 & 3",
+      "soldPrice": "$525,000",
+      "soldDate": "2026-05-21",
+      "bedrooms": 2,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,768",
+      "yearBuilt": 1979,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4681513",
+      "address": "8897 MIDNIGHT PASS RD #105",
+      "subdivision": "SUNRISE COVE SEC 1",
+      "soldPrice": "$478,000",
+      "soldDate": "2026-05-21",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,233",
+      "yearBuilt": 1973,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4687678",
       "address": "704 TROPICAL CIR",
@@ -103,32 +116,56 @@
       "yearBuilt": 2020,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4633988",
-      "address": "915 SEASIDE DR #604",
-      "subdivision": "RESIDENCES ON SIESTA KEY BEACH, HYATT RESIDENCES",
-      "soldPrice": "$1,400,000",
-      "soldDate": "2026-05-15",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,920",
-      "yearBuilt": 2009,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4680536",
-      "address": "353 AVENIDA LEONA",
-      "subdivision": "SIESTA MANOR SEC 3",
-      "soldPrice": "$1,385,000",
-      "soldDate": "2026-05-15",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,730",
-      "yearBuilt": 1971,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
-  ]
+  ],
+  "condoTiers": [
+    {
+      "tier": "pre1990",
+      "label": "Pre-1990",
+      "rangeLabel": "before 1990",
+      "activeCount": 233,
+      "avgPrice": "$850,100",
+      "avgPricePerSqFt": "$693",
+      "avgLivingSqFt": "1,222",
+      "avgDom": 148
+    },
+    {
+      "tier": "1990to2005",
+      "label": "1990 \u2013 2005",
+      "rangeLabel": "1990 through 2005",
+      "activeCount": 9,
+      "avgPrice": "$1,405,767",
+      "avgPricePerSqFt": "$695",
+      "avgLivingSqFt": "2,084",
+      "avgDom": 192
+    },
+    {
+      "tier": "2006to2019",
+      "label": "2006 \u2013 2019",
+      "rangeLabel": "2006 through 2019",
+      "activeCount": 9,
+      "avgPrice": "$2,634,222",
+      "avgPricePerSqFt": "$1,202",
+      "avgLivingSqFt": "2,146",
+      "avgDom": 255
+    },
+    {
+      "tier": "2020plus",
+      "label": "2020 & Newer",
+      "rangeLabel": "2020 or newer",
+      "activeCount": 8,
+      "avgPrice": "$4,878,125",
+      "avgPricePerSqFt": "$1,684",
+      "avgLivingSqFt": "3,032",
+      "avgDom": 334
+    }
+  ],
+  "condoTiersScope": {
+    "propertySubTypes": [
+      "Condominium",
+      "Villa",
+      "Townhouse"
+    ],
+    "status": "Active"
+  }
 }
