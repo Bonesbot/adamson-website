@@ -2,31 +2,31 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-21T10:53:05.087237+00:00",
+  "lastUpdated": "2026-05-22T11:53:26.849793+00:00",
   "counts": {
     "sold": 241,
-    "pending": 80,
-    "active": 280,
-    "total": 321
+    "pending": 84,
+    "active": 278,
+    "total": 325
   },
   "metrics": {
-    "avgPrice": "$1,857,594",
-    "avgPricePerSqFt": "$805",
+    "avgPrice": "$1,850,310",
+    "avgPricePerSqFt": "$803",
     "avgYearBuilt": 2003,
-    "avgLivingSqFt": "2,004",
-    "avgLotSqFt": "77,302",
-    "avgDom": 100
+    "avgLivingSqFt": "2,003",
+    "avgLotSqFt": null,
+    "avgDom": 102
   },
   "range": {
     "minPrice": "$198,000",
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 280,
+    "count": 278,
     "medianPrice": "$1,495,000",
-    "medianPricePerSqFt": "$841",
-    "waterfrontCount": 71,
-    "newConstructionCount": 99
+    "medianPricePerSqFt": "$846",
+    "waterfrontCount": 72,
+    "newConstructionCount": 100
   },
   "sold": {
     "count": 241,
@@ -39,31 +39,18 @@
     "medianMonthlyCondoFee": "$1,733"
   },
   "priceBands": {
-    "under900k": 83,
-    "band900kTo1_5m": 62,
-    "band1_5mTo3m": 66,
-    "band3mPlus": 69
+    "under900k": 82,
+    "band900kTo1_5m": 61,
+    "band1_5mTo3m": 65,
+    "band3mPlus": 70
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 280
+      "count": 278
     }
   ],
-  "buildingClasses": [
-    {
-      "class": "high-rise",
-      "count": 145
-    },
-    {
-      "class": "low-rise",
-      "count": 73
-    },
-    {
-      "class": "mid-rise",
-      "count": 54
-    }
-  ],
+  "buildingClasses": [],
   "recentSoldComps": [
     {
       "listingId": "N6142475",
@@ -130,5 +117,55 @@
       "propertyType": "Residential",
       "isWaterfront": false
     }
-  ]
+  ],
+  "condoTiers": [
+    {
+      "tier": "pre1990",
+      "label": "Pre-1990",
+      "rangeLabel": "before 1990",
+      "activeCount": 65,
+      "avgPrice": "$1,088,475",
+      "avgPricePerSqFt": "$641",
+      "avgLivingSqFt": "1,600",
+      "avgDom": 161
+    },
+    {
+      "tier": "1990to2005",
+      "label": "1990 \u2013 2005",
+      "rangeLabel": "1990 through 2005",
+      "activeCount": 40,
+      "avgPrice": "$1,822,298",
+      "avgPricePerSqFt": "$726",
+      "avgLivingSqFt": "2,236",
+      "avgDom": 148
+    },
+    {
+      "tier": "2006to2019",
+      "label": "2006 \u2013 2019",
+      "rangeLabel": "2006 through 2019",
+      "activeCount": 66,
+      "avgPrice": "$1,548,253",
+      "avgPricePerSqFt": "$748",
+      "avgLivingSqFt": "1,881",
+      "avgDom": 125
+    },
+    {
+      "tier": "2020plus",
+      "label": "2020 & Newer",
+      "rangeLabel": "2020 or newer",
+      "activeCount": 98,
+      "avgPrice": "$3,774,852",
+      "avgPricePerSqFt": "$1,322",
+      "avgLivingSqFt": "2,684",
+      "avgDom": 160
+    }
+  ],
+  "condoTiersScope": {
+    "propertySubTypes": [
+      "Condominium",
+      "Villa",
+      "Townhouse"
+    ],
+    "status": "Active"
+  }
 }
