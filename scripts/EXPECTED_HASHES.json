@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "purpose": "SHA256 manifest of MLS pipeline scripts. The integrity checker (scripts/_integrity_check.py) verifies on-disk bytes match these before each daily run, to catch FUSE-mount corruption.",
-  "generated_from_commit": "bd11fc27e8e137a7137a2425a5dfc689fd48e3be",
+  "generated_from_commit": "da2be035b74cc011945c19d686e4f309f8d5b4d3",
   "rotate_with": "python scripts/_integrity_check.py --rotate",
   "files": {
     "scripts/combine_mls_export.py": "c0907b2dddcbda617ae9918276d03310a23475cda44166c39a8863c1ec29c3ea",
-    "scripts/fetch_area_summary.py": "a72dd3880c2ff2e02ee9bc799296930e1cda511d566766a480312a212e003bbb",
+    "scripts/fetch_area_summary.py": "7a6e849c691af0fb28f9264e66602ad344b7e709c52a661d1756199dfe219947",
     "scripts/push_to_github.py": "1b5096085e32889fa950cdf5e4cafb95925ef64b59ba4d704a68246caadec2e6",
     "supabase/ingest_mls.py": "4f2a85ec034ac8f955c03724906b3666dfab260a7d95097a6c39e093e1af1f27"
   }
