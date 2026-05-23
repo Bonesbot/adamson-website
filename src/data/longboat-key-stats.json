@@ -2,18 +2,18 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-22T11:53:24.907083+00:00",
+  "lastUpdated": "2026-05-23T10:53:31.186446+00:00",
   "counts": {
-    "sold": 461,
-    "pending": 88,
-    "active": 369,
-    "total": 549
+    "sold": 465,
+    "pending": 85,
+    "active": 372,
+    "total": 550
   },
   "metrics": {
-    "avgPrice": "$1,836,392",
-    "avgPricePerSqFt": "$728",
+    "avgPrice": "$1,832,105",
+    "avgPricePerSqFt": "$727",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,178",
+    "avgLivingSqFt": "2,176",
     "avgLotSqFt": null,
     "avgDom": 95
   },
@@ -22,36 +22,88 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 369,
-    "medianPrice": "$1,049,000",
-    "medianPricePerSqFt": "$682",
-    "waterfrontCount": 283,
+    "count": 372,
+    "medianPrice": "$1,050,000",
+    "medianPricePerSqFt": "$686",
+    "waterfrontCount": 287,
     "newConstructionCount": 29
   },
   "sold": {
-    "count": 461,
+    "count": 465,
     "medianPrice": "$1,100,000",
     "medianDom": 66,
-    "saleToListRatio": "87.2%"
+    "saleToListRatio": "87.0%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,600",
     "medianMonthlyCondoFee": "$1,698"
   },
   "priceBands": {
-    "under900k": 150,
-    "band900kTo1_5m": 80,
-    "band1_5mTo3m": 80,
+    "under900k": 148,
+    "band900kTo1_5m": 83,
+    "band1_5mTo3m": 82,
     "band3mPlus": 59
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 369
+      "count": 372
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4683660",
+      "address": "1445 GULF OF MEXICO DR #103",
+      "subdivision": "PLAYERS CLUB III",
+      "soldPrice": "$800,000",
+      "soldDate": "2026-05-22",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,933",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4668394",
+      "address": "1912 HARBOURSIDE DR #602",
+      "subdivision": "FAIRWAY BAY 1",
+      "soldPrice": "$496,500",
+      "soldDate": "2026-05-22",
+      "bedrooms": 2,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,590",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4688685",
+      "address": "2039 GULF OF MEXICO DR #G3-203",
+      "subdivision": "SEAPLACE I",
+      "soldPrice": "$470,000",
+      "soldDate": "2026-05-22",
+      "bedrooms": 2,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,214",
+      "yearBuilt": 1974,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "N6141238",
+      "address": "5125 GULF OF MEXICO DR #7",
+      "subdivision": "SEAGRAPE INN",
+      "soldPrice": "$917,000",
+      "soldDate": "2026-05-21",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "961",
+      "yearBuilt": 1983,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4688092",
       "address": "100 SANDS POINT RD #108",
@@ -64,58 +116,6 @@
       "yearBuilt": 1966,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4689590",
-      "address": "2045 GULF OF MEXICO DR #M1-511",
-      "subdivision": "SEAPLACE II",
-      "soldPrice": "$749,000",
-      "soldDate": "2026-05-20",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,076",
-      "yearBuilt": 1974,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4665992",
-      "address": "6161 GULF OF MEXICO DR",
-      "subdivision": "SLEEPY LAGOON",
-      "soldPrice": "$8,000,000",
-      "soldDate": "2026-05-18",
-      "bedrooms": 4,
-      "bathrooms": 4.5,
-      "livingSqFt": "4,224",
-      "yearBuilt": 1997,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4670094",
-      "address": "5840 GULF OF MEXICO DR",
-      "subdivision": "LONGBOAT KEY",
-      "soldPrice": "$4,500,000",
-      "soldDate": "2026-05-18",
-      "bedrooms": 4,
-      "bathrooms": 5.0,
-      "livingSqFt": "4,145",
-      "yearBuilt": 2022,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4682918",
-      "address": "1211 GULF OF MEXICO DR #610",
-      "subdivision": "PROMENADE",
-      "soldPrice": "$1,278,000",
-      "soldDate": "2026-05-18",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,827",
-      "yearBuilt": 1985,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -123,21 +123,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 205,
-      "avgPrice": "$861,857",
-      "avgPricePerSqFt": "$639",
-      "avgLivingSqFt": "1,345",
+      "activeCount": 207,
+      "avgPrice": "$875,705",
+      "avgPricePerSqFt": "$650",
+      "avgLivingSqFt": "1,349",
       "avgDom": 140
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 51,
-      "avgPrice": "$2,192,813",
-      "avgPricePerSqFt": "$833",
-      "avgLivingSqFt": "2,573",
-      "avgDom": 153
+      "activeCount": 52,
+      "avgPrice": "$2,169,778",
+      "avgPricePerSqFt": "$826",
+      "avgLivingSqFt": "2,565",
+      "avgDom": 151
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$5,531,333",
       "avgPricePerSqFt": "$1,542",
       "avgLivingSqFt": "3,595",
-      "avgDom": 183
+      "avgDom": 184
     },
     {
       "tier": "2020plus",
