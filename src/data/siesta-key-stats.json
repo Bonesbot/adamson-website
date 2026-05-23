@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-22T11:53:26.178402+00:00",
+  "lastUpdated": "2026-05-23T10:53:32.625403+00:00",
   "counts": {
-    "sold": 463,
-    "pending": 72,
-    "active": 427,
-    "total": 535
+    "sold": 466,
+    "pending": 70,
+    "active": 429,
+    "total": 536
   },
   "metrics": {
-    "avgPrice": "$1,404,683",
-    "avgPricePerSqFt": "$680",
+    "avgPrice": "$1,402,949",
+    "avgPricePerSqFt": "$679",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,899",
+    "avgLivingSqFt": "1,898",
     "avgLotSqFt": null,
     "avgDom": 105
   },
@@ -22,17 +22,17 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 427,
-    "medianPrice": "$1,249,000",
+    "count": 429,
+    "medianPrice": "$1,225,000",
     "medianPricePerSqFt": "$774",
-    "waterfrontCount": 242,
+    "waterfrontCount": 244,
     "newConstructionCount": 60
   },
   "sold": {
-    "count": 463,
-    "medianPrice": "$875,000",
-    "medianDom": 69,
-    "saleToListRatio": "87.3%"
+    "count": 466,
+    "medianPrice": "$877,500",
+    "medianDom": 70,
+    "saleToListRatio": "87.4%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,133",
@@ -40,18 +40,57 @@
   },
   "priceBands": {
     "under900k": 166,
-    "band900kTo1_5m": 83,
+    "band900kTo1_5m": 85,
     "band1_5mTo3m": 84,
     "band3mPlus": 94
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 427
+      "count": 429
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4681389",
+      "address": "605 AVENIDA DE MAYO",
+      "subdivision": "SARASOTA BEACH",
+      "soldPrice": "$2,000,000",
+      "soldDate": "2026-05-22",
+      "bedrooms": 5,
+      "bathrooms": 4.0,
+      "livingSqFt": "4,210",
+      "yearBuilt": 2003,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "C7516381",
+      "address": "6480 MIDNIGHT PASS RD #403",
+      "subdivision": "SIESTA BREAKERS",
+      "soldPrice": "$1,000,000",
+      "soldDate": "2026-05-22",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,265",
+      "yearBuilt": 1979,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4652172",
+      "address": "6204 MIDNIGHT PASS RD #201",
+      "subdivision": "SIESTA DUNES BEACH",
+      "soldPrice": "$735,000",
+      "soldDate": "2026-05-22",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,173",
+      "yearBuilt": 1979,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4680015",
       "address": "8767 MIDNIGHT PASS RD #101F",
@@ -77,45 +116,6 @@
       "yearBuilt": 1973,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4687678",
-      "address": "704 TROPICAL CIR",
-      "subdivision": "SIESTA BEACH",
-      "soldPrice": "$1,425,000",
-      "soldDate": "2026-05-20",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,073",
-      "yearBuilt": 1976,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4667008",
-      "address": "5362 SHADOW LAWN DR",
-      "subdivision": "SIESTA ISLES",
-      "soldPrice": "$4,490,000",
-      "soldDate": "2026-05-19",
-      "bedrooms": 3,
-      "bathrooms": 4.0,
-      "livingSqFt": "4,294",
-      "yearBuilt": 2023,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4677832",
-      "address": "4881 OXFORD DR",
-      "subdivision": "SIESTA BEACH",
-      "soldPrice": "$2,680,000",
-      "soldDate": "2026-05-15",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "2,819",
-      "yearBuilt": 2020,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -123,10 +123,10 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 233,
-      "avgPrice": "$850,100",
-      "avgPricePerSqFt": "$693",
-      "avgLivingSqFt": "1,222",
+      "activeCount": 234,
+      "avgPrice": "$848,878",
+      "avgPricePerSqFt": "$694",
+      "avgLivingSqFt": "1,219",
       "avgDom": 148
     },
     {
@@ -137,7 +137,7 @@
       "avgPrice": "$1,405,767",
       "avgPricePerSqFt": "$695",
       "avgLivingSqFt": "2,084",
-      "avgDom": 192
+      "avgDom": 193
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$2,634,222",
       "avgPricePerSqFt": "$1,202",
       "avgLivingSqFt": "2,146",
-      "avgDom": 255
+      "avgDom": 256
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$4,878,125",
       "avgPricePerSqFt": "$1,684",
       "avgLivingSqFt": "3,032",
-      "avgDom": 334
+      "avgDom": 335
     }
   ],
   "condoTiersScope": {
