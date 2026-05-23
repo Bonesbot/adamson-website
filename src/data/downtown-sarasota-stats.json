@@ -2,15 +2,15 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-22T11:53:26.849793+00:00",
+  "lastUpdated": "2026-05-23T10:53:33.352920+00:00",
   "counts": {
-    "sold": 241,
-    "pending": 84,
+    "sold": 242,
+    "pending": 83,
     "active": 278,
     "total": 325
   },
   "metrics": {
-    "avgPrice": "$1,850,310",
+    "avgPrice": "$1,850,079",
     "avgPricePerSqFt": "$803",
     "avgYearBuilt": 2003,
     "avgLivingSqFt": "2,003",
@@ -29,7 +29,7 @@
     "newConstructionCount": 100
   },
   "sold": {
-    "count": 241,
+    "count": 242,
     "medianPrice": "$1,125,000",
     "medianDom": 88,
     "saleToListRatio": "91.0%"
@@ -40,8 +40,8 @@
   },
   "priceBands": {
     "under900k": 82,
-    "band900kTo1_5m": 61,
-    "band1_5mTo3m": 65,
+    "band900kTo1_5m": 62,
+    "band1_5mTo3m": 64,
     "band3mPlus": 70
   },
   "propertyTypes": [
@@ -52,6 +52,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4684753",
+      "address": "1111 N GULFSTREAM AVE #16D",
+      "subdivision": "ONE WATERGATE",
+      "soldPrice": "$800,000",
+      "soldDate": "2026-05-22",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,736",
+      "yearBuilt": 1974,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "N6142475",
       "address": "332 COCOANUT AVE #505",
@@ -103,19 +116,6 @@
       "yearBuilt": 1924,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4684837",
-      "address": "211 COSMOPOLITAN CT #211",
-      "subdivision": "Q",
-      "soldPrice": "$1,105,000",
-      "soldDate": "2026-05-13",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,588",
-      "yearBuilt": 2018,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -124,10 +124,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 65,
-      "avgPrice": "$1,088,475",
-      "avgPricePerSqFt": "$641",
+      "avgPrice": "$1,088,014",
+      "avgPricePerSqFt": "$640",
       "avgLivingSqFt": "1,600",
-      "avgDom": 161
+      "avgDom": 162
     },
     {
       "tier": "1990to2005",
@@ -137,17 +137,17 @@
       "avgPrice": "$1,822,298",
       "avgPricePerSqFt": "$726",
       "avgLivingSqFt": "2,236",
-      "avgDom": 148
+      "avgDom": 149
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
       "activeCount": 66,
-      "avgPrice": "$1,548,253",
-      "avgPricePerSqFt": "$748",
+      "avgPrice": "$1,546,056",
+      "avgPricePerSqFt": "$747",
       "avgLivingSqFt": "1,881",
-      "avgDom": 125
+      "avgDom": 126
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$3,774,852",
       "avgPricePerSqFt": "$1,322",
       "avgLivingSqFt": "2,684",
-      "avgDom": 160
+      "avgDom": 161
     }
   ],
   "condoTiersScope": {
