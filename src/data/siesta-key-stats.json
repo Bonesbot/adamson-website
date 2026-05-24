@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-23T10:53:32.625403+00:00",
+  "lastUpdated": "2026-05-24T10:52:48.514391+00:00",
   "counts": {
-    "sold": 466,
-    "pending": 70,
-    "active": 429,
-    "total": 536
+    "sold": 468,
+    "pending": 69,
+    "active": 428,
+    "total": 537
   },
   "metrics": {
-    "avgPrice": "$1,402,949",
+    "avgPrice": "$1,401,791",
     "avgPricePerSqFt": "$679",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,898",
+    "avgLivingSqFt": "1,897",
     "avgLotSqFt": null,
     "avgDom": 105
   },
@@ -22,16 +22,16 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 429,
-    "medianPrice": "$1,225,000",
-    "medianPricePerSqFt": "$774",
+    "count": 428,
+    "medianPrice": "$1,237,000",
+    "medianPricePerSqFt": "$775",
     "waterfrontCount": 244,
     "newConstructionCount": 60
   },
   "sold": {
-    "count": 466,
-    "medianPrice": "$877,500",
-    "medianDom": 70,
+    "count": 468,
+    "medianPrice": "$875,000",
+    "medianDom": 69,
     "saleToListRatio": "87.4%"
   },
   "fees": {
@@ -39,7 +39,7 @@
     "medianMonthlyCondoFee": "$1,263"
   },
   "priceBands": {
-    "under900k": 166,
+    "under900k": 165,
     "band900kTo1_5m": 85,
     "band1_5mTo3m": 84,
     "band3mPlus": 94
@@ -47,7 +47,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 429
+      "count": 428
     }
   ],
   "buildingClasses": [],
@@ -79,6 +79,19 @@
       "isWaterfront": true
     },
     {
+      "listingId": "A4680503",
+      "address": "6047 E PEPPERTREE WAY #224",
+      "subdivision": "PEPPERTREE BAY II",
+      "soldPrice": "$875,000",
+      "soldDate": "2026-05-22",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,180",
+      "yearBuilt": 1973,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
       "listingId": "A4652172",
       "address": "6204 MIDNIGHT PASS RD #201",
       "subdivision": "SIESTA DUNES BEACH",
@@ -92,30 +105,17 @@
       "isWaterfront": false
     },
     {
-      "listingId": "A4680015",
-      "address": "8767 MIDNIGHT PASS RD #101F",
-      "subdivision": "ISLAND REEF II PH 1 2 & 3",
-      "soldPrice": "$525,000",
-      "soldDate": "2026-05-21",
-      "bedrooms": 2,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,768",
-      "yearBuilt": 1979,
+      "listingId": "TB8486242",
+      "address": "6263 MIDNIGHT PASS RD #301",
+      "subdivision": "EXCELSIOR BEACH TO BAY 7",
+      "soldPrice": "$705,000",
+      "soldDate": "2026-05-22",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,018",
+      "yearBuilt": 1981,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4681513",
-      "address": "8897 MIDNIGHT PASS RD #105",
-      "subdivision": "SUNRISE COVE SEC 1",
-      "soldPrice": "$478,000",
-      "soldDate": "2026-05-21",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,233",
-      "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -123,11 +123,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 234,
-      "avgPrice": "$848,878",
+      "activeCount": 233,
+      "avgPrice": "$848,873",
       "avgPricePerSqFt": "$694",
       "avgLivingSqFt": "1,219",
-      "avgDom": 148
+      "avgDom": 149
     },
     {
       "tier": "1990to2005",
@@ -137,7 +137,7 @@
       "avgPrice": "$1,405,767",
       "avgPricePerSqFt": "$695",
       "avgLivingSqFt": "2,084",
-      "avgDom": 193
+      "avgDom": 194
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$2,634,222",
       "avgPricePerSqFt": "$1,202",
       "avgLivingSqFt": "2,146",
-      "avgDom": 256
+      "avgDom": 257
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$4,878,125",
       "avgPricePerSqFt": "$1,684",
       "avgLivingSqFt": "3,032",
-      "avgDom": 335
+      "avgDom": 336
     }
   ],
   "condoTiersScope": {
