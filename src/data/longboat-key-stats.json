@@ -2,18 +2,18 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-24T10:52:47.293537+00:00",
+  "lastUpdated": "2026-05-25T10:58:28.426574+00:00",
   "counts": {
-    "sold": 465,
+    "sold": 466,
     "pending": 86,
-    "active": 376,
-    "total": 551
+    "active": 375,
+    "total": 552
   },
   "metrics": {
-    "avgPrice": "$1,830,031",
-    "avgPricePerSqFt": "$727",
+    "avgPrice": "$1,828,235",
+    "avgPricePerSqFt": "$726",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,174",
+    "avgLivingSqFt": "2,173",
     "avgLotSqFt": null,
     "avgDom": 96
   },
@@ -22,14 +22,14 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 376,
+    "count": 375,
     "medianPrice": "$1,050,000",
-    "medianPricePerSqFt": "$688",
-    "waterfrontCount": 287,
+    "medianPricePerSqFt": "$689",
+    "waterfrontCount": 286,
     "newConstructionCount": 29
   },
   "sold": {
-    "count": 465,
+    "count": 466,
     "medianPrice": "$1,100,000",
     "medianDom": 66,
     "saleToListRatio": "87.0%"
@@ -39,7 +39,7 @@
     "medianMonthlyCondoFee": "$1,689"
   },
   "priceBands": {
-    "under900k": 149,
+    "under900k": 148,
     "band900kTo1_5m": 85,
     "band1_5mTo3m": 83,
     "band3mPlus": 59
@@ -47,7 +47,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 376
+      "count": 375
     }
   ],
   "buildingClasses": [],
@@ -105,17 +105,17 @@
       "isWaterfront": true
     },
     {
-      "listingId": "A4688092",
-      "address": "100 SANDS POINT RD #108",
-      "subdivision": "SANDS POINT",
-      "soldPrice": "$850,000",
-      "soldDate": "2026-05-20",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,492",
-      "yearBuilt": 1966,
+      "listingId": "A4681134",
+      "address": "4350 CHATHAM DR #205",
+      "subdivision": "LONGBOAT HARBOUR",
+      "soldPrice": "$250,000",
+      "soldDate": "2026-05-21",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "667",
+      "yearBuilt": 1969,
       "propertyType": "Residential",
-      "isWaterfront": true
+      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -123,11 +123,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 210,
-      "avgPrice": "$879,642",
+      "activeCount": 209,
+      "avgPrice": "$879,506",
       "avgPricePerSqFt": "$653",
-      "avgLivingSqFt": "1,350",
-      "avgDom": 138
+      "avgLivingSqFt": "1,348",
+      "avgDom": 137
     },
     {
       "tier": "1990to2005",
@@ -137,7 +137,7 @@
       "avgPrice": "$2,169,778",
       "avgPricePerSqFt": "$826",
       "avgLivingSqFt": "2,565",
-      "avgDom": 152
+      "avgDom": 153
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$5,531,333",
       "avgPricePerSqFt": "$1,542",
       "avgLivingSqFt": "3,595",
-      "avgDom": 185
+      "avgDom": 186
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$7,041,500",
       "avgPricePerSqFt": "$2,258",
       "avgLivingSqFt": "2,882",
-      "avgDom": 283
+      "avgDom": 284
     }
   ],
   "condoTiersScope": {
