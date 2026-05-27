@@ -2,18 +2,18 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-25T10:58:30.416425+00:00",
+  "lastUpdated": "2026-05-27T11:00:09.591650+00:00",
   "counts": {
-    "sold": 242,
+    "sold": 244,
     "pending": 84,
     "active": 278,
-    "total": 326
+    "total": 328
   },
   "metrics": {
-    "avgPrice": "$1,846,855",
-    "avgPricePerSqFt": "$802",
+    "avgPrice": "$1,844,581",
+    "avgPricePerSqFt": "$801",
     "avgYearBuilt": 2002,
-    "avgLivingSqFt": "2,002",
+    "avgLivingSqFt": "2,000",
     "avgLotSqFt": null,
     "avgDom": 102
   },
@@ -23,24 +23,24 @@
   },
   "active": {
     "count": 278,
-    "medianPrice": "$1,495,000",
-    "medianPricePerSqFt": "$847",
-    "waterfrontCount": 71,
-    "newConstructionCount": 101
+    "medianPrice": "$1,477,000",
+    "medianPricePerSqFt": "$846",
+    "waterfrontCount": 72,
+    "newConstructionCount": 102
   },
   "sold": {
-    "count": 242,
+    "count": 244,
     "medianPrice": "$1,125,000",
     "medianDom": 88,
-    "saleToListRatio": "91.0%"
+    "saleToListRatio": "90.9%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,644",
     "medianMonthlyCondoFee": "$1,733"
   },
   "priceBands": {
-    "under900k": 81,
-    "band900kTo1_5m": 63,
+    "under900k": 80,
+    "band900kTo1_5m": 64,
     "band1_5mTo3m": 64,
     "band3mPlus": 70
   },
@@ -53,6 +53,19 @@
   "buildingClasses": [],
   "recentSoldComps": [
     {
+      "listingId": "A4628715",
+      "address": "111 GOLDEN GATE PT #402",
+      "subdivision": "EVOLUTION",
+      "soldPrice": "$2,100,000",
+      "soldDate": "2026-05-26",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,314",
+      "yearBuilt": 2024,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "A4684753",
       "address": "1111 N GULFSTREAM AVE #16D",
       "subdivision": "ONE WATERGATE",
@@ -64,6 +77,19 @@
       "yearBuilt": 1974,
       "propertyType": "Residential",
       "isWaterfront": false
+    },
+    {
+      "listingId": "A4684252",
+      "address": "33 S GULFSTREAM AVE #507",
+      "subdivision": "GULFSTREAM TOWERS",
+      "soldPrice": "$275,000",
+      "soldDate": "2026-05-22",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "820",
+      "yearBuilt": 1964,
+      "propertyType": "Residential",
+      "isWaterfront": true
     },
     {
       "listingId": "N6142475",
@@ -90,32 +116,6 @@
       "yearBuilt": 1980,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4674559",
-      "address": "888 BLVD OF THE ARTS #1205",
-      "subdivision": "CONDO ON THE BAY TOWER I",
-      "soldPrice": "$1,021,000",
-      "soldDate": "2026-05-15",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,729",
-      "yearBuilt": 1982,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4680336",
-      "address": "1221 N PALM AVE #303",
-      "subdivision": "FRANCES CARLTON",
-      "soldPrice": "$387,000",
-      "soldDate": "2026-05-14",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "675",
-      "yearBuilt": 1924,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -123,40 +123,40 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 64,
-      "avgPrice": "$1,092,530",
-      "avgPricePerSqFt": "$642",
-      "avgLivingSqFt": "1,602",
-      "avgDom": 164
+      "activeCount": 65,
+      "avgPrice": "$1,095,491",
+      "avgPricePerSqFt": "$644",
+      "avgLivingSqFt": "1,603",
+      "avgDom": 163
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 40,
-      "avgPrice": "$1,822,298",
-      "avgPricePerSqFt": "$726",
-      "avgLivingSqFt": "2,236",
-      "avgDom": 150
+      "activeCount": 39,
+      "avgPrice": "$1,863,433",
+      "avgPricePerSqFt": "$736",
+      "avgLivingSqFt": "2,279",
+      "avgDom": 155
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 66,
-      "avgPrice": "$1,546,056",
-      "avgPricePerSqFt": "$747",
-      "avgLivingSqFt": "1,881",
-      "avgDom": 128
+      "activeCount": 65,
+      "avgPrice": "$1,523,611",
+      "avgPricePerSqFt": "$742",
+      "avgLivingSqFt": "1,866",
+      "avgDom": 127
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 99,
-      "avgPrice": "$3,747,328",
-      "avgPricePerSqFt": "$1,319",
-      "avgLivingSqFt": "2,668",
+      "activeCount": 100,
+      "avgPrice": "$3,738,855",
+      "avgPricePerSqFt": "$1,313",
+      "avgLivingSqFt": "2,678",
       "avgDom": 161
     }
   ],
