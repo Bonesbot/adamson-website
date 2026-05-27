@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-25T10:58:29.732117+00:00",
+  "lastUpdated": "2026-05-27T11:00:08.955025+00:00",
   "counts": {
-    "sold": 468,
-    "pending": 70,
-    "active": 428,
-    "total": 538
+    "sold": 470,
+    "pending": 75,
+    "active": 422,
+    "total": 545
   },
   "metrics": {
-    "avgPrice": "$1,400,328",
-    "avgPricePerSqFt": "$679",
+    "avgPrice": "$1,396,104",
+    "avgPricePerSqFt": "$680",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,896",
+    "avgLivingSqFt": "1,889",
     "avgLotSqFt": null,
     "avgDom": 105
   },
@@ -22,14 +22,14 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 428,
-    "medianPrice": "$1,249,000",
-    "medianPricePerSqFt": "$778",
-    "waterfrontCount": 244,
-    "newConstructionCount": 60
+    "count": 422,
+    "medianPrice": "$1,250,000",
+    "medianPricePerSqFt": "$784",
+    "waterfrontCount": 241,
+    "newConstructionCount": 61
   },
   "sold": {
-    "count": 468,
+    "count": 470,
     "medianPrice": "$875,000",
     "medianDom": 69,
     "saleToListRatio": "87.4%"
@@ -39,19 +39,32 @@
     "medianMonthlyCondoFee": "$1,263"
   },
   "priceBands": {
-    "under900k": 164,
-    "band900kTo1_5m": 86,
-    "band1_5mTo3m": 84,
-    "band3mPlus": 94
+    "under900k": 161,
+    "band900kTo1_5m": 83,
+    "band1_5mTo3m": 83,
+    "band3mPlus": 95
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 428
+      "count": 422
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4684757",
+      "address": "700 TROPICAL CIR",
+      "subdivision": "SIESTA BEACH",
+      "soldPrice": "$1,600,000",
+      "soldDate": "2026-05-26",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,341",
+      "yearBuilt": 1977,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4681389",
       "address": "605 AVENIDA DE MAYO",
@@ -103,19 +116,6 @@
       "yearBuilt": 1979,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "TB8486242",
-      "address": "6263 MIDNIGHT PASS RD #301",
-      "subdivision": "EXCELSIOR BEACH TO BAY 7",
-      "soldPrice": "$705,000",
-      "soldDate": "2026-05-22",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,018",
-      "yearBuilt": 1981,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -123,11 +123,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 233,
-      "avgPrice": "$851,611",
-      "avgPricePerSqFt": "$696",
-      "avgLivingSqFt": "1,220",
-      "avgDom": 150
+      "activeCount": 228,
+      "avgPrice": "$851,019",
+      "avgPricePerSqFt": "$694",
+      "avgLivingSqFt": "1,223",
+      "avgDom": 151
     },
     {
       "tier": "1990to2005",
@@ -137,7 +137,7 @@
       "avgPrice": "$1,405,767",
       "avgPricePerSqFt": "$695",
       "avgLivingSqFt": "2,084",
-      "avgDom": 195
+      "avgDom": 197
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$2,634,222",
       "avgPricePerSqFt": "$1,202",
       "avgLivingSqFt": "2,146",
-      "avgDom": 258
+      "avgDom": 260
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$4,878,125",
       "avgPricePerSqFt": "$1,684",
       "avgLivingSqFt": "3,032",
-      "avgDom": 337
+      "avgDom": 339
     }
   ],
   "condoTiersScope": {
