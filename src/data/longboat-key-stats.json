@@ -2,56 +2,69 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-25T10:58:28.426574+00:00",
+  "lastUpdated": "2026-05-27T11:00:07.679227+00:00",
   "counts": {
-    "sold": 466,
-    "pending": 86,
-    "active": 375,
-    "total": 552
+    "sold": 467,
+    "pending": 87,
+    "active": 376,
+    "total": 554
   },
   "metrics": {
-    "avgPrice": "$1,828,235",
+    "avgPrice": "$1,826,433",
     "avgPricePerSqFt": "$726",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,173",
+    "avgLivingSqFt": "2,172",
     "avgLotSqFt": null,
-    "avgDom": 96
+    "avgDom": 97
   },
   "range": {
     "minPrice": "$165,000",
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 375,
-    "medianPrice": "$1,050,000",
-    "medianPricePerSqFt": "$689",
-    "waterfrontCount": 286,
+    "count": 376,
+    "medianPrice": "$1,075,000",
+    "medianPricePerSqFt": "$693",
+    "waterfrontCount": 287,
     "newConstructionCount": 29
   },
   "sold": {
-    "count": 466,
+    "count": 467,
     "medianPrice": "$1,100,000",
     "medianDom": 66,
     "saleToListRatio": "87.0%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,600",
-    "medianMonthlyCondoFee": "$1,689"
+    "medianMonthlyCondoFee": "$1,706"
   },
   "priceBands": {
-    "under900k": 148,
+    "under900k": 147,
     "band900kTo1_5m": 85,
     "band1_5mTo3m": 83,
-    "band3mPlus": 59
+    "band3mPlus": 61
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 375
+      "count": 376
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4691148",
+      "address": "775 LONGBOAT CLUB RD #408",
+      "subdivision": "BEACHES OF LONGBOAT KEY PH-1",
+      "soldPrice": "$2,208,000",
+      "soldDate": "2026-05-26",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,122",
+      "yearBuilt": 1984,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4683660",
       "address": "1445 GULF OF MEXICO DR #103",
@@ -103,19 +116,6 @@
       "yearBuilt": 1983,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4681134",
-      "address": "4350 CHATHAM DR #205",
-      "subdivision": "LONGBOAT HARBOUR",
-      "soldPrice": "$250,000",
-      "soldDate": "2026-05-21",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "667",
-      "yearBuilt": 1969,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -124,9 +124,9 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 209,
-      "avgPrice": "$879,506",
-      "avgPricePerSqFt": "$653",
-      "avgLivingSqFt": "1,348",
+      "avgPrice": "$883,057",
+      "avgPricePerSqFt": "$655",
+      "avgLivingSqFt": "1,349",
       "avgDom": 137
     },
     {
@@ -134,9 +134,9 @@
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 52,
-      "avgPrice": "$2,169,778",
-      "avgPricePerSqFt": "$826",
-      "avgLivingSqFt": "2,565",
+      "avgPrice": "$2,288,893",
+      "avgPricePerSqFt": "$846",
+      "avgLivingSqFt": "2,606",
       "avgDom": 153
     },
     {
@@ -147,7 +147,7 @@
       "avgPrice": "$5,531,333",
       "avgPricePerSqFt": "$1,542",
       "avgLivingSqFt": "3,595",
-      "avgDom": 186
+      "avgDom": 188
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$7,041,500",
       "avgPricePerSqFt": "$2,258",
       "avgLivingSqFt": "2,882",
-      "avgDom": 284
+      "avgDom": 286
     }
   ],
   "condoTiersScope": {
