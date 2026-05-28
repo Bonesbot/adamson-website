@@ -2,18 +2,18 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-27T11:00:09.591650+00:00",
+  "lastUpdated": "2026-05-28T10:51:29.803316+00:00",
   "counts": {
-    "sold": 244,
-    "pending": 84,
+    "sold": 245,
+    "pending": 85,
     "active": 278,
-    "total": 328
+    "total": 330
   },
   "metrics": {
-    "avgPrice": "$1,844,581",
+    "avgPrice": "$1,841,281",
     "avgPricePerSqFt": "$801",
-    "avgYearBuilt": 2002,
-    "avgLivingSqFt": "2,000",
+    "avgYearBuilt": 2003,
+    "avgLivingSqFt": "1,998",
     "avgLotSqFt": null,
     "avgDom": 102
   },
@@ -23,25 +23,25 @@
   },
   "active": {
     "count": 278,
-    "medianPrice": "$1,477,000",
-    "medianPricePerSqFt": "$846",
+    "medianPrice": "$1,495,000",
+    "medianPricePerSqFt": "$847",
     "waterfrontCount": 72,
-    "newConstructionCount": 102
+    "newConstructionCount": 103
   },
   "sold": {
-    "count": 244,
+    "count": 245,
     "medianPrice": "$1,125,000",
     "medianDom": 88,
-    "saleToListRatio": "90.9%"
+    "saleToListRatio": "90.8%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,644",
+    "medianMonthlyAssociation": "$1,655",
     "medianMonthlyCondoFee": "$1,733"
   },
   "priceBands": {
     "under900k": 80,
-    "band900kTo1_5m": 64,
-    "band1_5mTo3m": 64,
+    "band900kTo1_5m": 63,
+    "band1_5mTo3m": 65,
     "band3mPlus": 70
   },
   "propertyTypes": [
@@ -52,6 +52,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4672850",
+      "address": "800 N TAMIAMI TRL #505/507",
+      "subdivision": "ALINARI",
+      "soldPrice": "$1,450,000",
+      "soldDate": "2026-05-27",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,981",
+      "yearBuilt": 2007,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4628715",
       "address": "111 GOLDEN GATE PT #402",
@@ -103,19 +116,6 @@
       "yearBuilt": 2021,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4642099",
-      "address": "11 SUNSET DR #303",
-      "subdivision": "SUNSET TOWERS",
-      "soldPrice": "$625,000",
-      "soldDate": "2026-05-16",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,433",
-      "yearBuilt": 1980,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -124,10 +124,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 65,
-      "avgPrice": "$1,095,491",
-      "avgPricePerSqFt": "$644",
+      "avgPrice": "$1,094,722",
+      "avgPricePerSqFt": "$643",
       "avgLivingSqFt": "1,603",
-      "avgDom": 163
+      "avgDom": 164
     },
     {
       "tier": "1990to2005",
@@ -137,27 +137,27 @@
       "avgPrice": "$1,863,433",
       "avgPricePerSqFt": "$736",
       "avgLivingSqFt": "2,279",
-      "avgDom": 155
+      "avgDom": 156
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 65,
-      "avgPrice": "$1,523,611",
+      "activeCount": 64,
+      "avgPrice": "$1,526,980",
       "avgPricePerSqFt": "$742",
-      "avgLivingSqFt": "1,866",
-      "avgDom": 127
+      "avgLivingSqFt": "1,867",
+      "avgDom": 129
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 100,
-      "avgPrice": "$3,738,855",
-      "avgPricePerSqFt": "$1,313",
-      "avgLivingSqFt": "2,678",
-      "avgDom": 161
+      "activeCount": 101,
+      "avgPrice": "$3,721,589",
+      "avgPricePerSqFt": "$1,309",
+      "avgLivingSqFt": "2,674",
+      "avgDom": 160
     }
   ],
   "condoTiersScope": {
