@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-27T11:00:08.955025+00:00",
+  "lastUpdated": "2026-05-28T10:51:29.159555+00:00",
   "counts": {
-    "sold": 470,
-    "pending": 75,
-    "active": 422,
-    "total": 545
+    "sold": 473,
+    "pending": 73,
+    "active": 425,
+    "total": 546
   },
   "metrics": {
-    "avgPrice": "$1,396,104",
+    "avgPrice": "$1,395,071",
     "avgPricePerSqFt": "$680",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,889",
+    "avgLivingSqFt": "1,888",
     "avgLotSqFt": null,
     "avgDom": 105
   },
@@ -22,14 +22,14 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 422,
+    "count": 425,
     "medianPrice": "$1,250,000",
-    "medianPricePerSqFt": "$784",
-    "waterfrontCount": 241,
+    "medianPricePerSqFt": "$785",
+    "waterfrontCount": 243,
     "newConstructionCount": 61
   },
   "sold": {
-    "count": 470,
+    "count": 473,
     "medianPrice": "$875,000",
     "medianDom": 69,
     "saleToListRatio": "87.4%"
@@ -39,19 +39,45 @@
     "medianMonthlyCondoFee": "$1,263"
   },
   "priceBands": {
-    "under900k": 161,
-    "band900kTo1_5m": 83,
-    "band1_5mTo3m": 83,
+    "under900k": 164,
+    "band900kTo1_5m": 82,
+    "band1_5mTo3m": 84,
     "band3mPlus": 95
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 422
+      "count": 425
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4671593",
+      "address": "4817 OCEAN BLVD",
+      "subdivision": "LAKE RITTWOOD",
+      "soldPrice": "$1,895,000",
+      "soldDate": "2026-05-27",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,657",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4679533",
+      "address": "1002 GLEBE LN",
+      "subdivision": "SIESTA ISLES",
+      "soldPrice": "$1,050,000",
+      "soldDate": "2026-05-27",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,808",
+      "yearBuilt": 1967,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4684757",
       "address": "700 TROPICAL CIR",
@@ -62,6 +88,19 @@
       "bathrooms": 3.0,
       "livingSqFt": "2,341",
       "yearBuilt": 1977,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4675259",
+      "address": "6518 MIDNIGHT PASS RD #310",
+      "subdivision": "HOUSE SUN",
+      "soldPrice": "$855,000",
+      "soldDate": "2026-05-26",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,215",
+      "yearBuilt": 1975,
       "propertyType": "Residential",
       "isWaterfront": true
     },
@@ -77,45 +116,6 @@
       "yearBuilt": 2003,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "C7516381",
-      "address": "6480 MIDNIGHT PASS RD #403",
-      "subdivision": "SIESTA BREAKERS",
-      "soldPrice": "$1,000,000",
-      "soldDate": "2026-05-22",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,265",
-      "yearBuilt": 1979,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4680503",
-      "address": "6047 E PEPPERTREE WAY #224",
-      "subdivision": "PEPPERTREE BAY II",
-      "soldPrice": "$875,000",
-      "soldDate": "2026-05-22",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,180",
-      "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4652172",
-      "address": "6204 MIDNIGHT PASS RD #201",
-      "subdivision": "SIESTA DUNES BEACH",
-      "soldPrice": "$735,000",
-      "soldDate": "2026-05-22",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,173",
-      "yearBuilt": 1979,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -123,11 +123,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 228,
-      "avgPrice": "$851,019",
-      "avgPricePerSqFt": "$694",
-      "avgLivingSqFt": "1,223",
-      "avgDom": 151
+      "activeCount": 231,
+      "avgPrice": "$852,711",
+      "avgPricePerSqFt": "$696",
+      "avgLivingSqFt": "1,222",
+      "avgDom": 149
     },
     {
       "tier": "1990to2005",
@@ -137,7 +137,7 @@
       "avgPrice": "$1,405,767",
       "avgPricePerSqFt": "$695",
       "avgLivingSqFt": "2,084",
-      "avgDom": 197
+      "avgDom": 198
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$2,634,222",
       "avgPricePerSqFt": "$1,202",
       "avgLivingSqFt": "2,146",
-      "avgDom": 260
+      "avgDom": 261
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$4,878,125",
       "avgPricePerSqFt": "$1,684",
       "avgLivingSqFt": "3,032",
-      "avgDom": 339
+      "avgDom": 340
     }
   ],
   "condoTiersScope": {
