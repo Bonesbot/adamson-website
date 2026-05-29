@@ -2,18 +2,18 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-28T10:51:27.910826+00:00",
+  "lastUpdated": "2026-05-29T10:57:31.543667+00:00",
   "counts": {
-    "sold": 470,
-    "pending": 86,
-    "active": 375,
-    "total": 556
+    "sold": 476,
+    "pending": 83,
+    "active": 373,
+    "total": 559
   },
   "metrics": {
-    "avgPrice": "$1,825,491",
-    "avgPricePerSqFt": "$725",
+    "avgPrice": "$1,821,353",
+    "avgPricePerSqFt": "$724",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,173",
+    "avgLivingSqFt": "2,172",
     "avgLotSqFt": null,
     "avgDom": 96
   },
@@ -22,36 +22,75 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 375,
+    "count": 373,
     "medianPrice": "$1,075,000",
     "medianPricePerSqFt": "$692",
-    "waterfrontCount": 287,
+    "waterfrontCount": 286,
     "newConstructionCount": 29
   },
   "sold": {
-    "count": 470,
-    "medianPrice": "$1,100,000",
+    "count": 476,
+    "medianPrice": "$1,099,000",
     "medianDom": 66,
     "saleToListRatio": "87.0%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,600",
-    "medianMonthlyCondoFee": "$1,706"
+    "medianMonthlyCondoFee": "$1,707"
   },
   "priceBands": {
-    "under900k": 147,
+    "under900k": 146,
     "band900kTo1_5m": 84,
-    "band1_5mTo3m": 82,
+    "band1_5mTo3m": 81,
     "band3mPlus": 62
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 375
+      "count": 373
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4670048",
+      "address": "415 L AMBIANCE DR #B202",
+      "subdivision": "L AMBIANCE 1",
+      "soldPrice": "$2,125,000",
+      "soldDate": "2026-05-28",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,385",
+      "yearBuilt": 1992,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4694811",
+      "address": "1904 HARBOURSIDE DR #204",
+      "subdivision": "FAIRWAY BAY 1",
+      "soldPrice": "$850,000",
+      "soldDate": "2026-05-28",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,135",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4678167",
+      "address": "3533 FAIR OAKS LN",
+      "subdivision": "QUEENS HARBOUR",
+      "soldPrice": "$2,850,000",
+      "soldDate": "2026-05-27",
+      "bedrooms": 4,
+      "bathrooms": 5.0,
+      "livingSqFt": "3,909",
+      "yearBuilt": 1999,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4673335",
       "address": "615 BUTTONWOOD DR",
@@ -66,54 +105,15 @@
       "isWaterfront": true
     },
     {
-      "listingId": "A4691148",
-      "address": "775 LONGBOAT CLUB RD #408",
-      "subdivision": "BEACHES OF LONGBOAT KEY PH-1",
-      "soldPrice": "$2,208,000",
-      "soldDate": "2026-05-26",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,122",
-      "yearBuilt": 1984,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4683336",
-      "address": "5635 GULF OF MEXICO DR #202",
-      "subdivision": "LONGBOAT SANDPIPERS",
-      "soldPrice": "$900,000",
-      "soldDate": "2026-05-26",
+      "listingId": "A4670081",
+      "address": "2295 GULF OF MEXICO DR #115S",
+      "subdivision": "ISLANDER CLUB OF LONGBOAT",
+      "soldPrice": "$820,000",
+      "soldDate": "2026-05-27",
       "bedrooms": 2,
       "bathrooms": 2.0,
-      "livingSqFt": "1,786",
-      "yearBuilt": 1980,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "J998699",
-      "address": "2425 GULF OF MEXICO DR #6D",
-      "subdivision": "SEA GATE CLUB",
-      "soldPrice": "$1,750,000",
-      "soldDate": "2026-05-22",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,470",
-      "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4683660",
-      "address": "1445 GULF OF MEXICO DR #103",
-      "subdivision": "PLAYERS CLUB III",
-      "soldPrice": "$800,000",
-      "soldDate": "2026-05-22",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,933",
-      "yearBuilt": 1982,
+      "livingSqFt": "1,235",
+      "yearBuilt": 1970,
       "propertyType": "Residential",
       "isWaterfront": true
     }
@@ -123,21 +123,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 208,
-      "avgPrice": "$880,981",
+      "activeCount": 207,
+      "avgPrice": "$881,256",
       "avgPricePerSqFt": "$655",
       "avgLivingSqFt": "1,347",
-      "avgDom": 139
+      "avgDom": 140
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 52,
-      "avgPrice": "$2,288,124",
-      "avgPricePerSqFt": "$845",
-      "avgLivingSqFt": "2,606",
-      "avgDom": 154
+      "activeCount": 51,
+      "avgPrice": "$2,297,146",
+      "avgPricePerSqFt": "$847",
+      "avgLivingSqFt": "2,611",
+      "avgDom": 155
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$5,531,333",
       "avgPricePerSqFt": "$1,542",
       "avgLivingSqFt": "3,595",
-      "avgDom": 189
+      "avgDom": 190
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$7,041,500",
       "avgPricePerSqFt": "$2,258",
       "avgLivingSqFt": "2,882",
-      "avgDom": 287
+      "avgDom": 288
     }
   ],
   "condoTiersScope": {
