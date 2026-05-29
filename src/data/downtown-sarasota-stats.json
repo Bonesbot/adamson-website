@@ -2,36 +2,36 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-28T10:51:29.803316+00:00",
+  "lastUpdated": "2026-05-29T10:57:33.483446+00:00",
   "counts": {
-    "sold": 245,
-    "pending": 85,
-    "active": 278,
-    "total": 330
+    "sold": 247,
+    "pending": 87,
+    "active": 276,
+    "total": 334
   },
   "metrics": {
-    "avgPrice": "$1,841,281",
-    "avgPricePerSqFt": "$801",
+    "avgPrice": "$1,831,864",
+    "avgPricePerSqFt": "$799",
     "avgYearBuilt": 2003,
-    "avgLivingSqFt": "1,998",
+    "avgLivingSqFt": "1,992",
     "avgLotSqFt": null,
-    "avgDom": 102
+    "avgDom": 103
   },
   "range": {
     "minPrice": "$198,000",
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 278,
+    "count": 276,
     "medianPrice": "$1,495,000",
-    "medianPricePerSqFt": "$847",
-    "waterfrontCount": 72,
+    "medianPricePerSqFt": "$852",
+    "waterfrontCount": 71,
     "newConstructionCount": 103
   },
   "sold": {
-    "count": 245,
-    "medianPrice": "$1,125,000",
-    "medianDom": 88,
+    "count": 247,
+    "medianPrice": "$1,140,000",
+    "medianDom": 89,
     "saleToListRatio": "90.8%"
   },
   "fees": {
@@ -39,19 +39,32 @@
     "medianMonthlyCondoFee": "$1,733"
   },
   "priceBands": {
-    "under900k": 80,
-    "band900kTo1_5m": 63,
-    "band1_5mTo3m": 65,
+    "under900k": 78,
+    "band900kTo1_5m": 64,
+    "band1_5mTo3m": 64,
     "band3mPlus": 70
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 278
+      "count": 276
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4666261",
+      "address": "711 S PALM AVE #303",
+      "subdivision": "7 ONE ONE PALM",
+      "soldPrice": "$1,500,000",
+      "soldDate": "2026-05-27",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,815",
+      "yearBuilt": 2019,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4672850",
       "address": "800 N TAMIAMI TRL #505/507",
@@ -62,6 +75,19 @@
       "bathrooms": 3.5,
       "livingSqFt": "2,981",
       "yearBuilt": 2007,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "TB8459345",
+      "address": "301 QUAY COMMONS #1707",
+      "subdivision": "BAYSO SARASOTA CONDOMINIUM",
+      "soldPrice": "$1,425,000",
+      "soldDate": "2026-05-27",
+      "bedrooms": 2,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,578",
+      "yearBuilt": 2023,
       "propertyType": "Residential",
       "isWaterfront": false
     },
@@ -90,32 +116,6 @@
       "yearBuilt": 1974,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4684252",
-      "address": "33 S GULFSTREAM AVE #507",
-      "subdivision": "GULFSTREAM TOWERS",
-      "soldPrice": "$275,000",
-      "soldDate": "2026-05-22",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "820",
-      "yearBuilt": 1964,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "N6142475",
-      "address": "332 COCOANUT AVE #505",
-      "subdivision": "332 COCOANUT",
-      "soldPrice": "$869,000",
-      "soldDate": "2026-05-18",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "992",
-      "yearBuilt": 2021,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -123,30 +123,30 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 65,
-      "avgPrice": "$1,094,722",
-      "avgPricePerSqFt": "$643",
-      "avgLivingSqFt": "1,603",
-      "avgDom": 164
+      "activeCount": 64,
+      "avgPrice": "$1,100,889",
+      "avgPricePerSqFt": "$645",
+      "avgLivingSqFt": "1,607",
+      "avgDom": 163
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 39,
-      "avgPrice": "$1,863,433",
+      "activeCount": 38,
+      "avgPrice": "$1,874,172",
       "avgPricePerSqFt": "$736",
-      "avgLivingSqFt": "2,279",
-      "avgDom": 156
+      "avgLivingSqFt": "2,284",
+      "avgDom": 155
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 64,
-      "avgPrice": "$1,526,980",
-      "avgPricePerSqFt": "$742",
-      "avgLivingSqFt": "1,867",
+      "activeCount": 63,
+      "avgPrice": "$1,544,789",
+      "avgPricePerSqFt": "$748",
+      "avgLivingSqFt": "1,881",
       "avgDom": 129
     },
     {
@@ -157,7 +157,7 @@
       "avgPrice": "$3,721,589",
       "avgPricePerSqFt": "$1,309",
       "avgLivingSqFt": "2,674",
-      "avgDom": 160
+      "avgDom": 161
     }
   ],
   "condoTiersScope": {
