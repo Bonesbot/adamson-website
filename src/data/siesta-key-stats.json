@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-28T10:51:29.159555+00:00",
+  "lastUpdated": "2026-05-29T10:57:32.853670+00:00",
   "counts": {
-    "sold": 473,
-    "pending": 73,
-    "active": 425,
-    "total": 546
+    "sold": 474,
+    "pending": 71,
+    "active": 426,
+    "total": 545
   },
   "metrics": {
-    "avgPrice": "$1,395,071",
+    "avgPrice": "$1,395,887",
     "avgPricePerSqFt": "$680",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,888",
+    "avgLivingSqFt": "1,889",
     "avgLotSqFt": null,
     "avgDom": 105
   },
@@ -22,16 +22,16 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 425,
-    "medianPrice": "$1,250,000",
-    "medianPricePerSqFt": "$785",
-    "waterfrontCount": 243,
+    "count": 426,
+    "medianPrice": "$1,249,500",
+    "medianPricePerSqFt": "$784",
+    "waterfrontCount": 244,
     "newConstructionCount": 61
   },
   "sold": {
-    "count": 473,
-    "medianPrice": "$875,000",
-    "medianDom": 69,
+    "count": 474,
+    "medianPrice": "$877,500",
+    "medianDom": 70,
     "saleToListRatio": "87.4%"
   },
   "fees": {
@@ -40,18 +40,31 @@
   },
   "priceBands": {
     "under900k": 164,
-    "band900kTo1_5m": 82,
+    "band900kTo1_5m": 83,
     "band1_5mTo3m": 84,
     "band3mPlus": 95
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 425
+      "count": 426
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4649919",
+      "address": "5024 COMMONWEALTH DR",
+      "subdivision": "SIESTA BEACH",
+      "soldPrice": "$1,954,700",
+      "soldDate": "2026-05-28",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,468",
+      "yearBuilt": 2003,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4671593",
       "address": "4817 OCEAN BLVD",
@@ -103,19 +116,6 @@
       "yearBuilt": 1975,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4681389",
-      "address": "605 AVENIDA DE MAYO",
-      "subdivision": "SARASOTA BEACH",
-      "soldPrice": "$2,000,000",
-      "soldDate": "2026-05-22",
-      "bedrooms": 5,
-      "bathrooms": 4.0,
-      "livingSqFt": "4,210",
-      "yearBuilt": 2003,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -124,10 +124,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 231,
-      "avgPrice": "$852,711",
-      "avgPricePerSqFt": "$696",
-      "avgLivingSqFt": "1,222",
-      "avgDom": 149
+      "avgPrice": "$850,543",
+      "avgPricePerSqFt": "$695",
+      "avgLivingSqFt": "1,221",
+      "avgDom": 150
     },
     {
       "tier": "1990to2005",
@@ -137,7 +137,7 @@
       "avgPrice": "$1,405,767",
       "avgPricePerSqFt": "$695",
       "avgLivingSqFt": "2,084",
-      "avgDom": 198
+      "avgDom": 199
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$2,634,222",
       "avgPricePerSqFt": "$1,202",
       "avgLivingSqFt": "2,146",
-      "avgDom": 261
+      "avgDom": 262
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$4,878,125",
       "avgPricePerSqFt": "$1,684",
       "avgLivingSqFt": "3,032",
-      "avgDom": 340
+      "avgDom": 341
     }
   ],
   "condoTiersScope": {
