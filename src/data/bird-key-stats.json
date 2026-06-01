@@ -2,16 +2,16 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-01T18:46:55.227732+00:00",
+  "lastUpdated": "2026-05-27T11:00:10.888045+00:00",
   "counts": {
-    "sold": 27,
-    "pending": 9,
-    "active": 25,
+    "sold": 26,
+    "pending": 10,
+    "active": 24,
     "total": 36
   },
   "metrics": {
-    "avgPrice": "$4,359,306",
-    "avgPricePerSqFt": "$1,112",
+    "avgPrice": "$4,364,861",
+    "avgPricePerSqFt": "$1,113",
     "avgYearBuilt": 1991,
     "avgLivingSqFt": "3,812",
     "avgLotSqFt": "14,390",
@@ -22,54 +22,41 @@
     "maxPrice": "$11,900,000"
   },
   "active": {
-    "count": 25,
-    "medianPrice": "$4,350,000",
-    "medianPricePerSqFt": "$1,347",
-    "waterfrontCount": 11,
-    "newConstructionCount": 7
+    "count": 24,
+    "medianPrice": "$4,422,500",
+    "medianPricePerSqFt": "$1,313",
+    "waterfrontCount": 10,
+    "newConstructionCount": 6
   },
   "sold": {
-    "count": 27,
-    "medianPrice": "$3,795,000",
-    "medianDom": 46,
-    "saleToListRatio": "87.3%"
+    "count": 26,
+    "medianPrice": "$3,805,000",
+    "medianDom": 38,
+    "saleToListRatio": "87.9%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$95",
+    "medianMonthlyAssociation": "$100",
     "medianMonthlyCondoFee": null
   },
   "priceBands": {
     "under900k": 0,
     "band900kTo1_5m": 1,
     "band1_5mTo3m": 7,
-    "band3mPlus": 17
+    "band3mPlus": 16
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 25
+      "count": 24
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 17
+      "count": 16
     }
   ],
   "recentSoldComps": [
-    {
-      "listingId": "A4634396",
-      "address": "367 W ROYAL FLAMINGO DR",
-      "subdivision": "BIRD KEY SUB",
-      "soldPrice": "$3,795,000",
-      "soldDate": "2026-05-28",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "5,257",
-      "yearBuilt": 1967,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
     {
       "listingId": "A4655760",
       "address": "483 PARTRIDGE CIR",
@@ -121,6 +108,19 @@
       "yearBuilt": 1970,
       "propertyType": "Residential",
       "isWaterfront": true
+    },
+    {
+      "listingId": "A4674585",
+      "address": "509 SPOONBILL WAY",
+      "subdivision": "BIRD KEY SUB",
+      "soldPrice": "$1,525,000",
+      "soldDate": "2026-03-10",
+      "bedrooms": 4,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,365",
+      "yearBuilt": 1971,
+      "propertyType": "Residential",
+      "isWaterfront": false
     }
   ],
   "condoTiers": [],
