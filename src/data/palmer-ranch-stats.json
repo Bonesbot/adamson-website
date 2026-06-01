@@ -1,0 +1,171 @@
+{
+  "areaSlug": "palmer-ranch",
+  "source": "supabase",
+  "status": "ok",
+  "lastUpdated": "2026-06-01T18:52:49.371416+00:00",
+  "counts": {
+    "sold": 21,
+    "pending": 11,
+    "active": 269,
+    "total": 32
+  },
+  "metrics": {
+    "avgPrice": "$643,322",
+    "avgPricePerSqFt": "$270",
+    "avgYearBuilt": 1997,
+    "avgLivingSqFt": "2,250",
+    "avgLotSqFt": null,
+    "avgDom": 84
+  },
+  "range": {
+    "minPrice": "$114,900",
+    "maxPrice": "$2,595,000"
+  },
+  "active": {
+    "count": 269,
+    "medianPrice": "$429,000",
+    "medianPricePerSqFt": "$255",
+    "waterfrontCount": 38,
+    "newConstructionCount": 27
+  },
+  "sold": {
+    "count": 21,
+    "medianPrice": "$482,500",
+    "medianDom": 89,
+    "saleToListRatio": "92.0%"
+  },
+  "fees": {
+    "medianMonthlyAssociation": "$491",
+    "medianMonthlyCondoFee": "$571"
+  },
+  "priceBands": {
+    "under900k": 235,
+    "band900kTo1_5m": 25,
+    "band1_5mTo3m": 9,
+    "band3mPlus": 0
+  },
+  "propertyTypes": [
+    {
+      "type": "Residential",
+      "count": 269
+    }
+  ],
+  "buildingClasses": [],
+  "recentSoldComps": [
+    {
+      "listingId": "A4680871",
+      "address": "8972 HUNTINGTON POINTE DR",
+      "subdivision": "HUNTINGTON POINTE",
+      "soldPrice": "$525,000",
+      "soldDate": "2026-06-01",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,827",
+      "yearBuilt": 1994,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4685412",
+      "address": "4501 MURCIA BLVD #7",
+      "subdivision": "PRESTANCIA",
+      "soldPrice": "$482,500",
+      "soldDate": "2026-06-01",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,173",
+      "yearBuilt": 2000,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "TB8496187",
+      "address": "8832 ENCLAVE CT",
+      "subdivision": "ENCLAVE AT SILVER OAK",
+      "soldPrice": "$965,000",
+      "soldDate": "2026-05-29",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,750",
+      "yearBuilt": 2004,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4664929",
+      "address": "4565 DEER CREEK BLVD",
+      "subdivision": "DEER CREEK",
+      "soldPrice": "$650,000",
+      "soldDate": "2026-05-29",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,617",
+      "yearBuilt": 1992,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4668836",
+      "address": "4223 BALMORAL WAY",
+      "subdivision": "STONEYBROOK AT PALMER RANCH",
+      "soldPrice": "$625,000",
+      "soldDate": "2026-05-29",
+      "bedrooms": 4,
+      "bathrooms": 4.0,
+      "livingSqFt": "2,803",
+      "yearBuilt": 1992,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    }
+  ],
+  "condoTiers": [
+    {
+      "tier": "pre1990",
+      "label": "Pre-1990 (Vintage)",
+      "rangeLabel": "before 1990",
+      "activeCount": 29,
+      "avgPrice": "$347,217",
+      "avgPricePerSqFt": "$204",
+      "avgLivingSqFt": "1,691",
+      "avgDom": 74
+    },
+    {
+      "tier": "1990to2005",
+      "label": "1990 \u2013 2005",
+      "rangeLabel": "1990 through 2005",
+      "activeCount": 103,
+      "avgPrice": "$292,672",
+      "avgPricePerSqFt": "$229",
+      "avgLivingSqFt": "1,274",
+      "avgDom": 91
+    },
+    {
+      "tier": "2006to2019",
+      "label": "2006 \u2013 2019",
+      "rangeLabel": "2006 through 2019",
+      "activeCount": 17,
+      "avgPrice": "$407,365",
+      "avgPricePerSqFt": "$253",
+      "avgLivingSqFt": "1,620",
+      "avgDom": 97
+    },
+    {
+      "tier": "2020plus",
+      "label": "2020 & Newer",
+      "rangeLabel": "2020 or newer",
+      "activeCount": 7,
+      "avgPrice": "$397,471",
+      "avgPricePerSqFt": "$231",
+      "avgLivingSqFt": "1,729",
+      "avgDom": 80
+    }
+  ],
+  "condoTiersScope": {
+    "propertySubTypes": [
+      "Condominium",
+      "Villa",
+      "Townhouse"
+    ],
+    "status": "Active"
+  }
+}

@@ -159,7 +159,8 @@ INSERT INTO areas (name, slug, zip_codes, description) VALUES
     ('Bird Key', 'bird-key', ARRAY['34236'], 'Exclusive gated island community with golf course'),
     ('West of Trail', 'west-of-trail-core', ARRAY['34239','34236'], 'Cherokee Park, Hudson Bayou, McClellan Park, Avondale, Oyster Bay — legacy mainland luxury corridor'),
     ('West of Trail - North', 'west-of-trail-north', ARRAY['34234','34236'], 'Indian Beach, Sapphire Shores, Bay Haven — bayfront-adjacent estates north of downtown'),
-    ('West of Trail - South', 'west-of-trail-south', ARRAY['34231','34239'], 'Phillippi Estates, Bay Shore, deep-water canal communities approaching Siesta Key')
+    ('West of Trail - South', 'west-of-trail-south', ARRAY['34231','34239'], 'Phillippi Estates, Bay Shore, deep-water canal communities approaching Siesta Key'),
+    ('Palmer Ranch', 'palmer-ranch', ARRAY['34238','34241'], 'Master-planned south Sarasota community — gated golf villages, Legacy Trail corridor, top-rated schools')
 ON CONFLICT (name) DO NOTHING;
 
 -- ===== Grants =====
