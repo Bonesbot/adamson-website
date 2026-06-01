@@ -2,18 +2,18 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-29T10:57:33.483446+00:00",
+  "lastUpdated": "2026-06-01T16:22:05.291881+00:00",
   "counts": {
-    "sold": 247,
+    "sold": 250,
     "pending": 87,
     "active": 276,
-    "total": 334
+    "total": 337
   },
   "metrics": {
-    "avgPrice": "$1,831,864",
-    "avgPricePerSqFt": "$799",
-    "avgYearBuilt": 2003,
-    "avgLivingSqFt": "1,992",
+    "avgPrice": "$1,823,509",
+    "avgPricePerSqFt": "$798",
+    "avgYearBuilt": 2002,
+    "avgLivingSqFt": "1,987",
     "avgLotSqFt": null,
     "avgDom": 103
   },
@@ -29,19 +29,19 @@
     "newConstructionCount": 103
   },
   "sold": {
-    "count": 247,
-    "medianPrice": "$1,140,000",
-    "medianDom": 89,
-    "saleToListRatio": "90.8%"
+    "count": 250,
+    "medianPrice": "$1,145,000",
+    "medianDom": 88,
+    "saleToListRatio": "90.7%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,655",
+    "medianMonthlyAssociation": "$1,644",
     "medianMonthlyCondoFee": "$1,733"
   },
   "priceBands": {
-    "under900k": 78,
-    "band900kTo1_5m": 64,
-    "band1_5mTo3m": 64,
+    "under900k": 80,
+    "band900kTo1_5m": 63,
+    "band1_5mTo3m": 63,
     "band3mPlus": 70
   },
   "propertyTypes": [
@@ -52,6 +52,45 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4676375",
+      "address": "35 WATERGATE DR #1005",
+      "subdivision": "THE TOWER RESIDENCES",
+      "soldPrice": "$2,850,000",
+      "soldDate": "2026-06-01",
+      "bedrooms": 4,
+      "bathrooms": 4.0,
+      "livingSqFt": "3,659",
+      "yearBuilt": 2003,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4666660",
+      "address": "1350 MAIN ST #PH1600",
+      "subdivision": "1350 MAIN RESIDENTIAL",
+      "soldPrice": "$1,775,000",
+      "soldDate": "2026-05-29",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,165",
+      "yearBuilt": 2007,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4676613",
+      "address": "209 COSMOPOLITAN CT",
+      "subdivision": "Q",
+      "soldPrice": "$830,000",
+      "soldDate": "2026-05-28",
+      "bedrooms": 2,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,680",
+      "yearBuilt": 2015,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4666261",
       "address": "711 S PALM AVE #303",
@@ -77,45 +116,6 @@
       "yearBuilt": 2007,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "TB8459345",
-      "address": "301 QUAY COMMONS #1707",
-      "subdivision": "BAYSO SARASOTA CONDOMINIUM",
-      "soldPrice": "$1,425,000",
-      "soldDate": "2026-05-27",
-      "bedrooms": 2,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,578",
-      "yearBuilt": 2023,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4628715",
-      "address": "111 GOLDEN GATE PT #402",
-      "subdivision": "EVOLUTION",
-      "soldPrice": "$2,100,000",
-      "soldDate": "2026-05-26",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,314",
-      "yearBuilt": 2024,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4684753",
-      "address": "1111 N GULFSTREAM AVE #16D",
-      "subdivision": "ONE WATERGATE",
-      "soldPrice": "$800,000",
-      "soldDate": "2026-05-22",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,736",
-      "yearBuilt": 1974,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -123,31 +123,31 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 64,
-      "avgPrice": "$1,100,889",
-      "avgPricePerSqFt": "$645",
-      "avgLivingSqFt": "1,607",
-      "avgDom": 163
+      "activeCount": 62,
+      "avgPrice": "$1,116,732",
+      "avgPricePerSqFt": "$644",
+      "avgLivingSqFt": "1,629",
+      "avgDom": 167
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 38,
-      "avgPrice": "$1,874,172",
-      "avgPricePerSqFt": "$736",
-      "avgLivingSqFt": "2,284",
-      "avgDom": 155
+      "activeCount": 40,
+      "avgPrice": "$1,817,336",
+      "avgPricePerSqFt": "$729",
+      "avgLivingSqFt": "2,233",
+      "avgDom": 150
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
       "activeCount": 63,
-      "avgPrice": "$1,544,789",
-      "avgPricePerSqFt": "$748",
-      "avgLivingSqFt": "1,881",
-      "avgDom": 129
+      "avgPrice": "$1,526,902",
+      "avgPricePerSqFt": "$745",
+      "avgLivingSqFt": "1,860",
+      "avgDom": 128
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$3,721,589",
       "avgPricePerSqFt": "$1,309",
       "avgLivingSqFt": "2,674",
-      "avgDom": 161
+      "avgDom": 164
     }
   ],
   "condoTiersScope": {
