@@ -2,15 +2,15 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-01T16:22:03.439157+00:00",
+  "lastUpdated": "2026-06-01T18:46:51.991850+00:00",
   "counts": {
-    "sold": 483,
-    "pending": 83,
+    "sold": 484,
+    "pending": 82,
     "active": 369,
     "total": 566
   },
   "metrics": {
-    "avgPrice": "$1,807,882",
+    "avgPrice": "$1,807,840",
     "avgPricePerSqFt": "$722",
     "avgYearBuilt": 1983,
     "avgLivingSqFt": "2,163",
@@ -29,8 +29,8 @@
     "newConstructionCount": 29
   },
   "sold": {
-    "count": 483,
-    "medianPrice": "$1,075,000",
+    "count": 484,
+    "medianPrice": "$1,073,750",
     "medianDom": 68,
     "saleToListRatio": "86.9%"
   },
@@ -52,6 +52,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4686510",
+      "address": "1925 GULF OF MEXICO DR #G8-303",
+      "subdivision": "SEAPLACE VI",
+      "soldPrice": "$775,000",
+      "soldDate": "2026-06-01",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,068",
+      "yearBuilt": 1978,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4684077",
       "address": "691 GULF BAY RD",
@@ -103,19 +116,6 @@
       "yearBuilt": 1974,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "P4937545",
-      "address": "549 SUTTON PL #t 19",
-      "subdivision": "SUTTON PLACE",
-      "soldPrice": "$320,000",
-      "soldDate": "2026-05-29",
-      "bedrooms": 2,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,248",
-      "yearBuilt": 1972,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -124,7 +124,7 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 201,
-      "avgPrice": "$881,973",
+      "avgPrice": "$881,740",
       "avgPricePerSqFt": "$656",
       "avgLivingSqFt": "1,343",
       "avgDom": 144
