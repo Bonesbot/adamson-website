@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-01T19:51:26.205779+00:00",
+  "lastUpdated": "2026-06-02T10:58:32.352348+00:00",
   "counts": {
-    "sold": 477,
+    "sold": 479,
     "pending": 69,
-    "active": 428,
-    "total": 546
+    "active": 427,
+    "total": 548
   },
   "metrics": {
-    "avgPrice": "$1,395,273",
-    "avgPricePerSqFt": "$679",
+    "avgPrice": "$1,398,097",
+    "avgPricePerSqFt": "$680",
     "avgYearBuilt": 1977,
-    "avgLivingSqFt": "1,890",
+    "avgLivingSqFt": "1,893",
     "avgLotSqFt": null,
     "avgDom": 105
   },
@@ -22,14 +22,14 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 428,
-    "medianPrice": "$1,224,500",
-    "medianPricePerSqFt": "$780",
-    "waterfrontCount": 246,
-    "newConstructionCount": 61
+    "count": 427,
+    "medianPrice": "$1,200,000",
+    "medianPricePerSqFt": "$783",
+    "waterfrontCount": 244,
+    "newConstructionCount": 62
   },
   "sold": {
-    "count": 477,
+    "count": 479,
     "medianPrice": "$880,000",
     "medianDom": 71,
     "saleToListRatio": "87.3%"
@@ -40,14 +40,14 @@
   },
   "priceBands": {
     "under900k": 167,
-    "band900kTo1_5m": 82,
-    "band1_5mTo3m": 84,
-    "band3mPlus": 95
+    "band900kTo1_5m": 81,
+    "band1_5mTo3m": 83,
+    "band3mPlus": 96
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 428
+      "count": 427
     }
   ],
   "buildingClasses": [],
@@ -62,6 +62,32 @@
       "bathrooms": 2.0,
       "livingSqFt": "1,770",
       "yearBuilt": 1981,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4679738",
+      "address": "19 WHISPERING SANDS DR #1104",
+      "subdivision": "WHISPERING SANDS",
+      "soldPrice": "$965,000",
+      "soldDate": "2026-06-01",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,282",
+      "yearBuilt": 1973,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4678849",
+      "address": "9397 MIDNIGHT PASS RD #603",
+      "subdivision": "POINTE ON MIDNIGHT PASS",
+      "soldPrice": "$329,000",
+      "soldDate": "2026-06-01",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "778",
+      "yearBuilt": 1975,
       "propertyType": "Residential",
       "isWaterfront": true
     },
@@ -90,32 +116,6 @@
       "yearBuilt": 1974,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4649919",
-      "address": "5024 COMMONWEALTH DR",
-      "subdivision": "SIESTA BEACH",
-      "soldPrice": "$1,954,700",
-      "soldDate": "2026-05-28",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,468",
-      "yearBuilt": 2003,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4671593",
-      "address": "4817 OCEAN BLVD",
-      "subdivision": "LAKE RITTWOOD",
-      "soldPrice": "$1,895,000",
-      "soldDate": "2026-05-27",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,657",
-      "yearBuilt": 1982,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -123,11 +123,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 235,
-      "avgPrice": "$845,210",
-      "avgPricePerSqFt": "$692",
-      "avgLivingSqFt": "1,219",
-      "avgDom": 151
+      "activeCount": 234,
+      "avgPrice": "$842,861",
+      "avgPricePerSqFt": "$691",
+      "avgLivingSqFt": "1,218",
+      "avgDom": 152
     },
     {
       "tier": "1990to2005",
@@ -137,7 +137,7 @@
       "avgPrice": "$1,405,767",
       "avgPricePerSqFt": "$695",
       "avgLivingSqFt": "2,084",
-      "avgDom": 201
+      "avgDom": 202
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$2,634,222",
       "avgPricePerSqFt": "$1,202",
       "avgLivingSqFt": "2,146",
-      "avgDom": 264
+      "avgDom": 265
     },
     {
       "tier": "2020plus",
