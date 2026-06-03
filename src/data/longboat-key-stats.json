@@ -2,18 +2,18 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-02T10:58:31.126875+00:00",
+  "lastUpdated": "2026-06-03T11:03:18.893233+00:00",
   "counts": {
-    "sold": 484,
-    "pending": 83,
-    "active": 369,
-    "total": 567
+    "sold": 486,
+    "pending": 84,
+    "active": 368,
+    "total": 570
   },
   "metrics": {
-    "avgPrice": "$1,807,738",
-    "avgPricePerSqFt": "$722",
+    "avgPrice": "$1,816,857",
+    "avgPricePerSqFt": "$726",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,163",
+    "avgLivingSqFt": "2,165",
     "avgLotSqFt": null,
     "avgDom": 96
   },
@@ -22,36 +22,49 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 369,
+    "count": 368,
     "medianPrice": "$1,075,000",
-    "medianPricePerSqFt": "$695",
-    "waterfrontCount": 282,
-    "newConstructionCount": 29
+    "medianPricePerSqFt": "$693",
+    "waterfrontCount": 283,
+    "newConstructionCount": 28
   },
   "sold": {
-    "count": 484,
-    "medianPrice": "$1,073,750",
+    "count": 486,
+    "medianPrice": "$1,075,000",
     "medianDom": 68,
     "saleToListRatio": "86.9%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,600",
-    "medianMonthlyCondoFee": "$1,706"
+    "medianMonthlyCondoFee": "$1,708"
   },
   "priceBands": {
     "under900k": 144,
     "band900kTo1_5m": 81,
     "band1_5mTo3m": 82,
-    "band3mPlus": 62
+    "band3mPlus": 61
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 369
+      "count": 368
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4689437",
+      "address": "581 YARDARM LN",
+      "subdivision": "COUNTRY CLUB SHORES SEC 02",
+      "soldPrice": "$2,075,000",
+      "soldDate": "2026-06-02",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,192",
+      "yearBuilt": 1968,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4686510",
       "address": "1925 GULF OF MEXICO DR #G8-303",
@@ -62,6 +75,19 @@
       "bathrooms": 2.0,
       "livingSqFt": "1,068",
       "yearBuilt": 1978,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4667288",
+      "address": "545 SANCTUARY DR #B204",
+      "subdivision": "SANCTUARY III",
+      "soldPrice": "$2,600,000",
+      "soldDate": "2026-05-29",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "3,115",
+      "yearBuilt": 1991,
       "propertyType": "Residential",
       "isWaterfront": true
     },
@@ -90,32 +116,6 @@
       "yearBuilt": 1934,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4694918",
-      "address": "1965 GULF OF MEXICO DR #G5-400",
-      "subdivision": "SEAPLACE III",
-      "soldPrice": "$506,000",
-      "soldDate": "2026-05-29",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,257",
-      "yearBuilt": 1977,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4652683",
-      "address": "4840 GULF OF MEXICO DR #Villa 15",
-      "subdivision": "WINDWARD BAY AMD",
-      "soldPrice": "$399,999",
-      "soldDate": "2026-05-29",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,084",
-      "yearBuilt": 1974,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -123,21 +123,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 201,
-      "avgPrice": "$875,565",
-      "avgPricePerSqFt": "$654",
-      "avgLivingSqFt": "1,339",
-      "avgDom": 144
+      "activeCount": 203,
+      "avgPrice": "$883,048",
+      "avgPricePerSqFt": "$655",
+      "avgLivingSqFt": "1,349",
+      "avgDom": 143
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 52,
-      "avgPrice": "$2,291,336",
-      "avgPricePerSqFt": "$846",
-      "avgLivingSqFt": "2,608",
-      "avgDom": 155
+      "activeCount": 51,
+      "avgPrice": "$2,275,577",
+      "avgPricePerSqFt": "$840",
+      "avgLivingSqFt": "2,607",
+      "avgDom": 156
     },
     {
       "tier": "2006to2019",
@@ -147,17 +147,17 @@
       "avgPrice": "$5,464,667",
       "avgPricePerSqFt": "$1,523",
       "avgLivingSqFt": "3,595",
-      "avgDom": 194
+      "avgDom": 195
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 6,
-      "avgPrice": "$7,041,500",
-      "avgPricePerSqFt": "$2,258",
-      "avgLivingSqFt": "2,882",
-      "avgDom": 291
+      "activeCount": 5,
+      "avgPrice": "$7,129,800",
+      "avgPricePerSqFt": "$2,147",
+      "avgLivingSqFt": "2,988",
+      "avgDom": 334
     }
   ],
   "condoTiersScope": {
