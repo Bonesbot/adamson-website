@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-02T10:58:32.352348+00:00",
+  "lastUpdated": "2026-06-03T11:03:20.107990+00:00",
   "counts": {
-    "sold": 479,
-    "pending": 69,
-    "active": 427,
-    "total": 548
+    "sold": 484,
+    "pending": 66,
+    "active": 426,
+    "total": 550
   },
   "metrics": {
-    "avgPrice": "$1,398,097",
-    "avgPricePerSqFt": "$680",
+    "avgPrice": "$1,394,378",
+    "avgPricePerSqFt": "$678",
     "avgYearBuilt": 1977,
-    "avgLivingSqFt": "1,893",
+    "avgLivingSqFt": "1,891",
     "avgLotSqFt": null,
     "avgDom": 105
   },
@@ -22,36 +22,88 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 427,
-    "medianPrice": "$1,200,000",
-    "medianPricePerSqFt": "$783",
-    "waterfrontCount": 244,
+    "count": 426,
+    "medianPrice": "$1,249,000",
+    "medianPricePerSqFt": "$784",
+    "waterfrontCount": 243,
     "newConstructionCount": 62
   },
   "sold": {
-    "count": 479,
-    "medianPrice": "$880,000",
-    "medianDom": 71,
-    "saleToListRatio": "87.3%"
+    "count": 484,
+    "medianPrice": "$890,000",
+    "medianDom": 72,
+    "saleToListRatio": "87.4%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,133",
     "medianMonthlyCondoFee": "$1,263"
   },
   "priceBands": {
-    "under900k": 167,
+    "under900k": 165,
     "band900kTo1_5m": 81,
-    "band1_5mTo3m": 83,
+    "band1_5mTo3m": 84,
     "band3mPlus": 96
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 427
+      "count": 426
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4678861",
+      "address": "5263 AVENIDA DE CORTEZ",
+      "subdivision": "SARASOTA BEACH",
+      "soldPrice": "$3,450,000",
+      "soldDate": "2026-06-02",
+      "bedrooms": 4,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,122",
+      "yearBuilt": 2018,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4673529",
+      "address": "749 TROPICAL CIR",
+      "subdivision": "SIESTAS BAYSIDE BAYSIDE CLUB 01",
+      "soldPrice": "$1,510,000",
+      "soldDate": "2026-06-02",
+      "bedrooms": 4,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,598",
+      "yearBuilt": 1984,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4690420",
+      "address": "8764 MIDNIGHT PASS RD #A202",
+      "subdivision": "ISLAND REEF I",
+      "soldPrice": "$582,000",
+      "soldDate": "2026-06-02",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,286",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4662182",
+      "address": "5830 MIDNIGHT PASS RD #25",
+      "subdivision": "JAMAICA ROYALE",
+      "soldPrice": "$522,500",
+      "soldDate": "2026-06-02",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "728",
+      "yearBuilt": 1962,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4654454",
       "address": "6281 MIDNIGHT PASS RD #6281",
@@ -64,58 +116,6 @@
       "yearBuilt": 1981,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4679738",
-      "address": "19 WHISPERING SANDS DR #1104",
-      "subdivision": "WHISPERING SANDS",
-      "soldPrice": "$965,000",
-      "soldDate": "2026-06-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,282",
-      "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4678849",
-      "address": "9397 MIDNIGHT PASS RD #603",
-      "subdivision": "POINTE ON MIDNIGHT PASS",
-      "soldPrice": "$329,000",
-      "soldDate": "2026-06-01",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "778",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4660785",
-      "address": "6150 MIDNIGHT PASS RD #Unit 10 A&B",
-      "subdivision": "ISLAND HOUSE",
-      "soldPrice": "$1,200,000",
-      "soldDate": "2026-05-29",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,962",
-      "yearBuilt": 1967,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4566083",
-      "address": "9011 MIDNIGHT PASS RD #228",
-      "subdivision": "SUNRISE COVE SEC 4",
-      "soldPrice": "$360,000",
-      "soldDate": "2026-05-29",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "783",
-      "yearBuilt": 1974,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -123,11 +123,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 234,
-      "avgPrice": "$842,861",
-      "avgPricePerSqFt": "$691",
-      "avgLivingSqFt": "1,218",
-      "avgDom": 152
+      "activeCount": 232,
+      "avgPrice": "$844,959",
+      "avgPricePerSqFt": "$693",
+      "avgLivingSqFt": "1,216",
+      "avgDom": 153
     },
     {
       "tier": "1990to2005",
@@ -137,7 +137,7 @@
       "avgPrice": "$1,405,767",
       "avgPricePerSqFt": "$695",
       "avgLivingSqFt": "2,084",
-      "avgDom": 202
+      "avgDom": 203
     },
     {
       "tier": "2006to2019",
@@ -157,7 +157,7 @@
       "avgPrice": "$4,878,125",
       "avgPricePerSqFt": "$1,684",
       "avgLivingSqFt": "3,032",
-      "avgDom": 344
+      "avgDom": 346
     }
   ],
   "condoTiersScope": {
