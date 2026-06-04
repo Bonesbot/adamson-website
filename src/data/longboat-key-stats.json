@@ -2,18 +2,18 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-03T11:03:18.893233+00:00",
+  "lastUpdated": "2026-06-04T10:58:52.883445+00:00",
   "counts": {
-    "sold": 486,
-    "pending": 84,
-    "active": 368,
-    "total": 570
+    "sold": 488,
+    "pending": 83,
+    "active": 370,
+    "total": 571
   },
   "metrics": {
-    "avgPrice": "$1,816,857",
+    "avgPrice": "$1,815,165",
     "avgPricePerSqFt": "$726",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,165",
+    "avgLivingSqFt": "2,163",
     "avgLotSqFt": null,
     "avgDom": 96
   },
@@ -22,36 +22,62 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 368,
-    "medianPrice": "$1,075,000",
-    "medianPricePerSqFt": "$693",
-    "waterfrontCount": 283,
+    "count": 370,
+    "medianPrice": "$1,092,500",
+    "medianPricePerSqFt": "$695",
+    "waterfrontCount": 284,
     "newConstructionCount": 28
   },
   "sold": {
-    "count": 486,
+    "count": 488,
     "medianPrice": "$1,075,000",
     "medianDom": 68,
     "saleToListRatio": "86.9%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,600",
-    "medianMonthlyCondoFee": "$1,708"
+    "medianMonthlyCondoFee": "$1,698"
   },
   "priceBands": {
     "under900k": 144,
-    "band900kTo1_5m": 81,
+    "band900kTo1_5m": 83,
     "band1_5mTo3m": 82,
     "band3mPlus": 61
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 368
+      "count": 370
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4681044",
+      "address": "1485 GULF OF MEXICO DR #110",
+      "subdivision": "PLAYERS CLUB I",
+      "soldPrice": "$1,430,000",
+      "soldDate": "2026-06-03",
+      "bedrooms": 2,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,971",
+      "yearBuilt": 1981,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4686987",
+      "address": "1930 HARBOURSIDE DR #145",
+      "subdivision": "FAIRWAY BAY 1",
+      "soldPrice": "$515,000",
+      "soldDate": "2026-06-03",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,270",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4689437",
       "address": "581 YARDARM LN",
@@ -90,32 +116,6 @@
       "yearBuilt": 1991,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4684077",
-      "address": "691 GULF BAY RD",
-      "subdivision": "BAILEY-DOBSON",
-      "soldPrice": "$885,000",
-      "soldDate": "2026-05-29",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,581",
-      "yearBuilt": 1976,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4686787",
-      "address": "7030 POINSETTIA AVE",
-      "subdivision": "LONGBEACH ON LONGBOAT KEY",
-      "soldPrice": "$800,000",
-      "soldDate": "2026-05-29",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,402",
-      "yearBuilt": 1934,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -123,10 +123,10 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 203,
-      "avgPrice": "$883,048",
-      "avgPricePerSqFt": "$655",
-      "avgLivingSqFt": "1,349",
+      "activeCount": 205,
+      "avgPrice": "$886,517",
+      "avgPricePerSqFt": "$658",
+      "avgLivingSqFt": "1,348",
       "avgDom": 143
     },
     {
@@ -147,7 +147,7 @@
       "avgPrice": "$5,464,667",
       "avgPricePerSqFt": "$1,523",
       "avgLivingSqFt": "3,595",
-      "avgDom": 195
+      "avgDom": 196
     },
     {
       "tier": "2020plus",
