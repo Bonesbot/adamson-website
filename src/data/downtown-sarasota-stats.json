@@ -2,18 +2,18 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-04T10:59:08.183923+00:00",
+  "lastUpdated": "2026-06-05T10:54:33.192441+00:00",
   "counts": {
-    "sold": 250,
-    "pending": 89,
+    "sold": 252,
+    "pending": 88,
     "active": 275,
-    "total": 339
+    "total": 340
   },
   "metrics": {
-    "avgPrice": "$1,816,922",
-    "avgPricePerSqFt": "$796",
+    "avgPrice": "$1,812,737",
+    "avgPricePerSqFt": "$795",
     "avgYearBuilt": 2002,
-    "avgLivingSqFt": "1,984",
+    "avgLivingSqFt": "1,982",
     "avgLotSqFt": null,
     "avgDom": 103
   },
@@ -24,12 +24,12 @@
   "active": {
     "count": 275,
     "medianPrice": "$1,495,000",
-    "medianPricePerSqFt": "$856",
-    "waterfrontCount": 71,
-    "newConstructionCount": 103
+    "medianPricePerSqFt": "$861",
+    "waterfrontCount": 70,
+    "newConstructionCount": 104
   },
   "sold": {
-    "count": 250,
+    "count": 252,
     "medianPrice": "$1,145,000",
     "medianDom": 88,
     "saleToListRatio": "90.7%"
@@ -39,9 +39,9 @@
     "medianMonthlyCondoFee": "$1,716"
   },
   "priceBands": {
-    "under900k": 80,
+    "under900k": 79,
     "band900kTo1_5m": 62,
-    "band1_5mTo3m": 63,
+    "band1_5mTo3m": 64,
     "band3mPlus": 70
   },
   "propertyTypes": [
@@ -52,6 +52,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4687326",
+      "address": "1255 N GULFSTREAM AVE #1501",
+      "subdivision": "BAY PLAZA",
+      "soldPrice": "$3,475,000",
+      "soldDate": "2026-06-04",
+      "bedrooms": 4,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,943",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4677207",
+      "address": "800 N TAMIAMI TRL #405",
+      "subdivision": "ALINARI",
+      "soldPrice": "$420,000",
+      "soldDate": "2026-06-04",
+      "bedrooms": 1,
+      "bathrooms": 1.5,
+      "livingSqFt": "1,070",
+      "yearBuilt": 2007,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4676375",
       "address": "35 WATERGATE DR #1005",
@@ -90,32 +116,6 @@
       "yearBuilt": 2015,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4666261",
-      "address": "711 S PALM AVE #303",
-      "subdivision": "7 ONE ONE PALM",
-      "soldPrice": "$1,500,000",
-      "soldDate": "2026-05-27",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,815",
-      "yearBuilt": 2019,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4672850",
-      "address": "800 N TAMIAMI TRL #505/507",
-      "subdivision": "ALINARI",
-      "soldPrice": "$1,450,000",
-      "soldDate": "2026-05-27",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,981",
-      "yearBuilt": 2007,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -123,21 +123,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 62,
-      "avgPrice": "$1,110,200",
+      "activeCount": 61,
+      "avgPrice": "$1,114,482",
       "avgPricePerSqFt": "$641",
-      "avgLivingSqFt": "1,625",
-      "avgDom": 169
+      "avgLivingSqFt": "1,629",
+      "avgDom": 171
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 40,
-      "avgPrice": "$1,817,336",
-      "avgPricePerSqFt": "$729",
+      "avgPrice": "$1,812,836",
+      "avgPricePerSqFt": "$728",
       "avgLivingSqFt": "2,233",
-      "avgDom": 152
+      "avgDom": 153
     },
     {
       "tier": "2006to2019",
@@ -153,11 +153,11 @@
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 101,
-      "avgPrice": "$3,721,589",
-      "avgPricePerSqFt": "$1,309",
-      "avgLivingSqFt": "2,674",
-      "avgDom": 167
+      "activeCount": 102,
+      "avgPrice": "$3,704,652",
+      "avgPricePerSqFt": "$1,306",
+      "avgLivingSqFt": "2,668",
+      "avgDom": 166
     }
   ],
   "condoTiersScope": {
