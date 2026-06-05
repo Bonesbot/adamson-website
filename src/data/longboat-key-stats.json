@@ -2,35 +2,35 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-04T10:58:52.883445+00:00",
+  "lastUpdated": "2026-06-05T10:54:23.956635+00:00",
   "counts": {
-    "sold": 488,
+    "sold": 490,
     "pending": 83,
-    "active": 370,
-    "total": 571
+    "active": 368,
+    "total": 573
   },
   "metrics": {
-    "avgPrice": "$1,815,165",
-    "avgPricePerSqFt": "$726",
+    "avgPrice": "$1,809,737",
+    "avgPricePerSqFt": "$724",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,163",
+    "avgLivingSqFt": "2,161",
     "avgLotSqFt": null,
-    "avgDom": 96
+    "avgDom": 97
   },
   "range": {
     "minPrice": "$165,000",
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 370,
-    "medianPrice": "$1,092,500",
-    "medianPricePerSqFt": "$695",
-    "waterfrontCount": 284,
+    "count": 368,
+    "medianPrice": "$1,095,000",
+    "medianPricePerSqFt": "$696",
+    "waterfrontCount": 282,
     "newConstructionCount": 28
   },
   "sold": {
-    "count": 488,
-    "medianPrice": "$1,075,000",
+    "count": 490,
+    "medianPrice": "$1,073,750",
     "medianDom": 68,
     "saleToListRatio": "86.9%"
   },
@@ -39,15 +39,15 @@
     "medianMonthlyCondoFee": "$1,698"
   },
   "priceBands": {
-    "under900k": 144,
-    "band900kTo1_5m": 83,
-    "band1_5mTo3m": 82,
+    "under900k": 142,
+    "band900kTo1_5m": 82,
+    "band1_5mTo3m": 83,
     "band3mPlus": 61
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 370
+      "count": 368
     }
   ],
   "buildingClasses": [],
@@ -62,6 +62,32 @@
       "bathrooms": 3.0,
       "livingSqFt": "1,971",
       "yearBuilt": 1981,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4685205",
+      "address": "5757 GULF OF MEXICO DR #115",
+      "subdivision": "THE SHORE",
+      "soldPrice": "$625,000",
+      "soldDate": "2026-06-03",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,561",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4666650",
+      "address": "1932 HARBOURSIDE DR #254",
+      "subdivision": "FAIRWAY BAY 1",
+      "soldPrice": "$530,000",
+      "soldDate": "2026-06-03",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,192",
+      "yearBuilt": 1982,
       "propertyType": "Residential",
       "isWaterfront": true
     },
@@ -90,32 +116,6 @@
       "yearBuilt": 1968,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4686510",
-      "address": "1925 GULF OF MEXICO DR #G8-303",
-      "subdivision": "SEAPLACE VI",
-      "soldPrice": "$775,000",
-      "soldDate": "2026-06-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,068",
-      "yearBuilt": 1978,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4667288",
-      "address": "545 SANCTUARY DR #B204",
-      "subdivision": "SANCTUARY III",
-      "soldPrice": "$2,600,000",
-      "soldDate": "2026-05-29",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "3,115",
-      "yearBuilt": 1991,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -123,21 +123,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 205,
-      "avgPrice": "$886,517",
-      "avgPricePerSqFt": "$658",
-      "avgLivingSqFt": "1,348",
-      "avgDom": 143
+      "activeCount": 204,
+      "avgPrice": "$892,470",
+      "avgPricePerSqFt": "$661",
+      "avgLivingSqFt": "1,350",
+      "avgDom": 142
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 51,
-      "avgPrice": "$2,275,577",
-      "avgPricePerSqFt": "$840",
-      "avgLivingSqFt": "2,607",
-      "avgDom": 156
+      "activeCount": 50,
+      "avgPrice": "$2,298,189",
+      "avgPricePerSqFt": "$846",
+      "avgLivingSqFt": "2,614",
+      "avgDom": 159
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$5,464,667",
       "avgPricePerSqFt": "$1,523",
       "avgLivingSqFt": "3,595",
-      "avgDom": 196
+      "avgDom": 197
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$7,129,800",
       "avgPricePerSqFt": "$2,147",
       "avgLivingSqFt": "2,988",
-      "avgDom": 334
+      "avgDom": 335
     }
   ],
   "condoTiersScope": {
