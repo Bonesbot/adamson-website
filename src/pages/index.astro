@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import AreaCard from '@/components/market/AreaCard.astro';
+import Testimonials from '@/components/Testimonials.astro';
 import Button from '@/components/ui/Button.astro';
 import { getAreas, getSiteSettings } from '@/lib/sanity';
 import areasFallback from '@/data/areas.json';
@@ -33,7 +34,17 @@ const jsonLd = [
     name: 'Ryan Adamson',
     description: 'Luxury real estate specialist serving Sarasota and the barrier islands.',
     url: 'https://adamsonfl.com',
-    telephone: '', // Add phone number
+    telephone: '+19417139234',
+    sameAs: [
+      'https://share.google/AOMDgknj0Rf0gtAvX',
+      'https://www.facebook.com/ryan.adamson.941',
+      'https://ryanadamson.sites.cbmoxi.com',
+    ],
+    identifier: {
+      '@type': 'PropertyValue',
+      name: 'Florida Real Estate License',
+      value: 'SL3457783',
+    },
     email: 'Ryan@Adamson-Group.com',
     image: '/images/ryan-adamson.jpg',
     address: {
@@ -223,6 +234,9 @@ const jsonLd = [
       </div>
     </div>
   </section>
+
+  <!-- ====== TESTIMONIALS (Dark) ====== -->
+  <Testimonials />
 
   <!-- ====== CTA SECTION (CBGL Blue) — with Ryan portrait on desktop ====== -->
   <section class="cbgl-section py-20 overflow-hidden">
