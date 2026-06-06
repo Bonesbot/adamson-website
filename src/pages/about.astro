@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Button from '@/components/ui/Button.astro';
+import Testimonials from '@/components/Testimonials.astro';
 
 const description = 'Meet Ryan Adamson, luxury real estate specialist at Coldwell Banker St. Armands. Serving Sarasota, Longboat Key, Lido Key, Siesta Key, and the barrier islands with expert market knowledge and personalized service.';
 
@@ -13,6 +14,18 @@ const jsonLd = {
     description: description,
     url: 'https://adamsonfl.com/about',
     image: '/images/ryan-adamson.jpg',
+    telephone: '+19417139234',
+    email: 'Ryan@Adamson-Group.com',
+    sameAs: [
+      'https://share.google/AOMDgknj0Rf0gtAvX',
+      'https://www.facebook.com/ryan.adamson.941',
+      'https://ryanadamson.sites.cbmoxi.com',
+    ],
+    identifier: {
+      '@type': 'PropertyValue',
+      name: 'Florida Real Estate License',
+      value: 'SL3457783',
+    },
     worksFor: {
       '@type': 'RealEstateAgent',
       name: 'Coldwell Banker Realty — St. Armands',
@@ -62,13 +75,16 @@ const jsonLd = {
         <!-- Bio Content -->
         <div class="md:col-span-3">
           <h2 class="accent-underline mb-6">Luxury Real Estate Specialist</h2>
-          <p class="font-accent text-sm uppercase tracking-wider text-[var(--color-gold)] mb-6">
+          <p class="font-accent text-sm uppercase tracking-wider text-[var(--color-gold)] mb-4">
             Coldwell Banker Realty — St. Armands Circle
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)] mb-6">
+            Ryan Adamson, PA &middot; Florida Real Estate License SL3457783 &middot;
+            <a href="https://share.google/AOMDgknj0Rf0gtAvX" target="_blank" rel="noopener" class="text-[var(--color-cbgl-blue)] hover:underline">5.0 &#9733; on Google (25 reviews)</a>
           </p>
 
           <div class="space-y-4 text-[var(--color-text-muted)] leading-relaxed">
             <p>
-              <!-- TODO: Replace with Ryan's actual bio copy -->
               Ryan Adamson brings deep local expertise and a client-first approach to luxury real estate on Sarasota's barrier islands. Specializing in waterfront properties across Longboat Key, Lido Key, Siesta Key, and the surrounding communities, Ryan combines market intelligence with personalized service to help buyers and sellers navigate one of Florida's most dynamic luxury markets.
             </p>
             <p>
@@ -88,5 +104,7 @@ const jsonLd = {
       </div>
     </div>
   </section>
+
+  <Testimonials />
 
 </BaseLayout>
