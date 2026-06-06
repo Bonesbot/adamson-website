@@ -3,125 +3,102 @@
 > Generated from independent AEO audit on **2026-04-25**.
 > Process for running future audits: see [AEO_AUDIT_PLAYBOOK.md](./AEO_AUDIT_PLAYBOOK.md).
 > Update this file after each post-deploy audit — close completed items, add new findings.
+>
+> **Last audited: 2026-06-06 (BonesBot, post-deploy). Overall grade: B.**
 
 ---
 
-## Priority 1 — Highest AEO impact (do these first)
+## New findings — 2026-06-06 audit (do these first)
+
+- [ ] **🔴 Homepage + Contact serve a STALE area set — fix and rebuild.** *(Highest impact this cycle.)*
+  Every page EXCEPT the homepage and `/contact/` shows the current footer/area list (Downtown, West of Trail ×3, Longboat, St. Armands and Lido, Siesta, Bird Key). The **homepage and contact page still show the OLD list** (separate "Lido Key" + "St. Armands" with pre-merge slugs). Worse, the homepage **"Areas We Serve" section renders only ONE card** — "Lido Key" with broken draft copy ("powder sand beaches steps fine dining and shopping") — instead of the 9 areas in `areas.json`. The homepage is the entity anchor an AI lands on first; right now it looks half-built. Likely a stale CDN cache or a page that didn't rebuild. **Action:** trigger a clean Netlify rebuild + cache purge, then re-fetch `/` and `/contact/` to confirm they match the rest of the site; if still wrong, the homepage `AreaCard` data source needs fixing.
+
+- [ ] **🔴 Stale hardcoded numbers in area-page FAQ prose contradict the live MLS tables.**
+  Example: Longboat Key's first FAQ answer says "the median home price on Longboat Key is approximately **$1,250,000** … year-over-year increase of about 4.2%" while the live table on the same page shows **$1,073,750 median sold / $1,095,000 median list**, updated June 6 2026. An AI engine may quote the stale FAQ figure. Audit all area-page FAQ answers (these come from `areas.json` `faqs[]`) and either (a) wire the numbers from the live stats JSON or (b) restate them as undated ranges so they don't go stale.
+
+- [ ] **🟡 `llms.txt` links a dead page and omits a live one.**
+  It points crawlers to `https://adamsonfl.com/areas/sarasota` (returns empty/404 — no `sarasota` slug exists) and **omits Palmer Ranch** (which is live). Regenerate `llms.txt` from `areas.json` so the page list always matches reality. Consider auto-generating it at build time.
+
+- [ ] **🟢 `/areas/` hub shows "From TBD" for the three West of Trail pages**, even though those pages now carry live median data (e.g. West of Trail median list $2,795,000, updated May 20). The hub "From" price reads `areas.json marketStats.medianPrice` ("TBD"); wire it from the live `<slug>-stats.json` instead.
+
+---
+
+## Priority 1 — Highest AEO impact
 
 - [ ] **Build `/market-reports/` as a luxury-buyer hub targeting $900k+ search intent.**
-  *(Strategic direction set 2026-04-25 — supersedes the original "fill in Coming Soon" framing.)*
+  **STILL OPEN as of 2026-06-06 — page is literally still "Coming Soon" in production.** This is now the single biggest gap: per-area pages are excellent, but there is no aggregated Sarasota-market hub for an AI to cite on a broad "what's the Sarasota luxury market doing?" query.
+  *(Full strategic spec retained below from 2026-04-25.)*
 
   **Target buyer:** $900k+ buyers searching Downtown Sarasota, Lido Key, Siesta Key, Longboat Key, and Sarasota mainland in zips 34239 (West of Trail / Southside / Harbor Acres / Cherokee Park) and 34231 (Oyster Bay / Gulf Gate / South Trail luxury pockets). Three personas: out-of-state relocator (biggest cohort post-2024), move-up local, second-home buyer comparing Sarasota vs Naples/Charleston/Hilton Head.
 
-  **Architecture:** Don't build one page — build a hub that fans out into six pulse pages (Downtown Sarasota, Lido Key, Siesta Key, Longboat Key, 34239, 34231). Hub shows cross-area summary at the $900k+ filter; each pulse page is a deep, dated, sourced market dashboard structured around the actual questions luxury buyers type into AI. Keep 34239 and 34231 as separate pages — their buyers, school districts, and value propositions differ enough that merging dilutes entity match.
+  **Architecture:** Don't build one page — build a hub that fans out into pulse pages. Hub shows cross-area summary at the $900k+ filter; each pulse page is a deep, dated, sourced market dashboard structured around the actual questions luxury buyers type into AI.
 
   **Question hierarchy each pulse page must answer (order matters):**
-  1. *"Where am I in the cycle?"* — list-to-sale ratio, YoY/2yr/peak comparisons, charts or `Dataset` schema with dated quarterly points. Not "the market is strong" prose.
-  2. *"What does $900k / $1.5M / $3M+ actually buy here?"* — 3–5 representative recent sold comps per band per page, with bed/bath/sqft/waterfront. Sold comps with dates are the highest-citation-value content type that exists.
-  3. *"Insurance + hurricane reality"* — sober factual block per coastal page: flood zone (AE vs VE vs X), 2026 insurance cost ranges, post-Helene/Milton market behavior, elevation/storm-surge facts. Cite FEMA, Citizens, FloodFactor. Honesty here is the single biggest AEO arbitrage opportunity — most competitors duck this question.
-  4. *"New construction tracker"* — current list with status: The Owen, The Edge, Ritz-Carlton Residences, Epoch, Rosewood, etc. for downtown; teardowns/permits/builder activity on the islands. Updated monthly. Highest-intent, lowest-supply content category in the Sarasota luxury market.
-  5. *"Lifestyle / comparison"* — explicit "Lido Key vs Longboat Key," "34239 vs Bird Key vs Lakewood Ranch" comparisons. Maps 1:1 to AI queries and gives interlink fuel.
-  6. *"Financial mechanics"* — property tax on $1.5M with current millage cited, homestead exemption, Save Our Homes cap, CDD/HOA ranges.
+  1. *"Where am I in the cycle?"* — list-to-sale ratio, YoY/2yr/peak comparisons, charts or `Dataset` schema with dated quarterly points.
+  2. *"What does $900k / $1.5M / $3M+ actually buy here?"* — 3–5 representative recent sold comps per band. (NOTE: the area pages already do this well now — reuse that component.)
+  3. *"Insurance + hurricane reality"* — flood zone (AE/VE/X), 2026 insurance ranges, post-Helene/Milton behavior. Cite FEMA, Citizens, FloodFactor. Biggest AEO arbitrage — competitors duck it.
+  4. *"New construction tracker"* — The Owen, The Edge, Ritz-Carlton Residences, Epoch, Rosewood, etc. (Note: a `/new-construction/` section now exists in the repo — wire it in.)
+  5. *"Lifestyle / comparison"* — explicit "Lido vs Longboat," "34239 vs Bird Key vs Lakewood Ranch."
+  6. *"Financial mechanics"* — property tax on $1.5M with current millage, homestead, Save Our Homes, CDD/HOA ranges.
 
-  **Don'ts:** no generic "Sarasota market overview" (that battle is already lost to Zillow/Redfin); not a blog; not gated; no rental/vacation data mixed in (different buyer, dilutes signal).
+  **Don'ts:** no generic "Sarasota market overview" prose; not a blog; not gated; no rental/vacation data.
+  **Freshness:** monthly minimum; `dateModified` machine-readable in JSON-LD.
 
-  **Freshness mechanic:** monthly updates minimum. `dateModified` must be machine-readable in JSON-LD, not just visible text. Wire `lastUpdated` from the MLS pipeline into the schema at build time.
+- [x] **~~Bring all five remaining area pages to Longboat Key parity.~~** ✅ **DONE / EXCEEDED (verified 2026-06-06).**
+  Area pages are now the strongest AEO asset on the site. Live, dated, MLS-sourced pages with sold/pending snapshot, active inventory, price bands, recent sold comps (address/bd/ba/sqft/built/date), typical monthly costs, FAQ (dual microdata + `FAQPage` JSON-LD), "last updated" date, and Stellar MLS attribution now exist for: **Longboat Key, St. Armands and Lido, Siesta Key, Downtown Sarasota, Bird Key, Palmer Ranch, West of Trail (Core/North/South)**. The original "sarasota / lido-key / st-armands" pages were superseded by the merge to `st-armands-lido` and the area expansion. *(See "Active Condos by Construction Era" note in audit history.)*
 
-  **Ship-first target (this quarter):** the **Downtown Sarasota pulse page**, fully fleshed out — sold comps in three price bands, new construction tracker, insurance/elevation block, three FAQ entries ("is it a good time to buy downtown Sarasota?" / "what's the price per sqft for luxury condos downtown?" / "what new condos are launching in 2026?"). Use it as the template for the other five.
-
-  *Blocked by:* MLS pipeline → Supabase → per-area JSON reaching this page. New construction tracker may need a manual data source until automated.
-
-- [ ] **Bring all five remaining area pages to Longboat Key parity.**
-  Pages affected: `/areas/sarasota/`, `/areas/lido-key/`, `/areas/siesta-key/`, `/areas/st-armands/`, `/areas/bird-key/`.
-  Each needs: stat grid (median, $/sqft, DOM, active, sold-90d, YoY%), 3-question FAQ block with both microdata and JSON-LD `FAQPage`, "last updated" date, Stellar MLS attribution.
-  *Pattern:* See area page rollout — draw polygon → fetch_area_summary.py → commit `<slug>-stats.json` → Netlify rebuild.
-
-- [ ] **Replace the `<!-- TODO: Replace with Ryan's actual bio copy -->` comment in `/about/` with real bio.**
-  This comment is in production HTML right now. Get Ryan's actual bio.
+- [ ] **Replace the `<!-- TODO: Replace with Ryan's actual bio copy -->` comment in `/about/` with a real bio.**
+  **STILL OPEN — the TODO comment and placeholder bio are still in `src/pages/about.astro` (line ~71).** The bio is generic marketing prose with zero citable specifics (no years in business, no transaction volume, no specializations beyond "waterfront"). Get Ryan's real bio.
 
 - [ ] **Strengthen E-E-A-T signals in Ryan's `RealEstateAgent` schema.**
-  Currently empty `telephone`, no license number, no `sameAs` links. Add:
-  - `telephone`
-  - Florida real estate license number (in visible text + schema)
-  - `sameAs`: LinkedIn, Realtor.com profile, Zillow profile, Coldwell Banker agent page
-  - Years of experience or year started in real estate
-  - Any awards / production volume claim that's defensible
+  **STILL OPEN — confirmed empty 2026-06-06.** Homepage schema has `telephone: ''` (literally empty) and no `sameAs`; `/about/` `RealEstateAgent` node has no telephone, no license, no `sameAs`. Add:
+  - `telephone` (visible + schema)
+  - Florida real estate license number (visible text + schema)
+  - `sameAs`: LinkedIn, Realtor.com, Zillow, Coldwell Banker agent page
+  - Years of experience / year started
+  - Defensible awards / production volume
+  This is why "who is the top agent on the barrier islands?" grounds only weakly — there's no third-party corroboration for an AI to lean on.
 
 - [ ] **Integrate Mapme map UX from SRQmap.com to humanize the geography for out-of-state buyers.**
-  *(Strategic direction set 2026-04-25.)*
-
-  **Why:** Luxury buyers in Connecticut/California cannot intuit from text alone how Lido sits relative to Longboat, or that 34239 is a 12-minute drive from St. Armands. A map closes that gap instantly. SRQmap.com is BonesBot's existing pet project built on Mapme — Ryan can edit POIs himself, no-code.
-
-  **Core rule (non-negotiable):** Map is a presentation layer, not a content layer. AI crawlers cannot read iframe content, and Mapme content served from `srqmap.com` is blocked from every AI bot by Cloudflare's managed robots.txt (`ClaudeBot`, `GPTBot`, `Google-Extended`, `Applebot-Extended`, `Bytespider`, `CCBot` all disallowed). Therefore: **every POI description, area label, marker caption, or lifestyle blurb that lives inside the map MUST also exist as plain HTML on the parent Astro page.** The map gives humans the visual story; the HTML gives AI engines the citable story. Duplication is intentional.
-
-  **Three placements (in priority order):**
-  1. **Site-wide orientation map on `/areas/` hub** — all six target areas (Downtown, Lido, Siesta, Longboat, 34239, 34231) with hover popovers and links to pulse pages. Highest-impact placement; serves the "give me a sense of the geography" need.
-  2. **Per-area maps embedded into each pulse page** — zoomed in, pinned with new-construction projects, restaurants, beach access, marinas, top schools, landmarks. Directly serves the "what's it like to live here" question driving the $900k+ buyer.
-  3. **Optional guided-tour `/discover/` landing page** — 10-minute Sarasota walkthrough for the visitor who hasn't picked an area yet. Each step funnels into a pulse page. Save for last; most fun, least immediately commercial.
-
-  **Schema opportunity (the move nobody else makes):** Every POI pinned on the map should also exist as a `Place` / `Restaurant` / `School` / `LandmarksOrHistoricalBuildings` entity in JSON-LD on the page. Same content, dual audience: AI engines pick up the schema; humans see the map.
-
-  **Implementation notes:**
-  - Use Astro's client-only island pattern so Mapme JS hydrates after static HTML ships to crawlers.
-  - Lazy-load below the fold; Mapme iframe can drag chunky JS, third-party fonts, tracking.
-  - Lighthouse before/after on a pulse page once one is embedded.
-  - Test brand-chrome conflict early — Mapme's default UI may not blend with Coldwell Banker palette + Playfair Display. If white-labeling is too limited, consider going native (MapLibre / Mapbox GL JS) — loses no-code editing, gains full visual control.
-
-  **Ship-first target:** the `/areas/` hub orientation map as a single proof point. Validate page load speed, brand fit, and the HTML+schema duplication build pattern. Once solid, roll out to the six pulse pages. Guided tour last.
+  *(No map detected on live pages as of 2026-06-06 — still open. Full spec retained from 2026-04-25.)*
+  **Core rule (non-negotiable):** Map is a presentation layer, not a content layer. AI crawlers cannot read iframe content, and srqmap.com is blocked from AI bots via Cloudflare robots.txt. Therefore every POI/label/blurb inside the map MUST also exist as plain HTML + JSON-LD (`Place`/`Restaurant`/`School`/`LandmarksOrHistoricalBuildings`) on the parent Astro page. Placements in priority order: (1) `/areas/` hub orientation map, (2) per-area maps on each pulse page, (3) optional `/discover/` guided tour. Use Astro client-only island, lazy-load below fold, Lighthouse before/after, test brand-chrome fit (fallback: native MapLibre/Mapbox GL).
 
 ---
 
 ## Priority 2 — High-leverage additions
 
-- [ ] **Add a homepage FAQ block with `FAQPage` JSON-LD.**
-  4–6 cross-cutting questions:
-  - "Who is Ryan Adamson?"
-  - "What areas does the Adamson Group cover?"
-  - "Where is Ryan's office?"
-  - "What's the Sarasota luxury market doing in 2026?"
-  - "How do I contact Ryan Adamson?"
-  - "What's the difference between Lido Key, Longboat Key, and Siesta Key?"
+- [ ] **Add a homepage FAQ block with `FAQPage` JSON-LD.** STILL OPEN — homepage has no FAQ. The `FAQSchema.astro` component already emits correct dual markup; just feed it 4–6 cross-cutting questions: "Who is Ryan Adamson?", "What areas does the Adamson Group cover?", "Where is Ryan's office?", "What's the Sarasota luxury market doing in 2026?", "How do I contact Ryan?", "Difference between Lido, Longboat, and Siesta?"
 
-- [ ] **Add an "at a glance" data block to the homepage below the fold.**
-  4–6 factual sentences with current numbers and a "last updated" date. Gives the homepage *something* to be cited for.
+- [ ] **Add an "at a glance" data block to the homepage below the fold.** STILL OPEN. The homepage currently carries ZERO citable facts — it's all marketing prose ("Real-time data", "Deep knowledge"). Add 4–6 factual sentences with current numbers + a "last updated" date so the homepage has something to be cited for.
 
-- [ ] **Create `llms.txt` at site root.**
-  Curated map of the site's important content for AI crawlers — paralleling robots.txt. Should reference area pages, market reports, about page, and a one-paragraph site summary.
+- [x] **~~Create `llms.txt` at site root.~~** ✅ **DONE — exists and is well-structured.** *(But has stale content — see New Findings 🟡 above: dead `/areas/sarasota` link + missing Palmer Ranch.)*
 
-- [ ] **Add `datePublished` and `dateModified` to all `WebPage` JSON-LD nodes.**
-  Visible "last updated" text exists on Longboat Key but isn't in the schema. Freshness needs to be machine-readable. Wire this into the area-page generator so it picks up the JSON file's mtime or a `lastUpdated` field.
+- [ ] **Add `datePublished` and `dateModified` to all `WebPage` / `ProfilePage` JSON-LD nodes.**
+  STILL OPEN. Area pages show a visible "Last updated" date and the FAQ/Dataset schema is rich, but the top-level `WebPage` JSON-LD node still has no machine-readable `dateModified`, and `/about/`'s `ProfilePage` has none. Wire `lastUpdated` from the stats JSON into the page schema at build time.
 
 ---
 
 ## Priority 3 — Polish & technical hygiene
 
-- [ ] **Per-page Open Graph images.**
-  All pages currently share `/images/og-default.jpg`. At minimum, give each area page its own OG image with the area name baked in.
+- [ ] **Per-page Open Graph images.** STILL OPEN — every page still uses `/images/og-default.jpg`. Give each area page an OG image with the area name baked in.
 
-- [ ] **Fix Lido Key homepage card copy.**
-  Current text: "Lido Key - powder sand beaches steps fine dining and shopping" — reads like incomplete draft copy (missing words/punctuation).
+- [ ] **Fix Lido Key homepage card copy.** STILL OPEN (and worse — see New Findings 🔴). Text still reads "Lido Key - powder sand beaches steps fine dining and shopping" (missing words). Will be resolved by the homepage rebuild + AreaCard data fix.
 
-- [ ] **Fix duplicate `invert` class on the Adamson Group logo `<img>`.**
-  In the header: `class="h-12 w-auto invert brightness-0 invert"` — `invert` appears twice. Cosmetic but sloppy.
+- [ ] **Fix duplicate `invert` class on the Adamson Group logo `<img>`.** Cosmetic. Not re-verified this cycle.
 
-- [ ] **Strengthen H1/H2 entity statements.**
-  Hero H1 is a tagline ("Luxury Real Estate on Sarasota's Barrier Islands"). Consider an additional visible H2 like "Ryan Adamson — Coldwell Banker Realty, St. Armands Circle" so the entity is in headline-level text, not just JSON-LD.
+- [ ] **Strengthen H1/H2 entity statements.** STILL OPEN. Homepage H1 is the tagline "Luxury Real Estate on Sarasota's Barrier Islands"; add a visible H2 like "Ryan Adamson — Coldwell Banker Realty, St. Armands Circle" so the entity is in headline text, not just JSON-LD. Same on `/about/` (H1 is just "Ryan Adamson" with no headline-level credential/entity line).
 
-- [ ] **Audit `alt` attributes site-wide.**
-  Several decorative-only alts spotted; ensure every meaningful image has descriptive alt text (helps both AEO and accessibility).
+- [ ] **Audit `alt` attributes site-wide.** Not re-verified this cycle.
 
-- [ ] **Add `BreadcrumbList` schema to area pages.**
-  Site → Areas → Longboat Key. Improves how AI assistants describe site structure.
+- [ ] **Add `BreadcrumbList` schema to area pages.** STILL OPEN — area `[slug].astro` emits `Place` + `WebPage` only, no `BreadcrumbList`. Add Site → Areas → <Area>. (`BreadcrumbNav.astro` already exists in the new-construction section — reuse the pattern.)
 
 ---
 
 ## Standing items (do every release)
 
-- [ ] **Run AEO_AUDIT_PLAYBOOK.md after every Netlify deploy.**
-  Compare results against this TODO file. Close items as they ship; log any new findings.
+- [ ] **Run AEO_AUDIT_PLAYBOOK.md after every Netlify deploy.** ✅ Ran 2026-06-06.
 
-- [ ] **Re-verify AI-bot allow-list in `robots.txt` after any robots.txt change.**
-  Currently allow-lists GPTBot, ClaudeBot, anthropic-ai, PerplexityBot, Google-Extended, Bytespider, CCBot. Don't lose this.
+- [x] **Re-verify AI-bot allow-list in `robots.txt`.** ✅ Confirmed 2026-06-06 — `User-agent: *` allowed plus explicit Allow for GPTBot, Google-Extended, anthropic-ai, ClaudeBot, PerplexityBot, Bytespider, CCBot. Sitemap referenced. *(Optional enhancement: add OAI-SearchBot, Applebot-Extended, Amazonbot, Meta-ExternalAgent.)*
 
 ---
 
@@ -132,3 +109,8 @@
 | 2026-04-25 | BonesBot (initial audit) | B- | 14 items above | — |
 | 2026-04-25 | BonesBot (strategy session) | — | P1#1 rewritten with luxury-buyer hub direction + 6-area architecture | — |
 | 2026-04-25 | BonesBot (strategy session) | — | Added P1#5: Mapme map UX integration with HTML+schema duplication rule | — |
+| 2026-06-06 | BonesBot (post-deploy audit) | B | 4 (stale homepage/contact; stale FAQ numbers vs live tables; llms.txt dead link + missing Palmer Ranch; areas-hub "From TBD" for WoT) | 2 (area-page parity exceeded; llms.txt created) |
+
+> **2026-06-06 deploy context:** Removed the "Active Condos by Construction Era" table from Palmer Ranch (Bird Key was already empty). That table now renders only on Downtown Sarasota, Longboat Key, Siesta Key, and St. Armands and Lido — per Ryan's instruction.
+>
+> **2026-06-06 grade rationale:** Area pages are A-grade, highly citable AEO assets (dated, MLS-sourced, sold comps, dual-markup FAQs) — a big jump from 2026-04-25 when only Longboat had data. Held to **B** overall by: (1) homepage is the weakest page yet the most-landed-on — stale area list + single broken card + zero citable facts + empty `telephone`; (2) `/market-reports/` still "Coming Soon"; (3) thin agent E-E-A-T (no license/phone/sameAs, placeholder bio); (4) stale FAQ numbers that contradict the live tables.
