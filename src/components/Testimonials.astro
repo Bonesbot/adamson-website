@@ -1,0 +1,105 @@
+---
+/**
+ * Testimonials — real 5-star client reviews from Ryan's Google Business
+ * Profile (5.0 across 25 reviews). Rendered as plain semantic HTML with a
+ * link to the live Google profile as the canonical source of truth.
+ *
+ * NOTE: intentionally NO aggregateRating / Review JSON-LD here. Google
+ * disallows self-serving review rich-results for your own entity, and the
+ * authoritative rating lives on the linked Google profile. The `sameAs`
+ * link to that profile in the page's RealEstateAgent schema is what carries
+ * the AEO / E-E-A-T signal. Review count is NOT hardcoded into schema, so it
+ * never goes stale.
+ */
+interface Testimonial {
+  quote: string;
+  author: string;
+  context?: string;
+  featured?: boolean;
+}
+
+interface Props {
+  heading?: string;
+  reviews?: Testimonial[];
+  googleUrl?: string;
+}
+
+const GOOGLE_PROFILE_URL = 'https://share.google/AOMDgknj0Rf0gtAvX';
+
+const defaultReviews: Testimonial[] = [
+  {
+    quote:
+      'Ryan has provided exceptional detailed service in helping us purchase our vacation property on Longboat…',
+    author: 'Justin M.',
+    context: 'Waterfront purchase · Longboat Key',
+    featured: true,
+  },
+  {
+    quote: 'Exceptional Service! My experience with Ryan was nothing short of outstanding.',
+    author: 'Sarah T.',
+  },
+  {
+    quote: 'Ryan with Coldwell Banker is superb! Not only is he kind, courteous and friendly…',
+    author: 'Tina H.',
+  },
+];
+
+const {
+  heading = 'What Clients Say',
+  reviews = defaultReviews,
+  googleUrl = GOOGLE_PROFILE_URL,
+} = Astro.props;
+---
+
+<section class="section dark-section" aria-labelledby="testimonials-heading">
+  <div class="container-narrow">
+    <div class="text-center mb-10">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Client Reviews</p>
+      <h2 id="testimonials-heading" class="accent-underline-center">{heading}</h2>
+      <a
+        href={googleUrl}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2 mt-4 text-sm text-white/70 hover:text-[var(--color-gold)] transition-colors"
+      >
+        <span class="text-[var(--color-gold)] tracking-[0.15em]" aria-hidden="true">★★★★★</span>
+        <span><strong class="text-white">5.0</strong> · 25 reviews on Google</span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {reviews.map((r) => (
+        <figure
+          class={`rounded-lg border border-[var(--color-border-dark)] bg-[var(--color-black-card)] p-6 flex flex-col ${r.featured ? 'md:col-span-3 md:flex-row md:items-start md:gap-8 ring-1 ring-[var(--color-cbgl-blue)]/40' : ''}`}
+        >
+          <div class={r.featured ? 'md:flex-1' : ''}>
+            {r.context && (
+              <p class="font-accent text-[11px] uppercase tracking-[0.18em] text-[var(--color-cbgl-blue-light)] mb-3">
+                {r.context}
+              </p>
+            )}
+            <span class="text-[var(--color-gold)] text-sm tracking-[0.15em]" aria-hidden="true">★★★★★</span>
+            <blockquote class={`mt-3 text-white/80 leading-relaxed ${r.featured ? 'text-lg' : 'text-base'}`}>
+              “{r.quote}”
+            </blockquote>
+            <figcaption class="mt-4 font-accent text-xs uppercase tracking-[0.15em] text-white/50">
+              {r.author} · <span class="text-white/40">Google review</span>
+            </figcaption>
+          </div>
+        </figure>
+      ))}
+    </div>
+
+    <p class="text-center mt-8">
+      <a
+        href={googleUrl}
+        target="_blank"
+        rel="noopener"
+        class="text-sm text-[var(--color-cbgl-blue-light)] hover:text-[var(--color-gold)] transition-colors"
+      >
+        Read all 25 reviews on Google →
+      </a>
+    </p>
+  </div>
+</section>
