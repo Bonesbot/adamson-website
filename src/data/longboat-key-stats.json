@@ -2,18 +2,18 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-05T10:54:23.956635+00:00",
+  "lastUpdated": "2026-06-06T10:59:33.098877+00:00",
   "counts": {
-    "sold": 490,
+    "sold": 492,
     "pending": 83,
-    "active": 368,
-    "total": 573
+    "active": 367,
+    "total": 575
   },
   "metrics": {
-    "avgPrice": "$1,809,737",
+    "avgPrice": "$1,811,912",
     "avgPricePerSqFt": "$724",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,161",
+    "avgLivingSqFt": "2,162",
     "avgLotSqFt": null,
     "avgDom": 97
   },
@@ -22,14 +22,14 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 368,
+    "count": 367,
     "medianPrice": "$1,095,000",
-    "medianPricePerSqFt": "$696",
-    "waterfrontCount": 282,
+    "medianPricePerSqFt": "$695",
+    "waterfrontCount": 280,
     "newConstructionCount": 28
   },
   "sold": {
-    "count": 490,
+    "count": 492,
     "medianPrice": "$1,073,750",
     "medianDom": 68,
     "saleToListRatio": "86.9%"
@@ -39,19 +39,45 @@
     "medianMonthlyCondoFee": "$1,698"
   },
   "priceBands": {
-    "under900k": 142,
+    "under900k": 141,
     "band900kTo1_5m": 82,
-    "band1_5mTo3m": 83,
-    "band3mPlus": 61
+    "band1_5mTo3m": 84,
+    "band3mPlus": 60
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 368
+      "count": 367
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4669890",
+      "address": "6810 LONGBOAT DR S",
+      "subdivision": "LONGBEACH",
+      "soldPrice": "$1,850,000",
+      "soldDate": "2026-06-05",
+      "bedrooms": 4,
+      "bathrooms": 4.5,
+      "livingSqFt": "2,848",
+      "yearBuilt": 2024,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4666939",
+      "address": "1975 GULF OF MEXICO DR #G4-308",
+      "subdivision": "SEAPLACE III",
+      "soldPrice": "$449,000",
+      "soldDate": "2026-06-05",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,068",
+      "yearBuilt": 1977,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4681044",
       "address": "1485 GULF OF MEXICO DR #110",
@@ -90,32 +116,6 @@
       "yearBuilt": 1982,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4686987",
-      "address": "1930 HARBOURSIDE DR #145",
-      "subdivision": "FAIRWAY BAY 1",
-      "soldPrice": "$515,000",
-      "soldDate": "2026-06-03",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,270",
-      "yearBuilt": 1982,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4689437",
-      "address": "581 YARDARM LN",
-      "subdivision": "COUNTRY CLUB SHORES SEC 02",
-      "soldPrice": "$2,075,000",
-      "soldDate": "2026-06-02",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,192",
-      "yearBuilt": 1968,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -123,11 +123,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 204,
-      "avgPrice": "$892,470",
-      "avgPricePerSqFt": "$661",
-      "avgLivingSqFt": "1,350",
-      "avgDom": 142
+      "activeCount": 203,
+      "avgPrice": "$895,167",
+      "avgPricePerSqFt": "$662",
+      "avgLivingSqFt": "1,353",
+      "avgDom": 143
     },
     {
       "tier": "1990to2005",
@@ -137,7 +137,7 @@
       "avgPrice": "$2,298,189",
       "avgPricePerSqFt": "$846",
       "avgLivingSqFt": "2,614",
-      "avgDom": 159
+      "avgDom": 160
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$5,464,667",
       "avgPricePerSqFt": "$1,523",
       "avgLivingSqFt": "3,595",
-      "avgDom": 197
+      "avgDom": 198
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$7,129,800",
       "avgPricePerSqFt": "$2,147",
       "avgLivingSqFt": "2,988",
-      "avgDom": 335
+      "avgDom": 336
     }
   ],
   "condoTiersScope": {
