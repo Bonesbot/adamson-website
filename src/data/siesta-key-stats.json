@@ -2,56 +2,108 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-05T10:54:25.164597+00:00",
+  "lastUpdated": "2026-06-06T10:59:34.295462+00:00",
   "counts": {
-    "sold": 485,
-    "pending": 69,
-    "active": 430,
-    "total": 554
+    "sold": 489,
+    "pending": 67,
+    "active": 429,
+    "total": 556
   },
   "metrics": {
-    "avgPrice": "$1,398,918",
-    "avgPricePerSqFt": "$680",
-    "avgYearBuilt": 1977,
-    "avgLivingSqFt": "1,894",
+    "avgPrice": "$1,396,888",
+    "avgPricePerSqFt": "$678",
+    "avgYearBuilt": 1978,
+    "avgLivingSqFt": "1,895",
     "avgLotSqFt": null,
-    "avgDom": 105
+    "avgDom": 106
   },
   "range": {
     "minPrice": "$290,000",
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 430,
+    "count": 429,
     "medianPrice": "$1,200,000",
-    "medianPricePerSqFt": "$775",
-    "waterfrontCount": 245,
+    "medianPricePerSqFt": "$776",
+    "waterfrontCount": 246,
     "newConstructionCount": 63
   },
   "sold": {
-    "count": 485,
-    "medianPrice": "$880,000",
+    "count": 489,
+    "medianPrice": "$895,000",
     "medianDom": 72,
-    "saleToListRatio": "87.4%"
+    "saleToListRatio": "87.3%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,133",
     "medianMonthlyCondoFee": "$1,261"
   },
   "priceBands": {
-    "under900k": 170,
+    "under900k": 169,
     "band900kTo1_5m": 81,
-    "band1_5mTo3m": 82,
-    "band3mPlus": 97
+    "band1_5mTo3m": 83,
+    "band3mPlus": 96
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 430
+      "count": 429
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4657651",
+      "address": "546A BEACH RD #A544",
+      "subdivision": "TIFFANY SANDS",
+      "soldPrice": "$1,800,000",
+      "soldDate": "2026-06-05",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,611",
+      "yearBuilt": 1981,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4668594",
+      "address": "635 TROPICAL CIR",
+      "subdivision": "SIESTAS BAYSIDE BAYSIDE CLUB 01",
+      "soldPrice": "$895,000",
+      "soldDate": "2026-06-05",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,255",
+      "yearBuilt": 1983,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4682792",
+      "address": "450 BEACH RD #3",
+      "subdivision": "PLACE 450",
+      "soldPrice": "$1,220,000",
+      "soldDate": "2026-06-04",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,386",
+      "yearBuilt": 1977,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4680023",
+      "address": "1300 N PORTOFINO DR #S206",
+      "subdivision": "SIESTA HARBOR II",
+      "soldPrice": "$410,000",
+      "soldDate": "2026-06-04",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "929",
+      "yearBuilt": 1969,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4678861",
       "address": "5263 AVENIDA DE CORTEZ",
@@ -64,58 +116,6 @@
       "yearBuilt": 2018,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4673529",
-      "address": "749 TROPICAL CIR",
-      "subdivision": "SIESTAS BAYSIDE BAYSIDE CLUB 01",
-      "soldPrice": "$1,510,000",
-      "soldDate": "2026-06-02",
-      "bedrooms": 4,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,598",
-      "yearBuilt": 1984,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4690420",
-      "address": "8764 MIDNIGHT PASS RD #A202",
-      "subdivision": "ISLAND REEF I",
-      "soldPrice": "$582,000",
-      "soldDate": "2026-06-02",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,286",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4662182",
-      "address": "5830 MIDNIGHT PASS RD #25",
-      "subdivision": "JAMAICA ROYALE",
-      "soldPrice": "$522,500",
-      "soldDate": "2026-06-02",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "728",
-      "yearBuilt": 1962,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4678675",
-      "address": "5631 MIDNIGHT PASS RD #1002",
-      "subdivision": "WHITE SANDS VILLAGE",
-      "soldPrice": "$290,000",
-      "soldDate": "2026-06-02",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "797",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -123,11 +123,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 237,
-      "avgPrice": "$840,292",
-      "avgPricePerSqFt": "$689",
-      "avgLivingSqFt": "1,217",
-      "avgDom": 151
+      "activeCount": 236,
+      "avgPrice": "$842,052",
+      "avgPricePerSqFt": "$690",
+      "avgLivingSqFt": "1,218",
+      "avgDom": 152
     },
     {
       "tier": "1990to2005",
@@ -137,7 +137,7 @@
       "avgPrice": "$1,405,767",
       "avgPricePerSqFt": "$695",
       "avgLivingSqFt": "2,084",
-      "avgDom": 204
+      "avgDom": 205
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$2,751,125",
       "avgPricePerSqFt": "$1,276",
       "avgLivingSqFt": "2,067",
-      "avgDom": 280
+      "avgDom": 281
     },
     {
       "tier": "2020plus",
