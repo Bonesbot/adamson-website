@@ -1,0 +1,91 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/ui/Button.astro';
+
+const description =
+  'Your dream-home wishlist has been received. Ryan Adamson will tap his private network and the full Sarasota market to find the right fit.';
+---
+
+<BaseLayout title="Wishlist Received" description={description} noIndex={true}>
+
+  <!-- ====== CONFIRMATION HERO (Dark, layered) ====== -->
+  <section class="relative overflow-hidden pt-36 pb-24">
+    <div class="absolute inset-0" style="background-color: var(--color-navy);"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70"></div>
+    <div
+      class="absolute -top-1/3 left-1/2 -translate-x-1/2 w-[60rem] h-[60rem] rounded-full opacity-20 blur-3xl pointer-events-none"
+      style="background: radial-gradient(circle, var(--color-cbgl-blue) 0%, transparent 60%);"
+    ></div>
+
+    <div class="relative z-10 container text-center">
+      <!-- Gold confirmation medallion -->
+      <div class="mx-auto mb-8 flex h-16 w-16 items-center justify-center rounded-full border border-[var(--color-gold)]/40 bg-[var(--color-gold)]/10">
+        <svg class="h-7 w-7 text-[var(--color-gold)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+
+      <p class="section-label text-[var(--color-gold)] mb-4">Wishlist Received</p>
+      <h1 class="font-display text-white text-4xl sm:text-5xl mb-6">Thank You</h1>
+      <p class="text-lg text-white/75 max-w-2xl mx-auto leading-relaxed">
+        Thank you for your inquiry. I'll reach out to my private network and search the full
+        Sarasota market — including off-market and pre-listing opportunities — to find your
+        dream home. I personally review every wishlist and will follow up within one business day.
+      </p>
+
+      <!-- Signature card -->
+      <div class="mx-auto mt-12 max-w-sm rounded-xl border border-[var(--color-border-dark)] bg-[var(--color-black-card)] p-8">
+        <img
+          src="/images/ryan-adamson.jpg"
+          alt="Ryan Adamson, Coldwell Banker Realty"
+          class="mx-auto mb-5 h-24 w-24 rounded-full object-cover ring-2 ring-[var(--color-gold)]/30"
+          loading="lazy"
+        />
+        <p class="font-display text-white text-xl">Ryan Adamson</p>
+        <p class="font-accent text-[11px] uppercase tracking-[0.2em] text-[var(--color-cbgl-blue-light)] mt-1">
+          Coldwell Banker Realty — St. Armands Circle
+        </p>
+        <p class="text-sm text-white/50 mt-4">
+          Something time-sensitive?
+          <a href="tel:+19417139234" class="text-[var(--color-gold)] hover:text-[var(--color-gold-light)] transition-colors whitespace-nowrap">
+            (941) 713-9234
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== KEEP EXPLORING ====== -->
+  <section class="section dark-section-elevated">
+    <div class="container-narrow text-center">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">While You Wait</p>
+      <h2 class="accent-underline-center mb-10">Get to Know the Market</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 text-left">
+        <a href="/areas" class="group rounded-lg border border-[var(--color-border-dark)] bg-[var(--color-black-card)] p-6 hover:border-[var(--color-gold)]/40 transition-colors">
+          <p class="font-display text-white text-lg mb-2 group-hover:text-[var(--color-gold)] transition-colors">Explore Areas</p>
+          <p class="text-sm text-white/50 leading-relaxed">
+            Barrier-island and mainland market guides, from Longboat Key to West of Trail.
+          </p>
+        </a>
+        <a href="/market-reports" class="group rounded-lg border border-[var(--color-border-dark)] bg-[var(--color-black-card)] p-6 hover:border-[var(--color-gold)]/40 transition-colors">
+          <p class="font-display text-white text-lg mb-2 group-hover:text-[var(--color-gold)] transition-colors">Market Reports</p>
+          <p class="text-sm text-white/50 leading-relaxed">
+            The latest MLS-sourced pricing and inventory trends across the coast.
+          </p>
+        </a>
+        <a href="/about" class="group rounded-lg border border-[var(--color-border-dark)] bg-[var(--color-black-card)] p-6 hover:border-[var(--color-gold)]/40 transition-colors">
+          <p class="font-display text-white text-lg mb-2 group-hover:text-[var(--color-gold)] transition-colors">About Ryan</p>
+          <p class="text-sm text-white/50 leading-relaxed">
+            Credentials, certifications, and how I work with buyers.
+          </p>
+        </a>
+      </div>
+
+      <Button href="/" variant="primary" size="lg">
+        Return to Homepage
+      </Button>
+    </div>
+  </section>
+
+</BaseLayout>
