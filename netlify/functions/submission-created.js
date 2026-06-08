@@ -1,23 +1,37 @@
 // netlify/functions/submission-created.js
 //
-// Netlify automatically invokes a function named `submission-created` after
-// every VERIFIED form submission. We mirror "Find My Dream Home" wishlist
-// submissions into Supabase (table: public.buyer_wishlists) so they're a
-// durable system of record, queryable and matchable against the MLS feed.
+// Captures "Find My Dream Home" wishlists into Supabase (public.buyer_wishlists)
+// — the durable system of record. Handles TWO trigger paths:
 //
-// Requires env vars in the Netlify dashboard:
-//   SUPABASE_URL                e.g. https://xxxx.supabase.co
-//   SUPABASE_SERVICE_ROLE_KEY   service-role key (server-side only)
+//   1. Direct AJAX POST from the form (primary, reliable):
+//        { "direct": true, "data": { ...fields, arrays comma-joined... } }
+//      The form posts straight here, so capture never depends on Netlify Forms
+//      detection/registration.
 //
-// No npm dependencies — uses global fetch (Netlify Node 18+).
+//   2. Netlify "submission-created" event (fallback, if Netlify Forms is wired):
+//        { "payload": { "form_name": "wishlist", "data": {...} } }
+//
+// Env vars (Netlify dashboard): SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY.
+// No npm deps — global fetch (Netlify Node 18+).
 
 exports.handler = async (event) => {
   try {
     const body = JSON.parse(event.body || '{}');
-    const payload = body.payload || {};
 
-    if (payload.form_name !== 'wishlist') {
-      return { statusCode: 200, body: 'ignored (not the wishlist form)' };
+    let d;
+    if (body.direct && body.data) {
+      d = body.data;
+    } else {
+      const payload = body.payload || {};
+      if (payload.form_name !== 'wishlist') {
+        return { statusCode: 200, body: 'ignored (not the wishlist form)' };
+      }
+      d = payload.data || {};
+    }
+
+    // Honeypot — silently ignore bot submissions.
+    if (d['bot-field']) {
+      return { statusCode: 200, body: 'ignored (honeypot)' };
     }
 
     const SUPABASE_URL = process.env.SUPABASE_URL;
@@ -26,8 +40,6 @@ exports.handler = async (event) => {
       console.error('submission-created: missing SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY');
       return { statusCode: 500, body: 'missing supabase env vars' };
     }
-
-    const d = payload.data || {};
 
     const toArr = (v) =>
       Array.isArray(v)
