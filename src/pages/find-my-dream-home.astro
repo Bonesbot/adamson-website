@@ -42,12 +42,8 @@ const legendCls =
 const chipCls =
   'flex items-center gap-2 px-4 py-2.5 border border-[var(--color-border)] rounded-lg cursor-pointer hover:border-[var(--color-gold)] transition-colors text-sm text-[var(--color-text)] bg-[var(--color-warm-white)]';
 
-// Live thousands-separator for the budget field (runs as user types).
+// Live thousands-separator for the budget field (runs as the user types).
 const budgetFmt = "var d=this.value.replace(/[^0-9]/g,'');this.value=d?'$'+Number(d).toLocaleString('en-US'):''";
-
-// On submit, copy the non-personal search criteria into the redirect URL so the
-// Thank You page can echo them back. (No name/email/phone in the URL.)
-const echoOnSubmit = "try{var f=this,p=new URLSearchParams();if(f.budget.value)p.set('budget',f.budget.value);if(f.timeline.value)p.set('timeline',f.timeline.value);if(f.bedrooms.value)p.set('beds',f.bedrooms.value);if(f.bathrooms.value)p.set('baths',f.bathrooms.value);var a=f['size-min'].value,b=f['size-max'].value;if(a||b)p.set('size',(a||'?')+'-'+(b||'?'));f.querySelectorAll('input[name=property-type]:checked,input[name=areas]:checked,input[name=must-haves]:checked').forEach(function(c){p.append(c.name,c.value)});if(f['areas-other'].value)p.append('areas',f['areas-other'].value);if(f['must-haves-other'].value)p.append('must-haves',f['must-haves-other'].value);f.action='/dream-home-received?'+p.toString()}catch(e){}";
 ---
 
 <BaseLayout title="Find My Dream Home" description={description} jsonLd={jsonLd}>
@@ -64,15 +60,6 @@ const echoOnSubmit = "try{var f=this,p=new URLSearchParams();if(f.budget.value)p
         market — including quiet, off-market and pre-listing opportunities you won't find on
         Zillow. No searching through hundreds of listings. Just the few that fit.
       </p>
-      <a
-        href="https://share.google/AOMDgknj0Rf0gtAvX"
-        target="_blank"
-        rel="noopener"
-        class="inline-flex items-center gap-2 mt-6 text-sm text-white/70 hover:text-[var(--color-gold)] transition-colors"
-      >
-        <span class="text-[var(--color-gold)] tracking-[0.15em]" aria-hidden="true">★★★★★</span>
-        <span><strong class="text-white">5.0</strong> · 25 Google reviews · Certified Waterfront Specialist</span>
-      </a>
     </div>
   </section>
 
@@ -109,7 +96,6 @@ const echoOnSubmit = "try{var f=this,p=new URLSearchParams();if(f.budget.value)p
         netlify
         data-netlify="true"
         netlify-honeypot="bot-field"
-        onsubmit={echoOnSubmit}
         class="space-y-12"
       >
         <input type="hidden" name="form-name" value="wishlist" />
@@ -144,21 +130,13 @@ const echoOnSubmit = "try{var f=this,p=new URLSearchParams();if(f.budget.value)p
         <fieldset>
           <legend class="font-display text-xl text-[var(--color-navy)] mb-6">What you're looking for</legend>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div>
-              <label for="budget" class={labelCls}>Approximate budget</label>
-              <input type="text" id="budget" name="budget" inputmode="numeric" required class={inputCls} placeholder="$1,500,000" oninput={budgetFmt} />
-            </div>
-            <div>
-              <span class={labelCls}>Property size (sq ft) — optional</span>
-              <div class="flex items-center gap-3">
-                <input type="number" name="size-min" min="0" step="100" class={inputCls} placeholder="Min" />
-                <span class="text-[var(--color-text-light)]">–</span>
-                <input type="number" name="size-max" min="0" step="100" class={inputCls} placeholder="Max" />
-              </div>
-            </div>
+          <!-- Budget -->
+          <div class="mb-8 md:max-w-sm">
+            <label for="budget" class={labelCls}>Approximate budget</label>
+            <input type="text" id="budget" name="budget" inputmode="numeric" required class={inputCls} placeholder="$1,500,000" oninput={budgetFmt} />
           </div>
 
+          <!-- Property type (directly below budget) -->
           <div class="mb-8">
             <p class={legendCls}>Property type <span class="normal-case tracking-normal text-[var(--color-text-light)]">(select all that apply)</span></p>
             <div class="flex flex-wrap gap-3">
@@ -168,6 +146,17 @@ const echoOnSubmit = "try{var f=this,p=new URLSearchParams();if(f.budget.value)p
             </div>
           </div>
 
+          <!-- Size -->
+          <div class="mb-8 md:max-w-sm">
+            <span class={labelCls}>Property size (sq ft) — optional</span>
+            <div class="flex items-center gap-3">
+              <input type="number" name="size-min" min="0" step="100" class={inputCls} placeholder="Min" />
+              <span class="text-[var(--color-text-light)]">–</span>
+              <input type="number" name="size-max" min="0" step="100" class={inputCls} placeholder="Max" />
+            </div>
+          </div>
+
+          <!-- Beds / Baths -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <div>
               <p class={legendCls}>Bedrooms</p>
@@ -187,6 +176,7 @@ const echoOnSubmit = "try{var f=this,p=new URLSearchParams();if(f.budget.value)p
             </div>
           </div>
 
+          <!-- Preferred areas -->
           <div>
             <p class={legendCls}>Preferred areas <span class="normal-case tracking-normal text-[var(--color-text-light)]">(optional — select any)</span></p>
             <div class="flex flex-wrap gap-3">
@@ -232,5 +222,40 @@ const echoOnSubmit = "try{var f=this,p=new URLSearchParams();if(f.budget.value)p
       </form>
     </div>
   </section>
+
+  <script>
+    // AJAX submit: post to Netlify ourselves, then redirect to the custom Thank
+    // You page with the (non-personal) search criteria so it can echo them back.
+    // This avoids Netlify's generic built-in "Thank you" success page.
+    (function () {
+      const form = document.querySelector('form[name="wishlist"]');
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+        const val = (n) => (form.elements[n] ? form.elements[n].value : '');
+        const p = new URLSearchParams();
+        if (val('budget')) p.set('budget', val('budget'));
+        if (val('timeline')) p.set('timeline', val('timeline'));
+        if (val('bedrooms')) p.set('beds', val('bedrooms'));
+        if (val('bathrooms')) p.set('baths', val('bathrooms'));
+        const smin = val('size-min'), smax = val('size-max');
+        if (smin || smax) p.set('size', (smin || '?') + '-' + (smax || '?'));
+        form.querySelectorAll('input[name="property-type"]:checked, input[name="areas"]:checked, input[name="must-haves"]:checked')
+          .forEach((c) => p.append(c.name, c.value));
+        if (val('areas-other')) p.append('areas', val('areas-other'));
+        if (val('must-haves-other')) p.append('must-haves', val('must-haves-other'));
+        const dest = '/dream-home-received?' + p.toString();
+        const body = new URLSearchParams(new FormData(form)).toString();
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body,
+        })
+          .then(() => { window.location = dest; })
+          .catch(() => { window.location = dest; });
+      });
+    })();
+  </script>
 
 </BaseLayout>
