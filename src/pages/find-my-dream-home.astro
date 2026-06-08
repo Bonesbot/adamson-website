@@ -98,7 +98,7 @@ const chipCls =
       <form
         name="wishlist"
         method="POST"
-        action="/thank-you"
+        action="/dream-home-received"
         netlify
         data-netlify="true"
         netlify-honeypot="bot-field"
@@ -139,14 +139,14 @@ const chipCls =
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div>
               <label for="budget" class={labelCls}>Budget (USD)</label>
-              <input type="number" id="budget" name="budget" min="0" step="50000" required class={inputCls} placeholder="$1,500,000" />
+              <input type="text" id="budget" name="budget" inputmode="numeric" data-format="currency" required class={inputCls} placeholder="$1,500,000" />
             </div>
             <div>
               <span class={labelCls}>Property size (sq ft) — optional</span>
               <div class="flex items-center gap-3">
-                <input type="number" name="size-min" min="0" step="100" class={inputCls} placeholder="Min" />
+                <input type="text" name="size-min" inputmode="numeric" data-format="number" class={inputCls} placeholder="Min" />
                 <span class="text-[var(--color-text-light)]">–</span>
-                <input type="number" name="size-max" min="0" step="100" class={inputCls} placeholder="Max" />
+                <input type="text" name="size-max" inputmode="numeric" data-format="number" class={inputCls} placeholder="Max" />
               </div>
             </div>
           </div>
@@ -186,6 +186,7 @@ const chipCls =
                 <label class={chipCls}><input type="checkbox" name="areas" value={a.value} class="accent-[var(--color-gold)]" /> {a.label}</label>
               ))}
             </div>
+            <input type="text" name="areas-other" class={`${inputCls} mt-3`} placeholder="Other area or neighborhood…" />
           </div>
         </fieldset>
 
@@ -198,6 +199,7 @@ const chipCls =
               <label class={chipCls}><input type="checkbox" name="must-haves" value={f.value} class="accent-[var(--color-gold)]" /> {f.label}</label>
             ))}
           </div>
+          <input type="text" name="must-haves-other" class={`${inputCls} mt-3`} placeholder="Anything else that's a must-have? (e.g. elevator, guest house, dock lift…)" />
         </fieldset>
 
         <!-- Story -->
@@ -217,15 +219,4 @@ const chipCls =
             type="submit"
             class="inline-flex items-center justify-center font-accent text-xs uppercase tracking-wider px-10 py-4 bg-[var(--color-gold)] text-[var(--color-navy)] hover:bg-[var(--color-gold-light)] font-semibold rounded transition-all duration-200"
           >
-            Send My Wishlist
-          </button>
-          <p class="text-xs text-[var(--color-text-light)] mt-4 max-w-md mx-auto leading-relaxed">
-            Private and never shared. No obligation. I personally review every wishlist and
-            follow up within one business day.
-          </p>
-        </div>
-      </form>
-    </div>
-  </section>
-
-</BaseLayout>
+  
