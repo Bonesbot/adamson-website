@@ -4,3 +4,9 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+# Serverless functions. `submission-created` is auto-invoked by Netlify after
+# every verified form submission and mirrors wishlist entries into Supabase.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
