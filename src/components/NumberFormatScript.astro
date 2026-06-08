@@ -1,0 +1,28 @@
+---
+/**
+ * Client script that adds thousands separators to any input with
+ * data-format="currency" ($1,500,000) or data-format="number" (2,500) on blur,
+ * reverting to raw digits on focus for easy editing.
+ *
+ * Lives in a component because this project's Astro build ships component
+ * <script> tags but drops page-level ones. The Netlify function strips the
+ * $/commas server-side, so stored values stay clean numbers.
+ */
+---
+<script>
+  const fmtField = (el, prefix) => {
+    const raw = String(el.value).replace(/[^0-9.]/g, '');
+    if (!raw) { el.value = ''; return; }
+    const n = parseFloat(raw);
+    if (Number.isNaN(n)) { el.value = ''; return; }
+    el.value = prefix + Math.round(n).toLocaleString('en-US');
+  };
+  document.querySelectorAll('[data-format="currency"]').forEach((el) => {
+    el.addEventListener('focus', () => { el.value = String(el.value).replace(/[^0-9.]/g, ''); });
+    el.addEventListener('blur', () => fmtField(el, '$'));
+  });
+  document.querySelectorAll('[data-format="number"]').forEach((el) => {
+    el.addEventListener('focus', () => { el.value = String(el.value).replace(/[^0-9.]/g, ''); });
+    el.addEventListener('blur', () => fmtField(el, ''));
+  });
+</script>
