@@ -88,7 +88,14 @@ const budgetFmt = "var d=this.value.replace(/[^0-9]/g,'');this.value=d?'$'+Numbe
   <!-- ====== FORM ====== -->
   <section class="section bg-white">
     <div class="container-narrow">
-      <form name="wishlist" class="space-y-12">
+      <form
+        name="wishlist"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        class="space-y-12"
+      >
+        <input type="hidden" name="form-name" value="wishlist" />
         <p class="hidden">
           <label>Don't fill this out: <input name="bot-field" /></label>
         </p>
@@ -214,18 +221,17 @@ const budgetFmt = "var d=this.value.replace(/[^0-9]/g,'');this.value=d?'$'+Numbe
   </section>
 
   <script>
-    // Post the wishlist directly to the serverless function (reliable capture into
-    // Supabase, independent of Netlify Forms), then redirect to the custom Thank You
-    // page with the non-personal search criteria so it can echo them back.
+    // Dual submit: (1) the serverless function -> Supabase (guaranteed record),
+    // and (2) Netlify Forms -> fires the instant email notification. Then redirect
+    // to the custom Thank You page with the non-personal search criteria.
     (function () {
       const form = document.querySelector('form[name="wishlist"]');
       if (!form) return;
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         if (!form.reportValidity()) return;
-        const val = (n) => (form.elements[n] && !form.elements[n].length ? form.elements[n].value : (form.elements[n] ? form.elements[n].value : ''));
+        const val = (n) => (form.elements[n] ? form.elements[n].value : '');
         const checked = (n) => Array.from(form.querySelectorAll('input[name="' + n + '"]:checked')).map((c) => c.value);
-
         const smin = val('size-min'), smax = val('size-max');
 
         // Echo params for the Thank You page (no personal data)
@@ -242,7 +248,7 @@ const budgetFmt = "var d=this.value.replace(/[^0-9]/g,'');this.value=d?'$'+Numbe
         if (val('must-haves-other')) p.append('must-haves', val('must-haves-other'));
         const dest = '/dream-home-received?' + p.toString();
 
-        // Data payload — arrays comma-joined to match the function's parser
+        // (1) Supabase via the function — guaranteed capture
         const data = {
           name: val('name'), email: val('email'), phone: val('phone'),
           budget: val('budget'), timeline: val('timeline'),
@@ -256,14 +262,18 @@ const budgetFmt = "var d=this.value.replace(/[^0-9]/g,'');this.value=d?'$'+Numbe
           message: val('message'),
           'bot-field': val('bot-field'),
         };
-
-        fetch('/.netlify/functions/submission-created', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+        const fnPost = fetch('/.netlify/functions/submission-created', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ direct: true, data: data }),
-        })
-          .then(function () { window.location = dest; })
-          .catch(function () { window.location = dest; });
+        });
+
+        // (2) Netlify Forms — fires the instant email notification
+        const netlifyPost = fetch('/', {
+          method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(form)).toString(),
+        });
+
+        Promise.allSettled([fnPost, netlifyPost]).then(function () { window.location = dest; });
       });
     })();
   </script>
