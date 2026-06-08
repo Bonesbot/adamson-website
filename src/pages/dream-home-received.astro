@@ -28,10 +28,19 @@ const description =
       <p class="section-label text-[var(--color-gold)] mb-4">Wishlist Received</p>
       <h1 class="font-display text-white text-4xl sm:text-5xl mb-6">Thank You</h1>
       <p class="text-lg text-white/75 max-w-2xl mx-auto leading-relaxed">
-        Thank you for your inquiry. I'll reach out to my private network and search the full
-        Sarasota market — including off-market and pre-listing opportunities — to find your
-        dream home. I personally review every wishlist and will follow up within one business day.
+        Thank you for your inquiry. I'll work to locate your dream property — reaching out to my
+        private network and searching the full Sarasota market, including off-market and
+        pre-listing opportunities. I personally review every wishlist and will follow up within
+        one business day.
       </p>
+
+      <!-- Echoed search parameters (populated from the redirect URL, no personal data) -->
+      <div id="wishlist-summary" class="mx-auto mt-10 max-w-md text-left rounded-xl border border-[var(--color-border-dark)] bg-[var(--color-black-card)] p-7 hidden">
+        <p class="font-accent text-[11px] uppercase tracking-[0.2em] text-[var(--color-cbgl-blue-light)] mb-4 text-center">
+          We'll search for the following
+        </p>
+        <ul id="wishlist-summary-list" class="space-y-2 text-sm"></ul>
+      </div>
 
       <!-- Signature card -->
       <div class="mx-auto mt-12 max-w-sm rounded-xl border border-[var(--color-border-dark)] bg-[var(--color-black-card)] p-8">
@@ -87,5 +96,30 @@ const description =
       </Button>
     </div>
   </section>
+
+  <script>
+    // Echo the buyer's (non-personal) search parameters passed in the redirect URL.
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const esc = (s) => String(s).replace(/[&<>"']/g, (c) =>
+        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      const pretty = (s) => esc(String(s).replace(/[-_]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()));
+      const rows = [];
+      const budget = params.get('budget'); if (budget) rows.push(['Budget', esc(budget)]);
+      const beds = params.get('beds'); if (beds) rows.push(['Bedrooms', esc(beds) + '+']);
+      const baths = params.get('baths'); if (baths) rows.push(['Bathrooms', esc(baths) + '+']);
+      const size = params.get('size'); if (size && size !== '?-?') rows.push(['Size', esc(size).replace('-', ' – ') + ' sq ft']);
+      const types = params.getAll('property-type').map(pretty); if (types.length) rows.push(['Property type', types.join(', ')]);
+      const ar = params.getAll('areas').map(pretty); if (ar.length) rows.push(['Areas', ar.join(', ')]);
+      const must = params.getAll('must-haves').map(pretty); if (must.length) rows.push(['Must-haves', must.join(', ')]);
+      const timeline = params.get('timeline'); if (timeline) rows.push(['Timeline', esc(timeline)]);
+      if (rows.length) {
+        const ul = document.getElementById('wishlist-summary-list');
+        ul.innerHTML = rows.map(([k, v]) =>
+          `<li class="flex gap-2"><span class="text-white/40 min-w-[7rem]">${k}</span><span class="text-white">${v}</span></li>`).join('');
+        document.getElementById('wishlist-summary').classList.remove('hidden');
+      }
+    })();
+  </script>
 
 </BaseLayout>
