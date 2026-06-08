@@ -1,0 +1,231 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const description =
+  "Tell Ryan Adamson your dream home wishlist and get matched to Sarasota listings — including off-market opportunities — before they hit the public sites. Private, no obligation.";
+
+const jsonLd = {
+  '@type': 'WebPage',
+  name: 'Find My Dream Home — Private Buyer Search',
+  description,
+  url: 'https://adamsonfl.com/find-my-dream-home',
+};
+
+const areas = [
+  { value: 'downtown-sarasota', label: 'Downtown Sarasota' },
+  { value: 'longboat-key', label: 'Longboat Key' },
+  { value: 'st-armands-lido', label: 'St. Armands & Lido' },
+  { value: 'siesta-key', label: 'Siesta Key' },
+  { value: 'bird-key', label: 'Bird Key' },
+  { value: 'west-of-trail', label: 'West of Trail' },
+  { value: 'palmer-ranch', label: 'Palmer Ranch' },
+  { value: 'flexible', label: "Open to suggestions" },
+];
+
+const features = [
+  { value: 'waterfront', label: 'Beachfront / Waterfront' },
+  { value: 'boating', label: 'Boating & Private Dock' },
+  { value: 'golf', label: 'Golf Course Community' },
+  { value: 'new_construction', label: 'New Construction' },
+  { value: 'dining', label: 'Walk to Dining' },
+  { value: 'gated', label: 'Gated Community' },
+  { value: 'pool', label: 'Private Pool' },
+  { value: 'turnkey', label: 'Turnkey / Move-in Ready' },
+];
+
+const inputCls =
+  'w-full px-4 py-3 border border-[var(--color-border)] rounded-lg focus:outline-none focus:border-[var(--color-gold)] transition-colors bg-[var(--color-warm-white)]';
+const labelCls =
+  'block font-accent text-xs uppercase tracking-wider text-[var(--color-text-muted)] mb-2';
+const legendCls =
+  'font-accent text-xs uppercase tracking-wider text-[var(--color-text-muted)] mb-3';
+const chipCls =
+  'flex items-center gap-2 px-4 py-2.5 border border-[var(--color-border)] rounded-lg cursor-pointer hover:border-[var(--color-gold)] transition-colors text-sm text-[var(--color-text)] bg-[var(--color-warm-white)]';
+---
+
+<BaseLayout title="Find My Dream Home" description={description} jsonLd={jsonLd}>
+
+  <!-- ====== HERO ====== -->
+  <section class="relative overflow-hidden pt-36 pb-20">
+    <div class="absolute inset-0" style="background-color: var(--color-navy);"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
+    <div class="relative z-10 container text-center">
+      <p class="section-label text-[var(--color-gold)] mb-4">Private Buyer Search</p>
+      <h1 class="font-display text-white text-4xl sm:text-5xl mb-6">Find My Dream Home</h1>
+      <p class="text-lg text-white/75 max-w-2xl mx-auto leading-relaxed">
+        Tell me exactly what you're looking for and I'll match you to Sarasota's coastal
+        market — including quiet, off-market and pre-listing opportunities you won't find on
+        Zillow. No searching through hundreds of listings. Just the few that fit.
+      </p>
+      <a
+        href="https://share.google/AOMDgknj0Rf0gtAvX"
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2 mt-6 text-sm text-white/70 hover:text-[var(--color-gold)] transition-colors"
+      >
+        <span class="text-[var(--color-gold)] tracking-[0.15em]" aria-hidden="true">★★★★★</span>
+        <span><strong class="text-white">5.0</strong> · 25 Google reviews · Certified Waterfront Specialist</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ====== HOW IT WORKS ====== -->
+  <section class="section dark-section-elevated">
+    <div class="container-narrow">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+        <div>
+          <p class="font-display text-[var(--color-gold)] text-3xl mb-2">1</p>
+          <p class="font-display text-white text-lg mb-1">Share your wishlist</p>
+          <p class="text-sm text-white/50 leading-relaxed">A few minutes. The more specific, the better the matches.</p>
+        </div>
+        <div>
+          <p class="font-display text-[var(--color-gold)] text-3xl mb-2">2</p>
+          <p class="font-display text-white text-lg mb-1">I curate matches</p>
+          <p class="text-sm text-white/50 leading-relaxed">I cross-check your criteria against live and off-market inventory daily.</p>
+        </div>
+        <div>
+          <p class="font-display text-[var(--color-gold)] text-3xl mb-2">3</p>
+          <p class="font-display text-white text-lg mb-1">You get a private shortlist</p>
+          <p class="text-sm text-white/50 leading-relaxed">A hand-picked selection — and a heads-up the moment something new fits.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FORM ====== -->
+  <section class="section bg-white">
+    <div class="container-narrow">
+      <form
+        name="wishlist"
+        method="POST"
+        action="/thank-you"
+        netlify
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        class="space-y-12"
+      >
+        <input type="hidden" name="form-name" value="wishlist" />
+        <p class="hidden">
+          <label>Don't fill this out: <input name="bot-field" /></label>
+        </p>
+
+        <!-- Contact -->
+        <fieldset>
+          <legend class="font-display text-xl text-[var(--color-navy)] mb-6">Let's start with you</legend>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="name" class={labelCls}>Name</label>
+              <input type="text" id="name" name="name" required class={inputCls} placeholder="Your name" />
+            </div>
+            <div>
+              <label for="email" class={labelCls}>Email</label>
+              <input type="email" id="email" name="email" required class={inputCls} placeholder="your@email.com" />
+            </div>
+            <div>
+              <label for="phone" class={labelCls}>Phone</label>
+              <input type="tel" id="phone" name="phone" required class={inputCls} placeholder="(941) 555-0000" />
+            </div>
+            <div>
+              <label for="timeline" class={labelCls}>Timeline to purchase</label>
+              <input type="text" id="timeline" name="timeline" class={inputCls} placeholder="e.g. this winter, next 6 months, just exploring" />
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Search criteria -->
+        <fieldset>
+          <legend class="font-display text-xl text-[var(--color-navy)] mb-6">What you're looking for</legend>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div>
+              <label for="budget" class={labelCls}>Budget (USD)</label>
+              <input type="number" id="budget" name="budget" min="0" step="50000" required class={inputCls} placeholder="$1,500,000" />
+            </div>
+            <div>
+              <span class={labelCls}>Property size (sq ft) — optional</span>
+              <div class="flex items-center gap-3">
+                <input type="number" name="size-min" min="0" step="100" class={inputCls} placeholder="Min" />
+                <span class="text-[var(--color-text-light)]">–</span>
+                <input type="number" name="size-max" min="0" step="100" class={inputCls} placeholder="Max" />
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <p class={legendCls}>Property type <span class="normal-case tracking-normal text-[var(--color-text-light)]">(select all that apply)</span></p>
+            <div class="flex flex-wrap gap-3">
+              <label class={chipCls}><input type="checkbox" name="property-type" value="condo" class="accent-[var(--color-gold)]" /> Condo</label>
+              <label class={chipCls}><input type="checkbox" name="property-type" value="home" class="accent-[var(--color-gold)]" /> Home</label>
+              <label class={chipCls}><input type="checkbox" name="property-type" value="lot_land" class="accent-[var(--color-gold)]" /> Lot / Land</label>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div>
+              <p class={legendCls}>Bedrooms</p>
+              <div class="flex flex-wrap gap-2">
+                {[1,2,3,4,5].map((n) => (
+                  <label class={chipCls}><input type="radio" name="bedrooms" value={String(n)} class="accent-[var(--color-gold)]" /> {n}+</label>
+                ))}
+              </div>
+            </div>
+            <div>
+              <p class={legendCls}>Bathrooms</p>
+              <div class="flex flex-wrap gap-2">
+                {[2,3,4,5].map((n) => (
+                  <label class={chipCls}><input type="radio" name="bathrooms" value={String(n)} class="accent-[var(--color-gold)]" /> {n}+</label>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p class={legendCls}>Preferred areas <span class="normal-case tracking-normal text-[var(--color-text-light)]">(optional — select any)</span></p>
+            <div class="flex flex-wrap gap-3">
+              {areas.map((a) => (
+                <label class={chipCls}><input type="checkbox" name="areas" value={a.value} class="accent-[var(--color-gold)]" /> {a.label}</label>
+              ))}
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Must-haves -->
+        <fieldset>
+          <legend class="font-display text-xl text-[var(--color-navy)] mb-2">Your must-haves</legend>
+          <p class="text-sm text-[var(--color-text-muted)] mb-6">Check what matters most — these drive your matches.</p>
+          <div class="flex flex-wrap gap-3">
+            {features.map((f) => (
+              <label class={chipCls}><input type="checkbox" name="must-haves" value={f.value} class="accent-[var(--color-gold)]" /> {f.label}</label>
+            ))}
+          </div>
+        </fieldset>
+
+        <!-- Story -->
+        <fieldset>
+          <legend class="font-display text-xl text-[var(--color-navy)] mb-2">Tell me about your dream home</legend>
+          <p class="text-sm text-[var(--color-text-muted)] mb-6">Optional — but the details you share here often lead to the best matches. Lifestyle, deal-breakers, the view you're picturing.</p>
+          <textarea id="message" name="message" rows="5" class={`${inputCls} resize-vertical`} placeholder="We'd love deep-water dockage with no fixed bridges to the Gulf, a chef's kitchen, and morning light on the water…"></textarea>
+        </fieldset>
+
+        <!-- Captcha -->
+        <div class="flex justify-center">
+          <div data-netlify-recaptcha="true"></div>
+        </div>
+
+        <div class="text-center">
+          <button
+            type="submit"
+            class="inline-flex items-center justify-center font-accent text-xs uppercase tracking-wider px-10 py-4 bg-[var(--color-gold)] text-[var(--color-navy)] hover:bg-[var(--color-gold-light)] font-semibold rounded transition-all duration-200"
+          >
+            Send My Wishlist
+          </button>
+          <p class="text-xs text-[var(--color-text-light)] mt-4 max-w-md mx-auto leading-relaxed">
+            Private and never shared. No obligation. I personally review every wishlist and
+            follow up within one business day.
+          </p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</BaseLayout>
