@@ -1,15 +1,16 @@
 // netlify/functions/submission-created.js
 //
-// Captures "Find My Dream Home" wishlists into Supabase (public.buyer_wishlists)
-// — the durable system of record. Handles TWO trigger paths:
+// Captures "Find My Dream Home" wishlists into Supabase (public.buyer_wishlists).
 //
-//   1. Direct AJAX POST from the form (primary, reliable):
-//        { "direct": true, "data": { ...fields, arrays comma-joined... } }
-//      The form posts straight here, so capture never depends on Netlify Forms
-//      detection/registration.
+// The form submits TWO ways on purpose:
+//   • Direct AJAX POST to this function  -> Supabase insert (guaranteed record)
+//   • Netlify Forms POST                 -> Netlify sends the email notification
+//                                           (and also invokes this function via
+//                                            the "submission-created" event)
 //
-//   2. Netlify "submission-created" event (fallback, if Netlify Forms is wired):
-//        { "payload": { "form_name": "wishlist", "data": {...} } }
+// To avoid a duplicate row, this function ONLY inserts for the DIRECT call.
+// On the Netlify event it simply acknowledges (the email is sent by Netlify's
+// own notification config, independent of this function).
 //
 // Env vars (Netlify dashboard): SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY.
 // No npm deps — global fetch (Netlify Node 18+).
@@ -26,10 +27,12 @@ exports.handler = async (event) => {
       if (payload.form_name !== 'wishlist') {
         return { statusCode: 200, body: 'ignored (not the wishlist form)' };
       }
-      d = payload.data || {};
+      // Netlify Forms event — email handled by Netlify; Supabase handled by the
+      // form's direct call. Skip to avoid a duplicate insert.
+      return { statusCode: 200, body: 'netlify event acknowledged (supabase handled by direct call)' };
     }
 
-    // Honeypot — silently ignore bot submissions.
+    // Honeypot — silently ignore bots.
     if (d['bot-field']) {
       return { statusCode: 200, body: 'ignored (honeypot)' };
     }
