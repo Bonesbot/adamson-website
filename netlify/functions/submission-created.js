@@ -49,6 +49,15 @@ exports.handler = async (event) => {
       return Number.isNaN(n) ? null : n;
     };
 
+    // Merge the free-text "Other" entries into their respective arrays.
+    const preferredAreas = toArr(d['areas']);
+    const areasOther = (d['areas-other'] || '').trim();
+    if (areasOther) preferredAreas.push(areasOther);
+
+    const mustHaves = toArr(d['must-haves']);
+    const mustOther = (d['must-haves-other'] || '').trim();
+    if (mustOther) mustHaves.push(mustOther);
+
     const row = {
       full_name: d.name || null,
       email: d.email || null,
@@ -56,12 +65,12 @@ exports.handler = async (event) => {
       timeline: d.timeline || null,
       budget_usd: num(d.budget),
       property_types: toArr(d['property-type']),
-      preferred_areas: toArr(d['areas']),
+      preferred_areas: preferredAreas,
       size_min_sqft: intOf(d['size-min']),
       size_max_sqft: intOf(d['size-max']),
       bedrooms_min: intOf(d['bedrooms']),
       bathrooms_min: intOf(d['bathrooms']),
-      must_have_features: toArr(d['must-haves']),
+      must_have_features: mustHaves,
       dream_notes: d.message || null,
       source: 'find-my-dream-home',
       raw_payload: d,
@@ -80,14 +89,4 @@ exports.handler = async (event) => {
 
     if (!res.ok) {
       const text = await res.text();
-      console.error('submission-created: Supabase insert failed', res.status, text);
-      return { statusCode: 500, body: 'supabase insert failed' };
-    }
-
-    console.log('submission-created: wishlist stored for', row.email);
-    return { statusCode: 200, body: 'wishlist stored' };
-  } catch (err) {
-    console.error('submission-created: error', err);
-    return { statusCode: 500, body: 'error' };
-  }
-};
+      console.error('submission-created: Supa
