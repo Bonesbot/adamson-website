@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import NumberFormatScript from '@/components/NumberFormatScript.astro';
 
 const description =
   "Tell Ryan Adamson your dream home wishlist and get matched to Sarasota listings — including off-market opportunities — before they hit the public sites. Private, no obligation.";
@@ -139,15 +138,24 @@ const chipCls =
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div>
-              <label for="budget" class={labelCls}>Budget (USD)</label>
-              <input type="text" id="budget" name="budget" inputmode="numeric" data-format="currency" required class={inputCls} placeholder="$1,500,000" />
+              <label for="budget" class={labelCls}>Budget</label>
+              <select id="budget" name="budget" required class={inputCls}>
+                <option value="">Select a price range</option>
+                <option value="500000">$500K – $750K</option>
+                <option value="750000">$750K – $1M</option>
+                <option value="1000000">$1M – $1.5M</option>
+                <option value="1500000">$1.5M – $2M</option>
+                <option value="2000000">$2M – $3M</option>
+                <option value="3000000">$3M – $5M</option>
+                <option value="5000000">$5M+</option>
+              </select>
             </div>
             <div>
               <span class={labelCls}>Property size (sq ft) — optional</span>
               <div class="flex items-center gap-3">
-                <input type="text" name="size-min" inputmode="numeric" data-format="number" class={inputCls} placeholder="Min" />
+                <input type="number" name="size-min" min="0" step="100" class={inputCls} placeholder="Min" />
                 <span class="text-[var(--color-text-light)]">–</span>
-                <input type="text" name="size-max" inputmode="numeric" data-format="number" class={inputCls} placeholder="Max" />
+                <input type="number" name="size-max" min="0" step="100" class={inputCls} placeholder="Max" />
               </div>
             </div>
           </div>
@@ -213,8 +221,4 @@ const chipCls =
         <div class="text-center">
           <button
             type="submit"
-            class="inline-flex items-center justify-center font-accent text-xs uppercase tracking-wider px-10 py-4 bg-[var(--color-gold)] text-[var(--color-navy)] hover:bg-[var(--color-gold-light)] font-semibold rounded transition-all duration-200"
-          >
-            Send My Wishlist
-          </button>
-          <p cla
+          
