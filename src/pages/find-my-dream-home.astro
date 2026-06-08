@@ -139,14 +139,14 @@ const chipCls =
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div>
               <label for="budget" class={labelCls}>Budget (USD)</label>
-              <input type="text" id="budget" name="budget" inputmode="numeric" data-format="currency" required class={inputCls} placeholder="$1,500,000" />
+              <input type="text" id="budget" name="budget" inputmode="numeric" required class={inputCls} placeholder="$1,500,000" onfocus="this.value=this.value.replace(/[^0-9.]/g,'')" onblur="var v=this.value.replace(/[^0-9.]/g,'');this.value=v?'$'+Math.round(parseFloat(v)).toLocaleString('en-US'):''" />
             </div>
             <div>
               <span class={labelCls}>Property size (sq ft) — optional</span>
               <div class="flex items-center gap-3">
-                <input type="text" name="size-min" inputmode="numeric" data-format="number" class={inputCls} placeholder="Min" />
+                <input type="text" name="size-min" inputmode="numeric" class={inputCls} placeholder="Min" onfocus="this.value=this.value.replace(/[^0-9.]/g,'')" onblur="var v=this.value.replace(/[^0-9.]/g,'');this.value=v?Math.round(parseFloat(v)).toLocaleString('en-US'):''" />
                 <span class="text-[var(--color-text-light)]">–</span>
-                <input type="text" name="size-max" inputmode="numeric" data-format="number" class={inputCls} placeholder="Max" />
+                <input type="text" name="size-max" inputmode="numeric" class={inputCls} placeholder="Max" onfocus="this.value=this.value.replace(/[^0-9.]/g,'')" onblur="var v=this.value.replace(/[^0-9.]/g,'');this.value=v?Math.round(parseFloat(v)).toLocaleString('en-US'):''" />
               </div>
             </div>
           </div>
@@ -210,13 +210,4 @@ const chipCls =
         </fieldset>
 
         <!-- Captcha -->
-        <div class="flex justify-center">
-          <div data-netlify-recaptcha="true"></div>
-        </div>
-
-        <div class="text-center">
-          <button
-            type="submit"
-            class="inline-flex items-center justify-center font-accent text-xs uppercase tracking-wider px-10 py-4 bg-[var(--color-gold)] text-[var(--color-navy)] hover:bg-[var(--color-gold-light)] font-semibold rounded transition-all duration-200"
-          >
   
