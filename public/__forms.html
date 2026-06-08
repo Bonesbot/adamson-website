@@ -2,12 +2,10 @@
   Static form copy for Netlify form-detection.
 
   Netlify scans every HTML file in the deploy for <form name="..." netlify>
-  elements at post-processing time and registers them. The visible contact form
-  at /contact lives inside an Astro template; Netlify's parser had been
-  failing to register it (POSTs were falling through to the static 404
-  handler). This file exists ONLY so Netlify can reliably see the form.
-
-  It is not linked from anywhere on the site. Do not delete.
+  elements at post-processing time and registers them. The visible forms live
+  inside Astro templates; this file exists ONLY so Netlify can reliably see
+  every form and its fields. It is not linked from anywhere on the site.
+  Do not delete.
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +26,22 @@
       <option value="relocation">Relocating to Sarasota</option>
       <option value="other">Other</option>
     </select>
+    <textarea name="message"></textarea>
+  </form>
+
+  <form name="wishlist" netlify netlify-honeypot="bot-field" data-netlify-recaptcha="true" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <input type="text" name="timeline" />
+    <input type="number" name="budget" />
+    <input type="number" name="size-min" />
+    <input type="number" name="size-max" />
+    <input type="checkbox" name="property-type" value="condo" />
+    <input type="radio" name="bedrooms" value="1" />
+    <input type="radio" name="bathrooms" value="2" />
+    <input type="checkbox" name="areas" value="longboat-key" />
+    <input type="checkbox" name="must-haves" value="waterfront" />
     <textarea name="message"></textarea>
   </form>
 </body>
