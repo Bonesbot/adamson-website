@@ -139,14 +139,14 @@ const chipCls =
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div>
               <label for="budget" class={labelCls}>Budget (USD)</label>
-              <input type="text" id="budget" name="budget" inputmode="numeric" required class={inputCls} placeholder="$1,500,000" onfocus="this.value=this.value.replace(/[^0-9.]/g,'')" onblur="var v=this.value.replace(/[^0-9.]/g,'');this.value=v?'$'+Math.round(parseFloat(v)).toLocaleString('en-US'):''" />
+              <input type="text" id="budget" name="budget" inputmode="numeric" data-format="currency" required class={inputCls} placeholder="$1,500,000" />
             </div>
             <div>
               <span class={labelCls}>Property size (sq ft) — optional</span>
               <div class="flex items-center gap-3">
-                <input type="text" name="size-min" inputmode="numeric" class={inputCls} placeholder="Min" onfocus="this.value=this.value.replace(/[^0-9.]/g,'')" onblur="var v=this.value.replace(/[^0-9.]/g,'');this.value=v?Math.round(parseFloat(v)).toLocaleString('en-US'):''" />
+                <input type="text" name="size-min" inputmode="numeric" data-format="number" class={inputCls} placeholder="Min" />
                 <span class="text-[var(--color-text-light)]">–</span>
-                <input type="text" name="size-max" inputmode="numeric" class={inputCls} placeholder="Max" onfocus="this.value=this.value.replace(/[^0-9.]/g,'')" onblur="var v=this.value.replace(/[^0-9.]/g,'');this.value=v?Math.round(parseFloat(v)).toLocaleString('en-US'):''" />
+                <input type="text" name="size-max" inputmode="numeric" data-format="number" class={inputCls} placeholder="Max" />
               </div>
             </div>
           </div>
@@ -209,4 +209,11 @@ const chipCls =
           <textarea id="message" name="message" rows="5" class={`${inputCls} resize-vertical`} placeholder="We'd love deep-water dockage with no fixed bridges to the Gulf, a chef's kitchen, and morning light on the water…"></textarea>
         </fieldset>
 
-        <div class="text-ce
+        <div class="text-center">
+          <button
+            type="submit"
+            class="inline-flex items-center justify-center font-accent text-xs uppercase tracking-wider px-10 py-4 bg-[var(--color-gold)] text-[var(--color-navy)] hover:bg-[var(--color-gold-light)] font-semibold rounded transition-all duration-200"
+          >
+            Send My Wishlist
+          </button>
+          <p class="text-xs text-[var(--color-text-light)] mt-4 max-w-md mx-auto leading
