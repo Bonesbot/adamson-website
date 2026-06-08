@@ -42,7 +42,6 @@ const legendCls =
 const chipCls =
   'flex items-center gap-2 px-4 py-2.5 border border-[var(--color-border)] rounded-lg cursor-pointer hover:border-[var(--color-gold)] transition-colors text-sm text-[var(--color-text)] bg-[var(--color-warm-white)]';
 
-// Live thousands-separator for the budget field (runs as the user types).
 const budgetFmt = "var d=this.value.replace(/[^0-9]/g,'');this.value=d?'$'+Number(d).toLocaleString('en-US'):''";
 ---
 
@@ -89,16 +88,7 @@ const budgetFmt = "var d=this.value.replace(/[^0-9]/g,'');this.value=d?'$'+Numbe
   <!-- ====== FORM ====== -->
   <section class="section bg-white">
     <div class="container-narrow">
-      <form
-        name="wishlist"
-        method="POST"
-        action="/dream-home-received"
-        netlify
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        class="space-y-12"
-      >
-        <input type="hidden" name="form-name" value="wishlist" />
+      <form name="wishlist" class="space-y-12">
         <p class="hidden">
           <label>Don't fill this out: <input name="bot-field" /></label>
         </p>
@@ -224,36 +214,56 @@ const budgetFmt = "var d=this.value.replace(/[^0-9]/g,'');this.value=d?'$'+Numbe
   </section>
 
   <script>
-    // AJAX submit: post to Netlify ourselves, then redirect to the custom Thank
-    // You page with the (non-personal) search criteria so it can echo them back.
-    // This avoids Netlify's generic built-in "Thank you" success page.
+    // Post the wishlist directly to the serverless function (reliable capture into
+    // Supabase, independent of Netlify Forms), then redirect to the custom Thank You
+    // page with the non-personal search criteria so it can echo them back.
     (function () {
       const form = document.querySelector('form[name="wishlist"]');
       if (!form) return;
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         if (!form.reportValidity()) return;
-        const val = (n) => (form.elements[n] ? form.elements[n].value : '');
+        const val = (n) => (form.elements[n] && !form.elements[n].length ? form.elements[n].value : (form.elements[n] ? form.elements[n].value : ''));
+        const checked = (n) => Array.from(form.querySelectorAll('input[name="' + n + '"]:checked')).map((c) => c.value);
+
+        const smin = val('size-min'), smax = val('size-max');
+
+        // Echo params for the Thank You page (no personal data)
         const p = new URLSearchParams();
         if (val('budget')) p.set('budget', val('budget'));
         if (val('timeline')) p.set('timeline', val('timeline'));
         if (val('bedrooms')) p.set('beds', val('bedrooms'));
         if (val('bathrooms')) p.set('baths', val('bathrooms'));
-        const smin = val('size-min'), smax = val('size-max');
         if (smin || smax) p.set('size', (smin || '?') + '-' + (smax || '?'));
-        form.querySelectorAll('input[name="property-type"]:checked, input[name="areas"]:checked, input[name="must-haves"]:checked')
-          .forEach((c) => p.append(c.name, c.value));
+        checked('property-type').forEach((v) => p.append('property-type', v));
+        checked('areas').forEach((v) => p.append('areas', v));
+        checked('must-haves').forEach((v) => p.append('must-haves', v));
         if (val('areas-other')) p.append('areas', val('areas-other'));
         if (val('must-haves-other')) p.append('must-haves', val('must-haves-other'));
         const dest = '/dream-home-received?' + p.toString();
-        const body = new URLSearchParams(new FormData(form)).toString();
-        fetch('/', {
+
+        // Data payload — arrays comma-joined to match the function's parser
+        const data = {
+          name: val('name'), email: val('email'), phone: val('phone'),
+          budget: val('budget'), timeline: val('timeline'),
+          bedrooms: val('bedrooms'), bathrooms: val('bathrooms'),
+          'size-min': smin, 'size-max': smax,
+          'property-type': checked('property-type').join(','),
+          areas: checked('areas').join(','),
+          'must-haves': checked('must-haves').join(','),
+          'areas-other': val('areas-other'),
+          'must-haves-other': val('must-haves-other'),
+          message: val('message'),
+          'bot-field': val('bot-field'),
+        };
+
+        fetch('/.netlify/functions/submission-created', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: body,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ direct: true, data: data }),
         })
-          .then(() => { window.location = dest; })
-          .catch(() => { window.location = dest; });
+          .then(function () { window.location = dest; })
+          .catch(function () { window.location = dest; });
       });
     })();
   </script>
