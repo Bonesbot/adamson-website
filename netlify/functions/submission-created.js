@@ -1,20 +1,15 @@
 // netlify/functions/submission-created.js
 //
 // Netlify automatically invokes a function named `submission-created` after
-// every VERIFIED form submission (i.e. it already passed the honeypot,
-// reCAPTCHA, and Netlify's spam filter). We use it to mirror "Find My Dream
-// Home" wishlist submissions into Supabase (table: public.buyer_wishlists)
-// so they're queryable and matchable against the daily MLS feed.
+// every VERIFIED form submission. We mirror "Find My Dream Home" wishlist
+// submissions into Supabase (table: public.buyer_wishlists) so they're a
+// durable system of record, queryable and matchable against the MLS feed.
 //
-// The contact form also fires this event — we ignore everything except the
-// `wishlist` form.
-//
-// Requires two environment variables set in the Netlify dashboard
-// (Site settings → Environment variables):
+// Requires env vars in the Netlify dashboard:
 //   SUPABASE_URL                e.g. https://xxxx.supabase.co
-//   SUPABASE_SERVICE_ROLE_KEY   service-role key (server-side only, never shipped to the browser)
+//   SUPABASE_SERVICE_ROLE_KEY   service-role key (server-side only)
 //
-// No npm dependencies — uses the global fetch available on Netlify's Node 18+ runtime.
+// No npm dependencies — uses global fetch (Netlify Node 18+).
 
 exports.handler = async (event) => {
   try {
@@ -41,15 +36,14 @@ exports.handler = async (event) => {
         ? v.split(',').map((s) => s.trim()).filter(Boolean)
         : [];
     const num = (v) => {
-      const n = parseFloat(String(v ?? '').replace(/[^0-9.]/g, ''));
+      const n = parseFloat(String(v == null ? '' : v).replace(/[^0-9.]/g, ''));
       return Number.isNaN(n) ? null : n;
     };
     const intOf = (v) => {
-      const n = parseInt(String(v ?? '').replace(/[^0-9]/g, ''), 10);
+      const n = parseInt(String(v == null ? '' : v).replace(/[^0-9]/g, ''), 10);
       return Number.isNaN(n) ? null : n;
     };
 
-    // Merge the free-text "Other" entries into their respective arrays.
     const preferredAreas = toArr(d['areas']);
     const areasOther = (d['areas-other'] || '').trim();
     if (areasOther) preferredAreas.push(areasOther);
@@ -89,4 +83,14 @@ exports.handler = async (event) => {
 
     if (!res.ok) {
       const text = await res.text();
-      console.error('submission-created: Supa
+      console.error('submission-created: Supabase insert failed', res.status, text);
+      return { statusCode: 500, body: 'supabase insert failed' };
+    }
+
+    console.log('submission-created: wishlist stored for', row.email);
+    return { statusCode: 200, body: 'wishlist stored' };
+  } catch (err) {
+    console.error('submission-created: error', err);
+    return { statusCode: 500, body: 'error' };
+  }
+};
