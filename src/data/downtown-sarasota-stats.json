@@ -2,20 +2,20 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-08T11:01:22.415341+00:00",
+  "lastUpdated": "2026-06-09T10:58:42.193548+00:00",
   "counts": {
-    "sold": 252,
-    "pending": 91,
+    "sold": 256,
+    "pending": 88,
     "active": 273,
-    "total": 343
+    "total": 344
   },
   "metrics": {
-    "avgPrice": "$1,800,649",
-    "avgPricePerSqFt": "$791",
+    "avgPrice": "$1,797,647",
+    "avgPricePerSqFt": "$790",
     "avgYearBuilt": 2002,
-    "avgLivingSqFt": "1,975",
+    "avgLivingSqFt": "1,974",
     "avgLotSqFt": null,
-    "avgDom": 103
+    "avgDom": 102
   },
   "range": {
     "minPrice": "$198,000",
@@ -29,14 +29,14 @@
     "newConstructionCount": 105
   },
   "sold": {
-    "count": 252,
-    "medianPrice": "$1,145,000",
+    "count": 256,
+    "medianPrice": "$1,132,500",
     "medianDom": 88,
     "saleToListRatio": "90.7%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,633",
-    "medianMonthlyCondoFee": "$1,733"
+    "medianMonthlyCondoFee": "$1,716"
   },
   "priceBands": {
     "under900k": 76,
@@ -53,6 +53,58 @@
   "buildingClasses": [],
   "recentSoldComps": [
     {
+      "listingId": "A4687004",
+      "address": "617 MADISON CT",
+      "subdivision": "WASHINGTON PARK",
+      "soldPrice": "$1,066,030",
+      "soldDate": "2026-06-08",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,480",
+      "yearBuilt": 1959,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "J1001902",
+      "address": "750 N TAMIAMI TRL #1011",
+      "subdivision": "RENAISSANCE 1",
+      "soldPrice": "$900,000",
+      "soldDate": "2026-06-08",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,420",
+      "yearBuilt": 2001,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4658549",
+      "address": "660 GOLDEN GATE PT #32",
+      "subdivision": "MARINA VIEW",
+      "soldPrice": "$600,000",
+      "soldDate": "2026-06-08",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,359",
+      "yearBuilt": 1970,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4673907",
+      "address": "325 GOLDEN GATE PT #601",
+      "subdivision": "THE OWEN GOLDEN GATE POINT",
+      "soldPrice": "$3,160,000",
+      "soldDate": "2026-06-05",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,557",
+      "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "A4687326",
       "address": "1255 N GULFSTREAM AVE #1501",
       "subdivision": "BAY PLAZA",
@@ -62,58 +114,6 @@
       "bathrooms": 3.5,
       "livingSqFt": "3,943",
       "yearBuilt": 1982,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4677207",
-      "address": "800 N TAMIAMI TRL #405",
-      "subdivision": "ALINARI",
-      "soldPrice": "$420,000",
-      "soldDate": "2026-06-04",
-      "bedrooms": 1,
-      "bathrooms": 1.5,
-      "livingSqFt": "1,070",
-      "yearBuilt": 2007,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4676375",
-      "address": "35 WATERGATE DR #1005",
-      "subdivision": "THE TOWER RESIDENCES",
-      "soldPrice": "$2,850,000",
-      "soldDate": "2026-06-01",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "3,659",
-      "yearBuilt": 2003,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4666660",
-      "address": "1350 MAIN ST #PH1600",
-      "subdivision": "1350 MAIN RESIDENTIAL",
-      "soldPrice": "$1,775,000",
-      "soldDate": "2026-05-29",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,165",
-      "yearBuilt": 2007,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4676613",
-      "address": "209 COSMOPOLITAN CT",
-      "subdivision": "Q",
-      "soldPrice": "$830,000",
-      "soldDate": "2026-05-28",
-      "bedrooms": 2,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,680",
-      "yearBuilt": 2015,
       "propertyType": "Residential",
       "isWaterfront": false
     }
@@ -127,7 +127,7 @@
       "avgPrice": "$1,122,473",
       "avgPricePerSqFt": "$645",
       "avgLivingSqFt": "1,632",
-      "avgDom": 175
+      "avgDom": 176
     },
     {
       "tier": "1990to2005",
@@ -154,10 +154,10 @@
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 103,
-      "avgPrice": "$3,784,024",
-      "avgPricePerSqFt": "$1,319",
+      "avgPrice": "$3,780,141",
+      "avgPricePerSqFt": "$1,318",
       "avgLivingSqFt": "2,687",
-      "avgDom": 167
+      "avgDom": 168
     }
   ],
   "condoTiersScope": {
