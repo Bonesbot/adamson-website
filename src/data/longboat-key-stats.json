@@ -2,18 +2,18 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-08T11:01:20.637953+00:00",
+  "lastUpdated": "2026-06-09T10:58:40.390644+00:00",
   "counts": {
-    "sold": 494,
-    "pending": 82,
-    "active": 367,
-    "total": 576
+    "sold": 496,
+    "pending": 83,
+    "active": 365,
+    "total": 579
   },
   "metrics": {
-    "avgPrice": "$1,814,141",
-    "avgPricePerSqFt": "$724",
+    "avgPrice": "$1,809,940",
+    "avgPricePerSqFt": "$723",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,164",
+    "avgLivingSqFt": "2,162",
     "avgLotSqFt": null,
     "avgDom": 97
   },
@@ -22,24 +22,24 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 367,
+    "count": 365,
     "medianPrice": "$1,095,000",
     "medianPricePerSqFt": "$695",
-    "waterfrontCount": 279,
+    "waterfrontCount": 278,
     "newConstructionCount": 28
   },
   "sold": {
-    "count": 494,
-    "medianPrice": "$1,071,250",
+    "count": 496,
+    "medianPrice": "$1,066,000",
     "medianDom": 68,
     "saleToListRatio": "86.9%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,600",
-    "medianMonthlyCondoFee": "$1,698"
+    "medianMonthlyCondoFee": "$1,689"
   },
   "priceBands": {
-    "under900k": 142,
+    "under900k": 140,
     "band900kTo1_5m": 82,
     "band1_5mTo3m": 84,
     "band3mPlus": 59
@@ -47,11 +47,24 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 367
+      "count": 365
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4689278",
+      "address": "815 BAYPORT WAY #815",
+      "subdivision": "BAYPORT BCH & TEN PH E",
+      "soldPrice": "$750,000",
+      "soldDate": "2026-06-08",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,601",
+      "yearBuilt": 1981,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4669890",
       "address": "6810 LONGBOAT DR S",
@@ -64,6 +77,19 @@
       "yearBuilt": 2024,
       "propertyType": "Residential",
       "isWaterfront": false
+    },
+    {
+      "listingId": "A4691842",
+      "address": "1115 GULF OF MEXICO DR #304",
+      "subdivision": "BEACHPLACE I",
+      "soldPrice": "$850,000",
+      "soldDate": "2026-06-05",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,503",
+      "yearBuilt": 1979,
+      "propertyType": "Residential",
+      "isWaterfront": true
     },
     {
       "listingId": "A4680533",
@@ -90,32 +116,6 @@
       "yearBuilt": 1977,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4689197",
-      "address": "3804 GULF OF MEXICO DR #B305",
-      "subdivision": "BEACH HARBOR CLUB",
-      "soldPrice": "$419,741",
-      "soldDate": "2026-06-05",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,007",
-      "yearBuilt": 1970,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4681044",
-      "address": "1485 GULF OF MEXICO DR #110",
-      "subdivision": "PLAYERS CLUB I",
-      "soldPrice": "$1,430,000",
-      "soldDate": "2026-06-03",
-      "bedrooms": 2,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,971",
-      "yearBuilt": 1981,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -123,21 +123,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 204,
-      "avgPrice": "$893,647",
-      "avgPricePerSqFt": "$660",
+      "activeCount": 203,
+      "avgPrice": "$900,073",
+      "avgPricePerSqFt": "$665",
       "avgLivingSqFt": "1,353",
-      "avgDom": 144
+      "avgDom": 145
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 50,
-      "avgPrice": "$2,298,189",
+      "avgPrice": "$2,297,989",
       "avgPricePerSqFt": "$846",
       "avgLivingSqFt": "2,614",
-      "avgDom": 162
+      "avgDom": 163
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$5,464,667",
       "avgPricePerSqFt": "$1,523",
       "avgLivingSqFt": "3,595",
-      "avgDom": 200
+      "avgDom": 201
     },
     {
       "tier": "2020plus",
