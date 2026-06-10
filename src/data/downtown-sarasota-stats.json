@@ -2,18 +2,18 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-09T10:58:42.193548+00:00",
+  "lastUpdated": "2026-06-10T20:06:58.179793+00:00",
   "counts": {
-    "sold": 256,
-    "pending": 88,
-    "active": 273,
-    "total": 344
+    "sold": 258,
+    "pending": 87,
+    "active": 276,
+    "total": 345
   },
   "metrics": {
-    "avgPrice": "$1,797,647",
-    "avgPricePerSqFt": "$790",
+    "avgPrice": "$1,800,411",
+    "avgPricePerSqFt": "$791",
     "avgYearBuilt": 2002,
-    "avgLivingSqFt": "1,974",
+    "avgLivingSqFt": "1,975",
     "avgLotSqFt": null,
     "avgDom": 102
   },
@@ -22,16 +22,16 @@
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 273,
+    "count": 276,
     "medianPrice": "$1,499,000",
-    "medianPricePerSqFt": "$873",
-    "waterfrontCount": 70,
-    "newConstructionCount": 105
+    "medianPricePerSqFt": "$868",
+    "waterfrontCount": 71,
+    "newConstructionCount": 106
   },
   "sold": {
-    "count": 256,
-    "medianPrice": "$1,132,500",
-    "medianDom": 88,
+    "count": 258,
+    "medianPrice": "$1,145,000",
+    "medianDom": 87,
     "saleToListRatio": "90.7%"
   },
   "fees": {
@@ -39,19 +39,32 @@
     "medianMonthlyCondoFee": "$1,716"
   },
   "priceBands": {
-    "under900k": 76,
+    "under900k": 78,
     "band900kTo1_5m": 62,
     "band1_5mTo3m": 64,
-    "band3mPlus": 71
+    "band3mPlus": 72
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 273
+      "count": 276
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4688715",
+      "address": "111 S PINEAPPLE AVE #1021",
+      "subdivision": "MARK SARASOTA CONDO",
+      "soldPrice": "$1,250,000",
+      "soldDate": "2026-06-10",
+      "bedrooms": 2,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,575",
+      "yearBuilt": 2019,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4687004",
       "address": "617 MADISON CT",
@@ -103,19 +116,6 @@
       "yearBuilt": 2026,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4687326",
-      "address": "1255 N GULFSTREAM AVE #1501",
-      "subdivision": "BAY PLAZA",
-      "soldPrice": "$3,475,000",
-      "soldDate": "2026-06-04",
-      "bedrooms": 4,
-      "bathrooms": 3.5,
-      "livingSqFt": "3,943",
-      "yearBuilt": 1982,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -133,31 +133,31 @@
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 39,
-      "avgPrice": "$1,851,905",
-      "avgPricePerSqFt": "$739",
-      "avgLivingSqFt": "2,266",
-      "avgDom": 158
+      "activeCount": 40,
+      "avgPrice": "$1,813,732",
+      "avgPricePerSqFt": "$729",
+      "avgLivingSqFt": "2,233",
+      "avgDom": 155
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 61,
-      "avgPrice": "$1,539,029",
-      "avgPricePerSqFt": "$752",
-      "avgLivingSqFt": "1,857",
-      "avgDom": 132
+      "activeCount": 62,
+      "avgPrice": "$1,525,174",
+      "avgPricePerSqFt": "$748",
+      "avgLivingSqFt": "1,849",
+      "avgDom": 131
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 103,
-      "avgPrice": "$3,780,141",
-      "avgPricePerSqFt": "$1,318",
-      "avgLivingSqFt": "2,687",
-      "avgDom": 168
+      "activeCount": 104,
+      "avgPrice": "$3,790,909",
+      "avgPricePerSqFt": "$1,321",
+      "avgLivingSqFt": "2,690",
+      "avgDom": 167
     }
   ],
   "condoTiersScope": {
