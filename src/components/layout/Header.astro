@@ -57,6 +57,19 @@ const currentPath = Astro.url.pathname;
             </a>
           </li>
         ))}
+        <li>
+          <a
+            href="/find-my-dream-home"
+            class:list={[
+              'font-accent text-xs uppercase tracking-[0.15em] font-semibold px-4 py-2 rounded-full transition-colors duration-200',
+              currentPath === '/find-my-dream-home'
+                ? 'bg-[var(--color-gold-light)] text-black'
+                : 'bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)]',
+            ]}
+          >
+            Off-Market Properties
+          </a>
+        </li>
       </ul>
 
       <!-- Mobile Menu Button -->
@@ -91,6 +104,14 @@ const currentPath = Astro.url.pathname;
           </a>
         </li>
       ))}
+      <li>
+        <a
+          href="/find-my-dream-home"
+          class="inline-block font-accent text-sm uppercase tracking-wider py-2 px-4 rounded-full bg-[var(--color-gold)] text-black font-semibold"
+        >
+          Off-Market Properties
+        </a>
+      </li>
     </ul>
   </div>
 </header>
