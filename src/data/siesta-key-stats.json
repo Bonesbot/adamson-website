@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-09T10:58:41.568195+00:00",
+  "lastUpdated": "2026-06-10T20:06:57.538965+00:00",
   "counts": {
-    "sold": 491,
-    "pending": 69,
-    "active": 427,
+    "sold": 493,
+    "pending": 67,
+    "active": 431,
     "total": 560
   },
   "metrics": {
-    "avgPrice": "$1,398,268",
+    "avgPrice": "$1,400,965",
     "avgPricePerSqFt": "$678",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,899",
+    "avgLivingSqFt": "1,901",
     "avgLotSqFt": null,
     "avgDom": 106
   },
@@ -22,36 +22,62 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 427,
+    "count": 431,
     "medianPrice": "$1,200,000",
-    "medianPricePerSqFt": "$783",
+    "medianPricePerSqFt": "$774",
     "waterfrontCount": 244,
     "newConstructionCount": 64
   },
   "sold": {
-    "count": 491,
+    "count": 493,
     "medianPrice": "$895,000",
     "medianDom": 71,
     "saleToListRatio": "87.3%"
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,133",
+    "medianMonthlyAssociation": "$1,132",
     "medianMonthlyCondoFee": "$1,261"
   },
   "priceBands": {
-    "under900k": 169,
-    "band900kTo1_5m": 80,
-    "band1_5mTo3m": 81,
+    "under900k": 173,
+    "band900kTo1_5m": 81,
+    "band1_5mTo3m": 80,
     "band3mPlus": 97
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 427
+      "count": 431
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4692725",
+      "address": "8900 BLIND PASS RD #A306",
+      "subdivision": "FISHERMANS COVE ADD",
+      "soldPrice": "$1,000,000",
+      "soldDate": "2026-06-09",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,132",
+      "yearBuilt": 1969,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4683156",
+      "address": "113 WHISPERING SANDS DR #V47",
+      "subdivision": "WHISPERING SANDS SEC 5",
+      "soldPrice": "$600,000",
+      "soldDate": "2026-06-09",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,344",
+      "yearBuilt": 1968,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4657651",
       "address": "546A BEACH RD #A544",
@@ -90,32 +116,6 @@
       "yearBuilt": 1974,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4682792",
-      "address": "450 BEACH RD #3",
-      "subdivision": "PLACE 450",
-      "soldPrice": "$1,220,000",
-      "soldDate": "2026-06-04",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,386",
-      "yearBuilt": 1977,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4685180",
-      "address": "157 GARDEN LN",
-      "subdivision": "SIESTA REV OF",
-      "soldPrice": "$1,050,000",
-      "soldDate": "2026-06-04",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,146",
-      "yearBuilt": 1958,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -123,11 +123,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 237,
-      "avgPrice": "$841,529",
-      "avgPricePerSqFt": "$691",
-      "avgLivingSqFt": "1,216",
-      "avgDom": 153
+      "activeCount": 242,
+      "avgPrice": "$838,426",
+      "avgPricePerSqFt": "$690",
+      "avgLivingSqFt": "1,212",
+      "avgDom": 151
     },
     {
       "tier": "1990to2005",
@@ -147,7 +147,7 @@
       "avgPrice": "$2,751,125",
       "avgPricePerSqFt": "$1,276",
       "avgLivingSqFt": "2,067",
-      "avgDom": 283
+      "avgDom": 284
     },
     {
       "tier": "2020plus",
