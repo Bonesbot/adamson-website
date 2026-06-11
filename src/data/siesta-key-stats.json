@@ -2,15 +2,15 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-10T20:06:57.538965+00:00",
+  "lastUpdated": "2026-06-11T11:00:53.396909+00:00",
   "counts": {
-    "sold": 493,
-    "pending": 67,
-    "active": 431,
+    "sold": 494,
+    "pending": 66,
+    "active": 432,
     "total": 560
   },
   "metrics": {
-    "avgPrice": "$1,400,965",
+    "avgPrice": "$1,400,894",
     "avgPricePerSqFt": "$678",
     "avgYearBuilt": 1978,
     "avgLivingSqFt": "1,901",
@@ -22,16 +22,16 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 431,
-    "medianPrice": "$1,200,000",
-    "medianPricePerSqFt": "$774",
-    "waterfrontCount": 244,
+    "count": 432,
+    "medianPrice": "$1,199,500",
+    "medianPricePerSqFt": "$773",
+    "waterfrontCount": 245,
     "newConstructionCount": 64
   },
   "sold": {
-    "count": 493,
-    "medianPrice": "$895,000",
-    "medianDom": 71,
+    "count": 494,
+    "medianPrice": "$887,500",
+    "medianDom": 72,
     "saleToListRatio": "87.3%"
   },
   "fees": {
@@ -39,7 +39,7 @@
     "medianMonthlyCondoFee": "$1,261"
   },
   "priceBands": {
-    "under900k": 173,
+    "under900k": 174,
     "band900kTo1_5m": 81,
     "band1_5mTo3m": 80,
     "band3mPlus": 97
@@ -47,11 +47,24 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 431
+      "count": 432
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4678611",
+      "address": "6063 E PEPPERTREE WAY #111",
+      "subdivision": "PEPPERTREE BAY I",
+      "soldPrice": "$785,000",
+      "soldDate": "2026-06-10",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,115",
+      "yearBuilt": 1972,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4692725",
       "address": "8900 BLIND PASS RD #A306",
@@ -103,19 +116,6 @@
       "yearBuilt": 1983,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4683913",
-      "address": "1169 W PEPPERTREE DR #118A",
-      "subdivision": "PEPPERTREE BAY III",
-      "soldPrice": "$590,000",
-      "soldDate": "2026-06-05",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,083",
-      "yearBuilt": 1974,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -127,7 +127,7 @@
       "avgPrice": "$838,426",
       "avgPricePerSqFt": "$690",
       "avgLivingSqFt": "1,212",
-      "avgDom": 151
+      "avgDom": 152
     },
     {
       "tier": "1990to2005",
@@ -137,17 +137,17 @@
       "avgPrice": "$1,382,862",
       "avgPricePerSqFt": "$692",
       "avgLivingSqFt": "2,068",
-      "avgDom": 224
+      "avgDom": 225
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
       "activeCount": 8,
-      "avgPrice": "$2,751,125",
-      "avgPricePerSqFt": "$1,276",
+      "avgPrice": "$2,719,875",
+      "avgPricePerSqFt": "$1,268",
       "avgLivingSqFt": "2,067",
-      "avgDom": 284
+      "avgDom": 285
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$4,878,125",
       "avgPricePerSqFt": "$1,684",
       "avgLivingSqFt": "3,032",
-      "avgDom": 352
+      "avgDom": 354
     }
   ],
   "condoTiersScope": {
