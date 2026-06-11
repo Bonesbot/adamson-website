@@ -5,6 +5,7 @@ import Testimonials from '@/components/Testimonials.astro';
 import Button from '@/components/ui/Button.astro';
 import { getAreas, getSiteSettings } from '@/lib/sanity';
 import areasFallback from '@/data/areas.json';
+import areaMedia from '@/data/area-media.json';
 
 const description = 'Ryan Adamson is a luxury real estate specialist at Coldwell Banker St. Armands, serving Sarasota, Longboat Key, St. Armands and Lido, Siesta Key, and the barrier islands. Expert market insights and waterfront properties.';
 
@@ -23,7 +24,7 @@ const areas = areasFallback.areas.map((fallback) => {
     slug: fallback.slug,
     tagline: sanity?.tagline || fallback.tagline,
     medianPrice: sanity?.marketStats?.medianPrice || fallback.marketStats?.medianPrice || '',
-    imageSrc: sanity?.cardImage || undefined,
+    imageSrc: sanity?.cardImage || (areaMedia as Record<string, any>)[fallback.slug]?.cardImage || undefined,
   };
 });
 
@@ -169,6 +170,7 @@ const jsonLd = [
             slug={area.slug}
             tagline={area.tagline}
             medianPrice={area.medianPrice}
+            imageSrc={area.imageSrc}
           />
         ))}
       </div>
