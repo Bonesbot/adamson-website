@@ -111,7 +111,7 @@ const jsonLd = [
     <div class="container-narrow">
       <h2 class="accent-underline mb-6">About {area.name}</h2>
       <p class="text-[var(--color-text-muted)] leading-relaxed text-lg mb-8">
-        {area.description}
+        {media.summary || area.description}
       </p>
 
       {area.highlights && area.highlights.length > 0 && (
