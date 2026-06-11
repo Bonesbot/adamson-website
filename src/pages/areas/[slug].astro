@@ -8,6 +8,7 @@ import FAQSchema from '@/components/seo/FAQSchema.astro';
 import Button from '@/components/ui/Button.astro';
 import { getAreas, getAreaBySlug } from '@/lib/sanity';
 import areasFallback from '@/data/areas.json';
+import areaMedia from '@/data/area-media.json';
 
 export async function getStaticPaths() {
   // Fallback JSON is the source of truth for WHICH areas exist.
@@ -21,6 +22,7 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
+const media = (areaMedia as Record<string, any>)[slug!] || {};
 
 // Fetch area data — Sanity first (overlay), fallback to JSON.
 let area: any = await getAreaBySlug(slug!);
@@ -123,6 +125,22 @@ const jsonLd = [
       )}
     </div>
   </section>
+
+  <!-- Photo Gallery (slug-keyed via area-media.json) -->
+  {media.gallery && media.gallery.length > 0 && (
+    <section class="section dark-section">
+      <div class="container">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {media.gallery.map((g: any) => (
+            <figure class="group relative overflow-hidden rounded-lg aspect-[16/9] m-0">
+              <img src={g.src} alt={g.alt} loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+              <figcaption class="absolute bottom-0 left-0 right-0 p-4 font-accent text-xs uppercase tracking-[0.15em] text-white/90">{g.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
 
   <!-- Market Stats — legacy placeholder block. Suppressed automatically
        whenever a detailedStats JSON file exists for this area, so the
