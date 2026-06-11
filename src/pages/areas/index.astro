@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import AreaCard from '@/components/market/AreaCard.astro';
 import { getAreas } from '@/lib/sanity';
 import areasFallback from '@/data/areas.json';
+import areaMedia from '@/data/area-media.json';
 
 const description = 'Explore luxury real estate markets across Sarasota\'s barrier islands — Longboat Key, St. Armands and Lido, Siesta Key, Bird Key, and greater Sarasota. Market data, pricing trends, and neighborhood guides.';
 
@@ -20,7 +21,7 @@ const areas = areasFallback.areas.map((fallback) => {
     slug: fallback.slug,
     tagline: sanity?.tagline || fallback.tagline,
     medianPrice: sanity?.marketStats?.medianPrice || fallback.marketStats?.medianPrice || "",
-    imageSrc: sanity?.cardImage || undefined,
+    imageSrc: sanity?.cardImage || (areaMedia as Record<string, any>)[fallback.slug]?.cardImage || undefined,
   };
 });
 
