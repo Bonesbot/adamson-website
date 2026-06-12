@@ -51,6 +51,35 @@ for (const [path, mod] of Object.entries(statsModules)) {
 // Prefer the live pipeline avg sold price (so AI crawlers see the same
 // number rendered in the DetailedMarketTable). Fall back to the legacy
 // median from areas.json / Sanity for areas not yet on the pipeline.
+// FAQ placeholder interpolation — answers in areas.json may embed tokens like
+// {{active.medianPrice}} or {{asOf}}, resolved against the daily-refreshed
+// pipeline stats at build time. Netlify rebuilds on every daily stats commit,
+// so interpolated FAQ numbers can never drift from the tables on the same page.
+// Any FAQ whose tokens cannot all be resolved is suppressed for that build
+// rather than rendered with gaps.
+function lookupPath(obj: any, path: string): any {
+  return path.split('.').reduce((o: any, k: string) => (o == null ? undefined : o[k]), obj);
+}
+
+const asOf = detailedStats?.lastUpdated
+  ? new Date(detailedStats.lastUpdated).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
+  : null;
+const interpCtx = detailedStats ? { ...detailedStats, asOf } : null;
+
+function interpolate(text: string): string | null {
+  let ok = true;
+  const out = text.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (_m: string, p: string) => {
+    const v = interpCtx ? lookupPath(interpCtx, p) : undefined;
+    if (v === undefined || v === null || v === '') { ok = false; return ''; }
+    return String(v);
+  });
+  return ok ? out : null;
+}
+
+const faqs = (area.faqs || [])
+  .map((f: any) => ({ question: f.question, answer: interpolate(f.answer) }))
+  .filter((f: any) => f.answer !== null) as { question: string; answer: string }[];
+
 const headlinePrice =
   detailedStats?.metrics?.avgPrice
     ? `Average sold price: ${detailedStats.metrics.avgPrice}`
@@ -76,11 +105,20 @@ const jsonLd = [
     name: `${area.name} Real Estate Market Guide`,
     description: description,
     url: `https://adamsonfl.com/areas/${area.slug}`,
+    ...(detailedStats?.lastUpdated && { dateModified: String(detailedStats.lastUpdated).slice(0, 10) }),
     author: {
       '@type': 'RealEstateAgent',
       name: 'Ryan Adamson',
       worksFor: { '@type': 'Organization', name: 'Coldwell Banker Realty — St. Armands' },
     },
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://adamsonfl.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Areas', item: 'https://adamsonfl.com/areas' },
+      { '@type': 'ListItem', position: 3, name: area.name, item: `https://adamsonfl.com/areas/${area.slug}` },
+    ],
   },
 ];
 ---
@@ -173,9 +211,9 @@ const jsonLd = [
   )}
 
   <!-- FAQ Section -->
-  {area.faqs && area.faqs.length > 0 && (
+  {faqs.length > 0 && (
     <FAQSchema
-      faqs={area.faqs}
+      faqs={faqs}
       heading={`${area.name} Real Estate FAQ`}
     />
   )}
