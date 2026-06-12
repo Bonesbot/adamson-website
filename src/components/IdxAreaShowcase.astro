@@ -80,6 +80,49 @@ const {
         id={`idxwidgetsrc-script-${widgetId}`}
         src={`https://adamsonfl.idxbroker.com/idx/widgets/${widgetId}`}
       ></script>
+      <!-- Keep click-throughs on adamsonfl.com: the widget emits links to the raw
+           adamsonfl.idxbroker.com subdomain, which bypasses the Netlify /idx/* proxy
+           and therefore the Dynamic Wrapper (unbranded page, Cloudflare challenge on
+           mobile). Rewrite shadow-DOM hrefs to same-origin; the proxy serves the
+           identical path wrapped in the site chrome. -->
+      <script is:inline>
+        (function () {
+          var IDX_HOST = 'adamsonfl.idxbroker.com';
+          var pending = null;
+          function rewrite(root) {
+            root.querySelectorAll('a[href*="' + IDX_HOST + '/idx/"]').forEach(function (a) {
+              try {
+                var u = new URL(a.href);
+                if (u.host === IDX_HOST) {
+                  u.protocol = 'https:';
+                  u.host = window.location.host;
+                  a.href = u.toString();
+                }
+              } catch (e) { /* leave link untouched */ }
+            });
+          }
+          function arm() {
+            var armed = false;
+            document.querySelectorAll('*').forEach(function (el) {
+              if (el.tagName.indexOf('IDX-') === 0 && el.shadowRoot && !el.__idxLinkFix) {
+                el.__idxLinkFix = true;
+                armed = true;
+                var root = el.shadowRoot;
+                rewrite(root);
+                new MutationObserver(function () {
+                  if (pending) return;
+                  pending = setTimeout(function () { pending = null; rewrite(root); }, 300);
+                }).observe(root, { childList: true, subtree: true });
+              }
+            });
+            return armed;
+          }
+          var tries = 0;
+          var timer = setInterval(function () {
+            if (arm() || ++tries > 60) clearInterval(timer);
+          }, 500);
+        })();
+      </script>
     </div>
 
     {viewAllUrl && (
