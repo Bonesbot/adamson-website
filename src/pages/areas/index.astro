@@ -14,13 +14,22 @@ const sanityBySlug = new Map<string, any>(
   sanityAreas.filter((a: any) => a?.slug).map((a: any) => [a.slug, a])
 );
 
+// Live pipeline stats (daily-refreshed *-stats.json) drive card prices so this
+// page can never disagree with the per-area market tables.
+const statsModules = import.meta.glob('../../data/*-stats.json', { eager: true }) as Record<string, any>;
+const statsBySlug: Record<string, any> = {};
+for (const [path, mod] of Object.entries(statsModules)) {
+  const m = path.match(/\/([\w-]+)-stats\.json$/);
+  if (m) statsBySlug[m[1]] = (mod as any).default ?? mod;
+}
+
 const areas = areasFallback.areas.map((fallback) => {
   const sanity = sanityBySlug.get(fallback.slug);
   return {
     name: sanity?.name || fallback.name,
     slug: fallback.slug,
     tagline: sanity?.tagline || fallback.tagline,
-    medianPrice: sanity?.marketStats?.medianPrice || fallback.marketStats?.medianPrice || "",
+    medianPrice: statsBySlug[fallback.slug]?.active?.medianPrice || sanity?.marketStats?.medianPrice || fallback.marketStats?.medianPrice || "",
     imageSrc: sanity?.cardImage || (areaMedia as Record<string, any>)[fallback.slug]?.cardImage || undefined,
   };
 });
