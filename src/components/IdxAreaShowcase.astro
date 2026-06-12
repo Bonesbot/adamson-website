@@ -70,9 +70,11 @@ const {
 
     <div class="idx-showcase-frame">
       <div id={`idxwidgetsrc-${widgetId}`}></div>
+      <!-- NOTE: no `defer` — IDX Broker widget scripts inject their markup via
+           document.write, which browsers silently discard for deferred scripts.
+           This must execute inline, at this exact spot, during HTML parsing. -->
       <script
         is:inline
-        defer
         type="text/javascript"
         charset="UTF-8"
         id={`idxwidgetsrc-script-${widgetId}`}
