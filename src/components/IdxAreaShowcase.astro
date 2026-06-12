@@ -30,6 +30,10 @@ interface Props {
   viewAllUrl?: string;
   /** Optional sub-heading; defaults to "Active Listings". */
   label?: string;
+  /** Where the off-market CTA points. */
+  offMarketUrl?: string;
+  /** Render the prominent off-market band around the feed. */
+  showOffMarketCta?: boolean;
 }
 
 const {
@@ -37,6 +41,8 @@ const {
   areaName,
   viewAllUrl,
   label = 'Active Listings',
+  offMarketUrl = '/find-my-dream-home',
+  showOffMarketCta = true,
 } = Astro.props;
 ---
 
@@ -52,6 +58,14 @@ const {
       <p class="text-white/60 text-sm max-w-xl mx-auto mt-3">
         Live from Stellar MLS. Updated continuously.
       </p>
+      {showOffMarketCta && (
+        <p class="text-sm max-w-xl mx-auto mt-2 text-white/70">
+          Not seeing it here?
+          <a href={offMarketUrl} class="text-[var(--color-gold)] hover:text-[var(--color-gold-light)] font-semibold underline underline-offset-4 ml-1">
+            Search off-market properties &rarr;
+          </a>
+        </p>
+      )}
     </div>
 
     <div class="idx-showcase-frame">
@@ -76,6 +90,28 @@ const {
         </a>
       </div>
     )}
+
+    {showOffMarketCta && (
+      <aside class="idx-offmarket-band mt-10" aria-label="Off-market properties">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+          <div>
+            <h3 class="font-display text-xl md:text-2xl text-white m-0 mb-2">
+              Don't see the home you want?
+            </h3>
+            <p class="text-white/70 text-sm md:text-base m-0 max-w-2xl">
+              Many of {areaName}'s finest properties trade quietly — before they ever reach the MLS.
+              Tell Ryan what you're looking for and get matched against off-market and pre-list opportunities.
+            </p>
+          </div>
+          <a
+            href={offMarketUrl}
+            class="inline-flex items-center justify-center font-accent uppercase tracking-wider transition-all duration-200 rounded bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] font-semibold text-sm px-8 py-4 whitespace-nowrap flex-shrink-0"
+          >
+            Find Off-Market Properties
+          </a>
+        </div>
+      </aside>
+    )}
   </div>
 </section>
 
@@ -90,5 +126,12 @@ const {
     border-radius: 8px;
     padding: 1rem;
     min-height: 300px;
+  }
+
+  .idx-offmarket-band {
+    background: linear-gradient(135deg, rgba(197, 165, 90, 0.12), rgba(197, 165, 90, 0.04));
+    border: 1px solid rgba(197, 165, 90, 0.35);
+    border-radius: 8px;
+    padding: 1.75rem 2rem;
   }
 </style>
