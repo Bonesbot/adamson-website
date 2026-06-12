@@ -80,18 +80,37 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
     min-height: 400px;
   }
 
-  /* Hide the loading message once IDX renders its own content */
+  /* Hide the loading message once IDX renders its own content.
+     NOTE: details pages root at #IDX-main (not .IDX-wrapper) — verified live 2026-06-12. */
   .idx-wrapper-shell:has(.IDX-wrapper) .idx-loading,
+  .idx-wrapper-shell:has(#IDX-main) .idx-loading,
   .idx-wrapper-shell:has(.IDX-resultsContainer) .idx-loading,
   .idx-wrapper-shell:has(.IDX-detailsBody) .idx-loading {
     display: none;
   }
 
-  /* Typography — match site fonts inside IDX content */
-  .IDX-wrapper, .IDX-wrapper * {
+  /* Containment — IDX internals (swiper gallery, modals, pageContainer) can
+     overflow the shell horizontally. Clip at the root; keep media in bounds. */
+  #IDX-main {
+    overflow-x: clip;
+    max-width: 100%;
+    border-radius: 8px;
+    background: #fff;
+  }
+  #IDX-main img,
+  #IDX-main iframe,
+  #IDX-main video {
+    max-width: 100%;
+  }
+
+  /* Typography — match site fonts inside IDX content.
+     .IDX-icon excluded so icon-font glyphs keep rendering. */
+  .IDX-wrapper, .IDX-wrapper *,
+  #IDX-main, #IDX-main *:not(.IDX-icon):not([class*="IDX-icon"]) {
     font-family: var(--font-body, 'Inter', system-ui, sans-serif) !important;
   }
   .IDX-wrapper h1, .IDX-wrapper h2, .IDX-wrapper h3,
+  #IDX-main h1, #IDX-main h2, #IDX-main .IDX-h2,
   .IDX-detailsHeader, .IDX-resultsAddress {
     font-family: var(--font-display, 'Playfair Display', Georgia, serif) !important;
   }
