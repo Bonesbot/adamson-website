@@ -17,13 +17,22 @@ const sanityBySlug = new Map<string, any>(
   sanityAreasRaw.filter((a: any) => a?.slug).map((a: any) => [a.slug, a])
 );
 
+// Live pipeline stats (daily-refreshed *-stats.json) drive card prices so the
+// homepage can never disagree with the area pages' market tables.
+const statsModules = import.meta.glob('../data/*-stats.json', { eager: true }) as Record<string, any>;
+const statsBySlug: Record<string, any> = {};
+for (const [path, mod] of Object.entries(statsModules)) {
+  const m = path.match(/\/([\w-]+)-stats\.json$/);
+  if (m) statsBySlug[m[1]] = (mod as any).default ?? mod;
+}
+
 const areas = areasFallback.areas.map((fallback) => {
   const sanity = sanityBySlug.get(fallback.slug);
   return {
     name: sanity?.name || fallback.name,
     slug: fallback.slug,
     tagline: sanity?.tagline || fallback.tagline,
-    medianPrice: sanity?.marketStats?.medianPrice || fallback.marketStats?.medianPrice || '',
+    medianPrice: statsBySlug[fallback.slug]?.active?.medianPrice || sanity?.marketStats?.medianPrice || fallback.marketStats?.medianPrice || '',
     imageSrc: sanity?.cardImage || (areaMedia as Record<string, any>)[fallback.slug]?.cardImage || undefined,
   };
 });
@@ -40,6 +49,12 @@ const jsonLd = [
       'https://share.google/AOMDgknj0Rf0gtAvX',
       'https://www.facebook.com/ryan.adamson.941',
       'https://ryanadamson.sites.cbmoxi.com',
+      'https://www.zillow.com/profile/The%20Adamson%20Group',
+      'https://www.coldwellbankerhomes.com/fl/sarasota/agent/ryan-adamson/aid_295651/',
+      'https://www.coldwellbanker.com/fl/sarasota/agents/ryan-adamson/aid-P00200000000031HxjHn46hpEmg2ylx6HJpL5DOc',
+      'https://www.coldwellbankerluxury.com/specialist/Nr0ouvr/ryan-adamson',
+      'https://www.homes.com/real-estate-agents/ryan-adamson/c6wpbhg/',
+      'https://adamson-group.com/',
     ],
     identifier: {
       '@type': 'PropertyValue',
@@ -56,7 +71,7 @@ const jsonLd = [
       },
     },
     email: 'Ryan@Adamson-Group.com',
-    image: '/images/ryan-adamson.jpg',
+    image: 'https://adamsonfl.com/images/ryan-adamson.jpg',
     address: {
       '@type': 'PostalAddress',
       streetAddress: '423 St Armands Cir',
