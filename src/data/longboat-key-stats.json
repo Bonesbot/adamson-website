@@ -2,18 +2,18 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-11T11:00:52.015172+00:00",
+  "lastUpdated": "2026-06-12T10:58:52.607812+00:00",
   "counts": {
-    "sold": 504,
-    "pending": 76,
-    "active": 367,
-    "total": 580
+    "sold": 508,
+    "pending": 74,
+    "active": 370,
+    "total": 582
   },
   "metrics": {
-    "avgPrice": "$1,835,247",
+    "avgPrice": "$1,834,748",
     "avgPricePerSqFt": "$727",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,172",
+    "avgLivingSqFt": "2,173",
     "avgLotSqFt": null,
     "avgDom": 97
   },
@@ -22,17 +22,17 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 367,
-    "medianPrice": "$1,095,000",
-    "medianPricePerSqFt": "$695",
-    "waterfrontCount": 279,
-    "newConstructionCount": 27
+    "count": 370,
+    "medianPrice": "$1,097,000",
+    "medianPricePerSqFt": "$693",
+    "waterfrontCount": 280,
+    "newConstructionCount": 28
   },
   "sold": {
-    "count": 504,
+    "count": 508,
     "medianPrice": "$1,071,250",
-    "medianDom": 68,
-    "saleToListRatio": "87.0%"
+    "medianDom": 69,
+    "saleToListRatio": "86.9%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,600",
@@ -40,18 +40,44 @@
   },
   "priceBands": {
     "under900k": 141,
-    "band900kTo1_5m": 82,
-    "band1_5mTo3m": 84,
+    "band900kTo1_5m": 84,
+    "band1_5mTo3m": 85,
     "band3mPlus": 60
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 367
+      "count": 370
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4668083",
+      "address": "573 SPINNAKER LN",
+      "subdivision": "COUNTRY CLUB SHORES SEC 02",
+      "soldPrice": "$2,700,000",
+      "soldDate": "2026-06-11",
+      "bedrooms": 4,
+      "bathrooms": 5.0,
+      "livingSqFt": "3,926",
+      "yearBuilt": 1998,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4676912",
+      "address": "2550 HARBOURSIDE DR #324",
+      "subdivision": "MARINA BAY",
+      "soldPrice": "$1,495,000",
+      "soldDate": "2026-06-11",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "3,083",
+      "yearBuilt": 1990,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4696713",
       "address": "801 LONGBOAT CLUB",
@@ -90,32 +116,6 @@
       "yearBuilt": 1991,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4667025",
-      "address": "775 LONGBOAT CLUB RD #203",
-      "subdivision": "BEACHES OF LONGBOAT KEY PH-1",
-      "soldPrice": "$1,650,000",
-      "soldDate": "2026-06-10",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,122",
-      "yearBuilt": 1984,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4692111",
-      "address": "3808 GULF OF MEXICO DR #E112",
-      "subdivision": "BEACH HARBOR CLUB",
-      "soldPrice": "$1,095,000",
-      "soldDate": "2026-06-10",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,273",
-      "yearBuilt": 1970,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -123,21 +123,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 204,
-      "avgPrice": "$895,946",
-      "avgPricePerSqFt": "$663",
-      "avgLivingSqFt": "1,351",
-      "avgDom": 146
+      "activeCount": 206,
+      "avgPrice": "$895,960",
+      "avgPricePerSqFt": "$660",
+      "avgLivingSqFt": "1,357",
+      "avgDom": 145
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 51,
-      "avgPrice": "$2,312,735",
-      "avgPricePerSqFt": "$850",
-      "avgLivingSqFt": "2,621",
-      "avgDom": 161
+      "activeCount": 50,
+      "avgPrice": "$2,293,490",
+      "avgPricePerSqFt": "$847",
+      "avgLivingSqFt": "2,608",
+      "avgDom": 162
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$5,464,667",
       "avgPricePerSqFt": "$1,523",
       "avgLivingSqFt": "3,595",
-      "avgDom": 203
+      "avgDom": 204
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$7,129,800",
       "avgPricePerSqFt": "$2,147",
       "avgLivingSqFt": "2,988",
-      "avgDom": 340
+      "avgDom": 341
     }
   ],
   "condoTiersScope": {
