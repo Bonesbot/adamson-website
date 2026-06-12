@@ -15,18 +15,18 @@
         "34228"
       ],
       "marketStats": {
-        "medianPrice": "$1,250,000",
+        "medianPrice": "$1,097,000",
         "avgDom": "68",
         "activeListings": "245",
         "soldLast90Days": "89",
         "yoyPriceChange": "+4.2%",
         "pricePerSqFt": "$625",
-        "lastUpdated": "2026-04-01"
+        "lastUpdated": "2026-06-12"
       },
       "faqs": [
         {
           "question": "What is the average home price on Longboat Key?",
-          "answer": "As of early 2026, the median home price on Longboat Key is approximately $1,250,000. Gulf-front properties typically start above $2 million, while bay-side condos can be found starting around $500,000. The market has seen a year-over-year price increase of about 4.2%."
+          "answer": "As of {{asOf}}, the median list price across {{active.count}} active Longboat Key listings is {{active.medianPrice}}, and the median sold price across the most recent closed sales is {{sold.medianPrice}}. Gulf-front properties typically command well above the median, while bay-side condos in the island's vintage buildings remain the most attainable entry point. Data sourced from Stellar MLS via PostGIS-verified geographic boundaries."
         },
         {
           "question": "Is Longboat Key a good place to invest in real estate?",
@@ -53,46 +53,46 @@
         "34236"
       ],
       "marketStats": {
-        "medianPrice": "$975,000",
+        "medianPrice": "$1,549,000",
         "avgDom": "72",
         "activeListings": "120",
         "soldLast90Days": "45",
         "yoyPriceChange": "+3.8%",
         "pricePerSqFt": "$580",
-        "lastUpdated": "2026-04-01"
+        "lastUpdated": "2026-05-20"
       },
       "faqs": [
         {
           "question": "What is the median price for homes on St. Armands and Lido?",
-          "answer": "As of late April 2026, the median list price for active homes on St. Armands and Lido is $1,925,000, with a median sold price of $1,475,000 across the most recent closed sales. Active inventory ranges from $500,000 for entry-level condos to over $20 million for new-construction Gulf-front estates. Data sourced from Stellar MLS via PostGIS-verified geographic boundaries — listings are assigned to St. Armands and Lido based on actual coordinates, not just postal code."
+          "answer": "As of {{asOf}}, the median list price for active homes on St. Armands and Lido is {{active.medianPrice}}, with a median sold price of {{sold.medianPrice}} across the most recent closed sales. Active inventory spans {{active.count}} listings, from entry-level condos to new-construction Gulf-front estates. Data sourced from Stellar MLS via PostGIS-verified geographic boundaries — listings are assigned to St. Armands and Lido based on actual coordinates, not just postal code."
         },
         {
           "question": "What is the price per square foot on St. Armands and Lido?",
-          "answer": "The median price per square foot for active St. Armands and Lido listings is $927 as of late April 2026. Beachfront and direct Gulf-view condos typically command a premium above $1,200/sqft, while bayside and inland Lido Shores properties trade closer to $700–$900/sqft."
+          "answer": "The median price per square foot for active St. Armands and Lido listings is {{active.medianPricePerSqFt}} as of {{asOf}}. Beachfront and direct Gulf-view condos typically command a meaningful premium above the median, while bayside and inland Lido Shores properties trade below it."
         },
         {
           "question": "How many homes are for sale on St. Armands and Lido right now?",
-          "answer": "There are currently 101 active listings on St. Armands and Lido, with another 18 under contract (pending) and 14 closed sales recorded in recent months. Approximately 50 of the 101 active listings (about 50%) are waterfront — beachfront, bayfront, or canal-front. Roughly 19 active listings are new construction built in 2020 or later."
+          "answer": "There are currently {{active.count}} active listings on St. Armands and Lido, with another {{counts.pending}} under contract (pending) and {{sold.count}} closed sales recorded in recent months. {{active.waterfrontCount}} of the active listings are waterfront — beachfront, bayfront, or canal-front — and {{active.newConstructionCount}} are new construction built in 2020 or later."
         },
         {
           "question": "How long does it take to sell a home on St. Armands and Lido?",
-          "answer": "The median days on market for sold listings on St. Armands and Lido is approximately 78 days. Properties priced below the median tend to move faster; ultra-luxury Gulf-front estates and large condo units typically take 90 to 180 days. The current sale-to-list ratio is approximately 87.5%, meaning sellers are typically accepting offers below their original asking price."
+          "answer": "The median days on market for sold St. Armands and Lido listings is approximately {{sold.medianDom}} days as of {{asOf}}. Properties priced near the median tend to move faster, while ultra-luxury Gulf-front estates and large condo units typically take longer. The current sale-to-list ratio is {{sold.saleToListRatio}}, meaning sellers are typically accepting offers below their original asking price."
         },
         {
           "question": "Is St. Armands and Lido a buyer's or seller's market in 2026?",
-          "answer": "Based on a sale-to-list ratio of 87.5% and a median 78 days on market, St. Armands and Lido is currently leaning toward a buyer's market in early 2026. Inventory levels (101 active listings) and the volume of $3M+ properties (38 active listings above $3M) give qualified buyers meaningful negotiating leverage, particularly on properties that have been on market more than 60 days."
+          "answer": "As of {{asOf}}, St. Armands and Lido shows a sale-to-list ratio of {{sold.saleToListRatio}}, a median {{sold.medianDom}} days on market, and {{active.count}} active listings against {{sold.count}} recent closed sales. Sale-to-list ratios meaningfully below asking, combined with extended marketing times, generally give qualified buyers negotiating leverage — particularly on properties that have been on market more than 60 days."
         },
         {
           "question": "How many waterfront properties are available on St. Armands and Lido?",
-          "answer": "Approximately 50 of 101 active St. Armands and Lido listings — about 50% — are waterfront properties. Coverage includes Gulf-front beach condos along Benjamin Franklin Drive, bayfront and canal-front estates in Lido Shores, and dock-equipped homes along the St. Armands and Lido inner basin. Geographic verification is performed via PostGIS against actual coastline polygons rather than relying on agent-entered MLS waterfront flags."
+          "answer": "{{active.waterfrontCount}} of {{active.count}} active St. Armands and Lido listings are waterfront properties as of {{asOf}}. Coverage includes Gulf-front beach condos along Benjamin Franklin Drive, bayfront and canal-front estates in Lido Shores, and dock-equipped homes along the inner basin. Geographic verification is performed via PostGIS against actual coastline polygons rather than relying on agent-entered MLS waterfront flags."
         },
         {
           "question": "What does $1 million buy you on St. Armands and Lido?",
-          "answer": "In the $900,000 to $1.5 million range, current St. Armands and Lido inventory includes approximately 14 active listings — typically mid-floor 2-bedroom condos with Gulf or bay views, smaller bayside single-family homes, and select units in established beachfront buildings such as L'Elegance and Key Tower. Below $900k, 29 active listings exist, mostly older or interior-facing condo units."
+          "answer": "In the $900,000 to $1.5 million range, current St. Armands and Lido inventory includes {{priceBands.band900kTo1_5m}} active listings — typically mid-floor 2-bedroom condos with Gulf or bay views, smaller bayside single-family homes, and select units in established beachfront buildings such as L'Elegance and Key Tower. Below $900k there are {{priceBands.under900k}} active listings, mostly older or interior-facing condo units."
         },
         {
           "question": "What is the most expensive recent sale on St. Armands and Lido?",
-          "answer": "The most expensive recent recorded sale on St. Armands and Lido is 171 Whittier Drive in Lido Beach Division A — a 5-bedroom, 6.5-bath new-construction Gulf-front estate built in 2023 with approximately 6,367 square feet of living space, which closed at $15,800,000 in April 2026. Other recent high-end closings include luxury condos at L'Elegance on Lido Beach in the $1.8M to $2.5M range."
+          "answer": "In spring 2026, the most expensive recorded sale on St. Armands and Lido was 171 Whittier Drive in Lido Beach Division A — a 5-bedroom, 6.5-bath new-construction Gulf-front estate built in 2023 with approximately 6,367 square feet of living space, which closed at $15,800,000 in April 2026. Other high-end closings in the same period included luxury condos at L'Elegance on Lido Beach in the $1.8M to $2.5M range."
         }
       ]
     },
@@ -111,18 +111,18 @@
         "34242"
       ],
       "marketStats": {
-        "medianPrice": "$875,000",
+        "medianPrice": "$1,199,500",
         "avgDom": "58",
         "activeListings": "180",
         "soldLast90Days": "72",
         "yoyPriceChange": "+5.1%",
         "pricePerSqFt": "$545",
-        "lastUpdated": "2026-04-01"
+        "lastUpdated": "2026-06-12"
       },
       "faqs": [
         {
           "question": "What is the average home price on Siesta Key?",
-          "answer": "The median home price on Siesta Key is approximately $875,000 as of early 2026. The market ranges widely — from condos near the village starting around $350,000 to Gulf-front estates exceeding $5 million on the north end of the island."
+          "answer": "As of {{asOf}}, the median list price across {{active.count}} active Siesta Key listings is {{active.medianPrice}}, with a median sold price of {{sold.medianPrice}} across the most recent closed sales. The market ranges widely — from village-adjacent condos to Gulf-front estates exceeding $5 million on the north end of the island. Data sourced from Stellar MLS via PostGIS-verified geographic boundaries."
         },
         {
           "question": "Why is Siesta Key beach so famous?",
@@ -145,46 +145,46 @@
         "34236"
       ],
       "marketStats": {
-        "medianPrice": "$1,659,000",
+        "medianPrice": "$1,499,250",
         "avgDom": "109",
         "activeListings": "251",
         "soldLast90Days": "31",
         "yoyPriceChange": "TBD",
         "pricePerSqFt": "$885",
-        "lastUpdated": "2026-04-26"
+        "lastUpdated": "2026-06-12"
       },
       "faqs": [
         {
           "question": "What is the median price for a downtown Sarasota condo?",
-          "answer": "As of late April 2026, the median list price for active downtown Sarasota residences is $1,659,000, with a median sold price of $1,350,000 across the most recent closed sales. The market spans from sub-$500,000 entry-level condos to ultra-luxury penthouses exceeding $12 million in buildings such as AQUA on Golden Gate Point. Data sourced from Stellar MLS via PostGIS-verified geographic boundaries (Rosemary District excluded)."
+          "answer": "As of {{asOf}}, the median list price for active downtown Sarasota residences is {{active.medianPrice}}, with a median sold price of {{sold.medianPrice}} across the most recent closed sales. The market spans from entry-level condos to ultra-luxury penthouses in buildings such as AQUA on Golden Gate Point. Data sourced from Stellar MLS via PostGIS-verified geographic boundaries (Rosemary District excluded)."
         },
         {
           "question": "What is the price per square foot in downtown Sarasota?",
-          "answer": "The median price per square foot for active downtown Sarasota listings is $885 as of late April 2026. Bayfront and Golden Gate Point penthouses regularly exceed $1,500/sqft, while interior-facing units in older mid-rise buildings can be found below $700/sqft."
+          "answer": "The median price per square foot for active downtown Sarasota listings is {{active.medianPricePerSqFt}} as of {{asOf}}. Bayfront and Golden Gate Point penthouses regularly exceed $1,500/sqft, while interior-facing units in older mid-rise buildings trade well below the median."
         },
         {
           "question": "How many condos are for sale in downtown Sarasota?",
-          "answer": "There are currently 251 active downtown Sarasota listings, with 66 under contract (pending) and 31 closed sales recorded in recent months. The active inventory is concentrated in high-rise buildings — 134 of 251 active listings (53%) are in towers of 10 stories or more, with another 49 in mid-rise (5–9 story) buildings and 60 in low-rise developments."
+          "answer": "There are currently {{active.count}} active downtown Sarasota listings, with {{counts.pending}} under contract (pending) and {{sold.count}} closed sales recorded in recent months. The active inventory is concentrated in high-rise towers along the bayfront and Main Street corridor, with the balance in mid-rise and low-rise buildings."
         },
         {
           "question": "How long do condos take to sell in downtown Sarasota?",
-          "answer": "The median days on market for sold downtown Sarasota condos is approximately 109 days. The current sale-to-list ratio is 86.5%, meaning sellers are typically accepting offers below their original asking price — a meaningful softness signal in the current market that gives qualified buyers room to negotiate, particularly on older inventory and high-floor luxury units."
+          "answer": "The median days on market for sold downtown Sarasota condos is approximately {{sold.medianDom}} days as of {{asOf}}. The current sale-to-list ratio is {{sold.saleToListRatio}}, meaning sellers are typically accepting offers below their original asking price — a softness signal that gives qualified buyers room to negotiate, particularly on older inventory."
         },
         {
           "question": "What is the typical HOA or condo fee in downtown Sarasota?",
-          "answer": "The median monthly condo fee for downtown Sarasota properties is approximately $2,083, with median total monthly association costs of $1,944. High-end buildings with concierge service, pools, fitness centers, and bay views (such as AQUA, The Tower Residences, and BLVD Sarasota) trend higher, often $3,000+ per month for larger residences. Older mid-rise buildings carry meaningfully lower fees."
+          "answer": "The median monthly condo fee for downtown Sarasota properties is approximately {{fees.medianMonthlyCondoFee}}, with median total monthly association costs of {{fees.medianMonthlyAssociation}}, as of {{asOf}}. High-end buildings with concierge service, pools, fitness centers, and bay views (such as AQUA, The Tower Residences, and BLVD Sarasota) trend higher, often $3,000+ per month for larger residences. Older mid-rise buildings carry meaningfully lower fees."
         },
         {
           "question": "Is downtown Sarasota a buyer's or seller's market in 2026?",
-          "answer": "Based on a sale-to-list ratio of 86.5%, a median 109 days on market, and 251 active listings against only 31 recent sales, downtown Sarasota is currently a buyer's market in early 2026. The volume of new construction delivering simultaneously (101 of 251 active listings — 40% — are post-2020 construction) is contributing to elevated absorption time, especially in the $1.5M–$3M segment where 66 active listings compete."
+          "answer": "As of {{asOf}}, downtown Sarasota shows a sale-to-list ratio of {{sold.saleToListRatio}}, a median {{sold.medianDom}} days on market, and {{active.count}} active listings against {{sold.count}} recent closed sales. {{active.newConstructionCount}} of the active listings are post-2020 construction, and that volume of new product delivering simultaneously contributes to elevated absorption time — especially in the $1.5M–$3M segment, where {{priceBands.band1_5mTo3m}} active listings compete."
         },
         {
           "question": "How much new construction is available in downtown Sarasota?",
-          "answer": "Approximately 101 of 251 active downtown Sarasota listings — about 40% — are new construction built in 2020 or later. The downtown skyline is in an active building cycle, with major projects including The Owen, The Edge, Ritz-Carlton Residences, Epoch, and Rosewood Residences delivering or pre-selling. This is the largest concentration of new luxury condo construction on Florida's Gulf Coast."
+          "answer": "Approximately {{active.newConstructionCount}} of {{active.count}} active downtown Sarasota listings are new construction built in 2020 or later. The downtown skyline is in an active building cycle, with major projects including The Owen, The Edge, Ritz-Carlton Residences, Epoch, and Rosewood Residences delivering or pre-selling. This is the largest concentration of new luxury condo construction on Florida's Gulf Coast."
         },
         {
           "question": "What does $1.5 million buy in downtown Sarasota?",
-          "answer": "Between $1.5M and $3M, current downtown Sarasota inventory includes 66 active listings — typically larger 2- and 3-bedroom condos with bay views, mid-floor units in landmark buildings, or new-construction residences in pre-completion projects. Sub-$1.5M inventory totals 118 listings (55 under $900k plus 63 in the $900k–$1.5M band), typically older or smaller units. Above $3M, 67 active listings exist, the highest concentration being penthouse and bayfront units."
+          "answer": "Between $1.5M and $3M, current downtown Sarasota inventory includes {{priceBands.band1_5mTo3m}} active listings — typically larger 2- and 3-bedroom condos with bay views, mid-floor units in landmark buildings, or new-construction residences in pre-completion projects. Below that, {{priceBands.under900k}} active listings sit under $900k and {{priceBands.band900kTo1_5m}} fall in the $900k–$1.5M band. Above $3M there are {{priceBands.band3mPlus}} active listings, the highest concentration being penthouse and bayfront units."
         }
       ]
     },
@@ -204,8 +204,8 @@
         "34236"
       ],
       "marketStats": {
-        "medianPrice": "TBD",
-        "lastUpdated": "2026-05-19"
+        "medianPrice": "$2,795,000",
+        "lastUpdated": "2026-05-20"
       },
       "faqs": [
         {
@@ -230,7 +230,7 @@
         "34236"
       ],
       "marketStats": {
-        "medianPrice": "TBD",
+        "medianPrice": "",
         "lastUpdated": "2026-05-19"
       },
       "faqs": [
@@ -256,8 +256,8 @@
         "34239"
       ],
       "marketStats": {
-        "medianPrice": "TBD",
-        "lastUpdated": "2026-05-19"
+        "medianPrice": "$559,900",
+        "lastUpdated": "2026-05-20"
       },
       "faqs": [
         {
@@ -281,18 +281,18 @@
         "34236"
       ],
       "marketStats": {
-        "medianPrice": "$1,500,000",
+        "medianPrice": "$4,325,000",
         "avgDom": "85",
         "activeListings": "28",
         "soldLast90Days": "8",
         "yoyPriceChange": "+3.2%",
         "pricePerSqFt": "$680",
-        "lastUpdated": "2026-04-01"
+        "lastUpdated": "2026-06-12"
       },
       "faqs": [
         {
           "question": "How much do homes cost on Bird Key?",
-          "answer": "Bird Key is one of Sarasota's most exclusive addresses. The median home price is approximately $1,500,000, with waterfront estates regularly selling between $2 million and $6 million. The limited inventory (typically under 30 active listings) keeps values strong."
+          "answer": "Bird Key is one of Sarasota's most exclusive addresses. As of {{asOf}}, the median list price across {{active.count}} active Bird Key listings is {{active.medianPrice}}, with a median sold price of {{sold.medianPrice}} across recent closed sales. Limited inventory — typically under 30 active listings at any time — keeps values strong."
         }
       ]
     },
@@ -323,31 +323,31 @@
       "faqs": [
         {
           "question": "What is the median home price in Palmer Ranch?",
-          "answer": "As of June 1, 2026, the median list price for active Palmer Ranch homes is $429,000, with a median sold price of $482,500 across the most recent closed sales. Active inventory ranges from $114,900 for entry-level condos to $2,595,000 for the highest-priced single-family listings in Esplanade on Palmer Ranch and the Wildwood/Prestancia corridor. Data sourced from Stellar MLS via PostGIS-verified geographic boundaries — Palmer Ranch listings are assigned based on actual coordinates falling inside the Census-defined Palmer Ranch CDP plus a small northern extension covering Esplanade and Sandhill Preserve, not just postal code."
+          "answer": "As of {{asOf}}, the median list price for active Palmer Ranch homes is {{active.medianPrice}}, with a median sold price of {{sold.medianPrice}} across the most recent closed sales. Active inventory spans entry-level condos to estate homes in Esplanade on Palmer Ranch and the Wildwood/Prestancia corridor. Data sourced from Stellar MLS via PostGIS-verified geographic boundaries — Palmer Ranch listings are assigned based on actual coordinates falling inside the Census-defined Palmer Ranch CDP plus a small northern extension covering Esplanade and Sandhill Preserve, not just postal code."
         },
         {
           "question": "What is the price per square foot in Palmer Ranch?",
-          "answer": "The median price per square foot for active Palmer Ranch listings is $255 as of June 1, 2026. New-construction homes in Esplanade on Palmer Ranch and Sandhill Preserve generally command a premium above $300/sqft, while villas and condos in 1990s-era communities such as Huntington Pointe, Stoneybrook at Palmer Ranch, and the Prestancia condo buildings typically trade between $200 and $250 per square foot."
+          "answer": "The median price per square foot for active Palmer Ranch listings is {{active.medianPricePerSqFt}} as of {{asOf}}. New-construction homes in Esplanade on Palmer Ranch and Sandhill Preserve generally command a premium above $300/sqft, while villas and condos in 1990s-era communities such as Huntington Pointe, Stoneybrook at Palmer Ranch, and the Prestancia condo buildings typically trade between $200 and $250 per square foot."
         },
         {
           "question": "How many homes are for sale in Palmer Ranch right now?",
-          "answer": "There are currently 269 active Palmer Ranch listings, with another 11 under contract (pending) and 21 closed sales recorded in recent months. Approximately 38 of the 269 active listings (about 14%) are waterfront — typically lake-front, pond-front, or preserve-adjacent rather than coastal — and 27 active listings (about 10%) are new construction built in 2020 or later. Inventory skews accessible: 235 of the 269 active listings — about 87% — are priced below $900,000, with only 9 active listings between $1.5M and $3M and none above $3M."
+          "answer": "There are currently {{active.count}} active Palmer Ranch listings, with another {{counts.pending}} under contract (pending) and {{sold.count}} closed sales recorded in recent months. Approximately {{active.waterfrontCount}} of the active listings are waterfront — typically lake-front, pond-front, or preserve-adjacent rather than coastal — and {{active.newConstructionCount}} are new construction built in 2020 or later. Inventory skews accessible: {{priceBands.under900k}} of the active listings are priced below $900,000, with only {{priceBands.band1_5mTo3m}} between $1.5M and $3M and {{priceBands.band3mPlus}} above $3M."
         },
         {
           "question": "How long does it take to sell a home in Palmer Ranch?",
-          "answer": "The median days on market for sold Palmer Ranch listings is approximately 89 days. The current sale-to-list ratio is approximately 92%, meaning sellers are typically accepting offers below their original asking price but with notably less discount than buyers are seeing on the Sarasota barrier islands (which are running 86–87% sale-to-list in the same period). Properties priced below the area median tend to move faster; ultra-luxury listings above $1.5M can sit 120 days or longer."
+          "answer": "The median days on market for sold Palmer Ranch listings is approximately {{sold.medianDom}} days as of {{asOf}}. The current sale-to-list ratio is {{sold.saleToListRatio}}, meaning sellers are typically accepting offers below their original asking price, but with notably less discount than buyers are seeing on the Sarasota barrier islands in the same period. Properties priced below the area median tend to move faster; ultra-luxury listings above $1.5M can sit 120 days or longer."
         },
         {
           "question": "Is Palmer Ranch a buyer's or seller's market in 2026?",
-          "answer": "Based on a 92% sale-to-list ratio, a median 89 days on market, and 269 active listings against 21 recent closed sales, Palmer Ranch is sitting closer to a balanced market in mid-2026 — meaningfully more seller-favorable than downtown Sarasota condos (86.5% sale-to-list) or Lido and Longboat Key (87%). The broader buyer pool at sub-$900,000 price points, ongoing relocation demand into south Sarasota County, and the Pine View School attendance draw all keep absorption healthier in Palmer Ranch than in the ultra-luxury barrier-island and downtown segments."
+          "answer": "Based on a {{sold.saleToListRatio}} sale-to-list ratio, a median {{sold.medianDom}} days on market, and {{active.count}} active listings against {{sold.count}} recent closed sales as of {{asOf}}, Palmer Ranch sits closer to a balanced market than Sarasota's coastal luxury submarkets. The broader buyer pool at sub-$900,000 price points, ongoing relocation demand into south Sarasota County, and the Pine View School attendance draw all keep absorption healthier in Palmer Ranch than in the ultra-luxury barrier-island and downtown segments."
         },
         {
           "question": "What does $500,000 buy in Palmer Ranch?",
-          "answer": "In the $400,000 to $700,000 range, current Palmer Ranch inventory includes 1990s-era single-family homes in Stoneybrook at Palmer Ranch and Deer Creek, maintenance-free villas in Huntington Pointe and Prestancia, and select three-bedroom condominiums. Recent comparable sales in this range include 8972 Huntington Pointe Dr (a 1,827 sqft 3-bedroom that closed at $525,000), 4501 Murcia Blvd #7 in Prestancia ($482,500), 4565 Deer Creek Blvd ($650,000), and 4223 Balmoral Way in Stoneybrook at Palmer Ranch ($625,000). Below $400,000, inventory is dominated by condominiums in 1990–2005 buildings — 103 active listings sit in that construction era at an average price of $293,000."
+          "answer": "In the $400,000 to $700,000 range, current Palmer Ranch inventory includes 1990s-era single-family homes in Stoneybrook at Palmer Ranch and Deer Creek, maintenance-free villas in Huntington Pointe and Prestancia, and select three-bedroom condominiums. Comparable sales in this range from spring 2026 included 8972 Huntington Pointe Dr (a 1,827 sqft 3-bedroom that closed at $525,000), 4501 Murcia Blvd #7 in Prestancia ($482,500), 4565 Deer Creek Blvd ($650,000), and 4223 Balmoral Way in Stoneybrook at Palmer Ranch ($625,000). Below $400,000, inventory is dominated by condominiums in 1990–2005 era buildings."
         },
         {
           "question": "How much new construction is available in Palmer Ranch?",
-          "answer": "Approximately 27 of 269 active Palmer Ranch listings — about 10% — are new construction built in 2020 or later. The newer enclaves driving that supply are Esplanade on Palmer Ranch (resort-style amenities, age-restricted sections), Sandhill Preserve, Hammock Preserve, and Legacy Estates at Esplanade on Palmer Ranch. The highest-priced active new-construction listings in Palmer Ranch include 5301 Greenbrook Dr ($2,299,000) and 12012 Legacy Estates Blvd ($1,899,000), both in Legacy Estates at Esplanade on Palmer Ranch."
+          "answer": "Approximately {{active.newConstructionCount}} of {{active.count}} active Palmer Ranch listings are new construction built in 2020 or later. The newer enclaves driving that supply are Esplanade on Palmer Ranch (resort-style amenities, age-restricted sections), Sandhill Preserve, Hammock Preserve, and Legacy Estates at Esplanade on Palmer Ranch. In mid-2026 the highest-priced active new-construction listings included homes in Legacy Estates at Esplanade on Palmer Ranch approaching $2.3M."
         },
         {
           "question": "What is Palmer Ranch?",
