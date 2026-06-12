@@ -8,6 +8,9 @@ interface Props {
 }
 
 const { title, description, ogImage, canonicalUrl, noIndex = false } = Astro.props;
+
+// Open Graph requires absolute image URLs; resolve site-relative paths.
+const ogImageAbs = ogImage.startsWith('http') ? ogImage : `https://adamsonfl.com${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
 ---
 
 <title>{title}</title>
@@ -20,7 +23,7 @@ const { title, description, ogImage, canonicalUrl, noIndex = false } = Astro.pro
 <meta property="og:type" content="website" />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={ogImage} />
+<meta property="og:image" content={ogImageAbs} />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:site_name" content="Ryan Adamson Luxury Real Estate" />
 
@@ -28,4 +31,4 @@ const { title, description, ogImage, canonicalUrl, noIndex = false } = Astro.pro
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image" content={ogImageAbs} />
