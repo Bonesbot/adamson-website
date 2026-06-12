@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-11T11:00:53.396909+00:00",
+  "lastUpdated": "2026-06-12T10:58:53.746907+00:00",
   "counts": {
-    "sold": 494,
-    "pending": 66,
-    "active": 432,
-    "total": 560
+    "sold": 496,
+    "pending": 63,
+    "active": 434,
+    "total": 559
   },
   "metrics": {
-    "avgPrice": "$1,400,894",
-    "avgPricePerSqFt": "$678",
+    "avgPrice": "$1,397,693",
+    "avgPricePerSqFt": "$677",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,901",
+    "avgLivingSqFt": "1,900",
     "avgLotSqFt": null,
     "avgDom": 106
   },
@@ -22,15 +22,15 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 432,
+    "count": 434,
     "medianPrice": "$1,199,500",
     "medianPricePerSqFt": "$773",
-    "waterfrontCount": 245,
+    "waterfrontCount": 247,
     "newConstructionCount": 64
   },
   "sold": {
-    "count": 494,
-    "medianPrice": "$887,500",
+    "count": 496,
+    "medianPrice": "$897,500",
     "medianDom": 72,
     "saleToListRatio": "87.3%"
   },
@@ -39,19 +39,45 @@
     "medianMonthlyCondoFee": "$1,261"
   },
   "priceBands": {
-    "under900k": 174,
+    "under900k": 175,
     "band900kTo1_5m": 81,
-    "band1_5mTo3m": 80,
+    "band1_5mTo3m": 81,
     "band3mPlus": 97
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 432
+      "count": 434
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4676249",
+      "address": "9265 BLIND PASS RD",
+      "subdivision": "ACREAGE & UNREC",
+      "soldPrice": "$2,950,000",
+      "soldDate": "2026-06-11",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "3,186",
+      "yearBuilt": 1998,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4678784",
+      "address": "436 CANAL RD #A",
+      "subdivision": "SIESTA VILLAS 1",
+      "soldPrice": "$1,650,000",
+      "soldDate": "2026-06-11",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,756",
+      "yearBuilt": 2002,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4678611",
       "address": "6063 E PEPPERTREE WAY #111",
@@ -90,32 +116,6 @@
       "yearBuilt": 1968,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4657651",
-      "address": "546A BEACH RD #A544",
-      "subdivision": "TIFFANY SANDS",
-      "soldPrice": "$1,800,000",
-      "soldDate": "2026-06-05",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,611",
-      "yearBuilt": 1981,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4668594",
-      "address": "635 TROPICAL CIR",
-      "subdivision": "SIESTAS BAYSIDE BAYSIDE CLUB 01",
-      "soldPrice": "$895,000",
-      "soldDate": "2026-06-05",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,255",
-      "yearBuilt": 1983,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -123,9 +123,9 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 242,
-      "avgPrice": "$838,426",
-      "avgPricePerSqFt": "$690",
+      "activeCount": 243,
+      "avgPrice": "$837,585",
+      "avgPricePerSqFt": "$689",
       "avgLivingSqFt": "1,212",
       "avgDom": 152
     },
@@ -137,7 +137,7 @@
       "avgPrice": "$1,382,862",
       "avgPricePerSqFt": "$692",
       "avgLivingSqFt": "2,068",
-      "avgDom": 225
+      "avgDom": 226
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$2,719,875",
       "avgPricePerSqFt": "$1,268",
       "avgLivingSqFt": "2,067",
-      "avgDom": 285
+      "avgDom": 286
     },
     {
       "tier": "2020plus",
