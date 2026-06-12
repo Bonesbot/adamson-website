@@ -109,10 +109,13 @@ const {
                 armed = true;
                 var root = el.shadowRoot;
                 rewrite(root);
+                // The widget inserts <a> nodes first and assigns href afterwards,
+                // so attribute mutations must be observed too (childList alone
+                // misses the href assignment and leaves subdomain links in place).
                 new MutationObserver(function () {
                   if (pending) return;
                   pending = setTimeout(function () { pending = null; rewrite(root); }, 300);
-                }).observe(root, { childList: true, subtree: true });
+                }).observe(root, { childList: true, subtree: true, attributes: true, attributeFilter: ['href'] });
               }
             });
             return armed;
@@ -121,6 +124,23 @@ const {
           var timer = setInterval(function () {
             if (arm() || ++tries > 60) clearInterval(timer);
           }, 500);
+          // Belt-and-suspenders: rewrite at click time via composed path, so a
+          // click can never escape to the unwrapped subdomain even if a future
+          // widget version renders links some other way.
+          ['click', 'auxclick'].forEach(function (evt) {
+            document.addEventListener(evt, function (e) {
+              (e.composedPath() || []).forEach(function (n) {
+                if (n && n.tagName === 'A' && n.href && n.href.indexOf(IDX_HOST + '/idx/') !== -1) {
+                  try {
+                    var u = new URL(n.href);
+                    u.protocol = 'https:';
+                    u.host = window.location.host;
+                    n.href = u.toString();
+                  } catch (err) {}
+                }
+              });
+            }, true);
+          });
         })();
       </script>
     </div>
