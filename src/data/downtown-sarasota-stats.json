@@ -2,15 +2,15 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-12T10:58:58.947627+00:00",
+  "lastUpdated": "2026-06-13T11:00:42.187004+00:00",
   "counts": {
-    "sold": 258,
-    "pending": 89,
+    "sold": 259,
+    "pending": 88,
     "active": 274,
     "total": 347
   },
   "metrics": {
-    "avgPrice": "$1,793,434",
+    "avgPrice": "$1,793,348",
     "avgPricePerSqFt": "$789",
     "avgYearBuilt": 2002,
     "avgLivingSqFt": "1,972",
@@ -29,8 +29,8 @@
     "newConstructionCount": 106
   },
   "sold": {
-    "count": 258,
-    "medianPrice": "$1,145,000",
+    "count": 259,
+    "medianPrice": "$1,140,000",
     "medianDom": 87,
     "saleToListRatio": "90.7%"
   },
@@ -52,6 +52,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4679957",
+      "address": "850 S TAMIAMI TRL #704",
+      "subdivision": "CENTRAL PARK SEC 2 PH 1",
+      "soldPrice": "$245,000",
+      "soldDate": "2026-06-12",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "980",
+      "yearBuilt": 1998,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4688715",
       "address": "111 S PINEAPPLE AVE #1021",
@@ -103,19 +116,6 @@
       "yearBuilt": 1970,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4673907",
-      "address": "325 GOLDEN GATE PT #601",
-      "subdivision": "THE OWEN GOLDEN GATE POINT",
-      "soldPrice": "$3,160,000",
-      "soldDate": "2026-06-05",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,557",
-      "yearBuilt": 2026,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -127,15 +127,15 @@
       "avgPrice": "$1,140,412",
       "avgPricePerSqFt": "$651",
       "avgLivingSqFt": "1,643",
-      "avgDom": 178
+      "avgDom": 179
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 40,
-      "avgPrice": "$1,813,732",
-      "avgPricePerSqFt": "$729",
+      "avgPrice": "$1,809,358",
+      "avgPricePerSqFt": "$726",
       "avgLivingSqFt": "2,233",
       "avgDom": 157
     },
@@ -157,7 +157,7 @@
       "avgPrice": "$3,790,909",
       "avgPricePerSqFt": "$1,321",
       "avgLivingSqFt": "2,690",
-      "avgDom": 169
+      "avgDom": 170
     }
   ],
   "condoTiersScope": {
