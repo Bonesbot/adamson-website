@@ -2,56 +2,95 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-12T10:58:52.607812+00:00",
+  "lastUpdated": "2026-06-13T11:00:40.039144+00:00",
   "counts": {
-    "sold": 508,
-    "pending": 74,
-    "active": 370,
-    "total": 582
+    "sold": 511,
+    "pending": 75,
+    "active": 368,
+    "total": 586
   },
   "metrics": {
-    "avgPrice": "$1,834,748",
-    "avgPricePerSqFt": "$727",
+    "avgPrice": "$1,837,633",
+    "avgPricePerSqFt": "$726",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,173",
+    "avgLivingSqFt": "2,179",
     "avgLotSqFt": null,
-    "avgDom": 97
+    "avgDom": 98
   },
   "range": {
     "minPrice": "$165,000",
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 370,
-    "medianPrice": "$1,097,000",
+    "count": 368,
+    "medianPrice": "$1,092,500",
     "medianPricePerSqFt": "$693",
-    "waterfrontCount": 280,
+    "waterfrontCount": 279,
     "newConstructionCount": 28
   },
   "sold": {
-    "count": 508,
-    "medianPrice": "$1,071,250",
+    "count": 511,
+    "medianPrice": "$1,072,500",
     "medianDom": 69,
     "saleToListRatio": "86.9%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,600",
-    "medianMonthlyCondoFee": "$1,689"
+    "medianMonthlyCondoFee": "$1,688"
   },
   "priceBands": {
-    "under900k": 141,
+    "under900k": 142,
     "band900kTo1_5m": 84,
-    "band1_5mTo3m": 85,
-    "band3mPlus": 60
+    "band1_5mTo3m": 83,
+    "band3mPlus": 59
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 370
+      "count": 368
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4685660",
+      "address": "415 L AMBIANCE DR #A701",
+      "subdivision": "L AMBIANCE 1",
+      "soldPrice": "$6,500,000",
+      "soldDate": "2026-06-12",
+      "bedrooms": 3,
+      "bathrooms": 4.0,
+      "livingSqFt": "3,380",
+      "yearBuilt": 1992,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4691690",
+      "address": "1241 GULF OF MEXICO DR #304",
+      "subdivision": "WATER CLUBI/LONGBOAT KEY CONDO",
+      "soldPrice": "$2,499,000",
+      "soldDate": "2026-06-12",
+      "bedrooms": 3,
+      "bathrooms": 4.0,
+      "livingSqFt": "3,045",
+      "yearBuilt": 1996,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4678529",
+      "address": "350 GULF OF MEXICO DR #234",
+      "subdivision": "TANGERINE BAY CLUB",
+      "soldPrice": "$700,000",
+      "soldDate": "2026-06-12",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,513",
+      "yearBuilt": 1992,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4668083",
       "address": "573 SPINNAKER LN",
@@ -77,45 +116,6 @@
       "yearBuilt": 1990,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4696713",
-      "address": "801 LONGBOAT CLUB",
-      "subdivision": "REGENT COURT",
-      "soldPrice": "$14,500,000",
-      "soldDate": "2026-06-10",
-      "bedrooms": 5,
-      "bathrooms": 5.5,
-      "livingSqFt": "6,934",
-      "yearBuilt": 1993,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4670192",
-      "address": "569 ROUNTREE DR",
-      "subdivision": "LONGBOAT KEY ESTATES",
-      "soldPrice": "$2,890,000",
-      "soldDate": "2026-06-10",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,756",
-      "yearBuilt": 2024,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4646987",
-      "address": "545 SANCTUARY DR #B806",
-      "subdivision": "SANCTUARY III",
-      "soldPrice": "$1,950,000",
-      "soldDate": "2026-06-10",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,375",
-      "yearBuilt": 1991,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -123,21 +123,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 206,
-      "avgPrice": "$895,960",
-      "avgPricePerSqFt": "$660",
-      "avgLivingSqFt": "1,357",
-      "avgDom": 145
+      "activeCount": 208,
+      "avgPrice": "$893,408",
+      "avgPricePerSqFt": "$658",
+      "avgLivingSqFt": "1,359",
+      "avgDom": 144
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 50,
-      "avgPrice": "$2,293,490",
-      "avgPricePerSqFt": "$847",
-      "avgLivingSqFt": "2,608",
-      "avgDom": 162
+      "activeCount": 47,
+      "avgPrice": "$2,275,223",
+      "avgPricePerSqFt": "$855",
+      "avgLivingSqFt": "2,551",
+      "avgDom": 158
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$5,464,667",
       "avgPricePerSqFt": "$1,523",
       "avgLivingSqFt": "3,595",
-      "avgDom": 204
+      "avgDom": 205
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$7,129,800",
       "avgPricePerSqFt": "$2,147",
       "avgLivingSqFt": "2,988",
-      "avgDom": 341
+      "avgDom": 342
     }
   ],
   "condoTiersScope": {
