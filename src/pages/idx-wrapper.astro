@@ -157,6 +157,16 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
     font-size: 0.85rem;
   }
   .idx-back-link:hover { color: #fff; }
+
+  /* Hide the GreatSchools widget/panel on detail pages (declutter).
+     Leaves the basic MLS school-name fields in the facts table intact. */
+  #IDX-detailsContainer-greatSchools,
+  #IDX-panel-greatSchools,
+  #IDX-panel-body-greatSchools,
+  #GS_schoolSearchWidget,
+  .idx-wrapper-shell iframe.greatschools {
+    display: none !important;
+  }
 </style>
 
 <script is:inline>
