@@ -167,6 +167,26 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
   .idx-wrapper-shell iframe.greatschools {
     display: none !important;
   }
+
+  /* ---- Mobile usability (declutter spacing, reclaim width, no overflow) ---- */
+  @media (max-width: 640px) {
+    .idx-wrapper-section {
+      padding-top: 84px;   /* was a fixed 120px — too much dead space on phones */
+      min-height: 0;       /* drop 80vh so short content doesn't leave a void */
+    }
+    .idx-wrapper-shell {
+      padding: 1rem;       /* reclaim ~40px of content width vs desktop 48px */
+      border-radius: 8px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      overflow-x: hidden;  /* guard against wide IDX tables/maps */
+    }
+    /* keep all embedded media within the viewport */
+    .idx-wrapper-shell img,
+    .idx-wrapper-shell iframe,
+    .idx-wrapper-shell table { max-width: 100%; }
+    /* tame IDX's oversized 20px facts text on small screens */
+    .idx-wrapper-shell .idx-text { font-size: 1rem; line-height: 1.35; }
+  }
 </style>
 
 <script is:inline>
