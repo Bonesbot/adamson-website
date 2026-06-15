@@ -15,6 +15,11 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
 ---
 
 <BaseLayout title={title} description={description}>
+  <!-- FontAwesome 4 — IDX detail markup uses .fa fa-* (FA4); without it,
+       gallery arrows, the heart, and sidebar-link icons render as tofu boxes. -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        is:inline />
   <section class="section dark-section idx-wrapper-section">
     <div class="container">
       <div class="text-center mb-10">
@@ -55,10 +60,10 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
 <style is:global>
   /* --------------------------------------------------------------------- */
   /* IDX Broker brand alignment                                            */
-  /* IDX renders its own markup with class names like .IDX-resultsCell,    */
-  /* .IDX-quicksearchSubmit, etc. We override only the highest-impact      */
-  /* visuals so listings feel native to adamsonfl.com without breaking IDX */
-  /* internal layout rules.                                                */
+  /* IDX's modern widget renders lowercase .idx-* / BEM classes            */
+  /* (.idx-details__price, .idx-text, .fa ...), NOT the legacy .IDX-*       */
+  /* classes. We target the current markup and keep a few legacy           */
+  /* fallbacks for any page still on the old renderer.                     */
   /* --------------------------------------------------------------------- */
 
   .idx-wrapper-section {
@@ -66,11 +71,27 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
     padding-top: 120px; /* clearance under fixed site header */
   }
 
+  /* IDX content surface — LIGHT card.                                     */
+  /* The modern IDX widget is designed for a light page. On the old dark   */
+  /* shell its text inherited white from .dark-section and disappeared on  */
+  /* IDX's own white cards. A real white card + dark ink fixes the         */
+  /* "invisible description / blank feature tables" problem.               */
   .idx-wrapper-shell {
-    background: var(--color-dark-elevated, #1a1a1a);
-    border-radius: 8px;
-    padding: 1.5rem;
+    background: #ffffff;
+    color: #1a1a1a;
+    border-radius: 12px;
+    padding: clamp(1.25rem, 4vw, 3rem);
     min-height: 600px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+  }
+  .idx-wrapper-shell a { color: var(--color-cbgl-blue, #0a2540); }
+  .idx-wrapper-shell a:hover { color: var(--color-gold, #c9a961); }
+  .idx-wrapper-shell h1, .idx-wrapper-shell h2,
+  .idx-wrapper-shell h3, .idx-wrapper-shell h4,
+  .idx-wrapper-shell strong {
+    color: var(--color-cbgl-blue, #0a2540);
+    font-family: var(--font-display, 'Playfair Display', Georgia, serif);
   }
 
   .idx-loading {
@@ -79,68 +100,98 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
     justify-content: center;
     min-height: 400px;
   }
+  .idx-loading p { color: rgba(0, 0, 0, 0.45) !important; }
 
-  /* Hide the loading message once IDX renders its own content.
-     NOTE: details pages root at #IDX-main (not .IDX-wrapper) — verified live 2026-06-12. */
+  /* Hide the loading message once IDX renders (new + legacy hooks) */
   .idx-wrapper-shell:has(.IDX-wrapper) .idx-loading,
-  .idx-wrapper-shell:has(#IDX-main) .idx-loading,
   .idx-wrapper-shell:has(.IDX-resultsContainer) .idx-loading,
-  .idx-wrapper-shell:has(.IDX-detailsBody) .idx-loading {
+  .idx-wrapper-shell:has(.IDX-detailsBody) .idx-loading,
+  .idx-wrapper-shell:has([class*="idx-details"]) .idx-loading,
+  .idx-wrapper-shell:has([class*="idx-results"]) .idx-loading {
     display: none;
   }
 
-  /* Containment — IDX internals (swiper gallery, modals, pageContainer) can
-     overflow the shell horizontally. Clip at the root; keep media in bounds. */
-  #IDX-main {
-    overflow-x: clip;
-    max-width: 100%;
-    border-radius: 8px;
-    background: #fff;
-  }
-  #IDX-main img,
-  #IDX-main iframe,
-  #IDX-main video {
-    max-width: 100%;
+  /* Price — kill the default IDX royal blue (new + legacy class names) */
+  .idx-wrapper-shell .idx-details__price,
+  .IDX-resultsPrice, .IDX-detailsPrice {
+    color: var(--color-cbgl-blue, #0a2540) !important;
+    font-weight: 700;
   }
 
-  /* Typography — match site fonts inside IDX content.
-     .IDX-icon excluded so icon-font glyphs keep rendering. */
-  .IDX-wrapper, .IDX-wrapper *,
-  #IDX-main, #IDX-main *:not(.IDX-icon):not([class*="IDX-icon"]) {
-    font-family: var(--font-body, 'Inter', system-ui, sans-serif) !important;
-  }
-  .IDX-wrapper h1, .IDX-wrapper h2, .IDX-wrapper h3,
-  #IDX-main h1, #IDX-main h2, #IDX-main .IDX-h2,
-  .IDX-detailsHeader, .IDX-resultsAddress {
-    font-family: var(--font-display, 'Playfair Display', Georgia, serif) !important;
+  /* Icons (gallery arrows, heart, sidebar quick-links) in brand gold.     */
+  /* Re-assert the icon font so nothing downstream swaps it back to Inter. */
+  .idx-wrapper-shell .fa {
+    color: var(--color-gold, #c9a961);
+    font-family: 'FontAwesome' !important;
   }
 
-  /* Primary action color — gold */
-  .IDX-quicksearchSubmit,
-  .IDX-detailsContactBtn,
-  .IDX-btn-primary,
-  .IDX-saveSearch button,
-  .IDX-results .IDX-resultsLink {
+  /* Primary buttons — gold pill (new markup + legacy) */
+  .idx-wrapper-shell button,
+  .idx-wrapper-shell input[type="submit"],
+  .IDX-quicksearchSubmit, .IDX-detailsContactBtn, .IDX-btn-primary {
     background-color: var(--color-gold, #c9a961) !important;
     color: #000 !important;
-    border-color: var(--color-gold, #c9a961) !important;
+    border: none !important;
+    border-radius: 999px !important;
+    font-weight: 600;
   }
-  .IDX-quicksearchSubmit:hover,
-  .IDX-detailsContactBtn:hover,
-  .IDX-btn-primary:hover {
+  .idx-wrapper-shell button:hover,
+  .idx-wrapper-shell input[type="submit"]:hover,
+  .IDX-quicksearchSubmit:hover, .IDX-detailsContactBtn:hover {
     background-color: var(--color-gold-light, #d4b87a) !important;
   }
 
-  /* Secondary accent — CBGL blue */
-  .IDX-resultsPrice,
-  .IDX-detailsPrice {
-    color: var(--color-cbgl-blue-light, #5b9bd5) !important;
+  /* Hide the generic ShareThis / AddThis social row (off-brand) */
+  .idx-wrapper-shell .sharethis-inline-share-buttons,
+  .idx-wrapper-shell .addthis_inline_share_toolbox {
+    display: none !important;
   }
 
-  /* Result cards — soft elevated background */
-  .IDX-resultsCell, .IDX-detailsBody {
-    background: rgba(255, 255, 255, 0.04) !important;
-    border-radius: 6px !important;
-    color: rgba(255, 255, 255, 0.9) !important;
+  /* Slim back-link injected on detail pages by the script below */
+  .idx-back-link {
+    display: inline-block;
+    color: var(--color-gold, #c9a961);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
   }
+  .idx-back-link:hover { color: #fff; }
 </style>
+
+<script is:inline>
+  /* Detail-page context fixes. The wrapper is shared across all IDX routes,
+     so the "Sarasota & Barrier Islands Property Search" hero also stamped
+     onto single-listing pages. On /idx/details/* swap it for a back link,
+     and prune the orphaned empty "No listings found" similar-listings box. */
+  (function () {
+    var isDetail = /\/idx\/details\//.test(location.pathname);
+
+    if (isDetail) {
+      var hero = document.querySelector('.idx-wrapper-section .text-center');
+      if (hero) {
+        hero.innerHTML =
+          '<a href="#" class="idx-back-link">\u2190 Back to listings</a>';
+        hero.classList.remove('mb-10');
+        var bl = hero.querySelector('.idx-back-link');
+        bl.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (history.length > 1) history.back();
+          else location.href = '/areas';
+        });
+      }
+    }
+
+    function pruneEmpty() {
+      document.querySelectorAll('.idx-wrapper-shell *').forEach(function (el) {
+        if (el.children.length === 0 &&
+            /^\s*no listings found\s*$/i.test(el.textContent)) {
+          var box = el.closest('section, div');
+          if (box) box.style.display = 'none';
+        }
+      });
+    }
+    pruneEmpty();
+    setTimeout(pruneEmpty, 1200); // IDX injects content asynchronously
+  })();
+</script>
