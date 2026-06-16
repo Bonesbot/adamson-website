@@ -2,18 +2,18 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-15T10:56:02.006311+00:00",
+  "lastUpdated": "2026-06-16T11:00:11.768798+00:00",
   "counts": {
-    "sold": 511,
-    "pending": 76,
-    "active": 368,
-    "total": 587
+    "sold": 516,
+    "pending": 75,
+    "active": 365,
+    "total": 591
   },
   "metrics": {
-    "avgPrice": "$1,839,518",
-    "avgPricePerSqFt": "$727",
+    "avgPrice": "$1,833,646",
+    "avgPricePerSqFt": "$726",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,183",
+    "avgLivingSqFt": "2,180",
     "avgLotSqFt": null,
     "avgDom": 98
   },
@@ -22,36 +22,75 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 368,
-    "medianPrice": "$1,062,500",
-    "medianPricePerSqFt": "$690",
-    "waterfrontCount": 279,
+    "count": 365,
+    "medianPrice": "$1,075,000",
+    "medianPricePerSqFt": "$692",
+    "waterfrontCount": 278,
     "newConstructionCount": 28
   },
   "sold": {
-    "count": 511,
-    "medianPrice": "$1,072,500",
-    "medianDom": 69,
-    "saleToListRatio": "86.9%"
+    "count": 516,
+    "medianPrice": "$1,071,250",
+    "medianDom": 68,
+    "saleToListRatio": "87.0%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,600",
-    "medianMonthlyCondoFee": "$1,688"
+    "medianMonthlyCondoFee": "$1,687"
   },
   "priceBands": {
-    "under900k": 144,
-    "band900kTo1_5m": 84,
+    "under900k": 143,
+    "band900kTo1_5m": 82,
     "band1_5mTo3m": 81,
     "band3mPlus": 59
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 368
+      "count": 365
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4687694",
+      "address": "531 WEDGE LN",
+      "subdivision": "COUNTRY CLUB SHORES SEC 02",
+      "soldPrice": "$2,425,000",
+      "soldDate": "2026-06-15",
+      "bedrooms": 4,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,751",
+      "yearBuilt": 1966,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4683782",
+      "address": "1145 GULF OF MEXICO DR #503",
+      "subdivision": "BEACHPLACE I",
+      "soldPrice": "$1,312,500",
+      "soldDate": "2026-06-15",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,503",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4693381",
+      "address": "703 SPANISH DR S",
+      "subdivision": "SPANISH MAIN YACHT CLUB CONDO",
+      "soldPrice": "$430,000",
+      "soldDate": "2026-06-15",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,322",
+      "yearBuilt": 1971,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4685660",
       "address": "415 L AMBIANCE DR #A701",
@@ -77,45 +116,6 @@
       "yearBuilt": 1996,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4678529",
-      "address": "350 GULF OF MEXICO DR #234",
-      "subdivision": "TANGERINE BAY CLUB",
-      "soldPrice": "$700,000",
-      "soldDate": "2026-06-12",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,513",
-      "yearBuilt": 1992,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4668083",
-      "address": "573 SPINNAKER LN",
-      "subdivision": "COUNTRY CLUB SHORES SEC 02",
-      "soldPrice": "$2,700,000",
-      "soldDate": "2026-06-11",
-      "bedrooms": 4,
-      "bathrooms": 5.0,
-      "livingSqFt": "3,926",
-      "yearBuilt": 1998,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4676912",
-      "address": "2550 HARBOURSIDE DR #324",
-      "subdivision": "MARINA BAY",
-      "soldPrice": "$1,495,000",
-      "soldDate": "2026-06-11",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "3,083",
-      "yearBuilt": 1990,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -123,18 +123,18 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 210,
-      "avgPrice": "$891,561",
-      "avgPricePerSqFt": "$657",
-      "avgLivingSqFt": "1,359",
-      "avgDom": 144
+      "activeCount": 207,
+      "avgPrice": "$889,040",
+      "avgPricePerSqFt": "$658",
+      "avgLivingSqFt": "1,352",
+      "avgDom": 146
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 47,
-      "avgPrice": "$2,273,074",
+      "avgPrice": "$2,272,862",
       "avgPricePerSqFt": "$854",
       "avgLivingSqFt": "2,551",
       "avgDom": 160
@@ -147,7 +147,7 @@
       "avgPrice": "$5,464,667",
       "avgPricePerSqFt": "$1,523",
       "avgLivingSqFt": "3,595",
-      "avgDom": 207
+      "avgDom": 208
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$7,129,800",
       "avgPricePerSqFt": "$2,147",
       "avgLivingSqFt": "2,988",
-      "avgDom": 343
+      "avgDom": 344
     }
   ],
   "condoTiersScope": {
