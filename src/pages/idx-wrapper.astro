@@ -187,6 +187,14 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
     /* tame IDX's oversized 20px facts text on small screens */
     .idx-wrapper-shell .idx-text { font-size: 1rem; line-height: 1.35; }
   }
+
+  /* MLS listing attribution kept for compliance but visually de-emphasized */
+  .idx-attribution-min {
+    font-size: 0.72rem !important;
+    line-height: 1.4 !important;
+    color: rgba(0, 0, 0, 0.45) !important;
+  }
+  .idx-attribution-min a { color: rgba(0, 0, 0, 0.5) !important; }
 </style>
 
 <script is:inline>
@@ -222,6 +230,19 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
       });
     }
     pruneEmpty();
-    setTimeout(pruneEmpty, 1200); // IDX injects content asynchronously
+    setTimeout(pruneEmpty, 1200);
+
+    function minimizeAttribution() {
+      var nodes = document.querySelectorAll('.idx-wrapper-shell div, .idx-wrapper-shell p');
+      for (var i = 0; i < nodes.length; i++) {
+        var own = '';
+        for (var j = 0; j < nodes[i].childNodes.length; j++) {
+          if (nodes[i].childNodes[j].nodeType === 3) own += nodes[i].childNodes[j].textContent;
+        }
+        if (/Listed by:/i.test(own)) { nodes[i].classList.add('idx-attribution-min'); break; }
+      }
+    }
+    minimizeAttribution();
+    setTimeout(minimizeAttribution, 1200); // IDX injects content asynchronously
   })();
 </script>
