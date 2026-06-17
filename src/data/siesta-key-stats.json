@@ -2,15 +2,15 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-16T11:00:13.059924+00:00",
+  "lastUpdated": "2026-06-17T10:58:09.268495+00:00",
   "counts": {
-    "sold": 500,
-    "pending": 62,
-    "active": 435,
+    "sold": 502,
+    "pending": 60,
+    "active": 437,
     "total": 562
   },
   "metrics": {
-    "avgPrice": "$1,389,364",
+    "avgPrice": "$1,389,268",
     "avgPricePerSqFt": "$677",
     "avgYearBuilt": 1978,
     "avgLivingSqFt": "1,892",
@@ -22,14 +22,14 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 435,
+    "count": 437,
     "medianPrice": "$1,199,000",
     "medianPricePerSqFt": "$772",
     "waterfrontCount": 246,
-    "newConstructionCount": 65
+    "newConstructionCount": 66
   },
   "sold": {
-    "count": 500,
+    "count": 502,
     "medianPrice": "$887,500",
     "medianDom": 72,
     "saleToListRatio": "87.3%"
@@ -39,19 +39,45 @@
     "medianMonthlyCondoFee": "$1,261"
   },
   "priceBands": {
-    "under900k": 175,
+    "under900k": 176,
     "band900kTo1_5m": 80,
     "band1_5mTo3m": 82,
-    "band3mPlus": 98
+    "band3mPlus": 99
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 435
+      "count": 437
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4689210",
+      "address": "5830 MIDNIGHT PASS RD #T22",
+      "subdivision": "JAMAICA ROYALE ELEV APTS",
+      "soldPrice": "$960,000",
+      "soldDate": "2026-06-15",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,194",
+      "yearBuilt": 1967,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4677365",
+      "address": "5855 MIDNIGHT PASS RD #408",
+      "subdivision": "HARBOR TOWERS Y & R",
+      "soldPrice": "$585,000",
+      "soldDate": "2026-06-15",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,056",
+      "yearBuilt": 1976,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4648285",
       "address": "8592 HIDDEN LAGOON RD",
@@ -90,32 +116,6 @@
       "yearBuilt": 1970,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4676249",
-      "address": "9265 BLIND PASS RD",
-      "subdivision": "ACREAGE & UNREC",
-      "soldPrice": "$2,950,000",
-      "soldDate": "2026-06-11",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "3,186",
-      "yearBuilt": 1998,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4678784",
-      "address": "436 CANAL RD #A",
-      "subdivision": "SIESTA VILLAS 1",
-      "soldPrice": "$1,650,000",
-      "soldDate": "2026-06-11",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,756",
-      "yearBuilt": 2002,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -123,10 +123,10 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 241,
-      "avgPrice": "$832,154",
+      "activeCount": 242,
+      "avgPrice": "$830,199",
       "avgPricePerSqFt": "$688",
-      "avgLivingSqFt": "1,206",
+      "avgLivingSqFt": "1,204",
       "avgDom": 156
     },
     {
@@ -147,7 +147,7 @@
       "avgPrice": "$2,719,875",
       "avgPricePerSqFt": "$1,268",
       "avgLivingSqFt": "2,067",
-      "avgDom": 288
+      "avgDom": 289
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$4,878,125",
       "avgPricePerSqFt": "$1,684",
       "avgLivingSqFt": "3,032",
-      "avgDom": 358
+      "avgDom": 360
     }
   ],
   "condoTiersScope": {
