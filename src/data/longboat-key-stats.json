@@ -2,18 +2,18 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-16T11:00:11.768798+00:00",
+  "lastUpdated": "2026-06-17T10:58:08.053666+00:00",
   "counts": {
-    "sold": 516,
+    "sold": 517,
     "pending": 75,
-    "active": 365,
-    "total": 591
+    "active": 366,
+    "total": 592
   },
   "metrics": {
-    "avgPrice": "$1,833,646",
+    "avgPrice": "$1,833,310",
     "avgPricePerSqFt": "$726",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,180",
+    "avgLivingSqFt": "2,179",
     "avgLotSqFt": null,
     "avgDom": 98
   },
@@ -22,16 +22,16 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 365,
-    "medianPrice": "$1,075,000",
-    "medianPricePerSqFt": "$692",
-    "waterfrontCount": 278,
+    "count": 366,
+    "medianPrice": "$1,062,500",
+    "medianPricePerSqFt": "$687",
+    "waterfrontCount": 277,
     "newConstructionCount": 28
   },
   "sold": {
-    "count": 516,
-    "medianPrice": "$1,071,250",
-    "medianDom": 68,
+    "count": 517,
+    "medianPrice": "$1,070,000",
+    "medianDom": 69,
     "saleToListRatio": "87.0%"
   },
   "fees": {
@@ -39,15 +39,15 @@
     "medianMonthlyCondoFee": "$1,687"
   },
   "priceBands": {
-    "under900k": 143,
-    "band900kTo1_5m": 82,
-    "band1_5mTo3m": 81,
+    "under900k": 145,
+    "band900kTo1_5m": 83,
+    "band1_5mTo3m": 79,
     "band3mPlus": 59
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 365
+      "count": 366
     }
   ],
   "buildingClasses": [],
@@ -92,6 +92,19 @@
       "isWaterfront": false
     },
     {
+      "listingId": "A4670603",
+      "address": "4390 EXETER DR #305",
+      "subdivision": "LONGBOAT HARBOUR",
+      "soldPrice": "$325,000",
+      "soldDate": "2026-06-15",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "837",
+      "yearBuilt": 1970,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
       "listingId": "A4685660",
       "address": "415 L AMBIANCE DR #A701",
       "subdivision": "L AMBIANCE 1",
@@ -103,19 +116,6 @@
       "yearBuilt": 1992,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4691690",
-      "address": "1241 GULF OF MEXICO DR #304",
-      "subdivision": "WATER CLUBI/LONGBOAT KEY CONDO",
-      "soldPrice": "$2,499,000",
-      "soldDate": "2026-06-12",
-      "bedrooms": 3,
-      "bathrooms": 4.0,
-      "livingSqFt": "3,045",
-      "yearBuilt": 1996,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -123,11 +123,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 207,
-      "avgPrice": "$889,040",
-      "avgPricePerSqFt": "$658",
-      "avgLivingSqFt": "1,352",
-      "avgDom": 146
+      "activeCount": 206,
+      "avgPrice": "$884,254",
+      "avgPricePerSqFt": "$655",
+      "avgLivingSqFt": "1,351",
+      "avgDom": 147
     },
     {
       "tier": "1990to2005",
@@ -137,7 +137,7 @@
       "avgPrice": "$2,272,862",
       "avgPricePerSqFt": "$854",
       "avgLivingSqFt": "2,551",
-      "avgDom": 160
+      "avgDom": 161
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$5,464,667",
       "avgPricePerSqFt": "$1,523",
       "avgLivingSqFt": "3,595",
-      "avgDom": 208
+      "avgDom": 209
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$7,129,800",
       "avgPricePerSqFt": "$2,147",
       "avgLivingSqFt": "2,988",
-      "avgDom": 344
+      "avgDom": 345
     }
   ],
   "condoTiersScope": {
