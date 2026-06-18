@@ -2,15 +2,15 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-17T10:58:08.053666+00:00",
+  "lastUpdated": "2026-06-18T11:00:05.700257+00:00",
   "counts": {
-    "sold": 517,
-    "pending": 75,
-    "active": 366,
+    "sold": 520,
+    "pending": 72,
+    "active": 368,
     "total": 592
   },
   "metrics": {
-    "avgPrice": "$1,833,310",
+    "avgPrice": "$1,832,985",
     "avgPricePerSqFt": "$726",
     "avgYearBuilt": 1983,
     "avgLivingSqFt": "2,179",
@@ -22,36 +22,75 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 366,
-    "medianPrice": "$1,062,500",
-    "medianPricePerSqFt": "$687",
-    "waterfrontCount": 277,
+    "count": 368,
+    "medianPrice": "$1,075,000",
+    "medianPricePerSqFt": "$683",
+    "waterfrontCount": 278,
     "newConstructionCount": 28
   },
   "sold": {
-    "count": 517,
-    "medianPrice": "$1,070,000",
+    "count": 520,
+    "medianPrice": "$1,071,250",
     "medianDom": 69,
     "saleToListRatio": "87.0%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,600",
-    "medianMonthlyCondoFee": "$1,687"
+    "medianMonthlyCondoFee": "$1,688"
   },
   "priceBands": {
     "under900k": 145,
-    "band900kTo1_5m": 83,
-    "band1_5mTo3m": 79,
+    "band900kTo1_5m": 84,
+    "band1_5mTo3m": 80,
     "band3mPlus": 59
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 366
+      "count": 368
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4676501",
+      "address": "3311 SABAL COVE DR",
+      "subdivision": "SABAL COVE",
+      "soldPrice": "$2,350,000",
+      "soldDate": "2026-06-17",
+      "bedrooms": 4,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,416",
+      "yearBuilt": 2006,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4668589",
+      "address": "1241 GULF OF MEXICO DR #207 S",
+      "subdivision": "WATER CLUB 01 AT LONGBOAT KEY",
+      "soldPrice": "$1,425,000",
+      "soldDate": "2026-06-17",
+      "bedrooms": 2,
+      "bathrooms": 4.0,
+      "livingSqFt": "2,965",
+      "yearBuilt": 1996,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4670932",
+      "address": "4900 GULF OF MEXICO DR #203",
+      "subdivision": "WINDWARD BAY AMD",
+      "soldPrice": "$671,500",
+      "soldDate": "2026-06-17",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,325",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4687694",
       "address": "531 WEDGE LN",
@@ -77,45 +116,6 @@
       "yearBuilt": 1980,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4693381",
-      "address": "703 SPANISH DR S",
-      "subdivision": "SPANISH MAIN YACHT CLUB CONDO",
-      "soldPrice": "$430,000",
-      "soldDate": "2026-06-15",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,322",
-      "yearBuilt": 1971,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4670603",
-      "address": "4390 EXETER DR #305",
-      "subdivision": "LONGBOAT HARBOUR",
-      "soldPrice": "$325,000",
-      "soldDate": "2026-06-15",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "837",
-      "yearBuilt": 1970,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4685660",
-      "address": "415 L AMBIANCE DR #A701",
-      "subdivision": "L AMBIANCE 1",
-      "soldPrice": "$6,500,000",
-      "soldDate": "2026-06-12",
-      "bedrooms": 3,
-      "bathrooms": 4.0,
-      "livingSqFt": "3,380",
-      "yearBuilt": 1992,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -124,20 +124,20 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 206,
-      "avgPrice": "$884,254",
+      "avgPrice": "$884,084",
       "avgPricePerSqFt": "$655",
       "avgLivingSqFt": "1,351",
-      "avgDom": 147
+      "avgDom": 148
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 47,
-      "avgPrice": "$2,272,862",
-      "avgPricePerSqFt": "$854",
-      "avgLivingSqFt": "2,551",
-      "avgDom": 161
+      "activeCount": 48,
+      "avgPrice": "$2,268,219",
+      "avgPricePerSqFt": "$850",
+      "avgLivingSqFt": "2,562",
+      "avgDom": 159
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$5,464,667",
       "avgPricePerSqFt": "$1,523",
       "avgLivingSqFt": "3,595",
-      "avgDom": 209
+      "avgDom": 210
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$7,129,800",
       "avgPricePerSqFt": "$2,147",
       "avgLivingSqFt": "2,988",
-      "avgDom": 345
+      "avgDom": 346
     }
   ],
   "condoTiersScope": {
