@@ -2,18 +2,18 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-17T10:58:09.887107+00:00",
+  "lastUpdated": "2026-06-18T11:00:12.192743+00:00",
   "counts": {
-    "sold": 261,
-    "pending": 90,
-    "active": 272,
-    "total": 351
+    "sold": 262,
+    "pending": 88,
+    "active": 274,
+    "total": 350
   },
   "metrics": {
-    "avgPrice": "$1,794,910",
-    "avgPricePerSqFt": "$789",
+    "avgPrice": "$1,798,117",
+    "avgPricePerSqFt": "$790",
     "avgYearBuilt": 2002,
-    "avgLivingSqFt": "1,976",
+    "avgLivingSqFt": "1,978",
     "avgLotSqFt": null,
     "avgDom": 103
   },
@@ -22,24 +22,24 @@
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 272,
-    "medianPrice": "$1,499,000",
-    "medianPricePerSqFt": "$869",
+    "count": 274,
+    "medianPrice": "$1,497,000",
+    "medianPricePerSqFt": "$859",
     "waterfrontCount": 71,
     "newConstructionCount": 106
   },
   "sold": {
-    "count": 261,
-    "medianPrice": "$1,140,000",
-    "medianDom": 87,
+    "count": 262,
+    "medianPrice": "$1,132,500",
+    "medianDom": 86,
     "saleToListRatio": "90.7%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,633",
-    "medianMonthlyCondoFee": "$1,716"
+    "medianMonthlyCondoFee": "$1,698"
   },
   "priceBands": {
-    "under900k": 77,
+    "under900k": 79,
     "band900kTo1_5m": 61,
     "band1_5mTo3m": 63,
     "band3mPlus": 71
@@ -47,11 +47,24 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 272
+      "count": 274
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4690797",
+      "address": "101 S GULFSTREAM AVE ## 4A",
+      "subdivision": "DOLPHIN TOWER",
+      "soldPrice": "$450,000",
+      "soldDate": "2026-06-16",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,200",
+      "yearBuilt": 1974,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4660379",
       "address": "301 QUAY COMMONS #1008",
@@ -103,19 +116,6 @@
       "yearBuilt": 2019,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4687004",
-      "address": "617 MADISON CT",
-      "subdivision": "WASHINGTON PARK",
-      "soldPrice": "$1,066,030",
-      "soldDate": "2026-06-08",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,480",
-      "yearBuilt": 1959,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -123,21 +123,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 58,
-      "avgPrice": "$1,136,722",
-      "avgPricePerSqFt": "$647",
-      "avgLivingSqFt": "1,645",
-      "avgDom": 181
+      "activeCount": 60,
+      "avgPrice": "$1,121,748",
+      "avgPricePerSqFt": "$643",
+      "avgLivingSqFt": "1,634",
+      "avgDom": 179
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 39,
-      "avgPrice": "$1,771,264",
+      "avgPrice": "$1,770,597",
       "avgPricePerSqFt": "$722",
       "avgLivingSqFt": "2,195",
-      "avgDom": 148
+      "avgDom": 149
     },
     {
       "tier": "2006to2019",
@@ -157,7 +157,7 @@
       "avgPrice": "$3,790,668",
       "avgPricePerSqFt": "$1,320",
       "avgLivingSqFt": "2,690",
-      "avgDom": 173
+      "avgDom": 174
     }
   ],
   "condoTiersScope": {
