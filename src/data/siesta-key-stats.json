@@ -2,35 +2,35 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-18T11:00:06.937496+00:00",
+  "lastUpdated": "2026-06-19T11:00:38.158297+00:00",
   "counts": {
-    "sold": 505,
-    "pending": 58,
-    "active": 437,
-    "total": 563
+    "sold": 506,
+    "pending": 60,
+    "active": 438,
+    "total": 566
   },
   "metrics": {
-    "avgPrice": "$1,387,843",
-    "avgPricePerSqFt": "$676",
+    "avgPrice": "$1,388,011",
+    "avgPricePerSqFt": "$677",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,891",
+    "avgLivingSqFt": "1,890",
     "avgLotSqFt": null,
-    "avgDom": 105
+    "avgDom": 107
   },
   "range": {
     "minPrice": "$290,000",
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 437,
-    "medianPrice": "$1,199,000",
+    "count": 438,
+    "medianPrice": "$1,195,000",
     "medianPricePerSqFt": "$772",
-    "waterfrontCount": 246,
+    "waterfrontCount": 248,
     "newConstructionCount": 66
   },
   "sold": {
-    "count": 505,
-    "medianPrice": "$880,000",
+    "count": 506,
+    "medianPrice": "$887,500",
     "medianDom": 72,
     "saleToListRatio": "87.3%"
   },
@@ -39,19 +39,32 @@
     "medianMonthlyCondoFee": "$1,261"
   },
   "priceBands": {
-    "under900k": 176,
+    "under900k": 178,
     "band900kTo1_5m": 80,
-    "band1_5mTo3m": 82,
+    "band1_5mTo3m": 81,
     "band3mPlus": 99
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 437
+      "count": 438
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4689084",
+      "address": "413 ISLAND CIR",
+      "subdivision": "SARASOTA BEACH",
+      "soldPrice": "$3,033,750",
+      "soldDate": "2026-06-17",
+      "bedrooms": 4,
+      "bathrooms": 4.5,
+      "livingSqFt": "2,994",
+      "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4684397",
       "address": "4939 COMMONWEALTH DR",
@@ -103,19 +116,6 @@
       "yearBuilt": 1976,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4669061",
-      "address": "6020 MIDNIGHT PASS RD #42",
-      "subdivision": "ALOHA KAI APTS",
-      "soldPrice": "$450,000",
-      "soldDate": "2026-06-15",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "672",
-      "yearBuilt": 1964,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -123,11 +123,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 242,
-      "avgPrice": "$830,199",
-      "avgPricePerSqFt": "$688",
+      "activeCount": 243,
+      "avgPrice": "$828,079",
+      "avgPricePerSqFt": "$686",
       "avgLivingSqFt": "1,204",
-      "avgDom": 157
+      "avgDom": 153
     },
     {
       "tier": "1990to2005",
@@ -137,17 +137,17 @@
       "avgPrice": "$1,382,862",
       "avgPricePerSqFt": "$692",
       "avgLivingSqFt": "2,068",
-      "avgDom": 230
+      "avgDom": 231
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 8,
-      "avgPrice": "$2,719,875",
-      "avgPricePerSqFt": "$1,268",
-      "avgLivingSqFt": "2,067",
-      "avgDom": 290
+      "activeCount": 9,
+      "avgPrice": "$2,489,222",
+      "avgPricePerSqFt": "$1,224",
+      "avgLivingSqFt": "1,920",
+      "avgDom": 275
     },
     {
       "tier": "2020plus",
@@ -157,7 +157,7 @@
       "avgPrice": "$4,878,125",
       "avgPricePerSqFt": "$1,684",
       "avgLivingSqFt": "3,032",
-      "avgDom": 360
+      "avgDom": 362
     }
   ],
   "condoTiersScope": {
