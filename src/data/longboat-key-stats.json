@@ -2,56 +2,95 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-18T11:00:05.700257+00:00",
+  "lastUpdated": "2026-06-19T11:00:36.889546+00:00",
   "counts": {
-    "sold": 520,
-    "pending": 72,
-    "active": 368,
-    "total": 592
+    "sold": 525,
+    "pending": 70,
+    "active": 366,
+    "total": 595
   },
   "metrics": {
-    "avgPrice": "$1,832,985",
+    "avgPrice": "$1,830,271",
     "avgPricePerSqFt": "$726",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,179",
+    "avgLivingSqFt": "2,176",
     "avgLotSqFt": null,
-    "avgDom": 98
+    "avgDom": 97
   },
   "range": {
     "minPrice": "$165,000",
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 368,
-    "medianPrice": "$1,075,000",
-    "medianPricePerSqFt": "$683",
-    "waterfrontCount": 278,
+    "count": 366,
+    "medianPrice": "$1,082,500",
+    "medianPricePerSqFt": "$687",
+    "waterfrontCount": 276,
     "newConstructionCount": 28
   },
   "sold": {
-    "count": 520,
-    "medianPrice": "$1,071,250",
+    "count": 525,
+    "medianPrice": "$1,072,500",
     "medianDom": 69,
     "saleToListRatio": "87.0%"
   },
   "fees": {
     "medianMonthlyAssociation": "$1,600",
-    "medianMonthlyCondoFee": "$1,688"
+    "medianMonthlyCondoFee": "$1,689"
   },
   "priceBands": {
-    "under900k": 145,
+    "under900k": 143,
     "band900kTo1_5m": 84,
-    "band1_5mTo3m": 80,
-    "band3mPlus": 59
+    "band1_5mTo3m": 79,
+    "band3mPlus": 60
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 368
+      "count": 366
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4693553",
+      "address": "3620 FAIR OAKS PL",
+      "subdivision": "QUEENS HARBOUR",
+      "soldPrice": "$2,900,000",
+      "soldDate": "2026-06-18",
+      "bedrooms": 3,
+      "bathrooms": 5.5,
+      "livingSqFt": "3,666",
+      "yearBuilt": 1991,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4686623",
+      "address": "3427 WINDING OAKS DR #14",
+      "subdivision": "WINDING OAKS",
+      "soldPrice": "$1,100,000",
+      "soldDate": "2026-06-18",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,555",
+      "yearBuilt": 1988,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4667039",
+      "address": "240 SANDS POINT RD #4206",
+      "subdivision": "INN ON THE BEACH PH II",
+      "soldPrice": "$1,050,000",
+      "soldDate": "2026-06-18",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "640",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4676501",
       "address": "3311 SABAL COVE DR",
@@ -77,45 +116,6 @@
       "yearBuilt": 1996,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4670932",
-      "address": "4900 GULF OF MEXICO DR #203",
-      "subdivision": "WINDWARD BAY AMD",
-      "soldPrice": "$671,500",
-      "soldDate": "2026-06-17",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,325",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4687694",
-      "address": "531 WEDGE LN",
-      "subdivision": "COUNTRY CLUB SHORES SEC 02",
-      "soldPrice": "$2,425,000",
-      "soldDate": "2026-06-15",
-      "bedrooms": 4,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,751",
-      "yearBuilt": 1966,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4683782",
-      "address": "1145 GULF OF MEXICO DR #503",
-      "subdivision": "BEACHPLACE I",
-      "soldPrice": "$1,312,500",
-      "soldDate": "2026-06-15",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,503",
-      "yearBuilt": 1980,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -123,21 +123,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 206,
-      "avgPrice": "$884,084",
+      "activeCount": 204,
+      "avgPrice": "$884,580",
       "avgPricePerSqFt": "$655",
       "avgLivingSqFt": "1,351",
-      "avgDom": 148
+      "avgDom": 150
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 48,
-      "avgPrice": "$2,268,219",
-      "avgPricePerSqFt": "$850",
-      "avgLivingSqFt": "2,562",
-      "avgDom": 159
+      "activeCount": 49,
+      "avgPrice": "$2,487,133",
+      "avgPricePerSqFt": "$887",
+      "avgLivingSqFt": "2,610",
+      "avgDom": 157
     },
     {
       "tier": "2006to2019",
@@ -147,7 +147,7 @@
       "avgPrice": "$5,464,667",
       "avgPricePerSqFt": "$1,523",
       "avgLivingSqFt": "3,595",
-      "avgDom": 210
+      "avgDom": 211
     },
     {
       "tier": "2020plus",
