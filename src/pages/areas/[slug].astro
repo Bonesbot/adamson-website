@@ -127,6 +127,19 @@ const jsonLd = [
     ],
   },
 ];
+
+if (media.video) {
+  jsonLd.push({
+    '@type': 'VideoObject',
+    name: media.video.title,
+    description: media.video.description,
+    thumbnailUrl: [`https://adamsonfl.com${media.video.poster}`],
+    uploadDate: media.video.uploadDate,
+    duration: media.video.duration,
+    contentUrl: `https://adamsonfl.com${media.video.src}`,
+    publisher: { '@type': 'RealEstateAgent', name: 'The Adamson Group' },
+  });
+}
 ---
 
 <BaseLayout title={`${area.name} Real Estate`} description={description} jsonLd={jsonLd}>
@@ -149,6 +162,33 @@ const jsonLd = [
       </p>
     </div>
   </section>
+
+  <!-- Weekly market-minute video (slug-keyed via area-media.json) -->
+  {media.video && (
+    <section class="section dark-section">
+      <div class="container-narrow text-center">
+        <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">{media.video.eyebrow}</p>
+        <h2 class="accent-underline-center mb-6">{media.video.title}</h2>
+        <div class="mx-auto rounded-xl overflow-hidden border border-white/10" style="max-width:760px;">
+          <video
+            src={media.video.src}
+            poster={media.video.poster}
+            controls
+            muted
+            autoplay
+            loop
+            playsinline
+            preload="metadata"
+            class="block w-full h-auto"
+            style="aspect-ratio:16/9; background:#0a1f3c;"
+          ></video>
+        </div>
+        {media.video.caption && (
+          <p class="text-white/60 text-sm mt-4 max-w-xl mx-auto">{media.video.caption}</p>
+        )}
+      </div>
+    </section>
+  )}
 
   <!-- Overview + nested area imagery (gallery slug-keyed via area-media.json) -->
   <section class="section light-section">
