@@ -150,23 +150,39 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- Overview -->
+  <!-- Overview + nested area imagery (gallery slug-keyed via area-media.json) -->
   <section class="section light-section">
-    <div class="container-narrow">
-      <h2 class="accent-underline mb-6">About {area.name}</h2>
-      <p class="text-[var(--color-text-muted)] leading-relaxed text-lg mb-8">
-        {media.summary || area.description}
-      </p>
+    <div class={media.gallery && media.gallery.length > 0 ? "container" : "container-narrow"}>
+      <div class={media.gallery && media.gallery.length > 0 ? "grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start" : ""}>
+        <div>
+          <h2 class="accent-underline mb-6">About {area.name}</h2>
+          <p class="text-[var(--color-text-muted)] leading-relaxed text-lg mb-8">
+            {media.summary || area.description}
+          </p>
 
-      {area.highlights && area.highlights.length > 0 && (
-        <div class="flex flex-wrap gap-3">
-          {area.highlights.map((highlight: string) => (
-            <span class="inline-block bg-[var(--color-cbgl-blue)]/10 text-[var(--color-cbgl-blue)] font-accent text-xs uppercase tracking-wider px-4 py-2 rounded-full border border-[var(--color-cbgl-blue)]/20">
-              {highlight}
-            </span>
-          ))}
+          {area.highlights && area.highlights.length > 0 && (
+            <div class="flex flex-wrap gap-3">
+              {area.highlights.map((highlight: string) => (
+                <span class="inline-block bg-[var(--color-cbgl-blue)]/10 text-[var(--color-cbgl-blue)] font-accent text-xs uppercase tracking-wider px-4 py-2 rounded-full border border-[var(--color-cbgl-blue)]/20">
+                  {highlight}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
-      )}
+
+        {media.gallery && media.gallery.length > 0 && (
+          <div class="grid grid-cols-2 gap-3 lg:gap-4">
+            {media.gallery.map((g: any) => (
+              <figure class="group relative overflow-hidden rounded-lg aspect-[4/3] m-0">
+                <img src={g.src} alt={g.alt} loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <figcaption class="absolute bottom-0 left-0 right-0 p-3 font-accent text-[0.7rem] uppercase tracking-[0.12em] text-white/90">{g.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   </section>
 
@@ -179,22 +195,7 @@ const jsonLd = [
     />
   )}
 
-  <!-- Photo Gallery (slug-keyed via area-media.json) -->
-  {media.gallery && media.gallery.length > 0 && (
-    <section class="section dark-section">
-      <div class="container">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {media.gallery.map((g: any) => (
-            <figure class="group relative overflow-hidden rounded-lg aspect-[16/9] m-0">
-              <img src={g.src} alt={g.alt} loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
-              <figcaption class="absolute bottom-0 left-0 right-0 p-4 font-accent text-xs uppercase tracking-[0.15em] text-white/90">{g.caption}</figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
+  <!-- Photo gallery is now nested in the Overview section above -->
 
   <!-- Market Stats — legacy placeholder block. Suppressed automatically
        whenever a detailedStats JSON file exists for this area, so the
