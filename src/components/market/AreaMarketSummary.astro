@@ -263,7 +263,7 @@ const soldCompsSchema = hasComps ? {
 
       {hasSold && (
         <div class="mb-10">
-          <h3 class="font-display text-xl text-white mb-4">Recent Sold Activity</h3>
+          <h3 class="font-display text-xl text-white mb-4">Recent Sold Activity {stats.sold?.windowDays ? `(Last ${stats.sold.windowDays} Days)` : ""}</h3>
           <dl class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
               <dt class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Sold Listings</dt>
@@ -293,7 +293,7 @@ const soldCompsSchema = hasComps ? {
 
       {hasComps && (
         <div class="mb-10">
-          <h3 class="font-display text-xl text-white mb-4">Most Recent Sold Comparables</h3>
+          <h3 class="font-display text-xl text-white mb-4">Most Recent Sold Comparables (Last 90 Days)</h3>
           <div class="overflow-hidden rounded-lg border border-[var(--color-border-dark)] bg-[var(--color-black-card)]">
             <table class="w-full text-sm">
               <caption class="sr-only">5 most recent sold listings in {areaName}</caption>

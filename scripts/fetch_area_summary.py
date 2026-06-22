@@ -93,6 +93,13 @@ SELECT
         FILTER (WHERE mls_status = 'Sold' AND days_on_market IS NOT NULL)             AS sold_median_dom,
     AVG(current_price / NULLIF(original_list_price, 0))
         FILTER (WHERE mls_status = 'Sold' AND original_list_price > 0)                AS sale_to_list_ratio,
+    COUNT(*) FILTER (WHERE mls_status = 'Sold' AND close_date >= CURRENT_DATE - INTERVAL '90 days') AS sold90_count,
+    PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY current_price)
+        FILTER (WHERE mls_status = 'Sold' AND current_price IS NOT NULL AND close_date >= CURRENT_DATE - INTERVAL '90 days') AS sold90_median_price,
+    PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY days_on_market)
+        FILTER (WHERE mls_status = 'Sold' AND days_on_market IS NOT NULL AND close_date >= CURRENT_DATE - INTERVAL '90 days') AS sold90_median_dom,
+    AVG(current_price / NULLIF(original_list_price, 0))
+        FILTER (WHERE mls_status = 'Sold' AND original_list_price > 0 AND close_date >= CURRENT_DATE - INTERVAL '90 days') AS sold90_sale_to_list,
     PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY monthly_association_cost)
         FILTER (WHERE monthly_association_cost > 0)                                   AS median_monthly_assoc,
     PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY monthly_condo_fee_amount)
@@ -150,6 +157,7 @@ FROM raw_listings
 WHERE detected_area = %(slug)s
   AND mls_status = 'Sold'
   AND close_date IS NOT NULL
+  AND close_date >= CURRENT_DATE - INTERVAL '90 days'
 ORDER BY close_date DESC, current_price DESC NULLS LAST
 LIMIT 5;
 """
@@ -270,10 +278,11 @@ def compute_summary(slug, conn):
             "newConstructionCount": head["active_new_construction_count"],
         },
         "sold": {
-            "count": head["sold_count"],
-            "medianPrice": fmt_currency(head["sold_median_price"]),
-            "medianDom": fmt_int(head["sold_median_dom"]),
-            "saleToListRatio": fmt_pct(head["sale_to_list_ratio"]),
+            "count": head["sold90_count"],
+            "medianPrice": fmt_currency(head["sold90_median_price"]),
+            "medianDom": fmt_int(head["sold90_median_dom"]),
+            "saleToListRatio": fmt_pct(head["sold90_sale_to_list"]),
+            "windowDays": 90,
         },
         "fees": {
             "medianMonthlyAssociation": fmt_currency(head["median_monthly_assoc"]),
