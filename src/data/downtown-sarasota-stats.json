@@ -2,37 +2,37 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-19T11:00:45.856364+00:00",
+  "lastUpdated": "2026-06-24T11:08:17.047252+00:00",
   "counts": {
-    "sold": 262,
-    "pending": 90,
-    "active": 274,
-    "total": 352
+    "sold": 266,
+    "pending": 89,
+    "active": 272,
+    "total": 355
   },
   "metrics": {
-    "avgPrice": "$1,795,274",
-    "avgPricePerSqFt": "$790",
+    "avgPrice": "$1,794,570",
+    "avgPricePerSqFt": "$787",
     "avgYearBuilt": 2002,
-    "avgLivingSqFt": "1,976",
+    "avgLivingSqFt": "1,985",
     "avgLotSqFt": null,
-    "avgDom": 103
+    "avgDom": 104
   },
   "range": {
     "minPrice": "$198,000",
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 274,
-    "medianPrice": "$1,496,500",
-    "medianPricePerSqFt": "$859",
-    "waterfrontCount": 71,
-    "newConstructionCount": 106
+    "count": 272,
+    "medianPrice": "$1,498,500",
+    "medianPricePerSqFt": "$873",
+    "waterfrontCount": 72,
+    "newConstructionCount": 107
   },
   "sold": {
-    "count": 78,
-    "medianPrice": "$1,122,500",
-    "medianDom": 92,
-    "saleToListRatio": "86.9%",
+    "count": 80,
+    "medianPrice": "$1,155,000",
+    "medianDom": 88,
+    "saleToListRatio": "87.2%",
     "windowDays": 90
   },
   "fees": {
@@ -40,19 +40,71 @@
     "medianMonthlyCondoFee": "$1,716"
   },
   "priceBands": {
-    "under900k": 78,
-    "band900kTo1_5m": 63,
-    "band1_5mTo3m": 62,
-    "band3mPlus": 71
+    "under900k": 77,
+    "band900kTo1_5m": 62,
+    "band1_5mTo3m": 61,
+    "band3mPlus": 72
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 274
+      "count": 272
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4685306",
+      "address": "800 N TAMIAMI TRL #1217",
+      "subdivision": "ALINARI",
+      "soldPrice": "$1,180,000",
+      "soldDate": "2026-06-22",
+      "bedrooms": 2,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,830",
+      "yearBuilt": 2007,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4680305",
+      "address": "750 N TAMIAMI TRL #307",
+      "subdivision": "RENAISSANCE 1",
+      "soldPrice": "$390,000",
+      "soldDate": "2026-06-22",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "810",
+      "yearBuilt": 2001,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4689921",
+      "address": "850 S TAMIAMI TRL #308",
+      "subdivision": "CENTRAL PARK SEC 2 PH 1",
+      "soldPrice": "$330,000",
+      "soldDate": "2026-06-22",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "876",
+      "yearBuilt": 1997,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4670428",
+      "address": "1255 N GULFSTREAM AVE #408",
+      "subdivision": "BAY PLAZA",
+      "soldPrice": "$1,225,000",
+      "soldDate": "2026-06-18",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,055",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4690797",
       "address": "101 S GULFSTREAM AVE ## 4A",
@@ -65,58 +117,6 @@
       "yearBuilt": 1974,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4660379",
-      "address": "301 QUAY COMMONS #1008",
-      "subdivision": "BAYSO SARASOTA",
-      "soldPrice": "$1,140,000",
-      "soldDate": "2026-06-15",
-      "bedrooms": 2,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,606",
-      "yearBuilt": 2023,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4687444",
-      "address": "850 S TAMIAMI TRL #831",
-      "subdivision": "CENTRAL PARK SEC 2 PH 1",
-      "soldPrice": "$310,801",
-      "soldDate": "2026-06-15",
-      "bedrooms": 2,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,224",
-      "yearBuilt": 1998,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4679957",
-      "address": "850 S TAMIAMI TRL #704",
-      "subdivision": "CENTRAL PARK SEC 2 PH 1",
-      "soldPrice": "$245,000",
-      "soldDate": "2026-06-12",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "980",
-      "yearBuilt": 1998,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4688715",
-      "address": "111 S PINEAPPLE AVE #1021",
-      "subdivision": "MARK SARASOTA CONDO",
-      "soldPrice": "$1,250,000",
-      "soldDate": "2026-06-10",
-      "bedrooms": 2,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,575",
-      "yearBuilt": 2019,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -125,40 +125,40 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 60,
-      "avgPrice": "$1,123,682",
-      "avgPricePerSqFt": "$647",
-      "avgLivingSqFt": "1,630",
-      "avgDom": 176
+      "avgPrice": "$1,107,848",
+      "avgPricePerSqFt": "$643",
+      "avgLivingSqFt": "1,614",
+      "avgDom": 178
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 39,
-      "avgPrice": "$1,770,597",
+      "activeCount": 38,
+      "avgPrice": "$1,741,139",
       "avgPricePerSqFt": "$722",
-      "avgLivingSqFt": "2,195",
-      "avgDom": 150
+      "avgLivingSqFt": "2,144",
+      "avgDom": 147
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 62,
-      "avgPrice": "$1,523,271",
-      "avgPricePerSqFt": "$747",
-      "avgLivingSqFt": "1,849",
-      "avgDom": 138
+      "activeCount": 61,
+      "avgPrice": "$1,535,144",
+      "avgPricePerSqFt": "$753",
+      "avgLivingSqFt": "1,841",
+      "avgDom": 144
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 104,
-      "avgPrice": "$3,787,990",
-      "avgPricePerSqFt": "$1,320",
-      "avgLivingSqFt": "2,687",
-      "avgDom": 174
+      "activeCount": 105,
+      "avgPrice": "$3,818,371",
+      "avgPricePerSqFt": "$1,327",
+      "avgLivingSqFt": "2,695",
+      "avgDom": 177
     }
   ],
   "condoTiersScope": {
