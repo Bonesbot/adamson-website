@@ -2,57 +2,109 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-19T11:00:38.158297+00:00",
+  "lastUpdated": "2026-06-24T11:08:16.422908+00:00",
   "counts": {
-    "sold": 506,
-    "pending": 60,
-    "active": 438,
-    "total": 566
+    "sold": 511,
+    "pending": 62,
+    "active": 440,
+    "total": 573
   },
   "metrics": {
-    "avgPrice": "$1,388,011",
-    "avgPricePerSqFt": "$677",
+    "avgPrice": "$1,379,704",
+    "avgPricePerSqFt": "$675",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,890",
+    "avgLivingSqFt": "1,885",
     "avgLotSqFt": null,
-    "avgDom": 107
+    "avgDom": 108
   },
   "range": {
     "minPrice": "$290,000",
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 438,
-    "medianPrice": "$1,195,000",
-    "medianPricePerSqFt": "$772",
-    "waterfrontCount": 248,
-    "newConstructionCount": 66
+    "count": 440,
+    "medianPrice": "$1,199,000",
+    "medianPricePerSqFt": "$780",
+    "waterfrontCount": 252,
+    "newConstructionCount": 67
   },
   "sold": {
-    "count": 153,
-    "medianPrice": "$960,000",
-    "medianDom": 64,
-    "saleToListRatio": "88.1%",
+    "count": 150,
+    "medianPrice": "$936,500",
+    "medianDom": 66,
+    "saleToListRatio": "88.4%",
     "windowDays": 90
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,132",
+    "medianMonthlyAssociation": "$1,133",
     "medianMonthlyCondoFee": "$1,261"
   },
   "priceBands": {
-    "under900k": 178,
+    "under900k": 177,
     "band900kTo1_5m": 80,
     "band1_5mTo3m": 81,
-    "band3mPlus": 99
+    "band3mPlus": 102
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 438
+      "count": 440
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4628207",
+      "address": "467 CANAL RD #467",
+      "subdivision": "GRAND SIESTA 1",
+      "soldPrice": "$2,200,000",
+      "soldDate": "2026-06-22",
+      "bedrooms": 4,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,228",
+      "yearBuilt": 2005,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4681028",
+      "address": "6415 MIDNIGHT PASS RD #904",
+      "subdivision": "ANCHORAGE",
+      "soldPrice": "$900,000",
+      "soldDate": "2026-06-19",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,290",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4686403",
+      "address": "1700 COVE II PL #324",
+      "subdivision": "MIDNIGHT COVE II",
+      "soldPrice": "$801,000",
+      "soldDate": "2026-06-18",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,720",
+      "yearBuilt": 1979,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4677414",
+      "address": "5855 MIDNIGHT PASS RD #327",
+      "subdivision": "HARBOR TOWERS Y & R",
+      "soldPrice": "$652,000",
+      "soldDate": "2026-06-18",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,165",
+      "yearBuilt": 1976,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4689084",
       "address": "413 ISLAND CIR",
@@ -65,58 +117,6 @@
       "yearBuilt": 2026,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4684397",
-      "address": "4939 COMMONWEALTH DR",
-      "subdivision": "SIESTA BEACH",
-      "soldPrice": "$1,350,000",
-      "soldDate": "2026-06-17",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,090",
-      "yearBuilt": 1982,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4684958",
-      "address": "1050 W PEPPERTREE LN #116B",
-      "subdivision": "PEPPERTREE BAY IV",
-      "soldPrice": "$630,000",
-      "soldDate": "2026-06-16",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,083",
-      "yearBuilt": 1974,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4689210",
-      "address": "5830 MIDNIGHT PASS RD #T22",
-      "subdivision": "JAMAICA ROYALE ELEV APTS",
-      "soldPrice": "$960,000",
-      "soldDate": "2026-06-15",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,194",
-      "yearBuilt": 1967,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4677365",
-      "address": "5855 MIDNIGHT PASS RD #408",
-      "subdivision": "HARBOR TOWERS Y & R",
-      "soldPrice": "$585,000",
-      "soldDate": "2026-06-15",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,056",
-      "yearBuilt": 1976,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -124,11 +124,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 243,
-      "avgPrice": "$828,079",
-      "avgPricePerSqFt": "$686",
-      "avgLivingSqFt": "1,204",
-      "avgDom": 153
+      "activeCount": 242,
+      "avgPrice": "$828,448",
+      "avgPricePerSqFt": "$688",
+      "avgLivingSqFt": "1,201",
+      "avgDom": 155
     },
     {
       "tier": "1990to2005",
@@ -138,27 +138,27 @@
       "avgPrice": "$1,382,862",
       "avgPricePerSqFt": "$692",
       "avgLivingSqFt": "2,068",
-      "avgDom": 231
+      "avgDom": 234
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 9,
-      "avgPrice": "$2,489,222",
-      "avgPricePerSqFt": "$1,224",
-      "avgLivingSqFt": "1,920",
-      "avgDom": 275
+      "activeCount": 10,
+      "avgPrice": "$2,534,890",
+      "avgPricePerSqFt": "$1,213",
+      "avgLivingSqFt": "1,990",
+      "avgDom": 252
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 8,
-      "avgPrice": "$4,878,125",
-      "avgPricePerSqFt": "$1,684",
+      "avgPrice": "$4,865,625",
+      "avgPricePerSqFt": "$1,677",
       "avgLivingSqFt": "3,032",
-      "avgDom": 362
+      "avgDom": 366
     }
   ],
   "condoTiersScope": {
