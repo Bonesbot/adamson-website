@@ -2,16 +2,16 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-24T11:08:17.047252+00:00",
+  "lastUpdated": "2026-06-25T11:04:29.209112+00:00",
   "counts": {
-    "sold": 266,
-    "pending": 89,
+    "sold": 268,
+    "pending": 88,
     "active": 272,
-    "total": 355
+    "total": 356
   },
   "metrics": {
-    "avgPrice": "$1,794,570",
-    "avgPricePerSqFt": "$787",
+    "avgPrice": "$1,796,249",
+    "avgPricePerSqFt": "$788",
     "avgYearBuilt": 2002,
     "avgLivingSqFt": "1,985",
     "avgLotSqFt": null,
@@ -29,15 +29,15 @@
     "newConstructionCount": 107
   },
   "sold": {
-    "count": 80,
-    "medianPrice": "$1,155,000",
-    "medianDom": 88,
-    "saleToListRatio": "87.2%",
+    "count": 81,
+    "medianPrice": "$1,170,000",
+    "medianDom": 86,
+    "saleToListRatio": "87.4%",
     "windowDays": 90
   },
   "fees": {
     "medianMonthlyAssociation": "$1,633",
-    "medianMonthlyCondoFee": "$1,716"
+    "medianMonthlyCondoFee": "$1,733"
   },
   "priceBands": {
     "under900k": 77,
@@ -53,6 +53,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4677296",
+      "address": "1064 N TAMIAMI TRL #1212",
+      "subdivision": "BROADWAY PROMENADE",
+      "soldPrice": "$340,000",
+      "soldDate": "2026-06-24",
+      "bedrooms": 1,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,137",
+      "yearBuilt": 2007,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "J1002441",
+      "address": "325 GOLDEN GATE PT #502",
+      "subdivision": "THE OWEN GOLDEN GATE POINT",
+      "soldPrice": "$2,420,000",
+      "soldDate": "2026-06-23",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,263",
+      "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4685306",
       "address": "800 N TAMIAMI TRL #1217",
@@ -91,32 +117,6 @@
       "yearBuilt": 1997,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4670428",
-      "address": "1255 N GULFSTREAM AVE #408",
-      "subdivision": "BAY PLAZA",
-      "soldPrice": "$1,225,000",
-      "soldDate": "2026-06-18",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,055",
-      "yearBuilt": 1982,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4690797",
-      "address": "101 S GULFSTREAM AVE ## 4A",
-      "subdivision": "DOLPHIN TOWER",
-      "soldPrice": "$450,000",
-      "soldDate": "2026-06-16",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,200",
-      "yearBuilt": 1974,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -125,10 +125,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 60,
-      "avgPrice": "$1,107,848",
+      "avgPrice": "$1,107,415",
       "avgPricePerSqFt": "$643",
       "avgLivingSqFt": "1,614",
-      "avgDom": 178
+      "avgDom": 179
     },
     {
       "tier": "1990to2005",
@@ -138,7 +138,7 @@
       "avgPrice": "$1,741,139",
       "avgPricePerSqFt": "$722",
       "avgLivingSqFt": "2,144",
-      "avgDom": 147
+      "avgDom": 148
     },
     {
       "tier": "2006to2019",
@@ -155,10 +155,10 @@
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 105,
-      "avgPrice": "$3,818,371",
-      "avgPricePerSqFt": "$1,327",
+      "avgPrice": "$3,808,848",
+      "avgPricePerSqFt": "$1,325",
       "avgLivingSqFt": "2,695",
-      "avgDom": 177
+      "avgDom": 178
     }
   ],
   "condoTiersScope": {
