@@ -2,36 +2,36 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-24T11:08:15.173978+00:00",
+  "lastUpdated": "2026-06-25T11:04:27.149927+00:00",
   "counts": {
-    "sold": 533,
-    "pending": 67,
-    "active": 367,
-    "total": 600
+    "sold": 535,
+    "pending": 66,
+    "active": 366,
+    "total": 601
   },
   "metrics": {
-    "avgPrice": "$1,825,177",
-    "avgPricePerSqFt": "$725",
+    "avgPrice": "$1,824,723",
+    "avgPricePerSqFt": "$724",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,175",
+    "avgLivingSqFt": "2,177",
     "avgLotSqFt": null,
-    "avgDom": 97
+    "avgDom": 98
   },
   "range": {
     "minPrice": "$165,000",
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 367,
+    "count": 366,
     "medianPrice": "$1,050,000",
-    "medianPricePerSqFt": "$684",
-    "waterfrontCount": 280,
+    "medianPricePerSqFt": "$683",
+    "waterfrontCount": 279,
     "newConstructionCount": 29
   },
   "sold": {
-    "count": 172,
-    "medianPrice": "$1,100,000",
-    "medianDom": 77,
+    "count": 170,
+    "medianPrice": "$1,107,500",
+    "medianDom": 76,
     "saleToListRatio": "86.8%",
     "windowDays": 90
   },
@@ -40,19 +40,45 @@
     "medianMonthlyCondoFee": "$1,689"
   },
   "priceBands": {
-    "under900k": 144,
-    "band900kTo1_5m": 85,
-    "band1_5mTo3m": 77,
+    "under900k": 145,
+    "band900kTo1_5m": 84,
+    "band1_5mTo3m": 76,
     "band3mPlus": 61
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 367
+      "count": 366
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4693248",
+      "address": "2410 HARBOURSIDE DR #131",
+      "subdivision": "MARINA BAY",
+      "soldPrice": "$1,700,000",
+      "soldDate": "2026-06-24",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,825",
+      "yearBuilt": 1993,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4661988",
+      "address": "5005 GULF OF MEXICO DR #5",
+      "subdivision": "BONAIRE AT LONGBOAT KEY",
+      "soldPrice": "$3,500,000",
+      "soldDate": "2026-06-23",
+      "bedrooms": 4,
+      "bathrooms": 4.5,
+      "livingSqFt": "4,044",
+      "yearBuilt": 2018,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "O6380712",
       "address": "580 RUSSELL ST",
@@ -91,32 +117,6 @@
       "yearBuilt": 2026,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4669347",
-      "address": "3040 GRAND BAY BLVD #283",
-      "subdivision": "GRAND BAY 2",
-      "soldPrice": "$1,650,000",
-      "soldDate": "2026-06-22",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,550",
-      "yearBuilt": 1996,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4688219",
-      "address": "2341 HARBOUR OAKS DR",
-      "subdivision": "HARBOUR OAKS 2",
-      "soldPrice": "$1,410,000",
-      "soldDate": "2026-06-22",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,282",
-      "yearBuilt": 1986,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -124,9 +124,9 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 205,
-      "avgPrice": "$877,636",
-      "avgPricePerSqFt": "$653",
+      "activeCount": 206,
+      "avgPrice": "$876,263",
+      "avgPricePerSqFt": "$652",
       "avgLivingSqFt": "1,346",
       "avgDom": 152
     },
@@ -134,11 +134,11 @@
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 48,
-      "avgPrice": "$2,514,781",
-      "avgPricePerSqFt": "$896",
-      "avgLivingSqFt": "2,611",
-      "avgDom": 160
+      "activeCount": 46,
+      "avgPrice": "$2,562,272",
+      "avgPricePerSqFt": "$908",
+      "avgLivingSqFt": "2,625",
+      "avgDom": 165
     },
     {
       "tier": "2006to2019",
@@ -148,7 +148,7 @@
       "avgPrice": "$5,464,667",
       "avgPricePerSqFt": "$1,523",
       "avgLivingSqFt": "3,595",
-      "avgDom": 216
+      "avgDom": 217
     },
     {
       "tier": "2020plus",
@@ -158,7 +158,7 @@
       "avgPrice": "$7,129,800",
       "avgPricePerSqFt": "$2,147",
       "avgLivingSqFt": "2,988",
-      "avgDom": 350
+      "avgDom": 351
     }
   ],
   "condoTiersScope": {
