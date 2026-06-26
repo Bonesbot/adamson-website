@@ -2,57 +2,83 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-25T11:04:29.209112+00:00",
+  "lastUpdated": "2026-06-26T10:55:49.327547+00:00",
   "counts": {
-    "sold": 268,
+    "sold": 270,
     "pending": 88,
-    "active": 272,
-    "total": 356
+    "active": 274,
+    "total": 358
   },
   "metrics": {
-    "avgPrice": "$1,796,249",
-    "avgPricePerSqFt": "$788",
+    "avgPrice": "$1,803,725",
+    "avgPricePerSqFt": "$789",
     "avgYearBuilt": 2002,
-    "avgLivingSqFt": "1,985",
+    "avgLivingSqFt": "1,989",
     "avgLotSqFt": null,
-    "avgDom": 104
+    "avgDom": 103
   },
   "range": {
     "minPrice": "$198,000",
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 272,
-    "medianPrice": "$1,498,500",
-    "medianPricePerSqFt": "$873",
-    "waterfrontCount": 72,
-    "newConstructionCount": 107
+    "count": 274,
+    "medianPrice": "$1,499,250",
+    "medianPricePerSqFt": "$881",
+    "waterfrontCount": 75,
+    "newConstructionCount": 110
   },
   "sold": {
-    "count": 81,
-    "medianPrice": "$1,170,000",
+    "count": 80,
+    "medianPrice": "$1,175,000",
     "medianDom": 86,
-    "saleToListRatio": "87.4%",
+    "saleToListRatio": "87.5%",
     "windowDays": 90
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,633",
-    "medianMonthlyCondoFee": "$1,733"
+    "medianMonthlyAssociation": "$1,644",
+    "medianMonthlyCondoFee": "$1,738"
   },
   "priceBands": {
-    "under900k": 77,
+    "under900k": 76,
     "band900kTo1_5m": 62,
-    "band1_5mTo3m": 61,
-    "band3mPlus": 72
+    "band1_5mTo3m": 62,
+    "band3mPlus": 74
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 272
+      "count": 274
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4657928",
+      "address": "301 QUAY COMMONS #1703",
+      "subdivision": "BAYSO SARASOTA CONDOMINIUM",
+      "soldPrice": "$1,600,000",
+      "soldDate": "2026-06-25",
+      "bedrooms": 2,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,828",
+      "yearBuilt": 2023,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4673354",
+      "address": "1350 5TH ST #306",
+      "subdivision": "RISDON ON 5TH",
+      "soldPrice": "$960,000",
+      "soldDate": "2026-06-25",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "1,836",
+      "yearBuilt": 2019,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4677296",
       "address": "1064 N TAMIAMI TRL #1212",
@@ -91,32 +117,6 @@
       "yearBuilt": 2007,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4680305",
-      "address": "750 N TAMIAMI TRL #307",
-      "subdivision": "RENAISSANCE 1",
-      "soldPrice": "$390,000",
-      "soldDate": "2026-06-22",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "810",
-      "yearBuilt": 2001,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4689921",
-      "address": "850 S TAMIAMI TRL #308",
-      "subdivision": "CENTRAL PARK SEC 2 PH 1",
-      "soldPrice": "$330,000",
-      "soldDate": "2026-06-22",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "876",
-      "yearBuilt": 1997,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -125,40 +125,40 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 60,
-      "avgPrice": "$1,107,415",
-      "avgPricePerSqFt": "$643",
+      "avgPrice": "$1,106,915",
+      "avgPricePerSqFt": "$642",
       "avgLivingSqFt": "1,614",
-      "avgDom": 179
+      "avgDom": 180
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 38,
-      "avgPrice": "$1,741,139",
-      "avgPricePerSqFt": "$722",
-      "avgLivingSqFt": "2,144",
-      "avgDom": 148
+      "activeCount": 37,
+      "avgPrice": "$1,765,630",
+      "avgPricePerSqFt": "$725",
+      "avgLivingSqFt": "2,171",
+      "avgDom": 150
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
       "activeCount": 61,
-      "avgPrice": "$1,535,144",
-      "avgPricePerSqFt": "$753",
+      "avgPrice": "$1,534,259",
+      "avgPricePerSqFt": "$752",
       "avgLivingSqFt": "1,841",
-      "avgDom": 144
+      "avgDom": 145
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 105,
-      "avgPrice": "$3,808,848",
-      "avgPricePerSqFt": "$1,325",
-      "avgLivingSqFt": "2,695",
-      "avgDom": 178
+      "activeCount": 108,
+      "avgPrice": "$3,850,148",
+      "avgPricePerSqFt": "$1,326",
+      "avgLivingSqFt": "2,729",
+      "avgDom": 174
     }
   ],
   "condoTiersScope": {
