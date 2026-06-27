@@ -1,5 +1,9 @@
 ---
-import pins from '../data/srqmap-pins.json';
+import allPins from '../data/srqmap-pins.json';
+
+// Categories currently shown on the map (others temporarily hidden — restore by adding ids back)
+const VISIBLE_GROUPS = ['things', 'dining'];
+const pins = allPins.filter((p) => VISIBLE_GROUPS.includes(p.group));
 
 const ICONS = {
   things: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
@@ -14,7 +18,7 @@ const GROUPS = [
   { id: 'condos', label: 'Condos & Residences', color: '#2E86AB', svg: ICONS.condos },
   { id: 'newdev', label: 'New Developments',    color: '#7D5BA6', svg: ICONS.newdev },
   { id: 'areas',  label: 'Communities & Areas', color: '#C2913B', svg: ICONS.areas  },
-];
+].filter((g) => VISIBLE_GROUPS.includes(g.id));
 const groupMap = Object.fromEntries(GROUPS.map((g) => [g.id, g]));
 
 const phone = '(941) 713-9234';
@@ -157,6 +161,7 @@ const itemList = {
 
   @media (max-width:720px){
     :root{--bar-h:56px}
+    .leaflet-control.locate-ctl{position:fixed;top:calc(var(--bar-h) + 12px);right:12px;bottom:auto;left:auto;margin:0;z-index:1000}
     .brand .tag{display:none}
     .call{padding:9px 13px;font-size:13px}
     .rail{left:0;right:0;width:auto;top:auto;bottom:0;border-radius:18px 18px 0 0;max-height:74vh;transition:transform .28s ease}
