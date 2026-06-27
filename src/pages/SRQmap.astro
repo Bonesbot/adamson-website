@@ -140,6 +140,20 @@ const itemList = {
   .pin-marker .body svg{transform:rotate(-45deg);width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2}
   .pin-marker:hover{transform:translateY(-3px) scale(1.05)}
   .pin-marker.active{transform:translateY(-4px) scale(1.14);z-index:5}
+  /* Locate-me control */
+  .leaflet-control.locate-ctl{margin-bottom:10px;border:none;background:transparent;box-shadow:none}
+  .locate-btn{width:36px;height:36px;display:grid;place-items:center;background:#fff;border:1px solid rgba(11,58,91,.12);border-radius:8px;cursor:pointer;color:var(--navy);padding:0;box-shadow:0 1px 5px rgba(10,42,64,.35)}
+  .locate-btn:hover{background:var(--cream)}
+  .locate-btn:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+  .locate-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .locate-btn.locating{color:var(--blue)}
+  .locate-btn.locating svg{animation:locspin 1s linear infinite}
+  .locate-btn.active{color:#fff;background:var(--blue);border-color:var(--blue)}
+  @keyframes locspin{to{transform:rotate(360deg)}}
+  .you-dot{position:relative;width:18px;height:18px}
+  .you-dot .core{position:absolute;left:4px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--blue);border:2px solid #fff;box-shadow:0 0 0 1px rgba(10,42,64,.35)}
+  .you-dot .ring{position:absolute;left:-3px;top:-3px;width:24px;height:24px;border-radius:50%;background:rgba(46,134,171,.35);animation:youpulse 2s ease-out infinite}
+  @keyframes youpulse{0%{transform:scale(.4);opacity:.85}100%{transform:scale(1.7);opacity:0}}
 
   @media (max-width:720px){
     :root{--bar-h:56px}
@@ -231,6 +245,48 @@ const itemList = {
     attribution:'&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
   }).addTo(map);
   L.control.zoom({position:'bottomright'}).addTo(map);
+  // ---- Locate me (browser geolocation) ----
+  var userLatLng = null, youMarker = null, youCircle = null, locateBtn = null;
+  var LocateControl = L.Control.extend({
+    options:{position:'bottomright'},
+    onAdd:function(){
+      var wrap = L.DomUtil.create('div','leaflet-bar leaflet-control locate-ctl');
+      var b = L.DomUtil.create('button','locate-btn', wrap);
+      b.type='button'; b.title='Show my location'; b.setAttribute('aria-label','Show my location');
+      b.innerHTML='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></svg>';
+      L.DomEvent.disableClickPropagation(wrap);
+      L.DomEvent.on(b,'click', function(e){ L.DomEvent.stop(e); locateMe(); });
+      locateBtn = b;
+      return wrap;
+    }
+  });
+  map.addControl(new LocateControl());
+
+  function locateMe(){
+    if(!('geolocation' in navigator)){ alert('Location isn\u2019t supported by this browser.'); return; }
+    if(locateBtn){ locateBtn.classList.remove('active'); locateBtn.classList.add('locating'); }
+    map.locate({setView:true, enableHighAccuracy:true, maxZoom:15, timeout:10000});
+  }
+  map.on('locationfound', function(e){
+    userLatLng = e.latlng;
+    if(locateBtn){ locateBtn.classList.remove('locating'); locateBtn.classList.add('active'); }
+    var html='<div class="you-dot"><div class="ring"></div><div class="core"></div></div>';
+    var icon=L.divIcon({html:html, className:'', iconSize:[18,18], iconAnchor:[9,9]});
+    if(youMarker){ youMarker.setLatLng(e.latlng); } else { youMarker=L.marker(e.latlng,{icon:icon, interactive:false, keyboard:false, zIndexOffset:1000}).addTo(map); }
+    var r = Math.min(Math.max(e.accuracy||0, 20), 1200);
+    if(youCircle){ youCircle.setLatLng(e.latlng).setRadius(r); } else { youCircle=L.circle(e.latlng,{radius:r, color:'#2E86AB', weight:1, fillColor:'#2E86AB', fillOpacity:.10, interactive:false}).addTo(map); }
+    if(selectedId!=null){ var p=PLACES[selectedId]; if(p) showDetail(p); }
+  });
+  map.on('locationerror', function(){
+    if(locateBtn){ locateBtn.classList.remove('locating'); }
+    alert('Couldn\u2019t get your location. Please allow location access for this site in your browser, then tap the locate button again.');
+  });
+
+  function directionsUrl(p){
+    var dest = p.address ? encodeURIComponent(p.address) : (p.lat+','+p.lng);
+    var origin = userLatLng ? ('&origin='+userLatLng.lat+','+userLatLng.lng) : '';
+    return 'https://www.google.com/maps/dir/?api=1'+origin+'&destination='+dest+'&travelmode=driving';
+  }
 
   var bounds = L.latLngBounds(PLACES.map(function(p){ return [p.lat,p.lng]; }));
   function fit(){ map.invalidateSize(); if(bounds.isValid()) map.fitBounds(bounds, {padding:[40,40], maxZoom:14}); }
@@ -305,12 +361,13 @@ const itemList = {
     var blurbHtml = p.blurb ? '<p class="blurb">'+esc(p.blurb)+'</p>' : '';
     var tipHtml = p.tip ? '<div class="tip"><p class="tip-h">Ryan’s take</p><p>'+esc(p.tip)+'</p></div>' : '';
     var siteHtml = p.website ? '<a class="detail-link" href="'+esc(p.website)+'" target="_blank" rel="noopener">Visit website</a>' : '';
+    var dirHtml = '<a class="detail-link" href="'+directionsUrl(p)+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>'+(userLatLng?'Directions from my location':'Get directions')+'</a>';
     detailBody.innerHTML =
       '<div class="kicker"><span class="pin"></span>'+esc(g.label)+'</div>'+
       '<h2>'+esc(p.name)+'</h2>'+
       (p.address?'<p class="addr">'+esc(p.address)+'</p>':'')+
       factsHtml + blurbHtml + tipHtml +
-      '<div class="links"><a class="detail-cta" href="tel:'+TEL+'">Ask Ryan about this</a>'+siteHtml+'</div>'+
+      '<div class="links"><a class="detail-cta" href="tel:'+TEL+'">Ask Ryan about this</a>'+dirHtml+siteHtml+'</div>'+
       '<p class="signoff">Ryan Adamson, PA · AdamsonFL.com</p>';
     listView.style.display='none';
     detailView.classList.add('show');
