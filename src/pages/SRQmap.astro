@@ -62,7 +62,7 @@ const itemList = {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <script type="application/ld+json" set:html={JSON.stringify(itemList)} />
-<style>
+<style is:global>
   :root{
     --navy:#0B3A5B; --ink:#0A2A40; --blue:#2E86AB; --blue-deep:#1C6489;
     --gold:#C2913B; --sand:#EDE3D1; --cream:#FBF8F2; --paper:#FFFFFF;
@@ -233,8 +233,10 @@ const itemList = {
   L.control.zoom({position:'bottomright'}).addTo(map);
 
   var bounds = L.latLngBounds(PLACES.map(function(p){ return [p.lat,p.lng]; }));
-  map.fitBounds(bounds, {padding:[40,40]});
-  setTimeout(function(){ map.invalidateSize(); }, 200);
+  function fit(){ map.invalidateSize(); if(bounds.isValid()) map.fitBounds(bounds, {padding:[40,40], maxZoom:14}); }
+  fit();
+  setTimeout(fit, 300);
+  window.addEventListener('load', fit);
 
   function buildMarkers(){
     PLACES.forEach(function(p){
