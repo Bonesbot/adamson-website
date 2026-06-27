@@ -4,28 +4,36 @@
  *
  * Embeds the Mapme viewer at viewer.mapme.com/srqmap (the SRQmap.com map).
  *
- * Mobile UX note: Mapme's own detail panel has only a subtle "< All places"
- * text link to dismiss it. On small screens the panel covers the full
- * viewport. This page adds a prominent floating "← Back to Map" button
- * that resets the iframe to the base map view.
+ * Features
+ * ────────
+ * 1. Mobile "← Back to Map" button — cross-origin safe iframe reset.
+ * 2. "📍 Locate Me" — Geolocation API; passes user coords to Mapme via
+ *    URL-parameter reload (viewer.mapme.com/srqmap?lat=X&lng=Y) and
+ *    postMessage fallback.
+ * 3. "🧭 Directions" — appears when a pin detail panel is open; opens
+ *    Google Maps (Android/desktop) or Apple Maps (iOS) with turn-by-turn
+ *    from the user's current position to the selected place.
  *
- * Button strategy (cross-origin safe):
- *  1. Always visible on mobile (opacity dimmed at rest, full when active).
- *  2. Brightens after first iframe interaction (window blur → iframe focus).
- *  3. On tap: reassigns iframe.src to the base URL, which closes the panel.
- *  4. Also listens for postMessage events from Mapme in case they expose
- *     place-open / place-close signals (future-proof).
+ * Cross-origin strategy
+ * ─────────────────────
+ * Mapme is a third-party iframe (viewer.mapme.com ≠ adamsonfl.com), so
+ * the parent page cannot access the iframe DOM. All interaction uses:
+ *   • iframe.src reassignment (reload with new URL params)
+ *   • window.postMessage / window.addEventListener('message') for
+ *     bidirectional hints
+ *   • window.blur / document.activeElement to detect iframe focus
+ *   • navigator.geolocation for user position
  *
  * AEO note: AI crawlers cannot read iframe content. All Place / POI data
- * that lives inside the Mapme map MUST also be represented as plain HTML
- * + JSON-LD on parent Astro pages (/areas/* etc.) per the AEO spec.
+ * inside the Mapme map MUST also exist as plain HTML + JSON-LD on parent
+ * Astro pages (/areas/* etc.) per the AEO spec.
  */
 
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 const title = 'Explore the SRQ Area';
 const description =
-  'Interactive map of Sarasota\'s barrier islands, neighbourhoods, beaches, and landmarks. Tap any pin to learn more about a location — then connect with Ryan Adamson to find your place in paradise.';
+  'Interactive map of Sarasota\'s barrier islands, neighbourhoods, beaches, and landmarks. Tap any pin to learn more — then get turn-by-turn directions from your current location.';
 
 const jsonLd = {
   '@type': 'WebPage',
@@ -43,7 +51,8 @@ const jsonLd = {
       <p class="srq-section-label">Explore</p>
       <h1 class="srq-heading">Explore Our Area</h1>
       <p class="srq-subhead">
-        Tap any pin to discover Sarasota's beaches, neighbourhoods, and landmarks.
+        Tap any pin to discover beaches, neighbourhoods, and landmarks.
+        Allow location to find places near you — then get directions in one tap.
         <a href="/areas" class="srq-areas-link">Browse area guides →</a>
       </p>
     </div>
@@ -63,21 +72,60 @@ const jsonLd = {
         loading="lazy"
       ></iframe>
 
+      <!-- ── Overlay button bar ──────────────────────────────────────── -->
       <!--
-        ── Mobile close / back button ────────────────────────────────────
-        Cross-origin iframes prevent DOM access, so we can't reach inside
-        Mapme's panel. Instead we overlay a button here in the parent page.
-        On tap it resets iframe.src → closes the Mapme detail panel.
+        All buttons live in this overlay so they stack neatly on mobile.
+        .srq-btn-bar is position:absolute over the iframe.
+
+        Left cluster  — Back to Map (dismiss detail panel)
+        Right cluster — Locate Me | Directions (contextual)
       -->
-      <button
-        id="srqBackBtn"
-        class="srq-back-btn"
-        type="button"
-        aria-label="Close detail panel and return to map"
-      >
-        <span class="srq-back-arrow" aria-hidden="true">←</span>
-        Back to Map
-      </button>
+      <div class="srq-btn-bar" id="srqBtnBar" aria-label="Map controls">
+
+        <!-- Back / close button (left) -->
+        <button
+          id="srqBackBtn"
+          class="srq-btn srq-btn--back"
+          type="button"
+          aria-label="Close detail panel and return to map"
+        >
+          <span aria-hidden="true">←</span>
+          <span class="srq-btn-label">Back to Map</span>
+        </button>
+
+        <!-- Right-side controls -->
+        <div class="srq-btn-group-right">
+
+          <!-- Locate Me -->
+          <button
+            id="srqLocateBtn"
+            class="srq-btn srq-btn--locate"
+            type="button"
+            aria-label="Use my current location"
+            title="Use my current location"
+          >
+            <span class="srq-btn-icon" aria-hidden="true">📍</span>
+            <span class="srq-btn-label">Locate Me</span>
+          </button>
+
+          <!-- Get Directions (only visible when a place detail is open
+               AND we have the user's location) -->
+          <button
+            id="srqDirectionsBtn"
+            class="srq-btn srq-btn--directions srq-hidden"
+            type="button"
+            aria-label="Get directions to this place"
+            title="Get directions to this place"
+          >
+            <span class="srq-btn-icon" aria-hidden="true">🧭</span>
+            <span class="srq-btn-label">Directions</span>
+          </button>
+
+        </div>
+      </div>
+
+      <!-- Location badge (shows "Near Siesta Key" style hint) -->
+      <div id="srqLocBadge" class="srq-loc-badge srq-hidden" role="status" aria-live="polite"></div>
 
     </div>
   </section>
@@ -88,13 +136,12 @@ const jsonLd = {
 <style>
   /* ── Intro ─────────────────────────────────────────────────────── */
   .srq-intro {
-    padding: 6rem 0 1.25rem;          /* clear fixed header (~80 px) + breathing room */
+    padding: 6rem 0 1.25rem;
     background-color: var(--color-black, #000);
   }
   @media (max-width: 640px) {
     .srq-intro { padding: 5.5rem 0 1rem; }
   }
-
   .srq-section-label {
     display: block;
     font-family: var(--font-accent, 'Montserrat', sans-serif);
@@ -105,7 +152,6 @@ const jsonLd = {
     color: var(--color-cbgl-blue-light, #52a8ff);
     margin-bottom: 0.5rem;
   }
-
   .srq-heading {
     font-family: var(--font-display, 'Playfair Display', Georgia, serif);
     font-size: clamp(1.75rem, 4vw, 2.75rem);
@@ -114,11 +160,11 @@ const jsonLd = {
     margin: 0 0 0.6rem;
     line-height: 1.15;
   }
-
   .srq-subhead {
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255,255,255,0.6);
     margin: 0;
+    max-width: 64ch;
   }
   .srq-areas-link {
     color: var(--color-gold, #c5a55a);
@@ -134,11 +180,9 @@ const jsonLd = {
     background: var(--color-black, #000);
     padding: 0 0 2rem;
   }
-
   .srq-map-wrap {
     position: relative;
     width: 100%;
-    /* Fill remaining viewport below intro strip + bottom padding */
     height: calc(100vh - 11rem);
     min-height: 480px;
     max-height: 900px;
@@ -146,23 +190,21 @@ const jsonLd = {
     overflow: hidden;
     margin: 0 auto;
     max-width: 1400px;
-    /* subtle gold glow border */
-    box-shadow: 0 0 0 1px rgba(197, 165, 90, 0.2),
-                0 24px 60px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 1px rgba(197,165,90,0.2),
+                0 24px 60px rgba(0,0,0,0.4);
   }
   @media (max-width: 1024px) {
     .srq-map-wrap { margin: 0 1rem; }
   }
   @media (max-width: 640px) {
-    .srq-map-section { padding: 0 0 1.25rem; }
+    .srq-map-section  { padding: 0 0 1.25rem; }
     .srq-map-wrap {
       margin: 0 0.75rem;
       border-radius: 8px;
-      height: calc(100dvh - 9.5rem);  /* dvh accounts for browser chrome on iOS/Android */
+      height: calc(100dvh - 9.5rem);
       max-height: none;
     }
   }
-
   .srq-iframe {
     display: block;
     width: 100%;
@@ -171,162 +213,382 @@ const jsonLd = {
     background: var(--color-dark, #1a1a1a);
   }
 
-  /* ── Mobile back button ─────────────────────────────────────────── */
-  .srq-back-btn {
-    /* Layout */
+  /* ── Button bar ─────────────────────────────────────────────────── */
+  .srq-btn-bar {
     position: absolute;
     top: 14px;
     left: 14px;
+    right: 14px;
     z-index: 20;
-    display: none;                      /* hidden on desktop */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    pointer-events: none; /* bar itself passes through; children opt-in */
+  }
+  .srq-btn-group-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
-    /* Touch target — minimum 44 × 44 px */
-    min-height: 44px;
-    padding: 0 18px;
+  /* ── Shared button styles ───────────────────────────────────────── */
+  .srq-btn {
+    pointer-events: auto;
+    display: flex;
     align-items: center;
     gap: 6px;
-
-    /* Black / gold luxury theme */
-    background: rgba(0, 0, 0, 0.88);
-    color: var(--color-gold, #c5a55a);
-    border: 1.5px solid var(--color-gold, #c5a55a);
+    min-height: 44px;       /* WCAG 2.5.5 minimum touch target */
+    min-width:  44px;
+    padding: 0 16px;
     border-radius: 999px;
-
-    /* Typography */
     font-family: var(--font-accent, 'Montserrat', sans-serif);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
     white-space: nowrap;
     cursor: pointer;
-
-    /* Entrance animation */
-    opacity: 0;
-    transform: translateY(-6px);
-    transition: opacity 0.25s ease, transform 0.25s ease,
-                background 0.2s, box-shadow 0.2s;
+    border: 1.5px solid var(--color-gold, #c5a55a);
+    background: rgba(0,0,0,0.88);
+    color: var(--color-gold, #c5a55a);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+    transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s, background 0.2s;
+    /* Start dimmed — brighten on interaction */
+    opacity: 0.55;
   }
-
-  .srq-back-arrow {
-    font-size: 1rem;
-    line-height: 1;
-  }
-
-  /* Visible state (added by JS after pin interaction) */
-  .srq-back-btn.srq-visible {
+  .srq-btn:hover,
+  .srq-btn:focus-visible {
+    background: rgba(20,20,20,0.95);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.55),
+                0 0 0 2px rgba(197,165,90,0.4);
     opacity: 1;
-    transform: translateY(0);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
+  }
+  .srq-btn:active { transform: scale(0.95); }
+
+  /* Active/engaged state (user interacted with map or has location) */
+  .srq-btn.srq-active {
+    opacity: 1;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.6),
+                0 0 0 2px rgba(197,165,90,0.35);
   }
 
-  /* On mobile: always render as flex; start semi-transparent as a hint */
-  @media (max-width: 768px) {
-    .srq-back-btn {
-      display: flex;
-      opacity: 0.55;          /* dim at rest — map not yet navigated */
-      transform: translateY(0);
-    }
-    .srq-back-btn.srq-visible {
-      opacity: 1;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6),
-                  0 0 0 2px rgba(197, 165, 90, 0.35);
-    }
-    .srq-back-btn:hover,
-    .srq-back-btn:focus-visible {
-      background: rgba(20, 20, 20, 0.95);
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.7),
-                  0 0 0 2px rgba(197, 165, 90, 0.55);
-    }
-    .srq-back-btn:active {
-      transform: scale(0.96);
-    }
+  /* Locate Me — gold fill when location acquired */
+  .srq-btn--locate.srq-located {
+    background: var(--color-gold, #c5a55a);
+    color: #000;
+    border-color: var(--color-gold, #c5a55a);
+    opacity: 1;
   }
+
+  /* Directions — only shown in JS via srq-hidden removal */
+  .srq-btn--directions {
+    background: rgba(0,0,0,0.92);
+  }
+  .srq-btn--directions.srq-active {
+    background: rgba(10,10,10,0.96);
+  }
+
+  /* Icon sizing */
+  .srq-btn-icon { font-size: 1rem; line-height: 1; }
+
+  /* Hide utility */
+  .srq-hidden { display: none !important; }
+
+  /* On desktop hide Back and label text of icon buttons to save space */
+  @media (min-width: 769px) {
+    /* Back button stays visible on desktop too (for keyboard users) */
+    .srq-btn--back { opacity: 0; pointer-events: none; } /* hidden at rest */
+    .srq-btn--back.srq-active { opacity: 1; pointer-events: auto; }
+    /* Directions: icon-only on desktop to save space */
+    .srq-btn--directions .srq-btn-label { display: none; }
+  }
+
+  /* Mobile — all buttons always visible (dimmed at rest) */
+  @media (max-width: 768px) {
+    .srq-btn { opacity: 0.55; }
+    .srq-btn.srq-active { opacity: 1; }
+    /* Back: always rendered on mobile */
+    .srq-btn--back { opacity: 0.55; }
+  }
+
+  /* ── Location badge ─────────────────────────────────────────────── */
+  .srq-loc-badge {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    background: rgba(0,0,0,0.84);
+    color: rgba(255,255,255,0.9);
+    border: 1px solid rgba(197,165,90,0.35);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-family: var(--font-accent, 'Montserrat', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .srq-loc-badge.srq-show { opacity: 1; }
 </style>
 
 <script is:inline>
-  (function () {
-    var BASE_URL = 'https://viewer.mapme.com/srqmap';
-    var iframe   = document.getElementById('srqMapIframe');
-    var btn      = document.getElementById('srqBackBtn');
+(function () {
+  /* ── Constants ───────────────────────────────────────────────── */
+  var BASE_URL = 'https://viewer.mapme.com/srqmap';
 
-    if (!iframe || !btn) return;
+  /* ── Element refs ────────────────────────────────────────────── */
+  var iframe    = document.getElementById('srqMapIframe');
+  var backBtn   = document.getElementById('srqBackBtn');
+  var locateBtn = document.getElementById('srqLocateBtn');
+  var dirBtn    = document.getElementById('srqDirectionsBtn');
+  var locBadge  = document.getElementById('srqLocBadge');
 
-    /** Make the button fully prominent */
-    function activate() {
-      btn.classList.add('srq-visible');
+  if (!iframe || !backBtn || !locateBtn || !dirBtn || !locBadge) return;
+
+  /* ── State ───────────────────────────────────────────────────── */
+  var userLat = null;
+  var userLng = null;
+  var placeLat = null;     // selected pin coords (from postMessage if available)
+  var placeLng = null;
+  var placeName = null;    // selected pin name
+  var detailOpen = false;  // is a detail panel currently open?
+
+  /* ── Helpers ─────────────────────────────────────────────────── */
+  function setDetailOpen(open) {
+    detailOpen = open;
+    if (open) {
+      backBtn.classList.add('srq-active');
+      if (userLat !== null) dirBtn.classList.remove('srq-hidden');
+      dirBtn.classList.toggle('srq-active', userLat !== null);
+    } else {
+      backBtn.classList.remove('srq-active');
+      dirBtn.classList.add('srq-hidden');
+      dirBtn.classList.remove('srq-active');
+    }
+  }
+
+  function showBadge(msg) {
+    locBadge.textContent = msg;
+    locBadge.classList.remove('srq-hidden');
+    locBadge.classList.add('srq-show');
+    clearTimeout(locBadge._timer);
+    locBadge._timer = setTimeout(function () {
+      locBadge.classList.remove('srq-show');
+    }, 4000);
+  }
+
+  /** Build a Google / Apple Maps directions URL */
+  function buildDirectionsUrl() {
+    var origin = (userLat !== null)
+      ? userLat.toFixed(6) + ',' + userLng.toFixed(6)
+      : null;
+
+    /* Prefer place coords; fall back to place name; fall back to SRQ area */
+    var dest = (placeLat !== null)
+      ? placeLat.toFixed(6) + ',' + placeLng.toFixed(6)
+      : (placeName ? encodeURIComponent(placeName + ', Sarasota FL') : null);
+
+    /* iOS / macOS → Apple Maps */
+    var isApple = /iP(hone|ad|od)|Macintosh/.test(navigator.userAgent) &&
+                  !window.MSStream;
+    if (isApple) {
+      var base = 'maps://maps.apple.com/?dirflg=d';
+      if (origin) base += '&saddr=' + origin;
+      if (dest)   base += '&daddr=' + dest;
+      return base;
     }
 
-    /** Reset iframe to the base map URL (closes any open detail panel) */
-    function resetMap() {
-      iframe.src = BASE_URL;
-      // Slight delay before dimming so the user sees the action completed
-      setTimeout(function () {
-        btn.classList.remove('srq-visible');
-      }, 300);
+    /* Everyone else → Google Maps */
+    var gBase = 'https://www.google.com/maps/dir/?api=1';
+    if (origin) gBase += '&origin=' + origin;
+    if (dest)   gBase += '&destination=' + dest;
+    return gBase;
+  }
+
+  /** Reload the iframe, optionally centred on coords */
+  function reloadIframe(lat, lng, zoom) {
+    var src = BASE_URL;
+    if (lat !== null && lng !== null) {
+      src += '?lat=' + lat.toFixed(6) + '&lng=' + lng.toFixed(6);
+      if (zoom) src += '&zoom=' + zoom;
+    }
+    iframe.src = src;
+  }
+
+  /* ── Back-to-map button ──────────────────────────────────────── */
+  function resetMap() {
+    reloadIframe(null, null, null);
+    setDetailOpen(false);
+    setTimeout(function () { backBtn.classList.remove('srq-active'); }, 300);
+  }
+  backBtn.addEventListener('click', resetMap);
+  backBtn.addEventListener('touchend', function (e) { e.preventDefault(); resetMap(); });
+
+  /* ── Locate Me button ────────────────────────────────────────── */
+  locateBtn.addEventListener('click', doLocate);
+  locateBtn.addEventListener('touchend', function (e) { e.preventDefault(); doLocate(); });
+
+  function doLocate() {
+    if (!navigator.geolocation) {
+      showBadge('Location not supported by your browser');
+      return;
+    }
+    locateBtn.classList.remove('srq-located');
+    locateBtn.querySelector('.srq-btn-icon').textContent = '⏳';
+
+    navigator.geolocation.getCurrentPosition(
+      function (pos) {
+        userLat = pos.coords.latitude;
+        userLng = pos.coords.longitude;
+
+        /* ① Tell Mapme via postMessage (if they support it) */
+        try {
+          iframe.contentWindow.postMessage({
+            action: 'setCenter',
+            lat: userLat, lng: userLng, zoom: 13
+          }, 'https://viewer.mapme.com');
+          iframe.contentWindow.postMessage({
+            action: 'setUserLocation',
+            lat: userLat, lng: userLng
+          }, 'https://viewer.mapme.com');
+        } catch (_) {}
+
+        /* ② Reload iframe centred on user (also shows Mapme's own
+              user-location marker if the platform supports ?lat/lng) */
+        reloadIframe(userLat, userLng, 13);
+
+        /* ③ Update UI */
+        locateBtn.querySelector('.srq-btn-icon').textContent = '📍';
+        locateBtn.classList.add('srq-located', 'srq-active');
+
+        /* ④ Reverse-geocode for friendly badge (best-effort) */
+        showBadge('📍 Location found — map centred on you');
+        fetchAreaName(userLat, userLng, function (area) {
+          showBadge('📍 Near ' + area);
+        });
+
+        /* Show Directions if a detail was already open */
+        if (detailOpen) {
+          dirBtn.classList.remove('srq-hidden');
+          dirBtn.classList.add('srq-active');
+        }
+      },
+      function (err) {
+        locateBtn.querySelector('.srq-btn-icon').textContent = '📍';
+        var msg = err.code === 1
+          ? 'Location blocked — allow in browser settings'
+          : 'Could not get your location';
+        showBadge(msg);
+      },
+      { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 }
+    );
+  }
+
+  /** Minimal reverse-geocode using Nominatim (no API key required) */
+  function fetchAreaName(lat, lng, cb) {
+    var url = 'https://nominatim.openstreetmap.org/reverse?format=json' +
+              '&lat=' + lat + '&lon=' + lng +
+              '&zoom=10&addressdetails=0';
+    fetch(url, { headers: { 'Accept-Language': 'en' } })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var name = (d.address && (d.address.suburb || d.address.town ||
+                    d.address.city || d.address.county)) || d.display_name || 'your area';
+        cb(name);
+      })
+      .catch(function () { /* silent — badge already shown */ });
+  }
+
+  /* ── Directions button ───────────────────────────────────────── */
+  dirBtn.addEventListener('click', openDirections);
+  dirBtn.addEventListener('touchend', function (e) { e.preventDefault(); openDirections(); });
+
+  function openDirections() {
+    if (userLat === null) {
+      /* No location yet — get it first, then open directions */
+      doLocate();
+      showBadge('Getting your location… tap Directions again in a moment');
+      return;
+    }
+    var url = buildDirectionsUrl();
+    window.open(url, '_blank', 'noopener');
+  }
+
+  /* ── Mapme postMessage listener ──────────────────────────────── */
+  /*
+   * Mapme may emit structured messages when the user navigates to a place.
+   * We listen broadly and try several common event-shape conventions.
+   * If Mapme's documented API uses a specific key, tighten here.
+   */
+  window.addEventListener('message', function (e) {
+    if (!e.origin || !e.origin.includes('mapme.com')) return;
+    var d;
+    try {
+      d = (typeof e.data === 'string') ? JSON.parse(e.data) : e.data;
+    } catch (_) { return; }
+    if (!d) return;
+
+    /* ── Place opened ── */
+    var isOpen =
+      d.event === 'place_open' || d.event === 'open'   ||
+      d.type  === 'place'      || d.type  === 'marker' ||
+      d.action === 'open';
+
+    if (isOpen) {
+      /* Capture coordinates & name if Mapme sends them */
+      if (d.place) {
+        placeLat  = d.place.lat  || d.place.latitude  || null;
+        placeLng  = d.place.lng  || d.place.longitude || null;
+        placeName = d.place.name || d.place.title     || null;
+      } else {
+        if (d.lat  !== undefined) placeLat  = parseFloat(d.lat);
+        if (d.lng  !== undefined) placeLng  = parseFloat(d.lng);
+        if (d.lng  !== undefined) placeLng  = parseFloat(d.lng);
+        if (d.name !== undefined) placeName = d.name;
+      }
+      setDetailOpen(true);
+      return;
     }
 
-    btn.addEventListener('click', resetMap);
-    // Also support tap (for iOS < 13 where click fires late)
-    btn.addEventListener('touchend', function (e) {
-      e.preventDefault();
-      resetMap();
-    });
+    /* ── Place closed / back ── */
+    var isClose =
+      d.event === 'place_close' || d.event === 'close' ||
+      d.action === 'back'       || d.action === 'close';
+    if (isClose) {
+      placeLat = placeLng = placeName = null;
+      setDetailOpen(false);
+    }
+  });
 
-    /**
-     * Cross-origin iframe interaction detection.
-     *
-     * When the user taps a pin inside the Mapme iframe, the browser
-     * moves focus from the parent window into the iframe — firing
-     * `window.blur`.  We use this as a signal that the user is
-     * exploring the map and should see the prominent back button.
-     */
-    window.addEventListener('blur', function () {
-      if (document.activeElement === iframe) {
-        // Small delay — let Mapme animate the detail panel open first
-        setTimeout(activate, 500);
+  /* ── iframe focus detection (cross-origin safe) ──────────────── */
+  /*
+   * When the user taps a pin inside the Mapme iframe, the browser moves
+   * focus into the iframe — firing window.blur on the parent.
+   */
+  window.addEventListener('blur', function () {
+    if (document.activeElement === iframe) {
+      /* User interacted with the map — assume a pin may have been tapped.
+         Show Back button; wait for postMessage to confirm place details. */
+      setTimeout(function () { setDetailOpen(true); }, 600);
+    }
+  });
+
+  /* ── iframe load event (user navigated back via Mapme's own UI) ─ */
+  iframe.addEventListener('load', function () {
+    setTimeout(function () {
+      if (!detailOpen) {
+        placeLat = placeLng = placeName = null;
+        setDetailOpen(false);
       }
-    });
-
-    /**
-     * Mapme postMessage listener (future-proof).
-     *
-     * Mapme's viewer may emit postMessage events when a place is
-     * opened or closed. We listen for any message from mapme.com and
-     * try common event-name conventions. If Mapme's API is confirmed,
-     * the exact event names can be tightened here.
-     */
-    window.addEventListener('message', function (e) {
-      if (!e.origin || !e.origin.includes('mapme.com')) return;
-      try {
-        var d = (typeof e.data === 'string') ? JSON.parse(e.data) : e.data;
-        // Activate on known / likely "place open" signals
-        if (
-          d.event === 'place_open'   || d.event === 'open'   ||
-          d.type  === 'place'        || d.type  === 'marker' ||
-          d.action === 'open'
-        ) { activate(); return; }
-        // Deactivate on "back to map" signals
-        if (
-          d.event === 'place_close'  || d.event === 'close'  ||
-          d.action === 'back'        || d.action === 'close'
-        ) { btn.classList.remove('srq-visible'); }
-      } catch (_) {
-        // Non-JSON message or unexpected shape — ignore
-      }
-    });
-
-    /**
-     * Fallback: when the iframe reloads (user navigated back via Mapme's
-     * own "< All places" link), the `load` event fires. Dim the button
-     * since the user is back at the base map view.
-     */
-    iframe.addEventListener('load', function () {
-      setTimeout(function () {
-        btn.classList.remove('srq-visible');
-      }, 200);
-    });
-  })();
+    }, 300);
+  });
+})();
 </script>
