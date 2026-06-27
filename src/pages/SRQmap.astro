@@ -1,0 +1,333 @@
+---
+import pins from '../data/srqmap-pins.json';
+
+const ICONS = {
+  things: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
+  dining: '<path d="M3 2v7c0 1.1.9 2 2 2h0c1.1 0 2-.9 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Z"/>',
+  condos: '<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01"/>',
+  newdev: '<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18"/><path d="M6 12H4a2 2 0 0 0-2 2v8h18"/><path d="M18 9h2a2 2 0 0 1 2 2v11"/><path d="M10 6h4M10 10h4M10 14h4"/>',
+  areas:  '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
+};
+const GROUPS = [
+  { id: 'things', label: 'Things to Do',        color: '#4C956C', svg: ICONS.things },
+  { id: 'dining', label: 'Dining & Drinks',     color: '#C0613B', svg: ICONS.dining },
+  { id: 'condos', label: 'Condos & Residences', color: '#2E86AB', svg: ICONS.condos },
+  { id: 'newdev', label: 'New Developments',    color: '#7D5BA6', svg: ICONS.newdev },
+  { id: 'areas',  label: 'Communities & Areas', color: '#C2913B', svg: ICONS.areas  },
+];
+const groupMap = Object.fromEntries(GROUPS.map((g) => [g.id, g]));
+
+const phone = '(941) 713-9234';
+const tel = '19417139234';
+
+const pageTitle = 'Sarasota Area Guide — Restaurants, Condos & Neighborhoods Map | AdamsonFL';
+const pageDesc = 'An interactive local map of Sarasota and the Keys from Ryan Adamson, PA: top restaurants and bars, downtown condo towers, new-construction communities, beaches and things to do.';
+const canonical = 'https://adamsonfl.com/SRQmap';
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Sarasota & the Keys — Local Area Guide',
+  description: pageDesc,
+  numberOfItems: pins.length,
+  itemListElement: pins.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Place',
+      name: p.name,
+      ...(p.address ? { address: p.address } : {}),
+      ...(p.blurb ? { description: p.blurb } : {}),
+      ...(p.website ? { url: p.website } : {}),
+      geo: { '@type': 'GeoCoordinates', latitude: p.lat, longitude: p.lng },
+    },
+  })),
+};
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{pageTitle}</title>
+<meta name="description" content={pageDesc} />
+<link rel="canonical" href={canonical} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={pageDesc} />
+<meta property="og:url" content={canonical} />
+<meta name="robots" content="index,follow" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script type="application/ld+json" set:html={JSON.stringify(itemList)} />
+<style>
+  :root{
+    --navy:#0B3A5B; --ink:#0A2A40; --blue:#2E86AB; --blue-deep:#1C6489;
+    --gold:#C2913B; --sand:#EDE3D1; --cream:#FBF8F2; --paper:#FFFFFF;
+    --line:rgba(11,58,91,.14); --muted:#5C6B76;
+    --rail-w:386px; --bar-h:62px; --shadow:0 18px 50px -20px rgba(10,42,64,.45);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{font-family:"Inter",system-ui,sans-serif;color:var(--ink);background:var(--cream);overflow:hidden}
+  .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+  .bar{position:fixed;top:0;left:0;right:0;height:var(--bar-h);z-index:1100;display:flex;align-items:center;gap:14px;padding:0 20px;background:var(--cream);border-bottom:1px solid var(--line)}
+  .bar::after{content:"";position:absolute;left:0;right:0;bottom:-9px;height:9px;background:radial-gradient(circle at 10px -4px, transparent 9px, var(--cream) 10px) repeat-x;background-size:20px 18px;pointer-events:none}
+  .brand{display:flex;flex-direction:column;line-height:1;margin-right:auto;min-width:0}
+  .brand .wordmark{font-family:"Fraunces",serif;font-weight:600;font-size:23px;letter-spacing:.2px;color:var(--navy)}
+  .brand .wordmark span{color:var(--blue)}
+  .brand .tag{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+  .call{display:inline-flex;align-items:center;gap:8px;flex:none;text-decoration:none;color:var(--paper);background:var(--navy);font-weight:600;font-size:13.5px;padding:10px 15px;border-radius:999px;box-shadow:0 6px 16px -8px rgba(11,58,91,.7);transition:transform .15s ease, background .15s ease}
+  .call:hover{background:var(--blue-deep);transform:translateY(-1px)}
+  .call svg{width:15px;height:15px}
+  .call .num{font-variant-numeric:tabular-nums}
+
+  #map{position:fixed;inset:var(--bar-h) 0 0 0;background:#AEC9D6;z-index:1}
+  .leaflet-div-icon{background:transparent;border:none}
+  .leaflet-control-attribution{font-size:10px;opacity:.85}
+
+  .rail{position:fixed;z-index:1000;top:calc(var(--bar-h) + 18px);left:18px;width:var(--rail-w);max-height:calc(100vh - var(--bar-h) - 36px);display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+  .rail-head{padding:18px 18px 14px;border-bottom:1px solid var(--line)}
+  .rail-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin:0 0 6px}
+  .rail-title{font-family:"Fraunces",serif;font-weight:600;font-size:25px;margin:0;color:var(--navy);line-height:1.08}
+  .rail-sub{margin:8px 0 0;font-size:12.5px;color:var(--muted)}
+  .rail-sub b{color:var(--ink);font-weight:600}
+
+  .chips{display:flex;flex-wrap:wrap;gap:7px;padding:14px 18px;border-bottom:1px solid var(--line)}
+  .chip{--c:var(--blue);display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;font-weight:600;color:var(--ink);padding:6px 11px 6px 9px;border:1px solid var(--line);border-radius:999px;background:var(--cream);user-select:none;transition:all .14s ease}
+  .chip .dot{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none}
+  .chip[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:#fff}
+  .chip[aria-pressed="true"] .dot{background:rgba(255,255,255,.9)}
+  .chip:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+
+  .list{overflow-y:auto;padding:6px 0;-webkit-overflow-scrolling:touch}
+  .card{display:grid;grid-template-columns:34px 1fr;gap:11px;align-items:start;padding:13px 18px;cursor:pointer;border-bottom:1px solid rgba(11,58,91,.06);transition:background .12s ease}
+  .card:hover{background:var(--cream)}
+  .card.active{background:#F2F6F8;box-shadow:inset 3px 0 0 var(--blue)}
+  .card .marker{width:30px;height:30px;border-radius:50% 50% 50% 2px;transform:rotate(45deg);background:var(--c);display:grid;place-items:center;margin-top:2px;flex:none;box-shadow:0 3px 7px -2px rgba(10,42,64,.45)}
+  .card .marker svg{transform:rotate(-45deg);width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2}
+  .card h3{margin:0;font-size:14.5px;font-weight:600;color:var(--ink)}
+  .card .meta{margin:3px 0 0;font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .card .cat-label{text-transform:uppercase;letter-spacing:.08em;font-weight:600;font-size:10px}
+
+  .detail{display:none;flex-direction:column;overflow-y:auto}
+  .detail.show{display:flex}
+  .back{display:inline-flex;align-items:center;gap:7px;background:none;border:none;cursor:pointer;font:inherit;font-size:12.5px;font-weight:600;color:var(--blue);padding:14px 18px 4px}
+  .detail-body{padding:6px 20px 22px}
+  .detail .kicker{display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--c);margin-bottom:8px}
+  .detail .kicker .pin{width:11px;height:11px;border-radius:50%;background:var(--c)}
+  .detail h2{font-family:"Fraunces",serif;font-weight:600;font-size:27px;line-height:1.1;margin:0 0 4px;color:var(--navy)}
+  .detail .addr{font-size:12px;color:var(--muted);margin:0 0 14px}
+  .detail .facts{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+  .detail .fact{font-size:11px;font-weight:600;color:#37535f;background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
+  .detail p.blurb{font-size:14px;line-height:1.62;color:#2B3942;margin:0 0 16px;white-space:pre-line}
+  .tip{background:var(--cream);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;padding:12px 14px;margin:0 0 18px}
+  .tip .tip-h{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:0 0 5px}
+  .tip p{margin:0;font-size:13px;line-height:1.55;color:#374550;font-style:italic}
+  .detail .links{display:flex;flex-direction:column;gap:9px}
+  .detail-cta{display:flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;background:var(--navy);color:#fff;font-weight:600;font-size:14px;padding:13px;border-radius:11px;transition:background .15s ease}
+  .detail-cta:hover{background:var(--blue-deep)}
+  .detail-link{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;color:var(--blue-deep);font-weight:600;font-size:13px;padding:11px;border:1px solid var(--line);border-radius:11px}
+  .detail-link:hover{background:var(--cream)}
+  .detail .signoff{text-align:center;font-size:11.5px;color:var(--muted);margin:13px 0 0}
+
+  .handle{display:none}
+  .pin-marker{cursor:pointer;width:30px;height:30px;position:relative;transition:transform .15s ease}
+  .pin-marker .body{width:30px;height:30px;border-radius:50% 50% 50% 2px;transform:rotate(45deg);background:var(--c);display:grid;place-items:center;box-shadow:0 5px 12px -4px rgba(10,42,64,.6);border:2px solid rgba(255,255,255,.9)}
+  .pin-marker .body svg{transform:rotate(-45deg);width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2}
+  .pin-marker:hover{transform:translateY(-3px) scale(1.05)}
+  .pin-marker.active{transform:translateY(-4px) scale(1.14);z-index:5}
+
+  @media (max-width:720px){
+    :root{--bar-h:56px}
+    .brand .tag{display:none}
+    .call{padding:9px 13px;font-size:13px}
+    .rail{left:0;right:0;width:auto;top:auto;bottom:0;border-radius:18px 18px 0 0;max-height:74vh;transition:transform .28s ease}
+    .rail.collapsed{transform:translateY(calc(100% - 152px))}
+    .handle{display:flex;justify-content:center;padding:8px 0 2px;cursor:pointer}
+    .handle .bar-grip{width:40px;height:4px;border-radius:999px;background:var(--line)}
+    .rail-head{padding-top:4px}
+    .list{max-height:44vh}
+    .detail{max-height:64vh}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="brand">
+    <div class="wordmark">Adamson<span>FL</span></div>
+    <div class="tag">Sarasota Field Guide</div>
+  </div>
+  <a class="call" href={`tel:${tel}`}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    <span class="num">{phone}</span>
+  </a>
+</header>
+
+<div id="map"></div>
+
+<aside class="rail collapsed" id="rail">
+  <div class="handle" id="handle"><div class="bar-grip"></div></div>
+  <div id="listView" style="display:flex;flex-direction:column;overflow:hidden">
+    <div class="rail-head">
+      <p class="rail-eyebrow">Local intel from your agent</p>
+      <h1 class="rail-title">Explore Sarasota &amp; the Keys</h1>
+      <p class="rail-sub"><b id="count">0 places</b> · <span id="subnote">curated by Ryan Adamson, PA</span></p>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="list" id="list"></div>
+  </div>
+  <div class="detail" id="detailView">
+    <button class="back" id="back">‹ All places</button>
+    <div class="detail-body" id="detailBody"></div>
+  </div>
+</aside>
+
+<!-- Crawlable content for search engines & AI answer engines -->
+<div class="visually-hidden">
+  <h2>Sarasota &amp; the Keys local directory — curated by Ryan Adamson, PA</h2>
+  {GROUPS.map((g) => (
+    <section>
+      <h3>{g.label}</h3>
+      {pins.filter((p) => p.group === g.id).map((p) => (
+        <article>
+          <h4>{p.name}</h4>
+          {p.address && <p>{p.address}</p>}
+          {p.blurb && <p>{p.blurb}</p>}
+          {p.tip && <p>Ryan's take: {p.tip}</p>}
+          {p.website && <a href={p.website}>{p.name} website</a>}
+        </article>
+      ))}
+    </section>
+  ))}
+</div>
+
+<script type="application/json" id="pins-data" set:html={JSON.stringify(pins)}></script>
+<script type="application/json" id="groups-data" set:html={JSON.stringify(GROUPS)}></script>
+
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script is:inline>
+(function(){
+  var PLACES = JSON.parse(document.getElementById('pins-data').textContent);
+  var GROUPS = JSON.parse(document.getElementById('groups-data').textContent);
+  var GMAP = {}; GROUPS.forEach(function(g){ GMAP[g.id]=g; });
+  PLACES.forEach(function(p,i){ p._id = i; });
+
+  var TEL = '19417139234', PHONE = '(941) 713-9234';
+  function iconSvg(g, cls){ return '<svg class="'+(cls||'')+'" viewBox="0 0 24 24">'+GMAP[g].svg+'</svg>'; }
+  function esc(s){ return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  var active = {}; GROUPS.forEach(function(g){ active[g.id]=true; });
+  var selectedId = null, markers = {};
+
+  var map = L.map('map',{zoomControl:false, attributionControl:true}).setView([27.34,-82.53], 11);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{
+    subdomains:'abcd', maxZoom:20,
+    attribution:'&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+  }).addTo(map);
+  L.control.zoom({position:'bottomright'}).addTo(map);
+
+  var bounds = L.latLngBounds(PLACES.map(function(p){ return [p.lat,p.lng]; }));
+  map.fitBounds(bounds, {padding:[40,40]});
+  setTimeout(function(){ map.invalidateSize(); }, 200);
+
+  function buildMarkers(){
+    PLACES.forEach(function(p){
+      var c = GMAP[p.group].color;
+      var html = '<div class="pin-marker" style="--c:'+c+'"><div class="body">'+iconSvg(p.group)+'</div></div>';
+      var icon = L.divIcon({html:html, iconSize:[30,30], iconAnchor:[15,30]});
+      var m = L.marker([p.lat,p.lng],{icon:icon}).addTo(map);
+      m.on('click', function(){ select(p._id, true); });
+      markers[p._id] = {marker:m, place:p};
+    });
+  }
+  buildMarkers();
+
+  var chipsEl = document.getElementById('chips');
+  function renderChips(){
+    chipsEl.innerHTML='';
+    GROUPS.forEach(function(g){
+      var b=document.createElement('button');
+      b.className='chip'; b.style.setProperty('--c', g.color);
+      b.setAttribute('aria-pressed', active[g.id]);
+      b.innerHTML='<span class="dot"></span>'+esc(g.label);
+      b.onclick=function(){ active[g.id]=!active[g.id]; refresh(); };
+      chipsEl.appendChild(b);
+    });
+  }
+
+  var listEl=document.getElementById('list');
+  var countEl=document.getElementById('count');
+  function visible(){ return PLACES.filter(function(p){ return active[p.group]; }); }
+  function renderList(){
+    var items=visible();
+    countEl.textContent=items.length+(items.length===1?' place':' places');
+    listEl.innerHTML='';
+    items.forEach(function(p){
+      var g=GMAP[p.group];
+      var card=document.createElement('div');
+      card.className='card'+(p._id===selectedId?' active':'');
+      card.style.setProperty('--c', g.color);
+      card.innerHTML='<div class="marker">'+iconSvg(p.group)+'</div><div><h3>'+esc(p.name)+'</h3><div class="meta"><span class="cat-label" style="color:'+g.color+'">'+esc(g.label)+'</span></div></div>';
+      card.onclick=function(){ select(p._id, true); };
+      listEl.appendChild(card);
+    });
+  }
+  function refreshMarkers(){
+    Object.keys(markers).forEach(function(k){
+      var mk=markers[k], on=active[mk.place.group];
+      if(on && !map.hasLayer(mk.marker)) mk.marker.addTo(map);
+      if(!on && map.hasLayer(mk.marker)) map.removeLayer(mk.marker);
+      var el=mk.marker.getElement();
+      if(el){ var pm=el.querySelector('.pin-marker'); if(pm) pm.classList.toggle('active', mk.place._id===selectedId); }
+    });
+  }
+  function refresh(){ renderChips(); renderList(); refreshMarkers(); }
+
+  var listView=document.getElementById('listView');
+  var detailView=document.getElementById('detailView');
+  var detailBody=document.getElementById('detailBody');
+  function showDetail(p){
+    var g=GMAP[p.group];
+    detailBody.style.setProperty('--c', g.color);
+    var facts=[];
+    if(p.price) facts.push(esc(p.price));
+    if(p.vibe) facts.push(esc(p.vibe));
+    if(p.good_for) facts.push(esc(p.good_for));
+    var factsHtml = facts.length ? '<div class="facts">'+facts.map(function(f){return '<span class="fact">'+f+'</span>';}).join('')+'</div>' : '';
+    var blurbHtml = p.blurb ? '<p class="blurb">'+esc(p.blurb)+'</p>' : '';
+    var tipHtml = p.tip ? '<div class="tip"><p class="tip-h">Ryan’s take</p><p>'+esc(p.tip)+'</p></div>' : '';
+    var siteHtml = p.website ? '<a class="detail-link" href="'+esc(p.website)+'" target="_blank" rel="noopener">Visit website</a>' : '';
+    detailBody.innerHTML =
+      '<div class="kicker"><span class="pin"></span>'+esc(g.label)+'</div>'+
+      '<h2>'+esc(p.name)+'</h2>'+
+      (p.address?'<p class="addr">'+esc(p.address)+'</p>':'')+
+      factsHtml + blurbHtml + tipHtml +
+      '<div class="links"><a class="detail-cta" href="tel:'+TEL+'">Ask Ryan about this</a>'+siteHtml+'</div>'+
+      '<p class="signoff">Ryan Adamson, PA · AdamsonFL.com</p>';
+    listView.style.display='none';
+    detailView.classList.add('show');
+  }
+  function hideDetail(){ detailView.classList.remove('show'); listView.style.display='flex'; }
+  document.getElementById('back').onclick=function(){ hideDetail(); selectedId=null; refresh(); };
+
+  function select(id, fly){
+    selectedId=id;
+    var p=PLACES[id]; if(!p) return;
+    if(!active[p.group]){ active[p.group]=true; }
+    document.getElementById('rail').classList.remove('collapsed');
+    refresh(); showDetail(p);
+    if(fly) map.flyTo([p.lat,p.lng], Math.max(map.getZoom(),15), {duration:.8});
+  }
+
+  document.getElementById('handle').onclick=function(){ document.getElementById('rail').classList.toggle('collapsed'); };
+  refresh();
+})();
+</script>
+</body>
+</html>
