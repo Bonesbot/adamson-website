@@ -1,0 +1,332 @@
+---
+/**
+ * /srq-map — Explore Our Area interactive map
+ *
+ * Embeds the Mapme viewer at viewer.mapme.com/srqmap (the SRQmap.com map).
+ *
+ * Mobile UX note: Mapme's own detail panel has only a subtle "< All places"
+ * text link to dismiss it. On small screens the panel covers the full
+ * viewport. This page adds a prominent floating "← Back to Map" button
+ * that resets the iframe to the base map view.
+ *
+ * Button strategy (cross-origin safe):
+ *  1. Always visible on mobile (opacity dimmed at rest, full when active).
+ *  2. Brightens after first iframe interaction (window blur → iframe focus).
+ *  3. On tap: reassigns iframe.src to the base URL, which closes the panel.
+ *  4. Also listens for postMessage events from Mapme in case they expose
+ *     place-open / place-close signals (future-proof).
+ *
+ * AEO note: AI crawlers cannot read iframe content. All Place / POI data
+ * that lives inside the Mapme map MUST also be represented as plain HTML
+ * + JSON-LD on parent Astro pages (/areas/* etc.) per the AEO spec.
+ */
+
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const title = 'Explore the SRQ Area';
+const description =
+  'Interactive map of Sarasota\'s barrier islands, neighbourhoods, beaches, and landmarks. Tap any pin to learn more about a location — then connect with Ryan Adamson to find your place in paradise.';
+
+const jsonLd = {
+  '@type': 'WebPage',
+  name: 'Explore the SRQ Area — Interactive Map',
+  description,
+  url: 'https://adamsonfl.com/srq-map',
+};
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+
+  <!-- ── Intro strip ─────────────────────────────────────────────────── -->
+  <section class="srq-intro">
+    <div class="container">
+      <p class="srq-section-label">Explore</p>
+      <h1 class="srq-heading">Explore Our Area</h1>
+      <p class="srq-subhead">
+        Tap any pin to discover Sarasota's beaches, neighbourhoods, and landmarks.
+        <a href="/areas" class="srq-areas-link">Browse area guides →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Map ─────────────────────────────────────────────────────────── -->
+  <section class="srq-map-section" aria-label="Interactive area map">
+    <div class="srq-map-wrap" id="srqMapWrap">
+
+      <iframe
+        id="srqMapIframe"
+        class="srq-iframe"
+        src="https://viewer.mapme.com/srqmap"
+        title="Explore Our Area — Interactive Map of Sarasota & the Barrier Islands"
+        frameborder="0"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+
+      <!--
+        ── Mobile close / back button ────────────────────────────────────
+        Cross-origin iframes prevent DOM access, so we can't reach inside
+        Mapme's panel. Instead we overlay a button here in the parent page.
+        On tap it resets iframe.src → closes the Mapme detail panel.
+      -->
+      <button
+        id="srqBackBtn"
+        class="srq-back-btn"
+        type="button"
+        aria-label="Close detail panel and return to map"
+      >
+        <span class="srq-back-arrow" aria-hidden="true">←</span>
+        Back to Map
+      </button>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<!-- ─────────────────────────────────────────────────────────────────────── -->
+<style>
+  /* ── Intro ─────────────────────────────────────────────────────── */
+  .srq-intro {
+    padding: 6rem 0 1.25rem;          /* clear fixed header (~80 px) + breathing room */
+    background-color: var(--color-black, #000);
+  }
+  @media (max-width: 640px) {
+    .srq-intro { padding: 5.5rem 0 1rem; }
+  }
+
+  .srq-section-label {
+    display: block;
+    font-family: var(--font-accent, 'Montserrat', sans-serif);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-cbgl-blue-light, #52a8ff);
+    margin-bottom: 0.5rem;
+  }
+
+  .srq-heading {
+    font-family: var(--font-display, 'Playfair Display', Georgia, serif);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 0.6rem;
+    line-height: 1.15;
+  }
+
+  .srq-subhead {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+  }
+  .srq-areas-link {
+    color: var(--color-gold, #c5a55a);
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 0.4em;
+    white-space: nowrap;
+  }
+  .srq-areas-link:hover { color: var(--color-gold-light, #e8d5a3); }
+
+  /* ── Map section ────────────────────────────────────────────────── */
+  .srq-map-section {
+    background: var(--color-black, #000);
+    padding: 0 0 2rem;
+  }
+
+  .srq-map-wrap {
+    position: relative;
+    width: 100%;
+    /* Fill remaining viewport below intro strip + bottom padding */
+    height: calc(100vh - 11rem);
+    min-height: 480px;
+    max-height: 900px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 1400px;
+    /* subtle gold glow border */
+    box-shadow: 0 0 0 1px rgba(197, 165, 90, 0.2),
+                0 24px 60px rgba(0, 0, 0, 0.4);
+  }
+  @media (max-width: 1024px) {
+    .srq-map-wrap { margin: 0 1rem; }
+  }
+  @media (max-width: 640px) {
+    .srq-map-section { padding: 0 0 1.25rem; }
+    .srq-map-wrap {
+      margin: 0 0.75rem;
+      border-radius: 8px;
+      height: calc(100dvh - 9.5rem);  /* dvh accounts for browser chrome on iOS/Android */
+      max-height: none;
+    }
+  }
+
+  .srq-iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: var(--color-dark, #1a1a1a);
+  }
+
+  /* ── Mobile back button ─────────────────────────────────────────── */
+  .srq-back-btn {
+    /* Layout */
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 20;
+    display: none;                      /* hidden on desktop */
+
+    /* Touch target — minimum 44 × 44 px */
+    min-height: 44px;
+    padding: 0 18px;
+    align-items: center;
+    gap: 6px;
+
+    /* Black / gold luxury theme */
+    background: rgba(0, 0, 0, 0.88);
+    color: var(--color-gold, #c5a55a);
+    border: 1.5px solid var(--color-gold, #c5a55a);
+    border-radius: 999px;
+
+    /* Typography */
+    font-family: var(--font-accent, 'Montserrat', sans-serif);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+
+    /* Entrance animation */
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.25s ease, transform 0.25s ease,
+                background 0.2s, box-shadow 0.2s;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .srq-back-arrow {
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  /* Visible state (added by JS after pin interaction) */
+  .srq-back-btn.srq-visible {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
+  }
+
+  /* On mobile: always render as flex; start semi-transparent as a hint */
+  @media (max-width: 768px) {
+    .srq-back-btn {
+      display: flex;
+      opacity: 0.55;          /* dim at rest — map not yet navigated */
+      transform: translateY(0);
+    }
+    .srq-back-btn.srq-visible {
+      opacity: 1;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6),
+                  0 0 0 2px rgba(197, 165, 90, 0.35);
+    }
+    .srq-back-btn:hover,
+    .srq-back-btn:focus-visible {
+      background: rgba(20, 20, 20, 0.95);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.7),
+                  0 0 0 2px rgba(197, 165, 90, 0.55);
+    }
+    .srq-back-btn:active {
+      transform: scale(0.96);
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var BASE_URL = 'https://viewer.mapme.com/srqmap';
+    var iframe   = document.getElementById('srqMapIframe');
+    var btn      = document.getElementById('srqBackBtn');
+
+    if (!iframe || !btn) return;
+
+    /** Make the button fully prominent */
+    function activate() {
+      btn.classList.add('srq-visible');
+    }
+
+    /** Reset iframe to the base map URL (closes any open detail panel) */
+    function resetMap() {
+      iframe.src = BASE_URL;
+      // Slight delay before dimming so the user sees the action completed
+      setTimeout(function () {
+        btn.classList.remove('srq-visible');
+      }, 300);
+    }
+
+    btn.addEventListener('click', resetMap);
+    // Also support tap (for iOS < 13 where click fires late)
+    btn.addEventListener('touchend', function (e) {
+      e.preventDefault();
+      resetMap();
+    });
+
+    /**
+     * Cross-origin iframe interaction detection.
+     *
+     * When the user taps a pin inside the Mapme iframe, the browser
+     * moves focus from the parent window into the iframe — firing
+     * `window.blur`.  We use this as a signal that the user is
+     * exploring the map and should see the prominent back button.
+     */
+    window.addEventListener('blur', function () {
+      if (document.activeElement === iframe) {
+        // Small delay — let Mapme animate the detail panel open first
+        setTimeout(activate, 500);
+      }
+    });
+
+    /**
+     * Mapme postMessage listener (future-proof).
+     *
+     * Mapme's viewer may emit postMessage events when a place is
+     * opened or closed. We listen for any message from mapme.com and
+     * try common event-name conventions. If Mapme's API is confirmed,
+     * the exact event names can be tightened here.
+     */
+    window.addEventListener('message', function (e) {
+      if (!e.origin || !e.origin.includes('mapme.com')) return;
+      try {
+        var d = (typeof e.data === 'string') ? JSON.parse(e.data) : e.data;
+        // Activate on known / likely "place open" signals
+        if (
+          d.event === 'place_open'   || d.event === 'open'   ||
+          d.type  === 'place'        || d.type  === 'marker' ||
+          d.action === 'open'
+        ) { activate(); return; }
+        // Deactivate on "back to map" signals
+        if (
+          d.event === 'place_close'  || d.event === 'close'  ||
+          d.action === 'back'        || d.action === 'close'
+        ) { btn.classList.remove('srq-visible'); }
+      } catch (_) {
+        // Non-JSON message or unexpected shape — ignore
+      }
+    });
+
+    /**
+     * Fallback: when the iframe reloads (user navigated back via Mapme's
+     * own "< All places" link), the `load` event fires. Dim the button
+     * since the user is back at the base map view.
+     */
+    iframe.addEventListener('load', function () {
+      setTimeout(function () {
+        btn.classList.remove('srq-visible');
+      }, 200);
+    });
+  })();
+</script>
