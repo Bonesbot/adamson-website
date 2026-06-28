@@ -50,6 +50,9 @@ exports.handler = async (event) => {
     let idxSync   = 'skipped';
     const IDX_API_KEY = process.env.IDX_API_KEY;
     if (IDX_API_KEY) {
+      // Bounded so a slow/down IDX can never stall the function or block the Supabase save.
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 6000);
       try {
         const form = new URLSearchParams();
         form.set('email', email);
@@ -64,6 +67,7 @@ exports.handler = async (event) => {
             apiversion:  '1.7.0',
           },
           body: form.toString(),
+          signal: ctrl.signal,
         });
         const txt = await idxRes.text();
         if (idxRes.ok) {
@@ -74,8 +78,10 @@ exports.handler = async (event) => {
           console.error('srqmap-lead: IDX forward failed', idxRes.status, txt.slice(0, 200));
         }
       } catch (e) {
-        idxSync = 'exception';
-        console.error('srqmap-lead: IDX forward exception', e && e.message);
+        idxSync = (e && e.name === 'AbortError') ? 'timeout' : 'exception';
+        console.error('srqmap-lead: IDX forward', idxSync, e && e.message);
+      } finally {
+        clearTimeout(timer);
       }
     }
 
