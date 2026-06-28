@@ -2,16 +2,16 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-26T10:55:50.584964+00:00",
+  "lastUpdated": "2026-06-28T10:59:21.417869+00:00",
   "counts": {
-    "sold": 31,
-    "pending": 6,
+    "sold": 33,
+    "pending": 4,
     "active": 25,
     "total": 37
   },
   "metrics": {
-    "avgPrice": "$4,339,459",
-    "avgPricePerSqFt": "$1,108",
+    "avgPrice": "$4,328,514",
+    "avgPricePerSqFt": "$1,105",
     "avgYearBuilt": 1992,
     "avgLivingSqFt": "3,814",
     "avgLotSqFt": "14,412",
@@ -29,10 +29,10 @@
     "newConstructionCount": 6
   },
   "sold": {
-    "count": 9,
+    "count": 11,
     "medianPrice": "$3,795,000",
-    "medianDom": 82,
-    "saleToListRatio": "91.0%",
+    "medianDom": 85,
+    "saleToListRatio": "89.5%",
     "windowDays": 90
   },
   "fees": {
@@ -58,6 +58,32 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4682428",
+      "address": "575 S SPOONBILL DR",
+      "subdivision": "BIRD KEY SUB",
+      "soldPrice": "$4,200,000",
+      "soldDate": "2026-06-26",
+      "bedrooms": 4,
+      "bathrooms": 5.5,
+      "livingSqFt": "3,900",
+      "yearBuilt": 2023,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4678714",
+      "address": "381 BOB WHITE DR",
+      "subdivision": "BIRD KEY SUB",
+      "soldPrice": "$2,185,000",
+      "soldDate": "2026-06-26",
+      "bedrooms": 4,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,774",
+      "yearBuilt": 2003,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4681496",
       "address": "329 BIRD KEY DR",
@@ -94,32 +120,6 @@
       "bathrooms": 3.5,
       "livingSqFt": "4,382",
       "yearBuilt": 2005,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4681528",
-      "address": "119 N WARBLER LN",
-      "subdivision": "BIRD KEY SUB",
-      "soldPrice": "$6,550,000",
-      "soldDate": "2026-06-04",
-      "bedrooms": 3,
-      "bathrooms": 4.0,
-      "livingSqFt": "5,099",
-      "yearBuilt": 1997,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4634396",
-      "address": "367 W ROYAL FLAMINGO DR",
-      "subdivision": "BIRD KEY SUB",
-      "soldPrice": "$3,795,000",
-      "soldDate": "2026-05-28",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "5,257",
-      "yearBuilt": 1967,
       "propertyType": "Residential",
       "isWaterfront": true
     }
