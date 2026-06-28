@@ -76,7 +76,7 @@ exports.handler = async (event) => {
           idxSync = 'ok';
         } else {
           idxSync = `error_${idxRes.status}`;
-          idxDetail = Buffer.from(txt.slice(0, 400)).toString('base64'); // TEMP debug b64
+          idxDetail = (txt||'').replace(/[^a-zA-Z ]/g,' ').replace(/ +/g,' ').trim().slice(0,220); // TEMP debug words
           console.error('srqmap-lead: IDX forward failed', idxRes.status, txt.slice(0, 200));
         }
       } catch (e) {
