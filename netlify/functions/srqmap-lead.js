@@ -48,6 +48,7 @@ exports.handler = async (event) => {
     // ── 1) Forward to IDX Engage (best-effort, before insert so we can record the id) ──
     let idxLeadId = null;
     let idxSync   = 'skipped';
+    let idxDetail = null; // TEMP debug
     const IDX_API_KEY = process.env.IDX_API_KEY;
     if (IDX_API_KEY) {
       // Bounded so a slow/down IDX can never stall the function or block the Supabase save.
@@ -75,6 +76,7 @@ exports.handler = async (event) => {
           idxSync = 'ok';
         } else {
           idxSync = `error_${idxRes.status}`;
+          idxDetail = txt.slice(0, 300); // TEMP debug
           console.error('srqmap-lead: IDX forward failed', idxRes.status, txt.slice(0, 200));
         }
       } catch (e) {
@@ -115,7 +117,7 @@ exports.handler = async (event) => {
 
     console.log('srqmap-lead: stored', email, '| idx:', idxSync);
     return { statusCode: 200, headers: { ...CORS, 'Content-Type': 'application/json' },
-             body: JSON.stringify({ success: true, idx: idxSync }) };
+             body: JSON.stringify({ success: true, idx: idxSync, idxDetail }) };
 
   } catch (err) {
     console.error('srqmap-lead: unexpected error', err);
