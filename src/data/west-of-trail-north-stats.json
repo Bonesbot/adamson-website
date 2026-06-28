@@ -1,23 +1,71 @@
 {
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
-  "status": "no_data",
-  "lastUpdated": "2026-05-20T19:14:41.191022+00:00",
+  "status": "ok",
+  "lastUpdated": "2026-06-28T20:01:53.967742+00:00",
   "counts": {
-    "active": 0,
-    "pending": 0,
-    "sold": 0,
-    "total": 0
+    "sold": 77,
+    "pending": 9,
+    "active": 63,
+    "total": 86
   },
-  "metrics": {},
+  "metrics": {
+    "avgPrice": "$1,206,870",
+    "avgPricePerSqFt": "$536",
+    "avgYearBuilt": 1973,
+    "avgLivingSqFt": "2,003",
+    "avgLotSqFt": null,
+    "avgDom": 108
+  },
+  "range": {
+    "minPrice": "$251,700",
+    "maxPrice": "$22,900,000"
+  },
+  "active": {
+    "count": 63,
+    "medianPrice": "$799,000",
+    "medianPricePerSqFt": "$543",
+    "waterfrontCount": 20,
+    "newConstructionCount": 21
+  },
   "sold": {
-    "count": 29,
-    "medianPrice": "$550,000",
-    "medianDom": 49,
-    "saleToListRatio": "90.6%",
+    "count": 27,
+    "medianPrice": "$560,000",
+    "medianDom": 55,
+    "saleToListRatio": "89.9%",
     "windowDays": 90
   },
+  "fees": {
+    "medianMonthlyAssociation": "$493",
+    "medianMonthlyCondoFee": "$493"
+  },
+  "priceBands": {
+    "under900k": 34,
+    "band900kTo1_5m": 8,
+    "band1_5mTo3m": 9,
+    "band3mPlus": 12
+  },
+  "propertyTypes": [
+    {
+      "type": "Residential",
+      "count": 63
+    }
+  ],
+  "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4681432",
+      "address": "2445 ALAMEDA AVE",
+      "subdivision": "SARASOTA BAY PARK",
+      "soldPrice": "$1,150,000",
+      "soldDate": "2026-06-18",
+      "bedrooms": 4,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,901",
+      "yearBuilt": 1925,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4693278",
       "address": "4237 SARASOTA AVE",
@@ -69,19 +117,56 @@
       "yearBuilt": 1972,
       "propertyType": "Residential",
       "isWaterfront": false
+    }
+  ],
+  "condoTiers": [
+    {
+      "tier": "pre1990",
+      "label": "Pre-1990",
+      "rangeLabel": "before 1990",
+      "activeCount": 1,
+      "avgPrice": "$569,000",
+      "avgPricePerSqFt": "$451",
+      "avgLivingSqFt": "1,262",
+      "avgDom": 44
     },
     {
-      "listingId": "A4667963",
-      "address": "5035 BAY SHORE RD",
-      "subdivision": "INDIAN BEACH SAPPHIRE SHORES",
-      "soldPrice": "$4,525,000",
-      "soldDate": "2026-06-09",
-      "bedrooms": 5,
-      "bathrooms": 6.5,
-      "livingSqFt": "5,712",
-      "yearBuilt": 1951,
-      "propertyType": "Residential",
-      "isWaterfront": false
+      "tier": "1990to2005",
+      "label": "1990 \u2013 2005",
+      "rangeLabel": "1990 through 2005",
+      "activeCount": 0,
+      "avgPrice": null,
+      "avgPricePerSqFt": null,
+      "avgLivingSqFt": null,
+      "avgDom": null
+    },
+    {
+      "tier": "2006to2019",
+      "label": "2006 \u2013 2019",
+      "rangeLabel": "2006 through 2019",
+      "activeCount": 0,
+      "avgPrice": null,
+      "avgPricePerSqFt": null,
+      "avgLivingSqFt": null,
+      "avgDom": null
+    },
+    {
+      "tier": "2020plus",
+      "label": "2020 & Newer",
+      "rangeLabel": "2020 or newer",
+      "activeCount": 14,
+      "avgPrice": "$569,955",
+      "avgPricePerSqFt": "$555",
+      "avgLivingSqFt": "1,033",
+      "avgDom": 150
     }
-  ]
+  ],
+  "condoTiersScope": {
+    "propertySubTypes": [
+      "Condominium",
+      "Villa",
+      "Townhouse"
+    ],
+    "status": "Active"
+  }
 }
