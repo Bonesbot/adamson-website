@@ -2,18 +2,18 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-26T10:55:40.952041+00:00",
+  "lastUpdated": "2026-06-28T10:59:04.695768+00:00",
   "counts": {
-    "sold": 539,
-    "pending": 64,
-    "active": 366,
+    "sold": 544,
+    "pending": 59,
+    "active": 368,
     "total": 603
   },
   "metrics": {
-    "avgPrice": "$1,821,533",
-    "avgPricePerSqFt": "$724",
+    "avgPrice": "$1,824,843",
+    "avgPricePerSqFt": "$725",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,175",
+    "avgLivingSqFt": "2,178",
     "avgLotSqFt": null,
     "avgDom": 97
   },
@@ -22,25 +22,25 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 366,
-    "medianPrice": "$1,049,500",
-    "medianPricePerSqFt": "$682",
-    "waterfrontCount": 277,
+    "count": 368,
+    "medianPrice": "$1,049,000",
+    "medianPricePerSqFt": "$681",
+    "waterfrontCount": 278,
     "newConstructionCount": 29
   },
   "sold": {
-    "count": 170,
-    "medianPrice": "$1,132,500",
-    "medianDom": 77,
-    "saleToListRatio": "86.8%",
+    "count": 175,
+    "medianPrice": "$1,100,000",
+    "medianDom": 76,
+    "saleToListRatio": "87.0%",
     "windowDays": 90
   },
   "fees": {
     "medianMonthlyAssociation": "$1,600",
-    "medianMonthlyCondoFee": "$1,687"
+    "medianMonthlyCondoFee": "$1,689"
   },
   "priceBands": {
-    "under900k": 146,
+    "under900k": 148,
     "band900kTo1_5m": 83,
     "band1_5mTo3m": 76,
     "band3mPlus": 61
@@ -48,11 +48,63 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 366
+      "count": 368
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4673061",
+      "address": "435 L AMBIANCE DR #J704",
+      "subdivision": "L AMBIANCE AT LONGBOAT KEY CLUB PH 02",
+      "soldPrice": "$2,725,000",
+      "soldDate": "2026-06-26",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,634",
+      "yearBuilt": 1994,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4685244",
+      "address": "2110 HARBOURSIDE DR #536",
+      "subdivision": "FAIRWAY BAY 3",
+      "soldPrice": "$725,000",
+      "soldDate": "2026-06-26",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,031",
+      "yearBuilt": 1988,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4688503",
+      "address": "706 BAYPORT WAY #706",
+      "subdivision": "BAYPORT BCH & TEN PH C",
+      "soldPrice": "$700,000",
+      "soldDate": "2026-06-26",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,601",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4683547",
+      "address": "6750 GULF OF MEXICO DR #163",
+      "subdivision": "WHITNEY BEACH",
+      "soldPrice": "$475,000",
+      "soldDate": "2026-06-26",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,449",
+      "yearBuilt": 1970,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4687604",
       "address": "7149 LONGBOAT DR N",
@@ -65,58 +117,6 @@
       "yearBuilt": 1967,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4693865",
-      "address": "2675 GULF OF MEXICO DR #303",
-      "subdivision": "VEINTE",
-      "soldPrice": "$1,320,000",
-      "soldDate": "2026-06-25",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,896",
-      "yearBuilt": 1979,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4663933",
-      "address": "1975 GULF OF MEXICO DR #G4-206",
-      "subdivision": "SEAPLACE III",
-      "soldPrice": "$430,000",
-      "soldDate": "2026-06-25",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,068",
-      "yearBuilt": 1977,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4678390",
-      "address": "4360 CHATHAM DR #305",
-      "subdivision": "LONGBOAT HARBOUR",
-      "soldPrice": "$290,000",
-      "soldDate": "2026-06-25",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "747",
-      "yearBuilt": 1969,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4693248",
-      "address": "2410 HARBOURSIDE DR #131",
-      "subdivision": "MARINA BAY",
-      "soldPrice": "$1,700,000",
-      "soldDate": "2026-06-24",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "3,825",
-      "yearBuilt": 1993,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -124,21 +124,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 206,
-      "avgPrice": "$871,511",
-      "avgPricePerSqFt": "$649",
-      "avgLivingSqFt": "1,343",
-      "avgDom": 153
+      "activeCount": 207,
+      "avgPrice": "$867,929",
+      "avgPricePerSqFt": "$647",
+      "avgLivingSqFt": "1,342",
+      "avgDom": 155
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 46,
-      "avgPrice": "$2,562,272",
-      "avgPricePerSqFt": "$908",
-      "avgLivingSqFt": "2,625",
-      "avgDom": 166
+      "activeCount": 47,
+      "avgPrice": "$2,525,955",
+      "avgPricePerSqFt": "$898",
+      "avgLivingSqFt": "2,614",
+      "avgDom": 159
     },
     {
       "tier": "2006to2019",
@@ -148,7 +148,7 @@
       "avgPrice": "$5,464,667",
       "avgPricePerSqFt": "$1,523",
       "avgLivingSqFt": "3,595",
-      "avgDom": 218
+      "avgDom": 220
     },
     {
       "tier": "2020plus",
@@ -158,7 +158,7 @@
       "avgPrice": "$7,129,800",
       "avgPricePerSqFt": "$2,147",
       "avgLivingSqFt": "2,988",
-      "avgDom": 352
+      "avgDom": 354
     }
   ],
   "condoTiersScope": {
