@@ -207,6 +207,14 @@ const itemList = {
   .gate-form .gate-cta{width:100%;border:none;cursor:pointer;margin-top:3px}
   .gate-form .gate-cta:disabled{opacity:.6;cursor:default}
   .gate-err{color:#b3261e;font-size:12px;margin:2px 0 0}
+  /* ===== Pin hero photo gallery (swipe) ===== */
+  .gallery{margin:2px 0 16px;position:relative}
+  .gallery-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;border-radius:12px;scrollbar-width:none;box-shadow:0 6px 18px -10px rgba(10,42,64,.5)}
+  .gallery-track::-webkit-scrollbar{display:none}
+  .gphoto{flex:0 0 100%;width:100%;height:210px;object-fit:cover;scroll-snap-align:center;display:block;background:var(--sand)}
+  .gallery-dots{display:flex;justify-content:center;gap:6px;margin-top:9px}
+  .gdot{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .2s ease,transform .2s ease}
+  .gdot.on{background:var(--gold);transform:scale(1.25)}
 </style>
 </head>
 <body>
@@ -352,7 +360,9 @@ const itemList = {
     document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeGate(); });
   })();
 
-  var map = L.map('map',{zoomControl:false, attributionControl:true}).setView([27.34,-82.53], 11);
+  // Initial view: centered on 301 Bird Key Dr, framing Lido Key + mid-Siesta and up
+  var HOME_CENTER = [27.3145, -82.5610], HOME_ZOOM = 13;
+  var map = L.map('map',{zoomControl:false, attributionControl:true}).setView(HOME_CENTER, HOME_ZOOM);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{
     subdomains:'abcd', maxZoom:20,
     attribution:'&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
@@ -401,8 +411,7 @@ const itemList = {
     return 'https://www.google.com/maps/dir/?api=1'+origin+'&destination='+dest+'&travelmode=driving';
   }
 
-  var bounds = L.latLngBounds(PLACES.map(function(p){ return [p.lat,p.lng]; }));
-  function fit(){ map.invalidateSize(); if(bounds.isValid()) map.fitBounds(bounds, {padding:[40,40], maxZoom:14}); }
+  function fit(){ map.invalidateSize(); map.setView(HOME_CENTER, HOME_ZOOM); }
   fit();
   setTimeout(fit, 300);
   window.addEventListener('load', fit);
@@ -478,13 +487,23 @@ const itemList = {
     var tipHtml = p.tip ? '<div class="tip"><p class="tip-h">Ryan’s take</p><p>'+esc(p.tip)+'</p></div>' : '';
     var siteHtml = p.website ? '<a class="detail-link" href="'+esc(p.website)+'" target="_blank" rel="noopener">Visit website</a>' : '';
     var dirHtml = '<a class="detail-link" href="'+directionsUrl(p)+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>'+(userLatLng?'Directions from my location':'Get directions')+'</a>';
+    var photos = Array.isArray(p.photos) ? p.photos.filter(Boolean) : [];
+    var galleryHtml = '';
+    if(photos.length){
+      var slides = photos.map(function(src,idx){ return '<img class="gphoto" src="'+esc(src)+'" loading="lazy" alt="'+esc(p.name)+'" />'; }).join('');
+      var gdotsHtml = photos.length>1 ? '<div class="gallery-dots">'+photos.map(function(_x,idx){return '<span class="gdot'+(idx===0?' on':'')+'"></span>';}).join('')+'</div>' : '';
+      galleryHtml = '<div class="gallery"><div class="gallery-track">'+slides+'</div>'+gdotsHtml+'</div>';
+    }
     detailBody.innerHTML =
+      galleryHtml +
       '<div class="kicker"><span class="pin"></span>'+esc(g.label)+'</div>'+
       '<h2>'+esc(p.name)+'</h2>'+
       (p.address?'<p class="addr">'+esc(p.address)+'</p>':'')+
       factsHtml + blurbHtml + tipHtml +
       '<div class="links"><a class="detail-cta" href="tel:'+TEL+'">Ask Ryan about this</a>'+dirHtml+siteHtml+'</div>'+
       '<p class="signoff">Ryan Adamson, PA · AdamsonFL.com</p>';
+    var gtrack = detailBody.querySelector('.gallery-track');
+    if(gtrack){ var gd = detailBody.querySelectorAll('.gdot'); if(gd.length){ gtrack.addEventListener('scroll', function(){ var gi=Math.round(gtrack.scrollLeft/Math.max(gtrack.clientWidth,1)); for(var k=0;k<gd.length;k++){ gd[k].classList.toggle('on', k===gi); } }, {passive:true}); } }
     listView.style.display='none';
     detailView.classList.add('show');
   }
