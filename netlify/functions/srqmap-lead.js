@@ -49,6 +49,17 @@ exports.handler = async (event) => {
     let idxLeadId = null;
     let idxSync   = 'skipped';
     let idxDetail = null; // TEMP debug
+    let idxProbe = null; // TEMP: read-API connectivity/auth check
+    if (process.env.IDX_API_KEY) {
+      try {
+        const pr = await fetch('https://api.idxbroker.com/clients/accountinfo', {
+          method: 'GET',
+          headers: { accesskey: process.env.IDX_API_KEY, outputtype: 'json' },
+        });
+        const ptxt = await pr.text();
+        idxProbe = pr.status + ' ' + (ptxt||'').replace(/[^a-zA-Z ]/g,' ').replace(/ +/g,' ').trim().slice(0,140);
+      } catch (e) { idxProbe = 'probe_exception ' + (e && e.name); }
+    }
     const IDX_API_KEY = process.env.IDX_API_KEY;
     if (IDX_API_KEY) {
       // Bounded so a slow/down IDX can never stall the function or block the Supabase save.
@@ -117,7 +128,7 @@ exports.handler = async (event) => {
 
     console.log('srqmap-lead: stored', email, '| idx:', idxSync);
     return { statusCode: 200, headers: { ...CORS, 'Content-Type': 'application/json' },
-             body: JSON.stringify({ success: true, idx: idxSync, idxDetail }) };
+             body: JSON.stringify({ success: true, idx: idxSync, idxDetail, idxProbe }) };
 
   } catch (err) {
     console.error('srqmap-lead: unexpected error', err);
