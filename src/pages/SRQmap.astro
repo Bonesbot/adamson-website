@@ -180,6 +180,32 @@ const itemList = {
     .detail{max-height:64vh}
   }
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  /* ===== Soft lead gate (SRQmap only) ===== */
+  .gate{display:none;position:fixed;inset:0;z-index:2000;background:rgba(10,42,64,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:20px}
+  .gate.show{display:flex}
+  .gate-card{position:relative;width:100%;max-width:430px;max-height:90vh;overflow-y:auto;background:var(--paper);border-radius:18px;box-shadow:0 30px 80px -20px rgba(10,42,64,.6);padding:30px 26px 22px;text-align:center}
+  .gate-x{position:absolute;top:12px;right:14px;background:none;border:none;font-size:26px;line-height:1;color:var(--muted);cursor:pointer;padding:4px 8px}
+  .gate-x:hover{color:var(--ink)}
+  .gate-eyebrow{font-family:"Montserrat",sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 8px}
+  .gate-title{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:25px;line-height:1.12;color:var(--navy);margin:0 0 10px}
+  .gate-copy{font-size:13.5px;line-height:1.55;color:var(--muted);margin:0 0 18px}
+  .gate-widget{text-align:left;margin:0 0 14px;min-height:40px}
+  .gate-fallback{text-align:center}
+  .gate-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;background:var(--navy);color:#fff;font-family:"Montserrat",sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;padding:13px 20px;border-radius:11px}
+  .gate-note{font-size:11px;color:var(--muted);margin:10px 0 0}
+  .gate-continue{display:block;width:100%;background:none;border:none;cursor:pointer;color:var(--blue-deep);font-family:"Montserrat",sans-serif;font-weight:600;font-size:12px;letter-spacing:.03em;padding:8px;margin-top:2px}
+  .gate-continue:hover{text-decoration:underline}
+  .gate-fine{font-size:10.5px;color:var(--muted);margin:10px 0 0}
+  .gate-form{display:flex;flex-direction:column;gap:9px}
+  .gate-hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+  .gate-row{display:flex;gap:9px}
+  .gate-row input{flex:1;min-width:0}
+  .gate-form input{width:100%;font-family:inherit;font-size:14px;color:var(--ink);padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--cream);outline:none;-webkit-appearance:none;transition:border-color .14s ease,box-shadow .14s ease}
+  .gate-form input::placeholder{color:var(--muted)}
+  .gate-form input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(197,165,90,.20)}
+  .gate-form .gate-cta{width:100%;border:none;cursor:pointer;margin-top:3px}
+  .gate-form .gate-cta:disabled{opacity:.6;cursor:default}
+  .gate-err{color:#b3261e;font-size:12px;margin:2px 0 0}
 </style>
 </head>
 <body>
@@ -240,6 +266,30 @@ const itemList = {
   ))}
 </div>
 
+<!-- Soft lead-capture gate (client-side only — crawlers/AI engines never see this; full content stays in the SSR block above) -->
+<div class="gate" id="gate" aria-hidden="true">
+  <div class="gate-card" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+    <button class="gate-x" id="gateClose" type="button" aria-label="Close">&times;</button>
+    <p class="gate-eyebrow">Unlock the full guide</p>
+    <h2 class="gate-title" id="gateTitle">See every spot Ryan recommends</h2>
+    <p class="gate-copy">You&rsquo;ve been exploring Sarasota &amp; the Keys. Create a free account to keep opening places &mdash; and save searches, get new-listing alerts, and Ryan&rsquo;s local picks.</p>
+    <div class="gate-widget" id="gateWidget">
+      <form class="gate-form" id="gateForm" novalidate>
+        <input type="text" name="bot-field" class="gate-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="gate-row">
+          <input type="text" id="gf_first" name="first_name" placeholder="First name" autocomplete="given-name" required />
+          <input type="text" id="gf_last" name="last_name" placeholder="Last name" autocomplete="family-name" />
+        </div>
+        <input type="email" id="gf_email" name="email" placeholder="Email address" autocomplete="email" required />
+        <input type="tel" id="gf_phone" name="phone" placeholder="Phone (optional)" autocomplete="tel" />
+        <button type="submit" class="gate-cta" id="gfSubmit">Unlock the full guide</button>
+        <p class="gate-err" id="gfErr" hidden></p>
+      </form>
+    </div>
+    <p class="gate-fine">No spam. Your details go straight to Ryan Adamson, PA &middot; saved to the Adamson Group.</p>
+  </div>
+</div>
+
 <script type="application/json" id="pins-data" set:html={JSON.stringify(pins)}></script>
 <script type="application/json" id="groups-data" set:html={JSON.stringify(GROUPS)}></script>
 
@@ -257,6 +307,49 @@ const itemList = {
 
   var active = {}; GROUPS.forEach(function(g){ active[g.id]=true; });
   var selectedId = null, markers = {}, query = '';
+
+  // ===== Soft lead gate — AEO-safe: only gates the interactive detail panel, never the SSR content =====
+  var GATE_FREE_OPENS = 3;            // distinct pins a visitor may open before the signup nudge
+  var GATE_OPENED_KEY = 'srqmap_opened_v1';
+  var GATE_UNLOCK_KEY = 'srqmap_unlocked_v1';
+  var gatePendingId = null;
+  function gateStore(){ try { return window.localStorage; } catch(e){ return null; } }
+  function gateUnlocked(){ var s=gateStore(); return !!(s && s.getItem(GATE_UNLOCK_KEY)==='1'); }
+  function gateOpened(){ var s=gateStore(); if(!s) return []; try{ return JSON.parse(s.getItem(GATE_OPENED_KEY)||'[]'); }catch(e){ return []; } }
+  function gateRecord(id){ var s=gateStore(); if(!s) return; var a=gateOpened(); if(a.indexOf(id)<0){ a.push(id); try{ s.setItem(GATE_OPENED_KEY, JSON.stringify(a)); }catch(e){} } }
+  function gateUnlock(){ var s=gateStore(); if(s){ try{ s.setItem(GATE_UNLOCK_KEY,'1'); }catch(e){} } }
+  function gateAllows(id){ if(gateUnlocked()) return true; var a=gateOpened(); if(a.indexOf(id)>=0) return true; return a.length < GATE_FREE_OPENS; }
+  var gateEl=document.getElementById('gate');
+  function openGate(){ if(gateEl){ gateEl.classList.add('show'); gateEl.setAttribute('aria-hidden','false'); } }
+  function closeGate(){ if(gateEl){ gateEl.classList.remove('show'); gateEl.setAttribute('aria-hidden','true'); } }
+  (function(){
+    if(!gateEl) return;
+    var x=document.getElementById('gateClose'); if(x) x.onclick=closeGate;
+    function onUnlocked(){ closeGate(); if(gatePendingId!=null){ var id=gatePendingId; gatePendingId=null; select(id, false); } }
+    var gForm=document.getElementById('gateForm');
+    if(gForm){
+      var errEl=document.getElementById('gfErr'), btn=document.getElementById('gfSubmit');
+      var showErr=function(m){ if(errEl){ errEl.textContent=m; errEl.hidden=false; } };
+      gForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        var first=(document.getElementById('gf_first').value||'').trim();
+        var last=(document.getElementById('gf_last').value||'').trim();
+        var email=(document.getElementById('gf_email').value||'').trim();
+        var phone=(document.getElementById('gf_phone').value||'').trim();
+        var hp=(gForm.querySelector('[name="bot-field"]')||{}).value||'';
+        if(!first){ showErr('Please enter your first name.'); return; }
+        if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ showErr('Please enter a valid email address.'); return; }
+        if(errEl) errEl.hidden=true;
+        var label=btn?btn.textContent:''; if(btn){ btn.disabled=true; btn.textContent='Saving\u2026'; }
+        fetch('/.netlify/functions/srqmap-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({first_name:first,last_name:last,email:email,phone:phone,'bot-field':hp,source:'srqmap-gate'})})
+          .then(function(r){ return r.ok ? r.json() : r.json().then(function(j){ throw new Error((j&&j.error)||'error'); }); })
+          .then(function(){ gateUnlock(); onUnlocked(); })
+          .catch(function(){ if(btn){ btn.disabled=false; btn.textContent=label; } showErr('Something went wrong \u2014 please try again, or call Ryan at '+PHONE+'.'); });
+      });
+    }
+    gateEl.addEventListener('click', function(e){ if(e.target===gateEl) closeGate(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeGate(); });
+  })();
 
   var map = L.map('map',{zoomControl:false, attributionControl:true}).setView([27.34,-82.53], 11);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{
@@ -398,6 +491,12 @@ const itemList = {
   document.getElementById('back').onclick=function(){ hideDetail(); selectedId=null; refresh(); };
 
   function select(id, fly){
+    if(!gateAllows(id)){
+      gatePendingId=id;
+      if(fly){ var gp=PLACES[id]; if(gp) map.flyTo([gp.lat,gp.lng], Math.max(map.getZoom(),15), {duration:.8}); }
+      openGate(); return;
+    }
+    gateRecord(id);
     selectedId=id;
     var p=PLACES[id]; if(!p) return;
     if(!active[p.group]){ active[p.group]=true; }
