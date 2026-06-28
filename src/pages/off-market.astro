@@ -1,0 +1,568 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const description =
+  "Some of Sarasota's most significant real estate transactions never appear on MLS. Register your property confidentially with Ryan Adamson — no listing, no obligation, no algorithm.";
+
+const propertyTypes = [
+  { value: 'single-family',      label: 'Single Family' },
+  { value: 'condo',              label: 'Condo' },
+  { value: 'townhome',           label: 'Townhome' },
+  { value: 'waterfront-dockage', label: 'Waterfront / Dockage' },
+  { value: 'beachfront',         label: 'Beachfront' },
+  { value: 'estate-acreage',     label: 'Estate / Acreage' },
+];
+
+const sizeOptions = [
+  { value: 'under-1500', label: 'Under 1,500 SF' },
+  { value: '1500-2500',  label: '1,500–2,500 SF' },
+  { value: '2500-4000',  label: '2,500–4,000 SF' },
+  { value: '4000-6000',  label: '4,000–6,000 SF' },
+  { value: '6000-plus',  label: '6,000+ SF' },
+];
+
+const bedroomOptions = [
+  { value: '1-2',    label: '1–2' },
+  { value: '3',      label: '3' },
+  { value: '4',      label: '4' },
+  { value: '5-plus', label: '5+' },
+];
+
+const timelineOptions = [
+  { value: 'right-now',   label: 'Right offer, right now' },
+  { value: '6-12-months', label: '6–12 months' },
+  { value: '1-2-years',   label: '1–2 years' },
+  { value: 'exploring',   label: 'Just exploring' },
+];
+
+const inputCls =
+  'w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white placeholder-white/20 focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm';
+const labelCls =
+  'block font-accent text-[10px] uppercase tracking-[0.2em] text-[var(--color-gold-light)] mb-2';
+const legendCls =
+  'font-accent text-[10px] uppercase tracking-[0.2em] text-[var(--color-gold-light)] mb-3 block';
+---
+
+<BaseLayout
+  title="Off Market Registry — Private Seller Interest"
+  description={description}
+>
+
+<style>
+  /* Chip / pill selection states */
+  .chip-multi.chip-selected,
+  .pill-single.chip-selected {
+    border-color: var(--color-gold) !important;
+    color: #fff !important;
+    background: rgba(197, 165, 90, 0.12) !important;
+  }
+
+  /* Custom range slider */
+  input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 2px;
+    background: rgba(255,255,255,0.10);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    background: var(--color-gold);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid #0A0A0A;
+    box-shadow: 0 0 0 1px var(--color-gold);
+    transition: transform 0.15s ease;
+  }
+  input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+  input[type=range]::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    background: var(--color-gold);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid #0A0A0A;
+  }
+
+  /* dark select dropdown options */
+  select.dark-select option {
+    background-color: #111111;
+    color: #fff;
+  }
+
+  .form-divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    margin: 2.5rem 0;
+  }
+
+  #success-state { animation: fadeInUp 0.5s ease forwards; }
+</style>
+
+  <!-- ══════════ HERO ══════════ -->
+  <section class="relative min-h-[68vh] flex items-center overflow-hidden">
+    <div
+      class="absolute inset-0"
+      style="background: linear-gradient(135deg,#000000 0%,#0c1828 55%,#000000 100%);"
+    ></div>
+    <div
+      class="absolute inset-0"
+      style="background: radial-gradient(ellipse at 72% 50%, rgba(197,165,90,0.07) 0%, transparent 58%);"
+    ></div>
+    <div
+      class="absolute bottom-0 left-0 right-0 h-28"
+      style="background: linear-gradient(to bottom, transparent, #0A0A0A);"
+    ></div>
+
+    <div class="relative z-10 container py-32 pt-40 text-center">
+      <p class="section-label text-[var(--color-gold)] mb-6 tracking-[0.3em]">
+        Private Seller Registry
+      </p>
+
+      <h1
+        class="font-display text-white text-4xl sm:text-5xl lg:text-[3.75rem] leading-[1.12] max-w-4xl mx-auto mb-8"
+      >
+        Not everything worth owning<br class="hidden sm:block" />
+        is for sale.<br />
+        <em class="not-italic text-[var(--color-gold)]">Until it is.</em>
+      </h1>
+
+      <p class="text-white/55 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-12">
+        Some of Sarasota's most significant transactions never appear on MLS.
+        If the right offer found you tomorrow, would you be ready?
+        Register confidentially — no listing, no obligation, no algorithm.
+      </p>
+
+      <a
+        href="#register"
+        class="inline-flex items-center gap-2 font-accent text-[11px] uppercase tracking-[0.25em] text-[var(--color-gold)] border border-[var(--color-gold)]/40 px-8 py-3.5 rounded hover:bg-[var(--color-gold)]/10 hover:border-[var(--color-gold)]/70 transition-all duration-200"
+      >
+        Register Your Interest
+        <span class="text-sm leading-none">↓</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════ TAGLINE STRIP ══════════ -->
+  <div class="bg-[var(--color-gold)]">
+    <div class="container py-3.5 text-center">
+      <p class="font-accent text-[11px] font-semibold tracking-[0.38em] uppercase text-black/75">
+        PRIVATE &nbsp;&middot;&nbsp; CURATED &nbsp;&middot;&nbsp; NO MLS REQUIRED
+      </p>
+    </div>
+  </div>
+
+  <!-- ══════════ FORM SECTION ══════════ -->
+  <section id="register" class="section bg-[var(--color-black-soft)]">
+    <div class="container-narrow">
+
+      <div class="text-center mb-14">
+        <p class="section-label text-[var(--color-gold)] mb-3">Confidential Registration</p>
+        <h2 class="font-display text-white text-3xl sm:text-4xl mb-5">Register Your Interest</h2>
+        <div class="w-14 h-px bg-[var(--color-gold)] mx-auto mb-6"></div>
+        <p class="text-white/35 text-sm max-w-md mx-auto leading-relaxed">
+          Complete the form below to register your property confidentially. This is not a
+          listing — no public record is created, no commitment is made.
+        </p>
+      </div>
+
+      <!-- Form wrapper — hidden on success -->
+      <div id="form-wrapper">
+        <form id="off-market-form" novalidate class="space-y-8">
+
+          <!-- 1. Name -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label for="om-first-name" class={labelCls}>First Name</label>
+              <input
+                type="text" id="om-first-name" name="first_name" required
+                class={inputCls} placeholder="First name"
+                autocomplete="given-name"
+              />
+            </div>
+            <div>
+              <label for="om-last-name" class={labelCls}>Last Name</label>
+              <input
+                type="text" id="om-last-name" name="last_name" required
+                class={inputCls} placeholder="Last name"
+                autocomplete="family-name"
+              />
+            </div>
+          </div>
+
+          <!-- 2 & 3. Email + Phone -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label for="om-email" class={labelCls}>
+                Email&nbsp;
+                <span class="normal-case tracking-normal font-sans font-normal text-white/25">(required)</span>
+              </label>
+              <input
+                type="email" id="om-email" name="email" required
+                class={inputCls} placeholder="your@email.com"
+                autocomplete="email"
+              />
+            </div>
+            <div>
+              <label for="om-phone" class={labelCls}>
+                Phone&nbsp;
+                <span class="normal-case tracking-normal font-sans font-normal text-white/25">(optional)</span>
+              </label>
+              <input
+                type="tel" id="om-phone" name="phone"
+                class={inputCls} placeholder="(941) 000-0000"
+                autocomplete="tel"
+              />
+            </div>
+          </div>
+
+          <hr class="form-divider" />
+
+          <!-- 4. Neighborhood -->
+          <div>
+            <label for="om-neighborhood" class={labelCls}>Neighborhood / Subdivision</label>
+            <input
+              type="text" id="om-neighborhood" name="neighborhood_subdivision"
+              class={inputCls}
+              placeholder="e.g. Bird Key, Harbor Acres, The Oaks, Prestancia..."
+            />
+            <p class="text-white/25 text-[11px] mt-2 leading-relaxed">
+              Be as specific as you like — subdivision names help us match you to the right buyer faster.
+            </p>
+          </div>
+
+          <!-- 5. Property Type -->
+          <div>
+            <span class={legendCls}>
+              Property Type&nbsp;
+              <span class="normal-case tracking-normal font-sans font-normal text-white/25">(select all that apply)</span>
+            </span>
+            <div class="flex flex-wrap gap-2.5" id="property-type-group">
+              {propertyTypes.map((pt) => (
+                <label class="chip-multi cursor-pointer flex items-center px-4 py-2.5 border border-white/[0.08] rounded text-[11px] font-accent tracking-wide text-white/40 hover:border-white/25 hover:text-white/70 transition-all select-none bg-[#111111]">
+                  <input type="checkbox" name="property_types" value={pt.value} class="sr-only" />
+                  {pt.label}
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <!-- 6 & 7. Size + Bedrooms -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div>
+              <label for="om-approx-size" class={labelCls}>Approximate Size</label>
+              <div class="relative">
+                <select
+                  id="om-approx-size" name="approx_size"
+                  class={`${inputCls} dark-select appearance-none pr-8`}
+                >
+                  <option value="" disabled selected>Select size range…</option>
+                  {sizeOptions.map((s) => (
+                    <option value={s.value}>{s.label}</option>
+                  ))}
+                </select>
+                <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/30 text-xs">▾</span>
+              </div>
+            </div>
+            <div>
+              <span class={legendCls}>Bedrooms</span>
+              <div class="flex flex-wrap gap-2" id="bedrooms-group">
+                {bedroomOptions.map((b) => (
+                  <label class="pill-single cursor-pointer px-4 py-2.5 border border-white/[0.08] rounded text-[11px] font-accent tracking-wide text-white/40 hover:border-white/25 hover:text-white/70 transition-all select-none bg-[#111111]">
+                    <input type="radio" name="bedrooms" value={b.value} class="sr-only" />
+                    {b.label}
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <hr class="form-divider" />
+
+          <!-- 8. Price Threshold Slider -->
+          <div>
+            <span class={legendCls}>What would make you move?</span>
+            <p class="text-white/30 text-[11px] mb-6 leading-relaxed max-w-lg">
+              The number that would get your attention. This stays completely private. It
+              helps Ryan know if a qualified buyer in your range is actively searching.
+            </p>
+
+            <div class="bg-[#111111] border border-white/[0.08] rounded-lg p-6 sm:p-8">
+              <div class="flex items-center justify-between mb-7">
+                <span class="text-white/20 text-xs font-accent tracking-wider">$500K</span>
+                <div class="text-center">
+                  <div class="font-display">
+                    <span id="price-value" class="text-[var(--color-gold)] text-4xl sm:text-5xl">$2M</span>
+                  </div>
+                  <p class="text-white/25 text-[10px] font-accent tracking-[0.2em] uppercase mt-1.5">price threshold</p>
+                </div>
+                <span class="text-white/20 text-xs font-accent tracking-wider">$10M+</span>
+              </div>
+
+              <input
+                type="range" id="price-slider"
+                min="0" max="10" step="1" value="4"
+                class="w-full"
+              />
+              <input type="hidden" name="price_threshold_min" id="price-min-hidden" value="2000000" />
+              <input type="hidden" name="price_threshold_max" id="price-max-hidden" value="" />
+
+              <div class="flex justify-between mt-3 px-0.5">
+                <span class="text-white/15 text-[9px]">500K</span>
+                <span class="text-white/15 text-[9px]">1M</span>
+                <span class="text-white/15 text-[9px]">2M</span>
+                <span class="text-white/15 text-[9px]">3M</span>
+                <span class="text-white/15 text-[9px]">5M</span>
+                <span class="text-white/15 text-[9px]">10M+</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. Timeline -->
+          <div>
+            <span class={legendCls}>Timeline</span>
+            <div class="flex flex-wrap gap-2.5" id="timeline-group">
+              {timelineOptions.map((t) => (
+                <label class="pill-single cursor-pointer px-4 py-2.5 border border-white/[0.08] rounded text-[11px] font-accent tracking-wide text-white/40 hover:border-white/25 hover:text-white/70 transition-all select-none bg-[#111111]">
+                  <input type="radio" name="timeline" value={t.value} class="sr-only" />
+                  {t.label}
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <!-- 10. Notes -->
+          <div>
+            <label for="om-notes" class={labelCls}>
+              Tell us about your home&nbsp;
+              <span class="normal-case tracking-normal font-sans font-normal text-white/25">(optional)</span>
+            </label>
+            <textarea
+              id="om-notes" name="notes" rows="4"
+              class={`${inputCls} resize-none leading-relaxed`}
+              placeholder="Unique features, recent renovations, why you love it — context helps us find the right match."
+            ></textarea>
+          </div>
+
+          <!-- 11. Confidentiality Acknowledgment -->
+          <div class="border border-white/[0.07] rounded-lg p-5 bg-[#0A0A0A]">
+            <label class="flex items-start gap-3 cursor-pointer group">
+              <input
+                type="checkbox" id="om-consent" name="consent" required
+                class="mt-0.5 w-4 h-4 flex-shrink-0 accent-[var(--color-gold)] cursor-pointer"
+              />
+              <span class="text-white/40 text-xs leading-relaxed group-hover:text-white/55 transition-colors">
+                I understand this registers my interest only and does not create an agency
+                relationship or listing agreement. Ryan Adamson, Coldwell Banker Realty,
+                will contact me privately.
+              </span>
+            </label>
+          </div>
+
+          <!-- Error -->
+          <div id="form-error" class="hidden text-red-400/80 text-xs text-center py-1">
+            Please fill in your name, email, and confirm the acknowledgment to continue.
+          </div>
+
+          <!-- Submit -->
+          <div class="text-center pt-2">
+            <button
+              type="submit" id="om-submit-btn"
+              class="inline-flex items-center justify-center font-accent text-[11px] uppercase tracking-[0.25em] px-12 py-4 bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] font-semibold rounded transition-all duration-200 disabled:opacity-60"
+            >
+              Register Confidentially
+            </button>
+            <p class="text-white/20 text-[11px] mt-4 max-w-sm mx-auto leading-relaxed">
+              Your information is private and never sold or shared. No listing is created.
+              No public record.
+            </p>
+          </div>
+
+        </form>
+      </div><!-- /form-wrapper -->
+
+      <!-- Success State -->
+      <div id="success-state" class="hidden text-center py-24">
+        <div
+          class="inline-flex items-center justify-center w-16 h-16 rounded-full border-2 border-[var(--color-gold)] text-[var(--color-gold)] text-xl mb-8"
+          aria-hidden="true"
+        >&#x2713;</div>
+        <h3 class="font-display text-white text-3xl mb-4">Registration Received</h3>
+        <div class="w-12 h-px bg-[var(--color-gold)] mx-auto mb-6"></div>
+        <p class="text-white/55 text-lg max-w-xs mx-auto leading-relaxed">
+          Ryan will be in touch privately within 24 hours.
+        </p>
+        <p class="text-white/20 text-[11px] mt-8 font-accent tracking-wider">
+          COLDWELL BANKER REALTY &middot; CONFIDENTIAL
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════ VALUE PROPS ══════════ -->
+  <section class="section bg-[var(--color-dark)]">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <div class="border border-white/[0.07] rounded-lg p-8 hover:border-[var(--color-gold)]/30 transition-colors duration-300">
+          <div class="w-8 h-0.5 bg-[var(--color-gold)] mb-7"></div>
+          <h3 class="font-display text-white text-xl mb-4 leading-snug">The Privacy Premium</h3>
+          <p class="text-white/45 text-sm leading-relaxed">
+            Off-market luxury transactions in Sarasota regularly close above MLS comparable
+            prices. No days-on-market counter. No open houses. Serious buyers only.
+          </p>
+        </div>
+
+        <div class="border border-white/[0.07] rounded-lg p-8 hover:border-[var(--color-gold)]/30 transition-colors duration-300">
+          <div class="w-8 h-0.5 bg-[var(--color-gold)] mb-7"></div>
+          <h3 class="font-display text-white text-xl mb-4 leading-snug">Active Buyer Pool</h3>
+          <p class="text-white/45 text-sm leading-relaxed">
+            Ryan currently works with pre-qualified buyers actively searching Sarasota's
+            barrier islands and mainland neighborhoods — many with cash, short timelines,
+            and specific criteria that may match your home.
+          </p>
+        </div>
+
+        <div class="border border-white/[0.07] rounded-lg p-8 hover:border-[var(--color-gold)]/30 transition-colors duration-300">
+          <div class="w-8 h-0.5 bg-[var(--color-gold)] mb-7"></div>
+          <h3 class="font-display text-white text-xl mb-4 leading-snug">No Obligation</h3>
+          <p class="text-white/45 text-sm leading-relaxed">
+            Registering interest is not a listing. There is no commitment until you choose
+            to move forward. Florida law and FREC guidelines protect your right to transact
+            on your terms.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ CLIENT SCRIPT ══════════ -->
+  <script>
+    (function () {
+      'use strict';
+
+      // Price slider
+      var PRICES = [500000, 750000, 1000000, 1500000, 2000000, 2500000, 3000000, 4000000, 5000000, 7500000, 10000000];
+
+      function fmtPrice(v) {
+        if (v >= 10000000) return '$10M+';
+        if (v >= 1000000) {
+          var m = v / 1000000;
+          return '$' + (m % 1 === 0 ? m.toFixed(0) : m.toFixed(1)) + 'M';
+        }
+        return '$' + (v / 1000).toFixed(0) + 'K';
+      }
+
+      var slider    = document.getElementById('price-slider');
+      var priceEl   = document.getElementById('price-value');
+      var hiddenMin = document.getElementById('price-min-hidden');
+
+      function updateSlider() {
+        var idx = parseInt(slider.value, 10);
+        var p   = PRICES[idx];
+        priceEl.textContent = fmtPrice(p);
+        hiddenMin.value     = String(p);
+      }
+      slider.addEventListener('input', updateSlider);
+      updateSlider();
+
+      // Multi-select chips (property type)
+      document.querySelectorAll('.chip-multi').forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          chip.classList.toggle('chip-selected');
+          var cb = chip.querySelector('input[type=checkbox]');
+          if (cb) cb.checked = chip.classList.contains('chip-selected');
+        });
+      });
+
+      // Single-select pills (bedrooms, timeline)
+      ['bedrooms-group', 'timeline-group'].forEach(function (gid) {
+        var group = document.getElementById(gid);
+        if (!group) return;
+        group.querySelectorAll('.pill-single').forEach(function (pill) {
+          pill.addEventListener('click', function () {
+            group.querySelectorAll('.pill-single').forEach(function (p) {
+              p.classList.remove('chip-selected');
+            });
+            pill.classList.add('chip-selected');
+            var radio = pill.querySelector('input[type=radio]');
+            if (radio) radio.checked = true;
+          });
+        });
+      });
+
+      // Form submission
+      var form        = document.getElementById('off-market-form');
+      var formWrapper = document.getElementById('form-wrapper');
+      var successEl   = document.getElementById('success-state');
+      var submitBtn   = document.getElementById('om-submit-btn');
+      var errorEl     = document.getElementById('form-error');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errorEl.classList.add('hidden');
+
+        var firstName = (form.querySelector('[name="first_name"]').value || '').trim();
+        var email     = (form.querySelector('[name="email"]').value      || '').trim();
+        var consent   = form.querySelector('[name="consent"]').checked;
+
+        if (!firstName || !email || !consent) {
+          errorEl.classList.remove('hidden');
+          if (!firstName)     { form.querySelector('[name="first_name"]').focus(); }
+          else if (!email)    { form.querySelector('[name="email"]').focus(); }
+          return;
+        }
+
+        submitBtn.disabled    = true;
+        submitBtn.textContent = 'Submitting…';
+
+        function radioVal(name) {
+          var r = form.querySelector('[name="' + name + '"]:checked');
+          return r ? r.value : '';
+        }
+
+        var payload = {
+          first_name:               firstName,
+          last_name:                (form.querySelector('[name="last_name"]').value || '').trim(),
+          email:                    email,
+          phone:                    (form.querySelector('[name="phone"]').value || '').trim(),
+          neighborhood_subdivision: (form.querySelector('[name="neighborhood_subdivision"]').value || '').trim(),
+          property_types:           Array.from(form.querySelectorAll('[name="property_types"]:checked')).map(function (i) { return i.value; }),
+          approx_size:              form.querySelector('[name="approx_size"]').value,
+          bedrooms:                 radioVal('bedrooms'),
+          price_threshold_min:      form.querySelector('[name="price_threshold_min"]').value,
+          price_threshold_max:      '',
+          timeline:                 radioVal('timeline'),
+          notes:                    (form.querySelector('[name="notes"]').value || '').trim(),
+          'bot-field':              '',
+        };
+
+        fetch('/.netlify/functions/off-market-lead', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload),
+        })
+          .then(function (res) {
+            if (!res.ok) { throw new Error('server ' + res.status); }
+            formWrapper.classList.add('hidden');
+            successEl.classList.remove('hidden');
+            successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          })
+          .catch(function () {
+            submitBtn.disabled    = false;
+            submitBtn.textContent = 'Register Confidentially';
+            errorEl.textContent   = 'Something went wrong. Please try again or email Ryan directly.';
+            errorEl.classList.remove('hidden');
+          });
+      });
+    })();
+  </script>
+
+</BaseLayout>

@@ -52,10 +52,10 @@ const areas = [
         </p>
       </div>
 
-      <!-- Quick Links -->
+      <!-- Quick Links + Buying & Selling -->
       <div>
         <h4 class="font-accent text-xs uppercase tracking-[0.15em] text-white font-semibold mb-4">Quick Links</h4>
-        <ul class="space-y-2" role="list">
+        <ul class="space-y-2 mb-8" role="list">
           {quickLinks.map((item) => (
             <li>
               <a href={item.href} class="text-sm text-white/50 hover:text-[var(--color-gold)] transition-colors flex items-center gap-2">
@@ -64,6 +64,21 @@ const areas = [
               </a>
             </li>
           ))}
+        </ul>
+        <h4 class="font-accent text-xs uppercase tracking-[0.15em] text-white font-semibold mb-4">Buying &amp; Selling</h4>
+        <ul class="space-y-2" role="list">
+          <li>
+            <a href="/find-my-dream-home" class="text-sm text-white/50 hover:text-[var(--color-gold)] transition-colors flex items-center gap-2">
+              <span class="text-[var(--color-cbgl-blue-light)] text-xs">&rarr;</span>
+              Find My Dream Home
+            </a>
+          </li>
+          <li>
+            <a href="/off-market" class="text-sm text-[var(--color-gold)]/70 hover:text-[var(--color-gold)] transition-colors flex items-center gap-2">
+              <span class="text-[var(--color-gold)]/40 text-xs">&rarr;</span>
+              Off Market Registry
+            </a>
+          </li>
         </ul>
       </div>
 
