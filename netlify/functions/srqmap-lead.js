@@ -52,12 +52,14 @@ exports.handler = async (event) => {
     let idxProbe = null; // TEMP: read-API connectivity/auth check
     if (process.env.IDX_API_KEY) {
       try {
+        const pbody = 'firstName=ProbeUser&lastName=Test&email=probe' + Date.now() + '%40example.com';
         const pr = await fetch('https://api.idxbroker.com/leads/lead', {
           method: 'PUT',
-          headers: { accesskey: process.env.IDX_API_KEY, outputtype: 'json', 'Content-Type': 'application/x-www-form-urlencoded' },
+          headers: { accesskey: process.env.IDX_API_KEY, outputtype: 'json', 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': String(Buffer.byteLength(pbody)) },
+          body: pbody,
         });
         const ptxt = await pr.text();
-        idxProbe = pr.status + ' :: ' + (ptxt||'').replace(/[^a-zA-Z0-9 _]/g,' ').replace(/ +/g,' ').trim().slice(0,260);
+        idxProbe = pr.status + ' :: ' + (ptxt||'').replace(/[^a-zA-Z0-9 _]/g,' ').replace(/ +/g,' ').trim().slice(0,400);
       } catch (e) { idxProbe = 'probe_exception ' + (e && e.name); }
     }
     const IDX_API_KEY = process.env.IDX_API_KEY;
