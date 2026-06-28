@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-26T10:55:42.234620+00:00",
+  "lastUpdated": "2026-06-28T10:59:05.944900+00:00",
   "counts": {
-    "sold": 515,
-    "pending": 60,
-    "active": 441,
-    "total": 575
+    "sold": 516,
+    "pending": 61,
+    "active": 442,
+    "total": 577
   },
   "metrics": {
-    "avgPrice": "$1,381,418",
+    "avgPrice": "$1,380,824",
     "avgPricePerSqFt": "$675",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,887",
+    "avgLivingSqFt": "1,888",
     "avgLotSqFt": null,
     "avgDom": 109
   },
@@ -22,17 +22,17 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 441,
+    "count": 442,
     "medianPrice": "$1,195,000",
-    "medianPricePerSqFt": "$774",
-    "waterfrontCount": 249,
+    "medianPricePerSqFt": "$773",
+    "waterfrontCount": 248,
     "newConstructionCount": 67
   },
   "sold": {
-    "count": 146,
-    "medianPrice": "$950,000",
+    "count": 147,
+    "medianPrice": "$940,000",
     "medianDom": 69,
-    "saleToListRatio": "88.4%",
+    "saleToListRatio": "88.3%",
     "windowDays": 90
   },
   "fees": {
@@ -40,7 +40,7 @@
     "medianMonthlyCondoFee": "$1,261"
   },
   "priceBands": {
-    "under900k": 178,
+    "under900k": 179,
     "band900kTo1_5m": 80,
     "band1_5mTo3m": 80,
     "band3mPlus": 103
@@ -48,11 +48,24 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 441
+      "count": 442
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4678073",
+      "address": "6157 MIDNIGHT PASS RD #B12",
+      "subdivision": "BAY OAKS",
+      "soldPrice": "$440,000",
+      "soldDate": "2026-06-26",
+      "bedrooms": 2,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,332",
+      "yearBuilt": 1974,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4693282",
       "address": "819 PARADISE WAY",
@@ -104,19 +117,6 @@
       "yearBuilt": 1975,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4667146",
-      "address": "145 AVENIDA MESSINA #3",
-      "subdivision": "VILLA NAVARRA",
-      "soldPrice": "$625,000",
-      "soldDate": "2026-06-22",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,025",
-      "yearBuilt": 1966,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -124,11 +124,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 241,
-      "avgPrice": "$828,366",
-      "avgPricePerSqFt": "$688",
+      "activeCount": 242,
+      "avgPrice": "$827,443",
+      "avgPricePerSqFt": "$686",
       "avgLivingSqFt": "1,202",
-      "avgDom": 157
+      "avgDom": 155
     },
     {
       "tier": "1990to2005",
@@ -138,7 +138,7 @@
       "avgPrice": "$1,382,862",
       "avgPricePerSqFt": "$692",
       "avgLivingSqFt": "2,068",
-      "avgDom": 235
+      "avgDom": 236
     },
     {
       "tier": "2006to2019",
@@ -148,7 +148,7 @@
       "avgPrice": "$2,534,890",
       "avgPricePerSqFt": "$1,213",
       "avgLivingSqFt": "1,990",
-      "avgDom": 253
+      "avgDom": 255
     },
     {
       "tier": "2020plus",
@@ -158,7 +158,7 @@
       "avgPrice": "$4,865,625",
       "avgPricePerSqFt": "$1,677",
       "avgLivingSqFt": "3,032",
-      "avgDom": 368
+      "avgDom": 370
     }
   ],
   "condoTiersScope": {
