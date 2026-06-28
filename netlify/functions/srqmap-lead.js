@@ -65,7 +65,7 @@ exports.handler = async (event) => {
             'Content-Type': 'application/x-www-form-urlencoded',
             accesskey:   IDX_API_KEY,
             outputtype:  'json',
-            apiversion:  '1.7.0',
+            apiversion:  '1.8.0',
           },
           body: form.toString(),
           signal: ctrl.signal,
