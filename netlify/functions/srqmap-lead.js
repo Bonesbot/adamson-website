@@ -1,17 +1,15 @@
 // netlify/functions/srqmap-lead.js
 //
-// SRQmap gate lead capture. Writes to Supabase FIRST (durable source of truth,
-// so the client base survives even if IDX Broker is ever dropped), THEN forwards
-// the lead to IDX Broker Engage via the API as a best-effort secondary sync.
+// SRQmap gate lead capture. Writes to Supabase (durable source of truth, so the
+// client base survives even if IDX Broker is ever dropped) AND forwards the lead
+// to IDX Broker Engage via the API. The IDX call is time-bounded so a slow/down
+// IDX can never block the Supabase save; if it fails the lead is still stored
+// (idx_sync records the outcome).
 //
-// ── Supabase table DDL (see supabase/migrations/srqmap_leads.sql) ──
-//   public.srqmap_leads (id, created_at, first_name, last_name, email,
-//                        phone, source, idx_lead_id, idx_sync, raw_payload)
-//
-// Env vars (Netlify dashboard):
-//   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY   (required — already set for other forms)
-//   IDX_API_KEY                                (optional — enables Engage sync)
-// No npm deps — uses global fetch (Netlify Node 18+).
+// ── Supabase table: see supabase/migrations/srqmap_leads.sql ──
+// Env vars (Netlify): SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY (required),
+//                     IDX_API_KEY (optional — enables Engage sync).
+// No npm deps — global fetch (Netlify Node 18+).
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -36,7 +34,6 @@ exports.handler = async (event) => {
       return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: 'Server configuration error' }) };
     }
 
-    // ── Validate ──
     const email = (body.email || '').trim();
     const first = (body.first_name || '').trim();
     const last  = (body.last_name  || '').trim();
@@ -45,42 +42,29 @@ exports.handler = async (event) => {
       return { statusCode: 400, headers: CORS, body: JSON.stringify({ error: 'A valid email is required' }) };
     }
 
-    // ── 1) Forward to IDX Engage (best-effort, before insert so we can record the id) ──
+    // ── IDX Engage sync (best-effort, time-bounded) ──
     let idxLeadId = null;
     let idxSync   = 'skipped';
-    let idxDetail = null; // TEMP debug
-    let idxProbe = null; // TEMP: read-API connectivity/auth check
-    if (process.env.IDX_API_KEY) {
-      try {
-        const pbody = 'firstName=ProbeUser&lastName=Test&email=probe' + Date.now() + '%40example.com';
-        const pr = await fetch('https://api.idxbroker.com/leads/lead', {
-          method: 'PUT',
-          headers: { accesskey: process.env.IDX_API_KEY, outputtype: 'json', 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': String(Buffer.byteLength(pbody)) },
-          body: pbody,
-        });
-        const ptxt = await pr.text();
-        idxProbe = pr.status + ' :: ' + (ptxt||'').replace(/[^a-zA-Z0-9 _]/g,' ').replace(/ +/g,' ').trim().slice(0,400);
-      } catch (e) { idxProbe = 'probe_exception ' + (e && e.name); }
-    }
     const IDX_API_KEY = process.env.IDX_API_KEY;
     if (IDX_API_KEY) {
-      // Bounded so a slow/down IDX can never stall the function or block the Supabase save.
-      const ctrl = new AbortController();
+      const ctrl  = new AbortController();
       const timer = setTimeout(() => ctrl.abort(), 6000);
       try {
         const form = new URLSearchParams();
         form.set('email', email);
         if (first) form.set('firstName', first);
         if (last)  form.set('lastName', last);
+        const payload = form.toString();
         const idxRes = await fetch('https://api.idxbroker.com/leads/lead', {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            accesskey:   IDX_API_KEY,
-            outputtype:  'json',
-            apiversion:  '1.8.0',
+            'Content-Type':   'application/x-www-form-urlencoded',
+            'Content-Length': String(Buffer.byteLength(payload)),
+            accesskey:        IDX_API_KEY,
+            outputtype:       'json',
+            apiversion:       '1.8.0',
           },
-          body: form.toString(),
+          body: payload,
           signal: ctrl.signal,
         });
         const txt = await idxRes.text();
@@ -89,7 +73,6 @@ exports.handler = async (event) => {
           idxSync = 'ok';
         } else {
           idxSync = `error_${idxRes.status}`;
-          idxDetail = (txt||'').replace(/[^a-zA-Z ]/g,' ').replace(/ +/g,' ').trim().slice(0,220); // TEMP debug words
           console.error('srqmap-lead: IDX forward failed', idxRes.status, txt.slice(0, 200));
         }
       } catch (e) {
@@ -100,7 +83,7 @@ exports.handler = async (event) => {
       }
     }
 
-    // ── 2) Insert into Supabase (source of truth) ──
+    // ── Persist to Supabase (source of truth) ──
     const row = {
       first_name:  first || null,
       last_name:   last  || null,
@@ -121,7 +104,6 @@ exports.handler = async (event) => {
       },
       body: JSON.stringify(row),
     });
-
     if (!res.ok) {
       const text = await res.text();
       console.error('srqmap-lead: Supabase insert failed', res.status, text);
@@ -130,7 +112,7 @@ exports.handler = async (event) => {
 
     console.log('srqmap-lead: stored', email, '| idx:', idxSync);
     return { statusCode: 200, headers: { ...CORS, 'Content-Type': 'application/json' },
-             body: JSON.stringify({ success: true, idx: idxSync, idxDetail, idxProbe }) };
+             body: JSON.stringify({ success: true }) };
 
   } catch (err) {
     console.error('srqmap-lead: unexpected error', err);
