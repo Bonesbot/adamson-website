@@ -229,7 +229,7 @@ const legendCls =
             <input
               type="text" id="om-neighborhood" name="neighborhood_subdivision"
               class={inputCls}
-              placeholder="e.g. Bird Key, Harbor Acres, The Oaks, Prestancia..."
+              placeholder="e.g. Bird Key, Harbor Acres, The Oaks, Country Club Shores..."
             />
             <p class="text-white/25 text-[11px] mt-2 leading-relaxed">
               Be as specific as you like — subdivision names help us match you to the right buyer faster.
@@ -306,7 +306,7 @@ const legendCls =
 
               <input
                 type="range" id="price-slider"
-                min="0" max="10" step="1" value="4"
+                min="500000" max="10000000" step="100000" value="2000000"
                 class="w-full"
               />
               <input type="hidden" name="price_threshold_min" id="price-min-hidden" value="2000000" />
@@ -448,9 +448,7 @@ const legendCls =
     (function () {
       'use strict';
 
-      // Price slider
-      var PRICES = [500000, 750000, 1000000, 1500000, 2000000, 2500000, 3000000, 4000000, 5000000, 7500000, 10000000];
-
+      // Price slider — continuous $100K increments from $500K to $10M+
       function fmtPrice(v) {
         if (v >= 10000000) return '$10M+';
         if (v >= 1000000) {
@@ -465,20 +463,21 @@ const legendCls =
       var hiddenMin = document.getElementById('price-min-hidden');
 
       function updateSlider() {
-        var idx = parseInt(slider.value, 10);
-        var p   = PRICES[idx];
+        var p = parseInt(slider.value, 10);
         priceEl.textContent = fmtPrice(p);
         hiddenMin.value     = String(p);
       }
       slider.addEventListener('input', updateSlider);
       updateSlider();
 
-      // Multi-select chips (property type)
-      document.querySelectorAll('.chip-multi').forEach(function (chip) {
-        chip.addEventListener('click', function () {
-          chip.classList.toggle('chip-selected');
-          var cb = chip.querySelector('input[type=checkbox]');
-          if (cb) cb.checked = chip.classList.contains('chip-selected');
+      // Multi-select chips (property type) — let the <label> toggle the
+      // checkbox natively, then reflect its real state into the chip class.
+      // (A click-toggle on the label double-fired against the native
+      // label->checkbox activation, cancelling every selection out.)
+      document.querySelectorAll('#property-type-group input[type=checkbox]').forEach(function (cb) {
+        cb.addEventListener('change', function () {
+          var chip = cb.closest('.chip-multi');
+          if (chip) chip.classList.toggle('chip-selected', cb.checked);
         });
       });
 
