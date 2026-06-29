@@ -300,13 +300,21 @@ def compute_extras(slug, conn, head):
                    "soldMedianPrice": fmt_currency(r["sold_price"]) if enough else None,
                    "lowSample": not enough})
 
-    # market balance (months of supply from trailing-90d sold)
+    # market balance (months of supply from trailing-12mo sold, segmented by property class)
     active_n = head["active_count"] or 0; sold90 = head["sold90_count"] or 0
-    mos = round(active_n / (sold90/3.0), 1) if sold90 else None
+    sold365 = head["sold365_count"] or 0
+    def _mos(a, s):
+        return round(a / (s / 12.0), 1) if s else None
+    mos = _mos(active_n, sold365)
+    mos_condo = _mos(head["active_condo"] or 0, head["sold365_condo"] or 0)
+    mos_sfhv = _mos(head["active_sfhv"] or 0, head["sold365_sfhv"] or 0)
     label = None
     if mos is not None:
-        label = "seller's market" if mos < 4 else ("buyer's market" if mos > 7 else "balanced market")
-    balance = {"monthsOfSupply": mos, "label": label, "activeCount": active_n, "sold90Count": sold90}
+        label = "seller's market" if mos < 5 else ("buyer's market" if mos > 7 else "balanced market")
+    balance = {"monthsOfSupply": mos, "monthsOfSupplyCondo": mos_condo,
+               "monthsOfSupplySfhVilla": mos_sfhv, "label": label,
+               "activeCount": active_n, "sold365Count": sold365, "sold90Count": sold90,
+               "method": "active / (trailing-12mo closed / 12)"}
 
     # property-type split
     ptype = {}
@@ -329,7 +337,7 @@ def compute_extras(slug, conn, head):
                   "a":f"Gulf-front / beachfront homes sell at a median {fmt_currency(g['sold_psf'])} per sq ft versus {fmt_currency(bc['sold_psf'])} for bay- or canal-front — about a {prem}% waterfront premium (Stellar MLS, recent closed sales)."})
     if mos is not None:
         q.append({"facet":"balance","q":f"Is {name} a buyer's or seller's market right now?",
-                  "a":f"With {active_n} active listings and roughly {round(sold90/3.0)} sales a month, {name} has about {mos} months of supply — a {label} (under 4 favors sellers, over 7 favors buyers)."})
+                  "a":f"With {active_n} active listings and roughly {round(sold365/12.0)} closed sales a month (trailing 12 months), {name} has about {mos} months of supply — a {label} (under 5 favors sellers, over 7 favors buyers)."})
     if "single_family" in ptype and "condo" in ptype:
         q.append({"facet":"type","q":f"What does a single-family home cost versus a condo on {name}?",
                   "a":f"Single-family homes sell around {ptype['single_family']['soldMedianPrice']} ({ptype['single_family']['soldMedianPricePerSqFt']}/sq ft), while condos, villas and townhouses sell around {ptype['condo']['soldMedianPrice']} ({ptype['condo']['soldMedianPricePerSqFt']}/sq ft)."})
