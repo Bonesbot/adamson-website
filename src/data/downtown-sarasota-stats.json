@@ -2,15 +2,15 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-28T10:59:20.160125+00:00",
+  "lastUpdated": "2026-06-29T10:53:09.030511+00:00",
   "counts": {
-    "sold": 273,
-    "pending": 85,
+    "sold": 274,
+    "pending": 84,
     "active": 275,
     "total": 358
   },
   "metrics": {
-    "avgPrice": "$1,804,845",
+    "avgPrice": "$1,804,499",
     "avgPricePerSqFt": "$789",
     "avgYearBuilt": 2002,
     "avgLivingSqFt": "1,991",
@@ -29,10 +29,10 @@
     "newConstructionCount": 109
   },
   "sold": {
-    "count": 83,
-    "medianPrice": "$1,180,000",
-    "medianDom": 90,
-    "saleToListRatio": "87.5%",
+    "count": 79,
+    "medianPrice": "$1,225,000",
+    "medianDom": 86,
+    "saleToListRatio": "87.9%",
     "windowDays": 90
   },
   "fees": {
@@ -63,6 +63,19 @@
       "bathrooms": 3.5,
       "livingSqFt": "2,845",
       "yearBuilt": 2019,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4689102",
+      "address": "50 CENTRAL AVE #16-C",
+      "subdivision": "PLAZA @ FIVE POINTS",
+      "soldPrice": "$1,375,000",
+      "soldDate": "2026-06-26",
+      "bedrooms": 2,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,117",
+      "yearBuilt": 2003,
       "propertyType": "Residential",
       "isWaterfront": false
     },
@@ -104,19 +117,6 @@
       "yearBuilt": 2019,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4677296",
-      "address": "1064 N TAMIAMI TRL #1212",
-      "subdivision": "BROADWAY PROMENADE",
-      "soldPrice": "$340,000",
-      "soldDate": "2026-06-24",
-      "bedrooms": 1,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,137",
-      "yearBuilt": 2007,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -128,7 +128,7 @@
       "avgPrice": "$1,123,195",
       "avgPricePerSqFt": "$647",
       "avgLivingSqFt": "1,625",
-      "avgDom": 178
+      "avgDom": 179
     },
     {
       "tier": "1990to2005",
@@ -138,7 +138,7 @@
       "avgPrice": "$1,765,630",
       "avgPricePerSqFt": "$725",
       "avgLivingSqFt": "2,171",
-      "avgDom": 151
+      "avgDom": 152
     },
     {
       "tier": "2006to2019",
@@ -158,7 +158,7 @@
       "avgPrice": "$3,866,458",
       "avgPricePerSqFt": "$1,329",
       "avgLivingSqFt": "2,734",
-      "avgDom": 176
+      "avgDom": 177
     }
   ],
   "condoTiersScope": {
