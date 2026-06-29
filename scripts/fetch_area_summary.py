@@ -94,6 +94,11 @@ SELECT
     AVG(current_price / NULLIF(original_list_price, 0))
         FILTER (WHERE mls_status = 'Sold' AND original_list_price > 0)                AS sale_to_list_ratio,
     COUNT(*) FILTER (WHERE mls_status = 'Sold' AND close_date >= CURRENT_DATE - INTERVAL '90 days') AS sold90_count,
+    COUNT(*) FILTER (WHERE mls_status = 'Sold' AND close_date >= CURRENT_DATE - INTERVAL '365 days') AS sold365_count,
+    COUNT(*) FILTER (WHERE mls_status = 'Sold' AND close_date >= CURRENT_DATE - INTERVAL '365 days' AND property_sub_type = 'Condominium') AS sold365_condo,
+    COUNT(*) FILTER (WHERE mls_status = 'Sold' AND close_date >= CURRENT_DATE - INTERVAL '365 days' AND property_sub_type IN ('Single Family Residence','Villa','Townhouse')) AS sold365_sfhv,
+    COUNT(*) FILTER (WHERE mls_status = 'Active' AND property_sub_type = 'Condominium') AS active_condo,
+    COUNT(*) FILTER (WHERE mls_status = 'Active' AND property_sub_type IN ('Single Family Residence','Villa','Townhouse')) AS active_sfhv,
     PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY current_price)
         FILTER (WHERE mls_status = 'Sold' AND current_price IS NOT NULL AND close_date >= CURRENT_DATE - INTERVAL '90 days') AS sold90_median_price,
     PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY days_on_market)
@@ -406,6 +411,13 @@ def compute_summary(slug, conn):
             "medianDom": fmt_int(head["sold90_median_dom"]),
             "saleToListRatio": fmt_pct(head["sold90_sale_to_list"]),
             "windowDays": 90,
+        },
+        "monthsOfSupply": {
+            "condo": (round(head["active_condo"] / (head["sold365_condo"] / 12.0), 1) if head["sold365_condo"] else None),
+            "sfhVilla": (round(head["active_sfhv"] / (head["sold365_sfhv"] / 12.0), 1) if head["sold365_sfhv"] else None),
+            "blended": (round(head["active_count"] / (head["sold365_count"] / 12.0), 1) if head["sold365_count"] else None),
+            "method": "active / (trailing-12mo closed / 12)",
+            "windowDays": 365,
         },
         "fees": {
             "medianMonthlyAssociation": fmt_currency(head["median_monthly_assoc"]),
