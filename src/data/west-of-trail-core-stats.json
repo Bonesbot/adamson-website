@@ -2,7 +2,7 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-29T21:24:23.803518+00:00",
+  "lastUpdated": "2026-06-29T22:25:01.317967+00:00",
   "counts": {
     "sold": 180,
     "pending": 29,
@@ -34,6 +34,13 @@
     "medianDom": 74,
     "saleToListRatio": "105.3%",
     "windowDays": 90
+  },
+  "monthsOfSupply": {
+    "condo": 11.2,
+    "sfhVilla": 9.2,
+    "blended": 9.4,
+    "method": "active / (trailing-12mo closed / 12)",
+    "windowDays": 365
   },
   "fees": {
     "medianMonthlyAssociation": "$67",
@@ -208,10 +215,14 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.2,
+    "monthsOfSupply": 9.4,
+    "monthsOfSupplyCondo": 11.2,
+    "monthsOfSupplySfhVilla": 9.2,
     "label": "buyer's market",
     "activeCount": 122,
-    "sold90Count": 51
+    "sold365Count": 156,
+    "sold90Count": 51,
+    "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
@@ -235,7 +246,7 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 122 active listings and roughly 17 sales a month, West Of Trail Core has about 7.2 months of supply \u2014 a buyer's market (under 4 favors sellers, over 7 favors buyers)."
+      "a": "With 122 active listings and roughly 13 closed sales a month (trailing 12 months), West Of Trail Core has about 9.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
