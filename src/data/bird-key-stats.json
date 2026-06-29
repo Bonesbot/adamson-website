@@ -2,7 +2,7 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-29T22:18:02.304469+00:00",
+  "lastUpdated": "2026-06-29T22:24:49.333387+00:00",
   "counts": {
     "sold": 33,
     "pending": 4,
@@ -172,10 +172,14 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 6.8,
-    "label": "balanced market",
+    "monthsOfSupply": 10.3,
+    "monthsOfSupplyCondo": null,
+    "monthsOfSupplySfhVilla": 10.3,
+    "label": "buyer's market",
     "activeCount": 25,
-    "sold90Count": 11
+    "sold365Count": 29,
+    "sold90Count": 11,
+    "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
@@ -193,7 +197,7 @@
     {
       "facet": "balance",
       "q": "Is Bird Key a buyer's or seller's market right now?",
-      "a": "With 25 active listings and roughly 4 sales a month, Bird Key has about 6.8 months of supply \u2014 a balanced market (under 4 favors sellers, over 7 favors buyers)."
+      "a": "With 25 active listings and roughly 2 closed sales a month (trailing 12 months), Bird Key has about 10.3 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "range",
