@@ -1,149 +1,141 @@
 #!/usr/bin/env python3
 """
-Self-throttling area-stats publisher.
+Self-throttling, remote-aware area-stats publisher.
 
-Regenerates every area's stats JSON from Supabase, but only PUBLISHES to GitHub
-(= triggers a Netlify build) when BOTH: (a) it's been >= --min-days since the
-last publish, and (b) the data actually changed. All changed files go in ONE
-commit (Git Trees API) = exactly one Netlify build per publish.
+Generates each area's stats JSON from Supabase and compares against the REMOTE
+(GitHub) copy — correct even when run from /tmp (FUSE-bypass) or when the local
+clone is stale. Publishes ALL changed files in ONE commit (Git Trees API = one
+Netlify build) but only when it's been >= --min-days since the last build AND
+data actually changed. Remembers the last build number + date in --state.
 
-Designed to be called by the daily mls-export job: it runs daily but builds the
-website only every few days, so Netlify build minutes aren't burned daily.
+Patches --status-out with a `publish` block (build number, date, next-eligible,
+emailLine) for the daily reconciliation email.
 
-It records the last build number + date in a local state file (not pushed) and
-patches the run status JSON with a `publish` block (build number, date, next
-eligible date, email line) the daily email renders.
-
-  python scripts/refresh_all_areas.py --status-out /path/last-run.json
+  python scripts/refresh_all_areas.py --status-out <last-run.json> --state <persistent path>
   python scripts/refresh_all_areas.py --dry-run
-  python scripts/refresh_all_areas.py --force          # publish now regardless of cadence
-
-Reads DATABASE_URL + GITHUB_TOKEN/REPO/BRANCH from .env at repo root.
+  python scripts/refresh_all_areas.py --force
 """
-import argparse, base64, datetime as dt, json, os, sys
+import argparse, base64, datetime as dt, json, os, sys, urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-ENV = ROOT / ".env"
-for line in (ENV.read_text(encoding="utf-8").splitlines() if ENV.exists() else []):
-    line = line.strip()
-    if line and not line.startswith("#") and "=" in line:
-        k, v = line.split("=", 1); os.environ.setdefault(k.strip(), v.strip())
+for cand in [ROOT / ".env", Path(__file__).resolve().parent / ".env"]:
+    if cand.exists():
+        for line in cand.read_text().splitlines():
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                k, v = line.split("=", 1); os.environ.setdefault(k.strip(), v.strip())
+        break
 
 import psycopg2
 from fetch_area_summary import compute_summary
 
-DATABASE_URL = os.environ.get("DATABASE_URL", "")
-TOK = os.environ.get("GITHUB_TOKEN", ""); REPO = os.environ.get("GITHUB_REPO", "Bonesbot/adamson-website"); BR = os.environ.get("GITHUB_BRANCH", "main")
-DATA_DIR = ROOT / "src" / "data"
-STATE_DEFAULT = ROOT / "logs" / "publish-state.json"
+DB = os.environ.get("DATABASE_URL", ""); TOK = os.environ.get("GITHUB_TOKEN", "")
+REPO = os.environ.get("GITHUB_REPO", "Bonesbot/adamson-website"); BR = os.environ.get("GITHUB_BRANCH", "main")
+API = f"https://api.github.com/repos/{REPO}"
+H = {"Authorization": f"Bearer {TOK}", "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", "User-Agent": "agw/1.0"}
+
+def gh(method, path, body=None):
+    data = json.dumps(body).encode() if body is not None else None
+    req = urllib.request.Request(API + path, method=method, headers=dict(H))
+    if data: req.add_header("Content-Type", "application/json")
+    return json.load(urllib.request.urlopen(req, data=data, timeout=40))
+
+def gh_raw(path):
+    req = urllib.request.Request(f"{API}/contents/{path}?ref={BR}", headers={**H, "Accept": "application/vnd.github.raw"})
+    try: return urllib.request.urlopen(req, timeout=30).read().decode()
+    except Exception: return None
 
 def slugs():
-    return [a["slug"] for a in json.loads((DATA_DIR / "areas.json").read_text(encoding="utf-8"))["areas"]]
+    local = ROOT / "src" / "data" / "areas.json"
+    txt = local.read_text() if local.exists() else gh_raw("src/data/areas.json")
+    return [a["slug"] for a in json.loads(txt)["areas"]]
 
-def material(d):
-    return {k: v for k, v in d.items() if k != "lastUpdated"}
-
-def load_state(p):
-    try: return json.loads(Path(p).read_text(encoding="utf-8"))
-    except Exception: return {"buildNumber": 0, "lastBuildDate": None}
-
-def save_state(p, st):
-    Path(p).parent.mkdir(parents=True, exist_ok=True)
-    Path(p).write_text(json.dumps(st, indent=2), encoding="utf-8")
-
-def patch_status(status_out, publish):
-    if not status_out: return
-    try:
-        d = json.loads(Path(status_out).read_text(encoding="utf-8")) if Path(status_out).exists() else {}
-    except Exception:
-        d = {}
-    d["publish"] = publish
-    try: Path(status_out).write_text(json.dumps(d, indent=2, default=str), encoding="utf-8")
-    except Exception as e: print(f"[WARN] could not patch status: {e}", file=sys.stderr)
+material = lambda d: {k: v for k, v in d.items() if k != "lastUpdated"}
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--status-out"); ap.add_argument("--state", default=str(STATE_DEFAULT))
-    ap.add_argument("--min-days", type=int, default=3)
-    ap.add_argument("--force", action="store_true"); ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--status-out"); ap.add_argument("--state", default=str(ROOT / "logs" / "publish-state.json"))
+    ap.add_argument("--min-days", type=int, default=3); ap.add_argument("--force", action="store_true"); ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--heartbeat", default=str(ROOT / "logs" / "daily-heartbeat.json"))
     args = ap.parse_args()
-    if not DATABASE_URL: sys.exit("Missing DATABASE_URL")
+    if not DB: sys.exit("Missing DATABASE_URL")
+    if not TOK: sys.exit("Missing GITHUB_TOKEN")
 
     today = dt.date.today()
-    st = load_state(args.state)
-    last_date = None
+    try: st = json.loads(Path(args.state).read_text())
+    except Exception: st = {"buildNumber": 0, "lastBuildDate": None}
+    last = None
     if st.get("lastBuildDate"):
-        try: last_date = dt.date.fromisoformat(st["lastBuildDate"])
-        except Exception: last_date = None
-    days_since = (today - last_date).days if last_date else 9999
-    next_eligible = (last_date + dt.timedelta(days=args.min_days)).isoformat() if last_date else today.isoformat()
+        try: last = dt.date.fromisoformat(st["lastBuildDate"])
+        except Exception: pass
+    days_since = (today - last).days if last else 9999
+    next_elig = (last + dt.timedelta(days=args.min_days)).isoformat() if last else today.isoformat()
+    build_no = st.get("buildNumber", 0)
 
-    # detect material changes (in memory; do NOT write to disk unless we publish)
-    conn = psycopg2.connect(DATABASE_URL)
-    changed = {}
+    conn = psycopg2.connect(DB); changed = {}
     try:
         for slug in slugs():
             data = compute_summary(slug, conn)
-            path = DATA_DIR / f"{slug}-stats.json"
-            old = json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
-            if old is None or material(old) != material(data):
+            remote = gh_raw(f"src/data/{slug}-stats.json")
+            robj = json.loads(remote) if remote else None
+            if robj is None or material(robj) != material(data):
                 changed[f"src/data/{slug}-stats.json"] = json.dumps(data, indent=2)
     finally:
         conn.close()
 
     throttled = (not args.force) and days_since < args.min_days
-    build_no = st.get("buildNumber", 0)
-
     if not changed:
-        action = "no_changes"
-        line = f"Website: no data changes today — no build (last build #{build_no} on {st.get('lastBuildDate') or 'n/a'})."
+        action, line = "no_changes", f"Website: no data changes — no build (last build #{build_no} on {st.get('lastBuildDate') or 'n/a'})."
     elif throttled:
-        action = "throttled"
-        line = f"Website: {len(changed)} area(s) changed but holding for the {args.min_days}-day cadence — last build #{build_no} on {st.get('lastBuildDate')}, next eligible {next_eligible}."
+        action, line = "throttled", f"Website: {len(changed)} area(s) changed but holding for the {args.min_days}-day cadence — last build #{build_no} on {st.get('lastBuildDate')}, next eligible {next_elig}."
     else:
-        action = "publish"  # will publish below
-        line = f"Website: would publish {len(changed)} area(s) now (build #{build_no+1})."
+        action, line = "publish", f"Website: would publish {len(changed)} area(s) (build #{build_no+1})."
 
-    print(f"days_since_last={days_since} changed={len(changed)} action={action}")
-    for rel in changed: print("  CHANGED:", rel.split('/')[-1])
+    print(f"days_since={days_since} changed={len(changed)} action={action}")
+    for r in changed: print("  CHANGED:", r.split('/')[-1])
+
+    def patch(pub):
+        if not args.status_out: return
+        try: d = json.loads(Path(args.status_out).read_text()) if Path(args.status_out).exists() else {}
+        except Exception: d = {}
+        d["publish"] = pub
+        try: Path(args.status_out).write_text(json.dumps(d, indent=2, default=str))
+        except Exception as e: print(f"[WARN] status patch failed: {e}", file=sys.stderr)
+
+    def heartbeat(act):
+        if args.dry_run: return
+        try:
+            Path(args.heartbeat).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.heartbeat).write_text(json.dumps({"date": today.isoformat(), "action": act, "buildNumber": build_no, "nextEligibleDate": next_elig}, indent=2))
+        except Exception as e: print(f"[WARN] heartbeat write failed: {e}", file=sys.stderr)
 
     if args.dry_run or action in ("no_changes", "throttled"):
-        publish = {"action": action, "buildNumber": build_no, "lastBuildDate": st.get("lastBuildDate"),
-                   "nextEligibleDate": next_eligible, "daysSinceLast": days_since,
-                   "areasPending": [r.split('/')[-1].replace('-stats.json','') for r in changed], "commit": None, "emailLine": line}
-        patch_status(args.status_out, publish)
+        heartbeat(action)
+        patch({"action": action, "buildNumber": build_no, "lastBuildDate": st.get("lastBuildDate"), "nextEligibleDate": next_elig,
+               "daysSinceLast": days_since, "areasPending": [r.split('/')[-1].replace('-stats.json','') for r in changed], "commit": None, "emailLine": line})
         print(line); return
 
-    # ---- PUBLISH: write changed files + single bundled commit (one build) ----
-    for rel, text in changed.items():
-        (ROOT / rel).write_text(text, encoding="utf-8")
-    import requests
-    if not TOK: sys.exit("Missing GITHUB_TOKEN")
-    s = requests.Session(); s.headers.update({"Authorization": f"Bearer {TOK}", "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", "User-Agent": "agw/1.0"})
-    api = f"https://api.github.com/repos/{REPO}"
-    base_sha = s.get(f"{api}/git/ref/heads/{BR}", timeout=20).json()["object"]["sha"]
-    base_tree = s.get(f"{api}/git/commits/{base_sha}", timeout=20).json()["tree"]["sha"]
+    # ---- PUBLISH: one bundled commit = one Netlify build ----
+    base = gh("GET", f"/git/ref/heads/{BR}")["object"]["sha"]
+    btree = gh("GET", f"/git/commits/{base}")["tree"]["sha"]
     tree = []
     for rel, text in changed.items():
-        blob = s.post(f"{api}/git/blobs", json={"content": base64.b64encode(text.encode()).decode(), "encoding": "base64"}, timeout=30).json()
+        blob = gh("POST", "/git/blobs", {"content": base64.b64encode(text.encode()).decode(), "encoding": "base64"})
         tree.append({"path": rel, "mode": "100644", "type": "blob", "sha": blob["sha"]})
-    new_tree = s.post(f"{api}/git/trees", json={"base_tree": base_tree, "tree": tree}, timeout=30).json()["sha"]
+    nt = gh("POST", "/git/trees", {"base_tree": btree, "tree": tree})["sha"]
     build_no += 1
     msg = f"Daily MLS refresh {today.isoformat()} — area stats build #{build_no} ({len(changed)} areas)"
-    commit = s.post(f"{api}/git/commits", json={"message": msg, "tree": new_tree, "parents": [base_sha]}, timeout=30).json()
-    s.patch(f"{api}/git/refs/heads/{BR}", json={"sha": commit["sha"]}, timeout=30)
-    sha7 = commit["sha"][:7]
-
-    st = {"buildNumber": build_no, "lastBuildDate": today.isoformat(), "lastCommit": sha7}
-    save_state(args.state, st)
-    line = f"Website: published build #{build_no} ({today.isoformat()}), {len(changed)} areas updated, commit {sha7} — Netlify rebuilding (next build no earlier than {(today + dt.timedelta(days=args.min_days)).isoformat()})."
-    publish = {"action": "published", "buildNumber": build_no, "buildDate": today.isoformat(),
-               "nextEligibleDate": (today + dt.timedelta(days=args.min_days)).isoformat(),
-               "areasUpdated": [r.split('/')[-1].replace('-stats.json','') for r in changed], "commit": sha7, "emailLine": line}
-    patch_status(args.status_out, publish)
-    print(f"Published 1 commit {sha7} ({len(changed)} files) = ONE build. build #{build_no}.")
+    commit = gh("POST", "/git/commits", {"message": msg, "tree": nt, "parents": [base]})
+    gh("PATCH", f"/git/refs/heads/{BR}", {"sha": commit["sha"]}); sha7 = commit["sha"][:7]
+    Path(args.state).parent.mkdir(parents=True, exist_ok=True)
+    Path(args.state).write_text(json.dumps({"buildNumber": build_no, "lastBuildDate": today.isoformat(), "lastCommit": sha7}, indent=2))
+    heartbeat("published")
+    line = f"Website: published build #{build_no} ({today.isoformat()}), {len(changed)} areas, commit {sha7} — Netlify rebuilding (next build no earlier than {(today + dt.timedelta(days=args.min_days)).isoformat()})."
+    patch({"action": "published", "buildNumber": build_no, "buildDate": today.isoformat(), "nextEligibleDate": (today + dt.timedelta(days=args.min_days)).isoformat(),
+           "areasUpdated": [r.split('/')[-1].replace('-stats.json','') for r in changed], "commit": sha7, "emailLine": line})
+    print(line)
 
 if __name__ == "__main__":
     main()
