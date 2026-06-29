@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import MarketStats from '@/components/market/MarketStats.astro';
 import DetailedMarketTable from '@/components/market/DetailedMarketTable.astro';
 import AreaMarketSummary from '@/components/market/AreaMarketSummary.astro';
+import WaterfrontSegments from '@/components/market/WaterfrontSegments.astro';
 import CondoTiersTable from '@/components/market/CondoTiersTable.astro';
 import FAQSchema from '@/components/seo/FAQSchema.astro';
 import IdxAreaShowcase from '@/components/IdxAreaShowcase.astro';
@@ -85,6 +86,10 @@ function interpolate(text: string): string | null {
 const faqs = (area.faqs || [])
   .map((f: any) => ({ question: f.question, answer: interpolate(f.answer) }))
   .filter((f: any) => f.answer !== null) as { question: string; answer: string }[];
+
+// Living FAQ — data-generated market answers prepended to the editorial FAQ (single FAQPage)
+const livingFaqs = ((detailedStats?.marketQuestions) || []).map((q: any) => ({ question: q.q, answer: q.a })) as { question: string; answer: string }[];
+const allFaqs = [...livingFaqs, ...faqs];
 
 const headlinePrice =
   detailedStats?.metrics?.avgPrice
@@ -266,11 +271,16 @@ if (media.video) {
     <AreaMarketSummary areaName={area.name} areaSlug={area.slug} stats={detailedStats} />
   )}
 
+  <!-- Waterfront price segmentation + market balance (AEO) -->
+  {detailedStats && detailedStats.waterfrontSegments && detailedStats.waterfrontSegments.length > 0 && (
+    <WaterfrontSegments areaName={area.name} stats={detailedStats} />
+  )}
+
   <!-- FAQ Section -->
-  {faqs.length > 0 && (
+  {allFaqs.length > 0 && (
     <FAQSchema
-      faqs={faqs}
-      heading={`${area.name} Real Estate FAQ`}
+      faqs={allFaqs}
+      heading={`${area.name} Market Questions & FAQ`}
     />
   )}
 
