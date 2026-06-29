@@ -222,6 +222,129 @@ def compute_condo_tiers(slug, conn):
     scope = {'propertySubTypes': ['Condominium', 'Villa', 'Townhouse'], 'status': 'Active'}
     return out, scope
 
+
+# ---- Extended groupings: waterfront segments, market balance, property-type split, living FAQ ----
+WF_SEGMENT_QUERY = """
+WITH t AS (
+  SELECT *,
+    CASE
+      WHEN waterfront_features ILIKE '%%Gulf%%' OR waterfront_features ILIKE '%%Beach%%' OR waterfront_features ILIKE '%%Ocean%%' THEN 'gulf_beachfront'
+      WHEN waterfront_features ILIKE '%%Bay%%' OR waterfront_features ILIKE '%%Canal%%' OR waterfront_features ILIKE '%%Intracoastal%%' OR waterfront_features ILIKE '%%Bayou%%' OR waterfront_features ILIKE '%%Lagoon%%' OR waterfront_features ILIKE '%%Marina%%' THEN 'bay_canal'
+      WHEN waterfront_yn = TRUE THEN 'other_wf'
+      WHEN water_view_yn = TRUE THEN 'waterview'
+      ELSE 'none'
+    END AS seg
+  FROM raw_listings WHERE detected_area = %(slug)s
+)
+SELECT seg,
+  COUNT(*) FILTER (WHERE mls_status='Active') AS active_n,
+  COUNT(*) FILTER (WHERE mls_status='Sold')   AS sold_n,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY close_price_by_calculated_sqft)
+    FILTER (WHERE mls_status='Sold' AND close_price_by_calculated_sqft IS NOT NULL) AS sold_psf,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY current_price)
+    FILTER (WHERE mls_status='Sold' AND current_price IS NOT NULL) AS sold_price
+FROM t GROUP BY seg;
+"""
+
+PTYPE_SPLIT_QUERY = """
+WITH t AS (
+  SELECT *,
+    CASE
+      WHEN property_sub_type ILIKE '%%Single Family%%' OR property_type ILIKE '%%Single Family%%' THEN 'single_family'
+      WHEN property_sub_type ILIKE '%%Condo%%' OR property_sub_type ILIKE '%%Villa%%' OR property_sub_type ILIKE '%%Townhouse%%' THEN 'condo'
+      ELSE 'other'
+    END AS ptype
+  FROM raw_listings WHERE detected_area = %(slug)s
+)
+SELECT ptype,
+  COUNT(*) FILTER (WHERE mls_status='Active') AS active_n,
+  COUNT(*) FILTER (WHERE mls_status='Sold')   AS sold_n,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY current_price)
+    FILTER (WHERE mls_status='Sold' AND current_price IS NOT NULL) AS sold_price,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY close_price_by_calculated_sqft)
+    FILTER (WHERE mls_status='Sold' AND close_price_by_calculated_sqft IS NOT NULL) AS sold_psf
+FROM t GROUP BY ptype;
+"""
+
+BOATING_QUERY = """
+SELECT
+  COUNT(*) FILTER (WHERE mls_status='Active' AND has_dock = TRUE) AS active_dock,
+  COUNT(*) FILTER (WHERE mls_status='Active' AND is_waterfront = TRUE) AS active_wf
+FROM raw_listings WHERE detected_area = %(slug)s;
+"""
+
+SEG_LABELS = {"gulf_beachfront":"Gulf / Beachfront","bay_canal":"Bay / Canal-front",
+              "waterview":"Water view (not waterfront)","other_wf":"Other waterfront","none":"No water"}
+SEG_ORDER = ["gulf_beachfront","bay_canal","waterview","other_wf","none"]
+MIN_N = 8  # suppress noisy segments
+
+def compute_extras(slug, conn, head):
+    with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+        cur.execute(WF_SEGMENT_QUERY, {"slug": slug}); segs = {r["seg"]: r for r in cur.fetchall()}
+        cur.execute(PTYPE_SPLIT_QUERY, {"slug": slug}); pts = {r["ptype"]: r for r in cur.fetchall()}
+        cur.execute(BOATING_QUERY, {"slug": slug}); boat = cur.fetchone() or {}
+
+    # waterfront segments (suppress sold $/sqft when n < MIN_N)
+    wf = []
+    for k in SEG_ORDER:
+        r = segs.get(k)
+        if not r or (r["active_n"]==0 and r["sold_n"]==0): continue
+        enough = r["sold_n"] and r["sold_n"] >= MIN_N
+        wf.append({"segment":k,"label":SEG_LABELS[k],"activeCount":r["active_n"],"soldCount":r["sold_n"],
+                   "soldMedianPricePerSqFt": fmt_currency(r["sold_psf"]) if enough else None,
+                   "soldMedianPrice": fmt_currency(r["sold_price"]) if enough else None,
+                   "lowSample": not enough})
+
+    # market balance (months of supply from trailing-90d sold)
+    active_n = head["active_count"] or 0; sold90 = head["sold90_count"] or 0
+    mos = round(active_n / (sold90/3.0), 1) if sold90 else None
+    label = None
+    if mos is not None:
+        label = "seller's market" if mos < 4 else ("buyer's market" if mos > 7 else "balanced market")
+    balance = {"monthsOfSupply": mos, "label": label, "activeCount": active_n, "sold90Count": sold90}
+
+    # property-type split
+    ptype = {}
+    for k in ("single_family","condo"):
+        r = pts.get(k)
+        if r and r["sold_n"]:
+            ptype[k] = {"soldCount":r["sold_n"],"activeCount":r["active_n"],
+                        "soldMedianPrice": fmt_currency(r["sold_price"]),
+                        "soldMedianPricePerSqFt": fmt_currency(r["sold_psf"])}
+
+    boating = {"activeWithDock": boat.get("active_dock"), "activeWaterfront": boat.get("active_wf")}
+
+    # ---- living FAQ (generated from data; only questions we can answer) ----
+    name = slug.replace("-"," ").title()
+    q = []
+    g = segs.get("gulf_beachfront"); bc = segs.get("bay_canal")
+    if g and bc and g["sold_n"]>=MIN_N and bc["sold_n"]>=MIN_N and g["sold_psf"] and bc["sold_psf"]:
+        prem = round((g["sold_psf"]/bc["sold_psf"]-1)*100)
+        q.append({"facet":"waterfront","q":f"How much more does beachfront cost than bayfront on {name}?",
+                  "a":f"Gulf-front / beachfront homes sell at a median {fmt_currency(g['sold_psf'])} per sq ft versus {fmt_currency(bc['sold_psf'])} for bay- or canal-front — about a {prem}% waterfront premium (Stellar MLS, recent closed sales)."})
+    if mos is not None:
+        q.append({"facet":"balance","q":f"Is {name} a buyer's or seller's market right now?",
+                  "a":f"With {active_n} active listings and roughly {round(sold90/3.0)} sales a month, {name} has about {mos} months of supply — a {label} (under 4 favors sellers, over 7 favors buyers)."})
+    if "single_family" in ptype and "condo" in ptype:
+        q.append({"facet":"type","q":f"What does a single-family home cost versus a condo on {name}?",
+                  "a":f"Single-family homes sell around {ptype['single_family']['soldMedianPrice']} ({ptype['single_family']['soldMedianPricePerSqFt']}/sq ft), while condos, villas and townhouses sell around {ptype['condo']['soldMedianPrice']} ({ptype['condo']['soldMedianPricePerSqFt']}/sq ft)."})
+    if head.get("min_price") and head.get("max_price") and head.get("active_median_price"):
+        q.append({"facet":"range","q":f"What's the price range on {name}?",
+                  "a":f"Active listings run from {fmt_currency(head['min_price'])} to {fmt_currency(head['max_price'])}, with a median asking price of {fmt_currency(head['active_median_price'])}."})
+    if head.get("sold90_median_dom") is not None and head.get("sold90_sale_to_list"):
+        q.append({"facet":"speed","q":f"How quickly do homes sell on {name}?",
+                  "a":f"Recently sold homes took a median {fmt_int(head['sold90_median_dom'])} days on market and closed at {fmt_pct(head['sold90_sale_to_list'])} of original list price (trailing 90 days)."})
+    if boating.get("activeWaterfront"):
+        q.append({"facet":"boating","q":f"Can I keep a boat — how many {name} homes have a dock?",
+                  "a":f"Of {boating['activeWaterfront']} active waterfront listings, {boating.get('activeWithDock') or 0} include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."})
+    if head.get("median_monthly_condo_fee") or head.get("median_monthly_assoc"):
+        q.append({"facet":"fees","q":f"What are typical HOA and condo fees on {name}?",
+                  "a":f"The median monthly condo fee is {fmt_currency(head.get('median_monthly_condo_fee'))} and the median monthly association fee is {fmt_currency(head.get('median_monthly_assoc'))}."})
+
+    return {"waterfrontSegments": wf, "marketBalance": balance, "propertyTypeSplit": ptype,
+            "boating": boating, "marketQuestions": q}
+
+
 def compute_summary(slug, conn):
     with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
         cur.execute(HEADLINE_QUERY, {"slug": slug})
@@ -331,6 +454,7 @@ def compute_summary(slug, conn):
             result['metrics']['avgLotSqFt'] = None
         result['buildingClasses'] = []
 
+    result.update(compute_extras(slug, conn, head))
     return result
 
 
