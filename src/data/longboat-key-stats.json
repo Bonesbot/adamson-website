@@ -2,7 +2,7 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-29T22:17:54.135856+00:00",
+  "lastUpdated": "2026-06-29T22:24:46.853064+00:00",
   "counts": {
     "sold": 544,
     "pending": 60,
@@ -224,10 +224,14 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 6.5,
-    "label": "balanced market",
+    "monthsOfSupply": 9.4,
+    "monthsOfSupplyCondo": 8.9,
+    "monthsOfSupplySfhVilla": 10.3,
+    "label": "buyer's market",
     "activeCount": 369,
-    "sold90Count": 171
+    "sold365Count": 473,
+    "sold90Count": 171,
+    "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
@@ -256,7 +260,7 @@
     {
       "facet": "balance",
       "q": "Is Longboat Key a buyer's or seller's market right now?",
-      "a": "With 369 active listings and roughly 57 sales a month, Longboat Key has about 6.5 months of supply \u2014 a balanced market (under 4 favors sellers, over 7 favors buyers)."
+      "a": "With 369 active listings and roughly 39 closed sales a month (trailing 12 months), Longboat Key has about 9.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
