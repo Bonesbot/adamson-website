@@ -2,7 +2,7 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-29T21:24:25.434006+00:00",
+  "lastUpdated": "2026-06-29T22:25:00.544311+00:00",
   "counts": {
     "sold": 740,
     "pending": 80,
@@ -34,6 +34,13 @@
     "medianDom": 45,
     "saleToListRatio": "90.9%",
     "windowDays": 90
+  },
+  "monthsOfSupply": {
+    "condo": 8.4,
+    "sfhVilla": 3.9,
+    "blended": 5.0,
+    "method": "active / (trailing-12mo closed / 12)",
+    "windowDays": 365
   },
   "fees": {
     "medianMonthlyAssociation": "$469",
@@ -208,10 +215,14 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 3.9,
-    "label": "seller's market",
+    "monthsOfSupply": 5.0,
+    "monthsOfSupplyCondo": 8.4,
+    "monthsOfSupplySfhVilla": 3.9,
+    "label": "balanced market",
     "activeCount": 290,
-    "sold90Count": 225
+    "sold365Count": 697,
+    "sold90Count": 225,
+    "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
@@ -235,7 +246,7 @@
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 290 active listings and roughly 75 sales a month, Palmer Ranch has about 3.9 months of supply \u2014 a seller's market (under 4 favors sellers, over 7 favors buyers)."
+      "a": "With 290 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 5.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
