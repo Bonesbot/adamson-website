@@ -2,123 +2,265 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-01T18:52:49.371416+00:00",
+  "lastUpdated": "2026-06-29T21:24:25.434006+00:00",
   "counts": {
-    "sold": 21,
-    "pending": 11,
-    "active": 269,
-    "total": 32
+    "sold": 740,
+    "pending": 80,
+    "active": 290,
+    "total": 820
   },
   "metrics": {
-    "avgPrice": "$643,322",
-    "avgPricePerSqFt": "$270",
-    "avgYearBuilt": 1997,
-    "avgLivingSqFt": "2,250",
+    "avgPrice": "$568,072",
+    "avgPricePerSqFt": "$265",
+    "avgYearBuilt": 2001,
+    "avgLivingSqFt": "2,056",
     "avgLotSqFt": null,
-    "avgDom": 84
+    "avgDom": 80
   },
   "range": {
-    "minPrice": "$114,900",
-    "maxPrice": "$2,595,000"
+    "minPrice": "$110,000",
+    "maxPrice": "$2,710,000"
   },
   "active": {
-    "count": 269,
-    "medianPrice": "$429,000",
-    "medianPricePerSqFt": "$255",
-    "waterfrontCount": 38,
-    "newConstructionCount": 27
+    "count": 290,
+    "medianPrice": "$417,450",
+    "medianPricePerSqFt": "$249",
+    "waterfrontCount": 34,
+    "newConstructionCount": 39
   },
   "sold": {
     "count": 225,
     "medianPrice": "$487,500",
-    "medianDom": 44,
-    "saleToListRatio": "91.2%",
+    "medianDom": 45,
+    "saleToListRatio": "90.9%",
     "windowDays": 90
   },
   "fees": {
-    "medianMonthlyAssociation": "$491",
-    "medianMonthlyCondoFee": "$571"
+    "medianMonthlyAssociation": "$469",
+    "medianMonthlyCondoFee": "$560"
   },
   "priceBands": {
-    "under900k": 235,
-    "band900kTo1_5m": 25,
-    "band1_5mTo3m": 9,
+    "under900k": 258,
+    "band900kTo1_5m": 22,
+    "band1_5mTo3m": 10,
     "band3mPlus": 0
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 269
+      "count": 290
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
     {
-      "listingId": "A4673645",
-      "address": "6347 ANISE DR",
-      "subdivision": "ARBOR LAKES ON PALMER RANCH",
-      "soldPrice": "$1,080,000",
-      "soldDate": "2026-06-18",
-      "bedrooms": 6,
-      "bathrooms": 5.5,
-      "livingSqFt": "5,077",
-      "yearBuilt": 2015,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4690988",
-      "address": "4813 BENCHMARK CT",
-      "subdivision": "TURTLE ROCK",
-      "soldPrice": "$875,000",
-      "soldDate": "2026-06-18",
+      "listingId": "A4654346",
+      "address": "8930 BLOOMFIELD BLVD",
+      "subdivision": "SILVER OAK",
+      "soldPrice": "$1,035,000",
+      "soldDate": "2026-06-26",
       "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,809",
-      "yearBuilt": 1997,
+      "bathrooms": 4.0,
+      "livingSqFt": "3,924",
+      "yearBuilt": 2000,
       "propertyType": "Residential",
       "isWaterfront": true
     },
     {
-      "listingId": "A4691941",
-      "address": "4153 ENTRADA CT",
-      "subdivision": "MIRA LAGO AT PALMER RANCH PH 1",
-      "soldPrice": "$320,000",
-      "soldDate": "2026-06-18",
+      "listingId": "A4693368",
+      "address": "5744 WOODLAND SAGE DR",
+      "subdivision": "PROMENADE ESTATES PH II",
+      "soldPrice": "$500,000",
+      "soldDate": "2026-06-26",
+      "bedrooms": 4,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,045",
+      "yearBuilt": 2022,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4683192",
+      "address": "7811 BERGAMO AVE",
+      "subdivision": "VILLAGEWALK",
+      "soldPrice": "$404,000",
+      "soldDate": "2026-06-26",
       "bedrooms": 3,
       "bathrooms": 3.0,
-      "livingSqFt": "1,854",
-      "yearBuilt": 1992,
+      "livingSqFt": "1,844",
+      "yearBuilt": 2004,
       "propertyType": "Residential",
       "isWaterfront": false
     },
     {
-      "listingId": "A4685516",
-      "address": "5340 MANG PL #1308",
-      "subdivision": "PALMER OAKS PH 1 & 2",
-      "soldPrice": "$275,000",
-      "soldDate": "2026-06-18",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,400",
-      "yearBuilt": 2008,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4693275",
-      "address": "8355 GLENROSE WAY #113",
+      "listingId": "A4690627",
+      "address": "4240 BREEZEWAY BLVD #321",
       "subdivision": "PINESTONE AT PALMER RANCH",
-      "soldPrice": "$249,900",
-      "soldDate": "2026-06-18",
+      "soldPrice": "$255,000",
+      "soldDate": "2026-06-26",
       "bedrooms": 2,
       "bathrooms": 2.0,
-      "livingSqFt": "1,068",
-      "yearBuilt": 1995,
+      "livingSqFt": "1,138",
+      "yearBuilt": 1997,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4684960",
+      "address": "5939 CASPIAN TERN DR",
+      "subdivision": "SANDHILL PRESERVE",
+      "soldPrice": "$610,000",
+      "soldDate": "2026-06-25",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,100",
+      "yearBuilt": 2016,
       "propertyType": "Residential",
       "isWaterfront": false
     }
   ],
-  "condoTiers": [],
-  "condoTiersScope": null
+  "condoTiers": [
+    {
+      "tier": "pre1990",
+      "label": "Pre-1990",
+      "rangeLabel": "before 1990",
+      "activeCount": 40,
+      "avgPrice": "$328,020",
+      "avgPricePerSqFt": "$201",
+      "avgLivingSqFt": "1,608",
+      "avgDom": 73
+    },
+    {
+      "tier": "1990to2005",
+      "label": "1990 \u2013 2005",
+      "rangeLabel": "1990 through 2005",
+      "activeCount": 105,
+      "avgPrice": "$297,730",
+      "avgPricePerSqFt": "$230",
+      "avgLivingSqFt": "1,288",
+      "avgDom": 108
+    },
+    {
+      "tier": "2006to2019",
+      "label": "2006 \u2013 2019",
+      "rangeLabel": "2006 through 2019",
+      "activeCount": 16,
+      "avgPrice": "$390,900",
+      "avgPricePerSqFt": "$240",
+      "avgLivingSqFt": "1,634",
+      "avgDom": 94
+    },
+    {
+      "tier": "2020plus",
+      "label": "2020 & Newer",
+      "rangeLabel": "2020 or newer",
+      "activeCount": 12,
+      "avgPrice": "$359,779",
+      "avgPricePerSqFt": "$225",
+      "avgLivingSqFt": "1,597",
+      "avgDom": 57
+    }
+  ],
+  "condoTiersScope": {
+    "propertySubTypes": [
+      "Condominium",
+      "Villa",
+      "Townhouse"
+    ],
+    "status": "Active"
+  },
+  "waterfrontSegments": [
+    {
+      "segment": "bay_canal",
+      "label": "Bay / Canal-front",
+      "activeCount": 0,
+      "soldCount": 2,
+      "soldMedianPricePerSqFt": null,
+      "soldMedianPrice": null,
+      "lowSample": true
+    },
+    {
+      "segment": "waterview",
+      "label": "Water view (not waterfront)",
+      "activeCount": 77,
+      "soldCount": 165,
+      "soldMedianPricePerSqFt": "$260",
+      "soldMedianPrice": "$477,500",
+      "lowSample": false
+    },
+    {
+      "segment": "other_wf",
+      "label": "Other waterfront",
+      "activeCount": 34,
+      "soldCount": 159,
+      "soldMedianPricePerSqFt": "$277",
+      "soldMedianPrice": "$615,000",
+      "lowSample": false
+    },
+    {
+      "segment": "none",
+      "label": "No water",
+      "activeCount": 179,
+      "soldCount": 414,
+      "soldMedianPricePerSqFt": "$245",
+      "soldMedianPrice": "$440,000",
+      "lowSample": false
+    }
+  ],
+  "marketBalance": {
+    "monthsOfSupply": 3.9,
+    "label": "seller's market",
+    "activeCount": 290,
+    "sold90Count": 225
+  },
+  "propertyTypeSplit": {
+    "single_family": {
+      "soldCount": 423,
+      "activeCount": 117,
+      "soldMedianPrice": "$655,000",
+      "soldMedianPricePerSqFt": "$289"
+    },
+    "condo": {
+      "soldCount": 317,
+      "activeCount": 173,
+      "soldMedianPrice": "$330,000",
+      "soldMedianPricePerSqFt": "$215"
+    }
+  },
+  "boating": {
+    "activeWithDock": 0,
+    "activeWaterfront": 34
+  },
+  "marketQuestions": [
+    {
+      "facet": "balance",
+      "q": "Is Palmer Ranch a buyer's or seller's market right now?",
+      "a": "With 290 active listings and roughly 75 sales a month, Palmer Ranch has about 3.9 months of supply \u2014 a seller's market (under 4 favors sellers, over 7 favors buyers)."
+    },
+    {
+      "facet": "type",
+      "q": "What does a single-family home cost versus a condo on Palmer Ranch?",
+      "a": "Single-family homes sell around $655,000 ($289/sq ft), while condos, villas and townhouses sell around $330,000 ($215/sq ft)."
+    },
+    {
+      "facet": "range",
+      "q": "What's the price range on Palmer Ranch?",
+      "a": "Active listings run from $110,000 to $2,710,000, with a median asking price of $417,450."
+    },
+    {
+      "facet": "speed",
+      "q": "How quickly do homes sell on Palmer Ranch?",
+      "a": "Recently sold homes took a median 45 days on market and closed at 90.9% of original list price (trailing 90 days)."
+    },
+    {
+      "facet": "boating",
+      "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
+      "a": "Of 34 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+    },
+    {
+      "facet": "fees",
+      "q": "What are typical HOA and condo fees on Palmer Ranch?",
+      "a": "The median monthly condo fee is $560 and the median monthly association fee is $469."
+    }
+  ]
 }

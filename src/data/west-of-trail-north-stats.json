@@ -2,7 +2,7 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-28T20:01:53.967742+00:00",
+  "lastUpdated": "2026-06-29T21:24:24.207516+00:00",
   "counts": {
     "sold": 77,
     "pending": 9,
@@ -128,7 +128,7 @@
       "avgPrice": "$569,000",
       "avgPricePerSqFt": "$451",
       "avgLivingSqFt": "1,262",
-      "avgDom": 44
+      "avgDom": 45
     },
     {
       "tier": "1990to2005",
@@ -168,5 +168,99 @@
       "Townhouse"
     ],
     "status": "Active"
-  }
+  },
+  "waterfrontSegments": [
+    {
+      "segment": "gulf_beachfront",
+      "label": "Gulf / Beachfront",
+      "activeCount": 0,
+      "soldCount": 1,
+      "soldMedianPricePerSqFt": null,
+      "soldMedianPrice": null,
+      "lowSample": true
+    },
+    {
+      "segment": "bay_canal",
+      "label": "Bay / Canal-front",
+      "activeCount": 20,
+      "soldCount": 22,
+      "soldMedianPricePerSqFt": "$532",
+      "soldMedianPrice": "$650,000",
+      "lowSample": false
+    },
+    {
+      "segment": "waterview",
+      "label": "Water view (not waterfront)",
+      "activeCount": 5,
+      "soldCount": 0,
+      "soldMedianPricePerSqFt": null,
+      "soldMedianPrice": null,
+      "lowSample": true
+    },
+    {
+      "segment": "none",
+      "label": "No water",
+      "activeCount": 38,
+      "soldCount": 54,
+      "soldMedianPricePerSqFt": "$403",
+      "soldMedianPrice": "$572,500",
+      "lowSample": false
+    }
+  ],
+  "marketBalance": {
+    "monthsOfSupply": 7.0,
+    "label": "balanced market",
+    "activeCount": 63,
+    "sold90Count": 27
+  },
+  "propertyTypeSplit": {
+    "single_family": {
+      "soldCount": 62,
+      "activeCount": 48,
+      "soldMedianPrice": "$666,515",
+      "soldMedianPricePerSqFt": "$426"
+    },
+    "condo": {
+      "soldCount": 15,
+      "activeCount": 15,
+      "soldMedianPrice": "$475,000",
+      "soldMedianPricePerSqFt": "$492"
+    }
+  },
+  "boating": {
+    "activeWithDock": 9,
+    "activeWaterfront": 20
+  },
+  "marketQuestions": [
+    {
+      "facet": "balance",
+      "q": "Is West Of Trail North a buyer's or seller's market right now?",
+      "a": "With 63 active listings and roughly 9 sales a month, West Of Trail North has about 7.0 months of supply \u2014 a balanced market (under 4 favors sellers, over 7 favors buyers)."
+    },
+    {
+      "facet": "type",
+      "q": "What does a single-family home cost versus a condo on West Of Trail North?",
+      "a": "Single-family homes sell around $666,515 ($426/sq ft), while condos, villas and townhouses sell around $475,000 ($492/sq ft)."
+    },
+    {
+      "facet": "range",
+      "q": "What's the price range on West Of Trail North?",
+      "a": "Active listings run from $251,700 to $22,900,000, with a median asking price of $799,000."
+    },
+    {
+      "facet": "speed",
+      "q": "How quickly do homes sell on West Of Trail North?",
+      "a": "Recently sold homes took a median 55 days on market and closed at 89.9% of original list price (trailing 90 days)."
+    },
+    {
+      "facet": "boating",
+      "q": "Can I keep a boat \u2014 how many West Of Trail North homes have a dock?",
+      "a": "Of 20 active waterfront listings, 9 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+    },
+    {
+      "facet": "fees",
+      "q": "What are typical HOA and condo fees on West Of Trail North?",
+      "a": "The median monthly condo fee is $493 and the median monthly association fee is $493."
+    }
+  ]
 }

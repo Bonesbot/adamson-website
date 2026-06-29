@@ -2,66 +2,109 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-20T19:14:41.739410+00:00",
+  "lastUpdated": "2026-06-29T21:24:24.604760+00:00",
   "counts": {
-    "sold": 69,
-    "pending": 10,
-    "active": 49,
-    "total": 79
+    "sold": 244,
+    "pending": 22,
+    "active": 133,
+    "total": 266
   },
   "metrics": {
-    "avgPrice": "$723,853",
-    "avgPricePerSqFt": "$346",
-    "avgYearBuilt": 1985,
-    "avgLivingSqFt": "2,004",
-    "avgLotSqFt": "61,652",
-    "avgDom": 92
+    "avgPrice": "$621,527",
+    "avgPricePerSqFt": "$328",
+    "avgYearBuilt": 1980,
+    "avgLivingSqFt": "1,735",
+    "avgLotSqFt": null,
+    "avgDom": 77
   },
   "range": {
-    "minPrice": "$160,000",
-    "maxPrice": "$4,975,000"
+    "minPrice": "$130,000",
+    "maxPrice": "$5,500,000"
   },
   "active": {
-    "count": 49,
-    "medianPrice": "$559,900",
-    "medianPricePerSqFt": "$319",
-    "waterfrontCount": 12,
-    "newConstructionCount": 3
+    "count": 133,
+    "medianPrice": "$489,500",
+    "medianPricePerSqFt": "$334",
+    "waterfrontCount": 38,
+    "newConstructionCount": 5
   },
   "sold": {
-    "count": 79,
-    "medianPrice": "$450,000",
-    "medianDom": 31,
-    "saleToListRatio": "90.8%",
+    "count": 78,
+    "medianPrice": "$438,750",
+    "medianDom": 32,
+    "saleToListRatio": "90.9%",
     "windowDays": 90
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,167",
-    "medianMonthlyCondoFee": "$992"
+    "medianMonthlyAssociation": "$842",
+    "medianMonthlyCondoFee": "$933"
   },
   "priceBands": {
-    "under900k": 38,
-    "band900kTo1_5m": 2,
-    "band1_5mTo3m": 5,
-    "band3mPlus": 4
+    "under900k": 105,
+    "band900kTo1_5m": 6,
+    "band1_5mTo3m": 14,
+    "band3mPlus": 8
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 49
+      "count": 133
     }
   ],
-  "buildingClasses": [
+  "buildingClasses": [],
+  "recentSoldComps": [
     {
-      "class": "low-rise",
-      "count": 43
+      "listingId": "A4692523",
+      "address": "4689 PINE HARRIER DR",
+      "subdivision": "THE LANDINGS",
+      "soldPrice": "$1,650,000",
+      "soldDate": "2026-06-24",
+      "bedrooms": 4,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,103",
+      "yearBuilt": 1986,
+      "propertyType": "Residential",
+      "isWaterfront": false
     },
     {
-      "class": "mid-rise",
-      "count": 2
-    }
-  ],
-  "recentSoldComps": [
+      "listingId": "A4692193",
+      "address": "1971 DEBBIE ST",
+      "subdivision": "NORTH VAMO SUB 2",
+      "soldPrice": "$429,000",
+      "soldDate": "2026-06-24",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,062",
+      "yearBuilt": 1971,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4692206",
+      "address": "5936 DRIFTWOOD AVE #16",
+      "subdivision": "BAYWOOD COLONY SEC 1",
+      "soldPrice": "$239,000",
+      "soldDate": "2026-06-24",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,155",
+      "yearBuilt": 1973,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4693089",
+      "address": "2436 BREAKWATER CIR",
+      "subdivision": "GULF GATE",
+      "soldPrice": "$350,000",
+      "soldDate": "2026-06-23",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,468",
+      "yearBuilt": 1967,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4649803",
       "address": "2271 PINE VIEW CIR",
@@ -74,58 +117,159 @@
       "yearBuilt": 1980,
       "propertyType": "Residential",
       "isWaterfront": false
+    }
+  ],
+  "condoTiers": [
+    {
+      "tier": "pre1990",
+      "label": "Pre-1990",
+      "rangeLabel": "before 1990",
+      "activeCount": 76,
+      "avgPrice": "$385,430",
+      "avgPricePerSqFt": "$301",
+      "avgLivingSqFt": "1,292",
+      "avgDom": 145
     },
     {
-      "listingId": "A4692425",
-      "address": "6014 BORDER LN",
-      "subdivision": "PINE SHORES ESTATE 4TH SEC",
-      "soldPrice": "$475,000",
-      "soldDate": "2026-06-17",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,583",
-      "yearBuilt": 1954,
-      "propertyType": "Residential",
-      "isWaterfront": false
+      "tier": "1990to2005",
+      "label": "1990 \u2013 2005",
+      "rangeLabel": "1990 through 2005",
+      "activeCount": 10,
+      "avgPrice": "$596,490",
+      "avgPricePerSqFt": "$307",
+      "avgLivingSqFt": "1,940",
+      "avgDom": 174
     },
     {
-      "listingId": "A4689397",
-      "address": "1885 VAMO WAY",
-      "subdivision": "VAMO 3RD ADD TO",
-      "soldPrice": "$240,000",
-      "soldDate": "2026-06-15",
-      "bedrooms": 2,
-      "bathrooms": 1.0,
-      "livingSqFt": "572",
-      "yearBuilt": 1961,
-      "propertyType": "Residential",
-      "isWaterfront": false
+      "tier": "2006to2019",
+      "label": "2006 \u2013 2019",
+      "rangeLabel": "2006 through 2019",
+      "activeCount": 4,
+      "avgPrice": "$579,500",
+      "avgPricePerSqFt": "$338",
+      "avgLivingSqFt": "1,713",
+      "avgDom": 176
     },
     {
-      "listingId": "A4661671",
-      "address": "2852 CAPTIVA DR",
-      "subdivision": "GULF GATE WOODS",
-      "soldPrice": "$550,000",
-      "soldDate": "2026-06-10",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,033",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": false
+      "tier": "2020plus",
+      "label": "2020 & Newer",
+      "rangeLabel": "2020 or newer",
+      "activeCount": 2,
+      "avgPrice": "$629,000",
+      "avgPricePerSqFt": "$353",
+      "avgLivingSqFt": "1,785",
+      "avgDom": 184
+    }
+  ],
+  "condoTiersScope": {
+    "propertySubTypes": [
+      "Condominium",
+      "Villa",
+      "Townhouse"
+    ],
+    "status": "Active"
+  },
+  "waterfrontSegments": [
+    {
+      "segment": "gulf_beachfront",
+      "label": "Gulf / Beachfront",
+      "activeCount": 0,
+      "soldCount": 3,
+      "soldMedianPricePerSqFt": null,
+      "soldMedianPrice": null,
+      "lowSample": true
     },
     {
-      "listingId": "A4690652",
-      "address": "7237 CLOISTER DR ## 207",
-      "subdivision": "GULF GATE GARDENS",
-      "soldPrice": "$175,000",
-      "soldDate": "2026-06-10",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "914",
-      "yearBuilt": 1984,
-      "propertyType": "Residential",
-      "isWaterfront": false
+      "segment": "bay_canal",
+      "label": "Bay / Canal-front",
+      "activeCount": 33,
+      "soldCount": 48,
+      "soldMedianPricePerSqFt": "$366",
+      "soldMedianPrice": "$500,500",
+      "lowSample": false
+    },
+    {
+      "segment": "waterview",
+      "label": "Water view (not waterfront)",
+      "activeCount": 25,
+      "soldCount": 22,
+      "soldMedianPricePerSqFt": "$286",
+      "soldMedianPrice": "$440,000",
+      "lowSample": false
+    },
+    {
+      "segment": "other_wf",
+      "label": "Other waterfront",
+      "activeCount": 5,
+      "soldCount": 11,
+      "soldMedianPricePerSqFt": "$338",
+      "soldMedianPrice": "$645,000",
+      "lowSample": false
+    },
+    {
+      "segment": "none",
+      "label": "No water",
+      "activeCount": 70,
+      "soldCount": 160,
+      "soldMedianPricePerSqFt": "$285",
+      "soldMedianPrice": "$430,000",
+      "lowSample": false
+    }
+  ],
+  "marketBalance": {
+    "monthsOfSupply": 5.1,
+    "label": "balanced market",
+    "activeCount": 133,
+    "sold90Count": 78
+  },
+  "propertyTypeSplit": {
+    "single_family": {
+      "soldCount": 134,
+      "activeCount": 41,
+      "soldMedianPrice": "$520,000",
+      "soldMedianPricePerSqFt": "$321"
+    },
+    "condo": {
+      "soldCount": 110,
+      "activeCount": 92,
+      "soldMedianPrice": "$350,000",
+      "soldMedianPricePerSqFt": "$251"
+    }
+  },
+  "boating": {
+    "activeWithDock": 18,
+    "activeWaterfront": 38
+  },
+  "marketQuestions": [
+    {
+      "facet": "balance",
+      "q": "Is West Of Trail South a buyer's or seller's market right now?",
+      "a": "With 133 active listings and roughly 26 sales a month, West Of Trail South has about 5.1 months of supply \u2014 a balanced market (under 4 favors sellers, over 7 favors buyers)."
+    },
+    {
+      "facet": "type",
+      "q": "What does a single-family home cost versus a condo on West Of Trail South?",
+      "a": "Single-family homes sell around $520,000 ($321/sq ft), while condos, villas and townhouses sell around $350,000 ($251/sq ft)."
+    },
+    {
+      "facet": "range",
+      "q": "What's the price range on West Of Trail South?",
+      "a": "Active listings run from $130,000 to $5,500,000, with a median asking price of $489,500."
+    },
+    {
+      "facet": "speed",
+      "q": "How quickly do homes sell on West Of Trail South?",
+      "a": "Recently sold homes took a median 32 days on market and closed at 90.9% of original list price (trailing 90 days)."
+    },
+    {
+      "facet": "boating",
+      "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
+      "a": "Of 38 active waterfront listings, 18 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+    },
+    {
+      "facet": "fees",
+      "q": "What are typical HOA and condo fees on West Of Trail South?",
+      "a": "The median monthly condo fee is $933 and the median monthly association fee is $842."
     }
   ]
 }

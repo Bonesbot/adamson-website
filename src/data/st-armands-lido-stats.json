@@ -2,57 +2,83 @@
   "areaSlug": "st-armands-lido",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-20T10:56:22.543816+00:00",
+  "lastUpdated": "2026-06-29T21:24:22.549018+00:00",
   "counts": {
-    "sold": 84,
-    "pending": 19,
-    "active": 129,
-    "total": 103
+    "sold": 96,
+    "pending": 17,
+    "active": 138,
+    "total": 113
   },
   "metrics": {
-    "avgPrice": "$2,521,669",
-    "avgPricePerSqFt": "$930",
-    "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,236",
+    "avgPrice": "$2,494,150",
+    "avgPricePerSqFt": "$923",
+    "avgYearBuilt": 1982,
+    "avgLivingSqFt": "2,242",
     "avgLotSqFt": null,
-    "avgDom": 118
+    "avgDom": 124
   },
   "range": {
     "minPrice": "$275,000",
-    "maxPrice": "$20,000,000"
+    "maxPrice": "$18,000,000"
   },
   "active": {
-    "count": 129,
-    "medianPrice": "$1,549,000",
-    "medianPricePerSqFt": "$922",
-    "waterfrontCount": 60,
-    "newConstructionCount": 21
+    "count": 138,
+    "medianPrice": "$1,612,000",
+    "medianPricePerSqFt": "$894",
+    "waterfrontCount": 64,
+    "newConstructionCount": 25
   },
   "sold": {
-    "count": 37,
+    "count": 35,
     "medianPrice": "$1,100,000",
     "medianDom": 85,
-    "saleToListRatio": "86.3%",
+    "saleToListRatio": "85.9%",
     "windowDays": 90
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,323",
+    "medianMonthlyAssociation": "$1,305",
     "medianMonthlyCondoFee": "$1,458"
   },
   "priceBands": {
-    "under900k": 47,
-    "band900kTo1_5m": 14,
-    "band1_5mTo3m": 20,
-    "band3mPlus": 48
+    "under900k": 53,
+    "band900kTo1_5m": 13,
+    "band1_5mTo3m": 19,
+    "band3mPlus": 53
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 129
+      "count": 138
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4687364",
+      "address": "408 JACKSON DR",
+      "subdivision": "SAINT ARMANDS DIV JOHN RINGLING ESTATES",
+      "soldPrice": "$2,750,000",
+      "soldDate": "2026-06-24",
+      "bedrooms": 4,
+      "bathrooms": 4.0,
+      "livingSqFt": "2,585",
+      "yearBuilt": 1955,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4653144",
+      "address": "800 S BLVD OF THE PRESIDENTS #5",
+      "subdivision": "EMBASSY VILLAS",
+      "soldPrice": "$470,000",
+      "soldDate": "2026-06-23",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,090",
+      "yearBuilt": 1972,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4646393",
       "address": "424 BOWDOIN CIR",
@@ -91,32 +117,6 @@
       "yearBuilt": 1952,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4687309",
-      "address": "1300 BENJAMIN FRANKLIN DR #501",
-      "subdivision": "THE BEACH RESIDENCES",
-      "soldPrice": "$4,750,000",
-      "soldDate": "2026-06-08",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "4,194",
-      "yearBuilt": 2005,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4630025",
-      "address": "115 TYLER DR #203",
-      "subdivision": "LIDO ROYALE",
-      "soldPrice": "$350,000",
-      "soldDate": "2026-06-08",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "766",
-      "yearBuilt": 1979,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -124,21 +124,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 60,
-      "avgPrice": "$736,540",
-      "avgPricePerSqFt": "$672",
-      "avgLivingSqFt": "1,107",
-      "avgDom": 167
+      "activeCount": 67,
+      "avgPrice": "$784,137",
+      "avgPricePerSqFt": "$676",
+      "avgLivingSqFt": "1,141",
+      "avgDom": 159
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 9,
-      "avgPrice": "$2,594,222",
-      "avgPricePerSqFt": "$1,011",
-      "avgLivingSqFt": "2,487",
-      "avgDom": 125
+      "activeCount": 10,
+      "avgPrice": "$2,554,800",
+      "avgPricePerSqFt": "$1,020",
+      "avgLivingSqFt": "2,440",
+      "avgDom": 143
     },
     {
       "tier": "2006to2019",
@@ -158,7 +158,7 @@
       "avgPrice": "$9,475,000",
       "avgPricePerSqFt": "$2,213",
       "avgLivingSqFt": "4,236",
-      "avgDom": 456
+      "avgDom": 496
     }
   ],
   "condoTiersScope": {
@@ -168,5 +168,104 @@
       "Townhouse"
     ],
     "status": "Active"
-  }
+  },
+  "waterfrontSegments": [
+    {
+      "segment": "gulf_beachfront",
+      "label": "Gulf / Beachfront",
+      "activeCount": 43,
+      "soldCount": 36,
+      "soldMedianPricePerSqFt": "$800",
+      "soldMedianPrice": "$1,300,000",
+      "lowSample": false
+    },
+    {
+      "segment": "bay_canal",
+      "label": "Bay / Canal-front",
+      "activeCount": 21,
+      "soldCount": 13,
+      "soldMedianPricePerSqFt": "$897",
+      "soldMedianPrice": "$3,500,000",
+      "lowSample": false
+    },
+    {
+      "segment": "waterview",
+      "label": "Water view (not waterfront)",
+      "activeCount": 19,
+      "soldCount": 14,
+      "soldMedianPricePerSqFt": "$841",
+      "soldMedianPrice": "$1,092,500",
+      "lowSample": false
+    },
+    {
+      "segment": "none",
+      "label": "No water",
+      "activeCount": 55,
+      "soldCount": 33,
+      "soldMedianPricePerSqFt": "$784",
+      "soldMedianPrice": "$1,345,000",
+      "lowSample": false
+    }
+  ],
+  "marketBalance": {
+    "monthsOfSupply": 11.8,
+    "label": "buyer's market",
+    "activeCount": 138,
+    "sold90Count": 35
+  },
+  "propertyTypeSplit": {
+    "single_family": {
+      "soldCount": 32,
+      "activeCount": 55,
+      "soldMedianPrice": "$2,787,500",
+      "soldMedianPricePerSqFt": "$958"
+    },
+    "condo": {
+      "soldCount": 64,
+      "activeCount": 83,
+      "soldMedianPrice": "$1,050,000",
+      "soldMedianPricePerSqFt": "$688"
+    }
+  },
+  "boating": {
+    "activeWithDock": 16,
+    "activeWaterfront": 64
+  },
+  "marketQuestions": [
+    {
+      "facet": "waterfront",
+      "q": "How much more does beachfront cost than bayfront on St Armands Lido?",
+      "a": "Gulf-front / beachfront homes sell at a median $800 per sq ft versus $897 for bay- or canal-front \u2014 about a -11% waterfront premium (Stellar MLS, recent closed sales)."
+    },
+    {
+      "facet": "balance",
+      "q": "Is St Armands Lido a buyer's or seller's market right now?",
+      "a": "With 138 active listings and roughly 12 sales a month, St Armands Lido has about 11.8 months of supply \u2014 a buyer's market (under 4 favors sellers, over 7 favors buyers)."
+    },
+    {
+      "facet": "type",
+      "q": "What does a single-family home cost versus a condo on St Armands Lido?",
+      "a": "Single-family homes sell around $2,787,500 ($958/sq ft), while condos, villas and townhouses sell around $1,050,000 ($688/sq ft)."
+    },
+    {
+      "facet": "range",
+      "q": "What's the price range on St Armands Lido?",
+      "a": "Active listings run from $275,000 to $18,000,000, with a median asking price of $1,612,000."
+    },
+    {
+      "facet": "speed",
+      "q": "How quickly do homes sell on St Armands Lido?",
+      "a": "Recently sold homes took a median 85 days on market and closed at 85.9% of original list price (trailing 90 days)."
+    },
+    {
+      "facet": "boating",
+      "q": "Can I keep a boat \u2014 how many St Armands Lido homes have a dock?",
+      "a": "Of 64 active waterfront listings, 16 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+    },
+    {
+      "facet": "fees",
+      "q": "What are typical HOA and condo fees on St Armands Lido?",
+      "a": "The median monthly condo fee is $1,458 and the median monthly association fee is $1,305."
+    }
+  ]
 }

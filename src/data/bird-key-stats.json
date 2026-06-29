@@ -2,7 +2,7 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-29T10:53:10.241171+00:00",
+  "lastUpdated": "2026-06-29T21:24:25.002896+00:00",
   "counts": {
     "sold": 33,
     "pending": 4,
@@ -125,5 +125,88 @@
     }
   ],
   "condoTiers": [],
-  "condoTiersScope": null
+  "condoTiersScope": null,
+  "waterfrontSegments": [
+    {
+      "segment": "gulf_beachfront",
+      "label": "Gulf / Beachfront",
+      "activeCount": 1,
+      "soldCount": 0,
+      "soldMedianPricePerSqFt": null,
+      "soldMedianPrice": null,
+      "lowSample": true
+    },
+    {
+      "segment": "bay_canal",
+      "label": "Bay / Canal-front",
+      "activeCount": 11,
+      "soldCount": 20,
+      "soldMedianPricePerSqFt": "$1,223",
+      "soldMedianPrice": "$4,350,000",
+      "lowSample": false
+    },
+    {
+      "segment": "waterview",
+      "label": "Water view (not waterfront)",
+      "activeCount": 0,
+      "soldCount": 1,
+      "soldMedianPricePerSqFt": null,
+      "soldMedianPrice": null,
+      "lowSample": true
+    },
+    {
+      "segment": "none",
+      "label": "No water",
+      "activeCount": 13,
+      "soldCount": 12,
+      "soldMedianPricePerSqFt": "$810",
+      "soldMedianPrice": "$2,090,000",
+      "lowSample": false
+    }
+  ],
+  "marketBalance": {
+    "monthsOfSupply": 6.8,
+    "label": "balanced market",
+    "activeCount": 25,
+    "sold90Count": 11
+  },
+  "propertyTypeSplit": {
+    "single_family": {
+      "soldCount": 33,
+      "activeCount": 25,
+      "soldMedianPrice": "$3,850,000",
+      "soldMedianPricePerSqFt": "$1,080"
+    }
+  },
+  "boating": {
+    "activeWithDock": 8,
+    "activeWaterfront": 12
+  },
+  "marketQuestions": [
+    {
+      "facet": "balance",
+      "q": "Is Bird Key a buyer's or seller's market right now?",
+      "a": "With 25 active listings and roughly 4 sales a month, Bird Key has about 6.8 months of supply \u2014 a balanced market (under 4 favors sellers, over 7 favors buyers)."
+    },
+    {
+      "facet": "range",
+      "q": "What's the price range on Bird Key?",
+      "a": "Active listings run from $1,150,000 to $11,900,000, with a median asking price of $4,350,000."
+    },
+    {
+      "facet": "speed",
+      "q": "How quickly do homes sell on Bird Key?",
+      "a": "Recently sold homes took a median 85 days on market and closed at 89.5% of original list price (trailing 90 days)."
+    },
+    {
+      "facet": "boating",
+      "q": "Can I keep a boat \u2014 how many Bird Key homes have a dock?",
+      "a": "Of 12 active waterfront listings, 8 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+    },
+    {
+      "facet": "fees",
+      "q": "What are typical HOA and condo fees on Bird Key?",
+      "a": "The median monthly condo fee is None and the median monthly association fee is $95."
+    }
+  ]
 }

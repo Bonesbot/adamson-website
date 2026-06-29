@@ -2,7 +2,7 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-29T10:53:09.030511+00:00",
+  "lastUpdated": "2026-06-29T21:24:23.396450+00:00",
   "counts": {
     "sold": 274,
     "pending": 84,
@@ -168,5 +168,108 @@
       "Townhouse"
     ],
     "status": "Active"
-  }
+  },
+  "waterfrontSegments": [
+    {
+      "segment": "gulf_beachfront",
+      "label": "Gulf / Beachfront",
+      "activeCount": 2,
+      "soldCount": 5,
+      "soldMedianPricePerSqFt": null,
+      "soldMedianPrice": null,
+      "lowSample": true
+    },
+    {
+      "segment": "bay_canal",
+      "label": "Bay / Canal-front",
+      "activeCount": 74,
+      "soldCount": 56,
+      "soldMedianPricePerSqFt": "$656",
+      "soldMedianPrice": "$1,160,000",
+      "lowSample": false
+    },
+    {
+      "segment": "waterview",
+      "label": "Water view (not waterfront)",
+      "activeCount": 93,
+      "soldCount": 127,
+      "soldMedianPricePerSqFt": "$791",
+      "soldMedianPrice": "$1,425,000",
+      "lowSample": false
+    },
+    {
+      "segment": "other_wf",
+      "label": "Other waterfront",
+      "activeCount": 0,
+      "soldCount": 1,
+      "soldMedianPricePerSqFt": null,
+      "soldMedianPrice": null,
+      "lowSample": true
+    },
+    {
+      "segment": "none",
+      "label": "No water",
+      "activeCount": 106,
+      "soldCount": 85,
+      "soldMedianPricePerSqFt": "$535",
+      "soldMedianPrice": "$675,000",
+      "lowSample": false
+    }
+  ],
+  "marketBalance": {
+    "monthsOfSupply": 10.4,
+    "label": "buyer's market",
+    "activeCount": 275,
+    "sold90Count": 79
+  },
+  "propertyTypeSplit": {
+    "single_family": {
+      "soldCount": 13,
+      "activeCount": 9,
+      "soldMedianPrice": "$950,000",
+      "soldMedianPricePerSqFt": "$563"
+    },
+    "condo": {
+      "soldCount": 261,
+      "activeCount": 266,
+      "soldMedianPrice": "$1,150,000",
+      "soldMedianPricePerSqFt": "$691"
+    }
+  },
+  "boating": {
+    "activeWithDock": 36,
+    "activeWaterfront": 76
+  },
+  "marketQuestions": [
+    {
+      "facet": "balance",
+      "q": "Is Downtown Sarasota a buyer's or seller's market right now?",
+      "a": "With 275 active listings and roughly 26 sales a month, Downtown Sarasota has about 10.4 months of supply \u2014 a buyer's market (under 4 favors sellers, over 7 favors buyers)."
+    },
+    {
+      "facet": "type",
+      "q": "What does a single-family home cost versus a condo on Downtown Sarasota?",
+      "a": "Single-family homes sell around $950,000 ($563/sq ft), while condos, villas and townhouses sell around $1,150,000 ($691/sq ft)."
+    },
+    {
+      "facet": "range",
+      "q": "What's the price range on Downtown Sarasota?",
+      "a": "Active listings run from $198,000 to $12,499,000, with a median asking price of $1,499,000."
+    },
+    {
+      "facet": "speed",
+      "q": "How quickly do homes sell on Downtown Sarasota?",
+      "a": "Recently sold homes took a median 86 days on market and closed at 87.9% of original list price (trailing 90 days)."
+    },
+    {
+      "facet": "boating",
+      "q": "Can I keep a boat \u2014 how many Downtown Sarasota homes have a dock?",
+      "a": "Of 76 active waterfront listings, 36 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+    },
+    {
+      "facet": "fees",
+      "q": "What are typical HOA and condo fees on Downtown Sarasota?",
+      "a": "The median monthly condo fee is $1,736 and the median monthly association fee is $1,655."
+    }
+  ]
 }

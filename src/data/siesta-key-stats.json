@@ -2,7 +2,7 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-29T10:53:02.279419+00:00",
+  "lastUpdated": "2026-06-29T21:24:22.974299+00:00",
   "counts": {
     "sold": 516,
     "pending": 64,
@@ -168,5 +168,113 @@
       "Townhouse"
     ],
     "status": "Active"
-  }
+  },
+  "waterfrontSegments": [
+    {
+      "segment": "gulf_beachfront",
+      "label": "Gulf / Beachfront",
+      "activeCount": 116,
+      "soldCount": 141,
+      "soldMedianPricePerSqFt": "$714",
+      "soldMedianPrice": "$960,000",
+      "lowSample": false
+    },
+    {
+      "segment": "bay_canal",
+      "label": "Bay / Canal-front",
+      "activeCount": 130,
+      "soldCount": 192,
+      "soldMedianPricePerSqFt": "$569",
+      "soldMedianPrice": "$1,132,500",
+      "lowSample": false
+    },
+    {
+      "segment": "waterview",
+      "label": "Water view (not waterfront)",
+      "activeCount": 60,
+      "soldCount": 65,
+      "soldMedianPricePerSqFt": "$581",
+      "soldMedianPrice": "$712,000",
+      "lowSample": false
+    },
+    {
+      "segment": "other_wf",
+      "label": "Other waterfront",
+      "activeCount": 2,
+      "soldCount": 11,
+      "soldMedianPricePerSqFt": "$496",
+      "soldMedianPrice": "$690,000",
+      "lowSample": false
+    },
+    {
+      "segment": "none",
+      "label": "No water",
+      "activeCount": 133,
+      "soldCount": 107,
+      "soldMedianPricePerSqFt": "$523",
+      "soldMedianPrice": "$775,000",
+      "lowSample": false
+    }
+  ],
+  "marketBalance": {
+    "monthsOfSupply": 9.4,
+    "label": "buyer's market",
+    "activeCount": 441,
+    "sold90Count": 141
+  },
+  "propertyTypeSplit": {
+    "single_family": {
+      "soldCount": 200,
+      "activeCount": 175,
+      "soldMedianPrice": "$1,526,000",
+      "soldMedianPricePerSqFt": "$639"
+    },
+    "condo": {
+      "soldCount": 316,
+      "activeCount": 266,
+      "soldMedianPrice": "$670,000",
+      "soldMedianPricePerSqFt": "$583"
+    }
+  },
+  "boating": {
+    "activeWithDock": 115,
+    "activeWaterfront": 248
+  },
+  "marketQuestions": [
+    {
+      "facet": "waterfront",
+      "q": "How much more does beachfront cost than bayfront on Siesta Key?",
+      "a": "Gulf-front / beachfront homes sell at a median $714 per sq ft versus $569 for bay- or canal-front \u2014 about a 26% waterfront premium (Stellar MLS, recent closed sales)."
+    },
+    {
+      "facet": "balance",
+      "q": "Is Siesta Key a buyer's or seller's market right now?",
+      "a": "With 441 active listings and roughly 47 sales a month, Siesta Key has about 9.4 months of supply \u2014 a buyer's market (under 4 favors sellers, over 7 favors buyers)."
+    },
+    {
+      "facet": "type",
+      "q": "What does a single-family home cost versus a condo on Siesta Key?",
+      "a": "Single-family homes sell around $1,526,000 ($639/sq ft), while condos, villas and townhouses sell around $670,000 ($583/sq ft)."
+    },
+    {
+      "facet": "range",
+      "q": "What's the price range on Siesta Key?",
+      "a": "Active listings run from $290,000 to $29,995,000, with a median asking price of $1,199,000."
+    },
+    {
+      "facet": "speed",
+      "q": "How quickly do homes sell on Siesta Key?",
+      "a": "Recently sold homes took a median 69 days on market and closed at 88.1% of original list price (trailing 90 days)."
+    },
+    {
+      "facet": "boating",
+      "q": "Can I keep a boat \u2014 how many Siesta Key homes have a dock?",
+      "a": "Of 248 active waterfront listings, 115 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+    },
+    {
+      "facet": "fees",
+      "q": "What are typical HOA and condo fees on Siesta Key?",
+      "a": "The median monthly condo fee is $1,261 and the median monthly association fee is $1,133."
+    }
+  ]
 }

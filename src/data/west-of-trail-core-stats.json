@@ -2,62 +2,70 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-05-20T19:14:40.664270+00:00",
+  "lastUpdated": "2026-06-29T21:24:23.803518+00:00",
   "counts": {
-    "sold": 166,
-    "pending": 22,
-    "active": 125,
-    "total": 188
+    "sold": 180,
+    "pending": 29,
+    "active": 122,
+    "total": 209
   },
   "metrics": {
-    "avgPrice": "$2,319,819",
-    "avgPricePerSqFt": "$715",
+    "avgPrice": "$2,420,258",
+    "avgPricePerSqFt": "$731",
     "avgYearBuilt": 1985,
-    "avgLivingSqFt": "2,939",
-    "avgLotSqFt": "21,350",
-    "avgDom": 112
+    "avgLivingSqFt": "2,980",
+    "avgLotSqFt": null,
+    "avgDom": 115
   },
   "range": {
     "minPrice": "$98,000",
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 125,
-    "medianPrice": "$2,795,000",
-    "medianPricePerSqFt": "$861",
+    "count": 122,
+    "medianPrice": "$2,996,000",
+    "medianPricePerSqFt": "$871",
     "waterfrontCount": 31,
-    "newConstructionCount": 38
+    "newConstructionCount": 42
   },
   "sold": {
-    "count": 56,
-    "medianPrice": "$2,147,500",
-    "medianDom": 82,
-    "saleToListRatio": "103.1%",
+    "count": 51,
+    "medianPrice": "$2,220,000",
+    "medianDom": 74,
+    "saleToListRatio": "105.3%",
     "windowDays": 90
   },
   "fees": {
-    "medianMonthlyAssociation": "$33",
+    "medianMonthlyAssociation": "$67",
     "medianMonthlyCondoFee": "$689"
   },
   "priceBands": {
-    "under900k": 18,
+    "under900k": 17,
     "band900kTo1_5m": 13,
-    "band1_5mTo3m": 35,
-    "band3mPlus": 59
+    "band1_5mTo3m": 32,
+    "band3mPlus": 60
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 125
+      "count": 122
     }
   ],
-  "buildingClasses": [
-    {
-      "class": "low-rise",
-      "count": 88
-    }
-  ],
+  "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4679338",
+      "address": "948 CITRUS AVE",
+      "subdivision": "HUDSON BAYOU",
+      "soldPrice": "$2,950,000",
+      "soldDate": "2026-06-18",
+      "bedrooms": 4,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,266",
+      "yearBuilt": 2017,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4692922",
       "address": "1575 EASTBROOK DR",
@@ -109,19 +117,150 @@
       "yearBuilt": 2025,
       "propertyType": "Residential",
       "isWaterfront": false
+    }
+  ],
+  "condoTiers": [
+    {
+      "tier": "pre1990",
+      "label": "Pre-1990",
+      "rangeLabel": "before 1990",
+      "activeCount": 14,
+      "avgPrice": "$450,200",
+      "avgPricePerSqFt": "$363",
+      "avgLivingSqFt": "1,169",
+      "avgDom": 138
     },
     {
-      "listingId": "A4687142",
-      "address": "3705 TANGIER TER",
-      "subdivision": "SAN REMO ESTATES",
-      "soldPrice": "$1,825,000",
-      "soldDate": "2026-06-10",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,529",
-      "yearBuilt": 1956,
-      "propertyType": "Residential",
-      "isWaterfront": false
+      "tier": "1990to2005",
+      "label": "1990 \u2013 2005",
+      "rangeLabel": "1990 through 2005",
+      "activeCount": 0,
+      "avgPrice": null,
+      "avgPricePerSqFt": null,
+      "avgLivingSqFt": null,
+      "avgDom": null
+    },
+    {
+      "tier": "2006to2019",
+      "label": "2006 \u2013 2019",
+      "rangeLabel": "2006 through 2019",
+      "activeCount": 0,
+      "avgPrice": null,
+      "avgPricePerSqFt": null,
+      "avgLivingSqFt": null,
+      "avgDom": null
+    },
+    {
+      "tier": "2020plus",
+      "label": "2020 & Newer",
+      "rangeLabel": "2020 or newer",
+      "activeCount": 0,
+      "avgPrice": null,
+      "avgPricePerSqFt": null,
+      "avgLivingSqFt": null,
+      "avgDom": null
+    }
+  ],
+  "condoTiersScope": {
+    "propertySubTypes": [
+      "Condominium",
+      "Villa",
+      "Townhouse"
+    ],
+    "status": "Active"
+  },
+  "waterfrontSegments": [
+    {
+      "segment": "bay_canal",
+      "label": "Bay / Canal-front",
+      "activeCount": 29,
+      "soldCount": 21,
+      "soldMedianPricePerSqFt": "$1,051",
+      "soldMedianPrice": "$3,875,000",
+      "lowSample": false
+    },
+    {
+      "segment": "waterview",
+      "label": "Water view (not waterfront)",
+      "activeCount": 2,
+      "soldCount": 6,
+      "soldMedianPricePerSqFt": null,
+      "soldMedianPrice": null,
+      "lowSample": true
+    },
+    {
+      "segment": "other_wf",
+      "label": "Other waterfront",
+      "activeCount": 2,
+      "soldCount": 1,
+      "soldMedianPricePerSqFt": null,
+      "soldMedianPrice": null,
+      "lowSample": true
+    },
+    {
+      "segment": "none",
+      "label": "No water",
+      "activeCount": 89,
+      "soldCount": 152,
+      "soldMedianPricePerSqFt": "$647",
+      "soldMedianPrice": "$1,626,250",
+      "lowSample": false
+    }
+  ],
+  "marketBalance": {
+    "monthsOfSupply": 7.2,
+    "label": "buyer's market",
+    "activeCount": 122,
+    "sold90Count": 51
+  },
+  "propertyTypeSplit": {
+    "single_family": {
+      "soldCount": 164,
+      "activeCount": 108,
+      "soldMedianPrice": "$1,837,500",
+      "soldMedianPricePerSqFt": "$674"
+    },
+    "condo": {
+      "soldCount": 16,
+      "activeCount": 14,
+      "soldMedianPrice": "$313,000",
+      "soldMedianPricePerSqFt": "$306"
+    }
+  },
+  "boating": {
+    "activeWithDock": 26,
+    "activeWaterfront": 31
+  },
+  "marketQuestions": [
+    {
+      "facet": "balance",
+      "q": "Is West Of Trail Core a buyer's or seller's market right now?",
+      "a": "With 122 active listings and roughly 17 sales a month, West Of Trail Core has about 7.2 months of supply \u2014 a buyer's market (under 4 favors sellers, over 7 favors buyers)."
+    },
+    {
+      "facet": "type",
+      "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
+      "a": "Single-family homes sell around $1,837,500 ($674/sq ft), while condos, villas and townhouses sell around $313,000 ($306/sq ft)."
+    },
+    {
+      "facet": "range",
+      "q": "What's the price range on West Of Trail Core?",
+      "a": "Active listings run from $98,000 to $26,400,000, with a median asking price of $2,996,000."
+    },
+    {
+      "facet": "speed",
+      "q": "How quickly do homes sell on West Of Trail Core?",
+      "a": "Recently sold homes took a median 74 days on market and closed at 105.3% of original list price (trailing 90 days)."
+    },
+    {
+      "facet": "boating",
+      "q": "Can I keep a boat \u2014 how many West Of Trail Core homes have a dock?",
+      "a": "Of 31 active waterfront listings, 26 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+    },
+    {
+      "facet": "fees",
+      "q": "What are typical HOA and condo fees on West Of Trail Core?",
+      "a": "The median monthly condo fee is $689 and the median monthly association fee is $67."
     }
   ]
 }
