@@ -2,7 +2,7 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-29T21:24:24.604760+00:00",
+  "lastUpdated": "2026-06-29T22:25:02.886072+00:00",
   "counts": {
     "sold": 244,
     "pending": 22,
@@ -34,6 +34,13 @@
     "medianDom": 32,
     "saleToListRatio": "90.9%",
     "windowDays": 90
+  },
+  "monthsOfSupply": {
+    "condo": 10.0,
+    "sfhVilla": 5.6,
+    "blended": 7.5,
+    "method": "active / (trailing-12mo closed / 12)",
+    "windowDays": 365
   },
   "fees": {
     "medianMonthlyAssociation": "$842",
@@ -217,10 +224,14 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.1,
-    "label": "balanced market",
+    "monthsOfSupply": 7.5,
+    "monthsOfSupplyCondo": 10.0,
+    "monthsOfSupplySfhVilla": 5.6,
+    "label": "buyer's market",
     "activeCount": 133,
-    "sold90Count": 78
+    "sold365Count": 214,
+    "sold90Count": 78,
+    "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
@@ -244,7 +255,7 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 133 active listings and roughly 26 sales a month, West Of Trail South has about 5.1 months of supply \u2014 a balanced market (under 4 favors sellers, over 7 favors buyers)."
+      "a": "With 133 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 7.5 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
