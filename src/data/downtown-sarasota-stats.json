@@ -2,7 +2,7 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-29T22:18:00.822062+00:00",
+  "lastUpdated": "2026-06-29T22:24:48.566254+00:00",
   "counts": {
     "sold": 274,
     "pending": 84,
@@ -224,10 +224,14 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 10.4,
+    "monthsOfSupply": 13.9,
+    "monthsOfSupplyCondo": 13.9,
+    "monthsOfSupplySfhVilla": 14.5,
     "label": "buyer's market",
     "activeCount": 275,
-    "sold90Count": 79
+    "sold365Count": 237,
+    "sold90Count": 79,
+    "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
@@ -251,7 +255,7 @@
     {
       "facet": "balance",
       "q": "Is Downtown Sarasota a buyer's or seller's market right now?",
-      "a": "With 275 active listings and roughly 26 sales a month, Downtown Sarasota has about 10.4 months of supply \u2014 a buyer's market (under 4 favors sellers, over 7 favors buyers)."
+      "a": "With 275 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 13.9 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
