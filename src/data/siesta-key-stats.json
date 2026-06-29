@@ -2,7 +2,7 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-29T22:17:55.836180+00:00",
+  "lastUpdated": "2026-06-29T22:24:47.784265+00:00",
   "counts": {
     "sold": 516,
     "pending": 64,
@@ -224,10 +224,14 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 9.4,
+    "monthsOfSupply": 11.6,
+    "monthsOfSupplyCondo": 11.4,
+    "monthsOfSupplySfhVilla": 11.8,
     "label": "buyer's market",
     "activeCount": 441,
-    "sold90Count": 141
+    "sold365Count": 456,
+    "sold90Count": 141,
+    "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
@@ -256,7 +260,7 @@
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 441 active listings and roughly 47 sales a month, Siesta Key has about 9.4 months of supply \u2014 a buyer's market (under 4 favors sellers, over 7 favors buyers)."
+      "a": "With 441 active listings and roughly 38 closed sales a month (trailing 12 months), Siesta Key has about 11.6 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
