@@ -2,7 +2,7 @@
   "areaSlug": "st-armands-lido",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-29T21:24:22.549018+00:00",
+  "lastUpdated": "2026-06-29T22:24:50.141276+00:00",
   "counts": {
     "sold": 96,
     "pending": 17,
@@ -34,6 +34,13 @@
     "medianDom": 85,
     "saleToListRatio": "85.9%",
     "windowDays": 90
+  },
+  "monthsOfSupply": {
+    "condo": 15.5,
+    "sfhVilla": 21.8,
+    "blended": 17.6,
+    "method": "active / (trailing-12mo closed / 12)",
+    "windowDays": 365
   },
   "fees": {
     "medianMonthlyAssociation": "$1,305",
@@ -208,10 +215,14 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 11.8,
+    "monthsOfSupply": 17.6,
+    "monthsOfSupplyCondo": 15.5,
+    "monthsOfSupplySfhVilla": 21.8,
     "label": "buyer's market",
     "activeCount": 138,
-    "sold90Count": 35
+    "sold365Count": 94,
+    "sold90Count": 35,
+    "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
@@ -240,7 +251,7 @@
     {
       "facet": "balance",
       "q": "Is St Armands Lido a buyer's or seller's market right now?",
-      "a": "With 138 active listings and roughly 12 sales a month, St Armands Lido has about 11.8 months of supply \u2014 a buyer's market (under 4 favors sellers, over 7 favors buyers)."
+      "a": "With 138 active listings and roughly 8 closed sales a month (trailing 12 months), St Armands Lido has about 17.6 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
