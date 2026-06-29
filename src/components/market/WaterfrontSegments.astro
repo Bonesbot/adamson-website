@@ -1,0 +1,92 @@
+---
+/**
+ * WaterfrontSegments — AEO waterfront price breakdown + market balance.
+ * Renders sentence-first visible facts (months of supply, SFH vs condo) and a
+ * collapsed <details> accordion table of median $/sqft by waterfront type,
+ * plus a Dataset JSON-LD mirror. Conditional: only renders when stats.waterfrontSegments exists.
+ */
+interface Props { areaName: string; stats: any; }
+const { areaName, stats } = Astro.props;
+const segs = (stats.waterfrontSegments || []).filter((s: any) => s.activeCount || s.soldCount);
+const bal = stats.marketBalance;
+const pt = stats.propertyTypeSplit || {};
+const asOf = stats.lastUpdated
+  ? new Date(stats.lastUpdated).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
+  : null;
+
+const dataset = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: `${areaName} waterfront price segmentation`,
+  description: `Median sold price per square foot on ${areaName} by waterfront type (Gulf/beachfront, bay/canal-front, water view, and non-waterfront), with market balance and property-type medians. Source: Stellar MLS via the Adamson Group data pipeline.`,
+  isBasedOn: { '@type': 'Dataset', name: 'Stellar MLS' },
+  ...(stats.lastUpdated ? { dateModified: String(stats.lastUpdated).slice(0, 10) } : {}),
+  variableMeasured: [
+    ...segs.filter((s: any) => s.soldMedianPricePerSqFt).map((s: any) => ({ '@type': 'PropertyValue', name: `${s.label} — median sold price per sq ft`, value: s.soldMedianPricePerSqFt })),
+    ...(bal && bal.monthsOfSupply != null ? [{ '@type': 'PropertyValue', name: 'Months of supply', value: bal.monthsOfSupply }] : []),
+    ...(pt.single_family ? [{ '@type': 'PropertyValue', name: 'Single-family median sold price', value: pt.single_family.soldMedianPrice }] : []),
+    ...(pt.condo ? [{ '@type': 'PropertyValue', name: 'Condo median sold price', value: pt.condo.soldMedianPrice }] : []),
+  ],
+};
+---
+
+{segs.length > 0 && (
+<section class="section-sm dark-section-elevated" id="waterfront-breakdown">
+  <div class="container-narrow">
+    <p class="text-[var(--color-cbgl-blue-light)] uppercase tracking-widest text-xs font-semibold mb-2">Waterfront & Market Breakdown</p>
+    <h2 class="accent-underline mb-6">{areaName} by Water Type & Market Balance</h2>
+
+    <div class="grid sm:grid-cols-2 gap-4 mb-8">
+      {bal && bal.monthsOfSupply != null && (
+        <div class="border border-[var(--color-border-dark)] rounded-lg p-5 bg-[var(--color-black-card)]">
+          <div class="text-white/50 text-xs uppercase tracking-wide mb-1">Market balance</div>
+          <div class="text-white text-lg font-semibold">{bal.monthsOfSupply} months of supply &middot; <span class="capitalize">{bal.label}</span></div>
+          <div class="text-white/50 text-xs mt-1">{bal.activeCount} active &middot; {bal.sold90Count} sold (90 days)</div>
+        </div>
+      )}
+      {(pt.single_family || pt.condo) && (
+        <div class="border border-[var(--color-border-dark)] rounded-lg p-5 bg-[var(--color-black-card)]">
+          <div class="text-white/50 text-xs uppercase tracking-wide mb-1">Single-family vs condo (median sold)</div>
+          {pt.single_family && <div class="text-white text-sm">Single-family: <b>{pt.single_family.soldMedianPrice}</b> ({pt.single_family.soldMedianPricePerSqFt}/sq ft)</div>}
+          {pt.condo && <div class="text-white text-sm">Condo / villa / townhouse: <b>{pt.condo.soldMedianPrice}</b> ({pt.condo.soldMedianPricePerSqFt}/sq ft)</div>}
+        </div>
+      )}
+    </div>
+
+    <details class="group border border-[var(--color-border-dark)] rounded-lg overflow-hidden bg-[var(--color-black-card)]">
+      <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-[var(--color-dark-elevated)] transition-colors duration-200">
+        <h3 class="text-base font-semibold text-white pr-4 m-0" style="font-size:1.05rem;font-family:var(--font-body);">Waterfront price breakdown — median $/sq ft by water type</h3>
+        <span class="text-[var(--color-cbgl-blue-light)] text-xl flex-shrink-0 transition-transform duration-200 group-open:rotate-45">+</span>
+      </summary>
+      <div class="px-5 pb-5">
+        <table class="w-full text-left text-sm border-collapse">
+          <caption class="sr-only">{areaName} median sold price per square foot by waterfront type</caption>
+          <thead>
+            <tr class="text-white/50 text-xs uppercase tracking-wide border-b border-[var(--color-border-dark)]">
+              <th class="py-2 pr-3 font-semibold">Water type</th>
+              <th class="py-2 px-3 font-semibold text-right">Active</th>
+              <th class="py-2 px-3 font-semibold text-right">Sold</th>
+              <th class="py-2 pl-3 font-semibold text-right">Median sold $/sq ft</th>
+            </tr>
+          </thead>
+          <tbody>
+            {segs.map((s: any) => (
+              <tr class="border-b border-[var(--color-border-dark)]/50 text-white/80">
+                <td class="py-2.5 pr-3">{s.label}</td>
+                <td class="py-2.5 px-3 text-right tabular-nums">{s.activeCount}</td>
+                <td class="py-2.5 px-3 text-right tabular-nums">{s.soldCount}</td>
+                <td class="py-2.5 pl-3 text-right tabular-nums font-semibold text-white">{s.soldMedianPricePerSqFt || '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="text-white/40 text-xs mt-4 leading-relaxed">
+          Median of MLS-calculated sold price per square foot, grouped by waterfront type. Segments with fewer than 8 sales are shown without a median to avoid noise (—).
+          Waterfront type is derived from the MLS waterfront features field. {asOf && `Data through ${asOf}.`} Source: Stellar MLS via the Adamson Group data pipeline.
+        </p>
+      </div>
+    </details>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(dataset, null, 0)} />
+</section>
+)}
