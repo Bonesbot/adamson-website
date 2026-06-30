@@ -4,7 +4,18 @@
 > Process for running future audits: see [AEO_AUDIT_PLAYBOOK.md](./AEO_AUDIT_PLAYBOOK.md).
 > Update this file after each post-deploy audit — close completed items, add new findings.
 >
-> **Last audited: 2026-06-12 (BonesBot, post-deploy verification). Overall grade: B+.**
+> **Last audited: 2026-06-30 (BonesBot, post LBK market-FAQ deploy). Overall grade: A−.**
+
+---
+
+## New findings — 2026-06-30 audit (post LBK market-FAQ deploy)
+
+> Cold audit via cache-proof deploy permalink (deploy `6a43dadd`, commit `01940d30`). Overall grade **A−**. Area pages are A-grade, gold-standard citable assets; remaining gaps are the `/market-reports/` stub, the shared OG image, a missing `aggregateRating`, and the thin `/about/` bio.
+
+- [ ] **🟡 Add `aggregateRating` to the `RealEstateAgent` schema (homepage + `/about/`).** Both pages show a visible "5.0 · 25 reviews" block, but neither `RealEstateAgent` JSON-LD node carries `aggregateRating`. Free AEO / rich-result win, and the single fix that pushes the "who is the top barrier-island agent?" query from PARTIAL to full grounding — an engine could cite a corroborated rating instead of a self-asserted superlative. Wire `aggregateRating` (ratingValue 5.0, reviewCount 25, bestRating 5) aligned with the visible block. (Data already on file: 5.0★/25 Google reviews.)
+- [ ] **🟢 Sitemap emits both `/srq-map/` and `/SRQmap/`** — case-duplicate of the same map page (Netlify lowercases URLs, so the mixed-case entry is a dupe). De-dupe so only the canonical lowercase URL is in the sitemap.
+- [ ] **🟢 robots.txt — optionally add the 4 newer AI agents** (OAI-SearchBot, Applebot-Extended, Amazonbot, Meta-ExternalAgent). Already crawled under `User-agent: *`, but explicit listing matches the file's existing convention.
+- [x] **~~🟡 "Data as of" / freshness date for AEO strength — CONFIRMED HANDLED on the data pages.~~** ✅ Verified 2026-06-30. Longboat Key exposes freshness to BOTH the reader ("Last updated June 30, 2026", "Data through June 30, 2026", and "As of June 30, 2026…" inside the cost FAQ answer) AND the crawler (`dateModified`, re-stamped daily, on the `Dataset` JSON-LD nodes). This is the 2026 AEO gold standard (visible date + aligned schema `dateModified`; pages refreshed within ~6 months earn the large majority of AI citations). No action needed on area pages. Replicate the visible-date + `dateModified` pattern when `/market-reports/` and the static About/Contact pages get dated content.
 
 ---
 
@@ -111,6 +122,9 @@
 | 2026-04-25 | BonesBot (strategy session) | — | Added P1#5: Mapme map UX integration with HTML+schema duplication rule | — |
 | 2026-06-06 | BonesBot (post-deploy audit) | B | 4 (stale homepage/contact; stale FAQ numbers vs live tables; llms.txt dead link + missing Palmer Ranch; areas-hub "From TBD" for WoT) | 2 (area-page parity exceeded; llms.txt created) |
 | 2026-06-12 | BonesBot (low-hanging-fruit sprint + post-deploy verification) | B+ | 1 (cached fetches can masquerade as stale pages — audit via deploy permalink) | 8 (FAQ↔stats interpolation system; card medians from stats / From-TBD; llms.txt regen; E-E-A-T schema verified + sameAs ×9; dateModified on area WebPage; BreadcrumbList on area pages; absolute og:image; duplicate invert) |
+| 2026-06-30 | BonesBot (post LBK market-FAQ deploy audit) | A− | 2 (no `aggregateRating` despite visible 5.0/25 reviews; sitemap `/srq-map/` vs `/SRQmap/` case-dupe) | 0 (LBK FAQ consolidation + freshness verified; "data as of" question confirmed handled) |
+
+> **2026-06-30 deploy context:** Deploy `6a43dadd` (commit `01940d30`, published in 16s; only `areas/longboat-key/index.html` changed) shipped the per-area market-FAQ registry (`AREA_MARKET_FAQ` in `scripts/fetch_area_summary.py`). Longboat Key now LEADS its FAQ with a consolidated, trailing-90-day **"What do properties cost on Longboat Key?"** answer — condo vs SFH by median + $/sqft, beachfront vs bayside by mix-robust $/sqft (per-location median price deliberately omitted because the buckets mix property types), closed by a valuation-nuance line pointing to Ryan. Retired: the granular beachfront-premium / SFH-vs-condo / price-range market Qs and the editorial "best neighborhoods" Q; buyer/seller Q renamed "Is it a good time to buy on Longboat Key?". Other 8 area pages untouched (safe-default registry). Grade up to **A−**: area pages are A-grade citable assets with gold-standard visible+schema freshness; held off a full A by (1) `/market-reports/` still a "Coming Soon" stub — no consolidated month/quarter narrative for the "what's the Sarasota luxury market doing?" query; (2) one shared `og-default.jpg` across all 9 pages; (3) thin `/about/` bio (TODO comment still open); (4) missing `aggregateRating` despite a visible 5.0/25-review block.
 
 > **2026-06-06 deploy context:** Removed the "Active Condos by Construction Era" table from Palmer Ranch (Bird Key was already empty). That table now renders only on Downtown Sarasota, Longboat Key, Siesta Key, and St. Armands and Lido — per Ryan's instruction.
 >
