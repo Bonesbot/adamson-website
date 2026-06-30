@@ -10,7 +10,7 @@ AreaMarketSummary.astro component.
 Extra fields:
     - active.{count, medianPrice, medianPricePerSqFt, waterfrontCount, newConstructionCount}
     - sold.{count, medianPrice, medianDom, saleToListRatio}
-    - fees.{medianMonthlyAssociation, medianMonthlyCondoFee}
+    - fees.{medianMonthlyAssociation, medianMonthlyCondoFee, minMonthlyCondoFee, maxMonthlyCondoFee, condoFeeRange}
     - priceBands (active inventory split into 4 bands)
     - propertyTypes (active inventory by property_type)
     - buildingClasses (active inventory by building_class)
@@ -109,6 +109,10 @@ SELECT
         FILTER (WHERE monthly_association_cost > 0)                                   AS median_monthly_assoc,
     PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY monthly_condo_fee_amount)
         FILTER (WHERE monthly_condo_fee_amount > 0)                                   AS median_monthly_condo_fee,
+    PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY monthly_condo_fee_amount)
+        FILTER (WHERE monthly_condo_fee_amount >= 100)                               AS median_condo_fee_floored,
+    MIN(monthly_condo_fee_amount) FILTER (WHERE monthly_condo_fee_amount >= 100)      AS min_monthly_condo_fee,
+    MAX(monthly_condo_fee_amount) FILTER (WHERE monthly_condo_fee_amount >= 100)      AS max_monthly_condo_fee,
     MIN(current_price) FILTER (WHERE current_price IS NOT NULL)                        AS min_price,
     MAX(current_price) FILTER (WHERE current_price IS NOT NULL)                        AS max_price,
     COUNT(*) FILTER (WHERE is_waterfront = TRUE)                                       AS waterfront_count,
@@ -570,6 +574,13 @@ def compute_summary(slug, conn):
         "fees": {
             "medianMonthlyAssociation": fmt_currency(head["median_monthly_assoc"]),
             "medianMonthlyCondoFee": fmt_currency(head["median_monthly_condo_fee"]),
+            "minMonthlyCondoFee": fmt_currency(head["min_monthly_condo_fee"]),
+            "maxMonthlyCondoFee": fmt_currency(head["max_monthly_condo_fee"]),
+            "condoFeeRange": ({
+                "min": fmt_int(head["min_monthly_condo_fee"]),
+                "median": fmt_int(head["median_condo_fee_floored"]),
+                "max": fmt_int(head["max_monthly_condo_fee"]),
+            } if (head.get("min_monthly_condo_fee") and head.get("max_monthly_condo_fee")) else None),
         },
         "priceBands": {
             "under900k": bands.get("under_900k", 0),
