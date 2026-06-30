@@ -328,25 +328,6 @@ const soldCompsSchema = hasComps ? {
         </div>
       )}
 
-      {(stats.fees?.medianMonthlyCondoFee || stats.fees?.medianMonthlyAssociation) && (
-        <div class="mb-6">
-          <h3 class="font-display text-xl text-white mb-4">Typical Monthly Costs</h3>
-          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {stats.fees.medianMonthlyCondoFee && (
-              <li class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
-                <p class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Median Condo Fee</p>
-                <p class="font-display text-2xl font-bold text-white">{stats.fees.medianMonthlyCondoFee}<span class="text-sm text-white/40 font-normal ml-1">/ month</span></p>
-              </li>
-            )}
-            {stats.fees.medianMonthlyAssociation && (
-              <li class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
-                <p class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Median Total HOA</p>
-                <p class="font-display text-2xl font-bold text-white">{stats.fees.medianMonthlyAssociation}<span class="text-sm text-white/40 font-normal ml-1">/ month</span></p>
-              </li>
-            )}
-          </ul>
-        </div>
-      )}
 
       <p class="text-xs text-[var(--color-text-on-dark-subtle)] mt-8 leading-relaxed">
         Active inventory and recent sold data sourced directly from the Sarasota Stellar MLS feed
