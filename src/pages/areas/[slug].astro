@@ -254,8 +254,13 @@ if (media.video) {
     <DetailedMarketTable areaName={area.name} stats={detailedStats} />
   )}
 
+  <!-- Enriched AEO market summary — active inventory, price bands, sold comps -->
+  {detailedStats && (detailedStats.active || detailedStats.sold) && (
+    <AreaMarketSummary areaName={area.name} areaSlug={area.slug} stats={detailedStats} />
+  )}
 
-  <!-- Condo tier table — active inventory grouped by construction era -->
+  <!-- Condo tier table — active inventory grouped by construction era.
+       Nested lower on the page, just above Typical HOA Costs. -->
   {detailedStats && detailedStats.condoTiers && detailedStats.condoTiers.length > 0 && (
     <CondoTiersTable
       areaName={area.name}
@@ -266,15 +271,34 @@ if (media.video) {
     />
   )}
 
-  <!-- Enriched AEO market summary — active inventory, price bands, sold comps -->
-  {detailedStats && (detailedStats.active || detailedStats.sold) && (
-    <AreaMarketSummary areaName={area.name} areaSlug={area.slug} stats={detailedStats} />
+  <!-- Typical HOA Costs (relocated out of AreaMarketSummary, sits just below the condo era table) -->
+  {detailedStats && (detailedStats.fees?.medianMonthlyCondoFee || detailedStats.fees?.medianMonthlyAssociation) && (
+    <section class="section dark-section">
+      <div class="container-narrow">
+        <h2 class="accent-underline mb-6">Typical HOA Costs</h2>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {detailedStats.fees.medianMonthlyCondoFee && (
+            <li class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
+              <p class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Median Condo Fee</p>
+              <p class="font-display text-2xl font-bold text-white">{detailedStats.fees.medianMonthlyCondoFee}<span class="text-sm text-white/40 font-normal ml-1">/ month</span></p>
+            </li>
+          )}
+          {detailedStats.fees.medianMonthlyAssociation && (
+            <li class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
+              <p class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Median Total HOA</p>
+              <p class="font-display text-2xl font-bold text-white">{detailedStats.fees.medianMonthlyAssociation}<span class="text-sm text-white/40 font-normal ml-1">/ month</span></p>
+            </li>
+          )}
+        </ul>
+      </div>
+    </section>
   )}
 
-  <!-- Waterfront price segmentation + market balance (AEO) -->
+  {/* Waterfront & Market Breakdown — removed for now (repetitive). Re-enable by uncommenting.
   {detailedStats && detailedStats.waterfrontSegments && detailedStats.waterfrontSegments.length > 0 && (
     <WaterfrontSegments areaName={area.name} stats={detailedStats} />
   )}
+  */}
 
   <!-- FAQ Section -->
   {allFaqs.length > 0 && (
