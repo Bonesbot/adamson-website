@@ -1,0 +1,55 @@
+# AG_website — project context for Claude
+
+## Related automation: the `mls-export` scheduled task (READ FIRST)
+
+This website **shares a codebase** with a Claude/Cowork **scheduled task named `mls-export`**
+(defined at `C:\Users\Bones\Documents\Claude\Scheduled\mls-export\SKILL.md`, with a companion
+`mls-export-watchdog` task). The two are halves of one system: this repo is where the site is
+built and hand-refined; the job runs the daily MLS extract and data prep that feeds it. They
+continually overlap, so when working here, know the job exists.
+
+What the `mls-export` job does each morning: logs into Stellar MLS, extracts the
+`000 - Market Update` saved search, combines + de-dupes to one CSV, ingests to Supabase,
+regenerates the per-area `src/data/*-stats.json` files, and publishes changes to GitHub
+(one bundled commit, self-throttled to ~every 3 days) which triggers the Netlify build.
+
+### Shared files this job owns — edit with care
+These scripts are run by the job (fetched canonically from `origin/main` into `/tmp` on every
+run, to dodge FUSE-mount truncation). If you change any of them here, **commit to `main`** — the
+job ignores un-committed local working-tree edits.
+
+**You no longer need to manually rotate `EXPECTED_HASHES.json` after changing a tracked script.**
+As of the self-healing integrity gate (June 2026): when the daily runner fetches a tracked
+script from `main` whose hash differs from the manifest, it checks whether the file is valid
+(parses as Python / non-empty). If valid, it *adopts* your change — auto-rotates the manifest to
+match `main` and pushes the corrected manifest back (`[skip ci]`, so Netlify is not rebuilt) —
+and records it under `manifest_heal` in `last-run.json`. Only a genuinely corrupt script
+(missing, or a `.py` that won't parse) still hard-fails with `failed_step="integrity_check"`.
+Net effect: just commit your script change to `main`; the runner stays in sync on its own.
+
+- `scripts/combine_mls_export.py` — combine batch CSVs + de-dupe
+- `scripts/fetch_area_summary.py` — `compute_summary()` builds one area's stats from Postgres
+- `scripts/refresh_all_areas.py` — regenerates ALL areas (reads `src/data/areas.json`) + publishes
+- `scripts/push_to_github.py` — legacy per-file publisher (superseded by refresh_all_areas)
+- `scripts/_integrity_check.py` + `scripts/EXPECTED_HASHES.json` — self-heal integrity gate
+- `supabase/ingest_mls.py` — Postgres upsert with per-batch hash dedupe
+
+### Machine-generated — do not hand-edit
+- `src/data/*-stats.json` — regenerated every run; hand edits are overwritten. To change what a
+  page shows, change the generator (`fetch_area_summary.py` → `compute_summary`), not the JSON.
+- `mls-imports/market-update_*.csv` — the job's extract drop folder (gitignored).
+
+### Source of truth for areas
+- `src/data/areas.json` lists which areas exist (9 today: longboat-key, st-armands-lido,
+  siesta-key, downtown-sarasota, west-of-trail-core, west-of-trail-north, west-of-trail-south,
+  bird-key, palmer-ranch). `refresh_all_areas.py` reads it — there is no hardcoded slug list.
+  Add/rename areas here. (`lido-key` and `st-armands` are retired dead slugs — use the combined
+  `st-armands-lido`.)
+
+### Methodology notes (so site numbers stay defensible)
+- Months of supply lives in each stats file's `marketBalance` block, computed as
+  `active / (trailing-12-month closed / 12)`, segmented condo vs SFH/villa. It is intentionally
+  NOT the 90-day window (that runs seasonally hot and understated supply).
+- The 90-day window is still used for recent median price / DOM / sale-to-list — that's correct.
+
+When in doubt, the job's `SKILL.md` (path above) documents the full pipeline end to end.
