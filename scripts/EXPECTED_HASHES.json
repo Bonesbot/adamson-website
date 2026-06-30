@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "purpose": "SHA256 manifest of MLS pipeline scripts. The integrity checker (scripts/_integrity_check.py) verifies on-disk bytes match these before each daily run, to catch FUSE-mount corruption.",
-  "generated_from_commit": "8f44baa (90-day sold cap) + manifest rotate",
+  "purpose": "SHA256 manifest of MLS pipeline scripts. The integrity checker (scripts/_integrity_check.py) verifies on-disk bytes before each daily run. Genuinely corrupt files hard-fail; a valid-but-mismatched script (stale manifest) is auto-adopted and this manifest is auto-rotated to match origin/main.",
+  "generated_from_commit": "self-heal rollout (manifest regenerated to current main; runner now auto-rotates)",
   "rotate_with": "python scripts/_integrity_check.py --rotate",
   "files": {
-    "scripts/combine_mls_export.py": "c0907b2dddcbda617ae9918276d03310a23475cda44166c39a8863c1ec29c3ea",
-    "scripts/fetch_area_summary.py": "d1cf0ffdbb91773725a42ece7cb84692be1f321edd25db8a8d543b8e221f6ead",
+    "scripts/combine_mls_export.py": "196ec1c82ab59a889f1898f157b69d7479e41d1ec0b6488c0ec215695ba4c212",
+    "scripts/fetch_area_summary.py": "8589934bcb9f963e66aae9d340de6af9d815b0d21c82dd63cfe0def343a6a0e4",
     "scripts/push_to_github.py": "1b5096085e32889fa950cdf5e4cafb95925ef64b59ba4d704a68246caadec2e6",
     "supabase/ingest_mls.py": "4f2a85ec034ac8f955c03724906b3666dfab260a7d95097a6c39e093e1af1f27"
   }

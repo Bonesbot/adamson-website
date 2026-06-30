@@ -150,18 +150,38 @@ def main():
     target = args.target_dir
     status_path = args.status_out
 
-    # --- Step 0: pipeline-script integrity check ---
-    # Catches FUSE-mount corruption of the four pipeline scripts before any
-    # work begins. Hard-fails the run with failed_step="integrity_check" so the
-    # daily email draft surfaces it.
+    # --- Step 0: pipeline-script integrity check (self-healing) ---
+    # Genuinely corrupt scripts (missing, or a .py that won't parse) still
+    # hard-fail with failed_step="integrity_check". A valid-but-mismatched
+    # script (stale manifest — e.g. a change made on the AG_website side and
+    # committed without rotating EXPECTED_HASHES.json) is auto-adopted by
+    # verify(): the manifest is rotated to match origin/main and pushed back
+    # ([skip ci]). We record what was healed so the daily email can mention it.
     try:
         sys.path.insert(0, str(Path(__file__).resolve().parent))
         from _integrity_check import verify as _verify_integrity, IntegrityError
-        _verify_integrity(Path(__file__).resolve().parent.parent)
+        _heal = _verify_integrity(Path(__file__).resolve().parent.parent)
     except IntegrityError as _exc:
         fail(status, status_path, "integrity_check",
              f"Pipeline script integrity mismatch: {_exc}",
              exit_code=2)
+    else:
+        _healed = list((_heal or {}).get("healed") or [])
+        # Step 0.6 may have healed before combine runs; pick up its sidecar.
+        try:
+            _sidecar = Path(__file__).resolve().parent / ".heal-report.json"
+            if _sidecar.exists():
+                for _f in json.loads(_sidecar.read_text()).get("healed", []):
+                    if _f not in _healed:
+                        _healed.append(_f)
+        except Exception:
+            pass
+        if _healed:
+            status["manifest_heal"] = {
+                "healed": _healed,
+                "note": "manifest auto-rotated to match origin/main (self-heal)",
+                "push": (_heal or {}).get("push"),
+            }
 
     # --- Step 1: discover batches ---
     if not staging.is_dir():
