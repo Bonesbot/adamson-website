@@ -54,6 +54,14 @@ for (const [path, mod] of Object.entries(statsModules)) {
   }
 }
 
+// Condo dues range (min / median / max monthly condo fee) -> Typical Condo Dues range bar.
+const condoDues = detailedStats?.fees?.condoFeeRange ?? null;
+const duesMedianPct = condoDues && condoDues.max > condoDues.min
+  ? Math.round(((condoDues.median - condoDues.min) / (condoDues.max - condoDues.min)) * 100)
+  : 0;
+const duesPct = Math.min(94, Math.max(6, duesMedianPct));
+const fmtUsd = (n: number) => `$${Math.round(n).toLocaleString("en-US")}`;
+
 // Headline price for meta description + WebPage JSON-LD schema.
 // Prefer the live pipeline avg sold price (so AI crawlers see the same
 // number rendered in the DetailedMarketTable). Fall back to the legacy
@@ -260,7 +268,7 @@ if (media.video) {
   )}
 
   <!-- Condo tier table — active inventory grouped by construction era.
-       Nested lower on the page, just above Typical HOA Costs. -->
+       Nested lower on the page, just above Typical Condo Dues. -->
   {detailedStats && detailedStats.condoTiers && detailedStats.condoTiers.length > 0 && (
     <CondoTiersTable
       areaName={area.name}
@@ -271,25 +279,46 @@ if (media.video) {
     />
   )}
 
-  <!-- Typical HOA Costs (relocated out of AreaMarketSummary, sits just below the condo era table) -->
-  {detailedStats && (detailedStats.fees?.medianMonthlyCondoFee || detailedStats.fees?.medianMonthlyAssociation) && (
+  <!-- Typical Condo Dues — Min / Median / Max monthly condo fee on a range bar -->
+  {condoDues && (
     <section class="section dark-section">
       <div class="container-narrow">
-        <h2 class="accent-underline mb-6">Typical HOA Costs</h2>
-        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {detailedStats.fees.medianMonthlyCondoFee && (
-            <li class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
-              <p class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Median Condo Fee</p>
-              <p class="font-display text-2xl font-bold text-white">{detailedStats.fees.medianMonthlyCondoFee}<span class="text-sm text-white/40 font-normal ml-1">/ month</span></p>
-            </li>
-          )}
-          {detailedStats.fees.medianMonthlyAssociation && (
-            <li class="bg-[var(--color-black-card)] rounded-lg p-5 border border-[var(--color-border-dark)]">
-              <p class="font-accent text-xs uppercase tracking-wider text-white/50 mb-1">Median Total HOA</p>
-              <p class="font-display text-2xl font-bold text-white">{detailedStats.fees.medianMonthlyAssociation}<span class="text-sm text-white/40 font-normal ml-1">/ month</span></p>
-            </li>
-          )}
-        </ul>
+        <h2 class="accent-underline mb-3">Typical Condo Dues</h2>
+        <p class="text-[var(--color-text-on-dark-muted)] leading-relaxed mb-10 max-w-2xl">
+          Monthly condo fees for active and recently sold {area.name} condominiums, villas and
+          townhouses — from the lowest-fee associations to full-service luxury buildings.
+        </p>
+
+        <div class="bg-[var(--color-black-card)] rounded-2xl border border-[var(--color-border-dark)] px-6 sm:px-10 py-10">
+          <div class="text-center mb-12">
+            <p class="font-accent text-xs uppercase tracking-[0.18em] text-[var(--color-cbgl-blue-light)] mb-1">Median Monthly Dues</p>
+            <p class="font-display text-4xl sm:text-5xl font-bold text-white">{fmtUsd(condoDues.median)}<span class="text-base text-white/40 font-normal ml-2">/ mo</span></p>
+          </div>
+          <div class="relative pt-7 pb-1">
+            <div class="absolute top-0 -translate-x-1/2 whitespace-nowrap" style={`left: ${duesPct}%;`}>
+              <span class="font-accent text-[0.7rem] uppercase tracking-wider text-white/70">Median</span>
+            </div>
+            <div class="relative h-2.5 rounded-full bg-[var(--color-dark-elevated)]">
+              <div class="absolute inset-0 rounded-full" style="background: linear-gradient(90deg, var(--color-cbgl-blue) 0%, var(--color-cbgl-blue-light) 55%, var(--color-cbgl-gold, #C5A55A) 100%); opacity:0.9;"></div>
+              <div class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-white shadow-lg ring-4 ring-[var(--color-cbgl-blue)]" style={`left: ${duesPct}%;`}></div>
+            </div>
+            <div class="flex justify-between mt-5">
+              <div class="text-left">
+                <p class="font-accent text-[0.65rem] uppercase tracking-wider text-white/40 mb-0.5">Minimum</p>
+                <p class="font-display text-lg font-semibold text-white">{fmtUsd(condoDues.min)}<span class="text-xs text-white/40 font-normal ml-1">/ mo</span></p>
+              </div>
+              <div class="text-right">
+                <p class="font-accent text-[0.65rem] uppercase tracking-wider text-white/40 mb-0.5">Maximum</p>
+                <p class="font-display text-lg font-semibold text-white">{fmtUsd(condoDues.max)}<span class="text-xs text-white/40 font-normal ml-1">/ mo</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="text-xs text-[var(--color-text-on-dark-subtle)] mt-6 leading-relaxed">
+          Source: Stellar MLS via the Adamson Group data pipeline. Monthly condo dues only; entries
+          under $100/mo are treated as data-entry errors and omitted. Figures approximate and vary
+          by building, square footage and amenities.
+        </p>
       </div>
     </section>
   )}
