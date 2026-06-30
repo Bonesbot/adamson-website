@@ -44,7 +44,14 @@
   },
   "fees": {
     "medianMonthlyAssociation": "$469",
-    "medianMonthlyCondoFee": "$560"
+    "medianMonthlyCondoFee": "$560",
+    "minMonthlyCondoFee": "$211",
+    "maxMonthlyCondoFee": "$1,000",
+    "condoFeeRange": {
+      "min": 211,
+      "median": 560,
+      "max": 1000
+    }
   },
   "priceBands": {
     "under900k": 258,
