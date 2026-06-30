@@ -271,6 +271,52 @@ SELECT ptype,
 FROM t GROUP BY ptype;
 """
 
+WF_SEGMENT_QUERY_90 = """
+WITH t AS (
+  SELECT *,
+    CASE
+      WHEN waterfront_features ILIKE '%%Gulf%%' OR waterfront_features ILIKE '%%Beach%%' OR waterfront_features ILIKE '%%Ocean%%' THEN 'gulf_beachfront'
+      WHEN waterfront_features ILIKE '%%Bay%%' OR waterfront_features ILIKE '%%Canal%%' OR waterfront_features ILIKE '%%Intracoastal%%' OR waterfront_features ILIKE '%%Bayou%%' OR waterfront_features ILIKE '%%Lagoon%%' OR waterfront_features ILIKE '%%Marina%%' THEN 'bay_canal'
+      WHEN waterfront_yn = TRUE THEN 'other_wf'
+      WHEN water_view_yn = TRUE THEN 'waterview'
+      ELSE 'none'
+    END AS seg
+  FROM raw_listings
+  WHERE detected_area = %(slug)s
+    AND mls_status = 'Sold'
+    AND close_date >= CURRENT_DATE - INTERVAL '90 days'
+)
+SELECT seg,
+  COUNT(*) AS sold_n,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY close_price_by_calculated_sqft)
+    FILTER (WHERE close_price_by_calculated_sqft IS NOT NULL) AS sold_psf,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY current_price)
+    FILTER (WHERE current_price IS NOT NULL) AS sold_price
+FROM t GROUP BY seg;
+"""
+
+PTYPE_SPLIT_QUERY_90 = """
+WITH t AS (
+  SELECT *,
+    CASE
+      WHEN property_sub_type ILIKE '%%Single Family%%' OR property_type ILIKE '%%Single Family%%' THEN 'single_family'
+      WHEN property_sub_type ILIKE '%%Condo%%' OR property_sub_type ILIKE '%%Villa%%' OR property_sub_type ILIKE '%%Townhouse%%' THEN 'condo'
+      ELSE 'other'
+    END AS ptype
+  FROM raw_listings
+  WHERE detected_area = %(slug)s
+    AND mls_status = 'Sold'
+    AND close_date >= CURRENT_DATE - INTERVAL '90 days'
+)
+SELECT ptype,
+  COUNT(*) AS sold_n,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY current_price)
+    FILTER (WHERE current_price IS NOT NULL) AS sold_price,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY close_price_by_calculated_sqft)
+    FILTER (WHERE close_price_by_calculated_sqft IS NOT NULL) AS sold_psf
+FROM t GROUP BY ptype;
+"""
+
 BOATING_QUERY = """
 SELECT
   COUNT(*) FILTER (WHERE mls_status='Active' AND has_dock = TRUE) AS active_dock,
@@ -283,11 +329,92 @@ SEG_LABELS = {"gulf_beachfront":"Gulf / Beachfront","bay_canal":"Bay / Canal-fro
 SEG_ORDER = ["gulf_beachfront","bay_canal","waterview","other_wf","none"]
 MIN_N = 8  # suppress noisy segments
 
+# ---- Per-area customization of the generated market-FAQ block ----
+# Areas NOT listed fall back to DEFAULT_FAQ_CONFIG (current behavior, unchanged),
+# so adding/altering an area is a few declarative lines here -- not a fork of the
+# generator. Per area you may set:
+#   drop   : set of generic facets to suppress {waterfront,balance,type,range,speed,boating,fees}
+#   rename : {facet: replacement question text}  (answer text is left untouched)
+#   cost   : ordered list of breakdown dimensions for a consolidated
+#            "What do properties cost on <Area>?" question, computed over the
+#            trailing 90 days of closed sales. Supported: 'property_type', 'waterfront'.
+DEFAULT_FAQ_CONFIG = {"drop": set(), "rename": {}, "cost": None}
+
+AREA_MARKET_FAQ = {
+    "longboat-key": {
+        "drop": {"waterfront", "type", "range"},
+        "rename": {"balance": "Is it a good time to buy on Longboat Key?"},
+        "cost": ["property_type", "waterfront"],
+    },
+}
+
+def _faq_config(slug):
+    cfg = dict(DEFAULT_FAQ_CONFIG)
+    cfg.update(AREA_MARKET_FAQ.get(slug, {}))
+    return cfg
+
+
+COST_NUANCE = ("These are blended medians \u2014 actual value varies widely with a property's "
+               "build era, specific views, amenities and level of updating. For a precise "
+               "valuation on an investment this significant, lean on Ryan Adamson's local "
+               "market guidance.")
+
+
+def build_cost_question(name, sold90_count, cost_dims, pts90, segs90):
+    """Consolidated, spoken-sentence cost answer over the trailing 90 days of closed
+    sales, segmented by the area-specific value drivers in cost_dims.
+    Returns (question_dict_or_None, structured_breakdown_dict)."""
+    def _norm(r):
+        if not r or not r.get("sold_n"):
+            return None
+        return {"soldCount": int(r["sold_n"]),
+                "soldMedianPrice": fmt_currency(r.get("sold_price")),
+                "soldMedianPricePerSqFt": fmt_currency(r.get("sold_psf"))}
+
+    breakdown = {"windowDays": 90, "soldCount": int(sold90_count or 0)}
+    frags = []
+
+    if "property_type" in cost_dims:
+        sf = pts90.get("single_family"); co = pts90.get("condo")
+        breakdown["byPropertyType"] = {"condo": _norm(co), "single_family": _norm(sf)}
+        if (sf and co and sf.get("sold_n", 0) >= MIN_N and co.get("sold_n", 0) >= MIN_N
+                and sf.get("sold_price") and co.get("sold_price")):
+            frags.append(
+                f"By property type, condos, villas and townhouses closed at a median "
+                f"{fmt_currency(co['sold_price'])} ({fmt_currency(co['sold_psf'])}/sq ft), "
+                f"while single-family homes closed around {fmt_currency(sf['sold_price'])} "
+                f"({fmt_currency(sf['sold_psf'])}/sq ft)")
+
+    if "waterfront" in cost_dims:
+        g = segs90.get("gulf_beachfront"); b = segs90.get("bay_canal")
+        breakdown["byWaterfront"] = {"gulf_beachfront": _norm(g), "bay_canal": _norm(b)}
+        # Compare by price-per-sq-ft, not raw median price: each location bucket mixes
+        # condos and single-family homes, so a per-location median price is confounded
+        # by property-type mix (beachfront skews to condos, bayfront to large SFHs).
+        # Per-sq-ft is the mix-robust signal. Phrased neutrally so it stays correct
+        # regardless of which side leads in a given 90-day window.
+        if (g and b and g.get("sold_n", 0) >= MIN_N and b.get("sold_n", 0) >= MIN_N
+                and g.get("sold_psf") and b.get("sold_psf")):
+            frags.append(
+                f"By location, Gulf-front and beachfront properties closed at a median "
+                f"{fmt_currency(g['sold_psf'])} per square foot, compared with "
+                f"{fmt_currency(b['sold_psf'])} for bay- and canal-front homes")
+
+    if not frags:
+        return None, breakdown
+    lead = (f"Over the past 90 days, {int(sold90_count)} properties have closed on {name}. "
+            if sold90_count else "")
+    answer = lead + ". ".join(frags) + ". " + COST_NUANCE
+    return {"facet": "cost", "q": f"What do properties cost on {name}?", "a": answer}, breakdown
+
+
 def compute_extras(slug, conn, head):
     with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
         cur.execute(WF_SEGMENT_QUERY, {"slug": slug}); segs = {r["seg"]: r for r in cur.fetchall()}
         cur.execute(PTYPE_SPLIT_QUERY, {"slug": slug}); pts = {r["ptype"]: r for r in cur.fetchall()}
         cur.execute(BOATING_QUERY, {"slug": slug}); boat = cur.fetchone() or {}
+        cur.execute(WF_SEGMENT_QUERY_90, {"slug": slug}); segs90 = {r["seg"]: r for r in cur.fetchall()}
+        cur.execute(PTYPE_SPLIT_QUERY_90, {"slug": slug}); pts90 = {r["ptype"]: r for r in cur.fetchall()}
 
     # waterfront segments (suppress sold $/sqft when n < MIN_N)
     wf = []
@@ -354,8 +481,21 @@ def compute_extras(slug, conn, head):
         q.append({"facet":"fees","q":f"What are typical HOA and condo fees on {name}?",
                   "a":f"The median monthly condo fee is {fmt_currency(head.get('median_monthly_condo_fee'))} and the median monthly association fee is {fmt_currency(head.get('median_monthly_assoc'))}."})
 
+    # ---- per-area customization: drop / rename generic questions, prepend cost question ----
+    cfg = _faq_config(slug)
+    if cfg["drop"]:
+        q = [it for it in q if it["facet"] not in cfg["drop"]]
+    for it in q:
+        if it["facet"] in cfg["rename"]:
+            it["q"] = cfg["rename"][it["facet"]]
+    cost_bd = None
+    if cfg["cost"]:
+        cost_item, cost_bd = build_cost_question(name, head.get("sold90_count") or 0, cfg["cost"], pts90, segs90)
+        if cost_item:
+            q.insert(0, cost_item)
+
     return {"waterfrontSegments": wf, "marketBalance": balance, "propertyTypeSplit": ptype,
-            "boating": boating, "marketQuestions": q}
+            "boating": boating, "marketQuestions": q, "costBreakdown90": cost_bd}
 
 
 def compute_summary(slug, conn):
