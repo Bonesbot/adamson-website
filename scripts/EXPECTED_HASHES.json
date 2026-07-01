@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "purpose": "SHA256 manifest of MLS pipeline scripts. The integrity checker (scripts/_integrity_check.py) verifies on-disk bytes before each daily run. Genuinely corrupt files hard-fail; a valid-but-mismatched script (stale manifest) is auto-adopted and this manifest is auto-rotated to match origin/main.",
-  "generated_from_commit": "self-heal rollout (manifest regenerated to current main; runner now auto-rotates)",
+  "generated_from_commit": "auto-rotated by mls-export self-heal",
   "rotate_with": "python scripts/_integrity_check.py --rotate",
   "files": {
     "scripts/combine_mls_export.py": "196ec1c82ab59a889f1898f157b69d7479e41d1ec0b6488c0ec215695ba4c212",
-    "scripts/fetch_area_summary.py": "8589934bcb9f963e66aae9d340de6af9d815b0d21c82dd63cfe0def343a6a0e4",
+    "scripts/fetch_area_summary.py": "dbc6cb447c24e96081536ee1efc9bcedd72a3462f5eae12924ab0e719f3e1c3a",
     "scripts/push_to_github.py": "1b5096085e32889fa950cdf5e4cafb95925ef64b59ba4d704a68246caadec2e6",
     "supabase/ingest_mls.py": "4f2a85ec034ac8f955c03724906b3666dfab260a7d95097a6c39e093e1af1f27"
   }
