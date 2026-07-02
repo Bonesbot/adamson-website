@@ -1,11 +1,8 @@
 ---
 /**
- * /new-construction/downtown-sarasota — DOWNTOWN PILLAR (PROTOTYPE)
- *
- * Single-area template per spec §6a.
+ * /new-construction/downtown-sarasota — DOWNTOWN PILLAR (LIVE)
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import DraftBanner from '@/components/newconstruction/DraftBanner.astro';
 import BreadcrumbNav from '@/components/newconstruction/BreadcrumbNav.astro';
 import Hero from '@/components/newconstruction/Hero.astro';
 import ProjectMap from '@/components/newconstruction/ProjectMap.astro';
@@ -17,21 +14,37 @@ import SchedulerEmbed from '@/components/newconstruction/SchedulerEmbed.astro';
 import StickyMobileCta from '@/components/newconstruction/StickyMobileCta.astro';
 import DisclosureFooter from '@/components/newconstruction/DisclosureFooter.astro';
 import projectsData from '@/data/newconstruction/projects.json';
+import dtStats from '@/data/downtown-sarasota-stats.json';
 
 const projects = projectsData.projects.filter((p) => p.area === 'downtown-sarasota');
 const pins = projects.map((p) => ({
-  slug: p.slug, name: p.name, area: p.area, island: p.island, status: p.status, lat: p.lat, lng: p.lng,
+  slug: p.slug, name: p.name, area: p.area, island: p.island, status: p.status, price_range: p.price_range, lat: p.lat, lng: p.lng,
 }));
 
+const statsAsOf = dtStats?.lastUpdated ? new Date(dtStats.lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : undefined;
+const kpis = [
+  { label: 'Active Listings — Downtown', value: String(dtStats?.active?.count ?? '—') },
+  { label: 'Median $/SqFt — Active', value: dtStats?.active?.medianPricePerSqFt ?? '—' },
+  { label: 'New Construction (2020+) Active', value: String(dtStats?.active?.newConstructionCount ?? '—') },
+];
+
 const description =
-  'Luxury new-construction condominiums and pre-construction projects in Downtown Sarasota — current availability, pricing, completion timelines, and developer details.';
+  'Luxury new-construction condominiums in Downtown Sarasota — 7 active projects from The Gallery (under $1M) to the Ritz-Carlton Residences at The Quay, with pricing, completion timelines, and developer details as of July 2026.';
+
+const editorial = `Downtown Sarasota is the most active luxury condo construction market on Florida's Gulf Coast. As of July 2026, seven projects are underway or completing in the core: The Owen, SIX88, and Amara on Golden Gate Point; The Ritz-Carlton Residences, Sarasota Bay at The Quay; The Edge at Cocoanut and Fruitville; The Gallery in the Rosemary District; and Mira Mar Residences on Palm Avenue.
+
+The price ladder is wider than most buyers expect. The Gallery starts under $1 million — genuine new construction at a price point downtown hasn't offered in years — while The Edge and SIX88 open near $2.5–3 million, the Ritz-Carlton from $3.7 million, Amara from $4.2 million, and full-floor SIX88 residences from $6.88 million. Five of the seven deliver in 2026; Amara and Mira Mar carry the pipeline to 2028.
+
+What's driving the cycle: the bayfront redevelopment around The Bay park and the Quay district, buyer migration that hasn't slowed since 2020, and a limited number of developable core parcels — which is why Golden Gate Point, downtown's private bayfront peninsula, holds three of the seven projects. Each building answers a different buyer: brand-managed service (Ritz-Carlton), boutique bayfront with boat slips (SIX88, Amara), oversized floor plans (The Edge), architectural preservation with estate-scale homes (Mira Mar), and attainable urban design (The Gallery).
+
+One market reality worth naming: with this much new product delivering simultaneously into elevated resale inventory, completing buildings are negotiating. Premiums, credits, and terms are all in play in a way they weren't in 2021–2023 — which is precisely when independent representation earns its value.`;
 
 const areaFaqs = [
-  /* FILL_IN: 8-12 Q&A pairs in Ryan's voice. Stems below — replace with full questions and 50-120 word answers. */
-  { question: 'FILL_IN: e.g. "What new condos are being built in Downtown Sarasota?"', answer: 'FILL_IN: 50-120 words.' },
-  { question: 'FILL_IN: e.g. "What is the price range for new construction in Downtown Sarasota?"', answer: 'FILL_IN' },
-  { question: 'FILL_IN: e.g. "Which downtown buildings have walk-to-bayfront access?"', answer: 'FILL_IN' },
-  { question: 'FILL_IN: e.g. "How does Downtown Sarasota compare to the barrier islands for a luxury buyer?"', answer: 'FILL_IN' },
+  { question: 'What new condos are being built in Downtown Sarasota?', answer: 'As of July 2026, seven luxury projects are active: The Owen (29 residences) and SIX88 (10 residences) on Golden Gate Point, The Ritz-Carlton Residences, Sarasota Bay (78 residences at The Quay), The Edge (27 residences), The Gallery (60 residences, Rosemary District), Amara on Sarasota Bay (54 residences, est. 2028), and Mira Mar Residences (70 residences on Palm Avenue, est. late 2028). Five deliver in 2026.' },
+  { question: 'What is the price range for new construction in Downtown Sarasota?', answer: 'As of July 2026: The Gallery starts under $1M, SIX88 from about $2.48M, The Owen from the mid-$2Ms, The Edge from $2.995M, the Ritz-Carlton Residences from $3.7M, Mira Mar from the high $3Ms, and Amara from about $4.2M. At the top, full-floor SIX88 residences start at $6.88M and its penthouse lists at $11.88M. Per-square-foot pricing on new bayfront product generally runs well above the downtown resale median.' },
+  { question: 'Which downtown buildings have direct bayfront or marina access?', answer: 'Golden Gate Point delivers the water: SIX88 sits on 80 feet of bay shoreline with private owner boat slips, and Amara — the only new Sarasota project offering private marina ownership — anticipates at least 12 deeded slips. The Owen fronts the bay at the Point’s entrance, and the Ritz-Carlton Residences adjoin the Quay Harbor marina district. The Edge, The Gallery, and Mira Mar are walk-to-bayfront rather than on-water.' },
+  { question: 'How does Downtown Sarasota compare to the barrier islands for a luxury buyer?', answer: 'Downtown offers walkability, deeper amenity programs, newer buildings, and a price range from under $1M to $12M; the islands offer sand, water frontage, and scarcity — beachfront new construction (Rosewood Residences Lido Key) starts around $6.8M. Many buyers ultimately weigh a downtown tower residence against an island condo of similar price and choose on lifestyle: restaurants and culture out the lobby door versus the Gulf out the window.' },
+  { question: 'Is downtown Sarasota new construction a good investment in 2026?', answer: 'No one can promise appreciation, but the structural facts favor quality: developable core parcels are nearly exhausted, construction and insurance costs put a floor under replacement value, and new buildings carry post-Surfside structural standards and fully funded reserves that older condo stock must now retrofit via assessments. In the near term, elevated 2026 inventory gives buyers negotiating leverage on completing buildings — an entry advantage rather than a warning sign for long-hold owners.' },
 ];
 
 const jsonLd: Record<string, any>[] = [
@@ -71,15 +84,13 @@ const jsonLd: Record<string, any>[] = [
   description={description}
   canonicalUrl="https://adamsonfl.com/new-construction/downtown-sarasota"
   jsonLd={jsonLd}
-  noIndex={true}
 >
-  <DraftBanner />
-
   <Hero
-    eyebrow="Area Pillar"
+    eyebrow="Downtown Sarasota"
     headline="Downtown Sarasota Luxury New Construction"
-    subhead="FILL_IN: 1-sentence positioning in Ryan's voice on what defines Downtown Sarasota new construction in this market cycle."
+    subhead="Seven active projects, from under $1M in the Rosemary District to the Ritz-Carlton's bayfront tower — the deepest new-construction lineup on Florida's Gulf Coast."
     image="/images/new-construction/downtown-sarasota-hero.jpg"
+    imageCredit="Courtesy of Seaward Development / Mira Mar Sarasota"
   />
 
   <BreadcrumbNav leafLabel="Downtown Sarasota" />
@@ -88,20 +99,18 @@ const jsonLd: Record<string, any>[] = [
   <section class="section light-section">
     <div class="container-narrow">
       <h2 class="accent-underline mb-6">About Downtown Sarasota New Construction</h2>
-      <p class="text-[var(--color-text-muted)] leading-relaxed text-lg whitespace-pre-line">
-        FILL_IN: 400-600 word editorial in Ryan's voice. Cover area identity (cultural anchors — Van Wezel, Selby Gardens, Burns Court, Marie Selby), who's buying (urban luxury vs island lifestyle), the vertical-build wave since 2020, height/setback constraints driving project economics, the current bayfront redevelopment, lifestyle anchors (walkability, dining, marina). Lead with the answer; specific numbers; date-stamped claims; no marketing adjectives.
-      </p>
+      <p class="text-[var(--color-text-muted)] leading-relaxed text-lg whitespace-pre-line">{editorial}</p>
     </div>
   </section>
 
   <!-- Map -->
-  <ProjectMap pins={pins} />
+  <ProjectMap pins={pins} center={[27.336, -82.547]} zoom={14} />
 
   <!-- All Downtown projects -->
   <section class="section dark-section">
     <div class="container">
       <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">All Projects</p>
-      <h2 class="accent-underline mb-10">Downtown Sarasota Pre-Construction & New Construction</h2>
+      <h2 class="accent-underline mb-10">Downtown Sarasota Pre-Construction &amp; New Construction</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {projects.map((p) => (
           <ProjectCard
@@ -113,6 +122,7 @@ const jsonLd: Record<string, any>[] = [
             area={p.area}
             island={p.island}
             cardImage={p.card_image}
+            imageCredit={p.image_credit}
           />
         ))}
       </div>
@@ -125,14 +135,14 @@ const jsonLd: Record<string, any>[] = [
       <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Currently for sale</p>
       <h2 class="accent-underline mb-3">Active Downtown Sarasota Listings</h2>
       <p class="text-white/60 mb-10 max-w-2xl">
-        New-construction-era resale in Downtown Sarasota (year-built 2020 or later, $1M+).
+        New-construction-era listings in Downtown Sarasota (built 2020 or later, $1M+).
       </p>
-      <IdxListingGrid heading="" limit={6} />
+      <IdxListingGrid heading="" limit={6} slotId="idx-downtown-newcon" zipCodes={['34236']} />
     </div>
   </section>
 
-  <!-- Area market data -->
-  <MarketDataKpis scope="Downtown Sarasota" />
+  <!-- Area market data (live pipeline stats) -->
+  <MarketDataKpis scope="Downtown Sarasota" kpis={kpis} asOf={statsAsOf} source="Stellar MLS via Adamson Group data pipeline" />
 
   <!-- Lifestyle anchors -->
   <section class="section dark-section">
@@ -141,17 +151,16 @@ const jsonLd: Record<string, any>[] = [
       <h2 class="accent-underline mb-10">What's Within Walking Distance</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-white/70">
         <div class="bg-black border border-white/10 rounded-lg p-6">
-          <h3 class="font-display text-lg text-white mb-3">Walk Score</h3>
-          <p class="text-3xl font-display text-[var(--color-gold)] mb-2">FILL_IN</p>
-          <p class="text-sm">FILL_IN: typical walk score for downtown new-builds; what specifically is walkable from each cluster.</p>
+          <h3 class="font-display text-lg text-white mb-3">Walkability</h3>
+          <p class="text-sm">The core projects put Main Street's restaurant row, Palm Avenue's galleries, Whole Foods, the farmers market, and the bayfront within a 5&ndash;15 minute walk. Golden Gate Point trades a few minutes of walk time for waterfront quiet; the Rosemary District sits one block from downtown's newest dining cluster.</p>
         </div>
         <div class="bg-black border border-white/10 rounded-lg p-6">
-          <h3 class="font-display text-lg text-white mb-3">Schools</h3>
-          <p class="text-sm">FILL_IN: Sarasota County school ratings, Pine View / Booker reference, public-school assignment for downtown addresses.</p>
+          <h3 class="font-display text-lg text-white mb-3">Culture &amp; The Bay</h3>
+          <p class="text-sm">Van Wezel Performing Arts Hall, the Sarasota Opera House, Florida Studio Theatre, Marie Selby Botanical Gardens, and Burns Court cinema all sit in or beside the core &mdash; plus The Bay, the 53-acre bayfront park redevelopment knitting it together with trails and event lawns.</p>
         </div>
         <div class="bg-black border border-white/10 rounded-lg p-6">
-          <h3 class="font-display text-lg text-white mb-3">Anchors</h3>
-          <p class="text-sm">FILL_IN: Van Wezel, Selby Gardens, Sarasota Opera House, Burns Court, the bayfront, Marina Jack.</p>
+          <h3 class="font-display text-lg text-white mb-3">Water &amp; Beaches</h3>
+          <p class="text-sm">Marina Jack and the Quay Harbor marina serve boaters from downtown's edge; Bayfront Park is the sunset default. Lido Beach is a 10-minute drive over the Ringling Bridge, with St. Armands Circle on the way &mdash; close enough that many downtown owners treat the islands as their backyard.</p>
         </div>
       </div>
     </div>
@@ -164,5 +173,5 @@ const jsonLd: Record<string, any>[] = [
   <SchedulerEmbed />
 
   <StickyMobileCta />
-  <DisclosureFooter showListingAttribution={true} showFactAttribution={true} />
+  <DisclosureFooter showListingAttribution={true} showFactAttribution={true} lastVerified="2026-07-01" />
 </BaseLayout>
