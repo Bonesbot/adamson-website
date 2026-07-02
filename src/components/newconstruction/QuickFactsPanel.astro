@@ -63,7 +63,8 @@ const facts: { label: string; value: any }[] = [
   { label: 'Construction Type', value: project.construction_type },
 ];
 
-const isFill = (v: any) => !v || (typeof v === 'string' && v.startsWith('FILL_IN'));
+// Only render facts we actually know — unknown fields are omitted entirely.
+const shown = facts.filter((f) => f.value && !(typeof f.value === 'string' && String(f.value).startsWith('FILL_IN')));
 ---
 
 <aside class="bg-black border border-white/10 rounded-lg overflow-hidden lg:sticky lg:top-24">
@@ -73,12 +74,12 @@ const isFill = (v: any) => !v || (typeof v === 'string' && v.startsWith('FILL_IN
     </p>
   </div>
   <dl class="divide-y divide-white/5">
-    {facts.map((f) => (
+    {shown.map((f) => (
       <div class="px-6 py-4">
         <dt class="font-accent text-[10px] uppercase tracking-[0.15em] text-white/40 mb-1">
           {f.label}
         </dt>
-        <dd class:list={['text-sm', isFill(f.value) ? 'text-orange-400/70 italic' : 'text-white']} set:html={f.value || 'FILL_IN'} />
+        <dd class="text-sm text-white" set:html={f.value} />
       </div>
     ))}
   </dl>
@@ -86,8 +87,8 @@ const isFill = (v: any) => !v || (typeof v === 'string' && v.startsWith('FILL_IN
     <a href="#schedule" class="block w-full text-center font-accent text-xs uppercase tracking-[0.15em] font-semibold bg-[var(--color-gold)] text-black px-4 py-3 rounded hover:bg-[var(--color-gold-light)]">
       Book a Private Tour
     </a>
-    <a href="#brief" class="block w-full text-center font-accent text-xs uppercase tracking-[0.15em] font-semibold border border-white/20 text-white px-4 py-3 rounded mt-3 hover:bg-white/10">
-      Get the Project Brief
+    <a href="tel:+19417139234" class="block w-full text-center font-accent text-xs uppercase tracking-[0.15em] font-semibold border border-white/20 text-white px-4 py-3 rounded mt-3 hover:bg-white/10">
+      Call (941) 713-9234
     </a>
   </div>
 </aside>
