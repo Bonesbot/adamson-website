@@ -2,7 +2,7 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-29T22:24:49.333387+00:00",
+  "lastUpdated": "2026-07-02T10:55:55.752628+00:00",
   "counts": {
     "sold": 33,
     "pending": 4,
@@ -29,10 +29,10 @@
     "newConstructionCount": 6
   },
   "sold": {
-    "count": 11,
-    "medianPrice": "$3,795,000",
-    "medianDom": 85,
-    "saleToListRatio": "89.5%",
+    "count": 10,
+    "medianPrice": "$3,997,500",
+    "medianDom": 90,
+    "saleToListRatio": "88.8%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -44,7 +44,10 @@
   },
   "fees": {
     "medianMonthlyAssociation": "$95",
-    "medianMonthlyCondoFee": null
+    "medianMonthlyCondoFee": null,
+    "minMonthlyCondoFee": null,
+    "maxMonthlyCondoFee": null,
+    "condoFeeRange": null
   },
   "priceBands": {
     "under900k": 0,
@@ -178,7 +181,7 @@
     "label": "buyer's market",
     "activeCount": 25,
     "sold365Count": 29,
-    "sold90Count": 11,
+    "sold90Count": 10,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -207,7 +210,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Bird Key?",
-      "a": "Recently sold homes took a median 85 days on market and closed at 89.5% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 90 days on market and closed at 88.8% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
@@ -219,5 +222,6 @@
       "q": "What are typical HOA and condo fees on Bird Key?",
       "a": "The median monthly condo fee is None and the median monthly association fee is $95."
     }
-  ]
+  ],
+  "costBreakdown90": null
 }

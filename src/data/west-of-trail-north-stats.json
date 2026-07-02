@@ -2,16 +2,16 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-29T22:25:02.101710+00:00",
+  "lastUpdated": "2026-07-02T10:55:54.272453+00:00",
   "counts": {
-    "sold": 77,
-    "pending": 9,
+    "sold": 79,
+    "pending": 7,
     "active": 63,
     "total": 86
   },
   "metrics": {
-    "avgPrice": "$1,206,870",
-    "avgPricePerSqFt": "$536",
+    "avgPrice": "$1,205,537",
+    "avgPricePerSqFt": "$534",
     "avgYearBuilt": 1973,
     "avgLivingSqFt": "2,003",
     "avgLotSqFt": null,
@@ -29,16 +29,16 @@
     "newConstructionCount": 21
   },
   "sold": {
-    "count": 27,
+    "count": 28,
     "medianPrice": "$560,000",
-    "medianDom": 55,
-    "saleToListRatio": "89.9%",
+    "medianDom": 52,
+    "saleToListRatio": "90.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 12.0,
+    "condo": 11.2,
     "sfhVilla": 9.9,
-    "blended": 10.4,
+    "blended": 10.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -67,6 +67,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4691066",
+      "address": "590 45TH ST",
+      "subdivision": "CORWOOD",
+      "soldPrice": "$665,000",
+      "soldDate": "2026-06-29",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,783",
+      "yearBuilt": 1960,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4678101",
+      "address": "1703 N TAMIAMI TRL #B507",
+      "subdivision": "THE STRAND",
+      "soldPrice": "$510,000",
+      "soldDate": "2026-06-29",
+      "bedrooms": 1,
+      "bathrooms": 2.0,
+      "livingSqFt": "858",
+      "yearBuilt": 2022,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4681432",
       "address": "2445 ALAMEDA AVE",
@@ -105,32 +131,6 @@
       "yearBuilt": 1971,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4689244",
-      "address": "1709 N TAMIAMI TRL #318",
-      "subdivision": "THE STRAND",
-      "soldPrice": "$650,000",
-      "soldDate": "2026-06-10",
-      "bedrooms": 1,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,332",
-      "yearBuilt": 2022,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4688359",
-      "address": "4395 SARASOTA AVE",
-      "subdivision": "CORWOOD PARK",
-      "soldPrice": "$550,000",
-      "soldDate": "2026-06-10",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,761",
-      "yearBuilt": 1972,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$569,000",
       "avgPricePerSqFt": "$451",
       "avgLivingSqFt": "1,262",
-      "avgDom": 45
+      "avgDom": 48
     },
     {
       "tier": "1990to2005",
@@ -169,10 +169,10 @@
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 14,
-      "avgPrice": "$569,955",
-      "avgPricePerSqFt": "$555",
+      "avgPrice": "$574,241",
+      "avgPricePerSqFt": "$558",
       "avgLivingSqFt": "1,033",
-      "avgDom": 150
+      "avgDom": 154
     }
   ],
   "condoTiersScope": {
@@ -206,7 +206,7 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 5,
-      "soldCount": 0,
+      "soldCount": 1,
       "soldMedianPricePerSqFt": null,
       "soldMedianPrice": null,
       "lowSample": true
@@ -215,34 +215,34 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 38,
-      "soldCount": 54,
-      "soldMedianPricePerSqFt": "$403",
-      "soldMedianPrice": "$572,500",
+      "soldCount": 55,
+      "soldMedianPricePerSqFt": "$402",
+      "soldMedianPrice": "$575,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 10.4,
-    "monthsOfSupplyCondo": 12.0,
+    "monthsOfSupply": 10.2,
+    "monthsOfSupplyCondo": 11.2,
     "monthsOfSupplySfhVilla": 9.9,
     "label": "buyer's market",
     "activeCount": 63,
-    "sold365Count": 73,
-    "sold90Count": 27,
+    "sold365Count": 74,
+    "sold90Count": 28,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 62,
+      "soldCount": 63,
       "activeCount": 48,
-      "soldMedianPrice": "$666,515",
-      "soldMedianPricePerSqFt": "$426"
+      "soldMedianPrice": "$665,000",
+      "soldMedianPricePerSqFt": "$425"
     },
     "condo": {
-      "soldCount": 15,
+      "soldCount": 16,
       "activeCount": 15,
-      "soldMedianPrice": "$475,000",
-      "soldMedianPricePerSqFt": "$492"
+      "soldMedianPrice": "$487,250",
+      "soldMedianPricePerSqFt": "$500"
     }
   },
   "boating": {
@@ -253,12 +253,12 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 63 active listings and roughly 6 closed sales a month (trailing 12 months), West Of Trail North has about 10.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 63 active listings and roughly 6 closed sales a month (trailing 12 months), West Of Trail North has about 10.2 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail North?",
-      "a": "Single-family homes sell around $666,515 ($426/sq ft), while condos, villas and townhouses sell around $475,000 ($492/sq ft)."
+      "a": "Single-family homes sell around $665,000 ($425/sq ft), while condos, villas and townhouses sell around $487,250 ($500/sq ft)."
     },
     {
       "facet": "range",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 55 days on market and closed at 89.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 52 days on market and closed at 90.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
@@ -280,5 +280,6 @@
       "q": "What are typical HOA and condo fees on West Of Trail North?",
       "a": "The median monthly condo fee is $493 and the median monthly association fee is $493."
     }
-  ]
+  ],
+  "costBreakdown90": null
 }

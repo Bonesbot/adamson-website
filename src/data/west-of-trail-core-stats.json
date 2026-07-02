@@ -2,16 +2,16 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-29T22:25:01.317967+00:00",
+  "lastUpdated": "2026-07-02T10:55:53.525252+00:00",
   "counts": {
-    "sold": 180,
-    "pending": 29,
-    "active": 122,
+    "sold": 183,
+    "pending": 26,
+    "active": 125,
     "total": 209
   },
   "metrics": {
-    "avgPrice": "$2,420,258",
-    "avgPricePerSqFt": "$731",
+    "avgPrice": "$2,418,588",
+    "avgPricePerSqFt": "$730",
     "avgYearBuilt": 1985,
     "avgLivingSqFt": "2,980",
     "avgLotSqFt": null,
@@ -22,23 +22,23 @@
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 122,
-    "medianPrice": "$2,996,000",
-    "medianPricePerSqFt": "$871",
+    "count": 125,
+    "medianPrice": "$2,995,000",
+    "medianPricePerSqFt": "$861",
     "waterfrontCount": 31,
-    "newConstructionCount": 42
+    "newConstructionCount": 43
   },
   "sold": {
-    "count": 51,
-    "medianPrice": "$2,220,000",
-    "medianDom": 74,
-    "saleToListRatio": "105.3%",
+    "count": 52,
+    "medianPrice": "$2,037,500",
+    "medianDom": 78,
+    "saleToListRatio": "104.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 11.2,
-    "sfhVilla": 9.2,
-    "blended": 9.4,
+    "condo": 12.0,
+    "sfhVilla": 9.6,
+    "blended": 9.8,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,58 @@
     }
   },
   "priceBands": {
-    "under900k": 17,
+    "under900k": 18,
     "band900kTo1_5m": 13,
-    "band1_5mTo3m": 32,
-    "band3mPlus": 60
+    "band1_5mTo3m": 33,
+    "band3mPlus": 61
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 122
+      "count": 125
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4676725",
+      "address": "1841 DATURA ST",
+      "subdivision": "DESOTA PARK",
+      "soldPrice": "$1,825,000",
+      "soldDate": "2026-06-30",
+      "bedrooms": 4,
+      "bathrooms": 4.0,
+      "livingSqFt": "2,293",
+      "yearBuilt": 1961,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4673616",
+      "address": "1632 WORRINGTON ST",
+      "subdivision": "JOHNSON ESTATES",
+      "soldPrice": "$630,000",
+      "soldDate": "2026-06-30",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,547",
+      "yearBuilt": 1973,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4671008",
+      "address": "1705 FIELD RD",
+      "subdivision": "OYSTER BAY ESTATES",
+      "soldPrice": "$2,125,000",
+      "soldDate": "2026-06-26",
+      "bedrooms": 4,
+      "bathrooms": 4.0,
+      "livingSqFt": "2,409",
+      "yearBuilt": 2020,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4679338",
       "address": "948 CITRUS AVE",
@@ -92,45 +131,6 @@
       "yearBuilt": 2025,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4684167",
-      "address": "1514 S LAKE SHORE DR",
-      "subdivision": "OYSTER BAY ESTATES",
-      "soldPrice": "$1,800,000",
-      "soldDate": "2026-06-12",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,430",
-      "yearBuilt": 1953,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "N6139734",
-      "address": "1740 WISCONSIN LN",
-      "subdivision": "BAYVIEW",
-      "soldPrice": "$400,000",
-      "soldDate": "2026-06-12",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "576",
-      "yearBuilt": 1949,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4674004",
-      "address": "1876 MAGNOLIA ST",
-      "subdivision": "POINSETTIA PARK 2",
-      "soldPrice": "$2,500,000",
-      "soldDate": "2026-06-11",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "3,292",
-      "yearBuilt": 2025,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 14,
-      "avgPrice": "$450,200",
+      "avgPrice": "$449,486",
       "avgPricePerSqFt": "$363",
       "avgLivingSqFt": "1,169",
-      "avgDom": 138
+      "avgDom": 140
     },
     {
       "tier": "1990to2005",
@@ -214,29 +214,29 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 89,
-      "soldCount": 152,
-      "soldMedianPricePerSqFt": "$647",
-      "soldMedianPrice": "$1,626,250",
+      "activeCount": 92,
+      "soldCount": 155,
+      "soldMedianPricePerSqFt": "$651",
+      "soldMedianPrice": "$1,637,500",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 9.4,
-    "monthsOfSupplyCondo": 11.2,
-    "monthsOfSupplySfhVilla": 9.2,
+    "monthsOfSupply": 9.8,
+    "monthsOfSupplyCondo": 12.0,
+    "monthsOfSupplySfhVilla": 9.6,
     "label": "buyer's market",
-    "activeCount": 122,
-    "sold365Count": 156,
-    "sold90Count": 51,
+    "activeCount": 125,
+    "sold365Count": 153,
+    "sold90Count": 52,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 164,
-      "activeCount": 108,
-      "soldMedianPrice": "$1,837,500",
-      "soldMedianPricePerSqFt": "$674"
+      "soldCount": 167,
+      "activeCount": 111,
+      "soldMedianPrice": "$1,825,000",
+      "soldMedianPricePerSqFt": "$675"
     },
     "condo": {
       "soldCount": 16,
@@ -253,22 +253,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 122 active listings and roughly 13 closed sales a month (trailing 12 months), West Of Trail Core has about 9.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 125 active listings and roughly 13 closed sales a month (trailing 12 months), West Of Trail Core has about 9.8 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,837,500 ($674/sq ft), while condos, villas and townhouses sell around $313,000 ($306/sq ft)."
+      "a": "Single-family homes sell around $1,825,000 ($675/sq ft), while condos, villas and townhouses sell around $313,000 ($306/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $98,000 to $26,400,000, with a median asking price of $2,996,000."
+      "a": "Active listings run from $98,000 to $26,400,000, with a median asking price of $2,995,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 74 days on market and closed at 105.3% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 78 days on market and closed at 104.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
@@ -280,5 +280,6 @@
       "q": "What are typical HOA and condo fees on West Of Trail Core?",
       "a": "The median monthly condo fee is $689 and the median monthly association fee is $67."
     }
-  ]
+  ],
+  "costBreakdown90": null
 }

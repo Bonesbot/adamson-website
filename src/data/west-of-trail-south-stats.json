@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-06-29T22:25:02.886072+00:00",
+  "lastUpdated": "2026-07-02T10:55:55.012278+00:00",
   "counts": {
-    "sold": 244,
+    "sold": 247,
     "pending": 22,
-    "active": 133,
-    "total": 266
+    "active": 131,
+    "total": 269
   },
   "metrics": {
-    "avgPrice": "$621,527",
-    "avgPricePerSqFt": "$328",
+    "avgPrice": "$621,746",
+    "avgPricePerSqFt": "$329",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,735",
+    "avgLivingSqFt": "1,737",
     "avgLotSqFt": null,
     "avgDom": 77
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$5,500,000"
   },
   "active": {
-    "count": 133,
-    "medianPrice": "$489,500",
-    "medianPricePerSqFt": "$334",
-    "waterfrontCount": 38,
+    "count": 131,
+    "medianPrice": "$495,000",
+    "medianPricePerSqFt": "$337",
+    "waterfrontCount": 36,
     "newConstructionCount": 5
   },
   "sold": {
-    "count": 78,
-    "medianPrice": "$438,750",
-    "medianDom": 32,
+    "count": 68,
+    "medianPrice": "$440,000",
+    "medianDom": 38,
     "saleToListRatio": "90.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 10.0,
+    "condo": 9.8,
     "sfhVilla": 5.6,
-    "blended": 7.5,
+    "blended": 7.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 105,
+    "under900k": 103,
     "band900kTo1_5m": 6,
     "band1_5mTo3m": 14,
     "band3mPlus": 8
@@ -62,11 +62,50 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 133
+      "count": 131
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4693104",
+      "address": "7113 ANTIGUA PL",
+      "subdivision": "GULF GATE",
+      "soldPrice": "$422,500",
+      "soldDate": "2026-07-01",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,378",
+      "yearBuilt": 1968,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4692133",
+      "address": "7464 CASS CIR",
+      "subdivision": "SIESTA HEIGHTS MANOR",
+      "soldPrice": "$445,000",
+      "soldDate": "2026-06-30",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,608",
+      "yearBuilt": 1969,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4676511",
+      "address": "1617 BROOKHOUSE DR #256",
+      "subdivision": "PELICAN COVE XVI",
+      "soldPrice": "$190,000",
+      "soldDate": "2026-06-30",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,245",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4692523",
       "address": "4689 PINE HARRIER DR",
@@ -92,45 +131,6 @@
       "yearBuilt": 1971,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4692206",
-      "address": "5936 DRIFTWOOD AVE #16",
-      "subdivision": "BAYWOOD COLONY SEC 1",
-      "soldPrice": "$239,000",
-      "soldDate": "2026-06-24",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,155",
-      "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4693089",
-      "address": "2436 BREAKWATER CIR",
-      "subdivision": "GULF GATE",
-      "soldPrice": "$350,000",
-      "soldDate": "2026-06-23",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,468",
-      "yearBuilt": 1967,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4649803",
-      "address": "2271 PINE VIEW CIR",
-      "subdivision": "GULF GATE PINES",
-      "soldPrice": "$435,000",
-      "soldDate": "2026-06-18",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,920",
-      "yearBuilt": 1980,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 76,
-      "avgPrice": "$385,430",
+      "activeCount": 74,
+      "avgPrice": "$384,915",
       "avgPricePerSqFt": "$301",
-      "avgLivingSqFt": "1,292",
-      "avgDom": 145
+      "avgLivingSqFt": "1,289",
+      "avgDom": 150
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$596,490",
       "avgPricePerSqFt": "$307",
       "avgLivingSqFt": "1,940",
-      "avgDom": 174
+      "avgDom": 176
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$579,500",
       "avgPricePerSqFt": "$338",
       "avgLivingSqFt": "1,713",
-      "avgDom": 176
+      "avgDom": 178
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$629,000",
       "avgPricePerSqFt": "$353",
       "avgLivingSqFt": "1,785",
-      "avgDom": 184
+      "avgDom": 186
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 33,
+      "activeCount": 31,
       "soldCount": 48,
       "soldMedianPricePerSqFt": "$366",
       "soldMedianPrice": "$500,500",
@@ -215,79 +215,80 @@
       "segment": "other_wf",
       "label": "Other waterfront",
       "activeCount": 5,
-      "soldCount": 11,
-      "soldMedianPricePerSqFt": "$338",
-      "soldMedianPrice": "$645,000",
+      "soldCount": 12,
+      "soldMedianPricePerSqFt": "$317",
+      "soldMedianPrice": "$622,500",
       "lowSample": false
     },
     {
       "segment": "none",
       "label": "No water",
       "activeCount": 70,
-      "soldCount": 160,
+      "soldCount": 162,
       "soldMedianPricePerSqFt": "$285",
       "soldMedianPrice": "$430,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.5,
-    "monthsOfSupplyCondo": 10.0,
+    "monthsOfSupply": 7.4,
+    "monthsOfSupplyCondo": 9.8,
     "monthsOfSupplySfhVilla": 5.6,
     "label": "buyer's market",
-    "activeCount": 133,
-    "sold365Count": 214,
-    "sold90Count": 78,
+    "activeCount": 131,
+    "sold365Count": 213,
+    "sold90Count": 68,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 134,
+      "soldCount": 136,
       "activeCount": 41,
-      "soldMedianPrice": "$520,000",
-      "soldMedianPricePerSqFt": "$321"
+      "soldMedianPrice": "$518,750",
+      "soldMedianPricePerSqFt": "$320"
     },
     "condo": {
-      "soldCount": 110,
-      "activeCount": 92,
+      "soldCount": 111,
+      "activeCount": 90,
       "soldMedianPrice": "$350,000",
-      "soldMedianPricePerSqFt": "$251"
+      "soldMedianPricePerSqFt": "$250"
     }
   },
   "boating": {
-    "activeWithDock": 18,
-    "activeWaterfront": 38
+    "activeWithDock": 17,
+    "activeWaterfront": 36
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 133 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 7.5 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 131 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 7.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $520,000 ($321/sq ft), while condos, villas and townhouses sell around $350,000 ($251/sq ft)."
+      "a": "Single-family homes sell around $518,750 ($320/sq ft), while condos, villas and townhouses sell around $350,000 ($250/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $130,000 to $5,500,000, with a median asking price of $489,500."
+      "a": "Active listings run from $130,000 to $5,500,000, with a median asking price of $495,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 32 days on market and closed at 90.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 38 days on market and closed at 90.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 38 active waterfront listings, 18 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 36 active waterfront listings, 17 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on West Of Trail South?",
       "a": "The median monthly condo fee is $933 and the median monthly association fee is $842."
     }
-  ]
+  ],
+  "costBreakdown90": null
 }
