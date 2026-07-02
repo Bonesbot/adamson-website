@@ -1,7 +1,6 @@
 ---
 /**
- * LocationBlock — embedded map + walk-to/drive-to callouts.
- * Per spec §5 section 7. Today the map is a static placeholder.
+ * LocationBlock — embedded Leaflet mini-map + walk-to/drive-to callouts.
  */
 interface Callout {
   label: string;
@@ -16,18 +15,9 @@ interface Props {
   callouts?: Callout[];
 }
 
-const {
-  address,
-  lat,
-  lng,
-  callouts = [
-    /* FILL_IN: walk/drive-to anchors specific to this project, e.g.
-       { label: 'St. Armands Circle', distance: '8 min walk', type: 'walk' },
-       { label: 'Lido Beach', distance: '12 min walk', type: 'walk' },
-       { label: 'SRQ International Airport', distance: '14 min drive', type: 'drive' }, */
-  ],
-} = Astro.props;
-
+const { address, lat, lng, callouts = [] } = Astro.props;
+const hasMap = typeof lat === 'number' && typeof lng === 'number';
+const mapId = `loc-map-${Math.abs(Math.round(((lat || 0) + (lng || 0)) * 10000))}`;
 const iconFor = (type?: 'walk' | 'drive' | 'bike') =>
   type === 'drive' ? '🚗' : type === 'bike' ? '🚲' : '🚶';
 ---
@@ -38,45 +28,53 @@ const iconFor = (type?: 'walk' | 'drive' | 'bike') =>
     <h2 class="accent-underline mb-3">Where you'll be</h2>
     {address && <p class="text-white/70 mb-8">{address}</p>}
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <!-- Map placeholder -->
-      <div class="lg:col-span-2 bg-black border border-white/10 rounded-lg overflow-hidden">
-        <div class="aspect-[16/10] bg-[var(--color-dark)] flex items-center justify-center">
-          <div class="text-center">
-            <svg class="w-12 h-12 text-white/20 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <p class="font-accent text-xs uppercase tracking-[0.2em] text-white/40">
-              {lat && lng ? `Map @ ${lat}, ${lng}` : 'Map placeholder &mdash; lat/lng FILL_IN in projects.json'}
-            </p>
-          </div>
-        </div>
+    {hasMap && (
+      <div class="rounded-lg overflow-hidden border border-white/10 mb-8">
+        <div id={mapId} class="w-full h-[320px] md:h-[380px]" data-lat={lat} data-lng={lng} aria-label={`Map showing ${address || 'project location'}`}></div>
       </div>
+    )}
 
-      <!-- Callouts -->
-      <div class="bg-black border border-white/10 rounded-lg p-6">
-        <h3 class="font-accent text-xs uppercase tracking-[0.2em] text-white/60 font-semibold mb-4">
-          Nearby
-        </h3>
-        {callouts.length === 0 ? (
-          <p class="text-orange-400/70 italic text-sm">FILL_IN: walk/drive-to callouts in this project's data.</p>
-        ) : (
-          <ul class="space-y-3" role="list">
-            {callouts.map((c) => (
-              <li class="flex items-start justify-between gap-3 text-sm">
-                <span class="text-white">
-                  <span class="mr-2" aria-hidden="true">{iconFor(c.type)}</span>
-                  {c.label}
-                </span>
-                <span class="text-white/50 font-accent text-xs uppercase tracking-wider">
-                  {c.distance}
-                </span>
-              </li>
-            ))}
-          </ul>
-        )}
+    {callouts.length > 0 && (
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {callouts.map((c) => (
+          <div class="bg-black border border-white/10 rounded-lg p-5 flex items-center gap-4">
+            <span class="text-xl" aria-hidden="true">{iconFor(c.type)}</span>
+            <div>
+              <p class="font-display text-white text-sm font-semibold">{c.label}</p>
+              <p class="font-accent text-[11px] uppercase tracking-wider text-white/50">{c.distance}</p>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
+    )}
   </div>
 </section>
+
+{hasMap && (
+  <>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script is:inline define:vars={{ mapId }}>
+      (function () {
+        var el = document.getElementById(mapId);
+        if (!el || typeof L === 'undefined') return;
+        var lat = parseFloat(el.dataset.lat), lng = parseFloat(el.dataset.lng);
+        var map = L.map(mapId, { scrollWheelZoom: false }).setView([lat, lng], 15);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        }).addTo(map);
+        var icon = L.divIcon({
+          html: '<div class="nc-pin"><div class="body" style="background:#C5A55A"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/></svg></div></div>',
+          iconSize: [32, 32], iconAnchor: [16, 32], className: ''
+        });
+        L.marker([lat, lng], { icon: icon }).addTo(map);
+      })();
+    </script>
+    <style is:global>
+      .nc-pin { width: 32px; height: 32px; }
+      .nc-pin .body { width: 32px; height: 32px; border-radius: 50% 50% 50% 2px; transform: rotate(45deg); display: grid; place-items: center; box-shadow: 0 5px 12px -4px rgba(10,42,64,.6); border: 2px solid rgba(255,255,255,.92); }
+      .nc-pin .body svg { transform: rotate(-45deg); width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2; }
+    </style>
+  </>
+)}
