@@ -1,0 +1,64 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const description =
+  'Accessibility statement for AdamsonFL.com: our commitment to WCAG 2.1 AA conformance, the measures in place, known limitations, and how to reach us if you encounter a barrier.';
+---
+
+<BaseLayout title="Accessibility Statement" description={description}>
+  <section class="pt-32 pb-20 bg-warm-white">
+    <div class="container" style="max-width: 48rem; color: #333333;">
+      <p class="section-label text-cbgl-blue">Accessibility</p>
+      <h1 class="font-display text-4xl font-bold mb-6 text-navy">Accessibility Statement</h1>
+
+      <p class="mb-4">
+        The Adamson Group is committed to ensuring that AdamsonFL.com is accessible to everyone,
+        including people with disabilities. We believe every client and visitor deserves equal
+        access to information about the Sarasota real estate market, and we work continuously to
+        improve the usability and accessibility of this site.
+      </p>
+
+      <h2 class="font-display text-2xl font-semibold mt-8 mb-3 text-navy">Our Standard</h2>
+      <p class="mb-4">
+        We aim to conform to the Web Content Accessibility Guidelines (WCAG) 2.1, Level AA, the
+        standard referenced by the Americans with Disabilities Act (ADA) guidance for websites,
+        and we monitor the evolution of WCAG 2.2 as best practice. This website is partially
+        conformant with WCAG 2.1 Level AA: some parts of the content may not yet fully conform,
+        and we are actively working to close those gaps.
+      </p>
+
+      <h2 class="font-display text-2xl font-semibold mt-8 mb-3 text-navy">Measures We Take</h2>
+      <ul class="list-disc pl-6 mb-4 space-y-2">
+        <li>Semantic HTML structure with proper landmarks, headings, and a skip-to-content link</li>
+        <li>Full keyboard navigability with visible focus indicators</li>
+        <li>Text alternatives for meaningful images and logos</li>
+        <li>Labeled form fields on all contact and inquiry forms</li>
+        <li>A pause control on background video, and support for reduced-motion preferences</li>
+        <li>Sufficient color contrast targets in our design system</li>
+        <li>Accessibility review as part of our development process for new pages</li>
+      </ul>
+
+      <h2 class="font-display text-2xl font-semibold mt-8 mb-3 text-navy">Known Limitations</h2>
+      <p class="mb-4">
+        Some content on this site is provided by third parties, including MLS/IDX property search
+        frames, embedded maps, and developer-supplied renderings and video. These components may
+        not fully conform to WCAG 2.1 AA. We work with our vendors to improve their accessibility,
+        and we are happy to provide any information contained in them in an alternative format on
+        request.
+      </p>
+
+      <h2 class="font-display text-2xl font-semibold mt-8 mb-3 text-navy">Feedback &amp; Assistance</h2>
+      <p class="mb-4">
+        If you experience any difficulty accessing any part of this website, or would like to
+        request information in an alternative format, please contact us. We aim to respond within
+        two business days.
+      </p>
+      <ul class="list-disc pl-6 mb-4 space-y-2">
+        <li>Phone: <a href="tel:+19417139234" class="text-cbgl-blue underline">(941) 713-9234</a></li>
+        <li>Email: <a href="mailto:Ryan@Adamson-Group.com" class="text-cbgl-blue underline">Ryan@Adamson-Group.com</a></li>
+      </ul>
+
+      <p class="mt-8 text-sm" style="color: #666666;">This statement was last reviewed and updated on July 2, 2026.</p>
+    </div>
+  </section>
+</BaseLayout>

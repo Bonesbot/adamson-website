@@ -304,3 +304,70 @@ a:hover {
 .cbgl-glow {
   box-shadow: 0 0 20px var(--color-cbgl-blue-glow);
 }
+
+/* ============================================
+   Accessibility (WCAG 2.1 AA)
+   ============================================ */
+
+/* Skip link - visually hidden until keyboard-focused */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--color-gold);
+  color: #000;
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* Visible keyboard focus indicator, site-wide */
+:focus-visible {
+  outline: 3px solid var(--color-cbgl-blue-light);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Hero video pause/play control (WCAG 2.2.2 Pause, Stop, Hide) */
+.video-hero {
+  position: relative;
+}
+.hero-video-toggle {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.hero-video-toggle:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+/* Respect user reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

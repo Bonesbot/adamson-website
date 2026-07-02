@@ -107,6 +107,8 @@ const jsonLd = [
   <section class="video-hero flex items-center justify-center">
     <!-- Video Background -->
     <video
+      id="hero-video"
+      aria-hidden="true"
       autoplay
       muted
       loop
@@ -118,6 +120,18 @@ const jsonLd = [
 
     <!-- Dark Overlay -->
     <div class="overlay"></div>
+
+    <!-- Pause/play control for background video (WCAG 2.2.2) -->
+    <button
+      id="hero-video-toggle"
+      class="hero-video-toggle"
+      aria-label="Pause background video"
+      aria-pressed="false"
+    >
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path id="hero-video-icon" d="M6 5h4v14H6zM14 5h4v14h-4z" />
+      </svg>
+    </button>
 
     <!-- Hero Content -->
     <div class="content text-center px-6 max-w-3xl mx-auto">
@@ -320,5 +334,35 @@ const jsonLd = [
       </div>
     </div>
   </section>
+
+<script>
+  // Hero video pause/play + honor prefers-reduced-motion
+  const heroVideo = document.getElementById('hero-video');
+  const heroToggle = document.getElementById('hero-video-toggle');
+  const heroIcon = document.getElementById('hero-video-icon');
+  const PAUSE_D = 'M6 5h4v14H6zM14 5h4v14h-4z';
+  const PLAY_D = 'M8 5v14l11-7z';
+  const setHeroState = (playing: boolean) => {
+    if (!heroToggle || !heroIcon) return;
+    heroToggle.setAttribute('aria-pressed', String(!playing));
+    heroToggle.setAttribute('aria-label', playing ? 'Pause background video' : 'Play background video');
+    heroIcon.setAttribute('d', playing ? PAUSE_D : PLAY_D);
+  };
+  if (heroVideo instanceof HTMLVideoElement && heroToggle) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      heroVideo.pause();
+      setHeroState(false);
+    }
+    heroToggle.addEventListener('click', () => {
+      if (heroVideo.paused) {
+        heroVideo.play();
+        setHeroState(true);
+      } else {
+        heroVideo.pause();
+        setHeroState(false);
+      }
+    });
+  }
+</script>
 
 </BaseLayout>
