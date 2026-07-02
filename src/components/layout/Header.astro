@@ -22,34 +22,34 @@ const currentPath = Astro.url.pathname;
   id="site-header"
 >
   <div class="container">
-    <nav class="flex items-center justify-between h-20" aria-label="Main navigation">
+    <nav class="flex items-center justify-between gap-4 h-20" aria-label="Main navigation">
       <!-- Logos — Adamson Group + Coldwell Banker (side by side like existing site) -->
-      <a href="/" class="flex items-center gap-4 group">
+      <a href="/" class="flex items-center gap-3 shrink-0 group">
         <!-- Adamson Group Logo (inverted to white for dark bg) -->
         <img
           src="/images/logos/adamson-group-black.png"
           alt="Adamson Group"
-          class="h-12 w-auto"
+          class="h-9 w-auto"
           style="filter: invert(1) brightness(100);"
         />
         <!-- Divider -->
-        <span class="hidden sm:block w-px h-8 bg-white/20"></span>
+        <span class="hidden sm:block w-px h-6 bg-white/20"></span>
         <!-- Coldwell Banker Logo (white version for dark bg) -->
         <img
           src="/images/logos/cb-horz-white.png"
           alt="Coldwell Banker Realty"
-          class="hidden sm:block h-10 w-auto"
+          class="hidden sm:block h-7 w-auto"
         />
       </a>
 
       <!-- Desktop Navigation -->
-      <ul class="hidden md:flex items-center gap-8" role="list">
+      <ul class="hidden xl:flex items-center gap-x-4" role="list">
         {navItems.map((item) => (
           <li>
             <a
               href={item.href}
               class:list={[
-                'font-accent text-xs uppercase tracking-[0.15em] font-semibold transition-colors duration-200',
+                'font-accent whitespace-nowrap text-[11px] uppercase tracking-[0.08em] font-semibold transition-colors duration-200',
                 currentPath === item.href
                   ? 'text-[var(--color-cbgl-blue-light)]'
                   : 'text-white/90 hover:text-[var(--color-gold)]',
@@ -63,20 +63,20 @@ const currentPath = Astro.url.pathname;
           <a
             href="/find-my-dream-home"
             class:list={[
-              'font-accent text-xs uppercase tracking-[0.15em] font-semibold px-4 py-2 rounded-full transition-colors duration-200',
+              'font-accent whitespace-nowrap text-[11px] uppercase tracking-[0.08em] font-semibold px-3.5 py-2 rounded-full transition-colors duration-200',
               currentPath === '/find-my-dream-home'
                 ? 'bg-[var(--color-gold-light)] text-black'
                 : 'bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)]',
             ]}
           >
-            Off-Market Properties
+            Off-Market
           </a>
         </li>
       </ul>
 
       <!-- Mobile Menu Button -->
       <button
-        class="md:hidden text-white p-2"
+        class="xl:hidden text-white p-2"
         id="mobile-menu-toggle"
         aria-label="Toggle navigation menu"
         aria-expanded="false"
@@ -89,7 +89,7 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <!-- Mobile Menu -->
-  <div class="hidden md:hidden bg-black/95 backdrop-blur-md" id="mobile-menu">
+  <div class="hidden xl:hidden bg-black/95 backdrop-blur-md" id="mobile-menu">
     <ul class="container py-6 space-y-4" role="list">
       {navItems.map((item) => (
         <li>
