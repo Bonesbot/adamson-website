@@ -15,6 +15,7 @@ interface Project {
   area: string;
   island?: string | null;
   card_image?: string;
+  image_credit?: string;
 }
 
 interface Props {
@@ -62,6 +63,7 @@ const linkClass = variant === 'light' ? 'text-[var(--color-cbgl-blue)]' : 'text-
           area={p.area}
           island={p.island}
           cardImage={p.card_image}
+          imageCredit={p.image_credit}
         />
       ))}
     </div>
