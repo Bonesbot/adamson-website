@@ -1,12 +1,10 @@
 ---
 /**
- * /new-construction — HUB PAGE (PROTOTYPE — NOT PUBLISHED)
- *
- * Composes the 10 sections from spec §4. noIndex + sitemap exclusion +
- * draft banner triple-gate this against accidental publication.
+ * /new-construction — HUB PAGE (LIVE)
+ * Composes hero, trust strip, interactive map, comparison table, area
+ * pillars, IDX slot, live market KPIs, Why Ryan, FAQ, booking + VIP.
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import DraftBanner from '@/components/newconstruction/DraftBanner.astro';
 import Hero from '@/components/newconstruction/Hero.astro';
 import TrustBar from '@/components/newconstruction/TrustBar.astro';
 import ProjectMap from '@/components/newconstruction/ProjectMap.astro';
@@ -14,16 +12,15 @@ import ProjectComparisonTable from '@/components/newconstruction/ProjectComparis
 import AreaSection from '@/components/newconstruction/AreaSection.astro';
 import IdxListingGrid from '@/components/newconstruction/IdxListingGrid.astro';
 import MarketDataKpis from '@/components/newconstruction/MarketDataKpis.astro';
-import MarketTrendChart from '@/components/newconstruction/MarketTrendChart.astro';
 import WhyRyanBlock from '@/components/newconstruction/WhyRyanBlock.astro';
 import FAQSchema from '@/components/seo/FAQSchema.astro';
 import SchedulerEmbed from '@/components/newconstruction/SchedulerEmbed.astro';
 import VipForm from '@/components/newconstruction/VipForm.astro';
-import RelatedContent from '@/components/newconstruction/RelatedContent.astro';
 import StickyMobileCta from '@/components/newconstruction/StickyMobileCta.astro';
 import DisclosureFooter from '@/components/newconstruction/DisclosureFooter.astro';
 import projectsData from '@/data/newconstruction/projects.json';
 import faqData from '@/data/newconstruction/faq.json';
+import dtStats from '@/data/downtown-sarasota-stats.json';
 
 const projects = projectsData.projects;
 const downtownProjects = projects.filter((p) => p.area === 'downtown-sarasota');
@@ -35,14 +32,22 @@ const pins = projects.map((p) => ({
   area: p.area,
   island: p.island,
   status: p.status,
+  price_range: p.price_range,
   lat: p.lat,
   lng: p.lng,
 }));
 
-const description =
-  "Sarasota's luxury new-construction hub: 8 active projects across Downtown Sarasota and the barrier islands (Lido, Longboat, Siesta), with live availability, pricing, and pre-construction VIP access.";
+// Live pipeline stats (regenerated daily from Stellar MLS via Supabase)
+const statsAsOf = dtStats?.lastUpdated ? new Date(dtStats.lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : undefined;
+const kpis = [
+  { label: 'Active New-Construction Listings (2020+)', value: String(dtStats?.active?.newConstructionCount ?? '—') },
+  { label: 'Median $/SqFt — Active Downtown', value: dtStats?.active?.medianPricePerSqFt ?? '—' },
+  { label: 'Median Days on Market — Sold', value: String(dtStats?.sold?.medianDom ?? '—') },
+];
 
-// JSON-LD per spec §13: hub page = CollectionPage + Place(s) + RealEstateAgent + FAQPage + BreadcrumbList
+const description =
+  "Sarasota's luxury new-construction hub: 8 active projects across Downtown Sarasota, Golden Gate Point, and the barrier islands — pricing, completion timelines, developer details, and pre-construction VIP access.";
+
 const jsonLd: Record<string, any>[] = [
   {
     '@type': 'CollectionPage',
@@ -62,7 +67,6 @@ const jsonLd: Record<string, any>[] = [
       })),
     },
   },
-  // Per spec §13: all four named entities even though only two pillar pages exist
   { '@type': 'Place', name: 'Downtown Sarasota', address: { '@type': 'PostalAddress', addressLocality: 'Sarasota', addressRegion: 'FL', addressCountry: 'US' } },
   { '@type': 'Place', name: 'Lido Key', address: { '@type': 'PostalAddress', addressLocality: 'Sarasota', addressRegion: 'FL', addressCountry: 'US' } },
   { '@type': 'Place', name: 'Longboat Key', address: { '@type': 'PostalAddress', addressLocality: 'Longboat Key', addressRegion: 'FL', addressCountry: 'US' } },
@@ -101,20 +105,18 @@ const jsonLd: Record<string, any>[] = [
   description={description}
   canonicalUrl="https://adamsonfl.com/new-construction"
   jsonLd={jsonLd}
-  noIndex={true}
 >
-  <DraftBanner />
-
   <!-- 1. Hero -->
   <Hero
     eyebrow="New Construction Hub"
     headline="Sarasota's Luxury New Construction — From Pre-Construction to Move-In Ready"
-    subhead="FILL_IN: 1-sentence subhead in Ryan's voice — what makes this hub the authoritative source for Sarasota new-construction buyers right now."
+    subhead="Eight active luxury projects, one honest scorecard — current pricing, completion timelines, and the release calendars the sales galleries don't publish, tracked by Ryan Adamson."
     primaryCtaLabel="Book a Private Tour"
     primaryCtaHref="#schedule"
     secondaryCtaLabel="Join the VIP List"
     secondaryCtaHref="#vip"
     image="/images/new-construction/hub-hero.jpg"
+    imageCredit="Courtesy of Kolter Urban"
     tall={true}
   />
 
@@ -131,7 +133,7 @@ const jsonLd: Record<string, any>[] = [
   <AreaSection
     eyebrow="Downtown Sarasota"
     heading="Downtown Sarasota"
-    intro="FILL_IN: 1-paragraph editorial intro to Downtown Sarasota new construction in Ryan's voice. Cover what's been built since 2020, what's currently in pre-construction, the price range, who's buying, and what differentiates downtown from the islands as a buying decision."
+    intro="Downtown Sarasota is in the largest luxury building cycle in its history. As of July 2026, seven projects are active in the core — from The Gallery's under-$1M Rosemary District residences to the Ritz-Carlton's $3.7M+ bayfront tower at The Quay, with Golden Gate Point's boutique buildings (The Owen, SIX88, Amara) in between. Five buildings deliver in 2026; Amara and Mira Mar carry the pipeline to 2028. Buyers choose downtown for walkability, amenity depth, and the widest price range in the market."
     projects={downtownProjects.slice(0, 3)}
     viewAllHref="/new-construction/downtown-sarasota"
     variant="dark"
@@ -141,30 +143,26 @@ const jsonLd: Record<string, any>[] = [
   <AreaSection
     eyebrow="Barrier Islands"
     heading="Barrier Islands"
-    intro="FILL_IN: 1-paragraph editorial intro covering Lido, Longboat, and Siesta as a single barrier-island market. Note Rosewood is the only confirmed full-build Phase-1 project; mention what's in pre-development on Longboat and the resale-driven nature of Siesta."
-    projects={islandProjects.length > 0 ? islandProjects.slice(0, 3) : downtownProjects.slice(0, 3)}
+    intro="On the islands, new construction is scarce by design — and that scarcity is the story. Rosewood Residences Lido Key, the brand's first stand-alone residential project anywhere in the world, is welcoming owners through 2026 and carries the entire beachfront new-construction market. Longboat Key stays low-rise with new supply arriving as individual Gulf-front estates, and Siesta Key remains a custom-build market. When island product is this limited, knowing the resale and off-market landscape matters as much as the developer brochures."
+    projects={islandProjects.length > 0 ? islandProjects : downtownProjects.slice(3, 6)}
     viewAllHref="/new-construction/barrier-islands"
     variant="elevated"
   />
 
-  <!-- 5. Active listings (IDX) -->
+  <!-- 5. Active listings (IDX slot) -->
   <section class="section dark-section">
     <div class="container">
       <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Currently available</p>
       <h2 class="accent-underline mb-3">Currently Available in Sarasota New Construction</h2>
       <p class="text-white/60 mb-10 max-w-2xl">
-        Live MLS listings filtered to the 8 projects in the comparison table above.
+        Live MLS listings across the projects tracked on this page.
       </p>
-      <IdxListingGrid heading="" limit={6} />
-      <a href="#vip" class="inline-block mt-8 font-accent text-sm uppercase tracking-[0.15em] font-semibold text-[var(--color-cbgl-blue-light)] hover:text-[var(--color-gold)]">
-        View all active listings &rarr;
-      </a>
+      <IdxListingGrid heading="" limit={6} slotId="idx-hub-new-construction" />
     </div>
   </section>
 
-  <!-- 6. Market data snapshot -->
-  <MarketDataKpis />
-  <MarketTrendChart />
+  <!-- 6. Market data snapshot (live pipeline stats) -->
+  <MarketDataKpis scope="Downtown Sarasota Market" kpis={kpis} asOf={statsAsOf} source="Stellar MLS via Adamson Group data pipeline" />
 
   <!-- 7. Why Ryan -->
   <WhyRyanBlock />
@@ -179,12 +177,9 @@ const jsonLd: Record<string, any>[] = [
   <SchedulerEmbed />
   <VipForm />
 
-  <!-- 10. Related editorial -->
-  <RelatedContent />
-
   <!-- Sticky mobile CTA -->
   <StickyMobileCta />
 
   <!-- Disclosures -->
-  <DisclosureFooter showListingAttribution={true} showFactAttribution={true} />
+  <DisclosureFooter showListingAttribution={true} showFactAttribution={true} lastVerified="2026-07-01" />
 </BaseLayout>
