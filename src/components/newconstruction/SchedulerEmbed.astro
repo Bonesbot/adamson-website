@@ -1,27 +1,30 @@
 ---
 /**
- * SchedulerEmbed — PLACEHOLDER for Calendly / Cal.com / TidyCal embed.
- * Per spec §4 section 9 + §9: two event types — 30-min Discovery Call
- * and 60-min Private Tour. URL param routes leads with project context.
+ * SchedulerEmbed — "Let Ryan Guide You" CTA block.
+ * Two paths: 30-min discovery call (direct line) and private tour (contact).
+ * Swap the hrefs for Calendly/Cal.com embeds when scheduling goes live.
  */
 interface Props {
-  /** Optional project name — used in heading and passed as context to scheduler. */
+  /** Optional project name — used in heading and tour context. */
   projectName?: string;
   /** Anchor id for #schedule links. */
   id?: string;
 }
 
 const { projectName, id = 'schedule' } = Astro.props;
-const heading = projectName ? `Tour ${projectName} with Ryan` : 'Talk to Ryan';
+const heading = projectName ? `Tour ${projectName} with Ryan` : 'Let Ryan Guide You';
+const tourSubject = encodeURIComponent(projectName ? `Private tour — ${projectName}` : 'Private new-construction tour');
 ---
 
 <section id={id} class="cbgl-section py-16 scroll-mt-20">
   <div class="container">
     <div class="text-center mb-10">
-      <p class="section-label text-white/70 mb-3">Schedule</p>
+      <p class="section-label text-white/70 mb-3">Work with Ryan</p>
       <h2 class="font-display text-3xl text-white mb-3">{heading}</h2>
-      <p class="text-white/70 max-w-xl mx-auto">
-        Two ways to start the conversation. Pick a time below.
+      <p class="text-white/70 max-w-2xl mx-auto">
+        The developer's sales gallery works for the developer. Ryan works for you &mdash;
+        release calendars, floor-premium math, contract terms, and the honest comparison
+        across every building on this page. Developer pays the commission; representation costs you nothing.
       </p>
     </div>
 
@@ -30,27 +33,22 @@ const heading = projectName ? `Tour ${projectName} with Ryan` : 'Talk to Ryan';
         <p class="font-accent text-xs uppercase tracking-[0.2em] text-[var(--color-gold)] mb-2">30 minutes</p>
         <h3 class="font-display text-xl text-white mb-3">Discovery Call</h3>
         <p class="text-sm text-white/70 mb-5">
-          Talk through what you're looking for, what's currently available, and what's coming.
+          Talk through what you're looking for, what's currently available, and what's coming next.
         </p>
-        <a href="FILL_IN: Calendly/Cal.com URL for 30-min call" class="block font-accent text-xs uppercase tracking-[0.15em] font-semibold bg-[var(--color-gold)] text-black px-4 py-3 rounded hover:bg-[var(--color-gold-light)]">
-          Book a Discovery Call
+        <a href="tel:+19417139234" class="block font-accent text-xs uppercase tracking-[0.15em] font-semibold bg-[var(--color-gold)] text-black px-4 py-3 rounded hover:bg-[var(--color-gold-light)]">
+          Call (941) 713-9234
         </a>
       </div>
       <div class="bg-black/40 border border-white/20 rounded-lg p-6 text-center">
-        <p class="font-accent text-xs uppercase tracking-[0.2em] text-[var(--color-gold)] mb-2">60 minutes</p>
+        <p class="font-accent text-xs uppercase tracking-[0.2em] text-[var(--color-gold)] mb-2">In person or virtual</p>
         <h3 class="font-display text-xl text-white mb-3">Private Tour</h3>
         <p class="text-sm text-white/70 mb-5">
-          Walk a building, a residence, or a site &mdash; in person or virtual.
+          Walk a building, a residence, or a site &mdash; on your schedule, with independent eyes.
         </p>
-        <a href="FILL_IN: Calendly/Cal.com URL for 60-min tour" class="block font-accent text-xs uppercase tracking-[0.15em] font-semibold bg-[var(--color-gold)] text-black px-4 py-3 rounded hover:bg-[var(--color-gold-light)]">
+        <a href={`/contact?subject=${tourSubject}`} class="block font-accent text-xs uppercase tracking-[0.15em] font-semibold bg-[var(--color-gold)] text-black px-4 py-3 rounded hover:bg-[var(--color-gold-light)]">
           Book a Private Tour
         </a>
       </div>
     </div>
-
-    <p class="text-center mt-8 text-xs text-white/50 font-accent uppercase tracking-wider">
-      <!-- Stub note -->
-      Embed Calendly / Cal.com / TidyCal here. Pass {projectName ? `?utm_project=${projectName.toLowerCase().replace(/\s+/g, '-')}` : '?utm_source=new-construction-hub'} to track lead source.
-    </p>
   </div>
 </section>
