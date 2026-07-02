@@ -1,35 +1,29 @@
 ---
 /**
- * IdxListingGrid — STUB live listings grid.
+ * IdxListingGrid — IDX Broker placeholder slot.
  *
- * Today: renders 4 hardcoded mock listings. Each card mirrors the field
- * shape (price, beds/baths, sqft, address, days on market, status badge,
- * thumbnail) the real IDX feed will produce.
- *
- * To wire to the real Stellar MLS feed (when ready):
- *  1. The site already has /idx-wrapper/ (Astro page) and a Netlify proxy
- *     /idx/* → adamsonfl.idxbroker.com.
- *  2. Replace the `mock` array below with a fetch (or props passed from
- *     the page) that filters by `subdivisions` and/or `island`.
- *  3. Or render the IDX Broker dynamic widget inside the slot if you want
- *     IDX Broker's own rendering.
- *
- * If a project / island has zero listings, this grid renders the
- * pre-construction CTA card instead (per spec §9 fallback).
+ * Renders a clean, branded panel reserved for the live Stellar MLS feed.
+ * TO WIRE (Ryan): drop the IDX Broker widget/saved-link embed inside the
+ * <div data-idx-slot> below — one slot per page/section, each carries its
+ * filter intent in data attributes so the right saved search plugs in.
+ * The site already has /idx-wrapper/ and the Netlify proxy /idx/* →
+ * adamsonfl.idxbroker.com.
  */
 interface Props {
-  /** MLS subdivision values (or BuildingName) used to filter. */
+  /** MLS subdivision values (or BuildingName) intended for this feed. */
   subdivisions?: string[];
-  /** Island slug for filtering (lido-key | longboat-key | siesta-key). */
+  /** Island slug (lido-key | longboat-key | siesta-key). */
   island?: string | null;
-  /** ZIP codes — additional filter for island feeds. */
+  /** ZIP codes intended for this feed. */
   zipCodes?: string[];
-  /** Subdivision keyword filters (loose contains) — used by island feeds. */
+  /** Subdivision keyword filters. */
   subdivisionKeywords?: string[];
-  /** Max listings to render. */
+  /** Max listings the wired feed should render. */
   limit?: number;
   /** Heading shown above the grid. Pass empty string to hide. */
   heading?: string;
+  /** Unique slot id so each IDX embed can be targeted. */
+  slotId?: string;
 }
 
 const {
@@ -39,117 +33,45 @@ const {
   subdivisionKeywords = [],
   limit = 6,
   heading = 'Currently Available',
+  slotId = 'idx-default',
 } = Astro.props;
 
-// Mock data — REPLACE WITH REAL IDX FETCH
-const mock = [
-  {
-    mlsId: 'A4123456',
-    address: '1900 Ringling Blvd #2104',
-    city: 'Sarasota',
-    price: '$3,450,000',
-    beds: 3,
-    baths: 3.5,
-    sqft: 2840,
-    dom: 12,
-    status: 'New Listing',
-    photo: '/images/new-construction/placeholder-listing.jpg',
-  },
-  {
-    mlsId: 'A4123457',
-    address: '500 S Palm Ave PH02',
-    city: 'Sarasota',
-    price: '$5,200,000',
-    beds: 4,
-    baths: 4.5,
-    sqft: 4120,
-    dom: 38,
-    status: 'Active',
-    photo: '/images/new-construction/placeholder-listing.jpg',
-  },
-  {
-    mlsId: 'A4123458',
-    address: '1300 Benjamin Franklin Dr #804',
-    city: 'Sarasota',
-    price: '$4,800,000',
-    beds: 3,
-    baths: 3.5,
-    sqft: 3160,
-    dom: 22,
-    status: 'Active',
-    photo: '/images/new-construction/placeholder-listing.jpg',
-  },
-  {
-    mlsId: 'A4123459',
-    address: '101 S Gulfstream Ave #16E',
-    city: 'Sarasota',
-    price: '$2,950,000',
-    beds: 3,
-    baths: 3,
-    sqft: 2540,
-    dom: 7,
-    status: 'New Listing',
-    photo: '/images/new-construction/placeholder-listing.jpg',
-  },
-];
-
-const listings = mock.slice(0, limit);
-const hasListings = listings.length > 0;
+const filterSummary = [
+  island ? `Island: ${island}` : null,
+  subdivisions.length ? `Subdivisions: ${subdivisions.join(', ')}` : null,
+  zipCodes.length ? `ZIPs: ${zipCodes.join(', ')}` : null,
+  subdivisionKeywords.length ? `Keywords: ${subdivisionKeywords.join(', ')}` : null,
+].filter(Boolean).join(' · ');
 ---
 
 {heading && <h3 class="font-display text-xl text-white mb-6">{heading}</h3>}
 
-{hasListings ? (
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {listings.map((l) => (
-      <article class="bg-black border border-white/10 rounded-lg overflow-hidden group">
-        <div
-          class="aspect-[4/3] bg-cover bg-center bg-[var(--color-charcoal)] relative"
-          style={`background-image: url('${l.photo}');`}
-        >
-          <div class="absolute top-3 left-3">
-            <span class="font-accent text-[10px] uppercase tracking-wider font-semibold bg-[var(--color-gold)] text-black px-2 py-1 rounded">
-              {l.status}
-            </span>
-          </div>
-        </div>
-        <div class="p-5">
-          <p class="font-display text-xl font-bold text-white mb-1">{l.price}</p>
-          <p class="text-sm text-white/70 mb-3">{l.address}, {l.city}</p>
-          <div class="flex items-center gap-4 text-xs text-white/50 font-accent uppercase tracking-wider mb-4">
-            <span>{l.beds} BD</span>
-            <span>&middot;</span>
-            <span>{l.baths} BA</span>
-            <span>&middot;</span>
-            <span>{l.sqft.toLocaleString()} sqft</span>
-          </div>
-          <div class="flex items-center justify-between text-xs">
-            <span class="text-white/40">MLS #{l.mlsId} &middot; {l.dom}d on market</span>
-            <a href={`/idx-wrapper/?mlsId=${l.mlsId}`} class="text-[var(--color-cbgl-blue-light)] hover:text-[var(--color-gold)] font-semibold">
-              View &rarr;
-            </a>
-          </div>
-        </div>
-      </article>
-    ))}
-  </div>
-) : (
-  <div class="bg-black border border-[var(--color-gold)]/30 rounded-lg p-8 text-center">
+<!-- IDX-WIDGET-SLOT id={slotId} limit={limit} {filterSummary} — paste IDX Broker embed inside the div below -->
+<div
+  data-idx-slot={slotId}
+  data-idx-island={island || undefined}
+  data-idx-subdivisions={subdivisions.join('|') || undefined}
+  data-idx-zips={zipCodes.join('|') || undefined}
+  data-idx-limit={limit}
+>
+  <div class="bg-black border border-[var(--color-gold)]/30 rounded-lg p-8 md:p-10 text-center">
     <p class="font-accent text-xs uppercase tracking-[0.2em] text-[var(--color-gold)] mb-3">
-      Pre-construction availability
+      Live MLS availability
     </p>
-    <p class="text-white/70 mb-6">
-      No active resale listings here right now. Pre-construction inventory and developer reservations are available &mdash; contact Ryan for the current release schedule.
+    <p class="text-white/70 mb-2 max-w-xl mx-auto">
+      Current listings for this search are curated directly from the Stellar MLS.
+      Pre-construction inventory and developer releases often never reach the public feed.
     </p>
-    <a href="#schedule" class="inline-block font-accent text-xs uppercase tracking-[0.15em] font-semibold bg-[var(--color-gold)] text-black px-6 py-3 rounded hover:bg-[var(--color-gold-light)]">
-      Talk to Ryan
-    </a>
+    <p class="text-white/40 text-sm mb-6">
+      Ask Ryan for the real-time availability sheet &mdash; including unlisted developer inventory.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="#schedule" class="inline-block font-accent text-xs uppercase tracking-[0.15em] font-semibold bg-[var(--color-gold)] text-black px-6 py-3 rounded hover:bg-[var(--color-gold-light)] transition-colors">
+        Get Current Availability
+      </a>
+      <a href="#vip" class="inline-block font-accent text-xs uppercase tracking-[0.15em] font-semibold border border-white/25 text-white px-6 py-3 rounded hover:border-[var(--color-gold)] hover:text-[var(--color-gold)] transition-colors">
+        Join the VIP List
+      </a>
+    </div>
   </div>
-)}
-
-<p class="mt-6 text-xs text-white/30 font-accent uppercase tracking-wider">
-  {/* Tagged so a visual scan reveals where mock data is rendering */}
-  STUB DATA &mdash; placeholder listings. Wire to /idx-wrapper/ when ready.
-  {island && <> &middot; Island filter: {island}</>}
-  {subdivisions.length > 0 && <> &middot; Subdivisions: {subdivisions.join(', ')}</>}
-</p>
+</div>
