@@ -1,61 +1,61 @@
 {
   "_meta": {
-    "purpose": "Maps the three barrier islands to the MLS area / subdivision / postal code values used by IdxListingGrid to filter Stellar MLS listings to that island. Per spec §6b, these values drive the per-island IDX feeds inside the Barrier Islands pillar page.",
-    "note": "Once Ryan confirms the actual MLS Area Major / Area Minor values used by Stellar for each island, replace the FILL_IN_MLS_AREA arrays. Postal codes are seeded from the existing src/data/areas.json."
+    "purpose": "Per-island editorial + IDX filter values for the Barrier Islands pillar page.",
+    "last_reviewed": "2026-07-01"
   },
   "islands": [
     {
       "slug": "lido-key",
       "name": "Lido Key",
       "anchor": "lido-key",
-      "tagline": "FILL_IN: 1-sentence island positioning in Ryan's voice",
-      "editorial": "FILL_IN: 250-400 words on Lido Key as a buying decision specifically — proximity to St. Armands Circle, Gulf vs bay orientation, beachfront condo character, who's buying, what compares well, what to know about flood zones and rebuilding standards. Reads as a complete answer to 'Lido Key new construction' even when the project list is empty.",
+      "tagline": "The walkable island — Gulf-front living five minutes from downtown, anchored by St. Armands Circle.",
+      "editorial": "Lido Key is where Sarasota's barrier-island new-construction story is actually happening. The island's headline project — Rosewood Residences Lido Key, 65 private residences directly on the beach — is welcoming owners through 2026, and it represents the first stand-alone residential project in the Rosewood brand's history. Beyond Rosewood, Lido's new supply arrives as individual Gulf-front and Lido Shores spec homes rebuilt to current code, often replacing mid-century originals.\n\nThe buying logic for Lido is access: St. Armands Circle's restaurants and boutiques sit at the island's center, Lido Beach runs the Gulf side, and downtown Sarasota is five minutes over the Ringling Bridge. Older beachfront condo buildings along Benjamin Franklin Drive (L'Elegance, Lido Beach Club, Orchid Beach Club) supply the resale market at meaningfully lower price points than new product, which is exactly why Rosewood's from-$6.8M positioning found its audience. Flood zone and elevation standards matter here — newer buildings are engineered with habitable floors above base flood elevation, and post-2022 rebuild standards separate new product sharply from vintage stock.",
       "zip_codes": ["34236"],
-      "mls_area_majors": ["FILL_IN_MLS_AREA: e.g. 'Sarasota'"],
-      "mls_area_minors": ["FILL_IN_MLS_AREA: e.g. 'Lido Key'"],
+      "mls_area_majors": [],
+      "mls_area_minors": [],
       "subdivision_keywords": ["Lido", "Lido Beach", "Lido Shores"],
       "lat_center": 27.31,
       "lng_center": -82.575,
       "island_faqs": [
-        { "question": "FILL_IN: e.g. 'Is there new construction on Lido Key right now?'", "answer": "FILL_IN: 50-120 words. Date-stamp." },
-        { "question": "FILL_IN", "answer": "FILL_IN" },
-        { "question": "FILL_IN", "answer": "FILL_IN" }
+        { "question": "Is there new construction on Lido Key right now?", "answer": "Yes. As of July 2026, Rosewood Residences Lido Key — 65 beachfront residences at 1000 Benjamin Franklin Drive — is completing construction and welcoming owners, with remaining homes priced from roughly $6.8 million. It is the only major new luxury building on the island; other new supply arrives as individual Gulf-front and Lido Shores custom and spec homes." },
+        { "question": "What does beachfront cost on Lido Key vs. an older building?", "answer": "As of mid-2026, new beachfront product at Rosewood starts around $6.8 million, while resale condos in established Benjamin Franklin Drive buildings such as L'Elegance and Orchid Beach Club generally trade between $1M and $3M depending on size, floor and renovation. The premium buys current flood/wind engineering, full-building amenities and Rosewood-managed services." },
+        { "question": "How close is Lido Key to downtown Sarasota?", "answer": "About five minutes by car over the John Ringling Causeway — roughly two miles from St. Armands Circle to Main Street. That proximity is Lido's defining trait among the barrier islands: beach living with downtown dining, the marina and SRQ airport (20 minutes) genuinely close." }
       ]
     },
     {
       "slug": "longboat-key",
       "name": "Longboat Key",
       "anchor": "longboat-key",
-      "tagline": "FILL_IN: 1-sentence island positioning",
-      "editorial": "FILL_IN: 250-400 words. Longboat is the 10-mile barrier island stretching to Anna Maria — gulf-to-bay properties, the country club / resort core mid-island, the quieter north-end estates, the south-end proximity to St. Armands. Cover the building-height regulations that have constrained new construction here historically, and what is currently in pre-development. Reads as a complete answer even when the project list is empty.",
+      "tagline": "Ten miles of private, low-rise Gulf-to-bay living — golf, deep-water boating, and deliberate quiet.",
+      "editorial": "Longboat Key's new-construction market looks nothing like downtown's. The island is largely built out and deliberately low-rise, so new supply arrives as individual Gulf-front and bayfront estates and small-parcel redevelopment rather than condo towers. The 2024 opening of The St. Regis Longboat Key Resort — 18 beachfront acres at the island's north-mid section — reset the island's luxury benchmark and brought branded-residence product to a market that historically offered none.\n\nThe island's rhythm is what buyers pay for: 45 holes of championship golf at the Longboat Key Club, the 291-slip deep-water Moorings marina, miles of uncrowded beach, and almost no commercial strip. Drive times are the tradeoff — 20 to 30 minutes to downtown Sarasota depending on where you are on the island's ten miles. For buyers who want new construction specifically, the realistic paths are a newly built single-family home (several deliver each year along Gulf of Mexico Drive and in the Village), a to-be-built custom on a teardown parcel, or watching the small pipeline of proposed boutique projects that surface as older parcels assemble.",
       "zip_codes": ["34228"],
-      "mls_area_majors": ["FILL_IN_MLS_AREA"],
-      "mls_area_minors": ["FILL_IN_MLS_AREA: e.g. 'Longboat Key'"],
+      "mls_area_majors": [],
+      "mls_area_minors": [],
       "subdivision_keywords": ["Longboat", "Bay Isles", "Harbourside", "Sleepy Lagoon"],
       "lat_center": 27.385,
       "lng_center": -82.643,
       "island_faqs": [
-        { "question": "FILL_IN", "answer": "FILL_IN" },
-        { "question": "FILL_IN", "answer": "FILL_IN" },
-        { "question": "FILL_IN", "answer": "FILL_IN" }
+        { "question": "Is there any new condo construction on Longboat Key?", "answer": "Very little, by design. Longboat Key's zoning and density rules keep the island low-rise and predominantly residential, so as of mid-2026 new supply is mostly individual Gulf-front and bayfront spec homes and custom builds rather than towers. The St. Regis Longboat Key (opened 2024) brought branded residences to the island, and occasional boutique proposals surface as older parcels assemble — but nothing at downtown Sarasota's scale is in the pipeline." },
+        { "question": "What is the Longboat Key Club?", "answer": "The Resort at Longboat Key Club anchors island life with 45 holes of championship golf across the Gulf-side Islandside course and bayfront Harbourside layouts, plus the Longboat Key Club Moorings — a 291-slip deep-water marina berthing vessels up to 150 feet. Membership and resort amenities are a major driver of the island's buyer demand." },
+        { "question": "How long is the drive from Longboat Key to downtown Sarasota?", "answer": "Roughly 20 to 30 minutes depending on where you are on the ten-mile island and season. The south end (closest to St. Armands Circle) is quickest; the north end near Anna Maria adds ten-plus minutes. Buyers trading drive time for privacy and space is the island's defining bargain." }
       ]
     },
     {
       "slug": "siesta-key",
       "name": "Siesta Key",
       "anchor": "siesta-key",
-      "tagline": "FILL_IN: 1-sentence positioning",
-      "editorial": "FILL_IN: 250-400 words on Siesta as a luxury new-construction destination — quartz-sand beaches, Siesta Village vs Crescent Beach vs Turtle Beach, the rental-economics pull (vacation rental allowances differ from Lido and Longboat), and the resale-vs-new dynamic. Reads as a complete answer even when the project list is empty.",
+      "tagline": "America's #1 beach and its quartz sand — a resale and custom-build market with village energy.",
+      "editorial": "Siesta Key is the strongest consumer brand of Sarasota's islands — the 99% quartz-crystal sand beach has ranked #1 in America multiple times — but it is not a new-construction condo market. Density rules and the island's built-out state mean no luxury towers are rising here; the new-build story is single-family: Gulf-side and canal-front custom homes and elevated spec builds replacing older cottages, particularly north of Siesta Village and along the Grand Canal system.\n\nFor a luxury buyer, Siesta's calculus differs from Lido and Longboat in two ways. First, rental economics: parts of Siesta Key permit weekly rentals, making it the strongest short-term-rental island in the market — relevant whether you want income or want to avoid rental turnover next door (check zoning street by street). Second, the village: Siesta Key Village gives the island a walkable dining-and-nightlife core the other islands don't attempt. Canal-front homes with sailboat-depth water and quick Gulf access through Big Pass remain the island's quiet blue-chip asset.",
       "zip_codes": ["34242"],
-      "mls_area_majors": ["FILL_IN_MLS_AREA"],
-      "mls_area_minors": ["FILL_IN_MLS_AREA: e.g. 'Siesta Key'"],
-      "subdivision_keywords": ["Siesta", "Crescent Beach", "Turtle Beach", "Sanderling"],
-      "lat_center": 27.265,
+      "mls_area_majors": [],
+      "mls_area_minors": [],
+      "subdivision_keywords": ["Siesta", "Siesta Key", "Sanderling"],
+      "lat_center": 27.267,
       "lng_center": -82.55,
       "island_faqs": [
-        { "question": "FILL_IN", "answer": "FILL_IN" },
-        { "question": "FILL_IN", "answer": "FILL_IN" },
-        { "question": "FILL_IN", "answer": "FILL_IN" }
+        { "question": "Is there new condo construction on Siesta Key?", "answer": "No major luxury condo projects are underway on Siesta Key as of mid-2026 — the island is built out and density rules preclude tower development. New construction here means single-family: elevated custom and spec homes replacing older cottages on Gulf-side streets and the canal system. Buyers wanting new luxury condos look to downtown Sarasota or Lido Key." },
+        { "question": "Why is Siesta Key beach so famous?", "answer": "The sand is 99% pure quartz crystal — cool underfoot even in summer — and the beach has been ranked #1 in America multiple times by Dr. Beach and TripAdvisor. The wide, flat shoreline and calm Gulf water make it the region's signature beach and a durable driver of property demand." },
+        { "question": "Can you rent out a home on Siesta Key short-term?", "answer": "In many parts of Siesta Key, yes — portions of the island permit weekly rentals, making it the strongest vacation-rental market among Sarasota's islands. Rules vary by zoning district and community, and condo associations impose their own minimums, so verify the specific street and association before buying with rental income in mind." }
       ]
     }
   ]
