@@ -1,14 +1,10 @@
 ---
 /**
- * /new-construction/barrier-islands — BARRIER ISLANDS PILLAR (PROTOTYPE)
- *
- * Multi-area template per spec §6b. Anchored sub-sections #lido-key,
- * #longboat-key, #siesta-key. Each island sub-section is fully named
- * and editorial-complete in Phase 1 EVEN WHEN the project list is empty,
- * so the island as an entity exists for SEO/AEO.
+ * /new-construction/barrier-islands — BARRIER ISLANDS PILLAR (LIVE)
+ * Anchored sub-sections #lido-key, #longboat-key, #siesta-key. Each island
+ * sub-section reads as a complete answer even when its project list is empty.
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import DraftBanner from '@/components/newconstruction/DraftBanner.astro';
 import BreadcrumbNav from '@/components/newconstruction/BreadcrumbNav.astro';
 import Hero from '@/components/newconstruction/Hero.astro';
 import ProjectMap from '@/components/newconstruction/ProjectMap.astro';
@@ -21,22 +17,37 @@ import StickyMobileCta from '@/components/newconstruction/StickyMobileCta.astro'
 import DisclosureFooter from '@/components/newconstruction/DisclosureFooter.astro';
 import projectsData from '@/data/newconstruction/projects.json';
 import islandsData from '@/data/newconstruction/islands.json';
+import lbkStats from '@/data/longboat-key-stats.json';
+import salStats from '@/data/st-armands-lido-stats.json';
+import skStats from '@/data/siesta-key-stats.json';
 
 const projects = projectsData.projects.filter((p) => p.area === 'barrier-islands');
 const pins = projects.map((p) => ({
-  slug: p.slug, name: p.name, area: p.area, island: p.island, status: p.status, lat: p.lat, lng: p.lng,
+  slug: p.slug, name: p.name, area: p.area, island: p.island, status: p.status, price_range: p.price_range, lat: p.lat, lng: p.lng,
 }));
 
-const description =
-  "Luxury new-construction projects on Sarasota's barrier islands — Lido Key, Longboat Key, and Siesta Key. Current availability, per-island pre-construction pipeline, and live MLS resale.";
-
-const pillarFaqs = [
-  /* FILL_IN: 4-6 cross-island FAQ pairs. Per-island FAQ live inside each IslandSubSection. */
-  { question: 'FILL_IN: e.g. "What new luxury construction is happening on the Sarasota barrier islands right now?"', answer: 'FILL_IN: 50-120 words covering Rosewood + named projects in pre-development.' },
-  { question: 'FILL_IN: e.g. "How do Lido, Longboat, and Siesta differ for a luxury new-construction buyer?"', answer: 'FILL_IN' },
+const statsAsOf = lbkStats?.lastUpdated ? new Date(lbkStats.lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : undefined;
+const kpis = [
+  { label: 'Longboat Key — Active Median', value: lbkStats?.active?.medianPrice ?? '—' },
+  { label: 'St. Armands & Lido — Active Median', value: salStats?.active?.medianPrice ?? '—' },
+  { label: 'Siesta Key — Active Median', value: skStats?.active?.medianPrice ?? '—' },
 ];
 
-// Per spec §13: Place schemas for each named island, even if project list is empty.
+const description =
+  "Luxury new construction on Sarasota's barrier islands — Rosewood Residences Lido Key plus the per-island pipeline on Longboat Key and Siesta Key, with live MLS market data.";
+
+const editorial = `On the barrier islands, scarcity is the defining feature of new construction — and the reason it commands the market's top pricing. As of July 2026, exactly one major luxury building is delivering on the islands: Rosewood Residences Lido Key, 65 beachfront residences and the first stand-alone residential project in the Rosewood brand's history, welcoming owners through 2026 from roughly $6.8 million.
+
+The islands differ sharply once you look past the sand. Lido Key is the access play — St. Armands Circle at its center, downtown five minutes over the bridge, and the island's only new tower on its beach. Longboat Key runs ten miles of deliberately low-rise, residential quiet: 45 holes of club golf, a 291-slip deep-water marina, and new supply arriving as individual Gulf-front estates rather than condo buildings. Siesta Key — home of America's #1-ranked quartz-sand beach — is a resale and custom-build market where density rules preclude towers entirely, and where short-term-rental zoning makes parts of the island the region's strongest vacation-rental play.
+
+Two practical notes for island buyers. Post-2022 construction standards (elevated habitable floors, current wind engineering, impact glazing) meaningfully separate new island product from the mid-century buildings that dominate resale inventory — inspect flood zone, finished-floor elevation, and the association's insurance posture on anything older. And because so little new product exists, off-market and pre-list opportunities matter more here than anywhere else in the Sarasota market; the best island buys are often never publicly listed.`;
+
+const pillarFaqs = [
+  { question: 'What new luxury construction is happening on the Sarasota barrier islands right now?', answer: 'As of July 2026, Rosewood Residences Lido Key — 65 private beachfront residences, the first stand-alone residential project in Rosewood Hotels & Resorts’ history — is completing and welcoming owners, priced from roughly $6.8 million. Longboat Key’s new supply arrives as individual Gulf-front and bayfront custom and spec homes rather than towers, and Siesta Key is a custom-build market. For bayfront new construction, Golden Gate Point (Amara, SIX88) sits five minutes from the islands.' },
+  { question: 'How do Lido, Longboat, and Siesta differ for a luxury new-construction buyer?', answer: 'Lido Key: the walkable island — St. Armands Circle, five minutes to downtown, and the only new luxury tower (Rosewood). Longboat Key: ten miles of low-rise privacy — club golf, deep-water boating, new supply limited to individual estates. Siesta Key: America’s #1 beach and the strongest short-term-rental zoning, with new construction meaning elevated custom single-family builds. Buyers effectively choose between access (Lido), privacy (Longboat), and beach-plus-rental economics (Siesta).' },
+  { question: 'Why is there so little new construction on the barrier islands?', answer: 'Deliberate policy and geography. The islands are essentially built out; town and county density rules — especially on Longboat Key and Siesta Key — cap heights and preclude tower development, so new projects require rare parcel assemblies like Rosewood’s Lido Beach site. That constraint is also the investment logic: new island product cannot be meaningfully replicated, which historically supports values through market cycles.' },
+];
+
 const jsonLd: Record<string, any>[] = [
   {
     '@type': 'CollectionPage',
@@ -49,14 +60,12 @@ const jsonLd: Record<string, any>[] = [
     name: isl.name,
     address: { '@type': 'PostalAddress', addressLocality: isl.name, addressRegion: 'FL', postalCode: isl.zip_codes?.[0] || '', addressCountry: 'US' },
   })),
-  ...islandsData.islands.map((isl) => ({
-    '@type': 'CollectionPage',
-    name: `${isl.name} New Construction`,
-    url: `https://adamsonfl.com/new-construction/barrier-islands#${isl.anchor}`,
-  })),
   {
     '@type': 'FAQPage',
-    mainEntity: pillarFaqs.map((f) => ({
+    mainEntity: [
+      ...pillarFaqs,
+      ...islandsData.islands.flatMap((isl) => isl.island_faqs || []),
+    ].map((f) => ({
       '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer },
     })),
   },
@@ -76,15 +85,13 @@ const jsonLd: Record<string, any>[] = [
   description={description}
   canonicalUrl="https://adamsonfl.com/new-construction/barrier-islands"
   jsonLd={jsonLd}
-  noIndex={true}
 >
-  <DraftBanner />
-
   <Hero
-    eyebrow="Area Pillar"
+    eyebrow="Barrier Islands"
     headline="Barrier Islands Luxury New Construction — Lido Key, Longboat Key, Siesta Key"
-    subhead="FILL_IN: 1-sentence subhead positioning the three islands as a single barrier-island market for luxury new-construction buyers."
+    subhead="One beachfront building delivering, three very different islands — where scarcity is the entire story, and the best opportunities are often never listed."
     image="/images/new-construction/barrier-islands-hero.jpg"
+    imageCredit="Courtesy of The Ronto Group / Rosewood Residences Lido Key"
   />
 
   <BreadcrumbNav leafLabel="Barrier Islands" />
@@ -93,38 +100,33 @@ const jsonLd: Record<string, any>[] = [
   <section class="section light-section">
     <div class="container-narrow">
       <h2 class="accent-underline mb-6">About Barrier Islands New Construction</h2>
-      <p class="text-[var(--color-text-muted)] leading-relaxed text-lg whitespace-pre-line">
-        FILL_IN: 400-600 word editorial. Cover the barrier-island lifestyle as a buying decision vs. downtown — beach access vs walkability, height/setback regulations on each island, drive times to mainland and SRQ, post-Ian rebuild standards, vacation-rental economics differences (Siesta vs Lido vs Longboat), and what each island's new-construction pipeline looks like in this cycle. Lead with the answer.
-      </p>
+      <p class="text-[var(--color-text-muted)] leading-relaxed text-lg whitespace-pre-line">{editorial}</p>
     </div>
   </section>
 
-  <!-- Combined map (3 islands color-coded) -->
-  <ProjectMap pins={pins} />
+  <!-- Combined map -->
+  <ProjectMap pins={pins} center={[27.31, -82.575]} zoom={12} />
 
-  <!-- All projects across the islands (sortable card grid) -->
+  <!-- All projects across the islands -->
   <section class="section dark-section">
     <div class="container">
       <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">All projects</p>
       <h2 class="accent-underline mb-10">All Barrier Islands Projects</h2>
-      {projects.length === 0 ? (
-        <p class="text-orange-400/70 italic">FILL_IN: only Rosewood Residences Lido Key is in projects.json today (build_depth=full). When Longboat or Siesta projects launch, add them and they'll appear here automatically.</p>
-      ) : (
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {projects.map((p) => (
-            <ProjectCard
-              slug={p.slug}
-              name={p.name}
-              tagline={p.tagline}
-              status={p.status}
-              priceRange={p.price_range}
-              area={p.area}
-              island={p.island}
-              cardImage={p.card_image}
-            />
-          ))}
-        </div>
-      )}
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {projects.map((p) => (
+          <ProjectCard
+            slug={p.slug}
+            name={p.name}
+            tagline={p.tagline}
+            status={p.status}
+            priceRange={p.price_range}
+            area={p.area}
+            island={p.island}
+            cardImage={p.card_image}
+            imageCredit={p.image_credit}
+          />
+        ))}
+      </div>
     </div>
   </section>
 
@@ -146,8 +148,8 @@ const jsonLd: Record<string, any>[] = [
     );
   })}
 
-  <!-- Combined market data with island toggles -->
-  <MarketDataKpis scope="Barrier Islands (combined)" />
+  <!-- Combined market data (live pipeline stats) -->
+  <MarketDataKpis scope="Barrier Islands — Active Median List Prices" kpis={kpis} asOf={statsAsOf} source="Stellar MLS via Adamson Group data pipeline" />
 
   <!-- Cross-island FAQ -->
   <FAQSchema faqs={pillarFaqs} heading="Barrier Islands New Construction FAQ" />
@@ -156,5 +158,5 @@ const jsonLd: Record<string, any>[] = [
   <SchedulerEmbed />
 
   <StickyMobileCta />
-  <DisclosureFooter showListingAttribution={true} showFactAttribution={true} />
+  <DisclosureFooter showListingAttribution={true} showFactAttribution={true} lastVerified="2026-07-01" />
 </BaseLayout>
