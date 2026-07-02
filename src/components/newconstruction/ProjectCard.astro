@@ -13,6 +13,7 @@ interface Props {
   island?: string | null;
   cardImage?: string;
   variant?: 'compact' | 'full';
+  imageCredit?: string;
 }
 
 const {
@@ -25,6 +26,7 @@ const {
   island,
   cardImage = '/images/new-construction/placeholder-card.jpg',
   variant = 'full',
+  imageCredit,
 } = Astro.props;
 
 const areaLabel = area === 'downtown-sarasota'
@@ -50,6 +52,12 @@ const areaLabel = area === 'downtown-sarasota'
         {status}
       </span>
     </div>
+  )}
+
+  {imageCredit && (
+    <p class="absolute top-4 right-4 font-accent text-[9px] uppercase tracking-[0.12em] text-white/40 text-right max-w-[55%]">
+      {imageCredit}
+    </p>
   )}
 
   <div class="absolute bottom-0 left-0 right-0 p-6">
