@@ -1,0 +1,436 @@
+---
+/**
+ * /buyers-guide — Interactive Sarasota Buyer's Guide.
+ *
+ * A 60-second lifestyle quiz that scores all 9 coverage areas against the
+ * buyer's priorities, budget and pace — using the daily-refreshed MLS stats
+ * (src/data/*-stats.json, regenerated from Supabase/Stellar MLS every morning)
+ * for price bands, medians and market climate. Tiles link to /areas/<slug>.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import areasData from '@/data/areas.json';
+
+// ---- Live pipeline stats -------------------------------------------------
+const statsModules = import.meta.glob('../data/*-stats.json', { eager: true }) as Record<string, any>;
+const statsBySlug: Record<string, any> = {};
+for (const [path, mod] of Object.entries(statsModules)) {
+  const m = path.match(/\/([\w-]+)-stats\.json$/);
+  if (m) statsBySlug[m[1]] = (mod as any).default ?? mod;
+}
+
+// ---- Lifestyle trait matrix (0–3, hand-scored) ----------------------------
+// beach, boating, golf, urban (walkable culture/dining), village (walkable shops),
+// privacy, family (schools), nature, condo, sfh, quiet, social, cityBuzz
+const TRAITS: Record<string, Record<string, number>> = {
+  'longboat-key':        { beach: 3, boating: 3, golf: 3, urban: 0, village: 1, privacy: 3, family: 0, nature: 2, condo: 3, sfh: 2, quiet: 3, social: 1, cityBuzz: 0 },
+  'st-armands-lido':     { beach: 3, boating: 2, golf: 0, urban: 2, village: 3, privacy: 1, family: 0, nature: 1, condo: 3, sfh: 2, quiet: 1, social: 3, cityBuzz: 1 },
+  'siesta-key':          { beach: 3, boating: 2, golf: 0, urban: 1, village: 3, privacy: 1, family: 1, nature: 2, condo: 3, sfh: 3, quiet: 1, social: 3, cityBuzz: 0 },
+  'downtown-sarasota':   { beach: 0, boating: 2, golf: 0, urban: 3, village: 3, privacy: 0, family: 0, nature: 1, condo: 3, sfh: 0, quiet: 0, social: 2, cityBuzz: 3 },
+  'west-of-trail-core':  { beach: 1, boating: 2, golf: 0, urban: 2, village: 2, privacy: 2, family: 3, nature: 1, condo: 1, sfh: 3, quiet: 2, social: 2, cityBuzz: 2 },
+  'west-of-trail-north': { beach: 1, boating: 1, golf: 0, urban: 1, village: 1, privacy: 2, family: 2, nature: 2, condo: 1, sfh: 3, quiet: 3, social: 1, cityBuzz: 1 },
+  'west-of-trail-south': { beach: 1, boating: 3, golf: 0, urban: 0, village: 1, privacy: 2, family: 2, nature: 2, condo: 1, sfh: 3, quiet: 3, social: 1, cityBuzz: 0 },
+  'bird-key':            { beach: 1, boating: 3, golf: 0, urban: 1, village: 1, privacy: 3, family: 1, nature: 1, condo: 0, sfh: 3, quiet: 3, social: 1, cityBuzz: 1 },
+  'palmer-ranch':        { beach: 1, boating: 0, golf: 3, urban: 0, village: 1, privacy: 3, family: 3, nature: 3, condo: 2, sfh: 3, quiet: 2, social: 2, cityBuzz: 0 },
+};
+
+// ---- Build the client payload from areas.json + live stats ----------------
+const pctNum = (s: any) => { const n = parseFloat(String(s || '').replace(/[^0-9.]/g, '')); return isNaN(n) ? null : n; };
+
+const AREAS = areasData.areas.map((a) => {
+  const s = statsBySlug[a.slug] || {};
+  const bands = s.priceBands || {};
+  const supply = s.marketBalance?.monthsOfSupply ?? s.monthsOfSupply?.blended ?? null;
+  const ratio = pctNum(s.sold?.saleToListRatio);
+  let climate = null;
+  if (supply != null || ratio != null) {
+    if ((supply != null && supply >= 7) || (ratio != null && ratio < 93)) climate = 'Buyer-leaning';
+    else if ((supply != null && supply >= 4.5) || (ratio != null && ratio < 97)) climate = 'Balanced';
+    else climate = 'Seller-leaning';
+  }
+  return {
+    slug: a.slug,
+    name: a.name,
+    tagline: a.tagline,
+    medianPrice: s.active?.medianPrice || a.marketStats?.medianPrice || null,
+    dom: s.sold?.medianDom ?? null,
+    activeCount: s.active?.count ?? null,
+    waterfrontCount: s.active?.waterfrontCount ?? null,
+    bands: {
+      under900k: bands.under900k ?? null,
+      band900kTo1_5m: bands.band900kTo1_5m ?? null,
+      band1_5mTo3m: bands.band1_5mTo3m ?? null,
+      band3mPlus: bands.band3mPlus ?? null,
+    },
+    climate,
+    asOf: s.lastUpdated ? String(s.lastUpdated).slice(0, 10) : null,
+    traits: TRAITS[a.slug] || {},
+  };
+});
+
+const dataAsOf = AREAS.map((a) => a.asOf).filter(Boolean).sort().pop() || null;
+const dataAsOfPretty = dataAsOf ? new Date(dataAsOf + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : null;
+
+const description =
+  "Answer five questions about how you want to live — beachfront, boating, golf, walkability — and get matched to the Sarasota neighborhoods that fit, scored against live Stellar MLS market data updated daily.";
+
+const guideFaqs = [
+  { question: 'How does the Sarasota Buyer’s Guide match me to a neighborhood?', answer: 'The guide scores all nine Sarasota coverage areas — from Longboat Key to Palmer Ranch — against your lifestyle priorities (beach, boating, golf, walkability, privacy, schools), preferred home style, pace, and budget. Budget fit is checked against live Stellar MLS inventory by price band, refreshed daily through the Adamson Group data pipeline, so a match always reflects what is actually for sale right now.' },
+  { question: 'Which Sarasota neighborhood is best for beachfront living?', answer: 'Longboat Key, St. Armands & Lido, and Siesta Key are the three true beachfront markets. Longboat Key offers the most private Gulf-front estates and low-rise condos; Lido pairs beachfront buildings with St. Armands Circle walkability; Siesta Key adds America’s #1-ranked quartz-sand beach and the strongest vacation-rental zoning. Mainland areas like West of Trail trade direct beachfront for proximity — typically 10–15 minutes to the sand.' },
+  { question: 'Where should boaters buy in Sarasota?', answer: 'Bird Key is the flagship — deep-water docks behind most homes and the Bird Key Yacht Club. West of Trail South offers deep-water canal homes near the Siesta bridges, Longboat Key has the 291-slip Moorings marina, and Siesta Key’s Grand Canal system suits smaller craft. Downtown, Golden Gate Point’s new buildings (SIX88, Amara) offer private slips on Sarasota Bay.' },
+  { question: 'What is the most affordable of Sarasota’s luxury areas?', answer: 'Palmer Ranch carries the most attainable entry point among the nine areas — a master-planned community of 30+ gated villages with golf, the Legacy Trail, and the Pine View School zone, where most active listings sit below $900,000. Among coastal areas, select condos on Siesta Key and Longboat Key’s bay side offer the lowest-priced water-adjacent entry.' },
+];
+
+const jsonLd: Record<string, any>[] = [
+  {
+    '@type': 'WebPage',
+    name: 'Sarasota Buyer’s Guide — Find Your Neighborhood',
+    description,
+    url: 'https://adamsonfl.com/buyers-guide',
+  },
+  {
+    '@type': 'ItemList',
+    name: 'Sarasota Neighborhoods Matched by the Buyer’s Guide',
+    itemListElement: AREAS.map((a, i) => ({
+      '@type': 'ListItem', position: i + 1,
+      item: { '@type': 'Place', name: a.name, url: `https://adamsonfl.com/areas/${a.slug}` },
+    })),
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: guideFaqs.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://adamsonfl.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Buyer’s Guide', item: 'https://adamsonfl.com/buyers-guide' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Sarasota Buyer's Guide — Find Your Neighborhood"
+  description={description}
+  canonicalUrl="https://adamsonfl.com/buyers-guide"
+  jsonLd={jsonLd}
+>
+  <!-- Hero -->
+  <section class="relative pt-32 pb-16">
+    <div class="absolute inset-0" style="background-color: var(--color-black);" />
+    <div class="relative z-10 container text-center">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">The Buyer's Guide</p>
+      <h1 class="font-display text-white mb-4">Find Your Sarasota</h1>
+      <p class="text-lg text-white/70 max-w-2xl mx-auto mb-3">
+        Nine distinct markets, one coastline. Tell us how you want to live &mdash; the guide matches
+        you to the neighborhoods that fit, scored against what's actually for sale today.
+      </p>
+      <p class="font-accent text-[11px] uppercase tracking-[0.2em] text-[var(--color-gold)]">
+        Takes 60 seconds{dataAsOfPretty && ` · Live Stellar MLS data as of ${dataAsOfPretty}`}
+      </p>
+    </div>
+  </section>
+
+  <!-- Quiz -->
+  <section class="section dark-section" id="quiz">
+    <div class="container max-w-4xl">
+      <div class="bg-black border border-white/10 rounded-lg p-6 md:p-10 space-y-10">
+
+        <fieldset>
+          <legend class="font-display text-xl text-white mb-1">What does your ideal week include?</legend>
+          <p class="text-white/50 text-sm mb-5">Choose everything that matters.</p>
+          <div class="flex flex-wrap gap-3" id="q-lifestyle">
+            <button type="button" class="bg-chip" data-trait="beach">🏖 Beach &amp; Gulf front</button>
+            <button type="button" class="bg-chip" data-trait="boating">⚓ Boating &amp; deep water</button>
+            <button type="button" class="bg-chip" data-trait="golf">⛳ Golf</button>
+            <button type="button" class="bg-chip" data-trait="urban">🏙 Downtown walkability &amp; culture</button>
+            <button type="button" class="bg-chip" data-trait="village">🍷 Walkable shops &amp; dining</button>
+            <button type="button" class="bg-chip" data-trait="privacy">🔑 Privacy &amp; gated</button>
+            <button type="button" class="bg-chip" data-trait="family">🎓 Family &amp; top schools</button>
+            <button type="button" class="bg-chip" data-trait="nature">🚴 Trails &amp; nature</button>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend class="font-display text-xl text-white mb-5">What kind of home?</legend>
+          <div class="flex flex-wrap gap-3" id="q-home" data-single>
+            <button type="button" class="bg-chip" data-home="condo">Condo / residence in a building</button>
+            <button type="button" class="bg-chip" data-home="sfh">Single-family home</button>
+            <button type="button" class="bg-chip is-on" data-home="either">Open to either</button>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend class="font-display text-xl text-white mb-5">Your budget?</legend>
+          <div class="flex flex-wrap gap-3" id="q-budget" data-single>
+            <button type="button" class="bg-chip" data-budget="under900k">Under $900K</button>
+            <button type="button" class="bg-chip" data-budget="band900kTo1_5m">$900K &ndash; $1.5M</button>
+            <button type="button" class="bg-chip is-on" data-budget="band1_5mTo3m">$1.5M &ndash; $3M</button>
+            <button type="button" class="bg-chip" data-budget="band3mPlus">$3M+</button>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend class="font-display text-xl text-white mb-5">And the pace?</legend>
+          <div class="flex flex-wrap gap-3" id="q-pace" data-single>
+            <button type="button" class="bg-chip" data-pace="quiet">Quiet &amp; residential</button>
+            <button type="button" class="bg-chip" data-pace="social">Social &amp; lively</button>
+            <button type="button" class="bg-chip" data-pace="cityBuzz">Urban energy</button>
+            <button type="button" class="bg-chip is-on" data-pace="any">Surprise me</button>
+          </div>
+        </fieldset>
+
+        <div class="text-center pt-2">
+          <button type="button" id="bg-reveal" class="font-accent text-xs uppercase tracking-[0.2em] font-semibold bg-[var(--color-gold)] text-black px-10 py-4 rounded hover:bg-[var(--color-gold-light)] transition-colors">
+            Reveal My Matches
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="section dark-section-elevated" id="results">
+    <div class="container">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+        <div>
+          <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Your matches</p>
+          <h2 class="accent-underline mb-2" id="bg-results-heading">Sarasota's Nine Markets</h2>
+          <p class="text-white/60 max-w-2xl" id="bg-profile-line">
+            Answer above and your strongest matches rise to the top &mdash; each tile shows live inventory in your price range.
+          </p>
+        </div>
+        {dataAsOfPretty && (
+          <p class="font-accent text-[10px] uppercase tracking-[0.15em] text-white/40 whitespace-nowrap">
+            Stellar MLS · updated {dataAsOfPretty}
+          </p>
+        )}
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="bg-tiles">
+        {AREAS.map((a) => (
+          <a
+            href={`/areas/${a.slug}`}
+            class="bg-tile group block relative overflow-hidden rounded-lg border border-white/10 bg-black p-6 transition-all duration-300 hover:border-[var(--color-gold)]/60"
+            data-slug={a.slug}
+          >
+            <span class="bg-match-badge hidden absolute top-4 right-4 font-accent text-[10px] uppercase tracking-[0.15em] font-semibold bg-[var(--color-gold)] text-black px-2.5 py-1 rounded"></span>
+            <h3 class="font-display text-2xl font-bold text-white mb-1 group-hover:text-[var(--color-gold-light)] transition-colors">{a.name}</h3>
+            <p class="text-sm text-white/60 mb-4">{a.tagline}</p>
+            <div class="space-y-1.5 text-sm">
+              {a.medianPrice && (
+                <p class="text-white/80"><span class="text-white/40">Median list:</span> <span class="font-semibold text-[var(--color-gold)]">{a.medianPrice}</span></p>
+              )}
+              <p class="bg-band-line text-white/80 hidden"><span class="text-white/40">In your range:</span> <span class="bg-band-count font-semibold text-white"></span></p>
+              {a.climate && (
+                <p class="text-white/80"><span class="text-white/40">Market climate:</span> {a.climate}</p>
+              )}
+              {typeof a.waterfrontCount === 'number' && a.waterfrontCount > 0 && (
+                <p class="text-white/50 text-xs">{a.waterfrontCount} waterfront listings active</p>
+              )}
+            </div>
+            <p class="mt-5 font-accent text-[11px] uppercase tracking-[0.15em] font-semibold text-[var(--color-cbgl-blue-light)] group-hover:text-[var(--color-gold)]">
+              Explore {a.name} &rarr;
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Send matches to Ryan -->
+  <section class="section dark-section" id="concierge">
+    <div class="container">
+      <div class="max-w-2xl mx-auto bg-black border border-white/10 rounded-lg p-8 md:p-12">
+        <p class="section-label text-[var(--color-gold)] mb-3">Concierge next step</p>
+        <h2 class="font-display text-3xl text-white mb-3" style="line-height: 1.2;">Send your matches to Ryan</h2>
+        <p class="text-white/70 mb-8 leading-relaxed">
+          Ryan will reply personally with the current availability sheet for your matched neighborhoods
+          &mdash; including off-market and pre-list opportunities that never reach the public feed.
+        </p>
+        <form name="buyers-guide-match" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="space-y-5">
+          <input type="hidden" name="form-name" value="buyers-guide-match" />
+          <input type="hidden" name="matches" id="bg-form-matches" />
+          <input type="hidden" name="preferences" id="bg-form-prefs" />
+          <p class="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="bg-name" class="block text-xs font-accent uppercase tracking-wider text-white/60 mb-2">First Name</label>
+              <input id="bg-name" type="text" name="firstName" required class="w-full bg-[var(--color-dark)] border border-white/10 rounded px-4 py-3 text-white placeholder-white/30 focus:border-[var(--color-cbgl-blue-light)] focus:outline-none" />
+            </div>
+            <div>
+              <label for="bg-email" class="block text-xs font-accent uppercase tracking-wider text-white/60 mb-2">Email</label>
+              <input id="bg-email" type="email" name="email" required class="w-full bg-[var(--color-dark)] border border-white/10 rounded px-4 py-3 text-white placeholder-white/30 focus:border-[var(--color-cbgl-blue-light)] focus:outline-none" />
+            </div>
+          </div>
+          <label class="flex items-start gap-3 cursor-pointer text-white/60 text-sm">
+            <input type="checkbox" name="consent" required class="mt-1 accent-[var(--color-gold)]" />
+            <span>I agree to receive a personal reply from Adamson Group about my matched areas.</span>
+          </label>
+          <button type="submit" class="w-full font-accent text-xs uppercase tracking-[0.2em] font-semibold bg-[var(--color-gold)] text-black px-6 py-4 rounded hover:bg-[var(--color-gold-light)] transition-colors">
+            Send My Matches to Ryan
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Crawlable methodology + FAQ -->
+  <section class="section light-section">
+    <div class="container-narrow">
+      <h2 class="accent-underline mb-6">How the Guide Works</h2>
+      <p class="text-[var(--color-text-muted)] leading-relaxed text-lg mb-4">
+        Every morning, the Adamson Group data pipeline refreshes market statistics for all nine coverage
+        areas directly from the Stellar MLS &mdash; median prices, days on market, sale-to-list ratios,
+        months of supply, and active inventory by price band, each verified geographically with PostGIS
+        boundaries rather than postal codes. The Buyer's Guide layers your lifestyle priorities over that
+        live data: an area only ranks as a match if homes matching your budget actually exist there today.
+      </p>
+      <p class="text-[var(--color-text-muted)] leading-relaxed text-lg">
+        The nine markets: Longboat Key (gulf-to-bay island privacy and golf), St. Armands &amp; Lido
+        (beachfront living with Circle walkability), Siesta Key (America's #1 beach and village energy),
+        Downtown Sarasota (high-rise luxury and cultural walkability), Bird Key (deep-water docks on a
+        private island), West of Trail core, north and south (Sarasota's legacy mainland luxury corridors),
+        and Palmer Ranch (master-planned golf villages and the Pine View school zone).
+      </p>
+    </div>
+  </section>
+
+  <section class="section dark-section">
+    <div class="container-narrow">
+      <h2 class="accent-underline mb-10">Buyer's Guide FAQ</h2>
+      <div class="space-y-8">
+        {guideFaqs.map((f) => (
+          <div>
+            <h3 class="font-display text-lg text-white mb-2">{f.question}</h3>
+            <p class="text-white/70 leading-relaxed">{f.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  .bg-chip {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+    color: rgba(255,255,255,.8);
+    background: var(--color-dark);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 999px;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: all .15s ease;
+    user-select: none;
+  }
+  .bg-chip:hover { border-color: var(--color-gold); color: var(--color-gold-light); }
+  .bg-chip.is-on { background: var(--color-gold); border-color: var(--color-gold); color: #000; }
+  .bg-tile.is-dim { opacity: .38; }
+  .bg-tile.is-match { border-color: var(--color-gold); box-shadow: 0 0 0 1px var(--color-gold), 0 18px 50px -24px rgba(197,165,90,.45); }
+  .bg-tile { will-change: opacity; }
+</style>
+
+<script is:inline define:vars={{ AREAS }}>
+  (function () {
+    var state = { lifestyle: [], home: 'either', budget: 'band1_5mTo3m', pace: 'any' };
+    var LABELS = {
+      beach: 'beach & Gulf front', boating: 'boating', golf: 'golf', urban: 'downtown walkability',
+      village: 'walkable shops & dining', privacy: 'privacy', family: 'schools & family', nature: 'trails & nature'
+    };
+    var BUDGET_LABELS = { under900k: 'under $900K', band900kTo1_5m: '$900K–$1.5M', band1_5mTo3m: '$1.5M–$3M', band3mPlus: '$3M+' };
+
+    function score(area) {
+      var t = area.traits || {}, s = 0;
+      state.lifestyle.forEach(function (k) { s += (t[k] || 0) * 2; });
+      if (state.home !== 'either') s += (t[state.home] || 0) * 2;
+      if (state.pace !== 'any') s += (t[state.pace] || 0) * 1.5;
+      var count = area.bands ? area.bands[state.budget] : null;
+      if (count === 0) s -= 6;
+      else if (count != null && count > 25) s += 2;
+      else if (count != null && count > 0) s += 1;
+      return s;
+    }
+
+    function render() {
+      var scored = AREAS.map(function (a) { return { a: a, s: score(a) }; });
+      scored.sort(function (x, y) { return y.s - x.s; });
+      var grid = document.getElementById('bg-tiles');
+      var anySelection = state.lifestyle.length > 0 || state.home !== 'either' || state.pace !== 'any';
+      var matchSlugs = scored.filter(function (x) { return x.s > 0; }).slice(0, 3).map(function (x) { return x.a.slug; });
+
+      scored.forEach(function (x, i) {
+        var tile = grid.querySelector('[data-slug="' + x.a.slug + '"]');
+        if (!tile) return;
+        tile.style.order = i;
+        var badge = tile.querySelector('.bg-match-badge');
+        var isMatch = anySelection && matchSlugs.indexOf(x.a.slug) !== -1;
+        tile.classList.toggle('is-match', isMatch);
+        tile.classList.toggle('is-dim', anySelection && !isMatch && matchSlugs.length > 0 && x.s < scored[0].s * 0.55);
+        if (badge) {
+          badge.classList.toggle('hidden', !isMatch);
+          if (isMatch) badge.textContent = i === 0 ? 'Top match' : 'Strong match';
+        }
+        var bandLine = tile.querySelector('.bg-band-line');
+        var bandCount = tile.querySelector('.bg-band-count');
+        var count = x.a.bands ? x.a.bands[state.budget] : null;
+        if (bandLine && bandCount && count != null) {
+          bandLine.classList.remove('hidden');
+          bandCount.textContent = count + ' active listing' + (count === 1 ? '' : 's') + ' ' + BUDGET_LABELS[state.budget];
+        } else if (bandLine) {
+          bandLine.classList.add('hidden');
+        }
+      });
+      grid.style.display = 'grid';
+
+      var heading = document.getElementById('bg-results-heading');
+      var profile = document.getElementById('bg-profile-line');
+      if (anySelection && matchSlugs.length) {
+        var names = matchSlugs.map(function (slug) {
+          var m = AREAS.filter(function (a) { return a.slug === slug; })[0];
+          return m ? m.name : slug;
+        });
+        heading.textContent = 'Your Sarasota Matches';
+        var wants = state.lifestyle.map(function (k) { return LABELS[k]; }).slice(0, 3).join(', ');
+        profile.textContent = 'Based on ' + (wants ? wants + ' and ' : '') + 'a ' + BUDGET_LABELS[state.budget] +
+          ' budget, your strongest fits are ' + names.join(', ') + '.';
+      } else {
+        heading.textContent = "Sarasota's Nine Markets";
+      }
+
+      var fm = document.getElementById('bg-form-matches');
+      var fp = document.getElementById('bg-form-prefs');
+      if (fm) fm.value = matchSlugs.join(', ');
+      if (fp) fp.value = 'lifestyle: ' + state.lifestyle.join('/') + ' | home: ' + state.home + ' | budget: ' + BUDGET_LABELS[state.budget] + ' | pace: ' + state.pace;
+    }
+
+    document.querySelectorAll('#q-lifestyle .bg-chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chip.classList.toggle('is-on');
+        var k = chip.getAttribute('data-trait');
+        var idx = state.lifestyle.indexOf(k);
+        if (idx === -1) state.lifestyle.push(k); else state.lifestyle.splice(idx, 1);
+        render();
+      });
+    });
+
+    [['q-home', 'data-home', 'home'], ['q-budget', 'data-budget', 'budget'], ['q-pace', 'data-pace', 'pace']].forEach(function (cfg) {
+      var wrap = document.getElementById(cfg[0]);
+      wrap.querySelectorAll('.bg-chip').forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          wrap.querySelectorAll('.bg-chip').forEach(function (c) { c.classList.remove('is-on'); });
+          chip.classList.add('is-on');
+          state[cfg[2]] = chip.getAttribute(cfg[1]);
+          render();
+        });
+      });
+    });
+
+    document.getElementById('bg-reveal').addEventListener('click', function () {
+      render();
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    render();
+  })();
+</script>
