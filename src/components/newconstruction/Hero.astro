@@ -27,6 +27,8 @@ interface Props {
   trustItems?: string[];
   /** Tall variant for hub page. */
   tall?: boolean;
+  /** Attribution line for developer renderings, e.g. "Courtesy of The Ronto Group". */
+  imageCredit?: string;
 }
 
 const {
@@ -40,6 +42,7 @@ const {
   secondaryCtaHref = '#vip',
   trustItems = [],
   tall = false,
+  imageCredit,
 } = Astro.props;
 
 const bgStyle = image
@@ -84,4 +87,10 @@ const bgStyle = image
       </div>
     )}
   </div>
+
+  {image && imageCredit && (
+    <p class="absolute bottom-3 right-4 z-10 font-accent text-[10px] uppercase tracking-[0.15em] text-white/45">
+      Rendering {imageCredit}
+    </p>
+  )}
 </section>
