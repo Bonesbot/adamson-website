@@ -27,7 +27,7 @@ const {
     { label: 'Avg Days on Market', value: '74', delta: '-12 vs last year', deltaDirection: 'down' },
     { label: 'Active Inventory', value: '38', delta: '+5 vs Q4', deltaDirection: 'up' },
   ],
-  asOf = 'FILL_IN: e.g. "April 2026"',
+  asOf,
   source = 'Stellar MLS',
 } = Astro.props;
 
@@ -46,7 +46,7 @@ const colorFor = (label: string, d?: 'up' | 'down' | 'flat') => {
   <div class="container">
     <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Market snapshot</p>
     <h2 class="accent-underline mb-3">{scope}</h2>
-    <p class="text-white/50 text-sm mb-10">As of {asOf} &middot; Source: {source}</p>
+    <p class="text-white/50 text-sm mb-10">{asOf ? `As of ${asOf} · ` : ''}Source: {source}</p>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {kpis.map((k) => (
