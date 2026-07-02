@@ -1,6 +1,6 @@
 ---
 /**
- * /new-construction/[slug] — DYNAMIC PROJECT PAGE (PROTOTYPE)
+ * /new-construction/[slug] — DYNAMIC PROJECT PAGE (LIVE)
  *
  * Routes through projects.json:
  *   build_depth: 'full'  → all 12 sections from spec §5
@@ -10,12 +10,9 @@
  * floor plan + RealEstateListing per active listing + FAQPage + BreadcrumbList.
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import DraftBanner from '@/components/newconstruction/DraftBanner.astro';
 import BreadcrumbNav from '@/components/newconstruction/BreadcrumbNav.astro';
 import Hero from '@/components/newconstruction/Hero.astro';
 import QuickFactsPanel from '@/components/newconstruction/QuickFactsPanel.astro';
-import PhotoGallery from '@/components/newconstruction/PhotoGallery.astro';
-import FloorPlanViewer from '@/components/newconstruction/FloorPlanViewer.astro';
 import AmenitiesGrid from '@/components/newconstruction/AmenitiesGrid.astro';
 import LocationBlock from '@/components/newconstruction/LocationBlock.astro';
 import IdxListingGrid from '@/components/newconstruction/IdxListingGrid.astro';
@@ -101,9 +98,7 @@ const lastVerified = project.last_verified && !String(project.last_verified).sta
   description={description}
   canonicalUrl={`https://adamsonfl.com/new-construction/${project.slug}`}
   jsonLd={jsonLd}
-  noIndex={true}
 >
-  <DraftBanner />
 
   <Hero
     eyebrow={isFull ? 'Featured Project' : 'Project'}
@@ -111,9 +106,10 @@ const lastVerified = project.last_verified && !String(project.last_verified).sta
     subhead={project.tagline && !String(project.tagline).startsWith('FILL_IN') ? project.tagline : 'FILL_IN: 1-sentence positioning in Ryan\'s voice for this project.'}
     primaryCtaLabel={`Book a Private Tour of ${project.name}`}
     primaryCtaHref="#schedule"
-    secondaryCtaLabel="Get the Project Brief"
-    secondaryCtaHref="#brief"
+    secondaryCtaLabel="Ask Ryan About This Building"
+    secondaryCtaHref="/contact"
     image={project.hero_image}
+    imageCredit={project.image_credit}
   />
 
   <BreadcrumbNav leafLabel={project.name} />
@@ -140,12 +136,6 @@ const lastVerified = project.last_verified && !String(project.last_verified).sta
           </div>
         </div>
       </section>
-
-      <!-- Photo gallery -->
-      <PhotoGallery />
-
-      <!-- Floor plans -->
-      <FloorPlanViewer />
 
       <!-- Amenities -->
       <AmenitiesGrid amenities={project.amenities || []} />
