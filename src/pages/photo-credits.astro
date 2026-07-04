@@ -1,0 +1,70 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const description = 'Photography credits and licensing for images used on AdamsonFL.com, the Sarasota luxury real estate site of Ryan Adamson, The Adamson Group.';
+
+const credits = [
+  { image: 'St. Armands & Lido Key area', title: 'Lido Beach', author: 'Bradley Buhro', license: 'CC BY-SA 2.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=112933308' },
+  { image: 'Siesta Key area', title: 'Sunset at Siesta Beach', author: 'Fred Hsu', license: 'CC BY-SA 3.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=57672359' },
+  { image: 'Downtown Sarasota area & social sharing card', title: 'Bayfront Park Marina, Sarasota', author: 'Wendyrichmondrn', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=73240507' },
+  { image: 'Bird Key area', title: 'Ringling Causeway from Bird Key', author: 'The Grid', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=68519548' },
+  { image: 'West of Trail area', title: 'Beasley House, Sarasota', author: 'Ebyabe', license: 'CC BY-SA 3.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=15635627' },
+  { image: 'West of Trail — North area', title: 'Banyan, Marie Selby Botanical Gardens', author: 'Daderot', license: 'CC0 (public domain)', licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=67010974' },
+  { image: 'West of Trail — South area', title: 'Earle House gate, Sarasota', author: 'Ebyabe', license: 'CC BY-SA 3.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=15636823' },
+  { image: 'Buyers Agent', title: 'House keys at the front door', author: 'Shixart1985', license: 'CC BY 2.0', licenseUrl: 'https://creativecommons.org/licenses/by/2.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=190519542' },
+  { image: 'Listing Agent', title: 'Revere Quality House, Sarasota', author: 'Ebyabe', license: 'CC BY-SA 3.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=15659492' },
+  { image: 'Relocation', title: 'Lido Key Beach', author: 'Fred Hsu', license: 'CC BY-SA 3.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=57668958' },
+  { image: 'Consulting', title: 'Business handshake', author: 'Perzon SEO', license: 'CC BY 2.0', licenseUrl: 'https://creativecommons.org/licenses/by/2.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=94751077' },
+  { image: 'General area imagery', title: 'Sarasota Skyline', author: 'Cullen Morgan', license: 'CC BY 4.0', licenseUrl: 'https://creativecommons.org/licenses/by/4.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=113010805' },
+  { image: 'New construction imagery', title: 'Sarasota from Ringling Causeway', author: 'TheGridExe', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=68519460' },
+];
+
+const jsonLd = {
+  '@type': 'WebPage',
+  name: 'Photo Credits — AdamsonFL.com',
+  description: description,
+  url: 'https://adamsonfl.com/photo-credits',
+};
+---
+
+<BaseLayout title="Photo Credits" description={description} jsonLd={jsonLd}>
+
+  <!-- Hero band so the fixed header stays legible (site page pattern) -->
+  <section class="relative pt-32 pb-16">
+    <div class="absolute inset-0" style="background-color: var(--color-navy);" />
+    <div class="relative z-10 container text-center">
+      <p class="font-accent text-xs uppercase tracking-[0.3em] text-[var(--color-gold)] mb-3">
+        Attribution
+      </p>
+      <h1 class="font-display text-white mb-4">Photo Credits</h1>
+      <p class="text-lg text-white/70 max-w-2xl mx-auto">
+        Select photography on this site is used under Creative Commons licenses.
+        We're grateful to the photographers who share their work.
+      </p>
+    </div>
+  </section>
+
+  <section class="section bg-white">
+    <div class="container-narrow">
+      <p class="text-sm text-[var(--color-text-muted)] mb-8">
+        The images below have been resized, cropped, and color-adjusted from their originals.
+        Listing photography, project renderings, and personal photography elsewhere on the site
+        are credited in place or used with permission.
+      </p>
+      <ul class="divide-y divide-black/10">
+        {credits.map((c) => (
+          <li class="py-4">
+            <p class="text-sm">
+              <span class="font-semibold">{c.image}:</span>{' '}
+              &ldquo;<a href={c.source} rel="nofollow noopener" class="underline hover:text-[var(--color-cbgl-blue)]">{c.title}</a>&rdquo;
+              by {c.author}, licensed under{' '}
+              <a href={c.licenseUrl} rel="nofollow noopener" class="underline hover:text-[var(--color-cbgl-blue)]">{c.license}</a>,
+              via Wikimedia Commons.
+            </p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+</BaseLayout>

@@ -1,7 +1,40 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import areasFallback from '@/data/areas.json';
 
-const description = 'Monthly and quarterly real estate market reports for Sarasota, Longboat Key, Lido Key, Siesta Key, and the barrier islands. MLS-sourced data and expert analysis from Ryan Adamson.';
+const description = 'Live real estate market reports for Sarasota, Longboat Key, St. Armands and Lido, Siesta Key, Bird Key, and the barrier islands. MLS-sourced data updated continuously from Stellar MLS by Ryan Adamson.';
+
+// Live pipeline stats (daily-refreshed *-stats.json) drive this page — the
+// same source of truth as the per-area market tables, so the two can never
+// disagree. No hand-entered numbers.
+const statsModules = import.meta.glob('../../data/*-stats.json', { eager: true }) as Record<string, any>;
+const statsBySlug: Record<string, any> = {};
+for (const [path, mod] of Object.entries(statsModules)) {
+  const m = path.match(/\/([\w-]+)-stats\.json$/);
+  if (m) statsBySlug[m[1]] = (mod as any).default ?? mod;
+}
+
+const reports = areasFallback.areas
+  .map((a) => {
+    const s = statsBySlug[a.slug];
+    if (!s || s.status !== 'ok') return null;
+    return {
+      name: a.name,
+      slug: a.slug,
+      tagline: a.tagline,
+      medianPrice: s.active?.medianPrice || null,
+      activeCount: s.active?.count ?? null,
+      medianPpsf: s.active?.medianPricePerSqFt || null,
+      updated: s.lastUpdated
+        ? new Date(s.lastUpdated).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+        : null,
+    };
+  })
+  .filter(Boolean) as Array<Record<string, any>>;
+
+const newestUpdate = reports
+  .map((r) => r.updated)
+  .filter(Boolean)[0] || null;
 
 const jsonLd = {
   '@type': 'CollectionPage',
@@ -18,27 +51,75 @@ const jsonLd = {
     <div class="absolute inset-0" style="background-color: var(--color-navy);" />
     <div class="relative z-10 container text-center">
       <p class="font-accent text-xs uppercase tracking-[0.3em] text-[var(--color-gold)] mb-3">
-        Data & Insights
+        Data &amp; Insights
       </p>
       <h1 class="font-display text-white mb-4">Market Reports</h1>
       <p class="text-lg text-white/70 max-w-2xl mx-auto">
-        Real data from the Sarasota MLS, analyzed and presented to help you understand the luxury market.
+        Live data from the Sarasota MLS, analyzed and presented to help you understand the luxury market.
       </p>
+      {newestUpdate && (
+        <p class="mt-4 text-xs uppercase tracking-[0.2em] text-white/40">
+          Latest data refresh: {newestUpdate}
+        </p>
+      )}
     </div>
   </section>
 
-  <!-- Coming Soon Placeholder -->
+  <!-- Live Area Reports -->
   <section class="section bg-white">
-    <div class="container-narrow text-center">
-      <div class="py-16">
+    <div class="container">
+      <div class="text-center mb-12">
         <p class="font-accent text-xs uppercase tracking-[0.2em] text-[var(--color-gold)] mb-4">
-          Coming Soon
+          Updated From Stellar MLS
         </p>
-        <h2 class="mb-4">Monthly Market Reports</h2>
+        <h2 class="mb-4">Live Market Reports by Area</h2>
         <p class="text-[var(--color-text-muted)] max-w-lg mx-auto leading-relaxed">
-          Detailed monthly and quarterly market reports with MLS-sourced data for each community we serve are on the way. Check back soon for the latest insights on pricing trends, inventory levels, and market conditions.
+          Each report is generated directly from our MLS data pipeline — active inventory,
+          sold and pending activity, pricing trends, and months of supply for every community we serve.
         </p>
       </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {reports.map((r) => (
+          <a
+            href={`/areas/${r.slug}`}
+            class="group block border border-black/10 rounded-lg p-6 hover:border-[var(--color-gold)] hover:shadow-lg transition-all"
+          >
+            <h3 class="font-display text-xl font-bold mb-1 group-hover:text-[var(--color-cbgl-blue)] transition-colors">
+              {r.name}
+            </h3>
+            <p class="text-sm text-[var(--color-text-muted)] mb-4">{r.tagline}</p>
+            <div class="space-y-1 text-sm">
+              {r.medianPrice && (
+                <p>
+                  <span class="text-[var(--color-text-muted)]">Median active price:</span>{' '}
+                  <span class="font-semibold">{r.medianPrice}</span>
+                </p>
+              )}
+              {r.medianPpsf && (
+                <p>
+                  <span class="text-[var(--color-text-muted)]">Median $/sq ft:</span>{' '}
+                  <span class="font-semibold">{r.medianPpsf}</span>
+                </p>
+              )}
+              {typeof r.activeCount === 'number' && (
+                <p>
+                  <span class="text-[var(--color-text-muted)]">Active listings:</span>{' '}
+                  <span class="font-semibold">{r.activeCount}</span>
+                </p>
+              )}
+            </div>
+            <p class="mt-5 font-accent text-xs uppercase tracking-[0.15em] text-[var(--color-gold)]">
+              View Full Report &rarr;
+            </p>
+          </a>
+        ))}
+      </div>
+
+      <p class="text-center text-xs text-[var(--color-text-muted)] mt-10 max-w-xl mx-auto">
+        Monthly narrative market recaps are in the works. In the meantime, every area report
+        above reflects the latest data from our Stellar MLS pipeline.
+      </p>
     </div>
   </section>
 
