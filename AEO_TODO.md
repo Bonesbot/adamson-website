@@ -101,7 +101,7 @@
 
 ## Priority 3 — Polish & technical hygiene
 
-- [ ] **Per-page Open Graph images.** STILL OPEN but UNBLOCKED 2026-07-04: `/images/og-default.jpg` previously did not exist on disk (every social share site-wide rendered a broken preview); a branded default (AG logo over the Sarasota bayfront, 1200×630) now serves 200. Next step is now cheap:每 area has a hero at `/images/areas/<slug>.jpg` to compose per-area OG images with the area name baked in.
+- [ ] **Per-page Open Graph images.** STILL OPEN but UNBLOCKED 2026-07-04: `/images/og-default.jpg` previously did not exist on disk (every social share site-wide rendered a broken preview); a branded default (AG logo over the Sarasota bayfront, 1200×630) now serves 200. Next step is now cheap: every area has a hero at `/images/areas/<slug>.jpg` to compose per-area OG images with the area name baked in.
 
 - [x] **~~Fix Lido Key homepage card copy.~~** ✅ **RESOLVED (verified live 2026-07-05).** The broken pre-merge copy is gone; all 9 cards render current names, clean taglines, live medians — and, as of `8952db1`, photos (8 cards previously rendered as empty charcoal blocks because their images did not exist).
 
