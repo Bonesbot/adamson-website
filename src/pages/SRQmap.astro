@@ -1,12 +1,14 @@
 ---
-// build-touch 2026-06-28T18: load IDX_API_KEY env into srqmap-lead fn
+// build-touch 2026-07-05: add Beaches & Access + Golf Courses groups, market-data links
 import allPins from '../data/srqmap-pins.json';
 
 // Categories currently shown on the map (others temporarily hidden — restore by adding ids back)
-const VISIBLE_GROUPS = ['things', 'dining'];
+const VISIBLE_GROUPS = ['beaches', 'things', 'dining', 'golf'];
 const pins = allPins.filter((p) => VISIBLE_GROUPS.includes(p.group));
 
 const ICONS = {
+  beaches: '<path d="M17.5 19H22a4.5 4.5 0 0 0-9 0h4.5Z"/><path d="M12 19v3"/><path d="M2 22h20"/><path d="M5.2 11.2 2 8a10 10 0 0 1 14-1.4"/><path d="M16 6.6c2.6 2 3.6 5.4 2.4 8.4l-4.4-3.4Z"/><path d="M5.2 11.2 14 18"/>',
+  golf: '<path d="M12 18v-13"/><path d="M12 5l7 3-7 3"/><circle cx="12" cy="20.5" r="1.5"/><path d="M7 21.2c-1.9-.4-3-1-3-1.7 0-1.1 3.6-2 8-2s8 .9 8 2c0 .7-1.1 1.3-3 1.7"/>',
   things: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
   dining: '<path d="M3 2v7c0 1.1.9 2 2 2h0c1.1 0 2-.9 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Z"/>',
   condos: '<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01"/>',
@@ -14,8 +16,10 @@ const ICONS = {
   areas:  '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
 };
 const GROUPS = [
+  { id: 'beaches', label: 'Beaches & Access',   color: '#1A9BB8', svg: ICONS.beaches },
   { id: 'things', label: 'Things to Do',        color: '#4C956C', svg: ICONS.things },
   { id: 'dining', label: 'Dining & Drinks',     color: '#C0613B', svg: ICONS.dining },
+  { id: 'golf',   label: 'Golf Courses',        color: '#0B6E4F', svg: ICONS.golf },
   { id: 'condos', label: 'Condos & Residences', color: '#2E86AB', svg: ICONS.condos },
   { id: 'newdev', label: 'New Developments',    color: '#7D5BA6', svg: ICONS.newdev },
   { id: 'areas',  label: 'Communities & Areas', color: '#C2913B', svg: ICONS.areas  },
@@ -25,8 +29,8 @@ const groupMap = Object.fromEntries(GROUPS.map((g) => [g.id, g]));
 const phone = '(941) 713-9234';
 const tel = '19417139234';
 
-const pageTitle = 'Sarasota Area Guide — Restaurants, Condos & Neighborhoods Map | AdamsonFL';
-const pageDesc = 'An interactive local map of Sarasota and the Keys from Ryan Adamson, PA: top restaurants and bars, downtown condo towers, new-construction communities, beaches and things to do.';
+const pageTitle = 'Sarasota Area Guide — Beaches, Golf, Restaurants & Neighborhoods Map | AdamsonFL';
+const pageDesc = 'An interactive local map of Sarasota and the Keys from Ryan Adamson, PA: beach access points on Siesta, Lido and Longboat Key, public and private golf courses within 15 miles of St. Armands, top restaurants and bars, and things to do.';
 const canonical = 'https://adamsonfl.com/srqmap';
 
 const itemList = {
@@ -39,7 +43,7 @@ const itemList = {
     '@type': 'ListItem',
     position: i + 1,
     item: {
-      '@type': 'Place',
+      '@type': p.group === 'golf' ? 'GolfCourse' : p.group === 'beaches' ? 'Beach' : 'Place',
       name: p.name,
       ...(p.address ? { address: p.address } : {}),
       ...(p.blurb ? { description: p.blurb } : {}),
@@ -486,6 +490,7 @@ const itemList = {
     var blurbHtml = p.blurb ? '<p class="blurb">'+esc(p.blurb)+'</p>' : '';
     var tipHtml = p.tip ? '<div class="tip"><p class="tip-h">Ryan’s take</p><p>'+esc(p.tip)+'</p></div>' : '';
     var siteHtml = p.website ? '<a class="detail-link" href="'+esc(p.website)+'" target="_blank" rel="noopener">Visit website</a>' : '';
+    var marketHtml = p.market ? '<a class="detail-link" href="'+esc(p.market)+'" target="_blank" rel="noopener">Live market data for this area</a>' : '';
     var dirHtml = '<a class="detail-link" href="'+directionsUrl(p)+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>'+(userLatLng?'Directions from my location':'Get directions')+'</a>';
     var photos = Array.isArray(p.photos) ? p.photos.filter(Boolean) : [];
     var galleryHtml = '';
@@ -500,7 +505,7 @@ const itemList = {
       '<h2>'+esc(p.name)+'</h2>'+
       (p.address?'<p class="addr">'+esc(p.address)+'</p>':'')+
       factsHtml + blurbHtml + tipHtml +
-      '<div class="links"><a class="detail-cta" href="tel:'+TEL+'">Ask Ryan about this</a>'+dirHtml+siteHtml+'</div>'+
+      '<div class="links"><a class="detail-cta" href="tel:'+TEL+'">Ask Ryan about this</a>'+dirHtml+siteHtml+marketHtml+'</div>'+
       '<p class="signoff">Ryan Adamson, PA · AdamsonFL.com</p>';
     var gtrack = detailBody.querySelector('.gallery-track');
     if(gtrack){ var gd = detailBody.querySelectorAll('.gdot'); if(gd.length){ gtrack.addEventListener('scroll', function(){ var gi=Math.round(gtrack.scrollLeft/Math.max(gtrack.clientWidth,1)); for(var k=0;k<gd.length;k++){ gd[k].classList.toggle('on', k===gi); } }, {passive:true}); } }
