@@ -4,7 +4,16 @@
 > Process for running future audits: see [AEO_AUDIT_PLAYBOOK.md](./AEO_AUDIT_PLAYBOOK.md).
 > Update this file after each post-deploy audit — close completed items, add new findings.
 >
-> **Last audited: 2026-06-30 (BonesBot, post LBK market-FAQ deploy). Overall grade: A−.**
+> **Last audited: 2026-07-05 (BonesBot, quick post-deploy audit of `8952db1`). Overall grade: A−.**
+
+---
+
+## New findings — 2026-07-05 quick audit (post imagery + market-reports deploy)
+
+> Quick post-deploy audit of `8952db1` (deploy `6a496307`): imagery fill (8 area photos, 4 specialties tiles, og-default, fallbacks), `/market-reports/` rebuild, new `/photo-credits`. All 12 checked pages return 200 with canonical, twitter card, parsing JSON-LD, zero placeholder leaks, zero `<!-- TODO -->` in production HTML; robots allow-list intact; llms.txt current; all three playbook query sims now ground with same-day (July 5) data. Grade holds **A−**.
+
+- [ ] **🟡 `/market-reports/` schema is thin relative to its new content.** The rebuilt page has gold-standard *visible* freshness ("Latest data refresh: July 5, 2026") and 9 live per-area cards, but its JSON-LD is a bare `CollectionPage` — no machine-readable `dateModified` (wire from newest stats `lastUpdated`) and no `ItemList` of the 9 area reports. Cheap fix; mirrors what area pages already emit.
+- [ ] **🟢 Swap CC stock photography for Ryan's own photos as they become available.** The 8 area photos + 4 specialties tiles shipped 2026-07-04 are licensed Wikimedia Commons images, attributed on `/photo-credits` (footer-linked — that page must stay while the images remain). Authentic drone/listing/neighborhood photography at the same file paths is the authenticity upgrade; prune `/photo-credits` entries as swapped.
 
 ---
 
@@ -37,7 +46,8 @@
 ## Priority 1 — Highest AEO impact
 
 - [ ] **Build `/market-reports/` as a luxury-buyer hub targeting $900k+ search intent.**
-  **STILL OPEN as of 2026-06-06 — page is literally still "Coming Soon" in production.** This is now the single biggest gap: per-area pages are excellent, but there is no aggregated Sarasota-market hub for an AI to cite on a broad "what's the Sarasota luxury market doing?" query.
+  **MATERIALLY ADVANCED 2026-07-04 (commit `8952db1`) — the "Coming Soon" stub is GONE.** `/market-reports/` now renders live per-area report cards for all 9 areas (median active price, median $/sq ft, active count, visible "Latest data refresh" date), driven by the daily `*-stats.json` pipeline — no hand-entered numbers. Verified live 2026-07-05: the broad "what's the Sarasota market doing?" query now grounds with same-day data. **Still open:** the full hub spec below — cross-area $900k+ summary, insurance/hurricane reality, tax mechanics, comparison content, monthly narrative, pulse-page fan-out.
+  *(2026-06-06 status, superseded: page was literally still "Coming Soon" in production — then the single biggest gap.)*
   *(Full strategic spec retained below from 2026-04-25.)*
 
   **Target buyer:** $900k+ buyers searching Downtown Sarasota, Lido Key, Siesta Key, Longboat Key, and Sarasota mainland in zips 34239 (West of Trail / Southside / Harbor Acres / Cherokee Park) and 34231 (Oyster Bay / Gulf Gate / South Trail luxury pockets). Three personas: out-of-state relocator (biggest cohort post-2024), move-up local, second-home buyer comparing Sarasota vs Naples/Charleston/Hilton Head.
@@ -58,8 +68,8 @@
 - [x] **~~Bring all five remaining area pages to Longboat Key parity.~~** ✅ **DONE / EXCEEDED (verified 2026-06-06).**
   Area pages are now the strongest AEO asset on the site. Live, dated, MLS-sourced pages with sold/pending snapshot, active inventory, price bands, recent sold comps (address/bd/ba/sqft/built/date), typical monthly costs, FAQ (dual microdata + `FAQPage` JSON-LD), "last updated" date, and Stellar MLS attribution now exist for: **Longboat Key, St. Armands and Lido, Siesta Key, Downtown Sarasota, Bird Key, Palmer Ranch, West of Trail (Core/North/South)**. The original "sarasota / lido-key / st-armands" pages were superseded by the merge to `st-armands-lido` and the area expansion. *(See "Active Condos by Construction Era" note in audit history.)*
 
-- [ ] **Replace the `<!-- TODO: Replace with Ryan's actual bio copy -->` comment in `/about/` with a real bio.**
-  **STILL OPEN — the TODO comment and placeholder bio are still in `src/pages/about.astro` (line ~71).** The bio is generic marketing prose with zero citable specifics (no years in business, no transaction volume, no specializations beyond "waterfront"). Get Ryan's real bio.
+- [ ] **Replace the placeholder bio in `/about/` with Ryan's real bio.**
+  **PARTIAL as of 2026-07-05 — the `<!-- TODO -->` comment is no longer in `src/pages/about.astro`, and the page carries strong E-E-A-T schema (license, phone, CWS credential, 9-profile sameAs).** The bio is generic marketing prose with zero citable specifics (no years in business, no transaction volume, no specializations beyond "waterfront"). Get Ryan's real bio.
 
 - [x] **~~Strengthen E-E-A-T signals in Ryan's `RealEstateAgent` schema.~~** ✅ **DONE (verified live 2026-06-12).** Homepage + `/about/` schema now carry `telephone`, FL license SL3457783 (`identifier`, plus visible text on About), CWS `hasCredential`, and a 9-profile `sameAs` (Google, Facebook, cbmoxi, Zillow, coldwellbankerhomes, coldwellbanker.com, CB Global Luxury, homes.com, adamson-group.com — all URL-verified 2026-06-12). Schema `image` URLs made absolute. Remaining nice-to-have: years of experience / production volume. Original ask:
   **(2026-06-06 status, superseded):** Homepage schema has `telephone: ''` (literally empty) and no `sameAs`; `/about/` `RealEstateAgent` node has no telephone, no license, no `sameAs`. Add:
@@ -91,9 +101,9 @@
 
 ## Priority 3 — Polish & technical hygiene
 
-- [ ] **Per-page Open Graph images.** STILL OPEN — every page still uses `/images/og-default.jpg`. Give each area page an OG image with the area name baked in.
+- [ ] **Per-page Open Graph images.** STILL OPEN but UNBLOCKED 2026-07-04: `/images/og-default.jpg` previously did not exist on disk (every social share site-wide rendered a broken preview); a branded default (AG logo over the Sarasota bayfront, 1200×630) now serves 200. Next step is now cheap:每 area has a hero at `/images/areas/<slug>.jpg` to compose per-area OG images with the area name baked in.
 
-- [ ] **Fix Lido Key homepage card copy.** STILL OPEN (and worse — see New Findings 🔴). Text still reads "Lido Key - powder sand beaches steps fine dining and shopping" (missing words). Will be resolved by the homepage rebuild + AreaCard data fix.
+- [x] **~~Fix Lido Key homepage card copy.~~** ✅ **RESOLVED (verified live 2026-07-05).** The broken pre-merge copy is gone; all 9 cards render current names, clean taglines, live medians — and, as of `8952db1`, photos (8 cards previously rendered as empty charcoal blocks because their images did not exist).
 
 - [x] **~~Fix duplicate `invert` class on the Adamson Group logo `<img>`.~~** ✅ **DONE 2026-06-12** — redundant `invert brightness-0 invert` utilities removed; the inline `filter` style already handles inversion.
 
@@ -123,7 +133,10 @@
 | 2026-06-06 | BonesBot (post-deploy audit) | B | 4 (stale homepage/contact; stale FAQ numbers vs live tables; llms.txt dead link + missing Palmer Ranch; areas-hub "From TBD" for WoT) | 2 (area-page parity exceeded; llms.txt created) |
 | 2026-06-12 | BonesBot (low-hanging-fruit sprint + post-deploy verification) | B+ | 1 (cached fetches can masquerade as stale pages — audit via deploy permalink) | 8 (FAQ↔stats interpolation system; card medians from stats / From-TBD; llms.txt regen; E-E-A-T schema verified + sameAs ×9; dateModified on area WebPage; BreadcrumbList on area pages; absolute og:image; duplicate invert) |
 | 2026-06-30 | BonesBot (post LBK market-FAQ deploy audit) | A− | 2 (no `aggregateRating` despite visible 5.0/25 reviews; sitemap `/srq-map/` vs `/SRQmap/` case-dupe) | 0 (LBK FAQ consolidation + freshness verified; "data as of" question confirmed handled) |
+| 2026-07-05 | BonesBot (quick post-deploy audit of `8952db1`) | A− | 2 (`/market-reports/` schema thin — no dateModified/ItemList; CC stock photos → replace with Ryan's photography over time) | 2 (market-reports "Coming Soon" stub → live per-area data cards; Lido card copy) — plus og-default 404 fixed, all missing imagery filled, About TODO comment gone |
 
+> **2026-07-05 deploy context:** Deploy `6a496307` (commit `8952db1`) filled every missing image on the site — 8 area card/hero photos (Wikimedia Commons CC, attributed on new `/photo-credits`), 4 homepage specialties tiles, branded `og-default.jpg` (previously a 404 → broken social previews site-wide), and both fallback images — and replaced the `/market-reports/` "Coming Soon" stub with live per-area report cards driven by the daily stats JSONs. Query sims: LBK median grounds ($1,187,500, "updated July 5, 2026"); agent identity grounds (license + sameAs ×9; still no `aggregateRating` — see 06-30 finding); current-market grounds on /market-reports with same-day medians for 9 areas. Grade holds **A−**; remaining gaps to A: homepage FAQ + at-a-glance citable facts, `aggregateRating`, market-reports hub content + schema depth, per-area OG images, real bio specifics.
+>
 > **2026-06-30 deploy context:** Deploy `6a43dadd` (commit `01940d30`, published in 16s; only `areas/longboat-key/index.html` changed) shipped the per-area market-FAQ registry (`AREA_MARKET_FAQ` in `scripts/fetch_area_summary.py`). Longboat Key now LEADS its FAQ with a consolidated, trailing-90-day **"What do properties cost on Longboat Key?"** answer — condo vs SFH by median + $/sqft, beachfront vs bayside by mix-robust $/sqft (per-location median price deliberately omitted because the buckets mix property types), closed by a valuation-nuance line pointing to Ryan. Retired: the granular beachfront-premium / SFH-vs-condo / price-range market Qs and the editorial "best neighborhoods" Q; buyer/seller Q renamed "Is it a good time to buy on Longboat Key?". Other 8 area pages untouched (safe-default registry). Grade up to **A−**: area pages are A-grade citable assets with gold-standard visible+schema freshness; held off a full A by (1) `/market-reports/` still a "Coming Soon" stub — no consolidated month/quarter narrative for the "what's the Sarasota luxury market doing?" query; (2) one shared `og-default.jpg` across all 9 pages; (3) thin `/about/` bio (TODO comment still open); (4) missing `aggregateRating` despite a visible 5.0/25-review block.
 
 > **2026-06-06 deploy context:** Removed the "Active Condos by Construction Era" table from Palmer Ranch (Bird Key was already empty). That table now renders only on Downtown Sarasota, Longboat Key, Siesta Key, and St. Armands and Lido — per Ryan's instruction.
