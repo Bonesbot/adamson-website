@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-02T10:55:55.012278+00:00",
+  "lastUpdated": "2026-07-05T10:55:34.562145+00:00",
   "counts": {
-    "sold": 247,
-    "pending": 22,
+    "sold": 249,
+    "pending": 21,
     "active": 131,
-    "total": 269
+    "total": 270
   },
   "metrics": {
-    "avgPrice": "$621,746",
-    "avgPricePerSqFt": "$329",
+    "avgPrice": "$620,366",
+    "avgPricePerSqFt": "$328",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,737",
+    "avgLivingSqFt": "1,735",
     "avgLotSqFt": null,
     "avgDom": 77
   },
@@ -23,22 +23,22 @@
   },
   "active": {
     "count": 131,
-    "medianPrice": "$495,000",
-    "medianPricePerSqFt": "$337",
-    "waterfrontCount": 36,
+    "medianPrice": "$499,000",
+    "medianPricePerSqFt": "$340",
+    "waterfrontCount": 35,
     "newConstructionCount": 5
   },
   "sold": {
     "count": 68,
-    "medianPrice": "$440,000",
-    "medianDom": 38,
-    "saleToListRatio": "90.9%",
+    "medianPrice": "$432,000",
+    "medianDom": 36,
+    "saleToListRatio": "90.5%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 9.8,
-    "sfhVilla": 5.6,
-    "blended": 7.4,
+    "condo": 9.5,
+    "sfhVilla": 5.7,
+    "blended": 7.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,8 +54,8 @@
     }
   },
   "priceBands": {
-    "under900k": 103,
-    "band900kTo1_5m": 6,
+    "under900k": 102,
+    "band900kTo1_5m": 7,
     "band1_5mTo3m": 14,
     "band3mPlus": 8
   },
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4689368",
+      "address": "2501 CASS ST",
+      "subdivision": "GULF GATE WOODS",
+      "soldPrice": "$395,000",
+      "soldDate": "2026-07-02",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,635",
+      "yearBuilt": 1971,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4693104",
       "address": "7113 ANTIGUA PL",
@@ -94,6 +107,19 @@
       "isWaterfront": false
     },
     {
+      "listingId": "A4636170",
+      "address": "1618 STICKNEY POINT RD #1618-202",
+      "subdivision": "CASTEL DEL MARE",
+      "soldPrice": "$210,000",
+      "soldDate": "2026-06-30",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "800",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "A4676511",
       "address": "1617 BROOKHOUSE DR #256",
       "subdivision": "PELICAN COVE XVI",
@@ -105,32 +131,6 @@
       "yearBuilt": 1980,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4692523",
-      "address": "4689 PINE HARRIER DR",
-      "subdivision": "THE LANDINGS",
-      "soldPrice": "$1,650,000",
-      "soldDate": "2026-06-24",
-      "bedrooms": 4,
-      "bathrooms": 3.5,
-      "livingSqFt": "3,103",
-      "yearBuilt": 1986,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4692193",
-      "address": "1971 DEBBIE ST",
-      "subdivision": "NORTH VAMO SUB 2",
-      "soldPrice": "$429,000",
-      "soldDate": "2026-06-24",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,062",
-      "yearBuilt": 1971,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 74,
-      "avgPrice": "$384,915",
-      "avgPricePerSqFt": "$301",
-      "avgLivingSqFt": "1,289",
-      "avgDom": 150
+      "activeCount": 73,
+      "avgPrice": "$386,092",
+      "avgPricePerSqFt": "$302",
+      "avgLivingSqFt": "1,290",
+      "avgDom": 153
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$596,490",
       "avgPricePerSqFt": "$307",
       "avgLivingSqFt": "1,940",
-      "avgDom": 176
+      "avgDom": 178
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$579,500",
       "avgPricePerSqFt": "$338",
       "avgLivingSqFt": "1,713",
-      "avgDom": 178
+      "avgDom": 179
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$629,000",
       "avgPricePerSqFt": "$353",
       "avgLivingSqFt": "1,785",
-      "avgDom": 186
+      "avgDom": 190
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 31,
+      "activeCount": 30,
       "soldCount": 48,
       "soldMedianPricePerSqFt": "$366",
       "soldMedianPrice": "$500,500",
@@ -223,66 +223,66 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 70,
-      "soldCount": 162,
-      "soldMedianPricePerSqFt": "$285",
-      "soldMedianPrice": "$430,000",
+      "activeCount": 71,
+      "soldCount": 164,
+      "soldMedianPricePerSqFt": "$283",
+      "soldMedianPrice": "$429,500",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.4,
-    "monthsOfSupplyCondo": 9.8,
-    "monthsOfSupplySfhVilla": 5.6,
+    "monthsOfSupply": 7.3,
+    "monthsOfSupplyCondo": 9.5,
+    "monthsOfSupplySfhVilla": 5.7,
     "label": "buyer's market",
     "activeCount": 131,
-    "sold365Count": 213,
+    "sold365Count": 214,
     "sold90Count": 68,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 136,
-      "activeCount": 41,
-      "soldMedianPrice": "$518,750",
+      "soldCount": 137,
+      "activeCount": 42,
+      "soldMedianPrice": "$517,500",
       "soldMedianPricePerSqFt": "$320"
     },
     "condo": {
-      "soldCount": 111,
-      "activeCount": 90,
+      "soldCount": 112,
+      "activeCount": 89,
       "soldMedianPrice": "$350,000",
-      "soldMedianPricePerSqFt": "$250"
+      "soldMedianPricePerSqFt": "$251"
     }
   },
   "boating": {
     "activeWithDock": 17,
-    "activeWaterfront": 36
+    "activeWaterfront": 35
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 131 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 7.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 131 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 7.3 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $518,750 ($320/sq ft), while condos, villas and townhouses sell around $350,000 ($250/sq ft)."
+      "a": "Single-family homes sell around $517,500 ($320/sq ft), while condos, villas and townhouses sell around $350,000 ($251/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $130,000 to $5,500,000, with a median asking price of $495,000."
+      "a": "Active listings run from $130,000 to $5,500,000, with a median asking price of $499,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 38 days on market and closed at 90.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 36 days on market and closed at 90.5% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 36 active waterfront listings, 17 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 35 active waterfront listings, 17 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

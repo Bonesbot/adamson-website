@@ -2,54 +2,54 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-02T10:55:52.757232+00:00",
+  "lastUpdated": "2026-07-05T10:55:32.434142+00:00",
   "counts": {
-    "sold": 279,
-    "pending": 83,
-    "active": 272,
-    "total": 362
+    "sold": 280,
+    "pending": 84,
+    "active": 271,
+    "total": 364
   },
   "metrics": {
-    "avgPrice": "$1,797,131",
+    "avgPrice": "$1,809,603",
     "avgPricePerSqFt": "$788",
     "avgYearBuilt": 2002,
-    "avgLivingSqFt": "1,985",
+    "avgLivingSqFt": "1,994",
     "avgLotSqFt": null,
-    "avgDom": 107
+    "avgDom": 108
   },
   "range": {
     "minPrice": "$190,000",
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 272,
-    "medianPrice": "$1,499,250",
-    "medianPricePerSqFt": "$881",
+    "count": 271,
+    "medianPrice": "$1,499,000",
+    "medianPricePerSqFt": "$877",
     "waterfrontCount": 77,
-    "newConstructionCount": 107
+    "newConstructionCount": 106
   },
   "sold": {
-    "count": 77,
-    "medianPrice": "$1,140,000",
-    "medianDom": 95,
+    "count": 78,
+    "medianPrice": "$1,122,500",
+    "medianDom": 96,
     "saleToListRatio": "86.7%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 13.7,
+    "condo": 13.6,
     "sfhVilla": 15.3,
-    "blended": 13.8,
+    "blended": 13.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,661",
-    "medianMonthlyCondoFee": "$1,738",
+    "medianMonthlyAssociation": "$1,655",
+    "medianMonthlyCondoFee": "$1,736",
     "minMonthlyCondoFee": "$352",
     "maxMonthlyCondoFee": "$11,729",
     "condoFeeRange": {
       "min": 352,
-      "median": 1744,
+      "median": 1738,
       "max": 11729
     }
   },
@@ -57,12 +57,12 @@
     "under900k": 74,
     "band900kTo1_5m": 63,
     "band1_5mTo3m": 60,
-    "band3mPlus": 75
+    "band3mPlus": 74
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 272
+      "count": 271
     }
   ],
   "buildingClasses": [],
@@ -77,6 +77,19 @@
       "bathrooms": 4.0,
       "livingSqFt": "4,095",
       "yearBuilt": 2005,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4682411",
+      "address": "635 S ORANGE AVE #301",
+      "subdivision": "ORANGE CLUB CONDOS",
+      "soldPrice": "$765,000",
+      "soldDate": "2026-06-30",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,013",
+      "yearBuilt": 2017,
       "propertyType": "Residential",
       "isWaterfront": false
     },
@@ -118,19 +131,6 @@
       "yearBuilt": 1997,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4660919",
-      "address": "111 S PINEAPPLE AVE #1204",
-      "subdivision": "MARK SARASOTA CONDO",
-      "soldPrice": "$2,600,000",
-      "soldDate": "2026-06-26",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,845",
-      "yearBuilt": 2019,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 60,
-      "avgPrice": "$1,136,500",
-      "avgPricePerSqFt": "$652",
+      "avgPrice": "$1,135,252",
+      "avgPricePerSqFt": "$651",
       "avgLivingSqFt": "1,636",
-      "avgDom": 178
+      "avgDom": 180
     },
     {
       "tier": "1990to2005",
@@ -152,27 +152,27 @@
       "avgPrice": "$1,764,522",
       "avgPricePerSqFt": "$724",
       "avgLivingSqFt": "2,171",
-      "avgDom": 154
+      "avgDom": 156
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
       "activeCount": 61,
-      "avgPrice": "$1,645,792",
-      "avgPricePerSqFt": "$759",
-      "avgLivingSqFt": "1,926",
-      "avgDom": 148
+      "avgPrice": "$1,646,628",
+      "avgPricePerSqFt": "$760",
+      "avgLivingSqFt": "1,927",
+      "avgDom": 145
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 105,
-      "avgPrice": "$3,899,362",
+      "activeCount": 104,
+      "avgPrice": "$3,864,788",
       "avgPricePerSqFt": "$1,335",
-      "avgLivingSqFt": "2,747",
-      "avgDom": 172
+      "avgLivingSqFt": "2,719",
+      "avgDom": 174
     }
   ],
   "condoTiersScope": {
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 91,
+      "activeCount": 90,
       "soldCount": 130,
       "soldMedianPricePerSqFt": "$785",
       "soldMedianPrice": "$1,412,500",
@@ -224,20 +224,20 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 104,
-      "soldCount": 86,
-      "soldMedianPricePerSqFt": "$529",
-      "soldMedianPrice": "$667,500",
+      "soldCount": 87,
+      "soldMedianPricePerSqFt": "$535",
+      "soldMedianPrice": "$675,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 13.8,
-    "monthsOfSupplyCondo": 13.7,
+    "monthsOfSupply": 13.7,
+    "monthsOfSupplyCondo": 13.6,
     "monthsOfSupplySfhVilla": 15.3,
     "label": "buyer's market",
-    "activeCount": 272,
-    "sold365Count": 236,
-    "sold90Count": 77,
+    "activeCount": 271,
+    "sold365Count": 237,
+    "sold90Count": 78,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,8 +248,8 @@
       "soldMedianPricePerSqFt": "$563"
     },
     "condo": {
-      "soldCount": 266,
-      "activeCount": 263,
+      "soldCount": 267,
+      "activeCount": 262,
       "soldMedianPrice": "$1,150,000",
       "soldMedianPricePerSqFt": "$688"
     }
@@ -262,7 +262,7 @@
     {
       "facet": "balance",
       "q": "Is Downtown Sarasota a buyer's or seller's market right now?",
-      "a": "With 272 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 13.8 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 271 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 13.7 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -272,12 +272,12 @@
     {
       "facet": "range",
       "q": "What's the price range on Downtown Sarasota?",
-      "a": "Active listings run from $190,000 to $12,499,000, with a median asking price of $1,499,250."
+      "a": "Active listings run from $190,000 to $12,499,000, with a median asking price of $1,499,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Downtown Sarasota?",
-      "a": "Recently sold homes took a median 95 days on market and closed at 86.7% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 96 days on market and closed at 86.7% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
@@ -287,7 +287,7 @@
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Downtown Sarasota?",
-      "a": "The median monthly condo fee is $1,738 and the median monthly association fee is $1,661."
+      "a": "The median monthly condo fee is $1,736 and the median monthly association fee is $1,655."
     }
   ],
   "costBreakdown90": null

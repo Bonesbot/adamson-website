@@ -2,16 +2,16 @@
   "areaSlug": "st-armands-lido",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-02T10:55:51.240555+00:00",
+  "lastUpdated": "2026-07-05T10:55:30.994518+00:00",
   "counts": {
-    "sold": 99,
-    "pending": 17,
-    "active": 135,
+    "sold": 100,
+    "pending": 16,
+    "active": 136,
     "total": 116
   },
   "metrics": {
-    "avgPrice": "$2,450,845",
-    "avgPricePerSqFt": "$913",
+    "avgPrice": "$2,446,966",
+    "avgPricePerSqFt": "$912",
     "avgYearBuilt": 1982,
     "avgLivingSqFt": "2,223",
     "avgLotSqFt": null,
@@ -22,23 +22,23 @@
     "maxPrice": "$18,000,000"
   },
   "active": {
-    "count": 135,
-    "medianPrice": "$1,795,000",
-    "medianPricePerSqFt": "$904",
-    "waterfrontCount": 62,
+    "count": 136,
+    "medianPrice": "$1,847,500",
+    "medianPricePerSqFt": "$914",
+    "waterfrontCount": 63,
     "newConstructionCount": 25
   },
   "sold": {
-    "count": 36,
+    "count": 35,
     "medianPrice": "$1,050,000",
-    "medianDom": 82,
-    "saleToListRatio": "85.9%",
+    "medianDom": 85,
+    "saleToListRatio": "86.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 14.7,
-    "sfhVilla": 21.1,
-    "blended": 16.9,
+    "sfhVilla": 20.8,
+    "blended": 16.8,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -57,16 +57,29 @@
     "under900k": 51,
     "band900kTo1_5m": 12,
     "band1_5mTo3m": 19,
-    "band3mPlus": 53
+    "band3mPlus": 54
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 135
+      "count": 136
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4672276",
+      "address": "161 S POLK DR",
+      "subdivision": "LIDO BEACH",
+      "soldPrice": "$5,300,000",
+      "soldDate": "2026-07-02",
+      "bedrooms": 5,
+      "bathrooms": 5.0,
+      "livingSqFt": "4,617",
+      "yearBuilt": 2013,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4678121",
       "address": "1186 WESTWAY DR",
@@ -118,19 +131,6 @@
       "yearBuilt": 1955,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4653144",
-      "address": "800 S BLVD OF THE PRESIDENTS #5",
-      "subdivision": "EMBASSY VILLAS",
-      "soldPrice": "$470,000",
-      "soldDate": "2026-06-23",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,090",
-      "yearBuilt": 1972,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 64,
-      "avgPrice": "$777,221",
-      "avgPricePerSqFt": "$678",
+      "avgPrice": "$776,829",
+      "avgPricePerSqFt": "$677",
       "avgLivingSqFt": "1,125",
-      "avgDom": 164
+      "avgDom": 166
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$2,554,800",
       "avgPricePerSqFt": "$1,020",
       "avgLivingSqFt": "2,440",
-      "avgDom": 145
+      "avgDom": 147
     },
     {
       "tier": "2006to2019",
@@ -172,7 +172,7 @@
       "avgPrice": "$9,475,000",
       "avgPricePerSqFt": "$2,213",
       "avgLivingSqFt": "4,236",
-      "avgDom": 498
+      "avgDom": 502
     }
   ],
   "condoTiersScope": {
@@ -187,7 +187,7 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 41,
+      "activeCount": 42,
       "soldCount": 36,
       "soldMedianPricePerSqFt": "$800",
       "soldMedianPrice": "$1,300,000",
@@ -197,9 +197,9 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 21,
-      "soldCount": 13,
-      "soldMedianPricePerSqFt": "$897",
-      "soldMedianPrice": "$3,500,000",
+      "soldCount": 14,
+      "soldMedianPricePerSqFt": "$1,023",
+      "soldMedianPrice": "$3,575,000",
       "lowSample": false
     },
     {
@@ -222,21 +222,21 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 16.9,
+    "monthsOfSupply": 16.8,
     "monthsOfSupplyCondo": 14.7,
-    "monthsOfSupplySfhVilla": 21.1,
+    "monthsOfSupplySfhVilla": 20.8,
     "label": "buyer's market",
-    "activeCount": 135,
-    "sold365Count": 96,
-    "sold90Count": 36,
+    "activeCount": 136,
+    "sold365Count": 97,
+    "sold90Count": 35,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 33,
-      "activeCount": 55,
-      "soldMedianPrice": "$2,750,000",
-      "soldMedianPricePerSqFt": "$946"
+      "soldCount": 34,
+      "activeCount": 56,
+      "soldMedianPrice": "$2,787,500",
+      "soldMedianPricePerSqFt": "$958"
     },
     "condo": {
       "soldCount": 66,
@@ -247,38 +247,38 @@
   },
   "boating": {
     "activeWithDock": 16,
-    "activeWaterfront": 62
+    "activeWaterfront": 63
   },
   "marketQuestions": [
     {
       "facet": "waterfront",
       "q": "How much more does beachfront cost than bayfront on St Armands Lido?",
-      "a": "Gulf-front / beachfront homes sell at a median $800 per sq ft versus $897 for bay- or canal-front \u2014 about a -11% waterfront premium (Stellar MLS, recent closed sales)."
+      "a": "Gulf-front / beachfront homes sell at a median $800 per sq ft versus $1,023 for bay- or canal-front \u2014 about a -22% waterfront premium (Stellar MLS, recent closed sales)."
     },
     {
       "facet": "balance",
       "q": "Is St Armands Lido a buyer's or seller's market right now?",
-      "a": "With 135 active listings and roughly 8 closed sales a month (trailing 12 months), St Armands Lido has about 16.9 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 136 active listings and roughly 8 closed sales a month (trailing 12 months), St Armands Lido has about 16.8 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on St Armands Lido?",
-      "a": "Single-family homes sell around $2,750,000 ($946/sq ft), while condos, villas and townhouses sell around $1,050,000 ($688/sq ft)."
+      "a": "Single-family homes sell around $2,787,500 ($958/sq ft), while condos, villas and townhouses sell around $1,050,000 ($688/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on St Armands Lido?",
-      "a": "Active listings run from $275,000 to $18,000,000, with a median asking price of $1,795,000."
+      "a": "Active listings run from $275,000 to $18,000,000, with a median asking price of $1,847,500."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on St Armands Lido?",
-      "a": "Recently sold homes took a median 82 days on market and closed at 85.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 85 days on market and closed at 86.0% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many St Armands Lido homes have a dock?",
-      "a": "Of 62 active waterfront listings, 16 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 63 active waterfront listings, 16 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
