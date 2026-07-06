@@ -29,7 +29,9 @@ const STATUS: Record<string, { badge: string; prefix: string; avail: string }> =
   'sold':        { badge: 'Sold',                prefix: 'Last offered at',       avail: 'https://schema.org/SoldOut' },
 };
 const st = STATUS[l.status] || STATUS['active'];
-const priceLabel = `${st.prefix} ${fmtPrice(l.price)}`;
+// Optional per-listing overrides (e.g. rentals: price_label "Offered at $5,500 / month", badge "For Rent")
+const badge = l.badge || st.badge;
+const priceLabel = l.price_label || `${st.prefix} ${fmtPrice(l.price)}`;
 const fullAddress = `${l.address}, ${l.city}, ${l.state} ${l.zip}`;
 const pageTitle = `${l.address} — ${l.neighborhood}, ${l.city} FL`;
 const canonical = `https://adamsonfl.com/listings/${l.slug}`;
@@ -111,7 +113,7 @@ if (l.faq && l.faq.length) {
     <img src={l.hero_image} alt={`${l.address} — ${l.neighborhood}`} class="absolute inset-0 w-full h-full object-cover" fetchpriority="high" />
     <div class="absolute inset-0" style="background:linear-gradient(to bottom, rgba(0,0,0,.42) 0%, rgba(0,0,0,.12) 40%, rgba(0,0,0,.82) 100%)"></div>
     <div class="container relative z-10 pb-16 pt-40">
-      <span class="inline-block font-accent text-[10px] uppercase tracking-[0.2em] font-bold px-3.5 py-1.5 rounded-full mb-5 bg-[var(--color-gold)] text-black">{st.badge}</span>
+      <span class="inline-block font-accent text-[10px] uppercase tracking-[0.2em] font-bold px-3.5 py-1.5 rounded-full mb-5 bg-[var(--color-gold)] text-black">{badge}</span>
       <p class="lst-eyebrow mb-3">{l.tagline}</p>
       <h1 class="font-display text-white font-bold leading-[1.05]" style="font-size:clamp(2.4rem,6vw,4.5rem)">{l.address}</h1>
       <p class="text-white/80 text-lg mt-3">{l.neighborhood} · {l.city}, {l.state} {l.zip}</p>
