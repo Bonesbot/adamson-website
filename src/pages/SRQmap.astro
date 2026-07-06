@@ -580,14 +580,9 @@ const itemList = {
       /* Desktop photo navigation: hover arrows + clickable dots (mobile swipes natively) */
       var gN = detailBody.querySelectorAll('.gphoto').length;
       function gCur(){ return Math.round(gtrack.scrollLeft/Math.max(gtrack.clientWidth,1)); }
-      /* NB: any smooth scrolling (scrollTo behavior:smooth OR CSS scroll-behavior:smooth) is
-         silently cancelled by Chrome's scroll-snap controller on this track — animate manually. */
-      function gGo(idx){
-        var from=gtrack.scrollLeft, to=idx*gtrack.clientWidth, d=to-from, t0=null;
-        if(!d) return;
-        function step(ts){ if(t0===null) t0=ts; var k=Math.min((ts-t0)/260,1); gtrack.scrollLeft=from+d*(1-Math.pow(1-k,3)); if(k<1) requestAnimationFrame(step); }
-        requestAnimationFrame(step);
-      }
+      /* NB: smooth scrolling (scrollTo behavior:smooth OR CSS scroll-behavior:smooth) is silently
+         cancelled by Chrome's scroll-snap controller on this track — jump directly; snap keeps it aligned. */
+      function gGo(idx){ gtrack.scrollLeft = idx*gtrack.clientWidth; }
       var gp=detailBody.querySelector('.gnav--prev'), gn=detailBody.querySelector('.gnav--next');
       if(gp) gp.onclick=function(e){ e.stopPropagation(); gGo((gCur()-1+gN)%gN); };
       if(gn) gn.onclick=function(e){ e.stopPropagation(); gGo((gCur()+1)%gN); };
