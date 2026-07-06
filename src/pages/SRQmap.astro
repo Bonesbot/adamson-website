@@ -551,7 +551,9 @@ const itemList = {
     var photos = Array.isArray(p.photos) ? p.photos.filter(Boolean) : [];
     var galleryHtml = '';
     if(photos.length){
-      var slides = photos.map(function(src,idx){ return '<img class="gphoto" src="'+esc(src)+'" loading="lazy" alt="'+esc(p.name)+'" />'; }).join('');
+      /* no loading="lazy" here: the gallery is built inside a hidden panel, and Chrome never
+         promotes lazy images created in display:none subtrees — they'd stay blank forever. */
+      var slides = photos.map(function(src,idx){ return '<img class="gphoto" src="'+esc(src)+'" decoding="async" alt="'+esc(p.name)+'" />'; }).join('');
       var gdotsHtml = photos.length>1 ? '<div class="gallery-dots">'+photos.map(function(_x,idx){return '<span class="gdot'+(idx===0?' on':'')+'"></span>';}).join('')+'</div>' : '';
       var gcreditHtml = p.photo_credit ? '<p class="gcredit">'+esc(p.photo_credit)+'</p>' : '';
       galleryHtml = '<div class="gallery"><div class="gallery-track">'+slides+'</div>'+gdotsHtml+gcreditHtml+'</div>';
