@@ -1,0 +1,66 @@
+---
+/**
+ * /listings — Featured Listings index (data-driven from src/data/listings/*.json)
+ * Listings with noindex:true still render here unless status is 'off-market'
+ * (off-market teasers are reachable only by direct link).
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const files = import.meta.glob('../../data/listings/*.json', { eager: true });
+const all = Object.values(files).map((m: any) => m.default ?? m);
+const order: Record<string, number> = { 'active': 0, 'coming-soon': 1, 'pending': 2, 'sold': 3 };
+const listings = all
+  .filter((l) => l.status !== 'off-market')
+  .sort((a, b) => (order[a.status] ?? 9) - (order[b.status] ?? 9) || b.price - a.price);
+
+const fmtPrice = (n: number) => '$' + n.toLocaleString('en-US');
+const BADGE: Record<string, string> = { 'active': 'For Sale', 'coming-soon': 'Coming Soon', 'pending': 'Pending', 'sold': 'Sold' };
+
+const description =
+  "Featured luxury listings represented by Ryan Adamson, PA — signature properties across Sarasota, the barrier islands, and the region's premier golf and waterfront communities.";
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Featured Listings — Ryan Adamson, PA',
+  description,
+  url: 'https://adamsonfl.com/listings',
+};
+---
+
+<BaseLayout title="Featured Listings" description={description} jsonLd={jsonLd} canonicalUrl="https://adamsonfl.com/listings">
+
+  <section class="bg-black pt-40 pb-16">
+    <div class="container text-center">
+      <p class="font-accent text-[11px] uppercase tracking-[0.28em] font-bold text-[var(--color-gold)] mb-3">Represented by Ryan Adamson, PA</p>
+      <h1 class="font-display text-white text-4xl md:text-5xl font-bold">Featured Listings</h1>
+      <p class="text-white/60 mt-4 max-w-2xl mx-auto">Signature properties, marketed the way they deserve. For homes not yet on the market, visit the <a href="/off-market" class="text-[var(--color-gold)] hover:text-[var(--color-gold-light)]">private registry</a>.</p>
+    </div>
+  </section>
+
+  <section class="bg-[#0A0A0A] py-16">
+    <div class="container">
+      {listings.length === 0 && (
+        <p class="text-white/60 text-center py-20">New signature listings are being prepared — <a href="/contact" class="text-[var(--color-gold)]">contact Ryan</a> for early access.</p>
+      )}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        {listings.map((l) => (
+          <a href={`/listings/${l.slug}`} class="group block bg-[#111111] border border-white/[0.06] rounded-lg overflow-hidden hover:border-[var(--color-gold)]/50 transition-colors">
+            <div class="relative overflow-hidden" style="aspect-ratio:16/10">
+              <img src={l.hero_image} alt={l.address} loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500" />
+              <span class="absolute top-4 left-4 font-accent text-[10px] uppercase tracking-[0.18em] font-bold px-3 py-1.5 rounded-full bg-[var(--color-gold)] text-black">{BADGE[l.status] || 'For Sale'}</span>
+            </div>
+            <div class="p-6">
+              <h2 class="font-display text-white text-2xl font-semibold group-hover:text-[var(--color-gold-light)] transition-colors">{l.address}</h2>
+              <p class="text-white/55 text-sm mt-1">{l.neighborhood} · {l.city}, {l.state}</p>
+              <div class="flex items-center justify-between mt-4">
+                <span class="font-display text-[var(--color-gold)] text-xl font-semibold">{fmtPrice(l.price)}</span>
+                <span class="font-accent text-[11px] uppercase tracking-[0.12em] text-white/50">{l.beds} BD · {l.baths} BA · {l.sqft?.toLocaleString('en-US')} SF</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
