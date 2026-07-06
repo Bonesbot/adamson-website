@@ -48,13 +48,13 @@ const jsonLd = {
           <a href={`/listings/${l.slug}`} class="group block bg-[#111111] border border-white/[0.06] rounded-lg overflow-hidden hover:border-[var(--color-gold)]/50 transition-colors">
             <div class="relative overflow-hidden" style="aspect-ratio:16/10">
               <img src={l.hero_image} alt={l.address} loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500" />
-              <span class="absolute top-4 left-4 font-accent text-[10px] uppercase tracking-[0.18em] font-bold px-3 py-1.5 rounded-full bg-[var(--color-gold)] text-black">{BADGE[l.status] || 'For Sale'}</span>
+              <span class="absolute top-4 left-4 font-accent text-[10px] uppercase tracking-[0.18em] font-bold px-3 py-1.5 rounded-full bg-[var(--color-gold)] text-black">{l.badge || BADGE[l.status] || 'For Sale'}</span>
             </div>
             <div class="p-6">
               <h2 class="font-display text-white text-2xl font-semibold group-hover:text-[var(--color-gold-light)] transition-colors">{l.address}</h2>
               <p class="text-white/55 text-sm mt-1">{l.neighborhood} · {l.city}, {l.state}</p>
               <div class="flex items-center justify-between mt-4">
-                <span class="font-display text-[var(--color-gold)] text-xl font-semibold">{fmtPrice(l.price)}</span>
+                <span class="font-display text-[var(--color-gold)] text-xl font-semibold">{l.price_label_short || fmtPrice(l.price)}</span>
                 <span class="font-accent text-[11px] uppercase tracking-[0.12em] text-white/50">{l.beds} BD · {l.baths} BA · {l.sqft?.toLocaleString('en-US')} SF</span>
               </div>
             </div>
