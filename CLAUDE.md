@@ -53,3 +53,19 @@ Net effect: just commit your script change to `main`; the runner stays in sync o
 - The 90-day window is still used for recent median price / DOM / sale-to-list — that's correct.
 
 When in doubt, the job's `SKILL.md` (path above) documents the full pipeline end to end.
+
+## SRQmap "Events This Week" (daily scheduled task: `srqmap-events`)
+
+The SRQmap guide map (`src/pages/SRQmap.astro`) has an auto-maintained **Events This Week**
+category, refreshed by the Cowork scheduled task `srqmap-events`
+(`C:\Users\Bones\Documents\Claude\Scheduled\srqmap-events\SKILL.md`).
+
+- `src/data/srqmap-events.json` — **machine-generated, do not hand-edit.** The task researches
+  local events (Your Observer, Sarasota Magazine, VisitSarasota, ABC7/Mysuncoast), picks the
+  top 3-4 within the next 7 days, and publishes via
+  `scripts/events/publish_srqmap_events.py` (validates schema + Sarasota-area lat/lng bounds,
+  prunes events whose end_date < today, pushes via Contents API only when the set changed —
+  each push triggers a Netlify rebuild so expired events disappear).
+- `SRQmap.astro` also drops past events at build time as a safety net.
+- Gate note: the SRQmap soft lead gate has a `GATE_ENABLED` kill-switch in `SRQmap.astro`
+  (set to `false` on 2026-07-05 for testing — flip back to `true` to restore the 3-pin wall).
