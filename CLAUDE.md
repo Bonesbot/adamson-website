@@ -69,3 +69,16 @@ category, refreshed by the Cowork scheduled task `srqmap-events`
 - `SRQmap.astro` also drops past events at build time as a safety net.
 - Gate note: the SRQmap soft lead gate has a `GATE_ENABLED` kill-switch in `SRQmap.astro`
   (set to `false` on 2026-07-05 for testing — flip back to `true` to restore the 3-pin wall).
+
+## Feature-listing landing pages (/listings)
+
+941props.com-style single-property marketing pages, data-driven:
+- `src/data/listings/<slug>.json` — one file per listing; every field maps to a page
+  section. Create/hydrate/push via `scripts/listings/new_listing.py` (`--mls <id>` pulls
+  price/beds/baths/sqft/garage from Supabase raw_listings; blank scaffold for off-market).
+- `src/pages/listings/[slug].astro` — the template (hero, stat bar, features, tours,
+  floor plan, map, photo lightbox, inquiry form). `/listings` index auto-lists everything
+  except status:"off-market".
+- Leads POST to the existing `srqmap-lead` function with `source: "listing:<slug>"`
+  (message lands in raw_payload). No new table needed.
+- Full workflow: `LISTINGS_PLAYBOOK.md`.
