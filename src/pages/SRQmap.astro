@@ -1,5 +1,5 @@
 ---
-// build-touch 2026-07-06: MapMe dining photos, UTC pins, UX polish (sticky back, map-click close), AdamsonFL.com cross-links
+// build-touch 2026-07-06b: desktop gallery arrows + clickable dots, Mid-Key beach access pin fix
 import allPins from '../data/srqmap-pins.json';
 import rawEvents from '../data/srqmap-events.json';
 
@@ -267,9 +267,15 @@ const itemList = {
   .gallery-track::-webkit-scrollbar{display:none}
   .gphoto{flex:0 0 100%;width:100%;height:210px;object-fit:cover;scroll-snap-align:center;display:block;background:var(--sand)}
   .gallery-dots{display:flex;justify-content:center;gap:6px;margin-top:9px}
-  .gdot{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .2s ease,transform .2s ease}
+  .gdot{width:8px;height:8px;border-radius:50%;background:var(--line);transition:background .2s ease,transform .2s ease;cursor:pointer}
   .gdot.on{background:var(--gold);transform:scale(1.25)}
   .gcredit{font-size:10px;color:var(--muted);text-align:right;margin:5px 2px 0}
+  .gnav{position:absolute;top:105px;transform:translateY(-50%);z-index:2;width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;background:rgba(10,42,64,.55);color:#fff;font-size:24px;line-height:1;display:grid;place-items:center;padding:0 0 3px;opacity:0;transition:opacity .15s ease,background .15s ease}
+  .gallery:hover .gnav,.gnav:focus-visible{opacity:1}
+  .gnav:hover{background:rgba(10,42,64,.85)}
+  .gnav--prev{left:10px}
+  .gnav--next{right:10px}
+  @media (hover:none){.gnav{display:none}}
 </style>
 </head>
 <body>
@@ -556,7 +562,8 @@ const itemList = {
       var slides = photos.map(function(src,idx){ return '<img class="gphoto" src="'+esc(src)+'" decoding="async" alt="'+esc(p.name)+'" />'; }).join('');
       var gdotsHtml = photos.length>1 ? '<div class="gallery-dots">'+photos.map(function(_x,idx){return '<span class="gdot'+(idx===0?' on':'')+'"></span>';}).join('')+'</div>' : '';
       var gcreditHtml = p.photo_credit ? '<p class="gcredit">'+esc(p.photo_credit)+'</p>' : '';
-      galleryHtml = '<div class="gallery"><div class="gallery-track">'+slides+'</div>'+gdotsHtml+gcreditHtml+'</div>';
+      var gnavHtml = photos.length>1 ? '<button class="gnav gnav--prev" type="button" aria-label="Previous photo">&#8249;</button><button class="gnav gnav--next" type="button" aria-label="Next photo">&#8250;</button>' : '';
+      galleryHtml = '<div class="gallery"><div class="gallery-track">'+slides+'</div>'+gnavHtml+gdotsHtml+gcreditHtml+'</div>';
     }
     detailBody.innerHTML =
       galleryHtml +
@@ -567,7 +574,18 @@ const itemList = {
       '<div class="links"><a class="detail-cta" href="tel:'+TEL+'">Ask Ryan about this</a>'+dirHtml+siteHtml+marketHtml+'</div>'+
       '<p class="signoff">Ryan Adamson, PA · <a href="https://adamsonfl.com/" style="color:var(--blue-deep);font-weight:600;text-decoration:none">AdamsonFL.com</a></p>';
     var gtrack = detailBody.querySelector('.gallery-track');
-    if(gtrack){ var gd = detailBody.querySelectorAll('.gdot'); if(gd.length){ gtrack.addEventListener('scroll', function(){ var gi=Math.round(gtrack.scrollLeft/Math.max(gtrack.clientWidth,1)); for(var k=0;k<gd.length;k++){ gd[k].classList.toggle('on', k===gi); } }, {passive:true}); } }
+    if(gtrack){
+      var gd = detailBody.querySelectorAll('.gdot');
+      if(gd.length){ gtrack.addEventListener('scroll', function(){ var gi=Math.round(gtrack.scrollLeft/Math.max(gtrack.clientWidth,1)); for(var k=0;k<gd.length;k++){ gd[k].classList.toggle('on', k===gi); } }, {passive:true}); }
+      /* Desktop photo navigation: hover arrows + clickable dots (mobile swipes natively) */
+      var gN = detailBody.querySelectorAll('.gphoto').length;
+      function gCur(){ return Math.round(gtrack.scrollLeft/Math.max(gtrack.clientWidth,1)); }
+      function gGo(idx){ gtrack.scrollTo({left: idx*gtrack.clientWidth, behavior:'smooth'}); }
+      var gp=detailBody.querySelector('.gnav--prev'), gn=detailBody.querySelector('.gnav--next');
+      if(gp) gp.onclick=function(e){ e.stopPropagation(); gGo((gCur()-1+gN)%gN); };
+      if(gn) gn.onclick=function(e){ e.stopPropagation(); gGo((gCur()+1)%gN); };
+      for(var gk=0;gk<gd.length;gk++){ (function(k){ gd[k].addEventListener('click', function(){ gGo(k); }); })(gk); }
+    }
     listView.style.display='none';
     detailView.classList.add('show');
     detailView.scrollTop=0;
