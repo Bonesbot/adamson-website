@@ -1,0 +1,315 @@
+---
+/**
+ * /listings/[slug] — Feature-property landing page (941props.com format, AdamsonFL design)
+ *
+ * Data-driven: one JSON file per listing in src/data/listings/*.json.
+ * Add/edit a listing = edit its JSON (see LISTINGS_PLAYBOOK.md + scripts/listings/new_listing.py).
+ * Section flow mirrors the proven 941props layout:
+ *   hero → stat bar → key features → price/CTA → virtual & video tour → floor plan
+ *   → map → photo tour (lightbox) → inquiry form (lead capture → srqmap-lead fn → Supabase + IDX)
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const files = import.meta.glob('../../data/listings/*.json', { eager: true });
+  return Object.values(files).map((mod: any) => {
+    const l = mod.default ?? mod;
+    return { params: { slug: l.slug }, props: { l } };
+  });
+}
+
+const { l } = Astro.props as { l: any };
+
+const fmtPrice = (n: number) => '$' + n.toLocaleString('en-US');
+const STATUS: Record<string, { badge: string; prefix: string; avail: string }> = {
+  'active':      { badge: 'For Sale',            prefix: 'Offered at',            avail: 'https://schema.org/InStock' },
+  'coming-soon': { badge: 'Coming Soon',         prefix: 'Anticipated at',        avail: 'https://schema.org/PreOrder' },
+  'off-market':  { badge: 'Private · Off-Market', prefix: 'Offered privately at', avail: 'https://schema.org/InStock' },
+  'pending':     { badge: 'Pending',             prefix: 'Offered at',            avail: 'https://schema.org/SoldOut' },
+  'sold':        { badge: 'Sold',                prefix: 'Last offered at',       avail: 'https://schema.org/SoldOut' },
+};
+const st = STATUS[l.status] || STATUS['active'];
+const priceLabel = `${st.prefix} ${fmtPrice(l.price)}`;
+const fullAddress = `${l.address}, ${l.city}, ${l.state} ${l.zip}`;
+const pageTitle = `${l.address} — ${l.neighborhood}, ${l.city} FL`;
+const canonical = `https://adamsonfl.com/listings/${l.slug}`;
+const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(l.map_query || fullAddress)}&t=m&z=13&output=embed&iwloc=near`;
+
+const residence = {
+  '@type': 'SingleFamilyResidence',
+  name: l.address,
+  address: { '@type': 'PostalAddress', streetAddress: l.address, addressLocality: l.city, addressRegion: l.state, postalCode: l.zip, addressCountry: 'US' },
+  ...(l.lat && l.lng ? { geo: { '@type': 'GeoCoordinates', latitude: l.lat, longitude: l.lng } } : {}),
+  ...(l.sqft ? { floorSize: { '@type': 'QuantitativeValue', value: l.sqft, unitCode: 'FTK' } } : {}),
+  ...(l.beds ? { numberOfBedrooms: l.beds } : {}),
+  ...(l.baths ? { numberOfBathroomsTotal: l.baths } : {}),
+  ...(l.year_built ? { yearBuilt: l.year_built } : {}),
+};
+const jsonLd: any[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'RealEstateListing',
+    url: canonical,
+    name: pageTitle,
+    description: l.description,
+    image: (l.photos || []).slice(0, 8),
+    about: residence,
+    offers: {
+      '@type': 'Offer',
+      price: l.price,
+      priceCurrency: 'USD',
+      availability: st.avail,
+      offeredBy: { '@type': 'RealEstateAgent', name: 'Ryan Adamson, PA', telephone: '+1-941-713-9234', email: 'Ryan@Adamson-Group.com', url: 'https://adamsonfl.com/about' },
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://adamsonfl.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Featured Listings', item: 'https://adamsonfl.com/listings' },
+      { '@type': 'ListItem', position: 3, name: l.address, item: canonical },
+    ],
+  },
+];
+if (l.faq && l.faq.length) {
+  jsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: l.faq.map((f: any) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  });
+}
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={l.description}
+  ogImage={l.hero_image}
+  canonicalUrl={canonical}
+  jsonLd={jsonLd}
+  noIndex={!!l.noindex}
+>
+
+<style>
+  .lst-eyebrow{font-family:var(--font-accent);font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--color-gold)}
+  .lst-stat-num{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--color-gold);line-height:1}
+  .lightbox{display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.94);align-items:center;justify-content:center}
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:92vw;max-height:88vh;object-fit:contain;box-shadow:0 30px 90px rgba(0,0,0,.8)}
+  .lb-btn{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.5);color:#fff;font-size:26px;cursor:pointer;display:grid;place-items:center;padding:0 0 4px;transition:background .15s}
+  .lb-btn:hover{background:rgba(197,165,90,.35)}
+  .lb-prev{left:18px}.lb-next{right:18px}
+  .lb-close{position:absolute;top:16px;right:20px;background:none;border:none;color:rgba(255,255,255,.75);font-size:34px;cursor:pointer;line-height:1}
+  .lb-close:hover{color:#fff}
+  .lb-count{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-family:var(--font-accent);font-size:12px;letter-spacing:.12em;color:rgba(255,255,255,.65)}
+  .gallery-grid img{cursor:pointer;transition:opacity .2s ease,transform .25s ease}
+  .gallery-grid img:hover{opacity:.85;transform:scale(1.015)}
+</style>
+
+  <!-- ══════════ HERO ══════════ -->
+  <section class="relative min-h-[86vh] flex items-end overflow-hidden">
+    <img src={l.hero_image} alt={`${l.address} — ${l.neighborhood}`} class="absolute inset-0 w-full h-full object-cover" fetchpriority="high" />
+    <div class="absolute inset-0" style="background:linear-gradient(to bottom, rgba(0,0,0,.42) 0%, rgba(0,0,0,.12) 40%, rgba(0,0,0,.82) 100%)"></div>
+    <div class="container relative z-10 pb-16 pt-40">
+      <span class="inline-block font-accent text-[10px] uppercase tracking-[0.2em] font-bold px-3.5 py-1.5 rounded-full mb-5 bg-[var(--color-gold)] text-black">{st.badge}</span>
+      <p class="lst-eyebrow mb-3">{l.tagline}</p>
+      <h1 class="font-display text-white font-bold leading-[1.05]" style="font-size:clamp(2.4rem,6vw,4.5rem)">{l.address}</h1>
+      <p class="text-white/80 text-lg mt-3">{l.neighborhood} · {l.city}, {l.state} {l.zip}</p>
+      <p class="font-display text-[var(--color-gold-light)] text-2xl md:text-3xl font-semibold mt-5">{priceLabel}</p>
+      {l.open_house && <p class="font-accent uppercase tracking-[0.15em] text-sm text-white mt-3 font-semibold">{l.open_house}</p>}
+      <div class="flex flex-wrap gap-4 mt-8">
+        <a href="#inquire" class="font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-3.5 rounded-full bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] transition-colors">Request a Private Showing</a>
+        <a href="tel:19417139234" class="font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-3.5 rounded-full border border-white/40 text-white hover:border-[var(--color-gold)] hover:text-[var(--color-gold)] transition-colors">Call (941) 713-9234</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ STAT BAR ══════════ -->
+  <section class="bg-black border-y border-white/[0.06]">
+    <div class="container py-12">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
+        {l.stats.map((s: any) => (
+          <div>
+            <div class="lst-stat-num">{s.value}</div>
+            <div class="font-accent text-[11px] uppercase tracking-[0.2em] text-white/60 mt-2">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ KEY FEATURES ══════════ -->
+  <section class="bg-[#0A0A0A] py-20">
+    <div class="container">
+      <p class="lst-eyebrow text-center mb-3">The Details</p>
+      <h2 class="font-display text-white text-3xl md:text-4xl font-bold text-center mb-14">Key Features</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {l.features.map((f: any) => (
+          <div class="bg-[#111111] border border-white/[0.06] rounded-lg p-8 hover:border-[var(--color-gold)]/40 transition-colors">
+            <h3 class="font-display text-[var(--color-gold)] text-xl font-semibold mb-3">{f.title}</h3>
+            <p class="text-white/70 text-sm leading-relaxed">{f.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ PRICE + AGENT CTA ══════════ -->
+  <section class="bg-black py-20 text-center border-y border-white/[0.06]">
+    <div class="container-narrow">
+      <p class="font-display text-white text-3xl md:text-5xl font-bold">{priceLabel}</p>
+      {l.open_house && <p class="font-accent uppercase tracking-[0.18em] text-[var(--color-gold)] mt-4 font-semibold">{l.open_house}</p>}
+      <div class="mt-10 flex flex-col items-center gap-2">
+        <img src="/images/logos/adamson-group-black.png" alt="Adamson Group" class="h-14 w-auto" style="filter: invert(1) brightness(100);" />
+        <p class="text-white font-semibold mt-3">Ryan Adamson, PA</p>
+        <a href="tel:19417139234" class="text-[var(--color-gold)] hover:text-[var(--color-gold-light)]">(941) 713-9234</a>
+        <a href="mailto:Ryan@Adamson-Group.com" class="text-white/60 hover:text-[var(--color-gold)] text-sm">Ryan@Adamson-Group.com</a>
+        <a href="#inquire" class="mt-6 font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-3.5 rounded-full bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] transition-colors">Schedule Your Tour Today</a>
+      </div>
+    </div>
+  </section>
+
+  {l.virtual_tour && (
+  <section class="bg-[#0A0A0A] py-20">
+    <div class="container">
+      <p class="lst-eyebrow text-center mb-3">Step Inside</p>
+      <h2 class="font-display text-white text-3xl font-bold text-center mb-10">Virtual Tour</h2>
+      <div class="rounded-lg overflow-hidden border border-white/[0.08]" style="aspect-ratio:16/9">
+        <iframe src={l.virtual_tour} title={`Virtual tour — ${l.address}`} class="w-full h-full" loading="lazy" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+  )}
+
+  {l.video_tour && (
+  <section class="bg-[#0A0A0A] pb-20">
+    <div class="container">
+      <h2 class="font-display text-white text-3xl font-bold text-center mb-10">Video Tour</h2>
+      <div class="rounded-lg overflow-hidden border border-white/[0.08]" style="aspect-ratio:16/9">
+        <iframe src={l.video_tour} title={`Video tour — ${l.address}`} class="w-full h-full" loading="lazy" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+  )}
+
+  {l.floor_plan && (
+  <section class="bg-black py-20 border-y border-white/[0.06]">
+    <div class="container-narrow text-center">
+      <p class="lst-eyebrow mb-3">The Layout</p>
+      <h2 class="font-display text-white text-3xl font-bold mb-10">Floor Plan</h2>
+      <img src={l.floor_plan} alt={`Floor plan — ${l.address}`} class="mx-auto rounded-lg bg-white p-4 max-h-[900px] w-auto" loading="lazy" />
+    </div>
+  </section>
+  )}
+
+  <!-- ══════════ MAP ══════════ -->
+  <section class="bg-[#0A0A0A] py-20">
+    <div class="container">
+      <p class="lst-eyebrow text-center mb-3">The Location</p>
+      <h2 class="font-display text-white text-3xl font-bold text-center mb-10">{l.neighborhood} · {l.city}</h2>
+      <div class="rounded-lg overflow-hidden border border-white/[0.08]" style="aspect-ratio:16/8">
+        <iframe src={mapSrc} title={`Map — ${fullAddress}`} class="w-full h-full" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ PHOTO TOUR ══════════ -->
+  <section class="bg-black py-20 border-t border-white/[0.06]">
+    <div class="container">
+      <p class="lst-eyebrow text-center mb-3">Every Angle</p>
+      <h2 class="font-display text-white text-3xl font-bold text-center mb-10">Photo Tour</h2>
+      <div class="gallery-grid grid grid-cols-2 md:grid-cols-3 gap-3" id="galleryGrid">
+        {(l.photos || []).map((src: string, i: number) => (
+          <img src={src} alt={`${l.address} — photo ${i + 1}`} loading="lazy" decoding="async" class="w-full aspect-[4/3] object-cover rounded" data-idx={i} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ INQUIRY / LEAD CAPTURE ══════════ -->
+  <section id="inquire" class="bg-[#0A0A0A] py-24 border-t border-white/[0.06]">
+    <div class="container-narrow">
+      <p class="lst-eyebrow text-center mb-3">Private Inquiry</p>
+      <h2 class="font-display text-white text-3xl md:text-4xl font-bold text-center mb-4">Request a Showing or More Information</h2>
+      <p class="text-white/60 text-center text-sm mb-12 max-w-xl mx-auto">Your inquiry goes directly to Ryan Adamson — no teams, no call centers. Expect a personal response within hours.</p>
+
+      <form id="listingForm" class="max-w-xl mx-auto" novalidate data-slug={l.slug}>
+        <input type="text" name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <input type="text" name="first_name" required placeholder="First name *" autocomplete="given-name" class="w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white placeholder-white/25 focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm" />
+          <input type="text" name="last_name" placeholder="Last name" autocomplete="family-name" class="w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white placeholder-white/25 focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm" />
+        </div>
+        <input type="email" name="email" required placeholder="Email address *" autocomplete="email" class="mt-4 w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white placeholder-white/25 focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm" />
+        <input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel" class="mt-4 w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white placeholder-white/25 focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm" />
+        <textarea name="message" rows="4" placeholder={`I'd like to know more about ${l.address}…`} class="mt-4 w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white placeholder-white/25 focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm"></textarea>
+        <p id="listingFormErr" class="hidden text-red-400 text-sm mt-3">Please provide your first name and a valid email address.</p>
+        <button type="submit" id="listingFormBtn" class="mt-6 w-full font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-4 rounded-full bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] transition-colors disabled:opacity-60">Send Inquiry</button>
+        <p class="text-white/35 text-xs text-center mt-4">No spam, ever. Your details go straight to Ryan Adamson, PA · Coldwell Banker Realty.</p>
+      </form>
+
+      <div id="listingFormOk" class="hidden max-w-xl mx-auto text-center py-10">
+        <p class="font-display text-[var(--color-gold)] text-3xl font-semibold mb-3">Thank you.</p>
+        <p class="text-white/75">Your inquiry about {l.address} is on its way to Ryan. He'll reach out personally — usually within a few hours.</p>
+        <a href="tel:19417139234" class="inline-block mt-6 font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-3.5 rounded-full border border-[var(--color-gold)] text-[var(--color-gold)]">Or call now: (941) 713-9234</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ LIGHTBOX ══════════ -->
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Photo viewer">
+    <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous photo">&#8249;</button>
+    <img id="lbImg" src="" alt="" />
+    <button class="lb-btn lb-next" id="lbNext" aria-label="Next photo">&#8250;</button>
+    <div class="lb-count" id="lbCount"></div>
+  </div>
+
+<script is:inline>
+(function(){
+  /* ── Lightbox ── */
+  var grid=document.getElementById('galleryGrid');
+  var lb=document.getElementById('lightbox'), lbImg=document.getElementById('lbImg'), lbCount=document.getElementById('lbCount');
+  var imgs=grid?Array.prototype.slice.call(grid.querySelectorAll('img')):[];
+  var cur=0;
+  function show(i){ cur=(i+imgs.length)%imgs.length; lbImg.src=imgs[cur].src; lbCount.textContent=(cur+1)+' / '+imgs.length; }
+  function openLb(i){ show(i); lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function closeLb(){ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  if(grid){ grid.addEventListener('click', function(e){ var t=e.target.closest('img'); if(t) openLb(parseInt(t.getAttribute('data-idx'),10)||0); }); }
+  document.getElementById('lbClose').onclick=closeLb;
+  document.getElementById('lbPrev').onclick=function(){ show(cur-1); };
+  document.getElementById('lbNext').onclick=function(){ show(cur+1); };
+  lb.addEventListener('click', function(e){ if(e.target===lb) closeLb(); });
+  document.addEventListener('keydown', function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') closeLb();
+    if(e.key==='ArrowLeft') show(cur-1);
+    if(e.key==='ArrowRight') show(cur+1);
+  });
+
+  /* ── Inquiry form → srqmap-lead fn (Supabase + IDX; message kept in raw_payload) ── */
+  var form=document.getElementById('listingForm');
+  if(form){
+    var err=document.getElementById('listingFormErr'), btn=document.getElementById('listingFormBtn'), ok=document.getElementById('listingFormOk');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var first=(form.querySelector('[name="first_name"]').value||'').trim();
+      var email=(form.querySelector('[name="email"]').value||'').trim();
+      if(!first || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ err.classList.remove('hidden'); return; }
+      err.classList.add('hidden'); btn.disabled=true; btn.textContent='Sending…';
+      fetch('/.netlify/functions/srqmap-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+        first_name:first,
+        last_name:(form.querySelector('[name="last_name"]').value||'').trim(),
+        email:email,
+        phone:(form.querySelector('[name="phone"]').value||'').trim(),
+        message:(form.querySelector('[name="message"]').value||'').trim(),
+        'bot-field':(form.querySelector('[name="bot-field"]')||{}).value||'',
+        source:'listing:'+(form.getAttribute('data-slug')||'unknown')
+      })})
+      .then(function(r){ if(!r.ok) throw new Error('bad'); return r.json(); })
+      .then(function(){ form.classList.add('hidden'); ok.classList.remove('hidden'); })
+      .catch(function(){ btn.disabled=false; btn.textContent='Send Inquiry'; err.textContent='Something went wrong — please try again or call (941) 713-9234.'; err.classList.remove('hidden'); });
+    });
+  }
+})();
+</script>
+</BaseLayout>
