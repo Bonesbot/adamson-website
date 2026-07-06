@@ -263,7 +263,7 @@ const itemList = {
   .gate-err{color:#b3261e;font-size:12px;margin:2px 0 0}
   /* ===== Pin hero photo gallery (swipe) ===== */
   .gallery{margin:2px 0 16px;position:relative}
-  .gallery-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;border-radius:12px;scrollbar-width:none;box-shadow:0 6px 18px -10px rgba(10,42,64,.5)}
+  .gallery-track{display:flex;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;border-radius:12px;scrollbar-width:none;box-shadow:0 6px 18px -10px rgba(10,42,64,.5)}
   .gallery-track::-webkit-scrollbar{display:none}
   .gphoto{flex:0 0 100%;width:100%;height:210px;object-fit:cover;scroll-snap-align:center;display:block;background:var(--sand)}
   .gallery-dots{display:flex;justify-content:center;gap:6px;margin-top:9px}
@@ -580,7 +580,8 @@ const itemList = {
       /* Desktop photo navigation: hover arrows + clickable dots (mobile swipes natively) */
       var gN = detailBody.querySelectorAll('.gphoto').length;
       function gCur(){ return Math.round(gtrack.scrollLeft/Math.max(gtrack.clientWidth,1)); }
-      function gGo(idx){ gtrack.scrollTo({left: idx*gtrack.clientWidth, behavior:'smooth'}); }
+      /* NB: scrollTo({behavior:'smooth'}) is silently cancelled by the scroll-snap controller in Chrome — assign scrollLeft directly and let CSS scroll-behavior handle easing */
+      function gGo(idx){ gtrack.scrollLeft = idx*gtrack.clientWidth; }
       var gp=detailBody.querySelector('.gnav--prev'), gn=detailBody.querySelector('.gnav--next');
       if(gp) gp.onclick=function(e){ e.stopPropagation(); gGo((gCur()-1+gN)%gN); };
       if(gn) gn.onclick=function(e){ e.stopPropagation(); gGo((gCur()+1)%gN); };
