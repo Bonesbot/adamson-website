@@ -1,0 +1,413 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const asOf = "July 7, 2026";
+const description = "Gulf & Bay Club, Siesta Key (34242) condo market: closed sales, median price ($1,237,500), price per sqft, CDOM, and sale-to-list ratios from live Stellar MLS data. Contact Kelli with the Adamson Group.";
+
+const jsonLd = [
+  {
+    '@type': 'Place',
+    name: 'Gulf & Bay Club',
+    description: 'Gulf & Bay Club is a beachfront and bayside condominium community on Midnight Pass Road, Siesta Key, Sarasota, Florida 34242.',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '5770-5790 Midnight Pass Road',
+      addressLocality: 'Siesta Key',
+      addressRegion: 'FL',
+      postalCode: '34242',
+      addressCountry: 'US',
+    },
+  },
+  {
+    '@type': 'WebPage',
+    name: 'Gulf & Bay Club Condo Market — Siesta Key',
+    description: description,
+    url: 'https://adamsonfl.com/siesta-key/gulf-and-bay-club',
+    dateModified: "2026-07-07",
+    author: {
+      '@type': 'RealEstateAgent',
+      name: 'Ryan Adamson',
+      worksFor: { '@type': 'Organization', name: 'Coldwell Banker Realty — St. Armands' },
+    },
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://adamsonfl.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Siesta Key', item: 'https://adamsonfl.com/areas/siesta-key' },
+      { '@type': 'ListItem', position: 3, name: 'Gulf & Bay Club', item: 'https://adamsonfl.com/siesta-key/gulf-and-bay-club' },
+    ],
+  },
+];
+---
+
+<BaseLayout title="Gulf & Bay Club Condos — Siesta Key" description={description} jsonLd={jsonLd}>
+
+  <section class="gbc-hero">
+    <div class="gbc-hero-bg" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg/1920px-SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg');"></div>
+    <div class="gbc-hero-overlay"></div>
+    <div class="relative z-10 container">
+      <p class="section-label text-cbgl-blue-light mb-3">Siesta Key &middot; 34242 &middot; Condo Community</p>
+      <h1 class="font-display text-white mb-4">Gulf &amp; Bay Club</h1>
+      <p class="gbc-hero-tag">A landmark Gulf-front condominium community on Siesta Key’s famed white-quartz sand — plus its bayside sister association. Live sold-market data, updated from Stellar MLS.</p>
+    </div>
+  </section>
+
+  <section class="section light-section">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
+        <div>
+          <h2 class="accent-underline mb-6">About Gulf &amp; Bay Club</h2>
+          <p class="gbc-about">Set on 32 beachfront acres along Midnight Pass Road, Gulf &amp; Bay Club is one of Siesta Key’s most established condominium communities — known for lush tropical landscaping, tennis, pools, and direct access to the #1-rated Siesta Key Beach. Its bayside counterpart adds intracoastal living and boating just across the road. This page tracks the real closed-sale market for both, straight from the MLS.</p>
+          <div class="flex flex-wrap gap-3 mt-6">
+            <span class="gbc-chip">Gulf-Front</span>
+            <span class="gbc-chip">Siesta Key Beach</span>
+            <span class="gbc-chip">Tennis &amp; Pools</span>
+            <span class="gbc-chip">Gated</span>
+            <span class="gbc-chip">Bayside Boating</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3 lg:gap-4">
+          <figure class="gbc-fig gbc-fig-tall"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Siesta_Key_Beach._Sarasota_-_panoramio.jpg/1920px-Siesta_Key_Beach._Sarasota_-_panoramio.jpg" alt="Siesta Key Beach near Gulf & Bay Club" loading="lazy" /></figure>
+          <figure class="gbc-fig"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Red_Lifeguard_Stand_at_Siesta_Key_Beach.jpg/1920px-Red_Lifeguard_Stand_at_Siesta_Key_Beach.jpg" alt="Red lifeguard stand on Siesta Key Beach" loading="lazy" /></figure>
+          <figure class="gbc-fig"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Siesta_Key_Public_Beach_-_panoramio.jpg/1920px-Siesta_Key_Public_Beach_-_panoramio.jpg" alt="Siesta Key public beach" loading="lazy" /></figure>
+          <figure class="gbc-fig gbc-fig-wide"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Siesta_key_sunset%2C_Sarasota._-_panoramio.jpg/1920px-Siesta_key_sunset%2C_Sarasota._-_panoramio.jpg" alt="Siesta Key sunset over the Gulf" loading="lazy" /></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark-section">
+    <div class="container">
+      <p class="section-label text-cbgl-blue-light mb-3">Beachfront</p>
+      <h2 class="font-display mb-3">Gulf &amp; Bay Club — Beachfront</h2>
+      <p class="gbc-blurb">The flagship 32-acre Gulf-front community on Midnight Pass Road, spanning Phases 1–6 directly on Siesta Key’s white quartz sand.</p>
+      <p class="gbc-window">Closed sales &middot; past 180 days &middot; as of July 7, 2026</p>
+      <div class="gbc-stat-grid"><div class="gbc-stat">
+      <div class="gbc-stat-value">10</div>
+      <div class="gbc-stat-label">Closed Sales</div>
+      
+    </div>
+<div class="gbc-stat">
+      <div class="gbc-stat-value">$925,000</div>
+      <div class="gbc-stat-label">Min Sale Price</div>
+      
+    </div>
+<div class="gbc-stat">
+      <div class="gbc-stat-value">$1,303,500</div>
+      <div class="gbc-stat-label">Avg Sale Price</div>
+      
+    </div>
+<div class="gbc-stat">
+      <div class="gbc-stat-value">$1,237,500</div>
+      <div class="gbc-stat-label">Median Sale Price</div>
+      
+    </div>
+<div class="gbc-stat">
+      <div class="gbc-stat-value">$2,500,000</div>
+      <div class="gbc-stat-label">Max Sale Price</div>
+      
+    </div>
+<div class="gbc-stat">
+      <div class="gbc-stat-value">$879</div>
+      <div class="gbc-stat-label">Avg Price / SqFt</div>
+      
+    </div>
+<div class="gbc-stat">
+      <div class="gbc-stat-value">51</div>
+      <div class="gbc-stat-label">Avg CDOM</div>
+      <div class="gbc-stat-sub">days on market</div>
+    </div>
+<div class="gbc-stat">
+      <div class="gbc-stat-value">93.8%</div>
+      <div class="gbc-stat-label">Avg Sale-to-List</div>
+      
+    </div></div>
+      
+      <h3 class="font-display gbc-subhead">Transaction Ledger</h3>
+      <p class="gbc-window">Every recorded closing in the last 180 days, most recent first.</p>
+      <div class="gbc-table-wrap">
+      <table class="gbc-table">
+        <thead>
+          <tr>
+            <th>Address &amp; Unit</th>
+            <th class="gbc-num">Sale Price</th>
+            <th class="gbc-num">$ / SqFt</th>
+            <th>Closed</th>
+            <th class="gbc-num">CDOM</th>
+            <th class="gbc-num">SP/LP</th>
+            <th>List Agent &amp; Brokerage</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td class="gbc-addr">5780 MIDNIGHT PASS RD #207</td>
+        <td class="gbc-num">$990,000</td>
+        <td class="gbc-num">$672</td>
+        <td>May 15, 2026</td>
+        <td class="gbc-num">49</td>
+        <td class="gbc-num">91.0%</td>
+        <td class="gbc-agent"><span>Lisa Gullick</span><span class="gbc-brk">PREMIER SOTHEBY&#x27;S INTERNATIONAL REALTY</span></td>
+      </tr><tr>
+        <td class="gbc-addr">5770 MIDNIGHT PASS RD #404</td>
+        <td class="gbc-num">$1,250,000</td>
+        <td class="gbc-num">$935</td>
+        <td>Apr 30, 2026</td>
+        <td class="gbc-num">37</td>
+        <td class="gbc-num">93.0%</td>
+        <td class="gbc-agent"><span>Tina Johns</span><span class="gbc-brk">COLDWELL BANKER REALTY</span></td>
+      </tr><tr>
+        <td class="gbc-addr">5790 MIDNIGHT PASS RD #406</td>
+        <td class="gbc-num">$1,120,000</td>
+        <td class="gbc-num">$782</td>
+        <td>Apr 23, 2026</td>
+        <td class="gbc-num">3</td>
+        <td class="gbc-num">93.0%</td>
+        <td class="gbc-agent"><span>Linda Duquette</span><span class="gbc-brk">ENGEL &amp; VOELKERS VENICE DOWNTOWN</span></td>
+      </tr><tr>
+        <td class="gbc-addr">5770 MIDNIGHT PASS #C608</td>
+        <td class="gbc-num">$2,500,000</td>
+        <td class="gbc-num">$1,199</td>
+        <td>Apr 15, 2026</td>
+        <td class="gbc-num">3</td>
+        <td class="gbc-num">100.0%</td>
+        <td class="gbc-agent"><span>Sylvia Wilk</span><span class="gbc-brk">PREFERRED SHORE LLC</span></td>
+      </tr><tr>
+        <td class="gbc-addr">5750 MIDNIGHT PASS RD #704E</td>
+        <td class="gbc-num">$1,275,000</td>
+        <td class="gbc-num">$955</td>
+        <td>Mar 30, 2026</td>
+        <td class="gbc-num">30</td>
+        <td class="gbc-num">93.0%</td>
+        <td class="gbc-agent"><span>Adnan Dedic</span><span class="gbc-brk">COMPASS FLORIDA LLC</span></td>
+      </tr><tr>
+        <td class="gbc-addr">5790 MIDNIGHT PASS RD #104</td>
+        <td class="gbc-num">$1,225,000</td>
+        <td class="gbc-num">$855</td>
+        <td>Mar 2, 2026</td>
+        <td class="gbc-num">10</td>
+        <td class="gbc-num">95.0%</td>
+        <td class="gbc-agent"><span>Jon Patella</span><span class="gbc-brk">WAGNER REALTY</span></td>
+      </tr><tr>
+        <td class="gbc-addr">5790 MIDNIGHT PASS RD #510</td>
+        <td class="gbc-num">$925,000</td>
+        <td class="gbc-num">$693</td>
+        <td>Feb 26, 2026</td>
+        <td class="gbc-num">14</td>
+        <td class="gbc-num">94.0%</td>
+        <td class="gbc-agent"><span>Robert Sherman</span><span class="gbc-brk">PREMIER SOTHEBY&#x27;S INTERNATIONAL REALTY</span></td>
+      </tr><tr>
+        <td class="gbc-addr">5740 MIDNIGHT PASS RD #405</td>
+        <td class="gbc-num">$1,350,000</td>
+        <td class="gbc-num">$1,010</td>
+        <td>Feb 23, 2026</td>
+        <td class="gbc-num">182</td>
+        <td class="gbc-num">92.0%</td>
+        <td class="gbc-agent"><span>Drew Jacobsen</span><span class="gbc-brk">COMPASS FLORIDA LLC</span></td>
+      </tr><tr>
+        <td class="gbc-addr">5760 MIDNIGHT PASS RD #307D</td>
+        <td class="gbc-num">$1,100,000</td>
+        <td class="gbc-num">$808</td>
+        <td>Feb 23, 2026</td>
+        <td class="gbc-num">74</td>
+        <td class="gbc-num">94.0%</td>
+        <td class="gbc-agent"><span>Tina Johns</span><span class="gbc-brk">COLDWELL BANKER REALTY</span></td>
+      </tr><tr>
+        <td class="gbc-addr">5750 MIDNIGHT PASS RD #508 E</td>
+        <td class="gbc-num">$1,300,000</td>
+        <td class="gbc-num">$884</td>
+        <td>Jan 30, 2026</td>
+        <td class="gbc-num">107</td>
+        <td class="gbc-num">93.0%</td>
+        <td class="gbc-agent"><span>Kathleen Griffin</span><span class="gbc-brk">MICHAEL SAUNDERS &amp; COMPANY</span></td>
+      </tr>
+        </tbody>
+      </table>
+    </div>
+      <h3 class="font-display gbc-subhead">Trailing 12-Month Trend</h3>
+      <p class="gbc-window">Median closed price by quarter — a fuller read on where values are heading.</p>
+      <div class="gbc-trend-grid"><div class="gbc-trend-col">
+          <div class="gbc-trend-period">2025-Q3</div>
+          <div class="gbc-trend-price">$1,150,000</div>
+          <div class="gbc-trend-meta">3 sold &middot; $861/sf</div>
+        </div>
+<div class="gbc-trend-col">
+          <div class="gbc-trend-period">2025-Q4</div>
+          <div class="gbc-trend-price">$1,030,000</div>
+          <div class="gbc-trend-meta">4 sold &middot; $772/sf</div>
+        </div>
+<div class="gbc-trend-col">
+          <div class="gbc-trend-period">2026-Q1</div>
+          <div class="gbc-trend-price">$1,225,000</div>
+          <div class="gbc-trend-meta">7 sold &middot; $855/sf</div>
+        </div>
+<div class="gbc-trend-col">
+          <div class="gbc-trend-period">2026-Q2</div>
+          <div class="gbc-trend-price">$1,185,000</div>
+          <div class="gbc-trend-meta">4 sold &middot; $858/sf</div>
+        </div></div>
+    </div>
+  </section>
+  <section class="section dark-section">
+    <div class="container">
+      <p class="section-label text-cbgl-blue-light mb-3">Bayside</p>
+      <h2 class="font-display mb-3">Gulf &amp; Bay Club — Bayside</h2>
+      <p class="gbc-blurb">The separate bayside association across Midnight Pass Road, offering intracoastal-side condos, docks, and a lower price of entry into the Gulf &amp; Bay Club name.</p>
+      <p class="gbc-window">Closed sales &middot; past 180 days &middot; as of July 7, 2026</p>
+      <div class="gbc-stat-grid"><div class="gbc-stat">
+      <div class="gbc-stat-value">1</div>
+      <div class="gbc-stat-label">Closed Sales</div>
+      
+    </div>
+<div class="gbc-stat">
+      <div class="gbc-stat-value">$940,000</div>
+      <div class="gbc-stat-label">Min Sale Price</div>
+      
+    </div>
+<div class="gbc-stat">
+      <div class="gbc-stat-value">$940,000</div>
+      <div class="gbc-stat-label">Avg Sale Price</div>
+      
+    </div>
+<div class="gbc-stat">
+      <div class="gbc-stat-value">$940,000</div>
+      <div class="gbc-stat-label">Median Sale Price</div>
+      
+    </div>
+<div class="gbc-stat">
+      <div class="gbc-stat-value">$940,000</div>
+      <div class="gbc-stat-label">Max Sale Price</div>
+      
+    </div>
+<div class="gbc-stat">
+      <div class="gbc-stat-value">$571</div>
+      <div class="gbc-stat-label">Avg Price / SqFt</div>
+      
+    </div>
+<div class="gbc-stat">
+      <div class="gbc-stat-value">34</div>
+      <div class="gbc-stat-label">Avg CDOM</div>
+      <div class="gbc-stat-sub">days on market</div>
+    </div>
+<div class="gbc-stat">
+      <div class="gbc-stat-value">94.0%</div>
+      <div class="gbc-stat-label">Avg Sale-to-List</div>
+      
+    </div></div>
+      <p class="gbc-note">Beachfront luxury turns slowly — this is a small but real sample. Figures update from live MLS data.</p>
+      <h3 class="font-display gbc-subhead">Transaction Ledger</h3>
+      <p class="gbc-window">Every recorded closing in the last 180 days, most recent first.</p>
+      <div class="gbc-table-wrap">
+      <table class="gbc-table">
+        <thead>
+          <tr>
+            <th>Address &amp; Unit</th>
+            <th class="gbc-num">Sale Price</th>
+            <th class="gbc-num">$ / SqFt</th>
+            <th>Closed</th>
+            <th class="gbc-num">CDOM</th>
+            <th class="gbc-num">SP/LP</th>
+            <th>List Agent &amp; Brokerage</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td class="gbc-addr">1275 SIESTA BAYSIDE DR #1275</td>
+        <td class="gbc-num">$940,000</td>
+        <td class="gbc-num">$571</td>
+        <td>May 5, 2026</td>
+        <td class="gbc-num">34</td>
+        <td class="gbc-num">94.0%</td>
+        <td class="gbc-agent"><span>Robert Ruiz</span><span class="gbc-brk">WILLIAM RAVEIS REAL ESTATE</span></td>
+      </tr>
+        </tbody>
+      </table>
+    </div>
+      <h3 class="font-display gbc-subhead">Trailing 12-Month Trend</h3>
+      <p class="gbc-window">Median closed price by quarter — a fuller read on where values are heading.</p>
+      <div class="gbc-trend-grid"><div class="gbc-trend-col">
+          <div class="gbc-trend-period">2025-Q3</div>
+          <div class="gbc-trend-price">$662,500</div>
+          <div class="gbc-trend-meta">2 sold &middot; $550/sf</div>
+        </div>
+<div class="gbc-trend-col">
+          <div class="gbc-trend-period">2025-Q4</div>
+          <div class="gbc-trend-price">$650,000</div>
+          <div class="gbc-trend-meta">3 sold &middot; $508/sf</div>
+        </div>
+<div class="gbc-trend-col">
+          <div class="gbc-trend-period">2026-Q2</div>
+          <div class="gbc-trend-price">$940,000</div>
+          <div class="gbc-trend-meta">1 sold &middot; $571/sf</div>
+        </div></div>
+    </div>
+  </section>
+
+  <section class="cbgl-section py-20">
+    <div class="container text-center">
+      <p class="section-label text-white/70 mb-3">Your Gulf &amp; Bay Club Specialist</p>
+      <h2 class="font-display text-white mb-4" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Calling Kelli</h2>
+      <p class="gbc-cta-text">Thinking about buying or selling in Gulf &amp; Bay Club? <strong>Kelli</strong> is our Siesta Key point of contact for this community — she can pull current availability, share off-market opportunities, and give you a no-obligation valuation grounded in the real closed-sale data above.</p>
+      <div class="gbc-cta-btns">
+        <a href="/contact" class="gbc-btn gbc-btn-gold">Reach Kelli</a>
+        <a href="/areas/siesta-key" class="gbc-btn gbc-btn-outline">Siesta Key Market</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm dark-section">
+    <div class="container-narrow">
+      <p class="gbc-disc"><strong>Methodology &amp; data.</strong> Figures reflect closed transactions in the MLS for the Gulf &amp; Bay Club (beachfront, Phases 1–6) and Gulf &amp; Bay Club Bayside subdivisions, sourced from Stellar MLS via the Adamson Group data pipeline. "CDOM" is cumulative days on market; "SP/LP" is sale price to list price. The 180-day window and trailing 12-month trend are computed as of July 7, 2026. Small communities close few units per quarter, so single sales can move averages meaningfully. Data is provided for informational purposes and is not a guarantee of value.</p>
+      <p class="gbc-disc gbc-credit">Photography (placeholder — to be replaced): Siesta Key beach imagery via Wikimedia Commons — "Sarasota Sunset, Siesta Key" &amp; "Siesta Key sunset" by John Simpson and contributors (CC BY 3.0), "Siesta Key Beach" (CC BY 3.0), "Red Lifeguard Stand at Siesta Key Beach" (CC0). Not photographs of the Gulf &amp; Bay Club buildings themselves.</p>
+    </div>
+  </section>
+
+<style is:global>
+  .gbc-hero { position:relative; padding-top:9rem; padding-bottom:7rem; overflow:hidden; }
+  .gbc-hero-bg { position:absolute; inset:0; background-size:cover; background-position:center; background-color:var(--color-black); }
+  .gbc-hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.45) 40%, rgba(0,0,0,0.9)); }
+  .gbc-hero-tag { font-size:1.15rem; color:rgba(255,255,255,0.8); max-width:44rem; line-height:1.7; }
+  .gbc-about { color:var(--color-text-muted); line-height:1.8; font-size:1.05rem; }
+  .gbc-chip { display:inline-block; background:rgba(45,66,128,0.1); color:var(--color-cbgl-blue); font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; padding:0.45rem 1rem; border-radius:9999px; border:1px solid rgba(45,66,128,0.2); }
+  .gbc-fig { position:relative; overflow:hidden; border-radius:0.6rem; aspect-ratio:4/3; margin:0; }
+  .gbc-fig img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .7s; }
+  .gbc-fig:hover img { transform:scale(1.05); }
+  .gbc-fig-tall { grid-row:span 2; aspect-ratio:3/4; }
+  .gbc-fig-wide { aspect-ratio:16/9; }
+  .gbc-blurb { color:rgba(255,255,255,0.72); max-width:46rem; line-height:1.7; margin-bottom:0.4rem; }
+  .gbc-window { color:rgba(255,255,255,0.45); font-family:var(--font-accent); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1.25rem; }
+  .gbc-subhead { margin-top:3rem; margin-bottom:0.35rem; color:#fff; font-size:1.4rem; }
+  .gbc-note { color:var(--color-gold-light); font-size:0.85rem; margin-top:0.75rem; font-style:italic; }
+  .gbc-thin { color:rgba(255,255,255,0.6); }
+  .gbc-stat-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0.9rem; margin-top:0.5rem; }
+  @media (min-width:640px){ .gbc-stat-grid{ grid-template-columns:repeat(4,1fr);} }
+  .gbc-stat { background:var(--color-black-card); border:1px solid rgba(255,255,255,0.1); border-radius:0.7rem; padding:1.3rem 1.1rem; }
+  .gbc-stat-value { font-family:var(--font-display); font-size:1.55rem; color:#fff; line-height:1.1; }
+  .gbc-stat-label { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.09em; color:var(--color-cbgl-blue-light); margin-top:0.5rem; }
+  .gbc-stat-sub { font-size:0.68rem; color:rgba(255,255,255,0.4); margin-top:0.15rem; }
+  .gbc-table-wrap { margin-top:0.75rem; max-height:520px; overflow:auto; border:1px solid rgba(255,255,255,0.1); border-radius:0.7rem; }
+  .gbc-table { width:100%; border-collapse:collapse; font-size:0.86rem; color:rgba(255,255,255,0.85); min-width:760px; }
+  .gbc-table thead th { position:sticky; top:0; background:var(--color-dark); color:var(--color-cbgl-blue-light); font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.07em; text-align:left; padding:0.8rem 0.9rem; border-bottom:1px solid rgba(255,255,255,0.14); z-index:1; }
+  .gbc-table tbody td { padding:0.75rem 0.9rem; border-bottom:1px solid rgba(255,255,255,0.06); vertical-align:top; }
+  .gbc-table tbody tr:hover { background:rgba(82,168,255,0.06); }
+  .gbc-num { text-align:right; font-variant-numeric:tabular-nums; }
+  .gbc-addr { font-weight:600; color:#fff; white-space:nowrap; }
+  .gbc-agent span { display:block; }
+  .gbc-brk { font-size:0.72rem; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:0.03em; }
+  .gbc-trend-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0.9rem; margin-top:0.5rem; }
+  @media (min-width:640px){ .gbc-trend-grid{ grid-template-columns:repeat(4,1fr);} }
+  .gbc-trend-col { background:var(--color-black-card); border:1px solid rgba(255,255,255,0.1); border-radius:0.7rem; padding:1.1rem; border-left:3px solid var(--color-gold); }
+  .gbc-trend-period { font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--color-cbgl-blue-light); }
+  .gbc-trend-price { font-family:var(--font-display); font-size:1.35rem; color:#fff; margin-top:0.35rem; }
+  .gbc-trend-meta { font-size:0.72rem; color:rgba(255,255,255,0.5); margin-top:0.25rem; }
+  .gbc-cta-text { color:rgba(255,255,255,0.85); max-width:40rem; margin:0 auto 2rem; line-height:1.7; }
+  .gbc-cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+  .gbc-btn { display:inline-flex; align-items:center; font-family:var(--font-accent); text-transform:uppercase; letter-spacing:0.08em; font-size:0.8rem; font-weight:600; padding:1rem 2rem; border-radius:0.35rem; transition:all .2s; }
+  .gbc-btn-gold { background:var(--color-gold); color:#000; }
+  .gbc-btn-gold:hover { background:var(--color-gold-light); }
+  .gbc-btn-outline { border:2px solid #fff; color:#fff; }
+  .gbc-btn-outline:hover { background:#fff; color:#000; }
+  .gbc-disc { color:rgba(255,255,255,0.55); font-size:0.82rem; line-height:1.7; }
+  .gbc-credit { margin-top:1rem; color:rgba(255,255,255,0.4); font-size:0.75rem; }
+</style>
+</BaseLayout>
