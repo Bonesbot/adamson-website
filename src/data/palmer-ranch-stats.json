@@ -2,35 +2,35 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-05T10:55:35.975486+00:00",
+  "lastUpdated": "2026-07-08T10:56:31.488466+00:00",
   "counts": {
-    "sold": 755,
-    "pending": 75,
-    "active": 290,
-    "total": 830
+    "sold": 759,
+    "pending": 78,
+    "active": 289,
+    "total": 837
   },
   "metrics": {
-    "avgPrice": "$565,810",
+    "avgPrice": "$563,588",
     "avgPricePerSqFt": "$264",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,052",
+    "avgLivingSqFt": "2,046",
     "avgLotSqFt": null,
-    "avgDom": 80
+    "avgDom": 81
   },
   "range": {
     "minPrice": "$110,000",
     "maxPrice": "$2,710,000"
   },
   "active": {
-    "count": 290,
-    "medianPrice": "$419,950",
+    "count": 289,
+    "medianPrice": "$419,900",
     "medianPricePerSqFt": "$249",
-    "waterfrontCount": 36,
-    "newConstructionCount": 39
+    "waterfrontCount": 37,
+    "newConstructionCount": 38
   },
   "sold": {
-    "count": 218,
-    "medianPrice": "$480,500",
+    "count": 220,
+    "medianPrice": "$485,250",
     "medianDom": 44,
     "saleToListRatio": "91.1%",
     "windowDays": 90
@@ -43,18 +43,18 @@
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$469",
+    "medianMonthlyAssociation": "$470",
     "medianMonthlyCondoFee": "$560",
     "minMonthlyCondoFee": "$211",
-    "maxMonthlyCondoFee": "$1,000",
+    "maxMonthlyCondoFee": "$1,192",
     "condoFeeRange": {
       "min": 211,
       "median": 560,
-      "max": 1000
+      "max": 1192
     }
   },
   "priceBands": {
-    "under900k": 258,
+    "under900k": 257,
     "band900kTo1_5m": 21,
     "band1_5mTo3m": 11,
     "band3mPlus": 0
@@ -62,11 +62,50 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 290
+      "count": 289
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4695027",
+      "address": "11790 FIORE LN",
+      "subdivision": "ISLES OF SARASOTA",
+      "soldPrice": "$555,000",
+      "soldDate": "2026-07-07",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,008",
+      "yearBuilt": 2006,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4693402",
+      "address": "4034 WILSHIRE CIR E #154",
+      "subdivision": "LAKESHORE VILLAGE",
+      "soldPrice": "$409,000",
+      "soldDate": "2026-07-07",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,990",
+      "yearBuilt": 1989,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4691437",
+      "address": "5835 PALMER RANCH PKWY",
+      "subdivision": "ARBOR LAKES ON PALMER RANCH",
+      "soldPrice": "$1,250,000",
+      "soldDate": "2026-07-06",
+      "bedrooms": 5,
+      "bathrooms": 4.5,
+      "livingSqFt": "4,657",
+      "yearBuilt": 2014,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4692718",
       "address": "8923 BLOOMFIELD BLVD",
@@ -92,45 +131,6 @@
       "yearBuilt": 2001,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4678179",
-      "address": "11105 SANDHILL PRESERVE DR",
-      "subdivision": "SANDHILL PRESERVE",
-      "soldPrice": "$487,000",
-      "soldDate": "2026-07-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,675",
-      "yearBuilt": 2016,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4678168",
-      "address": "3871 ALAMANDA DR",
-      "subdivision": "MIRA LAGO AT PALMER RANCH PH 3",
-      "soldPrice": "$400,000",
-      "soldDate": "2026-07-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,601",
-      "yearBuilt": 1996,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4692677",
-      "address": "3837 TORREY PINES BLVD",
-      "subdivision": "COUNTRY CLUB OF SARASOTA THE",
-      "soldPrice": "$517,500",
-      "soldDate": "2026-06-30",
-      "bedrooms": 4,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,060",
-      "yearBuilt": 1984,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,19 +139,19 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 42,
-      "avgPrice": "$328,686",
-      "avgPricePerSqFt": "$202",
-      "avgLivingSqFt": "1,612",
-      "avgDom": 75
+      "avgPrice": "$339,283",
+      "avgPricePerSqFt": "$200",
+      "avgLivingSqFt": "1,679",
+      "avgDom": 76
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 103,
-      "avgPrice": "$302,346",
+      "avgPrice": "$301,245",
       "avgPricePerSqFt": "$232",
-      "avgLivingSqFt": "1,300",
+      "avgLivingSqFt": "1,295",
       "avgDom": 110
     },
     {
@@ -159,10 +159,10 @@
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
       "activeCount": 17,
-      "avgPrice": "$384,671",
+      "avgPrice": "$387,906",
       "avgPricePerSqFt": "$238",
-      "avgLivingSqFt": "1,621",
-      "avgDom": 98
+      "avgLivingSqFt": "1,640",
+      "avgDom": 91
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$358,946",
       "avgPricePerSqFt": "$225",
       "avgLivingSqFt": "1,597",
-      "avgDom": 63
+      "avgDom": 66
     }
   ],
   "condoTiersScope": {
@@ -197,15 +197,15 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 76,
-      "soldCount": 170,
-      "soldMedianPricePerSqFt": "$260",
-      "soldMedianPrice": "$481,750",
+      "soldCount": 171,
+      "soldMedianPricePerSqFt": "$261",
+      "soldMedianPrice": "$486,000",
       "lowSample": false
     },
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 36,
+      "activeCount": 37,
       "soldCount": 161,
       "soldMedianPricePerSqFt": "$277",
       "soldMedianPrice": "$610,000",
@@ -214,8 +214,8 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 178,
-      "soldCount": 422,
+      "activeCount": 176,
+      "soldCount": 425,
       "soldMedianPricePerSqFt": "$245",
       "soldMedianPrice": "$440,000",
       "lowSample": false
@@ -226,20 +226,20 @@
     "monthsOfSupplyCondo": 8.5,
     "monthsOfSupplySfhVilla": 3.9,
     "label": "balanced market",
-    "activeCount": 290,
-    "sold365Count": 694,
-    "sold90Count": 218,
+    "activeCount": 289,
+    "sold365Count": 695,
+    "sold90Count": 220,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 431,
-      "activeCount": 116,
-      "soldMedianPrice": "$653,000",
-      "soldMedianPricePerSqFt": "$290"
+      "soldCount": 434,
+      "activeCount": 115,
+      "soldMedianPrice": "$651,500",
+      "soldMedianPricePerSqFt": "$289"
     },
     "condo": {
-      "soldCount": 324,
+      "soldCount": 325,
       "activeCount": 174,
       "soldMedianPrice": "$330,000",
       "soldMedianPricePerSqFt": "$215"
@@ -247,23 +247,23 @@
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 36
+    "activeWaterfront": 37
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 290 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 5.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 289 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 5.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Palmer Ranch?",
-      "a": "Single-family homes sell around $653,000 ($290/sq ft), while condos, villas and townhouses sell around $330,000 ($215/sq ft)."
+      "a": "Single-family homes sell around $651,500 ($289/sq ft), while condos, villas and townhouses sell around $330,000 ($215/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $2,710,000, with a median asking price of $419,950."
+      "a": "Active listings run from $110,000 to $2,710,000, with a median asking price of $419,900."
     },
     {
       "facet": "speed",
@@ -273,12 +273,12 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 36 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 37 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Palmer Ranch?",
-      "a": "The median monthly condo fee is $560 and the median monthly association fee is $469."
+      "a": "The median monthly condo fee is $560 and the median monthly association fee is $470."
     }
   ],
   "costBreakdown90": null

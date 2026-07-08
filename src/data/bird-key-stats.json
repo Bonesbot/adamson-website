@@ -2,11 +2,11 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-02T10:55:55.752628+00:00",
+  "lastUpdated": "2026-07-08T10:56:30.688492+00:00",
   "counts": {
     "sold": 33,
     "pending": 4,
-    "active": 25,
+    "active": 26,
     "total": 37
   },
   "metrics": {
@@ -22,28 +22,28 @@
     "maxPrice": "$11,900,000"
   },
   "active": {
-    "count": 25,
-    "medianPrice": "$4,350,000",
-    "medianPricePerSqFt": "$1,393",
+    "count": 26,
+    "medianPrice": "$4,325,000",
+    "medianPricePerSqFt": "$1,336",
     "waterfrontCount": 12,
     "newConstructionCount": 6
   },
   "sold": {
-    "count": 10,
-    "medianPrice": "$3,997,500",
-    "medianDom": 90,
-    "saleToListRatio": "88.8%",
+    "count": 9,
+    "medianPrice": "$4,200,000",
+    "medianDom": 94,
+    "saleToListRatio": "89.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": null,
-    "sfhVilla": 10.3,
-    "blended": 10.3,
+    "sfhVilla": 10.8,
+    "blended": 10.8,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$95",
+    "medianMonthlyAssociation": "$100",
     "medianMonthlyCondoFee": null,
     "minMonthlyCondoFee": null,
     "maxMonthlyCondoFee": null,
@@ -52,13 +52,13 @@
   "priceBands": {
     "under900k": 0,
     "band900kTo1_5m": 1,
-    "band1_5mTo3m": 8,
+    "band1_5mTo3m": 9,
     "band3mPlus": 16
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 25
+      "count": 26
     }
   ],
   "buildingClasses": [
@@ -167,7 +167,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 13,
+      "activeCount": 14,
       "soldCount": 12,
       "soldMedianPricePerSqFt": "$810",
       "soldMedianPrice": "$2,090,000",
@@ -175,19 +175,19 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 10.3,
+    "monthsOfSupply": 10.8,
     "monthsOfSupplyCondo": null,
-    "monthsOfSupplySfhVilla": 10.3,
+    "monthsOfSupplySfhVilla": 10.8,
     "label": "buyer's market",
-    "activeCount": 25,
+    "activeCount": 26,
     "sold365Count": 29,
-    "sold90Count": 10,
+    "sold90Count": 9,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 33,
-      "activeCount": 25,
+      "activeCount": 26,
       "soldMedianPrice": "$3,850,000",
       "soldMedianPricePerSqFt": "$1,080"
     }
@@ -200,17 +200,17 @@
     {
       "facet": "balance",
       "q": "Is Bird Key a buyer's or seller's market right now?",
-      "a": "With 25 active listings and roughly 2 closed sales a month (trailing 12 months), Bird Key has about 10.3 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 26 active listings and roughly 2 closed sales a month (trailing 12 months), Bird Key has about 10.8 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Bird Key?",
-      "a": "Active listings run from $1,150,000 to $11,900,000, with a median asking price of $4,350,000."
+      "a": "Active listings run from $1,150,000 to $11,900,000, with a median asking price of $4,325,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Bird Key?",
-      "a": "Recently sold homes took a median 90 days on market and closed at 88.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 94 days on market and closed at 89.0% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
@@ -220,7 +220,7 @@
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Bird Key?",
-      "a": "The median monthly condo fee is None and the median monthly association fee is $95."
+      "a": "The median monthly condo fee is None and the median monthly association fee is $100."
     }
   ],
   "costBreakdown90": null
