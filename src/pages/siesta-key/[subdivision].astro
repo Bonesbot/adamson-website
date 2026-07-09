@@ -1,0 +1,231 @@
+---
+// Subdivision / community landing pages under Siesta Key.
+// Registry: src/data/subdivisions.json (which communities exist + editorial copy)
+// Stats:    src/data/subdivisions/<slug>-stats.json — generated from the Supabase
+//           MLS pipeline by CRM-Outreach/scripts/build_subdivision_stats.py.
+// These pages triple as AEO surface, Google Ads landing pages, and mailer QR targets.
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import FAQSchema from '@/components/seo/FAQSchema.astro';
+import Button from '@/components/ui/Button.astro';
+import registry from '@/data/subdivisions.json';
+
+export async function getStaticPaths() {
+  return registry.subdivisions
+    .filter((s: any) => s.parentArea === 'siesta-key')
+    .map((s: any) => ({ params: { subdivision: s.slug } }));
+}
+
+const { subdivision } = Astro.params;
+const sub: any = registry.subdivisions.find((s: any) => s.slug === subdivision);
+if (!sub) return Astro.redirect('/areas/siesta-key');
+
+let stats: any = null;
+const statsModules = import.meta.glob('../../data/subdivisions/*-stats.json', { eager: true }) as Record<string, any>;
+for (const [path, mod] of Object.entries(statsModules)) {
+  if (path.endsWith(`/${subdivision}-stats.json`)) { stats = (mod as any).default ?? mod; break; }
+}
+
+const h = stats?.headline || {};
+const asOf = stats?.lastUpdated
+  ? new Date(stats.lastUpdated).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
+  : null;
+
+const faqs = (stats?.marketQuestions || []).map((q: any) => ({ question: q.q, answer: q.a }));
+
+const statCards = [
+  h.sold12 ? { value: String(h.sold12), label: 'Sales · Last 12 Mo' } : null,
+  h.soldMedian ? { value: h.soldMedian, label: 'Median Sold Price' } : null,
+  h.monthsOfSupply ? { value: `${h.monthsOfSupply} mo`, label: 'Supply at Current Pace' } : null,
+  h.active != null ? { value: String(h.active), label: 'Active Listings' } : null,
+  h.medianDom != null ? { value: `${h.medianDom} days`, label: 'Median Time to Sell' } : null,
+  h.activePsf ? { value: h.activePsf, label: 'Asking $/Sq Ft' } : null,
+].filter(Boolean) as { value: string; label: string }[];
+
+const description = `${sub.name} on Siesta Key — live market data: ${h.sold12 || '—'} sales in the last 12 months, median ${h.soldMedian || '—'}, ${h.monthsOfSupply || '—'} months of supply. Community guide, recent sales, fees & FAQ from Ryan Adamson, Coldwell Banker.`;
+
+const jsonLd = [
+  {
+    '@type': 'Place',
+    name: sub.name,
+    description: sub.description,
+    address: { '@type': 'PostalAddress', addressLocality: 'Sarasota', addressRegion: 'FL', postalCode: sub.zip || '34242', addressCountry: 'US' },
+  },
+  {
+    '@type': 'WebPage',
+    name: `${sub.name} — Siesta Key Condo Market Guide`,
+    description,
+    url: `https://adamsonfl.com/siesta-key/${sub.slug}`,
+    ...(stats?.lastUpdated && { dateModified: String(stats.lastUpdated).slice(0, 10) }),
+    author: { '@type': 'RealEstateAgent', name: 'Ryan Adamson', worksFor: { '@type': 'Organization', name: 'Coldwell Banker Realty — St. Armands' } },
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://adamsonfl.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Siesta Key', item: 'https://adamsonfl.com/areas/siesta-key' },
+      { '@type': 'ListItem', position: 3, name: sub.name, item: `https://adamsonfl.com/siesta-key/${sub.slug}` },
+    ],
+  },
+];
+---
+
+<BaseLayout title={`${sub.name} — Siesta Key Condos & Market Data`} description={description} jsonLd={jsonLd}>
+
+  <!-- Hero -->
+  <section class="relative pt-32 pb-20 overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center"
+      style={`background-image: url('/images/areas/siesta-key.jpg'); background-color: var(--color-black);`} />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/90" />
+    <div class="relative z-10 container">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Siesta Key Community Guide</p>
+      <h1 class="font-display text-white mb-4">{sub.name}</h1>
+      <p class="text-lg text-white/70 max-w-2xl leading-relaxed">{sub.tagline}</p>
+    </div>
+  </section>
+
+  <!-- Headline market stats -->
+  {statCards.length > 0 && (
+    <section class="bg-black py-10 border-t border-white/[0.06]">
+      <div class="container">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
+          {statCards.map((s) => (
+            <div>
+              <div class="font-display text-3xl text-[var(--color-gold)]">{s.value}</div>
+              <div class="font-accent text-[0.65rem] uppercase tracking-[0.15em] text-white/60 mt-1">{s.label}</div>
+            </div>
+          ))}
+        </div>
+        {asOf && (
+          <p class="text-center text-white/40 text-xs mt-6">
+            MLS sales, trailing 12 months · Source: Stellar MLS · Updated {asOf}
+          </p>
+        )}
+      </div>
+    </section>
+  )}
+
+  <!-- About -->
+  <section class="section light-section">
+    <div class="container-narrow">
+      <h2 class="accent-underline mb-6">About {sub.name}</h2>
+      <p class="text-[var(--color-text-muted)] leading-relaxed text-lg mb-8">{sub.description}</p>
+      {sub.highlights && (
+        <div class="flex flex-wrap gap-3">
+          {sub.highlights.map((x: string) => (
+            <span class="inline-block bg-[var(--color-cbgl-blue)]/10 text-[var(--color-cbgl-blue)] font-accent text-xs uppercase tracking-wider px-4 py-2 rounded-full border border-[var(--color-cbgl-blue)]/20">{x}</span>
+          ))}
+        </div>
+      )}
+      {stats?.profile && (
+        <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6">
+          {stats.profile.yearBuilt && (<div><div class="font-semibold text-lg">{stats.profile.yearBuilt}</div><div class="text-sm text-[var(--color-text-muted)]">Built</div></div>)}
+          {stats.profile.waterfrontShare && (<div><div class="font-semibold text-lg">{stats.profile.waterfrontShare}</div><div class="text-sm text-[var(--color-text-muted)]">of listings waterfront</div></div>)}
+          {stats.profile.medianMonthlyAssoc && (<div><div class="font-semibold text-lg">{stats.profile.medianMonthlyAssoc}/mo</div><div class="text-sm text-[var(--color-text-muted)]">Median assoc. cost</div></div>)}
+          {stats.profile.minimumLease && (<div><div class="font-semibold text-lg">{stats.profile.minimumLease}</div><div class="text-sm text-[var(--color-text-muted)]">Minimum lease</div></div>)}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Recent sales + price bands -->
+  {stats && (stats.recentSales?.length > 0 || stats.priceBands?.length > 0) && (
+    <section class="section dark-section">
+      <div class="container">
+        <h2 class="accent-underline-center text-center mb-12">Recent {sub.name} Sales</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div class="lg:col-span-2 overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="text-left font-accent text-[0.65rem] uppercase tracking-[0.15em] text-white/50 border-b border-white/10">
+                  <th class="py-3 pr-4">Closed</th><th class="py-3 pr-4">Price</th>
+                  <th class="py-3 pr-4">Beds / Baths</th><th class="py-3 pr-4">Sq Ft</th><th class="py-3">Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stats.recentSales.map((r: any) => (
+                  <tr class="border-b border-white/[0.06] text-white/80">
+                    <td class="py-3 pr-4">{r.closed}</td>
+                    <td class="py-3 pr-4 font-semibold text-white">{r.price}</td>
+                    <td class="py-3 pr-4">{r.beds} / {r.baths}</td>
+                    <td class="py-3 pr-4">{r.sqft}</td>
+                    <td class="py-3">{r.type}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h3 class="font-accent text-xs uppercase tracking-[0.15em] text-white/60 mb-4">Sold Price Mix (12 mo)</h3>
+            {stats.priceBands.map((b: any) => (
+              <div class="mb-3">
+                <div class="flex justify-between text-sm text-white/80 mb-1"><span>{b.label}</span><span>{b.count}</span></div>
+                <div class="h-2 rounded bg-white/10 overflow-hidden">
+                  <div class="h-full bg-[var(--color-gold)]" style={`width:${Math.min(100, (b.count / Math.max(1, Math.max(...stats.priceBands.map((x: any) => x.count)))) * 100)}%`} />
+                </div>
+              </div>
+            ))}
+            {h.saleToOrigList && (
+              <p class="text-white/50 text-xs mt-6">Sellers received on average {h.saleToOrigList} of original asking price over the past 12 months.</p>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- FAQ (data-driven, rebuilt on every stats refresh) -->
+  {faqs.length > 0 && <FAQSchema faqs={faqs} heading={`${sub.name} Market Questions & FAQ`} />}
+
+  <!-- Valuation CTA -->
+  <section class="cbgl-section py-16" id="valuation">
+    <div class="container text-center">
+      <h2 class="font-display text-2xl text-white mb-4">Own at {sub.name}?</h2>
+      <p class="text-white/70 mb-8 max-w-lg mx-auto">
+        Get a data-backed valuation of your residence — grounded in every {sub.name} sale on record, not a generic estimate.
+      </p>
+      <form id="subLeadForm" class="max-w-xl mx-auto text-left">
+        <input type="text" name="bot-field" class="hidden" tabindex="-1" autocomplete="off" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input required name="first_name" placeholder="First name" class="px-4 py-3 rounded bg-white/10 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-[var(--color-gold)]" />
+          <input name="last_name" placeholder="Last name" class="px-4 py-3 rounded bg-white/10 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-[var(--color-gold)]" />
+          <input required type="email" name="email" placeholder="Email" class="px-4 py-3 rounded bg-white/10 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-[var(--color-gold)]" />
+          <input name="phone" placeholder="Phone (optional)" class="px-4 py-3 rounded bg-white/10 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-[var(--color-gold)]" />
+        </div>
+        <button type="submit" class="mt-6 w-full font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-4 rounded-full bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] transition-colors disabled:opacity-60">
+          Request My {sub.name} Valuation
+        </button>
+        <p id="subLeadErr" class="hidden text-red-400 text-sm mt-3"></p>
+      </form>
+      <div id="subLeadOk" class="hidden max-w-xl mx-auto py-10">
+        <p class="text-white text-lg font-semibold">Thank you — Ryan will be in touch shortly.</p>
+      </div>
+      <p class="text-white/40 text-xs mt-8">Prefer to talk? <a href="/contact" class="underline text-white/60">Contact Ryan directly</a> · (941) 713-9234</p>
+    </div>
+  </section>
+
+  <script define:vars={{ slug: sub.slug }}>
+    const form = document.getElementById('subLeadForm');
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type=submit]');
+      const err = document.getElementById('subLeadErr');
+      btn.disabled = true; err.classList.add('hidden');
+      const fd = new FormData(form);
+      const payload = Object.fromEntries(fd.entries());
+      payload.source = `subdivision:${slug}`;
+      try {
+        const res = await fetch('/.netlify/functions/srqmap-lead', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error('Request failed');
+        form.classList.add('hidden');
+        document.getElementById('subLeadOk').classList.remove('hidden');
+      } catch (_) {
+        err.textContent = 'Something went wrong — please try again or use the contact page.';
+        err.classList.remove('hidden');
+        btn.disabled = false;
+      }
+    });
+  </script>
+
+</BaseLayout>
