@@ -200,32 +200,18 @@ const jsonLd = [
         <p class="text-white text-lg font-semibold">Thank you — Ryan will be in touch shortly.</p>
       </div>
       <p class="text-white/40 text-xs mt-8">Prefer to talk? <a href="/contact" class="underline text-white/60">Contact Ryan directly</a> · (941) 713-9234</p>
-    </div>
-  </section>
 
-  <script define:vars={{ slug: sub.slug }}>
-    const form = document.getElementById('subLeadForm');
-    form?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = form.querySelector('button[type=submit]');
-      const err = document.getElementById('subLeadErr');
-      btn.disabled = true; err.classList.add('hidden');
-      const fd = new FormData(form);
-      const payload = Object.fromEntries(fd.entries());
-      payload.source = `subdivision:${slug}`;
-      try {
-        const res = await fetch('/.netlify/functions/srqmap-lead', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
-        });
-        if (!res.ok) throw new Error('Request failed');
-        form.classList.add('hidden');
-        document.getElementById('subLeadOk').classList.remove('hidden');
-      } catch (_) {
-        err.textContent = 'Something went wrong — please try again or use the contact page.';
-        err.classList.remove('hidden');
-        btn.disabled = false;
-      }
-    });
-  </script>
-
-</BaseLayout>
+      <!-- Private off-market registry — deliberately discrete -->
+      <div class="max-w-xl mx-auto mt-14 pt-10 border-t border-white/10 text-left" id="registry">
+        <button id="omToggle" type="button" class="w-full text-center group">
+          <span class="font-accent text-[0.7rem] uppercase tracking-[0.2em] text-[var(--color-gold)]">Private Off-Market Registry</span>
+          <span class="block text-white/60 text-sm mt-2 group-hover:text-white/80 transition-colors">
+            Considering a sale — but quietly? Join a confidential registry of {sub.name} owners
+            open to the right offer. No sign, no listing, no showings parade. <span class="underline">Learn more</span>
+          </span>
+        </button>
+        <div id="omPanel" class="hidden mt-8">
+          <p class="text-white/60 text-sm mb-6 text-center">
+            We maintain a private database of owners who would sell at the right number. When a qualified
+            buyer matches your residence, we contact you directly — you stay entirely off the public market
+            until you say otherwise. No obligatio
