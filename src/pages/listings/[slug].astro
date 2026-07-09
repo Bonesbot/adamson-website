@@ -126,6 +126,15 @@ if (l.faq && l.faq.length) {
     </div>
   </section>
 
+  <!-- OPEN HOUSE BANNER (smart, self-expiring) -->
+  <section id="ohBanner" class="bg-[var(--color-gold)] text-black" hidden data-slug={l.slug} data-oh={JSON.stringify(l.open_houses || [])}>
+    <div class="container py-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-center">
+      <span class="font-accent text-[11px] uppercase tracking-[0.22em] font-bold">Open House</span>
+      <span id="ohWhen" class="font-semibold text-sm"></span>
+      <a href="#rsvp" class="font-accent text-[11px] uppercase tracking-[0.15em] font-bold px-5 py-2 rounded-full bg-black text-[var(--color-gold)] hover:bg-[#111] transition-colors">RSVP</a>
+    </div>
+  </section>
+
   <!-- ══════════ STAT BAR ══════════ -->
   <section class="bg-black border-y border-white/[0.06]">
     <div class="container py-12">
@@ -228,6 +237,37 @@ if (l.faq && l.faq.length) {
     </div>
   </section>
 
+  <!-- OPEN HOUSE RSVP (revealed with banner) -->
+  <section id="rsvp" class="bg-black py-24 border-t border-white/[0.06]" hidden>
+    <div class="container-narrow">
+      <p class="lst-eyebrow text-center mb-3">Open House</p>
+      <h2 class="font-display text-white text-3xl md:text-4xl font-bold text-center mb-3">RSVP for the Open House</h2>
+      <p id="rsvpWhen" class="font-accent uppercase tracking-[0.15em] text-[var(--color-gold)] text-center text-sm mb-10 font-semibold"></p>
+      <form id="rsvpForm" class="max-w-xl mx-auto" novalidate data-slug={l.slug}>
+        <input type="text" name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <input type="text" name="first_name" required placeholder="First name *" autocomplete="given-name" class="w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white placeholder-white/25 focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm" />
+          <input type="email" name="email" required placeholder="Email address *" autocomplete="email" class="w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white placeholder-white/25 focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm" />
+        </div>
+        <select name="guests" class="mt-4 w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm">
+          <option value="1">Just me</option>
+          <option value="2">2 guests</option>
+          <option value="3">3 guests</option>
+          <option value="4">4 guests</option>
+          <option value="5">5+ guests</option>
+        </select>
+        <textarea name="note" rows="3" placeholder="A short note (optional) - questions, arrival time, etc." class="mt-4 w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white placeholder-white/25 focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm"></textarea>
+        <p id="rsvpErr" class="hidden text-red-400 text-sm mt-3">Please provide your first name and a valid email address.</p>
+        <button type="submit" id="rsvpBtn" class="mt-6 w-full font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-4 rounded-full bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] transition-colors disabled:opacity-60">Reserve My Spot</button>
+        <p class="text-white/35 text-xs text-center mt-4">Your RSVP goes straight to Ryan Adamson, PA - Coldwell Banker Realty.</p>
+      </form>
+      <div id="rsvpOk" class="hidden max-w-xl mx-auto text-center py-10">
+        <p class="font-display text-[var(--color-gold)] text-3xl font-semibold mb-3">You're on the list.</p>
+        <p class="text-white/75">Thanks for your RSVP - Ryan looks forward to seeing you at the open house.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ══════════ INQUIRY / LEAD CAPTURE ══════════ -->
   <section id="inquire" class="bg-[#0A0A0A] py-24 border-t border-white/[0.06]">
     <div class="container-narrow">
@@ -287,6 +327,48 @@ if (l.faq && l.faq.length) {
     if(e.key==='ArrowLeft') show(cur-1);
     if(e.key==='ArrowRight') show(cur+1);
   });
+
+  /* Open house smart banner + RSVP (self-expiring) */
+  var ohBanner=document.getElementById('ohBanner');
+  if(ohBanner){
+    var ohs=[]; try{ ohs=JSON.parse(ohBanner.getAttribute('data-oh')||'[]'); }catch(e){}
+    var nowMs=Date.now();
+    var next=ohs.map(function(o){ return {s:new Date(o.start), e:new Date(o.end)}; })
+      .filter(function(o){ return o.e.getTime()>nowMs; })
+      .sort(function(a,b){ return a.s-b.s; })[0];
+    if(next){
+      var dstr=next.s.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+      var ft=function(x){ return x.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}).replace(':00',''); };
+      var whenTxt=dstr+' · '+ft(next.s)+'–'+ft(next.e);
+      var w1=document.getElementById('ohWhen'); if(w1) w1.textContent=whenTxt;
+      var w2=document.getElementById('rsvpWhen'); if(w2) w2.textContent=whenTxt;
+      ohBanner.hidden=false;
+      var rs=document.getElementById('rsvp'); if(rs) rs.hidden=false;
+    }
+  }
+  var rform=document.getElementById('rsvpForm');
+  if(rform){
+    var rerr=document.getElementById('rsvpErr'), rbtn=document.getElementById('rsvpBtn'), rok=document.getElementById('rsvpOk');
+    rform.addEventListener('submit', function(e){
+      e.preventDefault();
+      var first=(rform.querySelector('[name="first_name"]').value||'').trim();
+      var email=(rform.querySelector('[name="email"]').value||'').trim();
+      if(!first || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ rerr.classList.remove('hidden'); return; }
+      rerr.classList.add('hidden'); rbtn.disabled=true; rbtn.textContent='Reserving...';
+      var guests=(rform.querySelector('[name="guests"]').value||'1');
+      var note=(rform.querySelector('[name="note"]').value||'').trim();
+      var whenv=((document.getElementById('ohWhen')||{}).textContent||'').trim();
+      fetch('/.netlify/functions/srqmap-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+        first_name:first, email:email, guests:guests,
+        message:'RSVP ('+guests+' guest'+(guests==='1'?'':'s')+') for open house '+whenv+(note?(' - '+note):''),
+        'bot-field':(rform.querySelector('[name="bot-field"]')||{}).value||'',
+        source:'rsvp:'+(rform.getAttribute('data-slug')||'unknown')
+      })})
+      .then(function(r){ if(!r.ok) throw new Error('bad'); return r.json(); })
+      .then(function(){ rform.classList.add('hidden'); rok.classList.remove('hidden'); })
+      .catch(function(){ rbtn.disabled=false; rbtn.textContent='Reserve My Spot'; rerr.textContent='Something went wrong - please try again or call (941) 713-9234.'; rerr.classList.remove('hidden'); });
+    });
+  }
 
   /* ── Inquiry form → srqmap-lead fn (Supabase + IDX; message kept in raw_payload) ── */
   var form=document.getElementById('listingForm');
