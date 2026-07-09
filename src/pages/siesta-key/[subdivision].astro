@@ -214,4 +214,89 @@ const jsonLd = [
           <p class="text-white/60 text-sm mb-6 text-center">
             We maintain a private database of owners who would sell at the right number. When a qualified
             buyer matches your residence, we contact you directly — you stay entirely off the public market
-            until you say otherwise. No obligatio
+            until you say otherwise. No obligation, and your information is never shared.
+          </p>
+          <form id="omForm">
+            <input type="text" name="bot-field" class="hidden" tabindex="-1" autocomplete="off" />
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input required name="first_name" placeholder="First name" class="px-4 py-3 rounded bg-white/10 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-[var(--color-gold)]" />
+              <input name="last_name" placeholder="Last name" class="px-4 py-3 rounded bg-white/10 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-[var(--color-gold)]" />
+              <input required type="email" name="email" placeholder="Email" class="px-4 py-3 rounded bg-white/10 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-[var(--color-gold)]" />
+              <input name="phone" placeholder="Phone (optional)" class="px-4 py-3 rounded bg-white/10 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-[var(--color-gold)]" />
+              <select name="timeline" class="px-4 py-3 rounded bg-white/10 text-white border border-white/20 focus:outline-none focus:border-[var(--color-gold)] md:col-span-2">
+                <option value="" class="text-black">When might you consider selling?</option>
+                <option value="At the right price, anytime" class="text-black">At the right price, anytime</option>
+                <option value="Within 12 months" class="text-black">Within 12 months</option>
+                <option value="1-3 years" class="text-black">1–3 years</option>
+                <option value="Just curious what it's worth" class="text-black">Just curious what it's worth</option>
+              </select>
+              <input name="approx_size" placeholder="Unit type / approx. size (optional)" class="px-4 py-3 rounded bg-white/10 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-[var(--color-gold)] md:col-span-2" />
+            </div>
+            <button type="submit" class="mt-6 w-full font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-4 rounded-full border border-[var(--color-gold)] text-[var(--color-gold)] hover:bg-[var(--color-gold)] hover:text-black transition-colors disabled:opacity-60">
+              Join the Private Registry
+            </button>
+            <p id="omErr" class="hidden text-red-400 text-sm mt-3"></p>
+            <p class="text-white/30 text-[0.7rem] mt-4 text-center">Confidential. You can be removed at any time with one email.</p>
+          </form>
+          <div id="omOk" class="hidden text-center py-8">
+            <p class="text-white text-lg font-semibold">You're on the registry.</p>
+            <p class="text-white/60 text-sm mt-2">We'll only reach out when there's a serious, qualified match for your residence.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script define:vars={{ slug: sub.slug, subName: sub.name }}>
+    // Off-market registry toggle + submit (off_market_leads table via off-market-lead fn)
+    document.getElementById('omToggle')?.addEventListener('click', () => {
+      document.getElementById('omPanel')?.classList.toggle('hidden');
+    });
+    const omForm = document.getElementById('omForm');
+    omForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = omForm.querySelector('button[type=submit]');
+      const err = document.getElementById('omErr');
+      btn.disabled = true; err.classList.add('hidden');
+      const payload = Object.fromEntries(new FormData(omForm).entries());
+      payload.neighborhood_subdivision = subName;
+      payload.notes = `Private off-market registry signup — ${subName} subdivision page`;
+      try {
+        const res = await fetch('/.netlify/functions/off-market-lead', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error('failed');
+        omForm.classList.add('hidden');
+        document.getElementById('omOk').classList.remove('hidden');
+      } catch (_) {
+        err.textContent = 'Something went wrong — please try again or use the contact page.';
+        err.classList.remove('hidden');
+        btn.disabled = false;
+      }
+    });
+
+    const form = document.getElementById('subLeadForm');
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type=submit]');
+      const err = document.getElementById('subLeadErr');
+      btn.disabled = true; err.classList.add('hidden');
+      const fd = new FormData(form);
+      const payload = Object.fromEntries(fd.entries());
+      payload.source = `subdivision:${slug}`;
+      try {
+        const res = await fetch('/.netlify/functions/srqmap-lead', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error('Request failed');
+        form.classList.add('hidden');
+        document.getElementById('subLeadOk').classList.remove('hidden');
+      } catch (_) {
+        err.textContent = 'Something went wrong — please try again or use the contact page.';
+        err.classList.remove('hidden');
+        btn.disabled = false;
+      }
+    });
+  </script>
+
+</BaseLayout>
