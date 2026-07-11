@@ -718,7 +718,7 @@ const itemList = {
   function drawStep(){
     var s=QS[step];
     var dots=QS.map(function(_x,i){return '<span class="fms-dot'+(i<=step?' on':'')+'"></span>';}).join('');
-    fmsBody.innerHTML='<p class="fms-eyebrow">Find My Siesta · '+(step+1)+' of '+QS.length+'</p><h3 class="fms-q">'+s.q+'</h3>'+
+    fmsBody.innerHTML='<p class="fms-eyebrow">Find My Spot · '+(step+1)+' of '+QS.length+'</p><h3 class="fms-q">'+s.q+'</h3>'+
       '<div class="fms-opts">'+s.opts.map(function(o){return '<button class="fms-opt" data-v="'+o[0]+'">'+o[1]+'</button>';}).join('')+'</div>'+
       '<div class="fms-dots">'+dots+'</div>';
     fmsBody.querySelectorAll('.fms-opt').forEach(function(b){ b.onclick=function(){ answers[s.k]=b.dataset.v; step+=1; (step<QS.length)?drawStep():showMatch(); }; });
@@ -732,18 +732,15 @@ const itemList = {
     if(answers.type!=='condo'){ homes=homes.concat(resolve(m.houses)); }
     var all=picks.concat(homes);
     if(all.length){ var g=L.featureGroup(all.map(function(p){return L.marker([p.lat,p.lng]);})); map.fitBounds(g.getBounds().pad(0.25)); }
-    var chips=homes.slice(0,4).map(function(p){return '<button class="fms-chip" data-id="'+p._id+'">'+esc(p.name)+'</button>';}).join('');
-    fmsBody.innerHTML='<p class="fms-eyebrow">Your Siesta</p><h3 class="fms-q">'+m.emoji+' '+m.label+'</h3>'+
-      '<p style="font:400 13.5px/1.5 sans-serif;color:#5c6b76;margin:0 0 6px">Here\'s your corner of Sarasota — tap a match to explore it, or…</p>'+
-      '<div class="fms-result-chips">'+chips+'</div>'+
+    fmsBody.innerHTML='<p class="fms-eyebrow">Your spot</p><h3 class="fms-q">'+m.emoji+' '+m.label+'</h3>'+
+      '<p style="font:400 13.5px/1.5 sans-serif;color:#5c6b76;margin:0 0 10px">Good taste. Ryan knows exactly where to hunt for this — a few hand-picked finds, no listing firehose.</p>'+
       '<button class="fms-cta" id="fmsSend">🍹 Send Ryan to find it</button>'+
       '<button class="fms-ghost" id="fmsClear">maybe later — back to browsing</button>';
-    fmsBody.querySelectorAll('.fms-chip').forEach(function(c){ c.onclick=function(){ closeQuiz(); select(Number(c.dataset.id), true); }; });
     document.getElementById('fmsClear').onclick=function(){ closeQuiz(); };
     document.getElementById('fmsSend').onclick=function(){ drawCapture('find-my-siesta'+leadSrcSuffix,'Deal. Where do we send the good news?','Ryan hunts, you approve. A few finds a week, zero spam, unsubscribe whenever.'); };
   }
   function drawCapture(source,title,copy){
-    fmsBody.innerHTML='<p class="fms-eyebrow">Find My Siesta</p><h3 class="fms-q">'+title+'</h3>'+
+    fmsBody.innerHTML='<p class="fms-eyebrow">Find My Spot</p><h3 class="fms-q">'+title+'</h3>'+
       '<p style="font:400 13px/1.5 sans-serif;color:#5c6b76;margin:0 0 12px">'+copy+'</p>'+
       '<input id="fmsName" placeholder="First name" autocomplete="given-name"/>'+
       '<input id="fmsEmail" type="email" placeholder="Email" autocomplete="email"/>'+
@@ -759,7 +756,7 @@ const itemList = {
         phone:document.getElementById('fmsPhone').value.trim(), 'bot-field':document.getElementById('fmsHp').value,
         source:source, quiz:answers
       })}).then(function(r){return r.json();}).then(function(){
-        fmsBody.innerHTML='<p class="fms-eyebrow">Find My Siesta</p><h3 class="fms-q">🤙 Ryan\'s on it.</h3><p style="font:400 14px/1.6 sans-serif;color:#5c6b76">Expect a personal note — not a drip campaign. Meanwhile, the map is yours: your matches are still glowing.</p><button class="fms-cta" onclick="document.getElementById(\'fms\').classList.remove(\'show\')">Back to the island</button>';
+        fmsBody.innerHTML='<p class="fms-eyebrow">Find My Spot</p><h3 class="fms-q">🤙 Ryan\'s on it.</h3><p style="font:400 14px/1.6 sans-serif;color:#5c6b76">Expect a personal note — not a drip campaign. Meanwhile, the map is all yours.</p><button class="fms-cta" onclick="document.getElementById(\'fms\').classList.remove(\'show\')">Back to the island</button>';
       }).catch(function(){ document.getElementById('fmsMsg').textContent='Hmm, that hiccuped — try once more?'; var g=document.getElementById('fmsGo'); if(g){g.disabled=false;g.textContent='Put Ryan on it';} });
     };
   }
