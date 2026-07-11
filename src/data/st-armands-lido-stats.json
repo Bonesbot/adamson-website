@@ -2,43 +2,43 @@
   "areaSlug": "st-armands-lido",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-08T10:56:26.037536+00:00",
+  "lastUpdated": "2026-07-11T10:53:14.615969+00:00",
   "counts": {
-    "sold": 100,
-    "pending": 16,
-    "active": 137,
-    "total": 116
+    "sold": 101,
+    "pending": 18,
+    "active": 134,
+    "total": 119
   },
   "metrics": {
-    "avgPrice": "$2,454,603",
-    "avgPricePerSqFt": "$918",
+    "avgPrice": "$2,482,471",
+    "avgPricePerSqFt": "$920",
     "avgYearBuilt": 1982,
-    "avgLivingSqFt": "2,224",
+    "avgLivingSqFt": "2,238",
     "avgLotSqFt": null,
-    "avgDom": 124
+    "avgDom": 129
   },
   "range": {
     "minPrice": "$275,000",
     "maxPrice": "$18,000,000"
   },
   "active": {
-    "count": 137,
-    "medianPrice": "$1,795,000",
-    "medianPricePerSqFt": "$879",
-    "waterfrontCount": 63,
-    "newConstructionCount": 25
+    "count": 134,
+    "medianPrice": "$1,847,500",
+    "medianPricePerSqFt": "$878",
+    "waterfrontCount": 61,
+    "newConstructionCount": 24
   },
   "sold": {
-    "count": 32,
+    "count": 31,
     "medianPrice": "$1,050,000",
-    "medianDom": 86,
-    "saleToListRatio": "85.9%",
+    "medianDom": 87,
+    "saleToListRatio": "85.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 14.9,
-    "sfhVilla": 20.8,
-    "blended": 16.9,
+    "condo": 14.2,
+    "sfhVilla": 21.1,
+    "blended": 16.6,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 54,
+    "under900k": 53,
     "band900kTo1_5m": 10,
-    "band1_5mTo3m": 19,
-    "band3mPlus": 54
+    "band1_5mTo3m": 18,
+    "band3mPlus": 53
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 137
+      "count": 134
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4666274",
+      "address": "1100 BENJAMIN FRANKLIN DR #604",
+      "subdivision": "LIDO SURF & SAND",
+      "soldPrice": "$1,250,000",
+      "soldDate": "2026-07-09",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,456",
+      "yearBuilt": 1976,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4672276",
       "address": "161 S POLK DR",
@@ -118,19 +131,6 @@
       "yearBuilt": 1980,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4687364",
-      "address": "408 JACKSON DR",
-      "subdivision": "SAINT ARMANDS DIV JOHN RINGLING ESTATES",
-      "soldPrice": "$2,750,000",
-      "soldDate": "2026-06-24",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "2,585",
-      "yearBuilt": 1955,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 66,
-      "avgPrice": "$772,516",
-      "avgPricePerSqFt": "$669",
-      "avgLivingSqFt": "1,137",
-      "avgDom": 164
+      "activeCount": 65,
+      "avgPrice": "$772,093",
+      "avgPricePerSqFt": "$672",
+      "avgLivingSqFt": "1,127",
+      "avgDom": 169
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$2,677,000",
       "avgPricePerSqFt": "$1,014",
       "avgLivingSqFt": "2,561",
-      "avgDom": 159
+      "avgDom": 161
     },
     {
       "tier": "2006to2019",
@@ -168,11 +168,11 @@
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 6,
-      "avgPrice": "$9,475,000",
-      "avgPricePerSqFt": "$2,213",
-      "avgLivingSqFt": "4,236",
-      "avgDom": 504
+      "activeCount": 5,
+      "avgPrice": "$9,670,000",
+      "avgPricePerSqFt": "$2,276",
+      "avgLivingSqFt": "4,187",
+      "avgDom": 497
     }
   ],
   "condoTiersScope": {
@@ -187,9 +187,9 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 42,
-      "soldCount": 36,
-      "soldMedianPricePerSqFt": "$800",
+      "activeCount": 40,
+      "soldCount": 37,
+      "soldMedianPricePerSqFt": "$822",
       "soldMedianPrice": "$1,300,000",
       "lowSample": false
     },
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 55,
+      "activeCount": 54,
       "soldCount": 33,
       "soldMedianPricePerSqFt": "$784",
       "soldMedianPrice": "$1,345,000",
@@ -222,63 +222,63 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 16.9,
-    "monthsOfSupplyCondo": 14.9,
-    "monthsOfSupplySfhVilla": 20.8,
+    "monthsOfSupply": 16.6,
+    "monthsOfSupplyCondo": 14.2,
+    "monthsOfSupplySfhVilla": 21.1,
     "label": "buyer's market",
-    "activeCount": 137,
+    "activeCount": 134,
     "sold365Count": 97,
-    "sold90Count": 32,
+    "sold90Count": 31,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 34,
-      "activeCount": 56,
+      "activeCount": 55,
       "soldMedianPrice": "$2,787,500",
       "soldMedianPricePerSqFt": "$958"
     },
     "condo": {
-      "soldCount": 66,
-      "activeCount": 81,
+      "soldCount": 67,
+      "activeCount": 79,
       "soldMedianPrice": "$1,050,000",
-      "soldMedianPricePerSqFt": "$688"
+      "soldMedianPricePerSqFt": "$690"
     }
   },
   "boating": {
     "activeWithDock": 16,
-    "activeWaterfront": 63
+    "activeWaterfront": 61
   },
   "marketQuestions": [
     {
       "facet": "waterfront",
       "q": "How much more does beachfront cost than bayfront on St Armands Lido?",
-      "a": "Gulf-front / beachfront homes sell at a median $800 per sq ft versus $1,023 for bay- or canal-front \u2014 about a -22% waterfront premium (Stellar MLS, recent closed sales)."
+      "a": "Gulf-front / beachfront homes sell at a median $822 per sq ft versus $1,023 for bay- or canal-front \u2014 about a -20% waterfront premium (Stellar MLS, recent closed sales)."
     },
     {
       "facet": "balance",
       "q": "Is St Armands Lido a buyer's or seller's market right now?",
-      "a": "With 137 active listings and roughly 8 closed sales a month (trailing 12 months), St Armands Lido has about 16.9 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 134 active listings and roughly 8 closed sales a month (trailing 12 months), St Armands Lido has about 16.6 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on St Armands Lido?",
-      "a": "Single-family homes sell around $2,787,500 ($958/sq ft), while condos, villas and townhouses sell around $1,050,000 ($688/sq ft)."
+      "a": "Single-family homes sell around $2,787,500 ($958/sq ft), while condos, villas and townhouses sell around $1,050,000 ($690/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on St Armands Lido?",
-      "a": "Active listings run from $275,000 to $18,000,000, with a median asking price of $1,795,000."
+      "a": "Active listings run from $275,000 to $18,000,000, with a median asking price of $1,847,500."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on St Armands Lido?",
-      "a": "Recently sold homes took a median 86 days on market and closed at 85.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 87 days on market and closed at 85.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many St Armands Lido homes have a dock?",
-      "a": "Of 63 active waterfront listings, 16 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 61 active waterfront listings, 16 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

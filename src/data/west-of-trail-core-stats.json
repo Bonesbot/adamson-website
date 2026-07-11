@@ -2,16 +2,16 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-08T10:56:28.384472+00:00",
+  "lastUpdated": "2026-07-11T10:53:17.118799+00:00",
   "counts": {
-    "sold": 184,
-    "pending": 25,
-    "active": 125,
+    "sold": 188,
+    "pending": 21,
+    "active": 127,
     "total": 209
   },
   "metrics": {
-    "avgPrice": "$2,409,497",
-    "avgPricePerSqFt": "$729",
+    "avgPrice": "$2,403,526",
+    "avgPricePerSqFt": "$728",
     "avgYearBuilt": 1985,
     "avgLivingSqFt": "2,980",
     "avgLotSqFt": null,
@@ -22,23 +22,23 @@
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 125,
+    "count": 127,
     "medianPrice": "$2,995,000",
     "medianPricePerSqFt": "$861",
     "waterfrontCount": 31,
-    "newConstructionCount": 43
+    "newConstructionCount": 44
   },
   "sold": {
-    "count": 52,
-    "medianPrice": "$2,172,500",
-    "medianDom": 86,
-    "saleToListRatio": "104.0%",
+    "count": 53,
+    "medianPrice": "$2,220,000",
+    "medianDom": 81,
+    "saleToListRatio": "103.6%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 12.0,
+    "condo": 12.9,
     "sfhVilla": 9.5,
-    "blended": 9.7,
+    "blended": 9.8,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -56,17 +56,69 @@
   "priceBands": {
     "under900k": 18,
     "band900kTo1_5m": 13,
-    "band1_5mTo3m": 33,
+    "band1_5mTo3m": 35,
     "band3mPlus": 61
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 125
+      "count": 127
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4690123",
+      "address": "1815 S LAKE SHORE DR",
+      "subdivision": "OYSTER BAY ESTATES",
+      "soldPrice": "$4,100,000",
+      "soldDate": "2026-07-10",
+      "bedrooms": 5,
+      "bathrooms": 4.5,
+      "livingSqFt": "4,177",
+      "yearBuilt": 2023,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4668324",
+      "address": "1966 WISTERIA ST",
+      "subdivision": "DESOTA PARK",
+      "soldPrice": "$3,050,000",
+      "soldDate": "2026-07-08",
+      "bedrooms": 4,
+      "bathrooms": 5.0,
+      "livingSqFt": "3,934",
+      "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4693764",
+      "address": "888 S ORANGE AVE #2C",
+      "subdivision": "HUDSON CROSSING",
+      "soldPrice": "$2,700,000",
+      "soldDate": "2026-07-07",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,511",
+      "yearBuilt": 2007,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4634377",
+      "address": "1541 BAY POINT DR",
+      "subdivision": "BAY POINT PARK 2",
+      "soldPrice": "$6,500,000",
+      "soldDate": "2026-07-06",
+      "bedrooms": 4,
+      "bathrooms": 4.5,
+      "livingSqFt": "6,368",
+      "yearBuilt": 1996,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4677344",
       "address": "1204 HILLVIEW DR",
@@ -79,58 +131,6 @@
       "yearBuilt": 2008,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4676725",
-      "address": "1841 DATURA ST",
-      "subdivision": "DESOTA PARK",
-      "soldPrice": "$1,825,000",
-      "soldDate": "2026-06-30",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "2,293",
-      "yearBuilt": 1961,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4673616",
-      "address": "1632 WORRINGTON ST",
-      "subdivision": "JOHNSON ESTATES",
-      "soldPrice": "$630,000",
-      "soldDate": "2026-06-30",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,547",
-      "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4671008",
-      "address": "1705 FIELD RD",
-      "subdivision": "OYSTER BAY ESTATES",
-      "soldPrice": "$2,125,000",
-      "soldDate": "2026-06-26",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "2,409",
-      "yearBuilt": 2020,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4679338",
-      "address": "948 CITRUS AVE",
-      "subdivision": "HUDSON BAYOU",
-      "soldPrice": "$2,950,000",
-      "soldDate": "2026-06-18",
-      "bedrooms": 4,
-      "bathrooms": 3.5,
-      "livingSqFt": "3,266",
-      "yearBuilt": 2017,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$447,707",
       "avgPricePerSqFt": "$361",
       "avgLivingSqFt": "1,169",
-      "avgDom": 145
+      "avgDom": 147
     },
     {
       "tier": "1990to2005",
@@ -188,7 +188,7 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 29,
-      "soldCount": 22,
+      "soldCount": 24,
       "soldMedianPricePerSqFt": "$1,052",
       "soldMedianPrice": "$4,162,500",
       "lowSample": false
@@ -214,35 +214,35 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 92,
-      "soldCount": 155,
+      "activeCount": 94,
+      "soldCount": 157,
       "soldMedianPricePerSqFt": "$651",
-      "soldMedianPrice": "$1,637,500",
+      "soldMedianPrice": "$1,640,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 9.7,
-    "monthsOfSupplyCondo": 12.0,
+    "monthsOfSupply": 9.8,
+    "monthsOfSupplyCondo": 12.9,
     "monthsOfSupplySfhVilla": 9.5,
     "label": "buyer's market",
-    "activeCount": 125,
-    "sold365Count": 154,
-    "sold90Count": 52,
+    "activeCount": 127,
+    "sold365Count": 155,
+    "sold90Count": 53,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 168,
-      "activeCount": 111,
-      "soldMedianPrice": "$1,837,500",
-      "soldMedianPricePerSqFt": "$677"
+      "soldCount": 171,
+      "activeCount": 113,
+      "soldMedianPrice": "$1,850,000",
+      "soldMedianPricePerSqFt": "$682"
     },
     "condo": {
-      "soldCount": 16,
+      "soldCount": 17,
       "activeCount": 14,
-      "soldMedianPrice": "$313,000",
-      "soldMedianPricePerSqFt": "$306"
+      "soldMedianPrice": "$315,000",
+      "soldMedianPricePerSqFt": "$317"
     }
   },
   "boating": {
@@ -253,12 +253,12 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 125 active listings and roughly 13 closed sales a month (trailing 12 months), West Of Trail Core has about 9.7 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 127 active listings and roughly 13 closed sales a month (trailing 12 months), West Of Trail Core has about 9.8 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,837,500 ($677/sq ft), while condos, villas and townhouses sell around $313,000 ($306/sq ft)."
+      "a": "Single-family homes sell around $1,850,000 ($682/sq ft), while condos, villas and townhouses sell around $315,000 ($317/sq ft)."
     },
     {
       "facet": "range",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 86 days on market and closed at 104.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 81 days on market and closed at 103.6% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

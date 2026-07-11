@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-08T10:56:29.162214+00:00",
+  "lastUpdated": "2026-07-11T10:53:17.875074+00:00",
   "counts": {
     "sold": 80,
-    "pending": 7,
-    "active": 63,
-    "total": 87
+    "pending": 8,
+    "active": 62,
+    "total": 88
   },
   "metrics": {
-    "avgPrice": "$1,196,037",
-    "avgPricePerSqFt": "$532",
+    "avgPrice": "$1,186,422",
+    "avgPricePerSqFt": "$529",
     "avgYearBuilt": 1972,
-    "avgLivingSqFt": "1,995",
+    "avgLivingSqFt": "1,988",
     "avgLotSqFt": null,
     "avgDom": 107
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$22,900,000"
   },
   "active": {
-    "count": 63,
-    "medianPrice": "$799,000",
+    "count": 62,
+    "medianPrice": "$831,285",
     "medianPricePerSqFt": "$548",
     "waterfrontCount": 21,
     "newConstructionCount": 22
   },
   "sold": {
-    "count": 28,
-    "medianPrice": "$605,000",
+    "count": 26,
+    "medianPrice": "$657,500",
     "medianDom": 61,
-    "saleToListRatio": "89.7%",
+    "saleToListRatio": "89.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 12.8,
-    "sfhVilla": 9.7,
-    "blended": 10.4,
+    "sfhVilla": 9.5,
+    "blended": 10.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -55,14 +55,14 @@
   },
   "priceBands": {
     "under900k": 34,
-    "band900kTo1_5m": 9,
+    "band900kTo1_5m": 8,
     "band1_5mTo3m": 8,
     "band3mPlus": 12
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 63
+      "count": 62
     }
   ],
   "buildingClasses": [],
@@ -142,7 +142,7 @@
       "avgPrice": "$569,000",
       "avgPricePerSqFt": "$451",
       "avgLivingSqFt": "1,262",
-      "avgDom": 54
+      "avgDom": 57
     },
     {
       "tier": "1990to2005",
@@ -169,10 +169,10 @@
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 15,
-      "avgPrice": "$570,625",
-      "avgPricePerSqFt": "$561",
+      "avgPrice": "$568,958",
+      "avgPricePerSqFt": "$559",
       "avgLivingSqFt": "1,021",
-      "avgDom": 149
+      "avgDom": 152
     }
   ],
   "condoTiersScope": {
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 37,
+      "activeCount": 36,
       "soldCount": 56,
       "soldMedianPricePerSqFt": "$403",
       "soldMedianPrice": "$587,000",
@@ -222,19 +222,19 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 10.4,
+    "monthsOfSupply": 10.2,
     "monthsOfSupplyCondo": 12.8,
-    "monthsOfSupplySfhVilla": 9.7,
+    "monthsOfSupplySfhVilla": 9.5,
     "label": "buyer's market",
-    "activeCount": 63,
+    "activeCount": 62,
     "sold365Count": 73,
-    "sold90Count": 28,
+    "sold90Count": 26,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 64,
-      "activeCount": 47,
+      "activeCount": 46,
       "soldMedianPrice": "$671,515",
       "soldMedianPricePerSqFt": "$426"
     },
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 63 active listings and roughly 6 closed sales a month (trailing 12 months), West Of Trail North has about 10.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 62 active listings and roughly 6 closed sales a month (trailing 12 months), West Of Trail North has about 10.2 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,12 +263,12 @@
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail North?",
-      "a": "Active listings run from $251,700 to $22,900,000, with a median asking price of $799,000."
+      "a": "Active listings run from $251,700 to $22,900,000, with a median asking price of $831,285."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 61 days on market and closed at 89.7% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 61 days on market and closed at 89.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

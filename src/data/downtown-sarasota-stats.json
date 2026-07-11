@@ -2,16 +2,16 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-08T10:56:27.604749+00:00",
+  "lastUpdated": "2026-07-11T10:53:16.356210+00:00",
   "counts": {
-    "sold": 283,
-    "pending": 82,
-    "active": 274,
-    "total": 365
+    "sold": 286,
+    "pending": 78,
+    "active": 275,
+    "total": 364
   },
   "metrics": {
-    "avgPrice": "$1,810,103",
-    "avgPricePerSqFt": "$789",
+    "avgPrice": "$1,809,022",
+    "avgPricePerSqFt": "$788",
     "avgYearBuilt": 2002,
     "avgLivingSqFt": "1,994",
     "avgLotSqFt": null,
@@ -22,23 +22,23 @@
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 274,
-    "medianPrice": "$1,498,500",
-    "medianPricePerSqFt": "$865",
+    "count": 275,
+    "medianPrice": "$1,499,000",
+    "medianPricePerSqFt": "$864",
     "waterfrontCount": 80,
     "newConstructionCount": 107
   },
   "sold": {
-    "count": 79,
-    "medianPrice": "$1,140,000",
-    "medianDom": 95,
-    "saleToListRatio": "86.9%",
+    "count": 78,
+    "medianPrice": "$1,160,000",
+    "medianDom": 92,
+    "saleToListRatio": "87.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 13.5,
+    "condo": 13.3,
     "sfhVilla": 16.7,
-    "blended": 13.7,
+    "blended": 13.6,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -56,17 +56,30 @@
   "priceBands": {
     "under900k": 75,
     "band900kTo1_5m": 65,
-    "band1_5mTo3m": 60,
+    "band1_5mTo3m": 61,
     "band3mPlus": 74
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 274
+      "count": 275
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4686336",
+      "address": "11 SUNSET DR #502",
+      "subdivision": "SUNSET TOWERS",
+      "soldPrice": "$750,000",
+      "soldDate": "2026-07-08",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,389",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4673379",
       "address": "325 GOLDEN GATE PT #1003",
@@ -107,28 +120,15 @@
       "isWaterfront": false
     },
     {
-      "listingId": "A4650526",
-      "address": "50 CENTRAL AVE #17PHD",
-      "subdivision": "PLAZA AT 05 POINTS RESIDENCES",
-      "soldPrice": "$2,650,000",
-      "soldDate": "2026-06-30",
+      "listingId": "A4679097",
+      "address": "325 GOLDEN GATE PT #603",
+      "subdivision": "THE OWEN GOLDEN GATE POINT",
+      "soldPrice": "$3,685,000",
+      "soldDate": "2026-07-01",
       "bedrooms": 3,
-      "bathrooms": 4.0,
-      "livingSqFt": "4,095",
-      "yearBuilt": 2005,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4682411",
-      "address": "635 S ORANGE AVE #301",
-      "subdivision": "ORANGE CLUB CONDOS",
-      "soldPrice": "$765,000",
-      "soldDate": "2026-06-30",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,013",
-      "yearBuilt": 2017,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,065",
+      "yearBuilt": 2026,
       "propertyType": "Residential",
       "isWaterfront": false
     }
@@ -139,30 +139,30 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 62,
-      "avgPrice": "$1,138,697",
-      "avgPricePerSqFt": "$655",
+      "avgPrice": "$1,136,923",
+      "avgPricePerSqFt": "$654",
       "avgLivingSqFt": "1,636",
-      "avgDom": 176
+      "avgDom": 178
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 38,
-      "avgPrice": "$1,740,396",
+      "avgPrice": "$1,740,133",
       "avgPricePerSqFt": "$718",
       "avgLivingSqFt": "2,157",
-      "avgDom": 153
+      "avgDom": 155
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 60,
-      "avgPrice": "$1,639,497",
-      "avgPricePerSqFt": "$756",
-      "avgLivingSqFt": "1,925",
-      "avgDom": 148
+      "activeCount": 61,
+      "avgPrice": "$1,645,808",
+      "avgPricePerSqFt": "$759",
+      "avgLivingSqFt": "1,927",
+      "avgDom": 149
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$3,864,308",
       "avgPricePerSqFt": "$1,335",
       "avgLivingSqFt": "2,719",
-      "avgDom": 176
+      "avgDom": 179
     }
   ],
   "condoTiersScope": {
@@ -188,7 +188,7 @@
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
       "activeCount": 3,
-      "soldCount": 5,
+      "soldCount": 6,
       "soldMedianPricePerSqFt": null,
       "soldMedianPrice": null,
       "lowSample": true
@@ -205,10 +205,10 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 89,
-      "soldCount": 132,
-      "soldMedianPricePerSqFt": "$785",
-      "soldMedianPrice": "$1,412,500",
+      "activeCount": 90,
+      "soldCount": 134,
+      "soldMedianPricePerSqFt": "$791",
+      "soldMedianPrice": "$1,437,500",
       "lowSample": false
     },
     {
@@ -231,13 +231,13 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 13.7,
-    "monthsOfSupplyCondo": 13.5,
+    "monthsOfSupply": 13.6,
+    "monthsOfSupplyCondo": 13.3,
     "monthsOfSupplySfhVilla": 16.7,
     "label": "buyer's market",
-    "activeCount": 274,
-    "sold365Count": 240,
-    "sold90Count": 79,
+    "activeCount": 275,
+    "sold365Count": 243,
+    "sold90Count": 78,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,9 +248,9 @@
       "soldMedianPricePerSqFt": "$563"
     },
     "condo": {
-      "soldCount": 270,
-      "activeCount": 264,
-      "soldMedianPrice": "$1,145,000",
+      "soldCount": 273,
+      "activeCount": 265,
+      "soldMedianPrice": "$1,150,000",
       "soldMedianPricePerSqFt": "$688"
     }
   },
@@ -262,22 +262,22 @@
     {
       "facet": "balance",
       "q": "Is Downtown Sarasota a buyer's or seller's market right now?",
-      "a": "With 274 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 13.7 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 275 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 13.6 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Downtown Sarasota?",
-      "a": "Single-family homes sell around $950,000 ($563/sq ft), while condos, villas and townhouses sell around $1,145,000 ($688/sq ft)."
+      "a": "Single-family homes sell around $950,000 ($563/sq ft), while condos, villas and townhouses sell around $1,150,000 ($688/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Downtown Sarasota?",
-      "a": "Active listings run from $190,000 to $12,499,000, with a median asking price of $1,498,500."
+      "a": "Active listings run from $190,000 to $12,499,000, with a median asking price of $1,499,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Downtown Sarasota?",
-      "a": "Recently sold homes took a median 95 days on market and closed at 86.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 92 days on market and closed at 87.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

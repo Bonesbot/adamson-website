@@ -2,16 +2,16 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-08T10:56:30.688492+00:00",
+  "lastUpdated": "2026-07-11T10:53:19.458169+00:00",
   "counts": {
-    "sold": 33,
-    "pending": 4,
+    "sold": 34,
+    "pending": 3,
     "active": 26,
     "total": 37
   },
   "metrics": {
-    "avgPrice": "$4,328,514",
-    "avgPricePerSqFt": "$1,105",
+    "avgPrice": "$4,320,405",
+    "avgPricePerSqFt": "$1,103",
     "avgYearBuilt": 1992,
     "avgLivingSqFt": "3,814",
     "avgLotSqFt": "14,412",
@@ -24,21 +24,21 @@
   "active": {
     "count": 26,
     "medianPrice": "$4,325,000",
-    "medianPricePerSqFt": "$1,336",
+    "medianPricePerSqFt": "$1,334",
     "waterfrontCount": 12,
     "newConstructionCount": 6
   },
   "sold": {
-    "count": 9,
-    "medianPrice": "$4,200,000",
-    "medianDom": 94,
-    "saleToListRatio": "89.0%",
+    "count": 10,
+    "medianPrice": "$4,650,000",
+    "medianDom": 88,
+    "saleToListRatio": "89.6%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": null,
-    "sfhVilla": 10.8,
-    "blended": 10.8,
+    "sfhVilla": 10.4,
+    "blended": 10.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -68,6 +68,19 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4693231",
+      "address": "344 W ROYAL FLAMINGO DR",
+      "subdivision": "BIRD KEY",
+      "soldPrice": "$6,550,000",
+      "soldDate": "2026-07-08",
+      "bedrooms": 4,
+      "bathrooms": 5.0,
+      "livingSqFt": "4,344",
+      "yearBuilt": 1998,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4682428",
       "address": "575 S SPOONBILL DR",
@@ -119,19 +132,6 @@
       "yearBuilt": 1969,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4684085",
-      "address": "617 N OWL DR",
-      "subdivision": "BIRD KEY SUB",
-      "soldPrice": "$5,100,000",
-      "soldDate": "2026-06-08",
-      "bedrooms": 4,
-      "bathrooms": 3.5,
-      "livingSqFt": "4,382",
-      "yearBuilt": 2005,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [],
@@ -150,9 +150,9 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 11,
-      "soldCount": 20,
-      "soldMedianPricePerSqFt": "$1,223",
-      "soldMedianPrice": "$4,350,000",
+      "soldCount": 21,
+      "soldMedianPricePerSqFt": "$1,268",
+      "soldMedianPrice": "$4,500,000",
       "lowSample": false
     },
     {
@@ -175,21 +175,21 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 10.8,
+    "monthsOfSupply": 10.4,
     "monthsOfSupplyCondo": null,
-    "monthsOfSupplySfhVilla": 10.8,
+    "monthsOfSupplySfhVilla": 10.4,
     "label": "buyer's market",
     "activeCount": 26,
-    "sold365Count": 29,
-    "sold90Count": 9,
+    "sold365Count": 30,
+    "sold90Count": 10,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 33,
+      "soldCount": 34,
       "activeCount": 26,
-      "soldMedianPrice": "$3,850,000",
-      "soldMedianPricePerSqFt": "$1,080"
+      "soldMedianPrice": "$3,900,000",
+      "soldMedianPricePerSqFt": "$1,116"
     }
   },
   "boating": {
@@ -200,7 +200,7 @@
     {
       "facet": "balance",
       "q": "Is Bird Key a buyer's or seller's market right now?",
-      "a": "With 26 active listings and roughly 2 closed sales a month (trailing 12 months), Bird Key has about 10.8 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 26 active listings and roughly 2 closed sales a month (trailing 12 months), Bird Key has about 10.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "range",
@@ -210,7 +210,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Bird Key?",
-      "a": "Recently sold homes took a median 94 days on market and closed at 89.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 88 days on market and closed at 89.6% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
