@@ -4,7 +4,7 @@ import allPins from '../data/srqmap-pins.json';
 import rawEvents from '../data/srqmap-events.json';
 
 // Categories currently shown on the map (others temporarily hidden — restore by adding ids back)
-const VISIBLE_GROUPS = ['events', 'beaches', 'things', 'dining', 'golf'];
+const VISIBLE_GROUPS = ['events', 'beaches', 'things', 'dining', 'golf', 'condos'];
 
 // "Events This Week" — machine-maintained by the daily `srqmap-events` scheduled task.
 // Source file: src/data/srqmap-events.json (do NOT hand-edit; see scripts/events/).
@@ -46,7 +46,7 @@ const GROUPS = [
   { id: 'things', label: 'Things to Do',        color: '#4C956C', svg: ICONS.things },
   { id: 'dining', label: 'Dining & Drinks',     color: '#C0613B', svg: ICONS.dining },
   { id: 'golf',   label: 'Golf Courses',        color: '#0B6E4F', svg: ICONS.golf },
-  { id: 'condos', label: 'Condos & Residences', color: '#2E86AB', svg: ICONS.condos },
+  { id: 'condos', label: 'Properties', color: '#2E86AB', svg: ICONS.condos },
   { id: 'newdev', label: 'New Developments',    color: '#7D5BA6', svg: ICONS.newdev },
   { id: 'areas',  label: 'Communities & Areas', color: '#C2913B', svg: ICONS.areas  },
 ].filter((g) => VISIBLE_GROUPS.includes(g.id));
@@ -379,7 +379,7 @@ const itemList = {
   function iconSvg(g, cls){ return '<svg class="'+(cls||'')+'" viewBox="0 0 24 24">'+GMAP[g].svg+'</svg>'; }
   function esc(s){ return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-  var active = {}; GROUPS.forEach(function(g){ active[g.id]=true; });
+  var active = {}; GROUPS.forEach(function(g){ active[g.id]=(g.id!=='condos'); });
   var selectedId = null, markers = {}, query = '';
 
   // ===== Soft lead gate — AEO-safe: only gates the interactive detail panel, never the SSR content =====
