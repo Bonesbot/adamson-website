@@ -534,12 +534,20 @@ const itemList = {
   var chipsEl = document.getElementById('chips');
   function renderChips(){
     chipsEl.innerHTML='';
+    if(quizFilter){
+      var bn=document.createElement('button');
+      bn.className='chip'; bn.style.setProperty('--c','#C9A961');
+      bn.setAttribute('aria-pressed','true');
+      bn.innerHTML='<span class="dot"></span>🌴 Your matches · tap to show everything';
+      bn.onclick=function(){ quizFilter=null; refresh(); };
+      chipsEl.appendChild(bn);
+    }
     GROUPS.forEach(function(g){
       var b=document.createElement('button');
       b.className='chip'; b.style.setProperty('--c', g.color);
       b.setAttribute('aria-pressed', active[g.id]);
       b.innerHTML='<span class="dot"></span>'+esc(g.label);
-      b.onclick=function(){ active[g.id]=!active[g.id]; refresh(); };
+      b.onclick=function(){ if(quizFilter){ quizFilter=null; } active[g.id]=!active[g.id]; refresh(); };
       chipsEl.appendChild(b);
     });
   }
