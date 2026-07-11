@@ -1,10 +1,12 @@
 ---
 // build-touch 2026-07-06b: desktop gallery arrows + clickable dots, Mid-Key beach access pin fix
 import allPins from '../data/srqmap-pins.json';
+import openHouses from '../data/srqmap-openhouses.json';
+import matchTable from '../data/srqmap-match.json';
 import rawEvents from '../data/srqmap-events.json';
 
 // Categories currently shown on the map (others temporarily hidden — restore by adding ids back)
-const VISIBLE_GROUPS = ['events', 'beaches', 'things', 'dining', 'golf', 'condos'];
+const VISIBLE_GROUPS = ['events', 'openhouse', 'beaches', 'things', 'dining', 'golf', 'condos'];
 
 // "Events This Week" — machine-maintained by the daily `srqmap-events` scheduled task.
 // Source file: src/data/srqmap-events.json (do NOT hand-edit; see scripts/events/).
@@ -28,10 +30,12 @@ const eventPins = (rawEvents as any[])
     start_date: e.start_date,
     end_date: e.end_date || e.start_date,
   }));
-const pins = [...eventPins, ...allPins.filter((p) => VISIBLE_GROUPS.includes(p.group))];
+const ohPins = openHouses.map((o) => ({ ...o, group: 'openhouse' }));
+const pins = [...eventPins, ...ohPins, ...allPins.filter((p) => VISIBLE_GROUPS.includes(p.group))];
 
 const ICONS = {
   events: '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M12 13l1.3 2.6 2.7.4-2 1.9.5 2.7-2.5-1.3-2.5 1.3.5-2.7-2-1.9 2.7-.4Z"/>',
+  openhouse: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 10v10h5v-6h4v6h5V10"/><circle cx="12" cy="8.5" r=".8"/>',
   beaches: '<path d="M17.5 19H22a4.5 4.5 0 0 0-9 0h4.5Z"/><path d="M12 19v3"/><path d="M2 22h20"/><path d="M5.2 11.2 2 8a10 10 0 0 1 14-1.4"/><path d="M16 6.6c2.6 2 3.6 5.4 2.4 8.4l-4.4-3.4Z"/><path d="M5.2 11.2 14 18"/>',
   golf: '<path d="M12 18v-13"/><path d="M12 5l7 3-7 3"/><circle cx="12" cy="20.5" r="1.5"/><path d="M7 21.2c-1.9-.4-3-1-3-1.7 0-1.1 3.6-2 8-2s8 .9 8 2c0 .7-1.1 1.3-3 1.7"/>',
   things: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
@@ -42,6 +46,7 @@ const ICONS = {
 };
 const GROUPS = [
   { id: 'events', label: 'Events This Week',   color: '#D1495B', svg: ICONS.events },
+  ...(openHouses.length ? [{ id: 'openhouse', label: 'Open This Weekend', color: '#E4572E', svg: ICONS.openhouse }] : []),
   { id: 'beaches', label: 'Beaches & Access',   color: '#1A9BB8', svg: ICONS.beaches },
   { id: 'things', label: 'Things to Do',        color: '#4C956C', svg: ICONS.things },
   { id: 'dining', label: 'Dining & Drinks',     color: '#C0613B', svg: ICONS.dining },
@@ -276,6 +281,29 @@ const itemList = {
   .gnav--prev{left:10px}
   .gnav--next{right:10px}
   @media (hover:none){.gnav{display:none}}
+
+  /* ===== Find My Siesta quiz + capture ===== */
+  .fms-pill{position:fixed;left:14px;bottom:18px;z-index:1500;display:flex;align-items:center;gap:8px;background:var(--navy,#0A2A40);color:#fff;border:none;border-radius:999px;padding:12px 18px;font:600 14px "Montserrat",sans-serif;box-shadow:0 10px 30px -8px rgba(10,42,64,.55);cursor:pointer}
+  .fms-pill:hover{transform:translateY(-1px)}
+  .fms{display:none;position:fixed;inset:0;z-index:2100;background:rgba(10,42,64,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);align-items:flex-end;justify-content:center;padding:14px}
+  .fms.show{display:flex}
+  @media(min-width:700px){.fms{align-items:center}}
+  .fms-card{position:relative;width:100%;max-width:440px;background:#fff;border-radius:18px;box-shadow:0 30px 80px -20px rgba(10,42,64,.6);padding:24px 22px 20px}
+  .fms-x{position:absolute;top:10px;right:12px;background:none;border:none;font-size:24px;color:#888;cursor:pointer}
+  .fms-eyebrow{font:700 10.5px "Montserrat",sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--gold,#C9A961);margin:0 0 6px}
+  .fms-q{font-family:"Playfair Display",Georgia,serif;font-size:22px;line-height:1.15;color:var(--navy,#0A2A40);margin:0 0 14px}
+  .fms-opts{display:flex;flex-direction:column;gap:9px}
+  .fms-opt{text-align:left;background:#f4f7f9;border:1.5px solid #e2e9ee;border-radius:12px;padding:13px 14px;font:600 14.5px "Montserrat",sans-serif;color:#20323f;cursor:pointer}
+  .fms-opt:hover{border-color:var(--gold,#C9A961);background:#fbf7ef}
+  .fms-dots{display:flex;gap:6px;justify-content:center;margin-top:14px}
+  .fms-dot{width:7px;height:7px;border-radius:50%;background:#dde5ea}.fms-dot.on{background:var(--gold,#C9A961)}
+  .fms-result-chips{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 14px}
+  .fms-chip{background:#fbf7ef;border:1px solid var(--gold,#C9A961);color:#7a5f27;border-radius:999px;padding:6px 12px;font:600 12.5px "Montserrat",sans-serif;cursor:pointer}
+  .fms-cta{width:100%;background:var(--navy,#0A2A40);color:#fff;border:none;border-radius:12px;padding:14px;font:700 15px "Montserrat",sans-serif;cursor:pointer;margin-top:4px}
+  .fms-ghost{width:100%;background:none;border:none;color:#7c8b96;font:600 12.5px "Montserrat",sans-serif;cursor:pointer;margin-top:10px}
+  .fms input{width:100%;border:1.5px solid #e2e9ee;border-radius:10px;padding:12px;font-size:15px;margin-bottom:9px;box-sizing:border-box}
+  .fms input:focus{outline:none;border-color:var(--gold,#C9A961)}
+  .fms-note{font-size:12px;color:#8d9aa4;margin:6px 0 0;text-align:center}
 </style>
 </head>
 <body>
@@ -320,6 +348,14 @@ const itemList = {
     <div class="detail-body" id="detailBody"></div>
   </div>
 </aside>
+
+<button class="fms-pill" id="fmsOpen" aria-label="Find my spot on Siesta Key">🌴 <span>Find my spot</span></button>
+<div class="fms" id="fms" role="dialog" aria-modal="true">
+  <div class="fms-card">
+    <button class="fms-x" id="fmsX" aria-label="Close">×</button>
+    <div id="fmsBody"></div>
+  </div>
+</div>
 
 <!-- Crawlable content for search engines & AI answer engines -->
 <div class="visually-hidden">
@@ -366,6 +402,7 @@ const itemList = {
 
 <script type="application/json" id="pins-data" set:html={JSON.stringify(pins)}></script>
 <script type="application/json" id="groups-data" set:html={JSON.stringify(GROUPS)}></script>
+<script type="application/json" id="match-data" set:html={JSON.stringify(matchTable)}></script>
 
 <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script is:inline>
@@ -510,7 +547,8 @@ const itemList = {
   var listEl=document.getElementById('list');
   var countEl=document.getElementById('count');
   function matchesQuery(p){ if(!query) return true; return query.split(/\s+/).every(function(t){ return p._hay.indexOf(t)>=0; }); }
-  function isVisible(p){ return active[p.group] && matchesQuery(p); }
+  var quizFilter=null;
+  function isVisible(p){ if(quizFilter && !quizFilter[p._id]) return false; return active[p.group] && matchesQuery(p); }
   function visible(){ return PLACES.filter(isVisible); }
   function renderList(){
     var items=visible();
@@ -571,8 +609,10 @@ const itemList = {
       '<h2>'+esc(p.name)+'</h2>'+
       (p.address?'<p class="addr">'+esc(p.address)+'</p>':'')+
       factsHtml + blurbHtml + tipHtml +
-      '<div class="links"><a class="detail-cta" href="tel:'+TEL+'">Ask Ryan about this</a>'+dirHtml+siteHtml+marketHtml+'</div>'+
+      '<div class="links">'+(p.group==='condos'?'<button class="detail-cta" id="alertCta" style="border:none;cursor:pointer">🔔 Alert me when — or before — a unit hits</button>':'')+'<a class="detail-cta" href="tel:'+TEL+'">Ask Ryan about this</a>'+dirHtml+siteHtml+marketHtml+'</div>'+
       '<p class="signoff">Ryan Adamson, PA · <a href="https://adamsonfl.com/" style="color:var(--blue-deep);font-weight:600;text-decoration:none">AdamsonFL.com</a></p>';
+    var acta=detailBody.querySelector('#alertCta');
+    if(acta) acta.onclick=function(){ openCapture('unit-alert:'+(p.id||p.name), 'First word on '+p.name, 'Be the first to know when a unit lists here — including whisper listings before they ever hit the MLS. That is a promise only the farm agent can make.'); };
     var gtrack = detailBody.querySelector('.gallery-track');
     if(gtrack){
       var gd = detailBody.querySelectorAll('.gdot');
@@ -655,6 +695,78 @@ const itemList = {
     function toggle(){ if(suppress){ suppress=false; return; } rail.classList.toggle('collapsed'); }
     if(handle) handle.addEventListener('click', toggle);
   })();
+
+  /* ===== Find My Siesta (Funnel 1) + capture (Funnels 2/3 share it) ===== */
+  var MATCH = JSON.parse(document.getElementById('match-data').textContent);
+  var urlP = new URLSearchParams(location.search);
+  var leadSrcSuffix = urlP.get('src') ? (':'+urlP.get('src').replace(/[^a-z0-9-]/gi,'')) : '';
+  var byKey = {}; PLACES.forEach(function(p){ byKey[p.id||'']=p; byKey[p.name]=p; });
+  var fmsEl=document.getElementById('fms'), fmsBody=document.getElementById('fmsBody');
+  var QS=[
+    {k:'lifestyle',q:'What pulls you to the island?',opts:[['beach','🏖 Beach-walk purist'],['boat','⛵ Boat-first'],['village','🍹 Village social'],['south','🌅 Quiet south end']]},
+    {k:'budget',q:'Ballpark budget?',opts:[['b1','Under $600k'],['b2','$600k – $1M'],['b3','$1M – $2M'],['b4','$2M+']]},
+    {k:'type',q:'Condo or house?',opts:[['condo','Condo — lock &amp; leave'],['house','House — room to roam'],['surprise','Surprise me']]},
+    {k:'usage',q:'How will you use it?',opts:[['full','Full-time home'],['seasonal','Seasonal escape'],['invest','Rental-friendly investment']]},
+    {k:'timeline',q:'Toes in the sand by…',opts:[['3mo','Next 3 months'],['season','This season'],['year','This year'],['dream','Just dreaming (respect)']]}
+  ];
+  var answers={}, step=0;
+  function openQuiz(){ answers={}; step=0; fmsEl.classList.add('show'); drawStep(); }
+  function closeQuiz(){ fmsEl.classList.remove('show'); }
+  function drawStep(){
+    var s=QS[step];
+    var dots=QS.map(function(_x,i){return '<span class="fms-dot'+(i<=step?' on':'')+'"></span>';}).join('');
+    fmsBody.innerHTML='<p class="fms-eyebrow">Find My Siesta · '+(step+1)+' of '+QS.length+'</p><h3 class="fms-q">'+s.q+'</h3>'+
+      '<div class="fms-opts">'+s.opts.map(function(o){return '<button class="fms-opt" data-v="'+o[0]+'">'+o[1]+'</button>';}).join('')+'</div>'+
+      '<div class="fms-dots">'+dots+'</div>';
+    fmsBody.querySelectorAll('.fms-opt').forEach(function(b){ b.onclick=function(){ answers[s.k]=b.dataset.v; step+=1; (step<QS.length)?drawStep():showMatch(); }; });
+  }
+  function resolve(list){ return (list||[]).map(function(k){return byKey[k];}).filter(Boolean); }
+  function showMatch(){
+    var m=MATCH[answers.lifestyle]||MATCH.beach;
+    var picks=resolve(m.anchors);
+    var homes=[];
+    if(answers.type!=='house'){ homes=resolve((answers.budget==='b3'||answers.budget==='b4')&&m.premium.length?m.premium:m.condos); active.condos=true; }
+    if(answers.type!=='condo'){ homes=homes.concat(resolve(m.houses)); }
+    var all=picks.concat(homes);
+    quizFilter={}; all.forEach(function(p){ quizFilter[p._id]=true; });
+    refresh();
+    if(all.length){ var g=L.featureGroup(all.map(function(p){return L.marker([p.lat,p.lng]);})); map.fitBounds(g.getBounds().pad(0.25)); }
+    var chips=homes.slice(0,4).map(function(p){return '<button class="fms-chip" data-id="'+p._id+'">'+esc(p.name)+'</button>';}).join('');
+    fmsBody.innerHTML='<p class="fms-eyebrow">Your Siesta</p><h3 class="fms-q">'+m.emoji+' '+m.label+' — this is your corner of the island.</h3>'+
+      '<p style="font:400 13.5px/1.5 sans-serif;color:#5c6b76;margin:0 0 6px">The map just cleared away everything that isn\'t you. Tap a match to explore, or…</p>'+
+      '<div class="fms-result-chips">'+chips+'</div>'+
+      '<button class="fms-cta" id="fmsSend">🍹 Send Ryan to find it</button>'+
+      '<button class="fms-ghost" id="fmsClear">show me everything again</button>';
+    fmsBody.querySelectorAll('.fms-chip').forEach(function(c){ c.onclick=function(){ closeQuiz(); select(Number(c.dataset.id), true); }; });
+    document.getElementById('fmsClear').onclick=function(){ quizFilter=null; refresh(); closeQuiz(); };
+    document.getElementById('fmsSend').onclick=function(){ drawCapture('find-my-siesta'+leadSrcSuffix,'Deal. Where do we send the good news?','Ryan hunts, you approve. A few finds a week, zero spam, unsubscribe whenever.'); };
+  }
+  function drawCapture(source,title,copy){
+    fmsBody.innerHTML='<p class="fms-eyebrow">Find My Siesta</p><h3 class="fms-q">'+title+'</h3>'+
+      '<p style="font:400 13px/1.5 sans-serif;color:#5c6b76;margin:0 0 12px">'+copy+'</p>'+
+      '<input id="fmsName" placeholder="First name" autocomplete="given-name"/>'+
+      '<input id="fmsEmail" type="email" placeholder="Email" autocomplete="email"/>'+
+      '<input id="fmsPhone" type="tel" placeholder="Phone (optional — fastest for whisper finds)" autocomplete="tel"/>'+
+      '<input id="fmsHp" name="bot-field" style="display:none" tabindex="-1"/>'+
+      '<button class="fms-cta" id="fmsGo">Put Ryan on it</button><p class="fms-note" id="fmsMsg"></p>';
+    document.getElementById('fmsGo').onclick=function(){
+      var em=document.getElementById('fmsEmail').value.trim();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){ document.getElementById('fmsMsg').textContent='A real email and we\'re off to the races.'; return; }
+      this.disabled=true; this.textContent='…';
+      fetch('/.netlify/functions/srqmap-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+        first_name:document.getElementById('fmsName').value.trim(), email:em,
+        phone:document.getElementById('fmsPhone').value.trim(), 'bot-field':document.getElementById('fmsHp').value,
+        source:source, quiz:answers
+      })}).then(function(r){return r.json();}).then(function(){
+        fmsBody.innerHTML='<p class="fms-eyebrow">Find My Siesta</p><h3 class="fms-q">🤙 Ryan\'s on it.</h3><p style="font:400 14px/1.6 sans-serif;color:#5c6b76">Expect a personal note — not a drip campaign. Meanwhile, the map is yours: your matches are still glowing.</p><button class="fms-cta" onclick="document.getElementById(\'fms\').classList.remove(\'show\')">Back to the island</button>';
+      }).catch(function(){ document.getElementById('fmsMsg').textContent='Hmm, that hiccuped — try once more?'; var g=document.getElementById('fmsGo'); if(g){g.disabled=false;g.textContent='Put Ryan on it';} });
+    };
+  }
+  function openCapture(source,title,copy){ answers=answers||{}; fmsEl.classList.add('show'); drawCapture(source,title,copy); }
+  document.getElementById('fmsOpen').onclick=openQuiz;
+  document.getElementById('fmsX').onclick=closeQuiz;
+  fmsEl.addEventListener('click',function(e){ if(e.target===fmsEl) closeQuiz(); });
+  if(urlP.get('fms')==='1'){ setTimeout(openQuiz, 600); }
   refresh();
 })();
 </script>
