@@ -283,7 +283,8 @@ const itemList = {
   @media (hover:none){.gnav{display:none}}
 
   /* ===== Find My Siesta quiz + capture ===== */
-  .fms-pill{position:fixed;left:14px;bottom:18px;z-index:1500;display:flex;align-items:center;gap:8px;background:var(--navy,#0A2A40);color:#fff;border:none;border-radius:999px;padding:12px 18px;font:600 14px "Montserrat",sans-serif;box-shadow:0 10px 30px -8px rgba(10,42,64,.55);cursor:pointer}
+  .fms-pill{position:fixed;left:14px;bottom:18px;z-index:1500;display:flex;align-items:center;gap:8px;background:var(--navy,#0A2A40);color:#fff;border:none;border-radius:999px;padding:12px 18px;font:600 14px "Montserrat",sans-serif;box-shadow:0 10px 30px -8px rgba(10,42,64,.55);cursor:pointer;opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity 1.8s ease,transform 1.8s ease}
+  .fms-pill.on{opacity:1;transform:none;pointer-events:auto}
   .fms-pill:hover{transform:translateY(-1px)}
   .fms{display:none;position:fixed;left:14px;bottom:18px;z-index:1500;pointer-events:none;max-width:min(400px,calc(100vw - 28px))}
   .fms.show{display:block}
@@ -703,7 +704,7 @@ const itemList = {
   var byKey = {}; PLACES.forEach(function(p){ byKey[p.id||'']=p; byKey[p.name]=p; });
   var fmsEl=document.getElementById('fms'), fmsBody=document.getElementById('fmsBody');
   var QS=[
-    {k:'lifestyle',q:'What pulls you to the island?',opts:[['beach','🏖 Beach-walk purist'],['boat','⛵ Boat-first'],['village','🍹 Village social'],['south','🌅 Quiet south end']]},
+    {k:'market',q:'Which Sarasota is calling?',opts:[['siesta','🏖 Siesta Key — barefoot beach town'],['downtown','🌆 Downtown — arts &amp; walkability'],['stlido','🛍 St Armands / Lido — resort elegance'],['lbk','⛳ Longboat Key — quiet &amp; gulf-front']]},
     {k:'budget',q:'Ballpark budget?',opts:[['b1','Under $600k'],['b2','$600k – $1M'],['b3','$1M – $2M'],['b4','$2M+']]},
     {k:'type',q:'Condo or house?',opts:[['condo','Condo — lock &amp; leave'],['house','House — room to roam'],['surprise','Surprise me']]},
     {k:'usage',q:'How will you use it?',opts:[['full','Full-time home'],['seasonal','Seasonal escape'],['invest','Rental-friendly investment']]},
@@ -712,9 +713,8 @@ const itemList = {
   var answers={}, step=0;
   var pillEl=document.getElementById('fmsOpen');
   function openQuiz(){ answers={}; step=0; drawStep(); fmsEl.classList.add('show'); pillEl.style.display='none'; }
-  function closeQuiz(){ fmsEl.classList.remove('show'); pillEl.style.display=''; autoShown=true; }
-  var autoShown=false;
-  setTimeout(function(){ if(!autoShown && !fmsEl.classList.contains('show')) openQuiz(); }, 6000);
+  function closeQuiz(){ fmsEl.classList.remove('show'); pillEl.style.display=''; }
+  setTimeout(function(){ pillEl.classList.add('on'); }, 8000);
   function drawStep(){
     var s=QS[step];
     var dots=QS.map(function(_x,i){return '<span class="fms-dot'+(i<=step?' on':'')+'"></span>';}).join('');
@@ -725,7 +725,7 @@ const itemList = {
   }
   function resolve(list){ return (list||[]).map(function(k){return byKey[k];}).filter(Boolean); }
   function showMatch(){
-    var m=MATCH[answers.lifestyle]||MATCH.beach;
+    var m=MATCH[answers.market]||MATCH.siesta;
     var picks=resolve(m.anchors);
     var homes=[];
     if(answers.type!=='house'){ homes=resolve((answers.budget==='b3'||answers.budget==='b4')&&m.premium.length?m.premium:m.condos); if(!active.condos){ active.condos=true; refresh(); } }
@@ -733,8 +733,8 @@ const itemList = {
     var all=picks.concat(homes);
     if(all.length){ var g=L.featureGroup(all.map(function(p){return L.marker([p.lat,p.lng]);})); map.fitBounds(g.getBounds().pad(0.25)); }
     var chips=homes.slice(0,4).map(function(p){return '<button class="fms-chip" data-id="'+p._id+'">'+esc(p.name)+'</button>';}).join('');
-    fmsBody.innerHTML='<p class="fms-eyebrow">Your Siesta</p><h3 class="fms-q">'+m.emoji+' '+m.label+' — this is your corner of the island.</h3>'+
-      '<p style="font:400 13.5px/1.5 sans-serif;color:#5c6b76;margin:0 0 6px">Here\'s your corner of the island — tap a match to explore it, or…</p>'+
+    fmsBody.innerHTML='<p class="fms-eyebrow">Your Siesta</p><h3 class="fms-q">'+m.emoji+' '+m.label+'</h3>'+
+      '<p style="font:400 13.5px/1.5 sans-serif;color:#5c6b76;margin:0 0 6px">Here\'s your corner of Sarasota — tap a match to explore it, or…</p>'+
       '<div class="fms-result-chips">'+chips+'</div>'+
       '<button class="fms-cta" id="fmsSend">🍹 Send Ryan to find it</button>'+
       '<button class="fms-ghost" id="fmsClear">maybe later — back to browsing</button>';
