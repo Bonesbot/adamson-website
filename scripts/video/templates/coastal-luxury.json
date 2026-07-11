@@ -1,0 +1,47 @@
+{
+  "name": "coastal-luxury",
+  "colors": { "navy": [10, 31, 60], "navyTop": [14, 42, 80], "gold": [201, 169, 97], "white": [255, 255, 255] },
+  "fonts": {
+    "headline": "scripts/video/assets/Playfair.ttf",
+    "headlineUrl": "https://github.com/google/fonts/raw/main/ofl/playfairdisplay/PlayfairDisplay%5Bwght%5D.ttf",
+    "body": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    "bodyBold": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+  },
+  "logo": { "source": "public/images/logos/adamson-group-black.png", "invertToWhite": true },
+  "watermark": { "width": 150, "opacity": 0.55, "position": "top-right", "margin": [40, 48], "hideDuringEndcard": true },
+  "grade": "eq=contrast=1.07:brightness=-0.005:saturation=1.2,unsharp=5:5:0.4,vignette=PI/24",
+  "hook": {
+    "fontsize": 82, "color": "white", "shadow": [3, 4, 0.45],
+    "line1Y": 430, "line2Y": 540,
+    "fadeInAt": 0.6, "fadeInDur": 0.5, "fadeOutAt": 4.2, "fadeOutDur": 0.6
+  },
+  "bubble": {
+    "diameter": 320, "ringCanvas": 340, "ringWidth": 6, "ringColor": "gold",
+    "position": [64, 1260], "cropSquareY": 285,
+    "startAt": 3.4, "fadeDur": 0.4
+  },
+  "endcard": {
+    "durationSec": 3.5, "xfadeDur": 0.6,
+    "logoWidth": 520, "logoY": 560,
+    "nameText": "RYAN ADAMSON", "subText": "The Adamson Group · Coldwell Banker Realty",
+    "ctaText": "AdamsonFL.com", "ctaFontsize": 88,
+    "footerText": "Sarasota · Longboat Key · Siesta Key"
+  },
+  "transitions": { "type": "fade", "durationSec": 0.5 },
+  "audio": { "voiceDelayMs": "auto:bubble.startAt", "musicDuckDb": -18, "finalFadeOutSec": 1.1 },
+  "avatars": {
+    "ryan": {
+      "group": "e4ccd9ff79d34ced9c300cf3911c6a4b",
+      "look": "ccabb086270f4e94ade5058683e53710",
+      "voice": "ce2fae3761df4cdb973a65adfc54ede5",
+      "note": "Ryan3 / The Slim Navy Sport Coat over White (latest as of 2026-07-10)"
+    },
+    "kelli": { "group": null, "look": null, "voice": null, "note": "create HeyGen avatar group for Kelli Eggen" }
+  },
+  "presets": {
+    "ig-reel": { "size": [1080, 1920], "crf": 18, "maxSec": 90 },
+    "yt-short": { "size": [1080, 1920], "crf": 18, "maxSec": 60 },
+    "ig-feed": { "size": [1080, 1350], "crf": 18 },
+    "yt": { "size": [1920, 1080], "crf": 18, "verticalCrop": false }
+  }
+}
