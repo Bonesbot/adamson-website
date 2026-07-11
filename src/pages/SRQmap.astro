@@ -285,9 +285,10 @@ const itemList = {
   /* ===== Find My Siesta quiz + capture ===== */
   .fms-pill{position:fixed;left:14px;bottom:18px;z-index:1500;display:flex;align-items:center;gap:8px;background:var(--navy,#0A2A40);color:#fff;border:none;border-radius:999px;padding:12px 18px;font:600 14px "Montserrat",sans-serif;box-shadow:0 10px 30px -8px rgba(10,42,64,.55);cursor:pointer}
   .fms-pill:hover{transform:translateY(-1px)}
-  .fms{display:none;position:fixed;inset:0;z-index:2100;background:rgba(10,42,64,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);align-items:flex-end;justify-content:center;padding:14px}
-  .fms.show{display:flex}
-  @media(min-width:700px){.fms{align-items:center}}
+  .fms{display:none;position:fixed;left:14px;bottom:18px;z-index:1500;pointer-events:none;max-width:min(400px,calc(100vw - 28px))}
+  .fms.show{display:block}
+  .fms .fms-card{pointer-events:auto;opacity:0;transform:translateY(14px);transition:opacity 1.4s ease,transform 1.4s ease}
+  .fms.show .fms-card{opacity:1;transform:none}
   .fms-card{position:relative;width:100%;max-width:440px;background:#fff;border-radius:18px;box-shadow:0 30px 80px -20px rgba(10,42,64,.6);padding:24px 22px 20px}
   .fms-x{position:absolute;top:10px;right:12px;background:none;border:none;font-size:24px;color:#888;cursor:pointer}
   .fms-eyebrow{font:700 10.5px "Montserrat",sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--gold,#C9A961);margin:0 0 6px}
@@ -534,20 +535,12 @@ const itemList = {
   var chipsEl = document.getElementById('chips');
   function renderChips(){
     chipsEl.innerHTML='';
-    if(quizFilter){
-      var bn=document.createElement('button');
-      bn.className='chip'; bn.style.setProperty('--c','#C9A961');
-      bn.setAttribute('aria-pressed','true');
-      bn.innerHTML='<span class="dot"></span>🌴 Your matches · tap to show everything';
-      bn.onclick=function(){ quizFilter=null; refresh(); };
-      chipsEl.appendChild(bn);
-    }
     GROUPS.forEach(function(g){
       var b=document.createElement('button');
       b.className='chip'; b.style.setProperty('--c', g.color);
       b.setAttribute('aria-pressed', active[g.id]);
       b.innerHTML='<span class="dot"></span>'+esc(g.label);
-      b.onclick=function(){ if(quizFilter){ quizFilter=null; } active[g.id]=!active[g.id]; refresh(); };
+      b.onclick=function(){ active[g.id]=!active[g.id]; refresh(); };
       chipsEl.appendChild(b);
     });
   }
@@ -555,8 +548,7 @@ const itemList = {
   var listEl=document.getElementById('list');
   var countEl=document.getElementById('count');
   function matchesQuery(p){ if(!query) return true; return query.split(/\s+/).every(function(t){ return p._hay.indexOf(t)>=0; }); }
-  var quizFilter=null;
-  function isVisible(p){ if(quizFilter && !quizFilter[p._id]) return false; return active[p.group] && matchesQuery(p); }
+  function isVisible(p){ return active[p.group] && matchesQuery(p); }
   function visible(){ return PLACES.filter(isVisible); }
   function renderList(){
     var items=visible();
@@ -718,8 +710,11 @@ const itemList = {
     {k:'timeline',q:'Toes in the sand by…',opts:[['3mo','Next 3 months'],['season','This season'],['year','This year'],['dream','Just dreaming (respect)']]}
   ];
   var answers={}, step=0;
-  function openQuiz(){ answers={}; step=0; fmsEl.classList.add('show'); drawStep(); }
-  function closeQuiz(){ fmsEl.classList.remove('show'); }
+  var pillEl=document.getElementById('fmsOpen');
+  function openQuiz(){ answers={}; step=0; drawStep(); fmsEl.classList.add('show'); pillEl.style.display='none'; }
+  function closeQuiz(){ fmsEl.classList.remove('show'); pillEl.style.display=''; autoShown=true; }
+  var autoShown=false;
+  setTimeout(function(){ if(!autoShown && !fmsEl.classList.contains('show')) openQuiz(); }, 6000);
   function drawStep(){
     var s=QS[step];
     var dots=QS.map(function(_x,i){return '<span class="fms-dot'+(i<=step?' on':'')+'"></span>';}).join('');
@@ -733,20 +728,18 @@ const itemList = {
     var m=MATCH[answers.lifestyle]||MATCH.beach;
     var picks=resolve(m.anchors);
     var homes=[];
-    if(answers.type!=='house'){ homes=resolve((answers.budget==='b3'||answers.budget==='b4')&&m.premium.length?m.premium:m.condos); active.condos=true; }
+    if(answers.type!=='house'){ homes=resolve((answers.budget==='b3'||answers.budget==='b4')&&m.premium.length?m.premium:m.condos); if(!active.condos){ active.condos=true; refresh(); } }
     if(answers.type!=='condo'){ homes=homes.concat(resolve(m.houses)); }
     var all=picks.concat(homes);
-    quizFilter={}; all.forEach(function(p){ quizFilter[p._id]=true; });
-    refresh();
     if(all.length){ var g=L.featureGroup(all.map(function(p){return L.marker([p.lat,p.lng]);})); map.fitBounds(g.getBounds().pad(0.25)); }
     var chips=homes.slice(0,4).map(function(p){return '<button class="fms-chip" data-id="'+p._id+'">'+esc(p.name)+'</button>';}).join('');
     fmsBody.innerHTML='<p class="fms-eyebrow">Your Siesta</p><h3 class="fms-q">'+m.emoji+' '+m.label+' — this is your corner of the island.</h3>'+
-      '<p style="font:400 13.5px/1.5 sans-serif;color:#5c6b76;margin:0 0 6px">The map just cleared away everything that isn\'t you. Tap a match to explore, or…</p>'+
+      '<p style="font:400 13.5px/1.5 sans-serif;color:#5c6b76;margin:0 0 6px">Here\'s your corner of the island — tap a match to explore it, or…</p>'+
       '<div class="fms-result-chips">'+chips+'</div>'+
       '<button class="fms-cta" id="fmsSend">🍹 Send Ryan to find it</button>'+
-      '<button class="fms-ghost" id="fmsClear">show me everything again</button>';
+      '<button class="fms-ghost" id="fmsClear">maybe later — back to browsing</button>';
     fmsBody.querySelectorAll('.fms-chip').forEach(function(c){ c.onclick=function(){ closeQuiz(); select(Number(c.dataset.id), true); }; });
-    document.getElementById('fmsClear').onclick=function(){ quizFilter=null; refresh(); closeQuiz(); };
+    document.getElementById('fmsClear').onclick=function(){ closeQuiz(); };
     document.getElementById('fmsSend').onclick=function(){ drawCapture('find-my-siesta'+leadSrcSuffix,'Deal. Where do we send the good news?','Ryan hunts, you approve. A few finds a week, zero spam, unsubscribe whenever.'); };
   }
   function drawCapture(source,title,copy){
@@ -773,7 +766,7 @@ const itemList = {
   function openCapture(source,title,copy){ answers=answers||{}; fmsEl.classList.add('show'); drawCapture(source,title,copy); }
   document.getElementById('fmsOpen').onclick=openQuiz;
   document.getElementById('fmsX').onclick=closeQuiz;
-  fmsEl.addEventListener('click',function(e){ if(e.target===fmsEl) closeQuiz(); });
+
   if(urlP.get('fms')==='1'){ setTimeout(openQuiz, 600); }
   refresh();
 })();
