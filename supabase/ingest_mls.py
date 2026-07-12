@@ -166,7 +166,6 @@ CSV_TO_DB = {
     "DockDimensions": "dock_dimensions",
     "DockLiftCap": "dock_lift_cap",
     "DockYN": "dock_yn",
-    "TaxYear": "tax_year",
     "CDDYN": "cdd_yn",
     "TaxOtherAnnualAssessmentAmount": "tax_other_annual_assessment_amount",
     "ListAgentFullName": "list_agent_full_name",
@@ -183,7 +182,6 @@ CSV_TO_DB = {
     "PurchaseContractDate": "purchase_contract_date",
     "ListingContractDate": "listing_contract_date",
     "ExpirationDate": "expiration_date",
-    "ExpireRenewalDate": "expire_renewal_date",
     "Latitude": "latitude",
     "Longitude": "longitude",
     "View": "listing_view",
@@ -202,7 +200,7 @@ NUMERIC_COLS = {
     "monthly_hoa_amount", "total_annual_fees", "association_fee",
     "max_pet_weight", "garage_spaces", "stories_total",
     "waterfront_feet_total", "tax_annual_amount", "dock_lift_cap",
-    "tax_year", "tax_other_annual_assessment_amount",
+    "tax_other_annual_assessment_amount",
     "original_list_price", "latitude", "longitude",
 }
 
@@ -214,7 +212,7 @@ BOOLEAN_COLS = {
 
 DATE_COLS = {
     "close_date", "purchase_contract_date", "listing_contract_date",
-    "expiration_date", "expire_renewal_date",
+    "expiration_date",
 }
 
 TIMESTAMP_COLS = {
@@ -227,6 +225,38 @@ TIMESTAMP_COLS = {
 INSERT_COLS = sorted(CSV_TO_DB.values()) + [
     "import_batch_id", "raw_mls_data", "data_hash",
 ]
+
+# The exact CSV header this ingest expects, derived from the field map so it
+# stays in sync automatically: update CSV_TO_DB and the guard follows.
+EXPECTED_COLUMNS = frozenset(CSV_TO_DB)
+
+
+class HeaderMismatchError(ValueError):
+    """Raised when a CSV's header doesn't match the expected MLS export format."""
+
+
+def validate_header(fieldnames, source=""):
+    """Abort if the CSV header isn't an exact match for the current export
+    format. Catches wrong-format or mixed old/new files before they ingest with
+    silently-nulled or misaligned fields. Compared exactly (no stripping) so
+    whitespace drift in a header is caught rather than papered over."""
+    actual = set(fieldnames or [])
+    if actual == EXPECTED_COLUMNS:
+        return
+    missing = sorted(EXPECTED_COLUMNS - actual)
+    unexpected = sorted(actual - EXPECTED_COLUMNS)
+    details = []
+    if missing:
+        details.append(f"missing {len(missing)}: {missing}")
+    if unexpected:
+        details.append(f"unexpected {len(unexpected)}: {unexpected}")
+    where = f" in {source}" if source else ""
+    raise HeaderMismatchError(
+        f"CSV header mismatch{where} — " + "; ".join(details)
+        + f". Expected the current MLS export format ({len(EXPECTED_COLUMNS)} "
+        "columns). Aborting to avoid a bad ingest."
+    )
+
 
 # ---------------------------------------------------------------------------
 # Parsing helpers
@@ -519,6 +549,7 @@ def ingest_csv(filepath, conn, dry_run=False):
     log.info(f"  Reading CSV...")
     with open(filepath, "r", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
+        validate_header(reader.fieldnames, source=filepath.name)
         parsed_rows = []
         for csv_row in reader:
             db_row, raw_mls = parse_csv_row(csv_row)
