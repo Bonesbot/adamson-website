@@ -182,6 +182,8 @@ CSV_TO_DB = {
     "OriginalListPrice": "original_list_price",
     "PurchaseContractDate": "purchase_contract_date",
     "ListingContractDate": "listing_contract_date",
+    "ExpirationDate": "expiration_date",
+    "ExpireRenewalDate": "expire_renewal_date",
     "Latitude": "latitude",
     "Longitude": "longitude",
     "View": "listing_view",
@@ -212,6 +214,7 @@ BOOLEAN_COLS = {
 
 DATE_COLS = {
     "close_date", "purchase_contract_date", "listing_contract_date",
+    "expiration_date", "expire_renewal_date",
 }
 
 TIMESTAMP_COLS = {
