@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STR Intelligence — Siesta Key (34242) · The Adamson Group</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/esri-leaflet@3.0.12/dist/esri-leaflet.js"></script>
+<style>
+  :root{
+    --navy:#0A1F3C; --cb:#012169; --gold:#C9A961; --white:#fff;
+    --muted:#6b7688; --line:#e4e8ef; --bg:#f4f6f9;
+    --ok:#2e7d52; --no:#b23b3b; --warn:#c08a2d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#16233a;background:var(--bg)}
+  h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:600;margin:0}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 18px 60px}
+  header{background:var(--navy);color:#fff;border-bottom:3px solid var(--gold)}
+  .hd{max-width:1240px;margin:0 auto;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand .ag{font-family:Georgia,serif;font-size:20px;letter-spacing:.14em;text-transform:uppercase}
+  .brand .div{width:1px;height:30px;background:var(--gold);opacity:.7}
+  .brand .cb{font-size:10px;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;line-height:1.5}
+  .htag{font-family:Georgia,serif;color:#cdd6e4;font-size:13px;font-style:italic}
+  .subbar{max-width:1240px;margin:0 auto;padding:10px 18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;color:#40506a;font-size:12.5px}
+  .pill{display:inline-flex;align-items:center;gap:6px;background:#eaf0f7;border:1px solid #d8e2ee;border-radius:20px;padding:4px 11px;font-size:11.5px}
+  .pill b{color:var(--cb)}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);display:inline-block}
+  .dot.ph{background:var(--gold)}
+  h1.title{font-size:26px;color:var(--navy);margin:22px 0 3px}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:18px}
+  .grid{display:grid;grid-template-columns:390px 1fr;gap:18px}
+  @media(max-width:940px){.grid{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 1px 2px rgba(16,31,60,.04)}
+  .card h2{font-size:15px;color:var(--cb);letter-spacing:.02em;margin-bottom:4px}
+  .card .hint{color:var(--muted);font-size:12px;margin-bottom:12px}
+  label.fld{display:block;font-size:12px;color:#43506a;margin:2px 0 5px;font-weight:600}
+  input[type=text]{width:100%;padding:11px 12px;border:1px solid #cdd6e2;border-radius:8px;font-size:14px}
+  .btn{width:100%;margin-top:9px;background:var(--navy);color:#fff;border:0;border-radius:8px;padding:11px;font-size:14px;letter-spacing:.03em;cursor:pointer;transition:.15s}
+  .btn:hover{background:#12294a}
+  .btn.gold{background:var(--gold);color:#1a2233}
+  .btn.gold:hover{background:#d8b96f}
+  .mini{color:var(--muted);font-size:11.5px;margin-top:8px;line-height:1.5}
+  #verdict{margin-top:14px;display:none}
+  .vbadge{display:flex;align-items:center;gap:10px;border-radius:10px;padding:12px 14px;color:#fff;font-family:Georgia,serif}
+  .vbadge .ic{font-size:22px;line-height:1}
+  .vbadge .t{font-size:16px}
+  .vbadge .s{font-size:11.5px;opacity:.92;font-family:inherit}
+  .v-ok{background:var(--ok)} .v-no{background:var(--no)} .v-warn{background:var(--warn)}
+  .vrow{display:flex;justify-content:space-between;gap:10px;padding:8px 2px;border-bottom:1px solid var(--line);font-size:13px}
+  .vrow:last-child{border:0}
+  .vrow .k{color:var(--muted)} .vrow .val{font-weight:600;text-align:right}
+  .disc{font-size:11px;color:var(--muted);margin-top:10px;line-height:1.5;border-left:3px solid var(--gold);padding:6px 10px;background:#fbf8f1}
+  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+  .kpi{background:var(--navy);color:#fff;border-radius:10px;padding:12px}
+  .kpi .lab{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#9fb0c8}
+  .kpi .num{font-family:Georgia,serif;font-size:22px;margin-top:3px}
+  .kpi .num small{font-size:12px;color:var(--gold)}
+  .phtag{display:inline-block;margin-top:6px;font-size:9.5px;letter-spacing:.06em;color:var(--gold);border:1px solid rgba(201,169,97,.5);border-radius:10px;padding:1px 6px;text-transform:uppercase}
+  #map{height:560px;border-radius:12px;border:1px solid var(--line)}
+  .legend{background:#fff;padding:9px 11px;border-radius:8px;box-shadow:0 1px 6px rgba(0,0,0,.18);font-size:11.5px;line-height:1.8}
+  .legend i{display:inline-block;width:12px;height:12px;margin-right:7px;border-radius:2px;vertical-align:-1px;opacity:.85}
+  .mapnote{font-size:11.5px;color:var(--muted);margin-top:7px}
+  .scen{margin-top:18px}
+  .scen-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  @media(max-width:940px){.scen-grid{grid-template-columns:1fr}}
+  .slider{margin:14px 0}
+  .slider .top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+  .slider .top b{color:var(--cb);font-size:14px}
+  input[type=range]{width:100%;accent-color:var(--gold);height:5px}
+  .presets{display:flex;gap:8px;margin:4px 0 6px}
+  .presets button{flex:1;font-size:12px;padding:7px;border:1px solid #cdd6e2;background:#fff;border-radius:7px;cursor:pointer}
+  .presets button:hover{border-color:var(--gold);color:var(--cb)}
+  .out{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .obox{border:1px solid var(--line);border-radius:10px;padding:12px}
+  .obox .lab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .obox .v{font-family:Georgia,serif;font-size:22px;color:var(--navy);margin-top:3px}
+  .obox.hi{background:var(--navy)} .obox.hi .v{color:#fff} .obox.hi .lab{color:#9fb0c8}
+  .bar{height:16px;border-radius:8px;overflow:hidden;display:flex;margin:14px 0 4px;border:1px solid var(--line)}
+  .bar .seg{height:100%}
+  .goal{margin-top:16px;border-top:1px dashed var(--line);padding-top:14px}
+  .goal .res{margin-top:8px;font-size:13.5px;background:#f4f7fb;border-radius:8px;padding:10px 12px}
+  .goal .res b{color:var(--cb)}
+  .flag{font-size:12px;margin-top:6px;padding:6px 9px;border-radius:7px}
+  .flag.g{background:#e9f4ee;color:#215d3d} .flag.a{background:#fbf3e3;color:#8a6516}
+  footer{margin-top:26px;font-size:11.5px;color:var(--muted);line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--cb)}
+</style>
+</head>
+<body>
+<header>
+  <div class="hd">
+    <div class="brand">
+      <div class="ag">The Adamson Group</div>
+      <div class="div"></div>
+      <div class="cb">Coldwell Banker<br>Global Luxury</div>
+    </div>
+    <div class="htag">STR Intelligence &mdash; Siesta Key &bull; ZIP 34242</div>
+  </div>
+</header>
+<div class="subbar">
+  <span class="pill"><span class="dot"></span> Zoning: <b>Live &mdash; Sarasota County GIS</b></span>
+  <span class="pill"><span class="dot"></span> Geocoding: <b>Live &mdash; US Census</b></span>
+  <span class="pill"><span class="dot ph"></span> STR market stats: <b>Placeholder (AirROI API-ready)</b></span>
+</div>
+<div class="wrap">
+  <h1 class="title">Short-Term Rental Dashboard <span style="font-size:12px;vertical-align:middle;background:var(--gold);color:#1a2233;border-radius:20px;padding:3px 11px;letter-spacing:.06em">PREVIEW</span></h1>
+  <div class="sub">Check whether an address can legally operate a short-term rental, see the market picture, and model the numbers. Not every property in 34242 is STR-eligible &mdash; zoning decides.</div>
+  <div class="grid">
+    <div>
+      <div class="card">
+        <h2>Property &amp; Zoning Check</h2>
+        <div class="hint">Enter an address, or click any parcel on the map.</div>
+        <label class="fld" for="addr">Property address</label>
+        <input type="text" id="addr" placeholder="e.g. 5006 Ocean Blvd, Sarasota, FL 34242" value="5006 Ocean Blvd, Sarasota, FL 34242">
+        <button class="btn" id="go">Check STR eligibility</button>
+        <div class="mini" id="status"></div>
+        <div id="verdict">
+          <div class="vbadge" id="vbadge">
+            <div class="ic" id="vic">&bull;</div>
+            <div><div class="t" id="vtitle"></div><div class="s" id="vsub"></div></div>
+          </div>
+          <div style="margin-top:12px">
+            <div class="vrow"><span class="k">Zoning code</span><span class="val" id="vcode">&mdash;</span></div>
+            <div class="vrow"><span class="k">Designation</span><span class="val" id="vdesig">&mdash;</span></div>
+            <div class="vrow"><span class="k">Zoning group</span><span class="val" id="vgroup">&mdash;</span></div>
+            <div class="vrow"><span class="k">Overlay district</span><span class="val" id="voverlay">&mdash;</span></div>
+            <div class="vrow"><span class="k">Jurisdiction</span><span class="val" id="vmuni">&mdash;</span></div>
+          </div>
+          <div class="disc">Guidance only, from live county zoning polygons &mdash; not a legal determination. Confirm with Sarasota County Planning &amp; Development Services before relying on it. In unincorporated Sarasota County, rentals under 30 days are generally limited to multi-family / tourist-resort / commercial zones on the barrier islands.</div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <h2>STR Market Snapshot &mdash; 34242</h2>
+        <div class="hint">Sample figures. Live values populate from the AirROI API once connected (see spec).</div>
+        <div class="kpis">
+          <div class="kpi"><div class="lab">Median annual revenue</div><div class="num" id="k_rev">$95,000</div></div>
+          <div class="kpi"><div class="lab">Occupancy</div><div class="num" id="k_occ">62<small>%</small></div></div>
+          <div class="kpi"><div class="lab">ADR</div><div class="num" id="k_adr">$415</div></div>
+          <div class="kpi"><div class="lab">RevPAR</div><div class="num" id="k_revpar">$257</div></div>
+        </div>
+        <div style="margin-top:10px"><span class="phtag" id="k_src">Placeholder data</span></div>
+      </div>
+    </div>
+    <div>
+      <div id="map"></div>
+      <div class="mapnote">Toggle layers top-right. Green = likely STR-eligible zoning, red = single-family (not permitted), amber = verify. Overlay districts (incl. Siesta Key / SKOD) shown as outlined areas.</div>
+    </div>
+  </div>
+  <div class="card scen">
+    <h2>Scenario Studio &mdash; &ldquo;if this, then that&rdquo;</h2>
+    <div class="hint">Drag the sliders to model revenue and returns. Seeded with the 34242 sample market; swap for live comps once the API is wired.</div>
+    <div class="presets">
+      <button data-p="cons">Conservative</button>
+      <button data-p="mkt">Market</button>
+      <button data-p="opt">Optimistic</button>
+    </div>
+    <div class="scen-grid">
+      <div>
+        <div class="slider"><div class="top"><span>Average nightly rate (ADR)</span><b id="l_adr">$415</b></div><input type="range" id="s_adr" min="100" max="1200" step="5" value="415"></div>
+        <div class="slider"><div class="top"><span>Occupancy</span><b id="l_occ">62%</b></div><input type="range" id="s_occ" min="10" max="95" step="1" value="62"></div>
+        <div class="slider"><div class="top"><span>Management fee</span><b id="l_mgmt">20%</b></div><input type="range" id="s_mgmt" min="0" max="35" step="1" value="20"></div>
+        <div class="slider"><div class="top"><span>Platform / booking fee</span><b id="l_plat">3%</b></div><input type="range" id="s_plat" min="0" max="20" step="1" value="3"></div>
+        <div class="slider"><div class="top"><span>Fixed annual costs (HOA, tax, ins., utilities, upkeep)</span><b id="l_fix">$38,000</b></div><input type="range" id="s_fix" min="0" max="150000" step="1000" value="38000"></div>
+        <div class="slider"><div class="top"><span>Purchase price</span><b id="l_price">$1,200,000</b></div><input type="range" id="s_price" min="300000" max="6000000" step="25000" value="1200000"></div>
+      </div>
+      <div>
+        <div class="out">
+          <div class="obox hi"><div class="lab">Gross annual revenue</div><div class="v" id="o_gross">&mdash;</div></div>
+          <div class="obox"><div class="lab">Net operating income</div><div class="v" id="o_noi">&mdash;</div></div>
+          <div class="obox"><div class="lab">Break-even occupancy</div><div class="v" id="o_be">&mdash;</div></div>
+          <div class="obox"><div class="lab">Gross cap rate</div><div class="v" id="o_cap">&mdash;</div></div>
+        </div>
+        <div class="bar" id="bar" title="Revenue split: net vs fees vs fixed costs">
+          <div class="seg" id="seg_net" style="background:#2e7d52"></div>
+          <div class="seg" id="seg_fee" style="background:#C9A961"></div>
+          <div class="seg" id="seg_fix" style="background:#b23b3b"></div>
+        </div>
+        <div class="mini"><span style="color:#2e7d52">&#9632;</span> Net &nbsp; <span style="color:#C9A961">&#9632;</span> Mgmt/platform fees &nbsp; <span style="color:#b23b3b">&#9632;</span> Fixed costs</div>
+        <div class="goal">
+          <label class="fld" for="g_target">Goal-seek — target net income ($/yr)</label>
+          <input type="text" id="g_target" value="60000">
+          <button class="btn gold" id="g_run" style="margin-top:8px">What occupancy do I need?</button>
+          <div class="res" id="g_res" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <b>Data sources.</b> Zoning &amp; overlay districts: Sarasota County Enterprise GIS (CountyZoning &amp; ZoningOverlayDistrict FeatureServers, live). Address geocoding: U.S. Census Geocoder. Basemap: CARTO / OpenStreetMap. STR market metrics shown here are placeholder samples pending the AirROI API connection described in the project spec.<br>
+    Sarasota County GIS data is provided &ldquo;as is&rdquo; without warranty; figures are estimates, deemed reliable but not guaranteed. Nothing here constitutes legal, zoning, or investment advice. &copy; 2026 The Adamson Group &bull; Coldwell Banker Realty.
+  </footer>
+</div>
+<script>
+var ZON = "https://ags3.scgov.net/server/rest/services/Hosted/CountyZoning/FeatureServer/0";
+var OVL = "https://ags3.scgov.net/server/rest/services/Hosted/ZoningOverlayDistrict/FeatureServer/0";
+var SIESTA = [27.2730, -82.5460];
+
+function classify(group, code, muni){
+  group = group || "";
+  if(muni && muni !== "SC"){
+    var name = ({CS:"City of Sarasota",CV:"City of Venice",CNP:"City of North Port",TLK:"Town of Longboat Key",MC:"Manatee County",CC:"Charlotte County"})[muni] || muni;
+    return {cls:"warn", ic:"?", t:"Verify — outside County code", s:"Within "+name+"; that jurisdiction's STR rules apply, not the County's."};
+  }
+  if(group === "Residential Single Family")
+    return {cls:"no", ic:"✕", t:"Not permitted", s:"Single-family zoning — rentals under 30 days are prohibited in unincorporated Sarasota County."};
+  if(group === "Residential Multi-Family")
+    return {cls:"ok", ic:"✓", t:"Likely permitted", s:"Multi-family on the barrier island — short-term rental generally allowed with County registration."};
+  if(group === "Residential Tourist Resort")
+    return {cls:"ok", ic:"✓", t:"Permitted", s:"Tourist-resort zoning is intended for transient / short-term accommodation."};
+  if(group === "Commercial")
+    return {cls:"ok", ic:"✓", t:"Likely permitted", s:"Commercial / mixed-use zoning generally allows short-term rental with proper licensing."};
+  if(group === "Residential Mobile Home")
+    return {cls:"warn", ic:"?", t:"Verify", s:"Mobile-home residential — short-term rental is typically restricted; confirm with the County."};
+  return {cls:"warn", ic:"?", t:"Verify", s:"This zoning group ("+(group||"unknown")+") needs a direct check with County Planning."};
+}
+
+var map = L.map('map', {scrollWheelZoom:true}).setView(SIESTA, 14);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  {attribution:'&copy; OpenStreetMap, &copy; CARTO', maxZoom:20}).addTo(map);
+
+function strColor(g){
+  if(g==="Residential Single Family") return "#b23b3b";
+  if(g==="Residential Multi-Family"||g==="Residential Tourist Resort"||g==="Commercial") return "#2e7d52";
+  return "#C9A961";
+}
+var zoningLayer = L.esri.featureLayer({
+  url: ZON, simplifyFactor: 0.4, precision: 6,
+  fields: ["OBJECTID","zoninggroup","zoningcode","zoningdesignation","municipality"],
+  style: function(f){ return {color:"#5a6272", weight:0.6, fillColor:strColor(f.properties.zoninggroup), fillOpacity:0.35}; }
+}).addTo(map);
+zoningLayer.bindPopup(function(l){
+  var p=l.feature.properties, v=classify(p.zoninggroup,p.zoningcode,p.municipality);
+  return "<b>"+(p.zoningcode||"?")+"</b> — "+(p.zoninggroup||"")+"<br><span style='color:"+({ok:'#2e7d52',no:'#b23b3b',warn:'#c08a2d'})[v.cls]+"'><b>"+v.t+"</b></span>";
+});
+zoningLayer.on('requesterror', function(){ document.getElementById('status').innerHTML = "<span style='color:#b23b3b'>Note: live zoning tiles couldn't load in this browser (network/CORS). The address check below may still work.</span>"; });
+
+var overlayLayer = L.esri.featureLayer({
+  url: OVL, fields:["OBJECTID","districtname","districttype"],
+  style:function(){ return {color:"#26497a", weight:1.6, fill:false, dashArray:"4 3"}; }
+});
+
+L.control.layers(null,{ "Zoning (STR eligibility)":zoningLayer, "Overlay districts (SKOD, etc.)":overlayLayer }, {collapsed:false}).addTo(map);
+
+var legend = L.control({position:'bottomleft'});
+legend.onAdd = function(){
+  var d = L.DomUtil.create('div','legend');
+  d.innerHTML = "<b>STR zoning</b><br>"+
+    "<i style='background:#2e7d52'></i>Likely eligible (RMF / RTR / Comm.)<br>"+
+    "<i style='background:#b23b3b'></i>Not permitted (single-family)<br>"+
+    "<i style='background:#C9A961'></i>Verify with County";
+  return d;
+};
+legend.addTo(map);
+
+var marker = null;
+function setMarker(lat,lon){ if(marker) map.removeLayer(marker); marker=L.marker([lat,lon]).addTo(map); }
+
+function queryPoint(lat, lon, callback){
+  var g = lon+","+lat;
+  var base = "/query?geometry="+encodeURIComponent(g)+"&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&returnGeometry=false&f=json&outFields=";
+  var zurl = ZON+base+encodeURIComponent("zoningcode,zoningdesignation,zoninggroup,municipality");
+  var ourl = OVL+base+encodeURIComponent("districtname,districttype");
+  Promise.all([
+    fetch(zurl).then(function(r){return r.json()}).catch(function(){return null}),
+    fetch(ourl).then(function(r){return r.json()}).catch(function(){return null})
+  ]).then(function(res){
+    var z = res[0] && res[0].features && res[0].features[0] ? res[0].features[0].attributes : null;
+    var ov = res[1] && res[1].features ? res[1].features.map(function(f){return f.attributes.districtname}).filter(Boolean) : [];
+    callback(z, ov);
+  });
+}
+
+function showVerdict(z, ov){
+  var box = document.getElementById('verdict'); box.style.display='block';
+  if(!z){
+    document.getElementById('status').innerHTML = "<span style='color:#b23b3b'>No county zoning polygon at that point (may be open water or outside the County layer).</span>";
+    box.style.display='none'; return;
+  }
+  var v = classify(z.zoninggroup, z.zoningcode, z.municipality);
+  var badge = document.getElementById('vbadge');
+  badge.className = "vbadge v-"+(v.cls==='ok'?'ok':v.cls==='no'?'no':'warn');
+  document.getElementById('vic').textContent = v.ic;
+  document.getElementById('vtitle').textContent = v.t;
+  document.getElementById('vsub').textContent = v.s;
+  document.getElementById('vcode').textContent = z.zoningcode||"—";
+  document.getElementById('vdesig').textContent = z.zoningdesignation||"—";
+  document.getElementById('vgroup').textContent = z.zoninggroup||"—";
+  document.getElementById('voverlay').textContent = ov.length? ov.join(", ") : "None";
+  var muniName = ({SC:"Sarasota County (unincorporated)",CS:"City of Sarasota",CV:"City of Venice",CNP:"City of North Port",TLK:"Town of Longboat Key",MC:"Manatee County",CC:"Charlotte County"})[z.municipality] || z.municipality || "—";
+  document.getElementById('vmuni').textContent = muniName;
+}
+
+map.on('click', function(e){
+  setMarker(e.latlng.lat, e.latlng.lng);
+  document.getElementById('status').textContent = "Checking zoning at clicked point…";
+  queryPoint(e.latlng.lat, e.latlng.lng, function(z,ov){ document.getElementById('status').textContent=""; showVerdict(z,ov); });
+});
+
+function geocode(addr){
+  var c = "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address="+encodeURIComponent(addr)+"&benchmark=4&format=json";
+  return fetch(c).then(function(r){return r.json()}).then(function(j){
+    var m = j.result && j.result.addressMatches && j.result.addressMatches[0];
+    if(m) return {lat:m.coordinates.y, lon:m.coordinates.x, label:m.matchedAddress};
+    throw new Error("no census match");
+  }).catch(function(){
+    var n = "https://nominatim.openstreetmap.org/search?format=json&limit=1&q="+encodeURIComponent(addr);
+    return fetch(n).then(function(r){return r.json()}).then(function(a){
+      if(a && a[0]) return {lat:parseFloat(a[0].lat), lon:parseFloat(a[0].lon), label:a[0].display_name};
+      throw new Error("no match");
+    });
+  });
+}
+
+document.getElementById('go').onclick = function(){
+  var a = document.getElementById('addr').value.trim();
+  if(!a) return;
+  var s = document.getElementById('status'); s.style.color=""; s.textContent = "Locating address…";
+  geocode(a).then(function(loc){
+    setMarker(loc.lat, loc.lon); map.setView([loc.lat, loc.lon], 17);
+    s.textContent = "Reading county zoning…";
+    queryPoint(loc.lat, loc.lon, function(z,ov){ s.textContent=""; showVerdict(z,ov); });
+  }).catch(function(){
+    s.innerHTML = "<span style='color:#b23b3b'>Couldn't locate that address. Try a fuller address, or click the property on the map.</span>";
+  });
+};
+
+var P = {cons:{adr:330,occ:52}, mkt:{adr:415,occ:62}, opt:{adr:520,occ:73}};
+var MKT_P75_OCC = 73;
+function $(id){return document.getElementById(id)}
+function money(n){return "$"+Math.round(n).toLocaleString()}
+function calc(){
+  var adr=+$('s_adr').value, occ=+$('s_occ').value/100, mgmt=+$('s_mgmt').value/100,
+      plat=+$('s_plat').value/100, fix=+$('s_fix').value, price=+$('s_price').value;
+  $('l_adr').textContent=money(adr); $('l_occ').textContent=(occ*100).toFixed(0)+'%';
+  $('l_mgmt').textContent=($('s_mgmt').value)+'%'; $('l_plat').textContent=($('s_plat').value)+'%';
+  $('l_fix').textContent=money(fix); $('l_price').textContent=money(price);
+  var gross = adr*365*occ;
+  var fees = gross*(mgmt+plat);
+  var noi = gross - fees - fix;
+  var beOcc = (adr*365*(1-mgmt-plat))>0 ? fix/(adr*365*(1-mgmt-plat)) : 1;
+  var cap = price>0 ? noi/price : 0;
+  $('o_gross').textContent=money(gross);
+  $('o_noi').textContent=money(noi);
+  $('o_be').textContent=(beOcc*100).toFixed(0)+'%';
+  $('o_cap').textContent=(cap*100).toFixed(1)+'%';
+  var net=Math.max(noi,0);
+  var tot=net+fees+fix || 1;
+  $('seg_net').style.width=(net/tot*100)+'%';
+  $('seg_fee').style.width=(fees/tot*100)+'%';
+  $('seg_fix').style.width=(fix/tot*100)+'%';
+}
+['s_adr','s_occ','s_mgmt','s_plat','s_fix','s_price'].forEach(function(id){ $(id).addEventListener('input',calc); });
+document.querySelectorAll('.presets button').forEach(function(b){
+  b.onclick=function(){ var p=P[b.dataset.p]; $('s_adr').value=p.adr; $('s_occ').value=p.occ; calc(); };
+});
+
+$('g_run').onclick=function(){
+  var target=parseFloat(($('g_target').value||"0").replace(/[^0-9.]/g,''));
+  var adr=+$('s_adr').value, mgmt=+$('s_mgmt').value/100, plat=+$('s_plat').value/100, fix=+$('s_fix').value;
+  var denom = adr*365*(1-mgmt-plat);
+  var res=$('g_res'); res.style.display='block';
+  if(denom<=0){ res.innerHTML="Adjust fees/ADR — no achievable occupancy."; return; }
+  var reqOcc = (target+fix)/denom*100;
+  if(reqOcc>100){
+    res.innerHTML="To net <b>"+money(target)+"</b>/yr at <b>"+money(adr)+"</b> ADR you'd need <b>"+reqOcc.toFixed(0)+"%</b> occupancy — <b>not achievable</b>. Raise ADR or cut costs."+
+      "<div class='flag a'>Target exceeds a full calendar. Try a higher nightly rate.</div>";
+  } else {
+    var flag = reqOcc>MKT_P75_OCC
+      ? "<div class='flag a'>That's above the ~"+MKT_P75_OCC+"% top-quartile occupancy in the sample market — ambitious.</div>"
+      : "<div class='flag g'>That occupancy is within the normal range for this market.</div>";
+    res.innerHTML="To net <b>"+money(target)+"</b>/yr at <b>"+money(adr)+"</b> ADR, you need <b>"+reqOcc.toFixed(0)+"%</b> occupancy."+flag;
+  }
+};
+
+function loadStats(){
+  fetch('/.netlify/functions/str-stats').then(function(r){return r.json()}).then(function(d){
+    if(!d || d.occupancy==null) return;
+    $('k_rev').textContent = money(d.est_annual_revenue);
+    $('k_occ').innerHTML = Math.round(d.occupancy*100)+'<small>%</small>';
+    $('k_adr').textContent = money(d.adr);
+    $('k_revpar').textContent = money(d.revpar);
+    var live = d.source==='live';
+    var tag = $('k_src');
+    tag.textContent = live ? ('Live · AirROI' + (d.as_of?(' · '+d.as_of):'')) : 'Sample data';
+    if(live){ tag.style.color='#2e7d52'; tag.style.borderColor='rgba(46,125,82,.5)'; }
+    if(live){
+      P.mkt={adr:Math.round(d.adr), occ:Math.round(d.occupancy*100)};
+      $('s_adr').value=Math.round(d.adr); $('s_occ').value=Math.round(d.occupancy*100); calc();
+    }
+  }).catch(function(){});
+}
+loadStats();
+
+calc();
+window.addEventListener('load', function(){ setTimeout(function(){ document.getElementById('go').click(); }, 600); });
+</script>
+</body>
+</html>
