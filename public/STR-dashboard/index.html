@@ -129,7 +129,7 @@
             <div class="vrow"><span class="k">Overlay district</span><span class="val" id="voverlay">&mdash;</span></div>
             <div class="vrow"><span class="k">Jurisdiction</span><span class="val" id="vmuni">&mdash;</span></div>
           </div>
-          <div class="disc">Guidance only, from live county zoning polygons &mdash; not a legal determination. Confirm with Sarasota County Planning &amp; Development Services before relying on it. In unincorporated Sarasota County, rentals under 30 days are generally limited to multi-family / tourist-resort / commercial zones on the barrier islands.</div>
+          <div class="disc">Guidance only, from live county zoning polygons &mdash; not a legal determination. Confirm with the applicable jurisdiction (Sarasota County or City of Sarasota) and check for any HOA or deed restriction before relying on it. Unincorporated County: rentals under 30 days limited to multi-family / tourist-resort / commercial on the barrier islands. City of Sarasota: short-term rental allowed with a 7-day minimum stay.</div>
         </div>
       </div>
       <div class="card" style="margin-top:16px">
@@ -146,7 +146,7 @@
     </div>
     <div>
       <div id="map"></div>
-      <div class="mapnote">Toggle layers top-right. Green = likely STR-eligible zoning, red = single-family (not permitted), amber = verify. Overlay districts (incl. Siesta Key / SKOD) shown as outlined areas.</div>
+      <div class="mapnote">Toggle layers top-right. Green fill = likely STR-eligible county zoning; red = single-family (not permitted); amber = verify. Green outline = <b>City of Sarasota</b> (short-term rental with a 7-day minimum, subject to HOA/deed). Zoom out to see the city limits.</div>
     </div>
   </div>
   <div class="card scen">
@@ -189,8 +189,8 @@
     </div>
   </div>
   <footer>
-    <b>Data sources.</b> Zoning &amp; overlay districts: Sarasota County Enterprise GIS (CountyZoning &amp; ZoningOverlayDistrict FeatureServers), served through a cached proxy. Address geocoding: U.S. Census Geocoder. Basemap: CARTO / OpenStreetMap. STR market metrics shown here are placeholder samples pending the AirROI API connection described in the project spec.<br>
-    Sarasota County GIS data is provided &ldquo;as is&rdquo; without warranty; figures are estimates, deemed reliable but not guaranteed. Nothing here constitutes legal, zoning, or investment advice. &copy; 2026 The Adamson Group &bull; Coldwell Banker Realty.
+    <b>Data sources.</b> Zoning, overlay districts &amp; City of Sarasota limits: Sarasota County Enterprise GIS (CountyZoning &amp; ZoningOverlayDistrict FeatureServers), served through a cached proxy. Address geocoding: U.S. Census Geocoder. Basemap: CARTO / OpenStreetMap. STR market metrics shown here are placeholder samples pending the AirROI API connection described in the project spec.<br>
+    Sarasota County GIS data is provided &ldquo;as is&rdquo; without warranty; figures are estimates, deemed reliable but not guaranteed. Short-term-rental eligibility is jurisdiction- and property-specific and can be overridden by HOA or deed restrictions. Nothing here constitutes legal, zoning, or investment advice. &copy; 2026 The Adamson Group &bull; Coldwell Banker Realty.
   </footer>
 </div>
 <script>
@@ -202,8 +202,10 @@ var COL = {ok:'#2e7d52', no:'#b23b3b', warn:'#c08a2d'};
 
 function classify(group, code, muni){
   group = group || "";
+  if(muni === "CS")
+    return {cls:"ok", ic:"✓", t:"Permitted — City of Sarasota (7-day min)", s:"City of Sarasota allows short-term rental with a 7-day minimum stay (registration required). Confirm no HOA or deed restriction applies."};
   if(muni && muni !== "SC"){
-    var name = ({CS:"City of Sarasota",CV:"City of Venice",CNP:"City of North Port",TLK:"Town of Longboat Key",MC:"Manatee County",CC:"Charlotte County"})[muni] || muni;
+    var name = ({CV:"City of Venice",CNP:"City of North Port",TLK:"Town of Longboat Key",MC:"Manatee County",CC:"Charlotte County"})[muni] || muni;
     return {cls:"warn", ic:"?", t:"Verify — outside County code", s:"Within "+name+"; that jurisdiction's STR rules apply, not the County's."};
   }
   if(group === "Residential Single Family")
@@ -229,6 +231,11 @@ function strColor(g){
   return "#C9A961";
 }
 
+var cityGeo = L.geoJSON(null, {
+  style: function(){ return {color:"#2e7d52", weight:1.2, fillColor:"#3a8f5e", fillOpacity:0.10}; },
+  onEachFeature: function(f, layer){ layer.bindPopup("<b>City of Sarasota</b><br><span style='color:#2e7d52'><b>Short-term rental permitted</b></span> — 7-day minimum stay (confirm no HOA / deed restriction)."); }
+}).addTo(map);
+
 var zoningGeo = L.geoJSON(null, {
   style: function(f){ return {color:"#5a6272", weight:0.6, fillColor:strColor(f.properties.zoninggroup), fillOpacity:0.35}; },
   onEachFeature: function(f, layer){
@@ -242,7 +249,11 @@ var overlayGeo = L.geoJSON(null, {
   onEachFeature: function(f, layer){ layer.bindPopup("Overlay: <b>"+(f.properties.districtname||f.properties.districttype||"district")+"</b>"); }
 });
 
-L.control.layers(null,{ "Zoning (STR eligibility)":zoningGeo, "Overlay districts (SKOD, etc.)":overlayGeo }, {collapsed:false}).addTo(map);
+L.control.layers(null,{
+  "Zoning (STR eligibility)":zoningGeo,
+  "Overlay districts (SKOD, etc.)":overlayGeo,
+  "City of Sarasota (7-day STR min)":cityGeo
+}, {collapsed:false}).addTo(map);
 
 var legend = L.control({position:'bottomleft'});
 legend.onAdd = function(){
@@ -250,12 +261,13 @@ legend.onAdd = function(){
   d.innerHTML = "<b>STR zoning</b><br>"+
     "<i style='background:#2e7d52'></i>Likely eligible (RMF / RTR / Comm.)<br>"+
     "<i style='background:#b23b3b'></i>Not permitted (single-family)<br>"+
-    "<i style='background:#C9A961'></i>Verify with County";
+    "<i style='background:#C9A961'></i>Verify with County<br>"+
+    "<i style='background:#3a8f5e;border:1px solid #2e7d52'></i>City of Sarasota — 7-day min";
   return d;
 };
 legend.addTo(map);
 
-/* ---- load zoning polygons: proxy first, direct county fallback ---- */
+/* ---- zoning polygons (Siesta bbox): proxy first, direct county fallback ---- */
 function renderArea(d){
   if(d && d.zoning && d.zoning.features){ zoningGeo.addData(d.zoning); }
   if(d && d.overlays && d.overlays.features){ overlayGeo.addData(d.overlays); }
@@ -274,6 +286,17 @@ function loadArea(){
     .then(renderArea).catch(directArea);
 }
 loadArea();
+
+/* ---- City of Sarasota limits: proxy first, direct fallback ---- */
+function directCity(){
+  var u = ZON+"/query?where="+encodeURIComponent("municipality='CS'")+"&outFields=zoningcode&returnGeometry=true&outSR=4326&f=geojson&maxAllowableOffset=0.0003&geometryPrecision=5";
+  fetch(u).then(function(r){return r.json()}).then(function(g){ if(g&&g.features) cityGeo.addData(g); }).catch(function(){});
+}
+function loadCity(){
+  fetch(PROXY+"?mode=city").then(function(r){ if(!r.ok) throw 0; return r.json(); })
+    .then(function(d){ if(d && d.city && d.city.features) cityGeo.addData(d.city); }).catch(directCity);
+}
+loadCity();
 
 /* ---- marker + point verdict: proxy first, direct fallback ---- */
 var marker = null;
