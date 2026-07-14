@@ -2,48 +2,48 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-11T10:53:20.284876+00:00",
+  "lastUpdated": "2026-07-14T10:52:09.348452+00:00",
   "counts": {
-    "sold": 767,
-    "pending": 71,
-    "active": 295,
-    "total": 838
+    "sold": 768,
+    "pending": 73,
+    "active": 259,
+    "total": 841
   },
   "metrics": {
-    "avgPrice": "$563,827",
+    "avgPrice": "$564,307",
     "avgPricePerSqFt": "$264",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,047",
+    "avgLivingSqFt": "2,048",
     "avgLotSqFt": null,
-    "avgDom": 81
+    "avgDom": 82
   },
   "range": {
     "minPrice": "$110,000",
-    "maxPrice": "$2,710,000"
+    "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 295,
-    "medianPrice": "$415,000",
-    "medianPricePerSqFt": "$249",
-    "waterfrontCount": 40,
-    "newConstructionCount": 39
+    "count": 259,
+    "medianPrice": "$424,900",
+    "medianPricePerSqFt": "$251",
+    "waterfrontCount": 36,
+    "newConstructionCount": 34
   },
   "sold": {
-    "count": 224,
-    "medianPrice": "$485,250",
+    "count": 216,
+    "medianPrice": "$480,500",
     "medianDom": 45,
     "saleToListRatio": "91.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 8.6,
-    "sfhVilla": 4.0,
-    "blended": 5.1,
+    "condo": 7.5,
+    "sfhVilla": 3.5,
+    "blended": 4.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$469",
+    "medianMonthlyAssociation": "$471",
     "medianMonthlyCondoFee": "$560",
     "minMonthlyCondoFee": "$211",
     "maxMonthlyCondoFee": "$1,192",
@@ -54,15 +54,15 @@
     }
   },
   "priceBands": {
-    "under900k": 262,
-    "band900kTo1_5m": 21,
-    "band1_5mTo3m": 12,
+    "under900k": 231,
+    "band900kTo1_5m": 17,
+    "band1_5mTo3m": 11,
     "band3mPlus": 0
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 295
+      "count": 259
     }
   ],
   "buildingClasses": [],
@@ -138,41 +138,41 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 43,
-      "avgPrice": "$336,158",
-      "avgPricePerSqFt": "$199",
-      "avgLivingSqFt": "1,672",
-      "avgDom": 77
+      "activeCount": 40,
+      "avgPrice": "$326,870",
+      "avgPricePerSqFt": "$197",
+      "avgLivingSqFt": "1,651",
+      "avgDom": 72
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 105,
-      "avgPrice": "$300,491",
-      "avgPricePerSqFt": "$231",
-      "avgLivingSqFt": "1,297",
-      "avgDom": 111
+      "activeCount": 89,
+      "avgPrice": "$304,428",
+      "avgPricePerSqFt": "$234",
+      "avgLivingSqFt": "1,299",
+      "avgDom": 104
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 17,
-      "avgPrice": "$387,906",
-      "avgPricePerSqFt": "$238",
-      "avgLivingSqFt": "1,640",
-      "avgDom": 93
+      "activeCount": 16,
+      "avgPrice": "$386,719",
+      "avgPricePerSqFt": "$239",
+      "avgLivingSqFt": "1,626",
+      "avgDom": 90
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 13,
-      "avgPrice": "$355,411",
+      "activeCount": 12,
+      "avgPrice": "$354,278",
       "avgPricePerSqFt": "$221",
-      "avgLivingSqFt": "1,606",
-      "avgDom": 63
+      "avgLivingSqFt": "1,601",
+      "avgDom": 55
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 75,
+      "activeCount": 65,
       "soldCount": 174,
       "soldMedianPricePerSqFt": "$260",
       "soldMedianPrice": "$492,500",
@@ -205,16 +205,16 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 40,
-      "soldCount": 162,
+      "activeCount": 36,
+      "soldCount": 163,
       "soldMedianPricePerSqFt": "$276",
-      "soldMedianPrice": "$608,750",
+      "soldMedianPrice": "$607,500",
       "lowSample": false
     },
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 180,
+      "activeCount": 158,
       "soldCount": 429,
       "soldMedianPricePerSqFt": "$245",
       "soldMedianPrice": "$440,000",
@@ -222,38 +222,38 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.1,
-    "monthsOfSupplyCondo": 8.6,
-    "monthsOfSupplySfhVilla": 4.0,
-    "label": "balanced market",
-    "activeCount": 295,
-    "sold365Count": 699,
-    "sold90Count": 224,
+    "monthsOfSupply": 4.5,
+    "monthsOfSupplyCondo": 7.5,
+    "monthsOfSupplySfhVilla": 3.5,
+    "label": "seller's market",
+    "activeCount": 259,
+    "sold365Count": 696,
+    "sold90Count": 216,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 440,
-      "activeCount": 117,
+      "activeCount": 102,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$289"
     },
     "condo": {
-      "soldCount": 327,
-      "activeCount": 178,
+      "soldCount": 328,
+      "activeCount": 157,
       "soldMedianPrice": "$330,000",
       "soldMedianPricePerSqFt": "$214"
     }
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 40
+    "activeWaterfront": 36
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 295 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 5.1 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 259 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 4.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,7 +263,7 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $2,710,000, with a median asking price of $415,000."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $424,900."
     },
     {
       "facet": "speed",
@@ -273,12 +273,12 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 40 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 36 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Palmer Ranch?",
-      "a": "The median monthly condo fee is $560 and the median monthly association fee is $469."
+      "a": "The median monthly condo fee is $560 and the median monthly association fee is $471."
     }
   ],
   "costBreakdown90": null

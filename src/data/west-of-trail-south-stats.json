@@ -2,43 +2,43 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-11T10:53:18.654929+00:00",
+  "lastUpdated": "2026-07-14T10:52:07.662716+00:00",
   "counts": {
-    "sold": 253,
-    "pending": 19,
-    "active": 135,
-    "total": 272
+    "sold": 255,
+    "pending": 18,
+    "active": 103,
+    "total": 273
   },
   "metrics": {
-    "avgPrice": "$625,471",
-    "avgPricePerSqFt": "$328",
+    "avgPrice": "$627,140",
+    "avgPricePerSqFt": "$329",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,744",
+    "avgLivingSqFt": "1,746",
     "avgLotSqFt": null,
-    "avgDom": 77
+    "avgDom": 76
   },
   "range": {
     "minPrice": "$130,000",
     "maxPrice": "$5,500,000"
   },
   "active": {
-    "count": 135,
-    "medianPrice": "$484,700",
-    "medianPricePerSqFt": "$337",
-    "waterfrontCount": 35,
-    "newConstructionCount": 5
+    "count": 103,
+    "medianPrice": "$475,000",
+    "medianPricePerSqFt": "$334",
+    "waterfrontCount": 26,
+    "newConstructionCount": 2
   },
   "sold": {
-    "count": 63,
-    "medianPrice": "$435,000",
-    "medianDom": 31,
-    "saleToListRatio": "90.3%",
+    "count": 64,
+    "medianPrice": "$432,000",
+    "medianDom": 32,
+    "saleToListRatio": "89.7%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 9.6,
-    "sfhVilla": 5.8,
-    "blended": 7.4,
+    "condo": 7.1,
+    "sfhVilla": 4.5,
+    "blended": 5.6,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,45 @@
     }
   },
   "priceBands": {
-    "under900k": 106,
-    "band900kTo1_5m": 8,
-    "band1_5mTo3m": 13,
-    "band3mPlus": 8
+    "under900k": 81,
+    "band900kTo1_5m": 5,
+    "band1_5mTo3m": 11,
+    "band3mPlus": 6
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 135
+      "count": 103
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4662681",
+      "address": "8915 VAMO RD",
+      "subdivision": "MEAD HELEN D",
+      "soldPrice": "$405,000",
+      "soldDate": "2026-07-10",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "870",
+      "yearBuilt": 2017,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4682953",
+      "address": "1632 STICKNEY POINT RD #201",
+      "subdivision": "CASTEL DEL MARE",
+      "soldPrice": "$340,000",
+      "soldDate": "2026-07-10",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,016",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4680225",
       "address": "4939 PEREGRINE POINT WAY",
@@ -105,32 +131,6 @@
       "yearBuilt": 1975,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4671700",
-      "address": "5450 EAGLES POINT CIR #405",
-      "subdivision": "EAGLES POINT AT THE LANDINGS 4",
-      "soldPrice": "$625,000",
-      "soldDate": "2026-07-03",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,843",
-      "yearBuilt": 1998,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4689368",
-      "address": "2501 CASS ST",
-      "subdivision": "GULF GATE WOODS",
-      "soldPrice": "$395,000",
-      "soldDate": "2026-07-02",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,635",
-      "yearBuilt": 1971,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,31 +138,31 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 75,
-      "avgPrice": "$380,990",
-      "avgPricePerSqFt": "$300",
-      "avgLivingSqFt": "1,284",
-      "avgDom": 153
+      "activeCount": 56,
+      "avgPrice": "$361,888",
+      "avgPricePerSqFt": "$290",
+      "avgLivingSqFt": "1,274",
+      "avgDom": 142
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 10,
-      "avgPrice": "$596,490",
-      "avgPricePerSqFt": "$307",
-      "avgLivingSqFt": "1,940",
-      "avgDom": 182
+      "activeCount": 7,
+      "avgPrice": "$601,571",
+      "avgPricePerSqFt": "$299",
+      "avgLivingSqFt": "2,012",
+      "avgDom": 123
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 4,
-      "avgPrice": "$579,500",
-      "avgPricePerSqFt": "$338",
-      "avgLivingSqFt": "1,713",
-      "avgDom": 182
+      "activeCount": 3,
+      "avgPrice": "$589,667",
+      "avgPricePerSqFt": "$345",
+      "avgLivingSqFt": "1,711",
+      "avgDom": 121
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$629,000",
       "avgPricePerSqFt": "$353",
       "avgLivingSqFt": "1,785",
-      "avgDom": 196
+      "avgDom": 198
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 30,
+      "activeCount": 23,
       "soldCount": 49,
       "soldMedianPricePerSqFt": "$362",
       "soldMedianPrice": "$495,000",
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 26,
+      "activeCount": 19,
       "soldCount": 23,
       "soldMedianPricePerSqFt": "$299",
       "soldMedianPrice": "$450,000",
@@ -214,7 +214,7 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 5,
+      "activeCount": 3,
       "soldCount": 12,
       "soldMedianPricePerSqFt": "$317",
       "soldMedianPrice": "$622,500",
@@ -223,66 +223,66 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 74,
-      "soldCount": 166,
-      "soldMedianPricePerSqFt": "$285",
-      "soldMedianPrice": "$430,000",
+      "activeCount": 58,
+      "soldCount": 168,
+      "soldMedianPricePerSqFt": "$286",
+      "soldMedianPrice": "$429,500",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.4,
-    "monthsOfSupplyCondo": 9.6,
-    "monthsOfSupplySfhVilla": 5.8,
-    "label": "buyer's market",
-    "activeCount": 135,
-    "sold365Count": 218,
-    "sold90Count": 63,
+    "monthsOfSupply": 5.6,
+    "monthsOfSupplyCondo": 7.1,
+    "monthsOfSupplySfhVilla": 4.5,
+    "label": "balanced market",
+    "activeCount": 103,
+    "sold365Count": 219,
+    "sold90Count": 64,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 139,
-      "activeCount": 44,
-      "soldMedianPrice": "$520,000",
+      "soldCount": 140,
+      "activeCount": 35,
+      "soldMedianPrice": "$518,750",
       "soldMedianPricePerSqFt": "$321"
     },
     "condo": {
-      "soldCount": 114,
-      "activeCount": 91,
+      "soldCount": 115,
+      "activeCount": 68,
       "soldMedianPrice": "$350,000",
-      "soldMedianPricePerSqFt": "$257"
+      "soldMedianPricePerSqFt": "$260"
     }
   },
   "boating": {
     "activeWithDock": 16,
-    "activeWaterfront": 35
+    "activeWaterfront": 26
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 135 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 7.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 103 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 5.6 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $520,000 ($321/sq ft), while condos, villas and townhouses sell around $350,000 ($257/sq ft)."
+      "a": "Single-family homes sell around $518,750 ($321/sq ft), while condos, villas and townhouses sell around $350,000 ($260/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $130,000 to $5,500,000, with a median asking price of $484,700."
+      "a": "Active listings run from $130,000 to $5,500,000, with a median asking price of $475,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 31 days on market and closed at 90.3% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 32 days on market and closed at 89.7% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 35 active waterfront listings, 16 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 26 active waterfront listings, 16 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
