@@ -7,7 +7,6 @@
 <meta name="robots" content="noindex,nofollow">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://unpkg.com/esri-leaflet@3.0.12/dist/esri-leaflet.js"></script>
 <style>
   :root{
     --navy:#0A1F3C; --cb:#012169; --gold:#C9A961; --white:#fff;
@@ -190,14 +189,16 @@
     </div>
   </div>
   <footer>
-    <b>Data sources.</b> Zoning &amp; overlay districts: Sarasota County Enterprise GIS (CountyZoning &amp; ZoningOverlayDistrict FeatureServers, live). Address geocoding: U.S. Census Geocoder. Basemap: CARTO / OpenStreetMap. STR market metrics shown here are placeholder samples pending the AirROI API connection described in the project spec.<br>
+    <b>Data sources.</b> Zoning &amp; overlay districts: Sarasota County Enterprise GIS (CountyZoning &amp; ZoningOverlayDistrict FeatureServers), served through a cached proxy. Address geocoding: U.S. Census Geocoder. Basemap: CARTO / OpenStreetMap. STR market metrics shown here are placeholder samples pending the AirROI API connection described in the project spec.<br>
     Sarasota County GIS data is provided &ldquo;as is&rdquo; without warranty; figures are estimates, deemed reliable but not guaranteed. Nothing here constitutes legal, zoning, or investment advice. &copy; 2026 The Adamson Group &bull; Coldwell Banker Realty.
   </footer>
 </div>
 <script>
 var ZON = "https://ags3.scgov.net/server/rest/services/Hosted/CountyZoning/FeatureServer/0";
 var OVL = "https://ags3.scgov.net/server/rest/services/Hosted/ZoningOverlayDistrict/FeatureServer/0";
+var PROXY = "/.netlify/functions/zoning";
 var SIESTA = [27.2730, -82.5460];
+var COL = {ok:'#2e7d52', no:'#b23b3b', warn:'#c08a2d'};
 
 function classify(group, code, muni){
   group = group || "";
@@ -227,23 +228,21 @@ function strColor(g){
   if(g==="Residential Multi-Family"||g==="Residential Tourist Resort"||g==="Commercial") return "#2e7d52";
   return "#C9A961";
 }
-var zoningLayer = L.esri.featureLayer({
-  url: ZON, simplifyFactor: 0.4, precision: 6,
-  fields: ["OBJECTID","zoninggroup","zoningcode","zoningdesignation","municipality"],
-  style: function(f){ return {color:"#5a6272", weight:0.6, fillColor:strColor(f.properties.zoninggroup), fillOpacity:0.35}; }
+
+var zoningGeo = L.geoJSON(null, {
+  style: function(f){ return {color:"#5a6272", weight:0.6, fillColor:strColor(f.properties.zoninggroup), fillOpacity:0.35}; },
+  onEachFeature: function(f, layer){
+    var p=f.properties, v=classify(p.zoninggroup,p.zoningcode,p.municipality);
+    layer.bindPopup("<b>"+(p.zoningcode||"?")+"</b> — "+(p.zoninggroup||"")+"<br><span style='color:"+COL[v.cls]+"'><b>"+v.t+"</b></span>");
+  }
 }).addTo(map);
-zoningLayer.bindPopup(function(l){
-  var p=l.feature.properties, v=classify(p.zoninggroup,p.zoningcode,p.municipality);
-  return "<b>"+(p.zoningcode||"?")+"</b> — "+(p.zoninggroup||"")+"<br><span style='color:"+({ok:'#2e7d52',no:'#b23b3b',warn:'#c08a2d'})[v.cls]+"'><b>"+v.t+"</b></span>";
-});
-zoningLayer.on('requesterror', function(){ document.getElementById('status').innerHTML = "<span style='color:#b23b3b'>Note: live zoning tiles couldn't load in this browser (network/CORS). The address check below may still work.</span>"; });
 
-var overlayLayer = L.esri.featureLayer({
-  url: OVL, fields:["OBJECTID","districtname","districttype"],
-  style:function(){ return {color:"#26497a", weight:1.6, fill:false, dashArray:"4 3"}; }
+var overlayGeo = L.geoJSON(null, {
+  style: function(){ return {color:"#26497a", weight:1.6, fill:false, dashArray:"4 3"}; },
+  onEachFeature: function(f, layer){ layer.bindPopup("Overlay: <b>"+(f.properties.districtname||f.properties.districttype||"district")+"</b>"); }
 });
 
-L.control.layers(null,{ "Zoning (STR eligibility)":zoningLayer, "Overlay districts (SKOD, etc.)":overlayLayer }, {collapsed:false}).addTo(map);
+L.control.layers(null,{ "Zoning (STR eligibility)":zoningGeo, "Overlay districts (SKOD, etc.)":overlayGeo }, {collapsed:false}).addTo(map);
 
 var legend = L.control({position:'bottomleft'});
 legend.onAdd = function(){
@@ -256,22 +255,46 @@ legend.onAdd = function(){
 };
 legend.addTo(map);
 
+/* ---- load zoning polygons: proxy first, direct county fallback ---- */
+function renderArea(d){
+  if(d && d.zoning && d.zoning.features){ zoningGeo.addData(d.zoning); }
+  if(d && d.overlays && d.overlays.features){ overlayGeo.addData(d.overlays); }
+}
+function directArea(){
+  var bbox="-82.585,27.235,-82.515,27.335";
+  var base="/query?geometry="+bbox+"&geometryType=esriGeometryEnvelope&inSR=4326&outSR=4326&spatialRel=esriSpatialRelIntersects&returnGeometry=true&f=geojson&outFields=";
+  fetch(ZON+base+encodeURIComponent("zoningcode,zoningdesignation,zoninggroup,municipality"))
+    .then(function(r){return r.json()}).then(function(g){ if(g&&g.features) zoningGeo.addData(g); })
+    .catch(function(){ document.getElementById('status').innerHTML="<span style='color:#c08a2d'>Zoning layer is loading slowly; the address check still works.</span>"; });
+  fetch(OVL+base+encodeURIComponent("districtname,districttype"))
+    .then(function(r){return r.json()}).then(function(g){ if(g&&g.features) overlayGeo.addData(g); }).catch(function(){});
+}
+function loadArea(){
+  fetch(PROXY+"?mode=area").then(function(r){ if(!r.ok) throw 0; return r.json(); })
+    .then(renderArea).catch(directArea);
+}
+loadArea();
+
+/* ---- marker + point verdict: proxy first, direct fallback ---- */
 var marker = null;
 function setMarker(lat,lon){ if(marker) map.removeLayer(marker); marker=L.marker([lat,lon]).addTo(map); }
 
-function queryPoint(lat, lon, callback){
+function directPoint(lat, lon, cb){
   var g = lon+","+lat;
   var base = "/query?geometry="+encodeURIComponent(g)+"&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&returnGeometry=false&f=json&outFields=";
-  var zurl = ZON+base+encodeURIComponent("zoningcode,zoningdesignation,zoninggroup,municipality");
-  var ourl = OVL+base+encodeURIComponent("districtname,districttype");
   Promise.all([
-    fetch(zurl).then(function(r){return r.json()}).catch(function(){return null}),
-    fetch(ourl).then(function(r){return r.json()}).catch(function(){return null})
+    fetch(ZON+base+encodeURIComponent("zoningcode,zoningdesignation,zoninggroup,municipality")).then(function(r){return r.json()}).catch(function(){return null}),
+    fetch(OVL+base+encodeURIComponent("districtname,districttype")).then(function(r){return r.json()}).catch(function(){return null})
   ]).then(function(res){
     var z = res[0] && res[0].features && res[0].features[0] ? res[0].features[0].attributes : null;
     var ov = res[1] && res[1].features ? res[1].features.map(function(f){return f.attributes.districtname}).filter(Boolean) : [];
-    callback(z, ov);
+    cb(z, ov);
   });
+}
+function queryPoint(lat, lon, cb){
+  fetch(PROXY+"?mode=point&lat="+lat+"&lon="+lon).then(function(r){ if(!r.ok) throw 0; return r.json(); })
+    .then(function(d){ if(d && d.error) throw 0; cb(d.zoning||null, d.overlays||[]); })
+    .catch(function(){ directPoint(lat, lon, cb); });
 }
 
 function showVerdict(z, ov){
