@@ -565,7 +565,7 @@ SCRIPTS = r'''<script is:inline>
       } catch (err) {
         console.error(err);
         status.className = 'gbc-form-status is-err';
-        status.textContent = 'Something went wrong. Please call (941) 234-3597.';
+        status.textContent = 'Something went wrong. Please call (941) 713-9234.';
         btn.disabled = false;
       }
     });
