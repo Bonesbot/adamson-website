@@ -467,7 +467,8 @@ STYLES = r'''<style is:global>
   .gbc-avatar { width:112px; height:112px; border-radius:50%; object-fit:cover; display:block; margin:0 auto 0.85rem; border:2px solid rgba(197,165,90,0.55); box-shadow:0 6px 20px rgba(0,0,0,0.35); }
   @media (min-width:640px){ .gbc-avatar { width:132px; height:132px; } }
   .gbc-member-name { display:block; font-family:var(--font-display); font-size:1.02rem; color:#fff; }
-  .gbc-member-role { display:block; font-family:var(--font-accent); font-size:0.66rem; text-transform:uppercase; letter-spacing:0.09em; color:rgba(255,255,255,0.55); margin-top:0.2rem; }
+  .gbc-team-brokerage { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.16em; color:var(--color-gold); margin:-0.4rem auto 2.25rem; display:flex; align-items:center; justify-content:center; gap:1rem; }
+  .gbc-team-brokerage::before, .gbc-team-brokerage::after { content:""; height:1px; width:2.5rem; background:rgba(197,165,90,0.4); }
   .gbc-cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
   .gbc-btn { display:inline-flex; align-items:center; justify-content:center; font-family:var(--font-accent); text-transform:uppercase; letter-spacing:0.08em; font-size:0.8rem; font-weight:600; padding:1rem 2rem; border-radius:0.35rem; transition:all .2s; border:none; cursor:pointer; }
   .gbc-btn-gold { background:var(--color-gold); color:#000; }
@@ -716,27 +717,26 @@ const jsonLd = [
 {render_forms(cfg)}
   <section class="cbgl-section py-20">
     <div class="container text-center">
-      <p class="section-label text-white/70 mb-3">Your Gulf &amp; Bay Club Specialist</p>
-      <h2 class="font-display text-white mb-4" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Calling Kelli</h2>
-      <p class="gbc-cta-text">Thinking about buying or selling in {esc(cfg["short"])}? <strong>Kelli</strong> is our Siesta Key point of contact for this community — she can pull current availability, share off-market opportunities, and give you a no-obligation valuation grounded in the real closed-sale data above.</p>
+      <p class="section-label text-white/70 mb-3">Your Gulf &amp; Bay Club Team</p>
+      <h2 class="font-display text-white mb-4" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Let&rsquo;s Talk Gulf &amp; Bay Club</h2>
+      <p class="gbc-cta-text">Thinking about buying or selling in {esc(cfg["short"])}? <strong>Kelli and Ryan</strong> work this community together — they can pull current availability, share off-market opportunities, and give you a no-obligation valuation grounded in the real closed-sale data above.</p>
       <div class="gbc-team">
         <figure class="gbc-member">
-          <img class="gbc-avatar" src="/images/kelli-eggen.jpg" width="800" height="800" alt="Kelli Eggen, Siesta Key specialist" loading="lazy" decoding="async" />
+          <img class="gbc-avatar" src="/images/kelli-eggen.jpg" width="800" height="800" alt="Kelli Eggen, Coldwell Banker Global Luxury" loading="lazy" decoding="async" />
           <figcaption>
             <span class="gbc-member-name">Kelli Eggen</span>
-            <span class="gbc-member-role">Siesta Key Specialist</span>
           </figcaption>
         </figure>
         <figure class="gbc-member">
-          <img class="gbc-avatar" src="/images/ryan-adamson-square.jpg" width="800" height="800" alt="Ryan Adamson, Adamson Group" loading="lazy" decoding="async" />
+          <img class="gbc-avatar" src="/images/ryan-adamson-square.jpg" width="800" height="800" alt="Ryan Adamson, Coldwell Banker Global Luxury" loading="lazy" decoding="async" />
           <figcaption>
             <span class="gbc-member-name">Ryan Adamson</span>
-            <span class="gbc-member-role">Adamson Group &middot; Coldwell Banker</span>
           </figcaption>
         </figure>
       </div>
+      <p class="gbc-team-brokerage">Coldwell Banker Global Luxury</p>
       <div class="gbc-cta-btns">
-        <a href="/contact" class="gbc-btn gbc-btn-gold">Reach Kelli</a>
+        <a href="/contact" class="gbc-btn gbc-btn-gold">Contact the Team</a>
         <a href="/siesta-key/{cfg["sister_slug"]}" class="gbc-btn gbc-btn-outline">{esc(cfg["sister_name"])}</a>
       </div>
     </div>
