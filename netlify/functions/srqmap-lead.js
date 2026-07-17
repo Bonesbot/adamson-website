@@ -1,6 +1,7 @@
 // netlify/functions/srqmap-lead.js
 //
-// SRQmap gate lead capture. Writes to Supabase (durable source of truth, so the
+// SRQmap gate lead capture. Writes to public.leads (THE core lead queue — see
+// supabase/migrations/leads.sql). Durable source of truth, so the
 // client base survives even if IDX Broker is ever dropped) AND forwards the lead
 // to IDX Broker Engage via the API. The IDX call is time-bounded so a slow/down
 // IDX can never block the Supabase save; if it fails the lead is still stored
@@ -94,7 +95,7 @@ exports.handler = async (event) => {
       idx_sync:    idxSync,
       raw_payload: body,
     };
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/srqmap_leads`, {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
       method: 'POST',
       headers: {
         apikey:         KEY,

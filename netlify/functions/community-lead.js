@@ -5,28 +5,14 @@
 //
 // Does three things, independently — one failing never blocks the others, and the
 // browser always gets a 200 as long as the lead landed SOMEWHERE:
-//   1. Supabase  -> public.community_leads          (system of record)
+//   1. Supabase  -> public.leads                     (THE core lead queue)
 //   2. Zoho CRM  -> Leads, Lead_Status "Landing Pg - New"
 //   3. Gmail     -> a DRAFT to Ryan@Adamson-group.com (queued, not sent — Ryan reviews)
 //
-// ── Supabase table DDL ────────────────────────────────────────────────────────────
-//
-//   create table if not exists public.community_leads (
-//     id           uuid        primary key default gen_random_uuid(),
-//     created_at   timestamptz not null default now(),
-//     name         text,
-//     email        text        not null,
-//     phone        text,
-//     lead_type    text,                       -- 'Buyer' | 'Seller'
-//     community    text,                       -- e.g. 'Gulf & Bay Club Bayside'
-//     page         text,
-//     zoho_lead_id text,
-//     zoho_error   text,
-//     raw_payload  jsonb
-//   );
-//   create index if not exists community_leads_created_idx on public.community_leads (created_at desc);
-//   create index if not exists community_leads_email_idx   on public.community_leads (email);
-//   alter table public.community_leads enable row level security;
+// Schema: supabase/migrations/leads.sql. Every capture form on the site writes to
+// public.leads with a `<page-slug>:<intent>` source tag, so a new community
+// landing page needs NO new table, NO new function and NO dashboard change — it
+// just posts and appears in the Command Center queue, tagged.
 //
 // ── Env vars (Netlify dashboard) ──────────────────────────────────────────────────
 //   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY          (already set for other functions)
@@ -52,6 +38,20 @@ const json = (statusCode, obj) => ({
 // Zoho's Lead_Status picklist value is EXACTLY this — spaces around the dash.
 // Sending anything else makes Zoho reject the record.
 const LEAD_STATUS = 'Landing Pg - New';
+
+/**
+ * Build the `<page-slug>:<intent>` source tag from the page the form sat on, so
+ * every future community landing page is zero-config: no hidden field to forget,
+ * no per-page constant to maintain. '/siesta-key/gulf-and-bay-club-bayside/' +
+ * Seller -> 'gulf-and-bay-club-bayside:seller'. An explicit body.source wins.
+ */
+function sourceFor(body) {
+  const explicit = (body.source || '').trim();
+  if (explicit) return explicit;
+  const slug = String(body.page || '').split('?')[0].split('/').filter(Boolean).pop();
+  const intent = body.lead_type === 'Seller' ? 'seller' : 'buyer';
+  return slug ? `${slug}:${intent}` : `community:${intent}`;
+}
 
 /** "Jane Q. Smith" -> { first: 'Jane Q.', last: 'Smith' }; Last_Name is mandatory in Zoho. */
 function splitName(full) {
@@ -212,7 +212,8 @@ async function storeLead(lead, zohoId, zohoError) {
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) return { skipped: 'supabase env vars not configured' };
 
-  const res = await fetch(`${url}/rest/v1/community_leads`, {
+  const { first, last } = splitName(lead.name);
+  const res = await fetch(`${url}/rest/v1/leads`, {
     method: 'POST',
     headers: {
       apikey: key,
@@ -221,13 +222,16 @@ async function storeLead(lead, zohoId, zohoError) {
       Prefer: 'return=minimal',
     },
     body: JSON.stringify({
-      name: lead.name || null,
+      first_name: first,
+      last_name: last,
       email: lead.email,
       phone: lead.phone || null,
-      lead_type: lead.lead_type || null,
+      source: lead.source,
+      lead_type: lead.lead_type,
       community: lead.community || null,
       page: lead.page || null,
       zoho_lead_id: zohoId || null,
+      zoho_sync: zohoId ? 'ok' : null,
       zoho_error: zohoError || null,
       raw_payload: lead,
     }),
@@ -271,6 +275,7 @@ exports.handler = async (event) => {
       community: (body.community || '').trim() || null,
       page: (body.page || '').trim() || null,
     };
+    lead.source = sourceFor(body);
   } catch (err) {
     return json(400, { error: 'Bad request' });
   }
@@ -305,6 +310,6 @@ exports.handler = async (event) => {
     (stored.status === 'fulfilled' && stored.value && stored.value.ok) || Boolean(zohoId);
   if (!savedSomewhere) return json(500, { error: 'Failed to save your request' });
 
-  console.log('community-lead:', lead.lead_type, 'lead stored for', lead.email, '/', lead.community);
+  console.log('community-lead:', lead.source, '| stored', lead.email, '| zoho', zohoId || 'skipped');
   return json(200, { success: true });
 };

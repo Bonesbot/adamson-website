@@ -94,24 +94,30 @@ exports.handler = async (event) => {
 
     // ── Build row ──────────────────────────────────────────────────
     const row = {
-      first_name:               (body.first_name               || '').trim() || null,
-      last_name:                (body.last_name                || '').trim() || null,
-      email:                    body.email.trim(),
-      phone:                    (body.phone                    || '').trim() || null,
-      neighborhood_subdivision: (body.neighborhood_subdivision || '').trim() || null,
-      property_types:           toArr(body.property_types),
-      approx_size:              (body.approx_size              || '').trim() || null,
-      bedrooms:                 (body.bedrooms                 || '').trim() || null,
-      price_threshold_min:      toInt(body.price_threshold_min),
-      price_threshold_max:      toInt(body.price_threshold_max),
-      timeline:                 (body.timeline                 || '').trim() || null,
-      notes:                    (body.notes                    || '').trim() || null,
-      source:                   'off-market-page',
-      raw_payload:              body,
+      first_name:  (body.first_name || '').trim() || null,
+      last_name:   (body.last_name  || '').trim() || null,
+      email:       body.email.trim(),
+      phone:       (body.phone      || '').trim() || null,
+      source:      'off-market:seller',
+      lead_type:   'Seller',
+      page:        (body.page || '/off-market').trim(),
+      message:     (body.notes || '').trim() || null,
+      // Form-specific fields live in details jsonb (GIN indexed) — the core
+      // queue stays the same shape for every form.
+      details: {
+        neighborhood_subdivision: (body.neighborhood_subdivision || '').trim() || null,
+        property_types:           toArr(body.property_types),
+        approx_size:              (body.approx_size || '').trim() || null,
+        bedrooms:                 (body.bedrooms    || '').trim() || null,
+        price_threshold_min:      toInt(body.price_threshold_min),
+        price_threshold_max:      toInt(body.price_threshold_max),
+        timeline:                 (body.timeline    || '').trim() || null,
+      },
+      raw_payload: body,
     };
 
     // ── Insert into Supabase ───────────────────────────────────────
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/off_market_leads`, {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
       method: 'POST',
       headers: {
         apikey:         KEY,

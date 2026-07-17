@@ -67,25 +67,33 @@ exports.handler = async (event) => {
     const mustOther = (d['must-haves-other'] || '').trim();
     if (mustOther) mustHaves.push(mustOther);
 
+    const nameParts = String(d.name || '').trim().split(/\s+/).filter(Boolean);
     const row = {
-      full_name: d.name || null,
+      first_name: nameParts.length > 1 ? nameParts.slice(0, -1).join(' ') : null,
+      last_name:  nameParts.length ? nameParts[nameParts.length - 1] : null,
       email: d.email || null,
       phone: d.phone || null,
-      timeline: d.timeline || null,
-      budget_usd: num(d.budget),
-      property_types: toArr(d['property-type']),
-      preferred_areas: preferredAreas,
-      size_min_sqft: intOf(d['size-min']),
-      size_max_sqft: intOf(d['size-max']),
-      bedrooms_min: intOf(d['bedrooms']),
-      bathrooms_min: intOf(d['bathrooms']),
-      must_have_features: mustHaves,
-      dream_notes: d.message || null,
-      source: 'find-my-dream-home',
+      source: 'find-my-dream-home:buyer',
+      lead_type: 'Buyer',
+      page: '/find-my-dream-home',
+      message: d.message || null,
+      // The wishlist's typed fields move into details jsonb. GIN indexed, so the
+      // Phase 2b matching engine can still query budget / areas / must-haves.
+      details: {
+        timeline: d.timeline || null,
+        budget_usd: num(d.budget),
+        property_types: toArr(d['property-type']),
+        preferred_areas: preferredAreas,
+        size_min_sqft: intOf(d['size-min']),
+        size_max_sqft: intOf(d['size-max']),
+        bedrooms_min: intOf(d['bedrooms']),
+        bathrooms_min: intOf(d['bathrooms']),
+        must_have_features: mustHaves,
+      },
       raw_payload: d,
     };
 
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/buyer_wishlists`, {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
       method: 'POST',
       headers: {
         apikey: KEY,
