@@ -2,16 +2,16 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-14T10:52:06.803193+00:00",
+  "lastUpdated": "2026-07-17T10:52:25.432552+00:00",
   "counts": {
-    "sold": 80,
-    "pending": 8,
+    "sold": 82,
+    "pending": 6,
     "active": 60,
     "total": 88
   },
   "metrics": {
-    "avgPrice": "$1,186,422",
-    "avgPricePerSqFt": "$529",
+    "avgPrice": "$1,185,070",
+    "avgPricePerSqFt": "$528",
     "avgYearBuilt": 1972,
     "avgLivingSqFt": "1,988",
     "avgLotSqFt": null,
@@ -29,16 +29,16 @@
     "newConstructionCount": 19
   },
   "sold": {
-    "count": 26,
-    "medianPrice": "$657,500",
-    "medianDom": 61,
-    "saleToListRatio": "89.3%",
+    "count": 27,
+    "medianPrice": "$650,000",
+    "medianDom": 67,
+    "saleToListRatio": "89.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 12.8,
-    "sfhVilla": 9.1,
-    "blended": 9.9,
+    "condo": 12.0,
+    "sfhVilla": 8.9,
+    "blended": 9.6,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -67,6 +67,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4687057",
+      "address": "3127 BAY SHORE RD",
+      "subdivision": "INDIAN BEACH MAP OF",
+      "soldPrice": "$2,650,000",
+      "soldDate": "2026-07-16",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,219",
+      "yearBuilt": 1953,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4691547",
+      "address": "1703 N TAMIAMI TRL #B504",
+      "subdivision": "THE STRAND SARASOTA",
+      "soldPrice": "$420,000",
+      "soldDate": "2026-07-14",
+      "bedrooms": 1,
+      "bathrooms": 2.0,
+      "livingSqFt": "858",
+      "yearBuilt": 2022,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4679800",
       "address": "428 SAPPHIRE DR",
@@ -105,32 +131,6 @@
       "yearBuilt": 2022,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4681432",
-      "address": "2445 ALAMEDA AVE",
-      "subdivision": "SARASOTA BAY PARK",
-      "soldPrice": "$1,150,000",
-      "soldDate": "2026-06-18",
-      "bedrooms": 4,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,901",
-      "yearBuilt": 1925,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4693278",
-      "address": "4237 SARASOTA AVE",
-      "subdivision": "INDIAN BEACH MAP OF",
-      "soldPrice": "$415,000",
-      "soldDate": "2026-06-14",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,803",
-      "yearBuilt": 1940,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$569,000",
       "avgPricePerSqFt": "$451",
       "avgLivingSqFt": "1,262",
-      "avgDom": 60
+      "avgDom": 63
     },
     {
       "tier": "1990to2005",
@@ -172,7 +172,7 @@
       "avgPrice": "$568,958",
       "avgPricePerSqFt": "$559",
       "avgLivingSqFt": "1,021",
-      "avgDom": 155
+      "avgDom": 158
     }
   ],
   "condoTiersScope": {
@@ -197,8 +197,8 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 18,
-      "soldCount": 22,
-      "soldMedianPricePerSqFt": "$532",
+      "soldCount": 23,
+      "soldMedianPricePerSqFt": "$533",
       "soldMedianPrice": "$650,000",
       "lowSample": false
     },
@@ -215,34 +215,34 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 37,
-      "soldCount": 56,
+      "soldCount": 57,
       "soldMedianPricePerSqFt": "$403",
-      "soldMedianPrice": "$587,000",
+      "soldMedianPrice": "$575,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 9.9,
-    "monthsOfSupplyCondo": 12.8,
-    "monthsOfSupplySfhVilla": 9.1,
+    "monthsOfSupply": 9.6,
+    "monthsOfSupplyCondo": 12.0,
+    "monthsOfSupplySfhVilla": 8.9,
     "label": "buyer's market",
     "activeCount": 60,
-    "sold365Count": 73,
-    "sold90Count": 26,
+    "sold365Count": 75,
+    "sold90Count": 27,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 64,
+      "soldCount": 65,
       "activeCount": 44,
-      "soldMedianPrice": "$671,515",
+      "soldMedianPrice": "$678,030",
       "soldMedianPricePerSqFt": "$426"
     },
     "condo": {
-      "soldCount": 16,
+      "soldCount": 17,
       "activeCount": 16,
-      "soldMedianPrice": "$487,250",
-      "soldMedianPricePerSqFt": "$500"
+      "soldMedianPrice": "$475,000",
+      "soldMedianPricePerSqFt": "$492"
     }
   },
   "boating": {
@@ -253,12 +253,12 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 60 active listings and roughly 6 closed sales a month (trailing 12 months), West Of Trail North has about 9.9 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 60 active listings and roughly 6 closed sales a month (trailing 12 months), West Of Trail North has about 9.6 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail North?",
-      "a": "Single-family homes sell around $671,515 ($426/sq ft), while condos, villas and townhouses sell around $487,250 ($500/sq ft)."
+      "a": "Single-family homes sell around $678,030 ($426/sq ft), while condos, villas and townhouses sell around $475,000 ($492/sq ft)."
     },
     {
       "facet": "range",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 61 days on market and closed at 89.3% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 67 days on market and closed at 89.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

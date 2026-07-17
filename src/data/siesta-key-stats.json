@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-14T10:52:04.179420+00:00",
+  "lastUpdated": "2026-07-17T10:52:23.032856+00:00",
   "counts": {
-    "sold": 535,
-    "pending": 54,
-    "active": 329,
-    "total": 589
+    "sold": 541,
+    "pending": 49,
+    "active": 328,
+    "total": 590
   },
   "metrics": {
-    "avgPrice": "$1,376,605",
+    "avgPrice": "$1,376,536",
     "avgPricePerSqFt": "$675",
     "avgYearBuilt": 1977,
-    "avgLivingSqFt": "1,887",
+    "avgLivingSqFt": "1,886",
     "avgLotSqFt": null,
     "avgDom": 109
   },
@@ -22,113 +22,113 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 329,
-    "medianPrice": "$1,150,000",
+    "count": 328,
+    "medianPrice": "$1,172,000",
     "medianPricePerSqFt": "$764",
-    "waterfrontCount": 183,
-    "newConstructionCount": 51
+    "waterfrontCount": 182,
+    "newConstructionCount": 55
   },
   "sold": {
-    "count": 131,
-    "medianPrice": "$895,000",
-    "medianDom": 71,
+    "count": 128,
+    "medianPrice": "$885,000",
+    "medianDom": 76,
     "saleToListRatio": "88.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 8.5,
-    "sfhVilla": 8.6,
-    "blended": 8.6,
+    "sfhVilla": 8.5,
+    "blended": 8.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
     "medianMonthlyAssociation": "$1,133",
-    "medianMonthlyCondoFee": "$1,260",
+    "medianMonthlyCondoFee": "$1,261",
     "minMonthlyCondoFee": "$278",
     "maxMonthlyCondoFee": "$8,995",
     "condoFeeRange": {
       "min": 278,
-      "median": 1260,
+      "median": 1261,
       "max": 8995
     }
   },
   "priceBands": {
-    "under900k": 139,
+    "under900k": 137,
     "band900kTo1_5m": 59,
-    "band1_5mTo3m": 60,
-    "band3mPlus": 71
+    "band1_5mTo3m": 57,
+    "band3mPlus": 75
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 329
+      "count": 328
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
     {
-      "listingId": "A4683608",
-      "address": "1200 E PEPPERTREE LN #307",
-      "subdivision": "PEPPERTREE BAY II",
-      "soldPrice": "$585,000",
-      "soldDate": "2026-07-13",
+      "listingId": "A4661191",
+      "address": "1255 E PEPPERTREE DR #201",
+      "subdivision": "PEPPERTREE BAY I",
+      "soldPrice": "$480,000",
+      "soldDate": "2026-07-16",
       "bedrooms": 2,
       "bathrooms": 2.0,
-      "livingSqFt": "1,466",
-      "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4653809",
-      "address": "385 AVENIDA MADERA",
-      "subdivision": "SIESTA MANOR SEC 1",
-      "soldPrice": "$920,000",
-      "soldDate": "2026-07-09",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,094",
-      "yearBuilt": 1958,
+      "livingSqFt": "1,460",
+      "yearBuilt": 1972,
       "propertyType": "Residential",
       "isWaterfront": true
     },
     {
-      "listingId": "A4691399",
-      "address": "5569 SHADOW LAWN DR",
-      "subdivision": "SIESTA ISLES",
-      "soldPrice": "$1,100,000",
-      "soldDate": "2026-07-08",
+      "listingId": "A4651061",
+      "address": "7333 POINT OF ROCKS RD",
+      "subdivision": "WHITE BEACH FRUIT COMPANYS SU",
+      "soldPrice": "$3,000,000",
+      "soldDate": "2026-07-15",
+      "bedrooms": 4,
+      "bathrooms": 3.5,
+      "livingSqFt": "4,566",
+      "yearBuilt": 2014,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4676253",
+      "address": "1021 CRESCENT ST #1",
+      "subdivision": "SIESTA/ROCKS",
+      "soldPrice": "$1,600,000",
+      "soldDate": "2026-07-15",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,780",
+      "yearBuilt": 2015,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4680628",
+      "address": "5920 MIDNIGHT PASS RD #704",
+      "subdivision": "SARASOTA SURF & RACQUET",
+      "soldPrice": "$1,300,000",
+      "soldDate": "2026-07-14",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,334",
+      "yearBuilt": 1971,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4696712",
+      "address": "266 OGDEN ST",
+      "subdivision": "SIESTA REV OF",
+      "soldPrice": "$740,000",
+      "soldDate": "2026-07-13",
       "bedrooms": 3,
       "bathrooms": 2.0,
-      "livingSqFt": "2,074",
-      "yearBuilt": 1966,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4653716",
-      "address": "35 SANDY COVE RD #2A",
-      "subdivision": "SANDY COVE",
-      "soldPrice": "$850,000",
-      "soldDate": "2026-07-08",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,254",
-      "yearBuilt": 1970,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4677695",
-      "address": "1055 W PEPPERTREE DR #102AA",
-      "subdivision": "PEPPERTREE BAY IV",
-      "soldPrice": "$770,000",
-      "soldDate": "2026-07-08",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,163",
-      "yearBuilt": 1974,
+      "livingSqFt": "1,433",
+      "yearBuilt": 1973,
       "propertyType": "Residential",
       "isWaterfront": false
     }
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 183,
-      "avgPrice": "$808,329",
-      "avgPricePerSqFt": "$681",
-      "avgLivingSqFt": "1,192",
-      "avgDom": 135
+      "activeCount": 178,
+      "avgPrice": "$794,142",
+      "avgPricePerSqFt": "$677",
+      "avgLivingSqFt": "1,182",
+      "avgDom": 136
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 6,
-      "avgPrice": "$1,529,650",
-      "avgPricePerSqFt": "$708",
-      "avgLivingSqFt": "2,159",
-      "avgDom": 146
+      "activeCount": 5,
+      "avgPrice": "$1,515,780",
+      "avgPricePerSqFt": "$693",
+      "avgLivingSqFt": "2,183",
+      "avgDom": 149
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$2,592,700",
       "avgPricePerSqFt": "$1,202",
       "avgLivingSqFt": "2,024",
-      "avgDom": 206
+      "avgDom": 209
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 8,
-      "avgPrice": "$4,453,125",
-      "avgPricePerSqFt": "$1,560",
-      "avgLivingSqFt": "3,042",
-      "avgDom": 259
+      "activeCount": 12,
+      "avgPrice": "$4,922,917",
+      "avgPricePerSqFt": "$1,565",
+      "avgLivingSqFt": "3,295",
+      "avgDom": 176
     }
   ],
   "condoTiersScope": {
@@ -188,7 +188,7 @@
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
       "activeCount": 93,
-      "soldCount": 145,
+      "soldCount": 147,
       "soldMedianPricePerSqFt": "$708",
       "soldMedianPrice": "$930,000",
       "lowSample": false
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 88,
+      "activeCount": 87,
       "soldCount": 199,
       "soldMedianPricePerSqFt": "$569",
       "soldMedianPrice": "$1,115,000",
@@ -224,39 +224,39 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 96,
-      "soldCount": 111,
-      "soldMedianPricePerSqFt": "$536",
+      "soldCount": 115,
+      "soldMedianPricePerSqFt": "$538",
       "soldMedianPrice": "$775,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 8.6,
+    "monthsOfSupply": 8.5,
     "monthsOfSupplyCondo": 8.5,
-    "monthsOfSupplySfhVilla": 8.6,
+    "monthsOfSupplySfhVilla": 8.5,
     "label": "buyer's market",
-    "activeCount": 329,
-    "sold365Count": 461,
-    "sold90Count": 131,
+    "activeCount": 328,
+    "sold365Count": 464,
+    "sold90Count": 128,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 205,
-      "activeCount": 125,
-      "soldMedianPrice": "$1,520,000",
-      "soldMedianPricePerSqFt": "$632"
+      "soldCount": 208,
+      "activeCount": 126,
+      "soldMedianPrice": "$1,515,000",
+      "soldMedianPricePerSqFt": "$625"
     },
     "condo": {
-      "soldCount": 330,
-      "activeCount": 204,
+      "soldCount": 333,
+      "activeCount": 202,
       "soldMedianPrice": "$670,000",
-      "soldMedianPricePerSqFt": "$583"
+      "soldMedianPricePerSqFt": "$582"
     }
   },
   "boating": {
     "activeWithDock": 81,
-    "activeWaterfront": 183
+    "activeWaterfront": 182
   },
   "marketQuestions": [
     {
@@ -267,32 +267,32 @@
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 329 active listings and roughly 38 closed sales a month (trailing 12 months), Siesta Key has about 8.6 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 328 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 8.5 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Siesta Key?",
-      "a": "Single-family homes sell around $1,520,000 ($632/sq ft), while condos, villas and townhouses sell around $670,000 ($583/sq ft)."
+      "a": "Single-family homes sell around $1,515,000 ($625/sq ft), while condos, villas and townhouses sell around $670,000 ($582/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Siesta Key?",
-      "a": "Active listings run from $290,000 to $29,995,000, with a median asking price of $1,150,000."
+      "a": "Active listings run from $290,000 to $29,995,000, with a median asking price of $1,172,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 71 days on market and closed at 88.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 76 days on market and closed at 88.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Siesta Key homes have a dock?",
-      "a": "Of 183 active waterfront listings, 81 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 182 active waterfront listings, 81 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Siesta Key?",
-      "a": "The median monthly condo fee is $1,260 and the median monthly association fee is $1,133."
+      "a": "The median monthly condo fee is $1,261 and the median monthly association fee is $1,133."
     }
   ],
   "costBreakdown90": null

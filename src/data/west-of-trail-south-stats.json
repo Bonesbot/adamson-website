@@ -2,20 +2,20 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-14T10:52:07.662716+00:00",
+  "lastUpdated": "2026-07-17T10:52:26.171291+00:00",
   "counts": {
-    "sold": 255,
+    "sold": 257,
     "pending": 18,
     "active": 103,
-    "total": 273
+    "total": 275
   },
   "metrics": {
-    "avgPrice": "$627,140",
-    "avgPricePerSqFt": "$329",
+    "avgPrice": "$627,879",
+    "avgPricePerSqFt": "$330",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,746",
+    "avgLivingSqFt": "1,745",
     "avgLotSqFt": null,
-    "avgDom": 76
+    "avgDom": 77
   },
   "range": {
     "minPrice": "$130,000",
@@ -23,21 +23,21 @@
   },
   "active": {
     "count": 103,
-    "medianPrice": "$475,000",
-    "medianPricePerSqFt": "$334",
-    "waterfrontCount": 26,
+    "medianPrice": "$465,000",
+    "medianPricePerSqFt": "$332",
+    "waterfrontCount": 27,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 64,
-    "medianPrice": "$432,000",
-    "medianDom": 32,
-    "saleToListRatio": "89.7%",
+    "count": 63,
+    "medianPrice": "$422,500",
+    "medianDom": 39,
+    "saleToListRatio": "88.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 7.1,
-    "sfhVilla": 4.5,
+    "condo": 6.9,
+    "sfhVilla": 4.6,
     "blended": 5.6,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -55,8 +55,8 @@
   },
   "priceBands": {
     "under900k": 81,
-    "band900kTo1_5m": 5,
-    "band1_5mTo3m": 11,
+    "band900kTo1_5m": 4,
+    "band1_5mTo3m": 12,
     "band3mPlus": 6
   },
   "propertyTypes": [
@@ -67,6 +67,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4680245",
+      "address": "1508 PELICAN COVE RD #GR232",
+      "subdivision": "PELICAN COVE XIII",
+      "soldPrice": "$287,500",
+      "soldDate": "2026-07-16",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,211",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4651548",
+      "address": "4812 KESTRAL PARK CIR #20",
+      "subdivision": "LANDINGS CARRIAGEHOUSE II",
+      "soldPrice": "$285,000",
+      "soldDate": "2026-07-15",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,570",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4662681",
       "address": "8915 VAMO RD",
@@ -105,32 +131,6 @@
       "yearBuilt": 2000,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4695515",
-      "address": "4603 PINE HARRIER DR",
-      "subdivision": "THE LANDINGS",
-      "soldPrice": "$1,062,500",
-      "soldDate": "2026-07-09",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,723",
-      "yearBuilt": 1985,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4691665",
-      "address": "1654 STICKNEY POINT RD #54-201",
-      "subdivision": "CASTEL DEL MARE",
-      "soldPrice": "$280,000",
-      "soldDate": "2026-07-09",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,016",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 56,
-      "avgPrice": "$361,888",
-      "avgPricePerSqFt": "$290",
+      "avgPrice": "$358,852",
+      "avgPricePerSqFt": "$287",
       "avgLivingSqFt": "1,274",
-      "avgDom": 142
+      "avgDom": 143
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$601,571",
       "avgPricePerSqFt": "$299",
       "avgLivingSqFt": "2,012",
-      "avgDom": 123
+      "avgDom": 126
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$589,667",
       "avgPricePerSqFt": "$345",
       "avgLivingSqFt": "1,711",
-      "avgDom": 121
+      "avgDom": 123
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$629,000",
       "avgPricePerSqFt": "$353",
       "avgLivingSqFt": "1,785",
-      "avgDom": 198
+      "avgDom": 202
     }
   ],
   "condoTiersScope": {
@@ -196,16 +196,16 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 23,
-      "soldCount": 49,
-      "soldMedianPricePerSqFt": "$362",
-      "soldMedianPrice": "$495,000",
+      "activeCount": 24,
+      "soldCount": 50,
+      "soldMedianPricePerSqFt": "$361",
+      "soldMedianPrice": "$485,000",
       "lowSample": false
     },
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 19,
+      "activeCount": 18,
       "soldCount": 23,
       "soldMedianPricePerSqFt": "$299",
       "soldMedianPrice": "$450,000",
@@ -224,20 +224,20 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 58,
-      "soldCount": 168,
+      "soldCount": 169,
       "soldMedianPricePerSqFt": "$286",
-      "soldMedianPrice": "$429,500",
+      "soldMedianPrice": "$429,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 5.6,
-    "monthsOfSupplyCondo": 7.1,
-    "monthsOfSupplySfhVilla": 4.5,
+    "monthsOfSupplyCondo": 6.9,
+    "monthsOfSupplySfhVilla": 4.6,
     "label": "balanced market",
     "activeCount": 103,
-    "sold365Count": 219,
-    "sold90Count": 64,
+    "sold365Count": 221,
+    "sold90Count": 63,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,15 +248,15 @@
       "soldMedianPricePerSqFt": "$321"
     },
     "condo": {
-      "soldCount": 115,
+      "soldCount": 117,
       "activeCount": 68,
-      "soldMedianPrice": "$350,000",
-      "soldMedianPricePerSqFt": "$260"
+      "soldMedianPrice": "$347,500",
+      "soldMedianPricePerSqFt": "$253"
     }
   },
   "boating": {
     "activeWithDock": 16,
-    "activeWaterfront": 26
+    "activeWaterfront": 27
   },
   "marketQuestions": [
     {
@@ -267,22 +267,22 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $518,750 ($321/sq ft), while condos, villas and townhouses sell around $350,000 ($260/sq ft)."
+      "a": "Single-family homes sell around $518,750 ($321/sq ft), while condos, villas and townhouses sell around $347,500 ($253/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $130,000 to $5,500,000, with a median asking price of $475,000."
+      "a": "Active listings run from $130,000 to $5,500,000, with a median asking price of $465,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 32 days on market and closed at 89.7% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 39 days on market and closed at 88.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 26 active waterfront listings, 16 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 27 active waterfront listings, 16 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
