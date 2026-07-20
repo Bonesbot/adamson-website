@@ -81,6 +81,21 @@ def nice_date(d):
     return f"{d.strftime('%b')} {d.day}, {d.year}"
 
 
+def ledger_date(d):
+    """Compact MM/DD/YY for the transaction ledger (saves column width)."""
+    if d is None:
+        return "—"
+    return f"{d.month:02d}/{d.day:02d}/{d.year % 100:02d}"
+
+
+def pct0(n):
+    """Whole-percent variant of pct() for the ledger's SP/LP column."""
+    if n is None:
+        return "—"
+    v = float(n)
+    return f"{v * 100:.0f}%" if v <= 2 else f"{v:.0f}%"
+
+
 def bedbath(r):
     full = r["bathrooms_full"] or 0
     half = r["bathrooms_half"] or 0
@@ -126,6 +141,7 @@ SIDES = {
         "hero": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg/1920px-SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg",
         "sister_slug": "gulf-and-bay-club-bayside",
         "sister_name": "Gulf & Bay Club Bayside",
+        "team": "Kelli & Ryan",
     },
     "bayside": {
         "slug": "gulf-and-bay-club-bayside",
@@ -140,8 +156,16 @@ SIDES = {
         "hero": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Siesta_key_sunset%2C_Sarasota._-_panoramio.jpg/1920px-Siesta_key_sunset%2C_Sarasota._-_panoramio.jpg",
         "sister_slug": "gulf-and-bay-club-beachfront",
         "sister_name": "Gulf & Bay Club Beachfront",
+        "team": "Kelli & Ryan",
     },
 }
+
+# Beach conditions strip (hero): one beach serves both G&B pages. When cloning
+# this template for another community, point these at the right NWS gridpoint
+# and visitbeaches.org (Mote BCRS) beach id — or drop the strip for inland pages.
+BEACH_NWS_GRID = "TBW/70,67"      # api.weather.gov gridpoint for Siesta Key
+BEACH_MOTE_ID = "2"               # visitbeaches.org beach id — Siesta Key Beach
+BEACH_LABEL = "Siesta Key Beach today"
 
 # Same placeholder CC photo set on both pages, per spec.
 GALLERY = [
@@ -225,7 +249,7 @@ def render_stats(rows, lease, lease_n, lease_total):
         stat(money(mean(prices)) if prices else "—", "Avg Sale Price"),
         stat(money(max(prices)) if prices else "—", "Max Sale Price"),
         stat(f"${int(round(mean(psf))):,}" if psf else "—", "Avg Price / SqFt"),
-        stat(str(round(mean(cdom))) if cdom else "—", "Avg CDOM", "days on market"),
+        stat(str(round(mean(cdom))) if cdom else "—", "Avg Days on Market", "cumulative"),
         stat(f"{mean(splp) * 100:.1f}%" if splp else "—", "Avg Sale-to-List"),
         stat(esc(lease) if lease else "—", "Minimum Lease Period", lease_sub),
     ]
@@ -275,9 +299,9 @@ def render_ledger(rows, uid):
         <td class="gbc-num">{f"{sf:,}" if sf else "—"}</td>
         <td class="gbc-num">{money(r['current_price'])}</td>
         <td class="gbc-num">{money(r['close_price_by_calculated_sqft'])}</td>
-        <td>{nice_date(r['close_date'])}</td>
+        <td>{ledger_date(r['close_date'])}</td>
         <td class="gbc-num">{cdom if cdom is not None else "—"}</td>
-        <td class="gbc-num">{pct(r['sp_lp'])}</td>
+        <td class="gbc-num">{pct0(r['sp_lp'])}</td>
         <td class="gbc-wv">{esc(wv) if wv else '<span class="gbc-wv-none">No water view</span>'}</td>
       </tr>''')
     body = "\n".join(trs) if trs else '<tr><td colspan="9" class="gbc-empty">No closings recorded in this window.</td></tr>'
@@ -291,7 +315,7 @@ def render_ledger(rows, uid):
             <th class="gbc-num">Sale Price</th>
             <th class="gbc-num">$ / SqFt</th>
             <th>Closed</th>
-            <th class="gbc-num">CDOM</th>
+            <th class="gbc-num">Mkt Days</th>
             <th class="gbc-num">SP/LP</th>
             <th>Water View</th>
           </tr>
@@ -333,7 +357,7 @@ def render_forms(cfg):
           <h3 class="gbc-tile-title">Reach out for a private consult</h3>
           <p class="gbc-tile-copy">Curious what your unit would bring today? We&rsquo;ll walk the real closed-sale data above against your floor plan, view, and condition &mdash; privately, with no obligation and no listing pressure.</p>
           <form class="gbc-form" data-lead-type="Seller" data-community="{esc(community)}"
-                name="gbc-lead-seller" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                name="gbc-lead-seller" method="POST" action="/thank-you/" data-team="{esc(cfg.get("team","our team"))}" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="gbc-lead-seller" />
             <input type="hidden" name="lead_type" value="Seller" />
             <input type="hidden" name="community" value="{esc(community)}" />
@@ -354,7 +378,7 @@ def render_forms(cfg):
           <h3 class="gbc-tile-title">Add me to the coming-soon list</h3>
           <p class="gbc-tile-copy">{esc(cfg["short"])} turns over a handful of units a year, and the best ones often trade before they reach the MLS. Get on the list and we&rsquo;ll reach out first on available and off-market units.</p>
           <form class="gbc-form" data-lead-type="Buyer" data-community="{esc(community)}"
-                name="gbc-lead-buyer" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                name="gbc-lead-buyer" method="POST" action="/thank-you/" data-team="{esc(cfg.get("team","our team"))}" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="gbc-lead-buyer" />
             <input type="hidden" name="lead_type" value="Buyer" />
             <input type="hidden" name="community" value="{esc(community)}" />
@@ -458,6 +482,20 @@ STYLES = r'''<style is:global>
   .gbc-field input:focus { outline:none; border-color:var(--color-gold); box-shadow:0 0 0 3px rgba(197,165,90,0.15); }
   .gbc-hp { position:absolute; left:-9999px; }
   .gbc-form-status { margin-top:0.8rem; font-size:0.85rem; min-height:1.2em; }
+  .gbc-form-done { text-align:center; padding:1.6rem 1rem 0.6rem; }
+  .gbc-done-medallion { width:52px; height:52px; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; border-radius:50%; border:1px solid rgba(197,165,90,0.45); background:rgba(197,165,90,0.12); color:var(--color-gold); }
+  .gbc-done-medallion svg { width:24px; height:24px; }
+  .gbc-done-eyebrow { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--color-gold); margin-bottom:0.4rem; }
+  .gbc-done-title { font-family:var(--font-display); font-size:1.5rem; color:var(--color-black); margin:0 0 0.6rem; }
+  .gbc-done-copy { color:var(--color-text-muted); font-size:0.92rem; line-height:1.65; max-width:26rem; margin:0 auto; }
+  .gbc-done-alt { margin-top:1rem; font-size:0.85rem; color:var(--color-text-muted); }
+  .gbc-done-alt a { color:var(--color-gold); white-space:nowrap; }
+  .gbc-beach { display:inline-flex; flex-wrap:wrap; align-items:center; gap:0.6rem; margin-top:1.6rem; padding:0.55rem 1.15rem; border:1px solid rgba(255,255,255,0.16); border-radius:9999px; background:rgba(10,31,60,0.38); backdrop-filter:blur(8px); font-family:var(--font-accent); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.09em; color:rgba(255,255,255,0.65); }
+  .gbc-beach-temps { color:#fff; }
+  .gbc-beach-sep { color:var(--color-gold); }
+  .gbc-beach-tide { border-bottom:1px dotted rgba(255,255,255,0.3); padding-bottom:1px; }
+  .gbc-beach-tide.is-ok { color:#9fd8b4; }
+  .gbc-beach-tide.is-warn { color:var(--color-gold); }
   .gbc-form-status.is-ok { color:#1d7a4c; }
   .gbc-form-status.is-err { color:#b3261e; }
 
@@ -566,9 +604,22 @@ SCRIPTS = r'''<script is:inline>
           body: new URLSearchParams(fd).toString(),
         }).catch(() => {});
 
-        form.reset();
-        status.className = 'gbc-form-status is-ok';
-        status.textContent = 'Thank you — we’ll be in touch shortly.';
+        const first = String(data.name || '').trim().split(/\s+/)[0].replace(/[<>&"']/g, '');
+        const team  = (form.dataset.team || 'our team').replace(/[<>"']/g, '');
+        const isSeller = form.dataset.leadType === 'Seller';
+        const done = document.createElement('div');
+        done.className = 'gbc-form-done';
+        done.setAttribute('role', 'status');
+        done.innerHTML =
+          '<div class="gbc-done-medallion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>' +
+          '<p class="gbc-done-eyebrow">' + (isSeller ? 'Request received' : 'You&rsquo;re on the list') + '</p>' +
+          '<h4 class="gbc-done-title">Thank you' + (first ? ', ' + first : '') + '</h4>' +
+          '<p class="gbc-done-copy">' + (isSeller
+            ? 'Your private consult request has gone directly to ' + team + '. Expect a personal reply within one business day.'
+            : team + ' will reach out the moment something fits &mdash; often before it reaches the MLS.') + '</p>' +
+          '<p class="gbc-done-alt">Prefer to talk sooner? <a href="tel:+19417139234">(941) 713-9234</a></p>';
+        form.replaceWith(done);
+        done.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } catch (err) {
         console.error(err);
         status.className = 'gbc-form-status is-err';
@@ -576,6 +627,30 @@ SCRIPTS = r'''<script is:inline>
         btn.disabled = false;
       }
     });
+  });
+
+  // ── Beach conditions strip (NWS + Mote Marine via our proxy) ────
+  document.querySelectorAll('[data-beach]').forEach(async (strip) => {
+    try {
+      const qs = new URLSearchParams({ grid: strip.dataset.grid || '', beach: strip.dataset.beachId || '' });
+      const res = await fetch('/.netlify/functions/beach-conditions?' + qs.toString());
+      if (!res.ok) return;
+      const c = await res.json();
+      const temps = strip.querySelector('[data-out=beach-temps]');
+      const tide  = strip.querySelector('[data-out=beach-tide]');
+      if (c.hi == null && c.lo == null && !c.redTide) return;
+      temps.textContent = (c.hi != null ? 'High ' + c.hi + '\u00B0' : '') +
+                          (c.hi != null && c.lo != null ? ' / ' : '') +
+                          (c.lo != null ? 'Low ' + c.lo + '\u00B0' : '');
+      if (c.redTide && c.redTide.status === 'reported') {
+        tide.textContent = 'Beach advisory \u2014 see Mote report';
+        tide.classList.add('is-warn');
+      } else {
+        tide.textContent = 'Red tide: none reported';
+        tide.classList.add('is-ok');
+      }
+      strip.hidden = false;
+    } catch (e) { /* strip simply stays hidden */ }
   });
 </script>'''
 
@@ -586,7 +661,7 @@ def render_page(cfg, headline, ledger, lease, lease_n, lease_total, qs, as_of):
     avg = money(mean(prices)) if prices else "—"
     description = (f"{cfg['name']}, Siesta Key (34242) condo market: {len(headline)} closed sales in the last "
                    f"{HEADLINE_WINDOW_DAYS} days, average {avg}, {lease or 'n/a'} minimum lease period, plus price "
-                   f"per sqft, CDOM and sale-to-list ratios from live Stellar MLS data.")
+                   f"per sqft, days on market and sale-to-list ratios from live Stellar MLS data.")
 
     chips = "\n            ".join(f'<span class="gbc-chip">{c}</span>' for c in cfg["chips"])
     figs = "\n          ".join(
@@ -676,6 +751,13 @@ const jsonLd = [
       <h1 class="font-display text-white mb-4">{esc(cfg["name"])}</h1>
       <p class="gbc-hero-tag">{cfg["blurb"]}</p>
       <p class="gbc-sister">Looking for the other association? <a href="/siesta-key/{cfg["sister_slug"]}">{esc(cfg["sister_name"])} &rarr;</a></p>
+      <div class="gbc-beach" data-beach data-grid="{BEACH_NWS_GRID}" data-beach-id="{BEACH_MOTE_ID}" hidden>
+        <span class="gbc-beach-label">{BEACH_LABEL}</span>
+        <span class="gbc-beach-sep" aria-hidden="true">&middot;</span>
+        <span class="gbc-beach-temps" data-out="beach-temps"></span>
+        <span class="gbc-beach-sep" aria-hidden="true">&middot;</span>
+        <a class="gbc-beach-tide" data-out="beach-tide" href="https://visitbeaches.org" target="_blank" rel="noopener" title="Mote Marine Laboratory beach conditions report"></a>
+      </div>
     </div>
   </section>
 
@@ -744,7 +826,7 @@ const jsonLd = [
 
   <section class="section-sm dark-section">
     <div class="container-narrow">
-      <p class="gbc-disc"><strong>Methodology &amp; data.</strong> Figures reflect closed transactions in the MLS for the {esc(cfg["name"])} subdivision{ph_note}, sourced from Stellar MLS via the Adamson Group data pipeline. "CDOM" is cumulative days on market; "SP/LP" is sale price to list price. The headline snapshot uses a {HEADLINE_WINDOW_DAYS}-day window; the transaction ledger and quarterly trend use trailing 12 months, computed as of {as_of}. "Minimum Lease Period" is the value most frequently reported on MLS listings in this association and is <em>not</em> a substitute for the condo documents — confirm current rental rules with the association before purchasing. Small communities close few units per quarter, so single sales can move averages meaningfully. Data is provided for informational purposes and is not a guarantee of value.</p>
+      <p class="gbc-disc"><strong>Methodology &amp; data.</strong> Figures reflect closed transactions in the MLS for the {esc(cfg["name"])} subdivision{ph_note}, sourced from Stellar MLS via the Adamson Group data pipeline. "Mkt Days" is cumulative days on market; "SP/LP" is sale price to list price. The headline snapshot uses a {HEADLINE_WINDOW_DAYS}-day window; the transaction ledger and quarterly trend use trailing 12 months, computed as of {as_of}. "Minimum Lease Period" is the value most frequently reported on MLS listings in this association and is <em>not</em> a substitute for the condo documents — confirm current rental rules with the association before purchasing. Small communities close few units per quarter, so single sales can move averages meaningfully. Data is provided for informational purposes and is not a guarantee of value.</p>
       <p class="gbc-disc gbc-credit">Photography (placeholder — to be replaced): Siesta Key beach imagery via Wikimedia Commons — "Sarasota Sunset, Siesta Key" &amp; "Siesta Key sunset" by John Simpson and contributors (CC BY 3.0), "Siesta Key Beach" (CC BY 3.0), "Red Lifeguard Stand at Siesta Key Beach" (CC0). Not photographs of the {esc(cfg["short"])} buildings themselves.</p>
     </div>
   </section>

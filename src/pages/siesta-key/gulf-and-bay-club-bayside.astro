@@ -3,7 +3,7 @@
 // Re-run that script to refresh. Hand edits will be overwritten.
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-const description = 'Gulf & Bay Club Bayside, Siesta Key (34242) condo market: 1 closed sales in the last 180 days, average $940,000, 1 Week minimum lease period, plus price per sqft, CDOM and sale-to-list ratios from live Stellar MLS data.';
+const description = 'Gulf & Bay Club Bayside, Siesta Key (34242) condo market: 1 closed sales in the last 180 days, average $940,000, 1 Week minimum lease period, plus price per sqft, days on market and sale-to-list ratios from live Stellar MLS data.';
 
 const jsonLd = [
   {
@@ -24,7 +24,7 @@ const jsonLd = [
     name: 'Gulf & Bay Club Bayside Condo Market — Siesta Key',
     description: description,
     url: 'https://adamsonfl.com/siesta-key/gulf-and-bay-club-bayside',
-    dateModified: '2026-07-15',
+    dateModified: '2026-07-20',
     author: {
       '@type': 'RealEstateAgent',
       name: 'Ryan Adamson',
@@ -35,7 +35,7 @@ const jsonLd = [
     '@type': 'FAQPage',
     mainEntity: [
       { '@type': 'Question', name: 'What is the minimum lease period at Gulf & Bay Club Bayside?', acceptedAnswer: { '@type': 'Answer', text: 'The MLS reports a 1 Week minimum lease for Gulf & Bay Club Bayside on 17 of 18 listings. Always confirm current rental rules with the association before purchasing — condo documents change.' } },
-      { '@type': 'Question', name: 'How many units have sold recently at Gulf & Bay Club Bayside?', acceptedAnswer: { '@type': 'Answer', text: '1 units closed in the 180 days ending July 15, 2026, averaging $940,000.' } }
+      { '@type': 'Question', name: 'How many units have sold recently at Gulf & Bay Club Bayside?', acceptedAnswer: { '@type': 'Answer', text: '1 units closed in the 180 days ending July 20, 2026, averaging $940,000.' } }
     ],
   },
   {
@@ -60,6 +60,13 @@ const jsonLd = [
       <h1 class="font-display text-white mb-4">Gulf &amp; Bay Club Bayside</h1>
       <p class="gbc-hero-tag">The separate bayside association across Midnight Pass Road &mdash; intracoastal-side condos, a lower price of entry into the Gulf &amp; Bay Club name, and a weekly minimum lease.</p>
       <p class="gbc-sister">Looking for the other association? <a href="/siesta-key/gulf-and-bay-club-beachfront">Gulf &amp; Bay Club Beachfront &rarr;</a></p>
+      <div class="gbc-beach" data-beach data-grid="TBW/70,67" data-beach-id="2" hidden>
+        <span class="gbc-beach-label">Siesta Key Beach today</span>
+        <span class="gbc-beach-sep" aria-hidden="true">&middot;</span>
+        <span class="gbc-beach-temps" data-out="beach-temps"></span>
+        <span class="gbc-beach-sep" aria-hidden="true">&middot;</span>
+        <a class="gbc-beach-tide" data-out="beach-tide" href="https://visitbeaches.org" target="_blank" rel="noopener" title="Mote Marine Laboratory beach conditions report"></a>
+      </div>
     </div>
   </section>
 
@@ -91,7 +98,7 @@ const jsonLd = [
     <div class="container">
       <p class="section-label text-cbgl-blue-light mb-3">Bayside</p>
       <h2 class="font-display mb-3">Closed Market Snapshot</h2>
-      <p class="gbc-window">Closed sales &middot; past 180 days &middot; as of July 15, 2026</p>
+      <p class="gbc-window">Closed sales &middot; past 180 days &middot; as of July 20, 2026</p>
       <div class="gbc-stat-grid"><div class="gbc-stat">
         <div class="gbc-stat-value">1</div>
         <div class="gbc-stat-label">Closed Sales</div>
@@ -119,8 +126,8 @@ const jsonLd = [
       </div>
 <div class="gbc-stat">
         <div class="gbc-stat-value">34</div>
-        <div class="gbc-stat-label">Avg CDOM</div>
-        <div class="gbc-stat-sub">days on market</div>
+        <div class="gbc-stat-label">Avg Days on Market</div>
+        <div class="gbc-stat-sub">cumulative</div>
       </div>
 <div class="gbc-stat">
         <div class="gbc-stat-value">94.0%</div>
@@ -168,7 +175,7 @@ const jsonLd = [
             <th class="gbc-num">Sale Price</th>
             <th class="gbc-num">$ / SqFt</th>
             <th>Closed</th>
-            <th class="gbc-num">CDOM</th>
+            <th class="gbc-num">Mkt Days</th>
             <th class="gbc-num">SP/LP</th>
             <th>Water View</th>
           </tr>
@@ -180,9 +187,9 @@ const jsonLd = [
         <td class="gbc-num">1,645</td>
         <td class="gbc-num">$940,000</td>
         <td class="gbc-num">$571</td>
-        <td>May 5, 2026</td>
+        <td>05/05/26</td>
         <td class="gbc-num">34</td>
-        <td class="gbc-num">94.0%</td>
+        <td class="gbc-num">94%</td>
         <td class="gbc-wv">Pond</td>
       </tr>
 <tr data-bed="1" data-sqft="956">
@@ -191,9 +198,9 @@ const jsonLd = [
         <td class="gbc-num">956</td>
         <td class="gbc-num">$475,000</td>
         <td class="gbc-num">$497</td>
-        <td>Dec 2, 2025</td>
+        <td>12/02/25</td>
         <td class="gbc-num">172</td>
-        <td class="gbc-num">95.0%</td>
+        <td class="gbc-num">95%</td>
         <td class="gbc-wv"><span class="gbc-wv-none">No water view</span></td>
       </tr>
 <tr data-bed="2" data-sqft="1280">
@@ -202,9 +209,9 @@ const jsonLd = [
         <td class="gbc-num">1,280</td>
         <td class="gbc-num">$650,000</td>
         <td class="gbc-num">$508</td>
-        <td>Nov 13, 2025</td>
+        <td>11/13/25</td>
         <td class="gbc-num">141</td>
-        <td class="gbc-num">89.0%</td>
+        <td class="gbc-num">89%</td>
         <td class="gbc-wv">Pond</td>
       </tr>
 <tr data-bed="2" data-sqft="1280">
@@ -213,9 +220,9 @@ const jsonLd = [
         <td class="gbc-num">1,280</td>
         <td class="gbc-num">$729,000</td>
         <td class="gbc-num">$570</td>
-        <td>Oct 17, 2025</td>
+        <td>10/17/25</td>
         <td class="gbc-num">96</td>
-        <td class="gbc-num">94.0%</td>
+        <td class="gbc-num">94%</td>
         <td class="gbc-wv">Pond</td>
       </tr>
 <tr data-bed="2" data-sqft="1130">
@@ -224,9 +231,9 @@ const jsonLd = [
         <td class="gbc-num">1,130</td>
         <td class="gbc-num">$625,000</td>
         <td class="gbc-num">$553</td>
-        <td>Sep 30, 2025</td>
+        <td>09/30/25</td>
         <td class="gbc-num">115</td>
-        <td class="gbc-num">95.0%</td>
+        <td class="gbc-num">95%</td>
         <td class="gbc-wv">Pond</td>
       </tr>
 <tr data-bed="2" data-sqft="1280">
@@ -235,9 +242,9 @@ const jsonLd = [
         <td class="gbc-num">1,280</td>
         <td class="gbc-num">$700,000</td>
         <td class="gbc-num">$547</td>
-        <td>Aug 27, 2025</td>
+        <td>08/27/25</td>
         <td class="gbc-num">155</td>
-        <td class="gbc-num">92.0%</td>
+        <td class="gbc-num">92%</td>
         <td class="gbc-wv"><span class="gbc-wv-none">No water view</span></td>
       </tr>
         </tbody>
@@ -276,7 +283,7 @@ const jsonLd = [
           <h3 class="gbc-tile-title">Reach out for a private consult</h3>
           <p class="gbc-tile-copy">Curious what your unit would bring today? We&rsquo;ll walk the real closed-sale data above against your floor plan, view, and condition &mdash; privately, with no obligation and no listing pressure.</p>
           <form class="gbc-form" data-lead-type="Seller" data-community="Gulf &amp; Bay Club Bayside"
-                name="gbc-lead-seller" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                name="gbc-lead-seller" method="POST" action="/thank-you/" data-team="Kelli &amp; Ryan" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="gbc-lead-seller" />
             <input type="hidden" name="lead_type" value="Seller" />
             <input type="hidden" name="community" value="Gulf &amp; Bay Club Bayside" />
@@ -297,7 +304,7 @@ const jsonLd = [
           <h3 class="gbc-tile-title">Add me to the coming-soon list</h3>
           <p class="gbc-tile-copy">Bayside turns over a handful of units a year, and the best ones often trade before they reach the MLS. Get on the list and we&rsquo;ll reach out first on available and off-market units.</p>
           <form class="gbc-form" data-lead-type="Buyer" data-community="Gulf &amp; Bay Club Bayside"
-                name="gbc-lead-buyer" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                name="gbc-lead-buyer" method="POST" action="/thank-you/" data-team="Kelli &amp; Ryan" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="gbc-lead-buyer" />
             <input type="hidden" name="lead_type" value="Buyer" />
             <input type="hidden" name="community" value="Gulf &amp; Bay Club Bayside" />
@@ -345,7 +352,7 @@ const jsonLd = [
 
   <section class="section-sm dark-section">
     <div class="container-narrow">
-      <p class="gbc-disc"><strong>Methodology &amp; data.</strong> Figures reflect closed transactions in the MLS for the Gulf &amp; Bay Club Bayside subdivision, sourced from Stellar MLS via the Adamson Group data pipeline. "CDOM" is cumulative days on market; "SP/LP" is sale price to list price. The headline snapshot uses a 180-day window; the transaction ledger and quarterly trend use trailing 12 months, computed as of July 15, 2026. "Minimum Lease Period" is the value most frequently reported on MLS listings in this association and is <em>not</em> a substitute for the condo documents — confirm current rental rules with the association before purchasing. Small communities close few units per quarter, so single sales can move averages meaningfully. Data is provided for informational purposes and is not a guarantee of value.</p>
+      <p class="gbc-disc"><strong>Methodology &amp; data.</strong> Figures reflect closed transactions in the MLS for the Gulf &amp; Bay Club Bayside subdivision, sourced from Stellar MLS via the Adamson Group data pipeline. "Mkt Days" is cumulative days on market; "SP/LP" is sale price to list price. The headline snapshot uses a 180-day window; the transaction ledger and quarterly trend use trailing 12 months, computed as of July 20, 2026. "Minimum Lease Period" is the value most frequently reported on MLS listings in this association and is <em>not</em> a substitute for the condo documents — confirm current rental rules with the association before purchasing. Small communities close few units per quarter, so single sales can move averages meaningfully. Data is provided for informational purposes and is not a guarantee of value.</p>
       <p class="gbc-disc gbc-credit">Photography (placeholder — to be replaced): Siesta Key beach imagery via Wikimedia Commons — "Sarasota Sunset, Siesta Key" &amp; "Siesta Key sunset" by John Simpson and contributors (CC BY 3.0), "Siesta Key Beach" (CC BY 3.0), "Red Lifeguard Stand at Siesta Key Beach" (CC0). Not photographs of the Bayside buildings themselves.</p>
     </div>
   </section>
@@ -433,6 +440,20 @@ const jsonLd = [
   .gbc-field input:focus { outline:none; border-color:var(--color-gold); box-shadow:0 0 0 3px rgba(197,165,90,0.15); }
   .gbc-hp { position:absolute; left:-9999px; }
   .gbc-form-status { margin-top:0.8rem; font-size:0.85rem; min-height:1.2em; }
+  .gbc-form-done { text-align:center; padding:1.6rem 1rem 0.6rem; }
+  .gbc-done-medallion { width:52px; height:52px; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; border-radius:50%; border:1px solid rgba(197,165,90,0.45); background:rgba(197,165,90,0.12); color:var(--color-gold); }
+  .gbc-done-medallion svg { width:24px; height:24px; }
+  .gbc-done-eyebrow { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--color-gold); margin-bottom:0.4rem; }
+  .gbc-done-title { font-family:var(--font-display); font-size:1.5rem; color:var(--color-black); margin:0 0 0.6rem; }
+  .gbc-done-copy { color:var(--color-text-muted); font-size:0.92rem; line-height:1.65; max-width:26rem; margin:0 auto; }
+  .gbc-done-alt { margin-top:1rem; font-size:0.85rem; color:var(--color-text-muted); }
+  .gbc-done-alt a { color:var(--color-gold); white-space:nowrap; }
+  .gbc-beach { display:inline-flex; flex-wrap:wrap; align-items:center; gap:0.6rem; margin-top:1.6rem; padding:0.55rem 1.15rem; border:1px solid rgba(255,255,255,0.16); border-radius:9999px; background:rgba(10,31,60,0.38); backdrop-filter:blur(8px); font-family:var(--font-accent); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.09em; color:rgba(255,255,255,0.65); }
+  .gbc-beach-temps { color:#fff; }
+  .gbc-beach-sep { color:var(--color-gold); }
+  .gbc-beach-tide { border-bottom:1px dotted rgba(255,255,255,0.3); padding-bottom:1px; }
+  .gbc-beach-tide.is-ok { color:#9fd8b4; }
+  .gbc-beach-tide.is-warn { color:var(--color-gold); }
   .gbc-form-status.is-ok { color:#1d7a4c; }
   .gbc-form-status.is-err { color:#b3261e; }
 
@@ -539,9 +560,22 @@ const jsonLd = [
           body: new URLSearchParams(fd).toString(),
         }).catch(() => {});
 
-        form.reset();
-        status.className = 'gbc-form-status is-ok';
-        status.textContent = 'Thank you — we’ll be in touch shortly.';
+        const first = String(data.name || '').trim().split(/\s+/)[0].replace(/[<>&"']/g, '');
+        const team  = (form.dataset.team || 'our team').replace(/[<>"']/g, '');
+        const isSeller = form.dataset.leadType === 'Seller';
+        const done = document.createElement('div');
+        done.className = 'gbc-form-done';
+        done.setAttribute('role', 'status');
+        done.innerHTML =
+          '<div class="gbc-done-medallion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>' +
+          '<p class="gbc-done-eyebrow">' + (isSeller ? 'Request received' : 'You&rsquo;re on the list') + '</p>' +
+          '<h4 class="gbc-done-title">Thank you' + (first ? ', ' + first : '') + '</h4>' +
+          '<p class="gbc-done-copy">' + (isSeller
+            ? 'Your private consult request has gone directly to ' + team + '. Expect a personal reply within one business day.'
+            : team + ' will reach out the moment something fits &mdash; often before it reaches the MLS.') + '</p>' +
+          '<p class="gbc-done-alt">Prefer to talk sooner? <a href="tel:+19417139234">(941) 713-9234</a></p>';
+        form.replaceWith(done);
+        done.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } catch (err) {
         console.error(err);
         status.className = 'gbc-form-status is-err';
@@ -549,6 +583,30 @@ const jsonLd = [
         btn.disabled = false;
       }
     });
+  });
+
+  // ── Beach conditions strip (NWS + Mote Marine via our proxy) ────
+  document.querySelectorAll('[data-beach]').forEach(async (strip) => {
+    try {
+      const qs = new URLSearchParams({ grid: strip.dataset.grid || '', beach: strip.dataset.beachId || '' });
+      const res = await fetch('/.netlify/functions/beach-conditions?' + qs.toString());
+      if (!res.ok) return;
+      const c = await res.json();
+      const temps = strip.querySelector('[data-out=beach-temps]');
+      const tide  = strip.querySelector('[data-out=beach-tide]');
+      if (c.hi == null && c.lo == null && !c.redTide) return;
+      temps.textContent = (c.hi != null ? 'High ' + c.hi + '\u00B0' : '') +
+                          (c.hi != null && c.lo != null ? ' / ' : '') +
+                          (c.lo != null ? 'Low ' + c.lo + '\u00B0' : '');
+      if (c.redTide && c.redTide.status === 'reported') {
+        tide.textContent = 'Beach advisory \u2014 see Mote report';
+        tide.classList.add('is-warn');
+      } else {
+        tide.textContent = 'Red tide: none reported';
+        tide.classList.add('is-ok');
+      }
+      strip.hidden = false;
+    } catch (e) { /* strip simply stays hidden */ }
   });
 </script>
 </BaseLayout>

@@ -27,7 +27,9 @@
 //
 // No npm deps — global fetch (Netlify Node 18+).
 
-const NOTIFY_TO = process.env.LEAD_NOTIFY_TO || 'Ryan@Adamson-group.com';
+// Who gets each lead (Gmail draft recipients, Zoho team stamp) lives in ONE
+// easy-to-edit config: ./lead-routing.js — e.g. Siesta Key -> Ryan + Kelli.
+const { routeFor } = require('./lead-routing');
 
 const json = (statusCode, obj) => ({
   statusCode,
@@ -107,6 +109,7 @@ async function createZohoLead(lead) {
     Company: lead.community || 'Website Lead',
     Description: [
       `${intent}.`,
+      `Team: ${lead.route ? lead.route.agents : 'Ryan Adamson'}`,
       `Community: ${lead.community || 'n/a'}`,
       `Page: ${lead.page || 'n/a'}`,
       `Submitted: ${new Date().toISOString()}`,
@@ -178,6 +181,7 @@ async function queueGmailDraft(lead, zohoId) {
     `Community: ${lead.community || '—'}`,
     `Page:      https://adamsonfl.com${lead.page || ''}`,
     `Received:  ${new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })} ET`,
+    `Routed to: ${lead.route ? lead.route.label : 'Ryan (default)'}`,
     '',
     zohoId
       ? `Zoho lead created (status "${LEAD_STATUS}"): https://crm.zoho.com/crm/tab/Leads/${zohoId}`
@@ -186,8 +190,12 @@ async function queueGmailDraft(lead, zohoId) {
     '— Adamson Group site automation',
   ].join('\r\n');
 
+  const notify = (lead.route && lead.route.notify && lead.route.notify.length)
+    ? lead.route.notify.join(', ')
+    : 'Ryan@Adamson-Group.com';
+
   const mime = [
-    `To: ${NOTIFY_TO}`,
+    `To: ${notify}`,
     `Subject: ${subject}`,
     'Content-Type: text/plain; charset="UTF-8"',
     'MIME-Version: 1.0',
@@ -233,6 +241,9 @@ async function storeLead(lead, zohoId, zohoError) {
       zoho_lead_id: zohoId || null,
       zoho_sync: zohoId ? 'ok' : null,
       zoho_error: zohoError || null,
+      details: lead.route
+        ? { routing: lead.route.label, routed_to: lead.route.notify, agents: lead.route.agents }
+        : null,
       raw_payload: lead,
     }),
   });
@@ -276,6 +287,7 @@ exports.handler = async (event) => {
       page: (body.page || '').trim() || null,
     };
     lead.source = sourceFor(body);
+    lead.route = routeFor(lead.page);
   } catch (err) {
     return json(400, { error: 'Bad request' });
   }
