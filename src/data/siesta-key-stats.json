@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-17T10:52:23.032856+00:00",
+  "lastUpdated": "2026-07-20T10:51:56.998349+00:00",
   "counts": {
-    "sold": 541,
+    "sold": 542,
     "pending": 49,
     "active": 328,
-    "total": 590
+    "total": 591
   },
   "metrics": {
-    "avgPrice": "$1,376,536",
+    "avgPrice": "$1,375,179",
     "avgPricePerSqFt": "$675",
     "avgYearBuilt": 1977,
-    "avgLivingSqFt": "1,886",
+    "avgLivingSqFt": "1,885",
     "avgLotSqFt": null,
     "avgDom": 109
   },
@@ -23,20 +23,20 @@
   },
   "active": {
     "count": 328,
-    "medianPrice": "$1,172,000",
+    "medianPrice": "$1,167,000",
     "medianPricePerSqFt": "$764",
-    "waterfrontCount": 182,
+    "waterfrontCount": 183,
     "newConstructionCount": 55
   },
   "sold": {
-    "count": 128,
-    "medianPrice": "$885,000",
-    "medianDom": 76,
+    "count": 129,
+    "medianPrice": "$875,000",
+    "medianDom": 75,
     "saleToListRatio": "88.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 8.5,
+    "condo": 8.4,
     "sfhVilla": 8.5,
     "blended": 8.5,
     "method": "active / (trailing-12mo closed / 12)",
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4698700",
+      "address": "6150 MIDNIGHT PASS RD #25",
+      "subdivision": "ISLAND HOUSE",
+      "soldPrice": "$665,000",
+      "soldDate": "2026-07-16",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "939",
+      "yearBuilt": 1967,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4661191",
       "address": "1255 E PEPPERTREE DR #201",
@@ -118,19 +131,6 @@
       "yearBuilt": 1971,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4696712",
-      "address": "266 OGDEN ST",
-      "subdivision": "SIESTA REV OF",
-      "soldPrice": "$740,000",
-      "soldDate": "2026-07-13",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,433",
-      "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,20 +139,20 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 178,
-      "avgPrice": "$794,142",
-      "avgPricePerSqFt": "$677",
+      "avgPrice": "$793,548",
+      "avgPricePerSqFt": "$676",
       "avgLivingSqFt": "1,182",
-      "avgDom": 136
+      "avgDom": 138
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 5,
-      "avgPrice": "$1,515,780",
-      "avgPricePerSqFt": "$693",
-      "avgLivingSqFt": "2,183",
-      "avgDom": 149
+      "activeCount": 4,
+      "avgPrice": "$1,348,475",
+      "avgPricePerSqFt": "$668",
+      "avgLivingSqFt": "2,039",
+      "avgDom": 186
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$2,592,700",
       "avgPricePerSqFt": "$1,202",
       "avgLivingSqFt": "2,024",
-      "avgDom": 209
+      "avgDom": 212
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,922,917",
       "avgPricePerSqFt": "$1,565",
       "avgLivingSqFt": "3,295",
-      "avgDom": 176
+      "avgDom": 178
     }
   ],
   "condoTiersScope": {
@@ -187,10 +187,10 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 93,
-      "soldCount": 147,
+      "activeCount": 94,
+      "soldCount": 148,
       "soldMedianPricePerSqFt": "$708",
-      "soldMedianPrice": "$930,000",
+      "soldMedianPrice": "$927,500",
       "lowSample": false
     },
     {
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 96,
+      "activeCount": 95,
       "soldCount": 115,
       "soldMedianPricePerSqFt": "$538",
       "soldMedianPrice": "$775,000",
@@ -232,31 +232,31 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 8.5,
-    "monthsOfSupplyCondo": 8.5,
+    "monthsOfSupplyCondo": 8.4,
     "monthsOfSupplySfhVilla": 8.5,
     "label": "buyer's market",
     "activeCount": 328,
-    "sold365Count": 464,
-    "sold90Count": 128,
+    "sold365Count": 465,
+    "sold90Count": 129,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 208,
-      "activeCount": 126,
+      "activeCount": 127,
       "soldMedianPrice": "$1,515,000",
       "soldMedianPricePerSqFt": "$625"
     },
     "condo": {
-      "soldCount": 333,
-      "activeCount": 202,
+      "soldCount": 334,
+      "activeCount": 201,
       "soldMedianPrice": "$670,000",
-      "soldMedianPricePerSqFt": "$582"
+      "soldMedianPricePerSqFt": "$583"
     }
   },
   "boating": {
     "activeWithDock": 81,
-    "activeWaterfront": 182
+    "activeWaterfront": 183
   },
   "marketQuestions": [
     {
@@ -272,22 +272,22 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Siesta Key?",
-      "a": "Single-family homes sell around $1,515,000 ($625/sq ft), while condos, villas and townhouses sell around $670,000 ($582/sq ft)."
+      "a": "Single-family homes sell around $1,515,000 ($625/sq ft), while condos, villas and townhouses sell around $670,000 ($583/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Siesta Key?",
-      "a": "Active listings run from $290,000 to $29,995,000, with a median asking price of $1,172,000."
+      "a": "Active listings run from $290,000 to $29,995,000, with a median asking price of $1,167,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 76 days on market and closed at 88.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 75 days on market and closed at 88.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Siesta Key homes have a dock?",
-      "a": "Of 182 active waterfront listings, 81 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 183 active waterfront listings, 81 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

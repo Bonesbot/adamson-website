@@ -2,43 +2,43 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-17T10:52:25.432552+00:00",
+  "lastUpdated": "2026-07-20T10:51:59.451288+00:00",
   "counts": {
-    "sold": 82,
+    "sold": 83,
     "pending": 6,
-    "active": 60,
-    "total": 88
+    "active": 59,
+    "total": 89
   },
   "metrics": {
-    "avgPrice": "$1,185,070",
-    "avgPricePerSqFt": "$528",
+    "avgPrice": "$1,176,024",
+    "avgPricePerSqFt": "$527",
     "avgYearBuilt": 1972,
-    "avgLivingSqFt": "1,988",
+    "avgLivingSqFt": "1,979",
     "avgLotSqFt": null,
-    "avgDom": 107
+    "avgDom": 106
   },
   "range": {
     "minPrice": "$251,700",
     "maxPrice": "$22,900,000"
   },
   "active": {
-    "count": 60,
-    "medianPrice": "$729,500",
-    "medianPricePerSqFt": "$533",
+    "count": 59,
+    "medianPrice": "$749,000",
+    "medianPricePerSqFt": "$537",
     "waterfrontCount": 18,
     "newConstructionCount": 19
   },
   "sold": {
     "count": 27,
-    "medianPrice": "$650,000",
-    "medianDom": 67,
-    "saleToListRatio": "89.2%",
+    "medianPrice": "$665,000",
+    "medianDom": 71,
+    "saleToListRatio": "88.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 12.0,
-    "sfhVilla": 8.9,
-    "blended": 9.6,
+    "sfhVilla": 8.6,
+    "blended": 9.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 36,
-    "band900kTo1_5m": 7,
+    "under900k": 34,
+    "band900kTo1_5m": 8,
     "band1_5mTo3m": 8,
     "band3mPlus": 9
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 60
+      "count": 59
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "O6375499",
+      "address": "916 HIGHLAND ST",
+      "subdivision": "HIGHLAND PINES",
+      "soldPrice": "$1,000,000",
+      "soldDate": "2026-07-17",
+      "bedrooms": 5,
+      "bathrooms": 4.0,
+      "livingSqFt": "2,852",
+      "yearBuilt": 2024,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4687057",
       "address": "3127 BAY SHORE RD",
@@ -118,19 +131,6 @@
       "yearBuilt": 1960,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4678101",
-      "address": "1703 N TAMIAMI TRL #B507",
-      "subdivision": "THE STRAND",
-      "soldPrice": "$510,000",
-      "soldDate": "2026-06-29",
-      "bedrooms": 1,
-      "bathrooms": 2.0,
-      "livingSqFt": "858",
-      "yearBuilt": 2022,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$569,000",
       "avgPricePerSqFt": "$451",
       "avgLivingSqFt": "1,262",
-      "avgDom": 63
+      "avgDom": 66
     },
     {
       "tier": "1990to2005",
@@ -172,7 +172,7 @@
       "avgPrice": "$568,958",
       "avgPricePerSqFt": "$559",
       "avgLivingSqFt": "1,021",
-      "avgDom": 158
+      "avgDom": 161
     }
   ],
   "condoTiersScope": {
@@ -214,28 +214,28 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 37,
-      "soldCount": 57,
+      "activeCount": 36,
+      "soldCount": 58,
       "soldMedianPricePerSqFt": "$403",
-      "soldMedianPrice": "$575,000",
+      "soldMedianPrice": "$587,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 9.6,
+    "monthsOfSupply": 9.3,
     "monthsOfSupplyCondo": 12.0,
-    "monthsOfSupplySfhVilla": 8.9,
+    "monthsOfSupplySfhVilla": 8.6,
     "label": "buyer's market",
-    "activeCount": 60,
-    "sold365Count": 75,
+    "activeCount": 59,
+    "sold365Count": 76,
     "sold90Count": 27,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 65,
-      "activeCount": 44,
-      "soldMedianPrice": "$678,030",
+      "soldCount": 66,
+      "activeCount": 43,
+      "soldMedianPrice": "$686,515",
       "soldMedianPricePerSqFt": "$426"
     },
     "condo": {
@@ -253,22 +253,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 60 active listings and roughly 6 closed sales a month (trailing 12 months), West Of Trail North has about 9.6 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 59 active listings and roughly 6 closed sales a month (trailing 12 months), West Of Trail North has about 9.3 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail North?",
-      "a": "Single-family homes sell around $678,030 ($426/sq ft), while condos, villas and townhouses sell around $475,000 ($492/sq ft)."
+      "a": "Single-family homes sell around $686,515 ($426/sq ft), while condos, villas and townhouses sell around $475,000 ($492/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail North?",
-      "a": "Active listings run from $251,700 to $22,900,000, with a median asking price of $729,500."
+      "a": "Active listings run from $251,700 to $22,900,000, with a median asking price of $749,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 67 days on market and closed at 89.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 71 days on market and closed at 88.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
