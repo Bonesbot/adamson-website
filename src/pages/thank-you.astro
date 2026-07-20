@@ -82,10 +82,36 @@ const description =
         </a>
       </div>
 
-      <Button href="/" variant="primary" size="lg">
-        Return to Homepage
-      </Button>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a id="ty-back" href="/" hidden
+           class="inline-flex items-center justify-center font-accent text-xs uppercase tracking-wider px-8 py-4 border border-[var(--color-gold)]/50 text-[var(--color-gold)] hover:bg-[var(--color-gold)]/10 font-semibold rounded transition-all duration-200">
+          &larr; Back to <span id="ty-back-label" class="ml-1">previous page</span>
+        </a>
+        <Button href="/" variant="primary" size="lg">
+          Return to Homepage
+        </Button>
+      </div>
     </div>
   </section>
+
+  <script>
+    // Send the visitor back to the page they submitted from (same-origin only),
+    // so nobody lands here and gets lost.
+    try {
+      const ref = document.referrer ? new URL(document.referrer) : null;
+      if (ref && ref.origin === location.origin && ref.pathname !== location.pathname) {
+        const back = document.getElementById('ty-back');
+        const label = document.getElementById('ty-back-label');
+        const slug = ref.pathname.split('/').filter(Boolean).pop();
+        if (back) {
+          (back as HTMLAnchorElement).href = ref.pathname;
+          if (label && slug) {
+            label.textContent = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+          }
+          back.hidden = false;
+        }
+      }
+    } catch (e) { /* keep defaults */ }
+  </script>
 
 </BaseLayout>

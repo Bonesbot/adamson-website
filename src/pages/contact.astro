@@ -136,9 +136,70 @@ const jsonLd = {
           >
             Send Message
           </button>
+          <p id="contact-status" class="text-sm mt-4 min-h-[1.25rem] text-[var(--color-text-muted)]" role="status" aria-live="polite"></p>
         </div>
       </form>
+
+      <!-- On-brand confirmation — swapped in for the form on successful submit,
+           so the visitor stays right here instead of bouncing to a generic page. -->
+      <div id="contact-done" hidden class="text-center py-10">
+        <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-[var(--color-gold)]/40 bg-[var(--color-gold)]/10">
+          <svg class="h-7 w-7 text-[var(--color-gold)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <p class="font-accent text-xs uppercase tracking-[0.3em] text-[var(--color-gold)] mb-3">Message Received</p>
+        <h2 class="font-display text-3xl sm:text-4xl mb-4" style="color: var(--color-navy);">Thank You<span id="contact-done-name"></span></h2>
+        <p class="text-lg text-[var(--color-text-muted)] max-w-xl mx-auto leading-relaxed">
+          Your message has reached Ryan directly. He personally reviews every inquiry
+          and will be in touch within one business day.
+        </p>
+        <p class="mt-6 text-sm text-[var(--color-text-muted)]">
+          Prefer to talk sooner?
+          <a href="tel:+19417139234" class="text-[var(--color-gold)] hover:text-[var(--color-gold-light)] transition-colors whitespace-nowrap font-semibold">(941) 713-9234</a>
+        </p>
+      </div>
     </div>
   </section>
+
+  <script>
+    // Submit in place: the visitor never leaves /contact, so there is no
+    // generic interstitial and no way to get lost. action="/thank-you" above
+    // remains as the no-JS fallback.
+    const form = document.querySelector('form[name="contact"]');
+    const statusEl = document.getElementById('contact-status');
+    const done = document.getElementById('contact-done');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      if (fd.get('bot-field')) return; // honeypot
+
+      const btn = form.querySelector('button[type=submit]');
+      statusEl.textContent = 'Sending…';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(fd as any).toString(),
+        });
+        if (!res.ok) throw new Error('status ' + res.status);
+
+        const first = String(fd.get('name') || '').trim().split(/\s+/)[0].replace(/[<>&"']/g, '');
+        const nameEl = document.getElementById('contact-done-name');
+        if (first && nameEl) nameEl.textContent = ', ' + first;
+        form.hidden = true;
+        done.hidden = false;
+        done.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent =
+          'Something didn’t go through — please check the reCAPTCHA box and try again, or call (941) 713-9234.';
+        btn.disabled = false;
+      }
+    });
+  </script>
 
 </BaseLayout>

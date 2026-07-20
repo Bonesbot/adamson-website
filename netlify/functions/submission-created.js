@@ -1,6 +1,8 @@
 // netlify/functions/submission-created.js
 //
-// Captures "Find My Dream Home" wishlists into Supabase (public.buyer_wishlists).
+// Mirrors Netlify Forms submissions into Supabase public.leads (master queue):
+//   • "Find My Dream Home" wishlists  (direct AJAX call from the page)
+//   • "contact" page form             (via the Netlify submission-created event)
 //
 // The form submits TWO ways on purpose:
 //   • Direct AJAX POST to this function  -> Supabase insert (guaranteed record)
@@ -24,8 +26,13 @@ exports.handler = async (event) => {
       d = body.data;
     } else {
       const payload = body.payload || {};
+      if (payload.form_name === 'contact') {
+        // Contact form has no direct call — the event fires exactly once per
+        // verified submission, so mirroring here cannot duplicate.
+        return await storeContactLead(payload);
+      }
       if (payload.form_name !== 'wishlist') {
-        return { statusCode: 200, body: 'ignored (not the wishlist form)' };
+        return { statusCode: 200, body: 'ignored (unhandled form)' };
       }
       // Netlify Forms event — email handled by Netlify; Supabase handled by the
       // form's direct call. Skip to avoid a duplicate insert.
@@ -117,3 +124,53 @@ exports.handler = async (event) => {
     return { statusCode: 500, body: 'error' };
   }
 };
+
+// ── Contact page form → public.leads ──────────────────────────────────────────
+// source 'contact:<intent>' keeps the site-wide `<page-slug>:<intent>` tagging
+// so the Command Center + cc-queue-poller treat it like every other lead.
+async function storeContactLead(payload) {
+  const d = payload.data || {};
+  if (d['bot-field']) return { statusCode: 200, body: 'ignored (honeypot)' };
+  if (!d.email) return { statusCode: 200, body: 'ignored (no email)' };
+
+  const SUPABASE_URL = process.env.SUPABASE_URL;
+  const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!SUPABASE_URL || !KEY) {
+    console.error('submission-created: missing supabase env vars (contact)');
+    return { statusCode: 500, body: 'missing supabase env vars' };
+  }
+
+  const interest = String(d.interest || '').toLowerCase();
+  const intent = interest === 'buying' ? 'buyer' : interest === 'selling' ? 'seller' : 'general';
+  const nameParts = String(d.name || '').trim().split(/\s+/).filter(Boolean);
+
+  const row = {
+    first_name: nameParts.length > 1 ? nameParts.slice(0, -1).join(' ') : null,
+    last_name: nameParts.length ? nameParts[nameParts.length - 1] : null,
+    email: d.email,
+    phone: d.phone || null,
+    source: 'contact:' + intent,
+    lead_type: intent === 'buyer' ? 'Buyer' : intent === 'seller' ? 'Seller' : null,
+    page: '/contact',
+    message: d.message || null,
+    details: { interest: d.interest || null, referrer: payload.referrer || null },
+    raw_payload: d,
+  };
+
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+    method: 'POST',
+    headers: {
+      apikey: KEY,
+      Authorization: `Bearer ${KEY}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal',
+    },
+    body: JSON.stringify(row),
+  });
+  if (!res.ok) {
+    console.error('submission-created: contact insert failed', res.status, await res.text());
+    return { statusCode: 500, body: 'supabase insert failed' };
+  }
+  console.log('submission-created: contact lead stored for', row.email);
+  return { statusCode: 200, body: 'contact lead stored' };
+}
