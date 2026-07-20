@@ -29,7 +29,7 @@
 
 // Who gets each lead (Gmail draft recipients, Zoho team stamp) lives in ONE
 // easy-to-edit config: ./lead-routing.js — e.g. Siesta Key -> Ryan + Kelli.
-const { routeFor } = require('./lead-routing');
+import { routeFor } from './lead-routing.js';
 
 const json = (statusCode, obj) => ({
   statusCode,
@@ -256,7 +256,7 @@ async function storeLead(lead, zohoId, zohoError) {
 
 // ── Handler ────────────────────────────────────────────────────────────────────
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,

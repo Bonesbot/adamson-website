@@ -37,7 +37,7 @@ const ROUTES = [
   // ── add future submarket teams here ──────────────────────────────────────
 ];
 
-function routeFor(pagePath) {
+export function routeFor(pagePath) {
   const path = String(pagePath || '');
   for (const r of ROUTES) {
     if (r.match.test(path)) return r;
@@ -45,4 +45,4 @@ function routeFor(pagePath) {
   return DEFAULT_ROUTE;
 }
 
-module.exports = { routeFor, ROUTES, DEFAULT_ROUTE };
+export { ROUTES, DEFAULT_ROUTE };
