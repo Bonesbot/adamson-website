@@ -25,6 +25,9 @@
 
 interface Props {
   widgetId: string;
+  /** Optional: full embed script URL. Legacy middleware widgets use
+   *  /idx/customshowcasejs.php?widgetid=NNN instead of /idx/widgets/NNN. */
+  scriptSrc?: string;
   areaName: string;
   /** Optional: where the "View all" CTA points. Should be an /idx/... URL. */
   viewAllUrl?: string;
@@ -38,6 +41,7 @@ interface Props {
 
 const {
   widgetId,
+  scriptSrc,
   areaName,
   viewAllUrl,
   label = 'Active Listings',
@@ -78,7 +82,7 @@ const {
         type="text/javascript"
         charset="UTF-8"
         id={`idxwidgetsrc-script-${widgetId}`}
-        src={`https://adamsonfl.idxbroker.com/idx/widgets/${widgetId}`}
+        src={scriptSrc || `https://adamsonfl.idxbroker.com/idx/widgets/${widgetId}`}
       ></script>
       <!-- Keep click-throughs on adamsonfl.com: the widget emits links to the raw
            adamsonfl.idxbroker.com subdomain, which bypasses the Netlify /idx/* proxy
