@@ -2,43 +2,43 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-20T10:52:00.273182+00:00",
+  "lastUpdated": "2026-07-23T10:56:51.357558+00:00",
   "counts": {
-    "sold": 257,
-    "pending": 19,
-    "active": 105,
-    "total": 276
+    "sold": 258,
+    "pending": 21,
+    "active": 103,
+    "total": 279
   },
   "metrics": {
-    "avgPrice": "$633,213",
-    "avgPricePerSqFt": "$330",
+    "avgPrice": "$637,074",
+    "avgPricePerSqFt": "$331",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,752",
+    "avgLivingSqFt": "1,757",
     "avgLotSqFt": null,
-    "avgDom": 77
+    "avgDom": 78
   },
   "range": {
     "minPrice": "$130,000",
     "maxPrice": "$5,500,000"
   },
   "active": {
-    "count": 105,
+    "count": 103,
     "medianPrice": "$475,000",
-    "medianPricePerSqFt": "$333",
+    "medianPricePerSqFt": "$328",
     "waterfrontCount": 28,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 63,
-    "medianPrice": "$422,500",
-    "medianDom": 39,
-    "saleToListRatio": "88.9%",
+    "count": 60,
+    "medianPrice": "$405,000",
+    "medianDom": 36,
+    "saleToListRatio": "88.7%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 7.1,
+    "condo": 6.8,
     "sfhVilla": 4.7,
-    "blended": 5.8,
+    "blended": 5.6,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -56,17 +56,30 @@
   "priceBands": {
     "under900k": 82,
     "band900kTo1_5m": 4,
-    "band1_5mTo3m": 13,
+    "band1_5mTo3m": 11,
     "band3mPlus": 6
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 105
+      "count": 103
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4689181",
+      "address": "7145 BRIGHT CREEK DR #33",
+      "subdivision": "WOODSIDE SOUTH PH 1 2 & 3",
+      "soldPrice": "$230,000",
+      "soldDate": "2026-07-18",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,352",
+      "yearBuilt": 1981,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4680245",
       "address": "1508 PELICAN COVE RD #GR232",
@@ -118,19 +131,6 @@
       "yearBuilt": 1975,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4680225",
-      "address": "4939 PEREGRINE POINT WAY",
-      "subdivision": "THE LANDINGS",
-      "soldPrice": "$1,450,000",
-      "soldDate": "2026-07-09",
-      "bedrooms": 4,
-      "bathrooms": 4.5,
-      "livingSqFt": "3,828",
-      "yearBuilt": 2000,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 57,
-      "avgPrice": "$361,311",
-      "avgPricePerSqFt": "$291",
-      "avgLivingSqFt": "1,269",
-      "avgDom": 143
+      "avgPrice": "$369,978",
+      "avgPricePerSqFt": "$293",
+      "avgLivingSqFt": "1,283",
+      "avgDom": 129
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$597,286",
       "avgPricePerSqFt": "$297",
       "avgLivingSqFt": "2,012",
-      "avgDom": 129
+      "avgDom": 132
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$589,667",
       "avgPricePerSqFt": "$345",
       "avgLivingSqFt": "1,711",
-      "avgDom": 125
+      "avgDom": 127
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$629,000",
       "avgPricePerSqFt": "$353",
       "avgLivingSqFt": "1,785",
-      "avgDom": 204
+      "avgDom": 208
     }
   ],
   "condoTiersScope": {
@@ -223,51 +223,51 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 59,
-      "soldCount": 169,
-      "soldMedianPricePerSqFt": "$286",
-      "soldMedianPrice": "$429,000",
+      "activeCount": 57,
+      "soldCount": 170,
+      "soldMedianPricePerSqFt": "$285",
+      "soldMedianPrice": "$427,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.8,
-    "monthsOfSupplyCondo": 7.1,
+    "monthsOfSupply": 5.6,
+    "monthsOfSupplyCondo": 6.8,
     "monthsOfSupplySfhVilla": 4.7,
     "label": "balanced market",
-    "activeCount": 105,
+    "activeCount": 103,
     "sold365Count": 219,
-    "sold90Count": 63,
+    "sold90Count": 60,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 140,
-      "activeCount": 36,
+      "activeCount": 34,
       "soldMedianPrice": "$518,750",
       "soldMedianPricePerSqFt": "$321"
     },
     "condo": {
-      "soldCount": 117,
+      "soldCount": 118,
       "activeCount": 69,
-      "soldMedianPrice": "$347,500",
-      "soldMedianPricePerSqFt": "$253"
+      "soldMedianPrice": "$346,250",
+      "soldMedianPricePerSqFt": "$251"
     }
   },
   "boating": {
-    "activeWithDock": 16,
+    "activeWithDock": 14,
     "activeWaterfront": 28
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 105 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 5.8 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 103 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 5.6 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $518,750 ($321/sq ft), while condos, villas and townhouses sell around $347,500 ($253/sq ft)."
+      "a": "Single-family homes sell around $518,750 ($321/sq ft), while condos, villas and townhouses sell around $346,250 ($251/sq ft)."
     },
     {
       "facet": "range",
@@ -277,12 +277,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 39 days on market and closed at 88.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 36 days on market and closed at 88.7% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 28 active waterfront listings, 16 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 28 active waterfront listings, 14 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

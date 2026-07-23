@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-20T10:52:01.901124+00:00",
+  "lastUpdated": "2026-07-23T10:56:53.010932+00:00",
   "counts": {
-    "sold": 777,
-    "pending": 73,
-    "active": 257,
-    "total": 850
+    "sold": 783,
+    "pending": 70,
+    "active": 260,
+    "total": 853
   },
   "metrics": {
-    "avgPrice": "$564,716",
+    "avgPrice": "$564,320",
     "avgPricePerSqFt": "$264",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,049",
+    "avgLivingSqFt": "2,048",
     "avgLotSqFt": null,
     "avgDom": 81
   },
@@ -22,22 +22,22 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 257,
-    "medianPrice": "$420,000",
+    "count": 260,
+    "medianPrice": "$422,000",
     "medianPricePerSqFt": "$249",
-    "waterfrontCount": 35,
-    "newConstructionCount": 34
+    "waterfrontCount": 37,
+    "newConstructionCount": 35
   },
   "sold": {
-    "count": 215,
-    "medianPrice": "$470,000",
+    "count": 213,
+    "medianPrice": "$483,500",
     "medianDom": 45,
-    "saleToListRatio": "91.2%",
+    "saleToListRatio": "91.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 7.5,
-    "sfhVilla": 3.5,
+    "sfhVilla": 3.6,
     "blended": 4.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,81 +54,81 @@
     }
   },
   "priceBands": {
-    "under900k": 230,
-    "band900kTo1_5m": 16,
+    "under900k": 232,
+    "band900kTo1_5m": 17,
     "band1_5mTo3m": 11,
     "band3mPlus": 0
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 257
+      "count": 260
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
     {
-      "listingId": "A4689131",
-      "address": "9320 CLUBSIDE CIR #2106",
-      "subdivision": "STONEYBROOK CLUBSIDE 2",
-      "soldPrice": "$276,000",
-      "soldDate": "2026-07-17",
-      "bedrooms": 2,
+      "listingId": "A4680729",
+      "address": "8335 NICE WAY",
+      "subdivision": "TURTLE ROCK PRCL G",
+      "soldPrice": "$450,000",
+      "soldDate": "2026-07-22",
+      "bedrooms": 3,
       "bathrooms": 2.0,
-      "livingSqFt": "1,106",
-      "yearBuilt": 1995,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4695869",
-      "address": "3603 PINE POINT CT #120",
-      "subdivision": "VILLAGE DES PINS I",
-      "soldPrice": "$225,000",
-      "soldDate": "2026-07-17",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,353",
-      "yearBuilt": 1984,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4696352",
-      "address": "5206 BOUCHARD CIR #101",
-      "subdivision": "BOTANICA - BOUCHARD GARDENS",
-      "soldPrice": "$460,000",
-      "soldDate": "2026-07-16",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,798",
-      "yearBuilt": 2001,
+      "livingSqFt": "2,032",
+      "yearBuilt": 1999,
       "propertyType": "Residential",
       "isWaterfront": true
     },
     {
-      "listingId": "A4695355",
-      "address": "4109 VIA MIRADA",
-      "subdivision": "MARBELLA",
-      "soldPrice": "$700,000",
-      "soldDate": "2026-07-15",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "3,143",
-      "yearBuilt": 1991,
+      "listingId": "TB8475783",
+      "address": "3872 KINGSTON BLVD",
+      "subdivision": "GULF GATE EAST",
+      "soldPrice": "$598,000",
+      "soldDate": "2026-07-21",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,784",
+      "yearBuilt": 1983,
       "propertyType": "Residential",
       "isWaterfront": false
     },
     {
-      "listingId": "A4691250",
-      "address": "8080 CARDENA LN",
+      "listingId": "A4692981",
+      "address": "4170 CENTRAL SARASOTA PKWY #426",
+      "subdivision": "BELLA VILLINO VI",
+      "soldPrice": "$135,000",
+      "soldDate": "2026-07-21",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "829",
+      "yearBuilt": 1998,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4680308",
+      "address": "5573 LUCIA PL",
       "subdivision": "VILLAGEWALK",
-      "soldPrice": "$572,200",
-      "soldDate": "2026-07-14",
+      "soldPrice": "$640,000",
+      "soldDate": "2026-07-20",
       "bedrooms": 3,
-      "bathrooms": 3.0,
+      "bathrooms": 2.0,
       "livingSqFt": "2,008",
-      "yearBuilt": 2005,
+      "yearBuilt": 2003,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4691670",
+      "address": "5967 BENEVENTO DR",
+      "subdivision": "ISLES OF SARASOTA",
+      "soldPrice": "$406,250",
+      "soldDate": "2026-07-20",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,534",
+      "yearBuilt": 2006,
       "propertyType": "Residential",
       "isWaterfront": false
     }
@@ -138,41 +138,41 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 41,
-      "avgPrice": "$325,578",
+      "activeCount": 42,
+      "avgPrice": "$325,636",
       "avgPricePerSqFt": "$197",
-      "avgLivingSqFt": "1,644",
-      "avgDom": 76
+      "avgLivingSqFt": "1,651",
+      "avgDom": 77
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 89,
-      "avgPrice": "$299,673",
-      "avgPricePerSqFt": "$234",
-      "avgLivingSqFt": "1,277",
-      "avgDom": 102
+      "activeCount": 90,
+      "avgPrice": "$305,187",
+      "avgPricePerSqFt": "$235",
+      "avgLivingSqFt": "1,295",
+      "avgDom": 103
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
       "activeCount": 15,
-      "avgPrice": "$391,767",
+      "avgPrice": "$390,433",
       "avgPricePerSqFt": "$244",
       "avgLivingSqFt": "1,609",
-      "avgDom": 87
+      "avgDom": 90
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 12,
-      "avgPrice": "$353,528",
-      "avgPricePerSqFt": "$221",
+      "avgPrice": "$353,111",
+      "avgPricePerSqFt": "$220",
       "avgLivingSqFt": "1,601",
-      "avgDom": 61
+      "avgDom": 64
     }
   ],
   "condoTiersScope": {
@@ -197,25 +197,25 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 61,
-      "soldCount": 176,
-      "soldMedianPricePerSqFt": "$259",
+      "soldCount": 178,
+      "soldMedianPricePerSqFt": "$260",
       "soldMedianPrice": "$492,500",
       "lowSample": false
     },
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 35,
-      "soldCount": 166,
+      "activeCount": 37,
+      "soldCount": 169,
       "soldMedianPricePerSqFt": "$275",
-      "soldMedianPrice": "$606,000",
+      "soldMedianPrice": "$605,000",
       "lowSample": false
     },
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 161,
-      "soldCount": 433,
+      "activeCount": 162,
+      "soldCount": 434,
       "soldMedianPricePerSqFt": "$245",
       "soldMedianPrice": "$440,000",
       "lowSample": false
@@ -224,56 +224,56 @@
   "marketBalance": {
     "monthsOfSupply": 4.5,
     "monthsOfSupplyCondo": 7.5,
-    "monthsOfSupplySfhVilla": 3.5,
+    "monthsOfSupplySfhVilla": 3.6,
     "label": "seller's market",
-    "activeCount": 257,
-    "sold365Count": 691,
-    "sold90Count": 215,
+    "activeCount": 260,
+    "sold365Count": 690,
+    "sold90Count": 213,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 443,
-      "activeCount": 100,
+      "soldCount": 448,
+      "activeCount": 101,
       "soldMedianPrice": "$650,000",
-      "soldMedianPricePerSqFt": "$289"
+      "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 334,
-      "activeCount": 157,
+      "soldCount": 335,
+      "activeCount": 159,
       "soldMedianPrice": "$330,000",
       "soldMedianPricePerSqFt": "$215"
     }
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 35
+    "activeWaterfront": 37
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 257 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 4.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 260 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 4.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Palmer Ranch?",
-      "a": "Single-family homes sell around $650,000 ($289/sq ft), while condos, villas and townhouses sell around $330,000 ($215/sq ft)."
+      "a": "Single-family homes sell around $650,000 ($288/sq ft), while condos, villas and townhouses sell around $330,000 ($215/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $420,000."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $422,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 45 days on market and closed at 91.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 45 days on market and closed at 91.1% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 35 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 37 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
