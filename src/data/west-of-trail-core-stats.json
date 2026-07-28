@@ -2,43 +2,43 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-23T10:56:49.659082+00:00",
+  "lastUpdated": "2026-07-28T21:53:44.968290+00:00",
   "counts": {
-    "sold": 193,
-    "pending": 18,
-    "active": 91,
-    "total": 211
+    "sold": 197,
+    "pending": 16,
+    "active": 85,
+    "total": 213
   },
   "metrics": {
-    "avgPrice": "$2,383,820",
-    "avgPricePerSqFt": "$720",
+    "avgPrice": "$2,370,334",
+    "avgPricePerSqFt": "$718",
     "avgYearBuilt": 1985,
-    "avgLivingSqFt": "2,960",
+    "avgLivingSqFt": "2,957",
     "avgLotSqFt": null,
-    "avgDom": 116
+    "avgDom": 117
   },
   "range": {
     "minPrice": "$98,000",
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 91,
+    "count": 85,
     "medianPrice": "$3,200,000",
     "medianPricePerSqFt": "$893",
-    "waterfrontCount": 26,
-    "newConstructionCount": 34
+    "waterfrontCount": 25,
+    "newConstructionCount": 33
   },
   "sold": {
-    "count": 48,
-    "medianPrice": "$2,210,000",
-    "medianDom": 87,
-    "saleToListRatio": "104.7%",
+    "count": 47,
+    "medianPrice": "$1,950,000",
+    "medianDom": 96,
+    "saleToListRatio": "104.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 9.4,
-    "sfhVilla": 6.9,
-    "blended": 7.1,
+    "sfhVilla": 6.3,
+    "blended": 6.6,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -55,18 +55,70 @@
   },
   "priceBands": {
     "under900k": 13,
-    "band900kTo1_5m": 5,
-    "band1_5mTo3m": 24,
-    "band3mPlus": 49
+    "band900kTo1_5m": 3,
+    "band1_5mTo3m": 23,
+    "band3mPlus": 46
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 91
+      "count": 85
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4691671",
+      "address": "1885 CLEMATIS ST",
+      "subdivision": "DESOTA PARK",
+      "soldPrice": "$2,400,000",
+      "soldDate": "2026-07-28",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "3,215",
+      "yearBuilt": 2011,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4661399",
+      "address": "3838 FLORES AVE",
+      "subdivision": "GRANADA",
+      "soldPrice": "$1,400,000",
+      "soldDate": "2026-07-28",
+      "bedrooms": 5,
+      "bathrooms": 4.5,
+      "livingSqFt": "3,033",
+      "yearBuilt": 1926,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4672440",
+      "address": "3837 CAMINO REAL",
+      "subdivision": "GRANADA",
+      "soldPrice": "$965,000",
+      "soldDate": "2026-07-27",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,887",
+      "yearBuilt": 2003,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4682616",
+      "address": "1732 SHORELAND DR",
+      "subdivision": "SHORELAND WOODS SUB",
+      "soldPrice": "$1,875,000",
+      "soldDate": "2026-07-24",
+      "bedrooms": 5,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,790",
+      "yearBuilt": 2018,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4679755",
       "address": "1740 S ORANGE AVE",
@@ -77,58 +129,6 @@
       "bathrooms": 4.5,
       "livingSqFt": "3,168",
       "yearBuilt": 1967,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4687826",
-      "address": "866 HUDSON AVE #866",
-      "subdivision": "HUDSON LANDINGS",
-      "soldPrice": "$1,250,000",
-      "soldDate": "2026-07-17",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,293",
-      "yearBuilt": 1989,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4664741",
-      "address": "4439 WESTWOOD LN",
-      "subdivision": "OYSTER BAY ESTATES",
-      "soldPrice": "$2,768,500",
-      "soldDate": "2026-07-16",
-      "bedrooms": 4,
-      "bathrooms": 3.5,
-      "livingSqFt": "3,777",
-      "yearBuilt": 1991,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4689684",
-      "address": "1751 HAWTHORNE ST",
-      "subdivision": "HUDSON BAYOU",
-      "soldPrice": "$2,200,000",
-      "soldDate": "2026-07-15",
-      "bedrooms": 4,
-      "bathrooms": 3.5,
-      "livingSqFt": "3,875",
-      "yearBuilt": 2006,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4690683",
-      "address": "1702 WALDEMERE ST",
-      "subdivision": "HUDSON BAYOU",
-      "soldPrice": "$1,150,000",
-      "soldDate": "2026-07-14",
-      "bedrooms": 2,
-      "bathrooms": 1.0,
-      "livingSqFt": "991",
-      "yearBuilt": 1950,
       "propertyType": "Residential",
       "isWaterfront": false
     }
@@ -142,7 +142,7 @@
       "avgPrice": "$369,809",
       "avgPricePerSqFt": "$312",
       "avgLivingSqFt": "1,136",
-      "avgDom": 139
+      "avgDom": 144
     },
     {
       "tier": "1990to2005",
@@ -187,7 +187,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 23,
+      "activeCount": 22,
       "soldCount": 25,
       "soldMedianPricePerSqFt": "$1,051",
       "soldMedianPrice": "$3,875,000",
@@ -214,29 +214,29 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 63,
-      "soldCount": 161,
+      "activeCount": 58,
+      "soldCount": 165,
       "soldMedianPricePerSqFt": "$651",
       "soldMedianPrice": "$1,640,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.1,
+    "monthsOfSupply": 6.6,
     "monthsOfSupplyCondo": 9.4,
-    "monthsOfSupplySfhVilla": 6.9,
-    "label": "buyer's market",
-    "activeCount": 91,
-    "sold365Count": 154,
-    "sold90Count": 48,
+    "monthsOfSupplySfhVilla": 6.3,
+    "label": "balanced market",
+    "activeCount": 85,
+    "sold365Count": 155,
+    "sold90Count": 47,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 175,
-      "activeCount": 80,
+      "soldCount": 179,
+      "activeCount": 74,
       "soldMedianPrice": "$1,850,000",
-      "soldMedianPricePerSqFt": "$682"
+      "soldMedianPricePerSqFt": "$679"
     },
     "condo": {
       "soldCount": 18,
@@ -246,19 +246,19 @@
     }
   },
   "boating": {
-    "activeWithDock": 19,
-    "activeWaterfront": 26
+    "activeWithDock": 18,
+    "activeWaterfront": 25
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 91 active listings and roughly 13 closed sales a month (trailing 12 months), West Of Trail Core has about 7.1 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 85 active listings and roughly 13 closed sales a month (trailing 12 months), West Of Trail Core has about 6.6 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,850,000 ($682/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
+      "a": "Single-family homes sell around $1,850,000 ($679/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
     },
     {
       "facet": "range",
@@ -268,12 +268,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 87 days on market and closed at 104.7% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 96 days on market and closed at 104.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail Core homes have a dock?",
-      "a": "Of 26 active waterfront listings, 19 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 25 active waterfront listings, 18 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

@@ -2,43 +2,43 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-23T10:56:51.357558+00:00",
+  "lastUpdated": "2026-07-28T21:53:46.552226+00:00",
   "counts": {
-    "sold": 258,
-    "pending": 21,
-    "active": 103,
-    "total": 279
+    "sold": 260,
+    "pending": 25,
+    "active": 96,
+    "total": 285
   },
   "metrics": {
-    "avgPrice": "$637,074",
-    "avgPricePerSqFt": "$331",
+    "avgPrice": "$634,250",
+    "avgPricePerSqFt": "$330",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,757",
+    "avgLivingSqFt": "1,752",
     "avgLotSqFt": null,
     "avgDom": 78
   },
   "range": {
-    "minPrice": "$130,000",
+    "minPrice": "$110,000",
     "maxPrice": "$5,500,000"
   },
   "active": {
-    "count": 103,
-    "medianPrice": "$475,000",
-    "medianPricePerSqFt": "$328",
-    "waterfrontCount": 28,
+    "count": 96,
+    "medianPrice": "$477,000",
+    "medianPricePerSqFt": "$330",
+    "waterfrontCount": 25,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 60,
+    "count": 59,
     "medianPrice": "$405,000",
-    "medianDom": 36,
-    "saleToListRatio": "88.7%",
+    "medianDom": 43,
+    "saleToListRatio": "89.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 6.8,
-    "sfhVilla": 4.7,
-    "blended": 5.6,
+    "condo": 6.4,
+    "sfhVilla": 4.4,
+    "blended": 5.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,45 @@
     }
   },
   "priceBands": {
-    "under900k": 82,
+    "under900k": 77,
     "band900kTo1_5m": 4,
-    "band1_5mTo3m": 11,
+    "band1_5mTo3m": 9,
     "band3mPlus": 6
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 103
+      "count": 96
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4688435",
+      "address": "6454 BEECHWOOD AVE",
+      "subdivision": "PINE SHORES ESTATE 5TH SEC",
+      "soldPrice": "$750,000",
+      "soldDate": "2026-07-27",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,661",
+      "yearBuilt": 1971,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4691080",
+      "address": "1717 JOYCE ST",
+      "subdivision": "TROPICAL SHORES",
+      "soldPrice": "$350,000",
+      "soldDate": "2026-07-22",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,382",
+      "yearBuilt": 1966,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4689181",
       "address": "7145 BRIGHT CREEK DR #33",
@@ -105,32 +131,6 @@
       "yearBuilt": 1982,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4662681",
-      "address": "8915 VAMO RD",
-      "subdivision": "MEAD HELEN D",
-      "soldPrice": "$405,000",
-      "soldDate": "2026-07-10",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "870",
-      "yearBuilt": 2017,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4682953",
-      "address": "1632 STICKNEY POINT RD #201",
-      "subdivision": "CASTEL DEL MARE",
-      "soldPrice": "$340,000",
-      "soldDate": "2026-07-10",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,016",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 57,
-      "avgPrice": "$369,978",
-      "avgPricePerSqFt": "$293",
-      "avgLivingSqFt": "1,283",
-      "avgDom": 129
+      "activeCount": 53,
+      "avgPrice": "$367,925",
+      "avgPricePerSqFt": "$292",
+      "avgLivingSqFt": "1,275",
+      "avgDom": 128
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 7,
-      "avgPrice": "$597,286",
-      "avgPricePerSqFt": "$297",
-      "avgLivingSqFt": "2,012",
-      "avgDom": 132
+      "activeCount": 6,
+      "avgPrice": "$642,000",
+      "avgPricePerSqFt": "$315",
+      "avgLivingSqFt": "2,053",
+      "avgDom": 129
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$589,667",
       "avgPricePerSqFt": "$345",
       "avgLivingSqFt": "1,711",
-      "avgDom": 127
+      "avgDom": 130
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$629,000",
       "avgPricePerSqFt": "$353",
       "avgLivingSqFt": "1,785",
-      "avgDom": 208
+      "avgDom": 212
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 25,
+      "activeCount": 22,
       "soldCount": 50,
       "soldMedianPricePerSqFt": "$361",
       "soldMedianPrice": "$485,000",
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 18,
+      "activeCount": 16,
       "soldCount": 23,
       "soldMedianPricePerSqFt": "$299",
       "soldMedianPrice": "$450,000",
@@ -223,66 +223,66 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 57,
-      "soldCount": 170,
-      "soldMedianPricePerSqFt": "$285",
+      "activeCount": 55,
+      "soldCount": 172,
+      "soldMedianPricePerSqFt": "$283",
       "soldMedianPrice": "$427,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.6,
-    "monthsOfSupplyCondo": 6.8,
-    "monthsOfSupplySfhVilla": 4.7,
+    "monthsOfSupply": 5.3,
+    "monthsOfSupplyCondo": 6.4,
+    "monthsOfSupplySfhVilla": 4.4,
     "label": "balanced market",
-    "activeCount": 103,
+    "activeCount": 96,
     "sold365Count": 219,
-    "sold90Count": 60,
+    "sold90Count": 59,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 140,
-      "activeCount": 34,
+      "soldCount": 142,
+      "activeCount": 32,
       "soldMedianPrice": "$518,750",
-      "soldMedianPricePerSqFt": "$321"
+      "soldMedianPricePerSqFt": "$320"
     },
     "condo": {
       "soldCount": 118,
-      "activeCount": 69,
+      "activeCount": 64,
       "soldMedianPrice": "$346,250",
       "soldMedianPricePerSqFt": "$251"
     }
   },
   "boating": {
-    "activeWithDock": 14,
-    "activeWaterfront": 28
+    "activeWithDock": 12,
+    "activeWaterfront": 25
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 103 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 5.6 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 96 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 5.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $518,750 ($321/sq ft), while condos, villas and townhouses sell around $346,250 ($251/sq ft)."
+      "a": "Single-family homes sell around $518,750 ($320/sq ft), while condos, villas and townhouses sell around $346,250 ($251/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $130,000 to $5,500,000, with a median asking price of $475,000."
+      "a": "Active listings run from $110,000 to $5,500,000, with a median asking price of $477,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 36 days on market and closed at 88.7% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 43 days on market and closed at 89.0% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 28 active waterfront listings, 14 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 25 active waterfront listings, 12 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

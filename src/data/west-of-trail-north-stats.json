@@ -2,43 +2,43 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-23T10:56:50.518094+00:00",
+  "lastUpdated": "2026-07-28T21:53:45.735060+00:00",
   "counts": {
     "sold": 83,
-    "pending": 8,
-    "active": 56,
-    "total": 91
+    "pending": 10,
+    "active": 52,
+    "total": 93
   },
   "metrics": {
-    "avgPrice": "$1,166,815",
-    "avgPricePerSqFt": "$528",
-    "avgYearBuilt": 1972,
-    "avgLivingSqFt": "1,963",
+    "avgPrice": "$1,170,690",
+    "avgPricePerSqFt": "$531",
+    "avgYearBuilt": 1973,
+    "avgLivingSqFt": "1,964",
     "avgLotSqFt": null,
-    "avgDom": 110
+    "avgDom": 109
   },
   "range": {
     "minPrice": "$251,700",
     "maxPrice": "$22,900,000"
   },
   "active": {
-    "count": 56,
-    "medianPrice": "$744,000",
-    "medianPricePerSqFt": "$537",
-    "waterfrontCount": 16,
-    "newConstructionCount": 18
+    "count": 52,
+    "medianPrice": "$749,450",
+    "medianPricePerSqFt": "$533",
+    "waterfrontCount": 15,
+    "newConstructionCount": 16
   },
   "sold": {
-    "count": 26,
-    "medianPrice": "$657,500",
-    "medianDom": 69,
-    "saleToListRatio": "88.4%",
+    "count": 25,
+    "medianPrice": "$665,000",
+    "medianDom": 67,
+    "saleToListRatio": "88.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 11.2,
-    "sfhVilla": 8.2,
-    "blended": 8.8,
+    "condo": 9.8,
+    "sfhVilla": 7.8,
+    "blended": 8.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,15 +54,15 @@
     }
   },
   "priceBands": {
-    "under900k": 33,
+    "under900k": 30,
     "band900kTo1_5m": 7,
-    "band1_5mTo3m": 8,
+    "band1_5mTo3m": 7,
     "band3mPlus": 8
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 56
+      "count": 52
     }
   ],
   "buildingClasses": [],
@@ -142,7 +142,7 @@
       "avgPrice": "$569,000",
       "avgPricePerSqFt": "$451",
       "avgLivingSqFt": "1,262",
-      "avgDom": 69
+      "avgDom": 74
     },
     {
       "tier": "1990to2005",
@@ -168,11 +168,11 @@
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 14,
-      "avgPrice": "$579,669",
-      "avgPricePerSqFt": "$564",
-      "avgLivingSqFt": "1,033",
-      "avgDom": 134
+      "activeCount": 12,
+      "avgPrice": "$591,698",
+      "avgPricePerSqFt": "$556",
+      "avgLivingSqFt": "1,067",
+      "avgDom": 122
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 16,
+      "activeCount": 15,
       "soldCount": 23,
       "soldMedianPricePerSqFt": "$533",
       "soldMedianPrice": "$650,000",
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 5,
+      "activeCount": 4,
       "soldCount": 1,
       "soldMedianPricePerSqFt": null,
       "soldMedianPrice": null,
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 35,
+      "activeCount": 33,
       "soldCount": 58,
       "soldMedianPricePerSqFt": "$403",
       "soldMedianPrice": "$587,000",
@@ -222,38 +222,38 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 8.8,
-    "monthsOfSupplyCondo": 11.2,
-    "monthsOfSupplySfhVilla": 8.2,
+    "monthsOfSupply": 8.2,
+    "monthsOfSupplyCondo": 9.8,
+    "monthsOfSupplySfhVilla": 7.8,
     "label": "buyer's market",
-    "activeCount": 56,
+    "activeCount": 52,
     "sold365Count": 76,
-    "sold90Count": 26,
+    "sold90Count": 25,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 66,
-      "activeCount": 41,
+      "activeCount": 39,
       "soldMedianPrice": "$686,515",
       "soldMedianPricePerSqFt": "$426"
     },
     "condo": {
       "soldCount": 17,
-      "activeCount": 15,
+      "activeCount": 13,
       "soldMedianPrice": "$475,000",
       "soldMedianPricePerSqFt": "$492"
     }
   },
   "boating": {
     "activeWithDock": 7,
-    "activeWaterfront": 16
+    "activeWaterfront": 15
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 56 active listings and roughly 6 closed sales a month (trailing 12 months), West Of Trail North has about 8.8 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 52 active listings and roughly 6 closed sales a month (trailing 12 months), West Of Trail North has about 8.2 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,17 +263,17 @@
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail North?",
-      "a": "Active listings run from $251,700 to $22,900,000, with a median asking price of $744,000."
+      "a": "Active listings run from $251,700 to $22,900,000, with a median asking price of $749,450."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 69 days on market and closed at 88.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 67 days on market and closed at 88.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail North homes have a dock?",
-      "a": "Of 16 active waterfront listings, 7 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 15 active waterfront listings, 7 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

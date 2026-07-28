@@ -2,43 +2,43 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-23T10:56:52.164734+00:00",
+  "lastUpdated": "2026-07-28T21:53:47.342628+00:00",
   "counts": {
-    "sold": 34,
+    "sold": 35,
     "pending": 3,
-    "active": 20,
-    "total": 37
+    "active": 19,
+    "total": 38
   },
   "metrics": {
-    "avgPrice": "$4,320,405",
-    "avgPricePerSqFt": "$1,103",
-    "avgYearBuilt": 1992,
-    "avgLivingSqFt": "3,814",
-    "avgLotSqFt": "14,412",
-    "avgDom": 115
+    "avgPrice": "$4,479,605",
+    "avgPricePerSqFt": "$1,114",
+    "avgYearBuilt": 1993,
+    "avgLivingSqFt": "3,887",
+    "avgLotSqFt": "14,428",
+    "avgDom": 114
   },
   "range": {
     "minPrice": "$1,150,000",
     "maxPrice": "$13,950,000"
   },
   "active": {
-    "count": 20,
-    "medianPrice": "$4,600,000",
-    "medianPricePerSqFt": "$1,414",
-    "waterfrontCount": 10,
+    "count": 19,
+    "medianPrice": "$4,350,000",
+    "medianPricePerSqFt": "$1,389",
+    "waterfrontCount": 9,
     "newConstructionCount": 6
   },
   "sold": {
-    "count": 8,
-    "medianPrice": "$4,650,000",
-    "medianDom": 88,
-    "saleToListRatio": "89.4%",
+    "count": 9,
+    "medianPrice": "$4,350,000",
+    "medianDom": 82,
+    "saleToListRatio": "89.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": null,
-    "sfhVilla": 8.0,
-    "blended": 8.0,
+    "sfhVilla": 7.4,
+    "blended": 7.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -53,21 +53,34 @@
     "under900k": 0,
     "band900kTo1_5m": 1,
     "band1_5mTo3m": 5,
-    "band3mPlus": 14
+    "band3mPlus": 13
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 20
+      "count": 19
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 13
+      "count": 12
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4682743",
+      "address": "316 W ROYAL FLAMINGO DR",
+      "subdivision": "BIRD KEY",
+      "soldPrice": "$4,350,000",
+      "soldDate": "2026-07-24",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "4,070",
+      "yearBuilt": 2001,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4693231",
       "address": "344 W ROYAL FLAMINGO DR",
@@ -119,19 +132,6 @@
       "yearBuilt": 2026,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4685085",
-      "address": "218 ROBIN DR",
-      "subdivision": "BIRD KEY SUB",
-      "soldPrice": "$1,900,000",
-      "soldDate": "2026-06-15",
-      "bedrooms": 3,
-      "bathrooms": 4.0,
-      "livingSqFt": "2,673",
-      "yearBuilt": 1969,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [],
@@ -149,7 +149,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 9,
+      "activeCount": 8,
       "soldCount": 21,
       "soldMedianPricePerSqFt": "$1,268",
       "soldMedianPrice": "$4,500,000",
@@ -159,7 +159,7 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 0,
-      "soldCount": 1,
+      "soldCount": 2,
       "soldMedianPricePerSqFt": null,
       "soldMedianPrice": null,
       "lowSample": true
@@ -175,47 +175,47 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 8.0,
+    "monthsOfSupply": 7.4,
     "monthsOfSupplyCondo": null,
-    "monthsOfSupplySfhVilla": 8.0,
+    "monthsOfSupplySfhVilla": 7.4,
     "label": "buyer's market",
-    "activeCount": 20,
-    "sold365Count": 30,
-    "sold90Count": 8,
+    "activeCount": 19,
+    "sold365Count": 31,
+    "sold90Count": 9,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 34,
-      "activeCount": 20,
-      "soldMedianPrice": "$3,900,000",
-      "soldMedianPricePerSqFt": "$1,116"
+      "soldCount": 35,
+      "activeCount": 19,
+      "soldMedianPrice": "$3,950,000",
+      "soldMedianPricePerSqFt": "$1,080"
     }
   },
   "boating": {
-    "activeWithDock": 6,
-    "activeWaterfront": 10
+    "activeWithDock": 5,
+    "activeWaterfront": 9
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Bird Key a buyer's or seller's market right now?",
-      "a": "With 20 active listings and roughly 2 closed sales a month (trailing 12 months), Bird Key has about 8.0 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 19 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 7.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Bird Key?",
-      "a": "Active listings run from $1,150,000 to $13,950,000, with a median asking price of $4,600,000."
+      "a": "Active listings run from $1,150,000 to $13,950,000, with a median asking price of $4,350,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Bird Key?",
-      "a": "Recently sold homes took a median 88 days on market and closed at 89.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 82 days on market and closed at 89.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Bird Key homes have a dock?",
-      "a": "Of 10 active waterfront listings, 6 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 9 active waterfront listings, 5 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
