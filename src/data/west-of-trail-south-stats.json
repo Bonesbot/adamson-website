@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-28T21:53:46.552226+00:00",
+  "lastUpdated": "2026-07-31T13:45:08.735174+00:00",
   "counts": {
-    "sold": 260,
-    "pending": 25,
-    "active": 96,
-    "total": 285
+    "sold": 262,
+    "pending": 26,
+    "active": 95,
+    "total": 288
   },
   "metrics": {
-    "avgPrice": "$634,250",
+    "avgPrice": "$630,919",
     "avgPricePerSqFt": "$330",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,752",
+    "avgLivingSqFt": "1,748",
     "avgLotSqFt": null,
     "avgDom": 78
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$5,500,000"
   },
   "active": {
-    "count": 96,
-    "medianPrice": "$477,000",
-    "medianPricePerSqFt": "$330",
-    "waterfrontCount": 25,
+    "count": 95,
+    "medianPrice": "$484,700",
+    "medianPricePerSqFt": "$328",
+    "waterfrontCount": 26,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 59,
-    "medianPrice": "$405,000",
-    "medianDom": 43,
-    "saleToListRatio": "89.0%",
+    "count": 54,
+    "medianPrice": "$400,000",
+    "medianDom": 48,
+    "saleToListRatio": "88.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 6.4,
+    "condo": 6.2,
     "sfhVilla": 4.4,
-    "blended": 5.3,
+    "blended": 5.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,45 @@
     }
   },
   "priceBands": {
-    "under900k": 77,
-    "band900kTo1_5m": 4,
+    "under900k": 75,
+    "band900kTo1_5m": 5,
     "band1_5mTo3m": 9,
     "band3mPlus": 6
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 96
+      "count": 95
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4692788",
+      "address": "6100 HOLLYWOOD BLVD",
+      "subdivision": "AQUALANE ESTATES 2ND",
+      "soldPrice": "$495,000",
+      "soldDate": "2026-07-29",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,325",
+      "yearBuilt": 1956,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4688336",
+      "address": "1612 STICKNEY POINT RD #1612-1",
+      "subdivision": "CASTEL DEL MARE",
+      "soldPrice": "$260,000",
+      "soldDate": "2026-07-29",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "872",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4688435",
       "address": "6454 BEECHWOOD AVE",
@@ -105,32 +131,6 @@
       "yearBuilt": 1981,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4680245",
-      "address": "1508 PELICAN COVE RD #GR232",
-      "subdivision": "PELICAN COVE XIII",
-      "soldPrice": "$287,500",
-      "soldDate": "2026-07-16",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,211",
-      "yearBuilt": 1980,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4651548",
-      "address": "4812 KESTRAL PARK CIR #20",
-      "subdivision": "LANDINGS CARRIAGEHOUSE II",
-      "soldPrice": "$285,000",
-      "soldDate": "2026-07-15",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,570",
-      "yearBuilt": 1982,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 53,
-      "avgPrice": "$367,925",
-      "avgPricePerSqFt": "$292",
-      "avgLivingSqFt": "1,275",
-      "avgDom": 128
+      "activeCount": 52,
+      "avgPrice": "$369,251",
+      "avgPricePerSqFt": "$291",
+      "avgLivingSqFt": "1,282",
+      "avgDom": 132
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$642,000",
       "avgPricePerSqFt": "$315",
       "avgLivingSqFt": "2,053",
-      "avgDom": 129
+      "avgDom": 132
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$589,667",
       "avgPricePerSqFt": "$345",
       "avgLivingSqFt": "1,711",
-      "avgDom": 130
+      "avgDom": 132
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$629,000",
       "avgPricePerSqFt": "$353",
       "avgLivingSqFt": "1,785",
-      "avgDom": 212
+      "avgDom": 216
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 22,
+      "activeCount": 23,
       "soldCount": 50,
       "soldMedianPricePerSqFt": "$361",
       "soldMedianPrice": "$485,000",
@@ -223,66 +223,66 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 55,
-      "soldCount": 172,
+      "activeCount": 53,
+      "soldCount": 174,
       "soldMedianPricePerSqFt": "$283",
       "soldMedianPrice": "$427,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.3,
-    "monthsOfSupplyCondo": 6.4,
+    "monthsOfSupply": 5.2,
+    "monthsOfSupplyCondo": 6.2,
     "monthsOfSupplySfhVilla": 4.4,
     "label": "balanced market",
-    "activeCount": 96,
-    "sold365Count": 219,
-    "sold90Count": 59,
+    "activeCount": 95,
+    "sold365Count": 221,
+    "sold90Count": 54,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 142,
+      "soldCount": 143,
       "activeCount": 32,
-      "soldMedianPrice": "$518,750",
+      "soldMedianPrice": "$517,500",
       "soldMedianPricePerSqFt": "$320"
     },
     "condo": {
-      "soldCount": 118,
-      "activeCount": 64,
-      "soldMedianPrice": "$346,250",
-      "soldMedianPricePerSqFt": "$251"
+      "soldCount": 119,
+      "activeCount": 63,
+      "soldMedianPrice": "$345,000",
+      "soldMedianPricePerSqFt": "$253"
     }
   },
   "boating": {
     "activeWithDock": 12,
-    "activeWaterfront": 25
+    "activeWaterfront": 26
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 96 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 5.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 95 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 5.2 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $518,750 ($320/sq ft), while condos, villas and townhouses sell around $346,250 ($251/sq ft)."
+      "a": "Single-family homes sell around $517,500 ($320/sq ft), while condos, villas and townhouses sell around $345,000 ($253/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $110,000 to $5,500,000, with a median asking price of $477,000."
+      "a": "Active listings run from $110,000 to $5,500,000, with a median asking price of $484,700."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 43 days on market and closed at 89.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 48 days on market and closed at 88.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 25 active waterfront listings, 12 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 26 active waterfront listings, 12 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
