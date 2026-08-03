@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-07-31T13:45:07.070341+00:00",
+  "lastUpdated": "2026-08-03T15:40:54.474741+00:00",
   "counts": {
-    "sold": 197,
+    "sold": 198,
     "pending": 18,
-    "active": 83,
-    "total": 215
+    "active": 81,
+    "total": 216
   },
   "metrics": {
-    "avgPrice": "$2,432,954",
-    "avgPricePerSqFt": "$727",
-    "avgYearBuilt": 1986,
-    "avgLivingSqFt": "2,968",
+    "avgPrice": "$2,439,977",
+    "avgPricePerSqFt": "$728",
+    "avgYearBuilt": 1985,
+    "avgLivingSqFt": "2,976",
     "avgLotSqFt": null,
     "avgDom": 116
   },
@@ -22,28 +22,28 @@
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 83,
-    "medianPrice": "$3,100,000",
+    "count": 81,
+    "medianPrice": "$3,095,000",
     "medianPricePerSqFt": "$889",
-    "waterfrontCount": 22,
+    "waterfrontCount": 20,
     "newConstructionCount": 32
   },
   "sold": {
-    "count": 43,
-    "medianPrice": "$1,825,000",
+    "count": 41,
+    "medianPrice": "$2,125,000",
     "medianDom": 109,
-    "saleToListRatio": "105.7%",
+    "saleToListRatio": "106.7%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 8.6,
-    "sfhVilla": 6.3,
-    "blended": 6.5,
+    "sfhVilla": 6.0,
+    "blended": 6.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$67",
+    "medianMonthlyAssociation": "$100",
     "medianMonthlyCondoFee": "$689",
     "minMonthlyCondoFee": "$407",
     "maxMonthlyCondoFee": "$4,104",
@@ -57,16 +57,29 @@
     "under900k": 12,
     "band900kTo1_5m": 4,
     "band1_5mTo3m": 23,
-    "band3mPlus": 44
+    "band3mPlus": 42
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 83
+      "count": 81
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4689693",
+      "address": "1705 WISCONSIN LN",
+      "subdivision": "ACREAGE & UNREC",
+      "soldPrice": "$3,900,000",
+      "soldDate": "2026-07-29",
+      "bedrooms": 5,
+      "bathrooms": 6.0,
+      "livingSqFt": "4,871",
+      "yearBuilt": 2016,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4691671",
       "address": "1885 CLEMATIS ST",
@@ -118,19 +131,6 @@
       "yearBuilt": 2018,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4679755",
-      "address": "1740 S ORANGE AVE",
-      "subdivision": "HARBOR ACRES SEC 2",
-      "soldPrice": "$1,325,700",
-      "soldDate": "2026-07-17",
-      "bedrooms": 4,
-      "bathrooms": 4.5,
-      "livingSqFt": "3,168",
-      "yearBuilt": 1967,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$360,490",
       "avgPricePerSqFt": "$318",
       "avgLivingSqFt": "1,107",
-      "avgDom": 124
+      "avgDom": 127
     },
     {
       "tier": "1990to2005",
@@ -187,7 +187,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 19,
+      "activeCount": 17,
       "soldCount": 25,
       "soldMedianPricePerSqFt": "$1,051",
       "soldMedianPrice": "$3,875,000",
@@ -215,28 +215,28 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 60,
-      "soldCount": 165,
+      "soldCount": 166,
       "soldMedianPricePerSqFt": "$651",
-      "soldMedianPrice": "$1,640,000",
+      "soldMedianPrice": "$1,667,500",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 6.5,
+    "monthsOfSupply": 6.3,
     "monthsOfSupplyCondo": 8.6,
-    "monthsOfSupplySfhVilla": 6.3,
+    "monthsOfSupplySfhVilla": 6.0,
     "label": "balanced market",
-    "activeCount": 83,
-    "sold365Count": 154,
-    "sold90Count": 43,
+    "activeCount": 81,
+    "sold365Count": 155,
+    "sold90Count": 41,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 179,
-      "activeCount": 73,
-      "soldMedianPrice": "$1,850,000",
-      "soldMedianPricePerSqFt": "$679"
+      "soldCount": 180,
+      "activeCount": 71,
+      "soldMedianPrice": "$1,862,500",
+      "soldMedianPricePerSqFt": "$680"
     },
     "condo": {
       "soldCount": 18,
@@ -246,39 +246,39 @@
     }
   },
   "boating": {
-    "activeWithDock": 16,
-    "activeWaterfront": 22
+    "activeWithDock": 15,
+    "activeWaterfront": 20
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 83 active listings and roughly 13 closed sales a month (trailing 12 months), West Of Trail Core has about 6.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 81 active listings and roughly 13 closed sales a month (trailing 12 months), West Of Trail Core has about 6.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,850,000 ($679/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
+      "a": "Single-family homes sell around $1,862,500 ($680/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $98,000 to $26,400,000, with a median asking price of $3,100,000."
+      "a": "Active listings run from $98,000 to $26,400,000, with a median asking price of $3,095,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 109 days on market and closed at 105.7% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 109 days on market and closed at 106.7% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail Core homes have a dock?",
-      "a": "Of 22 active waterfront listings, 16 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 20 active waterfront listings, 15 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on West Of Trail Core?",
-      "a": "The median monthly condo fee is $689 and the median monthly association fee is $67."
+      "a": "The median monthly condo fee is $689 and the median monthly association fee is $100."
     }
   ],
   "costBreakdown90": null
