@@ -2,43 +2,43 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-08-03T15:40:56.770642+00:00",
+  "lastUpdated": "2026-08-09T01:32:36.114317+00:00",
   "counts": {
-    "sold": 36,
+    "sold": 37,
     "pending": 2,
-    "active": 19,
-    "total": 38
+    "active": 18,
+    "total": 39
   },
   "metrics": {
-    "avgPrice": "$4,461,184",
-    "avgPricePerSqFt": "$1,112",
-    "avgYearBuilt": 1993,
-    "avgLivingSqFt": "3,887",
-    "avgLotSqFt": "14,428",
-    "avgDom": 114
+    "avgPrice": "$4,461,154",
+    "avgPricePerSqFt": "$1,123",
+    "avgYearBuilt": 1992,
+    "avgLivingSqFt": "3,860",
+    "avgLotSqFt": "14,442",
+    "avgDom": 112
   },
   "range": {
     "minPrice": "$1,150,000",
     "maxPrice": "$13,950,000"
   },
   "active": {
-    "count": 19,
-    "medianPrice": "$4,350,000",
-    "medianPricePerSqFt": "$1,386",
-    "waterfrontCount": 9,
+    "count": 18,
+    "medianPrice": "$4,325,000",
+    "medianPricePerSqFt": "$1,322",
+    "waterfrontCount": 8,
     "newConstructionCount": 6
   },
   "sold": {
-    "count": 10,
-    "medianPrice": "$4,725,000",
-    "medianDom": 88,
-    "saleToListRatio": "88.0%",
+    "count": 11,
+    "medianPrice": "$4,350,000",
+    "medianDom": 94,
+    "saleToListRatio": "87.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": null,
-    "sfhVilla": 7.1,
-    "blended": 7.1,
+    "sfhVilla": 6.5,
+    "blended": 6.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -53,12 +53,12 @@
     "under900k": 0,
     "band900kTo1_5m": 1,
     "band1_5mTo3m": 5,
-    "band3mPlus": 13
+    "band3mPlus": 12
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 19
+      "count": 18
     }
   ],
   "buildingClasses": [
@@ -68,6 +68,19 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4666317",
+      "address": "412 PHEASANT WAY",
+      "subdivision": "BIRD KEY SUB",
+      "soldPrice": "$2,805,000",
+      "soldDate": "2026-08-06",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,677",
+      "yearBuilt": 2018,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4666605",
       "address": "440 MEADOW LARK DR",
@@ -119,19 +132,6 @@
       "yearBuilt": 2023,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4678714",
-      "address": "381 BOB WHITE DR",
-      "subdivision": "BIRD KEY SUB",
-      "soldPrice": "$2,185,000",
-      "soldDate": "2026-06-26",
-      "bedrooms": 4,
-      "bathrooms": 3.5,
-      "livingSqFt": "3,774",
-      "yearBuilt": 2003,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [],
@@ -149,7 +149,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 8,
+      "activeCount": 7,
       "soldCount": 22,
       "soldMedianPricePerSqFt": "$1,276",
       "soldMedianPrice": "$4,800,000",
@@ -168,54 +168,54 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 10,
-      "soldCount": 12,
-      "soldMedianPricePerSqFt": "$810",
-      "soldMedianPrice": "$2,090,000",
+      "soldCount": 13,
+      "soldMedianPricePerSqFt": "$834",
+      "soldMedianPrice": "$2,185,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.1,
+    "monthsOfSupply": 6.5,
     "monthsOfSupplyCondo": null,
-    "monthsOfSupplySfhVilla": 7.1,
-    "label": "buyer's market",
-    "activeCount": 19,
-    "sold365Count": 32,
-    "sold90Count": 10,
+    "monthsOfSupplySfhVilla": 6.5,
+    "label": "balanced market",
+    "activeCount": 18,
+    "sold365Count": 33,
+    "sold90Count": 11,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 36,
-      "activeCount": 19,
-      "soldMedianPrice": "$3,975,000",
-      "soldMedianPricePerSqFt": "$1,116"
+      "soldCount": 37,
+      "activeCount": 18,
+      "soldMedianPrice": "$3,950,000",
+      "soldMedianPricePerSqFt": "$1,080"
     }
   },
   "boating": {
-    "activeWithDock": 5,
-    "activeWaterfront": 9
+    "activeWithDock": 4,
+    "activeWaterfront": 8
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Bird Key a buyer's or seller's market right now?",
-      "a": "With 19 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 7.1 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 18 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 6.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Bird Key?",
-      "a": "Active listings run from $1,150,000 to $13,950,000, with a median asking price of $4,350,000."
+      "a": "Active listings run from $1,150,000 to $13,950,000, with a median asking price of $4,325,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Bird Key?",
-      "a": "Recently sold homes took a median 88 days on market and closed at 88.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 94 days on market and closed at 87.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Bird Key homes have a dock?",
-      "a": "Of 9 active waterfront listings, 5 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 8 active waterfront listings, 4 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

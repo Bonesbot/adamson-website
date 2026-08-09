@@ -2,43 +2,43 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-08-03T15:40:57.533208+00:00",
+  "lastUpdated": "2026-08-09T01:32:36.907483+00:00",
   "counts": {
-    "sold": 808,
-    "pending": 68,
-    "active": 242,
-    "total": 876
+    "sold": 825,
+    "pending": 62,
+    "active": 235,
+    "total": 887
   },
   "metrics": {
-    "avgPrice": "$565,625",
+    "avgPrice": "$567,412",
     "avgPricePerSqFt": "$264",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,052",
+    "avgLivingSqFt": "2,059",
     "avgLotSqFt": null,
-    "avgDom": 81
+    "avgDom": 80
   },
   "range": {
     "minPrice": "$110,000",
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 242,
-    "medianPrice": "$412,500",
-    "medianPricePerSqFt": "$250",
-    "waterfrontCount": 36,
-    "newConstructionCount": 36
+    "count": 235,
+    "medianPrice": "$420,000",
+    "medianPricePerSqFt": "$252",
+    "waterfrontCount": 38,
+    "newConstructionCount": 32
   },
   "sold": {
-    "count": 206,
-    "medianPrice": "$470,000",
-    "medianDom": 46,
-    "saleToListRatio": "91.1%",
+    "count": 210,
+    "medianPrice": "$472,500",
+    "medianDom": 49,
+    "saleToListRatio": "91.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 7.1,
-    "sfhVilla": 3.2,
-    "blended": 4.2,
+    "condo": 6.6,
+    "sfhVilla": 3.1,
+    "blended": 4.0,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,81 +54,81 @@
     }
   },
   "priceBands": {
-    "under900k": 218,
-    "band900kTo1_5m": 16,
-    "band1_5mTo3m": 8,
+    "under900k": 215,
+    "band900kTo1_5m": 15,
+    "band1_5mTo3m": 5,
     "band3mPlus": 0
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 242
+      "count": 235
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
     {
-      "listingId": "A4694490",
-      "address": "12325 MARSH POINTE RD",
-      "subdivision": "HAMMOCK PRESERVE PH 1A-4 1B &",
-      "soldPrice": "$835,000",
-      "soldDate": "2026-07-31",
+      "listingId": "A4680873",
+      "address": "7782 ULIVA WAY",
+      "subdivision": "VILLAGEWALK",
+      "soldPrice": "$612,500",
+      "soldDate": "2026-08-07",
       "bedrooms": 3,
       "bathrooms": 2.0,
       "livingSqFt": "2,008",
-      "yearBuilt": 2018,
+      "yearBuilt": 2005,
       "propertyType": "Residential",
-      "isWaterfront": false
+      "isWaterfront": true
     },
     {
-      "listingId": "TB8526546",
-      "address": "3941 KINGSTON DR",
+      "listingId": "A4689271",
+      "address": "4368 KINGSTON LOOP",
       "subdivision": "GULF GATE EAST",
-      "soldPrice": "$810,000",
-      "soldDate": "2026-07-31",
+      "soldPrice": "$550,000",
+      "soldDate": "2026-08-07",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,574",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "N6144935",
+      "address": "5958 ANISE DR",
+      "subdivision": "ARBOR LAKES ON PALMER RANCH",
+      "soldPrice": "$535,000",
+      "soldDate": "2026-08-07",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,055",
+      "yearBuilt": 2017,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4690574",
+      "address": "4956 BRIDGEHAMPTON BLVD",
+      "subdivision": "THE HAMPTONS",
+      "soldPrice": "$900,000",
+      "soldDate": "2026-08-06",
       "bedrooms": 4,
       "bathrooms": 3.0,
-      "livingSqFt": "2,376",
-      "yearBuilt": 1986,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4676670",
-      "address": "7675 ULIVA WAY",
-      "subdivision": "VILLAGEWALK",
-      "soldPrice": "$540,000",
-      "soldDate": "2026-07-31",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,008",
-      "yearBuilt": 2005,
+      "livingSqFt": "2,960",
+      "yearBuilt": 1999,
       "propertyType": "Residential",
       "isWaterfront": true
     },
     {
-      "listingId": "A4693107",
-      "address": "5389 MANCHINI ST",
-      "subdivision": "ESPLANADE ON PALMER RANCH",
-      "soldPrice": "$1,010,000",
-      "soldDate": "2026-07-30",
+      "listingId": "TB8449918",
+      "address": "8637 DAYDREAM ST",
+      "subdivision": "PROMENADE/PALMER RANCH PH 2",
+      "soldPrice": "$350,000",
+      "soldDate": "2026-08-06",
       "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,403",
-      "yearBuilt": 2018,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4667818",
-      "address": "3671 SQUARE WEST LN #22",
-      "subdivision": "PALMER SQUARE WEST",
-      "soldPrice": "$360,000",
-      "soldDate": "2026-07-30",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,806",
-      "yearBuilt": 2005,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,724",
+      "yearBuilt": 2020,
       "propertyType": "Residential",
       "isWaterfront": false
     }
@@ -139,40 +139,40 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 41,
-      "avgPrice": "$318,849",
-      "avgPricePerSqFt": "$197",
-      "avgLivingSqFt": "1,613",
-      "avgDom": 82
+      "avgPrice": "$322,605",
+      "avgPricePerSqFt": "$195",
+      "avgLivingSqFt": "1,641",
+      "avgDom": 85
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 85,
-      "avgPrice": "$298,919",
+      "activeCount": 84,
+      "avgPrice": "$303,526",
       "avgPricePerSqFt": "$235",
-      "avgLivingSqFt": "1,268",
+      "avgLivingSqFt": "1,289",
       "avgDom": 114
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 11,
-      "avgPrice": "$389,254",
+      "activeCount": 12,
+      "avgPrice": "$394,317",
       "avgPricePerSqFt": "$246",
-      "avgLivingSqFt": "1,583",
-      "avgDom": 94
+      "avgLivingSqFt": "1,605",
+      "avgDom": 98
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 11,
-      "avgPrice": "$356,168",
-      "avgPricePerSqFt": "$221",
-      "avgLivingSqFt": "1,613",
-      "avgDom": 77
+      "activeCount": 9,
+      "avgPrice": "$344,496",
+      "avgPricePerSqFt": "$214",
+      "avgLivingSqFt": "1,600",
+      "avgDom": 67
     }
   ],
   "condoTiersScope": {
@@ -196,84 +196,84 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 60,
-      "soldCount": 185,
-      "soldMedianPricePerSqFt": "$260",
+      "activeCount": 56,
+      "soldCount": 189,
+      "soldMedianPricePerSqFt": "$261",
       "soldMedianPrice": "$477,500",
       "lowSample": false
     },
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 36,
-      "soldCount": 175,
-      "soldMedianPricePerSqFt": "$275",
+      "activeCount": 38,
+      "soldCount": 179,
+      "soldMedianPricePerSqFt": "$276",
       "soldMedianPrice": "$605,000",
       "lowSample": false
     },
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 146,
-      "soldCount": 446,
+      "activeCount": 141,
+      "soldCount": 455,
       "soldMedianPricePerSqFt": "$244",
       "soldMedianPrice": "$440,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.2,
-    "monthsOfSupplyCondo": 7.1,
-    "monthsOfSupplySfhVilla": 3.2,
+    "monthsOfSupply": 4.0,
+    "monthsOfSupplyCondo": 6.6,
+    "monthsOfSupplySfhVilla": 3.1,
     "label": "seller's market",
-    "activeCount": 242,
-    "sold365Count": 692,
-    "sold90Count": 206,
+    "activeCount": 235,
+    "sold365Count": 700,
+    "sold90Count": 210,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 461,
-      "activeCount": 94,
+      "soldCount": 470,
+      "activeCount": 89,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 347,
-      "activeCount": 148,
-      "soldMedianPrice": "$330,000",
-      "soldMedianPricePerSqFt": "$214"
+      "soldCount": 355,
+      "activeCount": 146,
+      "soldMedianPrice": "$325,000",
+      "soldMedianPricePerSqFt": "$213"
     }
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 36
+    "activeWaterfront": 38
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 242 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 4.2 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 235 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 4.0 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Palmer Ranch?",
-      "a": "Single-family homes sell around $650,000 ($288/sq ft), while condos, villas and townhouses sell around $330,000 ($214/sq ft)."
+      "a": "Single-family homes sell around $650,000 ($288/sq ft), while condos, villas and townhouses sell around $325,000 ($213/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $412,500."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $420,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 46 days on market and closed at 91.1% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 49 days on market and closed at 91.0% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 36 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 38 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

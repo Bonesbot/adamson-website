@@ -2,41 +2,41 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-08-03T15:40:56.027318+00:00",
+  "lastUpdated": "2026-08-09T01:32:35.366843+00:00",
   "counts": {
-    "sold": 263,
-    "pending": 28,
+    "sold": 267,
+    "pending": 25,
     "active": 92,
-    "total": 291
+    "total": 292
   },
   "metrics": {
-    "avgPrice": "$627,892",
+    "avgPrice": "$630,273",
     "avgPricePerSqFt": "$329",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,741",
+    "avgLivingSqFt": "1,740",
     "avgLotSqFt": null,
-    "avgDom": 78
+    "avgDom": 77
   },
   "range": {
     "minPrice": "$110,000",
-    "maxPrice": "$5,500,000"
+    "maxPrice": "$6,000,000"
   },
   "active": {
     "count": 92,
-    "medianPrice": "$481,850",
-    "medianPricePerSqFt": "$327",
-    "waterfrontCount": 26,
+    "medianPrice": "$484,850",
+    "medianPricePerSqFt": "$325",
+    "waterfrontCount": 27,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 54,
-    "medianPrice": "$400,000",
-    "medianDom": 45,
-    "saleToListRatio": "88.4%",
+    "count": 53,
+    "medianPrice": "$405,000",
+    "medianDom": 43,
+    "saleToListRatio": "88.6%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 6.0,
+    "condo": 5.9,
     "sfhVilla": 4.3,
     "blended": 5.0,
     "method": "active / (trailing-12mo closed / 12)",
@@ -55,9 +55,9 @@
   },
   "priceBands": {
     "under900k": 72,
-    "band900kTo1_5m": 5,
+    "band900kTo1_5m": 6,
     "band1_5mTo3m": 9,
-    "band3mPlus": 6
+    "band3mPlus": 5
   },
   "propertyTypes": [
     {
@@ -67,6 +67,58 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4697181",
+      "address": "1503 CLOWER CREEK DR #259",
+      "subdivision": "PELICAN COVE XV",
+      "soldPrice": "$515,000",
+      "soldDate": "2026-08-07",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,219",
+      "yearBuilt": 1979,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4688441",
+      "address": "1511 PELICAN POINT DR #279",
+      "subdivision": "PELICAN COVE VII",
+      "soldPrice": "$465,000",
+      "soldDate": "2026-08-07",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,474",
+      "yearBuilt": 1978,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4693436",
+      "address": "6688 SCHOONER BAY CIR #6688",
+      "subdivision": "SCHOONER BAY",
+      "soldPrice": "$740,000",
+      "soldDate": "2026-08-05",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,812",
+      "yearBuilt": 1988,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4667413",
+      "address": "1627 BOATHOUSE CIR #127",
+      "subdivision": "PELICAN COVE IX",
+      "soldPrice": "$512,500",
+      "soldDate": "2026-08-03",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,216",
+      "yearBuilt": 1979,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4694062",
       "address": "1702 GLENHOUSE DR #410",
@@ -79,58 +131,6 @@
       "yearBuilt": 1979,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4692788",
-      "address": "6100 HOLLYWOOD BLVD",
-      "subdivision": "AQUALANE ESTATES 2ND",
-      "soldPrice": "$495,000",
-      "soldDate": "2026-07-29",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,325",
-      "yearBuilt": 1956,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4688336",
-      "address": "1612 STICKNEY POINT RD #1612-1",
-      "subdivision": "CASTEL DEL MARE",
-      "soldPrice": "$260,000",
-      "soldDate": "2026-07-29",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "872",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4688435",
-      "address": "6454 BEECHWOOD AVE",
-      "subdivision": "PINE SHORES ESTATE 5TH SEC",
-      "soldPrice": "$750,000",
-      "soldDate": "2026-07-27",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,661",
-      "yearBuilt": 1971,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4691080",
-      "address": "1717 JOYCE ST",
-      "subdivision": "TROPICAL SHORES",
-      "soldPrice": "$350,000",
-      "soldDate": "2026-07-22",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,382",
-      "yearBuilt": 1966,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 50,
-      "avgPrice": "$367,279",
+      "avgPrice": "$367,765",
       "avgPricePerSqFt": "$290",
-      "avgLivingSqFt": "1,285",
-      "avgDom": 127
+      "avgLivingSqFt": "1,280",
+      "avgDom": 135
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$642,000",
       "avgPricePerSqFt": "$315",
       "avgLivingSqFt": "2,053",
-      "avgDom": 135
+      "avgDom": 140
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$589,667",
       "avgPricePerSqFt": "$345",
       "avgLivingSqFt": "1,711",
-      "avgDom": 134
+      "avgDom": 137
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$629,000",
       "avgPricePerSqFt": "$353",
       "avgLivingSqFt": "1,785",
-      "avgDom": 218
+      "avgDom": 224
     }
   ],
   "condoTiersScope": {
@@ -196,18 +196,18 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 23,
-      "soldCount": 51,
-      "soldMedianPricePerSqFt": "$360",
-      "soldMedianPrice": "$475,000",
+      "activeCount": 24,
+      "soldCount": 54,
+      "soldMedianPricePerSqFt": "$366",
+      "soldMedianPrice": "$500,500",
       "lowSample": false
     },
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 16,
-      "soldCount": 23,
-      "soldMedianPricePerSqFt": "$299",
+      "activeCount": 15,
+      "soldCount": 24,
+      "soldMedianPricePerSqFt": "$307",
       "soldMedianPrice": "$450,000",
       "lowSample": false
     },
@@ -232,12 +232,12 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 5.0,
-    "monthsOfSupplyCondo": 6.0,
+    "monthsOfSupplyCondo": 5.9,
     "monthsOfSupplySfhVilla": 4.3,
     "label": "balanced market",
     "activeCount": 92,
-    "sold365Count": 220,
-    "sold90Count": 54,
+    "sold365Count": 222,
+    "sold90Count": 53,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,15 +248,15 @@
       "soldMedianPricePerSqFt": "$320"
     },
     "condo": {
-      "soldCount": 120,
+      "soldCount": 124,
       "activeCount": 61,
-      "soldMedianPrice": "$342,500",
-      "soldMedianPricePerSqFt": "$251"
+      "soldMedianPrice": "$348,750",
+      "soldMedianPricePerSqFt": "$261"
     }
   },
   "boating": {
-    "activeWithDock": 12,
-    "activeWaterfront": 26
+    "activeWithDock": 11,
+    "activeWaterfront": 27
   },
   "marketQuestions": [
     {
@@ -267,22 +267,22 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $517,500 ($320/sq ft), while condos, villas and townhouses sell around $342,500 ($251/sq ft)."
+      "a": "Single-family homes sell around $517,500 ($320/sq ft), while condos, villas and townhouses sell around $348,750 ($261/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $110,000 to $5,500,000, with a median asking price of $481,850."
+      "a": "Active listings run from $110,000 to $6,000,000, with a median asking price of $484,850."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 45 days on market and closed at 88.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 43 days on market and closed at 88.6% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 26 active waterfront listings, 12 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 27 active waterfront listings, 11 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

@@ -2,43 +2,43 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-08-03T15:40:52.869672+00:00",
+  "lastUpdated": "2026-08-09T01:32:32.192410+00:00",
   "counts": {
-    "sold": 562,
-    "pending": 55,
-    "active": 300,
-    "total": 617
+    "sold": 565,
+    "pending": 59,
+    "active": 290,
+    "total": 624
   },
   "metrics": {
-    "avgPrice": "$1,490,993",
-    "avgPricePerSqFt": "$686",
+    "avgPrice": "$1,497,373",
+    "avgPricePerSqFt": "$689",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,920",
+    "avgLivingSqFt": "1,923",
     "avgLotSqFt": null,
-    "avgDom": 108
+    "avgDom": 109
   },
   "range": {
     "minPrice": "$240,000",
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 300,
-    "medianPrice": "$1,199,000",
-    "medianPricePerSqFt": "$775",
-    "waterfrontCount": 168,
+    "count": 290,
+    "medianPrice": "$1,232,000",
+    "medianPricePerSqFt": "$784",
+    "waterfrontCount": 163,
     "newConstructionCount": 50
   },
   "sold": {
-    "count": 124,
-    "medianPrice": "$962,500",
-    "medianDom": 88,
-    "saleToListRatio": "87.9%",
+    "count": 120,
+    "medianPrice": "$977,500",
+    "medianDom": 92,
+    "saleToListRatio": "87.6%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 7.5,
-    "sfhVilla": 7.8,
-    "blended": 7.6,
+    "condo": 7.3,
+    "sfhVilla": 7.5,
+    "blended": 7.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,58 @@
     }
   },
   "priceBands": {
-    "under900k": 120,
-    "band900kTo1_5m": 53,
-    "band1_5mTo3m": 57,
-    "band3mPlus": 70
+    "under900k": 116,
+    "band900kTo1_5m": 51,
+    "band1_5mTo3m": 52,
+    "band3mPlus": 71
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 300
+      "count": 290
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4618421",
+      "address": "5727 RIEGELS POINT RD",
+      "subdivision": "RIEGELS LANDING",
+      "soldPrice": "$3,500,000",
+      "soldDate": "2026-08-04",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "3,616",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4697224",
+      "address": "603 TREMONT ST",
+      "subdivision": "WATERSIDE-WOOD SIESTAS BAYSID",
+      "soldPrice": "$3,500,000",
+      "soldDate": "2026-08-03",
+      "bedrooms": 4,
+      "bathrooms": 4.5,
+      "livingSqFt": "3,996",
+      "yearBuilt": 2025,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "C7524394",
+      "address": "915 BEACH RD #215",
+      "subdivision": "LA SIESTA",
+      "soldPrice": "$570,000",
+      "soldDate": "2026-08-03",
+      "bedrooms": 2,
+      "bathrooms": 1.0,
+      "livingSqFt": "753",
+      "yearBuilt": 1972,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4612536",
       "address": "70 AVENIDA VENECCIA #402",
@@ -92,45 +131,6 @@
       "yearBuilt": 1973,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4696439",
-      "address": "522 COMMONWEALTH LN",
-      "subdivision": "SIESTAS BAYSIDE WATERSIDE EAST",
-      "soldPrice": "$1,350,000",
-      "soldDate": "2026-07-31",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,990",
-      "yearBuilt": 1979,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4678026",
-      "address": "20 WHISPERING SANDS DR #1201",
-      "subdivision": "WHISPERING SANDS",
-      "soldPrice": "$1,100,000",
-      "soldDate": "2026-07-30",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,282",
-      "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4690769",
-      "address": "1203 SIESTA BAYSIDE DR #1203-D",
-      "subdivision": "GULF & BAY CLUB BAYSIDE",
-      "soldPrice": "$440,000",
-      "soldDate": "2026-07-30",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "959",
-      "yearBuilt": 1988,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 159,
-      "avgPrice": "$808,492",
-      "avgPricePerSqFt": "$685",
-      "avgLivingSqFt": "1,173",
-      "avgDom": 141
+      "activeCount": 155,
+      "avgPrice": "$818,563",
+      "avgPricePerSqFt": "$690",
+      "avgLivingSqFt": "1,181",
+      "avgDom": 144
     },
     {
       "tier": "1990to2005",
@@ -152,17 +152,17 @@
       "avgPrice": "$1,388,650",
       "avgPricePerSqFt": "$659",
       "avgLivingSqFt": "2,148",
-      "avgDom": 144
+      "avgDom": 149
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 6,
-      "avgPrice": "$2,912,983",
-      "avgPricePerSqFt": "$1,215",
-      "avgLivingSqFt": "2,274",
-      "avgDom": 214
+      "activeCount": 5,
+      "avgPrice": "$2,805,580",
+      "avgPricePerSqFt": "$1,197",
+      "avgLivingSqFt": "2,204",
+      "avgDom": 253
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,952,273",
       "avgPricePerSqFt": "$1,526",
       "avgLivingSqFt": "3,385",
-      "avgDom": 184
+      "avgDom": 188
     }
   ],
   "condoTiersScope": {
@@ -187,7 +187,7 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 87,
+      "activeCount": 86,
       "soldCount": 153,
       "soldMedianPricePerSqFt": "$714",
       "soldMedianPrice": "$960,000",
@@ -196,16 +196,16 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 79,
-      "soldCount": 206,
-      "soldMedianPricePerSqFt": "$584",
-      "soldMedianPrice": "$1,192,500",
+      "activeCount": 75,
+      "soldCount": 207,
+      "soldMedianPricePerSqFt": "$586",
+      "soldMedianPrice": "$1,200,000",
       "lowSample": false
     },
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 50,
+      "activeCount": 48,
       "soldCount": 70,
       "soldMedianPricePerSqFt": "$590",
       "soldMedianPrice": "$720,500",
@@ -223,71 +223,71 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 82,
-      "soldCount": 122,
-      "soldMedianPricePerSqFt": "$533",
+      "activeCount": 79,
+      "soldCount": 124,
+      "soldMedianPricePerSqFt": "$537",
       "soldMedianPrice": "$787,500",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.6,
-    "monthsOfSupplyCondo": 7.5,
-    "monthsOfSupplySfhVilla": 7.8,
+    "monthsOfSupply": 7.4,
+    "monthsOfSupplyCondo": 7.3,
+    "monthsOfSupplySfhVilla": 7.5,
     "label": "buyer's market",
-    "activeCount": 300,
-    "sold365Count": 472,
-    "sold90Count": 124,
+    "activeCount": 290,
+    "sold365Count": 471,
+    "sold90Count": 120,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 219,
-      "activeCount": 118,
-      "soldMedianPrice": "$1,500,000",
-      "soldMedianPricePerSqFt": "$635"
+      "soldCount": 221,
+      "activeCount": 113,
+      "soldMedianPrice": "$1,510,000",
+      "soldMedianPricePerSqFt": "$636"
     },
     "condo": {
-      "soldCount": 343,
-      "activeCount": 182,
+      "soldCount": 344,
+      "activeCount": 177,
       "soldMedianPrice": "$680,000",
       "soldMedianPricePerSqFt": "$586"
     }
   },
   "boating": {
-    "activeWithDock": 75,
-    "activeWaterfront": 168
+    "activeWithDock": 74,
+    "activeWaterfront": 163
   },
   "marketQuestions": [
     {
       "facet": "waterfront",
       "q": "How much more does beachfront cost than bayfront on Siesta Key?",
-      "a": "Gulf-front / beachfront homes sell at a median $714 per sq ft versus $584 for bay- or canal-front \u2014 about a 22% waterfront premium (Stellar MLS, recent closed sales)."
+      "a": "Gulf-front / beachfront homes sell at a median $714 per sq ft versus $586 for bay- or canal-front \u2014 about a 22% waterfront premium (Stellar MLS, recent closed sales)."
     },
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 300 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 7.6 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 290 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 7.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Siesta Key?",
-      "a": "Single-family homes sell around $1,500,000 ($635/sq ft), while condos, villas and townhouses sell around $680,000 ($586/sq ft)."
+      "a": "Single-family homes sell around $1,510,000 ($636/sq ft), while condos, villas and townhouses sell around $680,000 ($586/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Siesta Key?",
-      "a": "Active listings run from $240,000 to $29,995,000, with a median asking price of $1,199,000."
+      "a": "Active listings run from $240,000 to $29,995,000, with a median asking price of $1,232,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 88 days on market and closed at 87.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 92 days on market and closed at 87.6% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Siesta Key homes have a dock?",
-      "a": "Of 168 active waterfront listings, 75 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 163 active waterfront listings, 74 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
