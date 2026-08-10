@@ -7,13 +7,27 @@ Emits THREE pages from live Supabase MLS data:
   • gulf-and-bay-club-bayside.astro      (Bayside association)
   • gulf-and-bay-club.astro              (hub — preserves the indexed URL, links to both)
 
-These are BAKED STATIC snapshots (like the page they replace) — re-run this script
-to refresh. They are NOT part of the daily refresh_all_areas.py pipeline.
+Also emits, per community:
+  • src/data/communities/<slug>-stats.json   (machine-readable stats)
+
+As of 2026-08-09 these are NO LONGER baked orphans: refresh_all_areas.py imports
+build_payload() and republishes them daily, bundled into the same single commit
+as the area stats (one commit = one Netlify build). The JSON does three jobs:
+  1. change detection — the publisher diffs *material* JSON, so a day with no new
+     sales produces no commit and therefore no build (the as-of date alone must
+     never trigger a rebuild);
+  2. the data seam — mailers / Command-Center read numbers from here rather than
+     scraping the rendered page;
+  3. the future JSON-driven page render, if/when the .astro templates move to
+     reading data at build time instead of having it baked in by this script.
 
 Usage:
-    python scripts/gen_gulf_bay_pages.py
+    python scripts/gen_gulf_bay_pages.py            # write files locally
+    python scripts/gen_gulf_bay_pages.py --dry-run  # print what would change
 """
 
+import argparse
+import json
 import os
 import re
 import sys
@@ -28,6 +42,11 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent
 ENV_FILE = PROJECT_ROOT / ".env"
 OUT_DIR = PROJECT_ROOT / "src" / "pages" / "siesta-key"
+DATA_DIR = PROJECT_ROOT / "src" / "data" / "communities"
+
+# Repo-relative paths, so refresh_all_areas.py can publish them by path.
+REL_PAGES = "src/pages/siesta-key"
+REL_DATA = "src/data/communities"
 
 HEADLINE_WINDOW_DAYS = 180   # headline stat grid (unchanged from the original page)
 LEDGER_WINDOW_DAYS = 365     # transaction ledger — wider so the filters have data to bite on
@@ -199,6 +218,32 @@ def fetch(cur, where, days):
     return cur.fetchall()
 
 
+def dedupe_closed(rows):
+    """Collapse the same sale recorded twice.
+
+    Stellar occasionally carries one transaction under two listing_ids (e.g.
+    5790 Midnight Pass #408 appears as A4673936 / Coldwell Banker closing
+    2025-12-02 AND J996902 / Stellar Non-Member Office closing 2025-12-13 —
+    identical address, identical $1,030,000, both 0 DOM). Left in, it inflates
+    the closing count, drags the DOM average down, and skews office share.
+
+    Key is (normalised address, price); the earliest close_date wins. Returns
+    (rows, n_removed) so the count is reported rather than silently applied —
+    a stat that quietly changes is worse than one that changes loudly.
+    """
+    seen, out, removed = set(), [], 0
+    for r in sorted(rows, key=lambda x: (x["close_date"] or date.min)):
+        addr = re.sub(r"\s+", "", (r["unparsed_address"] or "")).upper()
+        key = (addr, None if r["current_price"] is None else round(float(r["current_price"])))
+        if key in seen:
+            removed += 1
+            continue
+        seen.add(key)
+        out.append(r)
+    out.sort(key=lambda x: (x["close_date"] or date.min), reverse=True)
+    return out, removed
+
+
 def lease_consensus(cur, where):
     """Modal minimum_lease across ALL listings (not just closed) for this side."""
     cur.execute(f"""
@@ -225,6 +270,148 @@ def quarters(cur, where):
          GROUP BY 1 ORDER BY 1
     """, (date.today() - timedelta(days=365),))
     return cur.fetchall()
+
+
+def actives(cur, where):
+    """Current on-market inventory. NOT used by the rendered page (that comes
+    from the IDX widget) but needed by the JSON consumers — mailer copy and
+    months-of-supply both depend on it, and the page and the mailer must agree."""
+    cur.execute(f"""
+        SELECT COUNT(*) n,
+               AVG(cumulative_days_on_market) avg_dom,
+               percentile_cont(0.5) WITHIN GROUP (ORDER BY cumulative_days_on_market) med_dom,
+               MIN(current_price) min_p, MAX(current_price) max_p,
+               percentile_cont(0.5) WITHIN GROUP (ORDER BY current_price) med_p
+          FROM raw_listings
+         WHERE {where} AND standard_status = 'Active'
+    """, ())
+    r = cur.fetchone()
+    return dict(r) if r else {}
+
+
+def _f(x):
+    return None if x is None else float(x)
+
+
+def community_stats(cfg, headline, ledger, lease, lease_n, lease_total, qs, act, as_of):
+    """Machine-readable stats for one community.
+
+    NOTE ON WINDOWS — both are published, both are labeled, and consumers must
+    say which one they used. `headline` is the 180-day grid the page shows at the
+    top; `ledger` is the trailing-12-month transaction list. Mixing them unlabeled
+    is the single easiest way to make the site and a mailer disagree.
+    """
+    def agg(rows, price_key="current_price"):
+        p = [_f(r[price_key]) for r in rows if r.get(price_key) is not None]
+        psf = [_f(r["close_price_by_calculated_sqft"]) for r in rows
+               if r.get("close_price_by_calculated_sqft") is not None]
+        dom = [_f(r["cumulative_days_on_market"]) for r in rows
+               if r.get("cumulative_days_on_market") is not None]
+        splp = [_f(r["sp_lp"]) for r in rows if r.get("sp_lp") is not None]
+        out = {"count": len(rows)}
+        if p:
+            out.update(avgPrice=round(mean(p)), medianPrice=round(median(p)),
+                       minPrice=round(min(p)), maxPrice=round(max(p)))
+        if psf:
+            out.update(avgPricePerSqft=round(mean(psf)))
+        if dom:
+            out.update(avgDaysOnMarket=round(mean(dom)), medianDaysOnMarket=round(median(dom)))
+        if splp:
+            out.update(avgSaleToListPct=round(mean(splp) * 100, 1))
+        if dom:
+            out.update(soldWithin14Days=sum(1 for d in dom if d <= 14))
+        return out
+
+    return {
+        "slug": cfg["slug"],
+        "name": cfg["name"],
+        "areaSlug": "siesta-key",
+        "street": cfg.get("street"),
+        "asOf": as_of,
+        "windows": {"headlineDays": HEADLINE_WINDOW_DAYS, "ledgerDays": LEDGER_WINDOW_DAYS},
+        "headline": agg(headline),
+        "trailing12": agg(ledger),
+        "active": {
+            "count": int(act.get("n") or 0),
+            "avgDaysOnMarket": None if act.get("avg_dom") is None else round(float(act["avg_dom"])),
+            "medianDaysOnMarket": None if act.get("med_dom") is None else round(float(act["med_dom"])),
+            "minPrice": None if act.get("min_p") is None else round(float(act["min_p"])),
+            "medianPrice": None if act.get("med_p") is None else round(float(act["med_p"])),
+            "maxPrice": None if act.get("max_p") is None else round(float(act["max_p"])),
+        },
+        "minimumLease": {"value": lease, "records": lease_n, "of": lease_total},
+        "quarters": [{"period": q["period"], "count": q["n"],
+                      "medianPrice": None if q["med"] is None else round(float(q["med"])),
+                      "avgPricePerSqft": None if q["psf"] is None else round(float(q["psf"]))}
+                     for q in qs],
+        "ledger": [{
+            "address": r["unparsed_address"],
+            "closeDate": r["close_date"].isoformat() if r.get("close_date") else None,
+            "price": None if r["current_price"] is None else round(float(r["current_price"])),
+            "pricePerSqft": None if r["close_price_by_calculated_sqft"] is None
+                            else round(float(r["close_price_by_calculated_sqft"])),
+            "daysOnMarket": r["cumulative_days_on_market"],
+            "beds": r["bedrooms_total"], "bathsFull": r["bathrooms_full"],
+            "livingArea": None if r["living_area"] is None else round(float(r["living_area"])),
+            "waterView": r["water_view"],
+        } for r in ledger],
+        "source": "Stellar MLS via the Adamson Group daily pipeline",
+        "note": ("Closed sales de-duplicated on (address, price); see duplicatesRemoved. "
+                 "Quarterly counts are NOT de-duplicated (computed in SQL)."),
+        "generatedBy": "scripts/gen_gulf_bay_pages.py",
+    }
+
+
+# Fields that change every run without the market changing. Excluded from the
+# publisher's change comparison so a quiet day costs zero Netlify builds.
+VOLATILE_KEYS = ("asOf", "generatedAt")
+
+
+def material(d):
+    return {k: v for k, v in d.items() if k not in VOLATILE_KEYS}
+
+
+def build_payload(conn):
+    """Return {repo_relative_path: file_text} for every file this generator owns.
+
+    Called by refresh_all_areas.py so community pages ride the same single daily
+    commit as the area stats. Pure function of the DB — writes nothing.
+    """
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    as_of = date.today().strftime("%B ") + str(date.today().day) + ", " + str(date.today().year)
+    files, stats, facts = {}, {}, {}
+
+    for key, cfg in SIDES.items():
+        headline, dup_h = dedupe_closed(fetch(cur, cfg["where"], HEADLINE_WINDOW_DAYS))
+        ledger, dup_l = dedupe_closed(fetch(cur, cfg["where"], LEDGER_WINDOW_DAYS))
+        lease, lease_n, lease_total = lease_consensus(cur, cfg["where"])
+        qs = quarters(cur, cfg["where"])
+        act = actives(cur, cfg["where"])
+
+        data = community_stats(cfg, headline, ledger, lease, lease_n, lease_total, qs, act, as_of)
+        data["duplicatesRemoved"] = {"headline": dup_h, "ledger": dup_l}
+        stats[cfg["slug"]] = data
+        files[f"{REL_DATA}/{cfg['slug']}-stats.json"] = json.dumps(data, indent=2, default=str)
+        files[f"{REL_PAGES}/{cfg['slug']}.astro"] = render_page(
+            cfg, headline, ledger, lease, lease_n, lease_total, qs, as_of)
+
+        prices = [float(r["current_price"]) for r in ledger if r["current_price"]]
+        psf = [float(r["close_price_by_calculated_sqft"]) for r in ledger
+               if r["close_price_by_calculated_sqft"]]
+        facts[key] = [
+            f"{len(ledger)} closed sales in the last 12 months",
+            (f"Median {money(median(prices))} \u00b7 ${int(round(mean(psf))):,}/sq ft")
+            if prices and psf else "Market data below",
+            f"{lease} minimum lease period" if lease else "Lease period not reported",
+        ]
+
+    files[f"{REL_PAGES}/gulf-and-bay-club.astro"] = HUB % {
+        "today": date.today().isoformat(),
+        "bf_facts": "[" + ", ".join(repr_js(f) for f in facts["beachfront"]) + "]",
+        "bs_facts": "[" + ", ".join(repr_js(f) for f in facts["bayside"]) + "]",
+    }
+    cur.close()
+    return files, stats
 
 
 # ── Rendering ─────────────────────────────────────────────────────────────────
@@ -966,44 +1153,40 @@ const sides = [
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--dry-run", action="store_true",
+                    help="compute and report, write nothing")
+    args = ap.parse_args()
     if not DATABASE_URL:
         sys.exit("DATABASE_URL not set (expected in .env)")
-    as_of = date.today().strftime("%B ") + str(date.today().day) + ", " + str(date.today().year)
     conn = psycopg2.connect(DATABASE_URL)
-    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    try:
+        files, stats = build_payload(conn)
+    finally:
+        conn.close()
+
+    for slug, d in stats.items():
+        t12, a = d["trailing12"], d["active"]
+        print(f"  {slug}: {t12.get('count', 0)} closed/12mo "
+              f"avg {money(t12.get('avgPrice'))} "
+              f"${t12.get('avgPricePerSqft')}/sf domAvg {t12.get('avgDaysOnMarket')} "
+              f"medDom {t12.get('medianDaysOnMarket')} | active {a['count']} "
+              f"avg {a['avgDaysOnMarket']}d | lease {d['minimumLease']['value']} "
+              f"{d['minimumLease']['records']}/{d['minimumLease']['of']}")
+
+    if args.dry_run:
+        print(f"dry-run: {len(files)} file(s) would be written")
+        for rel in sorted(files):
+            print("   ", rel)
+        return
+
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-
-    facts = {}
-    for key, cfg in SIDES.items():
-        headline = fetch(cur, cfg["where"], HEADLINE_WINDOW_DAYS)
-        ledger = fetch(cur, cfg["where"], LEDGER_WINDOW_DAYS)
-        lease, lease_n, lease_total = lease_consensus(cur, cfg["where"])
-        qs = quarters(cur, cfg["where"])
-
-        page = render_page(cfg, headline, ledger, lease, lease_n, lease_total, qs, as_of)
-        out = OUT_DIR / f"{cfg['slug']}.astro"
-        out.write_text(page, encoding="utf-8")
-        print(f"  wrote {out.relative_to(PROJECT_ROOT)}  "
-              f"({len(headline)} headline / {len(ledger)} ledger / lease={lease} {lease_n}/{lease_total})")
-
-        prices = [float(r["current_price"]) for r in ledger if r["current_price"]]
-        psf = [float(r["close_price_by_calculated_sqft"]) for r in ledger if r["close_price_by_calculated_sqft"]]
-        facts[key] = [
-            f"{len(ledger)} closed sales in the last 12 months",
-            (f"Median {money(median(prices))} · ${int(round(mean(psf))):,}/sq ft") if prices and psf else "Market data below",
-            f"{lease} minimum lease period" if lease else "Lease period not reported",
-        ]
-
-    hub = HUB % {
-        "today": date.today().isoformat(),
-        "bf_facts": "[" + ", ".join(repr_js(f) for f in facts["beachfront"]) + "]",
-        "bs_facts": "[" + ", ".join(repr_js(f) for f in facts["bayside"]) + "]",
-    }
-    (OUT_DIR / "gulf-and-bay-club.astro").write_text(hub, encoding="utf-8")
-    print("  wrote src/pages/siesta-key/gulf-and-bay-club.astro (hub)")
-
-    cur.close()
-    conn.close()
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    for rel, text in files.items():
+        out = PROJECT_ROOT / rel
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(text, encoding="utf-8")
+        print(f"  wrote {rel}")
     print("done.")
 
 

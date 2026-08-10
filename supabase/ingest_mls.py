@@ -22,6 +22,7 @@ import hashlib
 import json
 import os
 import sys
+import shutil
 import logging
 from datetime import datetime
 from pathlib import Path
@@ -598,14 +599,28 @@ def ingest_csv(filepath, conn, dry_run=False):
             f"inserted: {inserted}, updated: {updated}, unchanged: {unchanged}"
         )
 
-        # Step 7: Archive the file
-        archive_dir = Path(ARCHIVE_FOLDER)
-        archive_dir.mkdir(parents=True, exist_ok=True)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        archive_name = f"{timestamp}_{filepath.name}"
-        archive_path = archive_dir / archive_name
-        filepath.rename(archive_path)
-        log.info(f"  Archived to: {archive_path}")
+        # Step 7: Archive the file.
+        # NON-FATAL BY DESIGN. The database work above is already committed; if
+        # archiving fails we must NOT raise, because everything downstream of
+        # ingest (refresh_all_areas -> GitHub commit -> Netlify build) runs after
+        # this point and would be silently skipped.
+        # Uses shutil.move, not Path.rename: the runner copies the pipeline to
+        # /tmp while the CSV lives on the FUSE-mounted session drive, and
+        # os.rename() across filesystems raises OSError 18 "Invalid cross-device
+        # link". shutil.move falls back to copy+unlink. (Bug found 2026-08-09:
+        # a clean upsert of 1,283 rows was reported as a failed run.)
+        archive_path = None
+        try:
+            archive_dir = Path(ARCHIVE_FOLDER)
+            archive_dir.mkdir(parents=True, exist_ok=True)
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            archive_name = f"{timestamp}_{filepath.name}"
+            archive_path = archive_dir / archive_name
+            shutil.move(str(filepath), str(archive_path))
+            log.info(f"  Archived to: {archive_path}")
+        except Exception as e:
+            archive_path = None
+            log.warning(f"  Archive step failed (non-fatal, ingest already committed): {e}")
 
         cur.close()
         return {
@@ -613,6 +628,7 @@ def ingest_csv(filepath, conn, dry_run=False):
             "batch_id": str(batch_id), "total_rows": total_rows,
             "inserted": inserted, "updated": updated,
             "unchanged": unchanged, "submarket": submarket,
+            "archived_to": str(archive_path) if archive_path else None,
         }
 
     except Exception as e:
