@@ -906,8 +906,8 @@ def render_hero_styles(cfg):
   .gbc-hero--video .gbc-hero-overlay {{
     background:
       linear-gradient(to top,
-        rgba(10,31,60,0.90) 0%, rgba(10,31,60,0.62) 20%,
-        rgba(10,31,60,0.16) 42%, rgba(10,31,60,0) 56%),
+        rgba(10,31,60,0.84) 0%, rgba(10,31,60,0.50) 16%,
+        rgba(10,31,60,0.12) 34%, rgba(10,31,60,0) 48%),
       linear-gradient(to right,
         rgba(10,31,60,0.58) 0%, rgba(10,31,60,0.22) 34%, rgba(10,31,60,0) 60%),
       linear-gradient(to bottom,
@@ -937,6 +937,11 @@ def render_page(cfg, headline, ledger, lease, lease_n, lease_total, qs, as_of):
     hero_styles = render_hero_styles(cfg)
     hero_mod = " gbc-hero--video" if cfg.get("hero_video") else ""
     hero_rule = '<hr class="gbc-hero-rule" />\n      ' if cfg.get("hero_video") else ""
+    # video heroes carry the headline alone; the blurb clutters the footage and the
+    # same copy already opens the About section below. It still feeds <meta
+    # description> and the Place schema, so nothing is lost to search.
+    hero_blurb = ("" if cfg.get("hero_video")
+                  else f'      <p class="gbc-hero-tag">{cfg["blurb"]}</p>')
     standalone_attr = " standalone" if cfg.get("standalone") else ""
     idx_import = ("import IdxAreaShowcase from '@/components/IdxAreaShowcase.astro';"
                   if cfg.get("idx_widget_id") else "")
@@ -1040,7 +1045,7 @@ const jsonLd = [
     <div class="relative z-10 container">
       {hero_rule}<p class="section-label text-cbgl-blue-light mb-3">Siesta Key &middot; 34242 &middot; {cfg["label"]}</p>
       <h1 class="font-display text-white mb-4">{esc(cfg["name"])}</h1>
-      <p class="gbc-hero-tag">{cfg["blurb"]}</p>
+{hero_blurb}
       <p class="gbc-sister">Looking for the other association? <a href="/siesta-key/{cfg["sister_slug"]}">{esc(cfg["sister_name"])} &rarr;</a></p>
       <div class="gbc-beach" data-beach data-grid="{BEACH_NWS_GRID}" data-beach-id="{BEACH_MOTE_ID}" hidden>
         <span class="gbc-beach-label">{BEACH_LABEL}</span>
