@@ -2,16 +2,16 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-08-10T14:50:35.642434+00:00",
+  "lastUpdated": "2026-08-13T10:52:04.032888+00:00",
   "counts": {
-    "sold": 84,
-    "pending": 12,
-    "active": 50,
+    "sold": 87,
+    "pending": 9,
+    "active": 48,
     "total": 96
   },
   "metrics": {
-    "avgPrice": "$1,162,481",
-    "avgPricePerSqFt": "$527",
+    "avgPrice": "$1,157,439",
+    "avgPricePerSqFt": "$525",
     "avgYearBuilt": 1973,
     "avgLivingSqFt": "1,969",
     "avgLotSqFt": null,
@@ -22,23 +22,23 @@
     "maxPrice": "$22,900,000"
   },
   "active": {
-    "count": 50,
-    "medianPrice": "$744,450",
-    "medianPricePerSqFt": "$542",
+    "count": 48,
+    "medianPrice": "$806,735",
+    "medianPricePerSqFt": "$548",
     "waterfrontCount": 16,
-    "newConstructionCount": 18
+    "newConstructionCount": 17
   },
   "sold": {
-    "count": 20,
-    "medianPrice": "$657,500",
-    "medianDom": 65,
-    "saleToListRatio": "88.8%",
+    "count": 21,
+    "medianPrice": "$650,000",
+    "medianDom": 66,
+    "saleToListRatio": "86.8%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 9.9,
-    "sfhVilla": 7.4,
-    "blended": 8.0,
+    "condo": 8.7,
+    "sfhVilla": 7.0,
+    "blended": 7.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 28,
+    "under900k": 26,
     "band900kTo1_5m": 7,
     "band1_5mTo3m": 6,
     "band3mPlus": 9
@@ -62,11 +62,50 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 50
+      "count": 48
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4649616",
+      "address": "3931 BAY SHORE RD",
+      "subdivision": "INDIAN BEACH MAP OF",
+      "soldPrice": "$2,500,000",
+      "soldDate": "2026-08-12",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "3,012",
+      "yearBuilt": 1950,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4632292",
+      "address": "1709 N TAMIAMI TRL #215",
+      "subdivision": "THE STRAND OF SARASOTA",
+      "soldPrice": "$385,000",
+      "soldDate": "2026-08-11",
+      "bedrooms": 1,
+      "bathrooms": 1.5,
+      "livingSqFt": "855",
+      "yearBuilt": 2022,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4692698",
+      "address": "845 HIGHLAND ST",
+      "subdivision": "HIGHLAND PINES",
+      "soldPrice": "$525,000",
+      "soldDate": "2026-08-07",
+      "bedrooms": 2,
+      "bathrooms": 1.5,
+      "livingSqFt": "1,106",
+      "yearBuilt": 1961,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4688048",
       "address": "1709 N TAMIAMI TRL #522",
@@ -92,45 +131,6 @@
       "yearBuilt": 2024,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4687057",
-      "address": "3127 BAY SHORE RD",
-      "subdivision": "INDIAN BEACH MAP OF",
-      "soldPrice": "$2,650,000",
-      "soldDate": "2026-07-16",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "3,219",
-      "yearBuilt": 1953,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4691547",
-      "address": "1703 N TAMIAMI TRL #B504",
-      "subdivision": "THE STRAND SARASOTA",
-      "soldPrice": "$420,000",
-      "soldDate": "2026-07-14",
-      "bedrooms": 1,
-      "bathrooms": 2.0,
-      "livingSqFt": "858",
-      "yearBuilt": 2022,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4679800",
-      "address": "428 SAPPHIRE DR",
-      "subdivision": "SAPPHIRE SHORES",
-      "soldPrice": "$1,100,000",
-      "soldDate": "2026-07-03",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,174",
-      "yearBuilt": 1990,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$569,000",
       "avgPricePerSqFt": "$451",
       "avgLivingSqFt": "1,262",
-      "avgDom": 87
+      "avgDom": 90
     },
     {
       "tier": "1990to2005",
@@ -168,11 +168,11 @@
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 13,
-      "avgPrice": "$586,182",
-      "avgPricePerSqFt": "$563",
-      "avgLivingSqFt": "1,047",
-      "avgDom": 125
+      "activeCount": 12,
+      "avgPrice": "$601,781",
+      "avgPricePerSqFt": "$571",
+      "avgLivingSqFt": "1,063",
+      "avgDom": 128
     }
   ],
   "condoTiersScope": {
@@ -197,7 +197,7 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 16,
-      "soldCount": 24,
+      "soldCount": 26,
       "soldMedianPricePerSqFt": "$542",
       "soldMedianPrice": "$650,000",
       "lowSample": false
@@ -214,35 +214,35 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 29,
-      "soldCount": 58,
+      "activeCount": 27,
+      "soldCount": 59,
       "soldMedianPricePerSqFt": "$403",
-      "soldMedianPrice": "$587,000",
+      "soldMedianPrice": "$575,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 8.0,
-    "monthsOfSupplyCondo": 9.9,
-    "monthsOfSupplySfhVilla": 7.4,
+    "monthsOfSupply": 7.4,
+    "monthsOfSupplyCondo": 8.7,
+    "monthsOfSupplySfhVilla": 7.0,
     "label": "buyer's market",
-    "activeCount": 50,
-    "sold365Count": 75,
-    "sold90Count": 20,
+    "activeCount": 48,
+    "sold365Count": 78,
+    "sold90Count": 21,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 66,
-      "activeCount": 36,
+      "soldCount": 68,
+      "activeCount": 35,
       "soldMedianPrice": "$686,515",
-      "soldMedianPricePerSqFt": "$426"
+      "soldMedianPricePerSqFt": "$427"
     },
     "condo": {
-      "soldCount": 18,
-      "activeCount": 14,
-      "soldMedianPrice": "$472,500",
-      "soldMedianPricePerSqFt": "$500"
+      "soldCount": 19,
+      "activeCount": 13,
+      "soldMedianPrice": "$470,000",
+      "soldMedianPricePerSqFt": "$492"
     }
   },
   "boating": {
@@ -253,22 +253,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 50 active listings and roughly 6 closed sales a month (trailing 12 months), West Of Trail North has about 8.0 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 48 active listings and roughly 6 closed sales a month (trailing 12 months), West Of Trail North has about 7.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail North?",
-      "a": "Single-family homes sell around $686,515 ($426/sq ft), while condos, villas and townhouses sell around $472,500 ($500/sq ft)."
+      "a": "Single-family homes sell around $686,515 ($427/sq ft), while condos, villas and townhouses sell around $470,000 ($492/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail North?",
-      "a": "Active listings run from $251,700 to $22,900,000, with a median asking price of $744,450."
+      "a": "Active listings run from $251,700 to $22,900,000, with a median asking price of $806,735."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 65 days on market and closed at 88.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 66 days on market and closed at 86.8% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

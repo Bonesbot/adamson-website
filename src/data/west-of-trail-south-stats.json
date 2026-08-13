@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-08-10T14:50:36.342923+00:00",
+  "lastUpdated": "2026-08-13T10:52:04.754545+00:00",
   "counts": {
-    "sold": 267,
-    "pending": 25,
+    "sold": 270,
+    "pending": 27,
     "active": 92,
-    "total": 292
+    "total": 297
   },
   "metrics": {
-    "avgPrice": "$630,273",
-    "avgPricePerSqFt": "$329",
+    "avgPrice": "$636,622",
+    "avgPricePerSqFt": "$331",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,740",
+    "avgLivingSqFt": "1,746",
     "avgLotSqFt": null,
     "avgDom": 77
   },
@@ -23,22 +23,22 @@
   },
   "active": {
     "count": 92,
-    "medianPrice": "$484,850",
-    "medianPricePerSqFt": "$325",
-    "waterfrontCount": 27,
+    "medianPrice": "$481,850",
+    "medianPricePerSqFt": "$320",
+    "waterfrontCount": 26,
     "newConstructionCount": 2
   },
   "sold": {
     "count": 52,
     "medianPrice": "$407,500",
-    "medianDom": 41,
-    "saleToListRatio": "88.8%",
+    "medianDom": 48,
+    "saleToListRatio": "88.5%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.9,
+    "condo": 5.8,
     "sfhVilla": 4.3,
-    "blended": 5.0,
+    "blended": 4.9,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,9 +54,9 @@
     }
   },
   "priceBands": {
-    "under900k": 72,
+    "under900k": 73,
     "band900kTo1_5m": 6,
-    "band1_5mTo3m": 9,
+    "band1_5mTo3m": 8,
     "band3mPlus": 5
   },
   "propertyTypes": [
@@ -67,6 +67,45 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4680848",
+      "address": "1725 BAYWOOD DR",
+      "subdivision": "BAY VIEW ACRES",
+      "soldPrice": "$2,175,000",
+      "soldDate": "2026-08-12",
+      "bedrooms": 4,
+      "bathrooms": 4.0,
+      "livingSqFt": "3,612",
+      "yearBuilt": 1984,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4683877",
+      "address": "6650 SCHOONER BAY CIR #6650",
+      "subdivision": "SCHOONER BAY",
+      "soldPrice": "$385,000",
+      "soldDate": "2026-08-10",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,206",
+      "yearBuilt": 1983,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4685645",
+      "address": "1708 GLENHOUSE DR #313",
+      "subdivision": "PELICAN COVE XIV",
+      "soldPrice": "$320,000",
+      "soldDate": "2026-08-10",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,330",
+      "yearBuilt": 1979,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4697181",
       "address": "1503 CLOWER CREEK DR #259",
@@ -92,45 +131,6 @@
       "yearBuilt": 1978,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4693436",
-      "address": "6688 SCHOONER BAY CIR #6688",
-      "subdivision": "SCHOONER BAY",
-      "soldPrice": "$740,000",
-      "soldDate": "2026-08-05",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,812",
-      "yearBuilt": 1988,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4667413",
-      "address": "1627 BOATHOUSE CIR #127",
-      "subdivision": "PELICAN COVE IX",
-      "soldPrice": "$512,500",
-      "soldDate": "2026-08-03",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,216",
-      "yearBuilt": 1979,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4694062",
-      "address": "1702 GLENHOUSE DR #410",
-      "subdivision": "PELICAN COVE XIV",
-      "soldPrice": "$285,000",
-      "soldDate": "2026-07-31",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,576",
-      "yearBuilt": 1979,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 50,
-      "avgPrice": "$367,765",
-      "avgPricePerSqFt": "$290",
-      "avgLivingSqFt": "1,280",
-      "avgDom": 137
+      "activeCount": 52,
+      "avgPrice": "$365,170",
+      "avgPricePerSqFt": "$291",
+      "avgLivingSqFt": "1,261",
+      "avgDom": 128
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 6,
-      "avgPrice": "$642,000",
-      "avgPricePerSqFt": "$315",
-      "avgLivingSqFt": "2,053",
-      "avgDom": 142
+      "activeCount": 5,
+      "avgPrice": "$640,400",
+      "avgPricePerSqFt": "$302",
+      "avgLivingSqFt": "2,121",
+      "avgDom": 156
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$589,667",
       "avgPricePerSqFt": "$345",
       "avgLivingSqFt": "1,711",
-      "avgDom": 139
+      "avgDom": 141
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$629,000",
       "avgPricePerSqFt": "$353",
       "avgLivingSqFt": "1,785",
-      "avgDom": 226
+      "avgDom": 228
     }
   ],
   "condoTiersScope": {
@@ -196,8 +196,8 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 24,
-      "soldCount": 54,
+      "activeCount": 23,
+      "soldCount": 56,
       "soldMedianPricePerSqFt": "$366",
       "soldMedianPrice": "$500,500",
       "lowSample": false
@@ -205,9 +205,9 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 15,
-      "soldCount": 24,
-      "soldMedianPricePerSqFt": "$307",
+      "activeCount": 16,
+      "soldCount": 25,
+      "soldMedianPricePerSqFt": "$315",
       "soldMedianPrice": "$450,000",
       "lowSample": false
     },
@@ -231,58 +231,58 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.0,
-    "monthsOfSupplyCondo": 5.9,
+    "monthsOfSupply": 4.9,
+    "monthsOfSupplyCondo": 5.8,
     "monthsOfSupplySfhVilla": 4.3,
-    "label": "balanced market",
+    "label": "seller's market",
     "activeCount": 92,
-    "sold365Count": 222,
+    "sold365Count": 224,
     "sold90Count": 52,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 143,
-      "activeCount": 31,
-      "soldMedianPrice": "$517,500",
+      "soldCount": 144,
+      "activeCount": 30,
+      "soldMedianPrice": "$518,750",
       "soldMedianPricePerSqFt": "$320"
     },
     "condo": {
-      "soldCount": 124,
-      "activeCount": 61,
+      "soldCount": 126,
+      "activeCount": 62,
       "soldMedianPrice": "$348,750",
       "soldMedianPricePerSqFt": "$261"
     }
   },
   "boating": {
     "activeWithDock": 11,
-    "activeWaterfront": 27
+    "activeWaterfront": 26
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 92 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 5.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 92 active listings and roughly 19 closed sales a month (trailing 12 months), West Of Trail South has about 4.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $517,500 ($320/sq ft), while condos, villas and townhouses sell around $348,750 ($261/sq ft)."
+      "a": "Single-family homes sell around $518,750 ($320/sq ft), while condos, villas and townhouses sell around $348,750 ($261/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $110,000 to $6,000,000, with a median asking price of $484,850."
+      "a": "Active listings run from $110,000 to $6,000,000, with a median asking price of $481,850."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 41 days on market and closed at 88.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 48 days on market and closed at 88.5% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 27 active waterfront listings, 11 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 26 active waterfront listings, 11 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
