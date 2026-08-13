@@ -12,6 +12,8 @@ interface Props {
   canonicalUrl?: string;
   jsonLd?: Record<string, any> | Record<string, any>[];
   noIndex?: boolean;
+  /** Landing-page mode: header shows the logos only, no site nav. */
+  standalone?: boolean;
 }
 
 const {
@@ -21,6 +23,7 @@ const {
   canonicalUrl,
   jsonLd,
   noIndex = false,
+  standalone = false,
 } = Astro.props;
 
 const siteTitle = 'Ryan Adamson | Luxury Real Estate — Sarasota & Barrier Islands';
@@ -57,7 +60,7 @@ const fullTitle = title === 'Home' ? siteTitle : `${title} | Ryan Adamson Realty
   </head>
   <body class="min-h-screen flex flex-col">
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <Header />
+    <Header standalone={standalone} />
     <main id="main-content" class="flex-1">
       <slot />
     </main>

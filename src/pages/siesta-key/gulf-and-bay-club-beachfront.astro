@@ -51,9 +51,9 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title='Gulf & Bay Club Beachfront Condos — Siesta Key' description={description} jsonLd={jsonLd}>
+<BaseLayout title='Gulf & Bay Club Beachfront Condos — Siesta Key' description={description} jsonLd={jsonLd} standalone>
 
-  <section class="gbc-hero">
+  <section class="gbc-hero gbc-hero--video">
     <div class="gbc-hero-bg">
       <video
         class="gbc-hero-video"
@@ -66,6 +66,7 @@ const jsonLd = [
     </div>
     <div class="gbc-hero-overlay"></div>
     <div class="relative z-10 container">
+      <hr class="gbc-hero-rule" />
       <p class="section-label text-cbgl-blue-light mb-3">Siesta Key &middot; 34242 &middot; Beachfront</p>
       <h1 class="font-display text-white mb-4">Gulf &amp; Bay Club Beachfront</h1>
       <p class="gbc-hero-tag">The flagship 32-acre Gulf-front community on Midnight Pass Road, sitting directly on Siesta Key&rsquo;s white quartz sand.</p>
@@ -502,7 +503,35 @@ const jsonLd = [
   </section>
 
 <style is:global>
+  .gbc-hero.gbc-hero--video {
+    min-height:clamp(540px, 84vh, 920px);
+    display:flex; align-items:flex-end;
+    padding-top:7rem; padding-bottom:4rem;
+  }
+  .gbc-hero--video > .container { width:100%; }
   .gbc-hero-video { width:100%; height:100%; object-fit:cover; display:block; }
+  .gbc-hero--video .gbc-hero-overlay {
+    background:
+      linear-gradient(to top,
+        rgba(10,31,60,0.90) 0%, rgba(10,31,60,0.62) 20%,
+        rgba(10,31,60,0.16) 42%, rgba(10,31,60,0) 56%),
+      linear-gradient(to right,
+        rgba(10,31,60,0.58) 0%, rgba(10,31,60,0.22) 34%, rgba(10,31,60,0) 60%),
+      linear-gradient(to bottom,
+        rgba(4,12,26,0.46) 0%, rgba(4,12,26,0.13) 9%, rgba(4,12,26,0) 17%);
+  }
+  .gbc-hero--video h1 { text-shadow:0 2px 22px rgba(4,12,26,0.55); }
+  .gbc-hero--video .gbc-hero-tag { text-shadow:0 1px 14px rgba(4,12,26,0.6); color:rgba(255,255,255,0.92); }
+  /* the site's pale-blue eyebrow disappears against bright sand and white balconies —
+     white carries everywhere, and the gold rule above it does the brand work instead */
+  .gbc-hero--video .section-label { color:rgba(255,255,255,0.95); text-shadow:0 1px 12px rgba(4,12,26,0.85); }
+  .gbc-hero--video .gbc-hero-rule {
+    width:64px; height:2px; margin:0 0 1.5rem; border:0;
+    background:var(--color-gold); box-shadow:0 1px 10px rgba(4,12,26,0.5);
+  }
+  @media (max-width:640px) {
+    .gbc-hero.gbc-hero--video { min-height:clamp(460px, 76vh, 680px); padding-top:6rem; padding-bottom:2.5rem; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .gbc-hero-video { display:none; }
     .gbc-hero-bg { background-image:url('/videos/gulf-and-bay-club-beachfront-still.jpg'); }

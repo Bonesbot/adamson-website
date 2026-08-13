@@ -164,6 +164,8 @@ SIDES = {
         "hero_video": "/videos/gulf-and-bay-club-beachfront.mp4",
         "hero_poster": "/videos/gulf-and-bay-club-beachfront-poster.jpg",
         "hero_still": "/videos/gulf-and-bay-club-beachfront-still.jpg",
+        # standalone landing page: header shows the dual logos only, no site nav
+        "standalone": True,
         "sister_slug": "gulf-and-bay-club-bayside",
         "sister_name": "Gulf & Bay Club Bayside",
         "team": "Kelli & Ryan",
@@ -875,12 +877,54 @@ def render_hero_bg(cfg):
 
 
 def render_hero_styles(cfg):
-    """Extra CSS only a video hero needs — including the reduced-motion fallback."""
+    """Extra CSS only a video hero needs.
+
+    Three deliberate departures from the still-image hero:
+
+    1. HEIGHT. `object-fit:cover` crops whatever the box doesn't have room for, and the
+       old hero was a short letterbox, so the top of a 16:9 frame — sky, beach, the water
+       line — was thrown away. A tall hero keeps the frame close to its native shape.
+    2. THE SCRIM. The stock-photo hero used a flat black wash (0.55 -> 0.9) across the
+       whole frame, which is fine over a photo and ruinous over water: it greys out the
+       exact turquoise the footage was shot for. Replaced with brand navy, tinted only
+       where type actually sits — bottom, and a soft left edge — leaving the middle and
+       upper right of the frame untouched.
+    3. TYPE. With no wash to sit on, the headline carries its own shadow instead, and a
+       gold rule ties it back to the brand.
+    """
     if not cfg.get("hero_video"):
         return ""
     still = cfg.get("hero_still") or cfg["hero"]
     return f"""
+  .gbc-hero.gbc-hero--video {{
+    min-height:clamp(540px, 84vh, 920px);
+    display:flex; align-items:flex-end;
+    padding-top:7rem; padding-bottom:4rem;
+  }}
+  .gbc-hero--video > .container {{ width:100%; }}
   .gbc-hero-video {{ width:100%; height:100%; object-fit:cover; display:block; }}
+  .gbc-hero--video .gbc-hero-overlay {{
+    background:
+      linear-gradient(to top,
+        rgba(10,31,60,0.90) 0%, rgba(10,31,60,0.62) 20%,
+        rgba(10,31,60,0.16) 42%, rgba(10,31,60,0) 56%),
+      linear-gradient(to right,
+        rgba(10,31,60,0.58) 0%, rgba(10,31,60,0.22) 34%, rgba(10,31,60,0) 60%),
+      linear-gradient(to bottom,
+        rgba(4,12,26,0.46) 0%, rgba(4,12,26,0.13) 9%, rgba(4,12,26,0) 17%);
+  }}
+  .gbc-hero--video h1 {{ text-shadow:0 2px 22px rgba(4,12,26,0.55); }}
+  .gbc-hero--video .gbc-hero-tag {{ text-shadow:0 1px 14px rgba(4,12,26,0.6); color:rgba(255,255,255,0.92); }}
+  /* the site's pale-blue eyebrow disappears against bright sand and white balconies —
+     white carries everywhere, and the gold rule above it does the brand work instead */
+  .gbc-hero--video .section-label {{ color:rgba(255,255,255,0.95); text-shadow:0 1px 12px rgba(4,12,26,0.85); }}
+  .gbc-hero--video .gbc-hero-rule {{
+    width:64px; height:2px; margin:0 0 1.5rem; border:0;
+    background:var(--color-gold); box-shadow:0 1px 10px rgba(4,12,26,0.5);
+  }}
+  @media (max-width:640px) {{
+    .gbc-hero.gbc-hero--video {{ min-height:clamp(460px, 76vh, 680px); padding-top:6rem; padding-bottom:2.5rem; }}
+  }}
   @media (prefers-reduced-motion: reduce) {{
     .gbc-hero-video {{ display:none; }}
     .gbc-hero-bg {{ background-image:url('{still}'); }}
@@ -891,6 +935,9 @@ def render_page(cfg, headline, ledger, lease, lease_n, lease_total, qs, as_of):
     uid = cfg["slug"]
     hero_bg = render_hero_bg(cfg)
     hero_styles = render_hero_styles(cfg)
+    hero_mod = " gbc-hero--video" if cfg.get("hero_video") else ""
+    hero_rule = '<hr class="gbc-hero-rule" />\n      ' if cfg.get("hero_video") else ""
+    standalone_attr = " standalone" if cfg.get("standalone") else ""
     idx_import = ("import IdxAreaShowcase from '@/components/IdxAreaShowcase.astro';"
                   if cfg.get("idx_widget_id") else "")
     idx_section = (f"""
@@ -985,13 +1032,13 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={repr_js(cfg["name"] + " Condos — Siesta Key")} description={{description}} jsonLd={{jsonLd}}>
+<BaseLayout title={repr_js(cfg["name"] + " Condos — Siesta Key")} description={{description}} jsonLd={{jsonLd}}{standalone_attr}>
 
-  <section class="gbc-hero">
+  <section class="gbc-hero{hero_mod}">
     {hero_bg}
     <div class="gbc-hero-overlay"></div>
     <div class="relative z-10 container">
-      <p class="section-label text-cbgl-blue-light mb-3">Siesta Key &middot; 34242 &middot; {cfg["label"]}</p>
+      {hero_rule}<p class="section-label text-cbgl-blue-light mb-3">Siesta Key &middot; 34242 &middot; {cfg["label"]}</p>
       <h1 class="font-display text-white mb-4">{esc(cfg["name"])}</h1>
       <p class="gbc-hero-tag">{cfg["blurb"]}</p>
       <p class="gbc-sister">Looking for the other association? <a href="/siesta-key/{cfg["sister_slug"]}">{esc(cfg["sister_name"])} &rarr;</a></p>

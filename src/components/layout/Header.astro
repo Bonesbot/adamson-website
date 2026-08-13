@@ -14,6 +14,13 @@ const navItems: { label: string; href: string; pin?: boolean }[] = [
   { label: 'Contact', href: '/contact' },
 ];
 
+interface Props {
+  /** Landing-page mode: dual logos only, no nav, no mobile menu. The page stands
+   *  on its own and shouldn't offer twelve ways to leave it. */
+  standalone?: boolean;
+}
+const { standalone = false } = Astro.props;
+
 const currentPath = Astro.url.pathname;
 ---
 
@@ -43,6 +50,7 @@ const currentPath = Astro.url.pathname;
       </a>
 
       <!-- Desktop Navigation -->
+      {!standalone && (
       <ul class="hidden xl:flex items-center gap-x-4" role="list">
         {navItems.map((item) => (
           <li>
@@ -73,8 +81,10 @@ const currentPath = Astro.url.pathname;
           </a>
         </li>
       </ul>
+      )}
 
       <!-- Mobile Menu Button -->
+      {!standalone && (
       <button
         class="xl:hidden text-white p-2"
         id="mobile-menu-toggle"
@@ -85,10 +95,12 @@ const currentPath = Astro.url.pathname;
           <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
+      )}
     </nav>
   </div>
 
   <!-- Mobile Menu -->
+  {!standalone && (
   <div class="hidden xl:hidden bg-black/95 backdrop-blur-md" id="mobile-menu">
     <ul class="container py-6 space-y-4" role="list">
       {navItems.map((item) => (
@@ -116,6 +128,7 @@ const currentPath = Astro.url.pathname;
       </li>
     </ul>
   </div>
+  )}
 </header>
 
 <script>
@@ -132,11 +145,14 @@ const currentPath = Astro.url.pathname;
   updateHeader();
 
   // Mobile menu toggle
-  const toggle = document.getElementById('mobile-menu-toggle')!;
-  const menu = document.getElementById('mobile-menu')!;
-  toggle.addEventListener('click', () => {
-    const isOpen = !menu.classList.contains('hidden');
-    menu.classList.toggle('hidden');
-    toggle.setAttribute('aria-expanded', String(!isOpen));
-  });
+  // standalone pages render no mobile menu at all — bail rather than throw
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const isOpen = !menu.classList.contains('hidden');
+      menu.classList.toggle('hidden');
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+    });
+  }
 </script>
