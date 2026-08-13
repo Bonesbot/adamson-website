@@ -146,6 +146,25 @@ def water_view(r):
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
+# Ryan's own photography of the Beachfront grounds, shot on site 2026-08.
+# Every entry is served locally as WebP with a JPEG fallback; sources were 4-8MB
+# camera originals (two of them HEIC, which browsers can't render) and carried GPS
+# in EXIF — resized to 1600px, converted, and stripped by Media-Studio's
+# scripts/optimize_photos.py before they went anywhere near the repo.
+# Layout: four 4:3 in a 2x2, then one 16:9 spanning both columns.
+BEACHFRONT_GALLERY = [
+    ("/images/gulf-and-bay-beachfront/front-row-on-siesta-key",
+     "Gulf & Bay Club Beachfront seen from over the Gulf — the buildings sit in the front row on Siesta Key", ""),
+    ("/images/gulf-and-bay-beachfront/resort-pool-shortwalk-to-beach",
+     "The resort pool and lagoon at Gulf & Bay Club, a short walk from the sand", ""),
+    ("/images/gulf-and-bay-beachfront/tennis-pickleball",
+     "Tennis and pickleball courts on the Gulf & Bay Club grounds", ""),
+    ("/images/gulf-and-bay-beachfront/lagoon-fountain-seating",
+     "Shaded seating at the lagoon's edge, fountain running, Gulf & Bay Club", ""),
+    ("/images/gulf-and-bay-beachfront/shores-of-siesta-key",
+     "The white quartz shoreline of Siesta Key curving north past Gulf & Bay Club", "gbc-fig-wide"),
+]
+
 SIDES = {
     "beachfront": {
         "slug": "gulf-and-bay-club-beachfront",
@@ -154,9 +173,9 @@ SIDES = {
         "label": "Beachfront",
         "where": "subdivision_name ILIKE '%%GULF%%BAY%%CLUB%%' AND subdivision_name NOT ILIKE '%%BAYSIDE%%'",
         "blurb": "The flagship 32-acre Gulf-front community on Midnight Pass Road, sitting directly on Siesta Key&rsquo;s white quartz sand.",
-        "about": "Set on 32 beachfront acres along Midnight Pass Road, Gulf &amp; Bay Club is one of Siesta Key&rsquo;s most established condominium communities &mdash; known for lush tropical landscaping, tennis, pools, and direct access to the #1-rated Siesta Key Beach. Units are predominantly two-bedroom plans in the 1,300&ndash;1,500 sq ft range, with a handful of larger corner and penthouse residences. This page tracks the real closed-sale market, straight from the MLS.",
+        "about": "Set on 32 beachfront acres along Midnight Pass Road, Gulf &amp; Bay Club is one of Siesta Key&rsquo;s most established condominium communities &mdash; and one of the few that sits in the front row, with the #1-rated Siesta Key Beach at the end of the path rather than across a road. The grounds are the draw: spring-fed lagoons with fountains, a resort-scale pool a short walk from the sand, tennis and pickleball courts, and shaded pavilions with grills scattered through the palms. Units are predominantly two-bedroom plans in the 1,300&ndash;1,500 sq ft range, with a handful of larger corner and penthouse residences. This page tracks the real closed-sale market, straight from the MLS.",
         "street": "5740-5790 Midnight Pass Road",
-        "chips": ["Gulf-Front", "Siesta Key Beach", "Tennis &amp; Pools", "Gated", "1-Month Minimum Lease"],
+        "chips": ["Gulf-Front", "Siesta Key Beach", "Tennis &amp; Pickleball", "Lagoon Grounds", "Gated", "1-Month Minimum Lease"],
         "hero": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg/1920px-SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg",
         # Drone footage of the actual grounds, built by Media-Studio/scripts/hero_loop.py
         # (job: gulf-and-bay-club-beachfront, 2026-08-13). When "hero_video" is set it REPLACES
@@ -164,6 +183,9 @@ SIDES = {
         "hero_video": "/videos/gulf-and-bay-club-beachfront.mp4",
         "hero_poster": "/videos/gulf-and-bay-club-beachfront-poster.jpg",
         "hero_still": "/videos/gulf-and-bay-club-beachfront-still.jpg",
+        # Ryan's own photography — see BEACHFRONT_GALLERY. Presence of this key also
+        # switches the credit line from the Wikimedia placeholder notice.
+        "gallery": BEACHFRONT_GALLERY,
         # standalone landing page: header shows the dual logos only, no site nav
         "standalone": True,
         "sister_slug": "gulf-and-bay-club-bayside",
@@ -198,7 +220,7 @@ BEACH_NWS_GRID = "TBW/70,67"      # api.weather.gov gridpoint for Siesta Key
 BEACH_MOTE_ID = "2"               # visitbeaches.org beach id — Siesta Key Beach
 BEACH_LABEL = "Siesta Key Beach today"
 
-# Same placeholder CC photo set on both pages, per spec.
+# Placeholder CC set — still used by Bayside and the hub until Ryan shoots those.
 GALLERY = [
     ("https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Siesta_Key_Beach._Sarasota_-_panoramio.jpg/1920px-Siesta_Key_Beach._Sarasota_-_panoramio.jpg", "Siesta Key Beach near Gulf & Bay Club", "gbc-fig-tall"),
     ("https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Red_Lifeguard_Stand_at_Siesta_Key_Beach.jpg/1920px-Red_Lifeguard_Stand_at_Siesta_Key_Beach.jpg", "Red lifeguard stand on Siesta Key Beach", ""),
@@ -612,7 +634,7 @@ STYLES = r'''<style is:global>
   .gbc-fig img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .7s; }
   .gbc-fig:hover img { transform:scale(1.05); }
   .gbc-fig-tall { grid-row:span 2; aspect-ratio:3/4; }
-  .gbc-fig-wide { aspect-ratio:16/9; }
+  .gbc-fig-wide { aspect-ratio:16/9; grid-column:span 2; }
   .gbc-blurb { color:rgba(255,255,255,0.72); max-width:46rem; line-height:1.7; margin-bottom:0.4rem; }
   .gbc-window { color:rgba(255,255,255,0.45); font-family:var(--font-accent); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1.25rem; }
   .gbc-subhead { margin-top:3rem; margin-bottom:0.35rem; color:#fff; font-size:1.4rem; }
@@ -854,6 +876,17 @@ SCRIPTS = r'''<script is:inline>
 </script>'''
 
 
+def render_figure(src, alt, cls):
+    """Owned photos are local and extensionless in config -> <picture> with WebP first.
+    Anything with a scheme is an external placeholder and stays a plain <img>."""
+    if src.startswith("http"):
+        return f'<figure class="gbc-fig {cls}"><img src="{src}" alt="{esc(alt)}" loading="lazy" /></figure>'
+    return (f'<figure class="gbc-fig {cls}"><picture>'
+            f'<source srcset="{src}.webp" type="image/webp" />'
+            f'<img src="{src}.jpg" alt="{esc(alt)}" loading="lazy" decoding="async" '
+            f'width="1600" height="900" /></picture></figure>')
+
+
 def render_hero_bg(cfg):
     """The hero backdrop: a looping silent video when one exists, else the still.
 
@@ -960,9 +993,14 @@ def render_page(cfg, headline, ledger, lease, lease_n, lease_total, qs, as_of):
                    f"per sqft, days on market and sale-to-list ratios from live Stellar MLS data.")
 
     chips = "\n            ".join(f'<span class="gbc-chip">{c}</span>' for c in cfg["chips"])
-    figs = "\n          ".join(
-        f'<figure class="gbc-fig {cls}"><img src="{src}" alt="{esc(alt)}" loading="lazy" /></figure>'
-        for src, alt, cls in GALLERY)
+    gallery = cfg.get("gallery") or GALLERY
+    photo_credit = (f'Photography and video &copy; Ryan Adamson &mdash; shot on site at {esc(cfg["name"])}.'
+                    if cfg.get("gallery") else
+                    f'Photography (placeholder &mdash; to be replaced): Siesta Key beach imagery via Wikimedia '
+                    f'Commons &mdash; "Sarasota Sunset, Siesta Key" &amp; "Siesta Key sunset" by John Simpson and '
+                    f'contributors (CC BY 3.0), "Siesta Key Beach" (CC BY 3.0), "Red Lifeguard Stand at Siesta Key '
+                    f'Beach" (CC0). Not photographs of the {esc(cfg["short"])} buildings themselves.')
+    figs = "\n          ".join(render_figure(src, alt, cls) for src, alt, cls in gallery)
 
     if lease:
         lease_a = (f"The MLS reports a {lease} minimum lease for {cfg['name']} on {lease_n} of {lease_total} "
@@ -1124,7 +1162,7 @@ const jsonLd = [
   <section class="section-sm dark-section">
     <div class="container-narrow">
       <p class="gbc-disc">Data as of {as_of}.</p>
-      <p class="gbc-disc gbc-credit">Photography (placeholder — to be replaced): Siesta Key beach imagery via Wikimedia Commons — "Sarasota Sunset, Siesta Key" &amp; "Siesta Key sunset" by John Simpson and contributors (CC BY 3.0), "Siesta Key Beach" (CC BY 3.0), "Red Lifeguard Stand at Siesta Key Beach" (CC0). Not photographs of the {esc(cfg["short"])} buildings themselves.</p>
+      <p class="gbc-disc gbc-credit">{photo_credit}</p>
     </div>
   </section>
 

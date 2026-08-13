@@ -85,20 +85,22 @@ const jsonLd = [
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
         <div>
           <h2 class="accent-underline mb-6">About Beachfront</h2>
-          <p class="gbc-about">Set on 32 beachfront acres along Midnight Pass Road, Gulf &amp; Bay Club is one of Siesta Key&rsquo;s most established condominium communities &mdash; known for lush tropical landscaping, tennis, pools, and direct access to the #1-rated Siesta Key Beach. Units are predominantly two-bedroom plans in the 1,300&ndash;1,500 sq ft range, with a handful of larger corner and penthouse residences. This page tracks the real closed-sale market, straight from the MLS.</p>
+          <p class="gbc-about">Set on 32 beachfront acres along Midnight Pass Road, Gulf &amp; Bay Club is one of Siesta Key&rsquo;s most established condominium communities &mdash; and one of the few that sits in the front row, with the #1-rated Siesta Key Beach at the end of the path rather than across a road. The grounds are the draw: spring-fed lagoons with fountains, a resort-scale pool a short walk from the sand, tennis and pickleball courts, and shaded pavilions with grills scattered through the palms. Units are predominantly two-bedroom plans in the 1,300&ndash;1,500 sq ft range, with a handful of larger corner and penthouse residences. This page tracks the real closed-sale market, straight from the MLS.</p>
           <div class="flex flex-wrap gap-3 mt-6">
             <span class="gbc-chip">Gulf-Front</span>
             <span class="gbc-chip">Siesta Key Beach</span>
-            <span class="gbc-chip">Tennis &amp; Pools</span>
+            <span class="gbc-chip">Tennis &amp; Pickleball</span>
+            <span class="gbc-chip">Lagoon Grounds</span>
             <span class="gbc-chip">Gated</span>
             <span class="gbc-chip">1-Month Minimum Lease</span>
           </div>
         </div>
         <div class="grid grid-cols-2 gap-3 lg:gap-4">
-          <figure class="gbc-fig gbc-fig-tall"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Siesta_Key_Beach._Sarasota_-_panoramio.jpg/1920px-Siesta_Key_Beach._Sarasota_-_panoramio.jpg" alt="Siesta Key Beach near Gulf &amp; Bay Club" loading="lazy" /></figure>
-          <figure class="gbc-fig "><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Red_Lifeguard_Stand_at_Siesta_Key_Beach.jpg/1920px-Red_Lifeguard_Stand_at_Siesta_Key_Beach.jpg" alt="Red lifeguard stand on Siesta Key Beach" loading="lazy" /></figure>
-          <figure class="gbc-fig "><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Siesta_Key_Public_Beach_-_panoramio.jpg/1920px-Siesta_Key_Public_Beach_-_panoramio.jpg" alt="Siesta Key public beach" loading="lazy" /></figure>
-          <figure class="gbc-fig gbc-fig-wide"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Siesta_key_sunset%2C_Sarasota._-_panoramio.jpg/1920px-Siesta_key_sunset%2C_Sarasota._-_panoramio.jpg" alt="Siesta Key sunset over the Gulf" loading="lazy" /></figure>
+          <figure class="gbc-fig "><picture><source srcset="/images/gulf-and-bay-beachfront/front-row-on-siesta-key.webp" type="image/webp" /><img src="/images/gulf-and-bay-beachfront/front-row-on-siesta-key.jpg" alt="Gulf &amp; Bay Club Beachfront seen from over the Gulf — the buildings sit in the front row on Siesta Key" loading="lazy" decoding="async" width="1600" height="900" /></picture></figure>
+          <figure class="gbc-fig "><picture><source srcset="/images/gulf-and-bay-beachfront/resort-pool-shortwalk-to-beach.webp" type="image/webp" /><img src="/images/gulf-and-bay-beachfront/resort-pool-shortwalk-to-beach.jpg" alt="The resort pool and lagoon at Gulf &amp; Bay Club, a short walk from the sand" loading="lazy" decoding="async" width="1600" height="900" /></picture></figure>
+          <figure class="gbc-fig "><picture><source srcset="/images/gulf-and-bay-beachfront/tennis-pickleball.webp" type="image/webp" /><img src="/images/gulf-and-bay-beachfront/tennis-pickleball.jpg" alt="Tennis and pickleball courts on the Gulf &amp; Bay Club grounds" loading="lazy" decoding="async" width="1600" height="900" /></picture></figure>
+          <figure class="gbc-fig "><picture><source srcset="/images/gulf-and-bay-beachfront/lagoon-fountain-seating.webp" type="image/webp" /><img src="/images/gulf-and-bay-beachfront/lagoon-fountain-seating.jpg" alt="Shaded seating at the lagoon&#x27;s edge, fountain running, Gulf &amp; Bay Club" loading="lazy" decoding="async" width="1600" height="900" /></picture></figure>
+          <figure class="gbc-fig gbc-fig-wide"><picture><source srcset="/images/gulf-and-bay-beachfront/shores-of-siesta-key.webp" type="image/webp" /><img src="/images/gulf-and-bay-beachfront/shores-of-siesta-key.jpg" alt="The white quartz shoreline of Siesta Key curving north past Gulf &amp; Bay Club" loading="lazy" decoding="async" width="1600" height="900" /></picture></figure>
         </div>
       </div>
     </div>
@@ -497,7 +499,7 @@ const jsonLd = [
   <section class="section-sm dark-section">
     <div class="container-narrow">
       <p class="gbc-disc">Data as of August 13, 2026.</p>
-      <p class="gbc-disc gbc-credit">Photography (placeholder — to be replaced): Siesta Key beach imagery via Wikimedia Commons — "Sarasota Sunset, Siesta Key" &amp; "Siesta Key sunset" by John Simpson and contributors (CC BY 3.0), "Siesta Key Beach" (CC BY 3.0), "Red Lifeguard Stand at Siesta Key Beach" (CC0). Not photographs of the Beachfront buildings themselves.</p>
+      <p class="gbc-disc gbc-credit">Photography and video &copy; Ryan Adamson &mdash; shot on site at Gulf &amp; Bay Club Beachfront.</p>
     </div>
   </section>
 
@@ -548,7 +550,7 @@ const jsonLd = [
   .gbc-fig img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .7s; }
   .gbc-fig:hover img { transform:scale(1.05); }
   .gbc-fig-tall { grid-row:span 2; aspect-ratio:3/4; }
-  .gbc-fig-wide { aspect-ratio:16/9; }
+  .gbc-fig-wide { aspect-ratio:16/9; grid-column:span 2; }
   .gbc-blurb { color:rgba(255,255,255,0.72); max-width:46rem; line-height:1.7; margin-bottom:0.4rem; }
   .gbc-window { color:rgba(255,255,255,0.45); font-family:var(--font-accent); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1.25rem; }
   .gbc-subhead { margin-top:3rem; margin-bottom:0.35rem; color:#fff; font-size:1.4rem; }
