@@ -74,7 +74,7 @@ const {
 
     <div class="idx-showcase-frame">
       <div id={`idxwidgetsrc-${widgetId}`}></div>
-      <!-- NOTE: no `defer` — IDX Broker widget scripts inject their markup via
+      <!-- NOTE: no `defer`: IDX Broker widget scripts inject their markup via
            document.write, which browsers silently discard for deferred scripts.
            This must execute inline, at this exact spot, during HTML parsing. -->
       <script
@@ -168,7 +168,7 @@ const {
               Don't see the home you want?
             </h3>
             <p class="text-white/70 text-sm md:text-base m-0 max-w-2xl">
-              Many of {areaName}'s finest properties trade quietly — before they ever reach the MLS.
+              Many of {areaName}'s finest properties trade quietly : before they ever reach the MLS.
               Tell Ryan what you're looking for and get matched against off-market and pre-list opportunities.
             </p>
           </div>

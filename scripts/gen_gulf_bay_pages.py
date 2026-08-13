@@ -153,16 +153,17 @@ def water_view(r):
 # scripts/optimize_photos.py before they went anywhere near the repo.
 # Layout: four 4:3 in a 2x2, then one 16:9 spanning both columns.
 BEACHFRONT_GALLERY = [
-    ("/images/gulf-and-bay-beachfront/front-row-on-siesta-key",
-     "Gulf & Bay Club Beachfront seen from over the Gulf — the buildings sit in the front row on Siesta Key", ""),
+    ("/images/gulf-and-bay-beachfront/shores-of-siesta-key",
+     "The white quartz shoreline of Siesta Key curving north past Gulf & Bay Club", ""),
     ("/images/gulf-and-bay-beachfront/resort-pool-shortwalk-to-beach",
      "The resort pool and lagoon at Gulf & Bay Club, a short walk from the sand", ""),
     ("/images/gulf-and-bay-beachfront/tennis-pickleball",
      "Tennis and pickleball courts on the Gulf & Bay Club grounds", ""),
     ("/images/gulf-and-bay-beachfront/lagoon-fountain-seating",
      "Shaded seating at the lagoon's edge, fountain running, Gulf & Bay Club", ""),
-    ("/images/gulf-and-bay-beachfront/shores-of-siesta-key",
-     "The white quartz shoreline of Siesta Key curving north past Gulf & Bay Club", "gbc-fig-wide"),
+    ("/images/gulf-and-bay-beachfront/front-row-on-siesta-key",
+     "Gulf & Bay Club Beachfront seen from over the Gulf: the buildings sit in the front row on Siesta Key",
+     "gbc-fig-wide"),
 ]
 
 SIDES = {
@@ -173,7 +174,7 @@ SIDES = {
         "label": "Beachfront",
         "where": "subdivision_name ILIKE '%%GULF%%BAY%%CLUB%%' AND subdivision_name NOT ILIKE '%%BAYSIDE%%'",
         "blurb": "The flagship 32-acre Gulf-front community on Midnight Pass Road, sitting directly on Siesta Key&rsquo;s white quartz sand.",
-        "about": "Set on 32 beachfront acres along Midnight Pass Road, Gulf &amp; Bay Club is one of Siesta Key&rsquo;s most established condominium communities &mdash; and one of the few that sits in the front row, with the #1-rated Siesta Key Beach at the end of the path rather than across a road. The grounds are the draw: spring-fed lagoons with fountains, a resort-scale pool a short walk from the sand, tennis and pickleball courts, and shaded pavilions with grills scattered through the palms. Units are predominantly two-bedroom plans in the 1,300&ndash;1,500 sq ft range, with a handful of larger corner and penthouse residences. This page tracks the real closed-sale market, straight from the MLS.",
+        "about": "Set on 32 beachfront acres along Midnight Pass Road, Gulf &amp; Bay Club is one of Siesta Key&rsquo;s most established condominium communities, and one of the few that sits in the front row, with the #1-rated Siesta Key Beach at the end of the path rather than across a road. The grounds are the draw: spring-fed lagoons with fountains, a resort-scale pool a short walk from the sand, tennis and pickleball courts, and shaded pavilions with grills scattered through the palms. Units are predominantly two-bedroom plans in the 1,300&ndash;1,500 sq ft range, with a handful of larger corner and penthouse residences. This page tracks the real closed-sale market, straight from the MLS.",
         "street": "5740-5790 Midnight Pass Road",
         "chips": ["Gulf-Front", "Siesta Key Beach", "Tennis &amp; Pickleball", "Lagoon Grounds", "Gated", "1-Month Minimum Lease"],
         "hero": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg/1920px-SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg",
@@ -202,8 +203,8 @@ SIDES = {
         "short": "Bayside",
         "label": "Bayside &middot; Intracoastal Side",
         "where": "subdivision_name ILIKE '%%GULF%%BAY%%CLUB%%BAYSIDE%%'",
-        "blurb": "The separate bayside association across Midnight Pass Road &mdash; intracoastal-side condos, a lower price of entry into the Gulf &amp; Bay Club name, and a weekly minimum lease.",
-        "about": "Gulf &amp; Bay Club Bayside sits across Midnight Pass Road from its Gulf-front sister association, on the intracoastal side of Siesta Key. It is a distinct condominium association with its own fees, rules, and market. Two points matter most to buyers: the price of entry is materially lower than the beachfront, and the association permits a <strong>one-week minimum lease</strong> &mdash; versus one month on the beachfront &mdash; which makes Bayside the more flexible of the two for rental income. This page tracks its real closed-sale market, straight from the MLS.",
+        "blurb": "The separate bayside association across Midnight Pass Road: intracoastal-side condos, a lower price of entry into the Gulf &amp; Bay Club name, and a weekly minimum lease.",
+        "about": "Gulf &amp; Bay Club Bayside sits across Midnight Pass Road from its Gulf-front sister association, on the intracoastal side of Siesta Key. It is a distinct condominium association with its own fees, rules, and market. Two points matter most to buyers: the price of entry is materially lower than the beachfront, and the association permits a <strong>one-week minimum lease</strong> (versus one month on the beachfront), which makes Bayside the more flexible of the two for rental income. This page tracks its real closed-sale market, straight from the MLS.",
         "street": "1223-1311 Siesta Bayside Drive",
         "chips": ["Bayside", "Weekly Rentals Allowed", "Pond &amp; Bay Views", "Heated Pool", "Lower Entry Price"],
         "hero": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Siesta_key_sunset%2C_Sarasota._-_panoramio.jpg/1920px-Siesta_key_sunset%2C_Sarasota._-_panoramio.jpg",
@@ -576,7 +577,7 @@ def render_forms(cfg):
         <div class="gbc-tile gbc-tile-seller">
           <span class="gbc-tile-eyebrow">For Owners</span>
           <h3 class="gbc-tile-title">Reach out for a private consult</h3>
-          <p class="gbc-tile-copy">Curious what your unit would bring today? We&rsquo;ll walk the real closed-sale data above against your floor plan, view, and condition &mdash; privately, with no obligation and no listing pressure.</p>
+          <p class="gbc-tile-copy">Curious what your unit would bring today? We&rsquo;ll walk the real closed-sale data above against your floor plan, view, and condition. Privately, with no obligation and no listing pressure.</p>
           <form class="gbc-form" data-lead-type="Seller" data-community="{esc(community)}"
                 name="gbc-lead-seller" method="POST" action="/thank-you/" data-team="{esc(cfg.get("team","our team"))}" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="gbc-lead-seller" />
@@ -837,7 +838,7 @@ SCRIPTS = r'''<script is:inline>
           '<h4 class="gbc-done-title">Thank you' + (first ? ', ' + first : '') + '</h4>' +
           '<p class="gbc-done-copy">' + (isSeller
             ? 'Your private consult request has gone directly to ' + team + '. Expect a personal reply within one business day.'
-            : team + ' will reach out the moment something fits &mdash; often before it reaches the MLS.') + '</p>' +
+            : team + ' will reach out the moment something fits, often before it reaches the MLS.') + '</p>' +
           '<p class="gbc-done-alt">Prefer to talk sooner? <a href="tel:+19417139234">(941) 713-9234</a></p>';
         form.replaceWith(done);
         done.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -948,7 +949,7 @@ def render_hero_styles(cfg):
   }}
   .gbc-hero--video h1 {{ text-shadow:0 2px 22px rgba(4,12,26,0.55); }}
   .gbc-hero--video .gbc-hero-tag {{ text-shadow:0 1px 14px rgba(4,12,26,0.6); color:rgba(255,255,255,0.92); }}
-  /* the site's pale-blue eyebrow disappears against bright sand and white balconies —
+  /* the site's pale-blue eyebrow disappears against bright sand and white balconies;
      white carries everywhere, and the gold rule above it does the brand work instead */
   .gbc-hero--video .section-label {{ color:rgba(255,255,255,0.95); text-shadow:0 1px 12px rgba(4,12,26,0.85); }}
   .gbc-hero--video .gbc-hero-rule {{
@@ -994,17 +995,17 @@ def render_page(cfg, headline, ledger, lease, lease_n, lease_total, qs, as_of):
 
     chips = "\n            ".join(f'<span class="gbc-chip">{c}</span>' for c in cfg["chips"])
     gallery = cfg.get("gallery") or GALLERY
-    photo_credit = (f'Photography and video &copy; Ryan Adamson &mdash; shot on site at {esc(cfg["name"])}.'
+    photo_credit = (f'Photography and video &copy; Ryan Adamson, shot on site at {esc(cfg["name"])}.'
                     if cfg.get("gallery") else
-                    f'Photography (placeholder &mdash; to be replaced): Siesta Key beach imagery via Wikimedia '
-                    f'Commons &mdash; "Sarasota Sunset, Siesta Key" &amp; "Siesta Key sunset" by John Simpson and '
+                    f'Photography (placeholder, to be replaced): Siesta Key beach imagery via Wikimedia '
+                    f'Commons: "Sarasota Sunset, Siesta Key" &amp; "Siesta Key sunset" by John Simpson and '
                     f'contributors (CC BY 3.0), "Siesta Key Beach" (CC BY 3.0), "Red Lifeguard Stand at Siesta Key '
                     f'Beach" (CC0). Not photographs of the {esc(cfg["short"])} buildings themselves.')
     figs = "\n          ".join(render_figure(src, alt, cls) for src, alt, cls in gallery)
 
     if lease:
         lease_a = (f"The MLS reports a {lease} minimum lease for {cfg['name']} on {lease_n} of {lease_total} "
-                   f"listings. Always confirm current rental rules with the association before purchasing — "
+                   f"listings. Always confirm current rental rules with the association before purchasing; "
                    f"condo documents change.")
     else:
         lease_a = ("The MLS does not consistently report a minimum lease period for this association. "
@@ -1020,11 +1021,11 @@ def render_page(cfg, headline, ledger, lease, lease_n, lease_total, qs, as_of):
 
     plain_blurb = (cfg["blurb"].replace("&amp;", "&").replace("&mdash;", "—")
                    .replace("&rsquo;", "’").replace("&ndash;", "–"))
-    thin_note = ('<p class="gbc-note">A small but real sample — this association closes few units per period, '
+    thin_note = ('<p class="gbc-note">A small but real sample: this association closes few units per period, '
                  'so single sales move the averages. Figures update from live MLS data.</p>') if len(headline) < 4 else ''
 
     return f'''---
-// GENERATED by scripts/gen_gulf_bay_pages.py — baked static snapshot of Supabase MLS data.
+// GENERATED by scripts/gen_gulf_bay_pages.py: baked static snapshot of Supabase MLS data.
 // Re-run that script to refresh. Hand edits will be overwritten.
 import BaseLayout from '@/layouts/BaseLayout.astro';
 {idx_import}
@@ -1047,14 +1048,14 @@ const jsonLd = [
   }},
   {{
     '@type': 'WebPage',
-    name: {repr_js(cfg["name"] + " Condo Market — Siesta Key")},
+    name: {repr_js(cfg["name"] + " Condo Market, Siesta Key")},
     description: description,
     url: 'https://adamsonfl.com/siesta-key/{uid}',
     dateModified: '{date.today().isoformat()}',
     author: {{
       '@type': 'RealEstateAgent',
       name: 'Ryan Adamson',
-      worksFor: {{ '@type': 'Organization', name: 'Coldwell Banker Realty — St. Armands' }},
+      worksFor: {{ '@type': 'Organization', name: 'Coldwell Banker Realty, St. Armands' }},
     }},
   }},
   {{
@@ -1075,7 +1076,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={repr_js(cfg["name"] + " Condos — Siesta Key")} description={{description}} jsonLd={{jsonLd}}{standalone_attr}>
+<BaseLayout title={repr_js(cfg["name"] + " Condos, Siesta Key")} description={{description}} jsonLd={{jsonLd}}{standalone_attr}>
 
   <section class="gbc-hero{hero_mod}">
     {hero_bg}
@@ -1126,7 +1127,7 @@ const jsonLd = [
       {render_ledger(ledger, uid)}
 
       <h3 class="font-display gbc-subhead">Trailing 12-Month Trend</h3>
-      <p class="gbc-window">Median closed price by quarter — a fuller read on where values are heading.</p>
+      <p class="gbc-window">Median closed price by quarter: a fuller read on where values are heading.</p>
       {render_trend(qs)}
     </div>
   </section>
@@ -1136,7 +1137,7 @@ const jsonLd = [
     <div class="container text-center">
       <p class="section-label text-white/70 mb-3">Your Gulf &amp; Bay Club Team</p>
       <h2 class="font-display text-white mb-4" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Let&rsquo;s Talk Gulf &amp; Bay Club</h2>
-      <p class="gbc-cta-text">Thinking about buying or selling in {esc(cfg["short"])}? <strong>Kelli and Ryan</strong> work this community together — they can pull current availability, share off-market opportunities, and give you a no-obligation valuation grounded in the real closed-sale data above.</p>
+      <p class="gbc-cta-text">Thinking about buying or selling in {esc(cfg["short"])}? <strong>Kelli and Ryan</strong> work this community together, and can pull current availability, share off-market opportunities, and give you a no-obligation valuation grounded in the real closed-sale data above.</p>
       <div class="gbc-team">
         <figure class="gbc-member">
           <img class="gbc-avatar" src="/images/kelli-eggen.jpg" width="800" height="800" alt="Kelli Eggen, Coldwell Banker Global Luxury" loading="lazy" decoding="async" />
@@ -1174,7 +1175,7 @@ const jsonLd = [
 
 HUB = '''---
 // GENERATED by scripts/gen_gulf_bay_pages.py
-// Hub for the two Gulf & Bay Club associations — preserves the originally indexed URL.
+// Hub for the two Gulf & Bay Club associations: preserves the originally indexed URL.
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 const description = 'Gulf & Bay Club on Siesta Key is two separate condo associations — the Gulf-front community on Midnight Pass Road (one-month minimum lease) and Gulf & Bay Club Bayside across the road (one-week minimum lease). Compare both markets with live Stellar MLS data.';
@@ -1186,7 +1187,7 @@ const jsonLd = [
     description: description,
     url: 'https://adamsonfl.com/siesta-key/gulf-and-bay-club',
     dateModified: '%(today)s',
-    author: { '@type': 'RealEstateAgent', name: 'Ryan Adamson', worksFor: { '@type': 'Organization', name: 'Coldwell Banker Realty — St. Armands' } },
+    author: { '@type': 'RealEstateAgent', name: 'Ryan Adamson', worksFor: { '@type': 'Organization', name: 'Coldwell Banker Realty, St. Armands' } },
   },
   {
     '@type': 'FAQPage',
@@ -1228,7 +1229,7 @@ const sides = [
 ];
 ---
 
-<BaseLayout title="Gulf & Bay Club Condos — Siesta Key" description={description} jsonLd={jsonLd}>
+<BaseLayout title="Gulf & Bay Club Condos, Siesta Key" description={description} jsonLd={jsonLd}>
   <section class="gbc-hero">
     <div class="gbc-hero-bg" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg/1920px-SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg');"></div>
     <div class="gbc-hero-overlay"></div>
