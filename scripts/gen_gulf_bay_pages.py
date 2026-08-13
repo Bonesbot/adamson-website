@@ -158,6 +158,12 @@ SIDES = {
         "street": "5740-5790 Midnight Pass Road",
         "chips": ["Gulf-Front", "Siesta Key Beach", "Tennis &amp; Pools", "Gated", "1-Month Minimum Lease"],
         "hero": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg/1920px-SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg",
+        # Drone footage of the actual grounds, built by Media-Studio/scripts/hero_loop.py
+        # (job: gulf-and-bay-club-beachfront, 2026-08-13). When "hero_video" is set it REPLACES
+        # the "hero" still above; "hero" stays as the fallback if the video is ever removed.
+        "hero_video": "/videos/gulf-and-bay-club-beachfront.mp4",
+        "hero_poster": "/videos/gulf-and-bay-club-beachfront-poster.jpg",
+        "hero_still": "/videos/gulf-and-bay-club-beachfront-still.jpg",
         "sister_slug": "gulf-and-bay-club-bayside",
         "sister_name": "Gulf & Bay Club Bayside",
         "team": "Kelli & Ryan",
@@ -846,8 +852,45 @@ SCRIPTS = r'''<script is:inline>
 </script>'''
 
 
+def render_hero_bg(cfg):
+    """The hero backdrop: a looping silent video when one exists, else the still.
+
+    Video heroes are produced by Media-Studio (`scripts/hero_loop.py`) and land in
+    public/videos/ as <slug>.mp4 + -poster.jpg + -still.jpg. The four autoplay
+    attributes are the set iOS requires; aria-hidden keeps it out of the a11y tree;
+    the poster is frame 0 so there's no flash when playback starts.
+    """
+    if not cfg.get("hero_video"):
+        return f"""<div class="gbc-hero-bg" style="background-image:url('{cfg["hero"]}');"></div>"""
+    return f"""<div class="gbc-hero-bg">
+      <video
+        class="gbc-hero-video"
+        autoplay muted loop playsinline
+        preload="metadata"
+        poster="{cfg["hero_poster"]}"
+        aria-hidden="true" tabindex="-1">
+        <source src="{cfg["hero_video"]}" type="video/mp4" />
+      </video>
+    </div>"""
+
+
+def render_hero_styles(cfg):
+    """Extra CSS only a video hero needs — including the reduced-motion fallback."""
+    if not cfg.get("hero_video"):
+        return ""
+    still = cfg.get("hero_still") or cfg["hero"]
+    return f"""
+  .gbc-hero-video {{ width:100%; height:100%; object-fit:cover; display:block; }}
+  @media (prefers-reduced-motion: reduce) {{
+    .gbc-hero-video {{ display:none; }}
+    .gbc-hero-bg {{ background-image:url('{still}'); }}
+  }}"""
+
+
 def render_page(cfg, headline, ledger, lease, lease_n, lease_total, qs, as_of):
     uid = cfg["slug"]
+    hero_bg = render_hero_bg(cfg)
+    hero_styles = render_hero_styles(cfg)
     idx_import = ("import IdxAreaShowcase from '@/components/IdxAreaShowcase.astro';"
                   if cfg.get("idx_widget_id") else "")
     idx_section = (f"""
@@ -945,7 +988,7 @@ const jsonLd = [
 <BaseLayout title={repr_js(cfg["name"] + " Condos — Siesta Key")} description={{description}} jsonLd={{jsonLd}}>
 
   <section class="gbc-hero">
-    <div class="gbc-hero-bg" style="background-image:url('{cfg["hero"]}');"></div>
+    {hero_bg}
     <div class="gbc-hero-overlay"></div>
     <div class="relative z-10 container">
       <p class="section-label text-cbgl-blue-light mb-3">Siesta Key &middot; 34242 &middot; {cfg["label"]}</p>
@@ -1033,7 +1076,7 @@ const jsonLd = [
     </div>
   </section>
 
-{STYLES}
+{STYLES.replace('<style is:global>', '<style is:global>' + hero_styles, 1)}
 {SCRIPTS}
 </BaseLayout>
 '''

@@ -54,7 +54,16 @@ const jsonLd = [
 <BaseLayout title='Gulf & Bay Club Beachfront Condos — Siesta Key' description={description} jsonLd={jsonLd}>
 
   <section class="gbc-hero">
-    <div class="gbc-hero-bg" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg/1920px-SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg');"></div>
+    <div class="gbc-hero-bg">
+      <video
+        class="gbc-hero-video"
+        autoplay muted loop playsinline
+        preload="metadata"
+        poster="/videos/gulf-and-bay-club-beachfront-poster.jpg"
+        aria-hidden="true" tabindex="-1">
+        <source src="/videos/gulf-and-bay-club-beachfront.mp4" type="video/mp4" />
+      </video>
+    </div>
     <div class="gbc-hero-overlay"></div>
     <div class="relative z-10 container">
       <p class="section-label text-cbgl-blue-light mb-3">Siesta Key &middot; 34242 &middot; Beachfront</p>
@@ -493,6 +502,11 @@ const jsonLd = [
   </section>
 
 <style is:global>
+  .gbc-hero-video { width:100%; height:100%; object-fit:cover; display:block; }
+  @media (prefers-reduced-motion: reduce) {
+    .gbc-hero-video { display:none; }
+    .gbc-hero-bg { background-image:url('/videos/gulf-and-bay-club-beachfront-still.jpg'); }
+  }
   .gbc-hero { position:relative; padding-top:9rem; padding-bottom:7rem; overflow:hidden; }
   .gbc-hero-bg { position:absolute; inset:0; background-size:cover; background-position:center; background-color:var(--color-black); }
   .gbc-hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.45) 40%, rgba(0,0,0,0.9)); }
