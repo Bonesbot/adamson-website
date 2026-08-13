@@ -14,6 +14,8 @@ interface Props {
   noIndex?: boolean;
   /** Landing-page mode: header shows the logos only, no site nav. */
   standalone?: boolean;
+  /** Which Coldwell Banker office the footer names. Siesta Key pages use 'siesta-key'. */
+  office?: 'st-armands' | 'siesta-key';
 }
 
 const {
@@ -24,6 +26,7 @@ const {
   jsonLd,
   noIndex = false,
   standalone = false,
+  office = 'st-armands',
 } = Astro.props;
 
 const siteTitle = 'Ryan Adamson | Luxury Real Estate: Sarasota & Barrier Islands';
@@ -64,6 +67,6 @@ const fullTitle = title === 'Home' ? siteTitle : `${title} | Ryan Adamson Realty
     <main id="main-content" class="flex-1">
       <slot />
     </main>
-    <Footer />
+    <Footer office={office} />
   </body>
 </html>

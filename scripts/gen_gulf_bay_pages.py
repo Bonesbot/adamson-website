@@ -590,6 +590,9 @@ def render_forms(cfg):
               <input id="s-email-{slug}" name="email" type="email" required autocomplete="email" /></div>
             <div class="gbc-field"><label for="s-phone-{slug}">Phone</label>
               <input id="s-phone-{slug}" name="phone" type="tel" autocomplete="tel" /></div>
+            <div class="gbc-field"><label for="s-notes-{slug}">Other details you&rsquo;d like to share <span class="gbc-optional">optional</span></label>
+              <textarea id="s-notes-{slug}" name="notes" rows="3" maxlength="1200"
+                        placeholder="Unit number, floor, view, any updates you&rsquo;ve made, timing you have in mind"></textarea></div>
             <button type="submit" class="gbc-btn gbc-btn-gold gbc-btn-full">Request a Private Consult</button>
             <p class="gbc-form-status" data-out="status" role="status" aria-live="polite"></p>
           </form>
@@ -611,6 +614,9 @@ def render_forms(cfg):
               <input id="b-email-{slug}" name="email" type="email" required autocomplete="email" /></div>
             <div class="gbc-field"><label for="b-phone-{slug}">Phone</label>
               <input id="b-phone-{slug}" name="phone" type="tel" autocomplete="tel" /></div>
+            <div class="gbc-field"><label for="b-notes-{slug}">Other details you&rsquo;d like to share <span class="gbc-optional">optional</span></label>
+              <textarea id="b-notes-{slug}" name="notes" rows="3" maxlength="1200"
+                        placeholder="Size, view, floor, budget, timing, anything that would make it the right one"></textarea></div>
             <button type="submit" class="gbc-btn gbc-btn-navy gbc-btn-full">Notify Me First</button>
             <p class="gbc-form-status" data-out="status" role="status" aria-live="polite"></p>
           </form>
@@ -700,8 +706,13 @@ STYLES = r'''<style is:global>
   .gbc-tile-copy { color:var(--color-text-muted); line-height:1.7; font-size:0.94rem; margin-bottom:1.5rem; }
   .gbc-field { margin-bottom:0.9rem; }
   .gbc-field label { display:block; font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.09em; color:var(--color-text-muted); margin-bottom:0.35rem; }
-  .gbc-field input { width:100%; padding:0.7rem 0.85rem; border:1px solid rgba(0,0,0,0.14); border-radius:0.35rem; font-size:0.95rem; background:#fff; color:var(--color-black); transition:border-color .15s, box-shadow .15s; }
-  .gbc-field input:focus { outline:none; border-color:var(--color-gold); box-shadow:0 0 0 3px rgba(197,165,90,0.15); }
+  .gbc-field input,
+  .gbc-field textarea { width:100%; padding:0.7rem 0.85rem; border:1px solid rgba(0,0,0,0.14); border-radius:0.35rem; font-size:0.95rem; background:#fff; color:var(--color-black); transition:border-color .15s, box-shadow .15s; }
+  .gbc-field textarea { font-family:inherit; line-height:1.5; resize:vertical; min-height:4.6rem; }
+  .gbc-field textarea::placeholder { color:rgba(0,0,0,0.34); }
+  .gbc-optional { text-transform:none; letter-spacing:0; font-size:0.68rem; color:rgba(0,0,0,0.35); font-style:italic; margin-left:0.35rem; }
+  .gbc-field input:focus,
+  .gbc-field textarea:focus { outline:none; border-color:var(--color-gold); box-shadow:0 0 0 3px rgba(197,165,90,0.15); }
   .gbc-hp { position:absolute; left:-9999px; }
   .gbc-form-status { margin-top:0.8rem; font-size:0.85rem; min-height:1.2em; }
   .gbc-form-done { text-align:center; padding:1.6rem 1rem 0.6rem; }
@@ -812,6 +823,7 @@ SCRIPTS = r'''<script is:inline>
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             name: data.name, email: data.email, phone: data.phone,
+            notes: data.notes,
             lead_type: form.dataset.leadType,
             community: form.dataset.community,
             page: window.location.pathname,
@@ -1076,7 +1088,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={repr_js(cfg["name"] + " Condos, Siesta Key")} description={{description}} jsonLd={{jsonLd}}{standalone_attr}>
+<BaseLayout title={repr_js(cfg["name"] + " Condos, Siesta Key")} description={{description}} jsonLd={{jsonLd}} office="siesta-key"{standalone_attr}>
 
   <section class="gbc-hero{hero_mod}">
     {hero_bg}
@@ -1229,7 +1241,7 @@ const sides = [
 ];
 ---
 
-<BaseLayout title="Gulf & Bay Club Condos, Siesta Key" description={description} jsonLd={jsonLd}>
+<BaseLayout title="Gulf & Bay Club Condos, Siesta Key" description={description} jsonLd={jsonLd} office="siesta-key">
   <section class="gbc-hero">
     <div class="gbc-hero-bg" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg/1920px-SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg');"></div>
     <div class="gbc-hero-overlay"></div>

@@ -51,7 +51,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title='Gulf & Bay Club Beachfront Condos, Siesta Key' description={description} jsonLd={jsonLd} standalone>
+<BaseLayout title='Gulf & Bay Club Beachfront Condos, Siesta Key' description={description} jsonLd={jsonLd} office="siesta-key" standalone>
 
   <section class="gbc-hero gbc-hero--video">
     <div class="gbc-hero-bg">
@@ -429,7 +429,7 @@ const jsonLd = [
           <h3 class="gbc-tile-title">Reach out for a private consult</h3>
           <p class="gbc-tile-copy">Curious what your unit would bring today? We&rsquo;ll walk the real closed-sale data above against your floor plan, view, and condition. Privately, with no obligation and no listing pressure.</p>
           <form class="gbc-form" data-lead-type="Seller" data-community="Gulf &amp; Bay Club Beachfront"
-                name="gbc-lead-seller" method="POST" action="/thank-you/" data-team="Kelli &amp; Ryan" data-netlify="true" netlify-honeypot="bot-field">
+                name="gbc-lead-seller" method="POST" action="/thank-you/" data-team="Kelli and Ryan" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="gbc-lead-seller" />
             <input type="hidden" name="lead_type" value="Seller" />
             <input type="hidden" name="community" value="Gulf &amp; Bay Club Beachfront" />
@@ -440,6 +440,9 @@ const jsonLd = [
               <input id="s-email-gulf-and-bay-club-beachfront" name="email" type="email" required autocomplete="email" /></div>
             <div class="gbc-field"><label for="s-phone-gulf-and-bay-club-beachfront">Phone</label>
               <input id="s-phone-gulf-and-bay-club-beachfront" name="phone" type="tel" autocomplete="tel" /></div>
+            <div class="gbc-field"><label for="s-notes-gulf-and-bay-club-beachfront">Other details you&rsquo;d like to share <span class="gbc-optional">optional</span></label>
+              <textarea id="s-notes-gulf-and-bay-club-beachfront" name="notes" rows="3" maxlength="1200"
+                        placeholder="Unit number, floor, view, any updates you&rsquo;ve made, timing you have in mind"></textarea></div>
             <button type="submit" class="gbc-btn gbc-btn-gold gbc-btn-full">Request a Private Consult</button>
             <p class="gbc-form-status" data-out="status" role="status" aria-live="polite"></p>
           </form>
@@ -450,7 +453,7 @@ const jsonLd = [
           <h3 class="gbc-tile-title">Add me to the coming-soon list</h3>
           <p class="gbc-tile-copy">Beachfront turns over a handful of units a year, and the best ones often trade before they reach the MLS. Get on the list and we&rsquo;ll reach out first on available and off-market units.</p>
           <form class="gbc-form" data-lead-type="Buyer" data-community="Gulf &amp; Bay Club Beachfront"
-                name="gbc-lead-buyer" method="POST" action="/thank-you/" data-team="Kelli &amp; Ryan" data-netlify="true" netlify-honeypot="bot-field">
+                name="gbc-lead-buyer" method="POST" action="/thank-you/" data-team="Kelli and Ryan" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="gbc-lead-buyer" />
             <input type="hidden" name="lead_type" value="Buyer" />
             <input type="hidden" name="community" value="Gulf &amp; Bay Club Beachfront" />
@@ -461,6 +464,9 @@ const jsonLd = [
               <input id="b-email-gulf-and-bay-club-beachfront" name="email" type="email" required autocomplete="email" /></div>
             <div class="gbc-field"><label for="b-phone-gulf-and-bay-club-beachfront">Phone</label>
               <input id="b-phone-gulf-and-bay-club-beachfront" name="phone" type="tel" autocomplete="tel" /></div>
+            <div class="gbc-field"><label for="b-notes-gulf-and-bay-club-beachfront">Other details you&rsquo;d like to share <span class="gbc-optional">optional</span></label>
+              <textarea id="b-notes-gulf-and-bay-club-beachfront" name="notes" rows="3" maxlength="1200"
+                        placeholder="Size, view, floor, budget, timing, anything that would make it the right one"></textarea></div>
             <button type="submit" class="gbc-btn gbc-btn-navy gbc-btn-full">Notify Me First</button>
             <p class="gbc-form-status" data-out="status" role="status" aria-live="polite"></p>
           </form>
@@ -615,8 +621,13 @@ const jsonLd = [
   .gbc-tile-copy { color:var(--color-text-muted); line-height:1.7; font-size:0.94rem; margin-bottom:1.5rem; }
   .gbc-field { margin-bottom:0.9rem; }
   .gbc-field label { display:block; font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.09em; color:var(--color-text-muted); margin-bottom:0.35rem; }
-  .gbc-field input { width:100%; padding:0.7rem 0.85rem; border:1px solid rgba(0,0,0,0.14); border-radius:0.35rem; font-size:0.95rem; background:#fff; color:var(--color-black); transition:border-color .15s, box-shadow .15s; }
-  .gbc-field input:focus { outline:none; border-color:var(--color-gold); box-shadow:0 0 0 3px rgba(197,165,90,0.15); }
+  .gbc-field input,
+  .gbc-field textarea { width:100%; padding:0.7rem 0.85rem; border:1px solid rgba(0,0,0,0.14); border-radius:0.35rem; font-size:0.95rem; background:#fff; color:var(--color-black); transition:border-color .15s, box-shadow .15s; }
+  .gbc-field textarea { font-family:inherit; line-height:1.5; resize:vertical; min-height:4.6rem; }
+  .gbc-field textarea::placeholder { color:rgba(0,0,0,0.34); }
+  .gbc-optional { text-transform:none; letter-spacing:0; font-size:0.68rem; color:rgba(0,0,0,0.35); font-style:italic; margin-left:0.35rem; }
+  .gbc-field input:focus,
+  .gbc-field textarea:focus { outline:none; border-color:var(--color-gold); box-shadow:0 0 0 3px rgba(197,165,90,0.15); }
   .gbc-hp { position:absolute; left:-9999px; }
   .gbc-form-status { margin-top:0.8rem; font-size:0.85rem; min-height:1.2em; }
   .gbc-form-done { text-align:center; padding:1.6rem 1rem 0.6rem; }
@@ -725,6 +736,7 @@ const jsonLd = [
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             name: data.name, email: data.email, phone: data.phone,
+            notes: data.notes,
             lead_type: form.dataset.leadType,
             community: form.dataset.community,
             page: window.location.pathname,

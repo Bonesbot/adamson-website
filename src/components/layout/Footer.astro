@@ -4,6 +4,31 @@
  * Three-column layout: Quick Links, Resources, Contact Info
  * Includes MLS disclaimer and CBGL blue accent line.
  */
+interface Props {
+  /**
+   * Which Coldwell Banker office to show. Siesta Key pages should name the Siesta
+   * office: a buyer on a Siesta Key page is looking at Siesta Key, and the office
+   * two minutes from the property is the more useful address to give them.
+   * Threaded through BaseLayout, so a page sets it once.
+   */
+  office?: 'st-armands' | 'siesta-key';
+}
+const { office = 'st-armands' } = Astro.props;
+
+const OFFICES = {
+  'st-armands': {
+    name: 'Coldwell Banker Realty, St. Armands',
+    street: '423 St Armands Cir',
+    city: 'Sarasota, FL 34236',
+  },
+  'siesta-key': {
+    name: 'Coldwell Banker Realty, Siesta Key',
+    street: '5145 Ocean Blvd',
+    city: 'Sarasota, FL 34242',
+  },
+};
+const cbOffice = OFFICES[office] ?? OFFICES['st-armands'];
+
 const currentYear = new Date().getFullYear();
 
 const quickLinks = [
@@ -115,7 +140,19 @@ const areas = [
               Ryan&#64;Adamson-Group&#46;com
             </a>
           </p>
-          <p>423 St Armands Cir, Sarasota, FL 34236</p>
+          <p class="not-italic">
+            <span class="block text-white/70">{cbOffice.name}</span>
+            <a
+              href={`https://maps.google.com/?q=${encodeURIComponent(
+                `${cbOffice.name}, ${cbOffice.street}, ${cbOffice.city}`
+              )}`}
+              target="_blank"
+              rel="noopener"
+              class="hover:text-[var(--color-gold)] transition-colors"
+            >
+              {cbOffice.street}, {cbOffice.city}
+            </a>
+          </p>
         </div>
       </div>
     </div>
