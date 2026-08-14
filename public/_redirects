@@ -31,3 +31,17 @@
 /areas/lido-key/*    /areas/st-armands-lido/:splat                          301
 /areas/st-armands    /areas/st-armands-lido                                301
 /areas/st-armands/*  /areas/st-armands-lido/:splat                          301
+
+# ---------------------------------------------------------------------------
+# Gulf & Bay Club farm mailer QR / short URLs : 2026-08-14
+# ---------------------------------------------------------------------------
+# Per-recipient vanity codes: building letter + unit (A=5790, B=5780, C=5770,
+# D=5760, E=5750, F=5740). Printed on the Tier 1 postcard as a typed short URL;
+# the QR encodes the /gbq/ twin so scans and typed visits separate in analytics.
+# ?qr=<CODE> joins back to touch.qr_token -> parcel -> owner.
+# 302 (not 301) on purpose: codes are evergreen, destinations may change per issue.
+# /gbq/ is listed first; it cannot be shadowed by /gb/* but order makes intent clear.
+
+/gbq/*   /siesta-key/gulf-and-bay-club-beachfront/?qr=:splat&src=scan     302
+/gb/*    /siesta-key/gulf-and-bay-club-beachfront/?qr=:splat&src=typed    302
+/gb      /siesta-key/gulf-and-bay-club-beachfront/?src=typed              302
