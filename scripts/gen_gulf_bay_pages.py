@@ -729,6 +729,14 @@ def render_trend(qs):
     return '<div class="gbc-trend-grid">' + "\n".join(cols) + "</div>"
 
 
+# Netlify creates ONE form per unique form NAME per site, not per page. Every
+# community landing page posts to the same two names, with `community` as a
+# hidden field, so adding pages never adds forms. Renamed from gbc-* to condo-*
+# on 2026-08-14: these are the generic condo-community forms now, not Gulf & Bay
+# specific, and the placeholder copy ("Unit number, floor, view") assumes a condo.
+# A future single-family page wants its own pair (home-lead-*) with its own hints.
+# Changing a name here creates a NEW form in Netlify and orphans the old one's
+# submissions; re-point the email notifications after the first deploy.
 def render_forms(cfg):
     community = cfg["name"]
     slug = cfg["slug"]
@@ -744,8 +752,8 @@ def render_forms(cfg):
           <h3 class="gbc-tile-title">Reach out for a private consult</h3>
           <p class="gbc-tile-copy">Curious what your unit would bring today? We&rsquo;ll walk the real closed-sale data above against your floor plan, view, and condition. Privately, with no obligation and no listing pressure.</p>
           <form class="gbc-form" data-lead-type="Seller" data-community="{esc(community)}"
-                name="gbc-lead-seller" method="POST" action="/thank-you/" data-team="{esc(cfg.get("team","our team"))}" data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="gbc-lead-seller" />
+                name="condo-lead-seller" method="POST" action="/thank-you/" data-team="{esc(cfg.get("team","our team"))}" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="condo-lead-seller" />
             <input type="hidden" name="lead_type" value="Seller" />
             <input type="hidden" name="community" value="{esc(community)}" />
             <p class="gbc-hp"><label>Don&rsquo;t fill this out: <input name="bot-field" /></label></p>
@@ -768,8 +776,8 @@ def render_forms(cfg):
           <h3 class="gbc-tile-title">Add me to the coming-soon list</h3>
           <p class="gbc-tile-copy">{esc(cfg["short"])} turns over a handful of units a year, and the best ones often trade before they reach the MLS. Get on the list and we&rsquo;ll reach out first on available and off-market units.</p>
           <form class="gbc-form" data-lead-type="Buyer" data-community="{esc(community)}"
-                name="gbc-lead-buyer" method="POST" action="/thank-you/" data-team="{esc(cfg.get("team","our team"))}" data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="gbc-lead-buyer" />
+                name="condo-lead-buyer" method="POST" action="/thank-you/" data-team="{esc(cfg.get("team","our team"))}" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="condo-lead-buyer" />
             <input type="hidden" name="lead_type" value="Buyer" />
             <input type="hidden" name="community" value="{esc(community)}" />
             <p class="gbc-hp"><label>Don&rsquo;t fill this out: <input name="bot-field" /></label></p>
