@@ -51,6 +51,32 @@ REL_DATA = "src/data/communities"
 HEADLINE_WINDOW_DAYS = 180   # headline stat grid (unchanged from the original page)
 LEDGER_WINDOW_DAYS = 365     # transaction ledger — wider so the filters have data to bite on
 
+# ── Building identity ─────────────────────────────────────────────────────────
+# Gulf & Bay Club Beachfront is six buildings. The association letters them A-F;
+# the MLS only ever carries the street number. This map is the single source of
+# truth for that translation and it matches the county's own "BLD x" situs label
+# on all 390 parcels (verified 2026-08-14 against the SCPA file, zero exceptions).
+# The same map drives the CRM-Outreach farm QR tokens (F101 = 5740 unit 101), so
+# a change here must change CRM-Outreach/scripts/gb_farm_build.py too.
+#
+# Static by nature: buildings do not get built or renumbered. No maintenance.
+BEACHFRONT_BUILDINGS = {
+    "5790": "A", "5780": "B", "5770": "C",
+    "5760": "D", "5750": "E", "5740": "F",
+}
+
+# Below this many closed sales a per-building row is flagged as a small sample
+# rather than presented as a trend. Medians off one or two sales are noise.
+THIN_BUILDING_N = 3
+
+
+def building_letter(address, buildings):
+    """Map '5780 MIDNIGHT PASS RD #207' -> 'B'. Returns None if unmappable."""
+    if not address or not buildings:
+        return None
+    m = re.match(r"\s*(\d+)", address)
+    return buildings.get(m.group(1)) if m else None
+
 
 def load_env(env_path):
     if env_path.exists():
@@ -176,6 +202,13 @@ SIDES = {
         "blurb": "The flagship 32-acre Gulf-front community on Midnight Pass Road, sitting directly on Siesta Key&rsquo;s white quartz sand.",
         "about": "Set on 32 beachfront acres along Midnight Pass Road, Gulf &amp; Bay Club is one of Siesta Key&rsquo;s most established condominium communities, and one of the few that sits in the front row, with the #1-rated Siesta Key Beach at the end of the path rather than across a road. The grounds are the draw: spring-fed lagoons with fountains, a resort-scale pool a short walk from the sand, tennis and pickleball courts, and shaded pavilions with grills scattered through the palms. Units are predominantly two-bedroom plans in the 1,300&ndash;1,500 sq ft range, with a handful of larger corner and penthouse residences. This page tracks the real closed-sale market, straight from the MLS.",
         "street": "5740-5790 Midnight Pass Road",
+        # Presence of this key switches on the "By the Building" table and the
+        # ledger's Bld column. Remove it and both disappear cleanly.
+        "buildings": BEACHFRONT_BUILDINGS,
+        # Heading for the About section. Defaults to "short" ("Beachfront"), but
+        # owners and buyers call this side simply "Gulf & Bay" (Ryan, 2026-08-14),
+        # so the page should use the name people actually say.
+        "about_label": "Gulf &amp; Bay",
         "chips": ["Gulf-Front", "Siesta Key Beach", "Tennis &amp; Pickleball", "Lagoon Grounds", "Gated", "1-Month Minimum Lease"],
         "hero": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg/1920px-SARASOTA_SUNSET._SIESTA_KEY_-_panoramio_-_JOHN_SIMPSON.jpg",
         # Drone footage of the actual grounds, built by Media-Studio/scripts/hero_loop.py
@@ -189,8 +222,11 @@ SIDES = {
         "gallery": BEACHFRONT_GALLERY,
         # standalone landing page: header shows the dual logos only, no site nav
         "standalone": True,
-        "sister_slug": "gulf-and-bay-club-bayside",
-        "sister_name": "Gulf & Bay Club Bayside",
+        # Bayside cross-links intentionally OFF (Ryan, 2026-08-14): the Bayside
+        # page is not finished, so the Beachfront page should not send anyone
+        # there. Restoring is a two-line uncomment, nothing else references it.
+        #   "sister_slug": "gulf-and-bay-club-bayside",
+        #   "sister_name": "Gulf & Bay Club Bayside",
         "team": "Kelli & Ryan",
         # IDX Broker legacy Showcase widget bound (Edit-By-Hand querystring) to the
         # saved-link polygon sk-gulf-and-bay-beachside (slID 7854), Active only.
@@ -324,6 +360,64 @@ def _f(x):
     return None if x is None else float(x)
 
 
+def by_building(rows, buildings):
+    """Per-building closed-sale aggregates over whatever window `rows` covers.
+
+    Computed from the SAME de-duplicated ledger rows the Transaction Ledger
+    renders, so the building table and the ledger can never disagree: if you can
+    count it in the ledger, it is in here. Window is LEDGER_WINDOW_DAYS (365),
+    not the 180-day headline window, and that is deliberate. Split 180 days
+    across six buildings and five of the six land on a single sale, where min,
+    median and max are all the same number and "median sale-to-list" is one data
+    point wearing a statistics costume. Twelve months is the shortest window
+    that puts a real distribution in every row.
+
+    Every building in the map gets a row even with zero sales; an honest blank
+    beats a silently missing building, because a reader who owns in D will look
+    for D. `thin` marks rows under THIN_BUILDING_N for the small-sample cue.
+    """
+    if not buildings:
+        return []
+    groups = {letter: [] for letter in buildings.values()}
+    unmapped = 0
+    for r in rows:
+        letter = building_letter(r.get("address") or r.get("unparsed_address"), buildings)
+        if letter is None:
+            unmapped += 1
+            continue
+        groups[letter].append(r)
+
+    def med(vals):
+        vals = [v for v in vals if v is not None]
+        return round(median(vals)) if vals else None
+
+    out = []
+    for letter in sorted(groups):
+        rs = groups[letter]
+        street = next(k for k, v in buildings.items() if v == letter)
+        prices = [_f(r["current_price"]) for r in rs if r.get("current_price") is not None]
+        psf = [_f(r["close_price_by_calculated_sqft"]) for r in rs
+               if r.get("close_price_by_calculated_sqft") is not None]
+        dom = [_f(r["cumulative_days_on_market"]) for r in rs
+               if r.get("cumulative_days_on_market") is not None]
+        splp = [_f(r["sp_lp"]) for r in rs if r.get("sp_lp") is not None]
+        out.append({
+            "building": letter,
+            "street": street,
+            "count": len(rs),
+            "thin": 0 < len(rs) < THIN_BUILDING_N,
+            "minPrice": round(min(prices)) if prices else None,
+            "medianPrice": med(prices),
+            "maxPrice": round(max(prices)) if prices else None,
+            "medianPricePerSqft": med(psf),
+            "medianDaysOnMarket": med(dom),
+            "medianSaleToListPct": (round(median(splp) * 100, 1) if splp else None),
+        })
+    if unmapped:
+        print(f"  ! {unmapped} closed sale(s) did not map to a building letter", file=sys.stderr)
+    return out
+
+
 def community_stats(cfg, headline, ledger, lease, lease_n, lease_total, qs, act, as_of):
     """Machine-readable stats for one community.
 
@@ -362,6 +456,10 @@ def community_stats(cfg, headline, ledger, lease, lease_n, lease_total, qs, act,
         "windows": {"headlineDays": HEADLINE_WINDOW_DAYS, "ledgerDays": LEDGER_WINDOW_DAYS},
         "headline": agg(headline),
         "trailing12": agg(ledger),
+        # Per-building breakdown, trailing 12 months. Empty list for communities
+        # with no building map (Bayside), so consumers can test truthiness.
+        "byBuilding": by_building(ledger, cfg.get("buildings")),
+        "byBuildingWindowDays": LEDGER_WINDOW_DAYS if cfg.get("buildings") else None,
         "active": {
             "count": int(act.get("n") or 0),
             "avgDaysOnMarket": None if act.get("avg_dom") is None else round(float(act["avg_dom"])),
@@ -509,14 +607,79 @@ def render_filters(rows, uid):
       </div>'''
 
 
-def render_ledger(rows, uid):
+def render_by_building(rows, cfg):
+    """The "By the Building" strip: one slender row per building, A-F.
+
+    Deliberately not filterable and not sortable. It is a six-row reference
+    table, and every control added to it is another thing to maintain for a
+    table you can read in one glance.
+    """
+    buildings = cfg.get("buildings")
+    if not buildings:
+        return ""
+    stats = by_building(rows, buildings)
+    if not any(b["count"] for b in stats):
+        return ""
+
+    def cell(v, fmt=lambda x: f"{x:,}"):
+        return fmt(v) if v is not None else "&mdash;"
+
+    trs = []
+    for b in stats:
+        n = f'{b["count"]}<span class="gbc-bld-thin" title="Small sample: fewer than ' \
+            f'{THIN_BUILDING_N} closed sales in this window">*</span>' if b["thin"] else str(b["count"])
+        trs.append(f'''<tr>
+        <td class="gbc-bld-id"><span class="gbc-bld-letter">{b["building"]}</span><span class="gbc-bld-street">{b["street"]}</span></td>
+        <td class="gbc-num">{n}</td>
+        <td class="gbc-num">{cell(b["minPrice"], money)}</td>
+        <td class="gbc-num gbc-bld-key">{cell(b["medianPrice"], money)}</td>
+        <td class="gbc-num">{cell(b["maxPrice"], money)}</td>
+        <td class="gbc-num">{cell(b["medianPricePerSqft"], money)}</td>
+        <td class="gbc-num">{cell(b["medianDaysOnMarket"])}</td>
+        <td class="gbc-num">{cell(b["medianSaleToListPct"], lambda x: f"{x:.1f}%")}</td>
+      </tr>''')
+
+    thin_any = any(b["thin"] for b in stats)
+    foot = ('<p class="gbc-bld-foot">* Fewer than '
+            f'{THIN_BUILDING_N} closed sales in this window. Shown for completeness; '
+            'read it as a data point, not a trend.</p>') if thin_any else ""
+
+    return f'''<div class="gbc-table-wrap gbc-bld-wrap">
+      <table class="gbc-table gbc-bld-table">
+        <thead>
+          <tr>
+            <th>Building</th>
+            <th class="gbc-num">Sales</th>
+            <th class="gbc-num">Min</th>
+            <th class="gbc-num">Median</th>
+            <th class="gbc-num">Max</th>
+            <th class="gbc-num">Median $/SqFt</th>
+            <th class="gbc-num">Median CDOM</th>
+            <th class="gbc-num">Median SP/LP</th>
+          </tr>
+        </thead>
+        <tbody>
+{chr(10).join(trs)}
+        </tbody>
+      </table>
+      {foot}
+    </div>'''
+
+
+def render_ledger(rows, uid, buildings=None):
     trs = []
     for r in rows:
         wv = water_view(r)
         sf = int(r["living_area"]) if r["living_area"] else None
         cdom = r["cumulative_days_on_market"]
+        # Bld sits immediately after the address because it is derived FROM the
+        # address (street number -> letter), so the eye reads source then label.
+        bld = ""
+        if buildings:
+            letter = building_letter(r["unparsed_address"], buildings)
+            bld = f'<td class="gbc-bld-cell">{letter or "&mdash;"}</td>'
         trs.append(f'''<tr data-bed="{r['bedrooms_total'] or 0}" data-sqft="{sf or 0}">
-        <td class="gbc-addr">{esc(r['unparsed_address'])}</td>
+        <td class="gbc-addr">{esc(r['unparsed_address'])}</td>{bld}
         <td>{bedbath(r)}</td>
         <td class="gbc-num">{f"{sf:,}" if sf else "—"}</td>
         <td class="gbc-num">{money(r['current_price'])}</td>
@@ -526,12 +689,14 @@ def render_ledger(rows, uid):
         <td class="gbc-num">{pct0(r['sp_lp'])}</td>
         <td class="gbc-wv">{esc(wv) if wv else '<span class="gbc-wv-none">No water view</span>'}</td>
       </tr>''')
-    body = "\n".join(trs) if trs else '<tr><td colspan="9" class="gbc-empty">No closings recorded in this window.</td></tr>'
+    ncols = 10 if buildings else 9
+    body = "\n".join(trs) if trs else f'<tr><td colspan="{ncols}" class="gbc-empty">No closings recorded in this window.</td></tr>'
+    bld_th = '<th class="gbc-bld-cell">Bld</th>' if buildings else ""
     return f'''<div class="gbc-table-wrap">
       <table class="gbc-table" data-table="{uid}">
         <thead>
           <tr>
-            <th>Address &amp; Unit</th>
+            <th>Address &amp; Unit</th>{bld_th}
             <th>Bed / Bath</th>
             <th class="gbc-num">Sq Ft</th>
             <th class="gbc-num">Sale Price</th>
@@ -652,6 +817,25 @@ STYLES = r'''<style is:global>
   .gbc-stat-value { font-family:var(--font-display); font-size:1.55rem; color:#fff; line-height:1.1; }
   .gbc-stat-label { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.09em; color:var(--color-cbgl-blue-light); margin-top:0.5rem; }
   .gbc-stat-sub { font-size:0.68rem; color:rgba(255,255,255,0.4); margin-top:0.15rem; }
+
+  /* ── By the Building ───────────────────────────────────────── */
+  /* Slender by design: tighter rows and smaller type than the ledger, so it
+     reads as a summary strip rather than a second full table. */
+  .gbc-bld-wrap { margin-top:1.1rem; max-height:none; }
+  /* Narrower min-width than the ledger: eight short columns, no need to force
+     a 900px scroll canvas. */
+  .gbc-bld-table { font-size:0.82rem; min-width:640px; }
+  .gbc-bld-table th, .gbc-bld-table td { padding-top:0.55rem; padding-bottom:0.55rem; white-space:nowrap; }
+  /* NB: no display:flex on the td. A flex table cell drops out of table layout
+     in Safari and the columns stop aligning with the header. Inline-block. */
+  .gbc-bld-id { white-space:nowrap; }
+  .gbc-bld-letter { display:inline-block; font-family:var(--font-display); font-size:1.05rem; color:var(--color-gold); line-height:1; }
+  .gbc-bld-street { display:inline-block; margin-left:0.5rem; font-size:0.7rem; color:rgba(255,255,255,0.38); font-variant-numeric:tabular-nums; }
+  .gbc-bld-key { color:#fff; font-weight:600; }
+  .gbc-bld-thin { color:var(--color-gold); margin-left:0.15rem; cursor:help; }
+  .gbc-bld-foot { margin-top:0.6rem; font-size:0.7rem; color:rgba(255,255,255,0.38); font-style:italic; }
+  .gbc-bld-cell { color:var(--color-gold); font-variant-numeric:normal; text-align:center; width:2.5rem; }
+  @media (max-width:640px){ .gbc-bld-table { font-size:0.75rem; } .gbc-bld-street { display:none; } }
 
   /* ── Filter Data ───────────────────────────────────────────── */
   .gbc-filter { margin-top:1.5rem; background:var(--color-black-card); border:1px solid rgba(255,255,255,0.1); border-radius:0.7rem; padding:1.1rem 1.25rem 1.25rem; }
@@ -1036,6 +1220,27 @@ def render_page(cfg, headline, ledger, lease, lease_n, lease_total, qs, as_of):
     thin_note = ('<p class="gbc-note">A small but real sample: this association closes few units per period, '
                  'so single sales move the averages. Figures update from live MLS data.</p>') if len(headline) < 4 else ''
 
+    # "By the Building" sits between the snapshot and the ledger: the snapshot is
+    # the whole association, this splits it six ways, the ledger is every line.
+    # Renders to "" for any community without a building map, so Bayside and the
+    # hub are untouched and this whole block costs them nothing.
+    # Sister-association cross-links render only when the cfg carries them, so a
+    # community can be taken out of circulation by commenting two keys.
+    if cfg.get("sister_slug"):
+        sister_line = (f'      <p class="gbc-sister">Looking for the other association? '
+                       f'<a href="/siesta-key/{cfg["sister_slug"]}">{esc(cfg["sister_name"])} &rarr;</a></p>')
+        sister_btn = (f'\n        <a href="/siesta-key/{cfg["sister_slug"]}" '
+                      f'class="gbc-btn gbc-btn-outline">{esc(cfg["sister_name"])}</a>')
+    else:
+        sister_line, sister_btn = "", ""
+
+    bld_table = render_by_building(ledger, cfg)
+    by_building_block = f'''
+      <h3 class="font-display gbc-subhead">By the Building</h3>
+      <p class="gbc-window">Closed sales by building &middot; past {LEDGER_WINDOW_DAYS // 30} months &middot; {cfg.get("street", "")}</p>
+      {bld_table}
+''' if bld_table else ''
+
     return f'''---
 // GENERATED by scripts/gen_gulf_bay_pages.py: baked static snapshot of Supabase MLS data.
 // Re-run that script to refresh. Hand edits will be overwritten.
@@ -1097,7 +1302,7 @@ const jsonLd = [
       {hero_rule}<p class="section-label text-cbgl-blue-light mb-3">Siesta Key &middot; 34242 &middot; {cfg["label"]}</p>
       <h1 class="font-display text-white mb-4">{esc(cfg["name"])}</h1>
 {hero_blurb}
-      <p class="gbc-sister">Looking for the other association? <a href="/siesta-key/{cfg["sister_slug"]}">{esc(cfg["sister_name"])} &rarr;</a></p>
+{sister_line}
       <div class="gbc-beach" data-beach data-grid="{BEACH_NWS_GRID}" data-beach-id="{BEACH_MOTE_ID}" hidden>
         <span class="gbc-beach-label">{BEACH_LABEL}</span>
         <span class="gbc-beach-sep" aria-hidden="true">&middot;</span>
@@ -1112,7 +1317,7 @@ const jsonLd = [
     <div class="container">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
         <div>
-          <h2 class="accent-underline mb-6">About {esc(cfg["short"])}</h2>
+          <h2 class="accent-underline mb-6">About {cfg.get("about_label") or esc(cfg["short"])}</h2>
           <p class="gbc-about">{cfg["about"]}</p>
           <div class="flex flex-wrap gap-3 mt-6">
             {chips}
@@ -1132,11 +1337,11 @@ const jsonLd = [
       <p class="gbc-window">Closed sales &middot; past {HEADLINE_WINDOW_DAYS} days &middot; as of {as_of}</p>
       {render_stats(headline, lease, lease_n, lease_total)}
       {thin_note}
-
+{by_building_block}
       <h3 class="font-display gbc-subhead">Transaction Ledger</h3>
       <p class="gbc-window">Every recorded closing in the last {LEDGER_WINDOW_DAYS // 30} months, most recent first.</p>
       {render_filters(ledger, uid)}
-      {render_ledger(ledger, uid)}
+      {render_ledger(ledger, uid, cfg.get("buildings"))}
 
       <h3 class="font-display gbc-subhead">Trailing 12-Month Trend</h3>
       <p class="gbc-window">Median closed price by quarter: a fuller read on where values are heading.</p>
@@ -1166,8 +1371,7 @@ const jsonLd = [
       </div>
       <p class="gbc-team-brokerage">Coldwell Banker Global Luxury</p>
       <div class="gbc-cta-btns">
-        <a href="/contact" class="gbc-btn gbc-btn-gold">Contact the Team</a>
-        <a href="/siesta-key/{cfg["sister_slug"]}" class="gbc-btn gbc-btn-outline">{esc(cfg["sister_name"])}</a>
+        <a href="/contact" class="gbc-btn gbc-btn-gold">Contact the Team</a>{sister_btn}
       </div>
     </div>
   </section>
