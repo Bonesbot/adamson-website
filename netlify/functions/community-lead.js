@@ -112,6 +112,7 @@ async function createZohoLead(lead) {
       `Team: ${lead.route ? lead.route.agents : 'Ryan Adamson'}`,
       `Community: ${lead.community || 'n/a'}`,
       `Page: ${lead.page || 'n/a'}`,
+      ...(lead.notes ? ['', 'What they told us:', lead.notes] : []),
       `Submitted: ${new Date().toISOString()}`,
     ].join('\n'),
   };
@@ -179,6 +180,7 @@ async function queueGmailDraft(lead, zohoId) {
     `Phone:     ${lead.phone || '—'}`,
     `Lead Type: ${lead.lead_type}`,
     `Community: ${lead.community || '—'}`,
+    ...(lead.notes ? ['', 'What they told us:', lead.notes, ''] : []),
     `Page:      https://adamsonfl.com${lead.page || ''}`,
     `Received:  ${new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })} ET`,
     `Routed to: ${lead.route ? lead.route.label : 'Ryan (default)'}`,
@@ -241,8 +243,13 @@ async function storeLead(lead, zohoId, zohoError) {
       zoho_lead_id: zohoId || null,
       zoho_sync: zohoId ? 'ok' : null,
       zoho_error: zohoError || null,
-      details: lead.route
-        ? { routing: lead.route.label, routed_to: lead.route.notify, agents: lead.route.agents }
+      details: (lead.route || lead.notes)
+        ? {
+            ...(lead.route
+              ? { routing: lead.route.label, routed_to: lead.route.notify, agents: lead.route.agents }
+              : {}),
+            ...(lead.notes ? { notes: lead.notes } : {}),
+          }
         : null,
       raw_payload: lead,
     }),
@@ -282,6 +289,9 @@ export const handler = async (event) => {
       name: (body.name || '').trim() || null,
       email: String(body.email).trim(),
       phone: (body.phone || '').trim() || null,
+      // free text the visitor typed: unit number, view, size, timing. Capped because it
+      // rides into Zoho's Description and a Gmail draft, neither of which wants an essay.
+      notes: (body.notes || '').trim().slice(0, 1200) || null,
       lead_type: body.lead_type === 'Seller' ? 'Seller' : 'Buyer',
       community: (body.community || '').trim() || null,
       page: (body.page || '').trim() || null,
