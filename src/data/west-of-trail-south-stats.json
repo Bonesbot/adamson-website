@@ -2,41 +2,41 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-08-13T10:52:04.754545+00:00",
+  "lastUpdated": "2026-08-14T17:11:58.361745+00:00",
   "counts": {
-    "sold": 270,
-    "pending": 27,
-    "active": 92,
-    "total": 297
+    "sold": 271,
+    "pending": 29,
+    "active": 91,
+    "total": 300
   },
   "metrics": {
-    "avgPrice": "$636,622",
-    "avgPricePerSqFt": "$331",
+    "avgPrice": "$633,736",
+    "avgPricePerSqFt": "$330",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,746",
+    "avgLivingSqFt": "1,742",
     "avgLotSqFt": null,
-    "avgDom": 77
+    "avgDom": 78
   },
   "range": {
     "minPrice": "$110,000",
     "maxPrice": "$6,000,000"
   },
   "active": {
-    "count": 92,
-    "medianPrice": "$481,850",
-    "medianPricePerSqFt": "$320",
+    "count": 91,
+    "medianPrice": "$484,700",
+    "medianPricePerSqFt": "$321",
     "waterfrontCount": 26,
     "newConstructionCount": 2
   },
   "sold": {
     "count": 52,
-    "medianPrice": "$407,500",
-    "medianDom": 48,
-    "saleToListRatio": "88.5%",
+    "medianPrice": "$400,000",
+    "medianDom": 45,
+    "saleToListRatio": "88.6%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.8,
+    "condo": 5.6,
     "sfhVilla": 4.3,
     "blended": 4.9,
     "method": "active / (trailing-12mo closed / 12)",
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 73,
+    "under900k": 72,
     "band900kTo1_5m": 6,
     "band1_5mTo3m": 8,
     "band3mPlus": 5
@@ -62,11 +62,24 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 92
+      "count": 91
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4697127",
+      "address": "1715 PELICAN COVE RD #GL339",
+      "subdivision": "PELICAN COVE XIV",
+      "soldPrice": "$200,000",
+      "soldDate": "2026-08-13",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "731",
+      "yearBuilt": 1979,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4680848",
       "address": "1725 BAYWOOD DR",
@@ -118,19 +131,6 @@
       "yearBuilt": 1979,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4688441",
-      "address": "1511 PELICAN POINT DR #279",
-      "subdivision": "PELICAN COVE VII",
-      "soldPrice": "$465,000",
-      "soldDate": "2026-08-07",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,474",
-      "yearBuilt": 1978,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 52,
-      "avgPrice": "$365,170",
-      "avgPricePerSqFt": "$291",
-      "avgLivingSqFt": "1,261",
-      "avgDom": 128
+      "activeCount": 51,
+      "avgPrice": "$369,879",
+      "avgPricePerSqFt": "$293",
+      "avgLivingSqFt": "1,272",
+      "avgDom": 131
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$640,400",
       "avgPricePerSqFt": "$302",
       "avgLivingSqFt": "2,121",
-      "avgDom": 156
+      "avgDom": 157
     },
     {
       "tier": "2006to2019",
@@ -172,7 +172,7 @@
       "avgPrice": "$629,000",
       "avgPricePerSqFt": "$353",
       "avgLivingSqFt": "1,785",
-      "avgDom": 228
+      "avgDom": 230
     }
   ],
   "condoTiersScope": {
@@ -197,9 +197,9 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 23,
-      "soldCount": 56,
-      "soldMedianPricePerSqFt": "$366",
-      "soldMedianPrice": "$500,500",
+      "soldCount": 57,
+      "soldMedianPricePerSqFt": "$362",
+      "soldMedianPrice": "$495,000",
       "lowSample": false
     },
     {
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 50,
+      "activeCount": 49,
       "soldCount": 174,
       "soldMedianPricePerSqFt": "$283",
       "soldMedianPrice": "$427,000",
@@ -232,11 +232,11 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 4.9,
-    "monthsOfSupplyCondo": 5.8,
+    "monthsOfSupplyCondo": 5.6,
     "monthsOfSupplySfhVilla": 4.3,
     "label": "seller's market",
-    "activeCount": 92,
-    "sold365Count": 224,
+    "activeCount": 91,
+    "sold365Count": 225,
     "sold90Count": 52,
     "method": "active / (trailing-12mo closed / 12)"
   },
@@ -248,9 +248,9 @@
       "soldMedianPricePerSqFt": "$320"
     },
     "condo": {
-      "soldCount": 126,
-      "activeCount": 62,
-      "soldMedianPrice": "$348,750",
+      "soldCount": 127,
+      "activeCount": 61,
+      "soldMedianPrice": "$347,500",
       "soldMedianPricePerSqFt": "$261"
     }
   },
@@ -262,22 +262,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 92 active listings and roughly 19 closed sales a month (trailing 12 months), West Of Trail South has about 4.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 91 active listings and roughly 19 closed sales a month (trailing 12 months), West Of Trail South has about 4.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $518,750 ($320/sq ft), while condos, villas and townhouses sell around $348,750 ($261/sq ft)."
+      "a": "Single-family homes sell around $518,750 ($320/sq ft), while condos, villas and townhouses sell around $347,500 ($261/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $110,000 to $6,000,000, with a median asking price of $481,850."
+      "a": "Active listings run from $110,000 to $6,000,000, with a median asking price of $484,700."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 48 days on market and closed at 88.5% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 45 days on market and closed at 88.6% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

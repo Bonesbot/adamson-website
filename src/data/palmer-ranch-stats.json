@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-08-13T10:52:06.246318+00:00",
+  "lastUpdated": "2026-08-14T17:11:59.944611+00:00",
   "counts": {
-    "sold": 827,
-    "pending": 67,
+    "sold": 829,
+    "pending": 66,
     "active": 229,
-    "total": 894
+    "total": 895
   },
   "metrics": {
-    "avgPrice": "$566,621",
-    "avgPricePerSqFt": "$264",
+    "avgPrice": "$566,261",
+    "avgPricePerSqFt": "$263",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,059",
+    "avgLivingSqFt": "2,058",
     "avgLotSqFt": null,
     "avgDom": 80
   },
@@ -23,20 +23,20 @@
   },
   "active": {
     "count": 229,
-    "medianPrice": "$405,000",
+    "medianPrice": "$415,000",
     "medianPricePerSqFt": "$253",
     "waterfrontCount": 39,
-    "newConstructionCount": 30
+    "newConstructionCount": 31
   },
   "sold": {
-    "count": 206,
-    "medianPrice": "$472,500",
+    "count": 202,
+    "medianPrice": "$470,000",
     "medianDom": 50,
     "saleToListRatio": "90.8%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 6.7,
+    "condo": 6.5,
     "sfhVilla": 3.0,
     "blended": 3.9,
     "method": "active / (trailing-12mo closed / 12)",
@@ -67,6 +67,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4694802",
+      "address": "4655 TOWER HILL LN #2414",
+      "subdivision": "STONEYBROOK ARBOR GREENS 1",
+      "soldPrice": "$209,000",
+      "soldDate": "2026-08-13",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,310",
+      "yearBuilt": 1997,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4691502",
+      "address": "4640 TOWER HILL LN #2325",
+      "subdivision": "STONEYBROOK ARBOR GREENS 1",
+      "soldPrice": "$210,000",
+      "soldDate": "2026-08-12",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,163",
+      "yearBuilt": 1996,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4669285",
       "address": "7738 CALLE FACIL",
@@ -105,32 +131,6 @@
       "yearBuilt": 2005,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4689271",
-      "address": "4368 KINGSTON LOOP",
-      "subdivision": "GULF GATE EAST",
-      "soldPrice": "$550,000",
-      "soldDate": "2026-08-07",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,574",
-      "yearBuilt": 1982,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "N6144935",
-      "address": "5958 ANISE DR",
-      "subdivision": "ARBOR LAKES ON PALMER RANCH",
-      "soldPrice": "$535,000",
-      "soldDate": "2026-08-07",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,055",
-      "yearBuilt": 2017,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -138,20 +138,20 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 38,
-      "avgPrice": "$310,732",
+      "activeCount": 37,
+      "avgPrice": "$312,400",
       "avgPricePerSqFt": "$193",
-      "avgLivingSqFt": "1,604",
-      "avgDom": 91
+      "avgLivingSqFt": "1,613",
+      "avgDom": 93
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 85,
-      "avgPrice": "$302,873",
-      "avgPricePerSqFt": "$236",
-      "avgLivingSqFt": "1,274",
+      "activeCount": 84,
+      "avgPrice": "$302,967",
+      "avgPricePerSqFt": "$235",
+      "avgLivingSqFt": "1,277",
       "avgDom": 113
     },
     {
@@ -162,7 +162,7 @@
       "avgPrice": "$395,975",
       "avgPricePerSqFt": "$249",
       "avgLivingSqFt": "1,593",
-      "avgDom": 103
+      "avgDom": 104
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$344,162",
       "avgPricePerSqFt": "$214",
       "avgLivingSqFt": "1,600",
-      "avgDom": 72
+      "avgDom": 73
     }
   ],
   "condoTiersScope": {
@@ -215,7 +215,7 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 139,
-      "soldCount": 456,
+      "soldCount": 458,
       "soldMedianPricePerSqFt": "$244",
       "soldMedianPrice": "$440,000",
       "lowSample": false
@@ -223,26 +223,26 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 3.9,
-    "monthsOfSupplyCondo": 6.7,
+    "monthsOfSupplyCondo": 6.5,
     "monthsOfSupplySfhVilla": 3.0,
     "label": "seller's market",
     "activeCount": 229,
-    "sold365Count": 700,
-    "sold90Count": 206,
+    "sold365Count": 702,
+    "sold90Count": 202,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 472,
-      "activeCount": 85,
+      "activeCount": 87,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 355,
-      "activeCount": 144,
+      "soldCount": 357,
+      "activeCount": 142,
       "soldMedianPrice": "$325,000",
-      "soldMedianPricePerSqFt": "$213"
+      "soldMedianPricePerSqFt": "$212"
     }
   },
   "boating": {
@@ -258,12 +258,12 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Palmer Ranch?",
-      "a": "Single-family homes sell around $650,000 ($288/sq ft), while condos, villas and townhouses sell around $325,000 ($213/sq ft)."
+      "a": "Single-family homes sell around $650,000 ($288/sq ft), while condos, villas and townhouses sell around $325,000 ($212/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $405,000."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $415,000."
     },
     {
       "facet": "speed",

@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-08-13T10:52:03.321140+00:00",
+  "lastUpdated": "2026-08-14T17:11:56.720320+00:00",
   "counts": {
-    "sold": 199,
+    "sold": 200,
     "pending": 23,
     "active": 75,
-    "total": 222
+    "total": 223
   },
   "metrics": {
-    "avgPrice": "$2,479,437",
-    "avgPricePerSqFt": "$733",
+    "avgPrice": "$2,477,638",
+    "avgPricePerSqFt": "$732",
     "avgYearBuilt": 1986,
-    "avgLivingSqFt": "2,997",
+    "avgLivingSqFt": "2,999",
     "avgLotSqFt": null,
     "avgDom": 119
   },
@@ -29,15 +29,15 @@
     "newConstructionCount": 28
   },
   "sold": {
-    "count": 37,
-    "medianPrice": "$2,125,000",
-    "medianDom": 109,
-    "saleToListRatio": "108.8%",
+    "count": 36,
+    "medianPrice": "$2,000,000",
+    "medianDom": 114,
+    "saleToListRatio": "109.6%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 7.7,
-    "sfhVilla": 5.7,
+    "sfhVilla": 5.6,
     "blended": 5.8,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,9 +54,9 @@
     }
   },
   "priceBands": {
-    "under900k": 11,
+    "under900k": 12,
     "band900kTo1_5m": 4,
-    "band1_5mTo3m": 23,
+    "band1_5mTo3m": 22,
     "band3mPlus": 37
   },
   "propertyTypes": [
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4695101",
+      "address": "1519 HARBOR DR",
+      "subdivision": "HARBOR ACRES SEC 2",
+      "soldPrice": "$4,578,125",
+      "soldDate": "2026-08-13",
+      "bedrooms": 4,
+      "bathrooms": 4.5,
+      "livingSqFt": "3,970",
+      "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4666624",
       "address": "1022 S OSPREY AVE",
@@ -118,19 +131,6 @@
       "yearBuilt": 1926,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4672440",
-      "address": "3837 CAMINO REAL",
-      "subdivision": "GRANADA",
-      "soldPrice": "$965,000",
-      "soldDate": "2026-07-27",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,887",
-      "yearBuilt": 2003,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$380,544",
       "avgPricePerSqFt": "$334",
       "avgLivingSqFt": "1,113",
-      "avgDom": 151
+      "avgDom": 152
     },
     {
       "tier": "1990to2005",
@@ -215,28 +215,28 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 57,
-      "soldCount": 167,
-      "soldMedianPricePerSqFt": "$651",
-      "soldMedianPrice": "$1,640,000",
+      "soldCount": 168,
+      "soldMedianPricePerSqFt": "$652",
+      "soldMedianPrice": "$1,667,500",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 5.8,
     "monthsOfSupplyCondo": 7.7,
-    "monthsOfSupplySfhVilla": 5.7,
+    "monthsOfSupplySfhVilla": 5.6,
     "label": "balanced market",
     "activeCount": 75,
-    "sold365Count": 154,
-    "sold90Count": 37,
+    "sold365Count": 155,
+    "sold90Count": 36,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 181,
+      "soldCount": 182,
       "activeCount": 66,
-      "soldMedianPrice": "$1,850,000",
-      "soldMedianPricePerSqFt": "$679"
+      "soldMedianPrice": "$1,862,500",
+      "soldMedianPricePerSqFt": "$680"
     },
     "condo": {
       "soldCount": 18,
@@ -258,7 +258,7 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,850,000 ($679/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
+      "a": "Single-family homes sell around $1,862,500 ($680/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
     },
     {
       "facet": "range",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 109 days on market and closed at 108.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 114 days on market and closed at 109.6% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
