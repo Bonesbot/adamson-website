@@ -2,43 +2,43 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-08-14T17:11:57.547782+00:00",
+  "lastUpdated": "2026-08-17T10:51:07.262176+00:00",
   "counts": {
-    "sold": 87,
+    "sold": 88,
     "pending": 9,
-    "active": 51,
-    "total": 96
+    "active": 52,
+    "total": 97
   },
   "metrics": {
-    "avgPrice": "$1,157,439",
-    "avgPricePerSqFt": "$525",
+    "avgPrice": "$1,150,156",
+    "avgPricePerSqFt": "$522",
     "avgYearBuilt": 1973,
-    "avgLivingSqFt": "1,969",
+    "avgLivingSqFt": "1,967",
     "avgLotSqFt": null,
-    "avgDom": 107
+    "avgDom": 106
   },
   "range": {
     "minPrice": "$251,700",
     "maxPrice": "$22,900,000"
   },
   "active": {
-    "count": 51,
-    "medianPrice": "$739,000",
-    "medianPricePerSqFt": "$537",
-    "waterfrontCount": 16,
-    "newConstructionCount": 18
+    "count": 52,
+    "medianPrice": "$744,450",
+    "medianPricePerSqFt": "$542",
+    "waterfrontCount": 17,
+    "newConstructionCount": 19
   },
   "sold": {
-    "count": 20,
-    "medianPrice": "$657,500",
-    "medianDom": 58,
-    "saleToListRatio": "87.8%",
+    "count": 19,
+    "medianPrice": "$550,000",
+    "medianDom": 66,
+    "saleToListRatio": "86.7%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 9.3,
-    "sfhVilla": 7.4,
-    "blended": 7.8,
+    "sfhVilla": 7.5,
+    "blended": 7.9,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -57,16 +57,29 @@
     "under900k": 29,
     "band900kTo1_5m": 7,
     "band1_5mTo3m": 6,
-    "band3mPlus": 9
+    "band3mPlus": 10
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 51
+      "count": 52
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4694870",
+      "address": "864 41ST ST",
+      "subdivision": "INDIAN BEACH MAP OF",
+      "soldPrice": "$375,000",
+      "soldDate": "2026-08-14",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,332",
+      "yearBuilt": 1953,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4649616",
       "address": "3931 BAY SHORE RD",
@@ -118,19 +131,6 @@
       "yearBuilt": 2022,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "O6375499",
-      "address": "916 HIGHLAND ST",
-      "subdivision": "HIGHLAND PINES",
-      "soldPrice": "$1,000,000",
-      "soldDate": "2026-07-17",
-      "bedrooms": 5,
-      "bathrooms": 4.0,
-      "livingSqFt": "2,852",
-      "yearBuilt": 2024,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$569,000",
       "avgPricePerSqFt": "$451",
       "avgLivingSqFt": "1,262",
-      "avgDom": 91
+      "avgDom": 94
     },
     {
       "tier": "1990to2005",
@@ -169,10 +169,10 @@
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 13,
-      "avgPrice": "$591,567",
-      "avgPricePerSqFt": "$567",
+      "avgPrice": "$589,952",
+      "avgPricePerSqFt": "$566",
       "avgLivingSqFt": "1,050",
-      "avgDom": 119
+      "avgDom": 122
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 16,
+      "activeCount": 17,
       "soldCount": 26,
       "soldMedianPricePerSqFt": "$542",
       "soldMedianPrice": "$650,000",
@@ -215,28 +215,28 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 30,
-      "soldCount": 59,
+      "soldCount": 60,
       "soldMedianPricePerSqFt": "$403",
-      "soldMedianPrice": "$575,000",
+      "soldMedianPrice": "$572,500",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.8,
+    "monthsOfSupply": 7.9,
     "monthsOfSupplyCondo": 9.3,
-    "monthsOfSupplySfhVilla": 7.4,
+    "monthsOfSupplySfhVilla": 7.5,
     "label": "buyer's market",
-    "activeCount": 51,
-    "sold365Count": 78,
-    "sold90Count": 20,
+    "activeCount": 52,
+    "sold365Count": 79,
+    "sold90Count": 19,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 68,
-      "activeCount": 37,
-      "soldMedianPrice": "$686,515",
-      "soldMedianPricePerSqFt": "$427"
+      "soldCount": 69,
+      "activeCount": 38,
+      "soldMedianPrice": "$678,030",
+      "soldMedianPricePerSqFt": "$426"
     },
     "condo": {
       "soldCount": 19,
@@ -246,34 +246,34 @@
     }
   },
   "boating": {
-    "activeWithDock": 7,
-    "activeWaterfront": 16
+    "activeWithDock": 8,
+    "activeWaterfront": 17
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 51 active listings and roughly 6 closed sales a month (trailing 12 months), West Of Trail North has about 7.8 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 52 active listings and roughly 7 closed sales a month (trailing 12 months), West Of Trail North has about 7.9 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail North?",
-      "a": "Single-family homes sell around $686,515 ($427/sq ft), while condos, villas and townhouses sell around $470,000 ($492/sq ft)."
+      "a": "Single-family homes sell around $678,030 ($426/sq ft), while condos, villas and townhouses sell around $470,000 ($492/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail North?",
-      "a": "Active listings run from $251,700 to $22,900,000, with a median asking price of $739,000."
+      "a": "Active listings run from $251,700 to $22,900,000, with a median asking price of $744,450."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 58 days on market and closed at 87.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 66 days on market and closed at 86.7% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail North homes have a dock?",
-      "a": "Of 16 active waterfront listings, 7 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 17 active waterfront listings, 8 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

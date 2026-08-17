@@ -2,43 +2,43 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-08-14T17:11:56.720320+00:00",
+  "lastUpdated": "2026-08-17T10:51:06.538182+00:00",
   "counts": {
-    "sold": 200,
+    "sold": 201,
     "pending": 23,
-    "active": 75,
-    "total": 223
+    "active": 73,
+    "total": 224
   },
   "metrics": {
-    "avgPrice": "$2,477,638",
+    "avgPrice": "$2,476,443",
     "avgPricePerSqFt": "$732",
     "avgYearBuilt": 1986,
-    "avgLivingSqFt": "2,999",
+    "avgLivingSqFt": "2,998",
     "avgLotSqFt": null,
-    "avgDom": 119
+    "avgDom": 118
   },
   "range": {
     "minPrice": "$98,000",
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 75,
-    "medianPrice": "$2,997,000",
-    "medianPricePerSqFt": "$887",
-    "waterfrontCount": 17,
-    "newConstructionCount": 28
+    "count": 73,
+    "medianPrice": "$3,075,000",
+    "medianPricePerSqFt": "$893",
+    "waterfrontCount": 16,
+    "newConstructionCount": 29
   },
   "sold": {
     "count": 36,
     "medianPrice": "$2,000,000",
     "medianDom": 114,
-    "saleToListRatio": "109.6%",
+    "saleToListRatio": "109.5%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 7.7,
+    "condo": 6.0,
     "sfhVilla": 5.6,
-    "blended": 5.8,
+    "blended": 5.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 12,
+    "under900k": 10,
     "band900kTo1_5m": 4,
     "band1_5mTo3m": 22,
     "band3mPlus": 37
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 75
+      "count": 73
     }
   ],
   "buildingClasses": [],
@@ -77,6 +77,19 @@
       "bathrooms": 4.5,
       "livingSqFt": "3,970",
       "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4686033",
+      "address": "3625 JACINTO CT",
+      "subdivision": "GRANADA",
+      "soldPrice": "$575,000",
+      "soldDate": "2026-08-11",
+      "bedrooms": 2,
+      "bathrooms": 1.0,
+      "livingSqFt": "1,008",
+      "yearBuilt": 1957,
       "propertyType": "Residential",
       "isWaterfront": false
     },
@@ -118,19 +131,6 @@
       "yearBuilt": 2011,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4661399",
-      "address": "3838 FLORES AVE",
-      "subdivision": "GRANADA",
-      "soldPrice": "$1,400,000",
-      "soldDate": "2026-07-28",
-      "bedrooms": 5,
-      "bathrooms": 4.5,
-      "livingSqFt": "3,033",
-      "yearBuilt": 1926,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 9,
-      "avgPrice": "$380,544",
-      "avgPricePerSqFt": "$334",
-      "avgLivingSqFt": "1,113",
-      "avgDom": 152
+      "activeCount": 7,
+      "avgPrice": "$320,429",
+      "avgPricePerSqFt": "$293",
+      "avgLivingSqFt": "1,094",
+      "avgDom": 143
     },
     {
       "tier": "1990to2005",
@@ -187,7 +187,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 16,
+      "activeCount": 15,
       "soldCount": 25,
       "soldMedianPricePerSqFt": "$1,051",
       "soldMedianPrice": "$3,875,000",
@@ -214,66 +214,66 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 57,
-      "soldCount": 168,
-      "soldMedianPricePerSqFt": "$652",
-      "soldMedianPrice": "$1,667,500",
+      "activeCount": 56,
+      "soldCount": 169,
+      "soldMedianPricePerSqFt": "$651",
+      "soldMedianPrice": "$1,640,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.8,
-    "monthsOfSupplyCondo": 7.7,
+    "monthsOfSupply": 5.7,
+    "monthsOfSupplyCondo": 6.0,
     "monthsOfSupplySfhVilla": 5.6,
     "label": "balanced market",
-    "activeCount": 75,
+    "activeCount": 73,
     "sold365Count": 155,
     "sold90Count": 36,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 182,
+      "soldCount": 183,
       "activeCount": 66,
-      "soldMedianPrice": "$1,862,500",
-      "soldMedianPricePerSqFt": "$680"
+      "soldMedianPrice": "$1,850,000",
+      "soldMedianPricePerSqFt": "$679"
     },
     "condo": {
       "soldCount": 18,
-      "activeCount": 9,
+      "activeCount": 7,
       "soldMedianPrice": "$322,500",
       "soldMedianPricePerSqFt": "$320"
     }
   },
   "boating": {
-    "activeWithDock": 13,
-    "activeWaterfront": 17
+    "activeWithDock": 12,
+    "activeWaterfront": 16
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 75 active listings and roughly 13 closed sales a month (trailing 12 months), West Of Trail Core has about 5.8 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 73 active listings and roughly 13 closed sales a month (trailing 12 months), West Of Trail Core has about 5.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,862,500 ($680/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
+      "a": "Single-family homes sell around $1,850,000 ($679/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $98,000 to $26,400,000, with a median asking price of $2,997,000."
+      "a": "Active listings run from $98,000 to $26,400,000, with a median asking price of $3,075,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 114 days on market and closed at 109.6% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 114 days on market and closed at 109.5% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail Core homes have a dock?",
-      "a": "Of 17 active waterfront listings, 13 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 16 active waterfront listings, 12 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

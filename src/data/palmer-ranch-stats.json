@@ -2,15 +2,15 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-08-14T17:11:59.944611+00:00",
+  "lastUpdated": "2026-08-17T10:51:09.675002+00:00",
   "counts": {
-    "sold": 829,
-    "pending": 66,
+    "sold": 831,
+    "pending": 68,
     "active": 229,
-    "total": 895
+    "total": 899
   },
   "metrics": {
-    "avgPrice": "$566,261",
+    "avgPrice": "$565,983",
     "avgPricePerSqFt": "$263",
     "avgYearBuilt": 2001,
     "avgLivingSqFt": "2,058",
@@ -23,21 +23,21 @@
   },
   "active": {
     "count": 229,
-    "medianPrice": "$415,000",
+    "medianPrice": "$420,000",
     "medianPricePerSqFt": "$253",
-    "waterfrontCount": 39,
+    "waterfrontCount": 42,
     "newConstructionCount": 31
   },
   "sold": {
-    "count": 202,
+    "count": 201,
     "medianPrice": "$470,000",
-    "medianDom": 50,
-    "saleToListRatio": "90.8%",
+    "medianDom": 51,
+    "saleToListRatio": "90.7%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 6.5,
-    "sfhVilla": 3.0,
+    "sfhVilla": 3.1,
     "blended": 3.9,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -67,6 +67,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4695410",
+      "address": "8753 MERION AVE",
+      "subdivision": "STONEYBROOK GOLF & COUNTRY CLUB",
+      "soldPrice": "$860,000",
+      "soldDate": "2026-08-14",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,405",
+      "yearBuilt": 1997,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4684986",
+      "address": "7559 QUINTO DR",
+      "subdivision": "VILLAGEWALK",
+      "soldPrice": "$380,000",
+      "soldDate": "2026-08-14",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,534",
+      "yearBuilt": 2003,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4694802",
       "address": "4655 TOWER HILL LN #2414",
@@ -105,32 +131,6 @@
       "yearBuilt": 1989,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4697321",
-      "address": "5821 FERRARA DR",
-      "subdivision": "VILLAGEWALK",
-      "soldPrice": "$650,000",
-      "soldDate": "2026-08-10",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,201",
-      "yearBuilt": 2002,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4680873",
-      "address": "7782 ULIVA WAY",
-      "subdivision": "VILLAGEWALK",
-      "soldPrice": "$612,500",
-      "soldDate": "2026-08-07",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,008",
-      "yearBuilt": 2005,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -139,30 +139,30 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 37,
-      "avgPrice": "$312,400",
+      "avgPrice": "$309,941",
       "avgPricePerSqFt": "$193",
-      "avgLivingSqFt": "1,613",
-      "avgDom": 93
+      "avgLivingSqFt": "1,597",
+      "avgDom": 94
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 84,
-      "avgPrice": "$302,967",
+      "activeCount": 81,
+      "avgPrice": "$304,511",
       "avgPricePerSqFt": "$235",
-      "avgLivingSqFt": "1,277",
-      "avgDom": 113
+      "avgLivingSqFt": "1,284",
+      "avgDom": 115
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 12,
-      "avgPrice": "$395,975",
-      "avgPricePerSqFt": "$249",
-      "avgLivingSqFt": "1,593",
-      "avgDom": 104
+      "activeCount": 13,
+      "avgPrice": "$395,431",
+      "avgPricePerSqFt": "$243",
+      "avgLivingSqFt": "1,636",
+      "avgDom": 99
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$344,162",
       "avgPricePerSqFt": "$214",
       "avgLivingSqFt": "1,600",
-      "avgDom": 73
+      "avgDom": 76
     }
   ],
   "condoTiersScope": {
@@ -205,7 +205,7 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 39,
+      "activeCount": 42,
       "soldCount": 180,
       "soldMedianPricePerSqFt": "$275",
       "soldMedianPrice": "$606,000",
@@ -214,8 +214,8 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 139,
-      "soldCount": 458,
+      "activeCount": 136,
+      "soldCount": 460,
       "soldMedianPricePerSqFt": "$244",
       "soldMedianPrice": "$440,000",
       "lowSample": false
@@ -224,30 +224,30 @@
   "marketBalance": {
     "monthsOfSupply": 3.9,
     "monthsOfSupplyCondo": 6.5,
-    "monthsOfSupplySfhVilla": 3.0,
+    "monthsOfSupplySfhVilla": 3.1,
     "label": "seller's market",
     "activeCount": 229,
-    "sold365Count": 702,
-    "sold90Count": 202,
+    "sold365Count": 701,
+    "sold90Count": 201,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 472,
-      "activeCount": 87,
+      "soldCount": 473,
+      "activeCount": 89,
       "soldMedianPrice": "$650,000",
-      "soldMedianPricePerSqFt": "$288"
+      "soldMedianPricePerSqFt": "$289"
     },
     "condo": {
-      "soldCount": 357,
-      "activeCount": 142,
+      "soldCount": 358,
+      "activeCount": 140,
       "soldMedianPrice": "$325,000",
-      "soldMedianPricePerSqFt": "$212"
+      "soldMedianPricePerSqFt": "$213"
     }
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 39
+    "activeWaterfront": 42
   },
   "marketQuestions": [
     {
@@ -258,22 +258,22 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Palmer Ranch?",
-      "a": "Single-family homes sell around $650,000 ($288/sq ft), while condos, villas and townhouses sell around $325,000 ($212/sq ft)."
+      "a": "Single-family homes sell around $650,000 ($289/sq ft), while condos, villas and townhouses sell around $325,000 ($213/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $415,000."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $420,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 50 days on market and closed at 90.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 51 days on market and closed at 90.7% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 39 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 42 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
