@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>CMA Admin | The Adamson Group</title>
+<style>
+  :root { --navy:#0A1F3C; --gold:#C9A961; --muted:#B4BECD; --bg:#F7F8FA; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:Arial,"Helvetica Neue",sans-serif; background:var(--bg); color:#22304a; }
+  h1,h2 { font-family:Georgia,serif; color:var(--navy); }
+  .wrap { max-width:1050px; margin:0 auto; padding:0 18px 60px; }
+  header { background:var(--navy); color:#fff; padding:20px 0 18px; border-bottom:4px solid var(--gold); }
+  header h1 { color:#fff; font-size:23px; font-weight:400; }
+  .crit { color:var(--muted); margin-top:5px; font-size:13px; }
+  .card { background:#fff; border:1px solid #e3e7ee; border-radius:8px; padding:20px; margin-top:20px; }
+  .card h2 { font-size:17px; margin-bottom:4px; }
+  .card .sub { font-size:12px; color:#7c8798; margin-bottom:12px; }
+  .btn { background:#fff; color:var(--navy); border:1px solid #c8d0dc; padding:8px 16px; border-radius:5px; font-size:13px; cursor:pointer; text-decoration:none; display:inline-block; }
+  .btn.gold { background:var(--gold); border-color:var(--gold); font-weight:bold; }
+  .btn.sm { padding:4px 10px; font-size:11.5px; }
+  .btn:hover { filter:brightness(1.05); }
+  input, select, textarea { font:13px Arial; padding:8px; border:1px solid #d8dde6; border-radius:5px; width:100%; }
+  input:focus, select:focus, textarea:focus { outline:2px solid var(--gold); }
+  label { display:block; font-size:11px; color:#5a6b85; margin:10px 0 3px; letter-spacing:.03em; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:0 14px; }
+  .grid4 { display:grid; grid-template-columns:repeat(4,1fr); gap:0 14px; }
+  table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  th { background:var(--navy); color:#fff; padding:8px 7px; text-align:left; font-weight:normal; font-size:11px; }
+  td { padding:8px 7px; border-bottom:1px solid #eef1f5; }
+  .tag { font-size:10px; padding:2px 8px; border-radius:10px; font-weight:bold; }
+  .tag.condo { background:#dbe9f7; color:#1d4f80; }
+  .tag.sfh { background:#e3f3e6; color:#1e7a32; }
+  .msg { font-size:12.5px; margin-top:10px; padding:9px 12px; border-radius:5px; display:none; }
+  .msg.ok { background:#e3f3e6; color:#1e7a32; display:block; }
+  .msg.err { background:#fde3e3; color:#b02a2a; display:block; }
+  .msg.info { background:#fff8e5; color:#8a6d1f; display:block; }
+  #login-view { max-width:380px; margin:70px auto; }
+  .hide { display:none; }
+  .csvbox { border:2px dashed #c8d0dc; border-radius:6px; padding:14px; font-size:12px; color:#5a6b85; margin-top:10px; }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>CMA Admin <span style="font-size:13px;color:var(--gold);">INTERNAL</span></h1>
+  <div class="crit">Create, refresh and manage CMA pages · The Adamson Group</div>
+</div></header>
+
+<div class="wrap">
+  <div id="login-view" class="card">
+    <h2>Sign in</h2>
+    <div class="sub">Enter the CMA edit key to continue.</div>
+    <label>Edit key</label>
+    <input type="password" id="login-key" onkeydown="if(event.key==='Enter')logIn()">
+    <div style="margin-top:14px;"><button class="btn gold" onclick="logIn()">Sign in</button></div>
+    <div class="msg" id="login-msg"></div>
+  </div>
+
+  <div id="app-view" class="hide">
+    <div class="card">
+      <h2 style="display:flex;justify-content:space-between;align-items:center;">Your CMAs
+        <span><button class="btn sm" onclick="loadList()">Refresh list</button>
+              <button class="btn sm" onclick="logOut()">Log out</button></span></h2>
+      <div class="sub">The client page link is shareable and has no password. The workbench is where you adjust.</div>
+      <table id="cma-table"><tbody><tr><td>loading…</td></tr></tbody></table>
+    </div>
+
+    <div class="card">
+      <h2>New CMA</h2>
+      <div class="sub">Fill the subject, optionally attach the comp CSV export now, and Create. Pages are scaffolded from
+        the master templates and live in 1 to 2 minutes. Comps can also be imported later with Refresh Comps.</div>
+
+      <div class="grid3">
+        <div><label>Profile</label>
+          <select id="f-profile" onchange="toggleProfile()"><option value="condo">Condo</option><option value="sfh">Single Family</option></select></div>
+        <div><label>MLS # (subject)</label><input id="f-mls" placeholder="A4700000"></div>
+        <div><label>Status</label><select id="f-status"><option>Pre-market</option><option>Active</option><option>Pending</option></select></div>
+      </div>
+      <div class="grid3">
+        <div style="grid-column:span 2;"><label>Street address (include unit for condo)</label><input id="f-address" placeholder="6116 43rd St W #305D" onblur="deriveSlug()"></div>
+        <div><label>Subdivision / community</label><input id="f-subdivision"></div>
+      </div>
+      <div class="grid4">
+        <div><label>City</label><input id="f-city" value="Sarasota"></div>
+        <div><label>State</label><input id="f-state" value="FL"></div>
+        <div><label>Zip</label><input id="f-zip"></div>
+        <div><label>List price $</label><input id="f-list" type="number"></div>
+      </div>
+      <div class="grid4">
+        <div><label>Heated sq ft</label><input id="f-sqft" type="number"></div>
+        <div><label>Year built</label><input id="f-year" type="number"></div>
+        <div><label>Beds</label><input id="f-beds" type="number" value="3"></div>
+        <div><label>Baths (full / half)</label><div style="display:flex;gap:6px;"><input id="f-fb" type="number" value="2"><input id="f-hb" type="number" value="0"></div></div>
+      </div>
+      <div class="grid4" id="condo-fields">
+        <div><label>Floor #</label><input id="f-floor" type="number"></div>
+        <div><label>Condo fee $/mo</label><input id="f-fee" type="number"></div>
+        <div><label>Min lease</label><input id="f-minlease" value="1 Month"></div>
+        <div><label>Pets</label><input id="f-pets" placeholder="No pets permitted"></div>
+      </div>
+      <div class="grid4 hide" id="sfh-fields">
+        <div><label>Lot sq ft</label><input id="f-lot" type="number"></div>
+        <div><label>Garage spaces</label><input id="f-garage" type="number"></div>
+        <div></div><div></div>
+      </div>
+      <div class="grid4">
+        <div><label>Taxes $ (year)</label><div style="display:flex;gap:6px;"><input id="f-taxes" type="number"><input id="f-taxyear" type="number" placeholder="2025"></div></div>
+        <div><label>Flood zone</label><input id="f-flood" placeholder="X"></div>
+        <div><label>Latitude</label><input id="f-lat" type="number" step="any"></div>
+        <div><label>Longitude</label><input id="f-lng" type="number" step="any"></div>
+      </div>
+      <div class="grid3">
+        <div><label>URL slug</label><input id="f-slug"></div>
+        <div style="grid-column:span 2;"><label>Saved search name (the refresh contract; name it this in the MLS / Home Platform)</label><input id="f-search"></div>
+      </div>
+      <label>Judgment buckets (one per line, key | label). Prefilled for the profile; edit freely.</label>
+      <textarea id="f-buckets" rows="7" style="font-family:monospace;"></textarea>
+
+      <div class="csvbox">
+        <b>Comp CSV (optional now, importable later):</b> attach the export from your saved search.
+        Stellar full and compact shapes auto-detect; a Home Platform export shape gets added the first time we see one.
+        <input type="file" id="f-csv" accept=".csv,text/csv" style="margin-top:8px;" onchange="previewCsv(this,'create')">
+        <div id="csv-preview" style="margin-top:6px;"></div>
+      </div>
+
+      <div style="margin-top:16px;"><button class="btn gold" onclick="createCma()">Create CMA</button></div>
+      <div class="msg" id="create-msg"></div>
+    </div>
+
+    <div class="card">
+      <h2>Refresh Comps</h2>
+      <div class="sub">Re-ran the saved search and exported a fresh CSV? Import it here. Facts (data.json) are replaced;
+        your judgment overlay is keyed by MLS # and untouched, so reviewed and frozen comps keep their numbers.</div>
+      <div class="grid3">
+        <div><label>CMA</label><select id="r-slug"></select></div>
+        <div style="grid-column:span 2;"><label>CSV export</label><input type="file" id="r-csv" accept=".csv,text/csv" onchange="previewCsv(this,'refresh')"></div>
+      </div>
+      <div id="refresh-preview" style="margin-top:6px;font-size:12px;color:#5a6b85;"></div>
+      <div style="margin-top:12px;"><button class="btn gold" onclick="refreshComps()">Commit refresh</button></div>
+      <div class="msg" id="refresh-msg"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* CMA ADMIN. Login gates the tooling; every write is separately enforced
+   server-side by CMA_EDIT_KEY. Data source adapters normalize CSV exports:
+   Stellar full + compact today; add a Home Platform map to MAPS when the
+   first export from it is in hand. */
+const API = "/.netlify/functions/cma-adjustments";
+const KEY_KEY = "cma-edit-key";
+const $ = id => document.getElementById(id);
+const msg = (id,cls,t) => { const el=$(id); el.className="msg "+cls; el.innerHTML=t; };
+
+const BUCKET_PRESETS = {
+  condo: "floorView | Floor / View\nbuilding | Building\ncondoFee | Condo Fee\nkitchen | Kitchen\nbathrooms | Bathrooms\ncore | Core Comp. (Roof·AC·Win)\nother | Other (Floor·Finish)",
+  sfh:   "lotView | Lot / View\npoolPatio | Pool / Patio\nkitchen | Kitchen\nbathrooms | Bathrooms\ncore | Core Comp. (Roof·AC·Win)\nother | Other (Floor·Finish)",
+};
+const PARAM_PRESETS = {
+  condo: { agePerYear:1000, bedBathPerRoom:5000, ppsfAdj:150, feePerDollarMonth:0, trendPctMonth:0 },
+  sfh:   { agePerYear:1000, garagePerSpace:20000, lotPerSqft:2.5, bedBathPerRoom:5000, ppsfAdj:200, trendPctMonth:0 },
+};
+
+/* ---------- auth ---------- */
+async function verifyKey(k){
+  const r = await fetch(API+"?action=verify",{method:"POST",headers:{"Content-Type":"application/json","x-cma-key":k},body:"{}"});
+  return r.status===200;
+}
+async function logIn(){
+  const k=$("login-key").value.trim();
+  if(!k) return;
+  msg("login-msg","info","checking…");
+  try {
+    if(await verifyKey(k)){
+      localStorage.setItem(KEY_KEY,k);
+      const next=new URLSearchParams(location.search).get("next");
+      if(next && next.startsWith("/mkt/")) { location.replace(next); return; }
+      showApp();
+    } else msg("login-msg","err","Wrong key.");
+  } catch(e){ msg("login-msg","err","Could not reach the server."); }
+}
+function logOut(){ localStorage.removeItem(KEY_KEY); location.reload(); }
+async function post(qs, body){
+  const r = await fetch(API+qs,{method:"POST",headers:{"Content-Type":"application/json","x-cma-key":localStorage.getItem(KEY_KEY)||""},body:JSON.stringify(body||{})});
+  let j={}; try{ j=await r.json(); }catch(e){}
+  if(r.status===401){ localStorage.removeItem(KEY_KEY); location.reload(); }
+  return {status:r.status, body:j};
+}
+
+/* ---------- boot ---------- */
+(async function(){
+  const k=localStorage.getItem(KEY_KEY);
+  if(k && await verifyKey(k).catch(()=>false)){
+    const next=new URLSearchParams(location.search).get("next");
+    if(next && next.startsWith("/mkt/")) { location.replace(next); return; }
+    showApp();
+  } else { localStorage.removeItem(KEY_KEY); }
+})();
+function showApp(){
+  $("login-view").classList.add("hide");
+  $("app-view").classList.remove("hide");
+  toggleProfile(); loadList();
+}
+function toggleProfile(){
+  const p=$("f-profile").value;
+  $("condo-fields").classList.toggle("hide", p!=="condo");
+  $("sfh-fields").classList.toggle("hide", p!=="sfh");
+  $("f-buckets").value = BUCKET_PRESETS[p];
+}
+function deriveSlug(){
+  const a=$("f-address").value.trim();
+  if(!a) return;
+  $("f-slug").value ||= a.toLowerCase().replace(/#/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")+"-cma";
+  $("f-search").value ||= "AAAA - " + a.replace(/#/g,"") + " - CMA";
+}
+
+/* ---------- registry list ---------- */
+async function loadList(){
+  const res = await post("?action=list",{});
+  const rows = (res.body.pages||[]);
+  $("cma-table").innerHTML = "<thead><tr><th>Address</th><th>Profile</th><th>Slug</th><th>Updated</th><th></th></tr></thead><tbody>"
+    + (rows.length ? rows.map(p=>`<tr>
+        <td><b>${p.address||p.slug}</b></td>
+        <td><span class="tag ${p.profile}">${p.profile}</span></td>
+        <td style="font-family:monospace;font-size:11px;">${p.slug}</td>
+        <td style="font-size:11px;">${p.updated_at? new Date(p.updated_at).toLocaleDateString():""}</td>
+        <td style="white-space:nowrap;">
+          <a class="btn sm" href="/mkt/${p.slug}/workbench.html">Workbench</a>
+          <a class="btn sm" href="/mkt/${p.slug}/" target="_blank">Client page</a>
+          <button class="btn sm" onclick="navigator.clipboard.writeText(location.origin+'/mkt/${p.slug}/');this.textContent='Copied'">Copy link</button>
+        </td></tr>`).join("") : "<tr><td colspan=5>No CMAs registered yet.</td></tr>")
+    + "</tbody>";
+  $("r-slug").innerHTML = rows.map(p=>`<option value="${p.slug}">${p.address||p.slug}</option>`).join("");
+}
+
+/* ---------- CSV adapters ---------- */
+function parseCsv(text){
+  const rows=[]; let row=[], cur="", q=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i];
+    if(q){ if(ch==='"'){ if(text[i+1]==='"'){cur+='"';i++;} else q=false; } else cur+=ch; }
+    else if(ch==='"') q=true;
+    else if(ch===',' ){ row.push(cur); cur=""; }
+    else if(ch==='\n'||ch==='\r'){ if(cur!==""||row.length){ row.push(cur); rows.push(row); row=[]; cur=""; } if(ch==='\r'&&text[i+1]==='\n')i++; }
+    else cur+=ch;
+  }
+  if(cur!==""||row.length){ row.push(cur); rows.push(row); }
+  return rows;
+}
+const MAPS = {
+  stellar_full: { detect:"MLS Number", cols:{ mls:"MLS Number", address:"Address", status:"Standard Status",
+    price:"Current Price", origList:"Original List Price", sqft:"Heated Area", year:"Year Built",
+    feeMonthly:"Monthly Condo Fee Amount", feeAnnual:"Total Annual Association Fees", dom:"ADOM",
+    closeDate:"Close Date", terms:"Sold Terms", lat:"Latitude", lng:"Longitude",
+    lot:"Lot Size Square Footage", garage:"Garage Spaces", beds:"Beds", fullBaths:"Full Baths",
+    halfBaths:"Half Baths", floor:"Floor Number", subdivision:"Legal Subdivision Name" } },
+  stellar_compact: { detect:"UnparsedAddress", cols:{ address:"UnparsedAddress", status:"StandardStatus",
+    price:"CurrentPrice", origList:"", sqft:"LivingArea", year:"YearBuilt",
+    feeMonthly:"MonthlyCondoFeeAmount", dom:"DaysOnMarket", closeDate:"CloseDate", terms:"BuyerFinancing",
+    credit:"ConcessionsAmount", lot:"LotSizeSquareFeet", garage:"GarageSpaces", beds:"BedroomsTotal",
+    fullBaths:"BathroomsFull", halfBaths:"BathroomsHalf", floor:"FloorNumber", subdivision:"SubdivisionName" } },
+  /* home_platform: add the column map here the first time a Home Platform CSV export
+     is in hand; nothing else in the system changes. */
+};
+const addrKey = a => (a||"").toUpperCase().replace(/[^A-Z0-9]/g,"");
+function normalizeCsv(text){
+  const rows = parseCsv(text).filter(r=>r.length>1);
+  if(!rows.length) throw new Error("empty CSV");
+  const head = rows[0].map(h=>h.replace(/\\#/g,"#").trim());
+  const map = Object.values(MAPS).find(m=>head.includes(m.detect));
+  if(!map) throw new Error("Unrecognized export shape. Headers seen: "+head.slice(0,8).join(", ")+"… Send me one row of this file and I will add the adapter.");
+  const idx = {}; for(const [k,col] of Object.entries(map.cols)) idx[k]= col? head.indexOf(col) : -1;
+  const N=(v)=>{ const n=parseFloat(String(v??"").replace(/[^0-9.\-]/g,"")); return Number.isFinite(n)?n:null; };
+  return rows.slice(1).map(r=>{
+    const g=k=> idx[k]>=0 ? (r[idx[k]]??"").replace(/\\#/g,"#").trim() : "";
+    const address=g("address"), unitM=address.match(/#\s*([0-9A-Za-z-]+)/);
+    const unit=unitM?unitM[1]:""; const bM=unit.match(/([A-Za-z])$/);
+    const closeRaw=g("closeDate");
+    return {
+      mls: g("mls") || "X"+addrKey(address).slice(-12),
+      address: address.replace(/\s+/g," "),
+      unit, building: bM?bM[1].toUpperCase():"",
+      floor: N(g("floor")), status: g("status"),
+      price: N(g("price")), origList: N(g("origList"))||N(g("price")),
+      closeDate: closeRaw? closeRaw.slice(0,10):"", dom: N(g("dom")),
+      financing: g("terms")||"", credit: N(g("credit"))||0,
+      sqft: N(g("sqft")), lot: N(g("lot"))||0, garage: N(g("garage"))||0,
+      yearBuilt: N(g("year")), beds: N(g("beds"))||0, fullBaths: N(g("fullBaths"))||0, halfBaths: N(g("halfBaths"))||0,
+      feeMonthly: N(g("feeMonthly"))||0, feeAnnual: N(g("feeAnnual"))||0,
+      subdivision: g("subdivision"), lat: N(g("lat")), lng: N(g("lng")),
+    };
+  }).filter(x=>x.address && x.price);
+}
+function splitRows(all, subject){
+  const sk = addrKey(subject.address), sm=(subject.mls||"").toUpperCase();
+  const rest = all.filter(x=> addrKey(x.address)!==sk && x.mls.toUpperCase()!==sm);
+  const sold = rest.filter(x=>/sold|closed/i.test(x.status));
+  const act  = rest.filter(x=>/active|pending/i.test(x.status));
+  sold.sort((a,b)=>a.price-b.price);
+  const L="ABCDEFGHIJKLMNOPQRSTUVWX";
+  const comps = sold.map((x,i)=>({letter:L[i]||"?", ...x}));
+  const actives = act.map(x=>({ ...x, list:x.price, origList:x.origList||x.price }));
+  return {comps, actives};
+}
+let CSV_STATE = { create:null, refresh:null };
+function previewCsv(input, which){
+  const f=input.files[0]; if(!f) return;
+  const rd=new FileReader();
+  rd.onload=()=>{ try{
+      const all=normalizeCsv(rd.result);
+      CSV_STATE[which]=all;
+      const sold=all.filter(x=>/sold|closed/i.test(x.status)).length;
+      const act=all.filter(x=>/active|pending/i.test(x.status)).length;
+      const t=`Parsed ${all.length} rows: ${sold} sold, ${act} active/pending.`;
+      which==="create" ? $("csv-preview").textContent=t : $("refresh-preview").textContent=t;
+    }catch(e){ CSV_STATE[which]=null;
+      const t="CSV error: "+e.message;
+      which==="create" ? $("csv-preview").textContent=t : $("refresh-preview").textContent=t; } };
+  rd.readAsText(f);
+}
+
+/* ---------- create ---------- */
+function parseBuckets(){
+  return $("f-buckets").value.split("\n").map(l=>l.split("|")).filter(p=>p.length>=2)
+    .map(p=>({key:p[0].trim(), label:p.slice(1).join("|").trim()})).filter(b=>b.key&&b.label);
+}
+async function createCma(){
+  const profile=$("f-profile").value, slug=$("f-slug").value.trim();
+  const need={address:"f-address",list:"f-list",sqft:"f-sqft",year:"f-year",slug:"f-slug"};
+  for(const [k,id] of Object.entries(need)) if(!$(id).value.trim()) return msg("create-msg","err","Missing: "+k);
+  if(!/^[a-z0-9][a-z0-9-]{2,63}$/.test(slug)) return msg("create-msg","err","Slug must be lowercase letters, digits and hyphens.");
+  const N=id=>{ const v=parseFloat($(id).value); return Number.isFinite(v)?v:null; };
+  const today=new Date().toISOString().slice(0,10);
+  const subject={ mls:$("f-mls").value.trim(), address:$("f-address").value.trim(),
+    city:$("f-city").value.trim(), state:$("f-state").value.trim(), zip:$("f-zip").value.trim(),
+    subdivision:$("f-subdivision").value.trim(), sqft:N("f-sqft"), yearBuilt:N("f-year"),
+    beds:N("f-beds")||0, fullBaths:N("f-fb")||0, halfBaths:N("f-hb")||0,
+    list:N("f-list"), taxes:N("f-taxes"), taxYear:N("f-taxyear"),
+    floodZone:$("f-flood").value.trim(), lat:N("f-lat"), lng:N("f-lng"),
+    status:$("f-status").value };
+  if(profile==="condo"){ const u=subject.address.match(/#\s*([0-9A-Za-z-]+)/);
+    subject.unit=u?u[1]:""; const bm=(subject.unit||"").match(/([A-Za-z])$/);
+    subject.building=bm?bm[1].toUpperCase():"";
+    subject.floor=N("f-floor"); subject.feeMonthly=N("f-fee")||0;
+    subject.feeAnnual=subject.feeMonthly?Math.round(subject.feeMonthly*12):0;
+    subject.minLease=$("f-minlease").value.trim(); subject.pets=$("f-pets").value.trim();
+  } else { subject.lot=N("f-lot")||0; subject.garage=N("f-garage")||0; }
+  let comps=[], actives=[];
+  if(CSV_STATE.create){ const sp=splitRows(CSV_STATE.create, subject); comps=sp.comps; actives=sp.actives; }
+  const buckets=parseBuckets();
+  if(!buckets.length) return msg("create-msg","err","At least one bucket required.");
+  const data={ meta:{ savedSearch:$("f-search").value.trim(), lastUpdated:today, asOf:today,
+      preparedBy:"The Adamson Group · Coldwell Banker Realty", profile, params:PARAM_PRESETS[profile] },
+    subject, comps, actives };
+  const overlay={};
+  comps.forEach(c=>{ overlay[c.mls]={ _ref:`${c.address} · sold ${c.closeDate} $${(c.price||0).toLocaleString()}`,
+    pinned:true, excluded:false, excludeReason:"", reviewed:false, frozen:false, reviewedOn:"",
+    manual:Object.fromEntries(buckets.map(b=>[b.key,0])), notes:"", clientNote:"", photos:[] }; });
+  const adjustments={ schema:2, subject:subject.mls||slug, buckets, params:{}, overlay };
+  msg("create-msg","info","Creating… commits 4 files, then Netlify rebuilds.");
+  const res=await post("?action=create&slug="+encodeURIComponent(slug), {data, adjustments});
+  if(res.status!==200) return msg("create-msg","err","Create failed: "+(res.body.error||res.status)+(res.body.message?" · "+res.body.message:""));
+  msg("create-msg","ok",`Created. Live in 1 to 2 minutes:
+    <a href="${res.body.workbenchUrl}">workbench</a> · <a href="${res.body.clientUrl}" target="_blank">client page</a>`);
+  loadList();
+}
+
+/* ---------- refresh ---------- */
+async function refreshComps(){
+  const slug=$("r-slug").value;
+  if(!slug) return msg("refresh-msg","err","Pick a CMA.");
+  if(!CSV_STATE.refresh) return msg("refresh-msg","err","Attach a CSV first.");
+  msg("refresh-msg","info","Fetching current data.json…");
+  let cur;
+  try { const r=await fetch(`/mkt/${slug}/data.json`,{cache:"no-store"}); if(!r.ok) throw 0; cur=await r.json(); }
+  catch(e){ return msg("refresh-msg","err","Could not load /mkt/"+slug+"/data.json. Is the page deployed yet?"); }
+  /* Preserve overlay continuity: an export without MLS numbers gets address-derived
+     keys, so re-key new rows to the existing comp's key when the address matches.
+     This is what keeps reviewed/frozen adjustments attached across refreshes. */
+  const byAddr={}; (cur.comps||[]).concat(cur.actives||[]).forEach(c=>{ if(c.address) byAddr[addrKey(c.address)]=c.mls; });
+  const rekeyed=CSV_STATE.refresh.map(x=>({ ...x, mls: byAddr[addrKey(x.address)] || x.mls }));
+  const {comps, actives}=splitRows(rekeyed, cur.subject);
+  if(!comps.length && !actives.length) return msg("refresh-msg","err","CSV parsed but produced no comps or actives.");
+  const today=new Date().toISOString().slice(0,10);
+  const data={...cur, meta:{...cur.meta, lastUpdated:today, asOf:today}, comps, actives};
+  msg("refresh-msg","info","Committing…");
+  const res=await post("?action=savedata&slug="+encodeURIComponent(slug), {data});
+  if(res.status!==200) return msg("refresh-msg","err","Refresh failed: "+(res.body.error||res.status));
+  msg("refresh-msg","ok", res.body.unchanged? "No change: the export matches what is deployed."
+    : `Committed ${comps.length} comps + ${actives.length} actives. Netlify rebuilding; reviewed and frozen adjustments are untouched.`);
+}
+</script>
+</body>
+</html>

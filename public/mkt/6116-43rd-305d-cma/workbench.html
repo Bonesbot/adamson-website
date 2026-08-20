@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>
+/* Login gate: no key on this device -> go sign in at the CMA admin page.
+   Writes are independently enforced server-side by CMA_EDIT_KEY, so this gate
+   is about not letting the internal tooling be stumbled into, not about security. */
+if (!localStorage.getItem("cma-edit-key"))
+  location.replace("/mkt/admin/?next=" + encodeURIComponent(location.pathname));
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>CMA Workbench | Internal</title>
+<style>
+  :root { --navy:#0A1F3C; --gold:#C9A961; --muted:#B4BECD; --bg:#F7F8FA; --bronze:#8a6d1f; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:Arial,"Helvetica Neue",sans-serif; background:var(--bg); color:#22304a; }
+  h1,h2 { font-family:Georgia,serif; color:var(--navy); }
+  .wrap { max-width:1500px; margin:0 auto; padding:0 18px 60px; }
+  header { background:var(--navy); color:#fff; padding:20px 0 18px; border-bottom:4px solid var(--gold); }
+  header h1 { color:#fff; font-size:23px; font-weight:400; }
+  .crit { color:var(--muted); margin-top:5px; font-size:13px; }
+  .bar { background:#132c50; padding:10px 0; position:sticky; top:0; z-index:50; box-shadow:0 2px 8px rgba(0,0,0,.25); }
+  .bar .wrap { display:flex; gap:10px; align-items:center; flex-wrap:wrap; padding-bottom:0; }
+  .btn { background:#fff; color:var(--navy); border:1px solid #c8d0dc; padding:8px 15px; border-radius:5px; font-size:12.5px; cursor:pointer; text-decoration:none; display:inline-block; }
+  .btn.gold { background:var(--gold); border-color:var(--gold); font-weight:bold; }
+  .btn:hover { filter:brightness(1.06); }
+  .ind { color:var(--muted); font-size:11.5px; margin-left:auto; }
+  .card { background:#fff; border:1px solid #e3e7ee; border-radius:8px; padding:18px; margin-top:20px; }
+  .card h2 { font-size:17px; margin-bottom:3px; }
+  .card .sub { font-size:12px; color:#7c8798; margin-bottom:12px; }
+  table { width:100%; border-collapse:collapse; font-size:12px; }
+  th { background:var(--navy); color:#fff; padding:7px 5px; text-align:left; font-weight:normal; font-size:10.5px; white-space:nowrap; vertical-align:bottom; }
+  th.auto { background:#24507f; }
+  th.man  { background:var(--bronze); }
+  td { padding:5px; border-bottom:1px solid #eef1f5; white-space:nowrap; }
+  tr.tot td { background:#f2f4f8; font-weight:bold; color:var(--navy); border-top:2px solid var(--navy); }
+  tr.rev td { background:#f7fbf7; }
+  .num { text-align:right; }
+  input.b { width:74px; text-align:right; font:12px Arial; padding:4px 5px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
+  input.b:focus { outline:2px solid var(--gold); background:#fff; }
+  input.p { width:88px; text-align:right; font:12px Arial; padding:5px; border:1px solid #d8dde6; border-radius:4px; }
+  textarea.n { width:100%; min-height:44px; font:12px Arial; padding:6px; border:1px solid #d8dde6; border-radius:4px; resize:vertical; }
+  .lettermark { display:inline-flex; width:20px; height:20px; border-radius:50%; background:var(--navy); color:var(--gold);
+     font:bold 11px Georgia; align-items:center; justify-content:center; }
+  .bmark { display:inline-flex; width:20px; height:20px; border-radius:50%; background:#5b6b85; color:#fff;
+     font:bold 11px Georgia; align-items:center; justify-content:center; }
+  .params { display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:10px; }
+  .par { border:1px solid #e3e7ee; border-radius:6px; padding:9px 11px; }
+  .par .l { font-size:11px; color:#5a6b85; margin-bottom:4px; }
+  .par .h { font-size:10px; color:#96a0ae; margin-top:3px; }
+  .est { background:var(--navy); color:#fff; border-radius:8px; padding:16px 20px; display:flex; gap:34px; flex-wrap:wrap; align-items:center; }
+  .est .big { font-size:26px; font-family:Georgia,serif; color:var(--gold); }
+  .est .mid { font-size:18px; font-family:Georgia,serif; }
+  .est .l { font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); }
+  .flag { font-size:10px; padding:2px 7px; border-radius:3px; font-weight:bold; letter-spacing:.03em; }
+  .flag.f { background:#dbe9f7; color:#1d4f80; }
+  .flag.r { background:#e3f3e6; color:#1e7a32; }
+  .warn { background:#fff8e5; border-left:4px solid var(--gold); padding:10px 14px; font-size:12px; margin-top:14px; border-radius:0 5px 5px 0; }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>CMA Workbench <span style="font-size:13px;color:var(--gold);">INTERNAL</span></h1>
+  <div class="crit" id="hdr"></div>
+</div></header>
+
+<div class="bar"><div class="wrap">
+  <button class="btn gold" onclick="saveLive()">Save</button>
+  <button class="btn" onclick="freezeToGit()">Freeze to git</button>
+  <button class="btn" onclick="markAllReviewed()">Mark all reviewed</button>
+  <button class="btn" onclick="reload()">Reload</button>
+  <a class="btn" href="./" target="_blank">Client page ↗</a>
+  <a class="btn" href="/mkt/admin/">All CMAs</a>
+  <button class="btn" onclick="downloadAdjustments()">Download</button>
+  <button class="btn" onclick="logOut()">Log out</button>
+  <span class="ind" id="ind">loading</span>
+</div></div>
+
+<div class="wrap">
+  <div class="card"><div class="est" id="est"></div></div>
+  <div class="card">
+    <h2>Multipliers</h2>
+    <div class="sub">Arithmetic adjustments. These live in data.json and apply to every comp. Saved with Save.</div>
+    <div class="params" id="params"></div>
+  </div>
+  <div class="card">
+    <h2>Adjustment Grid</h2>
+    <div class="sub">Blue = arithmetic, computed, do not touch. Bronze = your judgment buckets, keyed to the comp's MLS #.
+      Sign convention: (+) subject superior to comp, (&minus;) subject inferior. Green row = reviewed.</div>
+    <div style="overflow-x:auto;"><table id="grid"></table></div>
+    <div class="warn" id="freeze-note"></div>
+  </div>
+  <div class="card">
+    <h2>Notes</h2>
+    <div class="sub">Internal note is private to this workbench. Client note prints on the shared CMA page under that comp.</div>
+    <div id="notes"></div>
+  </div>
+</div>
+
+<script>
+/* INTERNAL WORKBENCH, one template for every listing.
+   Reads data.json (facts) + the live Supabase overlay via the cma-adjustments
+   function (falls back to committed adjustments.json). meta.profile picks the
+   auto-adjustment columns and multipliers. Save is instant, no rebuild.
+   Multiplier edits ride along inside the overlay as ADJ.params so they also
+   save without a rebuild; data.json params are the seed. */
+const SLUG = (location.pathname.match(/\/mkt\/([^/]+)\//) || [])[1] || "";
+const API  = "/.netlify/functions/cma-adjustments?slug=" + encodeURIComponent(SLUG);
+const DRAFT_KEY = "cma-draft-" + SLUG;
+const KEY_KEY   = "cma-edit-key";
+let D=null, ADJ=null, dirty=false, REV=null, source="";
+
+const money  = v => (v<0?"−$":"$") + Math.abs(Math.round(v)).toLocaleString();
+const moneyS = v => !v ? "—" : (v>0?"+":"−") + "$" + Math.abs(Math.round(v)).toLocaleString();
+const fmtD   = d => { if(!d) return "—"; const x=new Date(d+"T12:00:00"); return (x.getMonth()+1)+"/"+x.getDate()+"/"+String(x.getFullYear()).slice(2); };
+const rooms  = o => (o.beds||0)+(o.fullBaths||0)+(o.halfBaths||0)*0.5;
+const P = k => { const o=(ADJ&&ADJ.params)||{}; if (k in o) return Number(o[k])||0;
+                 return Number((D.meta.params||{})[k])||0; };
+const OV = mls => ADJ.overlay[mls] ||= { pinned:true, excluded:false, excludeReason:"", reviewed:false,
+    frozen:false, reviewedOn:"", manual:Object.fromEntries((ADJ.buckets||[]).map(b=>[b.key,0])), notes:"", clientNote:"", photos:[] };
+function monthsSince(d){ if(!d) return 0; return Math.max(0,(Date.now()-new Date(d+"T12:00:00").getTime())/(1000*60*60*24*30.4375)); }
+
+const PROFILES = {
+  condo: {
+    params: [
+      ["agePerYear","Age (per year)","× build-year difference"],
+      ["bedBathPerRoom","Bed/Bath (per room)","half bath = 0.5 room"],
+      ["ppsfAdj","Price per Sq Ft Adj.","× heated sq-ft difference"],
+      ["feePerDollarMonth","Condo Fee (per $1/mo)","× monthly fee difference · 0 = handled in a fee bucket"],
+      ["trendPctMonth","Market trend (%/month)","time adj vs sale date · 0 = off"],
+    ],
+    auto: (s,c) => ({
+      age:     (s.yearBuilt-c.yearBuilt)*P("agePerYear"),
+      bedBath: (rooms(s)-rooms(c))*P("bedBathPerRoom"),
+      sqft:    ((s.sqft||0)-(c.sqft||0))*P("ppsfAdj"),
+      fee:     ((c.feeMonthly||0)-(s.feeMonthly||0))*P("feePerDollarMonth"),
+      time:    c.price*(P("trendPctMonth")/100)*monthsSince(c.closeDate),
+    }),
+    autoCols: [["age","Age"],["bedBath","Bed/Bath"],["sqft","Sq Ft"],["fee","Fee"],["time","Time"]],
+    factCols: [
+      {h:"Bldg", c:x=>`<td><span class="bmark">${x.building||"—"}</span></td>`},
+      {h:"Flr", cls:"num", c:x=>`<td class="num">${x.floor??"—"}</td>`},
+      {h:"Fee/mo", cls:"num", c:x=>`<td class="num">${x.feeMonthly?"$"+x.feeMonthly:"—"}</td>`},
+    ],
+    hdr: s => `Bldg ${s.building||"—"}, Unit ${s.unit||"—"}, Floor ${s.floor??"—"}`,
+    noteLoc: c => `Bldg ${c.building||"—"}, Flr ${c.floor??"—"}`,
+  },
+  sfh: {
+    params: [
+      ["agePerYear","Age (per year)","× build-year difference"],
+      ["garagePerSpace","Garage (per space)","× garage-bay difference"],
+      ["lotPerSqft","Lot Size (per sq ft)","× lot sq-ft difference"],
+      ["bedBathPerRoom","Bed/Bath (per room)","half bath = 0.5 room"],
+      ["ppsfAdj","Price per Sq Ft Adj.","× heated sq-ft difference"],
+      ["trendPctMonth","Market trend (%/month)","time adj vs sale date · 0 = off"],
+    ],
+    auto: (s,c) => ({
+      age:     (s.yearBuilt-c.yearBuilt)*P("agePerYear"),
+      garage:  ((s.garage||0)-(c.garage||0))*P("garagePerSpace"),
+      lot:     ((s.lot||0)-(c.lot||0))*P("lotPerSqft"),
+      bedBath: (rooms(s)-rooms(c))*P("bedBathPerRoom"),
+      sqft:    ((s.sqft||0)-(c.sqft||0))*P("ppsfAdj"),
+      time:    c.price*(P("trendPctMonth")/100)*monthsSince(c.closeDate),
+    }),
+    autoCols: [["age","Age"],["garage","Gar"],["lot","Lot"],["bedBath","Bed/Bath"],["sqft","Sq Ft"],["time","Time"]],
+    factCols: [
+      {h:"SqFt", cls:"num", c:x=>`<td class="num">${(x.sqft||0).toLocaleString()}</td>`},
+      {h:"Lot",  cls:"num", c:x=>`<td class="num">${(x.lot||0).toLocaleString()}</td>`},
+      {h:"Gar",  cls:"num", c:x=>`<td class="num">${x.garage??"—"}</td>`},
+    ],
+    hdr: s => s.subdivision||"",
+    noteLoc: c => c.subdivision||"",
+  },
+};
+let PR = null;
+
+async function boot(){
+  const grab = async f => { const r = await fetch(f,{cache:"no-store"}); if(!r.ok) throw new Error(f); return r.json(); };
+  let snapshot;
+  try { [D,snapshot] = await Promise.all([grab("./data.json"), grab("./adjustments.json")]); }
+  catch(e){ document.body.innerHTML="<p style='padding:40px;font-family:Georgia'>Could not load data.json / adjustments.json. Serve over http, not file://.</p>"; return; }
+  PR = PROFILES[D.meta.profile] || PROFILES.sfh;
+  ADJ = snapshot; REV = null; source = "committed snapshot";
+  try {
+    const r = await fetch(API, {cache:"no-store"});
+    if (r.ok) {
+      const live = await r.json();
+      if (live.source === "supabase" && live.adjustments) {
+        ADJ = live.adjustments; REV = live.rev;
+        source = "live, rev " + live.rev + (live.updated_at ? " saved " + new Date(live.updated_at).toLocaleString() : "");
+      } else { source = "committed snapshot, nothing saved live yet"; }
+    } else { source = "committed snapshot, live store unreachable"; }
+  } catch(e){ source = "committed snapshot, live store unreachable"; }
+  try { const d=localStorage.getItem(DRAFT_KEY); if(d){ const p=JSON.parse(d);
+        if(p && p.adj && p.adj.overlay && confirm("This device has unsaved edits from "+new Date(p.at).toLocaleString()+".\n\nOK = keep them.  Cancel = discard and use "+source+".")) { ADJ=p.adj; dirty=true; }
+        else localStorage.removeItem(DRAFT_KEY); } }catch(e){}
+  renderAll();
+}
+function reload(){ if(dirty && !confirm("Discard unsaved edits and reload the saved version?")) return;
+  localStorage.removeItem(DRAFT_KEY); location.reload(); }
+function logOut(){ localStorage.removeItem(KEY_KEY); location.replace("/mkt/admin/"); }
+
+function touch(){ dirty=true;
+  try{ localStorage.setItem(DRAFT_KEY, JSON.stringify({adj:ADJ, at:Date.now()})); }catch(e){}
+  setInd("unsaved · press Save", "#f0c86a"); }
+function setInd(t, c){ const el=document.getElementById("ind"); el.textContent=t; el.style.color=c||""; }
+
+function editKey(force){
+  let k = force ? null : localStorage.getItem(KEY_KEY);
+  if (!k) { k = prompt("Edit key"); if (!k) return null; localStorage.setItem(KEY_KEY, k); }
+  return k;
+}
+async function post(qs, body, retryOnAuth){
+  const k = editKey(false); if (!k) return null;
+  const r = await fetch(API + (qs||""), {
+    method:"POST", headers:{"Content-Type":"application/json","x-cma-key":k},
+    body: JSON.stringify(body||{}),
+  });
+  let j={}; try { j = await r.json(); } catch(e){}
+  if (r.status === 401 && !retryOnAuth) {
+    localStorage.removeItem(KEY_KEY);
+    if (confirm("That edit key was rejected. Try again?")) { editKey(true); return post(qs, body, true); }
+    return null;
+  }
+  return { status:r.status, body:j };
+}
+async function saveLive(){
+  setInd("saving...");
+  const res = await post("", { adjustments: ADJ, rev: REV });
+  if (!res) { setInd("save cancelled", "#f0c86a"); return; }
+  if (res.status === 409) {
+    setInd("conflict", "#ffb3b3");
+    if (confirm((res.body.message||"This CMA changed since you loaded it.")+"\n\nOK = reload the saved version (your unsaved edits here are lost).\nCancel = keep editing.")) {
+      localStorage.removeItem(DRAFT_KEY); location.reload();
+    }
+    return;
+  }
+  if (res.status !== 200) { setInd("save failed: "+(res.body.error||res.status), "#ffb3b3");
+    alert("Save failed: "+(res.body.error||res.status)+"\n\nYour edits are still cached on this device. Use Download as a fallback."); return; }
+  REV = res.body.rev; dirty=false; localStorage.removeItem(DRAFT_KEY);
+  setInd("saved rev "+REV+" at "+new Date().toLocaleTimeString(), "#9fe0a8");
+}
+async function freezeToGit(){
+  if (dirty && !confirm("You have unsaved edits. Freeze commits the last SAVED version, not what is on screen.\n\nContinue?")) return;
+  setInd("freezing to git...");
+  const res = await post("&action=snapshot", {});
+  if (!res) { setInd("freeze cancelled", "#f0c86a"); return; }
+  if (res.status !== 200) { setInd("freeze failed: "+(res.body.error||res.status), "#ffb3b3"); return; }
+  if (res.body.unchanged) { setInd("git already matches rev "+res.body.rev, "#9fe0a8"); return; }
+  setInd("frozen to git "+(res.body.commit||"")+" · Netlify rebuilding", "#9fe0a8");
+}
+function downloadAdjustments(){
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(ADJ,null,2)],{type:"application/json"}));
+  a.download="adjustments.json"; a.click();
+}
+function setB(mls,key,v){ OV(mls).manual[key] = Number(v)||0; touch(); renderAll(); }
+function setRev(mls,v){ const o=OV(mls); o.reviewed=v; o.reviewedOn = v ? new Date().toISOString().slice(0,10) : ""; touch(); renderAll(); }
+function setFrz(mls,v){ OV(mls).frozen=v; touch(); renderAll(); }
+function setExc(mls,v){ OV(mls).excluded=v; touch(); renderAll(); }
+function setNote(mls,f,v){ OV(mls)[f]=v; touch(); }
+function setParam(k,v){ (ADJ.params ||= {})[k]=Number(v)||0; touch(); renderAll(); }
+function markAllReviewed(){ D.comps.forEach(c=>{ const o=OV(c.mls); o.reviewed=true; o.reviewedOn ||= new Date().toISOString().slice(0,10); }); touch(); renderAll(); }
+
+function compute(c){
+  const auto = PR.auto(D.subject, c);
+  const autoAdj = Object.values(auto).reduce((t,v)=>t+v,0);
+  const manualAdj = (ADJ.buckets||[]).reduce((t,b)=>t+(Number(OV(c.mls).manual[b.key])||0),0);
+  const adjPrice = c.price+autoAdj+manualAdj;
+  return { auto, autoAdj, manualAdj, adjPrice, ppsf:c.price/c.sqft, adjPpsf:adjPrice/D.subject.sqft };
+}
+
+function renderAll(){
+  const s=D.subject;
+  document.getElementById("hdr").textContent =
+    `${s.address} · ${PR.hdr(s)} · ${s.subdivision} · list ${money(s.list)} · saved search "${D.meta.savedSearch||"none"}" · profile ${D.meta.profile}`;
+
+  document.getElementById("params").innerHTML = PR.params.map(([k,l,h])=>
+    `<div class="par"><div class="l">${l}</div>
+     <input class="p" type="number" step="any" value="${P(k)}" onchange="setParam('${k}',this.value)"><div class="h">${h}</div></div>`).join("");
+
+  const live = D.comps.filter(c=>!OV(c.mls).excluded);
+  const rows = live.map(c=>({c,r:compute(c)}));
+  const n = rows.length||1;
+  const avg = k => rows.reduce((t,x)=>t+(k==="price"?x.c.price:x.r[k]),0)/n;
+  const ap = rows.map(x=>x.r.adjPrice);
+  const central = avg("adjPrice");
+
+  document.getElementById("est").innerHTML = `
+    <div><div class="l">Indicated Range</div><div class="big">${rows.length?money(Math.min(...ap))+" to "+money(Math.max(...ap)):"—"}</div></div>
+    <div><div class="l">Central Estimate</div><div class="mid">${money(central)}</div></div>
+    <div><div class="l">Adjusted $/Sq Ft</div><div class="mid">$${avg("adjPpsf").toFixed(2)}</div></div>
+    <div><div class="l">vs. List ${money(s.list)}</div><div class="mid">${moneyS(central-s.list)}</div></div>
+    <div><div class="l">Reviewed</div><div class="mid">${live.filter(c=>OV(c.mls).reviewed).length} / ${live.length}</div></div>`;
+
+  let h = `<thead><tr><th></th><th>Address</th>`
+    + PR.factCols.map(f=>`<th${f.cls?` class="${f.cls}"`:""}>${f.h}</th>`).join("")
+    + `<th class="num">Sold</th><th class="num">DOM</th><th class="num">Sale Price</th><th class="num">$/SqFt</th>`
+    + PR.autoCols.map(([k,l])=>`<th class="auto num">${l}</th>`).join("")
+    + (ADJ.buckets||[]).map(b=>`<th class="man num">${b.label}</th>`).join("")
+    + `<th class="num">Total Adj.</th><th class="num">Adj. Price</th><th class="num">Adj. $/SqFt</th>
+       <th class="num">Rev</th><th class="num">Frz</th><th class="num">Exc</th></tr></thead><tbody>`;
+  D.comps.forEach(c=>{
+    const o=OV(c.mls), r=compute(c);
+    h += `<tr class="${o.reviewed?"rev":""}" style="${o.excluded?"opacity:.42;":""}">
+      <td><span class="lettermark">${c.letter}</span></td>
+      <td>${c.address}${o.frozen?' <span class="flag f">FROZEN</span>':""}</td>`
+      + PR.factCols.map(f=>f.c(c)).join("")
+      + `<td class="num">${fmtD(c.closeDate)}</td><td class="num">${c.dom??"—"}</td>
+      <td class="num">${money(c.price)}${c.credit?`<br><span style="font-size:9.5px;color:#b08a1f;">${money(c.credit)} concess.</span>`:""}</td>
+      <td class="num">$${r.ppsf.toFixed(2)}</td>`
+      + PR.autoCols.map(([k])=>`<td class="num">${moneyS(r.auto[k])}</td>`).join("")
+      + (ADJ.buckets||[]).map(b=>`<td class="num"><input class="b" type="number" step="500" value="${Number(o.manual[b.key])||0}"
+          ${o.frozen?"disabled title='Frozen. Untick Frz to edit.'":""} onchange="setB('${c.mls}','${b.key}',this.value)"></td>`).join("")
+      + `<td class="num">${moneyS(r.autoAdj+r.manualAdj)}</td>
+      <td class="num" style="font-weight:bold;">${money(r.adjPrice)}</td>
+      <td class="num">$${r.adjPpsf.toFixed(2)}</td>
+      <td class="num"><input type="checkbox" ${o.reviewed?"checked":""} onchange="setRev('${c.mls}',this.checked)"></td>
+      <td class="num"><input type="checkbox" ${o.frozen?"checked":""} onchange="setFrz('${c.mls}',this.checked)"></td>
+      <td class="num"><input type="checkbox" ${o.excluded?"checked":""} onchange="setExc('${c.mls}',this.checked)"></td></tr>`;
+  });
+  h += `<tr class="tot"><td></td><td>Averages of ${live.length} included</td>
+    <td colspan="${PR.factCols.length+2}"></td>
+    <td class="num">${money(avg("price"))}</td><td class="num">$${avg("ppsf").toFixed(2)}</td>
+    <td colspan="${PR.autoCols.length+(ADJ.buckets||[]).length+1}"></td>
+    <td class="num">${money(central)}</td><td class="num">$${avg("adjPpsf").toFixed(2)}</td><td colspan="3"></td></tr></tbody>`;
+  document.getElementById("grid").innerHTML = h;
+
+  const frozen = D.comps.filter(c=>OV(c.mls).frozen).length;
+  document.getElementById("freeze-note").innerHTML =
+    `<b>${frozen} of ${D.comps.length} comps frozen.</b> Freezing locks a closed, reviewed sale so a comp refresh or a later pass cannot change it.
+     A refresh rewrites <code>data.json</code> only; this overlay is keyed by MLS # and is never auto-touched.
+     Save writes it live; Freeze to git also commits <code>adjustments.json</code> as the versioned backup.`;
+
+  document.getElementById("notes").innerHTML = D.comps.map(c=>{
+    const o=OV(c.mls);
+    return `<div style="margin-bottom:14px;">
+      <div style="font:bold 13px Georgia;color:var(--navy);margin-bottom:5px;">
+        <span class="lettermark">${c.letter}</span> ${c.address} · ${PR.noteLoc(c)}
+        ${o.reviewed?`<span class="flag r">REVIEWED ${o.reviewedOn||""}</span>`:""}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div><div style="font-size:10.5px;color:#7c8798;margin-bottom:3px;">INTERNAL</div>
+          <textarea class="n" onchange="setNote('${c.mls}','notes',this.value)">${o.notes||""}</textarea></div>
+        <div><div style="font-size:10.5px;color:#7c8798;margin-bottom:3px;">CLIENT FACING</div>
+          <textarea class="n" onchange="setNote('${c.mls}','clientNote',this.value)">${o.clientNote||""}</textarea></div>
+      </div></div>`;
+  }).join("");
+
+  if(!dirty) setInd(`${source} · ${live.filter(c=>OV(c.mls).reviewed).length}/${live.length} reviewed · ${frozen} frozen`);
+}
+window.addEventListener("beforeunload", e => { if(dirty){ e.preventDefault(); e.returnValue=""; } });
+boot();
+</script>
+</body>
+</html>
