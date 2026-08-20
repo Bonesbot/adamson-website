@@ -57,6 +57,9 @@ if (!localStorage.getItem("cma-edit-key"))
   .flag { font-size:10px; padding:2px 7px; border-radius:3px; font-weight:bold; letter-spacing:.03em; }
   .flag.f { background:#dbe9f7; color:#1d4f80; }
   .flag.r { background:#e3f3e6; color:#1e7a32; }
+  tr.exc td { background:#f1f2f5; color:#94a0b1; }
+  input.gn { width:240px; font:12px Arial; padding:4px 6px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
+  select.sel { font:12px Arial; padding:4px 3px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
   .warn { background:#fff8e5; border-left:4px solid var(--gold); padding:10px 14px; font-size:12px; margin-top:14px; border-radius:0 5px 5px 0; }
 </style>
 </head>
@@ -69,7 +72,6 @@ if (!localStorage.getItem("cma-edit-key"))
 <div class="bar"><div class="wrap">
   <button class="btn gold" onclick="saveLive()">Save</button>
   <button class="btn" onclick="freezeToGit()">Freeze to git</button>
-  <button class="btn" onclick="markAllReviewed()">Mark all reviewed</button>
   <button class="btn" onclick="reload()">Reload</button>
   <a class="btn" href="./" target="_blank">Client page ↗</a>
   <a class="btn" href="/mkt/admin/">All CMAs</a>
@@ -88,7 +90,9 @@ if (!localStorage.getItem("cma-edit-key"))
   <div class="card">
     <h2>Adjustment Grid</h2>
     <div class="sub">Blue = arithmetic, computed, do not touch. Bronze = your judgment buckets, keyed to the comp's MLS #.
-      Sign convention: (+) subject superior to comp, (&minus;) subject inferior. Green row = reviewed.</div>
+      Sign convention: (+) subject superior to comp, (&minus;) subject inferior. Green row = graded.
+      Relevancy: <b>A</b> strongest comps &middot; <b>B</b> supporting &middot; <b>C</b> context &middot; <b>Exclude</b> removes from the analysis.
+      Setting relevancy marks the comp reviewed; the grid re-orders A, B, C, ungraded, excluded on load and after each save.</div>
     <div style="overflow-x:auto;"><table id="grid"></table></div>
     <div class="warn" id="freeze-note"></div>
   </div>
@@ -119,7 +123,16 @@ const rooms  = o => (o.beds||0)+(o.fullBaths||0)+(o.halfBaths||0)*0.5;
 const P = k => { const o=(ADJ&&ADJ.params)||{}; if (k in o) return Number(o[k])||0;
                  return Number((D.meta.params||{})[k])||0; };
 const OV = mls => ADJ.overlay[mls] ||= { pinned:true, excluded:false, excludeReason:"", reviewed:false,
-    frozen:false, reviewedOn:"", manual:Object.fromEntries((ADJ.buckets||[]).map(b=>[b.key,0])), notes:"", clientNote:"", photos:[] };
+    frozen:false, reviewedOn:"", relevancy:"", furnishings:"",
+    manual:Object.fromEntries((ADJ.buckets||[]).map(b=>[b.key,0])), notes:"", clientNote:"", photos:[] };
+const RANK = v => ({A:0,B:1,C:2,X:4})[v] ?? 3;
+let ORDER = [];
+function applySort(){ ORDER = D.comps.slice().sort((a,b)=>RANK(OV(a.mls).relevancy)-RANK(OV(b.mls).relevancy)); }
+const escA = s => String(s??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+const fmtC = v => { const n=Math.round(Number(v)||0); return n.toLocaleString("en-US"); };
+const parseC = t => { const n=Number(String(t).replace(/[^0-9\-]/g,"")); return Number.isFinite(n)?n:0; };
+function ciInput(el){ const neg=/^\s*[\u2212-]/.test(el.value); const d=el.value.replace(/[^0-9]/g,"");
+  el.value=(neg?"-":"")+(d?Number(d).toLocaleString("en-US"):""); }
 function monthsSince(d){ if(!d) return 0; return Math.max(0,(Date.now()-new Date(d+"T12:00:00").getTime())/(1000*60*60*24*30.4375)); }
 
 const PROFILES = {
@@ -193,10 +206,13 @@ async function boot(){
       } else { source = "committed snapshot, nothing saved live yet"; }
     } else { source = "committed snapshot, live store unreachable"; }
   } catch(e){ source = "committed snapshot, live store unreachable"; }
+  Object.values((ADJ&&ADJ.overlay)||{}).forEach(o=>{
+    if(o.relevancy===undefined) o.relevancy = o.excluded ? "X" : "";
+    if(o.furnishings===undefined) o.furnishings = ""; });
   try { const d=localStorage.getItem(DRAFT_KEY); if(d){ const p=JSON.parse(d);
         if(p && p.adj && p.adj.overlay && confirm("This device has unsaved edits from "+new Date(p.at).toLocaleString()+".\n\nOK = keep them.  Cancel = discard and use "+source+".")) { ADJ=p.adj; dirty=true; }
         else localStorage.removeItem(DRAFT_KEY); } }catch(e){}
-  renderAll();
+  applySort(); renderAll();
 }
 function reload(){ if(dirty && !confirm("Discard unsaved edits and reload the saved version?")) return;
   localStorage.removeItem(DRAFT_KEY); location.reload(); }
@@ -240,6 +256,7 @@ async function saveLive(){
   if (res.status !== 200) { setInd("save failed: "+(res.body.error||res.status), "#ffb3b3");
     alert("Save failed: "+(res.body.error||res.status)+"\n\nYour edits are still cached on this device. Use Download as a fallback."); return; }
   REV = res.body.rev; dirty=false; localStorage.removeItem(DRAFT_KEY);
+  applySort(); renderAll();
   setInd("saved rev "+REV+" at "+new Date().toLocaleTimeString(), "#9fe0a8");
 }
 async function freezeToGit(){
@@ -257,12 +274,13 @@ function downloadAdjustments(){
   a.download="adjustments.json"; a.click();
 }
 function setB(mls,key,v){ OV(mls).manual[key] = Number(v)||0; touch(); renderAll(); }
-function setRev(mls,v){ const o=OV(mls); o.reviewed=v; o.reviewedOn = v ? new Date().toISOString().slice(0,10) : ""; touch(); renderAll(); }
 function setFrz(mls,v){ OV(mls).frozen=v; touch(); renderAll(); }
-function setExc(mls,v){ OV(mls).excluded=v; touch(); renderAll(); }
+function setRel2(mls,v){ const o=OV(mls); o.relevancy=v; o.excluded=(v==="X");
+  o.reviewed = v!==""; o.reviewedOn = v!=="" ? (o.reviewedOn||new Date().toISOString().slice(0,10)) : "";
+  touch(); renderAll(); }
+function setFurn(mls,v){ OV(mls).furnishings=v; touch(); }
 function setNote(mls,f,v){ OV(mls)[f]=v; touch(); }
 function setParam(k,v){ (ADJ.params ||= {})[k]=Number(v)||0; touch(); renderAll(); }
-function markAllReviewed(){ D.comps.forEach(c=>{ const o=OV(c.mls); o.reviewed=true; o.reviewedOn ||= new Date().toISOString().slice(0,10); }); touch(); renderAll(); }
 
 function compute(c){
   const auto = PR.auto(D.subject, c);
@@ -300,11 +318,12 @@ function renderAll(){
     + `<th class="num">Sold</th><th class="num">DOM</th><th class="num">Sale Price</th><th class="num">$/SqFt</th>`
     + PR.autoCols.map(([k,l])=>`<th class="auto num">${l}</th>`).join("")
     + (ADJ.buckets||[]).map(b=>`<th class="man num">${b.label}</th>`).join("")
-    + `<th class="num">Total Adj.</th><th class="num">Adj. Price</th><th class="num">Adj. $/SqFt</th>
-       <th class="num">Rev</th><th class="num">Frz</th><th class="num">Exc</th></tr></thead><tbody>`;
-  D.comps.forEach(c=>{
+    + `<th class="man">Furnish</th><th class="man">Relevancy</th>
+       <th class="num">Total Adj.</th><th class="num">Adj. Price</th><th class="num">Adj. $/SqFt</th>
+       <th class="num">Frz</th><th>Internal Note</th></tr></thead><tbody>`;
+  (ORDER.length?ORDER:D.comps).forEach(c=>{
     const o=OV(c.mls), r=compute(c);
-    h += `<tr class="${o.reviewed?"rev":""}" style="${o.excluded?"opacity:.42;":""}">
+    h += `<tr class="${o.excluded?"exc":(o.reviewed?"rev":"")}">
       <td><span class="lettermark">${c.letter}</span></td>
       <td>${c.address}${o.frozen?' <span class="flag f">FROZEN</span>':""}</td>`
       + PR.factCols.map(f=>f.c(c)).join("")
@@ -312,20 +331,25 @@ function renderAll(){
       <td class="num">${money(c.price)}${c.credit?`<br><span style="font-size:9.5px;color:#b08a1f;">${money(c.credit)} concess.</span>`:""}</td>
       <td class="num">$${r.ppsf.toFixed(2)}</td>`
       + PR.autoCols.map(([k])=>`<td class="num">${moneyS(r.auto[k])}</td>`).join("")
-      + (ADJ.buckets||[]).map(b=>`<td class="num"><input class="b" type="number" step="500" value="${Number(o.manual[b.key])||0}"
-          ${o.frozen?"disabled title='Frozen. Untick Frz to edit.'":""} onchange="setB('${c.mls}','${b.key}',this.value)"></td>`).join("")
-      + `<td class="num">${moneyS(r.autoAdj+r.manualAdj)}</td>
+      + (ADJ.buckets||[]).map(b=>`<td class="num"><input class="b" type="text" inputmode="numeric" value="${fmtC(o.manual[b.key])}"
+          ${o.frozen?"disabled title='Frozen. Untick Frz to edit.'":""} oninput="ciInput(this)"
+          onchange="setB('${c.mls}','${b.key}',parseC(this.value))"></td>`).join("")
+      + `<td><select class="sel" onchange="setFurn('${c.mls}',this.value)">
+          ${["","No","Opt","Full"].map(v=>`<option value="${v}" ${o.furnishings===v?"selected":""}>${v||"\u2014"}</option>`).join("")}</select></td>
+      <td><select class="sel" style="font-weight:bold;" onchange="setRel2('${c.mls}',this.value)">
+          ${[["",""],["A","A"],["B","B"],["C","C"],["X","Exclude"]].map(([v,l])=>`<option value="${v}" ${(o.relevancy||"")===v?"selected":""}>${l||"\u2014"}</option>`).join("")}</select></td>
+      <td class="num">${moneyS(r.autoAdj+r.manualAdj)}</td>
       <td class="num" style="font-weight:bold;">${money(r.adjPrice)}</td>
       <td class="num">$${r.adjPpsf.toFixed(2)}</td>
-      <td class="num"><input type="checkbox" ${o.reviewed?"checked":""} onchange="setRev('${c.mls}',this.checked)"></td>
       <td class="num"><input type="checkbox" ${o.frozen?"checked":""} onchange="setFrz('${c.mls}',this.checked)"></td>
-      <td class="num"><input type="checkbox" ${o.excluded?"checked":""} onchange="setExc('${c.mls}',this.checked)"></td></tr>`;
+      <td><input class="gn" type="text" placeholder="${o.excluded?"why excluded":"internal note"}" value="${escA(o.notes)}"
+          onchange="setNote('${c.mls}','notes',this.value)"></td></tr>`;
   });
   h += `<tr class="tot"><td></td><td>Averages of ${live.length} included</td>
     <td colspan="${PR.factCols.length+2}"></td>
     <td class="num">${money(avg("price"))}</td><td class="num">$${avg("ppsf").toFixed(2)}</td>
-    <td colspan="${PR.autoCols.length+(ADJ.buckets||[]).length+1}"></td>
-    <td class="num">${money(central)}</td><td class="num">$${avg("adjPpsf").toFixed(2)}</td><td colspan="3"></td></tr></tbody>`;
+    <td colspan="${PR.autoCols.length+(ADJ.buckets||[]).length+3}"></td>
+    <td class="num">${money(central)}</td><td class="num">$${avg("adjPpsf").toFixed(2)}</td><td colspan="2"></td></tr></tbody>`;
   document.getElementById("grid").innerHTML = h;
 
   const frozen = D.comps.filter(c=>OV(c.mls).frozen).length;
@@ -334,16 +358,17 @@ function renderAll(){
      A refresh rewrites <code>data.json</code> only; this overlay is keyed by MLS # and is never auto-touched.
      Save writes it live; Freeze to git also commits <code>adjustments.json</code> as the versioned backup.`;
 
-  document.getElementById("notes").innerHTML = D.comps.map(c=>{
+  document.getElementById("notes").innerHTML = (ORDER.length?ORDER:D.comps).map(c=>{
     const o=OV(c.mls);
+    const relFlag = o.relevancy==="X" ? '<span class="flag" style="background:#e6e8ec;color:#7c8798;">EXCLUDED</span>'
+      : o.relevancy ? `<span class="flag r">RELEVANCY ${o.relevancy}${o.reviewedOn?" \u00b7 "+o.reviewedOn:""}</span>` : "";
     return `<div style="margin-bottom:14px;">
       <div style="font:bold 13px Georgia;color:var(--navy);margin-bottom:5px;">
-        <span class="lettermark">${c.letter}</span> ${c.address} · ${PR.noteLoc(c)}
-        ${o.reviewed?`<span class="flag r">REVIEWED ${o.reviewedOn||""}</span>`:""}</div>
+        <span class="lettermark">${c.letter}</span> ${c.address} \u00b7 ${PR.noteLoc(c)} ${relFlag}</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div><div style="font-size:10.5px;color:#7c8798;margin-bottom:3px;">INTERNAL</div>
-          <textarea class="n" onchange="setNote('${c.mls}','notes',this.value)">${o.notes||""}</textarea></div>
-        <div><div style="font-size:10.5px;color:#7c8798;margin-bottom:3px;">CLIENT FACING</div>
+        <div><div style="font-size:10.5px;color:#7c8798;margin-bottom:3px;">INTERNAL \u00b7 edit in the grid row</div>
+          <div style="font:12px Arial;color:#4a5871;white-space:pre-wrap;min-height:34px;border:1px dashed #dde2ea;border-radius:4px;padding:6px 8px;background:#fafbfc;">${o.notes?escA(o.notes):"<span style=\'color:#b9c2cf\'>none</span>"}</div></div>
+        <div><div style="font-size:10.5px;color:#7c8798;margin-bottom:3px;">CLIENT FACING \u00b7 prints on the shared page</div>
           <textarea class="n" onchange="setNote('${c.mls}','clientNote',this.value)">${o.clientNote||""}</textarea></div>
       </div></div>`;
   }).join("");

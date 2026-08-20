@@ -36,6 +36,10 @@
   .estimate-box .big { font-size:30px; font-family:Georgia,serif; color:var(--gold); }
   .estimate-box .mid { font-size:20px; font-family:Georgia,serif; color:#fff; }
   .estimate-box .l { font-size:10.5px; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); }
+  .rb { display:inline-flex; min-width:19px; height:19px; padding:0 5px; border-radius:4px; font:bold 10.5px Arial; align-items:center; justify-content:center; }
+  .rb.A { background:var(--navy); color:var(--gold); } .rb.B { background:#24507f; color:#fff; }
+  .rb.C { background:#5b6b85; color:#fff; } .rb.X { background:#e6e8ec; color:#7c8798; font-weight:normal; }
+  tr.exc td { background:#f4f5f7; color:#98a2b2; }
   .lettermark { display:inline-flex; width:21px; height:21px; border-radius:50%; background:var(--navy); color:var(--gold);
      font-size:11.5px; font-weight:bold; align-items:center; justify-content:center; font-family:Georgia,serif; }
   .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
@@ -248,7 +252,10 @@ async function boot(){
 function render(){
   const s = D.subject;
   const PR = PROFILES[D.meta.profile] || PROFILES.sfh;
-  const live = D.comps.filter(c => !OV(c.mls).excluded);
+  const rank = c => { const o=OV(c.mls); return ({A:0,B:1,C:2,X:4})[o.relevancy||""] ?? (o.excluded?4:3); };
+  const ordered = D.comps.slice().sort((a,b)=>rank(a)-rank(b));
+  const live = ordered.filter(c => !OV(c.mls).excluded);
+  const excl = ordered.filter(c => OV(c.mls).excluded);
   const rows = live.map(c => {
     const auto = PR.auto(s, c);
     const autoAdj = Object.values(auto).reduce((t,v)=>t+v,0);
@@ -263,7 +270,8 @@ function render(){
   };
   const ap = rows.map(x=>x.r.adjPrice);
   const e = { central: a.adjPrice, lo: Math.min(...ap), hi: Math.max(...ap), adjPpsf: a.adjPpsf };
-  const reviewed = live.filter(c => OV(c.mls).reviewed).length;
+  const isRev = c => { const o=OV(c.mls); return !!(o.reviewed || o.relevancy); };
+  const reviewed = live.filter(isRev).length;
   const pend = reviewed < live.length;
 
   document.title = `Comparative Market Analysis: ${s.address} | The Adamson Group`;
@@ -295,22 +303,32 @@ function render(){
   document.getElementById("subject-table").innerHTML = PR.subjectRows(s);
   document.getElementById("comps-sub").textContent = PR.compsSub(s);
 
-  let h = `<thead><tr><th></th><th>Address</th>`
+  let h = `<thead><tr><th></th><th>Address</th><th>Rel.</th>`
     + PR.compCols.map(col=>`<th${col.cls?` class="${col.cls}"`:""}>${col.h}</th>`).join("")
     + `<th class="num">Concess.</th><th>Terms</th><th class="num">Sale Price</th><th class="num">$/SqFt</th>
        <th class="num">Attribute</th><th class="num">Cond./Loc.</th>
        <th class="num">Adj. Price</th><th class="num">Adj. $/SqFt</th></tr></thead><tbody>`;
+  const relBadge = c => { const v=OV(c.mls).relevancy;
+    return v==="X" ? '<span class="rb X">Excl.</span>' : v ? `<span class="rb ${v}">${v}</span>`
+      : '<span style="color:#b08a1f;font-size:9.5px;">unrev</span>'; };
   rows.forEach(({c,r})=>{
-    const rev = OV(c.mls).reviewed;
     h += `<tr><td><span class="lettermark">${c.letter}</span></td>
-      <td>${c.address}${rev?"":' <span style="color:#b08a1f;font-size:9.5px;">unrev</span>'}</td>`
+      <td>${c.address}</td><td>${relBadge(c)}</td>`
       + PR.compCols.map(col=>col.c(c)).join("")
       + `<td class="num">${c.credit?money(c.credit):"—"}</td><td>${c.financing||"—"}</td>
       <td class="num">${money(c.price)}</td><td class="num">$${r.ppsf.toFixed(2)}</td>
       <td class="num">${moneyS(r.autoAdj)}</td><td class="num">${moneyS(r.manualAdj)}</td>
       <td class="num" style="font-weight:bold;">${money(r.adjPrice)}</td><td class="num">$${r.adjPpsf.toFixed(2)}</td></tr>`;
   });
-  h += `<tr class="totals"><td></td><td>Averages</td><td colspan="${PR.compCols.length+2}"></td>
+  excl.forEach(c=>{
+    h += `<tr class="exc"><td><span class="lettermark" style="background:#aab3c2;color:#fff;">${c.letter}</span></td>
+      <td>${c.address}</td><td><span class="rb X">Excl.</span></td>`
+      + PR.compCols.map(col=>col.c(c)).join("")
+      + `<td class="num">${c.credit?money(c.credit):"\u2014"}</td><td>${c.financing||"\u2014"}</td>
+      <td class="num">${money(c.price)}</td><td class="num">$${(c.price/c.sqft).toFixed(2)}</td>
+      <td class="num">\u2014</td><td class="num">\u2014</td><td class="num">\u2014</td><td class="num">\u2014</td></tr>`;
+  });
+  h += `<tr class="totals"><td></td><td>Averages of ${rows.length} included</td><td colspan="${PR.compCols.length+3}"></td>
     <td class="num">${money(a.price)}</td><td class="num">$${a.ppsf.toFixed(2)}</td><td></td><td></td>
     <td class="num">${money(a.adjPrice)}</td><td class="num">$${a.adjPpsf.toFixed(2)}</td></tr></tbody>`;
   document.getElementById("comps-table").innerHTML = h;
@@ -319,7 +337,9 @@ function render(){
   document.getElementById("ppsf-note").innerHTML =
     `Attribute is arithmetic (year, rooms, size${D.meta.profile==="condo"?", fee":", garage, lot"}). `
   + `Cond./Loc. is the sum of the judgment buckets${bl?" ("+bl+")":""}, held per comp by MLS # so a reviewed sale is never re-litigated. `
-  + `Seller concessions are shown but not netted out of adjusted price.`;
+  + `Seller concessions are shown but not netted out of adjusted price. `
+  + `<b>Rel.</b> is your agent's relevancy grade for each sale: <b>A</b> comps are the closest matches and carry the most weight in reading value,
+     <b>B</b> support the range, <b>C</b> provide context. Excluded sales appear for completeness but sit outside every average and the value range.`;
 
   const acts = D.actives||[];
   document.getElementById("actives-card").style.display = acts.length ? "" : "none";
