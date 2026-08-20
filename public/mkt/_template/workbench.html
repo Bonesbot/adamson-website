@@ -60,6 +60,27 @@ if (!localStorage.getItem("cma-edit-key"))
   tr.exc td { background:#f1f2f5; color:#94a0b1; }
   input.gn { width:240px; font:12px Arial; padding:4px 6px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
   select.sel { font:12px Arial; padding:4px 3px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
+  #grid th:nth-child(1), #grid td:nth-child(1) { position:sticky; left:0; z-index:2; width:40px; min-width:40px; }
+  #grid th:nth-child(2), #grid td:nth-child(2) { position:sticky; left:40px; z-index:2; min-width:158px;
+     box-shadow:6px 0 6px -5px rgba(10,31,60,.18); }
+  #grid th:nth-child(1), #grid th:nth-child(2) { z-index:3; }
+  #grid td:nth-child(1), #grid td:nth-child(2) { background:#fff; }
+  tr.rev td:nth-child(1), tr.rev td:nth-child(2) { background:#f7fbf7; }
+  tr.exc td:nth-child(1), tr.exc td:nth-child(2) { background:#f1f2f5; }
+  tr.tot td:nth-child(1), tr.tot td:nth-child(2) { background:#f2f4f8; }
+  .expmenu { position:relative; display:inline-block; }
+  .expmenu .dd { display:none; position:absolute; top:110%; left:0; background:#fff; border:1px solid #c8d0dc;
+     border-radius:6px; box-shadow:0 4px 14px rgba(0,0,0,.18); z-index:120; min-width:200px; }
+  .expmenu.open .dd { display:block; }
+  .expmenu .dd button { display:block; width:100%; text-align:left; background:none; border:none;
+     padding:9px 13px; font:12.5px Arial; cursor:pointer; color:var(--navy); }
+  .expmenu .dd button:hover { background:#f2f5fa; }
+  #handout { display:none; }
+  @media print {
+    body.print-handout header, body.print-handout .bar, body.print-handout .wrap { display:none !important; }
+    body.print-handout #handout { display:block; }
+    @page { size:letter landscape; margin:9mm; }
+  }
   .warn { background:#fff8e5; border-left:4px solid var(--gold); padding:10px 14px; font-size:12px; margin-top:14px; border-radius:0 5px 5px 0; }
 </style>
 </head>
@@ -75,7 +96,14 @@ if (!localStorage.getItem("cma-edit-key"))
   <button class="btn" onclick="reload()">Reload</button>
   <a class="btn" href="./" target="_blank">Client page ↗</a>
   <a class="btn" href="/mkt/admin/">All CMAs</a>
-  <button class="btn" onclick="downloadAdjustments()">Download</button>
+  <span class="expmenu" id="expmenu">
+    <button class="btn" onclick="document.getElementById('expmenu').classList.toggle('open')">Export &#9662;</button>
+    <span class="dd">
+      <button onclick="exportPdf()">One-page PDF (print dialog)</button>
+      <button onclick="exportDoc()">Word handout (.doc)</button>
+      <button onclick="downloadAdjustments()">adjustments.json backup</button>
+    </span>
+  </span>
   <button class="btn" onclick="logOut()">Log out</button>
   <span class="ind" id="ind">loading</span>
 </div></div>
@@ -102,6 +130,8 @@ if (!localStorage.getItem("cma-edit-key"))
     <div id="notes"></div>
   </div>
 </div>
+
+<div id="handout"></div>
 
 <script>
 /* INTERNAL WORKBENCH, one template for every listing.
@@ -268,19 +298,104 @@ async function freezeToGit(){
   if (res.body.unchanged) { setInd("git already matches rev "+res.body.rev, "#9fe0a8"); return; }
   setInd("frozen to git "+(res.body.commit||"")+" · Netlify rebuilding", "#9fe0a8");
 }
+const AUTOL = { age:"Age", bedBath:"Bed/Bath", sqft:"Sq Ft", fee:"Condo Fee", time:"Market Time", garage:"Garage", lot:"Lot" };
+function adjTerms(c){
+  const r=compute(c), t=[];
+  PR.autoCols.forEach(([k])=>{ const v=r.auto[k]; if(Math.abs(v)>=1) t.push(moneyS(v)+" "+(AUTOL[k]||k)); });
+  (ADJ.buckets||[]).forEach(b=>{ const v=Number(OV(c.mls).manual[b.key])||0; if(v) t.push(moneyS(v)+" "+b.label); });
+  return { total:r.autoAdj+r.manualAdj, terms:t, r };
+}
+function buildHandout(){
+  const s=D.subject;
+  const inc = ORDER.filter(c=>!OV(c.mls).excluded);
+  const exN = ORDER.length-inc.length;
+  const rows = inc.map(c=>({c, o:OV(c.mls), a:adjTerms(c)}));
+  const n=rows.length||1;
+  const ap=rows.map(x=>x.a.r.adjPrice);
+  const central=ap.reduce((t,v)=>t+v,0)/n;
+  const facts = D.meta.profile==="condo"
+    ? c=>`${c.building||"\u2014"} / ${c.floor??"\u2014"}`
+    : c=>`${(c.sqft||0).toLocaleString()} sf / ${c.garage??0} gar`;
+  const factH = D.meta.profile==="condo" ? "Bldg/Flr" : "SqFt/Gar";
+  const td='padding:4px 6px;border:1px solid #c9d1dc;font-size:10px;font-family:Arial,sans-serif;';
+  const th=td+'background:#0A1F3C;color:#fff;border-color:#0A1F3C;text-align:left;';
+  const num=td+'text-align:right;';
+  return `<div style="font-family:Arial,sans-serif;color:#22304a;">
+    <div style="border-bottom:3px solid #C9A961;padding-bottom:6px;margin-bottom:8px;">
+      <span style="font-family:Georgia,serif;letter-spacing:.15em;font-size:13px;color:#0A1F3C;">THE <span style="color:#8a6d1f;">ADAMSON</span> GROUP</span>
+      <span style="float:right;font-size:10px;color:#5a6b85;">Coldwell Banker Realty \u00b7 ${new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})}</span>
+    </div>
+    <div style="font-family:Georgia,serif;font-size:16px;color:#0A1F3C;margin-bottom:2px;">Comparative Market Analysis \u2014 ${s.address}, ${s.city||""}</div>
+    <div style="font-size:10.5px;color:#5a6b85;margin-bottom:8px;">${s.subdivision} \u00b7 ${s.sqft.toLocaleString()} sq ft \u00b7 ${s.beds} bd / ${s.fullBaths} ba \u00b7 List ${money(s.list)} ($${(s.list/s.sqft).toFixed(2)}/sq ft)</div>
+    <table style="border-collapse:collapse;width:100%;">
+      <tr><th style="${th}">Comp #</th><th style="${th}">Address</th><th style="${th}">${factH}</th>
+        <th style="${th}text-align:right;">Sold</th><th style="${th}text-align:right;">Sale Price</th>
+        <th style="${th}text-align:right;">$/SqFt</th><th style="${th}text-align:right;">Adjustments</th>
+        <th style="${th}text-align:right;">Adj. Price</th><th style="${th}text-align:right;">Adj. $/SqFt</th><th style="${th}">Rel.</th></tr>
+      ${rows.map(({c,o,a})=>`<tr>
+        <td style="${td}text-align:center;font-weight:bold;">${NUM.get(c.mls)}</td>
+        <td style="${td}">${c.address}</td><td style="${td}">${facts(c)}</td>
+        <td style="${num}">${fmtD(c.closeDate)}</td><td style="${num}">${money(c.price)}</td>
+        <td style="${num}">$${(c.price/c.sqft).toFixed(2)}</td><td style="${num}">${moneyS(a.total)}</td>
+        <td style="${num}font-weight:bold;">${money(a.r.adjPrice)}</td><td style="${num}">$${a.r.adjPpsf.toFixed(2)}</td>
+        <td style="${td}text-align:center;font-weight:bold;">${o.relevancy||"\u2014"}</td></tr>`).join("")}
+      <tr><td colspan="4" style="${td}font-weight:bold;background:#f2f4f8;">Averages of ${rows.length} included${exN?` (${exN} excluded)`:""}</td>
+        <td style="${num}font-weight:bold;background:#f2f4f8;">${money(rows.reduce((t,x)=>t+x.c.price,0)/n)}</td>
+        <td style="${num}background:#f2f4f8;"></td><td style="${num}background:#f2f4f8;"></td>
+        <td style="${num}font-weight:bold;background:#f2f4f8;">${money(central)}</td>
+        <td style="${num}font-weight:bold;background:#f2f4f8;">$${(central/s.sqft).toFixed(2)}</td>
+        <td style="${td}background:#f2f4f8;"></td></tr>
+    </table>
+    <div style="margin-top:8px;padding:8px 12px;background:#0A1F3C;color:#fff;font-size:11px;">
+      <b style="color:#C9A961;">Indicated range ${money(Math.min(...ap))} to ${money(Math.max(...ap))}</b>
+      &nbsp;\u00b7&nbsp; Central estimate ${money(central)} &nbsp;\u00b7&nbsp; vs. list ${money(s.list)}: ${moneyS(central-s.list)}
+    </div>
+    <div style="margin-top:6px;font-size:8.5px;color:#8a94a5;">Relevancy: A strongest comps, B supporting, C context; excluded sales are outside all averages.
+      Comparable data from Stellar MLS, deemed reliable but not guaranteed. Adjusted values are opinions of value, not appraisals.
+      Prepared by Ryan Adamson, Lic. SL3457783 \u00b7 The Adamson Group \u00b7 Coldwell Banker Realty.</div>
+  </div>`;
+}
+function exportPdf(){
+  document.getElementById('expmenu').classList.remove('open');
+  document.getElementById("handout").innerHTML = buildHandout();
+  document.body.classList.add("print-handout");
+  const done=()=>{ document.body.classList.remove("print-handout"); window.removeEventListener("afterprint",done); };
+  window.addEventListener("afterprint",done);
+  window.print();
+}
+function exportDoc(){
+  document.getElementById('expmenu').classList.remove('open');
+  const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">
+<head><meta charset="utf-8"><title>CMA ${D.subject.address}</title>
+<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->
+<style>@page WordSection1 { size:11in 8.5in; mso-page-orientation:landscape; margin:.5in; } div.WordSection1 { page:WordSection1; }</style>
+</head><body><div class="WordSection1">${buildHandout()}</div></body></html>`;
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob(["\ufeff"+html],{type:"application/msword"}));
+  a.download="CMA-"+SLUG+".doc"; a.click();
+}
 function downloadAdjustments(){
   const a=document.createElement("a");
   a.href=URL.createObjectURL(new Blob([JSON.stringify(ADJ,null,2)],{type:"application/json"}));
   a.download="adjustments.json"; a.click();
 }
-function setB(mls,key,v){ OV(mls).manual[key] = Number(v)||0; touch(); renderAll(); }
-function setFrz(mls,v){ OV(mls).frozen=v; touch(); renderAll(); }
+function setB(mls,key,v){ OV(mls).manual[key] = Number(v)||0; touch(); recalc(); }
+function setFrz(mls,v){ const o=OV(mls); o.frozen=v; touch();
+  const tr=document.querySelector(`#grid tr[data-mls="${mls}"]`); if(!tr) return;
+  tr.querySelectorAll("input.b").forEach(i=>{ i.disabled=v; i.title=v?"Frozen. Untick Frz to edit.":""; });
+  const f=tr.querySelector(".frzflag"); if(f) f.style.display=v?"":"none"; }
 function setRel2(mls,v){ const o=OV(mls); o.relevancy=v; o.excluded=(v==="X");
   o.reviewed = v!==""; o.reviewedOn = v!=="" ? (o.reviewedOn||new Date().toISOString().slice(0,10)) : "";
-  touch(); renderAll(); }
+  touch();
+  const tr=document.querySelector(`#grid tr[data-mls="${mls}"]`);
+  if(tr){ tr.className = o.excluded?"exc":(o.reviewed?"rev":"");
+    const ni=tr.querySelector("input.gn"); if(ni) ni.placeholder = o.excluded?"why excluded":"internal note"; }
+  recalc(); renderNotes(); }
 function setFurn(mls,v){ OV(mls).furnishings=v; touch(); }
-function setNote(mls,f,v){ OV(mls)[f]=v; touch(); }
-function setParam(k,v){ (ADJ.params ||= {})[k]=Number(v)||0; touch(); renderAll(); }
+function setNote(mls,f,v){ OV(mls)[f]=v; touch();
+  if(f==="notes"){ const el=document.getElementById("niv-"+mls);
+    if(el) el.innerHTML = v ? escA(v) : "<span style='color:#b9c2cf'>none</span>"; } }
+function setParam(k,v){ (ADJ.params ||= {})[k]=Number(v)||0; touch(); recalc(); }
 
 function compute(c){
   const auto = PR.auto(D.subject, c);
@@ -290,30 +405,29 @@ function compute(c){
   return { auto, autoAdj, manualAdj, adjPrice, ppsf:c.price/c.sqft, adjPpsf:adjPrice/D.subject.sqft };
 }
 
+let NUM = new Map();
+
 function renderAll(){
   const s=D.subject;
+  NUM = new Map(ORDER.map((c,i)=>[c.mls,i+1]));
   document.getElementById("hdr").textContent =
     `${s.address} · ${PR.hdr(s)} · ${s.subdivision} · list ${money(s.list)} · saved search "${D.meta.savedSearch||"none"}" · profile ${D.meta.profile}`;
-
   document.getElementById("params").innerHTML = PR.params.map(([k,l,h])=>
     `<div class="par"><div class="l">${l}</div>
      <input class="p" type="number" step="any" value="${P(k)}" onchange="setParam('${k}',this.value)"><div class="h">${h}</div></div>`).join("");
+  renderGrid();
+  renderNotes();
+  recalc();
+  const frozen = D.comps.filter(c=>OV(c.mls).frozen).length;
+  document.getElementById("freeze-note").innerHTML =
+    `<b>${frozen} of ${D.comps.length} comps frozen.</b> Freezing locks a closed, reviewed sale so a comp refresh or a later pass cannot change it.
+     A refresh rewrites <code>data.json</code> only; this overlay is keyed by MLS # and is never auto-touched.
+     Save writes it live; Freeze to git also commits <code>adjustments.json</code> as the versioned backup.
+     Comp #s follow relevancy order and re-number on save; the client page uses the same numbering.`;
+}
 
-  const live = D.comps.filter(c=>!OV(c.mls).excluded);
-  const rows = live.map(c=>({c,r:compute(c)}));
-  const n = rows.length||1;
-  const avg = k => rows.reduce((t,x)=>t+(k==="price"?x.c.price:x.r[k]),0)/n;
-  const ap = rows.map(x=>x.r.adjPrice);
-  const central = avg("adjPrice");
-
-  document.getElementById("est").innerHTML = `
-    <div><div class="l">Indicated Range</div><div class="big">${rows.length?money(Math.min(...ap))+" to "+money(Math.max(...ap)):"—"}</div></div>
-    <div><div class="l">Central Estimate</div><div class="mid">${money(central)}</div></div>
-    <div><div class="l">Adjusted $/Sq Ft</div><div class="mid">$${avg("adjPpsf").toFixed(2)}</div></div>
-    <div><div class="l">vs. List ${money(s.list)}</div><div class="mid">${moneyS(central-s.list)}</div></div>
-    <div><div class="l">Reviewed</div><div class="mid">${live.filter(c=>OV(c.mls).reviewed).length} / ${live.length}</div></div>`;
-
-  let h = `<thead><tr><th></th><th>Address</th>`
+function renderGrid(){
+  let h = `<thead><tr><th title="Comp number, ordered by relevancy">Comp #</th><th>Address</th>`
     + PR.factCols.map(f=>`<th${f.cls?` class="${f.cls}"`:""}>${f.h}</th>`).join("")
     + `<th class="num">Sold</th><th class="num">DOM</th><th class="num">Sale Price</th><th class="num">$/SqFt</th>`
     + PR.autoCols.map(([k,l])=>`<th class="auto num">${l}</th>`).join("")
@@ -322,15 +436,15 @@ function renderAll(){
        <th class="num">Total Adj.</th><th class="num">Adj. Price</th><th class="num">Adj. $/SqFt</th>
        <th class="num">Frz</th><th>Internal Note</th></tr></thead><tbody>`;
   (ORDER.length?ORDER:D.comps).forEach(c=>{
-    const o=OV(c.mls), r=compute(c);
-    h += `<tr class="${o.excluded?"exc":(o.reviewed?"rev":"")}">
-      <td><span class="lettermark">${c.letter}</span></td>
-      <td>${c.address}${o.frozen?' <span class="flag f">FROZEN</span>':""}</td>`
+    const o=OV(c.mls);
+    h += `<tr data-mls="${c.mls}" class="${o.excluded?"exc":(o.reviewed?"rev":"")}">
+      <td><span class="lettermark">${NUM.get(c.mls)||"?"}</span></td>
+      <td>${c.address}<span class="flag f frzflag" style="${o.frozen?"":"display:none;"}">FROZEN</span></td>`
       + PR.factCols.map(f=>f.c(c)).join("")
       + `<td class="num">${fmtD(c.closeDate)}</td><td class="num">${c.dom??"—"}</td>
       <td class="num">${money(c.price)}${c.credit?`<br><span style="font-size:9.5px;color:#b08a1f;">${money(c.credit)} concess.</span>`:""}</td>
-      <td class="num">$${r.ppsf.toFixed(2)}</td>`
-      + PR.autoCols.map(([k])=>`<td class="num">${moneyS(r.auto[k])}</td>`).join("")
+      <td class="num">$${(c.price/c.sqft).toFixed(2)}</td>`
+      + PR.autoCols.map(([k])=>`<td class="num" id="au-${c.mls}-${k}"></td>`).join("")
       + (ADJ.buckets||[]).map(b=>`<td class="num"><input class="b" type="text" inputmode="numeric" value="${fmtC(o.manual[b.key])}"
           ${o.frozen?"disabled title='Frozen. Untick Frz to edit.'":""} oninput="ciInput(this)"
           onchange="setB('${c.mls}','${b.key}',parseC(this.value))"></td>`).join("")
@@ -338,43 +452,66 @@ function renderAll(){
           ${["","No","Opt","Full"].map(v=>`<option value="${v}" ${o.furnishings===v?"selected":""}>${v||"\u2014"}</option>`).join("")}</select></td>
       <td><select class="sel" style="font-weight:bold;" onchange="setRel2('${c.mls}',this.value)">
           ${[["",""],["A","A"],["B","B"],["C","C"],["X","Exclude"]].map(([v,l])=>`<option value="${v}" ${(o.relevancy||"")===v?"selected":""}>${l||"\u2014"}</option>`).join("")}</select></td>
-      <td class="num">${moneyS(r.autoAdj+r.manualAdj)}</td>
-      <td class="num" style="font-weight:bold;">${money(r.adjPrice)}</td>
-      <td class="num">$${r.adjPpsf.toFixed(2)}</td>
+      <td class="num" id="tadj-${c.mls}"></td>
+      <td class="num" style="font-weight:bold;" id="aprice-${c.mls}"></td>
+      <td class="num" id="appsf-${c.mls}"></td>
       <td class="num"><input type="checkbox" ${o.frozen?"checked":""} onchange="setFrz('${c.mls}',this.checked)"></td>
       <td><input class="gn" type="text" placeholder="${o.excluded?"why excluded":"internal note"}" value="${escA(o.notes)}"
           onchange="setNote('${c.mls}','notes',this.value)"></td></tr>`;
   });
-  h += `<tr class="tot"><td></td><td>Averages of ${live.length} included</td>
+  h += `<tr class="tot"><td></td><td id="avg-label"></td>
     <td colspan="${PR.factCols.length+2}"></td>
-    <td class="num">${money(avg("price"))}</td><td class="num">$${avg("ppsf").toFixed(2)}</td>
+    <td class="num" id="avg-price"></td><td class="num" id="avg-ppsf"></td>
     <td colspan="${PR.autoCols.length+(ADJ.buckets||[]).length+3}"></td>
-    <td class="num">${money(central)}</td><td class="num">$${avg("adjPpsf").toFixed(2)}</td><td colspan="2"></td></tr></tbody>`;
+    <td class="num" id="avg-adj"></td><td class="num" id="avg-appsf"></td><td colspan="2"></td></tr></tbody>`;
   document.getElementById("grid").innerHTML = h;
+}
 
-  const frozen = D.comps.filter(c=>OV(c.mls).frozen).length;
-  document.getElementById("freeze-note").innerHTML =
-    `<b>${frozen} of ${D.comps.length} comps frozen.</b> Freezing locks a closed, reviewed sale so a comp refresh or a later pass cannot change it.
-     A refresh rewrites <code>data.json</code> only; this overlay is keyed by MLS # and is never auto-touched.
-     Save writes it live; Freeze to git also commits <code>adjustments.json</code> as the versioned backup.`;
+function recalc(){
+  const s=D.subject;
+  const set=(id,t)=>{ const el=document.getElementById(id); if(el) el.textContent=t; };
+  D.comps.forEach(c=>{
+    const r=compute(c);
+    PR.autoCols.forEach(([k])=>set(`au-${c.mls}-${k}`, moneyS(r.auto[k])));
+    set(`tadj-${c.mls}`, moneyS(r.autoAdj+r.manualAdj));
+    set(`aprice-${c.mls}`, money(r.adjPrice));
+    set(`appsf-${c.mls}`, "$"+r.adjPpsf.toFixed(2));
+  });
+  const live = D.comps.filter(c=>!OV(c.mls).excluded);
+  const rows = live.map(c=>({c,r:compute(c)}));
+  const n = rows.length||1;
+  const avg = k => rows.reduce((t,x)=>t+(k==="price"?x.c.price:x.r[k]),0)/n;
+  const ap = rows.map(x=>x.r.adjPrice);
+  const central = avg("adjPrice");
+  set("avg-label", `Averages of ${rows.length} included`);
+  set("avg-price", money(avg("price"))); set("avg-ppsf", "$"+avg("ppsf").toFixed(2));
+  set("avg-adj", money(central)); set("avg-appsf", "$"+avg("adjPpsf").toFixed(2));
+  document.getElementById("est").innerHTML = `
+    <div><div class="l">Indicated Range</div><div class="big">${rows.length?money(Math.min(...ap))+" to "+money(Math.max(...ap)):"—"}</div></div>
+    <div><div class="l">Central Estimate</div><div class="mid">${money(central)}</div></div>
+    <div><div class="l">Adjusted $/Sq Ft</div><div class="mid">$${avg("adjPpsf").toFixed(2)}</div></div>
+    <div><div class="l">vs. List ${money(s.list)}</div><div class="mid">${moneyS(central-s.list)}</div></div>
+    <div><div class="l">Graded</div><div class="mid">${live.filter(c=>OV(c.mls).reviewed).length} / ${live.length}</div></div>`;
+  if(!dirty) setInd(`${source} · ${live.filter(c=>OV(c.mls).reviewed).length}/${live.length} graded`);
+}
 
+function renderNotes(){
   document.getElementById("notes").innerHTML = (ORDER.length?ORDER:D.comps).map(c=>{
     const o=OV(c.mls);
     const relFlag = o.relevancy==="X" ? '<span class="flag" style="background:#e6e8ec;color:#7c8798;">EXCLUDED</span>'
       : o.relevancy ? `<span class="flag r">RELEVANCY ${o.relevancy}${o.reviewedOn?" \u00b7 "+o.reviewedOn:""}</span>` : "";
     return `<div style="margin-bottom:14px;">
       <div style="font:bold 13px Georgia;color:var(--navy);margin-bottom:5px;">
-        <span class="lettermark">${c.letter}</span> ${c.address} \u00b7 ${PR.noteLoc(c)} ${relFlag}</div>
+        <span class="lettermark">${NUM.get(c.mls)||"?"}</span> Comp ${NUM.get(c.mls)||"?"} \u00b7 ${c.address} \u00b7 ${PR.noteLoc(c)} ${relFlag}</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
         <div><div style="font-size:10.5px;color:#7c8798;margin-bottom:3px;">INTERNAL \u00b7 edit in the grid row</div>
-          <div style="font:12px Arial;color:#4a5871;white-space:pre-wrap;min-height:34px;border:1px dashed #dde2ea;border-radius:4px;padding:6px 8px;background:#fafbfc;">${o.notes?escA(o.notes):"<span style=\'color:#b9c2cf\'>none</span>"}</div></div>
+          <div id="niv-${c.mls}" style="font:12px Arial;color:#4a5871;white-space:pre-wrap;min-height:34px;border:1px dashed #dde2ea;border-radius:4px;padding:6px 8px;background:#fafbfc;">${o.notes?escA(o.notes):"<span style=\'color:#b9c2cf\'>none</span>"}</div></div>
         <div><div style="font-size:10.5px;color:#7c8798;margin-bottom:3px;">CLIENT FACING \u00b7 prints on the shared page</div>
           <textarea class="n" onchange="setNote('${c.mls}','clientNote',this.value)">${o.clientNote||""}</textarea></div>
       </div></div>`;
   }).join("");
-
-  if(!dirty) setInd(`${source} · ${live.filter(c=>OV(c.mls).reviewed).length}/${live.length} reviewed · ${frozen} frozen`);
 }
+
 window.addEventListener("beforeunload", e => { if(dirty){ e.preventDefault(); e.returnValue=""; } });
 boot();
 </script>

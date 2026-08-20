@@ -40,6 +40,12 @@
   .rb.A { background:var(--navy); color:var(--gold); } .rb.B { background:#24507f; color:#fff; }
   .rb.C { background:#5b6b85; color:#fff; } .rb.X { background:#e6e8ec; color:#7c8798; font-weight:normal; }
   tr.exc td { background:#f4f5f7; color:#98a2b2; }
+  tr.drow td { border-bottom:2px solid #dfe4ec; padding:6px 10px 10px; white-space:normal; }
+  tr.hasd td { border-bottom:none; }
+  .cnote { font:13px/1.5 Georgia,serif; color:#33415c; margin-bottom:3px; }
+  .cadj { font:11px Arial,sans-serif; color:#7c8798; }
+  .cadj b { color:#4a5871; }
+  .no-print {}
   .lettermark { display:inline-flex; width:21px; height:21px; border-radius:50%; background:var(--navy); color:var(--gold);
      font-size:11.5px; font-weight:bold; align-items:center; justify-content:center; font-family:Georgia,serif; }
   .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
@@ -66,7 +72,17 @@
   .btn.gold { background:var(--gold); border-color:var(--gold); font-weight:bold; }
   footer { text-align:center; font-size:11px; color:#8a94a5; padding:26px 16px; line-height:1.6; }
   @media (max-width:820px){ .subject-strip{grid-template-columns:repeat(2,1fr);} .grid2{grid-template-columns:1fr;} .photo-strip .ph{width:47%;} }
-  @media print { .card{page-break-inside:avoid; border:none;} .lightbox{display:none!important;} @page{margin:12mm;} }
+  @media print {
+    @page { size:letter portrait; margin:10mm; }
+    body { background:#fff; font-size:11px; }
+    .no-print, .lightbox, #map-card, #pending-banner { display:none !important; }
+    .card { page-break-inside:avoid; border:1px solid #e3e7ee; margin-top:12px; padding:12px; }
+    header { padding:14px 0 12px; }
+    table { font-size:9.5px; }
+    td, th { padding:4px 4px; }
+    .photo-strip .ph { width:120px; height:82px; }
+    .estimate-box .big { font-size:22px; }
+  }
 </style>
 </head>
 <body>
@@ -74,7 +90,9 @@
   <div class="wrap">
     <div class="brandline">
       <div class="wordmark">THE <span>ADAMSON</span> GROUP</div>
-      <div class="cb">Coldwell Banker Realty</div>
+      <div class="cb">Coldwell Banker Realty
+        <button class="no-print" onclick="window.print()" style="margin-left:14px;background:var(--gold);border:none;color:var(--navy);
+          font:bold 11px Arial;padding:6px 13px;border-radius:4px;cursor:pointer;letter-spacing:.05em;">PRINT / SAVE PDF</button></div>
     </div>
     <h1>Comparative Market Analysis</h1>
     <div class="crit" id="hdr-sub"></div>
@@ -114,7 +132,7 @@
       <div class="sub">Where each price point lands relative to the current list price</div>
       <table class="ladder" id="ladder"></table>
     </div>
-    <div class="card">
+    <div class="card" id="map-card">
       <h2>Comp Locations</h2>
       <div class="sub">★ Subject · Lettered pins = comparable sales · Hollow pins = active listings</div>
       <div id="map"></div>
@@ -256,6 +274,15 @@ function render(){
   const ordered = D.comps.slice().sort((a,b)=>rank(a)-rank(b));
   const live = ordered.filter(c => !OV(c.mls).excluded);
   const excl = ordered.filter(c => OV(c.mls).excluded);
+  const NUM = new Map(ordered.map((c,i)=>[c.mls,i+1]));
+  const AUTOL = { age:"Age", bedBath:"Bed/Bath", sqft:"Sq Ft", fee:"Condo Fee", time:"Market Time", garage:"Garage", lot:"Lot" };
+  const adjLine = (c,r) => {
+    const t=[];
+    Object.entries(r.auto).forEach(([k,v])=>{ if(Math.abs(v)>=1) t.push(moneyS(v)+" "+(AUTOL[k]||k)); });
+    (ADJ.buckets||[]).forEach(b=>{ const v=Number(OV(c.mls).manual?.[b.key])||0; if(v) t.push(moneyS(v)+" "+b.label); });
+    const tot=r.autoAdj+r.manualAdj;
+    return `<b>Adjustments: ${tot?moneyS(tot):"none"}</b>${t.length?" = "+t.join(" &nbsp;\u00b7&nbsp; "):""}`;
+  };
   const rows = live.map(c => {
     const auto = PR.auto(s, c);
     const autoAdj = Object.values(auto).reduce((t,v)=>t+v,0);
@@ -303,40 +330,48 @@ function render(){
   document.getElementById("subject-table").innerHTML = PR.subjectRows(s);
   document.getElementById("comps-sub").textContent = PR.compsSub(s);
 
-  let h = `<thead><tr><th></th><th>Address</th><th>Rel.</th>`
+  let h = `<thead><tr><th title="Comp number, ordered by relevancy">Comp #</th><th>Address</th><th>Rel.</th>`
     + PR.compCols.map(col=>`<th${col.cls?` class="${col.cls}"`:""}>${col.h}</th>`).join("")
     + `<th class="num">Concess.</th><th>Terms</th><th class="num">Sale Price</th><th class="num">$/SqFt</th>
-       <th class="num">Attribute</th><th class="num">Cond./Loc.</th>
+       <th class="num">Adjustments</th>
        <th class="num">Adj. Price</th><th class="num">Adj. $/SqFt</th></tr></thead><tbody>`;
+  const NCOLS = PR.compCols.length + 10;
   const relBadge = c => { const v=OV(c.mls).relevancy;
     return v==="X" ? '<span class="rb X">Excl.</span>' : v ? `<span class="rb ${v}">${v}</span>`
       : '<span style="color:#b08a1f;font-size:9.5px;">unrev</span>'; };
   rows.forEach(({c,r})=>{
-    h += `<tr><td><span class="lettermark">${c.letter}</span></td>
+    const note = OV(c.mls).clientNote||"";
+    h += `<tr class="hasd"><td><span class="lettermark">${NUM.get(c.mls)}</span></td>
       <td>${c.address}</td><td>${relBadge(c)}</td>`
       + PR.compCols.map(col=>col.c(c)).join("")
       + `<td class="num">${c.credit?money(c.credit):"—"}</td><td>${c.financing||"—"}</td>
       <td class="num">${money(c.price)}</td><td class="num">$${r.ppsf.toFixed(2)}</td>
-      <td class="num">${moneyS(r.autoAdj)}</td><td class="num">${moneyS(r.manualAdj)}</td>
-      <td class="num" style="font-weight:bold;">${money(r.adjPrice)}</td><td class="num">$${r.adjPpsf.toFixed(2)}</td></tr>`;
+      <td class="num">${moneyS(r.autoAdj+r.manualAdj)}</td>
+      <td class="num" style="font-weight:bold;">${money(r.adjPrice)}</td><td class="num">$${r.adjPpsf.toFixed(2)}</td></tr>
+    <tr class="drow"><td></td><td colspan="${NCOLS-1}">
+      ${note?`<div class="cnote">${note}</div>`:""}
+      <div class="cadj">${adjLine(c,r)}</div></td></tr>`;
   });
   excl.forEach(c=>{
-    h += `<tr class="exc"><td><span class="lettermark" style="background:#aab3c2;color:#fff;">${c.letter}</span></td>
+    const note = OV(c.mls).clientNote||"";
+    h += `<tr class="exc hasd"><td><span class="lettermark" style="background:#aab3c2;color:#fff;">${NUM.get(c.mls)}</span></td>
       <td>${c.address}</td><td><span class="rb X">Excl.</span></td>`
       + PR.compCols.map(col=>col.c(c)).join("")
       + `<td class="num">${c.credit?money(c.credit):"\u2014"}</td><td>${c.financing||"\u2014"}</td>
       <td class="num">${money(c.price)}</td><td class="num">$${(c.price/c.sqft).toFixed(2)}</td>
-      <td class="num">\u2014</td><td class="num">\u2014</td><td class="num">\u2014</td><td class="num">\u2014</td></tr>`;
+      <td class="num">\u2014</td><td class="num">\u2014</td><td class="num">\u2014</td></tr>
+    <tr class="drow exc"><td></td><td colspan="${NCOLS-1}">
+      ${note?`<div class="cnote">${note}</div>`:""}
+      <div class="cadj"><b>Excluded from the analysis</b> \u2014 not counted in any average or the value range.</div></td></tr>`;
   });
   h += `<tr class="totals"><td></td><td>Averages of ${rows.length} included</td><td colspan="${PR.compCols.length+3}"></td>
-    <td class="num">${money(a.price)}</td><td class="num">$${a.ppsf.toFixed(2)}</td><td></td><td></td>
+    <td class="num">${money(a.price)}</td><td class="num">$${a.ppsf.toFixed(2)}</td><td></td>
     <td class="num">${money(a.adjPrice)}</td><td class="num">$${a.adjPpsf.toFixed(2)}</td></tr></tbody>`;
   document.getElementById("comps-table").innerHTML = h;
 
   const bl = (ADJ.buckets||[]).map(b=>b.label).join(" · ");
   document.getElementById("ppsf-note").innerHTML =
-    `Attribute is arithmetic (year, rooms, size${D.meta.profile==="condo"?", fee":", garage, lot"}). `
-  + `Cond./Loc. is the sum of the judgment buckets${bl?" ("+bl+")":""}, held per comp by MLS # so a reviewed sale is never re-litigated. `
+    `Adjustments combine arithmetic attributes (year, rooms, size${D.meta.profile==="condo"?", fee":", garage, lot"}) with the judgment buckets${bl?" ("+bl+")":""}; the line under each comp itemizes them. `
   + `Seller concessions are shown but not netted out of adjusted price. `
   + `<b>Rel.</b> is your agent's relevancy grade for each sale: <b>A</b> comps are the closest matches and carry the most weight in reading value,
      <b>B</b> support the range, <b>C</b> provide context. Excluded sales appear for completeness but sit outside every average and the value range.`;
@@ -361,7 +396,7 @@ function render(){
   document.getElementById("comp-blocks").innerHTML = withPhotos.map(({c,r})=>`
     <div class="comp-block">
       <div class="head">
-        <div class="addr"><span class="lettermark" style="margin-right:8px;">${c.letter}</span>${c.address}${PR.blockLoc(c)}</div>
+        <div class="addr"><span class="lettermark" style="margin-right:8px;">${NUM.get(c.mls)}</span>Comp ${NUM.get(c.mls)} · ${c.address}${PR.blockLoc(c)}</div>
         <div class="price">Sold ${fmtD(c.closeDate)} at ${money(c.price)}, adjusted <b>${money(r.adjPrice)}</b></div>
       </div>
       <div class="note">${OV(c.mls).clientNote||""}</div>
@@ -380,10 +415,11 @@ function render(){
       <td class="num">${money(p)}</td><td class="num">$${(p/s.sqft).toFixed(2)}</td></tr>`;
   }
   document.getElementById("ladder").innerHTML = lh + "</tbody>";
-  drawMap(rows, PR);
+  drawMap(rows, PR, NUM);
+  window.__NUM = NUM;
 }
 
-function drawMap(rows, PR){
+function drawMap(rows, PR, NUM){
   if (!window.L) return;
   const s = D.subject;
   if (!s.lat) { document.getElementById("map").parentElement.style.display="none"; return; }
@@ -398,8 +434,8 @@ function drawMap(rows, PR){
     if (!c.lat) return;
     L.marker([c.lat, c.lng], { icon: L.divIcon({ className:"", iconSize:[26,26], iconAnchor:[13,13], popupAnchor:[0,-10],
       html:`<div style="width:26px;height:26px;border-radius:50%;background:#0A1F3C;border:2.5px solid #C9A961;color:#C9A961;
-        font:bold 12px Georgia;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.4);">${c.letter}</div>` })})
-      .addTo(m).bindPopup(`<b>${c.letter}. ${c.address}</b><br>${PR.compPin(c)}<br>Sold ${fmtD(c.closeDate)} at ${money(c.price)}<br>Adjusted: <b>${money(r.adjPrice)}</b>`);
+        font:bold 12px Georgia;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.4);">${NUM.get(c.mls)}</div>` })})
+      .addTo(m).bindPopup(`<b>Comp ${NUM.get(c.mls)}. ${c.address}</b><br>${PR.compPin(c)}<br>Sold ${fmtD(c.closeDate)} at ${money(c.price)}<br>Adjusted: <b>${money(r.adjPrice)}</b>`);
   });
   (D.actives||[]).forEach(c=>{
     if (!c.lat) return;
@@ -419,7 +455,7 @@ function lbOpen(mls, i){
 function lbDraw(){
   const {c, p} = lbList[lbIdx];
   document.getElementById("lb-img").src = p.file;
-  document.getElementById("lb-cap").textContent = `${c.letter}. ${c.address} : ${p.label}`;
+  document.getElementById("lb-cap").textContent = `Comp ${(window.__NUM&&window.__NUM.get(c.mls))||""} · ${c.address} : ${p.label}`;
   document.getElementById("lb-sub").textContent = `Sold ${fmtD(c.closeDate)} at ${money(c.price)}`;
 }
 function lbNav(d){ lbIdx = (lbIdx + d + lbList.length) % lbList.length; lbDraw(); }
