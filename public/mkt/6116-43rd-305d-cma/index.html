@@ -169,7 +169,7 @@
 const money  = v => (v<0?"−$":"$") + Math.abs(Math.round(v)).toLocaleString();
 const moneyS = v => !v ? "—" : (v>0?"+":"−") + "$" + Math.abs(Math.round(v)).toLocaleString();
 const fmtD   = d => { if(!d) return "—"; const x=new Date(d+"T12:00:00"); return (x.getMonth()+1)+"/"+x.getDate()+"/"+String(x.getFullYear()).slice(2); };
-const bmark  = b => b ? `<span class="lettermark" style="background:#5b6b85;">${b}</span>` : "—";
+const bmark  = b => b ? `<b>${b}</b>` : "—";
 const rooms  = o => (o.beds||0) + (o.fullBaths||0) + (o.halfBaths||0)*0.5;
 const num    = (v,d) => (v===0||v) ? Number(v).toLocaleString() : (d??"—");
 
@@ -353,7 +353,7 @@ function render(){
       <div class="cadj">${adjLine(c,r)}</div></td></tr>`;
   });
   excl.forEach(c=>{
-    const note = OV(c.mls).clientNote||"";
+    const note = OV(c.mls).clientNote || OV(c.mls).notes || "";
     h += `<tr class="exc hasd"><td><span class="lettermark" style="background:#aab3c2;color:#fff;">${NUM.get(c.mls)}</span></td>
       <td>${c.address}</td><td><span class="rb X">Excl.</span></td>`
       + PR.compCols.map(col=>col.c(c)).join("")
