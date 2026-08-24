@@ -41,13 +41,16 @@ DRY = "--dry-run" in sys.argv
 
 CODE_FILES = [
     "src/pages/areas/[slug].astro",
+    "src/pages/index.astro",
+    "src/pages/areas/index.astro",
+    "src/components/market/AreaCard.astro",
     "src/data/area-media.json",
     "scripts/build_area_media.py",
     "scripts/push_siesta_media.py",
 ]
 
-MSG = ("Siesta Key area page: own photography, WebP gallery, editorial summary, "
-       "tunable hero scrim and crop, em dash cleanup")
+MSG = ("Siesta Key: own photography across the area page and the home/areas card, "
+       "WebP throughout, tunable hero scrim and crop, em dash cleanup")
 
 
 def referenced_images():
@@ -55,7 +58,7 @@ def referenced_images():
     media = json.loads((ROOT / "src/data/area-media.json").read_text(encoding="utf-8"))
     entry = media.get(SLUG, {})
     urls = []
-    for key in ("heroImage", "heroWebp"):
+    for key in ("cardImage", "cardWebp", "heroImage", "heroWebp"):
         if entry.get(key):
             urls.append(entry[key])
     for g in entry.get("gallery", []):
