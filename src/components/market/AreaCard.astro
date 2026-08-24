@@ -8,6 +8,7 @@ interface Props {
   slug: string;
   tagline: string;
   imageSrc?: string;
+  imageWebp?: string;
   medianPrice?: string;
 }
 
@@ -16,8 +17,16 @@ const {
   slug,
   tagline,
   imageSrc = '/images/placeholder-area.jpg',
+  imageWebp,
   medianPrice,
 } = Astro.props;
+
+// Two background-image declarations: plain url() first, image-set() second. Browsers
+// that cannot parse image-set(..., type(...)) keep the first, so a card without a WebP
+// (or an older browser) is unaffected. A CSS background cannot use <picture>.
+const cardBg = imageWebp
+  ? `background-image: url('${imageSrc}'); background-image: image-set(url('${imageWebp}') type('image/webp'), url('${imageSrc}') type('image/jpeg'));`
+  : `background-image: url('${imageSrc}');`;
 ---
 
 <a
@@ -27,7 +36,7 @@ const {
   <!-- Background Image -->
   <div
     class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-    style={`background-image: url('${imageSrc}'); background-color: var(--color-charcoal);`}
+    style={`${cardBg} background-color: var(--color-charcoal);`}
   />
 
   <!-- Gradient Overlay -->
