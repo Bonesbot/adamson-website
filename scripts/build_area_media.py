@@ -157,6 +157,28 @@ def load(path: Path) -> Image.Image:
     return img
 
 
+def crop_to_aspect(img: Image.Image, aspect: str, focus: str) -> Image.Image:
+    """Largest window of the given W:H aspect, centred on a focal point and clamped
+    inside the frame. Used for the card, where the page wants portrait and the source
+    is almost always landscape, so a plain centre crop cuts the subject in half."""
+    work = ImageOps.exif_transpose(img)
+    aw, ah = (float(x) for x in aspect.split(":"))
+    fx, fy = (float(x) / 100.0 for x in focus.split(","))
+    w, h = work.size
+    target = aw / ah
+
+    if w / h > target:          # source is wider than the target: crop width
+        cw, ch = int(round(h * target)), h
+    else:                       # source is taller: crop height
+        cw, ch = w, int(round(w / target))
+
+    left = int(round(fx * w - cw / 2))
+    top = int(round(fy * h - ch / 2))
+    left = max(0, min(left, w - cw))
+    top = max(0, min(top, h - ch))
+    return work.crop((left, top, left + cw, top + ch))
+
+
 def encode(img: Image.Image, out_base: Path, width: int, jpeg_q: int, webp_q: int):
     """Resize to `width` on the longest edge and write .jpg + .webp. Returns (w, h)."""
     work = ImageOps.exif_transpose(img)
@@ -220,6 +242,14 @@ def main() -> int:
     ap.add_argument("--jpeg-quality", type=int, default=82)
     ap.add_argument("--webp-quality", type=int, default=80)
     ap.add_argument("--limit", type=int, default=0, help="cap gallery frames (0 = all)")
+    ap.add_argument("--card", default=None,
+                    help="filename (or fragment) to build the portrait card image from")
+    ap.add_argument("--card-aspect", default="3:4",
+                    help="card aspect as W:H (default 3:4, matching AreaCard)")
+    ap.add_argument("--card-width", type=int, default=1200,
+                    help="longest edge of the card image in px (a 3:4 card at 1200 is 900x1200)")
+    ap.add_argument("--card-focus", default="50,50",
+                    help="focal point as X,Y percentages of the source (default centre)")
     args = ap.parse_args()
 
     repo = Path(args.repo).resolve()
@@ -317,12 +347,31 @@ def main() -> int:
         eprint("error: nothing was encoded")
         return 1
 
+    card_meta = None
+    if args.card:
+        needle = args.card.lower()
+        card_src = next((p for p in raw if needle in p.name.lower()), None)
+        if card_src is None:
+            eprint(f"warning: --card '{args.card}' matched nothing; no card image written")
+        else:
+            cropped = crop_to_aspect(load(card_src), args.card_aspect, args.card_focus)
+            cw, ch = encode(cropped, out_dir / "card", args.card_width,
+                            args.jpeg_quality, args.webp_quality)
+            card_meta = {
+                "src": f"/images/areas/{args.slug}/card.jpg",
+                "webp": f"/images/areas/{args.slug}/card.webp",
+                "width": cw, "height": ch, "source": card_src.name,
+            }
+            print(f"\ncard: {card_src.name} -> {cw}x{ch} "
+                  f"({args.card_aspect}, focus {args.card_focus})")
+
     sheet_path = build_dir / f"{args.slug}-contact-sheet.png"
     contact_sheet(([hero_meta] if hero_meta else []) + frames, sheet_path)
 
     proposal = {
         args.slug: {
-            "cardImage": f"/images/areas/{args.slug}.jpg",
+            "cardImage": (card_meta["src"] if card_meta else f"/images/areas/{args.slug}.jpg"),
+            **({"cardWebp": card_meta["webp"]} if card_meta else {}),
             **({"heroImage": hero_meta["src"], "heroWebp": hero_meta["webp"]} if hero_meta else {}),
             "gallery": [
                 {
