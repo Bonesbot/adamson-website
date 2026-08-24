@@ -31,6 +31,7 @@ const areas = areasFallback.areas.map((fallback) => {
     tagline: sanity?.tagline || fallback.tagline,
     medianPrice: statsBySlug[fallback.slug]?.active?.medianPrice || sanity?.marketStats?.medianPrice || fallback.marketStats?.medianPrice || "",
     imageSrc: sanity?.cardImage || (areaMedia as Record<string, any>)[fallback.slug]?.cardImage || undefined,
+    imageWebp: (areaMedia as Record<string, any>)[fallback.slug]?.cardWebp || undefined,
   };
 });
 
@@ -69,6 +70,7 @@ const jsonLd = {
             tagline={area.tagline}
             medianPrice={area.medianPrice}
             imageSrc={area.imageSrc}
+            imageWebp={area.imageWebp}
           />
         ))}
       </div>
