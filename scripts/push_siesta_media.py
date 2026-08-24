@@ -4,19 +4,16 @@
 Same pattern as scripts/push_srqmap_groom.py: reads GITHUB_TOKEN / GITHUB_REPO /
 GITHUB_BRANCH from .env, one commit per file, bytes pushed verbatim.
 
-Pushes two groups:
-  1. Code + copy: the area template, area-media.json, and this build tooling.
-  2. Imagery: everything under public/images/areas/siesta-key/, if it exists.
-
-Group 2 is discovered at run time, so this script is safe to run BEFORE the photos
-have been processed (it just pushes group 1) and again AFTER (it picks up the
-frames). Files that do not exist locally are skipped with a note, never an error.
+The image list is derived from src/data/area-media.json rather than by globbing the
+image folder, so only files the page actually references get pushed. Superseded frames
+left behind by an earlier build stay local and are reported as unreferenced instead of
+silently shipping.
 
 Usage:
     python scripts/push_siesta_media.py [--dry-run]
 """
 import base64
-import mimetypes
+import json
 import os
 import sys
 from pathlib import Path
@@ -27,6 +24,7 @@ except ImportError:
     sys.exit("ERROR: 'requests' not installed. Run: pip install requests")
 
 ROOT = Path(__file__).resolve().parent.parent
+SLUG = "siesta-key"
 
 env_path = ROOT / ".env"
 if env_path.exists():
@@ -39,7 +37,6 @@ if env_path.exists():
 TOKEN = os.environ.get("GITHUB_TOKEN", "")
 REPO = os.environ.get("GITHUB_REPO", "Bonesbot/adamson-website")
 BRANCH = os.environ.get("GITHUB_BRANCH", "main")
-
 DRY = "--dry-run" in sys.argv
 
 CODE_FILES = [
@@ -49,31 +46,57 @@ CODE_FILES = [
     "scripts/push_siesta_media.py",
 ]
 
-IMAGE_DIR = "public/images/areas/siesta-key"
-
 MSG = ("Siesta Key area page: own photography, WebP gallery, editorial summary, "
-       "hero override, em dash cleanup")
+       "tunable hero scrim and crop, em dash cleanup")
 
 
-def collect():
-    files, missing = [], []
-    for rel in CODE_FILES:
-        (files if (ROOT / rel).is_file() else missing).append(rel)
-
-    img_dir = ROOT / IMAGE_DIR
-    if img_dir.is_dir():
-        for p in sorted(img_dir.rglob("*")):
-            if p.is_file() and p.suffix.lower() in {".jpg", ".jpeg", ".webp", ".png", ".avif"}:
-                files.append(p.relative_to(ROOT).as_posix())
-    return files, missing
+def referenced_images():
+    """Every image path the siesta-key entry points at, repo-relative."""
+    media = json.loads((ROOT / "src/data/area-media.json").read_text(encoding="utf-8"))
+    entry = media.get(SLUG, {})
+    urls = []
+    for key in ("heroImage", "heroWebp"):
+        if entry.get(key):
+            urls.append(entry[key])
+    for g in entry.get("gallery", []):
+        for key in ("src", "webp"):
+            if g.get(key):
+                urls.append(g[key])
+    # "/images/..." in the page maps to "public/images/..." in the repo
+    return ["public" + u for u in urls]
 
 
 def main() -> int:
-    files, missing = collect()
+    files, missing = [], []
+
+    for rel in CODE_FILES:
+        (files if (ROOT / rel).is_file() else missing).append(rel)
+
+    refs = referenced_images()
+    for rel in refs:
+        (files if (ROOT / rel).is_file() else missing).append(rel)
+
+    # Anything sitting in the image folder that the page no longer points at.
+    img_dir = ROOT / "public" / "images" / "areas" / SLUG
+    orphans = []
+    if img_dir.is_dir():
+        wanted = {(ROOT / r).resolve() for r in refs}
+        orphans = sorted(
+            p.name for p in img_dir.iterdir()
+            if p.is_file() and p.resolve() not in wanted
+        )
 
     for rel in missing:
-        print(f"  SKIP {rel} (not present locally)")
+        print(f"  MISSING {rel}")
+    if orphans:
+        print(f"\n  {len(orphans)} unreferenced file(s) in {img_dir.name}/ "
+              f"(NOT pushed, safe to delete):")
+        for o in orphans:
+            print(f"    {o}")
 
+    if missing:
+        print("\nRefusing to push with missing files. Run build_area_media.py first.")
+        return 1
     if not files:
         print("Nothing to push.")
         return 1
@@ -81,8 +104,7 @@ def main() -> int:
     total_kb = sum((ROOT / f).stat().st_size for f in files) / 1024
     print(f"\n{len(files)} file(s), {total_kb:,.0f} KB -> {REPO}@{BRANCH}")
     for f in files:
-        kb = (ROOT / f).stat().st_size / 1024
-        print(f"    {f:<58} {kb:>8,.0f} KB")
+        print(f"    {f:<58} {(ROOT / f).stat().st_size / 1024:>8,.0f} KB")
 
     if DRY:
         print("\n--dry-run: nothing pushed.")
