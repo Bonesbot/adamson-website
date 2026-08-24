@@ -65,6 +65,21 @@ LANDMARKS = {
         ("Big Pass", 27.2830, -82.5560),
         ("Bird Key / north bridge", 27.2861, -82.5453),
     ],
+    "downtown-sarasota": [
+        ("Five Points", 27.3364, -82.5407),
+        ("Sarasota Opera House", 27.3335, -82.5375),
+        ("Burns Court", 27.3307, -82.5366),
+        ("Bayfront Park", 27.3325, -82.5493),
+        ("Marina Jack", 27.3341, -82.5488),
+        ("The Bay Park", 27.3410, -82.5490),
+        ("Van Wezel", 27.3437, -82.5498),
+        ("Rosemary District", 27.3430, -82.5400),
+        ("Golden Gate Point", 27.3318, -82.5527),
+        ("Ringling Causeway Bridge", 27.3295, -82.5620),
+        ("Bird Key Park", 27.3246, -82.5686),
+        ("Selby Gardens", 27.3222, -82.5423),
+        ("Payne Park", 27.3339, -82.5290),
+    ],
     "longboat-key": [
         ("Longboat Key Club", 27.3616, -82.6236),
         ("Beer Can Island", 27.4290, -82.6870),
@@ -242,6 +257,10 @@ def main() -> int:
     ap.add_argument("--jpeg-quality", type=int, default=82)
     ap.add_argument("--webp-quality", type=int, default=80)
     ap.add_argument("--limit", type=int, default=0, help="cap gallery frames (0 = all)")
+    ap.add_argument("--crop", action="append", default=[], metavar="FRAG=W:H@X,Y",
+                    help="pre-crop a gallery frame before resizing, e.g. "
+                         "--crop 'mid-bridge=4:3@60,50'. Repeatable. For panoramas, "
+                         "whose native aspect a 4:3 tile would butcher.")
     ap.add_argument("--card", default=None,
                     help="filename (or fragment) to build the portrait card image from")
     ap.add_argument("--card-aspect", default="3:4",
@@ -276,6 +295,16 @@ def main() -> int:
     if skipped:
         eprint(f"note: {len(skipped)} non-image file(s) ignored: {', '.join(skipped[:6])}"
                + (" ..." if len(skipped) > 6 else ""))
+
+    crops = {}
+    for spec in args.crop:
+        try:
+            frag, rest = spec.split("=", 1)
+            aspect, focus = rest.split("@", 1)
+            crops[frag.lower()] = (aspect, focus)
+        except ValueError:
+            eprint(f"error: bad --crop '{spec}', expected FRAG=W:H@X,Y")
+            return 2
 
     hero_pick = None
     if args.hero:
@@ -320,10 +349,14 @@ def main() -> int:
             out_base = out_dir / f"gal-{stem}"
             width = args.gallery_width
 
-        w, h = encode(img, out_base, width, args.jpeg_quality, args.webp_quality)
+        crop_spec = next((v for k, v in crops.items() if k in path.name.lower()), None)
+        src_img = crop_to_aspect(img, *crop_spec) if crop_spec else img
+        w, h = encode(src_img, out_base, width, args.jpeg_quality, args.webp_quality)
 
         gps_s = f"{gps[0]:.5f},{gps[1]:.5f}" if gps else "none"
         lm_s = f"{landmark} ({km:.2f} km)" if landmark else ("out of range" if gps else "")
+        if crop_spec:
+            lm_s = (lm_s + f"  [cropped {crop_spec[0]}@{crop_spec[1]}]").strip()
         print(f"{path.name:<34} {f'{w}x{h}':>12}  {gps_s:>22}  {lm_s}")
 
         rec = {
