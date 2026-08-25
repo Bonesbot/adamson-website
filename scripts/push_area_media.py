@@ -47,6 +47,7 @@ BRANCH = os.environ.get("GITHUB_BRANCH", "main")
 CODE_FILES = [
     "src/pages/areas/[slug].astro",
     "src/pages/index.astro",
+    "src/pages/photo-credits.astro",
     "src/pages/areas/index.astro",
     "src/components/market/AreaCard.astro",
     "src/components/market/AreaMarketSummary.astro",
@@ -56,6 +57,7 @@ CODE_FILES = [
     "src/data/areas.json",
     "scripts/build_area_media.py",
     "scripts/push_area_media.py",
+    "public/images/specialties/new-build-consulting.jpg",
 ]
 
 
