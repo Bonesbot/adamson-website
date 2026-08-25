@@ -51,6 +51,7 @@ CODE_FILES = [
     "src/components/market/AreaCard.astro",
     "src/components/market/AreaMarketSummary.astro",
     "src/components/market/DetailedMarketTable.astro",
+    "src/components/market/CondoTiersTable.astro",
     "src/data/area-media.json",
     "src/data/areas.json",
     "scripts/build_area_media.py",
