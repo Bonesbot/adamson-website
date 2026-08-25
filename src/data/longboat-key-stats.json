@@ -2,16 +2,16 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-08-20T10:51:35.880358+00:00",
+  "lastUpdated": "2026-08-25T20:34:35.300747+00:00",
   "counts": {
-    "sold": 618,
-    "pending": 40,
-    "active": 245,
-    "total": 658
+    "sold": 626,
+    "pending": 37,
+    "active": 242,
+    "total": 663
   },
   "metrics": {
-    "avgPrice": "$1,817,169",
-    "avgPricePerSqFt": "$721",
+    "avgPrice": "$1,820,556",
+    "avgPricePerSqFt": "$722",
     "avgYearBuilt": 1983,
     "avgLivingSqFt": "2,169",
     "avgLotSqFt": null,
@@ -22,23 +22,23 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 245,
-    "medianPrice": "$1,050,000",
+    "count": 242,
+    "medianPrice": "$1,125,000",
     "medianPricePerSqFt": "$705",
-    "waterfrontCount": 183,
-    "newConstructionCount": 22
+    "waterfrontCount": 182,
+    "newConstructionCount": 20
   },
   "sold": {
-    "count": 155,
-    "medianPrice": "$1,080,000",
-    "medianDom": 82,
-    "saleToListRatio": "87.5%",
+    "count": 157,
+    "medianPrice": "$1,095,000",
+    "medianDom": 87,
+    "saleToListRatio": "93.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.8,
-    "sfhVilla": 6.2,
-    "blended": 5.9,
+    "condo": 5.6,
+    "sfhVilla": 6.1,
+    "blended": 5.8,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,81 +54,81 @@
     }
   },
   "priceBands": {
-    "under900k": 92,
-    "band900kTo1_5m": 59,
+    "under900k": 91,
+    "band900kTo1_5m": 58,
     "band1_5mTo3m": 51,
-    "band3mPlus": 43
+    "band3mPlus": 42
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 245
+      "count": 242
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
     {
-      "listingId": "A4664039",
-      "address": "210 SANDS POINT RD #2405",
-      "subdivision": "INN ON THE BEACH PH I",
-      "soldPrice": "$948,000",
-      "soldDate": "2026-08-19",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "650",
-      "yearBuilt": 1982,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4667364",
-      "address": "450 GULF OF MEXICO DR #B207",
-      "subdivision": "BAY HARBOUR APTS",
-      "soldPrice": "$620,000",
-      "soldDate": "2026-08-18",
+      "listingId": "A4703960",
+      "address": "530 GOLF LINKS LN",
+      "subdivision": "COUNTRY CLUB SHORES SEC 03",
+      "soldPrice": "$2,125,000",
+      "soldDate": "2026-08-25",
       "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,474",
-      "yearBuilt": 1970,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,909",
+      "yearBuilt": 1968,
       "propertyType": "Residential",
       "isWaterfront": true
     },
     {
-      "listingId": "A4685275",
-      "address": "530 CHIPPING LN",
-      "subdivision": "COUNTRY CLUB SHORES SEC 02",
-      "soldPrice": "$5,650,000",
-      "soldDate": "2026-08-17",
-      "bedrooms": 5,
-      "bathrooms": 6.0,
-      "livingSqFt": "4,216",
-      "yearBuilt": 2026,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4677923",
-      "address": "3598 FAIR OAKS LN",
-      "subdivision": "QUEENS HARBOUR",
-      "soldPrice": "$2,702,000",
-      "soldDate": "2026-08-17",
+      "listingId": "TB8515918",
+      "address": "3271 BAYOU RD",
+      "subdivision": "BAY ISLES",
+      "soldPrice": "$1,925,000",
+      "soldDate": "2026-08-25",
       "bedrooms": 4,
       "bathrooms": 4.0,
-      "livingSqFt": "3,417",
+      "livingSqFt": "3,059",
+      "yearBuilt": 2014,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4699212",
+      "address": "3526 FAIR OAKS LANE",
+      "subdivision": "QUEENS HARBOUR- BAY ISLES",
+      "soldPrice": "$1,800,000",
+      "soldDate": "2026-08-25",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,634",
       "yearBuilt": 1996,
       "propertyType": "Residential",
       "isWaterfront": false
     },
     {
-      "listingId": "A4678473",
-      "address": "4310 FALMOUTH DR #304",
-      "subdivision": "LONGBOAT HARBOUR",
-      "soldPrice": "$310,000",
-      "soldDate": "2026-08-14",
+      "listingId": "NS1083611",
+      "address": "721 BINNACLE POINT DR",
+      "subdivision": "EMERALD HARBOR",
+      "soldPrice": "$1,400,000",
+      "soldDate": "2026-08-25",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "3,229",
+      "yearBuilt": 1973,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4667038",
+      "address": "240 SANDS POINT RD #4205",
+      "subdivision": "INN ON THE BEACH PH II",
+      "soldPrice": "$1,050,000",
+      "soldDate": "2026-08-21",
       "bedrooms": 1,
       "bathrooms": 1.0,
-      "livingSqFt": "747",
-      "yearBuilt": 1969,
+      "livingSqFt": "640",
+      "yearBuilt": 1982,
       "propertyType": "Residential",
       "isWaterfront": true
     }
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 138,
-      "avgPrice": "$861,748",
-      "avgPricePerSqFt": "$660",
-      "avgLivingSqFt": "1,327",
-      "avgDom": 158
+      "activeCount": 136,
+      "avgPrice": "$862,982",
+      "avgPricePerSqFt": "$658",
+      "avgLivingSqFt": "1,335",
+      "avgDom": 159
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 32,
-      "avgPrice": "$2,313,997",
-      "avgPricePerSqFt": "$845",
-      "avgLivingSqFt": "2,521",
-      "avgDom": 152
+      "activeCount": 31,
+      "avgPrice": "$2,331,384",
+      "avgPricePerSqFt": "$847",
+      "avgLivingSqFt": "2,528",
+      "avgDom": 153
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$5,349,500",
       "avgPricePerSqFt": "$1,432",
       "avgLivingSqFt": "3,721",
-      "avgDom": 300
+      "avgDom": 304
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$7,101,800",
       "avgPricePerSqFt": "$2,138",
       "avgLivingSqFt": "2,988",
-      "avgDom": 395
+      "avgDom": 397
     }
   ],
   "condoTiersScope": {
@@ -187,18 +187,18 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 91,
-      "soldCount": 243,
-      "soldMedianPricePerSqFt": "$782",
+      "activeCount": 90,
+      "soldCount": 245,
+      "soldMedianPricePerSqFt": "$788",
       "soldMedianPrice": "$1,200,000",
       "lowSample": false
     },
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 89,
-      "soldCount": 207,
-      "soldMedianPricePerSqFt": "$566",
+      "activeCount": 88,
+      "soldCount": 210,
+      "soldMedianPricePerSqFt": "$561",
       "soldMedianPrice": "$1,150,000",
       "lowSample": false
     },
@@ -214,7 +214,7 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 3,
+      "activeCount": 4,
       "soldCount": 8,
       "soldMedianPricePerSqFt": "$421",
       "soldMedianPrice": "$1,040,000",
@@ -223,61 +223,61 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 35,
-      "soldCount": 97,
-      "soldMedianPricePerSqFt": "$435",
+      "activeCount": 33,
+      "soldCount": 100,
+      "soldMedianPricePerSqFt": "$451",
       "soldMedianPrice": "$740,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.9,
-    "monthsOfSupplyCondo": 5.8,
-    "monthsOfSupplySfhVilla": 6.2,
+    "monthsOfSupply": 5.8,
+    "monthsOfSupplyCondo": 5.6,
+    "monthsOfSupplySfhVilla": 6.1,
     "label": "balanced market",
-    "activeCount": 245,
-    "sold365Count": 497,
-    "sold90Count": 155,
+    "activeCount": 242,
+    "sold365Count": 503,
+    "sold90Count": 157,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 170,
+      "soldCount": 174,
       "activeCount": 68,
-      "soldMedianPrice": "$2,262,500",
-      "soldMedianPricePerSqFt": "$736"
+      "soldMedianPrice": "$2,200,000",
+      "soldMedianPricePerSqFt": "$731"
     },
     "condo": {
-      "soldCount": 448,
-      "activeCount": 177,
-      "soldMedianPrice": "$877,000",
-      "soldMedianPricePerSqFt": "$575"
+      "soldCount": 452,
+      "activeCount": 174,
+      "soldMedianPrice": "$872,250",
+      "soldMedianPricePerSqFt": "$577"
     }
   },
   "boating": {
-    "activeWithDock": 67,
-    "activeWaterfront": 183
+    "activeWithDock": 66,
+    "activeWaterfront": 182
   },
   "marketQuestions": [
     {
       "facet": "cost",
       "q": "What do properties cost on Longboat Key?",
-      "a": "Over the past 90 days, 155 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $825,000 ($493/sq ft), while single-family homes closed around $2,595,000 ($791/sq ft). By location, Gulf-front and beachfront properties closed at a median $780 per square foot, compared with $496 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
+      "a": "Over the past 90 days, 157 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $820,000 ($507/sq ft), while single-family homes closed around $2,437,500 ($765/sq ft). By location, Gulf-front and beachfront properties closed at a median $810 per square foot, compared with $502 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
     },
     {
       "facet": "balance",
       "q": "Is it a good time to buy on Longboat Key?",
-      "a": "With 245 active listings and roughly 41 closed sales a month (trailing 12 months), Longboat Key has about 5.9 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 242 active listings and roughly 42 closed sales a month (trailing 12 months), Longboat Key has about 5.8 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Longboat Key?",
-      "a": "Recently sold homes took a median 82 days on market and closed at 87.5% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 87 days on market and closed at 93.1% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Longboat Key homes have a dock?",
-      "a": "Of 183 active waterfront listings, 67 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 182 active waterfront listings, 66 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
@@ -287,29 +287,29 @@
   ],
   "costBreakdown90": {
     "windowDays": 90,
-    "soldCount": 155,
+    "soldCount": 157,
     "byPropertyType": {
       "condo": {
-        "soldCount": 117,
-        "soldMedianPrice": "$825,000",
-        "soldMedianPricePerSqFt": "$493"
+        "soldCount": 115,
+        "soldMedianPrice": "$820,000",
+        "soldMedianPricePerSqFt": "$507"
       },
       "single_family": {
-        "soldCount": 38,
-        "soldMedianPrice": "$2,595,000",
-        "soldMedianPricePerSqFt": "$791"
+        "soldCount": 42,
+        "soldMedianPrice": "$2,437,500",
+        "soldMedianPricePerSqFt": "$765"
       }
     },
     "byWaterfront": {
       "gulf_beachfront": {
-        "soldCount": 59,
-        "soldMedianPrice": "$1,312,500",
-        "soldMedianPricePerSqFt": "$780"
+        "soldCount": 56,
+        "soldMedianPrice": "$1,293,750",
+        "soldMedianPricePerSqFt": "$810"
       },
       "bay_canal": {
-        "soldCount": 52,
-        "soldMedianPrice": "$1,122,500",
-        "soldMedianPricePerSqFt": "$496"
+        "soldCount": 55,
+        "soldMedianPrice": "$1,150,000",
+        "soldMedianPricePerSqFt": "$502"
       }
     }
   }
