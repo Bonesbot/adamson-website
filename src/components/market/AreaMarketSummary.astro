@@ -62,9 +62,11 @@ interface Props {
   areaName: string;
   areaSlug: string;
   stats: EnrichedStats;
+  /** Predominantly single-family area: omit condo-fee facts from the Dataset schema. */
+  suppressCondo?: boolean;
 }
 
-const { areaName, areaSlug, stats } = Astro.props;
+const { areaName, areaSlug, stats, suppressCondo = false } = Astro.props;
 
 const updatedFmt = new Date(stats.lastUpdated).toLocaleDateString("en-US", {
   month: "long",
@@ -98,14 +100,14 @@ const datasetSchema = {
   "@context": "https://schema.org",
   "@type": "Dataset",
   name: `${areaName} Active Real Estate Market Summary`,
-  description: `Live MLS-sourced active inventory, pricing, and recent sold comparables for ${areaName}, Sarasota, FL — refreshed from Stellar MLS.`,
+  description: `Live MLS-sourced active inventory, pricing, and recent sold comparables for ${areaName}, Sarasota, FL, refreshed from Stellar MLS.`,
   url: `https://adamsonfl.com/areas/${areaSlug}`,
   dateModified: stats.lastUpdated,
   datePublished: stats.lastUpdated,
   creator: {
     "@type": "RealEstateAgent",
     name: "Ryan Adamson",
-    worksFor: { "@type": "Organization", name: "Coldwell Banker Realty — St. Armands" },
+    worksFor: { "@type": "Organization", name: "Coldwell Banker Realty, St. Armands" },
   },
   isBasedOn: { "@type": "Dataset", name: "Stellar MLS" },
   variableMeasured: [
@@ -127,7 +129,7 @@ const datasetSchema = {
     hasSold && stats.sold?.saleToListRatio && {
       "@type": "PropertyValue", name: "Sale-to-List Ratio", value: stats.sold.saleToListRatio,
     },
-    stats.fees?.medianMonthlyCondoFee && {
+    !suppressCondo && stats.fees?.medianMonthlyCondoFee && {
       "@type": "PropertyValue", name: "Median Monthly Condo Fee", value: stats.fees.medianMonthlyCondoFee,
     },
   ].filter(Boolean),
@@ -174,7 +176,7 @@ const soldCompsSchema = hasComps ? {
           {areaName} Active Inventory & Recent Sales
         </h2>
         <p class="text-[var(--color-text-on-dark-muted)] mt-4 leading-relaxed">
-          A live snapshot of the {areaName} luxury real estate market — built directly
+          A live snapshot of the {areaName} luxury real estate market, built directly
           from the Sarasota MLS feed and refreshed regularly. Data through {updatedFmt}.
         </p>
       </div>
@@ -331,7 +333,7 @@ const soldCompsSchema = hasComps ? {
 
       <p class="text-xs text-[var(--color-text-on-dark-subtle)] mt-8 leading-relaxed">
         Active inventory and recent sold data sourced directly from the Sarasota Stellar MLS feed
-        via the Adamson Group data pipeline. Geographic boundaries enforced via PostGIS — listings
+        via the Adamson Group data pipeline. Geographic boundaries enforced via PostGIS: listings
         are assigned to {areaName} based on actual coordinates, not just postal code. Data through {updatedFmt}.
         All figures approximate and subject to change.
       </p>
