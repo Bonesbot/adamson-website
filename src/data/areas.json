@@ -38,12 +38,13 @@
     {
       "name": "St. Armands and Lido",
       "slug": "st-armands-lido",
-      "tagline": "Barrier island living — beachfront condos to Circle-side estates",
-      "description": "The St. Armands & Lido market covers the entire Lido Key barrier island, from the beachfront condos along Benjamin Franklin Drive to the residential streets surrounding St. Armands Circle. The area is connected to mainland Sarasota via the Ringling Causeway, and combines Gulf-front beach living, walkable luxury shopping and dining at St. Armands Circle, and a mix of mid-century condos and new-construction Gulf-front estates.",
+      "tagline": "Barrier island living, from beachfront condos to Circle-side estates",
+      "description": "The St. Armands & Lido market covers the entire Lido Key barrier island, from the beachfront condos along Benjamin Franklin Drive to the residential streets surrounding St. Armands Circle. At its heart, St. Armands Circle hosts more than 130 boutiques, galleries and restaurants and a year-round calendar of signature events, from exotic car shows to fine art festivals. Property styles run from new Rosewood Residences Lido Key luxury condominiums to classic beach bungalows to canal-front boating homes, nearly all within walking distance of St. Armands activities. The area is connected to mainland Sarasota via the Ringling Causeway.",
       "highlights": [
         "Lido Beach Gulf-front",
         "St. Armands Circle walkability",
         "Beachfront condos & estates",
+        "Canal-front boating homes",
         "Boutique shopping & dining"
       ],
       "zipCodes": [
@@ -61,7 +62,7 @@
       "faqs": [
         {
           "question": "What is the median price for homes on St. Armands and Lido?",
-          "answer": "As of {{asOf}}, the median list price for active homes on St. Armands and Lido is {{active.medianPrice}}, with a median sold price of {{sold.medianPrice}} across the most recent closed sales. Active inventory spans {{active.count}} listings, from entry-level condos to new-construction Gulf-front estates. Data sourced from Stellar MLS via PostGIS-verified geographic boundaries — listings are assigned to St. Armands and Lido based on actual coordinates, not just postal code."
+          "answer": "As of {{asOf}}, the median list price for active homes on St. Armands and Lido is {{active.medianPrice}}, with a median sold price of {{sold.medianPrice}} across the most recent closed sales. Active inventory spans {{active.count}} listings, from entry-level condos to new-construction Gulf-front estates. Data sourced from Stellar MLS via PostGIS-verified geographic boundaries: listings are assigned to St. Armands and Lido based on actual coordinates, not just postal code."
         },
         {
           "question": "What is the price per square foot on St. Armands and Lido?",
@@ -69,7 +70,7 @@
         },
         {
           "question": "How many homes are for sale on St. Armands and Lido right now?",
-          "answer": "There are currently {{active.count}} active listings on St. Armands and Lido, with another {{counts.pending}} under contract (pending) and {{sold.count}} closed sales recorded in recent months. {{active.waterfrontCount}} of the active listings are waterfront — beachfront, bayfront, or canal-front — and {{active.newConstructionCount}} are new construction built in 2020 or later."
+          "answer": "There are currently {{active.count}} active listings on St. Armands and Lido, with another {{counts.pending}} under contract (pending) and {{sold.count}} closed sales recorded in recent months. {{active.waterfrontCount}} of the active listings are waterfront (beachfront, bayfront, or canal-front) and {{active.newConstructionCount}} are new construction built in 2020 or later."
         },
         {
           "question": "How long does it take to sell a home on St. Armands and Lido?",
@@ -77,7 +78,7 @@
         },
         {
           "question": "Is St. Armands and Lido a buyer's or seller's market in 2026?",
-          "answer": "As of {{asOf}}, St. Armands and Lido shows a sale-to-list ratio of {{sold.saleToListRatio}}, a median {{sold.medianDom}} days on market, and {{active.count}} active listings against {{sold.count}} recent closed sales. Sale-to-list ratios meaningfully below asking, combined with extended marketing times, generally give qualified buyers negotiating leverage — particularly on properties that have been on market more than 60 days."
+          "answer": "As of {{asOf}}, St. Armands and Lido shows a sale-to-list ratio of {{sold.saleToListRatio}}, a median {{sold.medianDom}} days on market, and {{active.count}} active listings against {{sold.count}} recent closed sales. Sale-to-list ratios meaningfully below asking, combined with extended marketing times, generally give qualified buyers negotiating leverage, particularly on properties that have been on market more than 60 days."
         },
         {
           "question": "How many waterfront properties are available on St. Armands and Lido?",
@@ -85,11 +86,11 @@
         },
         {
           "question": "What does $1 million buy you on St. Armands and Lido?",
-          "answer": "In the $900,000 to $1.5 million range, current St. Armands and Lido inventory includes {{priceBands.band900kTo1_5m}} active listings — typically mid-floor 2-bedroom condos with Gulf or bay views, smaller bayside single-family homes, and select units in established beachfront buildings such as L'Elegance and Key Tower. Below $900k there are {{priceBands.under900k}} active listings, mostly older or interior-facing condo units."
+          "answer": "In the $900,000 to $1.5 million range, current St. Armands and Lido inventory includes {{priceBands.band900kTo1_5m}} active listings: typically mid-floor 2-bedroom condos with Gulf or bay views, smaller bayside single-family homes, and select units in established beachfront buildings such as L'Elegance and Key Tower. Below $900k there are {{priceBands.under900k}} active listings, mostly older or interior-facing condo units."
         },
         {
           "question": "What is the most expensive recent sale on St. Armands and Lido?",
-          "answer": "In spring 2026, the most expensive recorded sale on St. Armands and Lido was 171 Whittier Drive in Lido Beach Division A — a 5-bedroom, 6.5-bath new-construction Gulf-front estate built in 2023 with approximately 6,367 square feet of living space, which closed at $15,800,000 in April 2026. Other high-end closings in the same period included luxury condos at L'Elegance on Lido Beach in the $1.8M to $2.5M range."
+          "answer": "In spring 2026, the most expensive recorded sale on St. Armands and Lido was 171 Whittier Drive in Lido Beach Division A, a 5-bedroom, 6.5-bath new-construction Gulf-front estate built in 2023 with approximately 6,367 square feet of living space, which closed at $15,800,000 in April 2026. Other high-end closings in the same period included luxury condos at L'Elegance on Lido Beach in the $1.8M to $2.5M range."
         }
       ]
     },
