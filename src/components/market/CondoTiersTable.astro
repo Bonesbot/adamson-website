@@ -53,30 +53,30 @@ const datasetSchema = {
   "@context": "https://schema.org",
   "@type": "Dataset",
   name: `${areaName} Condo Market by Construction Era`,
-  description: `Active ${subTypeList} inventory in ${areaName} grouped by year built — average price, price per square foot, living area, and days on market for each construction era.`,
+  description: `Active ${subTypeList} inventory in ${areaName} grouped by year built: average price, price per square foot, living area, and days on market for each construction era.`,
   url: `https://adamsonfl.com/areas/${areaSlug}`,
   dateModified: lastUpdated,
   creator: {
     "@type": "RealEstateAgent",
     name: "Ryan Adamson",
-    worksFor: { "@type": "Organization", name: "Coldwell Banker Realty — St. Armands" },
+    worksFor: { "@type": "Organization", name: "Coldwell Banker Realty, St. Armands" },
   },
   isBasedOn: { "@type": "Dataset", name: "Stellar MLS" },
   variableMeasured: tiers.flatMap((t) => {
     if (!t.activeCount) return [];
     return [
-      { "@type": "PropertyValue", name: `${t.label} — Active Listings`, value: t.activeCount },
+      { "@type": "PropertyValue", name: `${t.label}: Active Listings`, value: t.activeCount },
       ...(t.avgPrice
-        ? [{ "@type": "PropertyValue", name: `${t.label} — Average Price`, value: t.avgPrice }]
+        ? [{ "@type": "PropertyValue", name: `${t.label}: Average Price`, value: t.avgPrice }]
         : []),
       ...(t.avgPricePerSqFt
-        ? [{ "@type": "PropertyValue", name: `${t.label} — Average Price / Sq Ft`, value: t.avgPricePerSqFt }]
+        ? [{ "@type": "PropertyValue", name: `${t.label}: Average Price / Sq Ft`, value: t.avgPricePerSqFt }]
         : []),
       ...(t.avgLivingSqFt
-        ? [{ "@type": "PropertyValue", name: `${t.label} — Average Living Area`, value: `${t.avgLivingSqFt} sq ft` }]
+        ? [{ "@type": "PropertyValue", name: `${t.label}: Average Living Area`, value: `${t.avgLivingSqFt} sq ft` }]
         : []),
       ...(t.avgDom != null
-        ? [{ "@type": "PropertyValue", name: `${t.label} — Average Days on Market`, value: t.avgDom }]
+        ? [{ "@type": "PropertyValue", name: `${t.label}: Average Days on Market`, value: t.avgDom }]
         : []),
     ];
   }),
@@ -100,7 +100,7 @@ const datasetSchema = {
           {areaName} Active Condos by Construction Era
         </h2>
         <p class="text-[var(--color-text-on-dark-muted)] mt-4 leading-relaxed">
-          Active {subTypeList.toLowerCase()} inventory in {areaName} —
+          Active {subTypeList.toLowerCase()} inventory in {areaName}:
           <strong class="text-white">{totalActive}</strong> listings split across four construction
           eras. Newer towers carry a meaningful price premium; vintage mid-century buildings still
           dominate volume.
