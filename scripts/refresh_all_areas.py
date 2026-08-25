@@ -45,6 +45,13 @@ for cand in [ROOT / ".env", Path(__file__).resolve().parent / ".env"]:
 
 import psycopg2
 from fetch_area_summary import compute_summary
+DB = os.environ.get("DATABASE_URL", ""); TOK = os.environ.get("GITHUB_TOKEN", "")
+REPO = os.environ.get("GITHUB_REPO", "Bonesbot/adamson-website"); BR = os.environ.get("GITHUB_BRANCH", "main")
+NETLIFY_TOKEN = os.environ.get("NETLIFY_AUTH_TOKEN", "")
+NETLIFY_SITE = os.environ.get("NETLIFY_SITE_ID", "15e01fe1-523b-40a8-86ad-4f6521fa87a8")  # bonesbot -> adamsonfl.com
+API = f"https://api.github.com/repos/{REPO}"
+H = {"Authorization": f"Bearer {TOK}", "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", "User-Agent": "agw/1.0"}
+
 # The community generator is imported, not inlined. The daily runner executes
 # this file from a /tmp copy fetched from origin/main, and the set of files it
 # fetches is defined in the job's SKILL.md — outside this repo. If
@@ -62,12 +69,6 @@ try:
 except Exception as _e:
     print(f"[INFO] community generator not on path ({_e}); fetching from origin/{BR}", file=sys.stderr)
 
-DB = os.environ.get("DATABASE_URL", ""); TOK = os.environ.get("GITHUB_TOKEN", "")
-REPO = os.environ.get("GITHUB_REPO", "Bonesbot/adamson-website"); BR = os.environ.get("GITHUB_BRANCH", "main")
-NETLIFY_TOKEN = os.environ.get("NETLIFY_AUTH_TOKEN", "")
-NETLIFY_SITE = os.environ.get("NETLIFY_SITE_ID", "15e01fe1-523b-40a8-86ad-4f6521fa87a8")  # bonesbot -> adamsonfl.com
-API = f"https://api.github.com/repos/{REPO}"
-H = {"Authorization": f"Bearer {TOK}", "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", "User-Agent": "agw/1.0"}
 
 def gh(method, path, body=None):
     data = json.dumps(body).encode() if body is not None else None
