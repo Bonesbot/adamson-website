@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Goal HQ · The Landings by July 2027</title>
+<style>
+:root{
+  --navy:#0A1F3C; --navy2:#0E2748; --card:#11294E; --card2:#16305A;
+  --line:#23406e; --gold:#C9A961; --gold-soft:#e3cf9e; --white:#fff;
+  --ink:#EAF0F8; --muted:#B4BECD; --dim:#7f8ea3;
+  --good:#57C784; --warn:#E0A73C; --hot:#FF7A59; --cool:#6FA8DC; --bad:#E06060;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--navy);color:var(--ink);font:15px/1.5 -apple-system,"Segoe UI",Arial,sans-serif;min-height:100vh}
+h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:600}
+a{color:var(--gold-soft)}
+.wrap{max-width:1180px;margin:0 auto;padding:16px 14px 80px}
+/* ---------- lock screen ---------- */
+#lock{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:99}
+#lock .box{width:min(360px,90vw);text-align:center}
+#lock .crest{font-family:Georgia,serif;color:var(--gold);letter-spacing:.18em;font-size:13px;text-transform:uppercase}
+#lock h1{font-size:26px;margin:10px 0 2px}
+#lock p{color:var(--muted);font-size:13px;margin-bottom:18px}
+#pw{width:100%;padding:12px 14px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:16px;text-align:center}
+#pw:focus{outline:2px solid var(--gold)}
+#unlockBtn{margin-top:12px;width:100%;padding:12px;border:0;border-radius:8px;background:var(--gold);color:#0A1F3C;font-weight:700;font-size:15px;cursor:pointer}
+#unlockBtn:disabled{opacity:.6}
+#lockMsg{margin-top:10px;font-size:13px;color:var(--bad);min-height:18px}
+.remember{margin-top:12px;font-size:12.5px;color:var(--muted);display:flex;gap:6px;justify-content:center;align-items:center}
+/* ---------- header ---------- */
+header.app{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:6px 2px 12px;border-bottom:1px solid var(--line)}
+header.app h1{font-size:21px}
+header.app h1 .g{color:var(--gold)}
+#saveState{font-size:12px;color:var(--dim)}
+#saveState.dirty{color:var(--warn)}
+#saveState.err{color:var(--bad)}
+nav.tabs{display:flex;gap:4px;margin:14px 0 18px;flex-wrap:wrap}
+nav.tabs button{background:var(--card);border:1px solid var(--line);color:var(--muted);padding:8px 14px;border-radius:20px;cursor:pointer;font-size:13.5px}
+nav.tabs button.on{background:var(--gold);border-color:var(--gold);color:#0A1F3C;font-weight:700}
+.tabpane{display:none}.tabpane.on{display:block}
+/* ---------- cards / grid ---------- */
+.grid{display:grid;gap:12px}
+@media(min-width:760px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.card h2{font-size:16px;color:var(--gold-soft);margin-bottom:10px}
+.card h3{font-size:14px;color:var(--gold-soft);margin:12px 0 6px}
+.big{font-size:30px;font-weight:700;font-family:Georgia,serif}
+.sub{font-size:12.5px;color:var(--muted)}
+.kv{display:flex;justify-content:space-between;font-size:13.5px;padding:3px 0;border-bottom:1px dashed rgba(180,190,205,.15)}
+.kv:last-child{border-bottom:0}
+.kv b{font-weight:600}
+/* meters */
+.meter{background:var(--navy2);border-radius:6px;height:14px;overflow:hidden;margin:6px 0 2px;position:relative}
+.meter>i{display:block;height:100%;background:var(--gold);border-radius:6px 0 0 6px;transition:width .4s}
+.meter>i.green{background:var(--good)}
+.meter .tick{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--muted);opacity:.8}
+.meter-lbl{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:13px}
+.tblwrap{overflow-x:auto}
+th{color:var(--muted);text-align:left;font-weight:600;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:7px 8px;border-bottom:1px solid rgba(35,64,110,.55);vertical-align:top}
+tr:hover td{background:rgba(201,169,97,.05)}
+td.r,th.r{text-align:right}
+.pill{display:inline-block;padding:1px 9px;border-radius:10px;font-size:11.5px;font-weight:700}
+.pill.A{background:var(--gold);color:#0A1F3C}.pill.B{background:#3d5a8c;color:#fff}.pill.C{background:#22385f;color:var(--muted)}
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;padding:1px 8px;border-radius:10px;border:1px solid var(--line);color:var(--muted)}
+.tag.hot{border-color:var(--hot);color:var(--hot)}
+.tag.warm{border-color:var(--warn);color:var(--warn)}
+.tag.cold{border-color:var(--cool);color:var(--cool)}
+/* forms */
+input,select,textarea{background:var(--navy2);border:1px solid var(--line);border-radius:6px;color:var(--ink);padding:6px 8px;font-size:13px;font-family:inherit}
+input:focus,select:focus,textarea:focus{outline:1px solid var(--gold)}
+input[type=date]{padding:5px 6px}
+input.num{width:110px;text-align:right}
+button.act{background:var(--gold);color:#0A1F3C;border:0;border-radius:7px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:13.5px}
+button.ghost{background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:7px;padding:7px 12px;cursor:pointer;font-size:13px}
+button.ghost:hover{color:var(--ink)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.note{font-size:12px;color:var(--dim);margin-top:8px}
+.right{text-align:right}
+.mono{font-variant-numeric:tabular-nums}
+.pos{color:var(--good)}.neg{color:var(--bad)}
+/* bars chart */
+.bars{display:flex;align-items:flex-end;gap:6px;height:120px;margin-top:10px}
+.bars .b{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;min-width:0}
+.bars .b i{width:100%;max-width:38px;background:var(--gold);border-radius:4px 4px 0 0;min-height:2px}
+.bars .b i.pending{background:#3d5a8c}
+.bars .b span{font-size:10px;color:var(--dim);white-space:nowrap}
+.bars .b em{font-size:10px;color:var(--muted);font-style:normal}
+footer{margin-top:28px;font-size:11.5px;color:var(--dim);border-top:1px solid var(--line);padding-top:12px}
+</style>
+</head>
+<body>
+
+<div id="lock">
+  <div class="box">
+    <div class="crest">The Adamson Group · Internal</div>
+    <h1>Goal HQ</h1>
+    <p>The Landings by July 2027</p>
+    <input id="pw" type="password" placeholder="Password" autocomplete="current-password">
+    <button id="unlockBtn">Unlock</button>
+    <label class="remember"><input type="checkbox" id="rememberMe"> Remember on this device</label>
+    <div id="lockMsg"></div>
+  </div>
+</div>
+
+<div class="wrap" id="app" style="display:none">
+  <header class="app">
+    <h1>Goal <span class="g">HQ</span> <span class="sub">· The Landings by July 2027</span></h1>
+    <div>
+      <span id="saveState">loaded</span>
+      <button class="ghost" id="lockNow" style="margin-left:10px">Lock</button>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button data-tab="hq" class="on">Mission</button>
+    <button data-tab="engines">Engines</button>
+    <button data-tab="farms">Farms</button>
+    <button data-tab="targets">Landings Targets</button>
+    <button data-tab="ledger">Deal Ledger</button>
+    <button data-tab="kpis">KPIs</button>
+  </nav>
+
+  <!-- ============ MISSION ============ -->
+  <section class="tabpane on" id="tab-hq">
+    <div class="grid g2">
+      <div class="card">
+        <h2>The House Fund</h2>
+        <div class="big mono" id="bankNow">$0</div>
+        <div class="sub">banked toward <b>$200,000</b> cash (90% of GCI closed Sep 1, 2026 → Jul 31, 2027)</div>
+        <div class="meter"><i id="bankBar"></i><span class="tick" style="left:100%"></span></div>
+        <div class="meter-lbl"><span>$0</span><span id="bankPct"></span><span>$200k</span></div>
+        <div style="margin-top:10px">
+          <div class="kv"><span>Hypothetical purchase</span><b>$900,000</b></div>
+          <div class="kv"><span>Down payment (20%)</span><b>$180,000</b></div>
+          <div class="kv"><span>Immediate reno budget</span><b>$50k – $100k</b></div>
+          <div class="kv"><span>GCI needed at 90% net-to-fund</span><b>$222,222 closed in window</b></div>
+          <div class="kv"><span>Days until July 31, 2027</span><b id="daysLeft"></b></div>
+          <div class="kv"><span>Pending (not yet banked)</span><b id="bankPending" class="mono">$0</b></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>GCI vs the Three Tiers <span class="sub">(your net side, all business, Sep 2026 – Jul 2027)</span></h2>
+        <div id="tierBars"></div>
+        <div class="note" id="paceNote"></div>
+      </div>
+    </div>
+
+    <div class="grid g3" style="margin-top:12px">
+      <div class="card">
+        <h2>Engine: Siesta Key <span class="sub">w/ Kelli · 50/50</span></h2>
+        <div class="big mono" id="skClosed">$0</div>
+        <div class="sub">closed net · targets $50k / $75k / $105k</div>
+        <div class="meter"><i id="skBar"></i></div>
+        <div class="kv"><span>Pending net</span><b id="skPend" class="mono"></b></div>
+      </div>
+      <div class="card">
+        <h2>Engine: Longboat Key <span class="sub">w/ Anne · 50/50</span></h2>
+        <div class="big mono" id="lbkClosed">$0</div>
+        <div class="sub">closed net · targets $90k / $125k / $170k</div>
+        <div class="meter"><i id="lbkBar"></i></div>
+        <div class="kv"><span>Pending net</span><b id="lbkPend" class="mono"></b></div>
+      </div>
+      <div class="card">
+        <h2>Engine: Core Business <span class="sub">sphere · St Armands · referrals</span></h2>
+        <div class="big mono" id="othClosed">$0</div>
+        <div class="sub">closed net · targets $160k / $175k / $175k</div>
+        <div class="meter"><i id="othBar"></i></div>
+        <div class="kv"><span>Pending net</span><b id="othPend" class="mono"></b></div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:12px">
+      <div class="card">
+        <h2>Monthly GCI pace <span class="sub">closed (gold) + pending (blue) · line = base-tier pace $27.3k/mo</span></h2>
+        <div class="bars" id="paceChart"></div>
+      </div>
+      <div class="card">
+        <h2>The Buy Window: The Landings SFH</h2>
+        <div class="kv"><span>SFH sold, last 12 mo</span><b>12 · median $1.38M · 64 DOM</b></div>
+        <div class="kv"><span>Sold in your band ($700k–$1.1M)</span><b>4 in 12 mo · median $912k</b></div>
+        <div class="kv"><span>Active SFH now</span><b>4 · from $915k</b></div>
+        <div class="kv"><span>Cheapest active today</span><b>1732 Pine Harrier Cir · $915k · 131 DOM</b></div>
+        <div class="kv"><span>Your A-tier purchase targets</span><b id="aTierSummary"></b></div>
+        <div class="note">Your band trades ~4x a year. The fund has to be ready <b>before</b> the right one lists; that is the whole reason this page exists. Mail the A-tier owners as a buyer, not an agent.</div>
+        <div class="note"><a href="/landings/" target="_blank">Open the Landings drive map →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ENGINES ============ -->
+  <section class="tabpane" id="tab-engines">
+    <div class="card">
+      <h2>The model: three tiers, three engines <span class="sub">your net GCI, Sep 1 2026 → Jul 31 2027 · farm deals at 50% split, core at ~100%</span></h2>
+      <div class="tblwrap"><table>
+        <thead><tr><th>Tier</th><th class="r">Total (you)</th><th class="r">Siesta w/ Kelli</th><th class="r">LBK w/ Anne</th><th class="r">Core business</th><th class="r">Bank @90%</th><th>What it takes</th></tr></thead>
+        <tbody id="tierTable"></tbody>
+      </table></div>
+      <div class="note">Bank column = 90% of total held for the house fund. Every tier clears the $200k cash need; base clears it with a $70k buffer. Farm side targets below are deliberately over-provisioned (~15-20%) because not every farm delivers on schedule.</div>
+    </div>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="card">
+        <h2>Why these numbers are realistic</h2>
+        <div class="kv"><span>CCS listing sides available / yr</span><b>25 (20 different agents won them)</b></div>
+        <div class="kv"><span>Your CCS goal (mid)</span><b>3 sides = 12% share, no incumbent</b></div>
+        <div class="kv"><span>Peppertree sides available / yr</span><b>22 (fragmented, zero CB presence)</b></div>
+        <div class="kv"><span>Your Peppertree goal (mid)</span><b>3 sides = 14% share</b></div>
+        <div class="kv"><span>Immediate LBK pipeline</span><b>16 dead CCS listings ≈ $45M inventory</b></div>
+        <div class="kv"><span>Season</span><b>Listings signed Oct–Dec close Mar–Jun</b></div>
+        <div class="note">Nobody holds 3% of Siesta listing sides; CCS has no farm incumbent at all. A 10-15% share of one pocket is what one team with mail + data + brand can take in year one. Bruce Myer's 36 island-wide sides prove the ceiling is far higher.</div>
+      </div>
+      <div class="card">
+        <h2>Leading indicators that predict the money</h2>
+        <div class="kv"><span>Mailers / mo (both farms)</span><b>~1,250 from October</b></div>
+        <div class="kv"><span>Dead-listing letters (Sep wave)</span><b>16 CCS + wave-2 106 south-LBK</b></div>
+        <div class="kv"><span>Listing appointments / mo</span><b>3 (base) → 5 (stretch)</b></div>
+        <div class="kv"><span>Signed listings / mo (team)</span><b>~1 from November</b></div>
+        <div class="kv"><span>Farm response target</span><b>1.5% of mailed doors</b></div>
+        <div class="note">Track these on the KPI tab. GCI lags appointments by 60-120 days; if appointments are on pace, the money is coming even when the ledger looks thin.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FARMS ============ -->
+  <section class="tabpane" id="tab-farms">
+    <div class="card">
+      <h2>Siesta Key farm board <span class="sub">w/ Kelli Eggen · last-12-month MLS actuals (Aug 26, 2026 snapshot)</span></h2>
+      <div class="tblwrap"><table>
+        <thead><tr><th>Farm</th><th class="r">Sold 12mo</th><th class="r">Median</th><th class="r">Vol ($M)</th><th class="r">GCI pool*</th><th class="r">Actives</th><th class="r">Sides goal B/M/S</th><th>Play</th></tr></thead>
+        <tbody id="skFarms"></tbody>
+      </table></div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h2>Longboat Key farm board <span class="sub">w/ Anne Schneider · south polygon focus</span></h2>
+      <div class="tblwrap"><table>
+        <thead><tr><th>Farm</th><th class="r">Sold 12mo</th><th class="r">Median</th><th class="r">Vol ($M)</th><th class="r">GCI pool*</th><th class="r">Actives</th><th class="r">Sides goal B/M/S</th><th>Play</th></tr></thead>
+        <tbody id="lbkFarms"></tbody>
+      </table></div>
+      <div class="note">*GCI pool = 12-month sold volume × 2.5% listing side, before splits. Sides goal = team listing sides at Base / Mid / Stretch. Numbers refresh from the Supabase pipeline; re-run the snapshot before printing anything. Full strategy docs: OPERATION SIESTA (_shared) and OPERATION LONGBOAT (Drive, "Longboat Key with Anne").</div>
+    </div>
+  </section>
+
+  <!-- ============ TARGETS ============ -->
+  <section class="tabpane" id="tab-targets">
+    <div class="card">
+      <h2>The Landings: purchase targets <span class="sub">166 SFH parcels scored for likelihood to sell · you are the buyer here</span></h2>
+      <div class="grid g4" style="margin-bottom:10px">
+        <div><div class="big mono" id="tgMailed">0</div><div class="sub">mailed</div></div>
+        <div><div class="big mono" id="tgResp">0</div><div class="sub">responses</div></div>
+        <div><div class="big mono" id="tgHot">0</div><div class="sub">hot</div></div>
+        <div><div class="big mono" id="tgACov">0%</div><div class="sub">A-tier mailed</div></div>
+      </div>
+      <div class="filters">
+        <select id="fTier"><option value="">All tiers</option><option>A</option><option>B</option><option>C</option></select>
+        <select id="fStatus"><option value="">Any status</option><option value="mailed">Mailed</option><option value="unmailed">Not mailed</option><option value="responded">Responded</option><option value="hot">Hot</option><option value="warm">Warm</option></select>
+        <input id="fSearch" placeholder="Search address / owner" style="flex:1;min-width:160px">
+      </div>
+      <div class="tblwrap"><table>
+        <thead><tr><th>Tier</th><th>Address · why they might sell</th><th>Mailed</th><th>Response</th><th>Temp</th><th>Notes</th></tr></thead>
+        <tbody id="tgBody"></tbody>
+      </table></div>
+      <div class="note">Edits save automatically (encrypted). "Listed" rows are currently on market: contact via their agent only. Owner and purchase history are on each row's hover title.</div>
+    </div>
+  </section>
+
+  <!-- ============ LEDGER ============ -->
+  <section class="tabpane" id="tab-ledger">
+    <div class="card">
+      <h2>Deal ledger <span class="sub">every pending and closed deal · this drives the fund and the tiers</span></h2>
+      <div class="filters" id="dealForm">
+        <input id="dAddr" placeholder="Address / label" style="min-width:170px;flex:1">
+        <select id="dEngine"><option value="SK">Siesta (Kelli)</option><option value="LBK">LBK (Anne)</option><option value="OTH">Core</option></select>
+        <select id="dRole"><option>Listing</option><option>Buyer</option></select>
+        <input id="dPrice" class="num" placeholder="Price" inputmode="numeric">
+        <input id="dGci" class="num" value="2.5" title="GCI %" style="width:64px">
+        <input id="dSplit" class="num" value="50" title="Your split %" style="width:64px">
+        <select id="dStatus"><option>pending</option><option>closed</option></select>
+        <input id="dDate" type="date" title="Close (or expected close) date">
+        <button class="act" id="dAdd">Add</button>
+      </div>
+      <div class="tblwrap"><table>
+        <thead><tr><th>Status</th><th>Date</th><th>Address</th><th>Engine</th><th>Side</th><th class="r">Price</th><th class="r">GCI%</th><th class="r">Split%</th><th class="r">Your net</th><th></th></tr></thead>
+        <tbody id="dealBody"></tbody>
+        <tfoot><tr><th colspan="8" class="r">Closed in window / Pending</th><th class="r mono" id="dealTotals"></th><th></th></tr></tfoot>
+      </table></div>
+      <div class="note">Defaults: 2.5% side, 50% split on farm deals. Set split 100 for solo core deals. Only <b>closed</b> deals dated Sep 1, 2026 – Jul 31, 2027 feed the house fund. GCI% and split are editable per deal before adding.</div>
+    </div>
+  </section>
+
+  <!-- ============ KPIS ============ -->
+  <section class="tabpane" id="tab-kpis">
+    <div class="card">
+      <h2>Monthly KPIs <span class="sub">leading indicators · type straight into the grid</span></h2>
+      <div class="tblwrap"><table>
+        <thead><tr><th>Month</th><th class="r">Mailers sent<br><span class="sub">tgt 1,250</span></th><th class="r">Letters (dead listings)<br><span class="sub">tgt 15</span></th><th class="r">Listing appts<br><span class="sub">tgt 3</span></th><th class="r">Listings signed<br><span class="sub">tgt 1</span></th><th class="r">Closed GCI (auto)</th></tr></thead>
+        <tbody id="kpiBody"></tbody>
+      </table></div>
+      <div class="note">Mailer counts are manual for now; wiring this to the outreach mailer database is on the backlog. Closed GCI fills itself from the ledger.</div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h2>Scratchpad</h2>
+      <textarea id="notes" rows="5" style="width:100%" placeholder="Weekly notes to self..."></textarea>
+    </div>
+  </section>
+
+  <footer>
+    Internal only · encrypted client-side, nothing readable leaves this browser without the password · data snapshot Aug 26, 2026 from the Adamson Group MLS pipeline (1,691 LBK + 1,987 SK records) and Sarasota County parcel data.
+    To change the password: run <span class="mono">python scripts/goalhq_set_password.py</span> in AG_website on the mini-PC.
+  </footer>
+</div>
+
+<script>
+/* ================= static data ================= */
+const PTS = [{"pid":"0077100029","situs":"4612 PINE HARRIER DR","tier":"A","score":58,"owner":"KAREN L SNYDER TRUST NO 1 & SNYDER KAREN L (TTEE)","sqft":2791,"beds":3,"yr":1981,"bought":"2020 for $1,180,100","listed":false,"failed":1,"why":"prior failed listing x1; trust ownership; absentee mailing; out-of-state owner; non-homestead"},{"pid":"0077160011","situs":"4761 PINE HARRIER DR","tier":"A","score":55,"owner":"CHAMBERLAIN KAREN (TTEE) & REVOCABLE TRUST OF KAREN CHAMBERLAIN","sqft":2795,"beds":3,"yr":1987,"bought":"2026 for $1,305,000","listed":false,"failed":1,"why":"prior failed listing x1; widow(er) exemption; trust ownership"},{"pid":"0083020016","situs":"4880 PEREGRINE POINT CIR","tier":"A","score":55,"owner":"ALARIO JANET A","sqft":2652,"beds":4,"yr":1988,"bought":"2004 for $668,400","listed":false,"failed":0,"why":"widow(er) exemption; senior exemption (65+); 22yr tenure"},{"pid":"0083160015","situs":"5167 FLICKER FIELD CIR","tier":"A","score":52,"owner":"BODOR VERA & BODOR FRANK F","sqft":2327,"beds":3,"yr":1987,"bought":"1996 for $265,000","listed":false,"failed":0,"why":"widow(er) exemption; 30yr tenure; absentee mailing"},{"pid":"0077100006","situs":"4537 CAMINO REAL","tier":"A","score":50,"owner":"MARY J SALOMONE TRUST & SALOMONE MARY J (TTEE)","sqft":2649,"beds":3,"yr":1987,"bought":"1987 for $257,600","listed":false,"failed":0,"why":"widow(er) exemption; trust ownership; 39yr tenure"},{"pid":"0083020015","situs":"4876 PEREGRINE POINT CIR","tier":"A","score":50,"owner":"NANCY A GOLD REVOCABLE TRUST & GOLD NANCY A (TTEE)","sqft":2752,"beds":3,"yr":1986,"bought":"2001 for $365,000","listed":false,"failed":0,"why":"widow(er) exemption; trust ownership; 25yr tenure"},{"pid":"0083020026","situs":"4895 PEREGRINE POINT CIR","tier":"A","score":50,"owner":"DOROTHY L SCHEURENBRAND TRUST & SCHEURENBRAND DOROTHY L (TTEE)","sqft":2599,"beds":3,"yr":1981,"bought":"1984 for $275,000","listed":false,"failed":0,"why":"widow(er) exemption; trust ownership; 42yr tenure"},{"pid":"0083160006","situs":"5119 FLICKER FIELD CIR","tier":"A","score":50,"owner":"SERGENT CONSTANCE J (TTEE) & CONSTANCE J SERGENT REVOCABLE TRUST","sqft":2274,"beds":3,"yr":1987,"bought":"1986 for $55,000","listed":false,"failed":0,"why":"widow(er) exemption; trust ownership; 40yr tenure"},{"pid":"0083150024","situs":"5129 KESTRAL PARK PL","tier":"A","score":50,"owner":"ROUTH MARY R (TTEE) & MARY R ROUTH REVOCABLE TRUST","sqft":3581,"beds":4,"yr":1988,"bought":"1990 for $385,000","listed":false,"failed":0,"why":"widow(er) exemption; trust ownership; 36yr tenure"},{"pid":"0083070001","situs":"1766 PEREGRINE POINT DR","tier":"A","score":47,"owner":"MASTERS-GIBSON SANDRA (E LIFE EST)","sqft":2781,"beds":3,"yr":1981,"bought":"2010 for $500,000","listed":false,"failed":0,"why":"widow(er) exemption; senior exemption (65+); 16yr tenure"},{"pid":"0083070018","situs":"4921 PEREGRINE POINT WAY","tier":"A","score":45,"owner":"BARBARA PEARLSTEIN REVOCABLE LIVING TRUST & PEARLSTEIN BARBARA (TTEE)","sqft":3455,"beds":3,"yr":1984,"bought":"long hold (no recorded sale)","listed":false,"failed":0,"why":"widow(er) exemption; trust ownership; no recorded market sale (very long hold)"},{"pid":"0083020037","situs":"1615 PEREGRINE POINT CT","tier":"B","score":43,"owner":"KEIM JOSEPH JOHN & KEIM DIANE H","sqft":3311,"beds":3,"yr":1983,"bought":"1989 for $290,000","listed":false,"failed":0,"why":"37yr tenure; absentee mailing; out-of-state owner; non-homestead"},{"pid":"0083100008","situs":"1712 LANDINGS BLVD","tier":"B","score":42,"owner":"EILEEN SCHINELLER TRUST & SCHINELLER EILEEN TTEE","sqft":2882,"beds":3,"yr":1988,"bought":"2011 for $600,000","listed":false,"failed":0,"why":"widow(er) exemption; trust ownership; 15yr tenure"},{"pid":"0077150027","situs":"4678 PINE HARRIER DR","tier":"B","score":42,"owner":"COX CLINTON G","sqft":2728,"beds":4,"yr":1985,"bought":"2020 for $735,000","listed":false,"failed":1,"why":"prior failed listing x1; absentee mailing; non-homestead"},{"pid":"0077100023","situs":"1648 PINE HARRIER CIR","tier":"B","score":40,"owner":"RITA SPITZ REVOCABLE TRUST & SPITZ RITA (TTEE)","sqft":3438,"beds":4,"yr":1984,"bought":"2014 for $755,000","listed":false,"failed":0,"why":"trust ownership; 12yr tenure; absentee mailing; out-of-state owner"},{"pid":"0083020031","situs":"4841 PEREGRINE POINT CIR","tier":"B","score":40,"owner":"OLMSTED JOHN F","sqft":2957,"beds":4,"yr":1985,"bought":"2005 for $695,000","listed":false,"failed":0,"why":"widow(er) exemption; 21yr tenure"},{"pid":"0083020030","situs":"4845 PEREGRINE POINT CIR","tier":"B","score":40,"owner":"FEE JEANNE M","sqft":3309,"beds":3,"yr":1983,"bought":"1987 for $315,000","listed":false,"failed":0,"why":"widow(er) exemption; 39yr tenure"},{"pid":"0083160009","situs":"5137 FLICKER FIELD CIR","tier":"B","score":40,"owner":"HURTER DIANE M","sqft":2319,"beds":3,"yr":1988,"bought":"1987 for $65,000","listed":false,"failed":0,"why":"widow(er) exemption; 39yr tenure"},{"pid":"0083150006","situs":"5160 KESTRAL PARK TER","tier":"B","score":40,"owner":"SHROPE PATRICIA","sqft":2326,"beds":3,"yr":1983,"bought":"1996 for $322,000","listed":false,"failed":0,"why":"widow(er) exemption; 30yr tenure"},{"pid":"0083160017","situs":"5164 FLICKER FIELD CIR","tier":"B","score":40,"owner":"SPRINGSTEAD LINDA M","sqft":2141,"beds":3,"yr":1985,"bought":"1985 for $202,000","listed":false,"failed":0,"why":"widow(er) exemption; 41yr tenure"},{"pid":"0083100018","situs":"1568 LANDINGS TER","tier":"B","score":35,"owner":"ALICE G BLUEGLASS REVOCABLE TRUST & BLUEGLASS ALICE G (TTEE)","sqft":3337,"beds":4,"yr":1987,"bought":"2019 for $855,000","listed":false,"failed":0,"why":"widow(er) exemption; trust ownership; 7yr tenure"},{"pid":"0077100016","situs":"4660 PINE HARRIER DR","tier":"B","score":35,"owner":"BERRIOS RAFAEL HECTOR (TTEE) & REVOCABLE TRUST OF RAFAEL HECTOR BERRIOS","sqft":2828,"beds":3,"yr":1987,"bought":"1986 for $75,000","listed":false,"failed":0,"why":"trust ownership; 40yr tenure; non-homestead"},{"pid":"0083020007","situs":"4844 PEREGRINE POINT CIR","tier":"B","score":35,"owner":"JACOBS STEPHEN (TTEE) & (JACOBS FAMILY REVOC TR)","sqft":2586,"beds":3,"yr":1980,"bought":"2002 for $490,000","listed":false,"failed":0,"why":"trust ownership; 24yr tenure; non-homestead"},{"pid":"0083020008","situs":"4848 PEREGRINE POINT CIR","tier":"B","score":35,"owner":"WARREN ALLAN MARK & BURGESS WENDY SIAN","sqft":2880,"beds":4,"yr":1993,"bought":"2013 for $648,000","listed":false,"failed":0,"why":"13yr tenure; absentee mailing; out-of-state owner; non-homestead"},{"pid":"0083160003","situs":"5089 S KESTRAL PARK WAY","tier":"B","score":35,"owner":"HART KIMBERLY DUNN & BROWN MICHAEL J","sqft":2613,"beds":3,"yr":1985,"bought":"2014 for $615,000","listed":false,"failed":0,"why":"12yr tenure; absentee mailing; out-of-state owner; non-homestead"},{"pid":"0083160013","situs":"5155 FLICKER FIELD CIR","tier":"B","score":35,"owner":"FIERS DORIS DIANE (TTEE) & DORIS DIANE FIERS TRUST","sqft":2687,"beds":4,"yr":1987,"bought":"2017 for $675,000","listed":false,"failed":0,"why":"widow(er) exemption; trust ownership; 9yr tenure"},{"pid":"0077150034","situs":"1733 PINE HARRIER CIR","tier":"B","score":33,"owner":"SAUVAGEAU REVOCABLE TRUST","sqft":2647,"beds":3,"yr":1985,"bought":"2023 for $1,380,000","listed":false,"failed":0,"why":"trust ownership; absentee mailing; out-of-state owner; non-homestead"},{"pid":"0077150031","situs":"1697 PINE HARRIER CIR","tier":"B","score":32,"owner":"ALICIA WESTON-VILLANI REVOCABLE TRUST & DAVID A VILLANI & ALICIA WESTON VILLANI REV TRUST","sqft":2364,"beds":3,"yr":1986,"bought":"2019 for $230,000","listed":false,"failed":0,"why":"trust ownership; 7yr tenure; absentee mailing; non-homestead"},{"pid":"0077100033","situs":"4627 PINE HARRIER DR","tier":"B","score":32,"owner":"TRACY MC CORMICK CHESTER TRUST","sqft":2758,"beds":3,"yr":1986,"bought":"2015 for $765,000","listed":false,"failed":0,"why":"trust ownership; 11yr tenure; absentee mailing; non-homestead"},{"pid":"0083070014","situs":"4976 PEREGRINE POINT WAY","tier":"B","score":32,"owner":"DICKSON SUZANNE","sqft":3095,"beds":3,"yr":1985,"bought":"2009 for $550,000","listed":false,"failed":0,"why":"widow(er) exemption; 17yr tenure"},{"pid":"0083070028","situs":"1681 LANDINGS LN","tier":"B","score":30,"owner":"BENZ KRISTA A (TTEE) & KRISTA A BENZ REVOCABLE TRUST","sqft":3481,"beds":4,"yr":1986,"bought":"1998 for $375,000","listed":false,"failed":0,"why":"trust ownership; 28yr tenure"},{"pid":"0083100009","situs":"1700 LANDINGS BLVD","tier":"B","score":30,"owner":"JAMES B STEWART TRUST & JOAN A STEWART TRUST","sqft":3030,"beds":4,"yr":1981,"bought":"1999 for $379,500","listed":false,"failed":0,"why":"trust ownership; 27yr tenure"},{"pid":"0077150032","situs":"1709 PINE HARRIER CIR","tier":"B","score":30,"owner":"BLOOM FREDERICK L (TTEE)","sqft":3518,"beds":4,"yr":1986,"bought":"2000 for $540,000","listed":false,"failed":0,"why":"trust ownership; 26yr tenure"},{"pid":"0083100007","situs":"1724 LANDINGS BLVD","tier":"B","score":30,"owner":"KUCHTA ILONA W (TTEE) & ILONA W KUCHTA SURVIVORS TRUST","sqft":3068,"beds":4,"yr":1984,"bought":"2021 for $1,150,000","listed":false,"failed":0,"why":"widow(er) exemption; trust ownership"},{"pid":"0083020023","situs":"1765 PEREGRINE POINT DR","tier":"B","score":30,"owner":"JUDITH C GREENE TRUST & GREENE JUDITH C (TTEE)","sqft":2275,"beds":3,"yr":1980,"bought":"2006 for $36,800","listed":false,"failed":0,"why":"trust ownership; 20yr tenure"},{"pid":"0077160008","situs":"4725 PINE HARRIER DR","tier":"B","score":30,"owner":"ELOF M ROSENBLAD REVOC TRUST & ROSENBLAD ELOF M CO-TTEE","sqft":1997,"beds":3,"yr":1982,"bought":"1993 for $229,000","listed":false,"failed":0,"why":"trust ownership; 33yr tenure"},{"pid":"0077160009","situs":"4737 PINE HARRIER DR","tier":"B","score":30,"owner":"HAMILTON-HALL CHRISTINE (TTEE) & CHRISTINE HAMILTON-HALL TRUST","sqft":3040,"beds":3,"yr":1988,"bought":"1986 for $55,100","listed":false,"failed":0,"why":"trust ownership; 40yr tenure"},{"pid":"0083020003","situs":"4804 PEREGRINE POINT CIR","tier":"B","score":30,"owner":"KOACH KRAIG H (TTEE)","sqft":3074,"beds":4,"yr":1990,"bought":"2003 for $109,000","listed":false,"failed":0,"why":"trust ownership; 23yr tenure"},{"pid":"0083020010","situs":"4856 PEREGRINE POINT CIR","tier":"B","score":30,"owner":"GLASSMAN DAVID E JR  (TTEE) & GLASSMAN MICHELLE (TTEE)","sqft":3196,"beds":3,"yr":1988,"bought":"1987 for $94,000","listed":false,"failed":0,"why":"trust ownership; 39yr tenure"},{"pid":"0083070019","situs":"4903 PEREGRINE POINT WAY","tier":"B","score":30,"owner":"BERNSTEIN MARCY (TTEE) & MARCY BERNSTEIN FAMILY TRUST","sqft":2923,"beds":3,"yr":1983,"bought":"2021 for $1,260,000","listed":false,"failed":0,"why":"widow(er) exemption; trust ownership"},{"pid":"0083160004","situs":"5107 FLICKER FIELD CIR","tier":"B","score":30,"owner":"SILVERMAN DINA R (TTEE) & DINA R SILVERMAN TRUST","sqft":2215,"beds":3,"yr":1986,"bought":"2022 for $870,000","listed":false,"failed":0,"why":"widow(er) exemption; trust ownership"},{"pid":"0083160012","situs":"5149 FLICKER FIELD CIR","tier":"B","score":30,"owner":"ROGER W KIDDER REVOCABLE TRUST & KIDDER ROGER W (TTEE)","sqft":2519,"beds":4,"yr":1988,"bought":"2002 for $449,900","listed":false,"failed":0,"why":"trust ownership; 24yr tenure"},{"pid":"0083150016","situs":"5185 FLICKER FIELD CIR","tier":"B","score":30,"owner":"LUCY H DESLOGE REVOCABLE TRUST & DESLOGE LUCY H (TTEE)","sqft":2515,"beds":4,"yr":1985,"bought":"2000 for $315,000","listed":false,"failed":0,"why":"trust ownership; 26yr tenure"},{"pid":"0083160019","situs":"5120 FLICKER FIELD CIR","tier":"B","score":28,"owner":"KENZIE MARY LLOYD","sqft":2641,"beds":5,"yr":1987,"bought":"2015 for $630,000","listed":false,"failed":0,"why":"11yr tenure; absentee mailing; out-of-state owner; non-homestead"},{"pid":"0077150030","situs":"1685 PINE HARRIER CIR","tier":"B","score":27,"owner":"JULIA WELCH TRUST","sqft":2721,"beds":3,"yr":1997,"bought":"2007 for $790,000","listed":false,"failed":0,"why":"trust ownership; 19yr tenure; non-homestead"},{"pid":"0083020009","situs":"4852 PEREGRINE POINT CIR","tier":"B","score":27,"owner":"HAMEL ROBERT H (TTEE) & TRUST OF ROBERT H HAMEL","sqft":2250,"beds":3,"yr":1984,"bought":"2025 for $1,165,000","listed":false,"failed":0,"why":"trust ownership; absentee mailing; non-homestead"},{"pid":"0083070003","situs":"1718 PEREGRINE POINT DR","tier":"B","score":25,"owner":"BONINA BARBARA A","sqft":3113,"beds":3,"yr":1989,"bought":"2019 for $875,000","listed":false,"failed":0,"why":"widow(er) exemption; 7yr tenure"},{"pid":"0077160017","situs":"1769 PINE HARRIER CIR","tier":"C","score":24,"owner":"FRANGIE RAMSEY","sqft":2778,"beds":4,"yr":1983,"bought":"2013 for $425,000","listed":false,"failed":0,"why":"13yr tenure; absentee mailing"},{"pid":"0083020022","situs":"1741 PEREGRINE POINT DR","tier":"C","score":23,"owner":"NOVAK DANIEL JOSEPH JR & NOVAK CAROL ANNE","sqft":2824,"beds":3,"yr":1980,"bought":"2020 for $735,000","listed":false,"failed":0,"why":"absentee mailing; out-of-state owner; non-homestead"},{"pid":"0077160012","situs":"4773 PINE HARRIER DR","tier":"C","score":23,"owner":"REZNICK BRUCE & BERNSTEIN LAURA","sqft":2999,"beds":3,"yr":1983,"bought":"2022 for $1,186,300","listed":false,"failed":0,"why":"absentee mailing; out-of-state owner; non-homestead"},{"pid":"0083020019","situs":"4892 PEREGRINE POINT CIR","tier":"C","score":23,"owner":"KOYNER STEVEN & KOYNER LIA","sqft":2654,"beds":4,"yr":1984,"bought":"2025 for $1,200,000","listed":false,"failed":0,"why":"absentee mailing; out-of-state owner; non-homestead"},{"pid":"0077100027","situs":"1612 PINE HARRIER CIR","tier":"C","score":22,"owner":"HACKMANN LARRY FENTON (CO-TTEE) & HACKMANN RENATA LESLIE (CO-TTEE)","sqft":2742,"beds":4,"yr":1985,"bought":"2015 for $782,000","listed":false,"failed":0,"why":"11yr tenure; absentee mailing; non-homestead"},{"pid":"0077100019","situs":"1637 PINE HARRIER CIR","tier":"C","score":22,"owner":"CLINICAL REVIEW SERVICES LLC","sqft":2112,"beds":3,"yr":1983,"bought":"2025 for $950,000","listed":false,"failed":0,"why":"absentee mailing; out-of-state owner; entity-owned"},{"pid":"0077150040","situs":"1714 PINE HARRIER CIR","tier":"C","score":22,"owner":"WILLIAM STORY REVOCABLE TRUST & GLORIA STORY REVOCABLE TRUST","sqft":2408,"beds":3,"yr":1985,"bought":"2014 for $550,000","listed":false,"failed":0,"why":"trust ownership; 12yr tenure"},{"pid":"0077160018","situs":"1781 PINE HARRIER CIR","tier":"C","score":22,"owner":"TREIBLY ANDREW SCOTT (TTEE) & TREIBLY AMY KREMER (TTEE)","sqft":2730,"beds":4,"yr":1983,"bought":"2014 for $500,000","listed":false,"failed":0,"why":"trust ownership; 12yr tenure"},{"pid":"0077100036","situs":"4653 PINE HARRIER DR","tier":"C","score":22,"owner":"4653 PINE HARRIER REALTY TRUST & SWARTZ HOWARD H (TTEE)","sqft":2779,"beds":3,"yr":1988,"bought":"2012 for $548,800","listed":false,"failed":0,"why":"trust ownership; 14yr tenure"},{"pid":"0077160016","situs":"4720 PINE HARRIER DR","tier":"C","score":22,"owner":"SANDRA B SNYDER REVOCABLE TRUST & SNYDER SANDRA B (TTEE)","sqft":2829,"beds":3,"yr":1988,"bought":"2012 for $600,000","listed":false,"failed":0,"why":"trust ownership; 14yr tenure"},{"pid":"0083020029","situs":"4849 PEREGRINE POINT CIR","tier":"C","score":22,"owner":"EPSTEIN RICHARD M (TTEE) & RICHARD M EPSTEIN REVOCABLE TRUST","sqft":3191,"beds":3,"yr":1986,"bought":"2014 for $721,000","listed":false,"failed":0,"why":"trust ownership; 12yr tenure"},{"pid":"0083020014","situs":"4872 PEREGRINE POINT CIR","tier":"C","score":22,"owner":"EQUINE REAL ESTATE LLC","sqft":2083,"beds":3,"yr":1984,"bought":"2026 for $830,000","listed":false,"failed":0,"why":"absentee mailing; out-of-state owner; entity-owned"},{"pid":"0083020028","situs":"4887 PEREGRINE POINT CIR","tier":"C","score":22,"owner":"HORAN RICHARD T JR & HORAN KATHERINE V","sqft":2384,"beds":3,"yr":1980,"bought":"2018 for $699,000","listed":false,"failed":0,"why":"8yr tenure; absentee mailing; non-homestead"},{"pid":"0083150021","situs":"5123 KESTRAL PARK PL","tier":"C","score":22,"owner":"ICK LIVING TRUST & KLEIN IRA (TTEE)","sqft":2527,"beds":3,"yr":1987,"bought":"2009 for $325,000","listed":false,"failed":0,"why":"trust ownership; 17yr tenure"},{"pid":"0083150031","situs":"5163 KESTRAL PARK LN","tier":"C","score":22,"owner":"WEINER FAMILY TRUST & WEINER PAUL L CO-TTEE","sqft":2717,"beds":3,"yr":1989,"bought":"2013 for $612,000","listed":false,"failed":0,"why":"trust ownership; 13yr tenure"},{"pid":"0083070009","situs":"1574 PEREGRINE POINT DR","tier":"C","score":20,"owner":"SHAEFFER THEODORE L (E LIFE EST) & FISHER-SHAEFFER KAREN (E LIFE EST)","sqft":3359,"beds":3,"yr":1984,"bought":"1988 for $325,000","listed":false,"failed":0,"why":"38yr tenure"},{"pid":"0077100026","situs":"1618 PINE HARRIER CIR","tier":"C","score":20,"owner":"BRADLEY SCOTT D & BRADLEY LISA E","sqft":2667,"beds":3,"yr":1985,"bought":"1996 for $290,000","listed":false,"failed":0,"why":"30yr tenure"},{"pid":"0077150045","situs":"1684 PINE HARRIER CIR","tier":"C","score":20,"owner":"CARLSON DAVID K & CARLSON MASAKO","sqft":3426,"beds":3,"yr":1988,"bought":"1990 for $363,000","listed":false,"failed":0,"why":"36yr tenure"},{"pid":"0083070031","situs":"1699 LANDINGS LN","tier":"C","score":20,"owner":"QUIGLEY THOMAS E & QUIGLEY KELLY S","sqft":3159,"beds":4,"yr":1984,"bought":"2004 for $719,000","listed":false,"failed":0,"why":"22yr tenure"},{"pid":"0077150042","situs":"1702 PINE HARRIER CIR","tier":"C","score":20,"owner":"DUBAN ROBERTA","sqft":2609,"beds":3,"yr":1987,"bought":"2023 for $1,175,000","listed":false,"failed":0,"why":"widow(er) exemption"},{"pid":"0077150035","situs":"1745 PINE HARRIER CIR","tier":"C","score":20,"owner":"SCHMIDT JOHN","sqft":2274,"beds":3,"yr":1981,"bought":"2020 for $455,000","listed":false,"failed":0,"why":"widow(er) exemption"},{"pid":"0077160004","situs":"1768 PINE HARRIER CIR","tier":"C","score":20,"owner":"BRENNAN PATRICK (TTEE) & PATRICK BRENNAN REVOCABLE TRUST","sqft":2621,"beds":3,"yr":1984,"bought":"2015 for $829,000","listed":false,"failed":0,"why":"trust ownership; 11yr tenure; non-homestead"},{"pid":"0077100004","situs":"4517 CAMINO REAL","tier":"C","score":20,"owner":"MALATESTA JR FRANK & MALATESTA SALLY S","sqft":3262,"beds":4,"yr":1991,"bought":"1987 for $72,300","listed":false,"failed":0,"why":"39yr tenure"},{"pid":"0077100005","situs":"4527 CAMINO REAL","tier":"C","score":20,"owner":"GERRY HUBERT W & GERRY MARY A","sqft":2913,"beds":3,"yr":1982,"bought":"1981 for $73,000","listed":false,"failed":0,"why":"45yr tenure"},{"pid":"0077150004","situs":"4597 CAMINO REAL","tier":"C","score":20,"owner":"MURPHY CHARLES O & MURPHY LILLI A R","sqft":3541,"beds":4,"yr":1986,"bought":"1985 for $70,000","listed":false,"failed":0,"why":"41yr tenure"},{"pid":"0077100031","situs":"4603 PINE HARRIER DR","tier":"C","score":20,"owner":"SCOTT JOSHUA & SCOTT ANNE","sqft":2723,"beds":4,"yr":1985,"bought":"2026 for $1,062,500","listed":false,"failed":0,"why":"widow(er) exemption"},{"pid":"0077100035","situs":"4641 PINE HARRIER DR","tier":"C","score":20,"owner":"YEBBA CHRISTINA & YEBBA ANTHONY","sqft":3218,"beds":3,"yr":1987,"bought":"1986 for $61,900","listed":false,"failed":0,"why":"40yr tenure"},{"pid":"0077150024","situs":"4708 PINE HARRIER DR","tier":"C","score":20,"owner":"WHITMAN WILLIAM B & WHITMAN SUSAN A","sqft":2457,"beds":3,"yr":1986,"bought":"2002 for $615,000","listed":false,"failed":0,"why":"24yr tenure"},{"pid":"0083020034","situs":"4803 PEREGRINE POINT CIR","tier":"C","score":20,"owner":"COOPER CAROLYN (E LIFE EST)","sqft":2324,"beds":3,"yr":1981,"bought":"1980 for $61,300","listed":false,"failed":0,"why":"46yr tenure"},{"pid":"0083020006","situs":"4840 PEREGRINE POINT CIR","tier":"C","score":20,"owner":"DAVID RAYMOND M & DAVID MARALYN E","sqft":2934,"beds":4,"yr":1986,"bought":"1991 for $350,000","listed":false,"failed":0,"why":"35yr tenure"},{"pid":"0083100005","situs":"5026 KESTRAL PARK WAY","tier":"C","score":20,"owner":"BENTON LESLIE","sqft":3397,"beds":3,"yr":1985,"bought":"2021 for $1,200,000","listed":false,"failed":0,"why":"widow(er) exemption"},{"pid":"0083150013","situs":"5086 S KESTRAL PARK WAY","tier":"C","score":20,"owner":"BEWLEY DAVID C & BEWLEY DONNA M","sqft":3053,"beds":3,"yr":1986,"bought":"1992 for $351,429","listed":false,"failed":0,"why":"34yr tenure"},{"pid":"0083150029","situs":"5159 KESTRAL PARK LN","tier":"C","score":20,"owner":"BRAND-STALL LORI","sqft":3181,"beds":3,"yr":1988,"bought":"2005 for $197,500","listed":false,"failed":0,"why":"21yr tenure"},{"pid":"0083150017","situs":"5191 FLICKER FIELD CIR","tier":"C","score":20,"owner":"DAY PHILIP R & DAY JANICE M","sqft":2963,"beds":4,"yr":1984,"bought":"2000 for $435,000","listed":false,"failed":0,"why":"26yr tenure"},{"pid":"0077100024","situs":"1636 PINE HARRIER CIR","tier":"C","score":17,"owner":"NADLER MARGARET C (TTEE)","sqft":2776,"beds":3,"yr":1986,"bought":"2011 for $540,000","listed":false,"failed":0,"why":"15yr tenure; non-homestead"},{"pid":"0083160011","situs":"5147 FLICKER FIELD CIR","tier":"C","score":17,"owner":"CONFIDENTIAL \u00a7119.071FS & CONFIDENTIAL \u00a7119.071FS","sqft":2778,"beds":5,"yr":1989,"bought":"2019 for $473,000","listed":false,"failed":0,"why":"7yr tenure; absentee mailing"},{"pid":"0083100017","situs":"1574 LANDINGS TER","tier":"C","score":15,"owner":"TERRANCE P DOYLE REVOCABLE TRUST & DOYLE TERRANCE P (TTEE)","sqft":2949,"beds":3,"yr":2019,"bought":"2017 for $700,000","listed":false,"failed":0,"why":"trust ownership; 9yr tenure"},{"pid":"0083100015","situs":"1598 LANDINGS TER","tier":"C","score":15,"owner":"GRINBERG MARC A (TTEE) & MARC A GRINBERG REVOCABLE TRUST","sqft":2967,"beds":3,"yr":1989,"bought":"2024 for $1,150,000","listed":false,"failed":0,"why":"trust ownership; non-homestead"},{"pid":"0077160002","situs":"1792 PINE HARRIER CIR","tier":"C","score":15,"owner":"POLLARD FAMILY TRUST & POLLARD SUSAN E (TTEE)","sqft":2942,"beds":3,"yr":1998,"bought":"2019 for $737,500","listed":false,"failed":0,"why":"trust ownership; 7yr tenure"},{"pid":"0077100034","situs":"4639 PINE HARRIER DR","tier":"C","score":15,"owner":"RICHARD N THIELEN 1998 TRUST & THIELEN RICHARD N (TTEE)","sqft":2718,"beds":3,"yr":1986,"bought":"2019 for $823,000","listed":false,"failed":0,"why":"trust ownership; 7yr tenure"},{"pid":"0077150025","situs":"4696 PINE HARRIER DR","tier":"C","score":15,"owner":"MONINE FAMILY TRUST & MONINE ROBERT F (TTEE)","sqft":2787,"beds":3,"yr":1985,"bought":"2017 for $545,000","listed":false,"failed":0,"why":"trust ownership; 9yr tenure"},{"pid":"0077150023","situs":"4832 PEREGRINE POINT CIR","tier":"C","score":15,"owner":"ROSS ROBERT T (CO-TTEE) & TROUT SALLY A (CO-TTEE)","sqft":3083,"beds":4,"yr":1988,"bought":"2017 for $212,500","listed":false,"failed":0,"why":"trust ownership; 9yr tenure"},{"pid":"0083100006","situs":"5014 S KESTRAL PARK WAY","tier":"C","score":15,"owner":"BENJAMIN EARL PRICE JR AND MARY STEPHENSON PRICE REVOCABLE TRUST & PRICE BENJAMIN EARL JR (CO-TTEE)","sqft":2530,"beds":3,"yr":1984,"bought":"2015 for $580,000","listed":false,"failed":0,"why":"trust ownership; 11yr tenure"},{"pid":"0083160016","situs":"5172 FLICKER FIELD CIR","tier":"C","score":15,"owner":"CASSANDRA WINTERS 2016 IRREVOCABLE TRUST & WINTERS CASSANDRA (TTEE)","sqft":2481,"beds":3,"yr":1985,"bought":"2015 for $652,300","listed":false,"failed":0,"why":"trust ownership; 11yr tenure"},{"pid":"0077150046","situs":"1672 PINE HARRIER CIR","tier":"C","score":12,"owner":"FOX KURSTAN N","sqft":2477,"beds":3,"yr":1984,"bought":"2013 for $530,000","listed":false,"failed":0,"why":"13yr tenure"},{"pid":"0077150029","situs":"1673 PINE HARRIER CIR","tier":"C","score":12,"owner":"SINGER JOSEPH & SINGER SUSAN","sqft":2950,"beds":4,"yr":1985,"bought":"2009 for $445,000","listed":false,"failed":0,"why":"17yr tenure"},{"pid":"0083070002","situs":"1742 PEREGRINE POINT DR","tier":"C","score":12,"owner":"ROSS ALAN S & ROSS LAURENE J","sqft":3400,"beds":3,"yr":2015,"bought":"2014 for $535,000","listed":false,"failed":0,"why":"12yr tenure"},{"pid":"0083020035","situs":"4801 PEREGRINE POINT CIR","tier":"C","score":12,"owner":"DELISLE MARC & DELISLE PAMELA","sqft":2894,"beds":3,"yr":1983,"bought":"2011 for $510,000","listed":false,"failed":0,"why":"15yr tenure"},{"pid":"0077150021","situs":"4824 PEREGRINE POINT CIR","tier":"C","score":12,"owner":"MICHALOPOULOS GEORGE & MICHALOPOULOS ERIN","sqft":2682,"beds":3,"yr":1986,"bought":"2010 for $587,500","listed":false,"failed":0,"why":"16yr tenure"},{"pid":"0083020011","situs":"4860 PEREGRINE POINT CIR","tier":"C","score":12,"owner":"PENNIE JOHN THOMAS","sqft":2973,"beds":4,"yr":1986,"bought":"2014 for $574,400","listed":false,"failed":0,"why":"12yr tenure"},{"pid":"0083070011","situs":"4930 PEREGRINE POINT WAY","tier":"C","score":12,"owner":"RECANATESI ANDREA W & BARTH MONICA M","sqft":3325,"beds":3,"yr":1984,"bought":"2014 for $710,000","listed":false,"failed":0,"why":"12yr tenure"},{"pid":"0083100004","situs":"5038 KESTRAL PARK WAY","tier":"C","score":12,"owner":"SPERHAC ROBERT G (E LIFE EST) & SPERHAC ARLENE M (E LIFE EST)","sqft":2584,"beds":3,"yr":1988,"bought":"2014 for $620,000","listed":false,"failed":0,"why":"12yr tenure"},{"pid":"0083160020","situs":"5112 FLICKER FIELD CIR","tier":"C","score":12,"owner":"PADFIELD GERALD E & PADFIELD SUSAN P","sqft":2114,"beds":3,"yr":1981,"bought":"2010 for $400,000","listed":false,"failed":0,"why":"16yr tenure"},{"pid":"0083160005","situs":"5115 FLICKER FIELD CIR","tier":"C","score":12,"owner":"NAAMAN ANTOINE E (E LIFE EST) & NAAMAN INGRID E (E LIFE EST)","sqft":2504,"beds":3,"yr":1988,"bought":"2013 for $620,000","listed":false,"failed":0,"why":"13yr tenure"},{"pid":"0083150019","situs":"5119 KESTRAL PARK PL","tier":"C","score":12,"owner":"FLUHARTY BRANDON C & FLUHARTY LISA G","sqft":2666,"beds":3,"yr":1984,"bought":"2009 for $434,800","listed":false,"failed":0,"why":"17yr tenure"},{"pid":"0083150022","situs":"5125 KESTRAL PARK PL","tier":"C","score":12,"owner":"DAY FRANK DOUGLAS & DAY VERONICA T","sqft":2856,"beds":3,"yr":1986,"bought":"2014 for $665,000","listed":false,"failed":0,"why":"12yr tenure"},{"pid":"0083150025","situs":"5131 KESTRAL PARK PL","tier":"C","score":12,"owner":"MCMULLEN NICHOLAS A & MCMULLEN JILL W","sqft":2990,"beds":4,"yr":1989,"bought":"2014 for $760,000","listed":false,"failed":0,"why":"12yr tenure"},{"pid":"0083150028","situs":"5157 KESTRAL PARK LN","tier":"C","score":12,"owner":"KARANJAI RAJOHN & KARANJAI JILL R","sqft":3526,"beds":5,"yr":1984,"bought":"2014 for $752,000","listed":false,"failed":0,"why":"12yr tenure"},{"pid":"0083150005","situs":"5162 KESTRAL PARK TER","tier":"C","score":12,"owner":"SILVERMAN ROBERT F & SILVERMAN CLAUDIA","sqft":2813,"beds":3,"yr":1993,"bought":"2014 for $650,000","listed":false,"failed":0,"why":"12yr tenure"},{"pid":"0083070005","situs":"1670 PEREGRINE POINT DR","tier":"C","score":10,"owner":"REYNOLDS DAVID (CO TTEE) & REYNOLDS HEIDI (CO TTEE)","sqft":3200,"beds":4,"yr":2024,"bought":"2022 for $1,021,000","listed":false,"failed":0,"why":"trust ownership"},{"pid":"0077150038","situs":"1732 PINE HARRIER CIR","tier":"C","score":10,"owner":"DAVID MARTHA (TTEE)","sqft":2385,"beds":2,"yr":1984,"bought":"2001 for $372,000","listed":true,"failed":0,"why":"CURRENTLY LISTED: contact via agent only; 25yr tenure; absentee mailing; non-homestead"},{"pid":"0077150037","situs":"1744 PINE HARRIER CIR","tier":"C","score":10,"owner":"JOHNSON BRETT B & JOHNSON ELIZABETH H","sqft":2316,"beds":3,"yr":1985,"bought":"2017 for $549,000","listed":false,"failed":0,"why":"9yr tenure; non-homestead"},{"pid":"0077100032","situs":"4615 PINE HARRIER DR","tier":"C","score":10,"owner":"SALVATORI LOUIS (TTEE) & WEITERSHAUSEN-SALVATORI  KIM (TTEE)","sqft":2030,"beds":3,"yr":1984,"bought":"2023 for $895,000","listed":false,"failed":0,"why":"trust ownership"},{"pid":"0083020012","situs":"4864 PEREGRINE POINT CIR","tier":"C","score":10,"owner":"VIRBALL JOHN ALBERT (TTEE) & VIRBALL CATHERINE JEAN (TTEE)","sqft":2272,"beds":3,"yr":1982,"bought":"2021 for $715,000","listed":false,"failed":0,"why":"trust ownership"},{"pid":"0083020013","situs":"4868 PEREGRINE POINT CIR","tier":"C","score":10,"owner":"CITRO AND MCGRATH REVOCABLE TRUST & SPEIDELL DOROTHY CITRO (TTEE)","sqft":2927,"beds":3,"yr":1994,"bought":"2022 for $1,200,000","listed":false,"failed":0,"why":"trust ownership"},{"pid":"0083150007","situs":"5158 KESTRAL PARK TER","tier":"C","score":10,"owner":"SABA TIMOTHY A & SABA HEATHER M","sqft":2525,"beds":4,"yr":1984,"bought":"2015 for $585,000","listed":false,"failed":0,"why":"11yr tenure; non-homestead"},{"pid":"0083150002","situs":"5168 KESTRAL PARK TER","tier":"C","score":10,"owner":"WERMAN DEBRA L (TTEE) & DEBRA L WERMAN REVOCABLE LIVING TRUST","sqft":2491,"beds":4,"yr":1986,"bought":"2024 for $1,000,000","listed":false,"failed":0,"why":"trust ownership"},{"pid":"0083070006","situs":"1646 PEREGRINE POINT DR","tier":"C","score":5,"owner":"YOUNG BRYON LESLIE & BRADSHAW VICTORIA","sqft":2920,"beds":4,"yr":1981,"bought":"2021 for $675,000","listed":false,"failed":0,"why":"non-homestead"},{"pid":"0083100012","situs":"1650 LANDINGS BLVD","tier":"C","score":5,"owner":"LEVY LEONE M (E LIFE EST)","sqft":3302,"beds":3,"yr":1984,"bought":"2017 for $1,008,500","listed":false,"failed":0,"why":"9yr tenure"},{"pid":"0083070034","situs":"1741 LANDINGS WAY","tier":"C","score":5,"owner":"BERNHEIM GUY F & CLARK MARY E","sqft":3264,"beds":4,"yr":1983,"bought":"2017 for $835,000","listed":false,"failed":0,"why":"9yr tenure"},{"pid":"0077160005","situs":"1756 PINE HARRIER CIR","tier":"C","score":5,"owner":"FOY KEITH J & FOY ELIZABETH A","sqft":2210,"beds":3,"yr":1985,"bought":"2016 for $539,000","listed":false,"failed":0,"why":"10yr tenure"},{"pid":"0077150036","situs":"1757 PINE HARRIER CIR","tier":"C","score":5,"owner":"ZAMPOL ERIC S","sqft":2868,"beds":3,"yr":1981,"bought":"2018 for $419,000","listed":false,"failed":0,"why":"8yr tenure"},{"pid":"0077100037","situs":"4665 PINE HARRIER DR","tier":"C","score":5,"owner":"HILERIO CECILIA GALAVIZ","sqft":2499,"beds":3,"yr":1983,"bought":"2025 for $1,150,000","listed":false,"failed":0,"why":"non-homestead"},{"pid":"0077160007","situs":"4715 PINE HARRIER DR","tier":"C","score":5,"owner":"LATTA MATTHEW D & LATTA MANDY S","sqft":2504,"beds":3,"yr":1987,"bought":"2019 for $640,000","listed":false,"failed":0,"why":"7yr tenure"},{"pid":"0083070022","situs":"4937 LANDINGS CT","tier":"C","score":5,"owner":"KELLY DANIEL J & KELLY KRISTEN P","sqft":3504,"beds":4,"yr":1985,"bought":"2015 for $768,000","listed":true,"failed":0,"why":"CURRENTLY LISTED: contact via agent only; 11yr tenure"},{"pid":"0083150012","situs":"5098 S KESTRAL PARK WAY","tier":"C","score":5,"owner":"STANIFORTH BRUCE J","sqft":2924,"beds":3,"yr":1990,"bought":"2016 for $675,000","listed":false,"failed":0,"why":"10yr tenure"},{"pid":"0083150026","situs":"5133 KESTRAL PARK PL","tier":"C","score":5,"owner":"ISTOCK PAUL H & ISTOCK CAROLE J","sqft":2638,"beds":4,"yr":1986,"bought":"2015 for $715,000","listed":false,"failed":0,"why":"11yr tenure"},{"pid":"0083160018","situs":"5152 FLICKER FIELD CIR","tier":"C","score":5,"owner":"POYTA STEPHEN & POYTA MONA","sqft":2935,"beds":4,"yr":1987,"bought":"2016 for $775,000","listed":false,"failed":0,"why":"10yr tenure"},{"pid":"0083160014","situs":"5161 FLICKER FIELD CIR","tier":"C","score":5,"owner":"SOLOMON P BRANDON","sqft":2273,"beds":4,"yr":1986,"bought":"2017 for $580,000","listed":true,"failed":0,"why":"CURRENTLY LISTED: contact via agent only; 9yr tenure"},{"pid":"0083150004","situs":"5164 KESTRAL PARK TER","tier":"C","score":5,"owner":"KURNOV LAUREN","sqft":2909,"beds":3,"yr":1984,"bought":"2015 for $720,000","listed":false,"failed":0,"why":"11yr tenure"},{"pid":"0083150032","situs":"5165 KESTRAL PARK LN","tier":"C","score":5,"owner":"CHERRY DOUGLAS A & CHERRY BROOKE","sqft":3121,"beds":4,"yr":1988,"bought":"2019 for $885,000","listed":false,"failed":0,"why":"7yr tenure"},{"pid":"0083150001","situs":"5170 KESTRAL PARK TER","tier":"C","score":5,"owner":"BIERNACKI ADAM E & BIERNACKI ANDREA M","sqft":2796,"beds":3,"yr":1986,"bought":"2023 for $1,100,000","listed":false,"failed":0,"why":"non-homestead"},{"pid":"0083150014","situs":"5173 FLICKER FIELD CIR","tier":"C","score":5,"owner":"CRADDOCK PAXTON & CRADDOCK LAUREN","sqft":2587,"beds":3,"yr":1985,"bought":"2023 for $1,000,000","listed":false,"failed":0,"why":"non-homestead"},{"pid":"0083100016","situs":"1580 LANDINGS TER","tier":"C","score":0,"owner":"LIANG LISL M & ROBERTS WESLEY C","sqft":3341,"beds":4,"yr":1987,"bought":"2020 for $814,000","listed":false,"failed":0,"why":""},{"pid":"0083100013","situs":"1586 LANDINGS TER","tier":"C","score":0,"owner":"BASS MARINA & BASS ALEXANDER","sqft":3093,"beds":3,"yr":1983,"bought":"2023 for $1,200,000","listed":false,"failed":0,"why":""},{"pid":"0077100025","situs":"1624 PINE HARRIER CIR","tier":"C","score":0,"owner":"LAPINS JOHN III & STEWART REBECCA ANN","sqft":2702,"beds":2,"yr":1983,"bought":"2024 for $1,249,000","listed":false,"failed":0,"why":""},{"pid":"0083020038","situs":"1627 PEREGRINE POINT CT","tier":"C","score":0,"owner":"WALKER KRISTEN L & LOOMIS JONATHAN A","sqft":3179,"beds":4,"yr":1984,"bought":"2025 for $1,650,000","listed":false,"failed":0,"why":""},{"pid":"0083020039","situs":"1639 PEREGRINE POINT CT","tier":"C","score":0,"owner":"CANTOR MARK LEE & CANTOR LISA VERMUT","sqft":2984,"beds":3,"yr":1986,"bought":"2024 for $1,075,000","listed":false,"failed":0,"why":""},{"pid":"0077100020","situs":"1649 PINE HARRIER CIR","tier":"C","score":0,"owner":"ALBERT JESSICA N & ALBERT DUSTIN M","sqft":3054,"beds":4,"yr":1985,"bought":"2024 for $1,725,000","listed":false,"failed":0,"why":""},{"pid":"0077100022","situs":"1660 PINE HARRIER CIR","tier":"C","score":0,"owner":"CASTILOW JASON R & CASTILOW ALLISON M","sqft":2708,"beds":3,"yr":1985,"bought":"2026 for $1,525,000","listed":false,"failed":0,"why":""},{"pid":"0077100021","situs":"1661 PINE HARRIER CIR","tier":"C","score":0,"owner":"DURKIN WILLIAM & DURKIN JOYCE","sqft":2746,"beds":3,"yr":1985,"bought":"2021 for $650,000","listed":false,"failed":0,"why":""},{"pid":"0077150044","situs":"1690 PINE HARRIER CIR","tier":"C","score":0,"owner":"COOPER C ANDERSON & COOPER MARY JANE","sqft":3017,"beds":4,"yr":1988,"bought":"2026 for $1,450,000","listed":false,"failed":0,"why":""},{"pid":"0077150041","situs":"1708 PINE HARRIER CIR","tier":"C","score":0,"owner":"BUCKINGHAM WILLIAM A","sqft":2502,"beds":3,"yr":1986,"bought":"2021 for $815,500","listed":false,"failed":0,"why":""},{"pid":"0083020021","situs":"1717 PEREGRINE POINT DR","tier":"C","score":0,"owner":"DOYLE AUSTIN & DOYLE AMANDA","sqft":2673,"beds":3,"yr":1981,"bought":"2025 for $920,000","listed":false,"failed":0,"why":""},{"pid":"0077150039","situs":"1720 PINE HARRIER CIR","tier":"C","score":0,"owner":"FITZGERALD QIANG H & FITZGERALD BRYAN P","sqft":2634,"beds":3,"yr":1985,"bought":"2021 for $849,000","listed":false,"failed":0,"why":""},{"pid":"0077160003","situs":"1780 PINE HARRIER CIR","tier":"C","score":0,"owner":"REES LAURA SAVARY","sqft":2946,"beds":3,"yr":1980,"bought":"2025 for $1,695,000","listed":false,"failed":0,"why":""},{"pid":"0077150001","situs":"4567 CAMINO REAL","tier":"C","score":0,"owner":"HAYS ALEXANDER HORRELL & HAYS SAMANTHA PESHKIN","sqft":3333,"beds":2,"yr":2000,"bought":"2024 for $1,843,000","listed":false,"failed":0,"why":""},{"pid":"0077100018","situs":"4636 PINE HARRIER DR","tier":"C","score":0,"owner":"THOMAS JEFFREY ROBERT & THOMAS ERIN WALKER","sqft":2226,"beds":3,"yr":1981,"bought":"2025 for $1,550,000","listed":false,"failed":0,"why":""},{"pid":"0077100017","situs":"4638 PINE HARRIER DR","tier":"C","score":0,"owner":"KELLER CHARLES STEPHEN (E LIFE EST)","sqft":2068,"beds":4,"yr":1986,"bought":"2023 for $1,350,000","listed":false,"failed":0,"why":""},{"pid":"0077150028","situs":"4672 PINE HARRIER DR","tier":"C","score":0,"owner":"SMALLWOOD MATTHEW T & SMALLWOOD BREANN","sqft":2558,"beds":3,"yr":1985,"bought":"2026 for $995,000","listed":false,"failed":0,"why":""},{"pid":"0077150026","situs":"4684 PINE HARRIER DR","tier":"C","score":0,"owner":"KEREWICH PHILLIP JOSEPH JR & KEREWICH ERIN A","sqft":2532,"beds":4,"yr":1995,"bought":"2022 for $950,000","listed":false,"failed":0,"why":""},{"pid":"0077100038","situs":"4689 PINE HARRIER DR","tier":"C","score":0,"owner":"CLEMENTE JOHN & CLEMENTE ELIZABETH FLEMING","sqft":3103,"beds":4,"yr":1986,"bought":"2026 for $1,650,000","listed":false,"failed":0,"why":""},{"pid":"0077160006","situs":"4701 PINE HARRIER DR","tier":"C","score":0,"owner":"MCCALLA JEFFREY","sqft":2460,"beds":3,"yr":1985,"bought":"2025 for $800,000","listed":false,"failed":0,"why":""},{"pid":"0077160013","situs":"4785 PINE HARRIER DR","tier":"C","score":0,"owner":"FRIEDMAN ERICA","sqft":2640,"beds":4,"yr":1985,"bought":"2020 for $725,000","listed":false,"failed":0,"why":""},{"pid":"0083020033","situs":"4807 PEREGRINE POINT CIR","tier":"C","score":0,"owner":"VERMUT ROBERT S & VERMUT MADELINE R","sqft":3378,"beds":3,"yr":1987,"bought":"2023 for $648,000","listed":false,"failed":0,"why":""},{"pid":"0083020005","situs":"4812 PEREGRINE POINT CIR","tier":"C","score":0,"owner":"GILMORE ANDREW C (E LIFE EST) & GILMORE BETH L (E LIFE EST)","sqft":3579,"beds":5,"yr":1984,"bought":"2024 for $1,700,000","listed":false,"failed":0,"why":""},{"pid":"0083020017","situs":"4884 PEREGRINE POINT CIR","tier":"C","score":0,"owner":"THOMPSON DAVID & THOMPSON ASHLEY","sqft":3434,"beds":4,"yr":1984,"bought":"2025 for $2,095,000","listed":false,"failed":0,"why":""},{"pid":"0083020020","situs":"4896 PEREGRINE POINT CIR","tier":"C","score":0,"owner":"FELLMAN RONALD (E LIFE EST) & FELLMAN DEBORAH (E LIFE EST)","sqft":3360,"beds":4,"yr":1985,"bought":"2021 for $905,000","listed":false,"failed":0,"why":""},{"pid":"0083020025","situs":"4899 PEREGRINE POINT CIR","tier":"C","score":0,"owner":"MCDONALD WESLEY SCOTT & MCDONALD KIMBERLY JEAN","sqft":2749,"beds":4,"yr":1984,"bought":"2024 for $1,400,000","listed":false,"failed":0,"why":""},{"pid":"0083070021","situs":"4919 LANDINGS CT","tier":"C","score":0,"owner":"MILETICH JOSEPH & FERNANDEZ LISA","sqft":2496,"beds":3,"yr":1981,"bought":"2021 for $840,000","listed":false,"failed":0,"why":""},{"pid":"0083070023","situs":"4955 LANDINGS CT","tier":"C","score":0,"owner":"GRIFFIN EUGENE M & GRIFFIN JANICE","sqft":2722,"beds":3,"yr":1981,"bought":"2024 for $1,225,000","listed":false,"failed":0,"why":""},{"pid":"0083100003","situs":"5050 S KESTRAL PARK WAY","tier":"C","score":0,"owner":"NEESEN TOM & NEESEN KRISTIN W","sqft":2595,"beds":3,"yr":1982,"bought":"2025 for $900,000","listed":false,"failed":0,"why":""},{"pid":"0083160021","situs":"5104 FLICKER FIELD CIR","tier":"C","score":0,"owner":"WRIGHT PATRICK JOSEPH & WRIGHT SUZANNE WILLIAMS","sqft":2553,"beds":3,"yr":1981,"bought":"2025 for $1,650,000","listed":false,"failed":0,"why":""},{"pid":"0083160007","situs":"5125 FLICKER FIELD CIR","tier":"C","score":0,"owner":"HODGINS PAUL & HODGINS STACY LYNN","sqft":2908,"beds":3,"yr":1987,"bought":"2023 for $1,325,000","listed":false,"failed":0,"why":""},{"pid":"0083160008","situs":"5131 FLICKER FIELD CIR","tier":"C","score":0,"owner":"MORGAN DAVID A & MORGAN EMILY S","sqft":2333,"beds":4,"yr":1985,"bought":"2021 for $740,000","listed":false,"failed":0,"why":""},{"pid":"0083160010","situs":"5143 FLICKER FIELD CIR","tier":"C","score":0,"owner":"MIHAILOV IGOR","sqft":3502,"beds":3,"yr":1988,"bought":"2023 for $1,200,000","listed":false,"failed":0,"why":""},{"pid":"0083150033","situs":"5167 KESTRAL PARK LN","tier":"C","score":0,"owner":"RUTSTEIN SHEA & RUTSTEIN BRIGITTE","sqft":2920,"beds":4,"yr":1984,"bought":"2022 for $1,200,000","listed":false,"failed":0,"why":""},{"pid":"0083150034","situs":"5169 KESTRAL PARK LN","tier":"C","score":0,"owner":"FOX JOHNATHAN & FOX LINDSAY ERIN PRICHARD","sqft":2981,"beds":3,"yr":2018,"bought":"2024 for $2,400,000","listed":false,"failed":0,"why":""},{"pid":"0083150015","situs":"5179 FLICKER FIELD CIR","tier":"C","score":0,"owner":"BUCKLEY WILLIAM S III & BUCKLEY KATE BREARLEY","sqft":3135,"beds":4,"yr":1987,"bought":"2025 for $1,450,000","listed":false,"failed":0,"why":""}];
+
+const WINDOW = {start:"2026-09-01", end:"2027-07-31"};
+const TIERS = [
+ {key:"base",   name:"Base",    total:300000, eng:{SK:50000,  LBK:90000,  OTH:160000},
+  plan:"SK: 2 Peppertree + 1 G&B Beachfront + 1 Sara Sands. LBK: 2 CCS + 1 south-Key. Core: ~8 sides."},
+ {key:"mid",    name:"Mid",     total:375000, eng:{SK:75000,  LBK:125000, OTH:175000},
+  plan:"SK: adds 1 Peppertree + 1 Siesta Isles. LBK: 3 CCS + 1 feeder. Core: ~9 sides."},
+ {key:"stretch",name:"Stretch", total:450000, eng:{SK:105000, LBK:170000, OTH:175000},
+  plan:"SK: 7-8 sides incl. 1 Bay Island. LBK: 4 CCS + Bay Isles/Queens Harbour + 1 feeder."}
+];
+const SK_FARMS = [
+ ["Peppertree Bay (all phases)",22,"$634k",14.9,"$373k",3,"2 / 3 / 3","Primary mail farm; zero CB presence; page live"],
+ ["Gulf & Bay Club Beachfront",19,"$1.10M",22.3,"$558k",8,"1 / 1 / 2","Kelli's pick; campaign drafted; IDX live"],
+ ["Sara Sands",11,"$1.60M",22.0,"$550k",3,"1 / 1 / 1","Co-primary SFH; undersupplied"],
+ ["Siesta Isles",15,"$1.10M",21.8,"$545k",5,"0 / 1 / 1","Wave 2; canal-boater identity"],
+ ["Bay Island + Shores",14,"$3.40M",49.6,"$1.24M",6,"0 / 0 / 1","Hand-note micro-farm; highest $/mailbox"],
+ ["Siesta Towers",5,"$985k",5.2,"$130k",2,"0 / 0 / 1","Digital-first until page exists"]
+];
+const LBK_FARMS = [
+ ["Country Club Shores (all sections)",25,"$2.80M",83.4,"$2.08M",8,"2 / 3 / 4","THE farm; 20 agents split 25 sales; 16 dead listings in hand"],
+ ["Bay Isles",16,"$2.07M",40.0,"$1.00M",7,"0 / 1 / 1","Wave 2 (January); gated, mail-only inside"],
+ ["Queens Harbour",9,"$2.70M",21.6,"$540k",2,"0 / 0 / 1","Small, high ticket"],
+ ["L'Ambiance",10,"$3.30M",38.4,"$960k",2,"0 / 0 / 0","Relationship / open-house play, no mail yet"],
+ ["Promenade",12,"$1.34M",15.4,"$385k",4,"0 / 1 / 1","Volume condo feeder"],
+ ["Tangerine Bay Club",6,"$1.50M",9.0,"$225k",1,"0 / 0 / 1","Distress pocket: 9 dead $700k+ listings"]
+];
+const MONTHS = ["2026-09","2026-10","2026-11","2026-12","2027-01","2027-02","2027-03","2027-04","2027-05","2027-06","2027-07"];
+const BANK_GOAL = 200000, BANK_RATE = 0.9, BASE_PACE = 300000/11;
+
+/* ================= crypto + persistence ================= */
+const SALT = "aghq-v1-7c1f";
+const SB_URL = "https://qfcbtytjidvpczejwwtj.supabase.co";
+const SB_KEY = "sb_publishable_kHqrlAe6S-dc8iXKnaOJ2A_7SGN9Au0";
+let rowId = null, aesKey = null, S = null, dirty = false, saveTimer = null;
+
+const enc = new TextEncoder(), dec = new TextDecoder();
+const b64 = a => btoa(String.fromCharCode(...new Uint8Array(a)));
+const unb64 = s => Uint8Array.from(atob(s), c=>c.charCodeAt(0));
+
+async function derive(pw){
+  const idBuf = await crypto.subtle.digest("SHA-256", enc.encode("row:"+pw+":"+SALT));
+  const id = [...new Uint8Array(idBuf)].map(b=>b.toString(16).padStart(2,"0")).join("");
+  const mat = await crypto.subtle.importKey("raw", enc.encode(pw), "PBKDF2", false, ["deriveBits"]);
+  const bits = await crypto.subtle.deriveBits({name:"PBKDF2",salt:enc.encode(SALT),iterations:310000,hash:"SHA-256"}, mat, 256);
+  const key = await crypto.subtle.importKey("raw", bits, "AES-GCM", true, ["encrypt","decrypt"]);
+  return {id, key};
+}
+async function fetchRow(id){
+  const r = await fetch(`${SB_URL}/rest/v1/goal_dashboard?id=eq.${id}&select=payload`,
+    {headers:{apikey:SB_KEY, Authorization:"Bearer "+SB_KEY}});
+  if(!r.ok) throw new Error("network "+r.status);
+  const j = await r.json();
+  return j.length ? j[0].payload : null;
+}
+async function decrypt(payload, key){
+  const [iv, ct] = payload.split(".").map(unb64);
+  return JSON.parse(dec.decode(await crypto.subtle.decrypt({name:"AES-GCM",iv}, key, ct)));
+}
+async function encrypt(obj, key){
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const ct = await crypto.subtle.encrypt({name:"AES-GCM",iv}, key, enc.encode(JSON.stringify(obj)));
+  return b64(iv)+"."+b64(ct);
+}
+async function push(){
+  const payload = await encrypt(S, aesKey);
+  const r = await fetch(`${SB_URL}/rest/v1/goal_dashboard?on_conflict=id`,
+    {method:"POST", headers:{apikey:SB_KEY, Authorization:"Bearer "+SB_KEY,
+     "Content-Type":"application/json", Prefer:"resolution=merge-duplicates"},
+     body: JSON.stringify([{id:rowId, payload, updated_at:new Date().toISOString()}])});
+  if(!r.ok) throw new Error("save "+r.status);
+}
+function markDirty(){
+  dirty = true; setSave("saving…","dirty");
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async ()=>{
+    try{ await push(); dirty=false; setSave("saved "+new Date().toLocaleTimeString(),""); }
+    catch(e){ setSave("SAVE FAILED - retrying","err"); setTimeout(markDirty, 4000); }
+  }, 1200);
+}
+function setSave(t,c){ const el=document.getElementById("saveState"); el.textContent=t; el.className=c; }
+
+/* ================= unlock flow ================= */
+async function unlock(pw, silent){
+  const btn=document.getElementById("unlockBtn"), msg=document.getElementById("lockMsg");
+  btn.disabled=true; msg.textContent = silent?"":"unlocking…"; msg.style.color="var(--muted)";
+  try{
+    const d = await derive(pw);
+    const payload = await fetchRow(d.id);
+    if(!payload) throw new Error("wrong password");
+    S = await decrypt(payload, d.key);
+    rowId = d.id; aesKey = d.key;
+    if(document.getElementById("rememberMe").checked){
+      try{ const raw = await crypto.subtle.exportKey("raw", d.key);
+        localStorage.setItem("aghq", JSON.stringify({id:d.id, k:b64(raw)})); }catch(e){}
+    }
+    document.getElementById("lock").style.display="none";
+    document.getElementById("app").style.display="block";
+    S.deals ||= []; S.targets ||= {}; S.kpis ||= {}; S.notes ||= "";
+    renderAll();
+  }catch(e){
+    msg.style.color="var(--bad)";
+    msg.textContent = /wrong/.test(e.message) ? "Wrong password." : "Could not reach the vault ("+e.message+").";
+    try{ localStorage.removeItem("aghq"); }catch(_){}
+  }
+  btn.disabled=false;
+}
+document.getElementById("unlockBtn").onclick = ()=>unlock(document.getElementById("pw").value,false);
+document.getElementById("pw").addEventListener("keydown", e=>{ if(e.key==="Enter") unlock(e.target.value,false); });
+document.getElementById("lockNow").onclick = ()=>{ try{localStorage.removeItem("aghq");}catch(_){ } location.reload(); };
+(async ()=>{ /* auto-unlock if remembered */
+  try{
+    const m = JSON.parse(localStorage.getItem("aghq")||"null");
+    if(!m) return;
+    const key = await crypto.subtle.importKey("raw", unb64(m.k), "AES-GCM", true, ["encrypt","decrypt"]);
+    const payload = await fetchRow(m.id);
+    if(!payload) return;
+    S = await decrypt(payload, key);
+    rowId=m.id; aesKey=key;
+    document.getElementById("lock").style.display="none";
+    document.getElementById("app").style.display="block";
+    S.deals ||= []; S.targets ||= {}; S.kpis ||= {}; S.notes ||= "";
+    renderAll();
+  }catch(e){ /* fall back to lock screen */ }
+})();
+
+/* ================= tabs ================= */
+document.querySelectorAll("nav.tabs button").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll("nav.tabs button").forEach(x=>x.classList.remove("on"));
+    document.querySelectorAll(".tabpane").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    document.getElementById("tab-"+b.dataset.tab).classList.add("on");
+  };
+});
+
+/* ================= computations ================= */
+const fmt$ = n => "$"+Math.round(n).toLocaleString();
+const fmtK = n => n>=1e6 ? "$"+(n/1e6).toFixed(2)+"M" : "$"+Math.round(n/1000)+"k";
+function dealNet(d){ return d.price * (d.gci/100) * (d.split/100); }
+function inWindow(d){ return d.date >= WINDOW.start && d.date <= WINDOW.end; }
+function rollups(){
+  const R = {closed:{SK:0,LBK:0,OTH:0,total:0}, pend:{SK:0,LBK:0,OTH:0,total:0}, byMonth:{}};
+  MONTHS.forEach(m=>R.byMonth[m]={closed:0,pending:0});
+  for(const d of S.deals){
+    const net = dealNet(d), m = (d.date||"").slice(0,7);
+    if(d.status==="closed" && inWindow(d)){ R.closed[d.engine]+=net; R.closed.total+=net; if(R.byMonth[m]) R.byMonth[m].closed+=net; }
+    else if(d.status==="pending"){ R.pend[d.engine]+=net; R.pend.total+=net; if(R.byMonth[m]) R.byMonth[m].pending+=net; }
+  }
+  return R;
+}
+
+/* ================= renders ================= */
+function renderAll(){ renderHQ(); renderEngines(); renderFarms(); renderTargets(); renderLedger(); renderKpis();
+  const n=document.getElementById("notes"); n.value=S.notes||""; n.oninput=()=>{S.notes=n.value; markDirty();};
+}
+function renderHQ(){
+  const R = rollups();
+  const bank = R.closed.total*BANK_RATE, bankPend = R.pend.total*BANK_RATE;
+  document.getElementById("bankNow").textContent = fmt$(bank);
+  document.getElementById("bankPending").textContent = "+"+fmt$(bankPend)+" if pendings close";
+  document.getElementById("bankBar").style.width = Math.min(100, bank/BANK_GOAL*100)+"%";
+  document.getElementById("bankBar").className = bank>=BANK_GOAL ? "green":"";
+  document.getElementById("bankPct").textContent = Math.round(bank/BANK_GOAL*100)+"% of cash goal";
+  const days = Math.max(0, Math.round((new Date("2027-07-31")-new Date())/864e5));
+  document.getElementById("daysLeft").textContent = days.toLocaleString();
+  // tiers
+  const host = document.getElementById("tierBars"); host.innerHTML="";
+  TIERS.forEach(t=>{
+    const pct = Math.min(100, R.closed.total/t.total*100);
+    host.insertAdjacentHTML("beforeend",
+      `<div style="margin-bottom:10px">
+        <div class="meter-lbl"><span><b>${t.name}</b> ${fmtK(t.total)}</span><span>${Math.round(pct)}%</span></div>
+        <div class="meter"><i style="width:${pct}%" class="${pct>=100?'green':''}"></i></div>
+      </div>`);
+  });
+  // pace note
+  const start = new Date(WINDOW.start), now = new Date();
+  const monthsIn = Math.max(0, Math.min(11, (now.getFullYear()-start.getFullYear())*12 + now.getMonth()-start.getMonth() + Math.min(1, now.getDate()/30)));
+  const expect = BASE_PACE*monthsIn;
+  const diff = R.closed.total-expect;
+  document.getElementById("paceNote").innerHTML = monthsIn<=0
+    ? "Window opens Sep 1. Everything signed now closes inside it."
+    : `Base pace after ${monthsIn.toFixed(1)} months: ${fmtK(expect)} expected · you are <b class="${diff>=0?'pos':'neg'}">${diff>=0?'ahead':'behind'} by ${fmtK(Math.abs(diff))}</b> vs base.`;
+  // engines
+  const engDefs=[["sk","SK",[50000,75000,105000]],["lbk","LBK",[90000,125000,170000]],["oth","OTH",[160000,175000,175000]]];
+  engDefs.forEach(([p,k,t])=>{
+    document.getElementById(p+"Closed").textContent = fmt$(R.closed[k]);
+    document.getElementById(p+"Pend").textContent = fmt$(R.pend[k]);
+    document.getElementById(p+"Bar").style.width = Math.min(100, R.closed[k]/t[1]*100)+"%";
+  });
+  // pace chart
+  const pc=document.getElementById("paceChart"); pc.innerHTML="";
+  const max=Math.max(BASE_PACE*1.6, ...MONTHS.map(m=>R.byMonth[m].closed+R.byMonth[m].pending));
+  MONTHS.forEach(m=>{
+    const c=R.byMonth[m].closed, p=R.byMonth[m].pending;
+    const lbl=new Date(m+"-02").toLocaleString("en-US",{month:"short"});
+    pc.insertAdjacentHTML("beforeend",
+      `<div class="b" title="${m}: closed ${fmt$(c)}${p?", pending "+fmt$(p):""}">
+        <em>${c+p>0?fmtK(c+p):""}</em>
+        <i class="pending" style="height:${p/max*100}%"></i>
+        <i style="height:${Math.max(c/max*100, c>0?2:0)}%"></i>
+        <span>${lbl}</span></div>`);
+  });
+  // a-tier summary
+  const A = PTS.filter(x=>x.tier==="A");
+  const mailedA = A.filter(x=>(S.targets[x.pid]||{}).mailed).length;
+  document.getElementById("aTierSummary").textContent = `${A.length} homes · ${mailedA} approached`;
+}
+function renderEngines(){
+  const tb=document.getElementById("tierTable"); tb.innerHTML="";
+  TIERS.forEach(t=>{
+    tb.insertAdjacentHTML("beforeend",
+     `<tr><td><b>${t.name}</b></td><td class="r mono">${fmtK(t.total)}</td>
+      <td class="r mono">${fmtK(t.eng.SK)}</td><td class="r mono">${fmtK(t.eng.LBK)}</td>
+      <td class="r mono">${fmtK(t.eng.OTH)}</td><td class="r mono">${fmtK(t.total*BANK_RATE)}</td>
+      <td class="sub">${t.plan}</td></tr>`);
+  });
+}
+function farmRows(el, rows){
+  const tb=document.getElementById(el); tb.innerHTML="";
+  rows.forEach(r=>{
+    tb.insertAdjacentHTML("beforeend",
+     `<tr><td><b>${r[0]}</b></td><td class="r mono">${r[1]}</td><td class="r mono">${r[2]}</td>
+      <td class="r mono">${r[3].toFixed(1)}</td><td class="r mono">${r[4]}</td><td class="r mono">${r[5]}</td>
+      <td class="r mono">${r[6]}</td><td class="sub">${r[7]}</td></tr>`);
+  });
+}
+function renderFarms(){ farmRows("skFarms",SK_FARMS); farmRows("lbkFarms",LBK_FARMS); }
+
+/* targets */
+["fTier","fStatus","fSearch"].forEach(id=>document.getElementById(id).addEventListener("input",renderTargets));
+function renderTargets(){
+  const ft=document.getElementById("fTier").value, fs=document.getElementById("fStatus").value,
+        q=document.getElementById("fSearch").value.toLowerCase();
+  const tb=document.getElementById("tgBody"); tb.innerHTML="";
+  let mailed=0,resp=0,hot=0;
+  PTS.forEach(p=>{
+    const st = S.targets[p.pid] || {};
+    if(st.mailed) mailed++;
+    if(st.resp && st.resp!=="none") resp++;
+    if(st.temp==="hot") hot++;
+  });
+  document.getElementById("tgMailed").textContent=mailed;
+  document.getElementById("tgResp").textContent=resp;
+  document.getElementById("tgHot").textContent=hot;
+  const A=PTS.filter(x=>x.tier==="A");
+  document.getElementById("tgACov").textContent = Math.round(A.filter(x=>(S.targets[x.pid]||{}).mailed).length/A.length*100)+"%";
+  const frag=document.createDocumentFragment();
+  PTS.forEach(p=>{
+    const st = S.targets[p.pid] || {};
+    if(ft && p.tier!==ft) return;
+    if(fs==="mailed" && !st.mailed) return;
+    if(fs==="unmailed" && st.mailed) return;
+    if(fs==="responded" && (!st.resp || st.resp==="none")) return;
+    if(fs==="hot" && st.temp!=="hot") return;
+    if(fs==="warm" && st.temp!=="warm") return;
+    if(q && !(p.situs.toLowerCase().includes(q)||p.owner.toLowerCase().includes(q))) return;
+    const tr=document.createElement("tr");
+    tr.title = `${p.owner} · ${p.beds}bd ${p.sqft.toLocaleString()}sf ${p.yr} · bought ${p.bought}`;
+    tr.innerHTML =
+     `<td><span class="pill ${p.tier}">${p.tier}</span> <span class="sub mono">${p.score}</span></td>
+      <td><b>${p.situs}</b>${p.listed?' <span class="tag hot">LISTED</span>':""}${p.failed?' <span class="tag warm">prior fail</span>':""}<div class="sub">${p.why||""}</div></td>
+      <td><input type="date" value="${st.mailed||""}" data-pid="${p.pid}" data-f="mailed"></td>
+      <td><select data-pid="${p.pid}" data-f="resp">
+        ${["none","call","conversation","appointment","DNC"].map(o=>`<option ${st.resp===o?"selected":""}>${o}</option>`).join("")}
+      </select></td>
+      <td><select data-pid="${p.pid}" data-f="temp">
+        ${["","cold","warm","hot"].map(o=>`<option value="${o}" ${st.temp===o?"selected":""}>${o||"-"}</option>`).join("")}
+      </select></td>
+      <td><input style="width:150px" value="${(st.note||"").replace(/"/g,"&quot;")}" data-pid="${p.pid}" data-f="note" placeholder="..."></td>`;
+    frag.appendChild(tr);
+  });
+  tb.appendChild(frag);
+}
+document.getElementById("tgBody").addEventListener("change", e=>{
+  const el=e.target, pid=el.dataset.pid; if(!pid) return;
+  S.targets[pid] = S.targets[pid] || {};
+  S.targets[pid][el.dataset.f] = el.value;
+  markDirty(); renderHQ();
+  // refresh counters without full re-render
+  const st=S.targets;
+  document.getElementById("tgMailed").textContent = PTS.filter(x=>(st[x.pid]||{}).mailed).length;
+  document.getElementById("tgResp").textContent = PTS.filter(x=>{const s=st[x.pid]||{};return s.resp&&s.resp!=="none";}).length;
+  document.getElementById("tgHot").textContent = PTS.filter(x=>(st[x.pid]||{}).temp==="hot").length;
+  const A=PTS.filter(x=>x.tier==="A");
+  document.getElementById("tgACov").textContent = Math.round(A.filter(x=>(st[x.pid]||{}).mailed).length/A.length*100)+"%";
+});
+
+/* ledger */
+document.getElementById("dAdd").onclick = ()=>{
+  const g=id=>document.getElementById(id);
+  const price=parseFloat(g("dPrice").value.replace(/[^0-9.]/g,""));
+  if(!g("dAddr").value || !price || !g("dDate").value){ g("dAddr").focus(); return; }
+  S.deals.push({id:Date.now(), addr:g("dAddr").value, engine:g("dEngine").value, role:g("dRole").value,
+    price, gci:parseFloat(g("dGci").value)||2.5, split:parseFloat(g("dSplit").value)||50,
+    status:g("dStatus").value, date:g("dDate").value});
+  g("dAddr").value=""; g("dPrice").value="";
+  markDirty(); renderLedger(); renderHQ(); renderKpis();
+};
+document.getElementById("dEngine").addEventListener("change", e=>{
+  document.getElementById("dSplit").value = e.target.value==="OTH" ? 100 : 50;
+});
+function renderLedger(){
+  const tb=document.getElementById("dealBody"); tb.innerHTML="";
+  const deals=[...S.deals].sort((a,b)=> (a.date<b.date?1:-1));
+  deals.forEach(d=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML=`<td><select data-id="${d.id}" data-f="status">
+        <option ${d.status==="pending"?"selected":""}>pending</option>
+        <option ${d.status==="closed"?"selected":""}>closed</option></select></td>
+      <td><input type="date" value="${d.date}" data-id="${d.id}" data-f="date"></td>
+      <td><b>${d.addr}</b></td>
+      <td>${({SK:"Siesta",LBK:"LBK",OTH:"Core"})[d.engine]}</td><td>${d.role}</td>
+      <td class="r mono">${fmt$(d.price)}</td><td class="r mono">${d.gci}%</td><td class="r mono">${d.split}%</td>
+      <td class="r mono"><b>${fmt$(dealNet(d))}</b></td>
+      <td><button class="ghost" data-del="${d.id}" title="delete">✕</button></td>`;
+    tb.appendChild(tr);
+  });
+  const R=rollups();
+  document.getElementById("dealTotals").textContent = `${fmt$(R.closed.total)} / ${fmt$(R.pend.total)}`;
+}
+document.getElementById("dealBody").addEventListener("change", e=>{
+  const el=e.target, id=+el.dataset.id; if(!id) return;
+  const d=S.deals.find(x=>x.id===id); if(!d) return;
+  d[el.dataset.f]=el.value; markDirty(); renderLedger(); renderHQ(); renderKpis();
+});
+document.getElementById("dealBody").addEventListener("click", e=>{
+  const id=+e.target.dataset.del; if(!id) return;
+  if(!confirm("Delete this deal?")) return;
+  S.deals=S.deals.filter(x=>x.id!==id); markDirty(); renderLedger(); renderHQ(); renderKpis();
+});
+
+/* kpis */
+function renderKpis(){
+  const tb=document.getElementById("kpiBody"); tb.innerHTML="";
+  const R=rollups();
+  MONTHS.forEach(m=>{
+    const k=S.kpis[m]||{};
+    const lbl=new Date(m+"-02").toLocaleString("en-US",{month:"short",year:"2-digit"});
+    tb.insertAdjacentHTML("beforeend",
+     `<tr><td><b>${lbl}</b></td>
+      ${["mailers","letters","appts","signed"].map(f=>
+        `<td class="r"><input class="num" style="width:80px" inputmode="numeric" value="${k[f]??""}" data-m="${m}" data-f="${f}"></td>`).join("")}
+      <td class="r mono">${R.byMonth[m].closed?fmt$(R.byMonth[m].closed):"-"}</td></tr>`);
+  });
+}
+document.getElementById("kpiBody").addEventListener("change", e=>{
+  const el=e.target; if(!el.dataset.m) return;
+  S.kpis[el.dataset.m]=S.kpis[el.dataset.m]||{};
+  S.kpis[el.dataset.m][el.dataset.f]=el.value===""?null:+el.value;
+  markDirty();
+});
+</script>
+</body>
+</html>
