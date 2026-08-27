@@ -1,0 +1,159 @@
+---
+// /request-showing — showing scheduler + question form for IDX detail-page CTAs.
+// Reads ?mls=&addr=&intent=showing|question from the query string, posts through
+// the community-lead pipeline (Supabase + Zoho + Gmail draft). No IDX login involved.
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const title = 'Request a Showing | The Adamson Group';
+const description = 'Pick a day and time that suits you and we will confirm your private showing, usually within the hour during business hours.';
+---
+
+<BaseLayout title={title} description={description} standalone>
+  <section class="section dark-section" style="min-height:80vh;padding-top:120px;">
+    <div class="container" style="max-width:720px;">
+      <div class="rs-card">
+        <p class="section-label" style="color:var(--color-cbgl-blue-light);margin-bottom:.5rem;" id="rs-eyebrow">Private Showing</p>
+        <h1 class="font-display" id="rs-title" style="font-size:clamp(1.6rem,3.5vw,2.3rem);margin-bottom:.35rem;">Request a Showing</h1>
+        <p class="rs-listing" id="rs-listing" hidden></p>
+        <p class="rs-sub" id="rs-sub">Pick a day and a window that suits you. We confirm personally, usually within the hour during business hours, and we never share your details.</p>
+
+        <form id="rs-form" name="showing-request" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="showing-request" />
+          <input type="hidden" name="listing" id="rs-hidden-listing" value="" />
+          <input type="hidden" name="intent" id="rs-hidden-intent" value="showing" />
+          <p class="rs-hp"><label>Don&rsquo;t fill this out: <input name="bot-field" /></label></p>
+
+          <div class="rs-grid">
+            <div class="rs-field"><label for="rs-name">Name</label>
+              <input id="rs-name" name="name" type="text" required autocomplete="name" /></div>
+            <div class="rs-field"><label for="rs-email">Email</label>
+              <input id="rs-email" name="email" type="email" required autocomplete="email" /></div>
+            <div class="rs-field"><label for="rs-phone">Phone</label>
+              <input id="rs-phone" name="phone" type="tel" autocomplete="tel" /></div>
+          </div>
+
+          <div class="rs-grid" id="rs-when">
+            <div class="rs-field"><label for="rs-date">Preferred day</label>
+              <input id="rs-date" name="preferred_date" type="date" required /></div>
+            <div class="rs-field"><label for="rs-window">Time window</label>
+              <select id="rs-window" name="time_window">
+                <option>Morning (9-12)</option>
+                <option>Midday (12-3)</option>
+                <option>Afternoon (3-6)</option>
+                <option>Flexible / whatever works</option>
+              </select></div>
+            <div class="rs-field"><label for="rs-alt">Backup day <span class="rs-opt">optional</span></label>
+              <input id="rs-alt" name="backup_date" type="date" /></div>
+          </div>
+
+          <div class="rs-field"><label for="rs-notes" id="rs-notes-label">Anything we should know? <span class="rs-opt">optional</span></label>
+            <textarea id="rs-notes" name="notes" rows="3" maxlength="1200" placeholder="Timing, questions about the home, whether you&rsquo;re coming from out of town..."></textarea></div>
+
+          <button type="submit" class="rs-btn" id="rs-submit">Request This Showing</button>
+          <p class="rs-status" id="rs-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="rs-alt-contact">Prefer to talk now? <a href="tel:+19417139234">(941) 713-9234</a> &middot; The Adamson Group, Coldwell Banker Global Luxury, St. Armands</p>
+      </div>
+    </div>
+  </section>
+
+<style is:global>
+  .rs-card { background:#fff; color:#1a1a1a; border-radius:12px; padding:clamp(1.5rem,4vw,3rem); box-shadow:0 24px 60px rgba(0,0,0,.35); }
+  .rs-card h1 { color:var(--color-cbgl-blue,#0a2540); }
+  .rs-listing { font-family:var(--font-accent,Inter,sans-serif); font-size:.95rem; font-weight:600; color:var(--color-gold,#c9a961); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.75rem; }
+  .rs-sub { color:rgba(0,0,0,.55); font-size:.95rem; margin-bottom:1.5rem; }
+  .rs-grid { display:grid; gap:1rem; grid-template-columns:1fr; }
+  @media(min-width:640px){ .rs-grid { grid-template-columns:1fr 1fr 1fr; } }
+  .rs-field { margin-bottom:1rem; }
+  .rs-field label { display:block; font-family:var(--font-accent,Inter,sans-serif); font-size:.7rem; text-transform:uppercase; letter-spacing:.09em; color:rgba(0,0,0,.5); margin-bottom:.35rem; }
+  .rs-opt { text-transform:none; letter-spacing:0; font-style:italic; color:rgba(0,0,0,.35); }
+  .rs-field input, .rs-field select, .rs-field textarea { width:100%; padding:.65rem .8rem; border:1px solid rgba(10,37,64,.25); border-radius:8px; font-size:1rem; background:#fff; color:#1a1a1a; }
+  .rs-field input:focus, .rs-field select:focus, .rs-field textarea:focus { outline:2px solid var(--color-gold,#c9a961); border-color:transparent; }
+  .rs-btn { display:block; width:100%; padding:.9rem; border:0; border-radius:999px; background:var(--color-gold,#c9a961); color:#000; font-weight:700; font-size:1rem; cursor:pointer; margin-top:.5rem; }
+  .rs-btn:hover { background:#d4b87a; }
+  .rs-btn:disabled { opacity:.6; }
+  .rs-status { min-height:1.2rem; font-size:.85rem; color:#b00020; margin-top:.5rem; }
+  .rs-status.ok { color:#177245; }
+  .rs-hp { position:absolute; left:-9999px; }
+  .rs-alt-contact { margin-top:1.25rem; font-size:.8rem; color:rgba(0,0,0,.45); }
+  .rs-done { text-align:center; padding:2rem 0; }
+  .rs-done h2 { color:var(--color-cbgl-blue,#0a2540); margin-bottom:.5rem; }
+  .rs-done p { color:rgba(0,0,0,.55); }
+</style>
+
+<script is:inline>
+  (function () {
+    var qs = new URLSearchParams(location.search);
+    var addr = (qs.get('addr') || '').replace(/[<>&"']/g, '').slice(0, 120);
+    var mls = (qs.get('mls') || '').replace(/[^A-Za-z0-9]/g, '').slice(0, 20);
+    var intent = qs.get('intent') === 'question' ? 'question' : 'showing';
+
+    var listing = addr ? addr + (mls ? ' · MLS ' + mls : '') : (mls ? 'MLS ' + mls : '');
+    if (listing) {
+      var el = document.getElementById('rs-listing');
+      el.textContent = listing; el.hidden = false;
+      document.getElementById('rs-hidden-listing').value = listing;
+    }
+    document.getElementById('rs-hidden-intent').value = intent;
+
+    if (intent === 'question') {
+      document.getElementById('rs-eyebrow').textContent = 'Ask About This Home';
+      document.getElementById('rs-title').textContent = 'Ask a Question';
+      document.getElementById('rs-sub').textContent = 'Send us your question and we will come back with a straight answer, usually within the hour during business hours.';
+      document.getElementById('rs-when').style.display = 'none';
+      document.getElementById('rs-date').required = false;
+      document.getElementById('rs-notes-label').innerHTML = 'Your question';
+      document.getElementById('rs-notes').required = true;
+      document.getElementById('rs-submit').textContent = 'Send My Question';
+    }
+
+    var today = new Date(); today.setDate(today.getDate() + 1);
+    var min = today.toISOString().slice(0, 10);
+    document.getElementById('rs-date').min = min;
+    document.getElementById('rs-alt').min = min;
+
+    document.getElementById('rs-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var form = e.target, fd = new FormData(form), d = Object.fromEntries(fd.entries());
+      if (d['bot-field']) return;
+      var status = document.getElementById('rs-status'), btn = document.getElementById('rs-submit');
+      status.className = 'rs-status'; status.textContent = 'Sending…'; btn.disabled = true;
+
+      var noteLines = [];
+      if (listing) noteLines.push('Listing: ' + listing);
+      if (intent === 'showing') {
+        noteLines.push('Preferred: ' + (d.preferred_date || '-') + ' · ' + (d.time_window || ''));
+        if (d.backup_date) noteLines.push('Backup day: ' + d.backup_date);
+      }
+      if (d.notes) noteLines.push(d.notes);
+
+      try {
+        var res = await fetch('/.netlify/functions/community-lead', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: d.name, email: d.email, phone: d.phone,
+            notes: noteLines.join('\n'),
+            lead_type: intent === 'showing' ? 'Showing' : 'Buyer',
+            community: addr || 'IDX Listing',
+            page: location.pathname + location.search,
+          }),
+        });
+        if (!res.ok) throw new Error('bad status ' + res.status);
+        fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(fd).toString() }).catch(function(){});
+        var first = String(d.name || '').trim().split(/\s+/)[0].replace(/[<>&"']/g, '');
+        var done = document.createElement('div'); done.className = 'rs-done';
+        done.innerHTML = '<h2 class="font-display">Thank you' + (first ? ', ' + first : '') + '</h2>' +
+          (intent === 'showing'
+            ? '<p>Your showing request is in. We&rsquo;ll confirm the exact time personally, usually within the hour during business hours.</p>'
+            : '<p>Your question is on its way. Expect a personal reply shortly.</p>');
+        form.replaceWith(done);
+      } catch (err) {
+        status.textContent = 'Something went wrong. Please call (941) 713-9234.';
+        btn.disabled = false;
+      }
+    });
+  })();
+</script>
+</BaseLayout>
