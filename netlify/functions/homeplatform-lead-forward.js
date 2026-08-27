@@ -43,7 +43,7 @@ export function buildIdxStyleBody(lead) {
   // Structure mirrors the IDX Broker notification field-for-field.
   // Parsers key on these exact labels - do not reword or reorder.
   let body = "";
-  body += `${fullName} filled out the Contact Form on https://adamsonfl.com.\n`;
+  body += `${fullName} filled out the Contact Form on ${lead.sourceUrl || "https://adamsonfl.com"}.\n`;
   body += `\n`;
   body += `Lead Information\n`;
   body += `First Name: ${lead.firstName}\n`;
