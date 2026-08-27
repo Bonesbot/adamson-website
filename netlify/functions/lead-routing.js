@@ -34,6 +34,14 @@ const ROUTES = [
     agents: 'Ryan Adamson + Kelli Eggen',
     notify: ['Ryan@Adamson-Group.com', 'Kelli.Eggen@gmail.com'],
   },
+  {
+    // Longboat Key: Ryan + Anne Schneider partnership (Country Club Shores + future LBK pages)
+    // NOTE: add Anne's email to `notify` once she has confirmed the address (test phase: Ryan only).
+    match: /^\/longboat-key\//i,
+    label: 'Longboat Key: Ryan + Anne',
+    agents: 'Ryan Adamson + Anne Schneider',
+    notify: ['Ryan@Adamson-Group.com'],
+  },
   // ── add future submarket teams here ──────────────────────────────────────
 ];
 
