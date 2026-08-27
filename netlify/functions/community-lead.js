@@ -133,6 +133,95 @@ async function createZohoLead(lead) {
   return { id: row.details && row.details.id };
 }
 
+// ── Resend (Info@AdamsonFL.com): primary notification channel ─────────────────
+//
+// Sends the team notification FROM Info@AdamsonFL.com (domain-verified in
+// Resend) TO the routed notify list, Reply-To Ryan's real mailbox. Configured
+// via RESEND_API_KEY (sending-only key). Falls back to the Gmail leg below if
+// the key is absent.
+
+const RESEND_FROM = process.env.RESEND_FROM || 'The Adamson Group <Info@AdamsonFL.com>';
+const RESEND_REPLY_TO = process.env.RESEND_REPLY_TO || 'Ryan@adamson-group.com';
+
+async function sendResendEmail({ to, subject, text, replyTo }) {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) return { skipped: 'RESEND_API_KEY not configured' };
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from: RESEND_FROM,
+      to: Array.isArray(to) ? to : [to],
+      reply_to: replyTo || RESEND_REPLY_TO,
+      subject,
+      text,
+    }),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(`resend send failed: ${res.status} ${JSON.stringify(data).slice(0, 200)}`);
+  return { id: data.id, sent: true, via: 'resend' };
+}
+
+async function sendTeamNotification(lead, zohoId) {
+  if (!process.env.RESEND_API_KEY) return queueGmailDraft(lead, zohoId);
+  const kind = lead.lead_type === 'Seller' ? 'SELLER'
+    : lead.lead_type === 'Showing' ? 'SHOWING' : 'BUYER';
+  const subject = `[${kind} LEAD] ${lead.name || lead.email} - ${lead.community || 'Website'}`;
+  const body = [
+    `New ${kind.toLowerCase()} lead from the ${lead.community || 'website'} landing page.`,
+    '',
+    `Name:      ${lead.name || '-'}`,
+    `Email:     ${lead.email}`,
+    `Phone:     ${lead.phone || '-'}`,
+    `Lead Type: ${lead.lead_type}`,
+    `Community: ${lead.community || '-'}`,
+    ...(lead.notes ? ['', 'What they told us:', lead.notes, ''] : []),
+    `Page:      https://adamsonfl.com${lead.page || ''}`,
+    `Received:  ${new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })} ET`,
+    `Routed to: ${lead.route ? lead.route.label : 'Ryan (default)'}`,
+    '',
+    zohoId
+      ? `Zoho lead created (status "${LEAD_STATUS}"): https://crm.zoho.com/crm/tab/Leads/${zohoId}`
+      : 'NOTE: Zoho lead was NOT created: check the function logs.',
+    '',
+    '- Adamson Group site automation',
+  ].join('\n');
+  const notify = (lead.route && lead.route.notify && lead.route.notify.length)
+    ? lead.route.notify
+    : ['Ryan@Adamson-Group.com'];
+  return sendResendEmail({ to: notify, subject, text: body });
+}
+
+// Courtesy receipt to the lead. HARD-GATED: sends only when COURTESY_REPLY=on
+// in the environment AND the template below has been approved by Ryan.
+// Fixed template — nothing dynamic beyond name/address. Never marketing copy.
+async function sendCourtesyReply(lead) {
+  if (process.env.COURTESY_REPLY !== 'on') return { skipped: 'courtesy reply disabled' };
+  if (!process.env.RESEND_API_KEY || !lead.email) return { skipped: 'no key or no email' };
+  const first = String(lead.name || '').trim().split(/\s+/)[0] || 'there';
+  const isShowing = lead.lead_type === 'Showing';
+  const what = isShowing
+    ? `Your showing request${lead.community && lead.community !== 'Website' ? ' for ' + lead.community : ''} is in front of us now.`
+    : 'Your message is in front of us now.';
+  const body = [
+    `Thanks, ${first}.`,
+    '',
+    what,
+    'Expect a personal reply within the hour during business hours.',
+    '',
+    'Ryan Adamson & Anne Schneider',
+    'The Adamson Group · Coldwell Banker Global Luxury, St. Armands',
+    '(941) 713-9234',
+    '',
+    'Prefer to talk now? Just call, or reply to this email and it comes straight to Ryan.',
+  ].join('\n');
+  return sendResendEmail({
+    to: lead.email,
+    subject: isShowing ? 'Your showing request is received' : 'We got your message',
+    text: body,
+  });
+}
+
 // ── Gmail (draft — queued for Ryan to review & send) ────────────────────────────
 
 async function gmailAccessToken() {
@@ -331,9 +420,11 @@ export const handler = async (event) => {
 
   const results = await Promise.allSettled([
     storeLead(lead, zohoId, zohoError),
-    queueGmailDraft(lead, zohoId),
+    sendTeamNotification(lead, zohoId),
+    sendCourtesyReply(lead),
   ]);
-  const [stored, mailed] = results;
+  const [stored, mailed, courtesy] = results;
+  if (courtesy && courtesy.status === 'rejected') console.error('community-lead: courtesy reply —', courtesy.reason);
 
   if (stored.status === 'rejected') console.error('community-lead: supabase —', stored.reason);
   else if (stored.value && stored.value.skipped) console.warn('community-lead: supabase skipped —', stored.value.skipped);
