@@ -1,14 +1,14 @@
 ---
-// build-touch 2026-07-06b: desktop gallery arrows + clickable dots, Mid-Key beach access pin fix
+// build-touch 2026-08-21: pin grooming (blurb cleanup, stale fixes, 15 new tourist pins), em dashes removed
 import allPins from '../data/srqmap-pins.json';
 import openHouses from '../data/srqmap-openhouses.json';
 import matchTable from '../data/srqmap-match.json';
 import rawEvents from '../data/srqmap-events.json';
 
-// Categories currently shown on the map (others temporarily hidden — restore by adding ids back)
+// Categories currently shown on the map (others temporarily hidden; restore by adding ids back)
 const VISIBLE_GROUPS = ['events', 'openhouse', 'beaches', 'things', 'dining', 'golf', 'condos'];
 
-// "Events This Week" — machine-maintained by the daily `srqmap-events` scheduled task.
+// "Events This Week": machine-maintained by the daily `srqmap-events` scheduled task.
 // Source file: src/data/srqmap-events.json (do NOT hand-edit; see scripts/events/).
 // Past events are also dropped here at build time as a safety net (task prunes them too).
 const todayET = new Date(Date.now() - 5 * 3600 * 1000).toISOString().slice(0, 10);
@@ -60,14 +60,14 @@ const groupMap = Object.fromEntries(GROUPS.map((g) => [g.id, g]));
 const phone = '(941) 713-9234';
 const tel = '19417139234';
 
-const pageTitle = 'Sarasota Area Guide — Beaches, Golf, Restaurants & Neighborhoods Map | AdamsonFL';
+const pageTitle = 'Sarasota Area Guide: Beaches, Golf, Restaurants & Neighborhoods Map | AdamsonFL';
 const pageDesc = 'An interactive local map of Sarasota and the Keys from Ryan Adamson, PA: beach access points on Siesta, Lido and Longboat Key, public and private golf courses within 15 miles of St. Armands, top restaurants and bars, things to do, and this week’s local events.';
 const canonical = 'https://adamsonfl.com/srqmap';
 
 const itemList = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'Sarasota & the Keys — Local Area Guide',
+  name: 'Sarasota & the Keys Local Area Guide',
   description: pageDesc,
   numberOfItems: pins.length,
   itemListElement: pins.map((p, i) => ({
@@ -311,7 +311,7 @@ const itemList = {
 <body>
 
 <header class="bar">
-  <a class="brand" href="https://adamsonfl.com/" title="Back to AdamsonFL.com — Ryan Adamson, PA">
+  <a class="brand" href="https://adamsonfl.com/" title="Back to AdamsonFL.com, Ryan Adamson, PA">
     <img class="logo" src="/images/logos/adamson-group-black.png" alt="Adamson Group" width="44" height="44" />
     <div class="lockup">
       <div class="gname">Sarasota Area Guide</div>
@@ -361,7 +361,7 @@ const itemList = {
 
 <!-- Crawlable content for search engines & AI answer engines -->
 <div class="visually-hidden">
-  <h2>Sarasota &amp; the Keys local directory — curated by Ryan Adamson, PA</h2>
+  <h2>Sarasota &amp; the Keys local directory, curated by Ryan Adamson, PA</h2>
   {GROUPS.map((g) => (
     <section>
       <h3>{g.label}</h3>
@@ -378,7 +378,7 @@ const itemList = {
   ))}
 </div>
 
-<!-- Soft lead-capture gate (client-side only — crawlers/AI engines never see this; full content stays in the SSR block above) -->
+<!-- Soft lead-capture gate (client-side only; crawlers/AI engines never see this, full content stays in the SSR block above) -->
 <div class="gate" id="gate" aria-hidden="true">
   <div class="gate-card" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
     <button class="gate-x" id="gateClose" type="button" aria-label="Close">&times;</button>
@@ -421,8 +421,8 @@ const itemList = {
   var active = {}; GROUPS.forEach(function(g){ active[g.id]=(g.id!=='condos'); });
   var selectedId = null, markers = {}, query = '';
 
-  // ===== Soft lead gate — AEO-safe: only gates the interactive detail panel, never the SSR content =====
-  var GATE_ENABLED = false;           // TEMP 2026-07-05: login wall OFF for testing — set back to true to re-enable
+  // ===== Soft lead gate, AEO-safe: only gates the interactive detail panel, never the SSR content =====
+  var GATE_ENABLED = false;           // TEMP 2026-07-05: login wall OFF for testing; set back to true to re-enable
   var GATE_FREE_OPENS = 3;            // distinct pins a visitor may open before the signup nudge
   var GATE_OPENED_KEY = 'srqmap_opened_v1';
   var GATE_UNLOCK_KEY = 'srqmap_unlocked_v1';
@@ -458,7 +458,7 @@ const itemList = {
         fetch('/.netlify/functions/srqmap-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({first_name:first,last_name:last,email:email,phone:phone,'bot-field':hp,source:'srqmap-gate'})})
           .then(function(r){ return r.ok ? r.json() : r.json().then(function(j){ throw new Error((j&&j.error)||'error'); }); })
           .then(function(){ gateUnlock(); onUnlocked(); })
-          .catch(function(){ if(btn){ btn.disabled=false; btn.textContent=label; } showErr('Something went wrong — please try again, or call Ryan at '+PHONE+'.'); });
+          .catch(function(){ if(btn){ btn.disabled=false; btn.textContent=label; } showErr('Something went wrong. Please try again, or call Ryan at '+PHONE+'.'); });
       });
     }
     gateEl.addEventListener('click', function(e){ if(e.target===gateEl) closeGate(); });
@@ -468,9 +468,9 @@ const itemList = {
   // Initial view: centered on 301 Bird Key Dr, framing Lido Key + mid-Siesta and up
   var HOME_CENTER = [27.3145, -82.5610], HOME_ZOOM = 13;
   var map = L.map('map',{zoomControl:false, attributionControl:true}).setView(HOME_CENTER, HOME_ZOOM);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{
-    subdomains:'abcd', maxZoom:20,
-    attribution:'&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    maxZoom:19,
+    attribution:'&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
   L.control.zoom({position:'bottomright'}).addTo(map);
   // ---- Locate me (browser geolocation) ----
@@ -597,7 +597,7 @@ const itemList = {
     var galleryHtml = '';
     if(photos.length){
       /* no loading="lazy" here: the gallery is built inside a hidden panel, and Chrome never
-         promotes lazy images created in display:none subtrees — they'd stay blank forever. */
+         promotes lazy images created in display:none subtrees; they'd stay blank forever. */
       var slides = photos.map(function(src,idx){ return '<img class="gphoto" src="'+esc(src)+'" decoding="async" alt="'+esc(p.name)+'" />'; }).join('');
       var gdotsHtml = photos.length>1 ? '<div class="gallery-dots">'+photos.map(function(_x,idx){return '<span class="gdot'+(idx===0?' on':'')+'"></span>';}).join('')+'</div>' : '';
       var gcreditHtml = p.photo_credit ? '<p class="gcredit">'+esc(p.photo_credit)+'</p>' : '';
@@ -610,10 +610,10 @@ const itemList = {
       '<h2>'+esc(p.name)+'</h2>'+
       (p.address?'<p class="addr">'+esc(p.address)+'</p>':'')+
       factsHtml + blurbHtml + tipHtml +
-      '<div class="links">'+(p.group==='condos'?'<button class="detail-cta" id="alertCta" style="border:none;cursor:pointer">🔔 Alert me when — or before — a unit hits</button>':'')+'<a class="detail-cta" href="tel:'+TEL+'">Ask Ryan about this</a>'+dirHtml+siteHtml+marketHtml+'</div>'+
+      '<div class="links">'+(p.group==='condos'?'<button class="detail-cta" id="alertCta" style="border:none;cursor:pointer">🔔 Alert me when (or before) a unit hits</button>':'')+'<a class="detail-cta" href="tel:'+TEL+'">Ask Ryan about this</a>'+dirHtml+siteHtml+marketHtml+'</div>'+
       '<p class="signoff">Ryan Adamson, PA · <a href="https://adamsonfl.com/" style="color:var(--blue-deep);font-weight:600;text-decoration:none">AdamsonFL.com</a></p>';
     var acta=detailBody.querySelector('#alertCta');
-    if(acta) acta.onclick=function(){ openCapture('unit-alert:'+(p.id||p.name), 'First word on '+p.name, 'Be the first to know when a unit lists here — including whisper listings before they ever hit the MLS. That is a promise only the farm agent can make.'); };
+    if(acta) acta.onclick=function(){ openCapture('unit-alert:'+(p.id||p.name), 'First word on '+p.name, 'Be the first to know when a unit lists here, including whisper listings before they ever hit the MLS. That is a promise only the farm agent can make.'); };
     var gtrack = detailBody.querySelector('.gallery-track');
     if(gtrack){
       var gd = detailBody.querySelectorAll('.gdot');
@@ -622,7 +622,7 @@ const itemList = {
       var gN = detailBody.querySelectorAll('.gphoto').length;
       function gCur(){ return Math.round(gtrack.scrollLeft/Math.max(gtrack.clientWidth,1)); }
       /* NB: smooth scrolling (scrollTo behavior:smooth OR CSS scroll-behavior:smooth) is silently
-         cancelled by Chrome's scroll-snap controller on this track — jump directly; snap keeps it aligned. */
+         cancelled by Chrome's scroll-snap controller on this track; jump directly, snap keeps it aligned. */
       function gGo(idx){ gtrack.scrollLeft = idx*gtrack.clientWidth; }
       var gp=detailBody.querySelector('.gnav--prev'), gn=detailBody.querySelector('.gnav--next');
       if(gp) gp.onclick=function(e){ e.stopPropagation(); gGo((gCur()-1+gN)%gN); };
@@ -704,9 +704,9 @@ const itemList = {
   var byKey = {}; PLACES.forEach(function(p){ byKey[p.id||'']=p; byKey[p.name]=p; });
   var fmsEl=document.getElementById('fms'), fmsBody=document.getElementById('fmsBody');
   var QS=[
-    {k:'market',q:'Which Sarasota is calling?',opts:[['siesta','🏖 Siesta Key — barefoot beach town'],['downtown','🌆 Downtown — arts &amp; walkability'],['stlido','🛍 St Armands / Lido — resort elegance'],['lbk','⛳ Longboat Key — quiet &amp; gulf-front']]},
+    {k:'market',q:'Which Sarasota is calling?',opts:[['siesta','🏖 Siesta Key: barefoot beach town'],['downtown','🌆 Downtown: arts &amp; walkability'],['stlido','🛍 St Armands / Lido: resort elegance'],['lbk','⛳ Longboat Key: quiet &amp; gulf-front']]},
     {k:'budget',q:'Ballpark budget?',opts:[['b1','Under $600k'],['b2','$600k – $1M'],['b3','$1M – $2M'],['b4','$2M+']]},
-    {k:'type',q:'Condo or house?',opts:[['condo','Condo — lock &amp; leave'],['house','House — room to roam'],['surprise','Surprise me']]},
+    {k:'type',q:'Condo or house?',opts:[['condo','Condo: lock &amp; leave'],['house','House: room to roam'],['surprise','Surprise me']]},
     {k:'usage',q:'How will you use it?',opts:[['full','Full-time home'],['seasonal','Seasonal escape'],['invest','Rental-friendly investment']]},
     {k:'timeline',q:'Toes in the sand by…',opts:[['3mo','Next 3 months'],['season','This season'],['year','This year'],['dream','Just dreaming (respect)']]}
   ];
@@ -733,9 +733,9 @@ const itemList = {
     var all=picks.concat(homes);
     if(all.length){ var g=L.featureGroup(all.map(function(p){return L.marker([p.lat,p.lng]);})); map.fitBounds(g.getBounds().pad(0.25)); }
     fmsBody.innerHTML='<p class="fms-eyebrow">Your spot</p><h3 class="fms-q">'+m.emoji+' '+m.label+'</h3>'+
-      '<p style="font:400 13.5px/1.5 sans-serif;color:#5c6b76;margin:0 0 10px">Good taste. Ryan knows exactly where to hunt for this — a few hand-picked finds, no listing firehose.</p>'+
+      '<p style="font:400 13.5px/1.5 sans-serif;color:#5c6b76;margin:0 0 10px">Good taste. Ryan knows exactly where to hunt for this: a few hand-picked finds, no listing firehose.</p>'+
       '<button class="fms-cta" id="fmsSend">🍹 Send Ryan to find it</button>'+
-      '<button class="fms-ghost" id="fmsClear">maybe later — back to browsing</button>';
+      '<button class="fms-ghost" id="fmsClear">maybe later, back to browsing</button>';
     document.getElementById('fmsClear').onclick=function(){ closeQuiz(); };
     document.getElementById('fmsSend').onclick=function(){ drawCapture('find-my-siesta'+leadSrcSuffix,'Deal. Where do we send the good news?','Ryan hunts, you approve. A few finds a week, zero spam, unsubscribe whenever.'); };
   }
@@ -744,7 +744,7 @@ const itemList = {
       '<p style="font:400 13px/1.5 sans-serif;color:#5c6b76;margin:0 0 12px">'+copy+'</p>'+
       '<input id="fmsName" placeholder="First name" autocomplete="given-name"/>'+
       '<input id="fmsEmail" type="email" placeholder="Email" autocomplete="email"/>'+
-      '<input id="fmsPhone" type="tel" placeholder="Phone (optional — fastest for whisper finds)" autocomplete="tel"/>'+
+      '<input id="fmsPhone" type="tel" placeholder="Phone (optional, fastest for whisper finds)" autocomplete="tel"/>'+
       '<input id="fmsHp" name="bot-field" style="display:none" tabindex="-1"/>'+
       '<button class="fms-cta" id="fmsGo">Put Ryan on it</button><p class="fms-note" id="fmsMsg"></p>';
     document.getElementById('fmsGo').onclick=function(){
@@ -756,8 +756,8 @@ const itemList = {
         phone:document.getElementById('fmsPhone').value.trim(), 'bot-field':document.getElementById('fmsHp').value,
         source:source, quiz:answers
       })}).then(function(r){return r.json();}).then(function(){
-        fmsBody.innerHTML='<p class="fms-eyebrow">Find My Spot</p><h3 class="fms-q">🤙 Ryan\'s on it.</h3><p style="font:400 14px/1.6 sans-serif;color:#5c6b76">Expect a personal note — not a drip campaign. Meanwhile, the map is all yours.</p><button class="fms-cta" onclick="document.getElementById(\'fms\').classList.remove(\'show\')">Back to the island</button>';
-      }).catch(function(){ document.getElementById('fmsMsg').textContent='Hmm, that hiccuped — try once more?'; var g=document.getElementById('fmsGo'); if(g){g.disabled=false;g.textContent='Put Ryan on it';} });
+        fmsBody.innerHTML='<p class="fms-eyebrow">Find My Spot</p><h3 class="fms-q">🤙 Ryan\'s on it.</h3><p style="font:400 14px/1.6 sans-serif;color:#5c6b76">Expect a personal note, not a drip campaign. Meanwhile, the map is all yours.</p><button class="fms-cta" onclick="document.getElementById(\'fms\').classList.remove(\'show\')">Back to the island</button>';
+      }).catch(function(){ document.getElementById('fmsMsg').textContent='Hmm, that hiccuped. Try once more?'; var g=document.getElementById('fmsGo'); if(g){g.disabled=false;g.textContent='Put Ryan on it';} });
     };
   }
   function openCapture(source,title,copy){ answers=answers||{}; fmsEl.classList.add('show'); drawCapture(source,title,copy); }
