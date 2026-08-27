@@ -51,6 +51,7 @@ const description = 'Pick a day and time that suits you and we will confirm your
 
           <button type="submit" class="rs-btn" id="rs-submit">Request This Showing</button>
           <p class="rs-status" id="rs-status" role="status" aria-live="polite"></p>
+          <p class="rs-nar" id="rs-nar">One quick note: if you&rsquo;re already under an exclusive buyer-broker agreement with another brokerage, just mention it. Under National Association of REALTORS&reg; policy, agents need a written buyer agreement in place before touring a property together, and a simple single-showing agreement is all it takes. Happy to answer any questions when we confirm your time.</p>
         </form>
 
         <p class="rs-alt-contact">Prefer to talk now? <a href="tel:+19417139234">(941) 713-9234</a> &middot; The Adamson Group, Coldwell Banker Global Luxury, St. Armands</p>
@@ -77,6 +78,7 @@ const description = 'Pick a day and time that suits you and we will confirm your
   .rs-status.ok { color:#177245; }
   .rs-hp { position:absolute; left:-9999px; }
   .rs-alt-contact { margin-top:1.25rem; font-size:.8rem; color:rgba(0,0,0,.45); }
+  .rs-nar { margin-top:.9rem; font-size:.74rem; line-height:1.5; color:rgba(0,0,0,.4); font-style:italic; }
   .rs-done { text-align:center; padding:2rem 0; }
   .rs-done h2 { color:var(--color-cbgl-blue,#0a2540); margin-bottom:.5rem; }
   .rs-done p { color:rgba(0,0,0,.55); }
@@ -106,6 +108,7 @@ const description = 'Pick a day and time that suits you and we will confirm your
       document.getElementById('rs-notes-label').innerHTML = 'Your question';
       document.getElementById('rs-notes').required = true;
       document.getElementById('rs-submit').textContent = 'Send My Question';
+      var nar = document.getElementById('rs-nar'); if (nar) nar.style.display = 'none';
     }
 
     var today = new Date(); today.setDate(today.getDate() + 1);
