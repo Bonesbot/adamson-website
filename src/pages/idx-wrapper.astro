@@ -224,6 +224,15 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
 
   /* ---- Full property details collapsed behind a toggle ---- */
   .idx-fields-collapsed #IDX-fieldsWrapper { display:none; }
+
+  /* ---- v3 declutter: Walk Score, AI Redesign, IDX nav links ---- */
+  #IDX-walkscoreContainer, #ws-walkscore-tile,
+  .idx-wrapper-shell iframe[src*="walkscore"] { display:none !important; }
+  ai-redesign-widget, #ai-redesign-widget-idx, .ai-redesign-tool-launch { display:none !important; }
+
+  /* ---- injected summary cells match IDX's own field styling ---- */
+  .idx-field__ag .idx-label { display:block; }
+  .idx-cta-panel--below { margin-top:1.5rem; }
   .idx-wrapper-shell button.idx-fields-toggle { display:block; width:100%; text-align:center; margin:1rem 0; padding:.7rem; border:1px dashed rgba(10,37,64,.35) !important; border-radius:10px !important; background-color:#fff !important; color:var(--color-cbgl-blue,#0a2540) !important; font-weight:600; cursor:pointer; }
   .idx-wrapper-shell button.idx-fields-toggle:hover { background-color:#f6f1e4 !important; }
 </style>
@@ -331,18 +340,87 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
         }
       });
 
+      /* Full field tables stay hidden entirely (bare-minimum detail page);
+         they remain in the DOM as the data source for the summary below. */
       var fw = document.getElementById('IDX-fieldsWrapper');
-      if (fw && !document.querySelector('.idx-fields-toggle')) {
-        var shell = fw.closest('.idx-wrapper-shell') || document.body;
-        shell.classList.add('idx-fields-collapsed');
-        var tg = document.createElement('button');
-        tg.type = 'button'; tg.className = 'idx-fields-toggle';
-        tg.textContent = 'Show full property details';
-        tg.addEventListener('click', function () {
-          var c = shell.classList.toggle('idx-fields-collapsed');
-          tg.textContent = c ? 'Show full property details' : 'Hide full property details';
+      if (fw) (fw.closest('.idx-wrapper-shell') || document.body).classList.add('idx-fields-collapsed');
+
+      /* IDX nav links visitors don't need */
+      document.querySelectorAll('.idx-wrapper-shell a').forEach(function (a) {
+        var txt = a.textContent.trim();
+        if (txt === 'New Search' || txt === 'My Account') a.style.display = 'none';
+      });
+
+      /* ---- Summary field rebuild: bare-minimum, buyer-question-first ---- */
+      var right = document.querySelector('.idx-details__right');
+      if (right && !right.getAttribute('data-ag-summary')) {
+        right.setAttribute('data-ag-summary', '1');
+        var cells = [].slice.call(right.querySelectorAll('.idx-field'));
+        var byLabel = {};
+        cells.forEach(function (c) {
+          var l = c.querySelector('.idx-label');
+          if (l) byLabel[l.textContent.trim()] = c;
         });
-        fw.parentNode.insertBefore(tg, fw);
+        ['County', 'Property Type'].forEach(function (l) {
+          if (byLabel[l]) byLabel[l].style.display = 'none';
+        });
+        function fv(id, label) {
+          var e = document.getElementById('IDX-field-' + id);
+          if (!e) return null;
+          var txt = e.textContent.replace(/\s+/g, ' ').trim();
+          if (label && txt.toLowerCase().indexOf(label.toLowerCase()) === 0) txt = txt.slice(label.length).trim();
+          return txt || null;
+        }
+        function cap(v) { return v === 'yes' ? 'Yes' : (v === 'no' ? 'No' : v); }
+        function mk(label, val) {
+          var d = document.createElement('div');
+          d.className = 'idx-field idx-field__ag';
+          var l = document.createElement('span'); l.className = 'idx-label'; l.textContent = label;
+          var v = document.createElement('span'); v.className = 'idx-text'; v.textContent = val;
+          d.appendChild(l); d.appendChild(v); return d;
+        }
+        function insAfter(node, ref) {
+          if (ref && ref.parentNode) ref.parentNode.insertBefore(node, ref.nextSibling);
+          else right.appendChild(node);
+        }
+        var priceEl = document.querySelector('.idx-details__price, .IDX-detailsPrice');
+        var priceTxt = priceEl ? priceEl.textContent.trim().split('\n')[0].trim() : null;
+        var priceNum = priceTxt ? parseFloat(priceTxt.replace(/[^0-9.]/g, '')) : null;
+        var sqftCell = byLabel['SqFt'];
+        var sqftNum = sqftCell ? parseFloat(sqftCell.textContent.replace(/[^0-9]/g, '')) : null;
+        var ppsf = (priceNum && sqftNum) ? '$' + Math.round(priceNum / sqftNum).toLocaleString() : null;
+        var anchor2 = sqftCell;
+        var garage = fv('garageSpaces', 'Garage Spaces');
+        if (garage && sqftCell) { var gc = mk('Garage Size', garage + (garage === '1' ? ' bay' : ' bays')); insAfter(gc, sqftCell); }
+        var acresCell = byLabel['Acres'];
+        var flood = fv('floodZoneCode', 'Flood Zone Code');
+        if (flood) insAfter(mk('Flood Zone', flood), acresCell || sqftCell);
+        var tail = byLabel['Property Sub Type'] || cells[cells.length - 1];
+        var monthly = fv('totalMonthlyFees', 'Total Monthly Fees');
+        var seq = [
+          ['Pool Private', cap(fv('poolPrivateYN', 'Pool Private'))],
+          ['Levels', fv('levels', 'Levels')],
+          ['Water View', cap(fv('waterViewYN', 'Water View'))],
+          ['Water View Type', fv('waterView', 'Water View Type')],
+          ['Waterfront', cap(fv('waterfrontYN', 'Waterfront'))],
+          ['Waterfront Features', fv('waterfrontFeatures', 'Waterfront Features')],
+          ['Association Fee Requirement', fv('associationFeeRequirement', 'Association Fee Requirement')],
+          ['Total Monthly Fees', monthly ? ('$' + monthly + ' / mo') : null],
+          ['Price', priceTxt],
+          ['Price Per SqFt', ppsf]
+        ];
+        seq.forEach(function (pair) {
+          if (pair[1]) { var c2 = mk(pair[0], pair[1]); insAfter(c2, tail); tail = c2; }
+        });
+        /* Second CTA row directly below the summary */
+        var basePanel = document.querySelector('.idx-cta-panel');
+        if (basePanel && !document.querySelector('.idx-cta-panel--below')) {
+          var p2 = basePanel.cloneNode(true);
+          p2.classList.add('idx-cta-panel--below');
+          var leadEl = p2.querySelector('.idx-cta-lead');
+          if (leadEl) leadEl.textContent = 'Questions on this property? Straight answers, fast.';
+          insAfter(p2, tail);
+        }
       }
     }
     /* Backstop: any IDX-native form that slips past the CSS gets re-routed
