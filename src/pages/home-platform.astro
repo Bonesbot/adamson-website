@@ -1,0 +1,91 @@
+---
+// /home-platform — the funnel target that replaces IDX Broker's Log in / Sign up.
+// Invitation-request capture for Coldwell Banker's Home Platform client portal.
+// When Ryan has a direct invite URL, swap the form for a button pointing there
+// (one edit, marked below).
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const title = 'Home Platform | The Adamson Group';
+const description = 'Your private home-search workspace with The Adamson Group on Coldwell Banker&rsquo;s Home Platform: curated listings, saved collections, and a direct line to your agents.';
+---
+
+<BaseLayout title={title} description={description} standalone>
+  <section class="section dark-section" style="min-height:80vh;padding-top:120px;">
+    <div class="container" style="max-width:680px;">
+      <div class="hp-card">
+        <p class="section-label" style="color:var(--color-cbgl-blue-light);margin-bottom:.5rem;">By Invitation</p>
+        <h1 class="font-display" style="font-size:clamp(1.6rem,3.5vw,2.3rem);margin-bottom:.75rem;">Your Private Home Search, Upgraded</h1>
+        <p class="hp-sub">Instead of another account and password on a listing site, we set our clients up on <strong>Home Platform</strong>, Coldwell Banker&rsquo;s private client workspace. One place for the homes we curate for you, your own saved collections and notes, and a direct line to Ryan and the team. No spam, no cold calls from strangers, no ads.</p>
+        <ul class="hp-points">
+          <li>Listings curated by your agent, not an algorithm</li>
+          <li>Save, compare and comment on homes with your family</li>
+          <li>Off-market and coming-soon homes when they fit</li>
+          <li>One tap to your agent, never a call center</li>
+        </ul>
+
+        <!-- SWAP POINT: when the direct Home Platform invite URL exists, replace
+             this form with: <a class="hp-btn" href="THE_URL">Open Home Platform</a> -->
+        <form id="hp-form" name="home-platform-invite" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="home-platform-invite" />
+          <p class="hp-hp"><label>Don&rsquo;t fill this out: <input name="bot-field" /></label></p>
+          <div class="hp-grid">
+            <div class="hp-field"><label for="hp-name">Name</label>
+              <input id="hp-name" name="name" type="text" required autocomplete="name" /></div>
+            <div class="hp-field"><label for="hp-email">Email</label>
+              <input id="hp-email" name="email" type="email" required autocomplete="email" /></div>
+          </div>
+          <button type="submit" class="hp-btn" id="hp-submit">Request My Invitation</button>
+          <p class="hp-status" id="hp-status" role="status" aria-live="polite"></p>
+        </form>
+        <p class="hp-alt">Working with us already? Text or call <a href="tel:+19417139234">(941) 713-9234</a> and we&rsquo;ll set you up on the spot.</p>
+      </div>
+    </div>
+  </section>
+
+<style is:global>
+  .hp-card { background:#fff; color:#1a1a1a; border-radius:12px; padding:clamp(1.5rem,4vw,3rem); box-shadow:0 24px 60px rgba(0,0,0,.35); }
+  .hp-card h1 { color:var(--color-cbgl-blue,#0a2540); }
+  .hp-sub { color:rgba(0,0,0,.6); margin-bottom:1.25rem; }
+  .hp-points { margin:0 0 1.5rem 1.1rem; color:rgba(0,0,0,.65); }
+  .hp-points li { margin-bottom:.4rem; }
+  .hp-grid { display:grid; gap:1rem; grid-template-columns:1fr; }
+  @media(min-width:560px){ .hp-grid { grid-template-columns:1fr 1fr; } }
+  .hp-field { margin-bottom:1rem; }
+  .hp-field label { display:block; font-family:var(--font-accent,Inter,sans-serif); font-size:.7rem; text-transform:uppercase; letter-spacing:.09em; color:rgba(0,0,0,.5); margin-bottom:.35rem; }
+  .hp-field input { width:100%; padding:.65rem .8rem; border:1px solid rgba(10,37,64,.25); border-radius:8px; font-size:1rem; }
+  .hp-field input:focus { outline:2px solid var(--color-gold,#c9a961); border-color:transparent; }
+  .hp-btn { display:block; width:100%; padding:.9rem; border:0; border-radius:999px; background:var(--color-gold,#c9a961); color:#000; font-weight:700; font-size:1rem; cursor:pointer; text-align:center; text-decoration:none; }
+  .hp-btn:hover { background:#d4b87a; }
+  .hp-btn:disabled { opacity:.6; }
+  .hp-status { min-height:1.2rem; font-size:.85rem; color:#b00020; margin-top:.5rem; }
+  .hp-hp { position:absolute; left:-9999px; }
+  .hp-alt { margin-top:1.25rem; font-size:.8rem; color:rgba(0,0,0,.45); }
+  .hp-done { text-align:center; padding:2rem 0; }
+  .hp-done h2 { color:var(--color-cbgl-blue,#0a2540); margin-bottom:.5rem; }
+  .hp-done p { color:rgba(0,0,0,.55); }
+</style>
+
+<script is:inline>
+  (function(){
+    document.getElementById('hp-form').addEventListener('submit', async function(e){
+      e.preventDefault();
+      var form=e.target, fd=new FormData(form), d=Object.fromEntries(fd.entries());
+      if (d['bot-field']) return;
+      var status=document.getElementById('hp-status'), btn=document.getElementById('hp-submit');
+      status.textContent='Sending…'; btn.disabled=true;
+      try{
+        var res=await fetch('/.netlify/functions/community-lead',{method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({name:d.name,email:d.email,notes:'Home Platform invitation request',
+            lead_type:'Buyer',community:'Home Platform',page:location.pathname})});
+        if(!res.ok) throw new Error('bad status '+res.status);
+        fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+          body:new URLSearchParams(fd).toString()}).catch(function(){});
+        var done=document.createElement('div'); done.className='hp-done';
+        done.innerHTML='<h2 class="font-display">Invitation requested</h2><p>We&rsquo;ll send your Home Platform invite personally, usually the same day.</p>';
+        form.replaceWith(done);
+      }catch(err){ status.textContent='Something went wrong. Please call (941) 713-9234.'; btn.disabled=false; }
+    });
+  })();
+</script>
+</BaseLayout>
