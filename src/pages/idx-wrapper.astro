@@ -217,6 +217,11 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
   .idx-cta-call { width:100%; color:rgba(255,255,255,.65) !important; font-size:.8rem; margin:0; }
   .idx-cta-call a { color:var(--color-gold,#c9a961) !important; }
 
+  /* ---- Leads never enter IDX's CRM: their forms are hidden; ours replace them ---- */
+  .idx-wrapper-shell form.IDX-contactForm,
+  .idx-wrapper-shell .IDX-detailsContactBtn,
+  .idx-wrapper-shell a[href*="/idx/moreinfo"] { display:none !important; }
+
   /* ---- Full property details collapsed behind a toggle ---- */
   .idx-fields-collapsed #IDX-fieldsWrapper { display:none; }
   .idx-wrapper-shell button.idx-fields-toggle { display:block; width:100%; text-align:center; margin:1rem 0; padding:.7rem; border:1px dashed rgba(10,37,64,.35) !important; border-radius:10px !important; background-color:#fff !important; color:var(--color-cbgl-blue,#0a2540) !important; font-weight:600; cursor:pointer; }
@@ -340,6 +345,44 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
         fw.parentNode.insertBefore(tg, fw);
       }
     }
+    /* Backstop: any IDX-native form that slips past the CSS gets re-routed
+       into our own lead pipeline instead of IDX Broker's CRM. */
+    document.addEventListener('submit', function (e) {
+      var f = e.target;
+      if (!f || !f.matches) return;
+      if (!f.matches('form.IDX-contactForm, form[action*="idxbroker.com"], form[id^="IDX-"]')) return;
+      e.preventDefault(); e.stopImmediatePropagation();
+      var val = function (sel) { var el = f.querySelector(sel); return el ? el.value : ''; };
+      var fields = {};
+      f.querySelectorAll('input[name], textarea[name], select[name]').forEach(function (el) {
+        if (el.type !== 'hidden' && el.name !== 'bot-field' && el.value) fields[el.name] = el.value.slice(0, 300);
+      });
+      var name = val('input[name*="ame"]') || fields.name || '';
+      var email = val('input[type="email"], input[name*="mail"]') || '';
+      var phone = val('input[type="tel"], input[name*="hone"]') || '';
+      var noteBits = [];
+      Object.keys(fields).forEach(function (k) {
+        if (!/ame$|mail|hone/i.test(k)) noteBits.push(k + ': ' + fields[k]);
+      });
+      noteBits.push('Source: IDX-native form intercepted on ' + location.pathname);
+      fetch('/.netlify/functions/community-lead', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, email: email, phone: phone,
+          notes: noteBits.join('\n'), lead_type: 'Buyer',
+          community: 'IDX Listing', page: location.pathname })
+      }).then(function () {
+        var done = document.createElement('p');
+        done.style.cssText = 'padding:1rem;background:#f4efe2;border-radius:8px;color:#0a2540;font-weight:600;';
+        done.textContent = 'Thank you. Your message went straight to The Adamson Group; expect a personal reply shortly.';
+        f.replaceWith(done);
+      }).catch(function () {
+        var err = document.createElement('p');
+        err.style.cssText = 'padding:.6rem 0;color:#b00020;font-size:.85rem;';
+        err.textContent = 'Something went wrong. Please call (941) 713-9234.';
+        f.appendChild(err);
+      });
+    }, true);
+
     run(); setTimeout(run, 1200); setTimeout(run, 3000);
   })();
 </script>
