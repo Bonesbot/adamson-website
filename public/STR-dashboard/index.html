@@ -189,7 +189,7 @@
     </div>
   </div>
   <footer>
-    <b>Data sources.</b> Zoning, overlay districts &amp; City of Sarasota limits: Sarasota County Enterprise GIS (CountyZoning &amp; ZoningOverlayDistrict FeatureServers), served through a cached proxy. Address geocoding: U.S. Census Geocoder. Basemap: CARTO / OpenStreetMap. STR market metrics shown here are placeholder samples pending the AirROI API connection described in the project spec.<br>
+    <b>Data sources.</b> Zoning, overlay districts &amp; City of Sarasota limits: Sarasota County Enterprise GIS (CountyZoning &amp; ZoningOverlayDistrict FeatureServers), served through a cached proxy. Address geocoding: U.S. Census Geocoder. Basemap: OpenStreetMap. STR market metrics shown here are placeholder samples pending the AirROI API connection described in the project spec.<br>
     Sarasota County GIS data is provided &ldquo;as is&rdquo; without warranty; figures are estimates, deemed reliable but not guaranteed. Short-term-rental eligibility is jurisdiction- and property-specific and can be overridden by HOA or deed restrictions. Nothing here constitutes legal, zoning, or investment advice. &copy; 2026 The Adamson Group &bull; Coldwell Banker Realty.
   </footer>
 </div>
@@ -222,8 +222,8 @@ function classify(group, code, muni){
 }
 
 var map = L.map('map', {scrollWheelZoom:true}).setView(SIESTA, 14);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-  {attribution:'&copy; OpenStreetMap, &copy; CARTO', maxZoom:20}).addTo(map);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {attribution:'&copy; OpenStreetMap contributors', maxZoom:19}).addTo(map);
 
 function strColor(g){
   if(g==="Residential Single Family") return "#b23b3b";
