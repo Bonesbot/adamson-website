@@ -7,7 +7,7 @@
 // browser always gets a 200 as long as the lead landed SOMEWHERE:
 //   1. Supabase  -> public.leads                     (THE core lead queue)
 //   2. Zoho CRM  -> Leads, Lead_Status "Landing Pg - New"
-//   3. Gmail     -> a DRAFT to Ryan@Adamson-group.com (queued, not sent — Ryan reviews)
+//   3. Gmail     -> notification EMAIL SENT to the routed team (draft fallback if send scope missing)
 //
 // Schema: supabase/migrations/leads.sql. Every capture form on the site writes to
 // public.leads with a `<page-slug>:<intent>` source tag, so a new community
@@ -205,6 +205,21 @@ async function queueGmailDraft(lead, zohoId) {
     body,
   ].join('\r\n');
 
+  // SEND the team notification (Ryan requested auto-send 2026-08-27: internal
+  // notification to the routed agents only, never to the consumer). If the
+  // OAuth token lacks send scope, fall back to the old draft behavior so no
+  // lead notification is ever lost.
+  const sendRes = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ raw: b64url(mime) }),
+  });
+  if (sendRes.ok) {
+    const sent = await sendRes.json().catch(() => ({}));
+    return { id: sent.id, sent: true };
+  }
+  const sendErr = await sendRes.json().catch(() => ({}));
+  console.warn('community-lead: gmail send failed, falling back to draft:', sendRes.status, JSON.stringify(sendErr).slice(0, 200));
   const res = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/drafts', {
     method: 'POST',
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
@@ -212,7 +227,7 @@ async function queueGmailDraft(lead, zohoId) {
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(`gmail draft failed: ${res.status} ${JSON.stringify(data)}`);
-  return { id: data.id };
+  return { id: data.id, sent: false };
 }
 
 // ── Supabase ───────────────────────────────────────────────────────────────────
