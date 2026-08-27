@@ -195,6 +195,32 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
     color: rgba(0, 0, 0, 0.45) !important;
   }
   .idx-attribution-min a { color: rgba(0, 0, 0, 0.5) !important; }
+
+  /* ---- Funnel: no IDX visitor accounts; Home Platform instead ---- */
+  .idx-wrapper-shell a[href*="/idx/userlogin"],
+  .idx-wrapper-shell a[href*="/idx/usersignup"],
+  .idx-wrapper-shell .IDX-signupLoginToggle { display:none !important; }
+  .idx-hp-btn { display:inline-block; background:var(--color-cbgl-blue,#0a2540); color:#fff !important; border-radius:999px; padding:.45rem 1.1rem; font-weight:600; font-size:.85rem; text-decoration:none; }
+  .idx-hp-btn:hover { background:var(--color-gold,#c9a961); color:#000 !important; }
+
+  /* ---- Detail-page declutter ---- */
+  .idx-wrapper-shell .IDX-similar-listings { display:none !important; }
+
+  /* ---- Detail CTA panel (injected by script below) ---- */
+  .idx-cta-panel { background:var(--color-cbgl-blue,#0a2540); border-radius:12px; padding:1.25rem 1.5rem; margin:1.25rem 0; display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; }
+  .idx-cta-panel .idx-cta-lead { color:#fff !important; font-weight:600; margin-right:auto; font-size:1rem; font-family:var(--font-display,Georgia,serif); }
+  .idx-cta-btn { display:inline-block; border-radius:999px; padding:.7rem 1.4rem; font-weight:700; text-decoration:none; font-size:.95rem; }
+  a.idx-cta-btn--gold { background:var(--color-gold,#c9a961); color:#000 !important; }
+  a.idx-cta-btn--gold:hover { background:#d4b87a; color:#000 !important; }
+  a.idx-cta-btn--ghost { border:1px solid rgba(255,255,255,.6); color:#fff !important; }
+  a.idx-cta-btn--ghost:hover { border-color:var(--color-gold,#c9a961); color:var(--color-gold,#c9a961) !important; }
+  .idx-cta-call { width:100%; color:rgba(255,255,255,.65) !important; font-size:.8rem; margin:0; }
+  .idx-cta-call a { color:var(--color-gold,#c9a961) !important; }
+
+  /* ---- Full property details collapsed behind a toggle ---- */
+  .idx-fields-collapsed #IDX-fieldsWrapper { display:none; }
+  .idx-wrapper-shell button.idx-fields-toggle { display:block; width:100%; text-align:center; margin:1rem 0; padding:.7rem; border:1px dashed rgba(10,37,64,.35) !important; border-radius:10px !important; background-color:#fff !important; color:var(--color-cbgl-blue,#0a2540) !important; font-weight:600; cursor:pointer; }
+  .idx-wrapper-shell button.idx-fields-toggle:hover { background-color:#f6f1e4 !important; }
 </style>
 
 <script is:inline>
@@ -244,5 +270,76 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
     }
     minimizeAttribution();
     setTimeout(minimizeAttribution, 1200); // IDX injects content asynchronously
+  })();
+</script>
+
+<script is:inline>
+  /* Funnel + declutter layer: hide IDX accounts (Home Platform instead),
+     prominent showing/question CTAs, collapse the long field tables. */
+  (function () {
+    var isDetail = /\/idx\/details\//.test(location.pathname);
+
+    function run() {
+      var login = document.querySelector('.idx-wrapper-shell a[href*="/idx/userlogin"]');
+      var navBar = login ? login.parentElement : null;
+      if (navBar && !navBar.querySelector('.idx-hp-btn')) {
+        var hp = document.createElement('a');
+        hp.className = 'idx-hp-btn'; hp.href = '/home-platform';
+        hp.textContent = 'Home Platform';
+        navBar.appendChild(hp);
+      }
+      if (!isDetail) return;
+
+      var m = location.pathname.match(/\/details\/listing\/[^/]+\/([^/]+)\/([^/?]+)/);
+      var mls = m ? m[1] : '';
+      var addr = m ? decodeURIComponent(m[2]).replace(/-/g, ' ').replace(/ FL \d{5}.*$/, '').trim() : '';
+      var showUrl = '/request-showing?intent=showing&mls=' + encodeURIComponent(mls) + '&addr=' + encodeURIComponent(addr);
+      var askUrl = '/request-showing?intent=question&mls=' + encodeURIComponent(mls) + '&addr=' + encodeURIComponent(addr);
+
+      var head = document.getElementById('IDX-detailsHead');
+      if (head && !document.querySelector('.idx-cta-panel')) {
+        var p = document.createElement('div');
+        p.className = 'idx-cta-panel';
+        p.innerHTML =
+          '<span class="idx-cta-lead">Like this home? See it in person.</span>' +
+          '<a class="idx-cta-btn idx-cta-btn--gold" href="' + showUrl + '">Request a Showing</a>' +
+          '<a class="idx-cta-btn idx-cta-btn--ghost" href="' + askUrl + '">Ask a Question</a>' +
+          '<p class="idx-cta-call">or reach The Adamson Group directly: <a href="tel:+19417139234">(941) 713-9234</a></p>';
+        head.parentNode.insertBefore(p, head.nextSibling);
+      }
+
+      var ss = document.getElementById('IDX-scheduleShowing');
+      if (ss) { var sa = ss.tagName === 'A' ? ss : ss.querySelector('a'); if (sa) { sa.href = showUrl; sa.removeAttribute('onclick'); } }
+      var mi = document.getElementById('IDX-moreinfo');
+      if (mi) { var ma = mi.tagName === 'A' ? mi : mi.querySelector('a'); if (ma) { ma.href = askUrl; ma.removeAttribute('onclick'); } }
+
+      document.querySelectorAll('.idx-wrapper-shell h2, .idx-wrapper-shell h3').forEach(function (h) {
+        if (/^\s*Similar Listings\s*$/i.test(h.textContent)) h.style.display = 'none';
+      });
+
+      document.querySelectorAll('.idx-wrapper-shell button, .idx-wrapper-shell a, .idx-wrapper-shell span').forEach(function (el) {
+        var txt = el.textContent.trim();
+        if (txt === 'English' || txt === 'Espa\u00f1ol' || txt === 'Espanol') {
+          var box = el.closest('div');
+          if (box && box.textContent.trim().length < 30) box.style.display = 'none';
+          else el.style.display = 'none';
+        }
+      });
+
+      var fw = document.getElementById('IDX-fieldsWrapper');
+      if (fw && !document.querySelector('.idx-fields-toggle')) {
+        var shell = fw.closest('.idx-wrapper-shell') || document.body;
+        shell.classList.add('idx-fields-collapsed');
+        var tg = document.createElement('button');
+        tg.type = 'button'; tg.className = 'idx-fields-toggle';
+        tg.textContent = 'Show full property details';
+        tg.addEventListener('click', function () {
+          var c = shell.classList.toggle('idx-fields-collapsed');
+          tg.textContent = c ? 'Show full property details' : 'Hide full property details';
+        });
+        fw.parentNode.insertBefore(tg, fw);
+      }
+    }
+    run(); setTimeout(run, 1200); setTimeout(run, 3000);
   })();
 </script>
