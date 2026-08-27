@@ -3,6 +3,7 @@
 // Modeled on gulf-and-bay-club-beachfront.astro; data baked from Supabase MLS snapshot 2026-08-27.
 // Re-bake the numbers before season; hand edits to copy are fine.
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import IdxAreaShowcase from '@/components/IdxAreaShowcase.astro';
 
 const description = 'Country Club Shores, Longboat Key (34228) single-family market: 20 closed sales in the last 180 days, average $3,136,500, with canal-front, open-bayfront and interior homes tracked separately, plus price per sqft, days on market and sale-to-list ratios from live Stellar MLS data.';
 
@@ -546,8 +547,13 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- IDX showcase pending: create an IDX Broker saved search / showcase widget for
-       Country Club Shores and drop an <IdxAreaShowcase widgetId=... /> here, matching the G&B pages. -->
+  <IdxAreaShowcase
+    widgetId="50171"
+    scriptSrc="https://adamsonfl.idxbroker.com/idx/customshowcasejs.php?widgetid=50171"
+    areaName="Country Club Shores"
+    label="Available Now"
+    showOffMarketCta={false}
+  />
 
   <section class="section light-section">
     <div class="container">
