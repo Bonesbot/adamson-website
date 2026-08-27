@@ -31,6 +31,10 @@
 // easy-to-edit config: ./lead-routing.js — e.g. Siesta Key -> Ryan + Kelli.
 import { routeFor } from './lead-routing.js';
 
+// Home platform CRM forward: mimics the IDX Broker lead-email format so their
+// inbound parser files the lead automatically. Fire-and-forget; never fatal.
+import { forwardLeadToHomePlatform } from './homeplatform-lead-forward.js';
+
 const json = (statusCode, obj) => ({
   statusCode,
   headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
@@ -431,6 +435,28 @@ export const handler = async (event) => {
 
   if (mailed.status === 'rejected') console.error('community-lead: gmail —', mailed.reason);
   else if (mailed.value && mailed.value.skipped) console.warn('community-lead: gmail skipped —', mailed.value.skipped);
+
+  // ── Home platform forward (after Supabase write + our own notifications) ────
+  // Failure logs to the function console and never breaks the visitor response.
+  try {
+    const { first, last } = splitName(lead.name);
+    const fwd = await forwardLeadToHomePlatform({
+      firstName: first || '',
+      lastName: last || '',
+      email: lead.email,
+      phone: lead.phone || '',
+      message: lead.notes || '',
+      sourceUrl: lead.page
+        ? (lead.page.startsWith('http') ? lead.page : `https://adamsonfl.com${lead.page}`)
+        : 'https://adamsonfl.com',
+      // Community forms carry no structured listing data — omit `listing` so the
+      // email goes out as a general inquiry (the module handles the formatting).
+    });
+    if (fwd && fwd.ok) console.log('community-lead: home platform forwarded', fwd.id);
+    else if (fwd) console.error('community-lead: home platform forward not ok', fwd.status);
+  } catch (err) {
+    console.error('community-lead: home platform forward —', String(err && err.message || err));
+  }
 
   // Only a total loss (nowhere recorded at all) is an error to the visitor — Netlify
   // Forms still has the submission via the page's mirrored POST.
