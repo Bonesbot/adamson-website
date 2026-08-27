@@ -60,9 +60,9 @@ const iconFor = (type?: 'walk' | 'drive' | 'bike') =>
         if (!el || typeof L === 'undefined') return;
         var lat = parseFloat(el.dataset.lat), lng = parseFloat(el.dataset.lng);
         var map = L.map(mapId, { scrollWheelZoom: false }).setView([lat, lng], 15);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
           maxZoom: 19,
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
         var icon = L.divIcon({
           html: '<div class="nc-pin"><div class="body" style="background:#C5A55A"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/></svg></div></div>',
