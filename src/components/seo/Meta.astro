@@ -5,12 +5,23 @@ interface Props {
   ogImage: string;
   canonicalUrl: string;
   noIndex?: boolean;
+  /** og:site_name; the LLL layout overrides this for longboatlido.com pages. */
+  siteName?: string;
 }
 
-const { title, description, ogImage, canonicalUrl, noIndex = false } = Astro.props;
+const {
+  title,
+  description,
+  ogImage,
+  canonicalUrl,
+  noIndex = false,
+  siteName = 'Ryan Adamson Luxury Real Estate',
+} = Astro.props;
 
-// Open Graph requires absolute image URLs; resolve site-relative paths.
-const ogImageAbs = ogImage.startsWith('http') ? ogImage : `https://adamsonfl.com${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
+// Open Graph requires absolute image URLs; resolve site-relative paths against
+// the building site's domain (astro.config `site`, which the SITE env var picks).
+const siteOrigin = Astro.site?.origin ?? 'https://adamsonfl.com';
+const ogImageAbs = ogImage.startsWith('http') ? ogImage : `${siteOrigin}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
 ---
 
 <title>{title}</title>
@@ -25,7 +36,7 @@ const ogImageAbs = ogImage.startsWith('http') ? ogImage : `https://adamsonfl.com
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImageAbs} />
 <meta property="og:url" content={canonicalUrl} />
-<meta property="og:site_name" content="Ryan Adamson Luxury Real Estate" />
+<meta property="og:site_name" content={siteName} />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />

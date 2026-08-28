@@ -1,0 +1,79 @@
+---
+/**
+ * LongboatLido.com base layout (SITE=lll build target).
+ *
+ * Mirrors src/layouts/BaseLayout.astro's props API so pages port between the
+ * two sites with only the layout import changing. Shared pieces (global.css,
+ * Meta, JsonLd) come from src/ via the '@' alias; the header and footer are
+ * the LLL co-brand versions (Anne Schneider & Ryan Adamson, equal billing).
+ */
+import '@/styles/global.css';
+import Meta from '@/components/seo/Meta.astro';
+import JsonLd from '@/components/seo/JsonLd.astro';
+import LLLHeader from '../components/LLLHeader.astro';
+import LLLFooter from '../components/LLLFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  jsonLd?: Record<string, any> | Record<string, any>[];
+  noIndex?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogImage = '/images/og-default.jpg',
+  canonicalUrl,
+  jsonLd,
+  noIndex = false,
+} = Astro.props;
+
+const siteTitle = 'Longboat Lido | Longboat Key & Lido Key Real Estate';
+const fullTitle = title === 'Home' ? siteTitle : `${title} | Longboat Lido`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <Meta
+      title={fullTitle}
+      description={description}
+      ogImage={ogImage}
+      canonicalUrl={canonicalUrl || Astro.url.href}
+      noIndex={noIndex}
+      siteName="Longboat Lido"
+    />
+
+    {jsonLd && <JsonLd data={jsonLd} />}
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Home Platform Pixel Tracker (connects the site to the CRM) -->
+    <!-- begin Pixel Code -->
+    <script src="https://www.homeplatform.com/cxlp/a.min.js" id="cxlp-ajs" data-client-id="fl4xsh4e3vj4" async is:inline></script>
+    <!-- end Pixel Code -->
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <LLLHeader />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <LLLFooter />
+  </body>
+</html>

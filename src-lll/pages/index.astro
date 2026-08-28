@@ -1,0 +1,87 @@
+---
+/**
+ * LongboatLido.com home: v1 launch scaffold.
+ *
+ * Deliberately lean and honest: one community page exists today (Country Club
+ * Shores), so the home page introduces the co-brand and routes to it. Add a
+ * card per community as new Longboat/Lido farm pages come online.
+ *
+ * noIndex stays true until Anne's details are filled in and Ryan approves the
+ * launch copy; flip it with the DNS cutover.
+ */
+import LLLLayout from '../layouts/LLLLayout.astro';
+
+const description =
+  'Longboat Key and Lido Key real estate with Anne Schneider and Ryan Adamson of Coldwell Banker Realty, St. Armands: neighborhood-level closed-sale data from live Stellar MLS records, current availability, and local representation from the sand to the bay.';
+---
+
+<LLLLayout title="Home" description={description} noIndex>
+  <!-- Hero -->
+  <section class="bg-[var(--color-navy,#1B2A4A)] text-white">
+    <div class="container py-24 text-center">
+      <h1 class="font-display text-4xl md:text-5xl font-bold leading-tight">
+        Longboat Key &amp; Lido Key,<br />
+        <span class="text-[var(--color-gold,#C5A55A)]">by the numbers</span>
+      </h1>
+      <p class="mt-6 max-w-2xl mx-auto text-white/70 text-lg leading-relaxed">
+        Neighborhood-level market data from live Stellar MLS records, and
+        representation from two agents who work these islands every day.
+      </p>
+      <p class="mt-4 font-accent text-xs uppercase tracking-[0.2em] text-white/50">
+        Anne Schneider &amp; Ryan Adamson &middot; Coldwell Banker Realty, St. Armands
+      </p>
+    </div>
+  </section>
+
+  <!-- Communities -->
+  <section class="bg-white">
+    <div class="container py-20">
+      <h2 class="font-display text-3xl font-bold text-[var(--color-navy,#1B2A4A)] text-center mb-12">
+        Community Market Pages
+      </h2>
+      <div class="max-w-xl mx-auto">
+        <a
+          href="/country-club-shores/"
+          class="block border border-gray-200 rounded-lg p-8 hover:border-[var(--color-gold,#C5A55A)] hover:shadow-lg transition-all no-underline"
+        >
+          <p class="font-accent text-xs uppercase tracking-[0.2em] text-[var(--color-gold,#C5A55A)] mb-2">
+            Longboat Key &middot; 34228
+          </p>
+          <h3 class="font-display text-2xl font-bold text-[var(--color-navy,#1B2A4A)] mb-3">
+            Country Club Shores
+          </h3>
+          <p class="text-sm text-gray-500 leading-relaxed">
+            Closed-sale data for the canal-front neighborhood on the south end of
+            Longboat Key: canal-front, open-bayfront, and interior homes tracked
+            separately, with price per square foot, days on market, and
+            sale-to-list ratios from live Stellar MLS records.
+          </p>
+          <p class="mt-4 font-accent text-xs uppercase tracking-[0.15em] text-[var(--color-navy,#1B2A4A)]">
+            See the numbers &rarr;
+          </p>
+        </a>
+        <!-- Next community cards land here as Longboat/Lido farm pages come online. -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="bg-gray-50 border-t border-gray-200">
+    <div class="container py-16 text-center">
+      <h2 class="font-display text-2xl font-bold text-[var(--color-navy,#1B2A4A)] mb-4">
+        Thinking about a move on the islands?
+      </h2>
+      <p class="max-w-xl mx-auto text-sm text-gray-500 leading-relaxed mb-6">
+        Anne and Ryan work Longboat Key and Lido Key together. Reach either of
+        us for current availability, off-market opportunities, or a
+        no-obligation valuation grounded in closed-sale data.
+      </p>
+      <p class="font-accent text-sm text-[var(--color-navy,#1B2A4A)]">
+        Ryan Adamson &middot; <a href="tel:+19417139234" class="hover:text-[var(--color-gold,#C5A55A)]">(941) 713-9234</a>
+      </p>
+      <p class="font-accent text-sm text-[var(--color-navy,#1B2A4A)] mt-1">
+        Anne Schneider &middot; [ANNE PHONE]
+      </p>
+    </div>
+  </section>
+</LLLLayout>

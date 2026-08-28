@@ -10,3 +10,36 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+
+# ---------------------------------------------------------------------------
+# LongboatLido.com spinoff (the `longboatlido` Netlify project, SITE=lll build)
+# This file is shared by both Netlify projects; every rule below is scoped to
+# an explicit host, so it only fires on the project that serves that domain.
+# ---------------------------------------------------------------------------
+
+# ccshores.com: Country Club Shores mailer vanity domain. Always a 301 to the
+# canonical page, with UTM tags so mailer traffic is separable in analytics.
+# Inert until ccshores.com DNS points at the longboatlido project.
+[[redirects]]
+  from = "https://ccshores.com/*"
+  to = "https://longboatlido.com/country-club-shores/?utm_source=mailer&utm_medium=direct-mail&utm_campaign=ccshores"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.ccshores.com/*"
+  to = "https://longboatlido.com/country-club-shores/?utm_source=mailer&utm_medium=direct-mail&utm_campaign=ccshores"
+  status = 301
+  force = true
+
+# TODO(launch): uncomment at DNS cutover, once longboatlido.com resolves and
+# serves the page. This moves the old hub URL and its earned authority to the
+# new domain. Until then the adamsonfl.com page stays live so mail and search
+# traffic never hits a dead domain. Remember to also remove
+# src/pages/longboat-key/country-club-shores.astro in the same commit (force
+# is set so the rule wins over the built file either way).
+# [[redirects]]
+#   from = "https://adamsonfl.com/longboat-key/country-club-shores"
+#   to = "https://longboatlido.com/country-club-shores/"
+#   status = 301
+#   force = true

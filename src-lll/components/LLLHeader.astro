@@ -1,0 +1,44 @@
+---
+/**
+ * LongboatLido.com header: co-brand, equal billing, no AdamsonFL nav.
+ * Text wordmark until a dedicated LLL mark exists; both agents named on the
+ * right with the brokerage, per the dual-logo rule in _shared/brand/brand.json.
+ */
+const nav = [
+  { label: 'Home', href: '/' },
+  { label: 'Country Club Shores', href: '/country-club-shores/' },
+];
+---
+
+<header class="bg-[var(--color-navy,#1B2A4A)] text-white">
+  <div class="container flex flex-col md:flex-row items-center justify-between gap-3 py-4">
+    <a href="/" class="flex items-baseline gap-2 no-underline">
+      <span class="font-display text-2xl font-bold tracking-wide text-white">Longboat</span>
+      <span class="font-display text-2xl font-bold tracking-wide text-[var(--color-gold,#C5A55A)]">Lido</span>
+    </a>
+
+    <nav aria-label="Main">
+      <ul class="flex items-center gap-6" role="list">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="font-accent text-xs uppercase tracking-[0.15em] text-white/80 hover:text-[var(--color-gold,#C5A55A)] transition-colors"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="text-center md:text-right leading-tight">
+      <p class="font-accent text-xs uppercase tracking-[0.15em] text-white">
+        Anne Schneider &amp; Ryan Adamson
+      </p>
+      <p class="font-accent text-[10px] uppercase tracking-[0.2em] text-white/60 mt-0.5">
+        Coldwell Banker Realty, St. Armands
+      </p>
+    </div>
+  </div>
+</header>

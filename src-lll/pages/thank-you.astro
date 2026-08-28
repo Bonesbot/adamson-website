@@ -1,0 +1,39 @@
+---
+/**
+ * LongboatLido.com form confirmation page. The Country Club Shores lead forms
+ * POST here (action="/thank-you/"). Co-brand voice: "we", not "I".
+ */
+import LLLLayout from '../layouts/LLLLayout.astro';
+
+const description =
+  'Thank you for reaching out to Anne Schneider and Ryan Adamson. Your message has been received and one of us will personally be in touch within one business day.';
+---
+
+<LLLLayout title="Thank You" description={description} noIndex={true}>
+  <section class="relative overflow-hidden pt-36 pb-24">
+    <div class="absolute inset-0" style="background-color: var(--color-navy);"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70"></div>
+
+    <div class="relative z-10 container text-center">
+      <!-- Gold confirmation medallion -->
+      <div class="mx-auto mb-8 flex h-16 w-16 items-center justify-center rounded-full border border-[var(--color-gold)]/40 bg-[var(--color-gold)]/10">
+        <svg class="h-7 w-7 text-[var(--color-gold)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+
+      <p class="section-label text-[var(--color-gold)] mb-4">Message Received</p>
+      <h1 class="font-display text-white text-4xl sm:text-5xl mb-6">Thank You</h1>
+      <p class="text-lg text-white/70 max-w-xl mx-auto leading-relaxed">
+        Your message has reached us directly. We personally review every inquiry
+        and one of us will be in touch within one business day.
+      </p>
+
+      <div class="mt-12">
+        <a href="/" class="font-accent text-xs uppercase tracking-[0.15em] text-[var(--color-gold)] hover:text-white transition-colors">
+          &larr; Back to LongboatLido.com
+        </a>
+      </div>
+    </div>
+  </section>
+</LLLLayout>

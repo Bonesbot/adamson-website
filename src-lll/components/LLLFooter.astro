@@ -1,0 +1,94 @@
+---
+/**
+ * LongboatLido.com footer: co-brand contact block, CB St. Armands office,
+ * the same MLS disclaimer language as the hub site, and a plain (non-redirect)
+ * link back to AdamsonFL.com.
+ *
+ * ANNE PLACEHOLDERS: her phone, email, and license number are bracketed below.
+ * Fill them in before the domain goes live; do not invent values.
+ */
+const currentYear = new Date().getFullYear();
+---
+
+<!-- Gold accent line at top of footer -->
+<div class="h-1 bg-gradient-to-r from-[var(--color-gold,#C5A55A)] via-[var(--color-gold-light,#E8D5A3)] to-[var(--color-gold,#C5A55A)]"></div>
+
+<footer class="bg-black text-white/80">
+  <div class="container py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+
+      <!-- Brand Column -->
+      <div>
+        <p class="font-display text-2xl font-bold text-white mb-1">
+          Longboat <span class="text-[var(--color-gold,#C5A55A)]">Lido</span>
+        </p>
+        <p class="font-accent text-xs uppercase tracking-[0.2em] text-[var(--color-cbgl-blue-light,#52a8ff)] mb-4">
+          Coldwell Banker Global Luxury
+        </p>
+        <p class="text-sm leading-relaxed text-white/50">
+          Neighborhood-level market data and representation on Longboat Key and
+          Lido Key, from Anne Schneider and Ryan Adamson.
+        </p>
+      </div>
+
+      <!-- Agents -->
+      <div>
+        <h4 class="font-accent text-xs uppercase tracking-[0.15em] text-white font-semibold mb-4">Your Agents</h4>
+        <div class="space-y-6 text-sm text-white/50">
+          <div>
+            <p class="text-white/80 font-semibold">Anne Schneider</p>
+            <p>[ANNE PHONE]</p>
+            <p>[ANNE EMAIL]</p>
+          </div>
+          <div>
+            <p class="text-white/80 font-semibold">Ryan Adamson</p>
+            <p>
+              <a href="tel:+19417139234" class="hover:text-[var(--color-gold,#C5A55A)] transition-colors">(941) 713-9234</a>
+            </p>
+            <p>
+              <a href="mailto:Ryan&#64;Adamson-Group&#46;com" class="hover:text-[var(--color-gold,#C5A55A)] transition-colors">Ryan&#64;Adamson-Group&#46;com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Office -->
+      <div>
+        <h4 class="font-accent text-xs uppercase tracking-[0.15em] text-white font-semibold mb-4">Office</h4>
+        <div class="space-y-3 text-sm text-white/50">
+          <p class="not-italic">
+            <span class="block text-white/70">Coldwell Banker Realty, St. Armands</span>
+            <a
+              href="https://maps.google.com/?q=Coldwell%20Banker%20Realty%2C%20St.%20Armands%2C%20423%20St%20Armands%20Cir%2C%20Sarasota%2C%20FL%2034236"
+              target="_blank"
+              rel="noopener"
+              class="hover:text-[var(--color-gold,#C5A55A)] transition-colors"
+            >
+              423 St Armands Cir, Sarasota, FL 34236
+            </a>
+          </p>
+          <p>
+            <a href="https://adamsonfl.com/" class="hover:text-[var(--color-gold,#C5A55A)] transition-colors">
+              Sarasota-wide coverage: AdamsonFL.com
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="mt-12 pt-8 border-t border-white/10">
+      <p class="text-xs text-white/30 text-center mb-4">
+        Disclaimer: All information contained on this website is deemed reliable but not guaranteed. All properties are subject to prior sale, change, or withdrawal notice. Market data sourced from Stellar MLS. Statistics are approximate and subject to change.
+      </p>
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-white/30">
+          &copy; {currentYear} Anne Schneider [ANNE LICENSE] &amp; Ryan Adamson SL3457783. Coldwell Banker Realty. All rights reserved.
+        </p>
+        <p class="text-xs text-white/30">
+          Equal Housing Opportunity. Each office is independently owned and operated.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

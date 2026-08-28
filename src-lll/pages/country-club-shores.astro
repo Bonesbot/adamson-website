@@ -1,0 +1,973 @@
+---
+// Country Club Shores, Longboat Key : community landing page (Adamson x Schneider).
+// Modeled on gulf-and-bay-club-beachfront.astro; data baked from Supabase MLS snapshot 2026-08-27.
+// Re-bake the numbers before season; hand edits to copy are fine.
+import LLLLayout from '../layouts/LLLLayout.astro';
+import IdxAreaShowcase from '@/components/IdxAreaShowcase.astro';
+
+const description = 'Country Club Shores, Longboat Key (34228) single-family market: 20 closed sales in the last 180 days, average $3,136,500, with canal-front, open-bayfront and interior homes tracked separately, plus price per sqft, days on market and sale-to-list ratios from live Stellar MLS data.';
+
+const jsonLd = [
+  {
+    '@type': 'Place',
+    name: 'Country Club Shores',
+    description: 'A canal-front single-family neighborhood on the south end of Longboat Key, with deep-water canals off Sarasota Bay and the Longboat Key Club across Gulf of Mexico Drive.',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Longboat Key',
+      addressRegion: 'FL',
+      postalCode: '34228',
+      addressCountry: 'US',
+    },
+  },
+  {
+    '@type': 'WebPage',
+    name: 'Country Club Shores Home Sales, Longboat Key',
+    description: description,
+    url: 'https://longboatlido.com/country-club-shores',
+    dateModified: '2026-08-27',
+    author: [
+      {
+        '@type': 'RealEstateAgent',
+        name: 'Anne Schneider',
+        worksFor: { '@type': 'Organization', name: 'Coldwell Banker Realty, St. Armands' },
+      },
+      {
+        '@type': 'RealEstateAgent',
+        name: 'Ryan Adamson',
+        worksFor: { '@type': 'Organization', name: 'Coldwell Banker Realty, St. Armands' },
+      },
+    ],
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'How much of Country Club Shores is canal-front?', acceptedAnswer: { '@type': 'Answer', text: 'Most of the neighborhood sits on deep-water canals: 22 of the 25 single-family closings in the 12 months ending August 27, 2026 were canal-front homes, with a small number of open-bayfront point lots and interior homes along Gulf of Mexico Drive.' } },
+      { '@type': 'Question', name: 'What does a canal-front home in Country Club Shores sell for?', acceptedAnswer: { '@type': 'Answer', text: 'Canal-front homes closed at a median of $2,750,000 over the 12 months ending August 27, 2026, while the rare open-bayfront homes commanded far more. See the on-page table for the full segment breakdown.' } }
+    ],
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://longboatlido.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Country Club Shores', item: 'https://longboatlido.com/country-club-shores' },
+    ],
+  },
+];
+---
+
+<LLLLayout title='Country Club Shores Homes, Longboat Key' description={description} jsonLd={jsonLd}>
+
+  <section class="gbc-hero gbc-hero--video">
+    <div class="gbc-hero-bg">
+      <!-- HERO PLACEHOLDER: drop the aerial at /public/videos/country-club-shores.mp4
+           and a poster frame at /public/videos/country-club-shores-poster.jpg -->
+      <video
+        class="gbc-hero-video"
+        autoplay muted loop playsinline
+        preload="metadata"
+        poster="/videos/country-club-shores-poster.jpg"
+        aria-hidden="true" tabindex="-1">
+        <source src="/videos/country-club-shores.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="gbc-hero-overlay"></div>
+    <div class="relative z-10 container">
+      <hr class="gbc-hero-rule" />
+      <p class="section-label text-cbgl-blue-light mb-3">Longboat Key &middot; 34228 &middot; Canal-Front</p>
+      <h1 class="font-display text-white mb-4">Country Club Shores</h1>
+    </div>
+  </section>
+
+  <section class="section light-section">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
+        <div>
+          <h2 class="accent-underline mb-6">About the Shores</h2>
+          <p class="gbc-about">Country Club Shores is the south end of Longboat Key&rsquo;s signature canal neighborhood: four sections of single-family homes laid out in the late 1950s and 1960s on streets named for golf and sailing, from Putter and Birdie Lane to Ketch, Sloop and Halyard. Nearly every home backs to a deep-water canal off Sarasota Bay, minutes by boat to New Pass and the Gulf, with the Longboat Key Club&rsquo;s fairways just across Gulf of Mexico Drive and St. Armands Circle a five-minute drive south. The housing stock runs from original ranch homes on wide canal lots to brand-new coastal construction, which is exactly what makes the market here worth tracking closely. This page follows the real closed-sale market, straight from the MLS, with canal-front, open-bayfront and interior homes broken out separately.</p>
+          <div class="flex flex-wrap gap-3 mt-6">
+            <span class="gbc-chip">Deep-Water Canals</span>
+            <span class="gbc-chip">Minutes to New Pass</span>
+            <span class="gbc-chip">Single-Family Only</span>
+            <span class="gbc-chip">Golf Across the Street</span>
+            <span class="gbc-chip">5 Min to St. Armands</span>
+            <span class="gbc-chip">No HOA Towers</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3 lg:gap-4">
+          <!-- PHOTO PLACEHOLDERS: replace each .ccs-ph block with a <picture> like the G&B page
+               once Country Club Shores photography is shot. -->
+          <figure class="gbc-fig"><div class="ccs-ph"><span>Canal &amp; dock photo</span></div></figure>
+          <figure class="gbc-fig"><div class="ccs-ph"><span>Aerial of the four sections</span></div></figure>
+          <figure class="gbc-fig"><div class="ccs-ph"><span>New construction photo</span></div></figure>
+          <figure class="gbc-fig"><div class="ccs-ph"><span>Bayfront point lot photo</span></div></figure>
+          <figure class="gbc-fig gbc-fig-wide"><div class="ccs-ph"><span>Wide aerial &mdash; canals to the bay</span></div></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark-section">
+    <div class="container">
+      <p class="section-label text-cbgl-blue-light mb-3">Country Club Shores</p>
+      <h2 class="font-display mb-3">Closed Market Snapshot</h2>
+      <p class="gbc-window">Closed single-family sales &middot; past 180 days &middot; as of August 27, 2026</p>
+      <div class="gbc-stat-grid"><div class="gbc-stat">
+        <div class="gbc-stat-value">20</div>
+        <div class="gbc-stat-label">Closed Sales</div>
+        
+      </div>
+<div class="gbc-stat">
+        <div class="gbc-stat-value">$1,100,000</div>
+        <div class="gbc-stat-label">Min Sale Price</div>
+        
+      </div>
+<div class="gbc-stat">
+        <div class="gbc-stat-value">$3,136,500</div>
+        <div class="gbc-stat-label">Avg Sale Price</div>
+        
+      </div>
+<div class="gbc-stat">
+        <div class="gbc-stat-value">$5,650,000</div>
+        <div class="gbc-stat-label">Max Sale Price</div>
+        
+      </div>
+<div class="gbc-stat">
+        <div class="gbc-stat-value">$1007</div>
+        <div class="gbc-stat-label">Avg Price / SqFt</div>
+        
+      </div>
+<div class="gbc-stat">
+        <div class="gbc-stat-value">126</div>
+        <div class="gbc-stat-label">Avg Days on Market</div>
+        <div class="gbc-stat-sub">cumulative</div>
+      </div>
+<div class="gbc-stat">
+        <div class="gbc-stat-value">94.0%</div>
+        <div class="gbc-stat-label">Avg Sale-to-List</div>
+        
+      </div>
+<div class="gbc-stat">
+        <div class="gbc-stat-value">88%</div>
+        <div class="gbc-stat-label">Canal-Front Share</div>
+        <div class="gbc-stat-sub">22 of 25 sales, past 12 months</div>
+      </div>
+</div>
+
+      <h3 class="font-display gbc-subhead">By the Water</h3>
+      <p class="gbc-window">Closed sales by waterfront type &middot; past 12 months &middot; the segments are priced worlds apart, so we never blend them</p>
+      <div class="gbc-table-wrap gbc-bld-wrap">
+      <table class="gbc-table gbc-bld-table">
+        <thead>
+          <tr>
+            <th>Waterfront</th>
+            <th class="gbc-num">Sales</th>
+            <th class="gbc-num">Min</th>
+            <th class="gbc-num">Median</th>
+            <th class="gbc-num">Max</th>
+            <th class="gbc-num">Median $/SqFt</th>
+            <th class="gbc-num">Median CDOM</th>
+            <th class="gbc-num">Median SP/LP</th>
+          </tr>
+        </thead>
+        <tbody>
+<tr>
+        <td class="gbc-bld-id"><span class="gbc-bld-letter">Canal Front</span><span class="gbc-bld-street">~90% of the Shores</span></td>
+        <td class="gbc-num">22</td>
+        <td class="gbc-num">$1,500,000</td>
+        <td class="gbc-num gbc-bld-key">$2,750,000</td>
+        <td class="gbc-num">$5,650,000</td>
+        <td class="gbc-num">$1019</td>
+        <td class="gbc-num">130</td>
+        <td class="gbc-num">94.5%</td>
+      </tr>
+<tr>
+        <td class="gbc-bld-id"><span class="gbc-bld-letter">Open Bayfront</span><span class="gbc-bld-street">the point lots</span></td>
+        <td class="gbc-num">2<span class="gbc-bld-thin" title="Small sample: fewer than 3 closed sales in this window">*</span></td>
+        <td class="gbc-num">$4,700,000</td>
+        <td class="gbc-num gbc-bld-key">$6,662,500</td>
+        <td class="gbc-num">$8,625,000</td>
+        <td class="gbc-num">$1491</td>
+        <td class="gbc-num">238</td>
+        <td class="gbc-num">90.5%</td>
+      </tr>
+<tr>
+        <td class="gbc-bld-id"><span class="gbc-bld-letter">Garden</span><span class="gbc-bld-street">interior / GMD side</span></td>
+        <td class="gbc-num">1<span class="gbc-bld-thin" title="Small sample: fewer than 3 closed sales in this window">*</span></td>
+        <td class="gbc-num">$1,100,000</td>
+        <td class="gbc-num gbc-bld-key">$1,100,000</td>
+        <td class="gbc-num">$1,100,000</td>
+        <td class="gbc-num">$645</td>
+        <td class="gbc-num">51</td>
+        <td class="gbc-num">85.0%</td>
+      </tr>
+
+        </tbody>
+      </table>
+      <p class="gbc-bld-foot">* Fewer than 3 closed sales in this window. Shown for completeness; read it as a data point, not a trend. Open-bayfront point lots trade rarely and at a large premium, which is exactly why they are kept out of the canal-front medians.</p>
+    </div>
+
+      <h3 class="font-display gbc-subhead">Transaction Ledger</h3>
+      <p class="gbc-window">Every recorded single-family closing in the last 12 months, most recent first.</p>
+      <div class="gbc-filter" data-filter="country-club-shores">
+        <div class="gbc-filter-head">Filter Data</div>
+        <div class="gbc-filter-grid">
+          <div class="gbc-filter-ctl">
+            <label for="country-club-shores-bed">Bedrooms <span class="gbc-filter-val" data-out="bed">Any</span></label>
+            <input id="country-club-shores-bed" type="range" min="0" max="4" step="1" value="0" data-role="bed" />
+            <div class="gbc-filter-scale"><span>Any</span><span>1</span><span>2</span><span>3</span><span>4+</span></div>
+          </div>
+          <div class="gbc-filter-ctl">
+            <label for="country-club-shores-min">Approx Sq Ft <span class="gbc-filter-val" data-out="sqft">1,700 &ndash; 4,800</span></label>
+            <div class="gbc-dual">
+              <input id="country-club-shores-min" type="range" min="1700" max="4800" step="100" value="1700" data-role="sqmin" aria-label="Minimum square feet" />
+              <input id="country-club-shores-max" type="range" min="1700" max="4800" step="100" value="4800" data-role="sqmax" aria-label="Maximum square feet" />
+            </div>
+            <div class="gbc-filter-scale"><span>1,700</span><span>4,800</span></div>
+          </div>
+          <div class="gbc-filter-meta">
+            <span data-out="count">25</span> of 25 sales
+            <button type="button" class="gbc-filter-reset" data-role="reset">Reset</button>
+          </div>
+        </div>
+      </div>
+      <div class="gbc-table-wrap">
+      <table class="gbc-table" data-table="country-club-shores">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Bed / Bath</th>
+            <th class="gbc-num">Sq Ft</th>
+            <th class="gbc-num">Sale Price</th>
+            <th class="gbc-num">$ / SqFt</th>
+            <th>Closed</th>
+            <th class="gbc-num">Mkt Days</th>
+            <th class="gbc-num">SP/LP</th>
+            <th>Waterfront</th>
+          </tr>
+        </thead>
+        <tbody>
+<tr data-bed="3" data-sqft="1909">
+        <td class="gbc-addr">530 GOLF LINKS LN</td>
+        <td>3 bd / 2.5 ba</td>
+        <td class="gbc-num">1,909</td>
+        <td class="gbc-num">$2,125,000</td>
+        <td class="gbc-num">$1113</td>
+        <td>08/25/26</td>
+        <td class="gbc-num">0</td>
+        <td class="gbc-num">100%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="5" data-sqft="4216">
+        <td class="gbc-addr">530 CHIPPING LN</td>
+        <td>5 bd / 5.5 ba</td>
+        <td class="gbc-num">4,216</td>
+        <td class="gbc-num">$5,650,000</td>
+        <td class="gbc-num">$1340</td>
+        <td>08/17/26</td>
+        <td class="gbc-num">151</td>
+        <td class="gbc-num">98%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="3" data-sqft="2311">
+        <td class="gbc-addr">500 HALYARD LN</td>
+        <td>3 bd / 2 ba</td>
+        <td class="gbc-num">2,311</td>
+        <td class="gbc-num">$1,945,000</td>
+        <td class="gbc-num">$842</td>
+        <td>08/04/26</td>
+        <td class="gbc-num">95</td>
+        <td class="gbc-num">97%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="4" data-sqft="2500">
+        <td class="gbc-addr">571 RANGER LN</td>
+        <td>4 bd / 3 ba</td>
+        <td class="gbc-num">2,500</td>
+        <td class="gbc-num">$3,100,000</td>
+        <td class="gbc-num">$1240</td>
+        <td>07/31/26</td>
+        <td class="gbc-num">0</td>
+        <td class="gbc-num">97%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="3" data-sqft="2253">
+        <td class="gbc-addr">510 PUTTER LN</td>
+        <td>3 bd / 2 ba</td>
+        <td class="gbc-num">2,253</td>
+        <td class="gbc-num">$2,600,000</td>
+        <td class="gbc-num">$1154</td>
+        <td>07/28/26</td>
+        <td class="gbc-num">305</td>
+        <td class="gbc-num">90%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="4" data-sqft="3976">
+        <td class="gbc-addr">548 HORNBLOWER LN</td>
+        <td>4 bd / 4.5 ba</td>
+        <td class="gbc-num">3,976</td>
+        <td class="gbc-num">$4,500,000</td>
+        <td class="gbc-num">$1132</td>
+        <td>07/17/26</td>
+        <td class="gbc-num">153</td>
+        <td class="gbc-num">91%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="4" data-sqft="3737">
+        <td class="gbc-addr">524 HALYARD LN</td>
+        <td>4 bd / 4.5 ba</td>
+        <td class="gbc-num">3,737</td>
+        <td class="gbc-num">$5,150,000</td>
+        <td class="gbc-num">$1378</td>
+        <td>07/08/26</td>
+        <td class="gbc-num">260</td>
+        <td class="gbc-num">94%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="5" data-sqft="4281">
+        <td class="gbc-addr">550 YARDARM LN</td>
+        <td>5 bd / 5.5 ba</td>
+        <td class="gbc-num">4,281</td>
+        <td class="gbc-num">$3,500,000</td>
+        <td class="gbc-num">$818</td>
+        <td>07/02/26</td>
+        <td class="gbc-num">162</td>
+        <td class="gbc-num">93%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="3" data-sqft="2028">
+        <td class="gbc-addr">524 KETCH LN</td>
+        <td>3 bd / 2 ba</td>
+        <td class="gbc-num">2,028</td>
+        <td class="gbc-num">$1,500,000</td>
+        <td class="gbc-num">$740</td>
+        <td>07/01/26</td>
+        <td class="gbc-num">185</td>
+        <td class="gbc-num">91%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="4" data-sqft="2751">
+        <td class="gbc-addr">531 WEDGE LN</td>
+        <td>4 bd / 3.5 ba</td>
+        <td class="gbc-num">2,751</td>
+        <td class="gbc-num">$2,425,000</td>
+        <td class="gbc-num">$882</td>
+        <td>06/15/26</td>
+        <td class="gbc-num">37</td>
+        <td class="gbc-num">97%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="4" data-sqft="3926">
+        <td class="gbc-addr">573 SPINNAKER LN</td>
+        <td>4 bd / 5 ba</td>
+        <td class="gbc-num">3,926</td>
+        <td class="gbc-num">$2,700,000</td>
+        <td class="gbc-num">$688</td>
+        <td>06/11/26</td>
+        <td class="gbc-num">174</td>
+        <td class="gbc-num">90%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="3" data-sqft="2192">
+        <td class="gbc-addr">581 YARDARM LN</td>
+        <td>3 bd / 3 ba</td>
+        <td class="gbc-num">2,192</td>
+        <td class="gbc-num">$2,075,000</td>
+        <td class="gbc-num">$947</td>
+        <td>06/02/26</td>
+        <td class="gbc-num">7</td>
+        <td class="gbc-num">92%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="4" data-sqft="1840">
+        <td class="gbc-addr">510 WEDGE LN</td>
+        <td>4 bd / 3 ba</td>
+        <td class="gbc-num">1,840</td>
+        <td class="gbc-num">$1,900,000</td>
+        <td class="gbc-num">$1033</td>
+        <td>05/12/26</td>
+        <td class="gbc-num">181</td>
+        <td class="gbc-num">95%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="4" data-sqft="2162">
+        <td class="gbc-addr">513 OUTRIGGER LN</td>
+        <td>4 bd / 3 ba</td>
+        <td class="gbc-num">2,162</td>
+        <td class="gbc-num">$2,175,000</td>
+        <td class="gbc-num">$1006</td>
+        <td>05/07/26</td>
+        <td class="gbc-num">5</td>
+        <td class="gbc-num">99%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="4" data-sqft="4138">
+        <td class="gbc-addr">610 YARDARM LN</td>
+        <td>4 bd / 4.5 ba</td>
+        <td class="gbc-num">4,138</td>
+        <td class="gbc-num">$3,950,000</td>
+        <td class="gbc-num">$955</td>
+        <td>04/27/26</td>
+        <td class="gbc-num">107</td>
+        <td class="gbc-num">99%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="4" data-sqft="4438">
+        <td class="gbc-addr">524 SCHOONER LN</td>
+        <td>4 bd / 4.5 ba</td>
+        <td class="gbc-num">4,438</td>
+        <td class="gbc-num">$3,985,000</td>
+        <td class="gbc-num">$898</td>
+        <td>04/07/26</td>
+        <td class="gbc-num">212</td>
+        <td class="gbc-num">93%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="3" data-sqft="4733">
+        <td class="gbc-addr">585 GUNWALE LN</td>
+        <td>3 bd / 3.5 ba</td>
+        <td class="gbc-num">4,733</td>
+        <td class="gbc-num">$4,700,000</td>
+        <td class="gbc-num">$993</td>
+        <td>04/03/26</td>
+        <td class="gbc-num">412</td>
+        <td class="gbc-num">94%</td>
+        <td class="gbc-wv">Open Bayfront</td>
+      </tr>
+<tr data-bed="3" data-sqft="1706">
+        <td class="gbc-addr">1050 BOGEY LN</td>
+        <td>3 bd / 2 ba</td>
+        <td class="gbc-num">1,706</td>
+        <td class="gbc-num">$1,100,000</td>
+        <td class="gbc-num">$645</td>
+        <td>03/26/26</td>
+        <td class="gbc-num">51</td>
+        <td class="gbc-num">85%</td>
+        <td class="gbc-wv">Garden (interior)</td>
+      </tr>
+<tr data-bed="4" data-sqft="4297">
+        <td class="gbc-addr">590 BIRDIE LN</td>
+        <td>4 bd / 4.5 ba</td>
+        <td class="gbc-num">4,297</td>
+        <td class="gbc-num">$5,500,000</td>
+        <td class="gbc-num">$1280</td>
+        <td>03/20/26</td>
+        <td class="gbc-num">7</td>
+        <td class="gbc-num">92%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="3" data-sqft="2016">
+        <td class="gbc-addr">520 GOLF LINKS LN</td>
+        <td>3 bd / 3 ba</td>
+        <td class="gbc-num">2,016</td>
+        <td class="gbc-num">$2,150,000</td>
+        <td class="gbc-num">$1066</td>
+        <td>03/05/26</td>
+        <td class="gbc-num">7</td>
+        <td class="gbc-num">94%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="4" data-sqft="4338">
+        <td class="gbc-addr">600 WEDGE LN</td>
+        <td>4 bd / 4.5 ba</td>
+        <td class="gbc-num">4,338</td>
+        <td class="gbc-num">$8,625,000</td>
+        <td class="gbc-num">$1988</td>
+        <td>02/23/26</td>
+        <td class="gbc-num">65</td>
+        <td class="gbc-num">87%</td>
+        <td class="gbc-wv">Open Bayfront</td>
+      </tr>
+<tr data-bed="2" data-sqft="2273">
+        <td class="gbc-addr">548 KETCH LN</td>
+        <td>2 bd / 3 ba</td>
+        <td class="gbc-num">2,273</td>
+        <td class="gbc-num">$2,200,000</td>
+        <td class="gbc-num">$968</td>
+        <td>01/19/26</td>
+        <td class="gbc-num">0</td>
+        <td class="gbc-num">100%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="4" data-sqft="3666">
+        <td class="gbc-addr">560 SCHOONER LN</td>
+        <td>4 bd / 3.5 ba</td>
+        <td class="gbc-num">3,666</td>
+        <td class="gbc-num">$3,310,000</td>
+        <td class="gbc-num">$903</td>
+        <td>01/08/26</td>
+        <td class="gbc-num">242</td>
+        <td class="gbc-num">95%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="3" data-sqft="2626">
+        <td class="gbc-addr">571 BIRDIE LN</td>
+        <td>3 bd / 3 ba</td>
+        <td class="gbc-num">2,626</td>
+        <td class="gbc-num">$2,800,000</td>
+        <td class="gbc-num">$1066</td>
+        <td>11/05/25</td>
+        <td class="gbc-num">109</td>
+        <td class="gbc-num">93%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+<tr data-bed="4" data-sqft="3436">
+        <td class="gbc-addr">531 RANGER LN</td>
+        <td>4 bd / 3.5 ba</td>
+        <td class="gbc-num">3,436</td>
+        <td class="gbc-num">$3,700,000</td>
+        <td class="gbc-num">$1077</td>
+        <td>11/03/25</td>
+        <td class="gbc-num">212</td>
+        <td class="gbc-num">97%</td>
+        <td class="gbc-wv">Canal Front</td>
+      </tr>
+        </tbody>
+      </table>
+      <p class="gbc-empty" data-out="empty" hidden>No sales match those filters.</p>
+    </div>
+
+      <h3 class="font-display gbc-subhead">Trailing 12-Month Trend</h3>
+      <p class="gbc-window">Median closed price by quarter, all waterfront types combined: small quarterly samples, read direction not decimals.</p>
+      <div class="gbc-trend-grid"><div class="gbc-trend-col">
+          <div class="gbc-trend-period">2025-Q4</div>
+          <div class="gbc-trend-price">$3,250,000</div>
+          <div class="gbc-trend-meta">2 sold &middot; $1072/sf</div>
+        </div>
+<div class="gbc-trend-col">
+          <div class="gbc-trend-period">2026-Q1</div>
+          <div class="gbc-trend-price">$2,755,000</div>
+          <div class="gbc-trend-meta">6 sold &middot; $1017/sf</div>
+        </div>
+<div class="gbc-trend-col">
+          <div class="gbc-trend-period">2026-Q2</div>
+          <div class="gbc-trend-price">$2,562,500</div>
+          <div class="gbc-trend-meta">8 sold &middot; $951/sf</div>
+        </div>
+<div class="gbc-trend-col">
+          <div class="gbc-trend-period">2026-Q3 (to date)</div>
+          <div class="gbc-trend-price">$3,100,000</div>
+          <div class="gbc-trend-meta">9 sold &middot; $1132/sf</div>
+        </div>
+</div>
+    </div>
+  </section>
+
+  <IdxAreaShowcase
+    widgetId="50171"
+    scriptSrc="https://adamsonfl.idxbroker.com/idx/customshowcasejs.php?widgetid=50171"
+    areaName="Country Club Shores"
+    label="Available Now"
+    showOffMarketCta={false}
+  />
+
+  <section id="contact" class="section light-section">
+    <div class="container">
+      <p class="section-label mb-3">Two Ways In</p>
+      <h2 class="accent-underline mb-6">Work With Us in the Shores</h2>
+      <div class="gbc-tiles">
+
+        <div class="gbc-tile gbc-tile-seller">
+          <span class="gbc-tile-eyebrow">For Owners</span>
+          <h3 class="gbc-tile-title">Reach out for a private consult</h3>
+          <p class="gbc-tile-copy">Curious what your home would bring today? We&rsquo;ll walk the real closed-sale data above against your lot, dockage, and condition. Canal, bayfront, and interior homes are different markets, and we price them that way. Privately, with no obligation and no listing pressure.</p>
+          <form class="gbc-form" data-lead-type="Seller" data-community="Country Club Shores"
+                name="home-lead-seller" method="POST" action="/thank-you/" data-team="Anne &amp; Ryan" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="home-lead-seller" />
+            <input type="hidden" name="lead_type" value="Seller" />
+            <input type="hidden" name="community" value="Country Club Shores" />
+            <p class="gbc-hp"><label>Don&rsquo;t fill this out: <input name="bot-field" /></label></p>
+            <div class="gbc-field"><label for="s-name-country-club-shores">Name</label>
+              <input id="s-name-country-club-shores" name="name" type="text" required autocomplete="name" /></div>
+            <div class="gbc-field"><label for="s-email-country-club-shores">Email</label>
+              <input id="s-email-country-club-shores" name="email" type="email" required autocomplete="email" /></div>
+            <div class="gbc-field"><label for="s-phone-country-club-shores">Phone</label>
+              <input id="s-phone-country-club-shores" name="phone" type="tel" autocomplete="tel" /></div>
+            <div class="gbc-field"><label for="s-notes-country-club-shores">Other details you&rsquo;d like to share <span class="gbc-optional">optional</span></label>
+              <textarea id="s-notes-country-club-shores" name="notes" rows="3" maxlength="1200"
+                        placeholder="Street, dockage, updates you&rsquo;ve made, timing you have in mind"></textarea></div>
+            <button type="submit" class="gbc-btn gbc-btn-gold gbc-btn-full">Request a Private Consult</button>
+            <p class="gbc-form-status" data-out="status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="gbc-tile gbc-tile-buyer">
+          <span class="gbc-tile-eyebrow">For Buyers</span>
+          <h3 class="gbc-tile-title">Add me to the coming-soon list</h3>
+          <p class="gbc-tile-copy">Only a couple dozen homes trade in the Shores each year, and the best canal lots often change hands before they reach the MLS. Get on the list and we&rsquo;ll reach out first on available and off-market homes.</p>
+          <form class="gbc-form" data-lead-type="Buyer" data-community="Country Club Shores"
+                name="home-lead-buyer" method="POST" action="/thank-you/" data-team="Anne &amp; Ryan" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="home-lead-buyer" />
+            <input type="hidden" name="lead_type" value="Buyer" />
+            <input type="hidden" name="community" value="Country Club Shores" />
+            <p class="gbc-hp"><label>Don&rsquo;t fill this out: <input name="bot-field" /></label></p>
+            <div class="gbc-field"><label for="b-name-country-club-shores">Name</label>
+              <input id="b-name-country-club-shores" name="name" type="text" required autocomplete="name" /></div>
+            <div class="gbc-field"><label for="b-email-country-club-shores">Email</label>
+              <input id="b-email-country-club-shores" name="email" type="email" required autocomplete="email" /></div>
+            <div class="gbc-field"><label for="b-phone-country-club-shores">Phone</label>
+              <input id="b-phone-country-club-shores" name="phone" type="tel" autocomplete="tel" /></div>
+            <div class="gbc-field"><label for="b-notes-country-club-shores">Other details you&rsquo;d like to share <span class="gbc-optional">optional</span></label>
+              <textarea id="b-notes-country-club-shores" name="notes" rows="3" maxlength="1200"
+                        placeholder="Canal or bayfront, boat size, budget, timing, anything that would make it the right one"></textarea></div>
+            <button type="submit" class="gbc-btn gbc-btn-navy gbc-btn-full">Notify Me First</button>
+            <p class="gbc-form-status" data-out="status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="cbgl-section py-20">
+    <div class="container text-center">
+      <p class="section-label text-white/70 mb-3">Your Country Club Shores Team</p>
+      <h2 class="font-display text-white mb-4" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Let&rsquo;s Talk the Shores</h2>
+      <p class="gbc-cta-text">Thinking about buying or selling in Country Club Shores? <strong>Anne and Ryan</strong> work this neighborhood together, and can pull current availability, share off-market opportunities, and give you a no-obligation valuation grounded in the real closed-sale data above.</p>
+      <div class="gbc-team">
+        <figure class="gbc-member">
+          <!-- ANNE PHOTO PLACEHOLDER: replace this div with
+               <img class="gbc-avatar" src="/images/anne-schneider-square.jpg" width="800" height="800" alt="Anne Schneider, Coldwell Banker Realty" loading="lazy" decoding="async" /> -->
+          <div class="gbc-avatar ccs-avatar-ph" role="img" aria-label="Anne Schneider, photo coming soon"><span>AS</span></div>
+          <figcaption>
+            <span class="gbc-member-name">Anne Schneider</span>
+          </figcaption>
+        </figure>
+        <figure class="gbc-member">
+          <img class="gbc-avatar" src="/images/ryan-adamson-square.jpg" width="800" height="800" alt="Ryan Adamson, Coldwell Banker Global Luxury" loading="lazy" decoding="async" />
+          <figcaption>
+            <span class="gbc-member-name">Ryan Adamson</span>
+          </figcaption>
+        </figure>
+      </div>
+      <p class="gbc-team-brokerage">Coldwell Banker Global Luxury</p>
+      <div class="gbc-cta-btns">
+        <a href="#contact" class="gbc-btn gbc-btn-gold">Contact the Team</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm dark-section">
+    <div class="container-narrow">
+      <p class="gbc-disc">Data as of August 27, 2026. Closed-sale statistics computed from Stellar MLS records for the Country Club Shores subdivisions, single-family homes only. Waterfront segments are classified from MLS waterfront features; verify any individual home&rsquo;s water frontage independently.</p>
+      <p class="gbc-disc gbc-credit">Hero video and photography coming soon.</p>
+    </div>
+  </section>
+
+<style is:global>
+  .gbc-hero.gbc-hero--video {
+    min-height:clamp(540px, 84vh, 920px);
+    display:flex; align-items:flex-end;
+    padding-top:7rem; padding-bottom:4rem;
+  }
+  .gbc-hero--video > .container { width:100%; }
+  .gbc-hero-video { width:100%; height:100%; object-fit:cover; display:block; }
+  .gbc-hero--video .gbc-hero-overlay {
+    background:
+      linear-gradient(to top,
+        rgba(10,31,60,0.84) 0%, rgba(10,31,60,0.50) 16%,
+        rgba(10,31,60,0.12) 34%, rgba(10,31,60,0) 48%),
+      linear-gradient(to right,
+        rgba(10,31,60,0.58) 0%, rgba(10,31,60,0.22) 34%, rgba(10,31,60,0) 60%),
+      linear-gradient(to bottom,
+        rgba(4,12,26,0.46) 0%, rgba(4,12,26,0.13) 9%, rgba(4,12,26,0) 17%);
+  }
+  .gbc-hero--video h1 { text-shadow:0 2px 22px rgba(4,12,26,0.55); }
+  .gbc-hero--video .gbc-hero-tag { text-shadow:0 1px 14px rgba(4,12,26,0.6); color:rgba(255,255,255,0.92); }
+  /* the site's pale-blue eyebrow disappears against bright sand and white balconies;
+     white carries everywhere, and the gold rule above it does the brand work instead */
+  .gbc-hero--video .section-label { color:rgba(255,255,255,0.95); text-shadow:0 1px 12px rgba(4,12,26,0.85); }
+  .gbc-hero--video .gbc-hero-rule {
+    width:64px; height:2px; margin:0 0 1.5rem; border:0;
+    background:var(--color-gold); box-shadow:0 1px 10px rgba(4,12,26,0.5);
+  }
+  @media (max-width:640px) {
+    .gbc-hero.gbc-hero--video { min-height:clamp(460px, 76vh, 680px); padding-top:6rem; padding-bottom:2.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gbc-hero-video { display:none; }
+    .gbc-hero-bg { background-image:url('/videos/gulf-and-bay-club-beachfront-still.jpg'); }
+  }
+  .gbc-hero { position:relative; padding-top:9rem; padding-bottom:7rem; overflow:hidden; }
+  .gbc-hero-bg { position:absolute; inset:0; background-size:cover; background-position:center; background-color:var(--color-black); }
+  .gbc-hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.45) 40%, rgba(0,0,0,0.9)); }
+  .gbc-hero-tag { font-size:1.15rem; color:rgba(255,255,255,0.8); max-width:44rem; line-height:1.7; }
+  .gbc-sister { margin-top:1.75rem; font-family:var(--font-accent); font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.6); }
+  .gbc-sister a { color:var(--color-gold); border-bottom:1px solid rgba(197,165,90,0.5); padding-bottom:2px; }
+  .gbc-sister a:hover { color:var(--color-gold-light); }
+  .gbc-about { color:var(--color-text-muted); line-height:1.8; font-size:1.05rem; }
+  .gbc-chip { display:inline-block; background:rgba(45,66,128,0.1); color:var(--color-cbgl-blue); font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; padding:0.45rem 1rem; border-radius:9999px; border:1px solid rgba(45,66,128,0.2); }
+  .gbc-fig { position:relative; overflow:hidden; border-radius:0.6rem; aspect-ratio:4/3; margin:0; }
+  .gbc-fig img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .7s; }
+  .gbc-fig:hover img { transform:scale(1.05); }
+  .gbc-fig-tall { grid-row:span 2; aspect-ratio:3/4; }
+  .gbc-fig-wide { aspect-ratio:16/9; grid-column:span 2; }
+  .gbc-blurb { color:rgba(255,255,255,0.72); max-width:46rem; line-height:1.7; margin-bottom:0.4rem; }
+  .gbc-window { color:rgba(255,255,255,0.45); font-family:var(--font-accent); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1.25rem; }
+  .gbc-subhead { margin-top:3rem; margin-bottom:0.35rem; color:#fff; font-size:1.4rem; }
+  .gbc-note { color:var(--color-gold-light); font-size:0.85rem; margin-top:0.75rem; font-style:italic; }
+  .gbc-stat-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0.9rem; margin-top:0.5rem; }
+  @media (min-width:640px){ .gbc-stat-grid{ grid-template-columns:repeat(4,1fr);} }
+  .gbc-stat { background:var(--color-black-card); border:1px solid rgba(255,255,255,0.1); border-radius:0.7rem; padding:1.3rem 1.1rem; }
+  .gbc-stat-value { font-family:var(--font-display); font-size:1.55rem; color:#fff; line-height:1.1; }
+  .gbc-stat-label { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.09em; color:var(--color-cbgl-blue-light); margin-top:0.5rem; }
+  .gbc-stat-sub { font-size:0.68rem; color:rgba(255,255,255,0.4); margin-top:0.15rem; }
+
+  /* ── By the Building ───────────────────────────────────────── */
+  /* Slender by design: tighter rows and smaller type than the ledger, so it
+     reads as a summary strip rather than a second full table. */
+  .gbc-bld-wrap { margin-top:1.1rem; max-height:none; }
+  /* Narrower min-width than the ledger: eight short columns, no need to force
+     a 900px scroll canvas. */
+  .gbc-bld-table { font-size:0.82rem; min-width:640px; }
+  .gbc-bld-table th, .gbc-bld-table td { padding-top:0.55rem; padding-bottom:0.55rem; white-space:nowrap; }
+  /* NB: no display:flex on the td. A flex table cell drops out of table layout
+     in Safari and the columns stop aligning with the header. Inline-block. */
+  .gbc-bld-id { white-space:nowrap; }
+  .gbc-bld-letter { display:inline-block; font-family:var(--font-display); font-size:1.05rem; color:var(--color-gold); line-height:1; }
+  .gbc-bld-street { display:inline-block; margin-left:0.5rem; font-size:0.7rem; color:rgba(255,255,255,0.38); font-variant-numeric:tabular-nums; }
+  .gbc-bld-key { color:#fff; font-weight:600; }
+  .gbc-bld-thin { color:var(--color-gold); margin-left:0.15rem; cursor:help; }
+  .gbc-bld-foot { margin-top:0.6rem; font-size:0.7rem; color:rgba(255,255,255,0.38); font-style:italic; }
+  .gbc-bld-cell { color:var(--color-gold); font-variant-numeric:normal; text-align:center; width:2.5rem; }
+  @media (max-width:640px){ .gbc-bld-table { font-size:0.75rem; } .gbc-bld-street { display:none; } }
+
+  /* ── Filter Data ───────────────────────────────────────────── */
+  .gbc-filter { margin-top:1.5rem; background:var(--color-black-card); border:1px solid rgba(255,255,255,0.1); border-radius:0.7rem; padding:1.1rem 1.25rem 1.25rem; }
+  .gbc-filter-head { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.12em; color:rgba(255,255,255,0.4); margin-bottom:1rem; }
+  .gbc-filter-grid { display:grid; grid-template-columns:1fr; gap:1.5rem; align-items:end; }
+  @media (min-width:820px){ .gbc-filter-grid { grid-template-columns:1fr 1fr auto; gap:2.25rem; } }
+  .gbc-filter-ctl label { display:flex; justify-content:space-between; align-items:baseline; gap:1rem; font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--color-cbgl-blue-light); margin-bottom:0.7rem; }
+  .gbc-filter-val { font-family:var(--font-display); text-transform:none; letter-spacing:0; font-size:0.95rem; color:#fff; }
+  .gbc-filter-scale { display:flex; justify-content:space-between; margin-top:0.45rem; font-size:0.65rem; color:rgba(255,255,255,0.3); font-variant-numeric:tabular-nums; }
+  .gbc-filter input[type=range] { -webkit-appearance:none; appearance:none; width:100%; height:2px; background:rgba(255,255,255,0.18); border-radius:2px; outline:none; margin:0; }
+  .gbc-filter input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:15px; height:15px; border-radius:50%; background:var(--color-gold); cursor:pointer; border:none; box-shadow:0 0 0 4px rgba(197,165,90,0.15); transition:box-shadow .15s, transform .15s; }
+  .gbc-filter input[type=range]::-webkit-slider-thumb:hover { box-shadow:0 0 0 7px rgba(197,165,90,0.25); transform:scale(1.08); }
+  .gbc-filter input[type=range]::-moz-range-thumb { width:15px; height:15px; border-radius:50%; background:var(--color-gold); cursor:pointer; border:none; box-shadow:0 0 0 4px rgba(197,165,90,0.15); }
+  .gbc-filter input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow:0 0 0 7px rgba(197,165,90,0.4); }
+  .gbc-dual { position:relative; height:15px; }
+  .gbc-dual input[type=range] { position:absolute; top:6px; left:0; pointer-events:none; background:none; }
+  .gbc-dual::before { content:""; position:absolute; top:6px; left:0; right:0; height:2px; background:rgba(255,255,255,0.18); border-radius:2px; }
+  .gbc-dual input[type=range]::-webkit-slider-thumb { pointer-events:auto; }
+  .gbc-dual input[type=range]::-moz-range-thumb { pointer-events:auto; }
+  .gbc-filter-meta { font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.5); white-space:nowrap; }
+  .gbc-filter-meta [data-out=count] { color:var(--color-gold); font-weight:600; }
+  .gbc-filter-reset { display:block; margin-top:0.5rem; background:none; border:none; padding:0; color:rgba(255,255,255,0.45); font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; cursor:pointer; border-bottom:1px solid rgba(255,255,255,0.2); }
+  .gbc-filter-reset:hover { color:#fff; }
+
+  .gbc-table-wrap { margin-top:0.75rem; max-height:520px; overflow:auto; border:1px solid rgba(255,255,255,0.1); border-radius:0.7rem; }
+  .gbc-table { width:100%; border-collapse:collapse; font-size:0.86rem; color:rgba(255,255,255,0.85); min-width:900px; }
+  .gbc-table thead th { position:sticky; top:0; background:var(--color-dark); color:var(--color-cbgl-blue-light); font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.07em; text-align:left; padding:0.8rem 0.9rem; border-bottom:1px solid rgba(255,255,255,0.14); z-index:1; white-space:nowrap; }
+  .gbc-table tbody td { padding:0.75rem 0.9rem; border-bottom:1px solid rgba(255,255,255,0.06); vertical-align:top; }
+  .gbc-table tbody tr:hover { background:rgba(82,168,255,0.06); }
+  .gbc-num { text-align:right; font-variant-numeric:tabular-nums; }
+  .gbc-addr { font-weight:600; color:#fff; white-space:nowrap; }
+  .gbc-wv { font-size:0.78rem; color:rgba(255,255,255,0.65); max-width:15rem; }
+  .gbc-wv-none { color:rgba(255,255,255,0.3); font-style:italic; }
+  .gbc-empty, .gbc-noresults { padding:2rem; text-align:center; color:rgba(255,255,255,0.4); font-style:italic; font-size:0.85rem; }
+  .gbc-noresults { margin:0; }
+
+  .gbc-trend-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0.9rem; margin-top:0.5rem; }
+  @media (min-width:640px){ .gbc-trend-grid{ grid-template-columns:repeat(4,1fr);} }
+  .gbc-trend-col { background:var(--color-black-card); border:1px solid rgba(255,255,255,0.1); border-radius:0.7rem; padding:1.1rem; border-left:3px solid var(--color-gold); }
+  .gbc-trend-period { font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--color-cbgl-blue-light); }
+  .gbc-trend-price { font-family:var(--font-display); font-size:1.35rem; color:#fff; margin-top:0.35rem; }
+  .gbc-trend-meta { font-size:0.72rem; color:rgba(255,255,255,0.5); margin-top:0.25rem; }
+
+  /* ── Lead tiles ────────────────────────────────────────────── */
+  .gbc-tiles { display:grid; grid-template-columns:1fr; gap:1.5rem; }
+  @media (min-width:900px){ .gbc-tiles { grid-template-columns:1fr 1fr; gap:2rem; } }
+  .gbc-tile { border-radius:0.8rem; padding:2rem 1.9rem; border:1px solid rgba(0,0,0,0.08); background:#fff; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
+  .gbc-tile-seller { border-top:3px solid var(--color-gold); }
+  .gbc-tile-buyer  { border-top:3px solid var(--color-cbgl-blue); }
+  .gbc-tile-eyebrow { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--color-text-muted); }
+  .gbc-tile-title { font-family:var(--font-display); font-size:1.5rem; margin:0.6rem 0 0.75rem; color:var(--color-black); }
+  .gbc-tile-copy { color:var(--color-text-muted); line-height:1.7; font-size:0.94rem; margin-bottom:1.5rem; }
+  .gbc-field { margin-bottom:0.9rem; }
+  .gbc-field label { display:block; font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.09em; color:var(--color-text-muted); margin-bottom:0.35rem; }
+  .gbc-field input,
+  .gbc-field textarea { width:100%; padding:0.7rem 0.85rem; border:1px solid rgba(0,0,0,0.14); border-radius:0.35rem; font-size:0.95rem; background:#fff; color:var(--color-black); transition:border-color .15s, box-shadow .15s; }
+  .gbc-field textarea { font-family:inherit; line-height:1.5; resize:vertical; min-height:4.6rem; }
+  .gbc-field textarea::placeholder { color:rgba(0,0,0,0.34); }
+  .gbc-optional { text-transform:none; letter-spacing:0; font-size:0.68rem; color:rgba(0,0,0,0.35); font-style:italic; margin-left:0.35rem; }
+  .gbc-field input:focus,
+  .gbc-field textarea:focus { outline:none; border-color:var(--color-gold); box-shadow:0 0 0 3px rgba(197,165,90,0.15); }
+  .gbc-hp { position:absolute; left:-9999px; }
+  .gbc-form-status { margin-top:0.8rem; font-size:0.85rem; min-height:1.2em; }
+  .gbc-form-done { text-align:center; padding:1.6rem 1rem 0.6rem; }
+  .gbc-done-medallion { width:52px; height:52px; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; border-radius:50%; border:1px solid rgba(197,165,90,0.45); background:rgba(197,165,90,0.12); color:var(--color-gold); }
+  .gbc-done-medallion svg { width:24px; height:24px; }
+  .gbc-done-eyebrow { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--color-gold); margin-bottom:0.4rem; }
+  .gbc-done-title { font-family:var(--font-display); font-size:1.5rem; color:var(--color-black); margin:0 0 0.6rem; }
+  .gbc-done-copy { color:var(--color-text-muted); font-size:0.92rem; line-height:1.65; max-width:26rem; margin:0 auto; }
+  .gbc-done-alt { margin-top:1rem; font-size:0.85rem; color:var(--color-text-muted); }
+  .gbc-done-alt a { color:var(--color-gold); white-space:nowrap; }
+  .gbc-beach { display:inline-flex; flex-wrap:wrap; align-items:center; gap:0.6rem; margin-top:1.6rem; padding:0.55rem 1.15rem; border:1px solid rgba(255,255,255,0.16); border-radius:9999px; background:rgba(10,31,60,0.38); backdrop-filter:blur(8px); font-family:var(--font-accent); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.09em; color:rgba(255,255,255,0.65); }
+  .gbc-beach-temps { color:#fff; }
+  .gbc-beach-sep { color:var(--color-gold); }
+  .gbc-beach-tide { border-bottom:1px dotted rgba(255,255,255,0.3); padding-bottom:1px; }
+  .gbc-beach-tide.is-ok { color:#9fd8b4; }
+  .gbc-beach-tide.is-warn { color:var(--color-gold); }
+  .gbc-form-status.is-ok { color:#1d7a4c; }
+  .gbc-form-status.is-err { color:#b3261e; }
+
+  .gbc-cta-text { color:rgba(255,255,255,0.85); max-width:40rem; margin:0 auto 2rem; line-height:1.7; }
+  .gbc-team { display:flex; justify-content:center; gap:3rem; margin:0 auto 2.25rem; flex-wrap:wrap; }
+  .gbc-member { margin:0; text-align:center; }
+  .gbc-avatar { width:112px; height:112px; border-radius:50%; object-fit:cover; display:block; margin:0 auto 0.85rem; border:2px solid rgba(197,165,90,0.55); box-shadow:0 6px 20px rgba(0,0,0,0.35); }
+  @media (min-width:640px){ .gbc-avatar { width:132px; height:132px; } }
+  .gbc-member-name { display:block; font-family:var(--font-display); font-size:1.02rem; color:#fff; }
+  .gbc-team-brokerage { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.16em; color:var(--color-gold); margin:-0.4rem auto 2.25rem; display:flex; align-items:center; justify-content:center; gap:1rem; }
+  .gbc-team-brokerage::before, .gbc-team-brokerage::after { content:""; height:1px; width:2.5rem; background:rgba(197,165,90,0.4); }
+  .gbc-cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+  .gbc-btn { display:inline-flex; align-items:center; justify-content:center; font-family:var(--font-accent); text-transform:uppercase; letter-spacing:0.08em; font-size:0.8rem; font-weight:600; padding:1rem 2rem; border-radius:0.35rem; transition:all .2s; border:none; cursor:pointer; }
+  .gbc-btn-gold { background:var(--color-gold); color:#000; }
+  .gbc-btn-gold:hover { background:var(--color-gold-light); }
+  .gbc-btn-navy { background:var(--color-cbgl-blue); color:#fff; }
+  .gbc-btn-navy:hover { filter:brightness(1.15); }
+  .gbc-btn-outline { border:2px solid #fff; color:#fff; }
+  .gbc-btn-outline:hover { background:#fff; color:#000; }
+  .gbc-btn-full { width:100%; }
+  .gbc-btn[disabled] { opacity:0.55; cursor:default; }
+  .gbc-disc { color:rgba(255,255,255,0.55); font-size:0.82rem; line-height:1.7; }
+  .gbc-credit { margin-top:1rem; color:rgba(255,255,255,0.4); font-size:0.75rem; }
+</style>
+<style is:global>
+  .ccs-ph { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, #12294E 0%, #1c3a6b 55%, #0A1F3C 100%); }
+  .ccs-ph span { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.55); border:1px dashed rgba(201,169,97,0.5); padding:0.5rem 0.9rem; border-radius:6px; }
+  .ccs-avatar-ph { display:flex; align-items:center; justify-content:center; background:#0A1F3C; border:2px solid #C9A961; }
+  .ccs-avatar-ph span { font-family:var(--font-display); font-size:2.2rem; color:#C9A961; letter-spacing:0.05em; }
+</style>
+<script is:inline>
+  // ── Ledger filters ──────────────────────────────────────────────
+  document.querySelectorAll('[data-filter]').forEach((panel) => {
+    const uid   = panel.getAttribute('data-filter');
+    const table = document.querySelector('[data-table="' + uid + '"]');
+    if (!table) return;
+    const rows   = Array.from(table.querySelectorAll('tbody tr[data-bed]'));
+    const bed    = panel.querySelector('[data-role=bed]');
+    const sqMin  = panel.querySelector('[data-role=sqmin]');
+    const sqMax  = panel.querySelector('[data-role=sqmax]');
+    const outBed = panel.querySelector('[data-out=bed]');
+    const outSq  = panel.querySelector('[data-out=sqft]');
+    const outCnt = panel.querySelector('[data-out=count]');
+    const empty  = table.parentElement.querySelector('[data-out=empty]');
+    const reset  = panel.querySelector('[data-role=reset]');
+    const n = (v) => Number(v);
+    const fmt = (v) => n(v).toLocaleString();
+
+    function apply() {
+      // Keep the dual handles from crossing.
+      if (n(sqMin.value) > n(sqMax.value)) {
+        if (document.activeElement === sqMin) sqMax.value = sqMin.value;
+        else sqMin.value = sqMax.value;
+      }
+      const b = n(bed.value), lo = n(sqMin.value), hi = n(sqMax.value);
+      outBed.textContent = b === 0 ? 'Any' : (b === 4 ? '4+' : String(b));
+      outSq.textContent  = fmt(lo) + ' – ' + fmt(hi);
+
+      let shown = 0;
+      rows.forEach((tr) => {
+        const rb = n(tr.dataset.bed), rs = n(tr.dataset.sqft);
+        const okBed  = b === 0 || (b === 4 ? rb >= 4 : rb === b);
+        const okSqft = rs === 0 || (rs >= lo && rs <= hi);
+        const ok = okBed && okSqft;
+        tr.hidden = !ok;
+        if (ok) shown++;
+      });
+      if (outCnt) outCnt.textContent = String(shown);
+      if (empty) empty.hidden = shown !== 0;
+    }
+
+    [bed, sqMin, sqMax].forEach((el) => el && el.addEventListener('input', apply));
+    if (reset) reset.addEventListener('click', () => {
+      bed.value = 0; sqMin.value = sqMin.min; sqMax.value = sqMax.max; apply();
+    });
+    apply();
+  });
+
+  // ── Lead forms ──────────────────────────────────────────────────
+  document.querySelectorAll('form.gbc-form').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = form.querySelector('[data-out=status]');
+      const btn    = form.querySelector('button[type=submit]');
+      const fd     = new FormData(form);
+      const data   = Object.fromEntries(fd.entries());
+
+      if (data['bot-field']) return;               // honeypot
+      status.className = 'gbc-form-status';
+      status.textContent = 'Sending…';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('/.netlify/functions/community-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: data.name, email: data.email, phone: data.phone,
+            notes: data.notes,
+            lead_type: form.dataset.leadType,
+            community: form.dataset.community,
+            page: window.location.pathname,
+          }),
+        });
+        if (!res.ok) throw new Error('bad status ' + res.status);
+
+        // Mirror to Netlify Forms so the built-in email notification fires too.
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(fd).toString(),
+        }).catch(() => {});
+
+        const first = String(data.name || '').trim().split(/\s+/)[0].replace(/[<>&"']/g, '');
+        const team  = (form.dataset.team || 'our team').replace(/[<>"']/g, '');
+        const isSeller = form.dataset.leadType === 'Seller';
+        const done = document.createElement('div');
+        done.className = 'gbc-form-done';
+        done.setAttribute('role', 'status');
+        done.innerHTML =
+          '<div class="gbc-done-medallion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>' +
+          '<p class="gbc-done-eyebrow">' + (isSeller ? 'Request received' : 'You&rsquo;re on the list') + '</p>' +
+          '<h4 class="gbc-done-title">Thank you' + (first ? ', ' + first : '') + '</h4>' +
+          '<p class="gbc-done-copy">' + (isSeller
+            ? 'Your private consult request has gone directly to ' + team + '. Expect a personal reply within one business day.'
+            : team + ' will reach out the moment something fits, often before it reaches the MLS.') + '</p>' +
+          '<p class="gbc-done-alt">Prefer to talk sooner? <a href="tel:+19417139234">(941) 713-9234</a></p>';
+        form.replaceWith(done);
+        done.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } catch (err) {
+        console.error(err);
+        status.className = 'gbc-form-status is-err';
+        status.textContent = 'Something went wrong. Please call (941) 713-9234.';
+        btn.disabled = false;
+      }
+    });
+  });
+
+  // ── Beach conditions strip (NWS + Mote Marine via our proxy) ────
+  document.querySelectorAll('[data-beach]').forEach(async (strip) => {
+    try {
+      const qs = new URLSearchParams({ grid: strip.dataset.grid || '', beach: strip.dataset.beachId || '' });
+      const res = await fetch('/.netlify/functions/beach-conditions?' + qs.toString());
+      if (!res.ok) return;
+      const c = await res.json();
+      const temps = strip.querySelector('[data-out=beach-temps]');
+      const tide  = strip.querySelector('[data-out=beach-tide]');
+      if (c.hi == null && c.lo == null && !c.redTide) return;
+      temps.textContent = (c.hi != null ? 'High ' + c.hi + '\u00B0' : '') +
+                          (c.hi != null && c.lo != null ? ' / ' : '') +
+                          (c.lo != null ? 'Low ' + c.lo + '\u00B0' : '');
+      if (c.redTide && c.redTide.status === 'reported') {
+        tide.textContent = 'Beach advisory \u2014 see Mote report';
+        tide.classList.add('is-warn');
+      } else {
+        tide.textContent = 'Red tide: none reported';
+        tide.classList.add('is-ok');
+      }
+      strip.hidden = false;
+    } catch (e) { /* strip simply stays hidden */ }
+  });
+</script>
+</LLLLayout>

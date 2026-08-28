@@ -3,8 +3,23 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 
+// One repo, two sites. SITE picks the build target:
+//   (unset) / 'adamsonfl' -> the AdamsonFL.com hub (src/)
+//   'lll'                 -> LongboatLido.com, the Anne & Ryan co-brand (src-lll/)
+// The Netlify project for longboatlido.com sets SITE=lll in its build environment;
+// the adamsonfl.com project sets nothing and builds exactly as before.
+// Shared components/layouts/data stay in src/ and are reached via the '@' alias
+// (tsconfig paths), which always points at src/ regardless of build target.
+const SITE = process.env.SITE ?? 'adamsonfl';
+
+const SITE_URLS = {
+  adamsonfl: 'https://adamsonfl.com',
+  lll: 'https://longboatlido.com',
+};
+
 export default defineConfig({
-  site: 'https://adamsonfl.com', // Update with final domain
+  site: SITE_URLS[SITE] ?? SITE_URLS.adamsonfl,
+  srcDir: SITE === 'lll' ? './src-lll' : './src',
   integrations: [
     tailwind(),
     sitemap(),
