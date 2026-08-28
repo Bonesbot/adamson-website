@@ -6,8 +6,6 @@
  * Shores), so the home page introduces the co-brand and routes to it. Add a
  * card per community as new Longboat/Lido farm pages come online.
  *
- * noIndex stays true until Anne's details are filled in and Ryan approves the
- * launch copy; flip it with the DNS cutover.
  */
 import LLLLayout from '../layouts/LLLLayout.astro';
 
@@ -15,7 +13,7 @@ const description =
   'Longboat Key and Lido Key real estate with Anne Schneider and Ryan Adamson of Coldwell Banker Realty, St. Armands: neighborhood-level closed-sale data from live Stellar MLS records, current availability, and local representation from the sand to the bay.';
 ---
 
-<LLLLayout title="Home" description={description} noIndex>
+<LLLLayout title="Home" description={description}>
   <!-- Hero -->
   <section class="bg-[var(--color-navy,#1B2A4A)] text-white">
     <div class="container py-24 text-center">
@@ -80,7 +78,7 @@ const description =
         Ryan Adamson &middot; <a href="tel:+19417139234" class="hover:text-[var(--color-gold,#C5A55A)]">(941) 713-9234</a>
       </p>
       <p class="font-accent text-sm text-[var(--color-navy,#1B2A4A)] mt-1">
-        Anne Schneider &middot; [ANNE PHONE]
+        Anne Schneider &middot; <a href="tel:+13105629710" class="hover:text-[var(--color-gold,#C5A55A)]">(310) 562-9710</a>
       </p>
     </div>
   </section>
