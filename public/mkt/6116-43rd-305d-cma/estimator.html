@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Closing Cost Estimator — CMA Workbench</title>
+<script>
+/* Same gate as workbench.html. Convenience only — the send-estimate function
+   enforces nothing client-side; it always mails Ryan's notify list. */
+if (!localStorage.getItem("cma-edit-key"))
+  location.replace("/mkt/admin/?next=" + encodeURIComponent(location.pathname));
+</script>
+<style>
+:root{
+  --navy:#0A1F3C; --gold:#C9A961; --bronze:#8a6d1f;
+  --ink:#0A1F3C; --ink2:#33465e; --mut:#6b7c93; --line:#c8d0dc; --line2:#eef2f7;
+  --bg:#F7F8FA; --card:#ffffff; --accent:#0A1F3C; --accent2:#8a6d1f;
+  --buy:#1f6f52; --buyBg:#eef7f2; --sell:#8a4b12; --sellBg:#fdf4ea;
+  --red:#a32020; --ok:#1f6f52;
+  --r:10px; --sh:0 1px 2px rgba(15,28,46,.06),0 4px 14px rgba(15,28,46,.05);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--ink); background:var(--bg); -webkit-font-smoothing:antialiased;
+}
+h1,h2{margin:0;font-family:Georgia,serif;color:var(--navy);font-weight:normal}
+h3,h4{margin:0;font-weight:650;letter-spacing:-.01em}
+a{color:var(--accent2)}
+.wrap{max-width:1420px;margin:0 auto;padding:0 20px 60px}
+
+/* ---------- top bar ---------- */
+.wbhead{background:var(--navy);color:#fff;padding:18px 0 16px;border-bottom:4px solid var(--gold)}
+.wbhead h1{color:#fff;font-size:20px}
+.wbhead .crit{font-size:12px;color:var(--muted,#B4BECD);margin-top:4px}
+.top{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40}
+.top-in{max-width:1420px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px;margin-right:auto}
+.brand h1{font-size:17px}
+.brand .sub{font-size:12px;color:var(--mut)}
+.badge{display:inline-block;font-size:10.5px;font-weight:750;letter-spacing:.09em;text-transform:uppercase;
+  padding:4px 9px;border-radius:999px;background:#fdeceb;color:#a32020;border:1px solid #f3c9c6}
+.btn{font:inherit;font-size:13px;font-weight:600;padding:8px 13px;border-radius:8px;border:1px solid var(--line);
+  background:#fff;color:var(--ink2);cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:#bcc9d8;background:#fafbfd}
+.btn.pri,.btn.gold{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn.pri:hover,.btn.gold:hover{background:#132d52}
+.ind{font-size:12px;color:var(--mut);align-self:center;min-width:10px}
+.ind.ok{color:var(--ok);font-weight:600}
+.ind.err{color:var(--red);font-weight:600}
+.btn.sm{padding:5px 9px;font-size:12px}
+
+/* ---------- layout ---------- */
+.grid{display:grid;grid-template-columns:392px minmax(0,1fr);gap:20px;padding-top:20px;align-items:start}
+@media(max-width:1080px){.grid{grid-template-columns:1fr}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
+.card + .card{margin-top:14px}
+.card > h3{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);
+  padding:13px 16px;border-bottom:1px solid var(--line2)}
+.card .body{padding:14px 16px}
+
+.sidebar{position:sticky;top:70px;max-height:calc(100vh - 88px);overflow-y:auto;padding-bottom:8px}
+@media(max-width:1080px){.sidebar{position:static;max-height:none;overflow:visible}}
+
+/* ---------- form ---------- */
+.f{margin-bottom:11px}
+.f:last-child{margin-bottom:0}
+label{display:block;font-size:11.5px;font-weight:600;color:var(--ink2);margin-bottom:4px}
+label .hint{font-weight:400;color:var(--mut)}
+input[type=text],input[type=number],input[type=date],select{
+  width:100%;font:inherit;font-size:13.5px;padding:7px 9px;border:1px solid var(--line);border-radius:7px;
+  background:#fff;color:var(--ink)}
+input:focus,select:focus{outline:none;border-color:var(--accent2);box-shadow:0 0 0 3px rgba(47,110,165,.13)}
+input[readonly]{background:#f7f9fb;color:var(--ink2)}
+.row{display:grid;gap:9px}
+.row.c2{grid-template-columns:1fr 1fr}
+.row.c3{grid-template-columns:1fr 1fr 1fr}
+.seg{display:flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+.seg button{flex:1;font:inherit;font-size:12.5px;font-weight:600;padding:7px 4px;border:0;background:#fff;
+  color:var(--mut);cursor:pointer;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed=true]{background:var(--accent);color:#fff}
+.chk{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:var(--ink2);cursor:pointer;line-height:1.35}
+.chk input{margin-top:2px;width:15px;height:15px;flex:none;accent-color:var(--accent)}
+.req{border:1px solid #f0d6a8;background:#fdf8ee;border-radius:8px;padding:11px 12px}
+.req.bad{border-color:#e8a9a4;background:#fdefee;animation:pulse .5s}
+@keyframes pulse{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+.req .lbl{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#8a5a12;margin-bottom:7px}
+.note{font-size:11.5px;color:var(--mut);margin-top:5px;line-height:1.4}
+.clause{font-size:11.5px;line-height:1.5;color:var(--ink2);background:#f2f6fa;border-left:3px solid var(--accent2);
+  padding:9px 11px;border-radius:0 6px 6px 0;margin-top:8px}
+.clause b{color:var(--accent)}
+
+/* ---------- tabs ---------- */
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.tab{font:inherit;font-size:13px;font-weight:650;padding:9px 16px;border-radius:8px;border:1px solid var(--line);
+  background:#fff;color:var(--mut);cursor:pointer}
+.tab[aria-selected=true]{background:var(--navy);border-color:var(--navy);color:#fff}
+
+/* ---------- statement ---------- */
+.stmt{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
+.stmt-h{padding:16px 20px;border-bottom:1px solid var(--line)}
+.stmt-h .eyebrow{font-size:10.5px;font-weight:750;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.stmt-h h2{font-size:19px;margin-top:3px}
+.stmt-h .addr{font-size:13px;color:var(--ink2);margin-top:4px}
+.stmt-h .meta{display:flex;flex-wrap:wrap;gap:5px 18px;margin-top:10px;font-size:12px;color:var(--mut)}
+.stmt-h .meta b{color:var(--ink2);font-weight:600}
+.side-buy .stmt-h{background:var(--buyBg);border-bottom-color:#cfe3d8}
+.side-sell .stmt-h{background:var(--sellBg);border-bottom-color:#eed9bf}
+
+table.li{width:100%;border-collapse:collapse}
+table.li th{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);text-align:left;
+  padding:11px 20px 7px;font-weight:700;border-bottom:1px solid var(--line2)}
+table.li th.n{text-align:right}
+table.li td{padding:6px 20px;border-bottom:1px solid var(--line2);vertical-align:top}
+table.li td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-size:13.5px}
+table.li tr.grp td{background:#f7f9fb;font-size:10.5px;font-weight:750;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--ink2);padding:8px 20px}
+table.li tr.sub td{font-weight:700;background:#fbfcfd}
+table.li tr.tot td{font-weight:750;font-size:15px;background:#f2f6fa;border-top:2px solid var(--line);padding:12px 20px}
+table.li tr.tot.big td{font-size:17px;background:var(--ink);color:#fff;border-top:0}
+table.li tr.cred td.n{color:var(--ok)}
+table.li .sm{font-size:11.5px;color:var(--mut);margin-top:1px;line-height:1.35}
+table.li tr.zero{opacity:.45}
+.tag{display:inline-block;font-size:9.5px;font-weight:750;letter-spacing:.05em;text-transform:uppercase;
+  padding:1px 5px;border-radius:4px;background:#eef2f7;color:var(--mut);margin-left:6px;vertical-align:1px}
+.tag.k{background:#e7f0e9;color:var(--buy)}
+.tag.c{background:#fdeceb;color:#a32020}
+
+.contingent{margin:14px 20px 18px;border:1px dashed #d9b98a;background:#fdfaf4;border-radius:8px;padding:12px 14px}
+.contingent h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#8a5a12}
+.contingent table{width:100%;border-collapse:collapse;margin-top:8px}
+.contingent td{padding:3px 0;font-size:13px}
+.contingent td.n{text-align:right;font-variant-numeric:tabular-nums}
+.contingent p{margin:8px 0 0;font-size:11.5px;color:var(--mut);line-height:1.45}
+
+.disc{margin:0;padding:14px 20px 18px;font-size:11px;line-height:1.5;color:var(--mut);border-top:1px solid var(--line2)}
+.disc b{color:var(--red)}
+
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:900px){.dual{grid-template-columns:1fr}}
+
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.kpi .k{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:13px 15px;box-shadow:var(--sh)}
+.kpi .k .l{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);font-weight:700}
+.kpi .k .v{font-size:21px;font-weight:700;margin-top:5px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.kpi .k.b .v{color:var(--accent)}
+.kpi .k.s .v{color:var(--sell)}
+
+/* settings */
+.fee-tbl{width:100%;border-collapse:collapse}
+.fee-tbl td{padding:5px 0;border-bottom:1px solid var(--line2);font-size:13px}
+.fee-tbl td:last-child{width:108px}
+.fee-tbl input{padding:5px 7px;font-size:13px;text-align:right}
+.fee-tbl .sm{font-size:11px;color:var(--mut)}
+
+details.adv{border-top:1px solid var(--line2);margin-top:12px;padding-top:10px}
+details.adv summary{cursor:pointer;font-size:12px;font-weight:650;color:var(--accent2);list-style:none}
+details.adv summary::-webkit-details-marker{display:none}
+details.adv summary:before{content:"▸ ";font-size:10px}
+details.adv[open] summary:before{content:"▾ "}
+
+.foot{margin-top:22px;font-size:11.5px;color:var(--mut);line-height:1.6}
+
+/* ---------- print ---------- */
+@page{size:letter portrait;margin:0.5in}
+@media print{
+  body{background:#fff}
+  .no-print,.top,.tabs,.sidebar,.foot{display:none!important}
+  .wrap{max-width:none;padding:0}
+  .grid{display:block;padding:0}
+  .stmt{border:0;box-shadow:none;border-radius:0;break-inside:auto}
+  .stmt + .stmt{margin-top:26px;break-before:page}
+  .dual{display:block}
+  .kpi{display:none}
+  .panel{display:none!important}
+  html[data-print="buyer"]   #panel-buyer{display:block!important}
+  html[data-print="seller"]  #panel-seller{display:block!important}
+  html[data-print="combined"] #panel-combined{display:block!important}
+  html[data-print="combined"] .dual .stmt + .stmt{break-before:page}
+  table.li tr{break-inside:avoid}
+  table.li tr.tot.big td{background:#0f1c2e!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .side-buy .stmt-h,.side-sell .stmt-h,table.li tr.grp td,table.li tr.tot td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .print-only{display:block!important}
+}
+.print-only{display:none}
+.print-hd{border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:14px}
+.print-hd .t{font-size:16px;font-weight:750}
+.print-hd .d{font-size:11px;color:var(--mut);margin-top:3px}
+</style>
+</head>
+<body>
+
+<header class="wbhead no-print"><div class="top-in">
+  <h1>Closing Cost Estimator <span style="font-size:13px;color:var(--gold);">INTERNAL</span></h1>
+  <div class="crit" id="hdr">Florida &middot; buyer &amp; seller &middot; ESTIMATED figures only</div>
+</div></header>
+
+<div class="top no-print">
+  <div class="top-in">
+    <span class="badge">Estimate Only</span>
+    <button class="btn" onclick="makePdf('buyer','save')">Buyer PDF</button>
+    <button class="btn" onclick="makePdf('seller','save')">Seller PDF</button>
+    <button class="btn gold" onclick="makePdf('combined','save')">Combined PDF</button>
+    <span style="width:1px;height:22px;background:var(--line)"></span>
+    <select id="emailSide" style="width:auto;padding:7px 8px">
+      <option value="combined">Combined</option>
+      <option value="buyer">Buyer only</option>
+      <option value="seller">Seller only</option>
+    </select>
+    <button class="btn" onclick="emailPdf()">Email to me</button>
+    <span class="ind" id="ind"></span>
+    <span style="margin-left:auto;display:flex;gap:8px">
+      <a class="btn" href="./workbench.html">&larr; Workbench</a>
+      <a class="btn" href="/mkt/admin/">All CMAs</a>
+    </span>
+  </div>
+</div>
+
+<div class="wrap">
+<div class="grid">
+
+  <!-- ============ INPUTS ============ -->
+  <div class="sidebar no-print">
+
+    <div class="card">
+      <h3>Saved Estimates</h3>
+      <div class="body">
+        <div class="f">
+          <select id="scenarioList"><option value="">— New estimate —</option></select>
+        </div>
+        <div class="f">
+          <input type="text" id="scenarioName" placeholder="Name this estimate">
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn sm pri" onclick="scSave()">Save</button>
+          <button class="btn sm" onclick="scDelete()">Delete</button>
+          <button class="btn sm" onclick="scExport()">Export .json</button>
+          <button class="btn sm" onclick="$('scImport').click()">Import</button>
+          <input type="file" id="scImport" accept="application/json,.json" style="display:none">
+        </div>
+        <div class="note" id="scMsg">Saved in this browser. Work in progress is kept automatically &mdash; export to move an estimate to another machine.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Transaction</h3>
+      <div class="body">
+        <div class="f">
+          <label>Property Address</label>
+          <input type="text" id="address" placeholder="7333 Featherstone Blvd, Sarasota, FL 34238">
+        </div>
+        <div class="f">
+          <label>Contract Form</label>
+          <div class="seg" id="segForm">
+            <button data-v="asis" aria-pressed="true">&ldquo;AS IS&rdquo;</button>
+            <button data-v="standard" aria-pressed="false">Standard</button>
+          </div>
+        </div>
+        <div class="f">
+          <label>Title &amp; Closing Agent &mdash; Contract &para;9(c)</label>
+          <select id="titleOpt">
+            <option value="i">9(c)(i) &mdash; Seller designates &amp; pays Owner&rsquo;s Policy</option>
+            <option value="ii" selected>9(c)(ii) &mdash; Buyer designates &amp; pays Owner&rsquo;s Policy</option>
+            <option value="iii">9(c)(iii) &mdash; Miami-Dade / Broward provision</option>
+          </select>
+          <div class="clause" id="clauseBox"></div>
+        </div>
+        <div class="f">
+          <label>Closing Agent / Attorney Fee <span class="hint">follows &para;9(c)</span></label>
+          <div class="row c2">
+            <div>
+              <input type="text" inputmode="decimal" class="money" id="caDesig" value="750">
+              <div class="note" id="caDesigWho">Designating party</div>
+            </div>
+            <div>
+              <input type="text" inputmode="decimal" class="money" id="caOther" value="395">
+              <div class="note" id="caOtherWho">Other party</div>
+            </div>
+          </div>
+          <div class="note">The party that designates the Closing Agent carries the larger fee; under &sect;627.7711(1)(a) each side still bears its own Closing Services fee. Flipping &para;9(c) swaps these two amounts between the ledgers. Independent attorney review, further down, stays with whoever retains counsel.</div>
+        </div>
+        <div class="f">
+          <label>Financing</label>
+          <div class="seg" id="segFin">
+            <button data-v="financed" aria-pressed="true">Financed</button>
+            <button data-v="cash" aria-pressed="false">Cash</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Price &amp; Terms</h3>
+      <div class="body">
+        <div class="f">
+          <label>Purchase Price</label>
+          <input type="text" inputmode="decimal" class="money" id="price" value="500000">
+        </div>
+        <div class="row c2 f" id="finRow">
+          <div>
+            <label>% Financed (LTV)</label>
+            <input type="text" inputmode="decimal" class="money" id="ltv" value="80">
+          </div>
+          <div>
+            <label>Loan Amount <span class="hint">calc</span></label>
+            <input type="text" inputmode="decimal" class="money" id="loan" value="400000">
+          </div>
+        </div>
+        <div class="row c2 f">
+          <div>
+            <label>Closing Date</label>
+            <input type="date" id="closingDate">
+          </div>
+          <div>
+            <label>Escrow Deposit(s)</label>
+            <input type="text" inputmode="decimal" class="money" id="deposit" value="25000">
+          </div>
+        </div>
+        <div class="row c2 f">
+          <div>
+            <label>Annual Property Tax</label>
+            <input type="text" inputmode="decimal" class="money" id="annualTax" value="0">
+          </div>
+          <div>
+            <label>Mortgage Payoff <span class="hint">seller</span></label>
+            <input type="text" inputmode="decimal" class="money" id="payoff" value="0">
+          </div>
+        </div>
+        <div class="f">
+          <label>CDD / Special District &mdash; Prepaid <span class="hint">reimburse Seller</span></label>
+          <input type="text" inputmode="decimal" class="money" id="cdd" value="0">
+          <div class="note">Common on Palmer Ranch, Lakewood Ranch and other CDD communities where the district assessment is billed in advance.</div>
+        </div>
+        <div class="f">
+          <label>Credit(s) to Buyer at Closing</label>
+          <div class="seg" id="segCredit" style="margin-bottom:7px">
+            <button data-v="flat" aria-pressed="true">Flat $</button>
+            <button data-v="pct" aria-pressed="false">% of price</button>
+          </div>
+          <input type="text" inputmode="decimal" class="money" id="sellerCredit" value="0">
+          <div class="note" id="creditNote">Repair credits, closing-cost credits, concessions.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Commissions</h3>
+      <div class="body">
+        <div class="f">
+          <div class="seg" id="segComm">
+            <button data-v="pct" aria-pressed="true">Percent</button>
+            <button data-v="flat" aria-pressed="false">Flat $</button>
+          </div>
+        </div>
+        <div class="row c2 f">
+          <div>
+            <label>Listing Side <span class="hint" id="lblList">%</span></label>
+            <input type="text" inputmode="decimal" class="money" id="listRate" value="3">
+          </div>
+          <div>
+            <label>Selling Side <span class="hint" id="lblSell">%</span></label>
+            <input type="text" inputmode="decimal" class="money" id="sellRate" value="2.5">
+          </div>
+        </div>
+        <div class="f">
+          <label>Brokerage Transaction / Compliance Fee</label>
+          <input type="text" inputmode="decimal" class="money" id="transFee" value="375">
+        </div>
+        <div class="note" id="commNote"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Association</h3>
+      <div class="body">
+        <div class="req" id="hoaReq">
+          <div class="lbl">Required</div>
+          <div class="chk" style="margin-bottom:6px">
+            <input type="checkbox" id="hoaYes">
+            <label for="hoaYes" style="margin:0;font-size:13px;font-weight:600;cursor:pointer">
+              HOA / COA Property?
+            </label>
+          </div>
+          <div class="chk">
+            <input type="checkbox" id="hoaNo">
+            <label for="hoaNo" style="margin:0;font-size:13px;font-weight:600;cursor:pointer">
+              No association
+            </label>
+          </div>
+          <div class="note" id="hoaMsg">Select one &mdash; required before the estimate will calculate.</div>
+        </div>
+        <div id="hoaFields" style="display:none;margin-top:12px">
+          <div class="row c2 f">
+            <div>
+              <label>Estoppel Search / Fee</label>
+              <input type="text" inputmode="decimal" class="money" id="estoppel" value="500">
+            </div>
+            <div>
+              <label>Master Assn. Estoppel</label>
+              <input type="text" inputmode="decimal" class="money" id="estoppel2" value="0">
+            </div>
+          </div>
+          <div class="row c2 f">
+            <div>
+              <label>Transfer / App Fee <span class="hint">buyer</span></label>
+              <input type="text" inputmode="decimal" class="money" id="hoaTransfer" value="250">
+            </div>
+            <div>
+              <label>Capital Contribution <span class="hint">buyer</span></label>
+              <input type="text" inputmode="decimal" class="money" id="hoaCap" value="0">
+            </div>
+          </div>
+          <div class="row c3 f">
+            <div>
+              <label>Dues Amount</label>
+              <input type="text" inputmode="decimal" class="money" id="hoaDues" value="0">
+            </div>
+            <div>
+              <label>Billed</label>
+              <select id="hoaFreq">
+                <option value="1">Monthly</option>
+                <option value="3" selected>Quarterly</option>
+                <option value="6">Semi-annual</option>
+                <option value="12">Annual</option>
+              </select>
+            </div>
+            <div>
+              <label>Paid Through</label>
+              <input type="date" id="hoaPaidThru">
+            </div>
+          </div>
+          <div class="note">Estoppel fees are a <b>Seller</b> cost under &para;9(a) of both forms; transfer/application fees are a <b>Buyer</b> cost under &para;9(b). Dues paid in advance are prorated from the closing date to the paid-through date and reimbursed to Seller. A second master-association estoppel is common in Palmer Ranch and Lakewood Ranch.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Title Insurance &amp; Home Warranty</h3>
+      <div class="body">
+        <div class="f">
+          <label>Home Warranty &mdash; &para;9(e)</label>
+          <div class="row c2">
+            <select id="hwPayer">
+              <option value="none" selected>N/A</option>
+              <option value="seller">Seller pays</option>
+              <option value="buyer">Buyer pays</option>
+            </select>
+            <input type="text" inputmode="decimal" class="money" id="hwCost" value="700">
+          </div>
+        </div>
+        <div class="f">
+          <div class="chk">
+            <input type="checkbox" id="reissue">
+            <label for="reissue" style="margin:0;font-size:13px;cursor:pointer">Reissue rate &mdash; prior owner&rsquo;s policy &lt; 3 yrs</label>
+          </div>
+        </div>
+        <div class="f">
+          <div class="chk">
+            <input type="checkbox" id="form9" checked>
+            <label for="form9" style="margin:0;font-size:13px;cursor:pointer">Florida Form 9 endorsement <span class="hint">(10% of premiums)</span></label>
+          </div>
+        </div>
+        <div class="note" id="rateNote"></div>
+      </div>
+    </div>
+
+    <div class="card" id="stdCard" style="display:none">
+      <h3>Standard Contract &mdash; Seller Repair Limits</h3>
+      <div class="body">
+        <div class="row c3 f">
+          <div><label>General %</label><input type="text" inputmode="decimal" class="money" id="genPct" value="1.5"></div>
+          <div><label>WDO %</label><input type="text" inputmode="decimal" class="money" id="wdoPct" value="1.5"></div>
+          <div><label>Permit %</label><input type="text" inputmode="decimal" class="money" id="permitPct" value="1.5"></div>
+        </div>
+        <div class="chk">
+          <input type="checkbox" id="incRepairs">
+          <label for="incRepairs" style="margin:0;font-size:13px;cursor:pointer">Include limits in Seller net proceeds</label>
+        </div>
+        <div class="note">&para;12 caps Seller&rsquo;s obligation at these percentages of Purchase Price (1.5% each if left blank). Shown as contingent exposure unless included above.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Fee Assumptions</h3>
+      <div class="body">
+        <details class="adv" open>
+          <summary>Buyer-side fees</summary>
+          <table class="fee-tbl" id="feeBuy"></table>
+        </details>
+        <details class="adv">
+          <summary>Seller-side fees</summary>
+          <table class="fee-tbl" id="feeSell"></table>
+        </details>
+        <details class="adv">
+          <summary>Rates &amp; proration method</summary>
+          <div class="f" style="margin-top:9px">
+            <label>Doc stamps on deed <span class="hint">per $100</span></label>
+            <input type="text" inputmode="decimal" class="money" id="deedRate" value="0.70">
+          </div>
+          <div class="f">
+            <label>Tax proration basis</label>
+            <div class="seg" id="segPro">
+              <button data-v="365" aria-pressed="true">Actual / 365</button>
+              <button data-v="360" aria-pressed="false">30-day / 360</button>
+            </div>
+            <div class="note">Actual/365 matches the Berlin Patten settlement statement. 30/360 matches the DAYS360 formula in your RE Expense worksheet.</div>
+          </div>
+        </details>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button class="btn sm" onclick="saveDefaults()">Save as my defaults</button>
+          <button class="btn sm" onclick="resetDefaults()">Reset</button>
+        </div>
+        <div class="note" id="saveMsg"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ OUTPUT ============ -->
+  <div>
+    <div class="tabs no-print" id="tabs">
+      <button class="tab" data-p="combined" aria-selected="true">Combined</button>
+      <button class="tab" data-p="buyer" aria-selected="false">Buyer</button>
+      <button class="tab" data-p="seller" aria-selected="false">Seller</button>
+      <label class="chk" style="margin-left:auto;align-self:center;font-size:12.5px">
+        <input type="checkbox" id="hideZero" checked> Hide $0 lines
+      </label>
+    </div>
+
+    <div class="kpi no-print" id="kpi"></div>
+
+    <div class="panel" id="panel-combined">
+      <div class="print-only print-hd">
+        <div class="t">Estimated Closing Statement &mdash; Buyer &amp; Seller</div>
+        <div class="d" id="phd-c"></div>
+      </div>
+      <div class="dual">
+        <div id="cmb-buy"></div>
+        <div id="cmb-sell"></div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-buyer" style="display:none">
+      <div class="print-only print-hd">
+        <div class="t">Estimated Buyer Closing Costs</div>
+        <div class="d" id="phd-b"></div>
+      </div>
+      <div id="out-buy"></div>
+    </div>
+
+    <div class="panel" id="panel-seller" style="display:none">
+      <div class="print-only print-hd">
+        <div class="t">Estimated Seller Net Proceeds</div>
+        <div class="d" id="phd-s"></div>
+      </div>
+      <div id="out-sell"></div>
+    </div>
+
+    <div class="foot no-print">
+      <b>Sources &amp; method.</b> Title premiums use the Florida promulgated rates in Fla. Admin. Code R. 69O-186.003.
+      Documentary stamp tax on the deed, documentary stamp tax on the note and intangible tax on the mortgage are Florida
+      statutory rates. Cost allocation follows &para;9 of the FloridaRealtors/FloridaBar &ldquo;AS IS&rdquo; (ASIS-7x) and
+      Standard (7x) contracts. Soft-fee defaults are drawn from a live Sarasota ALTA Combined Settlement Statement
+      (Berlin Patten Ebling) and from the RE Expense Estimate Worksheet. Every fee is editable.
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+"use strict";
+
+/* ============================================================
+   DEFAULT FEE SCHEDULE  (hybrid: real ALTA actuals + workbook)
+   ============================================================ */
+const FEE_DEFS = {
+  buy: [
+    {k:'b_search',   l:'Title search',                        v:75,   s:'Only when Buyer pays Owner’s Policy & Charges'},
+    {k:'b_muni',     l:'Municipal lien search',               v:185,  s:'Contract-defined; Ch. 153/159/170 F.S.'},
+    {k:'b_permit',   l:'Permit search (if ordered)',          v:0,    s:'ProPlogix on the sample file — $257.45'},
+    {k:'b_lender',   l:'Lender’s title policy (simultaneous)',v:350,  s:'Rule minimum is $25; $350 is Sarasota practice'},
+    {k:'b_endo',     l:'ALTA endorsements (5.1, 8.1, etc.)',  v:200,  s:'$100 each on the sample file'},
+    {k:'b_fraud',    l:'Title fraud verification',            v:35,   s:''},
+    {k:'b_erec',     l:'E-recording fee',                     v:10,   s:''},
+    {k:'b_survey',   l:'Survey',                              v:395,  s:'N/A on most condos'},
+    {k:'b_elev',     l:'Elevation certificate',               v:0,    s:'If required by lender/insurer'},
+    {k:'b_recdeed',  l:'Recording — deed',                    v:27,   s:''},
+    {k:'b_recmtg',   l:'Recording — mortgage',                v:214,  s:'Financed only'},
+    {k:'b_uw',       l:'Lender / underwriting fee',           v:1500, s:'Financed only — confirm w/ lender'},
+    {k:'b_appr',     l:'Appraisal',                           v:700,  s:'Financed only — often prepaid'},
+    {k:'b_credit',   l:'Credit report / flood cert / tax svc',v:150,  s:'Financed only'},
+    {k:'b_prepaid',  l:'Prepaids & escrow reserves',          v:0,    s:'Insurance + tax escrows — verify w/ lender'},
+    {k:'b_insp',     l:'Inspections (general / WDO / wind)',  v:0,    s:'Usually paid outside closing'},
+    {k:'b_atty',     l:'Buyer’s attorney (independent review)', v:0, s:'Own counsel — does not shift with ¶9(c)'},
+    {k:'b_other',    l:'Other buyer cost',                    v:0,    s:''}
+  ],
+  sell: [
+    {k:'s_search',   l:'Title search',                        v:75,   s:'Only when Seller pays Owner’s Policy & Charges'},
+    {k:'s_muni',     l:'Municipal lien search',               v:185,  s:'Seller pays under 9(c)(i) and 9(c)(iii)'},
+    {k:'s_fraud',    l:'Title fraud verification',            v:35,   s:''},
+    {k:'s_erec',     l:'E-recording fee',                     v:10,   s:''},
+    {k:'s_wire',     l:'Wire fee',                            v:25,   s:''},
+    {k:'s_courier',  l:'Courier / express mail',              v:17,   s:''},
+    {k:'s_cure',     l:'Recording fees to cure title',        v:35.50,s:'Trust certification, NOT/CA, satisfactions'},
+    {k:'s_atty',     l:'Seller’s attorney (independent review)', v:0, s:'Own counsel — does not shift with ¶9(c)'},
+    {k:'s_other',    l:'Other seller cost',                   v:0,    s:''}
+  ]
+};
+
+const S = {};              // live state
+let printPanel = 'combined';
+
+/* ---------------- helpers ---------------- */
+const $ = id => document.getElementById(id);
+const num = id => { const e=$(id); if(!e) return 0; const v = parseFloat(String(e.value).replace(/,/g,'')); return isFinite(v)?v:0; };
+
+/* ---- live thousands separators in text inputs ---- */
+function fmtLive(raw){
+  const neg = /^\s*-/.test(raw);
+  let v = String(raw).replace(/[^0-9.]/g,'');
+  const dot = v.indexOf('.');
+  let ip = dot < 0 ? v : v.slice(0, dot);
+  let fp = dot < 0 ? null : v.slice(dot+1).replace(/\./g,'');
+  ip = ip.replace(/^0+(?=\d)/,'');
+  const grouped = ip === '' ? '' : ip.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return (neg && (grouped || fp!==null) ? '-' : '') + grouped + (fp === null ? '' : '.' + fp);
+}
+function attachMoney(el){
+  if(el.dataset.money) return;
+  el.dataset.money = '1';
+  el.addEventListener('input', () => {
+    const caret = el.selectionStart;
+    const digitsBefore = el.value.slice(0, caret).replace(/[^0-9.]/g,'').length;
+    el.value = fmtLive(el.value);
+    let seen = 0, pos = el.value.length;
+    if(digitsBefore === 0){
+      pos = 0;
+    } else {
+      for(let k = 0; k < el.value.length; k++){
+        if(/[0-9.]/.test(el.value[k])) seen++;
+        if(seen === digitsBefore){ pos = k + 1; break; }
+      }
+    }
+    try{ el.setSelectionRange(pos, pos); }catch(e){}
+  });
+  el.addEventListener('blur', () => { el.value = fmtLive(el.value); });
+  el.value = fmtLive(el.value);
+}
+function initMoney(root){ (root||document).querySelectorAll('input.money').forEach(attachMoney); }
+function setMoney(id, v){ const e=$(id); if(e){ e.value = fmtLive(String(v)); } }
+const r2 = n => Math.round(n*100)/100;
+const fmt = n => (n<0?'-':'') + '$' + Math.abs(r2(n)).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmt0 = n => (n<0?'-':'') + '$' + Math.abs(Math.round(n)).toLocaleString('en-US');
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const SLUG = (location.pathname.match(/\/mkt\/([^/]+)\//) || [])[1] || '';
+let LAST = null;      // last calc() result, for the PDF + email payload
+let CMA  = null;      // this CMA's data.json, when the page sits in /mkt/<slug>/
+let RESTORED = false; // true when autosave repopulated the form
+
+/* ---------------- FL promulgated title rates (69O-186.003) ---------------- */
+function ownersPremium(amount, reissue){
+  if(!(amount>0)) return 0;
+  const tiers = reissue
+    ? [[100000,3.30],[1000000,3.00],[10000000,2.00],[Infinity,1.50]]
+    : [[100000,5.75],[1000000,5.00],[5000000,2.50],[10000000,2.25],[Infinity,2.00]];
+  let prev=0, p=0;
+  for(const [cap,rate] of tiers){
+    if(amount<=prev) break;
+    p += (Math.min(amount,cap)-prev)/1000*rate;
+    prev = cap;
+  }
+  return Math.max(100, r2(p));
+}
+
+/* ---------------- date / proration ---------------- */
+function parseDate(v){
+  if(!v) return null;
+  const [y,m,d] = v.split('-').map(Number);
+  if(!y) return null;
+  return new Date(y,(m||1)-1,d||1);
+}
+function daysActual(a,b){ return Math.round((b-a)/86400000); }
+function days360(a,b){
+  let d1=a.getDate(), d2=b.getDate();
+  if(d1===31) d1=30;
+  if(d2===31 && d1===30) d2=30;
+  return (b.getFullYear()-a.getFullYear())*360 + (b.getMonth()-a.getMonth())*30 + (d2-d1);
+}
+
+/* ============================================================
+   CALCULATE
+   ============================================================ */
+function calc(){
+  const price   = num('price');
+  const cash    = S.fin === 'cash';
+  const loan    = cash ? 0 : num('loan');
+  const opt     = $('titleOpt').value;
+  const isStd   = S.form === 'standard';
+  const hoa     = S.hoa === true;
+  const F = k => num('fee_'+k);
+
+  /* --- statutory --- */
+  const deedStamps = r2(price/100 * num('deedRate'));
+  const noteStamps = cash ? 0 : r2(loan/100 * 0.35);
+  const intangible = cash ? 0 : r2(loan * 0.002);
+
+  /* --- title --- */
+  const reissue  = $('reissue').checked;
+  const ownersP  = ownersPremium(price, reissue);
+  const lenderP  = cash ? 0 : F('b_lender');
+  const form9    = $('form9').checked ? r2((ownersP + lenderP) * 0.10) : 0;
+
+  // Who pays Owner's Policy and Charges, per ¶9(c)
+  const sellerPaysOwners = (opt === 'i');
+  const sellerPaysSearch = (opt === 'i' || opt === 'iii');
+
+  // The party designating the Closing Agent carries the larger settlement fee.
+  const sellerDesignates = (opt === 'i');
+  const caBuyer  = sellerDesignates ? num('caOther') : num('caDesig');
+  const caSeller = sellerDesignates ? num('caDesig') : num('caOther');
+
+  /* --- commissions --- */
+  const pct = S.comm === 'pct';
+  const listC = pct ? r2(price * num('listRate')/100) : num('listRate');
+  const sellC = pct ? r2(price * num('sellRate')/100) : num('sellRate');
+
+  /* --- prorations --- */
+  const cd = parseDate($('closingDate').value);
+  let taxPro = 0, taxDays = 0, hoaPro = 0, proLabel = '', hoaProLabel = '';
+  if(cd){
+    const jan1 = new Date(cd.getFullYear(),0,1);
+    taxDays = S.pro === '360' ? days360(jan1, cd) : daysActual(jan1, cd);
+    if(taxDays < 0) taxDays = 0;
+    const basis = S.pro === '360' ? 360 : 365;
+    taxPro = r2(num('annualTax') / basis * taxDays);
+    proLabel = '01/01/' + cd.getFullYear() + ' to ' + (cd.getMonth()+1) + '/' + cd.getDate() + '/' + cd.getFullYear()
+             + ' · ' + taxDays + ' days @ ' + fmt(num('annualTax')/basis) + '/day';
+    if(hoa && num('hoaDues') > 0){
+      const thru = parseDate($('hoaPaidThru').value);
+      if(thru && thru > cd){
+        const months = parseInt($('hoaFreq').value,10) || 3;
+        const pStart = new Date(thru.getFullYear(), thru.getMonth()-months, thru.getDate());
+        const pDays  = Math.max(1, daysActual(pStart, thru));
+        const unused = Math.max(0, daysActual(cd, thru));
+        hoaPro = r2(num('hoaDues')/pDays * unused);
+        hoaProLabel = unused + ' of ' + pDays + ' days unused · ' + fmt(num('hoaDues')) + ' per period';
+      }
+    }
+  }
+
+  const credit  = S.credit === 'pct' ? r2(price * num('sellerCredit')/100) : num('sellerCredit');
+  const deposit = num('deposit');
+
+  /* ============ BUYER ============ */
+  const B = [];
+  const bp = (l,v,s,tag) => { if(v!==0 || !s) B.push({l,v,s,tag}); };
+  B.push({g:'Purchase & Financing'});
+  B.push({l:'Purchase price', v:price, s:''});
+  if(!cash) B.push({l:'Loan amount', v:-loan, s:(price? (loan/price*100).toFixed(2):'0')+'% LTV', cr:1});
+  if(deposit) B.push({l:'Escrow deposit(s) already paid', v:-deposit, s:'', cr:1});
+
+  B.push({g:'Government Recording & Transfer'});
+  if(!cash){
+    B.push({l:'Documentary stamp tax — note', v:noteStamps, s:'$0.35 per $100 of loan amount'});
+    B.push({l:'Intangible tax — mortgage', v:intangible, s:'$0.002 per $1.00 of loan amount'});
+  }
+  B.push({l:'Recording — deed', v:F('b_recdeed'), s:''});
+  if(!cash) B.push({l:'Recording — mortgage', v:F('b_recmtg'), s:''});
+  B.push({l:'E-recording fee', v:F('b_erec'), s:''});
+
+  B.push({g:'Title Charges & Settlement'});
+  if(!sellerPaysOwners){
+    B.push({l:'Owner’s title policy', v:ownersP, s:'FL promulgated · ' + (reissue?'reissue':'original') + ' rate on ' + fmt0(price), tag:'9(c)'+opt});
+  }
+  if(!cash) B.push({l:'Lender’s title policy', v:lenderP, s:'Simultaneous issue'});
+  if(form9) B.push({l:'Florida Form 9 endorsement', v:form9, s:'10% of title premiums'});
+  B.push({l:'ALTA endorsements', v:F('b_endo'), s:''});
+  if(!sellerPaysSearch) B.push({l:'Title search', v:F('b_search'), s:''});
+  if(opt === 'ii') B.push({l:'Municipal lien search', v:F('b_muni'), s:'Buyer pays under 9(c)(ii)'});
+  B.push({l:'Permit search', v:F('b_permit'), s:''});
+  B.push({l:'Settlement / closing fee', v:caBuyer,
+          s:'Buyer’s Closing Services · §627.7711(1)(a) · ' + (sellerDesignates ? 'Seller designates agent' : 'Buyer designates agent'),
+          tag: sellerDesignates ? '' : 'designating'});
+  B.push({l:'Title fraud verification', v:F('b_fraud'), s:''});
+
+  if(!cash){
+    B.push({g:'Loan Charges'});
+    B.push({l:'Lender / underwriting fee', v:F('b_uw'), s:''});
+    B.push({l:'Appraisal', v:F('b_appr'), s:''});
+    B.push({l:'Credit report / flood cert / tax service', v:F('b_credit'), s:''});
+    B.push({l:'Prepaids & escrow reserves', v:F('b_prepaid'), s:'Verify with lender'});
+  }
+
+  B.push({g:'Property & Due Diligence'});
+  B.push({l:'Survey', v:F('b_survey'), s:''});
+  B.push({l:'Elevation certificate', v:F('b_elev'), s:''});
+  B.push({l:'Inspections', v:F('b_insp'), s:''});
+  B.push({l:'Buyer’s attorney (independent review)', v:F('b_atty'), s:''});
+  B.push({l:'Home warranty', v: $('hwPayer').value==='buyer' ? num('hwCost') : 0, s:'¶9(e)'});
+  B.push({l:'Other', v:F('b_other'), s:''});
+
+  if(hoa){
+    B.push({g:'Association'});
+    B.push({l:'HOA / COA transfer & application fee', v:num('hoaTransfer'), s:'¶9(b) — Buyer pays'});
+    B.push({l:'Capital contribution', v:num('hoaCap'), s:''});
+    if(hoaPro) B.push({l:'HOA / COA dues proration', v:hoaPro, s:'Reimburse Seller for prepaid dues · ' + hoaProLabel});
+  }
+
+  B.push({g:'Prorations & Credits'});
+  if(num('cdd')) B.push({l:'CDD / special district reimbursement', v:num('cdd'), s:'Prepaid by Seller'});
+  if(taxPro) B.push({l:'Property tax proration', v:-taxPro, s:'Credit from Seller · ' + proLabel, cr:1});
+  if(credit) B.push({l:'Seller credit to Buyer', v:-credit, s: S.credit==='pct' ? num('sellerCredit')+'% of purchase price' : '', cr:1});
+
+  // gross buyer costs vs. credits, kept separate so the totals read correctly
+  const bItems = B.filter(x=>!x.g && x.l!=='Purchase price' && !/^Loan amount/.test(x.l) && !/^Escrow deposit/.test(x.l));
+  const buyerCosts   = r2(bItems.filter(x=>x.v>0).reduce((a,x)=>a+x.v,0));
+  const buyerCredits = r2(-bItems.filter(x=>x.v<0).reduce((a,x)=>a+x.v,0));
+  const cashToClose  = r2(price - loan - deposit + buyerCosts - buyerCredits);
+
+  /* ============ SELLER ============ */
+  const L = [];
+  L.push({g:'Sale'});
+  L.push({l:'Contract sales price', v:price, s:'', cr:1});
+
+  L.push({g:'Commissions'});
+  L.push({l:'Listing side commission', v:-listC, s: pct ? num('listRate')+'% of price' : 'Flat'});
+  L.push({l:'Selling side commission', v:-sellC, s: pct ? num('sellRate')+'% of price' : 'Flat'});
+  L.push({l:'Brokerage transaction / compliance fee', v:-num('transFee'), s:''});
+
+  L.push({g:'Government & Transfer'});
+  L.push({l:'Documentary stamp tax — deed', v:-deedStamps, s:'$'+num('deedRate').toFixed(2)+' per $100 of sales price'});
+  L.push({l:'Recording fees to cure title', v:-F('s_cure'), s:''});
+  L.push({l:'E-recording fee', v:-F('s_erec'), s:''});
+
+  L.push({g:'Title Charges & Settlement'});
+  if(sellerPaysOwners){
+    L.push({l:'Owner’s title policy', v:-ownersP, s:'FL promulgated · ' + (reissue?'reissue':'original') + ' rate', tag:'9(c)(i)'});
+  }
+  if(sellerPaysSearch) L.push({l:'Title search', v:-F('s_search'), s: opt==='iii' ? 'Capped at $200 unless filled in' : ''});
+  if(opt !== 'ii') L.push({l:'Municipal lien search', v:-F('s_muni'), s:'Seller pays under 9(c)('+opt+')'});
+  L.push({l:'Settlement / closing fee', v:-caSeller,
+          s:'Seller’s Closing Services · §627.7711(1)(a) · ' + (sellerDesignates ? 'Seller designates agent' : 'Buyer designates agent'),
+          tag: sellerDesignates ? 'designating' : ''});
+  L.push({l:'Title fraud verification', v:-F('s_fraud'), s:''});
+  L.push({l:'Wire fee', v:-F('s_wire'), s:''});
+  L.push({l:'Courier / express mail', v:-F('s_courier'), s:''});
+
+  if(hoa){
+    L.push({g:'Association'});
+    L.push({l:'Estoppel search / fee to property mgmt', v:-num('estoppel'), s:'¶9(a) — Seller pays'});
+    if(num('estoppel2')) L.push({l:'Estoppel fee — master association', v:-num('estoppel2'), s:'¶9(a) — Seller pays'});
+    if(hoaPro) L.push({l:'HOA / COA dues proration', v:hoaPro, s:'Buyer reimburses prepaid dues · ' + hoaProLabel, cr:1});
+  }
+
+  L.push({g:'Prorations & Credits'});
+  if(num('cdd')) L.push({l:'CDD / special district reimbursement', v:num('cdd'), s:'Reimbursed by Buyer', cr:1});
+  if(taxPro) L.push({l:'Property tax proration', v:-taxPro, s:'Credit to Buyer · ' + proLabel});
+  if(credit) L.push({l:'Credit to Buyer at closing', v:-credit, s: S.credit==='pct' ? num('sellerCredit')+'% of purchase price' : ''});
+
+  L.push({g:'Other'});
+  L.push({l:'Home warranty', v: $('hwPayer').value==='seller' ? -num('hwCost') : 0, s:'¶9(e)'});
+  L.push({l:'Seller’s attorney (independent review)', v:-F('s_atty'), s:''});
+  L.push({l:'Other', v:-F('s_other'), s:''});
+
+  /* Standard contract repair limits */
+  const genL = r2(price * num('genPct')/100);
+  const wdoL = r2(price * num('wdoPct')/100);
+  const perL = r2(price * num('permitPct')/100);
+  const repairTotal = genL + wdoL + perL;
+  const includeRepairs = isStd && $('incRepairs').checked;
+  if(includeRepairs){
+    L.push({l:'Repair obligations at ¶12 limits', v:-repairTotal, s:'Maximum exposure — included by election'});
+  }
+
+  const sellerCosts = L.filter(x=>!x.g && x.l!=='Contract sales price').reduce((a,x)=>a+x.v,0);
+  const netPre  = r2(price + sellerCosts);
+  const payoff  = num('payoff');
+  const netPost = r2(netPre - payoff);
+
+  return {price,loan,cash,opt,isStd,hoa,B,L,buyerCosts,buyerCredits,cashToClose,sellerCosts:-sellerCosts,netPre,payoff,netPost,
+          ownersP,lenderP,form9,deedStamps,noteStamps,intangible,listC,sellC,taxPro,taxDays,proLabel,
+          genL,wdoL,perL,repairTotal,includeRepairs,reissue};
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function rows(items){
+  const hide = $('hideZero').checked;
+  let h = '', pending = null;
+  for(const it of items){
+    if(it.g){ pending = it.g; continue; }
+    if(hide && it.v === 0) continue;
+    if(pending){ h += '<tr class="grp"><td colspan="2">'+esc(pending)+'</td></tr>'; pending = null; }
+    const zero = it.v === 0 ? ' zero' : '';
+    void 0;
+    h += '<tr class="'+(it.cr?'cred':'')+zero+'">'
+      +  '<td>'+esc(it.l)+(it.tag?'<span class="tag">'+esc(it.tag)+'</span>':'')
+      +  (it.s?'<div class="sm">'+esc(it.s)+'</div>':'')+'</td>'
+      +  '<td class="n">'+fmt(Math.abs(it.v))+'</td></tr>';
+  }
+  return h;
+}
+
+function header(side, d, title, eyebrow){
+  const addr = $('address').value.trim() || 'Property address not entered';
+  const cd = $('closingDate').value;
+  const meta = [
+    ['Purchase price', fmt0(d.price)],
+    ['Financing', d.cash ? 'Cash' : fmt0(d.loan)+' loan'],
+    ['Closing', cd ? new Date(cd+'T12:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '—'],
+    ['Contract', d.isStd ? 'Standard (7x)' : 'AS IS (ASIS-7x)'],
+    ['Title ¶9(c)', '('+d.opt+')'],
+    ['HOA / COA', d.hoa ? 'Yes' : 'No']
+  ].map(m=>'<span><b>'+m[0]+':</b> '+esc(m[1])+'</span>').join('');
+  return '<div class="stmt-h"><div class="eyebrow">'+esc(eyebrow)+'</div><h2>'+esc(title)+'</h2>'
+       + '<div class="addr">'+esc(addr)+'</div><div class="meta">'+meta+'</div></div>';
+}
+
+const DISC = '<div class="disc"><b>ESTIMATED FIGURES ONLY.</b> This worksheet is an estimate prepared for planning '
+ + 'purposes and is not a Closing Disclosure, ALTA settlement statement, or commitment to any term. Title premiums are '
+ + 'calculated at Florida promulgated rates (Fla. Admin. Code R. 69O-186.003); documentary stamp and intangible taxes are '
+ + 'at Florida statutory rates. Cost allocation follows &para;9 of the FloridaRealtors/FloridaBar contract selected above. '
+ + 'Lender charges, prepaid items, escrow reserves, insurance, association charges, payoff figures and per diem interest '
+ + 'are estimates only and will be set by the lender, the association and the closing agent. Prorations assume taxes are '
+ + 'not yet paid and are prorated from January 1 to the closing date. Actual figures will differ. Verify all amounts with '
+ + 'your closing agent and lender before relying on them. Not tax or legal advice.</div>';
+
+function buyerCard(d){
+  return '<div class="stmt side-buy">'
+    + header('buy', d, 'Estimated Buyer Closing Costs', 'Buyer')
+    + '<table class="li"><thead><tr><th>Description</th><th class="n">Amount</th></tr></thead><tbody>'
+    + rows(d.B)
+    + '<tr class="tot"><td>Total estimated Buyer closing costs</td><td class="n">'+fmt(d.buyerCosts)+'</td></tr>'
+    + (d.buyerCredits ? '<tr class="tot cred"><td>Less credits &amp; prorations</td><td class="n">'+fmt(d.buyerCredits)+'</td></tr>' : '')
+    + '<tr class="tot big"><td>Estimated cash to close</td><td class="n">'+fmt(d.cashToClose)+'</td></tr>'
+    + '</tbody></table>' + DISC + '</div>';
+}
+
+function sellerCard(d){
+  let contingent = '';
+  if(d.isStd && !d.includeRepairs){
+    contingent = '<div class="contingent"><h4>Contingent exposure — Standard contract ¶12</h4><table>'
+      + '<tr><td>General repair limit ('+num('genPct')+'%)</td><td class="n">'+fmt(d.genL)+'</td></tr>'
+      + '<tr><td>WDO treatment / repair limit ('+num('wdoPct')+'%)</td><td class="n">'+fmt(d.wdoL)+'</td></tr>'
+      + '<tr><td>Permit / code closure limit ('+num('permitPct')+'%)</td><td class="n">'+fmt(d.perL)+'</td></tr>'
+      + '<tr><td><b>Maximum combined exposure</b></td><td class="n"><b>'+fmt(d.repairTotal)+'</b></td></tr></table>'
+      + '<p>Not included in net proceeds above. Under the Standard contract the Seller is obligated to repair up to these '
+      + 'caps; the actual cost is unknown until inspections are complete. The &ldquo;AS IS&rdquo; contract carries no such '
+      + 'obligation.</p></div>';
+  }
+  if(!d.isStd){
+    contingent = '<div class="contingent"><h4>&ldquo;AS IS&rdquo; contract note</h4><p>No Seller repair obligation. '
+      + 'Buyer&rsquo;s sole remedy during the Inspection Period is to terminate. If Seller cannot meet the AS IS Maintenance '
+      + 'Requirement at closing, &para;11 requires <b>125% of the estimated cost</b> to be escrowed from Seller&rsquo;s proceeds.</p></div>';
+  }
+  return '<div class="stmt side-sell">'
+    + header('sell', d, 'Estimated Seller Net Proceeds', 'Seller')
+    + '<table class="li"><thead><tr><th>Description</th><th class="n">Amount</th></tr></thead><tbody>'
+    + rows(d.L)
+    + '<tr class="tot"><td>Total estimated Seller costs</td><td class="n">'+fmt(d.sellerCosts)+'</td></tr>'
+    + '<tr class="tot"><td>Net proceeds before mortgage payoff</td><td class="n">'+fmt(d.netPre)+'</td></tr>'
+    + (d.payoff ? '<tr class="tot"><td>Less mortgage payoff</td><td class="n">'+fmt(d.payoff)+'</td></tr>' : '')
+    + '<tr class="tot big"><td>Estimated net proceeds to Seller</td><td class="n">'+fmt(d.netPost)+'</td></tr>'
+    + '</tbody></table>' + contingent + DISC + '</div>';
+}
+
+const CLAUSES = {
+  i:  '<b>9(c)(i):</b> Seller shall designate Closing Agent and pay for Owner’s Policy and Charges. Buyer shall pay premiums for any lender’s title policy and endorsements.',
+  ii: '<b>9(c)(ii):</b> Buyer shall designate Closing Agent and pay for Owner’s Policy and Charges and premiums for any lender’s title policy and endorsements.',
+  iii:'<b>9(c)(iii) [Miami-Dade / Broward]:</b> Buyer shall designate Closing Agent and pay for premiums for owner’s title policy, any lender’s title policy and endorsements. Seller pays actual costs for title search (capped at $200 if blank), tax search and municipal lien search.'
+};
+
+function render(){
+  // gate on the mandatory HOA answer
+  if(S.hoa === null){
+    const msg = '<div class="card"><div class="body" style="padding:34px;text-align:center;color:var(--mut)">'
+      + '<div style="font-size:15px;font-weight:650;color:var(--ink)">Answer the HOA / COA question to calculate</div>'
+      + '<div style="margin-top:6px;font-size:13px">Estoppel fees are a Seller cost under &para;9(a) and materially change net proceeds, so the estimate will not run until it is answered.</div>'
+      + '</div></div>';
+    $('cmb-buy').innerHTML = msg; $('cmb-sell').innerHTML = '';
+    $('out-buy').innerHTML = msg; $('out-sell').innerHTML = msg;
+    $('kpi').innerHTML = '';
+    return;
+  }
+
+  const d = calc();
+  LAST = d;
+  const b = buyerCard(d), s = sellerCard(d);
+  $('cmb-buy').innerHTML = b; $('cmb-sell').innerHTML = s;
+  $('out-buy').innerHTML = b; $('out-sell').innerHTML = s;
+
+  $('kpi').innerHTML =
+      '<div class="k b"><div class="l">Buyer cash to close</div><div class="v">'+fmt0(d.cashToClose)+'</div></div>'
+    + '<div class="k b"><div class="l">Buyer closing costs</div><div class="v">'+fmt0(d.buyerCosts)+'</div></div>'
+    + '<div class="k s"><div class="l">Seller costs</div><div class="v">'+fmt0(d.sellerCosts)+'</div></div>'
+    + '<div class="k s"><div class="l">Seller net proceeds</div><div class="v">'+fmt0(d.netPost)+'</div></div>';
+
+  $('rateNote').innerHTML = 'Owner&rsquo;s policy on ' + fmt0(d.price) + ' = <b>' + fmt(d.ownersP) + '</b> ('
+    + (d.reissue?'reissue':'original') + ' rate). Form 9 = ' + fmt(d.form9) + '.';
+
+  const tc = num('listRate')+num('sellRate');
+  $('commNote').innerHTML = S.comm==='pct'
+    ? 'Total ' + tc.toFixed(2) + '% = <b>' + fmt0(d.listC + d.sellC) + '</b>'
+    : 'Total commission <b>' + fmt0(d.listC + d.sellC) + '</b>';
+
+  $('clauseBox').innerHTML = CLAUSES[$('titleOpt').value];
+
+  const sd = $('titleOpt').value === 'i';
+  $('caDesigWho').innerHTML = '<b>' + (sd ? 'Seller' : 'Buyer') + '</b> — designates agent';
+  $('caOtherWho').textContent = (sd ? 'Buyer' : 'Seller') + ' — other party';
+
+  $('creditNote').innerHTML = S.credit === 'pct'
+    ? num('sellerCredit') + '% of ' + fmt0(d.price) + ' = <b>' + fmt0(d.price * num('sellerCredit')/100) + '</b>'
+    : 'Repair credits, closing-cost credits, concessions.';
+
+  const stamp = 'Prepared ' + new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})
+    + ' · ' + ($('address').value.trim() || 'Address not entered') + ' · ESTIMATED FIGURES ONLY';
+  $('phd-b').textContent = stamp; $('phd-s').textContent = stamp; $('phd-c').textContent = stamp;
+}
+
+/* ============================================================
+   UI WIRING
+   ============================================================ */
+function buildFeeTable(which){
+  const t = $(which === 'buy' ? 'feeBuy' : 'feeSell');
+  t.innerHTML = FEE_DEFS[which].map(f =>
+    '<tr><td>'+esc(f.l)+(f.s?'<div class="sm">'+esc(f.s)+'</div>':'')+'</td>'
+    + '<td><input type="text" inputmode="decimal" class="money" id="fee_'+f.k+'" value="'+f.v+'"></td></tr>').join('');
+  initMoney(t);
+}
+
+function seg(id, key, cb){
+  $(id).addEventListener('click', e => {
+    const b = e.target.closest('button'); if(!b) return;
+    [...$(id).children].forEach(x => x.setAttribute('aria-pressed', x === b));
+    S[key] = b.dataset.v;
+    if(cb) cb();
+    render();
+  });
+}
+
+function syncLoan(from){
+  const p = num('price');
+  if(from === 'ltv'){ setMoney('loan', Math.round(p * num('ltv')/100)); }
+  else { setMoney('ltv', p ? r2(num('loan')/p*100) : 0); }
+}
+
+function exportPDF(which){
+  document.documentElement.dataset.print = which;
+  setTimeout(()=>{ window.print(); }, 30);
+}
+window.addEventListener('afterprint', ()=>{ delete document.documentElement.dataset.print; });
+
+function saveDefaults(){
+  const o = {};
+  [...FEE_DEFS.buy, ...FEE_DEFS.sell].forEach(f => o['fee_'+f.k] = num('fee_'+f.k));
+  ['listRate','sellRate','transFee','deedRate','estoppel','estoppel2','hoaTransfer','hoaCap','hwCost','genPct','wdoPct','permitPct'].forEach(k => o[k] = num(k));
+  o._comm = S.comm; o._pro = S.pro;
+  try{ localStorage.setItem('fl_cce_defaults', JSON.stringify(o)); $('saveMsg').textContent = 'Saved to this browser.'; }
+  catch(e){ $('saveMsg').textContent = 'Could not save in this browser.'; }
+  setTimeout(()=>{ $('saveMsg').textContent=''; }, 2500);
+}
+function loadDefaults(){
+  let o = null;
+  try{ o = JSON.parse(localStorage.getItem('fl_cce_defaults') || 'null'); }catch(e){}
+  if(!o) return;
+  Object.keys(o).forEach(k => { if(k[0] !== '_' && $(k)) setMoney(k, o[k]); });
+  if(o._comm) S.comm = o._comm;
+  if(o._pro)  S.pro  = o._pro;
+}
+function resetDefaults(){
+  try{ localStorage.removeItem('fl_cce_defaults'); }catch(e){}
+  location.reload();
+}
+
+function hoaPick(which){
+  $('hoaYes').checked = which === true;
+  $('hoaNo').checked  = which === false;
+  S.hoa = which;
+  $('hoaFields').style.display = which === true ? '' : 'none';
+  $('hoaReq').classList.remove('bad');
+  $('hoaMsg').textContent = which === true
+    ? 'Estoppel fee added to the Seller side.'
+    : (which === false ? 'No association line items applied.' : 'Select one — required before the estimate will calculate.');
+  render();
+}
+
+/* ============================================================
+   SAVED ESTIMATES
+   ============================================================ */
+let PRISTINE = null;
+const SKEY = 'fl_cce_scenarios';
+const AKEY = 'fl_cce_autosave_' + (SLUG || 'standalone');
+
+function scStore(){
+  try{ return JSON.parse(localStorage.getItem(SKEY) || '{}'); }catch(e){ return {}; }
+}
+function scWrite(o){
+  try{ localStorage.setItem(SKEY, JSON.stringify(o)); return true; }catch(e){ return false; }
+}
+function collect(){
+  const fields = {};
+  document.querySelectorAll('.sidebar input[id], .sidebar select[id]').forEach(e => {
+    if(e.type === 'file') return;
+    fields[e.id] = (e.type === 'checkbox') ? e.checked : e.value;
+  });
+  return {
+    v: 1,
+    saved: new Date().toISOString(),
+    state: {form:S.form, fin:S.fin, comm:S.comm, pro:S.pro, credit:S.credit, hoa:S.hoa},
+    fields
+  };
+}
+function applySnapshot(o){
+  if(!o || !o.fields) return;
+  Object.entries(o.fields).forEach(([k, v]) => {
+    const e = $(k); if(!e) return;
+    if(e.type === 'checkbox') e.checked = !!v;
+    else if(e.classList && e.classList.contains('money')) e.value = fmtLive(String(v));
+    else e.value = v;
+  });
+  const st = o.state || {};
+  ['form','fin','comm','pro','credit'].forEach(k => { if(st[k]) S[k] = st[k]; });
+  S.hoa = (st.hoa === true || st.hoa === false) ? st.hoa : null;
+  syncUI();
+  render();
+}
+function syncUI(){
+  const setSeg = (id, val) => { const el = $(id); if(el) [...el.children].forEach(b => b.setAttribute('aria-pressed', b.dataset.v === val)); };
+  setSeg('segForm', S.form); setSeg('segFin', S.fin); setSeg('segComm', S.comm);
+  setSeg('segPro', S.pro);   setSeg('segCredit', S.credit);
+  $('stdCard').style.display = S.form === 'standard' ? '' : 'none';
+  $('finRow').style.display  = S.fin === 'cash' ? 'none' : '';
+  $('hoaYes').checked = S.hoa === true;
+  $('hoaNo').checked  = S.hoa === false;
+  $('hoaFields').style.display = S.hoa === true ? '' : 'none';
+  const p = S.comm === 'pct';
+  $('lblList').textContent = p ? '%' : '$';
+  $('lblSell').textContent = p ? '%' : '$';
+}
+function scRefreshList(sel){
+  const o = scStore();
+  const names = Object.keys(o).sort((a,b) => a.localeCompare(b));
+  $('scenarioList').innerHTML = '<option value="">— New estimate —</option>'
+    + names.map(n => '<option value="'+esc(n)+'"'+(n===sel?' selected':'')+'>'+esc(n)+'</option>').join('');
+}
+function scFlash(m){ $('scMsg').textContent = m; setTimeout(() => { $('scMsg').textContent = 'Saved in this browser. Work in progress is kept automatically — export to move an estimate to another machine.'; }, 3000); }
+function scSave(){
+  let name = $('scenarioName').value.trim() || $('address').value.trim();
+  if(!name){ scFlash('Give the estimate a name (or fill in the address) first.'); return; }
+  const o = scStore();
+  o[name] = collect();
+  if(!scWrite(o)){ scFlash('This browser would not let me save.'); return; }
+  $('scenarioName').value = name;
+  scRefreshList(name);
+  scFlash('Saved “' + name + '”.');
+}
+function scDelete(){
+  const name = $('scenarioList').value;
+  if(!name){ scFlash('Pick a saved estimate to delete.'); return; }
+  const o = scStore(); delete o[name]; scWrite(o);
+  $('scenarioName').value = '';
+  scRefreshList('');
+  scFlash('Deleted “' + name + '”.');
+}
+function scExport(){
+  const name = ($('scenarioName').value.trim() || $('address').value.trim() || 'closing-estimate');
+  const blob = new Blob([JSON.stringify({name, data:collect()}, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name.replace(/[^a-z0-9]+/gi,'-').toLowerCase() + '.json';
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+}
+function scImportFile(file){
+  const rd = new FileReader();
+  rd.onload = () => {
+    try{
+      const j = JSON.parse(rd.result);
+      const snap = j.data || j;
+      applySnapshot(snap);
+      if(j.name){ $('scenarioName').value = j.name; }
+      scFlash('Imported.');
+    }catch(e){ scFlash('That file could not be read as an estimate.'); }
+  };
+  rd.readAsText(file);
+}
+function autosave(){ try{ localStorage.setItem(AKEY, JSON.stringify(collect())); }catch(e){} }
+
+
+/* ============================================================
+   PDF  —  jsPDF + autoTable, lazy-loaded from /vendor/
+   ============================================================ */
+const C_NAVY=[10,31,60], C_GOLD=[201,169,97], C_GREY=[128,138,153],
+      C_LINE=[221,228,236], C_OK=[31,111,82], C_RED=[163,32,32], C_BG=[242,244,248];
+
+function loadScript(src){
+  return new Promise((res, rej) => {
+    if(document.querySelector('script[data-vend="'+src+'"]')) return res();
+    const el = document.createElement('script');
+    el.src = src; el.dataset.vend = src;
+    el.onload = () => res();
+    el.onerror = () => rej(new Error('Could not load ' + src));
+    document.head.appendChild(el);
+  });
+}
+async function ensurePdf(){
+  if(window.jspdf && window.jspdf.jsPDF && window.jspdf.jsPDF.API.autoTable) return;
+  await loadScript('/vendor/jspdf.umd.min.js');
+  await loadScript('/vendor/jspdf.plugin.autotable.min.js');
+  if(!(window.jspdf && window.jspdf.jsPDF.API.autoTable)) throw new Error('PDF libraries did not initialise');
+}
+
+function pdfName(side){
+  const a = ($('address').value.trim() || 'estimate').replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'').toLowerCase();
+  return 'closing-estimate-' + side + '-' + (a || 'property').slice(0,48) + '.pdf';
+}
+
+/* line items -> autoTable rows, carrying a parallel kind[] for styling */
+function pdfRows(items, extras){
+  const hide = $('hideZero').checked;
+  const rows = [], kind = [];
+  let pending = null;
+  for(const it of items){
+    if(it.g){ pending = it.g; continue; }
+    if(hide && it.v === 0) continue;
+    if(pending){ rows.push([pending, '']); kind.push('g'); pending = null; }
+    rows.push([it.l, fmt(Math.abs(it.v))]); kind.push(it.cr ? 'cr' : 'n');
+    if(it.s){ rows.push([it.s, '']); kind.push('s'); }
+  }
+  (extras || []).forEach(e => { rows.push([e[0], fmt(Math.abs(e[1]))]); kind.push(e[2]); });
+  return { rows, kind };
+}
+
+function metaPairs(d){
+  const cd = $('closingDate').value;
+  return [
+    ['Purchase price', fmt0(d.price)],
+    ['Financing', d.cash ? 'Cash' : fmt0(d.loan) + ' loan'],
+    ['Closing date', cd ? new Date(cd + 'T12:00').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}) : '—'],
+    ['Contract form', d.isStd ? 'Standard (FloridaRealtors/FloridaBar-7x)' : '"AS IS" (ASIS-7x)'],
+    ['Title & closing agent', '¶9(c)(' + d.opt + ')'],
+    ['HOA / COA', d.hoa ? 'Yes' : 'No']
+  ];
+}
+
+function drawSide(doc, d, side, startY){
+  const M = 40, W = doc.internal.pageSize.getWidth(), CW = W - M*2;
+  const isB = side === 'buyer';
+  const title = isB ? 'Estimated Buyer Closing Costs' : 'Estimated Seller Net Proceeds';
+
+  // navy title band
+  doc.setFillColor.apply(doc, C_NAVY);
+  doc.rect(M, startY, CW, 40, 'F');
+  doc.setFillColor.apply(doc, C_GOLD);
+  doc.rect(M, startY + 40, CW, 3, 'F');
+  doc.setTextColor(255,255,255); doc.setFont('times','bold'); doc.setFontSize(15);
+  doc.text(title, M + 14, startY + 26);
+  doc.setFont('helvetica','bold'); doc.setFontSize(8);
+  doc.setTextColor.apply(doc, C_GOLD);
+  doc.text('ESTIMATED', W - M - 14, startY + 25, {align:'right'});
+
+  let y = startY + 62;
+  doc.setTextColor.apply(doc, C_NAVY); doc.setFont('times','bold'); doc.setFontSize(12);
+  doc.text($('address').value.trim() || 'Property address not entered', M, y);
+  y += 6;
+
+  // meta in two columns
+  const pairs = metaPairs(d);
+  doc.setFontSize(8.5);
+  const colW = CW / 2, rowsN = Math.ceil(pairs.length / 2);
+  pairs.forEach((pr, i) => {
+    const col = Math.floor(i / rowsN), row = i % rowsN;
+    const x = M + col * colW, ly = y + 12 + row * 11;
+    doc.setFont('helvetica','normal'); doc.setTextColor.apply(doc, C_GREY);
+    doc.text(pr[0] + ':', x, ly);
+    doc.setFont('helvetica','bold'); doc.setTextColor(51,70,94);
+    doc.text(String(pr[1]), x + 92, ly);
+  });
+  y += 12 + rowsN * 11 + 6;
+
+  const extras = isB
+    ? [['Total estimated Buyer closing costs', d.buyerCosts, 't']]
+        .concat(d.buyerCredits ? [['Less credits & prorations', d.buyerCredits, 't']] : [])
+        .concat([['ESTIMATED CASH TO CLOSE', d.cashToClose, 'T']])
+    : [['Total estimated Seller costs', d.sellerCosts, 't'],
+       ['Net proceeds before mortgage payoff', d.netPre, 't']]
+        .concat(d.payoff ? [['Less mortgage payoff', d.payoff, 't']] : [])
+        .concat([['ESTIMATED NET PROCEEDS TO SELLER', d.netPost, 'T']]);
+
+  const { rows, kind } = pdfRows(isB ? d.B : d.L, extras);
+
+  doc.autoTable({
+    startY: y,
+    margin: {left: M, right: M, bottom: 96},
+    head: [['Description', 'Amount']],
+    body: rows,
+    theme: 'plain',
+    styles: {font:'helvetica', fontSize:9, cellPadding:{top:3.5,bottom:3.5,left:6,right:6},
+             lineColor:C_LINE, lineWidth:{bottom:0.4}, textColor:[20,32,48], overflow:'linebreak'},
+    headStyles: {fontStyle:'bold', fontSize:7.5, textColor:C_GREY, lineWidth:{bottom:0.8}, lineColor:C_NAVY},
+    columnStyles: {0:{cellWidth:CW-110}, 1:{cellWidth:110, halign:'right'}},
+    didParseCell: h => {
+      if(h.section !== 'body') return;
+      const k = kind[h.row.index];
+      if(k === 'g'){
+        h.cell.styles.fillColor = C_BG; h.cell.styles.fontStyle = 'bold';
+        h.cell.styles.fontSize = 7.5; h.cell.styles.textColor = C_NAVY;
+        if(h.column.index === 0) h.cell.text = [String(h.cell.text).toUpperCase()];
+      } else if(k === 's'){
+        h.cell.styles.fontSize = 7; h.cell.styles.textColor = C_GREY;
+        h.cell.styles.lineWidth = 0;
+        h.cell.styles.cellPadding = {top:0, bottom:4, left:6, right:6};
+      } else if(k === 'cr'){
+        if(h.column.index === 1) h.cell.styles.textColor = C_OK;
+      } else if(k === 't'){
+        h.cell.styles.fontStyle = 'bold'; h.cell.styles.fillColor = C_BG;
+        h.cell.styles.fontSize = 10; h.cell.styles.cellPadding = {top:6,bottom:6,left:6,right:6};
+      } else if(k === 'T'){
+        h.cell.styles.fontStyle = 'bold'; h.cell.styles.fillColor = C_NAVY;
+        h.cell.styles.textColor = [255,255,255]; h.cell.styles.fontSize = 11;
+        h.cell.styles.cellPadding = {top:8,bottom:8,left:6,right:6};
+      }
+    }
+  });
+
+  let endY = doc.lastAutoTable.finalY;
+
+  // contract-specific note
+  const noteTxt = !isB
+    ? (d.isStd
+        ? 'CONTINGENT EXPOSURE — STANDARD CONTRACT ¶12.  General repair limit ' + fmt(d.genL)
+          + ' · WDO limit ' + fmt(d.wdoL) + ' · permit limit ' + fmt(d.perL)
+          + ' · maximum combined ' + fmt(d.repairTotal) + '. '
+          + (d.includeRepairs ? 'Included in net proceeds above.' : 'NOT included in net proceeds above; actual cost is unknown until inspections are complete.')
+        : '"AS IS" CONTRACT.  No Seller repair obligation — Buyer’s sole remedy during the Inspection Period is to terminate. If Seller cannot meet the AS IS Maintenance Requirement at closing, ¶11 requires 125% of the estimated cost to be escrowed from Seller’s proceeds.')
+    : null;
+  if(noteTxt){
+    doc.setFont('helvetica','normal'); doc.setFontSize(7.5);
+    const lines = doc.splitTextToSize(noteTxt, CW - 20);
+    const h = lines.length * 9 + 16;
+    if(endY + 12 + h > doc.internal.pageSize.getHeight() - 96){ doc.addPage(); endY = 40; }
+    doc.setDrawColor(217,185,138); doc.setFillColor(253,250,244);
+    doc.roundedRect(M, endY + 12, CW, h, 3, 3, 'FD');
+    doc.setTextColor(138,90,18);
+    doc.text(lines, M + 10, endY + 24);
+    endY += 12 + h;
+  }
+  return endY;
+}
+
+const PDF_DISCLAIMER =
+  'ESTIMATED FIGURES ONLY. This worksheet is an estimate prepared for planning purposes and is not a Closing Disclosure, '
++ 'ALTA settlement statement, or commitment to any term. Title premiums are calculated at Florida promulgated rates '
++ '(Fla. Admin. Code R. 69O-186.003); documentary stamp and intangible taxes are at Florida statutory rates. Cost allocation '
++ 'follows ¶9 of the FloridaRealtors/FloridaBar contract selected. Lender charges, prepaid items, escrow reserves, insurance, '
++ 'association charges, payoff figures and per diem interest are estimates only and will be set by the lender, the association '
++ 'and the closing agent. Prorations assume taxes are not yet paid and are prorated from January 1 to the closing date. Actual '
++ 'figures will differ. Verify all amounts with your closing agent and lender before relying on them. Not tax or legal advice.';
+
+function drawFooters(doc){
+  const M = 40, W = doc.internal.pageSize.getWidth(), H = doc.internal.pageSize.getHeight();
+  const n = doc.internal.getNumberOfPages();
+  const stamp = 'Prepared ' + new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})
+              + ' · The Adamson Group · Coldwell Banker Realty';
+  for(let i = 1; i <= n; i++){
+    doc.setPage(i);
+    doc.setDrawColor.apply(doc, C_LINE); doc.setLineWidth(0.5);
+    doc.line(M, H - 84, W - M, H - 84);
+    doc.setFont('helvetica','normal'); doc.setFontSize(6.2); doc.setTextColor.apply(doc, C_GREY);
+    doc.text(doc.splitTextToSize(PDF_DISCLAIMER, W - M*2), M, H - 74, {lineHeightFactor: 1.28});
+    doc.setFontSize(7); doc.setTextColor.apply(doc, C_GREY);
+    doc.text(stamp, M, H - 14);
+    doc.setFont('helvetica','bold'); doc.setTextColor.apply(doc, C_RED);
+    doc.text('ESTIMATE', W - M, H - 14, {align:'right'});
+    doc.setTextColor.apply(doc, C_GREY); doc.setFont('helvetica','normal');
+    doc.text('Page ' + i + ' of ' + n, W / 2, H - 14, {align:'center'});
+  }
+}
+
+async function makePdf(side, mode){
+  if(S.hoa === null){ ind('Answer the HOA / COA question first', 'err'); return null; }
+  ind('Building PDF…');
+  try{
+    await ensurePdf();
+    const d = LAST || calc();
+    const doc = new window.jspdf.jsPDF({unit:'pt', format:'letter', compress:true});
+    if(side === 'combined'){
+      drawSide(doc, d, 'buyer', 40);
+      doc.addPage();
+      drawSide(doc, d, 'seller', 40);
+    } else {
+      drawSide(doc, d, side, 40);
+    }
+    drawFooters(doc);
+    if(mode === 'save'){ doc.save(pdfName(side)); ind('Saved ' + pdfName(side), 'ok'); }
+    else ind('');
+    return doc;
+  }catch(e){
+    ind(String(e.message || e), 'err');
+    return null;
+  }
+}
+
+function ind(msg, cls){
+  const e = $('ind'); if(!e) return;
+  e.className = 'ind' + (cls ? ' ' + cls : '');
+  e.textContent = msg || '';
+  if(cls === 'ok') setTimeout(() => { if(e.textContent === msg) e.textContent = ''; }, 6000);
+}
+
+async function emailPdf(){
+  const side = $('emailSide').value;
+  const doc = await makePdf(side, 'return');
+  if(!doc) return;
+  ind('Sending…');
+  const d = LAST;
+  const b64 = doc.output('datauristring').split(',')[1];
+  try{
+    const r = await fetch('/.netlify/functions/send-estimate', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        side, filename: pdfName(side), pdfBase64: b64,
+        summary: {
+          slug: SLUG,
+          address: $('address').value.trim(),
+          price: d.price, loan: d.loan, cash: d.cash,
+          closingDate: $('closingDate').value,
+          contract: d.isStd ? 'Standard (7x)' : 'AS IS (ASIS-7x)',
+          titleOption: d.opt, hoa: d.hoa,
+          buyerCosts: d.buyerCosts, cashToClose: d.cashToClose,
+          sellerCosts: d.sellerCosts, netProceeds: d.netPost
+        }
+      })
+    });
+    const j = await r.json().catch(() => ({}));
+    if(!r.ok){ ind(j.error || ('Send failed (' + r.status + ')'), 'err'); return; }
+    ind('Emailed to ' + (j.to || 'your notify list'), 'ok');
+  }catch(e){
+    ind('Send failed: ' + (e.message || e), 'err');
+  }
+}
+
+/* ============================================================
+   CMA PREFILL  —  reads ./data.json when under /mkt/<slug>/
+   ============================================================ */
+async function prefillFromCma(){
+  try{
+    const r = await fetch('./data.json', {cache:'no-store'});
+    if(!r.ok) return;
+    const D = await r.json();
+    CMA = D;
+    if(RESTORED) return;              // never clobber a restored estimate
+    const sub = D.subject || {}, meta = D.meta || {};
+    const cityLine = [sub.city, [sub.state, sub.zip].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+    const addr = [sub.address, cityLine].filter(Boolean).join(', ');
+    if(addr) $('address').value = addr;
+    if(sub.list){ setMoney('price', sub.list); syncLoan('ltv'); }
+    if(sub.taxes) setMoney('annualTax', sub.taxes);
+    const condo = meta.profile === 'condo';
+    const fee = sub.feeQuarterly || sub.feeMonthly || sub.feeAnnual;
+    if(condo || fee){
+      hoaPick(true);
+      if(sub.feeQuarterly){ setMoney('hoaDues', sub.feeQuarterly); $('hoaFreq').value = '3'; }
+      else if(sub.feeMonthly){ setMoney('hoaDues', sub.feeMonthly); $('hoaFreq').value = '1'; }
+      else if(sub.feeAnnual){ setMoney('hoaDues', sub.feeAnnual); $('hoaFreq').value = '12'; }
+      if(condo) setMoney('fee_b_survey', 0);   // no survey on a condo
+    }
+    if(!$('scenarioName').value) $('scenarioName').value = sub.address || SLUG;
+    render(); autosave();
+    ind('Prefilled from this CMA', 'ok');
+  }catch(e){ /* standalone use — no data.json, no prefill */ }
+}
+
+/* ---------------- init ---------------- */
+(function init(){
+  S.form = 'asis'; S.fin = 'financed'; S.comm = 'pct'; S.pro = '365'; S.credit = 'flat'; S.hoa = null;
+
+  buildFeeTable('buy'); buildFeeTable('sell');
+  initMoney(document);
+
+  // default closing date = 30 days out
+  const dt = new Date(); dt.setDate(dt.getDate() + 30);
+  $('closingDate').value = dt.toISOString().slice(0,10);
+
+  loadDefaults();
+  syncUI();
+  PRISTINE = collect();
+
+  // restore work in progress
+  try{
+    const wip = JSON.parse(localStorage.getItem(AKEY) || 'null');
+    if(wip){ applySnapshot(wip); RESTORED = true; }
+  }catch(e){}
+  scRefreshList('');
+
+  seg('segForm','form', () => {
+    $('stdCard').style.display = S.form === 'standard' ? '' : 'none';
+  });
+  seg('segFin','fin', () => {
+    $('finRow').style.display = S.fin === 'cash' ? 'none' : '';
+  });
+  seg('segComm','comm', () => {
+    const p = S.comm === 'pct';
+    $('lblList').textContent = p ? '%' : '$';
+    $('lblSell').textContent = p ? '%' : '$';
+    if(p){ setMoney('listRate', 3); setMoney('sellRate', 2.5); }
+    else { const pr = num('price'); setMoney('listRate', Math.round(pr*.03)); setMoney('sellRate', Math.round(pr*.025)); }
+  });
+  seg('segPro','pro');
+  seg('segCredit','credit', () => {
+    if(S.credit === 'pct'){
+      const pr = num('price');
+      setMoney('sellerCredit', pr ? r2(num('sellerCredit')/pr*100) : 0);
+    } else {
+      setMoney('sellerCredit', Math.round(num('price') * num('sellerCredit')/100));
+    }
+  });
+
+  // mandatory HOA — mutually exclusive pair
+  $('hoaYes').addEventListener('change', e => hoaPick(e.target.checked ? true : null));
+  $('hoaNo').addEventListener('change',  e => hoaPick(e.target.checked ? false : null));
+
+  $('ltv').addEventListener('input', () => { syncLoan('ltv'); render(); });
+  $('loan').addEventListener('input', () => { syncLoan('loan'); render(); });
+  $('price').addEventListener('input', () => { syncLoan('ltv'); render(); });
+
+  $('tabs').addEventListener('click', e => {
+    const b = e.target.closest('.tab'); if(!b) return;
+    [...$('tabs').children].forEach(x => x.setAttribute('aria-selected', x === b));
+    ['combined','buyer','seller'].forEach(p => {
+      $('panel-'+p).style.display = (p === b.dataset.p) ? '' : 'none';
+    });
+    printPanel = b.dataset.p;
+  });
+
+  $('scenarioList').addEventListener('change', e => {
+    const name = e.target.value;
+    if(!name){
+      $('scenarioName').value = '';
+      if(PRISTINE){ applySnapshot(PRISTINE); $('address').value = ''; render(); autosave(); }
+      scFlash('Started a new estimate.');
+      return;
+    }
+    const o = scStore();
+    if(o[name]){ applySnapshot(o[name]); $('scenarioName').value = name; scFlash('Loaded “' + name + '”.'); }
+  });
+  $('scImport').addEventListener('change', e => {
+    if(e.target.files && e.target.files[0]) scImportFile(e.target.files[0]);
+    e.target.value = '';
+  });
+  $('hideZero').addEventListener('change', render);
+  document.addEventListener('input', e => {
+    if(e.target.matches('input,select') && !['ltv','loan','price'].includes(e.target.id)) render();
+  });
+  let asT = null;
+  document.addEventListener('input', () => { clearTimeout(asT); asT = setTimeout(autosave, 600); });
+  document.addEventListener('change', () => { clearTimeout(asT); asT = setTimeout(autosave, 600); });
+  document.addEventListener('change', e => {
+    if(e.target.matches('select')) render();
+  });
+
+  render();
+  prefillFromCma();
+})();
+</script>
+</body>
+</html>
