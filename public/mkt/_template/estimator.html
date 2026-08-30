@@ -1471,9 +1471,34 @@ async function prefillFromCma(){
       else if(sub.feeAnnual){ setMoney('hoaDues', sub.feeAnnual); $('hoaFreq').value = '12'; }
       if(condo) setMoney('fee_b_survey', 0);   // no survey on a condo
     }
+
+    // meta.estimateDefaults — per-deal seed values (actual contract terms, which
+    // are not the same as the listing data in `subject`).
+    const ed = meta.estimateDefaults || {};
+    if(ed.price != null) setMoney('price', ed.price);
+    if(ed.ltv   != null) setMoney('ltv', ed.ltv);
+    if(ed.price != null || ed.ltv != null) syncLoan('ltv');
+    if(ed.loan  != null){ setMoney('loan', ed.loan); syncLoan('loan'); }
+    if(ed.deposit      != null) setMoney('deposit', ed.deposit);
+    if(ed.annualTax    != null) setMoney('annualTax', ed.annualTax);
+    if(ed.sellerCredit != null) setMoney('sellerCredit', ed.sellerCredit);
+    if(ed.payoff       != null) setMoney('payoff', ed.payoff);
+    if(ed.listRate     != null) setMoney('listRate', ed.listRate);
+    if(ed.sellRate     != null) setMoney('sellRate', ed.sellRate);
+    if(ed.closingDate) $('closingDate').value = ed.closingDate;
+    if(ed.contractForm === 'asis' || ed.contractForm === 'standard') S.form = ed.contractForm;
+    if(ed.financing === 'cash' || ed.financing === 'financed')       S.fin  = ed.financing;
+    if(['i','ii','iii'].indexOf(ed.titleOption) >= 0) $('titleOpt').value = ed.titleOption;
+    if(ed.hoa === true || ed.hoa === false) hoaPick(ed.hoa);
+    if(ed.hoaDues != null) setMoney('hoaDues', ed.hoaDues);
+    if(ed.hoaFreq)     $('hoaFreq').value = String(ed.hoaFreq);
+    if(ed.hoaPaidThru) $('hoaPaidThru').value = ed.hoaPaidThru;
+    if(ed.estoppel != null) setMoney('estoppel', ed.estoppel);
+    syncUI();
+
     if(!$('scenarioName').value) $('scenarioName').value = sub.address || SLUG;
     render(); autosave();
-    ind('Prefilled from this CMA', 'ok');
+    ind('Prefilled from ' + (meta.estimateDefaults ? 'the contract terms on file' : 'this CMA'), 'ok');
   }catch(e){ /* standalone use — no data.json, no prefill */ }
 }
 

@@ -4,12 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Closing Cost Estimator — CMA Workbench</title>
-<script>
-/* Same gate as workbench.html. Convenience only — the send-estimate function
-   enforces nothing client-side; it always mails Ryan's notify list. */
-if (!localStorage.getItem("cma-edit-key"))
-  location.replace("/mkt/admin/?next=" + encodeURIComponent(location.pathname));
-</script>
+<meta name="robots" content="noindex,nofollow">
+<!-- Shareable copy: no edit-key gate, matching the per-CMA client-page tier.
+     Re-gate by restoring the localStorage check used in _template/estimator.html. -->
 <style>
 :root{
   --navy:#0A1F3C; --gold:#C9A961; --bronze:#8a6d1f;
@@ -194,7 +191,7 @@ details.adv[open] summary:before{content:"▾ "}
 <body>
 
 <header class="wbhead no-print"><div class="top-in">
-  <h1>Closing Cost Estimator <span style="font-size:13px;color:var(--gold);">INTERNAL</span></h1>
+  <h1>Closing Cost Estimator </h1>
   <div class="crit" id="hdr">Florida &middot; buyer &amp; seller &middot; ESTIMATED figures only</div>
 </div></header>
 
@@ -212,10 +209,7 @@ details.adv[open] summary:before{content:"▾ "}
     </select>
     <button class="btn" onclick="emailPdf()">Email to me</button>
     <span class="ind" id="ind"></span>
-    <span style="margin-left:auto;display:flex;gap:8px">
-      <a class="btn" href="./workbench.html">&larr; Workbench</a>
-      <a class="btn" href="/mkt/admin/">All CMAs</a>
-    </span>
+    <span style="margin-left:auto"></span>
   </div>
 </div>
 
