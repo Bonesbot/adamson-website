@@ -60,15 +60,19 @@ const jsonLd = [
 
   <section class="gbc-hero gbc-hero--video">
     <div class="gbc-hero-bg">
-      <!-- HERO PLACEHOLDER: drop the aerial at /public/videos/country-club-shores.mp4
-           and a poster frame at /public/videos/country-club-shores-poster.jpg -->
       <video
         class="gbc-hero-video"
         autoplay muted loop playsinline
         preload="metadata"
         poster="/videos/country-club-shores-poster.jpg"
+        width="1280" height="720"
         aria-hidden="true" tabindex="-1">
-        <source src="/videos/country-club-shores.mp4" type="video/mp4" />
+        <!-- AV1 first: 1.74MB vs 2.55MB for the h264, at higher measured fidelity.
+             The explicit codecs= parameter is required. Without it Safari accepts the
+             file on container type alone and then fails to decode on any device
+             without hardware AV1, leaving a black hero. -->
+        <source src="/videos/country-club-shores-av1.mp4" type='video/mp4; codecs="av01.0.05M.08"' />
+        <source src="/videos/country-club-shores.mp4"     type="video/mp4" />
       </video>
     </div>
     <div class="gbc-hero-overlay"></div>
@@ -684,7 +688,7 @@ const jsonLd = [
   }
   @media (prefers-reduced-motion: reduce) {
     .gbc-hero-video { display:none; }
-    .gbc-hero-bg { background-image:url('/videos/gulf-and-bay-club-beachfront-still.jpg'); }
+    .gbc-hero-bg { background-image:url('/videos/country-club-shores-poster.jpg'); }
   }
   .gbc-hero { position:relative; padding-top:9rem; padding-bottom:7rem; overflow:hidden; }
   .gbc-hero-bg { position:absolute; inset:0; background-size:cover; background-position:center; background-color:var(--color-black); }
