@@ -70,6 +70,23 @@ category, refreshed by the Cowork scheduled task `srqmap-events`
 - Gate note: the SRQmap soft lead gate has a `GATE_ENABLED` kill-switch in `SRQmap.astro`
   (set to `false` on 2026-07-05 for testing — flip back to `true` to restore the 3-pin wall).
 
+## SRQmap is HIDDEN from the hub site (temporary, since 2026-09-02)
+
+The map pages are still live (srqmap.com 302s to https://adamsonfl.com/srqmap/), but the hub
+site no longer links to them and they are de-indexed, so nobody browsing AdamsonFL.com should
+stumble on SRQmap. Every edit carries a `SRQMAP-HIDDEN` marker; `grep -rn SRQMAP-HIDDEN` finds
+them all. To restore:
+
+- `src/components/layout/Header.astro` and `Footer.astro`: uncomment the SRQ Map nav/footer items.
+- `src/pages/SRQmap.astro`: set the robots meta back to `index,follow`.
+- `src/pages/srq-map.astro` (legacy Mapme embed): drop the `noIndex={true}` prop.
+- `astro.config.mjs`: remove the sitemap `filter` so /srqmap and /srq-map are listed again.
+- `netlify.toml`: delete the three `X-Robots-Tag: noindex` `[[headers]]` blocks.
+- `public/llms.txt`: re-add the "Sarasota Area Guide Map" line under the pages list.
+
+The `srqmap-events` scheduled task keeps running while hidden; it only touches
+`src/data/srqmap-events.json`, so it is unaffected.
+
 ## Feature-listing landing pages (/listings)
 
 941props.com-style single-property marketing pages, data-driven:
