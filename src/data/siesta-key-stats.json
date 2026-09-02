@@ -2,135 +2,135 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-08-25T20:34:36.761399+00:00",
+  "lastUpdated": "2026-09-02T21:22:42.475440+00:00",
   "counts": {
-    "sold": 582,
-    "pending": 59,
-    "active": 289,
-    "total": 641
+    "sold": 596,
+    "pending": 53,
+    "active": 278,
+    "total": 649
   },
   "metrics": {
-    "avgPrice": "$1,484,773",
-    "avgPricePerSqFt": "$687",
+    "avgPrice": "$1,492,371",
+    "avgPricePerSqFt": "$688",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,919",
+    "avgLivingSqFt": "1,923",
     "avgLotSqFt": null,
-    "avgDom": 110
+    "avgDom": 109
   },
   "range": {
     "minPrice": "$240,000",
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 289,
-    "medianPrice": "$1,200,000",
-    "medianPricePerSqFt": "$785",
-    "waterfrontCount": 159,
-    "newConstructionCount": 49
+    "count": 278,
+    "medianPrice": "$1,150,000",
+    "medianPricePerSqFt": "$770",
+    "waterfrontCount": 152,
+    "newConstructionCount": 47
   },
   "sold": {
     "count": 111,
     "medianPrice": "$1,000,000",
-    "medianDom": 106,
-    "saleToListRatio": "87.7%",
+    "medianDom": 105,
+    "saleToListRatio": "88.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 7.3,
-    "sfhVilla": 7.3,
-    "blended": 7.3,
+    "sfhVilla": 6.6,
+    "blended": 7.0,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
     "medianMonthlyAssociation": "$1,133",
-    "medianMonthlyCondoFee": "$1,261",
+    "medianMonthlyCondoFee": "$1,260",
     "minMonthlyCondoFee": "$208",
     "maxMonthlyCondoFee": "$8,995",
     "condoFeeRange": {
       "min": 208,
-      "median": 1261,
+      "median": 1260,
       "max": 8995
     }
   },
   "priceBands": {
-    "under900k": 117,
-    "band900kTo1_5m": 53,
-    "band1_5mTo3m": 52,
-    "band3mPlus": 67
+    "under900k": 118,
+    "band900kTo1_5m": 51,
+    "band1_5mTo3m": 47,
+    "band3mPlus": 62
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 289
+      "count": 278
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
     {
-      "listingId": "A4698402",
-      "address": "7425 MIDNIGHT PASS RD",
-      "subdivision": "MIDNIGHT HARBOR SUB",
-      "soldPrice": "$1,200,000",
-      "soldDate": "2026-08-24",
-      "bedrooms": 4,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,763",
-      "yearBuilt": 1965,
+      "listingId": "A4695723",
+      "address": "1128 W PEPPERTREE LN #111",
+      "subdivision": "PEPPERTREE BAY III",
+      "soldPrice": "$605,000",
+      "soldDate": "2026-09-02",
+      "bedrooms": 2,
+      "bathrooms": 1.5,
+      "livingSqFt": "1,120",
+      "yearBuilt": 1974,
       "propertyType": "Residential",
-      "isWaterfront": true
+      "isWaterfront": false
     },
     {
-      "listingId": "A4686142",
-      "address": "5790 MIDNIGHT PASS RD #506",
-      "subdivision": "GULF & BAY CLUB PH 1",
-      "soldPrice": "$1,070,000",
-      "soldDate": "2026-08-24",
+      "listingId": "A4631493",
+      "address": "420 BEACH RD #203",
+      "subdivision": "SIESTA GULF VIEW",
+      "soldPrice": "$1,100,000",
+      "soldDate": "2026-09-01",
       "bedrooms": 2,
       "bathrooms": 2.0,
-      "livingSqFt": "1,335",
-      "yearBuilt": 1979,
+      "livingSqFt": "1,316",
+      "yearBuilt": 1980,
       "propertyType": "Residential",
       "isWaterfront": true
     },
     {
-      "listingId": "A4689132",
-      "address": "558 VENICE LN",
-      "subdivision": "SIESTAS BAYSIDE WATERSIDE EAST",
-      "soldPrice": "$4,295,000",
-      "soldDate": "2026-08-21",
-      "bedrooms": 5,
-      "bathrooms": 4.5,
-      "livingSqFt": "4,132",
-      "yearBuilt": 2025,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4667090",
-      "address": "276 ISLAND CIR",
+      "listingId": "A4696360",
+      "address": "617 CALLE DE PERU",
       "subdivision": "SARASOTA BEACH",
-      "soldPrice": "$2,800,000",
-      "soldDate": "2026-08-20",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,292",
-      "yearBuilt": 2026,
+      "soldPrice": "$850,000",
+      "soldDate": "2026-09-01",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,560",
+      "yearBuilt": 1959,
       "propertyType": "Residential",
-      "isWaterfront": true
+      "isWaterfront": false
     },
     {
-      "listingId": "A4667533",
-      "address": "6415 MIDNIGHT PASS RD #306",
-      "subdivision": "ANCHORAGE",
-      "soldPrice": "$550,000",
-      "soldDate": "2026-08-20",
+      "listingId": "A4695909",
+      "address": "6287 MIDNIGHT PASS RD #201",
+      "subdivision": "EXCELSIOR BEACH TO BAY 6",
+      "soldPrice": "$612,000",
+      "soldDate": "2026-09-01",
       "bedrooms": 2,
       "bathrooms": 2.0,
-      "livingSqFt": "1,287",
-      "yearBuilt": 1975,
+      "livingSqFt": "1,401",
+      "yearBuilt": 1982,
       "propertyType": "Residential",
-      "isWaterfront": true
+      "isWaterfront": false
+    },
+    {
+      "listingId": "J1004667",
+      "address": "6962 BELGRAVE DR",
+      "subdivision": "PRINCES GATE",
+      "soldPrice": "$1,825,000",
+      "soldDate": "2026-08-31",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,224",
+      "yearBuilt": 1974,
+      "propertyType": "Residential",
+      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,31 +138,31 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 157,
-      "avgPrice": "$825,399",
-      "avgPricePerSqFt": "$706",
-      "avgLivingSqFt": "1,161",
-      "avgDom": 135
+      "activeCount": 158,
+      "avgPrice": "$823,838",
+      "avgPricePerSqFt": "$698",
+      "avgLivingSqFt": "1,175",
+      "avgDom": 133
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 6,
-      "avgPrice": "$1,416,317",
-      "avgPricePerSqFt": "$680",
-      "avgLivingSqFt": "2,122",
-      "avgDom": 122
+      "activeCount": 4,
+      "avgPrice": "$1,438,475",
+      "avgPricePerSqFt": "$723",
+      "avgLivingSqFt": "1,999",
+      "avgDom": 170
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
       "activeCount": 5,
-      "avgPrice": "$2,545,780",
-      "avgPricePerSqFt": "$1,183",
+      "avgPrice": "$2,525,780",
+      "avgPricePerSqFt": "$1,178",
       "avgLivingSqFt": "1,959",
-      "avgDom": 232
+      "avgDom": 240
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,762,400",
       "avgPricePerSqFt": "$1,471",
       "avgLivingSqFt": "3,389",
-      "avgDom": 220
+      "avgDom": 227
     }
   ],
   "condoTiersScope": {
@@ -187,28 +187,28 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 82,
-      "soldCount": 160,
-      "soldMedianPricePerSqFt": "$723",
-      "soldMedianPrice": "$960,000",
+      "activeCount": 81,
+      "soldCount": 166,
+      "soldMedianPricePerSqFt": "$735",
+      "soldMedianPrice": "$961,500",
       "lowSample": false
     },
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 74,
-      "soldCount": 213,
-      "soldMedianPricePerSqFt": "$587",
+      "activeCount": 68,
+      "soldCount": 216,
+      "soldMedianPricePerSqFt": "$584",
       "soldMedianPrice": "$1,200,000",
       "lowSample": false
     },
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 50,
-      "soldCount": 71,
+      "activeCount": 48,
+      "soldCount": 72,
       "soldMedianPricePerSqFt": "$581",
-      "soldMedianPrice": "$729,000",
+      "soldMedianPrice": "$720,500",
       "lowSample": false
     },
     {
@@ -223,76 +223,76 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 80,
-      "soldCount": 127,
+      "activeCount": 78,
+      "soldCount": 131,
       "soldMedianPricePerSqFt": "$545",
       "soldMedianPrice": "$800,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.3,
+    "monthsOfSupply": 7.0,
     "monthsOfSupplyCondo": 7.3,
-    "monthsOfSupplySfhVilla": 7.3,
-    "label": "buyer's market",
-    "activeCount": 289,
-    "sold365Count": 476,
+    "monthsOfSupplySfhVilla": 6.6,
+    "label": "balanced market",
+    "activeCount": 278,
+    "sold365Count": 478,
     "sold90Count": 111,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 228,
-      "activeCount": 111,
-      "soldMedianPrice": "$1,522,500",
-      "soldMedianPricePerSqFt": "$639"
+      "soldCount": 231,
+      "activeCount": 101,
+      "soldMedianPrice": "$1,520,000",
+      "soldMedianPricePerSqFt": "$640"
     },
     "condo": {
-      "soldCount": 354,
-      "activeCount": 178,
+      "soldCount": 365,
+      "activeCount": 177,
       "soldMedianPrice": "$680,000",
-      "soldMedianPricePerSqFt": "$587"
+      "soldMedianPricePerSqFt": "$586"
     }
   },
   "boating": {
-    "activeWithDock": 72,
-    "activeWaterfront": 159
+    "activeWithDock": 68,
+    "activeWaterfront": 152
   },
   "marketQuestions": [
     {
       "facet": "waterfront",
       "q": "How much more does beachfront cost than bayfront on Siesta Key?",
-      "a": "Gulf-front / beachfront homes sell at a median $723 per sq ft versus $587 for bay- or canal-front \u2014 about a 23% waterfront premium (Stellar MLS, recent closed sales)."
+      "a": "Gulf-front / beachfront homes sell at a median $735 per sq ft versus $584 for bay- or canal-front \u2014 about a 26% waterfront premium (Stellar MLS, recent closed sales)."
     },
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 289 active listings and roughly 40 closed sales a month (trailing 12 months), Siesta Key has about 7.3 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 278 active listings and roughly 40 closed sales a month (trailing 12 months), Siesta Key has about 7.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Siesta Key?",
-      "a": "Single-family homes sell around $1,522,500 ($639/sq ft), while condos, villas and townhouses sell around $680,000 ($587/sq ft)."
+      "a": "Single-family homes sell around $1,520,000 ($640/sq ft), while condos, villas and townhouses sell around $680,000 ($586/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Siesta Key?",
-      "a": "Active listings run from $240,000 to $29,995,000, with a median asking price of $1,200,000."
+      "a": "Active listings run from $240,000 to $29,995,000, with a median asking price of $1,150,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 106 days on market and closed at 87.7% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 105 days on market and closed at 88.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Siesta Key homes have a dock?",
-      "a": "Of 159 active waterfront listings, 72 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 152 active waterfront listings, 68 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Siesta Key?",
-      "a": "The median monthly condo fee is $1,261 and the median monthly association fee is $1,133."
+      "a": "The median monthly condo fee is $1,260 and the median monthly association fee is $1,133."
     }
   ],
   "costBreakdown90": null

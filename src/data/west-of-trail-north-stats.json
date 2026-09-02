@@ -2,43 +2,43 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-08-25T20:34:38.961087+00:00",
+  "lastUpdated": "2026-09-02T21:22:44.793306+00:00",
   "counts": {
-    "sold": 90,
-    "pending": 10,
-    "active": 48,
-    "total": 100
+    "sold": 93,
+    "pending": 11,
+    "active": 43,
+    "total": 104
   },
   "metrics": {
-    "avgPrice": "$1,127,477",
-    "avgPricePerSqFt": "$518",
+    "avgPrice": "$1,119,343",
+    "avgPricePerSqFt": "$519",
     "avgYearBuilt": 1973,
-    "avgLivingSqFt": "1,945",
+    "avgLivingSqFt": "1,936",
     "avgLotSqFt": null,
-    "avgDom": 106
+    "avgDom": 104
   },
   "range": {
     "minPrice": "$235,000",
     "maxPrice": "$22,900,000"
   },
   "active": {
-    "count": 48,
+    "count": 43,
     "medianPrice": "$739,000",
-    "medianPricePerSqFt": "$548",
-    "waterfrontCount": 17,
+    "medianPricePerSqFt": "$547",
+    "waterfrontCount": 16,
     "newConstructionCount": 20
   },
   "sold": {
     "count": 21,
     "medianPrice": "$590,000",
     "medianDom": 81,
-    "saleToListRatio": "85.7%",
+    "saleToListRatio": "86.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 10.0,
-    "sfhVilla": 6.4,
-    "blended": 7.2,
+    "sfhVilla": 5.2,
+    "blended": 6.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,45 @@
     }
   },
   "priceBands": {
-    "under900k": 28,
+    "under900k": 25,
     "band900kTo1_5m": 6,
-    "band1_5mTo3m": 5,
+    "band1_5mTo3m": 3,
     "band3mPlus": 9
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 48
+      "count": 43
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4699500",
+      "address": "4735 REMINGTON DR",
+      "subdivision": "SAPPHIRE HEIGHTS",
+      "soldPrice": "$500,000",
+      "soldDate": "2026-09-01",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,762",
+      "yearBuilt": 1956,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4699914",
+      "address": "418 SAPPHIRE DR",
+      "subdivision": "SAPPHIRE SHORES",
+      "soldPrice": "$1,080,000",
+      "soldDate": "2026-08-27",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,724",
+      "yearBuilt": 1955,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4689749",
       "address": "922 INDIAN BEACH DR",
@@ -105,32 +131,6 @@
       "yearBuilt": 1953,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4649616",
-      "address": "3931 BAY SHORE RD",
-      "subdivision": "INDIAN BEACH MAP OF",
-      "soldPrice": "$2,500,000",
-      "soldDate": "2026-08-12",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "3,012",
-      "yearBuilt": 1950,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4632292",
-      "address": "1709 N TAMIAMI TRL #215",
-      "subdivision": "THE STRAND OF SARASOTA",
-      "soldPrice": "$385,000",
-      "soldDate": "2026-08-11",
-      "bedrooms": 1,
-      "bathrooms": 1.5,
-      "livingSqFt": "855",
-      "yearBuilt": 2022,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$550,000",
       "avgPricePerSqFt": "$436",
       "avgLivingSqFt": "1,262",
-      "avgDom": 102
+      "avgDom": 110
     },
     {
       "tier": "1990to2005",
@@ -172,7 +172,7 @@
       "avgPrice": "$602,455",
       "avgPricePerSqFt": "$566",
       "avgLivingSqFt": "1,070",
-      "avgDom": 122
+      "avgDom": 130
     }
   ],
   "condoTiersScope": {
@@ -188,7 +188,7 @@
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
       "activeCount": 0,
-      "soldCount": 1,
+      "soldCount": 2,
       "soldMedianPricePerSqFt": null,
       "soldMedianPrice": null,
       "lowSample": true
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 17,
+      "activeCount": 16,
       "soldCount": 26,
       "soldMedianPricePerSqFt": "$542",
       "soldMedianPrice": "$650,000",
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 3,
+      "activeCount": 4,
       "soldCount": 1,
       "soldMedianPricePerSqFt": null,
       "soldMedianPrice": null,
@@ -214,51 +214,51 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 28,
-      "soldCount": 62,
+      "activeCount": 23,
+      "soldCount": 64,
       "soldMedianPricePerSqFt": "$403",
       "soldMedianPrice": "$582,500",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.2,
+    "monthsOfSupply": 6.3,
     "monthsOfSupplyCondo": 10.0,
-    "monthsOfSupplySfhVilla": 6.4,
-    "label": "buyer's market",
-    "activeCount": 48,
-    "sold365Count": 80,
+    "monthsOfSupplySfhVilla": 5.2,
+    "label": "balanced market",
+    "activeCount": 43,
+    "sold365Count": 82,
     "sold90Count": 21,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 71,
-      "activeCount": 33,
+      "soldCount": 73,
+      "activeCount": 28,
       "soldMedianPrice": "$678,030",
       "soldMedianPricePerSqFt": "$426"
     },
     "condo": {
-      "soldCount": 19,
+      "soldCount": 20,
       "activeCount": 15,
-      "soldMedianPrice": "$470,000",
-      "soldMedianPricePerSqFt": "$492"
+      "soldMedianPrice": "$472,500",
+      "soldMedianPricePerSqFt": "$500"
     }
   },
   "boating": {
-    "activeWithDock": 7,
-    "activeWaterfront": 17
+    "activeWithDock": 6,
+    "activeWaterfront": 16
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 48 active listings and roughly 7 closed sales a month (trailing 12 months), West Of Trail North has about 7.2 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 43 active listings and roughly 7 closed sales a month (trailing 12 months), West Of Trail North has about 6.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail North?",
-      "a": "Single-family homes sell around $678,030 ($426/sq ft), while condos, villas and townhouses sell around $470,000 ($492/sq ft)."
+      "a": "Single-family homes sell around $678,030 ($426/sq ft), while condos, villas and townhouses sell around $472,500 ($500/sq ft)."
     },
     {
       "facet": "range",
@@ -268,12 +268,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 81 days on market and closed at 85.7% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 81 days on market and closed at 86.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail North homes have a dock?",
-      "a": "Of 17 active waterfront listings, 7 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 16 active waterfront listings, 6 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

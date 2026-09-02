@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-08-25T20:34:39.770443+00:00",
+  "lastUpdated": "2026-09-02T21:22:45.521340+00:00",
   "counts": {
-    "sold": 273,
-    "pending": 38,
+    "sold": 276,
+    "pending": 40,
     "active": 81,
-    "total": 311
+    "total": 316
   },
   "metrics": {
-    "avgPrice": "$633,796",
-    "avgPricePerSqFt": "$329",
+    "avgPrice": "$631,424",
+    "avgPricePerSqFt": "$330",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,741",
+    "avgLivingSqFt": "1,737",
     "avgLotSqFt": null,
     "avgDom": 80
   },
@@ -23,21 +23,21 @@
   },
   "active": {
     "count": 81,
-    "medianPrice": "$484,700",
+    "medianPrice": "$485,000",
     "medianPricePerSqFt": "$328",
     "waterfrontCount": 23,
-    "newConstructionCount": 1
+    "newConstructionCount": 2
   },
   "sold": {
-    "count": 48,
-    "medianPrice": "$400,000",
-    "medianDom": 45,
-    "saleToListRatio": "88.2%",
+    "count": 45,
+    "medianPrice": "$405,000",
+    "medianDom": 47,
+    "saleToListRatio": "87.8%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 4.6,
-    "sfhVilla": 4.1,
+    "condo": 4.4,
+    "sfhVilla": 4.4,
     "blended": 4.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -68,6 +68,45 @@
   "buildingClasses": [],
   "recentSoldComps": [
     {
+      "listingId": "A4660320",
+      "address": "1848 SOUTHPOINTE DR",
+      "subdivision": "SOUTHPOINTE SHORES",
+      "soldPrice": "$605,000",
+      "soldDate": "2026-08-27",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,852",
+      "yearBuilt": 1968,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4697729",
+      "address": "5161 FLICKER FIELD CIR",
+      "subdivision": "THE LANDINGS",
+      "soldPrice": "$1,085,000",
+      "soldDate": "2026-08-26",
+      "bedrooms": 4,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,273",
+      "yearBuilt": 1986,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "TB8512156",
+      "address": "6139 HOLLYWOOD BLVD",
+      "subdivision": "PINE SHORES ESTATE 4TH SEC",
+      "soldPrice": "$980,000",
+      "soldDate": "2026-08-26",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,088",
+      "yearBuilt": 1953,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "A4700798",
       "address": "7031 BRIGHT CREEK DR #4",
       "subdivision": "WOODSIDE SOUTH PH 1 2 & 3",
@@ -92,45 +131,6 @@
       "yearBuilt": 1976,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4697127",
-      "address": "1715 PELICAN COVE RD #GL339",
-      "subdivision": "PELICAN COVE XIV",
-      "soldPrice": "$200,000",
-      "soldDate": "2026-08-13",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "731",
-      "yearBuilt": 1979,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4680848",
-      "address": "1725 BAYWOOD DR",
-      "subdivision": "BAY VIEW ACRES",
-      "soldPrice": "$2,175,000",
-      "soldDate": "2026-08-12",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "3,612",
-      "yearBuilt": 1984,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4683877",
-      "address": "6650 SCHOONER BAY CIR #6650",
-      "subdivision": "SCHOONER BAY",
-      "soldPrice": "$385,000",
-      "soldDate": "2026-08-10",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,206",
-      "yearBuilt": 1983,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,10 +138,10 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 43,
-      "avgPrice": "$377,075",
-      "avgPricePerSqFt": "$294",
-      "avgLivingSqFt": "1,285",
+      "activeCount": 42,
+      "avgPrice": "$371,968",
+      "avgPricePerSqFt": "$292",
+      "avgLivingSqFt": "1,263",
       "avgDom": 111
     },
     {
@@ -152,7 +152,7 @@
       "avgPrice": "$605,750",
       "avgPricePerSqFt": "$288",
       "avgLivingSqFt": "2,110",
-      "avgDom": 189
+      "avgDom": 197
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$589,667",
       "avgPricePerSqFt": "$345",
       "avgLivingSqFt": "1,711",
-      "avgDom": 149
+      "avgDom": 154
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 1,
-      "avgPrice": "$579,000",
-      "avgPricePerSqFt": "$317",
-      "avgLivingSqFt": "1,825",
-      "avgDom": 341
+      "activeCount": 2,
+      "avgPrice": "$627,000",
+      "avgPricePerSqFt": "$352",
+      "avgLivingSqFt": "1,785",
+      "avgDom": 178
     }
   ],
   "condoTiersScope": {
@@ -224,28 +224,28 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 49,
-      "soldCount": 176,
-      "soldMedianPricePerSqFt": "$282",
-      "soldMedianPrice": "$425,000",
+      "soldCount": 179,
+      "soldMedianPricePerSqFt": "$283",
+      "soldMedianPrice": "$429,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 4.4,
-    "monthsOfSupplyCondo": 4.6,
-    "monthsOfSupplySfhVilla": 4.1,
+    "monthsOfSupplyCondo": 4.4,
+    "monthsOfSupplySfhVilla": 4.4,
     "label": "seller's market",
     "activeCount": 81,
-    "sold365Count": 223,
-    "sold90Count": 48,
+    "sold365Count": 221,
+    "sold90Count": 45,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 144,
+      "soldCount": 147,
       "activeCount": 30,
-      "soldMedianPrice": "$518,750",
-      "soldMedianPricePerSqFt": "$320"
+      "soldMedianPrice": "$520,000",
+      "soldMedianPricePerSqFt": "$321"
     },
     "condo": {
       "soldCount": 129,
@@ -262,22 +262,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 81 active listings and roughly 19 closed sales a month (trailing 12 months), West Of Trail South has about 4.4 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 81 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 4.4 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $518,750 ($320/sq ft), while condos, villas and townhouses sell around $345,000 ($260/sq ft)."
+      "a": "Single-family homes sell around $520,000 ($321/sq ft), while condos, villas and townhouses sell around $345,000 ($260/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $110,000 to $6,000,000, with a median asking price of $484,700."
+      "a": "Active listings run from $110,000 to $6,000,000, with a median asking price of $485,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 45 days on market and closed at 88.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 47 days on market and closed at 87.8% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
