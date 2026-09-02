@@ -32,3 +32,19 @@
   to = "https://longboatlido.com/country-club-shores/"
   status = 301
   force = true
+
+# SRQMAP-HIDDEN 2026-09-02: belt-and-braces de-index of the SRQmap pages while
+# they are hidden from the hub site. The pages stay live (srqmap.com 302s to
+# /srqmap/), they just carry noindex at the HTTP layer too. Delete to restore.
+[[headers]]
+  for = "/srqmap/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+[[headers]]
+  for = "/SRQmap/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+[[headers]]
+  for = "/srq-map/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

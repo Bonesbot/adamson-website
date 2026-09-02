@@ -43,7 +43,8 @@ const jsonLd = {
 };
 ---
 
-<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+{/* SRQMAP-HIDDEN 2026-09-02: noIndex while hidden; remove the prop to restore */}
+<BaseLayout title={title} description={description} jsonLd={jsonLd} noIndex={true}>
 
   <!-- ── Intro strip ─────────────────────────────────────────────────── -->
   <section class="srq-intro">

@@ -22,7 +22,11 @@ export default defineConfig({
   srcDir: SITE === 'lll' ? './src-lll' : './src',
   integrations: [
     tailwind(),
-    sitemap(),
+    sitemap({
+      // SRQMAP-HIDDEN 2026-09-02: keep the map pages out of the sitemap while hidden.
+      // Remove the filter to restore.
+      filter: (page) => !/\/(srqmap|srq-map)\/?$/i.test(page),
+    }),
     mdx(),
   ],
   output: 'static',

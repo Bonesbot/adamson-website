@@ -7,7 +7,9 @@
 const navItems: { label: string; href: string; pin?: boolean }[] = [
   { label: 'Home', href: '/' },
   { label: 'Areas', href: '/areas' },
-  { label: 'SRQ Map', href: '/srqmap', pin: true },
+  // SRQMAP-HIDDEN 2026-09-02: nav link removed while the map is hidden from the hub site.
+  // Restore by uncommenting. (Page still live at /srqmap; srqmap.com redirects there.)
+  // { label: 'SRQ Map', href: '/srqmap', pin: true },
   { label: "Buyer's Guide", href: '/buyers-guide' },
   { label: 'Market Reports', href: '/market-reports' },
   { label: 'About Ryan', href: '/about' },
