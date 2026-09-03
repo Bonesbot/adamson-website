@@ -48,3 +48,16 @@
   for = "/srq-map/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# ---------------------------------------------------------------------------
+# mls-watchdog: off-machine dead-man's-switch for the daily MLS export.
+# Runs at 14:00 UTC (10am EDT / 9am EST), a few hours after the mini-PC job's
+# ~6:50am ET window, so a normal run has had time to land. It queries Postgres
+# for the newest import_batches row and emails Ryan via Resend if nothing has
+# loaded in MLS_STALE_HOURS (default 26).
+# Deliberately hosted here, NOT on the mini-PC: the 2026-08-26..09-01 outage
+# went unseen for 8 days because the old watchdog shared the machine and the
+# Gmail path with the job it was supposed to be watching.
+# ---------------------------------------------------------------------------
+[functions."mls-watchdog"]
+  schedule = "0 14 * * *"
