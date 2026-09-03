@@ -242,6 +242,14 @@ footer{margin-top:28px;font-size:11.5px;color:var(--dim);border-top:1px solid va
       </table></div>
       <div class="note">*GCI pool = 12-month sold volume × 2.5% listing side, before splits. Goal = team listing sides at Base/Mid/Stretch, with the share of last-12-month sides that goal represents. Share leader = top listing agent by sides over the same 12 months, so every goal is benchmarked against what one agent actually just did in that pocket. (CB) marks Coldwell colleagues: their pockets get relationship plays, never mail wars. Snapshot 2026-08-26; re-run before printing. Full strategy: OPERATION SIESTA (_shared) and OPERATION LONGBOAT (Drive).</div>
     </div>
+    <div class="card" style="margin-top:12px">
+      <h2>Sept 3 revisit: every market, ranked <span class="sub">162 subdivisions with 5+ sales, 12 months to Sep 3, 2026; entrenched pockets excluded</span></h2>
+      <div class="tblwrap"><table>
+        <thead><tr><th class="r">#</th><th>Market</th><th>Subdivision</th><th>Type</th><th class="r">Sold 12mo</th><th class="r">Median</th><th class="r">GCI pool*</th><th class="r">CDOM</th><th class="r">MoS</th><th>Share leader (12mo)</th><th class="r">Score</th><th>Verdict</th></tr></thead>
+        <tbody id="revisitRows"></tbody>
+      </table></div>
+      <div class="note">Score = price 25%, GCI pool 20%, speed 20%, fragmentation 25%, balanced supply 10%. Excluded as entrenched (top agent 34%+ of sides): Bay Isles (Heers 6/15, CB), Siesta Isles (Berger 6/15, new since July), Whispering Sands (Stopher 11/24, CB), Sleepy Lagoon Park (Moneuse 4/10), San Remo Estates (Stutzman 4/9), Fairway Bay (Myer 8/22, CB). Peppertree Bay falls to #95 on these criteria (median $632k, 101 CDOM): it stays a volume farm, not a price farm. Full workbook: Drive "Sept 3rd - revisit of strategy". Snapshot 2026-09-03.</div>
+    </div>
   </section>
 
   <!-- ============ TARGETS ============ -->
@@ -349,6 +357,33 @@ const LBK_FARMS = [
  ["Queens Harbour",9,"$2.70M",21.6,"$540k",2,"Schatzle (CB) & Callahan (MSC) x2 each","0/0/1 = 11%","Small, high ticket"],
  ["Tangerine Bay Club",6,"$1.50M",9.0,"$225k",1,"none: all singles","0/1/1 = 17%","Distress pocket: 9 dead $700k+ listings"],
  ["L'Ambiance",10,"$3.30M",38.4,"$960k",2,"Kepecz-Hays (CB) x2","0/0/0","Relationship / open-house play only"]
+];
+const REVISIT_0903 = [
+ [1, "Siesta Key", "Bay Island", "SFH", 7, "$4.90M", "$736k", 43, 8.6, "Faith Stutzman x1 = 14%", 86.0, "Already in plan: SK board (hand-note micro farm)", "thin sample"],
+ [2, "St Armands / Lido", "Lido Beach Division", "SFH", 10, "$3.55M", "$1.04M", 22, 14.4, "Christy Travis x1 = 10%", 85.4, "NEW: add to the board", "oversupplied, 14 MoS"],
+ [3, "Bird Key", "Bird Key", "SFH", 32, "$3.97M", "$3.55M", 70, 5.2, "Yvette Sellyn x7 = 22% (CB)", 84.7, "NEW: add to the board", ""],
+ [4, "Siesta Key", "Siesta Village (Siesta replat)", "SFH", 9, "$1.85M", "$566k", 13, 9.3, "Cam Moore x1 = 11%", 84.2, "Already in plan: SK board (Siesta Village)", ""],
+ [5, "Outside polygons", "The Oaks (Osprey 34229, outside polygons)", "SFH", 27, "$1.85M", "$1.27M", 41, 8.9, "Mark Lyda x7 = 26%", 80.4, "NEW: add to the board", "presence: Mark Lyda 7/27"],
+ [6, "Siesta Key", "Siesta Beach", "SFH", 20, "$1.56M", "$781k", 74, 7.2, "Mark Coppens x2 = 10%", 79.0, "Already in plan: SK board (digital only)", ""],
+ [7, "West of Trail Core", "Oyster Bay Estates", "SFH", 9, "$2.12M", "$531k", 55, 9.3, "Michael Hays x1 = 11%", 78.6, "NEW: add to the board", ""],
+ [8, "Siesta Key", "Sarasota Beach", "SFH", 22, "$1.56M", "$985k", 87, 4.9, "Jessica Hoffman x2 = 9%", 78.4, "Already in plan: SK board (digital only)", ""],
+ [9, "Siesta Key", "Sara Sands", "SFH", 11, "$1.60M", "$549k", 28, 2.2, "Darlene Gamble x2 = 18%", 78.3, "Already in plan: SK board (Siesta T1)", ""],
+ [10, "West of Trail Core", "Cherokee Park", "SFH", 8, "$2.83M", "$567k", 96, 4.5, "Cole Collins x1 = 12%", 78.0, "NEW: add to the board", ""],
+ [11, "Siesta Key", "Gulf & Bay Club", "Condo", 15, "$1.09M", "$410k", 49, 6.4, "Lisa Gullick x2 = 13%", 77.4, "Already in plan: SK board (G&B campaign live)", ""],
+ [12, "Longboat Key", "Country Club Shores", "SFH", 25, "$2.80M", "$2.08M", 109, 3.8, "Bruce Myer x3 = 12% (CB)", 76.3, "Already in plan: LBK board (OPERATION LONGBOAT, mailing Sept)", ""],
+ [13, "Longboat Key", "Grand Bay", "Condo", 22, "$1.57M", "$865k", 63, 3.8, "Bruce Myer x6 = 27% (CB)", 74.4, "Already in plan: LBK board (Pettingell/Myer, buyer side)", "presence: Bruce Myer 6/22 (CB colleague)"],
+ [14, "Siesta Key", "Bay Island Shores", "SFH", 5, "$3.85M", "$441k", 81, 2.4, "Nikki Taylor x1 = 20%", 73.3, "Already in plan: SK board (hand-note micro farm)", "thin sample"],
+ [15, "Longboat Key", "Queens Harbour", "SFH", 9, "$2.70M", "$540k", 82, 2.7, "Cindy Schatzle x2 = 22%", 73.0, "Already in plan: LBK board", ""],
+ [16, "Downtown Sarasota", "Vue Sarasota Bay", "Condo", 12, "$1.71M", "$534k", 83, 3.0, "Lisa Morris, PA x2 = 17%", 72.0, "NEW: watch list", ""],
+ [17, "West of Trail Core", "Hudson Bayou", "SFH", 5, "$2.95M", "$361k", 56, 0.0, "Victoria Beckham x1 = 20%", 71.9, "NEW: watch list", "thin sample"],
+ [18, "West of Trail Core", "Desota Park", "SFH", 6, "$1.66M", "$290k", 41, 2.0, "Linda Driggs x1 = 17%", 71.8, "NEW: watch list", "thin sample"],
+ [19, "Longboat Key", "Longboat Key (north-end village plat)", "SFH", 16, "$1.41M", "$1.35M", 132, 7.5, "Irma Scherer x2 = 12%", 71.1, "NEW: watch list", ""],
+ [20, "Longboat Key", "Harbour Oaks", "Villa", 5, "$980k", "$138k", 12, 4.8, "Sandra Endres x1 = 20%", 70.1, "NEW: watch list", "thin sample"],
+ [21, "Downtown Sarasota", "Mark Sarasota", "Condo", 15, "$1.26M", "$561k", 74, 1.6, "Emmy Fitzpatrick x2 = 13%", 69.6, "NEW: watch list", ""],
+ [22, "West of Trail Core", "Bay View Heights", "SFH", 5, "$2.38M", "$251k", 93, 7.2, "Courtney Tarantino x1 = 20%", 69.6, "NEW: watch list", "thin sample"],
+ [23, "Palmer Ranch", "Sunrise Preserve", "SFH", 16, "$642k", "$285k", 51, 5.2, "Todd Currey x1 = 6%", 69.2, "NEW: watch list", ""],
+ [24, "Siesta Key", "Harmony", "SFH", 6, "$1.52M", "$284k", 63, 6.0, "Derek Edwards x2 = 33%", 69.1, "NEW: watch list", "thin sample"],
+ [25, "West of Trail South", "The Landings", "SFH", 13, "$1.30M", "$417k", 74, 3.7, "Kelly Quigley x3 = 23%", 69.0, "Already in plan: Ryan personal target (off-market purchase map)", ""]
 ];
 const MONTHS = ["2026-09","2026-10","2026-11","2026-12","2027-01","2027-02","2027-03","2027-04","2027-05","2027-06","2027-07"];
 const BANK_GOAL = 200000, BANK_RATE = 0.9, BASE_PACE = 300000/11;
@@ -551,7 +586,15 @@ function farmRows(el, rows){
       <td class="sub">${r[6]}</td><td class="mono">${r[7]}</td><td class="sub">${r[8]}</td></tr>`);
   });
 }
-function renderFarms(){ farmRows("skFarms",SK_FARMS); farmRows("lbkFarms",LBK_FARMS); }
+function revisitRows(){
+  const tb=document.getElementById("revisitRows"); if(!tb) return; tb.innerHTML="";
+  REVISIT_0903.forEach(r=>{
+    const v=r[11]||"", cls=v.startsWith("NEW: add")?"style=\"background:#fff6dd\"":"";
+    tb.insertAdjacentHTML("beforeend",
+     `<tr ${cls}><td class="r mono">${r[0]}</td><td class="sub">${r[1]}</td><td><b>${r[2]}</b>${r[12]?`<div class="sub">${r[12]}</div>`:""}</td><td class="sub">${r[3]}</td><td class="r mono">${r[4]}</td><td class="r mono">${r[5]}</td><td class="r mono">${r[6]}</td><td class="r mono">${r[7]}</td><td class="r mono">${r[8]}</td><td class="sub">${r[9]}</td><td class="r mono">${r[10]}</td><td class="sub">${v}</td></tr>`);
+  });
+}
+function renderFarms(){ farmRows("skFarms",SK_FARMS); farmRows("lbkFarms",LBK_FARMS); revisitRows(); }
 
 /* targets */
 ["fTier","fStatus","fSearch"].forEach(id=>document.getElementById(id).addEventListener("input",renderTargets));
