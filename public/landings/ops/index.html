@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Adamson Ops Map</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#F2F4F7; --ink:#0A1F3C; --ink-2:#3C4C64; --muted:#6B7A92; --rule:#D5DBE5; --panel:#FFFFFF;
+  --gold:#C9A961; --gold-ink:#8C7239; --ok:#2E7D5B; --warn:#B8860B; --bad:#B23A3A;
+  --chip:#E8ECF2;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0A1F3C; --ink:#F2F4F7; --ink-2:#C9D2DF; --muted:#8FA0B8; --rule:#22375A; --panel:#0F2A4E;
+    --gold:#D6B970; --gold-ink:#D6B970; --ok:#5FBF93; --warn:#E2B44A; --bad:#E27272; --chip:#173564;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0A1F3C; --ink:#F2F4F7; --ink-2:#C9D2DF; --muted:#8FA0B8; --rule:#22375A; --panel:#0F2A4E;
+  --gold:#D6B970; --gold-ink:#D6B970; --ok:#5FBF93; --warn:#E2B44A; --bad:#E27272; --chip:#173564;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 "Source Sans 3",Arial,sans-serif}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:40px 24px 72px}
+.mast{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-bottom:2px solid var(--gold);padding-bottom:12px}
+.mast h1{font:600 30px/1.1 "Playfair Display",Georgia,serif;margin:0;text-wrap:balance}
+.mast .issue{font:500 12px/1 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lede{max-width:65ch;color:var(--ink-2);margin:18px 0 0}
+h2{font:600 22px/1.2 "Playfair Display",Georgia,serif;margin:44px 0 6px;text-wrap:balance}
+h2 + p.sub{margin:0 0 16px;color:var(--muted);max-width:65ch}
+.eyebrow{font:600 11px/1 "Source Sans 3",Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink)}
+.daily{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
+.daily a{display:block;background:var(--panel);border:1px solid var(--rule);border-top:3px solid var(--gold);padding:16px 18px;text-decoration:none;min-height:126px}
+.daily a:hover,.daily a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.daily .name{font:600 19px/1.2 "Playfair Display",Georgia,serif;margin:6px 0 4px}
+.daily .what{color:var(--ink-2);font-size:14.5px}
+.daily .url{font:400 12px/1.4 "IBM Plex Mono",monospace;color:var(--muted);margin-top:8px;word-break:break-all}
+.diagram{background:var(--panel);border:1px solid var(--rule);padding:12px;overflow-x:auto;margin-top:12px}
+.diagram pre{margin:0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--panel);border:1px solid var(--rule)}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-top:1px solid var(--rule)}
+th{background:var(--chip);font-weight:600;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);border-top:0}
+td.k{font:500 13px/1.45 "IBM Plex Mono",monospace;white-space:nowrap;color:var(--ink-2)}
+td .path{font:400 12.5px/1.4 "IBM Plex Mono",monospace;color:var(--muted);word-break:break-all}
+.tablewrap{overflow-x:auto;margin-top:12px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.pill{display:inline-block;font:600 11px/1 "Source Sans 3",Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:2px;background:var(--chip);color:var(--ink-2);vertical-align:middle}
+.pill.ok{color:var(--ok)} .pill.warn{color:var(--warn)} .pill.bad{color:var(--bad)}
+.note{border-left:3px solid var(--gold);padding:10px 14px;background:var(--panel);color:var(--ink-2);max-width:65ch;margin-top:16px}
+ol.brief{max-width:65ch;color:var(--ink-2);padding-left:20px}
+ol.brief li{margin:6px 0}
+footer{margin-top:56px;border-top:1px solid var(--rule);padding-top:12px;color:var(--muted);font-size:13px;max-width:65ch}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <h1>Adamson Ops Map</h1>
+    <div class="issue">Where it all lives · rev 2026-09-03 · adamsonfl.com/landings/ops/</div>
+  </header>
+  <p class="lede">One page, one link, every surface. The daily 8 AM brief points here. Unlisted and noindex, like the Landings map and Goal HQ. If you cannot remember where something lives, it is on this page or it is not a real part of the system yet.</p>
+
+  <div class="eyebrow" style="margin-top:36px">Open these every morning</div>
+  <div class="daily">
+    <a href="https://command.adamsonfl.com">
+      <div class="eyebrow">Dashboard</div>
+      <div class="name">Command Center</div>
+      <div class="what">Tabs: Chat · Tasks · Leads · Farming · Deals · Market. Job health lights, lead queue, farm parcels and touches, Zoho deals.</div>
+      <div class="url">command.adamsonfl.com</div>
+    </a>
+    <a href="https://adamsonfl.com/landings/hq/">
+      <div class="eyebrow">Goals</div>
+      <div class="name">Goal HQ</div>
+      <div class="what">Password gate. $200k house fund, three GCI tiers, Siesta and Longboat farm boards with share goals, deal ledger, monthly KPIs.</div>
+      <div class="url">adamsonfl.com/landings/hq/</div>
+    </a>
+    <a href="#process">
+      <div class="eyebrow">Process</div>
+      <div class="name">Process Map</div>
+      <div class="what">What runs when and what feeds what. The diagram below is the hub's PROCESS_MAP.md, rendered.</div>
+      <div class="url">adamsonfl.com/landings/ops/ · _shared/PROCESS_MAP.md</div>
+    </a>
+    <a href="#backlog">
+      <div class="eyebrow">Open work</div>
+      <div class="name">Backlog and Decisions</div>
+      <div class="what">BACKLOG.md is the only file that answers "what is not done". DECISIONS.md answers why. Both live on the mini-PC.</div>
+      <div class="url">C:\Users\Bones\automation\_shared\</div>
+    </a>
+  </div>
+
+  <h2 id="process">Process map</h2>
+  <p class="sub">Asset flow across the hub and spokes. Boxes are systems; arrows are the seams. Producers are authoritative, consumers read and never re-derive.</p>
+  <div class="diagram">
+<pre class="mermaid">
+flowchart LR
+  subgraph EXT[External sources]
+    MLS[Stellar MLS daily export]
+    FOOT[Drone and iPhone footage on Drive video-in]
+    LIST[Listing assets on Drive Listing Info]
+  end
+  subgraph HUB[_shared hub]
+    BRAND[brand kit]
+    DOCS[CONTEXT · STRATEGY · DECISIONS · BACKLOG · PROCESS_MAP]
+  end
+  subgraph AG[AG_website]
+    JOB[mls-export 6:38 AM]
+    SUPA[(Supabase raw_listings)]
+    STATS[stats JSON contract]
+    SITE[adamsonfl.com + longboatlido.com]
+  end
+  subgraph MS[Media-Studio]
+    HERO[hero_loop.py on the mini-PC]
+    REEL[social_reel.py]
+    HEY[HeyGen avatar Ryan3]
+  end
+  subgraph CRM[CRM-Outreach]
+    ZOHO[(Zoho CRM)]
+    FARM[(farm_parcels · farm_touches)]
+    CAMP[Owner's Brief mailers]
+  end
+  subgraph CC[Command-Center]
+    APP[command.adamsonfl.com]
+    QUEUE[(cc_ tables)]
+    POLL[cc-queue-poller every 15 min]
+  end
+  MLS -->|daily CSV| JOB --> SUPA --> STATS --> SITE
+  SUPA -->|read-only stats| CAMP
+  SUPA -->|read-only stats| REEL
+  FOOT --> HERO -->|mp4 + webm + poster| SITE
+  HEY --> REEL -->|market minute embeds| SITE
+  REEL -->|drafts to video-out| SOCIAL[IG · YT · FB · GBP]
+  BRAND --> SITE & CAMP & REEL & HERO
+  FARM -->|target list + QR codes| CAMP
+  CAMP -->|QR scan| SITE
+  SITE -->|every form| CLFN[community-lead function]
+  CLFN --> LEADS[(public.leads)]
+  CLFN -->|Resend email| INBOX[Ryan + partner inboxes]
+  LEADS --> POLL --> ZOHO
+  POLL --> QUEUE --> APP
+  JOB -->|heartbeats| QUEUE
+  ZOHO -->|hourly deals sync| QUEUE
+  FARM --> APP
+</pre>
+  </div>
+
+  <h2>Daily rhythm</h2>
+  <p class="sub">America/New_York. A quiet day is normal; a missing heartbeat is not. The September 2 outage ran seven days unseen because the failure alert never fired, so the top backlog item is moving alerts onto Resend.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>When</th><th>Job</th><th>Where</th><th>What it does</th><th>Failure signal</th></tr></thead>
+    <tbody>
+      <tr><td class="k">5:30 AM</td><td>backup-to-drive</td><td>Windows Task Scheduler</td><td>Mirrors the automation folder to Drive backups</td><td>backup-log.txt older than 25h</td></tr>
+      <tr><td class="k">6:38 AM</td><td>mls-export</td><td>Cowork scheduled task, mini-PC</td><td>Stellar export, Supabase upsert, stats JSON for 9 areas plus community pages, one commit, Netlify build</td><td>last-run.json, watchdog <span class="pill bad">alerting unreliable</span></td></tr>
+      <tr><td class="k">7:36 AM</td><td>mls-export-watchdog</td><td>Cowork scheduled task</td><td>Checks the heartbeat</td><td>Shares the job's failure modes</td></tr>
+      <tr><td class="k">8:00 AM</td><td>morning-brief</td><td>Cloud scheduled task</td><td>Emails this map plus open work, milestones, and state of the business</td><td>No email by 8:15 <span class="pill ok">new 2026-09-03</span></td></tr>
+      <tr><td class="k">every 15 min</td><td>cc-queue-poller</td><td>Cowork scheduled task</td><td>Command Center requests, lead relay to Zoho, hourly deals sync, heartbeat</td><td>App pill "rounds late"</td></tr>
+      <tr><td class="k">daily</td><td>srqmap-events</td><td>Cowork scheduled task</td><td>Refreshes event pins on /srqmap</td><td>Stale events</td></tr>
+      <tr><td class="k">on demand</td><td>hero loop · listing launch · CMA workbench · stale-seller packet</td><td>Playbooks in _shared/playbooks</td><td>"I need a new video edited" starts NEW_VIDEO.md</td><td>QC gates per job</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>Directory</h2>
+  <p class="sub">Grouped by what you are looking for, not by which spoke owns it.</p>
+  <div class="grid2">
+    <div>
+      <div class="eyebrow">Live sites</div>
+      <div class="tablewrap"><table>
+        <tr><td><a href="https://adamsonfl.com">adamsonfl.com</a><div class="path">hub site · 9 area pages · SRQmap · IDX · new construction</div></td></tr>
+        <tr><td><a href="https://longboatlido.com">longboatlido.com</a><div class="path">Adamson x Schneider co-brand · Country Club Shores page</div></td></tr>
+        <tr><td><a href="https://adamsonfl.com/siesta-key/gulf-and-bay-club-beachfront/">Gulf and Bay Club Beachfront</a><div class="path">the community page template · IDX widget 50169</div></td></tr>
+        <tr><td><a href="https://longboatlido.com/country-club-shores/">Country Club Shores</a><div class="path">CCS page · IDX widget 50171 · ccshores.com forwards here</div></td></tr>
+        <tr><td><a href="https://adamsonfl.com/landings/">Landings drive map</a><div class="path">166 off-market targets · noindex · GPS follow mode</div></td></tr>
+        <tr><td><a href="https://adamsonfl.com/srqmap">SRQmap</a><div class="path">events and tourist layer</div></td></tr>
+      </table></div>
+    </div>
+    <div>
+      <div class="eyebrow">Plans and living docs (Drive)</div>
+      <div class="tablewrap"><table>
+        <tr><td><a href="https://drive.google.com/drive/folders/1nR4-tg8_2v4l4-hT-ZkRkbkELHRaNIPI">Business Plan folder</a><div class="path">BonesBot-Share / Business Plan</div></td></tr>
+        <tr><td>H2-2026 Growth Plan and 2027 Roadmap<div class="path">in the Business Plan folder · the Ferry / Pantana / Keller frame · July 2</div></td></tr>
+        <tr><td>Siesta Key Attack Plan (Adamson x Eggen)<div class="path">in the Business Plan folder · 12-month playbook · July 5</div></td></tr>
+        <tr><td>OPERATION LONGBOAT (Adamson x Schneider)<div class="path">Drive folder "Longboat Key with Anne" · South Key attack plan · Aug 26</div></td></tr>
+        <tr><td>OPERATION SIESTA Phase 1<div class="path">C:\Users\Bones\automation\_shared\OPERATION_SIESTA.md</div></td></tr>
+        <tr><td>Compass Home Platform brief<div class="path">C:\Users\Bones\automation\_shared\COMPASS_HOME_PLATFORM.md</div></td></tr>
+        <tr><td>BonesBot-Share (Drive root)<div class="path">video-in · video-out · Listing Info · _inbox · backups · one level above the Business Plan folder</div></td></tr>
+      </table></div>
+    </div>
+    <div>
+      <div class="eyebrow" id="backlog">Hub files on the mini-PC</div>
+      <div class="tablewrap"><table>
+        <tr><td>STRATEGY.md<div class="path">current direction and dated pivots · read first</div></td></tr>
+        <tr><td>BACKLOG.md<div class="path">open items by spoke and priority · edited in place · the only "what next" file</div></td></tr>
+        <tr><td>DECISIONS.md<div class="path">append-only why log · newest first</div></td></tr>
+        <tr><td>PROCESS_MAP.md<div class="path">the diagram above plus the job table · living</div></td></tr>
+        <tr><td>ARCHITECTURE.md<div class="path">hub and spokes · Drive conventions · secrets · backup</div></td></tr>
+        <tr><td>brand/brand.json<div class="path">navy #0A1F3C · gold #C9A961 · Playfair Display · avatar IDs</div></td></tr>
+        <tr><td>playbooks/<div class="path">LISTING_LAUNCH · NEW_VIDEO · STALE_SELLER_PACKET</div></td></tr>
+      </table></div>
+    </div>
+    <div>
+      <div class="eyebrow">Systems and consoles</div>
+      <div class="tablewrap"><table>
+        <tr><td><a href="https://supabase.com/dashboard">Supabase</a><div class="path">raw_listings · public.leads · farm_* · cc_* · goal_dashboard · graph (pending)</div></td></tr>
+        <tr><td><a href="https://crm.zoho.com">Zoho CRM</a><div class="path">system of record for contacts, leads, deals · Compass CRM is a satellite copy</div></td></tr>
+        <tr><td><a href="https://app.netlify.com">Netlify</a><div class="path">sites: bonesbot (adamsonfl) · longboatlido · ag-command-center</div></td></tr>
+        <tr><td><a href="https://github.com/Bonesbot/adamson-website">GitHub: adamson-website</a><div class="path">Astro site · pipeline scripts · netlify functions · src-lll</div></td></tr>
+        <tr><td><a href="https://resend.com">Resend</a><div class="path">Info@AdamsonFL.com transactional sender · send-only</div></td></tr>
+        <tr><td><a href="https://middleware.idxbroker.com">IDX Broker</a><div class="path">display only · wrapper cache must be cleared after deploys</div></td></tr>
+        <tr><td><a href="https://app.heygen.com">HeyGen</a><div class="path">Ryan3 avatar · Kelli's avatar does not exist yet</div></td></tr>
+        <tr><td>Compass Home Platform<div class="path">Buyer Demand · Likely to Sell · Insights · Compass One · no API</div></td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <h2>What the 8 AM brief contains</h2>
+  <p class="sub">Read in this order. It is built from the hub files, so the brief is only as honest as the backlog.</p>
+  <ol class="brief">
+    <li><strong>Links.</strong> This page, Command Center, Goal HQ.</li>
+    <li><strong>State of the business.</strong> Pipeline health (did mls-export run), the two operations (Siesta with Kelli, Longboat with Anne) against their next milestone, and anything in STRATEGY.md that changed in the last week.</li>
+    <li><strong>Milestones.</strong> The dated commitments: CCS letters in mailboxes in September, Siesta launch, Goal HQ tier pace, the July 2027 Landings purchase.</li>
+    <li><strong>Open work.</strong> Every P1 from BACKLOG.md, then a count of P2 and P3 by spoke, then the three that have been open longest.</li>
+    <li><strong>Today's one thing.</strong> The single action that moves a listing appointment closer, chosen from the P1 list.</li>
+  </ol>
+  <div class="note">The brief never re-derives a market number. Where it quotes one, it comes from the stats contract or the Goal HQ constants, with the as-of date.</div>
+
+  <footer>Adamson Ops Map · maintained by the boardroom session · when a surface is added or retired, this page and _shared/PROCESS_MAP.md change in the same session.</footer>
+</div>
+
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs";
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+  mermaid.initialize({ startOnLoad: true, theme: dark ? "dark" : "neutral", fontFamily: "Source Sans 3, Arial, sans-serif" });
+</script>
+</body>
+</html>
