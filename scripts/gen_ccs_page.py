@@ -212,14 +212,22 @@ def compute(conn, as_of=None):
     headline = [r for r in ledger if r["close_date"] >= head_from]
 
     prices = [_f(r["current_price"]) for r in headline]
+    # Headline tiles report MEDIANS (Ryan, 2026-09-04): matches the mailer and the
+    # industry convention (Redfin, Realtor.com, Altos, NAR), and a single point-lot
+    # sale cannot drag them. Means stay in the JSON as *_avg for anything still
+    # reading them; the page does not print them.
     snap = {
         "n": len(headline),
         "mn": min(prices) if prices else None,
-        "avg": mean(prices),
+        "md": median(prices),
         "mx": max(prices) if prices else None,
-        "psf": mean([_f(r["close_price_by_calculated_sqft"]) for r in headline]),
-        "cdom": mean([_f(r["cumulative_days_on_market"]) for r in headline]),
-        "splp": mean([_f(r["sp_lp"]) for r in headline]),
+        "psf": median([_f(r["close_price_by_calculated_sqft"]) for r in headline]),
+        "cdom": median([_f(r["cumulative_days_on_market"]) for r in headline]),
+        "splp": median([_f(r["sp_lp"]) for r in headline]),
+        "price_avg": mean(prices),
+        "psf_avg": mean([_f(r["close_price_by_calculated_sqft"]) for r in headline]),
+        "cdom_avg": mean([_f(r["cumulative_days_on_market"]) for r in headline]),
+        "splp_avg": mean([_f(r["sp_lp"]) for r in headline]),
     }
     segs = {}
     for key, _, _ in SEGMENTS:
@@ -275,11 +283,11 @@ def render_stats(s):
     tiles = [
         stat(snap["n"], "Closed Sales"),
         stat(money(snap["mn"]), "Min Sale Price"),
-        stat(money(snap["avg"]), "Avg Sale Price"),
+        stat(money(snap["md"]), "Median Sale Price"),
         stat(money(snap["mx"]), "Max Sale Price"),
-        stat(psf(snap["psf"]), "Avg Price / SqFt"),
-        stat(num(snap["cdom"]), "Avg Mkt Days", "cumulative"),
-        stat(pct1(snap["splp"]), "Avg Sale-to-List"),
+        stat(psf(snap["psf"]), "Median Price / SqFt"),
+        stat(num(snap["cdom"]), "Median Mkt Days", "cumulative"),
+        stat(pct1(snap["splp"]), "Median Sale-to-List"),
         stat(share, "Canal-Front Share", f"{canal_n} of {total} sales, past 12 months"),
     ]
     return '<div class="gbc-stat-grid">' + "\n".join(tiles) + "\n</div>"
@@ -370,7 +378,7 @@ def render_page(s, template=None):
     total = len(s["ledger"])
     lo, hi = sq_range(s)
     description = (f"Country Club Shores, Longboat Key (34228) single-family market: {snap['n']} closed sales "
-                   f"in the last 180 days, average {money(snap['avg'])}, with canal-front, open-bayfront and "
+                   f"in the last 180 days, median {money(snap['md'])}, with canal-front, open-bayfront and "
                    f"interior homes tracked separately, plus price per sqft, days on market and sale-to-list "
                    f"ratios from live Stellar MLS data.")
     faq_share = (f"Most of the neighborhood sits on deep-water canals: {segs['canal']['n']} of the {total} "
