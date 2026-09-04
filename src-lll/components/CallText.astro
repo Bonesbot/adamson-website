@@ -46,7 +46,7 @@ const smsBody = `Hi, I'm looking at ${pageName} on LongboatLido.com and have a q
     <a class="lll-ct-link" data-ct="text" href="#contact" rel="nofollow">Text</a>
   </div>
 ) : (
-  <div class="lll-ct lll-ct-bar md:hidden" data-k={enc} data-body={smsBody} role="region" aria-label="Call or text us">
+  <div class="lll-ct lll-ct-bar" data-k={enc} data-body={smsBody} role="region" aria-label="Call or text us">
     <a class="lll-ct-btn" data-ct="call" href="#contact" rel="nofollow">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L8.1 9.7a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.8.3 1.7.6 2.6.7a2 2 0 0 1 1.7 2z"/></svg>
       <span>Call</span>
@@ -69,6 +69,8 @@ const smsBody = `Hi, I'm looking at ${pageName} on LongboatLido.com and have a q
   .lll-ct-bar { position:fixed; left:0; right:0; bottom:0; z-index:60; display:flex; gap:0.5rem; padding:0.55rem 0.75rem calc(0.55rem + env(safe-area-inset-bottom)); background:rgba(27,42,74,0.96); backdrop-filter:blur(8px); box-shadow:0 -6px 20px rgba(0,0,0,0.25); }
   .lll-ct-btn { flex:1; display:flex; align-items:center; justify-content:center; gap:0.45rem; min-height:44px; border-radius:0.5rem; font-family:var(--font-accent); font-size:0.8rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; text-decoration:none; color:#fff; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.22); }
   .lll-ct-btn-gold { background:var(--color-gold,#C5A55A); border-color:var(--color-gold,#C5A55A); color:#1B2A4A; }
+  /* phones only: own media query, because this global rule sits after Tailwind's md:hidden in the cascade and would win */
+  @media (min-width:768px) { .lll-ct-bar { display:none; } }
   /* keep the footer reachable above the bar on phones */
   @media (max-width:767px) { body.has-ct-bar { padding-bottom:calc(64px + env(safe-area-inset-bottom)); } }
 </style>
