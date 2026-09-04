@@ -1,0 +1,101 @@
+---
+/**
+ * Call / Text control for the shared LongboatLido.com web number (CallRail,
+ * added 2026-09-04). Two variants, both driven by the same tiny inline script:
+ *
+ *   <CallText variant="header" />   compact "(941) ... Call · Text" in the LLL header
+ *   <CallText variant="bar" />      sticky bottom bar on phones (hidden md:)
+ *
+ * Anti-scrape design: the number NEVER appears in the served HTML. It sits in
+ * one base64 data attribute and the script assembles the digits, the tel: href and
+ * the sms: href at runtime. Bulk harvesters read raw HTML and regex for
+ * 10-digit patterns and tel: links; they get nothing. People (and Googlebot,
+ * which renders JS) get a normal tappable number. Keep `telephone` OUT of any
+ * JSON-LD on this site for the same reason: the schema field is the first
+ * place scrapers look.
+ *
+ * The sms: body names the page, so CallRail's text log shows which landing
+ * page the prospect was on. Taps push a `call_text_click` event to dataLayer
+ * when one exists, so analytics can count them beside CallRail's own logs.
+ *
+ * Changing the number: edit NUMBER below, nowhere else.
+ */
+interface Props {
+  variant?: 'header' | 'bar';
+  /** Page name for the prefilled text, defaults to the page title-ish path */
+  context?: string;
+}
+const { variant = 'header', context } = Astro.props;
+
+const NUMBER = '9413372944'; // CallRail shared web number, (941) 337-2944
+// base64 so the served HTML carries no digit run at all (a 10-digit string,
+// even split in three, is still a phone-shaped pattern to a regex)
+const enc = Buffer.from(NUMBER).toString('base64');
+
+const path = Astro.url.pathname.replace(/\/+$/, '');
+const pageName = context
+  || (path ? path.split('/').pop()!.replace(/-/g, ' ').replace(/\b\w/g, (m) => m.toUpperCase()) : 'LongboatLido.com');
+const smsBody = `Hi, I'm looking at ${pageName} on LongboatLido.com and have a question.`;
+---
+
+{variant === 'header' ? (
+  <div class="lll-ct lll-ct-header" data-k={enc} data-body={smsBody}>
+    <span class="lll-ct-num" aria-label="Phone number"></span>
+    <a class="lll-ct-link" data-ct="call" href="#contact" rel="nofollow">Call</a>
+    <span class="lll-ct-dot" aria-hidden="true">&middot;</span>
+    <a class="lll-ct-link" data-ct="text" href="#contact" rel="nofollow">Text</a>
+  </div>
+) : (
+  <div class="lll-ct lll-ct-bar md:hidden" data-k={enc} data-body={smsBody} role="region" aria-label="Call or text us">
+    <a class="lll-ct-btn" data-ct="call" href="#contact" rel="nofollow">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L8.1 9.7a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.8.3 1.7.6 2.6.7a2 2 0 0 1 1.7 2z"/></svg>
+      <span>Call</span>
+    </a>
+    <a class="lll-ct-btn lll-ct-btn-gold" data-ct="text" href="#contact" rel="nofollow">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <span>Text</span>
+    </a>
+  </div>
+)}
+
+<style is:global>
+  .lll-ct-header { display:flex; align-items:center; gap:0.45rem; font-family:var(--font-accent); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; white-space:nowrap; }
+  .lll-ct-header .lll-ct-num { color:var(--color-gold,#C5A55A); font-weight:600; letter-spacing:0.06em; }
+  .lll-ct-header .lll-ct-num:empty { display:none; }
+  .lll-ct-header .lll-ct-link { color:rgba(255,255,255,0.85); text-decoration:none; }
+  .lll-ct-header .lll-ct-link:hover { color:var(--color-gold,#C5A55A); }
+  .lll-ct-header .lll-ct-dot { color:rgba(255,255,255,0.4); }
+
+  .lll-ct-bar { position:fixed; left:0; right:0; bottom:0; z-index:60; display:flex; gap:0.5rem; padding:0.55rem 0.75rem calc(0.55rem + env(safe-area-inset-bottom)); background:rgba(27,42,74,0.96); backdrop-filter:blur(8px); box-shadow:0 -6px 20px rgba(0,0,0,0.25); }
+  .lll-ct-btn { flex:1; display:flex; align-items:center; justify-content:center; gap:0.45rem; min-height:44px; border-radius:0.5rem; font-family:var(--font-accent); font-size:0.8rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; text-decoration:none; color:#fff; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.22); }
+  .lll-ct-btn-gold { background:var(--color-gold,#C5A55A); border-color:var(--color-gold,#C5A55A); color:#1B2A4A; }
+  /* keep the footer reachable above the bar on phones */
+  @media (max-width:767px) { body.has-ct-bar { padding-bottom:calc(64px + env(safe-area-inset-bottom)); } }
+</style>
+
+<script is:inline>
+  (function () {
+    if (window.__lllCallText) return; window.__lllCallText = true;
+    function wire() {
+      var els = document.querySelectorAll('.lll-ct');
+      if (!els.length) return;
+      els.forEach(function (el) {
+        var digits; try { digits = atob(el.dataset.k || ''); } catch (e) { return; }
+        if (!/^\d{10}$/.test(digits)) return;
+        var pretty = '(' + digits.slice(0, 3) + ') ' + digits.slice(3, 6) + '-' + digits.slice(6);
+        var num = el.querySelector('.lll-ct-num'); if (num) num.textContent = pretty;
+        var body = encodeURIComponent(el.dataset.body || '');
+        el.querySelectorAll('[data-ct]').forEach(function (link) {
+          var kind = link.dataset.ct;
+          link.href = kind === 'text' ? 'sms:+1' + digits + '?&body=' + body : 'tel:+1' + digits;
+          link.setAttribute('aria-label', (kind === 'text' ? 'Text ' : 'Call ') + pretty);
+          link.addEventListener('click', function () {
+            try { (window.dataLayer = window.dataLayer || []).push({ event: 'call_text_click', channel: kind, page: location.pathname }); } catch (e) {}
+          });
+        });
+        if (el.classList.contains('lll-ct-bar')) document.body.classList.add('has-ct-bar');
+      });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wire); else wire();
+  })();
+</script>

@@ -12,6 +12,7 @@ import Meta from '@/components/seo/Meta.astro';
 import JsonLd from '@/components/seo/JsonLd.astro';
 import LLLHeader from '../components/LLLHeader.astro';
 import LLLFooter from '../components/LLLFooter.astro';
+import CallText from '../components/CallText.astro';
 
 interface Props {
   title: string;
@@ -75,5 +76,7 @@ const fullTitle = title === 'Home' ? siteTitle : `${title} | Longboat Key and Li
       <slot />
     </main>
     <LLLFooter />
+    <!-- Shared CallRail web number, phones only (desktop has it in the header) -->
+    <CallText variant="bar" />
   </body>
 </html>
