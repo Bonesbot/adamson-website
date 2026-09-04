@@ -61,13 +61,30 @@ H = {"Authorization": f"Bearer {TOK}", "Accept": "application/vnd.github+json", 
 # failure it fetches the canonical script from origin/main itself (same source
 # the runner uses) and loads it. `communities_via` records which path was taken
 # and is reported in the publish block.
-communities = None
-communities_via = None
-try:
-    import gen_gulf_bay_pages as communities
-    communities_via = "local"
-except Exception as _e:
-    print(f"[INFO] community generator not on path ({_e}); fetching from origin/{BR}", file=sys.stderr)
+# Registry of community generators. Each exposes build_payload(conn) ->
+# ({repo_path: text}, {slug: stats}), REL_DATA and material(). Adding a page
+# means adding a module here; the loader below handles missing files.
+GENERATORS = [
+    ("gulf-bay", "gen_gulf_bay_pages"),   # src/pages/siesta-key/gulf-and-bay-club*.astro
+    ("ccs", "gen_ccs_page"),              # src-lll/pages/country-club-shores.astro (longboatlido.com)
+]
+generators = {}      # key -> module (or None)
+generators_via = {}  # key -> "local" | "origin" | "unavailable: ..." | "failed: ..."
+for _key, _mod in GENERATORS:
+    try:
+        generators[_key] = __import__(_mod)
+        generators_via[_key] = "local"
+    except Exception as _e:
+        generators[_key] = None
+        generators_via[_key] = None
+        print(f"[INFO] {_mod} not on path ({_e}); will fetch from origin", file=sys.stderr)
+# kept for the publish block / morning brief, which read a single string
+communities = generators["gulf-bay"]
+communities_via = generators_via["gulf-bay"]
+
+# The site must never hold data back longer than this, whatever --min-days the
+# caller passes (Ryan, 2026-09-04: "every 3 days at minimum"). Default is 1.
+MAX_HOLD_DAYS = 3
 
 
 def gh(method, path, body=None):
@@ -81,22 +98,22 @@ def gh_raw(path):
     try: return urllib.request.urlopen(req, timeout=30).read().decode()
     except Exception: return None
 
-def _load_communities_from_main():
-    """Fetch scripts/gen_gulf_bay_pages.py from origin/<BR> and load it.
+def _load_generator_from_main(modname):
+    """Fetch scripts/<modname>.py from origin/<BR> and load it.
 
     Fallback for when the runner's /tmp tree does not include the generator.
     Returns (module|None, how). Never raises — area stats must publish regardless.
     """
     import importlib.util, tempfile
     try:
-        src = gh_raw("scripts/gen_gulf_bay_pages.py")
+        src = gh_raw(f"scripts/{modname}.py")
         if not src:
             return None, "unavailable: not found on origin"
-        tmp = Path(tempfile.mkdtemp(prefix="agw_comm_")) / "gen_gulf_bay_pages.py"
+        tmp = Path(tempfile.mkdtemp(prefix="agw_comm_")) / f"{modname}.py"
         tmp.write_text(src, encoding="utf-8")
-        spec = importlib.util.spec_from_file_location("gen_gulf_bay_pages", tmp)
+        spec = importlib.util.spec_from_file_location(modname, tmp)
         mod = importlib.util.module_from_spec(spec)
-        sys.modules["gen_gulf_bay_pages"] = mod
+        sys.modules[modname] = mod
         spec.loader.exec_module(mod)
         # the generator resolves output paths from its own __file__; point it at
         # this repo instead of the throwaway temp dir
@@ -163,6 +180,9 @@ def main():
     ap.add_argument("--skip-communities", action="store_true", help="area stats only")
     ap.add_argument("--no-verify", action="store_true", help="do not wait on the Netlify deploy")
     args = ap.parse_args()
+    if args.min_days > MAX_HOLD_DAYS:
+        print(f"[INFO] --min-days {args.min_days} capped to {MAX_HOLD_DAYS} (MAX_HOLD_DAYS)", file=sys.stderr)
+        args.min_days = MAX_HOLD_DAYS
     if not DB: sys.exit("Missing DATABASE_URL")
     if not TOK: sys.exit("Missing GITHUB_TOKEN")
 
@@ -186,29 +206,38 @@ def main():
             if robj is None or material(robj) != material(data):
                 changed[f"src/data/{slug}-stats.json"] = json.dumps(data, indent=2)
 
-        # ---- community landing pages (Gulf & Bay today; the registry is SIDES) ----
+        # ---- community landing pages (registry: GENERATORS) ----
         global communities, communities_via
-        if communities is None and not args.skip_communities:
-            communities, communities_via = _load_communities_from_main()
-        # One .astro page bakes its numbers in, so we cannot diff it directly —
+        # A generated .astro page bakes its numbers in, so we cannot diff it directly:
         # the as-of date alone would differ every day and force a build. Diff the
-        # MATERIAL stats JSON instead, and only ship the pages when it moved.
-        if communities is not None and not args.skip_communities:
-            try:
-                files, stats = communities.build_payload(conn)
-                for slug, data in stats.items():
-                    rel_json = f"{communities.REL_DATA}/{slug}-stats.json"
-                    remote = gh_raw(rel_json)
-                    robj = json.loads(remote) if remote else None
-                    if robj is None or communities.material(robj) != communities.material(data):
-                        community_changed.append(slug)
-                if community_changed:
-                    # ship the whole community payload together (pages + hub + json)
-                    # so the hub's summary facts can never disagree with the pages
-                    changed.update(files)
-            except Exception as e:
-                communities_via = f"failed: {type(e).__name__}: {str(e)[:120]}"
-                print(f"[WARN] community refresh failed, continuing with areas: {e}", file=sys.stderr)
+        # MATERIAL stats JSON instead, and only ship that generator's pages when it moved.
+        # Each generator is isolated: one failing never blocks the others or area stats.
+        if not args.skip_communities:
+            for key, modname in GENERATORS:
+                gen = generators.get(key)
+                if gen is None:
+                    gen, generators_via[key] = _load_generator_from_main(modname)
+                    generators[key] = gen
+                if gen is None:
+                    continue
+                try:
+                    files, stats = gen.build_payload(conn)
+                    moved = []
+                    for slug, data in stats.items():
+                        remote = gh_raw(f"{gen.REL_DATA}/{slug}-stats.json")
+                        robj = json.loads(remote) if remote else None
+                        if robj is None or gen.material(robj) != gen.material(data):
+                            moved.append(slug)
+                    if moved:
+                        # ship this generator's whole payload together (pages + hub + json)
+                        # so a hub's summary facts can never disagree with its pages
+                        changed.update(files)
+                        community_changed.extend(moved)
+                except Exception as e:
+                    generators_via[key] = f"failed: {type(e).__name__}: {str(e)[:120]}"
+                    print(f"[WARN] {modname} refresh failed, continuing: {e}", file=sys.stderr)
+        communities = generators["gulf-bay"]
+        communities_via = "; ".join(f"{k}={generators_via.get(k)}" for k, _ in GENERATORS)
     finally:
         conn.close()
 
@@ -289,8 +318,9 @@ def main():
            "filesPublished": sorted(changed.keys()),
            "commit": sha7, "netlify": nl, "buildOk": nl["state"] == "ready",
            "emailLine": line})
-    if communities_via is None or str(communities_via).startswith(("unavailable", "failed")):
-        line += f" WARNING: community pages did NOT refresh ({communities_via}) — Gulf & Bay is going stale."
+    bad = [k for k, _ in GENERATORS if generators_via.get(k) is None or str(generators_via.get(k)).startswith(("unavailable", "failed"))]
+    if bad:
+        line += f" WARNING: community pages did NOT refresh for {', '.join(bad)} ({communities_via}); those pages are going stale."
     print(line)
     # a failed Netlify build is a failed publish — make the run reflect it
     if nl["state"] in ("error", "rejected"):
