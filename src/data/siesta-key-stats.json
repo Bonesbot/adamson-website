@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-02T21:22:42.475440+00:00",
+  "lastUpdated": "2026-09-05T10:54:51.927372+00:00",
   "counts": {
-    "sold": 596,
-    "pending": 53,
-    "active": 278,
-    "total": 649
+    "sold": 600,
+    "pending": 52,
+    "active": 279,
+    "total": 652
   },
   "metrics": {
-    "avgPrice": "$1,492,371",
-    "avgPricePerSqFt": "$688",
+    "avgPrice": "$1,496,317",
+    "avgPricePerSqFt": "$689",
     "avgYearBuilt": 1978,
-    "avgLivingSqFt": "1,923",
+    "avgLivingSqFt": "1,927",
     "avgLotSqFt": null,
     "avgDom": 109
   },
@@ -22,22 +22,22 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 278,
+    "count": 279,
     "medianPrice": "$1,150,000",
-    "medianPricePerSqFt": "$770",
+    "medianPricePerSqFt": "$764",
     "waterfrontCount": 152,
-    "newConstructionCount": 47
+    "newConstructionCount": 48
   },
   "sold": {
-    "count": 111,
+    "count": 109,
     "medianPrice": "$1,000,000",
     "medianDom": 105,
-    "saleToListRatio": "88.2%",
+    "saleToListRatio": "88.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 7.3,
-    "sfhVilla": 6.6,
+    "sfhVilla": 6.7,
     "blended": 7.0,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -55,18 +55,70 @@
   },
   "priceBands": {
     "under900k": 118,
-    "band900kTo1_5m": 51,
-    "band1_5mTo3m": 47,
-    "band3mPlus": 62
+    "band900kTo1_5m": 52,
+    "band1_5mTo3m": 46,
+    "band3mPlus": 63
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 278
+      "count": 279
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4656278",
+      "address": "119 WHISPERING SANDS CIR #V36",
+      "subdivision": "WHISPERING SANDS",
+      "soldPrice": "$465,000",
+      "soldDate": "2026-09-03",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,160",
+      "yearBuilt": 1968,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4702354",
+      "address": "614 CALLE DE PERU",
+      "subdivision": "SARASOTA BEACH",
+      "soldPrice": "$425,000",
+      "soldDate": "2026-09-03",
+      "bedrooms": 2,
+      "bathrooms": 1.0,
+      "livingSqFt": "710",
+      "yearBuilt": 1950,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4701586",
+      "address": "6540 PEACOCK RD",
+      "subdivision": "STICKNEY POINT SUB",
+      "soldPrice": "$5,280,000",
+      "soldDate": "2026-09-02",
+      "bedrooms": 6,
+      "bathrooms": 6.5,
+      "livingSqFt": "4,129",
+      "yearBuilt": 2023,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4688703",
+      "address": "6536 PEACOCK RD",
+      "subdivision": "STICKNEY POINT SUB",
+      "soldPrice": "$5,280,000",
+      "soldDate": "2026-09-02",
+      "bedrooms": 7,
+      "bathrooms": 8.0,
+      "livingSqFt": "4,697",
+      "yearBuilt": 2024,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4695723",
       "address": "1128 W PEPPERTREE LN #111",
@@ -79,58 +131,6 @@
       "yearBuilt": 1974,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4631493",
-      "address": "420 BEACH RD #203",
-      "subdivision": "SIESTA GULF VIEW",
-      "soldPrice": "$1,100,000",
-      "soldDate": "2026-09-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,316",
-      "yearBuilt": 1980,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4696360",
-      "address": "617 CALLE DE PERU",
-      "subdivision": "SARASOTA BEACH",
-      "soldPrice": "$850,000",
-      "soldDate": "2026-09-01",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,560",
-      "yearBuilt": 1959,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4695909",
-      "address": "6287 MIDNIGHT PASS RD #201",
-      "subdivision": "EXCELSIOR BEACH TO BAY 6",
-      "soldPrice": "$612,000",
-      "soldDate": "2026-09-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,401",
-      "yearBuilt": 1982,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "J1004667",
-      "address": "6962 BELGRAVE DR",
-      "subdivision": "PRINCES GATE",
-      "soldPrice": "$1,825,000",
-      "soldDate": "2026-08-31",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,224",
-      "yearBuilt": 1974,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 158,
-      "avgPrice": "$823,838",
-      "avgPricePerSqFt": "$698",
-      "avgLivingSqFt": "1,175",
-      "avgDom": 133
+      "activeCount": 156,
+      "avgPrice": "$826,067",
+      "avgPricePerSqFt": "$693",
+      "avgLivingSqFt": "1,186",
+      "avgDom": 134
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,438,475",
       "avgPricePerSqFt": "$723",
       "avgLivingSqFt": "1,999",
-      "avgDom": 170
+      "avgDom": 173
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$2,525,780",
       "avgPricePerSqFt": "$1,178",
       "avgLivingSqFt": "1,959",
-      "avgDom": 240
+      "avgDom": 243
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 10,
-      "avgPrice": "$4,762,400",
-      "avgPricePerSqFt": "$1,471",
-      "avgLivingSqFt": "3,389",
-      "avgDom": 227
+      "activeCount": 11,
+      "avgPrice": "$4,692,636",
+      "avgPricePerSqFt": "$1,490",
+      "avgLivingSqFt": "3,298",
+      "avgDom": 209
     }
   ],
   "condoTiersScope": {
@@ -187,25 +187,25 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 81,
-      "soldCount": 166,
-      "soldMedianPricePerSqFt": "$735",
-      "soldMedianPrice": "$961,500",
+      "activeCount": 80,
+      "soldCount": 167,
+      "soldMedianPricePerSqFt": "$730",
+      "soldMedianPrice": "$960,000",
       "lowSample": false
     },
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 68,
-      "soldCount": 216,
-      "soldMedianPricePerSqFt": "$584",
+      "soldCount": 218,
+      "soldMedianPricePerSqFt": "$586",
       "soldMedianPrice": "$1,200,000",
       "lowSample": false
     },
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 48,
+      "activeCount": 49,
       "soldCount": 72,
       "soldMedianPricePerSqFt": "$581",
       "soldMedianPrice": "$720,500",
@@ -214,7 +214,7 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 3,
+      "activeCount": 4,
       "soldCount": 11,
       "soldMedianPricePerSqFt": "$496",
       "soldMedianPrice": "$690,000",
@@ -224,8 +224,8 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 78,
-      "soldCount": 131,
-      "soldMedianPricePerSqFt": "$545",
+      "soldCount": 132,
+      "soldMedianPricePerSqFt": "$550",
       "soldMedianPrice": "$800,000",
       "lowSample": false
     }
@@ -233,46 +233,46 @@
   "marketBalance": {
     "monthsOfSupply": 7.0,
     "monthsOfSupplyCondo": 7.3,
-    "monthsOfSupplySfhVilla": 6.6,
+    "monthsOfSupplySfhVilla": 6.7,
     "label": "balanced market",
-    "activeCount": 278,
-    "sold365Count": 478,
-    "sold90Count": 111,
+    "activeCount": 279,
+    "sold365Count": 477,
+    "sold90Count": 109,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 231,
-      "activeCount": 101,
-      "soldMedianPrice": "$1,520,000",
-      "soldMedianPricePerSqFt": "$640"
+      "soldCount": 234,
+      "activeCount": 103,
+      "soldMedianPrice": "$1,522,500",
+      "soldMedianPricePerSqFt": "$643"
     },
     "condo": {
-      "soldCount": 365,
-      "activeCount": 177,
+      "soldCount": 366,
+      "activeCount": 176,
       "soldMedianPrice": "$680,000",
       "soldMedianPricePerSqFt": "$586"
     }
   },
   "boating": {
-    "activeWithDock": 68,
+    "activeWithDock": 67,
     "activeWaterfront": 152
   },
   "marketQuestions": [
     {
       "facet": "waterfront",
       "q": "How much more does beachfront cost than bayfront on Siesta Key?",
-      "a": "Gulf-front / beachfront homes sell at a median $735 per sq ft versus $584 for bay- or canal-front \u2014 about a 26% waterfront premium (Stellar MLS, recent closed sales)."
+      "a": "Gulf-front / beachfront homes sell at a median $730 per sq ft versus $586 for bay- or canal-front \u2014 about a 24% waterfront premium (Stellar MLS, recent closed sales)."
     },
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 278 active listings and roughly 40 closed sales a month (trailing 12 months), Siesta Key has about 7.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 279 active listings and roughly 40 closed sales a month (trailing 12 months), Siesta Key has about 7.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Siesta Key?",
-      "a": "Single-family homes sell around $1,520,000 ($640/sq ft), while condos, villas and townhouses sell around $680,000 ($586/sq ft)."
+      "a": "Single-family homes sell around $1,522,500 ($643/sq ft), while condos, villas and townhouses sell around $680,000 ($586/sq ft)."
     },
     {
       "facet": "range",
@@ -282,12 +282,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 105 days on market and closed at 88.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 105 days on market and closed at 88.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Siesta Key homes have a dock?",
-      "a": "Of 152 active waterfront listings, 68 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 152 active waterfront listings, 67 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

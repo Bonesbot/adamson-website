@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-02T21:22:47.021076+00:00",
+  "lastUpdated": "2026-09-05T10:54:56.622258+00:00",
   "counts": {
-    "sold": 867,
-    "pending": 65,
-    "active": 222,
-    "total": 932
+    "sold": 868,
+    "pending": 72,
+    "active": 219,
+    "total": 940
   },
   "metrics": {
-    "avgPrice": "$563,274",
+    "avgPrice": "$562,870",
     "avgPricePerSqFt": "$263",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,052",
+    "avgLivingSqFt": "2,051",
     "avgLotSqFt": null,
     "avgDom": 79
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 222,
-    "medianPrice": "$412,500",
-    "medianPricePerSqFt": "$247",
+    "count": 219,
+    "medianPrice": "$410,000",
+    "medianPricePerSqFt": "$245",
     "waterfrontCount": 36,
-    "newConstructionCount": 30
+    "newConstructionCount": 29
   },
   "sold": {
-    "count": 192,
-    "medianPrice": "$468,500",
+    "count": 186,
+    "medianPrice": "$460,000",
     "medianDom": 52,
-    "saleToListRatio": "91.0%",
+    "saleToListRatio": "91.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 6.0,
-    "sfhVilla": 3.0,
-    "blended": 3.8,
+    "condo": 6.1,
+    "sfhVilla": 2.9,
+    "blended": 3.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 201,
-    "band900kTo1_5m": 16,
+    "under900k": 199,
+    "band900kTo1_5m": 15,
     "band1_5mTo3m": 5,
     "band3mPlus": 0
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 222
+      "count": 219
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4692392",
+      "address": "8755 OLDE HICKORY AVE #7101",
+      "subdivision": "STONEYBROOK TERRACE 1",
+      "soldPrice": "$245,000",
+      "soldDate": "2026-09-04",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,314",
+      "yearBuilt": 1996,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4694456",
       "address": "5152 NORTHRIDGE RD #302",
@@ -118,19 +131,6 @@
       "yearBuilt": 1988,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "J1004738",
-      "address": "7753 BERGAMO AVE",
-      "subdivision": "VILLAGEWALK",
-      "soldPrice": "$446,000",
-      "soldDate": "2026-08-31",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,867",
-      "yearBuilt": 2004,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,31 +138,31 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 37,
-      "avgPrice": "$308,259",
-      "avgPricePerSqFt": "$192",
-      "avgLivingSqFt": "1,605",
-      "avgDom": 109
+      "activeCount": 36,
+      "avgPrice": "$307,100",
+      "avgPricePerSqFt": "$193",
+      "avgLivingSqFt": "1,588",
+      "avgDom": 112
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 77,
-      "avgPrice": "$294,427",
-      "avgPricePerSqFt": "$229",
-      "avgLivingSqFt": "1,281",
-      "avgDom": 117
+      "avgPrice": "$293,661",
+      "avgPricePerSqFt": "$228",
+      "avgLivingSqFt": "1,284",
+      "avgDom": 115
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
       "activeCount": 9,
-      "avgPrice": "$402,422",
+      "avgPrice": "$401,978",
       "avgPricePerSqFt": "$242",
       "avgLivingSqFt": "1,679",
-      "avgDom": 75
+      "avgDom": 78
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$350,169",
       "avgPricePerSqFt": "$218",
       "avgLivingSqFt": "1,605",
-      "avgDom": 76
+      "avgDom": 79
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 44,
+      "activeCount": 40,
       "soldCount": 198,
       "soldMedianPricePerSqFt": "$260",
       "soldMedianPrice": "$475,000",
@@ -214,33 +214,33 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 142,
-      "soldCount": 482,
+      "activeCount": 143,
+      "soldCount": 483,
       "soldMedianPricePerSqFt": "$244",
       "soldMedianPrice": "$440,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 3.8,
-    "monthsOfSupplyCondo": 6.0,
-    "monthsOfSupplySfhVilla": 3.0,
+    "monthsOfSupply": 3.7,
+    "monthsOfSupplyCondo": 6.1,
+    "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
-    "activeCount": 222,
-    "sold365Count": 710,
-    "sold90Count": 192,
+    "activeCount": 219,
+    "sold365Count": 704,
+    "sold90Count": 186,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 494,
-      "activeCount": 88,
+      "activeCount": 86,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$289"
     },
     "condo": {
-      "soldCount": 373,
-      "activeCount": 134,
+      "soldCount": 374,
+      "activeCount": 133,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$212"
     }
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 222 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.8 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 219 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.7 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,12 +263,12 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $412,500."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $410,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 52 days on market and closed at 91.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 52 days on market and closed at 91.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

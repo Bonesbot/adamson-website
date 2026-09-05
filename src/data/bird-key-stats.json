@@ -2,16 +2,16 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-02T21:22:46.306204+00:00",
+  "lastUpdated": "2026-09-05T10:54:55.842871+00:00",
   "counts": {
-    "sold": 38,
-    "pending": 2,
+    "sold": 39,
+    "pending": 1,
     "active": 14,
     "total": 40
   },
   "metrics": {
-    "avgPrice": "$4,436,000",
-    "avgPricePerSqFt": "$1,123",
+    "avgPrice": "$4,432,562",
+    "avgPricePerSqFt": "$1,122",
     "avgYearBuilt": 1992,
     "avgLivingSqFt": "3,847",
     "avgLotSqFt": "14,456",
@@ -30,15 +30,15 @@
   },
   "sold": {
     "count": 11,
-    "medianPrice": "$5,100,000",
-    "medianDom": 82,
-    "saleToListRatio": "89.5%",
+    "medianPrice": "$4,512,500",
+    "medianDom": 72,
+    "saleToListRatio": "89.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": null,
-    "sfhVilla": 5.2,
-    "blended": 5.2,
+    "sfhVilla": 5.1,
+    "blended": 5.1,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -68,6 +68,19 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4696960",
+      "address": "465 E ROYAL FLAMINGO DR",
+      "subdivision": "BIRD KEY SUB",
+      "soldPrice": "$4,512,500",
+      "soldDate": "2026-09-03",
+      "bedrooms": 4,
+      "bathrooms": 4.0,
+      "livingSqFt": "2,846",
+      "yearBuilt": 1973,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4692992",
       "address": "667 MOURNING DOVE DR",
@@ -119,19 +132,6 @@
       "yearBuilt": 2001,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4693231",
-      "address": "344 W ROYAL FLAMINGO DR",
-      "subdivision": "BIRD KEY",
-      "soldPrice": "$6,550,000",
-      "soldDate": "2026-07-08",
-      "bedrooms": 4,
-      "bathrooms": 5.0,
-      "livingSqFt": "4,344",
-      "yearBuilt": 1998,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [],
@@ -150,9 +150,9 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 6,
-      "soldCount": 23,
-      "soldMedianPricePerSqFt": "$1,285",
-      "soldMedianPrice": "$5,100,000",
+      "soldCount": 24,
+      "soldMedianPricePerSqFt": "$1,305",
+      "soldMedianPrice": "$4,806,250",
       "lowSample": false
     },
     {
@@ -175,21 +175,21 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.2,
+    "monthsOfSupply": 5.1,
     "monthsOfSupplyCondo": null,
-    "monthsOfSupplySfhVilla": 5.2,
+    "monthsOfSupplySfhVilla": 5.1,
     "label": "balanced market",
     "activeCount": 14,
-    "sold365Count": 32,
+    "sold365Count": 33,
     "sold90Count": 11,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 38,
+      "soldCount": 39,
       "activeCount": 14,
-      "soldMedianPrice": "$3,975,000",
-      "soldMedianPricePerSqFt": "$1,116"
+      "soldMedianPrice": "$4,000,000",
+      "soldMedianPricePerSqFt": "$1,152"
     }
   },
   "boating": {
@@ -200,7 +200,7 @@
     {
       "facet": "balance",
       "q": "Is Bird Key a buyer's or seller's market right now?",
-      "a": "With 14 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 5.2 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 14 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 5.1 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "range",
@@ -210,7 +210,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Bird Key?",
-      "a": "Recently sold homes took a median 82 days on market and closed at 89.5% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 72 days on market and closed at 89.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-02T21:22:45.521340+00:00",
+  "lastUpdated": "2026-09-05T10:54:55.052344+00:00",
   "counts": {
-    "sold": 276,
+    "sold": 278,
     "pending": 40,
     "active": 81,
-    "total": 316
+    "total": 318
   },
   "metrics": {
-    "avgPrice": "$631,424",
-    "avgPricePerSqFt": "$330",
+    "avgPrice": "$630,104",
+    "avgPricePerSqFt": "$329",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,737",
+    "avgLivingSqFt": "1,735",
     "avgLotSqFt": null,
     "avgDom": 80
   },
@@ -25,19 +25,19 @@
     "count": 81,
     "medianPrice": "$485,000",
     "medianPricePerSqFt": "$328",
-    "waterfrontCount": 23,
+    "waterfrontCount": 24,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 45,
-    "medianPrice": "$405,000",
-    "medianDom": 47,
-    "saleToListRatio": "87.8%",
+    "count": 44,
+    "medianPrice": "$390,000",
+    "medianDom": 50,
+    "saleToListRatio": "87.5%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 4.4,
-    "sfhVilla": 4.4,
+    "condo": 4.5,
+    "sfhVilla": 4.3,
     "blended": 4.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -67,6 +67,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4694065",
+      "address": "1632 STARLING DR #101",
+      "subdivision": "LANDINGS SOUTH IV",
+      "soldPrice": "$310,000",
+      "soldDate": "2026-09-04",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,712",
+      "yearBuilt": 1987,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4691682",
+      "address": "1624 STICKNEY POINT RD #206",
+      "subdivision": "CASTEL DEL MARE",
+      "soldPrice": "$349,000",
+      "soldDate": "2026-09-02",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,016",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4660320",
       "address": "1848 SOUTHPOINTE DR",
@@ -105,32 +131,6 @@
       "yearBuilt": 1953,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4700798",
-      "address": "7031 BRIGHT CREEK DR #4",
-      "subdivision": "WOODSIDE SOUTH PH 1 2 & 3",
-      "soldPrice": "$237,000",
-      "soldDate": "2026-08-18",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,121",
-      "yearBuilt": 1981,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4691508",
-      "address": "5800 HOLLYWOOD BLVD #115",
-      "subdivision": "BAYWOOD COLONY GARDEN APTS",
-      "soldPrice": "$120,000",
-      "soldDate": "2026-08-17",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "679",
-      "yearBuilt": 1976,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 42,
-      "avgPrice": "$371,968",
-      "avgPricePerSqFt": "$292",
-      "avgLivingSqFt": "1,263",
-      "avgDom": 111
+      "avgPrice": "$367,725",
+      "avgPricePerSqFt": "$294",
+      "avgLivingSqFt": "1,241",
+      "avgDom": 109
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$605,750",
       "avgPricePerSqFt": "$288",
       "avgLivingSqFt": "2,110",
-      "avgDom": 197
+      "avgDom": 200
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$589,667",
       "avgPricePerSqFt": "$345",
       "avgLivingSqFt": "1,711",
-      "avgDom": 154
+      "avgDom": 156
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$627,000",
       "avgPricePerSqFt": "$352",
       "avgLivingSqFt": "1,785",
-      "avgDom": 178
+      "avgDom": 181
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 21,
+      "activeCount": 22,
       "soldCount": 57,
       "soldMedianPricePerSqFt": "$362",
       "soldMedianPrice": "$495,000",
@@ -206,9 +206,9 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 9,
-      "soldCount": 25,
-      "soldMedianPricePerSqFt": "$315",
-      "soldMedianPrice": "$450,000",
+      "soldCount": 26,
+      "soldMedianPricePerSqFt": "$316",
+      "soldMedianPrice": "$440,000",
       "lowSample": false
     },
     {
@@ -223,21 +223,21 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 49,
-      "soldCount": 179,
+      "activeCount": 48,
+      "soldCount": 180,
       "soldMedianPricePerSqFt": "$283",
-      "soldMedianPrice": "$429,000",
+      "soldMedianPrice": "$427,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 4.4,
-    "monthsOfSupplyCondo": 4.4,
-    "monthsOfSupplySfhVilla": 4.4,
+    "monthsOfSupplyCondo": 4.5,
+    "monthsOfSupplySfhVilla": 4.3,
     "label": "seller's market",
     "activeCount": 81,
-    "sold365Count": 221,
-    "sold90Count": 45,
+    "sold365Count": 223,
+    "sold90Count": 44,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,7 +248,7 @@
       "soldMedianPricePerSqFt": "$321"
     },
     "condo": {
-      "soldCount": 129,
+      "soldCount": 131,
       "activeCount": 51,
       "soldMedianPrice": "$345,000",
       "soldMedianPricePerSqFt": "$260"
@@ -256,13 +256,13 @@
   },
   "boating": {
     "activeWithDock": 10,
-    "activeWaterfront": 23
+    "activeWaterfront": 24
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 81 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 4.4 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 81 active listings and roughly 19 closed sales a month (trailing 12 months), West Of Trail South has about 4.4 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -277,12 +277,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 47 days on market and closed at 87.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 50 days on market and closed at 87.5% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 23 active waterfront listings, 10 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 24 active waterfront listings, 10 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
