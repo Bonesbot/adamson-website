@@ -1,85 +1,779 @@
 ---
 /**
- * LongboatLido.com home: v1 launch scaffold.
+ * LongboatLido.com home: the Longboat Key market page, co-branded Anne Schneider
+ * and Ryan Adamson. Hand-built (not generated); the island copy comes from
+ * src/data/areas.json + area-media.json and every number from the daily pipeline's
+ * src/data/longboat-key-stats.json, both shared with the hub repo via the '@' alias,
+ * so the numbers here refresh on the same commit as everywhere else.
  *
- * Deliberately lean and honest: one community page exists today (Country Club
- * Shores), so the home page introduces the co-brand and routes to it. Add a
- * card per community as new Longboat/Lido farm pages come online.
- *
+ * House rules for this site: no links back to AdamsonFL.com anywhere on the page
+ * (Anne's ask), medians over averages wherever the pipeline provides one, no em dashes.
+ * Layout and classes mirror /country-club-shores so the two pages read as one site.
  */
 import LLLLayout from '../layouts/LLLLayout.astro';
+import IdxAreaShowcase from '@/components/IdxAreaShowcase.astro';
+import areasJson from '@/data/areas.json';
+import areaMedia from '@/data/area-media.json';
+import stats from '@/data/longboat-key-stats.json';
 
-const description =
-  'Longboat Key and Lido Key real estate with Anne Schneider and Ryan Adamson of Coldwell Banker Realty, St. Armands: neighborhood-level closed-sale data from live Stellar MLS records, current availability, and local representation from the sand to the bay.';
+const area: any = (areasJson as any).areas.find((a: any) => a.slug === 'longboat-key');
+const media: any = (areaMedia as any)['longboat-key'] || {};
+
+const asOf = stats.lastUpdated
+  ? new Date(stats.lastUpdated).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
+  : '';
+const asOfIso = String(stats.lastUpdated || '').slice(0, 10);
+
+const fmtUsd = (n: number) => `$${Math.round(n).toLocaleString('en-US')}`;
+const fmtDate = (iso: string) => new Date(iso + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+// Co-brand voice: the pipeline writes its living answers for the hub site.
+const cobrand = (s: string) => s
+  .replace(/Ryan Adamson's local market guidance/g, "Anne and Ryan's local market guidance")
+  .replace(/Ryan Adamson/g, 'Anne Schneider and Ryan Adamson')
+  .replace(/\s*—\s*/g, ', ');
+
+const active = stats.active;
+const sold = stats.sold;
+const mb = stats.marketBalance;
+const pts = stats.propertyTypeSplit as any;
+const cb90 = (stats as any).costBreakdown90;
+const bands = stats.priceBands;
+const boating = (stats as any).boating;
+const segments = (stats.waterfrontSegments || []) as any[];
+const tiers = (stats.condoTiers || []) as any[];
+const comps = (stats.recentSoldComps || []) as any[];
+
+const condoDues = stats.fees?.condoFeeRange ?? null;
+const duesMedianPct = condoDues && condoDues.max > condoDues.min
+  ? Math.round(((condoDues.median - condoDues.min) / (condoDues.max - condoDues.min)) * 100)
+  : 0;
+const duesPct = Math.min(94, Math.max(6, duesMedianPct));
+
+// Editorial FAQ from areas.json may carry {{tokens}} resolved against the stats file.
+function lookupPath(obj: any, path: string): any {
+  return path.split('.').reduce((o: any, k: string) => (o == null ? undefined : o[k]), obj);
+}
+const interpCtx = { ...(stats as any), asOf };
+function interpolate(text: string): string | null {
+  let ok = true;
+  const out = text.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (_m: string, p: string) => {
+    const v = lookupPath(interpCtx, p);
+    if (v === undefined || v === null || v === '') { ok = false; return ''; }
+    return String(v);
+  });
+  return ok ? out : null;
+}
+const livingFaqs = ((stats as any).marketQuestions || []).map((q: any) => ({ question: cobrand(q.q), answer: cobrand(q.a) }));
+const editorialFaqs = (area.faqs || [])
+  .map((f: any) => ({ question: f.question, answer: interpolate(f.answer) }))
+  .filter((f: any) => f.answer !== null)
+  .map((f: any) => ({ question: f.question.replace('average home price', 'median home price'), answer: cobrand(f.answer) }));
+const faqs = [...livingFaqs, ...editorialFaqs] as { question: string; answer: string }[];
+
+const description = `Longboat Key real estate market data from Anne Schneider and Ryan Adamson, Coldwell Banker Realty, St. Armands: ${active.count} active listings, median sold price ${sold.medianPrice} over the last ${sold.windowDays} days, ${mb.monthsOfSupply} months of supply, with Gulf-front, bayfront, condo and single-family segments tracked separately from live Stellar MLS data.`;
+
+const jsonLd = [
+  {
+    '@type': 'Place',
+    name: 'Longboat Key',
+    description: media.summary || cobrand(area.description),
+    address: { '@type': 'PostalAddress', addressLocality: 'Longboat Key', addressRegion: 'FL', postalCode: '34228', addressCountry: 'US' },
+  },
+  {
+    '@type': 'WebPage',
+    name: 'Longboat Key Real Estate Market Guide',
+    description,
+    url: 'https://longboatlido.com/',
+    ...(asOfIso && { dateModified: asOfIso }),
+    author: [
+      { '@type': 'RealEstateAgent', name: 'Anne Schneider', worksFor: { '@type': 'Organization', name: 'Coldwell Banker Realty, St. Armands' } },
+      { '@type': 'RealEstateAgent', name: 'Ryan Adamson', worksFor: { '@type': 'Organization', name: 'Coldwell Banker Realty, St. Armands' } },
+    ],
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
+  },
+];
 ---
 
-<LLLLayout title="Home" description={description}>
-  <!-- Hero -->
-  <section class="bg-[var(--color-navy,#1B2A4A)] text-white">
-    <div class="container py-24 text-center">
-      <h1 class="font-display text-4xl md:text-5xl font-bold leading-tight">
-        Longboat Key &amp; Lido Key,<br />
-        <span class="text-[var(--color-gold,#C5A55A)]">by the numbers</span>
-      </h1>
-      <p class="mt-6 max-w-2xl mx-auto text-white/70 text-lg leading-relaxed">
-        Neighborhood-level market data from live Stellar MLS records, and
-        representation from two agents who work these islands every day.
-      </p>
-      <p class="mt-4 font-accent text-xs uppercase tracking-[0.2em] text-white/50">
-        Anne Schneider &amp; Ryan Adamson &middot; Coldwell Banker Realty, St. Armands
-      </p>
+<LLLLayout title="Home" description={description} jsonLd={jsonLd}>
+
+  <section class="gbc-hero">
+    <div class="gbc-hero-bg" style="background-image:url('/images/areas/longboat-key.jpg'); background-position:center 40%;"></div>
+    <div class="gbc-hero-overlay"></div>
+    <div class="relative z-10 container">
+      <hr class="gbc-hero-rule" />
+      <p class="section-label text-cbgl-blue-light mb-3">Longboat Key &middot; 34228 &middot; Gulf to Bay</p>
+      <h1 class="font-display text-white mb-4">Longboat Key, by the numbers</h1>
+      <p class="gbc-hero-tag">Every closed sale and every active listing on the island, from live Stellar MLS records: Gulf-front, bayfront, condo and single-family tracked separately, and two agents who work Longboat Key and Lido Key every day.</p>
+      <p class="gbc-hero-team">Anne Schneider &amp; Ryan Adamson &middot; Coldwell Banker Realty, St. Armands</p>
     </div>
   </section>
 
-  <!-- Communities -->
-  <section class="bg-white">
-    <div class="container py-20">
-      <h2 class="font-display text-3xl font-bold text-[var(--color-navy,#1B2A4A)] text-center mb-12">
-        Community Market Pages
-      </h2>
-      <div class="max-w-xl mx-auto">
-        <a
-          href="/country-club-shores/"
-          class="block border border-gray-200 rounded-lg p-8 hover:border-[var(--color-gold,#C5A55A)] hover:shadow-lg transition-all no-underline"
-        >
-          <p class="font-accent text-xs uppercase tracking-[0.2em] text-[var(--color-gold,#C5A55A)] mb-2">
-            Longboat Key &middot; 34228
-          </p>
-          <h3 class="font-display text-2xl font-bold text-[var(--color-navy,#1B2A4A)] mb-3">
-            Country Club Shores
-          </h3>
-          <p class="text-sm text-gray-500 leading-relaxed">
-            Closed-sale data for the canal-front neighborhood on the south end of
-            Longboat Key: canal-front, open-bayfront, and interior homes tracked
-            separately, with price per square foot, days on market, and
-            sale-to-list ratios from live Stellar MLS records.
-          </p>
-          <p class="mt-4 font-accent text-xs uppercase tracking-[0.15em] text-[var(--color-navy,#1B2A4A)]">
-            See the numbers &rarr;
-          </p>
-        </a>
-        <!-- Next community cards land here as Longboat/Lido farm pages come online. -->
+  <section class="section light-section">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
+        <div>
+          <h2 class="accent-underline mb-6">About Longboat Key</h2>
+          <p class="gbc-about">{media.summary || cobrand(area.description)}</p>
+          {area.highlights && area.highlights.length > 0 && (
+            <div class="flex flex-wrap gap-3 mt-6">
+              {area.highlights.map((h: string) => <span class="gbc-chip">{h}</span>)}
+            </div>
+          )}
+        </div>
+        {media.gallery && media.gallery.length > 0 && (
+          <div class="grid grid-cols-2 gap-3 lg:gap-4">
+            {media.gallery.map((g: any) => (
+              <figure class="gbc-fig">
+                <picture>
+                  {g.webp && <source srcset={g.webp} type="image/webp" />}
+                  <img src={g.src} alt={g.alt} loading="lazy" decoding="async" />
+                </picture>
+                <figcaption class="gbc-fig-cap">{g.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section class="bg-gray-50 border-t border-gray-200">
-    <div class="container py-16 text-center">
-      <h2 class="font-display text-2xl font-bold text-[var(--color-navy,#1B2A4A)] mb-4">
-        Thinking about a move on the islands?
-      </h2>
-      <p class="max-w-xl mx-auto text-sm text-gray-500 leading-relaxed mb-6">
-        Anne and Ryan work Longboat Key and Lido Key together. Reach either of
-        us for current availability, off-market opportunities, or a
-        no-obligation valuation grounded in closed-sale data.
-      </p>
-      <p class="font-accent text-sm text-[var(--color-navy,#1B2A4A)]">
-        Ryan Adamson &middot; <a href="tel:+19417139234" class="hover:text-[var(--color-gold,#C5A55A)]">(941) 713-9234</a>
-      </p>
-      <p class="font-accent text-sm text-[var(--color-navy,#1B2A4A)] mt-1">
-        Anne Schneider &middot; <a href="tel:+13105629710" class="hover:text-[var(--color-gold,#C5A55A)]">(310) 562-9710</a>
-      </p>
+  <section class="section dark-section">
+    <div class="container">
+      <p class="section-label text-cbgl-blue-light mb-3">Longboat Key</p>
+      <h2 class="font-display mb-3">Market Snapshot</h2>
+      <p class="gbc-window">Live Stellar MLS data &middot; closed sales past {sold.windowDays} days &middot; as of {asOf}</p>
+      <div class="gbc-stat-grid">
+        <div class="gbc-stat"><div class="gbc-stat-value">{active.count}</div><div class="gbc-stat-label">For Sale Today</div><div class="gbc-stat-sub">{stats.counts.pending} more under contract</div></div>
+        <div class="gbc-stat"><div class="gbc-stat-value">{sold.count}</div><div class="gbc-stat-label">Closed Sales</div><div class="gbc-stat-sub">past {sold.windowDays} days</div></div>
+        <div class="gbc-stat"><div class="gbc-stat-value">{sold.medianPrice}</div><div class="gbc-stat-label">Median Sale Price</div><div class="gbc-stat-sub">past {sold.windowDays} days</div></div>
+        <div class="gbc-stat"><div class="gbc-stat-value">{sold.medianDom}</div><div class="gbc-stat-label">Median Days on Market</div><div class="gbc-stat-sub">closed sales, past {sold.windowDays} days</div></div>
+        <div class="gbc-stat"><div class="gbc-stat-value">{sold.saleToListRatio}</div><div class="gbc-stat-label">Median Sale vs. List Price</div><div class="gbc-stat-sub">sale price as % of asking</div></div>
+        <div class="gbc-stat"><div class="gbc-stat-value">{active.medianPrice}</div><div class="gbc-stat-label">Median Asking Price</div><div class="gbc-stat-sub">{active.medianPricePerSqFt} per sq ft, active listings</div></div>
+        <div class="gbc-stat"><div class="gbc-stat-value">{mb.monthsOfSupply}</div><div class="gbc-stat-label">Months of Supply</div><div class="gbc-stat-sub">{mb.label}: condo {mb.monthsOfSupplyCondo}, single-family {mb.monthsOfSupplySfhVilla}</div></div>
+        <div class="gbc-stat"><div class="gbc-stat-value">{active.waterfrontCount}</div><div class="gbc-stat-label">Waterfront Listings</div><div class="gbc-stat-sub">{boating?.activeWithDock ?? 0} with a private dock</div></div>
+      </div>
+      <p class="gbc-note">Months of supply is today&rsquo;s inventory divided by the trailing 12-month closing pace (under 5 favors sellers, over 7 favors buyers).</p>
+
+      <h3 class="font-display gbc-subhead">Condo vs. Single-Family</h3>
+      <p class="gbc-window">Two different markets on one island, so we never blend them &middot; closed sales past 12 months and past {cb90?.windowDays ?? 90} days</p>
+      <div class="gbc-table-wrap gbc-bld-wrap">
+        <table class="gbc-table gbc-bld-table">
+          <thead>
+            <tr>
+              <th>Property Type</th>
+              <th class="gbc-num">For Sale</th>
+              <th class="gbc-num">Sold, 12 Mo</th>
+              <th class="gbc-num">Median Price, 12 Mo</th>
+              <th class="gbc-num">Median $ / Sq Ft, 12 Mo</th>
+              <th class="gbc-num">Sold, {cb90?.windowDays ?? 90} Days</th>
+              <th class="gbc-num">Median Price, {cb90?.windowDays ?? 90} Days</th>
+              <th class="gbc-num">Median $ / Sq Ft, {cb90?.windowDays ?? 90} Days</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[['Condos, villas &amp; townhouses', 'condo'], ['Single-family homes', 'single_family']].map(([label, key]) => (
+              <tr>
+                <td class="gbc-bld-id"><span class="gbc-seg" set:html={label}></span></td>
+                <td class="gbc-num">{pts?.[key]?.activeCount ?? '&mdash;'}</td>
+                <td class="gbc-num">{pts?.[key]?.soldCount ?? '&mdash;'}</td>
+                <td class="gbc-num gbc-bld-key">{pts?.[key]?.soldMedianPrice ?? '&mdash;'}</td>
+                <td class="gbc-num">{pts?.[key]?.soldMedianPricePerSqFt ?? '&mdash;'}</td>
+                <td class="gbc-num">{cb90?.byPropertyType?.[key]?.soldCount ?? '&mdash;'}</td>
+                <td class="gbc-num gbc-bld-key">{cb90?.byPropertyType?.[key]?.soldMedianPrice ?? '&mdash;'}</td>
+                <td class="gbc-num">{cb90?.byPropertyType?.[key]?.soldMedianPricePerSqFt ?? '&mdash;'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="font-display gbc-subhead">By the Water</h3>
+      <p class="gbc-window">Closed sales by waterfront type &middot; past 12 months &middot; Gulf-front and bay-front are priced worlds apart</p>
+      <div class="gbc-table-wrap gbc-bld-wrap">
+        <table class="gbc-table gbc-bld-table">
+          <thead>
+            <tr>
+              <th>Waterfront</th>
+              <th class="gbc-num">For Sale</th>
+              <th class="gbc-num">Sold, 12 Mo</th>
+              <th class="gbc-num">Median Sale Price</th>
+              <th class="gbc-num">Median $ / Sq Ft</th>
+            </tr>
+          </thead>
+          <tbody>
+            {segments.map((s) => (
+              <tr>
+                <td class="gbc-bld-id"><span class="gbc-seg">{s.label}</span>{s.lowSample && <span class="gbc-bld-thin" title="Small sample">*</span>}</td>
+                <td class="gbc-num">{s.activeCount}</td>
+                <td class="gbc-num">{s.soldCount}</td>
+                <td class="gbc-num gbc-bld-key">{s.soldMedianPrice ?? '&mdash;'}</td>
+                <td class="gbc-num">{s.soldMedianPricePerSqFt ?? '&mdash;'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {segments.some((s) => s.lowSample) && <p class="gbc-bld-foot">* Small sample. Shown for completeness; read it as a data point, not a trend.</p>}
+      </div>
+
+      <div class="gbc-two-col">
+        <div>
+          <h3 class="font-display gbc-subhead">For Sale by Price Band</h3>
+          <p class="gbc-window">Active listings today &middot; where the inventory sits</p>
+          <div class="gbc-table-wrap gbc-bld-wrap">
+            <table class="gbc-table gbc-bld-table gbc-narrow-table">
+              <thead><tr><th>Price Band</th><th class="gbc-num">For Sale</th></tr></thead>
+              <tbody>
+                <tr><td>Under $900k</td><td class="gbc-num gbc-bld-key">{bands.under900k}</td></tr>
+                <tr><td>$900k to $1.5M</td><td class="gbc-num gbc-bld-key">{bands.band900kTo1_5m}</td></tr>
+                <tr><td>$1.5M to $3M</td><td class="gbc-num gbc-bld-key">{bands.band1_5mTo3m}</td></tr>
+                <tr><td>$3M and above</td><td class="gbc-num gbc-bld-key">{bands.band3mPlus}</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-display gbc-subhead">Condos by Construction Era</h3>
+          <p class="gbc-window">Active condo, villa and townhouse listings grouped by year built</p>
+          <div class="gbc-table-wrap gbc-bld-wrap">
+            <table class="gbc-table gbc-bld-table gbc-narrow-table">
+              <thead><tr><th>Built</th><th class="gbc-num">For Sale</th><th class="gbc-num">Avg Asking</th><th class="gbc-num">Avg $ / Sq Ft</th><th class="gbc-num">Avg Days on Market</th></tr></thead>
+              <tbody>
+                {tiers.map((t) => (
+                  <tr>
+                    <td>{t.label}</td>
+                    <td class="gbc-num">{t.activeCount}</td>
+                    <td class="gbc-num gbc-bld-key">{t.avgPrice ?? '&mdash;'}</td>
+                    <td class="gbc-num">{t.avgPricePerSqFt ?? '&mdash;'}</td>
+                    <td class="gbc-num">{t.avgDom ?? '&mdash;'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p class="gbc-bld-foot">Asking prices of current listings, so averages rather than closed-sale medians. Newer eras carry a handful of listings each.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="font-display gbc-subhead">Most Recent Closings</h3>
+      <p class="gbc-window">The latest recorded sales on the island, most recent first</p>
+      <div class="gbc-table-wrap">
+        <table class="gbc-table">
+          <thead>
+            <tr>
+              <th>Address</th>
+              <th>Community</th>
+              <th>Bed / Bath</th>
+              <th class="gbc-num">Sq Ft</th>
+              <th class="gbc-num">Sale Price</th>
+              <th>Closed</th>
+              <th class="gbc-num">Built</th>
+              <th>Waterfront</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comps.map((c) => (
+              <tr>
+                <td class="gbc-addr">{c.address}</td>
+                <td class="gbc-wv">{c.subdivision || '&mdash;'}</td>
+                <td>{c.bedrooms ?? '&mdash;'} / {c.bathrooms ?? '&mdash;'}</td>
+                <td class="gbc-num">{c.livingSqFt || '&mdash;'}</td>
+                <td class="gbc-num gbc-bld-key">{c.soldPrice}</td>
+                <td>{fmtDate(c.soldDate)}</td>
+                <td class="gbc-num">{c.yearBuilt ?? '&mdash;'}</td>
+                <td class="gbc-wv">{c.isWaterfront ? 'Waterfront' : <span class="gbc-wv-none">Not waterfront</span>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
+
+  {condoDues && (
+    <section class="section light-section">
+      <div class="container-narrow">
+        <h2 class="accent-underline mb-3">Typical Condo Dues</h2>
+        <p class="gbc-about mb-10">Monthly condo fees for active and recently sold Longboat Key condominiums, villas and townhouses, from the lowest-fee associations to full-service luxury buildings. Median monthly association fee across all listings: {stats.fees.medianMonthlyAssociation}.</p>
+        <div class="gbc-dues">
+          <div class="text-center mb-12">
+            <p class="gbc-dues-eyebrow">Median Monthly Dues</p>
+            <p class="gbc-dues-big">{fmtUsd(condoDues.median)}<span class="gbc-dues-unit">/ mo</span></p>
+          </div>
+          <div class="relative pt-7 pb-1">
+            <div class="absolute top-0 -translate-x-1/2 whitespace-nowrap" style={`left: ${duesPct}%;`}>
+              <span class="gbc-dues-tick">Median</span>
+            </div>
+            <div class="gbc-dues-track">
+              <div class="gbc-dues-fill"></div>
+              <div class="gbc-dues-knob" style={`left: ${duesPct}%;`}></div>
+            </div>
+            <div class="flex justify-between mt-5">
+              <div class="text-left"><p class="gbc-dues-eyebrow">Minimum</p><p class="gbc-dues-end">{fmtUsd(condoDues.min)}<span class="gbc-dues-unit">/ mo</span></p></div>
+              <div class="text-right"><p class="gbc-dues-eyebrow">Maximum</p><p class="gbc-dues-end">{fmtUsd(condoDues.max)}<span class="gbc-dues-unit">/ mo</span></p></div>
+            </div>
+          </div>
+        </div>
+        <p class="gbc-dues-foot">Source: Stellar MLS. Monthly condo dues only; entries under $100/mo are treated as data-entry errors and omitted. Figures are approximate and vary by building, square footage and amenities.</p>
+      </div>
+    </section>
+  )}
+
+  <IdxAreaShowcase
+    widgetId={area.idxWidgetId}
+    areaName="Longboat Key"
+    label="Available Now"
+    showOffMarketCta={false}
+  />
+
+  <section class="section light-section">
+    <div class="container">
+      <p class="section-label mb-3">Neighborhood Pages</p>
+      <h2 class="accent-underline mb-6">Longboat Key, Neighborhood by Neighborhood</h2>
+      <p class="gbc-about mb-8">Island-wide numbers tell you the direction. Neighborhood pages tell you what your street is worth. Each one tracks every closed sale in that community from the MLS, segment by segment.</p>
+      <div class="gbc-comm-grid">
+        <a href="/country-club-shores/" class="gbc-comm-card">
+          <p class="gbc-comm-eyebrow">Longboat Key &middot; 34228 &middot; Canal-Front</p>
+          <h3 class="gbc-comm-title">Country Club Shores</h3>
+          <p class="gbc-comm-copy">Closed-sale data for the canal-front neighborhood on the south end of Longboat Key: canal-front, open-bayfront and interior homes tracked separately, with price per square foot, days on market and sale-to-list ratios.</p>
+          <p class="gbc-comm-cta">See the numbers &rarr;</p>
+        </a>
+        <!-- Next community cards land here as Longboat / Lido neighborhood pages come online. -->
+      </div>
+    </div>
+  </section>
+
+  {faqs.length > 0 && (
+    <section class="section dark-section">
+      <div class="container-narrow">
+        <p class="section-label text-cbgl-blue-light mb-3">Straight Answers</p>
+        <h2 class="font-display mb-8">Longboat Key Market Questions</h2>
+        <div class="gbc-faq">
+          {faqs.map((f) => (
+            <details class="gbc-faq-item">
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section id="contact" class="section light-section">
+    <div class="container">
+      <p class="section-label mb-3">Two Ways In</p>
+      <h2 class="accent-underline mb-6">Work With Us on Longboat Key</h2>
+      <div class="gbc-tiles">
+        <div class="gbc-tile gbc-tile-seller">
+          <span class="gbc-tile-eyebrow">For Owners</span>
+          <h3 class="gbc-tile-title">Reach out for a private consult</h3>
+          <p class="gbc-tile-copy">Curious what your home or condo would bring today? We&rsquo;ll walk the real closed-sale data above against your building, view, floor and condition. Gulf-front, bayfront, condo and single-family are different markets, and we price them that way. Privately, with no obligation and no listing pressure.</p>
+          <form class="gbc-form" data-lead-type="Seller" data-community="Longboat Key"
+                name="home-lead-seller" method="POST" action="/thank-you/" data-team="Anne &amp; Ryan" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="home-lead-seller" />
+            <input type="hidden" name="lead_type" value="Seller" />
+            <input type="hidden" name="community" value="Longboat Key" />
+            <p class="gbc-hp"><label>Don&rsquo;t fill this out: <input name="bot-field" /></label></p>
+            <div class="gbc-field"><label for="s-name-lbk">Name</label>
+              <input id="s-name-lbk" name="name" type="text" required autocomplete="name" /></div>
+            <div class="gbc-field"><label for="s-email-lbk">Email</label>
+              <input id="s-email-lbk" name="email" type="email" required autocomplete="email" /></div>
+            <div class="gbc-field"><label for="s-phone-lbk">Phone</label>
+              <input id="s-phone-lbk" name="phone" type="tel" autocomplete="tel" /></div>
+            <div class="gbc-field"><label for="s-notes-lbk">Other details you&rsquo;d like to share <span class="gbc-optional">optional</span></label>
+              <textarea id="s-notes-lbk" name="notes" rows="3" maxlength="1200"
+                        placeholder="Building or street, view, updates you&rsquo;ve made, timing you have in mind"></textarea></div>
+            <button type="submit" class="gbc-btn gbc-btn-gold gbc-btn-full">Request a Private Consult</button>
+            <p class="gbc-form-status" data-out="status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+        <div class="gbc-tile gbc-tile-buyer">
+          <span class="gbc-tile-eyebrow">For Buyers</span>
+          <h3 class="gbc-tile-title">Add me to the coming-soon list</h3>
+          <p class="gbc-tile-copy">The best Gulf-front and bayfront residences on Longboat Key often change hands before they reach the MLS. Tell us what you are looking for and we&rsquo;ll reach out first on available and off-market homes.</p>
+          <form class="gbc-form" data-lead-type="Buyer" data-community="Longboat Key"
+                name="home-lead-buyer" method="POST" action="/thank-you/" data-team="Anne &amp; Ryan" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="home-lead-buyer" />
+            <input type="hidden" name="lead_type" value="Buyer" />
+            <input type="hidden" name="community" value="Longboat Key" />
+            <p class="gbc-hp"><label>Don&rsquo;t fill this out: <input name="bot-field" /></label></p>
+            <div class="gbc-field"><label for="b-name-lbk">Name</label>
+              <input id="b-name-lbk" name="name" type="text" required autocomplete="name" /></div>
+            <div class="gbc-field"><label for="b-email-lbk">Email</label>
+              <input id="b-email-lbk" name="email" type="email" required autocomplete="email" /></div>
+            <div class="gbc-field"><label for="b-phone-lbk">Phone</label>
+              <input id="b-phone-lbk" name="phone" type="tel" autocomplete="tel" /></div>
+            <div class="gbc-field"><label for="b-notes-lbk">Other details you&rsquo;d like to share <span class="gbc-optional">optional</span></label>
+              <textarea id="b-notes-lbk" name="notes" rows="3" maxlength="1200"
+                        placeholder="Gulf or bay, condo or home, budget, timing, anything that would make it the right one"></textarea></div>
+            <button type="submit" class="gbc-btn gbc-btn-navy gbc-btn-full">Notify Me First</button>
+            <p class="gbc-form-status" data-out="status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cbgl-section py-20">
+    <div class="container text-center">
+      <p class="section-label text-white/70 mb-3">Your Longboat Key Team</p>
+      <h2 class="font-display text-white mb-4" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Let&rsquo;s Talk Longboat Key</h2>
+      <p class="gbc-cta-text">Thinking about buying or selling on the island? <strong>Anne and Ryan</strong> work Longboat Key and Lido Key together, and can pull current availability, share off-market opportunities, and give you a no-obligation valuation grounded in the real closed-sale data above.</p>
+      <div class="gbc-team">
+        <figure class="gbc-member">
+          <img class="gbc-avatar" src="/images/anne-schneider-square.jpg" width="583" height="583" alt="Anne Schneider, Coldwell Banker Realty" loading="lazy" decoding="async" />
+          <figcaption>
+            <span class="gbc-member-name">Anne Schneider</span>
+            <span class="gbc-member-contact">
+              <a href="tel:+13105629710">(310) 562-9710</a>
+              <a href="mailto:Anne&#46;Schneider&#64;cbrealty&#46;com">Anne&#46;Schneider&#64;cbrealty&#46;com</a>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="gbc-member">
+          <img class="gbc-avatar" src="/images/ryan-adamson-square.jpg" width="800" height="800" alt="Ryan Adamson, Coldwell Banker Global Luxury" loading="lazy" decoding="async" />
+          <figcaption>
+            <span class="gbc-member-name">Ryan Adamson</span>
+            <span class="gbc-member-contact">
+              <a href="tel:+19417139234">(941) 713-9234</a>
+              <a href="mailto:Ryan&#64;Adamson-Group&#46;com">Ryan&#64;Adamson-Group&#46;com</a>
+            </span>
+          </figcaption>
+        </figure>
+      </div>
+      <p class="gbc-team-brokerage">Coldwell Banker Global Luxury</p>
+      <div class="gbc-cta-btns">
+        <a href="#contact" class="gbc-btn gbc-btn-gold">Contact the Team</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm dark-section">
+    <div class="container-narrow">
+      <p class="gbc-disc">Data as of {asOf}. Statistics computed from Stellar MLS records for properties inside the Longboat Key boundary, condos and single-family homes tracked separately. Waterfront segments are classified from MLS waterfront features; verify any individual property&rsquo;s water frontage independently. Medians are shown wherever the data allows; a single sale can move a small segment.</p>
+    </div>
+  </section>
+
+<style is:global>
+  .gbc-hero { position:relative; padding-top:9rem; padding-bottom:7rem; overflow:hidden; }
+  .gbc-hero-bg { position:absolute; inset:0; background-size:cover; background-position:center; background-color:var(--color-black); }
+  .gbc-hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.45) 40%, rgba(0,0,0,0.9)); }
+  .gbc-hero-tag { font-size:1.15rem; color:rgba(255,255,255,0.8); max-width:44rem; line-height:1.7; }
+  .gbc-sister { margin-top:1.75rem; font-family:var(--font-accent); font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.6); }
+  .gbc-sister a { color:var(--color-gold); border-bottom:1px solid rgba(197,165,90,0.5); padding-bottom:2px; }
+  .gbc-sister a:hover { color:var(--color-gold-light); }
+  .gbc-about { color:var(--color-text-muted); line-height:1.8; font-size:1.05rem; }
+  .gbc-chip { display:inline-block; background:rgba(45,66,128,0.1); color:var(--color-cbgl-blue); font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; padding:0.45rem 1rem; border-radius:9999px; border:1px solid rgba(45,66,128,0.2); }
+  .gbc-fig { position:relative; overflow:hidden; border-radius:0.6rem; aspect-ratio:4/3; margin:0; }
+  .gbc-fig img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .7s; }
+  .gbc-fig:hover img { transform:scale(1.05); }
+  .gbc-fig-tall { grid-row:span 2; aspect-ratio:3/4; }
+  .gbc-fig-wide { aspect-ratio:16/9; grid-column:span 2; }
+  .gbc-blurb { color:rgba(255,255,255,0.72); max-width:46rem; line-height:1.7; margin-bottom:0.4rem; }
+  .gbc-window { color:rgba(255,255,255,0.45); font-family:var(--font-accent); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1.25rem; }
+  .gbc-subhead { margin-top:3rem; margin-bottom:0.35rem; color:#fff; font-size:1.4rem; }
+  .gbc-note { color:var(--color-gold-light); font-size:0.85rem; margin-top:0.75rem; font-style:italic; }
+  .gbc-stat-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0.9rem; margin-top:0.5rem; }
+  @media (min-width:640px){ .gbc-stat-grid{ grid-template-columns:repeat(4,1fr);} }
+  .gbc-stat { background:var(--color-black-card); border:1px solid rgba(255,255,255,0.1); border-radius:0.7rem; padding:1.3rem 1.1rem; }
+  .gbc-stat-value { font-family:var(--font-display); font-size:1.55rem; color:#fff; line-height:1.1; }
+  .gbc-stat-label { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.09em; color:var(--color-cbgl-blue-light); margin-top:0.5rem; }
+  .gbc-stat-sub { font-size:0.68rem; color:rgba(255,255,255,0.4); margin-top:0.15rem; }
+
+  /* ── By the Building ───────────────────────────────────────── */
+  /* Slender by design: tighter rows and smaller type than the ledger, so it
+     reads as a summary strip rather than a second full table. */
+  .gbc-bld-wrap { margin-top:1.1rem; max-height:none; }
+  /* Narrower min-width than the ledger: eight short columns, no need to force
+     a 900px scroll canvas. */
+  .gbc-bld-table { font-size:0.82rem; min-width:640px; }
+  .gbc-bld-table th, .gbc-bld-table td { padding-top:0.55rem; padding-bottom:0.55rem; white-space:nowrap; }
+  /* NB: no display:flex on the td. A flex table cell drops out of table layout
+     in Safari and the columns stop aligning with the header. Inline-block. */
+  .gbc-bld-id { white-space:nowrap; }
+  .gbc-bld-letter { display:inline-block; font-family:var(--font-display); font-size:1.05rem; color:var(--color-gold); line-height:1; }
+  .gbc-bld-street { display:inline-block; margin-left:0.5rem; font-size:0.7rem; color:rgba(255,255,255,0.38); font-variant-numeric:tabular-nums; }
+  .gbc-bld-key { color:#fff; font-weight:600; }
+  .gbc-bld-thin { color:var(--color-gold); margin-left:0.15rem; cursor:help; }
+  .gbc-bld-foot { margin-top:0.6rem; font-size:0.7rem; color:rgba(255,255,255,0.38); font-style:italic; }
+  .gbc-bld-cell { color:var(--color-gold); font-variant-numeric:normal; text-align:center; width:2.5rem; }
+  @media (max-width:640px){ .gbc-bld-table { font-size:0.75rem; } .gbc-bld-street { display:none; } }
+
+  /* ── Filter Data ───────────────────────────────────────────── */
+  .gbc-filter { margin-top:1.5rem; background:var(--color-black-card); border:1px solid rgba(255,255,255,0.1); border-radius:0.7rem; padding:1.1rem 1.25rem 1.25rem; }
+  .gbc-filter-head { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.12em; color:rgba(255,255,255,0.4); margin-bottom:1rem; }
+  .gbc-filter-grid { display:grid; grid-template-columns:1fr; gap:1.5rem; align-items:end; }
+  @media (min-width:820px){ .gbc-filter-grid { grid-template-columns:1fr 1fr auto; gap:2.25rem; } }
+  .gbc-filter-ctl label { display:flex; justify-content:space-between; align-items:baseline; gap:1rem; font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--color-cbgl-blue-light); margin-bottom:0.7rem; }
+  .gbc-filter-val { font-family:var(--font-display); text-transform:none; letter-spacing:0; font-size:0.95rem; color:#fff; }
+  .gbc-filter-scale { display:flex; justify-content:space-between; margin-top:0.45rem; font-size:0.65rem; color:rgba(255,255,255,0.3); font-variant-numeric:tabular-nums; }
+  .gbc-filter input[type=range] { -webkit-appearance:none; appearance:none; width:100%; height:2px; background:rgba(255,255,255,0.18); border-radius:2px; outline:none; margin:0; }
+  .gbc-filter input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:15px; height:15px; border-radius:50%; background:var(--color-gold); cursor:pointer; border:none; box-shadow:0 0 0 4px rgba(197,165,90,0.15); transition:box-shadow .15s, transform .15s; }
+  .gbc-filter input[type=range]::-webkit-slider-thumb:hover { box-shadow:0 0 0 7px rgba(197,165,90,0.25); transform:scale(1.08); }
+  .gbc-filter input[type=range]::-moz-range-thumb { width:15px; height:15px; border-radius:50%; background:var(--color-gold); cursor:pointer; border:none; box-shadow:0 0 0 4px rgba(197,165,90,0.15); }
+  .gbc-filter input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow:0 0 0 7px rgba(197,165,90,0.4); }
+  .gbc-dual { position:relative; height:15px; }
+  .gbc-dual input[type=range] { position:absolute; top:6px; left:0; pointer-events:none; background:none; }
+  .gbc-dual::before { content:""; position:absolute; top:6px; left:0; right:0; height:2px; background:rgba(255,255,255,0.18); border-radius:2px; }
+  .gbc-dual input[type=range]::-webkit-slider-thumb { pointer-events:auto; }
+  .gbc-dual input[type=range]::-moz-range-thumb { pointer-events:auto; }
+  .gbc-filter-meta { font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.5); white-space:nowrap; }
+  .gbc-filter-meta [data-out=count] { color:var(--color-gold); font-weight:600; }
+  .gbc-filter-reset { display:block; margin-top:0.5rem; background:none; border:none; padding:0; color:rgba(255,255,255,0.45); font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; cursor:pointer; border-bottom:1px solid rgba(255,255,255,0.2); }
+  .gbc-filter-reset:hover { color:#fff; }
+
+  .gbc-table-wrap { margin-top:0.75rem; max-height:520px; overflow:auto; border:1px solid rgba(255,255,255,0.1); border-radius:0.7rem; }
+  .gbc-table { width:100%; border-collapse:collapse; font-size:0.86rem; color:rgba(255,255,255,0.85); min-width:900px; }
+  .gbc-table thead th { position:sticky; top:0; background:var(--color-dark); color:var(--color-cbgl-blue-light); font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.07em; text-align:left; padding:0.8rem 0.9rem; border-bottom:1px solid rgba(255,255,255,0.14); z-index:1; white-space:nowrap; }
+  .gbc-table tbody td { padding:0.75rem 0.9rem; border-bottom:1px solid rgba(255,255,255,0.06); vertical-align:top; }
+  .gbc-table tbody tr:hover { background:rgba(82,168,255,0.06); }
+  .gbc-num { text-align:right; font-variant-numeric:tabular-nums; }
+  .gbc-addr { font-weight:600; color:#fff; white-space:nowrap; }
+  .gbc-wv { font-size:0.78rem; color:rgba(255,255,255,0.65); max-width:15rem; }
+  .gbc-wv-none { color:rgba(255,255,255,0.3); font-style:italic; }
+  .gbc-empty, .gbc-noresults { padding:2rem; text-align:center; color:rgba(255,255,255,0.4); font-style:italic; font-size:0.85rem; }
+  .gbc-noresults { margin:0; }
+
+  .gbc-trend-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0.9rem; margin-top:0.5rem; }
+  @media (min-width:640px){ .gbc-trend-grid{ grid-template-columns:repeat(4,1fr);} }
+  .gbc-trend-col { background:var(--color-black-card); border:1px solid rgba(255,255,255,0.1); border-radius:0.7rem; padding:1.1rem; border-left:3px solid var(--color-gold); }
+  .gbc-trend-period { font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--color-cbgl-blue-light); }
+  .gbc-trend-price { font-family:var(--font-display); font-size:1.35rem; color:#fff; margin-top:0.35rem; }
+  .gbc-trend-meta { font-size:0.72rem; color:rgba(255,255,255,0.5); margin-top:0.25rem; }
+
+  /* ── Lead tiles ────────────────────────────────────────────── */
+  .gbc-tiles { display:grid; grid-template-columns:1fr; gap:1.5rem; }
+  @media (min-width:900px){ .gbc-tiles { grid-template-columns:1fr 1fr; gap:2rem; } }
+  .gbc-tile { border-radius:0.8rem; padding:2rem 1.9rem; border:1px solid rgba(0,0,0,0.08); background:#fff; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
+  .gbc-tile-seller { border-top:3px solid var(--color-gold); }
+  .gbc-tile-buyer  { border-top:3px solid var(--color-cbgl-blue); }
+  .gbc-tile-eyebrow { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--color-text-muted); }
+  .gbc-tile-title { font-family:var(--font-display); font-size:1.5rem; margin:0.6rem 0 0.75rem; color:var(--color-black); }
+  .gbc-tile-copy { color:var(--color-text-muted); line-height:1.7; font-size:0.94rem; margin-bottom:1.5rem; }
+  .gbc-field { margin-bottom:0.9rem; }
+  .gbc-field label { display:block; font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.09em; color:var(--color-text-muted); margin-bottom:0.35rem; }
+  .gbc-field input,
+  .gbc-field textarea { width:100%; padding:0.7rem 0.85rem; border:1px solid rgba(0,0,0,0.14); border-radius:0.35rem; font-size:0.95rem; background:#fff; color:var(--color-black); transition:border-color .15s, box-shadow .15s; }
+  .gbc-field textarea { font-family:inherit; line-height:1.5; resize:vertical; min-height:4.6rem; }
+  .gbc-field textarea::placeholder { color:rgba(0,0,0,0.34); }
+  .gbc-optional { text-transform:none; letter-spacing:0; font-size:0.68rem; color:rgba(0,0,0,0.35); font-style:italic; margin-left:0.35rem; }
+  .gbc-field input:focus,
+  .gbc-field textarea:focus { outline:none; border-color:var(--color-gold); box-shadow:0 0 0 3px rgba(197,165,90,0.15); }
+  .gbc-hp { position:absolute; left:-9999px; }
+  .gbc-form-status { margin-top:0.8rem; font-size:0.85rem; min-height:1.2em; }
+  .gbc-form-done { text-align:center; padding:1.6rem 1rem 0.6rem; }
+  .gbc-done-medallion { width:52px; height:52px; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; border-radius:50%; border:1px solid rgba(197,165,90,0.45); background:rgba(197,165,90,0.12); color:var(--color-gold); }
+  .gbc-done-medallion svg { width:24px; height:24px; }
+  .gbc-done-eyebrow { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--color-gold); margin-bottom:0.4rem; }
+  .gbc-done-title { font-family:var(--font-display); font-size:1.5rem; color:var(--color-black); margin:0 0 0.6rem; }
+  .gbc-done-copy { color:var(--color-text-muted); font-size:0.92rem; line-height:1.65; max-width:26rem; margin:0 auto; }
+  .gbc-done-alt { margin-top:1rem; font-size:0.85rem; color:var(--color-text-muted); }
+  .gbc-done-alt a { color:var(--color-gold); white-space:nowrap; }
+  .gbc-beach { display:inline-flex; flex-wrap:wrap; align-items:center; gap:0.6rem; margin-top:1.6rem; padding:0.55rem 1.15rem; border:1px solid rgba(255,255,255,0.16); border-radius:9999px; background:rgba(10,31,60,0.38); backdrop-filter:blur(8px); font-family:var(--font-accent); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.09em; color:rgba(255,255,255,0.65); }
+  .gbc-beach-temps { color:#fff; }
+  .gbc-beach-sep { color:var(--color-gold); }
+  .gbc-beach-tide { border-bottom:1px dotted rgba(255,255,255,0.3); padding-bottom:1px; }
+  .gbc-beach-tide.is-ok { color:#9fd8b4; }
+  .gbc-beach-tide.is-warn { color:var(--color-gold); }
+  .gbc-form-status.is-ok { color:#1d7a4c; }
+  .gbc-form-status.is-err { color:#b3261e; }
+
+  .gbc-cta-text { color:rgba(255,255,255,0.85); max-width:40rem; margin:0 auto 2rem; line-height:1.7; }
+  .gbc-team { display:flex; justify-content:center; gap:3rem; margin:0 auto 2.25rem; flex-wrap:wrap; }
+  .gbc-member { margin:0; text-align:center; }
+  .gbc-avatar { width:112px; height:112px; border-radius:50%; object-fit:cover; display:block; margin:0 auto 0.85rem; border:2px solid rgba(197,165,90,0.55); box-shadow:0 6px 20px rgba(0,0,0,0.35); }
+  @media (min-width:640px){ .gbc-avatar { width:132px; height:132px; } }
+  .gbc-member-name { display:block; font-family:var(--font-display); font-size:1.02rem; color:#fff; }
+  .gbc-member-contact { display:flex; flex-direction:column; gap:0.15rem; margin-top:0.4rem; font-family:var(--font-accent); font-size:0.72rem; letter-spacing:0.06em; line-height:1.6; }
+  .gbc-member-contact a { color:rgba(255,255,255,0.62); text-decoration:none; transition:color 0.2s; }
+  .gbc-member-contact a:hover { color:var(--color-gold); }
+  .gbc-team-brokerage { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.16em; color:var(--color-gold); margin:-0.4rem auto 2.25rem; display:flex; align-items:center; justify-content:center; gap:1rem; }
+  .gbc-team-brokerage::before, .gbc-team-brokerage::after { content:""; height:1px; width:2.5rem; background:rgba(197,165,90,0.4); }
+  .gbc-cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+  .gbc-btn { display:inline-flex; align-items:center; justify-content:center; font-family:var(--font-accent); text-transform:uppercase; letter-spacing:0.08em; font-size:0.8rem; font-weight:600; padding:1rem 2rem; border-radius:0.35rem; transition:all .2s; border:none; cursor:pointer; }
+  .gbc-btn-gold { background:var(--color-gold); color:#000; }
+  .gbc-btn-gold:hover { background:var(--color-gold-light); }
+  .gbc-btn-navy { background:var(--color-cbgl-blue); color:#fff; }
+  .gbc-btn-navy:hover { filter:brightness(1.15); }
+  .gbc-btn-outline { border:2px solid #fff; color:#fff; }
+  .gbc-btn-outline:hover { background:#fff; color:#000; }
+  .gbc-btn-full { width:100%; }
+  .gbc-btn[disabled] { opacity:0.55; cursor:default; }
+  .gbc-disc { color:rgba(255,255,255,0.55); font-size:0.82rem; line-height:1.7; }
+  .gbc-credit { margin-top:1rem; color:rgba(255,255,255,0.4); font-size:0.75rem; }
+
+  /* ── Home-page additions (kept in the CCS vocabulary) ───────── */
+  .gbc-hero { min-height:clamp(520px, 78vh, 860px); display:flex; align-items:flex-end; padding-top:7rem; padding-bottom:4rem; }
+  .gbc-hero > .container { width:100%; }
+  .gbc-hero h1 { text-shadow:0 2px 22px rgba(4,12,26,0.55); }
+  .gbc-hero .section-label { color:rgba(255,255,255,0.95); text-shadow:0 1px 12px rgba(4,12,26,0.85); }
+  .gbc-hero-rule { width:64px; height:2px; margin:0 0 1.5rem; border:0; background:var(--color-gold); box-shadow:0 1px 10px rgba(4,12,26,0.5); }
+  .gbc-hero-team { margin-top:1.5rem; font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.2em; color:rgba(255,255,255,0.7); }
+  @media (max-width:640px) { .gbc-hero { min-height:clamp(440px, 72vh, 640px); padding-top:6rem; padding-bottom:2.5rem; } }
+  .gbc-fig-cap { position:absolute; left:0; right:0; bottom:0; padding:0.75rem; font-family:var(--font-accent); font-size:0.66rem; text-transform:uppercase; letter-spacing:0.12em; color:rgba(255,255,255,0.92); background:linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0)); }
+  .gbc-seg { color:#fff; font-weight:600; }
+  .gbc-two-col { display:grid; grid-template-columns:1fr; gap:0 2.5rem; }
+  @media (min-width:900px){ .gbc-two-col { grid-template-columns:1fr 1fr; } }
+  .gbc-narrow-table { min-width:0; }
+  .gbc-dues { background:#fff; border:1px solid rgba(0,0,0,0.08); border-radius:1rem; padding:2.5rem 1.5rem; box-shadow:0 8px 30px rgba(0,0,0,0.05); }
+  @media (min-width:640px){ .gbc-dues { padding:2.5rem; } }
+  .gbc-dues-eyebrow { font-family:var(--font-accent); font-size:0.66rem; text-transform:uppercase; letter-spacing:0.16em; color:var(--color-cbgl-blue); margin-bottom:0.25rem; }
+  .gbc-dues-big { font-family:var(--font-display); font-size:2.6rem; font-weight:700; color:var(--color-black); line-height:1; }
+  .gbc-dues-unit { font-size:0.95rem; color:rgba(0,0,0,0.4); font-weight:400; margin-left:0.4rem; }
+  .gbc-dues-end { font-family:var(--font-display); font-size:1.15rem; font-weight:600; color:var(--color-black); }
+  .gbc-dues-tick { font-family:var(--font-accent); font-size:0.66rem; text-transform:uppercase; letter-spacing:0.1em; color:rgba(0,0,0,0.55); }
+  .gbc-dues-track { position:relative; height:10px; border-radius:9999px; background:rgba(0,0,0,0.08); }
+  .gbc-dues-fill { position:absolute; inset:0; border-radius:9999px; background:linear-gradient(90deg, var(--color-cbgl-blue) 0%, var(--color-cbgl-blue-light) 55%, var(--color-gold) 100%); opacity:0.9; }
+  .gbc-dues-knob { position:absolute; top:50%; width:20px; height:20px; border-radius:50%; background:#fff; transform:translate(-50%,-50%); box-shadow:0 2px 8px rgba(0,0,0,0.25), 0 0 0 4px var(--color-cbgl-blue); }
+  .gbc-dues-foot { margin-top:1.5rem; font-size:0.75rem; line-height:1.7; color:rgba(0,0,0,0.45); }
+  .gbc-comm-grid { display:grid; grid-template-columns:1fr; gap:1.5rem; }
+  @media (min-width:900px){ .gbc-comm-grid { grid-template-columns:1fr 1fr; } }
+  .gbc-comm-card { display:block; border:1px solid rgba(0,0,0,0.1); border-radius:0.8rem; padding:2rem 1.9rem; background:#fff; text-decoration:none; transition:border-color .2s, box-shadow .2s, transform .2s; }
+  .gbc-comm-card:hover { border-color:var(--color-gold); box-shadow:0 10px 30px rgba(0,0,0,0.08); transform:translateY(-2px); }
+  .gbc-comm-eyebrow { font-family:var(--font-accent); font-size:0.66rem; text-transform:uppercase; letter-spacing:0.18em; color:var(--color-gold); margin-bottom:0.5rem; }
+  .gbc-comm-title { font-family:var(--font-display); font-size:1.5rem; color:var(--color-black); margin:0 0 0.6rem; }
+  .gbc-comm-copy { color:var(--color-text-muted); font-size:0.92rem; line-height:1.7; }
+  .gbc-comm-cta { margin-top:1rem; font-family:var(--font-accent); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--color-cbgl-blue); }
+  .gbc-faq-item { border-bottom:1px solid rgba(255,255,255,0.1); padding:0.35rem 0; }
+  .gbc-faq-item summary { cursor:pointer; list-style:none; padding:0.9rem 2rem 0.9rem 0; position:relative; font-family:var(--font-display); font-size:1.08rem; color:#fff; }
+  .gbc-faq-item summary::-webkit-details-marker { display:none; }
+  .gbc-faq-item summary::after { content:"+"; position:absolute; right:0.25rem; top:0.8rem; color:var(--color-gold); font-size:1.3rem; line-height:1; transition:transform .2s; }
+  .gbc-faq-item[open] summary::after { transform:rotate(45deg); }
+  .gbc-faq-item p { color:rgba(255,255,255,0.72); line-height:1.75; font-size:0.95rem; padding:0 2rem 1rem 0; margin:0; }
+</style>
+<script is:inline>
+  // ── Ledger filters ──────────────────────────────────────────────
+  document.querySelectorAll('[data-filter]').forEach((panel) => {
+    const uid   = panel.getAttribute('data-filter');
+    const table = document.querySelector('[data-table="' + uid + '"]');
+    if (!table) return;
+    const rows   = Array.from(table.querySelectorAll('tbody tr[data-bed]'));
+    const bed    = panel.querySelector('[data-role=bed]');
+    const sqMin  = panel.querySelector('[data-role=sqmin]');
+    const sqMax  = panel.querySelector('[data-role=sqmax]');
+    const outBed = panel.querySelector('[data-out=bed]');
+    const outSq  = panel.querySelector('[data-out=sqft]');
+    const outCnt = panel.querySelector('[data-out=count]');
+    const empty  = table.parentElement.querySelector('[data-out=empty]');
+    const reset  = panel.querySelector('[data-role=reset]');
+    const n = (v) => Number(v);
+    const fmt = (v) => n(v).toLocaleString();
+
+    function apply() {
+      // Keep the dual handles from crossing.
+      if (n(sqMin.value) > n(sqMax.value)) {
+        if (document.activeElement === sqMin) sqMax.value = sqMin.value;
+        else sqMin.value = sqMax.value;
+      }
+      const b = n(bed.value), lo = n(sqMin.value), hi = n(sqMax.value);
+      outBed.textContent = b === 0 ? 'Any' : (b === 4 ? '4+' : String(b));
+      outSq.textContent  = fmt(lo) + ' – ' + fmt(hi);
+
+      let shown = 0;
+      rows.forEach((tr) => {
+        const rb = n(tr.dataset.bed), rs = n(tr.dataset.sqft);
+        const okBed  = b === 0 || (b === 4 ? rb >= 4 : rb === b);
+        const okSqft = rs === 0 || (rs >= lo && rs <= hi);
+        const ok = okBed && okSqft;
+        tr.hidden = !ok;
+        if (ok) shown++;
+      });
+      if (outCnt) outCnt.textContent = String(shown);
+      if (empty) empty.hidden = shown !== 0;
+    }
+
+    [bed, sqMin, sqMax].forEach((el) => el && el.addEventListener('input', apply));
+    if (reset) reset.addEventListener('click', () => {
+      bed.value = 0; sqMin.value = sqMin.min; sqMax.value = sqMax.max; apply();
+    });
+    apply();
+  });
+
+  // ── Lead forms ──────────────────────────────────────────────────
+  document.querySelectorAll('form.gbc-form').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = form.querySelector('[data-out=status]');
+      const btn    = form.querySelector('button[type=submit]');
+      const fd     = new FormData(form);
+      const data   = Object.fromEntries(fd.entries());
+
+      if (data['bot-field']) return;               // honeypot
+      status.className = 'gbc-form-status';
+      status.textContent = 'Sending…';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('/.netlify/functions/community-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: data.name, email: data.email, phone: data.phone,
+            notes: data.notes,
+            lead_type: form.dataset.leadType,
+            community: form.dataset.community,
+            page: window.location.pathname,
+          }),
+        });
+        if (!res.ok) throw new Error('bad status ' + res.status);
+
+        // Mirror to Netlify Forms so the built-in email notification fires too.
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(fd).toString(),
+        }).catch(() => {});
+
+        const first = String(data.name || '').trim().split(/\s+/)[0].replace(/[<>&"']/g, '');
+        const team  = (form.dataset.team || 'our team').replace(/[<>"']/g, '');
+        const isSeller = form.dataset.leadType === 'Seller';
+        const done = document.createElement('div');
+        done.className = 'gbc-form-done';
+        done.setAttribute('role', 'status');
+        done.innerHTML =
+          '<div class="gbc-done-medallion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>' +
+          '<p class="gbc-done-eyebrow">' + (isSeller ? 'Request received' : 'You&rsquo;re on the list') + '</p>' +
+          '<h4 class="gbc-done-title">Thank you' + (first ? ', ' + first : '') + '</h4>' +
+          '<p class="gbc-done-copy">' + (isSeller
+            ? 'Your private consult request has gone directly to ' + team + '. Expect a personal reply within one business day.'
+            : team + ' will reach out the moment something fits, often before it reaches the MLS.') + '</p>' +
+          '<p class="gbc-done-alt">Prefer to talk sooner? <a href="tel:+19417139234">(941) 713-9234</a></p>';
+        form.replaceWith(done);
+        done.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } catch (err) {
+        console.error(err);
+        status.className = 'gbc-form-status is-err';
+        status.textContent = 'Something went wrong. Please call (941) 713-9234.';
+        btn.disabled = false;
+      }
+    });
+  });
+
+  // ── Beach conditions strip (NWS + Mote Marine via our proxy) ────
+  document.querySelectorAll('[data-beach]').forEach(async (strip) => {
+    try {
+      const qs = new URLSearchParams({ grid: strip.dataset.grid || '', beach: strip.dataset.beachId || '' });
+      const res = await fetch('/.netlify/functions/beach-conditions?' + qs.toString());
+      if (!res.ok) return;
+      const c = await res.json();
+      const temps = strip.querySelector('[data-out=beach-temps]');
+      const tide  = strip.querySelector('[data-out=beach-tide]');
+      if (c.hi == null && c.lo == null && !c.redTide) return;
+      temps.textContent = (c.hi != null ? 'High ' + c.hi + '\u00B0' : '') +
+                          (c.hi != null && c.lo != null ? ' / ' : '') +
+                          (c.lo != null ? 'Low ' + c.lo + '\u00B0' : '');
+      if (c.redTide && c.redTide.status === 'reported') {
+        tide.textContent = 'Beach advisory \u2014 see Mote report';
+        tide.classList.add('is-warn');
+      } else {
+        tide.textContent = 'Red tide: none reported';
+        tide.classList.add('is-ok');
+      }
+      strip.hidden = false;
+    } catch (e) { /* strip simply stays hidden */ }
+  });
+</script>
 </LLLLayout>

@@ -629,12 +629,20 @@ const jsonLd = [
           <img class="gbc-avatar" src="/images/anne-schneider-square.jpg" width="583" height="583" alt="Anne Schneider, Coldwell Banker Realty" loading="lazy" decoding="async" />
           <figcaption>
             <span class="gbc-member-name">Anne Schneider</span>
+            <span class="gbc-member-contact">
+              <a href="tel:+13105629710">(310) 562-9710</a>
+              <a href="mailto:Anne&#46;Schneider&#64;cbrealty&#46;com">Anne&#46;Schneider&#64;cbrealty&#46;com</a>
+            </span>
           </figcaption>
         </figure>
         <figure class="gbc-member">
           <img class="gbc-avatar" src="/images/ryan-adamson-square.jpg" width="800" height="800" alt="Ryan Adamson, Coldwell Banker Global Luxury" loading="lazy" decoding="async" />
           <figcaption>
             <span class="gbc-member-name">Ryan Adamson</span>
+            <span class="gbc-member-contact">
+              <a href="tel:+19417139234">(941) 713-9234</a>
+              <a href="mailto:Ryan&#64;Adamson-Group&#46;com">Ryan&#64;Adamson-Group&#46;com</a>
+            </span>
           </figcaption>
         </figure>
       </div>
@@ -815,6 +823,9 @@ const jsonLd = [
   .gbc-avatar { width:112px; height:112px; border-radius:50%; object-fit:cover; display:block; margin:0 auto 0.85rem; border:2px solid rgba(197,165,90,0.55); box-shadow:0 6px 20px rgba(0,0,0,0.35); }
   @media (min-width:640px){ .gbc-avatar { width:132px; height:132px; } }
   .gbc-member-name { display:block; font-family:var(--font-display); font-size:1.02rem; color:#fff; }
+  .gbc-member-contact { display:flex; flex-direction:column; gap:0.15rem; margin-top:0.4rem; font-family:var(--font-accent); font-size:0.72rem; letter-spacing:0.06em; line-height:1.6; }
+  .gbc-member-contact a { color:rgba(255,255,255,0.62); text-decoration:none; transition:color 0.2s; }
+  .gbc-member-contact a:hover { color:var(--color-gold); }
   .gbc-team-brokerage { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.16em; color:var(--color-gold); margin:-0.4rem auto 2.25rem; display:flex; align-items:center; justify-content:center; gap:1rem; }
   .gbc-team-brokerage::before, .gbc-team-brokerage::after { content:""; height:1px; width:2.5rem; background:rgba(197,165,90,0.4); }
   .gbc-cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
