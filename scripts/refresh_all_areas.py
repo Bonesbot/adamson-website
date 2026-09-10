@@ -61,6 +61,10 @@ H = {"Authorization": f"Bearer {TOK}", "Accept": "application/vnd.github+json", 
 # failure it fetches the canonical script from origin/main itself (same source
 # the runner uses) and loads it. `communities_via` records which path was taken
 # and is reported in the publish block.
+# A community page whose published as-of date is this many days behind the fresh
+# compute is republished even if its numbers did not move (label freshness).
+MAX_ASOF_AGE_DAYS = 3
+
 # Registry of community generators. Each exposes build_payload(conn) ->
 # ({repo_path: text}, {slug: stats}), REL_DATA and material(). Adding a page
 # means adding a module here; the loader below handles missing files.
@@ -226,7 +230,16 @@ def main():
                     for slug, data in stats.items():
                         remote = gh_raw(f"{gen.REL_DATA}/{slug}-stats.json")
                         robj = json.loads(remote) if remote else None
-                        if robj is None or gen.material(robj) != gen.material(data):
+                        # Ship on a material change, OR when the published as-of label is
+                        # MAX_ASOF_AGE_DAYS old (2026-09-10, Ryan): identical numbers are
+                        # fine, but a page reading "as of <a week ago>" is not.
+                        stale = False
+                        try:
+                            stale = (robj is not None and "asOf" in data and
+                                     (dt.date.fromisoformat(data["asOf"]) - dt.date.fromisoformat(robj.get("asOf", data["asOf"]))).days >= MAX_ASOF_AGE_DAYS)
+                        except (TypeError, ValueError):
+                            stale = False
+                        if robj is None or gen.material(robj) != gen.material(data) or stale:
                             moved.append(slug)
                     if moved:
                         # ship this generator's whole payload together (pages + hub + json)
