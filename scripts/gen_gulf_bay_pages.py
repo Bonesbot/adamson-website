@@ -331,7 +331,7 @@ def quarters(cur, where):
         SELECT to_char(close_date, 'YYYY"-Q"Q') AS period,
                COUNT(*) n,
                percentile_cont(0.5) WITHIN GROUP (ORDER BY current_price) AS med,
-               AVG(close_price_by_calculated_sqft) AS psf
+               percentile_cont(0.5) WITHIN GROUP (ORDER BY close_price_by_calculated_sqft) AS psf
           FROM raw_listings
          WHERE {where} AND standard_status='Closed' AND close_date >= %s
          GROUP BY 1 ORDER BY 1
@@ -438,11 +438,12 @@ def community_stats(cfg, headline, ledger, lease, lease_n, lease_total, qs, act,
             out.update(avgPrice=round(mean(p)), medianPrice=round(median(p)),
                        minPrice=round(min(p)), maxPrice=round(max(p)))
         if psf:
-            out.update(avgPricePerSqft=round(mean(psf)))
+            out.update(avgPricePerSqft=round(mean(psf)), medianPricePerSqft=round(median(psf)))
         if dom:
             out.update(avgDaysOnMarket=round(mean(dom)), medianDaysOnMarket=round(median(dom)))
         if splp:
-            out.update(avgSaleToListPct=round(mean(splp) * 100, 1))
+            out.update(avgSaleToListPct=round(mean(splp) * 100, 1),
+                       medianSaleToListPct=round(median(splp) * 100, 1))
         if dom:
             out.update(soldWithin14Days=sum(1 for d in dom if d <= 14))
         return out
@@ -471,7 +472,7 @@ def community_stats(cfg, headline, ledger, lease, lease_n, lease_total, qs, act,
         "minimumLease": {"value": lease, "records": lease_n, "of": lease_total},
         "quarters": [{"period": q["period"], "count": q["n"],
                       "medianPrice": None if q["med"] is None else round(float(q["med"])),
-                      "avgPricePerSqft": None if q["psf"] is None else round(float(q["psf"]))}
+                      "medianPricePerSqft": None if q["psf"] is None else round(float(q["psf"]))}
                      for q in qs],
         "ledger": [{
             "address": r["unparsed_address"],
@@ -529,7 +530,7 @@ def build_payload(conn):
                if r["close_price_by_calculated_sqft"]]
         facts[key] = [
             f"{len(ledger)} closed sales in the last 12 months",
-            (f"Median {money(median(prices))} \u00b7 ${int(round(mean(psf))):,}/sq ft")
+            (f"Median {money(median(prices))} \u00b7 ${int(round(median(psf))):,}/sq ft")
             if prices and psf else "Market data below",
             f"{lease} minimum lease period" if lease else "Lease period not reported",
         ]
@@ -566,11 +567,11 @@ def render_stats(rows, lease, lease_n, lease_total):
     tiles = [
         stat(len(rows), "Closed Sales"),
         stat(money(min(prices)) if prices else "—", "Min Sale Price"),
-        stat(money(mean(prices)) if prices else "—", "Avg Sale Price"),
+        stat(money(median(prices)) if prices else "—", "Median Sale Price"),
         stat(money(max(prices)) if prices else "—", "Max Sale Price"),
-        stat(f"${int(round(mean(psf))):,}" if psf else "—", "Avg Price / SqFt"),
-        stat(str(round(mean(cdom))) if cdom else "—", "Avg Days on Market", "cumulative"),
-        stat(f"{mean(splp) * 100:.1f}%" if splp else "—", "Avg Sale-to-List"),
+        stat(f"${int(round(median(psf))):,}" if psf else "—", "Median Price / Sq Ft"),
+        stat(str(round(median(cdom))) if cdom else "—", "Median Days on Market", "total days listed, incl. relists"),
+        stat(f"{median(splp) * 100:.1f}%" if splp else "—", "Median Sale vs. List Price", "sale price as % of asking"),
         stat(esc(lease) if lease else "—", "Minimum Lease Period", lease_sub),
     ]
     return '<div class="gbc-stat-grid">' + "\n".join(tiles) + "</div>"
@@ -653,9 +654,9 @@ def render_by_building(rows, cfg):
             <th class="gbc-num">Min</th>
             <th class="gbc-num">Median</th>
             <th class="gbc-num">Max</th>
-            <th class="gbc-num">Median $/SqFt</th>
-            <th class="gbc-num">Median CDOM</th>
-            <th class="gbc-num">Median SP/LP</th>
+            <th class="gbc-num">Median $ / Sq Ft</th>
+            <th class="gbc-num">Median Days on Market</th>
+            <th class="gbc-num">Median Sale vs. List</th>
           </tr>
         </thead>
         <tbody>
@@ -700,10 +701,10 @@ def render_ledger(rows, uid, buildings=None):
             <th>Bed / Bath</th>
             <th class="gbc-num">Sq Ft</th>
             <th class="gbc-num">Sale Price</th>
-            <th class="gbc-num">$ / SqFt</th>
+            <th class="gbc-num">$ / Sq Ft</th>
             <th>Closed</th>
-            <th class="gbc-num">Mkt Days</th>
-            <th class="gbc-num">SP/LP</th>
+            <th class="gbc-num">Days on Market</th>
+            <th class="gbc-num">Sale vs. List</th>
             <th>Water View</th>
           </tr>
         </thead>
@@ -930,6 +931,9 @@ STYLES = r'''<style is:global>
   .gbc-avatar { width:112px; height:112px; border-radius:50%; object-fit:cover; display:block; margin:0 auto 0.85rem; border:2px solid rgba(197,165,90,0.55); box-shadow:0 6px 20px rgba(0,0,0,0.35); }
   @media (min-width:640px){ .gbc-avatar { width:132px; height:132px; } }
   .gbc-member-name { display:block; font-family:var(--font-display); font-size:1.02rem; color:#fff; }
+  .gbc-member-contact { display:flex; flex-direction:column; gap:0.15rem; margin-top:0.4rem; font-family:var(--font-accent); font-size:0.72rem; letter-spacing:0.06em; line-height:1.6; }
+  .gbc-member-contact a { color:rgba(255,255,255,0.62); text-decoration:none; transition:color 0.2s; }
+  .gbc-member-contact a:hover { color:var(--color-gold); }
   .gbc-team-brokerage { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.16em; color:var(--color-gold); margin:-0.4rem auto 2.25rem; display:flex; align-items:center; justify-content:center; gap:1rem; }
   .gbc-team-brokerage::before, .gbc-team-brokerage::after { content:""; height:1px; width:2.5rem; background:rgba(197,165,90,0.4); }
   .gbc-cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
@@ -1192,10 +1196,10 @@ def render_page(cfg, headline, ledger, lease, lease_n, lease_total, qs, as_of):
     showOffMarketCta={{false}}
   />""" if cfg.get("idx_widget_id") else "")
     prices = [float(r["current_price"]) for r in headline if r["current_price"]]
-    avg = money(mean(prices)) if prices else "—"
+    med = money(median(prices)) if prices else "—"
     description = (f"{cfg['name']}, Siesta Key (34242) condo market: {len(headline)} closed sales in the last "
-                   f"{HEADLINE_WINDOW_DAYS} days, average {avg}, {lease or 'n/a'} minimum lease period, plus price "
-                   f"per sqft, days on market and sale-to-list ratios from live Stellar MLS data.")
+                   f"{HEADLINE_WINDOW_DAYS} days, median {med}, {lease or 'n/a'} minimum lease period, plus median price "
+                   f"per sq ft, days on market and sale-vs-list ratios from live Stellar MLS data.")
 
     chips = "\n            ".join(f'<span class="gbc-chip">{c}</span>' for c in cfg["chips"])
     gallery = cfg.get("gallery") or GALLERY
@@ -1217,7 +1221,7 @@ def render_page(cfg, headline, ledger, lease, lease_n, lease_total, qs, as_of):
     faq = [
         (f"What is the minimum lease period at {cfg['name']}?", lease_a),
         (f"How many units have sold recently at {cfg['name']}?",
-         f"{len(headline)} units closed in the {HEADLINE_WINDOW_DAYS} days ending {as_of}, averaging {avg}."),
+         f"{len(headline)} units closed in the {HEADLINE_WINDOW_DAYS} days ending {as_of}, with a median sale price of {med}."),
     ]
     faq_json = ",\n      ".join(
         "{ '@type': 'Question', name: %s, acceptedAnswer: { '@type': 'Answer', text: %s } }"
@@ -1226,7 +1230,7 @@ def render_page(cfg, headline, ledger, lease, lease_n, lease_total, qs, as_of):
     plain_blurb = (cfg["blurb"].replace("&amp;", "&").replace("&mdash;", "—")
                    .replace("&rsquo;", "’").replace("&ndash;", "–"))
     thin_note = ('<p class="gbc-note">A small but real sample: this association closes few units per period, '
-                 'so single sales move the averages. Figures update from live MLS data.</p>') if len(headline) < 4 else ''
+                 'so a single sale can move the medians. Figures update from live MLS data.</p>') if len(headline) < 4 else ''
 
     # "By the Building" sits between the snapshot and the ledger: the snapshot is
     # the whole association, this splits it six ways, the ledger is every line.
@@ -1368,12 +1372,20 @@ const jsonLd = [
           <img class="gbc-avatar" src="/images/kelli-eggen.jpg" width="800" height="800" alt="Kelli Eggen, Coldwell Banker Global Luxury" loading="lazy" decoding="async" />
           <figcaption>
             <span class="gbc-member-name">Kelli Eggen</span>
+            <span class="gbc-member-contact">
+              <a href="tel:+19413769844">(941) 376-9844</a>
+              <a href="mailto:Kelli&#46;Eggen&#64;gmail&#46;com">Kelli&#46;Eggen&#64;gmail&#46;com</a>
+            </span>
           </figcaption>
         </figure>
         <figure class="gbc-member">
           <img class="gbc-avatar" src="/images/ryan-adamson-square.jpg" width="800" height="800" alt="Ryan Adamson, Coldwell Banker Global Luxury" loading="lazy" decoding="async" />
           <figcaption>
             <span class="gbc-member-name">Ryan Adamson</span>
+            <span class="gbc-member-contact">
+              <a href="tel:+19417139234">(941) 713-9234</a>
+              <a href="mailto:Ryan&#64;Adamson-Group&#46;com">Ryan&#64;Adamson-Group&#46;com</a>
+            </span>
           </figcaption>
         </figure>
       </div>
@@ -1526,10 +1538,10 @@ def main():
     for slug, d in stats.items():
         t12, a = d["trailing12"], d["active"]
         print(f"  {slug}: {t12.get('count', 0)} closed/12mo "
-              f"avg {money(t12.get('avgPrice'))} "
-              f"${t12.get('avgPricePerSqft')}/sf domAvg {t12.get('avgDaysOnMarket')} "
+              f"median {money(t12.get('medianPrice'))} "
+              f"${t12.get('medianPricePerSqft')}/sf "
               f"medDom {t12.get('medianDaysOnMarket')} | active {a['count']} "
-              f"avg {a['avgDaysOnMarket']}d | lease {d['minimumLease']['value']} "
+              f"medDom {a['medianDaysOnMarket']}d | lease {d['minimumLease']['value']} "
               f"{d['minimumLease']['records']}/{d['minimumLease']['of']}")
 
     if args.dry_run:

@@ -4,7 +4,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 
-const description = 'Gulf & Bay Club Bayside, Siesta Key (34242) condo market: 2 closed sales in the last 180 days, average $690,000, 1 Week minimum lease period, plus price per sqft, days on market and sale-to-list ratios from live Stellar MLS data.';
+const description = 'Gulf & Bay Club Bayside, Siesta Key (34242) condo market: 2 closed sales in the last 180 days, median $690,000, 1 Week minimum lease period, plus median price per sq ft, days on market and sale-vs-list ratios from live Stellar MLS data.';
 
 const jsonLd = [
   {
@@ -36,7 +36,7 @@ const jsonLd = [
     '@type': 'FAQPage',
     mainEntity: [
       { '@type': 'Question', name: 'What is the minimum lease period at Gulf & Bay Club Bayside?', acceptedAnswer: { '@type': 'Answer', text: 'The MLS reports a 1 Week minimum lease for Gulf & Bay Club Bayside on 17 of 18 listings. Always confirm current rental rules with the association before purchasing; condo documents change.' } },
-      { '@type': 'Question', name: 'How many units have sold recently at Gulf & Bay Club Bayside?', acceptedAnswer: { '@type': 'Answer', text: '2 units closed in the 180 days ending September 10, 2026, averaging $690,000.' } }
+      { '@type': 'Question', name: 'How many units have sold recently at Gulf & Bay Club Bayside?', acceptedAnswer: { '@type': 'Answer', text: '2 units closed in the 180 days ending September 10, 2026, with a median sale price of $690,000.' } }
     ],
   },
   {
@@ -112,7 +112,7 @@ const jsonLd = [
       </div>
 <div class="gbc-stat">
         <div class="gbc-stat-value">$690,000</div>
-        <div class="gbc-stat-label">Avg Sale Price</div>
+        <div class="gbc-stat-label">Median Sale Price</div>
         
       </div>
 <div class="gbc-stat">
@@ -122,25 +122,25 @@ const jsonLd = [
       </div>
 <div class="gbc-stat">
         <div class="gbc-stat-value">$515</div>
-        <div class="gbc-stat-label">Avg Price / SqFt</div>
+        <div class="gbc-stat-label">Median Price / Sq Ft</div>
         
       </div>
 <div class="gbc-stat">
         <div class="gbc-stat-value">49</div>
-        <div class="gbc-stat-label">Avg Days on Market</div>
-        <div class="gbc-stat-sub">cumulative</div>
+        <div class="gbc-stat-label">Median Days on Market</div>
+        <div class="gbc-stat-sub">total days listed, incl. relists</div>
       </div>
 <div class="gbc-stat">
         <div class="gbc-stat-value">91.0%</div>
-        <div class="gbc-stat-label">Avg Sale-to-List</div>
-        
+        <div class="gbc-stat-label">Median Sale vs. List Price</div>
+        <div class="gbc-stat-sub">sale price as % of asking</div>
       </div>
 <div class="gbc-stat">
         <div class="gbc-stat-value">1 Week</div>
         <div class="gbc-stat-label">Minimum Lease Period</div>
         <div class="gbc-stat-sub">94% of 18 MLS records</div>
       </div></div>
-      <p class="gbc-note">A small but real sample: this association closes few units per period, so single sales move the averages. Figures update from live MLS data.</p>
+      <p class="gbc-note">A small but real sample: this association closes few units per period, so a single sale can move the medians. Figures update from live MLS data.</p>
 
       <h3 class="font-display gbc-subhead">Transaction Ledger</h3>
       <p class="gbc-window">Every recorded closing in the last 12 months, most recent first.</p>
@@ -174,10 +174,10 @@ const jsonLd = [
             <th>Bed / Bath</th>
             <th class="gbc-num">Sq Ft</th>
             <th class="gbc-num">Sale Price</th>
-            <th class="gbc-num">$ / SqFt</th>
+            <th class="gbc-num">$ / Sq Ft</th>
             <th>Closed</th>
-            <th class="gbc-num">Mkt Days</th>
-            <th class="gbc-num">SP/LP</th>
+            <th class="gbc-num">Days on Market</th>
+            <th class="gbc-num">Sale vs. List</th>
             <th>Water View</th>
           </tr>
         </thead>
@@ -263,7 +263,7 @@ const jsonLd = [
 <div class="gbc-trend-col">
           <div class="gbc-trend-period">2025-Q4</div>
           <div class="gbc-trend-price">$650,000</div>
-          <div class="gbc-trend-meta">3 sold &middot; $525/sf</div>
+          <div class="gbc-trend-meta">3 sold &middot; $508/sf</div>
         </div>
 <div class="gbc-trend-col">
           <div class="gbc-trend-period">2026-Q2</div>
@@ -346,12 +346,20 @@ const jsonLd = [
           <img class="gbc-avatar" src="/images/kelli-eggen.jpg" width="800" height="800" alt="Kelli Eggen, Coldwell Banker Global Luxury" loading="lazy" decoding="async" />
           <figcaption>
             <span class="gbc-member-name">Kelli Eggen</span>
+            <span class="gbc-member-contact">
+              <a href="tel:+19413769844">(941) 376-9844</a>
+              <a href="mailto:Kelli&#46;Eggen&#64;gmail&#46;com">Kelli&#46;Eggen&#64;gmail&#46;com</a>
+            </span>
           </figcaption>
         </figure>
         <figure class="gbc-member">
           <img class="gbc-avatar" src="/images/ryan-adamson-square.jpg" width="800" height="800" alt="Ryan Adamson, Coldwell Banker Global Luxury" loading="lazy" decoding="async" />
           <figcaption>
             <span class="gbc-member-name">Ryan Adamson</span>
+            <span class="gbc-member-contact">
+              <a href="tel:+19417139234">(941) 713-9234</a>
+              <a href="mailto:Ryan&#64;Adamson-Group&#46;com">Ryan&#64;Adamson-Group&#46;com</a>
+            </span>
           </figcaption>
         </figure>
       </div>
@@ -500,6 +508,9 @@ const jsonLd = [
   .gbc-avatar { width:112px; height:112px; border-radius:50%; object-fit:cover; display:block; margin:0 auto 0.85rem; border:2px solid rgba(197,165,90,0.55); box-shadow:0 6px 20px rgba(0,0,0,0.35); }
   @media (min-width:640px){ .gbc-avatar { width:132px; height:132px; } }
   .gbc-member-name { display:block; font-family:var(--font-display); font-size:1.02rem; color:#fff; }
+  .gbc-member-contact { display:flex; flex-direction:column; gap:0.15rem; margin-top:0.4rem; font-family:var(--font-accent); font-size:0.72rem; letter-spacing:0.06em; line-height:1.6; }
+  .gbc-member-contact a { color:rgba(255,255,255,0.62); text-decoration:none; transition:color 0.2s; }
+  .gbc-member-contact a:hover { color:var(--color-gold); }
   .gbc-team-brokerage { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.16em; color:var(--color-gold); margin:-0.4rem auto 2.25rem; display:flex; align-items:center; justify-content:center; gap:1rem; }
   .gbc-team-brokerage::before, .gbc-team-brokerage::after { content:""; height:1px; width:2.5rem; background:rgba(197,165,90,0.4); }
   .gbc-cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
