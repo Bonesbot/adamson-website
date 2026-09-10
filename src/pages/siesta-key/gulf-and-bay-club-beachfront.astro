@@ -35,7 +35,7 @@ const jsonLd = [
   {
     '@type': 'FAQPage',
     mainEntity: [
-      { '@type': 'Question', name: 'What is the minimum lease period at Gulf & Bay Club Beachfront?', acceptedAnswer: { '@type': 'Answer', text: 'The MLS reports a 1 Month minimum lease for Gulf & Bay Club Beachfront on 38 of 38 listings. Always confirm current rental rules with the association before purchasing; condo documents change.' } },
+      { '@type': 'Question', name: 'What is the minimum lease period at Gulf & Bay Club Beachfront?', acceptedAnswer: { '@type': 'Answer', text: 'The MLS reports a 1 Month minimum lease for Gulf & Bay Club Beachfront on 164 of 164 listings. Always confirm current rental rules with the association before purchasing; condo documents change.' } },
       { '@type': 'Question', name: 'How many units have sold recently at Gulf & Bay Club Beachfront?', acceptedAnswer: { '@type': 'Answer', text: '6 units closed in the 180 days ending September 10, 2026, with a median sale price of $1,185,000.' } }
     ],
   },
@@ -107,6 +107,24 @@ const jsonLd = [
     </div>
   </section>
 
+
+  <section class="section gbc-feature">
+    <div class="container">
+      <div class="gbc-feature-grid">
+        <div class="gbc-feature-copy">
+          <p class="section-label mb-3">Thinking of selling?</p>
+          <h2 class="accent-underline mb-5">The buyers arrive in January. The prep starts now.</h2>
+          <p class="gbc-about">More than half of Gulf &amp; Bay sales go under contract between January and April. Listed January to March, condos found a buyer in a median 37 days; listed in the fall, 93. Twenty seconds from Ryan on why the calendar matters.</p>
+          <a href="#contact" class="gbc-btn gbc-btn-gold gbc-feature-btn">Request a Private Consult</a>
+        </div>
+        <div class="gbc-feature-media">
+          <video class="gbc-feature-video" controls playsinline preload="metadata" poster="/videos/gb-list-in-january-poster.jpg" width="1280" height="720">
+            <source src="/videos/gb-list-in-january.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
   <section class="section dark-section">
     <div class="container">
       <p class="section-label text-cbgl-blue-light mb-3">Beachfront</p>
@@ -150,7 +168,7 @@ const jsonLd = [
 <div class="gbc-stat">
         <div class="gbc-stat-value">1 Month</div>
         <div class="gbc-stat-label">Minimum Lease Period</div>
-        <div class="gbc-stat-sub">100% of 38 MLS records</div>
+        <div class="gbc-stat-sub">100% of 164 MLS records</div>
       </div></div>
       
 
@@ -364,17 +382,6 @@ const jsonLd = [
         <td class="gbc-num">94%</td>
         <td class="gbc-wv">Beach, Gulf/Ocean - Full</td>
       </tr>
-<tr data-bed="2" data-sqft="1337">
-        <td class="gbc-addr">5740 MIDNIGHT PASS RD #405</td><td class="gbc-bld-cell">F</td>
-        <td>2 bd / 2 ba</td>
-        <td class="gbc-num">1,337</td>
-        <td class="gbc-num">$1,350,000</td>
-        <td class="gbc-num">$1,010</td>
-        <td>02/23/26</td>
-        <td class="gbc-num">182</td>
-        <td class="gbc-num">92%</td>
-        <td class="gbc-wv">Gulf/Ocean - Full</td>
-      </tr>
 <tr data-bed="2" data-sqft="1361">
         <td class="gbc-addr">5760 MIDNIGHT PASS RD #307D</td><td class="gbc-bld-cell">D</td>
         <td>2 bd / 2 ba</td>
@@ -385,6 +392,17 @@ const jsonLd = [
         <td class="gbc-num">74</td>
         <td class="gbc-num">94%</td>
         <td class="gbc-wv">Beach, Gulf/Ocean - Full, Lagoon/Estuary</td>
+      </tr>
+<tr data-bed="2" data-sqft="1337">
+        <td class="gbc-addr">5740 MIDNIGHT PASS RD #405</td><td class="gbc-bld-cell">F</td>
+        <td>2 bd / 2 ba</td>
+        <td class="gbc-num">1,337</td>
+        <td class="gbc-num">$1,350,000</td>
+        <td class="gbc-num">$1,010</td>
+        <td>02/23/26</td>
+        <td class="gbc-num">182</td>
+        <td class="gbc-num">92%</td>
+        <td class="gbc-wv">Gulf/Ocean - Full</td>
       </tr>
 <tr data-bed="2" data-sqft="1471">
         <td class="gbc-addr">5750 MIDNIGHT PASS RD #508 E</td><td class="gbc-bld-cell">E</td>
@@ -635,6 +653,14 @@ const jsonLd = [
   .gbc-sister a { color:var(--color-gold); border-bottom:1px solid rgba(197,165,90,0.5); padding-bottom:2px; }
   .gbc-sister a:hover { color:var(--color-gold-light); }
   .gbc-about { color:var(--color-text-muted); line-height:1.8; font-size:1.05rem; }
+  .gbc-feature { background:#F6F1E4; border-top:1px solid rgba(201,169,97,0.35); border-bottom:1px solid rgba(201,169,97,0.35); }
+  .gbc-feature h2 { color:var(--color-black); }
+  .gbc-feature .section-label { color:var(--color-cbgl-blue); }
+  .gbc-feature-grid { display:grid; grid-template-columns:1fr; gap:2rem; align-items:center; }
+  @media (min-width:960px){ .gbc-feature-grid { grid-template-columns:5fr 7fr; gap:3.5rem; } }
+  .gbc-feature-btn { margin-top:1.75rem; }
+  .gbc-feature-media { border-radius:0.9rem; overflow:hidden; box-shadow:0 18px 50px rgba(10,31,60,0.28); background:#0A1F3C; aspect-ratio:16/9; }
+  .gbc-feature-video { display:block; width:100%; height:100%; object-fit:cover; }
   .gbc-chip { display:inline-block; background:rgba(45,66,128,0.1); color:var(--color-cbgl-blue); font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; padding:0.45rem 1rem; border-radius:9999px; border:1px solid rgba(45,66,128,0.2); }
   .gbc-fig { position:relative; overflow:hidden; border-radius:0.6rem; aspect-ratio:4/3; margin:0; }
   .gbc-fig img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .7s; }

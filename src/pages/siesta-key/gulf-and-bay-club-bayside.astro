@@ -35,7 +35,7 @@ const jsonLd = [
   {
     '@type': 'FAQPage',
     mainEntity: [
-      { '@type': 'Question', name: 'What is the minimum lease period at Gulf & Bay Club Bayside?', acceptedAnswer: { '@type': 'Answer', text: 'The MLS reports a 1 Week minimum lease for Gulf & Bay Club Bayside on 17 of 18 listings. Always confirm current rental rules with the association before purchasing; condo documents change.' } },
+      { '@type': 'Question', name: 'What is the minimum lease period at Gulf & Bay Club Bayside?', acceptedAnswer: { '@type': 'Answer', text: 'The MLS reports a 1 Week minimum lease for Gulf & Bay Club Bayside on 62 of 64 listings. Always confirm current rental rules with the association before purchasing; condo documents change.' } },
       { '@type': 'Question', name: 'How many units have sold recently at Gulf & Bay Club Bayside?', acceptedAnswer: { '@type': 'Answer', text: '2 units closed in the 180 days ending September 10, 2026, with a median sale price of $690,000.' } }
     ],
   },
@@ -95,6 +95,7 @@ const jsonLd = [
     </div>
   </section>
 
+
   <section class="section dark-section">
     <div class="container">
       <p class="section-label text-cbgl-blue-light mb-3">Bayside</p>
@@ -138,7 +139,7 @@ const jsonLd = [
 <div class="gbc-stat">
         <div class="gbc-stat-value">1 Week</div>
         <div class="gbc-stat-label">Minimum Lease Period</div>
-        <div class="gbc-stat-sub">94% of 18 MLS records</div>
+        <div class="gbc-stat-sub">97% of 64 MLS records</div>
       </div></div>
       <p class="gbc-note">A small but real sample: this association closes few units per period, so a single sale can move the medians. Figures update from live MLS data.</p>
 
@@ -387,6 +388,14 @@ const jsonLd = [
   .gbc-sister a { color:var(--color-gold); border-bottom:1px solid rgba(197,165,90,0.5); padding-bottom:2px; }
   .gbc-sister a:hover { color:var(--color-gold-light); }
   .gbc-about { color:var(--color-text-muted); line-height:1.8; font-size:1.05rem; }
+  .gbc-feature { background:#F6F1E4; border-top:1px solid rgba(201,169,97,0.35); border-bottom:1px solid rgba(201,169,97,0.35); }
+  .gbc-feature h2 { color:var(--color-black); }
+  .gbc-feature .section-label { color:var(--color-cbgl-blue); }
+  .gbc-feature-grid { display:grid; grid-template-columns:1fr; gap:2rem; align-items:center; }
+  @media (min-width:960px){ .gbc-feature-grid { grid-template-columns:5fr 7fr; gap:3.5rem; } }
+  .gbc-feature-btn { margin-top:1.75rem; }
+  .gbc-feature-media { border-radius:0.9rem; overflow:hidden; box-shadow:0 18px 50px rgba(10,31,60,0.28); background:#0A1F3C; aspect-ratio:16/9; }
+  .gbc-feature-video { display:block; width:100%; height:100%; object-fit:cover; }
   .gbc-chip { display:inline-block; background:rgba(45,66,128,0.1); color:var(--color-cbgl-blue); font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; padding:0.45rem 1rem; border-radius:9999px; border:1px solid rgba(45,66,128,0.2); }
   .gbc-fig { position:relative; overflow:hidden; border-radius:0.6rem; aspect-ratio:4/3; margin:0; }
   .gbc-fig img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .7s; }

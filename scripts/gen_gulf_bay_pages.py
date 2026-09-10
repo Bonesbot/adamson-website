@@ -217,6 +217,17 @@ SIDES = {
         "hero_video": "/videos/gulf-and-bay-club-beachfront.mp4",
         "hero_poster": "/videos/gulf-and-bay-club-beachfront-poster.jpg",
         "hero_still": "/videos/gulf-and-bay-club-beachfront-still.jpg",
+        # Feature spot (Media-Studio job gb-list-in-january, 2026-09-10): Ryan's HeyGen
+        # avatar over the grounds footage with the seasonality stats from
+        # Marketing/Siesta/GB/gb-seasonality-brief-2026-09-10.md. Renders a section
+        # between About and the market snapshot; drop the key to remove it.
+        "feature_video": {
+            "src": "/videos/gb-list-in-january.mp4",
+            "poster": "/videos/gb-list-in-january-poster.jpg",
+            "eyebrow": "Thinking of selling?",
+            "title": "The buyers arrive in January. The prep starts now.",
+            "caption": "More than half of Gulf &amp; Bay sales go under contract between January and April. Listed January to March, condos found a buyer in a median 37 days; listed in the fall, 93. Twenty seconds from Ryan on why the calendar matters.",
+        },
         # Ryan's own photography — see BEACHFRONT_GALLERY. Presence of this key also
         # switches the credit line from the Wikimedia placeholder notice.
         "gallery": BEACHFRONT_GALLERY,
@@ -810,6 +821,14 @@ STYLES = r'''<style is:global>
   .gbc-sister a { color:var(--color-gold); border-bottom:1px solid rgba(197,165,90,0.5); padding-bottom:2px; }
   .gbc-sister a:hover { color:var(--color-gold-light); }
   .gbc-about { color:var(--color-text-muted); line-height:1.8; font-size:1.05rem; }
+  .gbc-feature { background:#F6F1E4; border-top:1px solid rgba(201,169,97,0.35); border-bottom:1px solid rgba(201,169,97,0.35); }
+  .gbc-feature h2 { color:var(--color-black); }
+  .gbc-feature .section-label { color:var(--color-cbgl-blue); }
+  .gbc-feature-grid { display:grid; grid-template-columns:1fr; gap:2rem; align-items:center; }
+  @media (min-width:960px){ .gbc-feature-grid { grid-template-columns:5fr 7fr; gap:3.5rem; } }
+  .gbc-feature-btn { margin-top:1.75rem; }
+  .gbc-feature-media { border-radius:0.9rem; overflow:hidden; box-shadow:0 18px 50px rgba(10,31,60,0.28); background:#0A1F3C; aspect-ratio:16/9; }
+  .gbc-feature-video { display:block; width:100%; height:100%; object-fit:cover; }
   .gbc-chip { display:inline-block; background:rgba(45,66,128,0.1); color:var(--color-cbgl-blue); font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; padding:0.45rem 1rem; border-radius:9999px; border:1px solid rgba(45,66,128,0.2); }
   .gbc-fig { position:relative; overflow:hidden; border-radius:0.6rem; aspect-ratio:4/3; margin:0; }
   .gbc-fig img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .7s; }
@@ -1246,6 +1265,26 @@ def render_page(cfg, headline, ledger, lease, lease_n, lease_total, qs, as_of):
     else:
         sister_line, sister_btn = "", ""
 
+    fv = cfg.get("feature_video")
+    feature_video_block = (f'''
+  <section class="section gbc-feature">
+    <div class="container">
+      <div class="gbc-feature-grid">
+        <div class="gbc-feature-copy">
+          <p class="section-label mb-3">{fv["eyebrow"]}</p>
+          <h2 class="accent-underline mb-5">{fv["title"]}</h2>
+          <p class="gbc-about">{fv["caption"]}</p>
+          <a href="#contact" class="gbc-btn gbc-btn-gold gbc-feature-btn">Request a Private Consult</a>
+        </div>
+        <div class="gbc-feature-media">
+          <video class="gbc-feature-video" controls playsinline preload="metadata" poster="{fv["poster"]}" width="1280" height="720">
+            <source src="{fv["src"]}" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>''') if fv else ""
+
     bld_table = render_by_building(ledger, cfg)
     by_building_block = f'''
       <h3 class="font-display gbc-subhead">By the Building</h3>
@@ -1342,6 +1381,7 @@ const jsonLd = [
     </div>
   </section>
 
+{feature_video_block}
   <section class="section dark-section">
     <div class="container">
       <p class="section-label text-cbgl-blue-light mb-3">{cfg["short"]}</p>
