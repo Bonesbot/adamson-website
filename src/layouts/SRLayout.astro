@@ -1,0 +1,78 @@
+---
+/**
+ * SiestaReport.com layout. siestareport.com is a domain alias on the adamsonfl.com
+ * Netlify project (no separate build), so the page that uses this layout lives in
+ * src/pages/siesta-report/ and is served at the bare SiestaReport.com host by a
+ * host-scoped 200 rewrite in public/_redirects. On the adamsonfl.com host the same
+ * path 301s to SiestaReport.com, and the sitemap filter in astro.config.mjs keeps it
+ * out of the hub sitemap, so the page has exactly one public address.
+ *
+ * Mirrors LLLLayout: same props API as BaseLayout, shared global.css / Meta / JsonLd,
+ * co-brand header and footer (Kelli Eggen & Ryan Adamson, equal billing).
+ */
+import '@/styles/global.css';
+import Meta from '@/components/seo/Meta.astro';
+import JsonLd from '@/components/seo/JsonLd.astro';
+import SRHeader from '@/components/sr/SRHeader.astro';
+import SRFooter from '@/components/sr/SRFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  jsonLd?: Record<string, any> | Record<string, any>[];
+  noIndex?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogImage = '/images/areas/siesta-key/hero.jpg',
+  canonicalUrl,
+  jsonLd,
+  noIndex = false,
+} = Astro.props;
+
+const siteTitle = 'Siesta Report: Siesta Key Real Estate, by the Numbers';
+const fullTitle = title === 'Home' ? siteTitle : `${title} | Siesta Report`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <Meta
+      title={fullTitle}
+      description={description}
+      ogImage={ogImage}
+      canonicalUrl={canonicalUrl || 'https://siestareport.com/'}
+      noIndex={noIndex}
+      siteName="Siesta Report"
+    />
+
+    {jsonLd && <JsonLd data={jsonLd} />}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Home Platform Pixel Tracker (connects the site to the CRM) -->
+    <script src="https://www.homeplatform.com/cxlp/a.min.js" id="cxlp-ajs" data-client-id="fl4xsh4e3vj4" async is:inline></script>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <SRHeader />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <SRFooter />
+  </body>
+</html>

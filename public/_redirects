@@ -12,7 +12,8 @@
 # they fire only on that host and are listed first so the un-scoped /gb rules
 # below never shadow them. 200 = the Gulf & Bay page is SERVED at
 # SiestaReport.com/GB (URL stays put); the adamsonfl.com URL stays live too and
-# keeps the canonical. Netlify path matching is case-insensitive, but /GB is
+# keeps the canonical. The bare host serves src/pages/siesta-report/ (Kelli + Ryan
+# co-brand). Netlify path matching is case-insensitive, but /GB is
 # what is printed, so both spellings are listed for clarity.
 
 https://www.siestareport.com/*  https://siestareport.com/:splat                              301!
@@ -20,7 +21,10 @@ https://siestareport.com/GB     /siesta-key/gulf-and-bay-club-beachfront/       
 https://siestareport.com/gb     /siesta-key/gulf-and-bay-club-beachfront/                    200
 https://siestareport.com/GB/*   /siesta-key/gulf-and-bay-club-beachfront/?qr=:splat&src=typed 200
 https://siestareport.com/gb/*   /siesta-key/gulf-and-bay-club-beachfront/?qr=:splat&src=typed 200
-https://siestareport.com/       /areas/siesta-key/                                           200
+https://siestareport.com/       /siesta-report/                                              200
+# On the hub host the SiestaReport home has no business being reachable: one public address.
+https://adamsonfl.com/siesta-report    https://siestareport.com/                             301!
+https://adamsonfl.com/siesta-report/*  https://siestareport.com/                             301!
 
 # Printed on the Sept 2026 Gulf & Bay Owner Brief proof before the domain existed.
 /gulfbay   https://siestareport.com/GB?utm_source=mailer&utm_medium=direct-mail&utm_campaign=gb-owner-brief   301

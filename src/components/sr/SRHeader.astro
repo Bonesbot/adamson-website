@@ -1,0 +1,45 @@
+---
+/**
+ * SiestaReport.com header: co-brand, equal billing, no AdamsonFL nav.
+ * Text wordmark; both agents named on the right with the brokerage, per the
+ * dual-logo rule in _shared/brand/brand.json. Each agent's own contact info sits
+ * under their headshot on the page and in the footer.
+ */
+const nav = [
+  { label: 'Home', href: '/' },
+  { label: 'Gulf & Bay Club', href: '/GB' },
+];
+---
+
+<header class="bg-[var(--color-navy,#1B2A4A)] text-white">
+  <div class="container flex flex-col md:flex-row items-center justify-between gap-3 py-4">
+    <a href="/" class="flex flex-wrap items-baseline justify-center gap-x-2 no-underline">
+      <span class="font-display text-xl font-bold tracking-wide text-white whitespace-nowrap">Siesta Report</span>
+      <span class="font-display text-xl font-bold tracking-wide text-[var(--color-gold,#C5A55A)] whitespace-nowrap">Siesta Key, by the Numbers</span>
+    </a>
+
+    <nav aria-label="Main">
+      <ul class="flex items-center gap-6" role="list">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="font-accent text-xs uppercase tracking-[0.15em] text-white/80 hover:text-[var(--color-gold,#C5A55A)] transition-colors"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="text-center md:text-right leading-tight">
+      <p class="font-accent text-xs uppercase tracking-[0.15em] text-white">
+        Kelli Eggen &amp; Ryan Adamson
+      </p>
+      <p class="font-accent text-[10px] uppercase tracking-[0.2em] text-white/60 mt-0.5">
+        Coldwell Banker Realty, Siesta Key
+      </p>
+    </div>
+  </div>
+</header>

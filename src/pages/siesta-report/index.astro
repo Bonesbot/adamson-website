@@ -1,0 +1,78 @@
+---
+/**
+ * SiestaReport.com home: the Siesta Key market page, co-branded Kelli Eggen and
+ * Ryan Adamson. Served at https://siestareport.com/ by a host-scoped 200 rewrite
+ * (public/_redirects); on adamsonfl.com this path 301s to SiestaReport.com and is
+ * filtered out of the hub sitemap, so the page has one public address.
+ *
+ * The body is the shared CobrandAreaPage component (also used by longboatlido.com);
+ * this file owns the layout, title, description and JSON-LD. Every number comes from
+ * src/data/siesta-key-stats.json (daily pipeline), the island copy from areas.json +
+ * area-media.json. No links back to AdamsonFL.com.
+ */
+import SRLayout from '@/layouts/SRLayout.astro';
+import CobrandAreaPage from '@/components/market/CobrandAreaPage.astro';
+import { buildAreaModel } from '@/lib/cobrandArea';
+import areasJson from '@/data/areas.json';
+import areaMedia from '@/data/area-media.json';
+import stats from '@/data/siesta-key-stats.json';
+
+const area: any = (areasJson as any).areas.find((a: any) => a.slug === 'siesta-key');
+const media: any = (areaMedia as any)['siesta-key'] || {};
+const names = { agentsShort: 'Kelli and Ryan', agentsFull: 'Kelli Eggen and Ryan Adamson' };
+const { asOfIso, faqs, summary } = buildAreaModel(stats, area, media, names);
+
+const description = `Siesta Key real estate market data from Kelli Eggen and Ryan Adamson, Coldwell Banker Realty: ${stats.active.count} active listings, median sold price ${stats.sold.medianPrice} over the last ${stats.sold.windowDays} days, ${stats.marketBalance.monthsOfSupply} months of supply, with Gulf-front, bayfront, condo and single-family segments tracked separately from live Stellar MLS data.`;
+
+const jsonLd = [
+  {
+    '@type': 'Place',
+    name: 'Siesta Key',
+    description: summary,
+    address: { '@type': 'PostalAddress', addressLocality: 'Siesta Key', addressRegion: 'FL', postalCode: '34242', addressCountry: 'US' },
+  },
+  {
+    '@type': 'WebPage',
+    name: 'Siesta Key Real Estate Market Guide',
+    description,
+    url: 'https://siestareport.com/',
+    ...(asOfIso && { dateModified: asOfIso }),
+    author: [
+      { '@type': 'RealEstateAgent', name: 'Kelli Eggen', worksFor: { '@type': 'Organization', name: 'Coldwell Banker Realty, Siesta Key' } },
+      { '@type': 'RealEstateAgent', name: 'Ryan Adamson', worksFor: { '@type': 'Organization', name: 'Coldwell Banker Realty, Siesta Key' } },
+    ],
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
+  },
+];
+---
+
+<SRLayout title="Home" description={description} jsonLd={jsonLd}>
+  <CobrandAreaPage
+    uid="sk"
+    area={area}
+    media={media}
+    stats={stats}
+    heroImage={media.heroImage || '/images/areas/siesta-key.jpg'}
+    heroPosition={media.heroPosition || 'center'}
+    heroLabel="Siesta Key &middot; 34242 &middot; Gulf to Bay"
+    heroTag="Every closed sale and every active listing on the island, from live Stellar MLS records: Gulf-front, bayfront, condo and single-family tracked separately, and two agents who work Siesta Key every day."
+    heroTeamLine="Kelli Eggen &amp; Ryan Adamson &middot; Coldwell Banker Realty, Siesta Key"
+    agentsShort={names.agentsShort}
+    agentsFull={names.agentsFull}
+    teamWorkLine="work Siesta Key together"
+    team={[
+      { name: 'Kelli Eggen', img: '/images/kelli-eggen.jpg', width: 800, height: 800, alt: 'Kelli Eggen, Coldwell Banker Global Luxury', phone: '(941) 376-9844', phoneHref: 'tel:+19413769844', emailEntity: 'Kelli&#46;Eggen&#64;gmail&#46;com' },
+      { name: 'Ryan Adamson', img: '/images/ryan-adamson-square.jpg', width: 800, height: 800, alt: 'Ryan Adamson, Coldwell Banker Global Luxury', phone: '(941) 713-9234', phoneHref: 'tel:+19417139234', emailEntity: 'Ryan&#64;Adamson-Group&#46;com' },
+    ]}
+    communities={[
+      { href: '/GB', eyebrow: 'Siesta Key &middot; 34242 &middot; Gulf-Front', title: 'Gulf &amp; Bay Club', copy: 'Every closed sale at the 32-acre Gulf-front association on Midnight Pass Road, broken out building by building (A through F) with median price, price per square foot, days on market and sale-to-list ratios from live Stellar MLS data.' },
+    ]}
+    sellerCopy="Curious what your home or condo would bring today? We'll walk the real closed-sale data above against your building, view, floor and condition. Gulf-front, bayfront, condo and single-family are different markets, and we price them that way. Privately, with no obligation and no listing pressure."
+    buyerCopy="The best Gulf-front and bayfront residences on Siesta Key often change hands before they reach the MLS. Tell us what you are looking for and we'll reach out first on available and off-market homes."
+    altPhone="(941) 713-9234"
+    altPhoneHref="tel:+19417139234"
+  />
+</SRLayout>

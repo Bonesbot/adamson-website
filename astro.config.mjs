@@ -25,7 +25,9 @@ export default defineConfig({
     sitemap({
       // SRQMAP-HIDDEN 2026-09-02: keep the map pages out of the sitemap while hidden.
       // Remove the filter to restore.
-      filter: (page) => !/\/(srqmap|srq-map)\/?$/i.test(page),
+      // siesta-report is the SiestaReport.com home page (served there by a host-scoped
+      // rewrite); it must not be listed as an adamsonfl.com URL.
+      filter: (page) => !/\/(srqmap|srq-map|siesta-report)\/?$/i.test(page),
     }),
     mdx(),
   ],
