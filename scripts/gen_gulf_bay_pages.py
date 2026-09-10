@@ -220,14 +220,16 @@ SIDES = {
         # Feature spot (Media-Studio job gb-list-in-january, 2026-09-10): Ryan's HeyGen
         # avatar over the grounds footage with the seasonality stats from
         # Marketing/Siesta/GB/gb-seasonality-brief-2026-09-10.md. Renders a section
-        # between About and the market snapshot; drop the key to remove it.
-        "feature_video": {
-            "src": "/videos/gb-list-in-january.mp4",
-            "poster": "/videos/gb-list-in-january-poster.jpg",
-            "eyebrow": "Thinking of selling?",
-            "title": "The buyers arrive in January. The prep starts now.",
-            "caption": "More than half of Gulf &amp; Bay sales go under contract between January and April. Listed January to March, condos found a buyer in a median 37 days; listed in the fall, 93. Twenty seconds from Ryan on why the calendar matters.",
-        },
+        # between About and the market snapshot. OFF since 2026-09-10 (Ryan: it was a test);
+        # the section code stays, uncomment the key and restore the two files under
+        # public/videos from Media-Studio/jobs/gb-list-in-january/ to bring it back.
+        # "feature_video": {
+        #     "src": "/videos/gb-list-in-january.mp4",
+        #     "poster": "/videos/gb-list-in-january-poster.jpg",
+        #     "eyebrow": "Thinking of selling?",
+        #     "title": "The buyers arrive in January. The prep starts now.",
+        #     "caption": "More than half of Gulf &amp; Bay sales go under contract between January and April. Listed January to March, condos found a buyer in a median 37 days; listed in the fall, 93. Twenty seconds from Ryan on why the calendar matters.",
+        # },
         # Ryan's own photography — see BEACHFRONT_GALLERY. Presence of this key also
         # switches the credit line from the Wikimedia placeholder notice.
         "gallery": BEACHFRONT_GALLERY,
