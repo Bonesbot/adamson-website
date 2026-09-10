@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-08T10:49:37.969166+00:00",
+  "lastUpdated": "2026-09-10T16:35:09.166690+00:00",
   "counts": {
-    "sold": 278,
-    "pending": 39,
-    "active": 82,
-    "total": 317
+    "sold": 282,
+    "pending": 36,
+    "active": 81,
+    "total": 318
   },
   "metrics": {
-    "avgPrice": "$630,940",
+    "avgPrice": "$629,485",
     "avgPricePerSqFt": "$329",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,737",
+    "avgLivingSqFt": "1,735",
     "avgLotSqFt": null,
     "avgDom": 80
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$6,000,000"
   },
   "active": {
-    "count": 82,
-    "medianPrice": "$487,450",
-    "medianPricePerSqFt": "$328",
-    "waterfrontCount": 24,
+    "count": 81,
+    "medianPrice": "$497,800",
+    "medianPricePerSqFt": "$329",
+    "waterfrontCount": 23,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 43,
-    "medianPrice": "$395,000",
-    "medianDom": 52,
-    "saleToListRatio": "87.3%",
+    "count": 45,
+    "medianPrice": "$405,000",
+    "medianDom": 53,
+    "saleToListRatio": "87.5%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 4.5,
-    "sfhVilla": 4.4,
-    "blended": 4.4,
+    "condo": 4.0,
+    "sfhVilla": 4.5,
+    "blended": 4.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,71 @@
     }
   },
   "priceBands": {
-    "under900k": 63,
-    "band900kTo1_5m": 6,
+    "under900k": 61,
+    "band900kTo1_5m": 7,
     "band1_5mTo3m": 8,
     "band3mPlus": 5
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 82
+      "count": 81
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4693024",
+      "address": "1613 IDLE LN",
+      "subdivision": "DOES NOT APPLY",
+      "soldPrice": "$565,000",
+      "soldDate": "2026-09-09",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,009",
+      "yearBuilt": 1972,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4692894",
+      "address": "5420 EAGLES POINT CIR #402",
+      "subdivision": "EAGLES POINT AT THE LANDINGS 1",
+      "soldPrice": "$615,000",
+      "soldDate": "2026-09-08",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,715",
+      "yearBuilt": 1993,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4699112",
+      "address": "7411 DICKENS DR",
+      "subdivision": "GULF GATE WOODS",
+      "soldPrice": "$405,000",
+      "soldDate": "2026-09-08",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,256",
+      "yearBuilt": 1972,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4686372",
+      "address": "1617 BROOKHOUSE DR #BR260",
+      "subdivision": "PELICAN COVE XVI",
+      "soldPrice": "$369,000",
+      "soldDate": "2026-09-08",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,283",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4694065",
       "address": "1632 STARLING DR #101",
@@ -79,58 +131,6 @@
       "yearBuilt": 1987,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4691682",
-      "address": "1624 STICKNEY POINT RD #206",
-      "subdivision": "CASTEL DEL MARE",
-      "soldPrice": "$349,000",
-      "soldDate": "2026-09-02",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,016",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4660320",
-      "address": "1848 SOUTHPOINTE DR",
-      "subdivision": "SOUTHPOINTE SHORES",
-      "soldPrice": "$605,000",
-      "soldDate": "2026-08-27",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,852",
-      "yearBuilt": 1968,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4697729",
-      "address": "5161 FLICKER FIELD CIR",
-      "subdivision": "THE LANDINGS",
-      "soldPrice": "$1,085,000",
-      "soldDate": "2026-08-26",
-      "bedrooms": 4,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,273",
-      "yearBuilt": 1986,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "TB8512156",
-      "address": "6139 HOLLYWOOD BLVD",
-      "subdivision": "PINE SHORES ESTATE 4TH SEC",
-      "soldPrice": "$980,000",
-      "soldDate": "2026-08-26",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,088",
-      "yearBuilt": 1953,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 41,
-      "avgPrice": "$370,621",
-      "avgPricePerSqFt": "$296",
-      "avgLivingSqFt": "1,243",
-      "avgDom": 111
+      "activeCount": 38,
+      "avgPrice": "$360,046",
+      "avgPricePerSqFt": "$295",
+      "avgLivingSqFt": "1,213",
+      "avgDom": 109
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$605,750",
       "avgPricePerSqFt": "$288",
       "avgLivingSqFt": "2,110",
-      "avgDom": 203
+      "avgDom": 205
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$589,667",
       "avgPricePerSqFt": "$345",
       "avgLivingSqFt": "1,711",
-      "avgDom": 158
+      "avgDom": 159
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$627,000",
       "avgPricePerSqFt": "$352",
       "avgLivingSqFt": "1,785",
-      "avgDom": 184
+      "avgDom": 186
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 22,
+      "activeCount": 21,
       "soldCount": 57,
       "soldMedianPricePerSqFt": "$362",
       "soldMedianPrice": "$495,000",
@@ -206,9 +206,9 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 9,
-      "soldCount": 26,
-      "soldMedianPricePerSqFt": "$316",
-      "soldMedianPrice": "$440,000",
+      "soldCount": 29,
+      "soldMedianPricePerSqFt": "$315",
+      "soldMedianPrice": "$450,000",
       "lowSample": false
     },
     {
@@ -224,65 +224,65 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 49,
-      "soldCount": 180,
+      "soldCount": 181,
       "soldMedianPricePerSqFt": "$283",
-      "soldMedianPrice": "$427,000",
+      "soldMedianPrice": "$425,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.4,
-    "monthsOfSupplyCondo": 4.5,
-    "monthsOfSupplySfhVilla": 4.4,
+    "monthsOfSupply": 4.3,
+    "monthsOfSupplyCondo": 4.0,
+    "monthsOfSupplySfhVilla": 4.5,
     "label": "seller's market",
-    "activeCount": 82,
-    "sold365Count": 222,
-    "sold90Count": 43,
+    "activeCount": 81,
+    "sold365Count": 226,
+    "sold90Count": 45,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 147,
-      "activeCount": 32,
+      "soldCount": 149,
+      "activeCount": 34,
       "soldMedianPrice": "$520,000",
       "soldMedianPricePerSqFt": "$321"
     },
     "condo": {
-      "soldCount": 131,
-      "activeCount": 50,
-      "soldMedianPrice": "$345,000",
-      "soldMedianPricePerSqFt": "$260"
+      "soldCount": 133,
+      "activeCount": 47,
+      "soldMedianPrice": "$347,500",
+      "soldMedianPricePerSqFt": "$261"
     }
   },
   "boating": {
     "activeWithDock": 11,
-    "activeWaterfront": 24
+    "activeWaterfront": 23
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 82 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail South has about 4.4 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 81 active listings and roughly 19 closed sales a month (trailing 12 months), West Of Trail South has about 4.3 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $520,000 ($321/sq ft), while condos, villas and townhouses sell around $345,000 ($260/sq ft)."
+      "a": "Single-family homes sell around $520,000 ($321/sq ft), while condos, villas and townhouses sell around $347,500 ($261/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $110,000 to $6,000,000, with a median asking price of $487,450."
+      "a": "Active listings run from $110,000 to $6,000,000, with a median asking price of $497,800."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 52 days on market and closed at 87.3% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 53 days on market and closed at 87.5% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 24 active waterfront listings, 11 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 23 active waterfront listings, 11 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

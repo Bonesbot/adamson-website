@@ -2,20 +2,20 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-08T10:49:36.478652+00:00",
+  "lastUpdated": "2026-09-10T16:35:07.618034+00:00",
   "counts": {
-    "sold": 209,
+    "sold": 211,
     "pending": 25,
     "active": 74,
-    "total": 234
+    "total": 236
   },
   "metrics": {
-    "avgPrice": "$2,443,259",
-    "avgPricePerSqFt": "$728",
-    "avgYearBuilt": 1986,
-    "avgLivingSqFt": "2,990",
+    "avgPrice": "$2,429,757",
+    "avgPricePerSqFt": "$725",
+    "avgYearBuilt": 1985,
+    "avgLivingSqFt": "2,981",
     "avgLotSqFt": null,
-    "avgDom": 119
+    "avgDom": 120
   },
   "range": {
     "minPrice": "$3,150",
@@ -23,27 +23,27 @@
   },
   "active": {
     "count": 74,
-    "medianPrice": "$3,047,000",
+    "medianPrice": "$3,097,500",
     "medianPricePerSqFt": "$912",
-    "waterfrontCount": 17,
+    "waterfrontCount": 18,
     "newConstructionCount": 29
   },
   "sold": {
-    "count": 36,
+    "count": 35,
     "medianPrice": "$1,825,000",
-    "medianDom": 116,
-    "saleToListRatio": "86.9%",
+    "medianDom": 124,
+    "saleToListRatio": "85.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 3.8,
-    "sfhVilla": 5.9,
-    "blended": 5.7,
+    "sfhVilla": 5.8,
+    "blended": 5.6,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$67",
+    "medianMonthlyAssociation": "$100",
     "medianMonthlyCondoFee": "$689",
     "minMonthlyCondoFee": "$407",
     "maxMonthlyCondoFee": "$4,104",
@@ -54,10 +54,10 @@
     }
   },
   "priceBands": {
-    "under900k": 9,
-    "band900kTo1_5m": 4,
-    "band1_5mTo3m": 24,
-    "band3mPlus": 37
+    "under900k": 8,
+    "band900kTo1_5m": 5,
+    "band1_5mTo3m": 23,
+    "band3mPlus": 38
   },
   "propertyTypes": [
     {
@@ -67,6 +67,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4626321",
+      "address": "4431 CAMINO REAL",
+      "subdivision": "OYSTER BAY ESTATES",
+      "soldPrice": "$4,225,000",
+      "soldDate": "2026-09-10",
+      "bedrooms": 4,
+      "bathrooms": 4.5,
+      "livingSqFt": "3,787",
+      "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4687005",
+      "address": "3319 S OSPREY AVE",
+      "subdivision": "POINSETTIA PARK 2",
+      "soldPrice": "$1,750,000",
+      "soldDate": "2026-09-09",
+      "bedrooms": 4,
+      "bathrooms": 4.5,
+      "livingSqFt": "3,554",
+      "yearBuilt": 2023,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4705114",
       "address": "1862 PROSPECT ST",
@@ -105,32 +131,6 @@
       "yearBuilt": 2024,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4699858",
-      "address": "3727 TANGIER TER",
-      "subdivision": "SAN REMO ESTATES",
-      "soldPrice": "$1,600,000",
-      "soldDate": "2026-09-01",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,696",
-      "yearBuilt": 1959,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4685410",
-      "address": "825 S OSPREY AVE #101",
-      "subdivision": "CENTRAL PARK",
-      "soldPrice": "$450,000",
-      "soldDate": "2026-09-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,260",
-      "yearBuilt": 1985,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 5,
-      "avgPrice": "$246,400",
-      "avgPricePerSqFt": "$264",
-      "avgLivingSqFt": "968",
-      "avgDom": 139
+      "avgPrice": "$401,400",
+      "avgPricePerSqFt": "$365",
+      "avgLivingSqFt": "1,042",
+      "avgDom": 102
     },
     {
       "tier": "1990to2005",
@@ -187,7 +187,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 16,
+      "activeCount": 17,
       "soldCount": 27,
       "soldMedianPricePerSqFt": "$1,051",
       "soldMedianPrice": "$3,875,000",
@@ -206,7 +206,7 @@
       "segment": "other_wf",
       "label": "Other waterfront",
       "activeCount": 1,
-      "soldCount": 2,
+      "soldCount": 3,
       "soldMedianPricePerSqFt": null,
       "soldMedianPrice": null,
       "lowSample": true
@@ -214,26 +214,26 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 57,
-      "soldCount": 174,
-      "soldMedianPricePerSqFt": "$647",
-      "soldMedianPrice": "$1,638,750",
+      "activeCount": 56,
+      "soldCount": 175,
+      "soldMedianPricePerSqFt": "$642",
+      "soldMedianPrice": "$1,640,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.7,
+    "monthsOfSupply": 5.6,
     "monthsOfSupplyCondo": 3.8,
-    "monthsOfSupplySfhVilla": 5.9,
+    "monthsOfSupplySfhVilla": 5.8,
     "label": "balanced market",
     "activeCount": 74,
-    "sold365Count": 157,
-    "sold90Count": 36,
+    "sold365Count": 158,
+    "sold90Count": 35,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 189,
+      "soldCount": 191,
       "activeCount": 69,
       "soldMedianPrice": "$1,850,000",
       "soldMedianPricePerSqFt": "$675"
@@ -246,14 +246,14 @@
     }
   },
   "boating": {
-    "activeWithDock": 13,
-    "activeWaterfront": 17
+    "activeWithDock": 14,
+    "activeWaterfront": 18
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 74 active listings and roughly 13 closed sales a month (trailing 12 months), West Of Trail Core has about 5.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 74 active listings and roughly 13 closed sales a month (trailing 12 months), West Of Trail Core has about 5.6 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,22 +263,22 @@
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $3,150 to $26,400,000, with a median asking price of $3,047,000."
+      "a": "Active listings run from $3,150 to $26,400,000, with a median asking price of $3,097,500."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 116 days on market and closed at 86.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 124 days on market and closed at 85.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail Core homes have a dock?",
-      "a": "Of 17 active waterfront listings, 13 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 18 active waterfront listings, 14 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on West Of Trail Core?",
-      "a": "The median monthly condo fee is $689 and the median monthly association fee is $67."
+      "a": "The median monthly condo fee is $689 and the median monthly association fee is $100."
     }
   ],
   "costBreakdown90": null
