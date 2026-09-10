@@ -21,7 +21,8 @@ https://siestareport.com/GB     /siesta-key/gulf-and-bay-club-beachfront/       
 https://siestareport.com/gb     /siesta-key/gulf-and-bay-club-beachfront/                    200
 https://siestareport.com/GB/*   /siesta-key/gulf-and-bay-club-beachfront/?qr=:splat&src=typed 200
 https://siestareport.com/gb/*   /siesta-key/gulf-and-bay-club-beachfront/?qr=:splat&src=typed 200
-https://siestareport.com/       /siesta-report/                                              200
+# 200! (forced): the hub's own /index.html exists, and an unforced rewrite never shadows a real file.
+https://siestareport.com/       /siesta-report/                                              200!
 # On the hub host the SiestaReport home has no business being reachable: one public address.
 https://adamsonfl.com/siesta-report    https://siestareport.com/                             301!
 https://adamsonfl.com/siesta-report/*  https://siestareport.com/                             301!
