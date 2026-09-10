@@ -3,8 +3,9 @@
  * LongboatLido.com header: co-brand, equal billing, no AdamsonFL nav.
  * Text wordmark until a dedicated LLL mark exists; both agents named on the
  * right with the brokerage, per the dual-logo rule in _shared/brand/brand.json.
+ * No shared tracking number here (removed 2026-09-10, not in use yet); each agent's
+ * own contact info sits under their headshot on the page and in the footer.
  */
-import CallText from './CallText.astro';
 
 const nav = [
   { label: 'Home', href: '/' },
@@ -33,10 +34,6 @@ const nav = [
         ))}
       </ul>
     </nav>
-
-    <div class="hidden md:block">
-      <CallText variant="header" />
-    </div>
 
     <div class="text-center md:text-right leading-tight">
       <p class="font-accent text-xs uppercase tracking-[0.15em] text-white">
