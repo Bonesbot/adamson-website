@@ -2,15 +2,15 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-10T16:35:06.811651+00:00",
+  "lastUpdated": "2026-09-11T11:10:11.456194+00:00",
   "counts": {
-    "sold": 323,
-    "pending": 71,
+    "sold": 325,
+    "pending": 69,
     "active": 185,
     "total": 394
   },
   "metrics": {
-    "avgPrice": "$1,747,925",
+    "avgPrice": "$1,747,583",
     "avgPricePerSqFt": "$775",
     "avgYearBuilt": 2002,
     "avgLivingSqFt": "1,975",
@@ -24,21 +24,21 @@
   "active": {
     "count": 185,
     "medianPrice": "$1,750,000",
-    "medianPricePerSqFt": "$931",
+    "medianPricePerSqFt": "$920",
     "waterfrontCount": 52,
     "newConstructionCount": 89
   },
   "sold": {
-    "count": 65,
-    "medianPrice": "$800,000",
-    "medianDom": 104,
+    "count": 66,
+    "medianPrice": "$820,000",
+    "medianDom": 105,
     "saleToListRatio": "86.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 8.5,
-    "sfhVilla": 9.0,
-    "blended": 8.5,
+    "condo": 8.4,
+    "sfhVilla": 8.6,
+    "blended": 8.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -67,6 +67,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4673505",
+      "address": "1659 DEVONSHIRE LN",
+      "subdivision": "BURNS REALTY CO SUB",
+      "soldPrice": "$2,300,000",
+      "soldDate": "2026-09-10",
+      "bedrooms": 4,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,754",
+      "yearBuilt": 2024,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4701005",
+      "address": "770 S PALM AVE #904",
+      "subdivision": "EMBASSY HOUSE",
+      "soldPrice": "$685,000",
+      "soldDate": "2026-09-10",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,636",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4686980",
       "address": "1111 N GULFSTREAM AVE #10E",
@@ -105,32 +131,6 @@
       "yearBuilt": 2003,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4692654",
-      "address": "770 S PALM AVE #1501",
-      "subdivision": "EMBASSY HOUSE",
-      "soldPrice": "$750,000",
-      "soldDate": "2026-09-02",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,408",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4678251",
-      "address": "33 S PALM AVE #902",
-      "subdivision": "THE DEMARCAY",
-      "soldPrice": "$875,000",
-      "soldDate": "2026-09-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,397",
-      "yearBuilt": 2024,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,20 +139,20 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 36,
-      "avgPrice": "$1,182,272",
-      "avgPricePerSqFt": "$688",
+      "avgPrice": "$1,180,911",
+      "avgPricePerSqFt": "$687",
       "avgLivingSqFt": "1,621",
-      "avgDom": 166
+      "avgDom": 167
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 25,
-      "avgPrice": "$1,377,072",
-      "avgPricePerSqFt": "$658",
+      "avgPrice": "$1,369,112",
+      "avgPricePerSqFt": "$655",
       "avgLivingSqFt": "1,891",
-      "avgDom": 117
+      "avgDom": 118
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$1,395,116",
       "avgPricePerSqFt": "$668",
       "avgLivingSqFt": "1,870",
-      "avgDom": 90
+      "avgDom": 91
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 87,
-      "avgPrice": "$3,796,897",
+      "avgPrice": "$3,797,471",
       "avgPricePerSqFt": "$1,335",
-      "avgLivingSqFt": "2,666",
-      "avgDom": 219
+      "avgLivingSqFt": "2,668",
+      "avgDom": 220
     }
   ],
   "condoTiersScope": {
@@ -206,9 +206,9 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 62,
-      "soldCount": 151,
-      "soldMedianPricePerSqFt": "$769",
-      "soldMedianPrice": "$1,450,000",
+      "soldCount": 152,
+      "soldMedianPricePerSqFt": "$767",
+      "soldMedianPrice": "$1,437,500",
       "lowSample": false
     },
     {
@@ -224,33 +224,33 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 71,
-      "soldCount": 100,
-      "soldMedianPricePerSqFt": "$501",
+      "soldCount": 101,
+      "soldMedianPricePerSqFt": "$505",
       "soldMedianPrice": "$625,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 8.5,
-    "monthsOfSupplyCondo": 8.5,
-    "monthsOfSupplySfhVilla": 9.0,
+    "monthsOfSupply": 8.4,
+    "monthsOfSupplyCondo": 8.4,
+    "monthsOfSupplySfhVilla": 8.6,
     "label": "buyer's market",
     "activeCount": 185,
-    "sold365Count": 261,
-    "sold90Count": 65,
+    "sold365Count": 263,
+    "sold90Count": 66,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 15,
+      "soldCount": 16,
       "activeCount": 5,
-      "soldMedianPrice": "$940,000",
-      "soldMedianPricePerSqFt": "$505"
+      "soldMedianPrice": "$945,000",
+      "soldMedianPricePerSqFt": "$534"
     },
     "condo": {
-      "soldCount": 308,
+      "soldCount": 309,
       "activeCount": 180,
-      "soldMedianPrice": "$1,132,500",
+      "soldMedianPrice": "$1,125,000",
       "soldMedianPricePerSqFt": "$677"
     }
   },
@@ -262,12 +262,12 @@
     {
       "facet": "balance",
       "q": "Is Downtown Sarasota a buyer's or seller's market right now?",
-      "a": "With 185 active listings and roughly 22 closed sales a month (trailing 12 months), Downtown Sarasota has about 8.5 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 185 active listings and roughly 22 closed sales a month (trailing 12 months), Downtown Sarasota has about 8.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Downtown Sarasota?",
-      "a": "Single-family homes sell around $940,000 ($505/sq ft), while condos, villas and townhouses sell around $1,132,500 ($677/sq ft)."
+      "a": "Single-family homes sell around $945,000 ($534/sq ft), while condos, villas and townhouses sell around $1,125,000 ($677/sq ft)."
     },
     {
       "facet": "range",
@@ -277,7 +277,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Downtown Sarasota?",
-      "a": "Recently sold homes took a median 104 days on market and closed at 86.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 105 days on market and closed at 86.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

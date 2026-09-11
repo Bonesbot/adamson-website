@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-10T16:35:10.670942+00:00",
+  "lastUpdated": "2026-09-11T11:10:15.202727+00:00",
   "counts": {
-    "sold": 873,
-    "pending": 81,
-    "active": 210,
-    "total": 954
+    "sold": 875,
+    "pending": 80,
+    "active": 211,
+    "total": 955
   },
   "metrics": {
-    "avgPrice": "$562,545",
-    "avgPricePerSqFt": "$263",
+    "avgPrice": "$561,441",
+    "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,050",
+    "avgLivingSqFt": "2,048",
     "avgLotSqFt": null,
     "avgDom": 80
   },
@@ -22,21 +22,21 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 210,
-    "medianPrice": "$415,000",
+    "count": 211,
+    "medianPrice": "$419,000",
     "medianPricePerSqFt": "$253",
-    "waterfrontCount": 34,
-    "newConstructionCount": 29
+    "waterfrontCount": 36,
+    "newConstructionCount": 30
   },
   "sold": {
     "count": 170,
     "medianPrice": "$460,000",
-    "medianDom": 50,
-    "saleToListRatio": "92.1%",
+    "medianDom": 52,
+    "saleToListRatio": "92.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.8,
+    "condo": 5.7,
     "sfhVilla": 2.9,
     "blended": 3.6,
     "method": "active / (trailing-12mo closed / 12)",
@@ -55,18 +55,44 @@
   },
   "priceBands": {
     "under900k": 189,
-    "band900kTo1_5m": 17,
+    "band900kTo1_5m": 18,
     "band1_5mTo3m": 4,
     "band3mPlus": 0
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 210
+      "count": 211
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4695956",
+      "address": "12635 NIGHT VIEW DR",
+      "subdivision": "PROMENADE ESTATES PH I",
+      "soldPrice": "$920,000",
+      "soldDate": "2026-09-10",
+      "bedrooms": 4,
+      "bathrooms": 4.0,
+      "livingSqFt": "3,182",
+      "yearBuilt": 2022,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4691819",
+      "address": "6392 DRAW LN #40",
+      "subdivision": "SUNRISE GOLF CLUB PH I",
+      "soldPrice": "$155,000",
+      "soldDate": "2026-09-10",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,482",
+      "yearBuilt": 1974,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4683113",
       "address": "3639 MUIRFIELD DR #3A",
@@ -105,32 +131,6 @@
       "yearBuilt": 1981,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4698350",
-      "address": "4057 CROCKERS LAKE BLVD #17",
-      "subdivision": "VINTAGE GRAND",
-      "soldPrice": "$245,000",
-      "soldDate": "2026-09-08",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,272",
-      "yearBuilt": 1989,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4699605",
-      "address": "12667 NIGHT VIEW DR",
-      "subdivision": "PROMENADE ESTATES PH 1",
-      "soldPrice": "$400,000",
-      "soldDate": "2026-09-04",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,682",
-      "yearBuilt": 2021,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,20 +138,20 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 33,
-      "avgPrice": "$303,006",
-      "avgPricePerSqFt": "$192",
-      "avgLivingSqFt": "1,581",
+      "activeCount": 32,
+      "avgPrice": "$307,475",
+      "avgPricePerSqFt": "$194",
+      "avgLivingSqFt": "1,596",
       "avgDom": 113
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 73,
-      "avgPrice": "$297,816",
-      "avgPricePerSqFt": "$230",
-      "avgLivingSqFt": "1,291",
+      "activeCount": 74,
+      "avgPrice": "$299,670",
+      "avgPricePerSqFt": "$231",
+      "avgLivingSqFt": "1,295",
       "avgDom": 121
     },
     {
@@ -162,7 +162,7 @@
       "avgPrice": "$400,867",
       "avgPricePerSqFt": "$241",
       "avgLivingSqFt": "1,679",
-      "avgDom": 83
+      "avgDom": 84
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$350,078",
       "avgPricePerSqFt": "$218",
       "avgLivingSqFt": "1,605",
-      "avgDom": 84
+      "avgDom": 85
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 41,
+      "activeCount": 40,
       "soldCount": 199,
       "soldMedianPricePerSqFt": "$260",
       "soldMedianPrice": "$475,000",
@@ -205,7 +205,7 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 34,
+      "activeCount": 36,
       "soldCount": 186,
       "soldMedianPricePerSqFt": "$275",
       "soldMedianPrice": "$602,500",
@@ -215,7 +215,7 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 135,
-      "soldCount": 486,
+      "soldCount": 488,
       "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$440,000",
       "lowSample": false
@@ -223,23 +223,23 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 3.6,
-    "monthsOfSupplyCondo": 5.8,
+    "monthsOfSupplyCondo": 5.7,
     "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
-    "activeCount": 210,
-    "sold365Count": 702,
+    "activeCount": 211,
+    "sold365Count": 700,
     "sold90Count": 170,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 496,
-      "activeCount": 84,
+      "soldCount": 497,
+      "activeCount": 85,
       "soldMedianPrice": "$650,000",
-      "soldMedianPricePerSqFt": "$288"
+      "soldMedianPricePerSqFt": "$289"
     },
     "condo": {
-      "soldCount": 377,
+      "soldCount": 378,
       "activeCount": 126,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
@@ -247,33 +247,33 @@
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 34
+    "activeWaterfront": 36
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 210 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 211 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Palmer Ranch?",
-      "a": "Single-family homes sell around $650,000 ($288/sq ft), while condos, villas and townhouses sell around $325,000 ($211/sq ft)."
+      "a": "Single-family homes sell around $650,000 ($289/sq ft), while condos, villas and townhouses sell around $325,000 ($211/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $415,000."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $419,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 50 days on market and closed at 92.1% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 52 days on market and closed at 92.0% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 34 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 36 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

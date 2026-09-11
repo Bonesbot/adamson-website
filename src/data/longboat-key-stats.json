@@ -2,18 +2,18 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-10T16:35:04.184268+00:00",
+  "lastUpdated": "2026-09-11T11:10:08.963274+00:00",
   "counts": {
-    "sold": 1224,
-    "pending": 34,
-    "active": 223,
-    "total": 1258
+    "sold": 1226,
+    "pending": 36,
+    "active": 219,
+    "total": 1262
   },
   "metrics": {
-    "avgPrice": "$2,035,425",
+    "avgPrice": "$2,033,560",
     "avgPricePerSqFt": "$806",
     "avgYearBuilt": 1985,
-    "avgLivingSqFt": "2,200",
+    "avgLivingSqFt": "2,199",
     "avgLotSqFt": null,
     "avgDom": 88
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 223,
-    "medianPrice": "$1,040,000",
+    "count": 219,
+    "medianPrice": "$1,044,000",
     "medianPricePerSqFt": "$679",
-    "waterfrontCount": 170,
+    "waterfrontCount": 167,
     "newConstructionCount": 16
   },
   "sold": {
-    "count": 138,
+    "count": 134,
     "medianPrice": "$1,090,000",
-    "medianDom": 81,
+    "medianDom": 87,
     "saleToListRatio": "94.8%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.0,
-    "sfhVilla": 5.6,
-    "blended": 5.2,
+    "condo": 4.9,
+    "sfhVilla": 5.5,
+    "blended": 5.1,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,45 @@
     }
   },
   "priceBands": {
-    "under900k": 90,
+    "under900k": 88,
     "band900kTo1_5m": 53,
-    "band1_5mTo3m": 43,
+    "band1_5mTo3m": 41,
     "band3mPlus": 37
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 223
+      "count": 219
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "TB8463320",
+      "address": "744 JUNGLE QUEEN WAY",
+      "subdivision": "LONGBOAT KEY",
+      "soldPrice": "$950,000",
+      "soldDate": "2026-09-10",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,688",
+      "yearBuilt": 1963,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4682225",
+      "address": "690 FOX ST",
+      "subdivision": "LONGBEACH ON LONGBOAT KEY",
+      "soldPrice": "$615,000",
+      "soldDate": "2026-09-10",
+      "bedrooms": 4,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,376",
+      "yearBuilt": 1967,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4694362",
       "address": "1135 GULF OF MEXICO DR #505",
@@ -105,32 +131,6 @@
       "yearBuilt": 1969,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4693850",
-      "address": "3806 GULF OF MEXICO DR #C209",
-      "subdivision": "BEACH HARBOR CLUB",
-      "soldPrice": "$305,000",
-      "soldDate": "2026-09-04",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,046",
-      "yearBuilt": 1970,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4699882",
-      "address": "5757 GULF OF MEXICO DR #205",
-      "subdivision": "THE SHORE",
-      "soldPrice": "$875,000",
-      "soldDate": "2026-09-03",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,561",
-      "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 125,
-      "avgPrice": "$842,011",
+      "activeCount": 121,
+      "avgPrice": "$841,177",
       "avgPricePerSqFt": "$647",
-      "avgLivingSqFt": "1,329",
-      "avgDom": 150
+      "avgLivingSqFt": "1,328",
+      "avgDom": 152
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 28,
-      "avgPrice": "$2,295,461",
-      "avgPricePerSqFt": "$841",
+      "avgPrice": "$2,294,957",
+      "avgPricePerSqFt": "$840",
       "avgLivingSqFt": "2,477",
-      "avgDom": 151
+      "avgDom": 152
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$6,499,667",
       "avgPricePerSqFt": "$1,695",
       "avgLivingSqFt": "3,801",
-      "avgDom": 216
+      "avgDom": 217
     },
     {
       "tier": "2020plus",
@@ -187,7 +187,7 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 79,
+      "activeCount": 76,
       "soldCount": 522,
       "soldMedianPricePerSqFt": "$892",
       "soldMedianPrice": "$1,400,000",
@@ -197,15 +197,15 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 87,
-      "soldCount": 401,
-      "soldMedianPricePerSqFt": "$602",
-      "soldMedianPrice": "$1,200,000",
+      "soldCount": 402,
+      "soldMedianPricePerSqFt": "$601",
+      "soldMedianPrice": "$1,187,500",
       "lowSample": false
     },
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 25,
+      "activeCount": 24,
       "soldCount": 105,
       "soldMedianPricePerSqFt": "$626",
       "soldMedianPrice": "$1,190,000",
@@ -224,60 +224,60 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 28,
-      "soldCount": 175,
-      "soldMedianPricePerSqFt": "$489",
+      "soldCount": 176,
+      "soldMedianPricePerSqFt": "$487",
       "soldMedianPrice": "$850,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.2,
-    "monthsOfSupplyCondo": 5.0,
-    "monthsOfSupplySfhVilla": 5.6,
+    "monthsOfSupply": 5.1,
+    "monthsOfSupplyCondo": 4.9,
+    "monthsOfSupplySfhVilla": 5.5,
     "label": "balanced market",
-    "activeCount": 223,
-    "sold365Count": 511,
-    "sold90Count": 138,
+    "activeCount": 219,
+    "sold365Count": 513,
+    "sold90Count": 134,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 314,
+      "soldCount": 316,
       "activeCount": 59,
-      "soldMedianPrice": "$2,117,500",
-      "soldMedianPricePerSqFt": "$728"
+      "soldMedianPrice": "$2,105,000",
+      "soldMedianPricePerSqFt": "$727"
     },
     "condo": {
       "soldCount": 907,
-      "activeCount": 162,
+      "activeCount": 158,
       "soldMedianPrice": "$1,000,000",
       "soldMedianPricePerSqFt": "$647"
     }
   },
   "boating": {
     "activeWithDock": 67,
-    "activeWaterfront": 170
+    "activeWaterfront": 167
   },
   "marketQuestions": [
     {
       "facet": "cost",
       "q": "What do properties cost on Longboat Key?",
-      "a": "Over the past 90 days, 138 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $877,500 ($529/sq ft), while single-family homes closed around $2,437,500 ($791/sq ft). By location, Gulf-front and beachfront properties closed at a median $821 per square foot, compared with $496 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
+      "a": "Over the past 90 days, 134 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $890,000 ($545/sq ft), while single-family homes closed around $2,387,500 ($765/sq ft). By location, Gulf-front and beachfront properties closed at a median $818 per square foot, compared with $507 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
     },
     {
       "facet": "balance",
       "q": "Is it a good time to buy on Longboat Key?",
-      "a": "With 223 active listings and roughly 43 closed sales a month (trailing 12 months), Longboat Key has about 5.2 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 219 active listings and roughly 43 closed sales a month (trailing 12 months), Longboat Key has about 5.1 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Longboat Key?",
-      "a": "Recently sold homes took a median 81 days on market and closed at 94.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 87 days on market and closed at 94.8% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Longboat Key homes have a dock?",
-      "a": "Of 170 active waterfront listings, 67 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 167 active waterfront listings, 67 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
@@ -287,29 +287,29 @@
   ],
   "costBreakdown90": {
     "windowDays": 90,
-    "soldCount": 138,
+    "soldCount": 134,
     "byPropertyType": {
       "condo": {
-        "soldCount": 104,
-        "soldMedianPrice": "$877,500",
-        "soldMedianPricePerSqFt": "$529"
+        "soldCount": 98,
+        "soldMedianPrice": "$890,000",
+        "soldMedianPricePerSqFt": "$545"
       },
       "single_family": {
-        "soldCount": 34,
-        "soldMedianPrice": "$2,437,500",
-        "soldMedianPricePerSqFt": "$791"
+        "soldCount": 36,
+        "soldMedianPrice": "$2,387,500",
+        "soldMedianPricePerSqFt": "$765"
       }
     },
     "byWaterfront": {
       "gulf_beachfront": {
-        "soldCount": 45,
-        "soldMedianPrice": "$1,312,500",
-        "soldMedianPricePerSqFt": "$821"
+        "soldCount": 43,
+        "soldMedianPrice": "$1,275,000",
+        "soldMedianPricePerSqFt": "$818"
       },
       "bay_canal": {
-        "soldCount": 52,
-        "soldMedianPrice": "$1,040,000",
-        "soldMedianPricePerSqFt": "$496"
+        "soldCount": 51,
+        "soldMedianPrice": "$1,080,000",
+        "soldMedianPricePerSqFt": "$507"
       }
     }
   }
