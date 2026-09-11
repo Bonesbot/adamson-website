@@ -34,11 +34,15 @@ interface Props {
   communities: CommunityCard[];
   sellerCopy: string; buyerCopy: string;
   altPhone: string; altPhoneHref: string;   // the "prefer to talk sooner?" number after a form submit
+  /** page path sent to community-lead: lead-routing.js matches on it ("/siesta-key/" -> Ryan + Kelli,
+   *  "/longboat-key/" -> Ryan + Anne) and the last segment becomes the lead source tag. The partner
+   *  home pages live at "/", which would fall to the default route (Ryan only). */
+  leadPage: string;
 }
 
 const {
   uid, area, media, stats, heroImage, heroPosition = 'center', heroLabel, heroTag, heroTeamLine,
-  agentsShort, agentsFull, teamWorkLine, team, communities, sellerCopy, buyerCopy, altPhone, altPhoneHref,
+  agentsShort, agentsFull, teamWorkLine, team, communities, sellerCopy, buyerCopy, altPhone, altPhoneHref, leadPage,
 } = Astro.props;
 
 const areaName: string = area.name;
@@ -342,7 +346,7 @@ const duesPct = Math.min(94, Math.max(6, duesMedianPct));
           <h3 class="gbc-tile-title">Reach out for a private consult</h3>
           <p class="gbc-tile-copy">{sellerCopy}</p>
           <form class="gbc-form" data-lead-type="Seller" data-community={areaName}
-                name="home-lead-seller" method="POST" action="/thank-you/" data-team={agentsShort} data-phone={altPhone} data-phone-href={altPhoneHref} data-netlify="true" netlify-honeypot="bot-field">
+                name="home-lead-seller" method="POST" action="/thank-you/" data-team={agentsShort} data-phone={altPhone} data-phone-href={altPhoneHref} data-lead-page={leadPage} data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="home-lead-seller" />
             <input type="hidden" name="lead_type" value="Seller" />
             <input type="hidden" name="community" value={areaName} />
@@ -365,7 +369,7 @@ const duesPct = Math.min(94, Math.max(6, duesMedianPct));
           <h3 class="gbc-tile-title">Add me to the coming-soon list</h3>
           <p class="gbc-tile-copy">{buyerCopy}</p>
           <form class="gbc-form" data-lead-type="Buyer" data-community={areaName}
-                name="home-lead-buyer" method="POST" action="/thank-you/" data-team={agentsShort} data-phone={altPhone} data-phone-href={altPhoneHref} data-netlify="true" netlify-honeypot="bot-field">
+                name="home-lead-buyer" method="POST" action="/thank-you/" data-team={agentsShort} data-phone={altPhone} data-phone-href={altPhoneHref} data-lead-page={leadPage} data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="home-lead-buyer" />
             <input type="hidden" name="lead_type" value="Buyer" />
             <input type="hidden" name="community" value={areaName} />
@@ -677,7 +681,7 @@ const duesPct = Math.min(94, Math.max(6, duesMedianPct));
             notes: data.notes,
             lead_type: form.dataset.leadType,
             community: form.dataset.community,
-            page: window.location.pathname,
+            page: form.dataset.leadPage || window.location.pathname,
           }),
         });
         if (!res.ok) throw new Error('bad status ' + res.status);
