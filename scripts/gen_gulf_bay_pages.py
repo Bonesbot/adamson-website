@@ -230,6 +230,20 @@ SIDES = {
         #     "title": "The buyers arrive in January. The prep starts now.",
         #     "caption": "More than half of Gulf &amp; Bay sales go under contract between January and April. Listed January to March, condos found a buyer in a median 37 days; listed in the fall, 93. Twenty seconds from Ryan on why the calendar matters.",
         # },
+        # Peak-season section (2026-09-11): two ECharts panels (contracts by calendar month,
+        # median days to contract by list month) from the five-year seasonality study
+        # (Marketing/Siesta/GB/gb-seasonality-brief-2026-09-10.md). Data is the JSON file
+        # below, hand-maintained until it is computed from raw_listings; ECharts is vendored
+        # at public/vendor/echarts.simple.min.js (no CDN dependency). Drop the key to remove
+        # the section.
+        "seasonality": {
+            "data": "src/data/communities/gulf-and-bay-club-beachfront-seasonality.json",
+            "eyebrow": "Peak Buyer Season",
+            "title": "Now is the time to prep your condo for peak buyer season, whether you are here or away.",
+            "copy": "Five years of Gulf &amp; Bay closings say the same thing: buyers sign between January and April, and residences that launch by March find a buyer in weeks, not months. Prep, photography and pricing happen in the fall so the listing is live when they arrive.",
+            "cta": "Plan a January Launch",
+            "cta_sub": "No obligation. We coordinate prep and vendors remotely for owners who are away.",
+        },
         # Ryan's own photography — see BEACHFRONT_GALLERY. Presence of this key also
         # switches the credit line from the Wikimedia placeholder notice.
         "gallery": BEACHFRONT_GALLERY,
@@ -558,6 +572,159 @@ def build_payload(conn):
 
 
 # ── Rendering ─────────────────────────────────────────────────────────────────
+
+def render_seasonality(cfg):
+    """Peak-season section: two ECharts bar panels on the cream surface. Renders ""
+    when the cfg has no "seasonality" key. Data comes from the JSON file named in the
+    cfg (read at generation time and inlined, so the page stays static)."""
+    sc = cfg.get("seasonality")
+    if not sc:
+        return ""
+    data = json.loads((PROJECT_ROOT / sc["data"]).read_text(encoding="utf-8"))
+    n_total = sum(data["contractsByMonth"])
+    n_peak = sum(data["contractsByMonth"][i] for i in data["peakMonths"])
+    as_of = data.get("asOf", "")
+    try:
+        d0 = date.fromisoformat(as_of)
+        as_of_fmt = d0.strftime("%B ") + str(d0.day) + ", " + str(d0.year)
+    except Exception:
+        as_of_fmt = as_of
+    payload = json.dumps({k: data[k] for k in ("months", "contractsByMonth", "peakMonths", "launchWindows", "peakWindow", "recent")})
+    rc = data["recent"]; rlw = rc["launchWindows"]; rlw_n = sum(w["attempts"] for w in rlw)
+    rc_peak = sum(rc["contractsByMonth"][i] for i in data["peakMonths"])
+    lw = data["launchWindows"]; since = data.get("launchWindowsSince", 2022)
+    lw_n = sum(w["attempts"] for w in lw)
+    return f'''
+  <section class="section gbc-season" id="peak-season">
+    <div class="container">
+      <div class="gbc-season-head">
+        <div>
+          <p class="section-label mb-3">{sc["eyebrow"]}</p>
+          <h2 class="accent-underline mb-5">{sc["title"]}</h2>
+          <p class="gbc-about">{sc["copy"]}</p>
+        </div>
+        <div class="gbc-season-cta">
+          <a href="#contact" class="gbc-btn gbc-btn-gold">{sc["cta"]}</a>
+          <p class="gbc-chart-sub">{sc["cta_sub"]}</p>
+        </div>
+      </div>
+      <div class="gbc-season-grid">
+        <div class="gbc-chart-card">
+          <p class="gbc-chart-title">When buyers sign</p>
+          <p class="gbc-chart-sub">Contracts signed by calendar month, all {esc(cfg["name"])} closings 2021 to 2026</p>
+          <p class="gbc-legend"><span><i class="gbc-sw-peak"></i>Peak season, Jan to Apr</span><span><i class="gbc-sw-rest"></i>Rest of year</span></p>
+          <div class="gbc-chart" data-chart="contracts" role="img" aria-label="Bar chart of contracts signed by month; January through April carry {n_peak} of {n_total}."></div>
+          <p class="gbc-chart-foot">{n_total} closed sales. {n_peak} of them ({round(100 * n_peak / n_total)}%) went under contract January through April.</p>
+        </div>
+        <div class="gbc-chart-card">
+          <p class="gbc-chart-title">Odds of a contract within 60 days</p>
+          <p class="gbc-chart-sub">Share of all listings, sold or not, that went under contract within 60 days of launch, by launch window ({since} to 2026)</p>
+          <p class="gbc-legend"><span><i class="gbc-sw-peak"></i>Peak-season launch</span><span><i class="gbc-sw-rest"></i>Other launch windows</span></p>
+          <div class="gbc-chart" data-chart="odds" role="img" aria-label="Bar chart of the share of listings under contract within 60 days by launch window; {lw[0]['pct']}% for January to March launches, {lw[1]['pct']}% for April to May, {lw[2]['pct']}% for June to September, {lw[3]['pct']}% for October to December."></div>
+          <p class="gbc-chart-foot">{lw_n} listing attempts since {since}, expired and canceled listings counted as misses. The 2021 surge year is left out so it cannot flatter any window.</p>
+        </div>
+      </div>
+
+      <div class="gbc-season-rowhead">
+        <p class="gbc-chart-title">The cooled market, {rc["label"]}</p>
+        <p class="gbc-chart-sub">Same two views, only the two slow years after rates rose. Smaller counts, same shape.</p>
+      </div>
+      <div class="gbc-season-grid">
+        <div class="gbc-chart-card">
+          <p class="gbc-chart-title">When buyers signed, {rc["label"]}</p>
+          <p class="gbc-chart-sub">Contracts signed by calendar month, {esc(cfg["name"])} closings with a contract date in 2024 or 2025</p>
+          <p class="gbc-legend"><span><i class="gbc-sw-peak"></i>Peak season, Jan to Apr</span><span><i class="gbc-sw-rest"></i>Rest of year</span></p>
+          <div class="gbc-chart" data-chart="contracts-recent" role="img" aria-label="Bar chart of contracts signed by month in 2024 and 2025; January through April carry {rc_peak} of {rc["contractsTotal"]}."></div>
+          <p class="gbc-chart-foot">{rc["contractsTotal"]} closed sales. {rc_peak} of them ({round(100 * rc_peak / rc["contractsTotal"])}%) went under contract January through April.</p>
+        </div>
+        <div class="gbc-chart-card">
+          <p class="gbc-chart-title">Odds of a contract within 60 days, {rc["label"]}</p>
+          <p class="gbc-chart-sub">Share of all listings launched in 2024 or 2025, sold or not, under contract within 60 days, by launch window</p>
+          <p class="gbc-legend"><span><i class="gbc-sw-peak"></i>Peak-season launch</span><span><i class="gbc-sw-rest"></i>Other launch windows</span></p>
+          <div class="gbc-chart" data-chart="odds-recent" role="img" aria-label="Bar chart of the share of 2024 and 2025 listings under contract within 60 days by launch window; {rlw[0]['pct']}% for January to March launches, {rlw[1]['pct']}% for April to May, {rlw[2]['pct']}% for June to September, {rlw[3]['pct']}% for October to December."></div>
+          <p class="gbc-chart-foot">{rlw_n} listing attempts. Hover a bar for the median days to contract of the sales in that window. Today&rsquo;s 34 median days on market (past 180 days) is the 2026 season: every one of those closings launched January to March. In {rc["label"]} the same window ran a median {rlw[0]["medianDays"]} days and every other window ran {min(w["medianDays"] for w in rlw[1:])} or more.</p>
+        </div>
+      </div>
+      <p class="gbc-season-note">Source: Stellar MLS, {esc(cfg["name"])} ({cfg.get("street", "")}), listings January 2021 through September 2026. Contracts counted by contract date; contract odds by the month the listing launched. Data as of {as_of_fmt}.</p>
+    </div>
+    <script type="application/json" data-season-data>{payload}</script>
+  </section>'''
+
+
+SEASON_STYLES = '''
+  .gbc-season { background:#F6F1E4; border-top:1px solid rgba(201,169,97,0.35); border-bottom:1px solid rgba(201,169,97,0.35); }
+  .gbc-season h2 { color:var(--color-black); max-width:34rem; }
+  .gbc-season .section-label { color:var(--color-cbgl-blue); }
+  .gbc-season-head { display:grid; grid-template-columns:1fr; gap:1.5rem; align-items:end; margin-bottom:2.25rem; }
+  @media (min-width:960px){ .gbc-season-head { grid-template-columns:7fr 5fr; gap:3rem; } }
+  .gbc-season-cta { display:flex; flex-direction:column; align-items:flex-start; gap:1rem; }
+  @media (min-width:960px){ .gbc-season-cta { align-items:flex-end; text-align:right; } }
+  .gbc-season-grid { display:grid; grid-template-columns:1fr; gap:1.5rem; }
+  @media (min-width:900px){ .gbc-season-grid { grid-template-columns:1fr 1fr; gap:2rem; } }
+  .gbc-chart-card { background:#fff; border:1px solid rgba(10,31,60,0.08); border-radius:0.9rem; padding:1.5rem 1.5rem 1rem; box-shadow:0 14px 40px rgba(10,31,60,0.08); min-width:0; }
+  .gbc-chart-title { font-family:var(--font-display); font-size:1.25rem; color:var(--color-black); margin:0 0 0.25rem; }
+  .gbc-chart-sub { font-size:0.8rem; color:var(--color-text-muted); margin:0 0 0.5rem; line-height:1.5; }
+  .gbc-chart { width:100%; height:300px; }
+  .gbc-chart-foot { font-size:0.72rem; color:rgba(0,0,0,0.45); margin:0.5rem 0 0; line-height:1.5; }
+  .gbc-legend { display:flex; flex-wrap:wrap; gap:0.5rem 1.25rem; font-family:var(--font-accent); font-size:0.66rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--color-text-muted); margin:0 0 0.25rem; }
+  .gbc-legend i { display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:0.45rem; vertical-align:-1px; }
+  .gbc-sw-peak { background:#A8801F; } .gbc-sw-rest { background:#2F62B8; }
+  .gbc-season-rowhead { margin:2.5rem 0 1rem; padding-top:2rem; border-top:1px solid rgba(201,169,97,0.35); }
+  .gbc-season-rowhead .gbc-chart-title { font-size:1.45rem; }
+  .gbc-season-note { font-size:0.78rem; color:rgba(0,0,0,0.5); margin-top:1.5rem; line-height:1.6; }
+'''
+
+SEASON_SCRIPT = '''
+<script is:inline src="/vendor/echarts.simple.min.js"></script>
+<script is:inline>
+  // Peak-season charts. Palette validated on the cream surface (#A8801F peak, #2F62B8 rest).
+  // One measure per chart on purpose: no dual axes.
+  (function () {
+    var node = document.querySelector('[data-season-data]');
+    if (!node || !window.echarts) return;
+    var D = JSON.parse(node.textContent);
+    var PEAK = '#A8801F', REST = '#2F62B8', INK = '#0A0F1A', MUTED = '#6b7280', GRID = 'rgba(10,31,60,0.08)';
+    var font = 'Inter, system-ui, sans-serif';
+    function base() { return {
+      animationDuration: 900, animationEasing: 'cubicOut',
+      grid: { left: 8, right: 8, top: 36, bottom: 8, containLabel: true },
+      textStyle: { fontFamily: font },
+      xAxis: { type: 'category', data: D.months, axisTick: { show: false }, axisLine: { lineStyle: { color: GRID } }, axisLabel: { color: MUTED, fontSize: 12, fontFamily: font } },
+      yAxis: { type: 'value', splitLine: { lineStyle: { color: GRID } }, axisLabel: { color: MUTED, fontSize: 11, fontFamily: font }, axisLine: { show: false }, axisTick: { show: false }, minInterval: 1 },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow', shadowStyle: { color: 'rgba(10,31,60,0.05)' } }, backgroundColor: '#0A1F3C', borderWidth: 0, padding: [10, 14], textStyle: { color: '#fff', fontFamily: font, fontSize: 13 }, extraCssText: 'border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.25)' }
+    }; }
+    function isPeak(i) { return D.peakMonths.indexOf(i) >= 0; }
+    var charts = [];
+    function contractsChart(sel, months, counts) {
+      var el = document.querySelector(sel); if (!el) return;
+      var c = echarts.init(el, null, { renderer: 'svg' }); var o = base();
+      o.xAxis.data = months;
+      o.series = [{ type: 'bar', barWidth: '58%', label: { show: true, position: 'top', color: INK, fontSize: 12, fontFamily: font },
+        data: counts.map(function (v, i) { return { value: v, itemStyle: { color: isPeak(i) ? PEAK : REST, borderRadius: [4, 4, 0, 0] } }; }) }];
+      o.tooltip.formatter = function (p) { var x = p[0]; return '<b>' + x.name + '</b><br/>' + x.value + ' contract' + (x.value === 1 ? '' : 's') + ' signed'; };
+      c.setOption(o); charts.push(c);
+    }
+    function oddsChart(sel, windows) {
+      var el = document.querySelector(sel); if (!el) return;
+      var c = echarts.init(el, null, { renderer: 'svg' }); var o = base();
+      o.xAxis.data = windows.map(function (w) { return w.label; });
+      o.yAxis.max = 100; o.yAxis.minInterval = 20; o.yAxis.axisLabel.formatter = '{value}%';
+      o.series = [{ type: 'bar', barWidth: '52%', label: { show: true, position: 'top', color: INK, fontSize: 13, fontFamily: font, formatter: function (p) { return p.value + '%'; } },
+        data: windows.map(function (w, i) { return { value: w.pct, itemStyle: { color: i === D.peakWindow ? PEAK : REST, borderRadius: [4, 4, 0, 0] } }; }) }];
+      o.tooltip.formatter = function (p) { var x = p[0]; var w = windows[x.dataIndex];
+        return '<b>Launched ' + w.label + '</b><br/>' + w.hit60 + ' of ' + w.attempts + ' listings under contract within 60 days<br/><span style="opacity:.7">' + w.sold + ' of ' + w.attempts + ' eventually sold' + (w.medianDays != null ? ' · median ' + w.medianDays + ' days to contract' : '') + '</span>'; };
+      c.setOption(o); charts.push(c);
+    }
+    contractsChart('[data-chart=contracts]', D.months, D.contractsByMonth);
+    oddsChart('[data-chart=odds]', D.launchWindows);
+    if (D.recent) {
+      contractsChart('[data-chart=contracts-recent]', D.months, D.recent.contractsByMonth);
+      oddsChart('[data-chart=odds-recent]', D.recent.launchWindows);
+    }
+    window.addEventListener('resize', function () { charts.forEach(function (c) { c.resize(); }); });
+  })();
+</script>
+'''
 
 def stat(value, label, sub=""):
     sub_html = f'<div class="gbc-stat-sub">{sub}</div>' if sub else ""
@@ -1287,6 +1454,9 @@ def render_page(cfg, headline, ledger, lease, lease_n, lease_total, qs, as_of):
     </div>
   </section>''') if fv else ""
 
+    seasonality_block = render_seasonality(cfg)
+    season_tail = (SEASON_STYLES, SEASON_SCRIPT) if cfg.get("seasonality") else ("", "")
+
     bld_table = render_by_building(ledger, cfg)
     by_building_block = f'''
       <h3 class="font-display gbc-subhead">By the Building</h3>
@@ -1383,7 +1553,7 @@ const jsonLd = [
     </div>
   </section>
 
-{feature_video_block}
+{feature_video_block}{seasonality_block}
   <section class="section dark-section">
     <div class="container">
       <p class="section-label text-cbgl-blue-light mb-3">{cfg["short"]}</p>
@@ -1445,8 +1615,8 @@ const jsonLd = [
     </div>
   </section>
 
-{STYLES.replace('<style is:global>', '<style is:global>' + hero_styles, 1)}
-{SCRIPTS}
+{STYLES.replace('<style is:global>', '<style is:global>' + hero_styles + season_tail[0], 1)}
+{SCRIPTS}{season_tail[1]}
 </BaseLayout>
 '''
 

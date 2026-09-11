@@ -108,6 +108,31 @@ const jsonLd = [
   </section>
 
 
+  <section class="section gbc-season" id="peak-season">
+    <div class="container">
+      <div class="gbc-season-head gbc-season-single">
+        <div>
+          <p class="section-label mb-3">Peak Buyer Season</p>
+          <h2 class="accent-underline mb-5">Now is the time to prep and get ready for season.</h2>
+          <p class="gbc-season-stat"><span class="gbc-season-big">53%</span><span class="gbc-season-stat-label">of buyers purchase within the peak season, January to April</span></p>
+          <p class="gbc-about">Five years of Gulf &amp; Bay closings say the same thing: the buyers are here from January through April. Prep, photography and pricing happen in the fall so the listing is live when they arrive, whether you are here or away.</p>
+          <div class="gbc-season-cta">
+            <a href="#contact" class="gbc-btn gbc-btn-gold">Plan a January Launch</a>
+            <p class="gbc-chart-sub">No obligation. We coordinate prep and vendors remotely for owners who are away.</p>
+          </div>
+        </div>
+        <div class="gbc-chart-card">
+          <p class="gbc-chart-title">When buyers sign</p>
+          <p class="gbc-chart-sub">Contracts signed by calendar month, all Gulf &amp; Bay Club Beachfront closings 2021 to 2026</p>
+          <p class="gbc-legend"><span><i class="gbc-sw-peak"></i>Peak season, Jan to Apr</span><span><i class="gbc-sw-rest"></i>Rest of year</span></p>
+          <div class="gbc-chart" data-chart="contracts" role="img" aria-label="Bar chart of contracts signed by month; January through April carry 60 of 114."></div>
+          <p class="gbc-chart-foot">114 closed sales. 60 of them (53%) went under contract January through April.</p>
+        </div>
+      </div>
+      <p class="gbc-season-note">Source: Stellar MLS, Gulf &amp; Bay Club Beachfront (5740-5790 Midnight Pass Road), listings January 2021 through September 2026. Contracts counted by contract date. Data as of September 10, 2026.</p>
+    </div>
+    <script type="application/json" data-season-data>{"months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], "contractsByMonth": [13, 16, 18, 13, 11, 7, 1, 6, 4, 8, 10, 7], "peakMonths": [0, 1, 2, 3], "launchWindows": [{"label": "Jan to Mar", "attempts": 46, "sold": 35, "hit60": 29, "pct": 63}, {"label": "Apr to May", "attempts": 18, "sold": 10, "hit60": 5, "pct": 28}, {"label": "Jun to Sep", "attempts": 15, "sold": 12, "hit60": 4, "pct": 27}, {"label": "Oct to Dec", "attempts": 28, "sold": 19, "hit60": 11, "pct": 39}], "peakWindow": 0, "recent": {"label": "2024 to 2025", "contractsByMonth": [3, 2, 5, 2, 3, 1, 0, 5, 1, 2, 2, 3], "contractsTotal": 29, "launchWindows": [{"label": "Jan to Mar", "attempts": 18, "sold": 11, "hit60": 7, "pct": 39, "medianDays": 54}, {"label": "Apr to May", "attempts": 5, "sold": 3, "hit60": 1, "pct": 20, "medianDays": 209}, {"label": "Jun to Sep", "attempts": 7, "sold": 6, "hit60": 1, "pct": 14, "medianDays": 96}, {"label": "Oct to Dec", "attempts": 15, "sold": 9, "hit60": 3, "pct": 20, "medianDays": 76}]}}</script>
+  </section>
   <section class="section dark-section">
     <div class="container">
       <p class="section-label text-cbgl-blue-light mb-3">Beachfront</p>
@@ -628,6 +653,33 @@ const jsonLd = [
     .gbc-hero-video { display:none; }
     .gbc-hero-bg { background-image:url('/videos/gulf-and-bay-club-beachfront-still.jpg'); }
   }
+  .gbc-season { background:#F6F1E4; border-top:1px solid rgba(201,169,97,0.35); border-bottom:1px solid rgba(201,169,97,0.35); }
+  .gbc-season h2 { color:var(--color-black); max-width:34rem; }
+  .gbc-season .section-label { color:var(--color-cbgl-blue); }
+  .gbc-season-head { display:grid; grid-template-columns:1fr; gap:1.5rem; align-items:end; margin-bottom:2.25rem; }
+  @media (min-width:960px){ .gbc-season-head { grid-template-columns:7fr 5fr; gap:3rem; } }
+  .gbc-season-cta { display:flex; flex-direction:column; align-items:flex-start; gap:1rem; }
+  @media (min-width:960px){ .gbc-season-cta { align-items:flex-end; text-align:right; } }
+  .gbc-season-grid { display:grid; grid-template-columns:1fr; gap:1.5rem; }
+  @media (min-width:900px){ .gbc-season-grid { grid-template-columns:1fr 1fr; gap:2rem; } }
+  .gbc-chart-card { background:#fff; border:1px solid rgba(10,31,60,0.08); border-radius:0.9rem; padding:1.5rem 1.5rem 1rem; box-shadow:0 14px 40px rgba(10,31,60,0.08); min-width:0; }
+  .gbc-chart-title { font-family:var(--font-display); font-size:1.25rem; color:var(--color-black); margin:0 0 0.25rem; }
+  .gbc-chart-sub { font-size:0.8rem; color:var(--color-text-muted); margin:0 0 0.5rem; line-height:1.5; }
+  .gbc-chart { width:100%; height:300px; }
+  .gbc-chart-foot { font-size:0.72rem; color:rgba(0,0,0,0.45); margin:0.5rem 0 0; line-height:1.5; }
+  .gbc-legend { display:flex; flex-wrap:wrap; gap:0.5rem 1.25rem; font-family:var(--font-accent); font-size:0.66rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--color-text-muted); margin:0 0 0.25rem; }
+  .gbc-legend i { display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:0.45rem; vertical-align:-1px; }
+  .gbc-sw-peak { background:#A8801F; } .gbc-sw-rest { background:#2F62B8; }
+  .gbc-season-single { align-items:center; margin-bottom:0; }
+  @media (min-width:960px){ .gbc-season-single { grid-template-columns:5fr 7fr; } }
+  .gbc-season-stat { display:flex; align-items:baseline; gap:0.9rem; margin:0 0 1.25rem; }
+  .gbc-season-big { font-family:var(--font-display); font-size:clamp(3rem,6vw,4.5rem); line-height:1; color:#A8801F; font-weight:600; }
+  .gbc-season-stat-label { font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--color-black); max-width:16rem; line-height:1.5; }
+  .gbc-season-single .gbc-season-cta { align-items:flex-start; text-align:left; margin-top:1.5rem; }
+  .gbc-season-single .gbc-about { margin-bottom:0; }
+  .gbc-season-rowhead { margin:2.5rem 0 1rem; padding-top:2rem; border-top:1px solid rgba(201,169,97,0.35); }
+  .gbc-season-rowhead .gbc-chart-title { font-size:1.45rem; }
+  .gbc-season-note { font-size:0.78rem; color:rgba(0,0,0,0.5); margin-top:1.5rem; line-height:1.6; }
   .gbc-hero { position:relative; padding-top:9rem; padding-bottom:7rem; overflow:hidden; }
   .gbc-hero-bg { position:absolute; inset:0; background-size:cover; background-position:center; background-color:var(--color-black); }
   .gbc-hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.45) 40%, rgba(0,0,0,0.9)); }
@@ -914,5 +966,51 @@ const jsonLd = [
       strip.hidden = false;
     } catch (e) { /* strip simply stays hidden */ }
   });
+</script>
+<script is:inline src="/vendor/echarts.simple.min.js"></script>
+<script is:inline>
+  // Peak-season charts. Palette validated on the cream surface (#A8801F peak, #2F62B8 rest).
+  // One measure per chart on purpose: no dual axes.
+  (function () {
+    var node = document.querySelector('[data-season-data]');
+    if (!node || !window.echarts) return;
+    var D = JSON.parse(node.textContent);
+    var PEAK = '#A8801F', REST = '#2F62B8', INK = '#0A0F1A', MUTED = '#6b7280', GRID = 'rgba(10,31,60,0.08)';
+    var font = 'Inter, system-ui, sans-serif';
+    function base() { return {
+      animationDuration: 900, animationEasing: 'cubicOut',
+      grid: { left: 8, right: 8, top: 36, bottom: 8, containLabel: true },
+      textStyle: { fontFamily: font },
+      xAxis: { type: 'category', data: D.months, axisTick: { show: false }, axisLine: { lineStyle: { color: GRID } }, axisLabel: { color: MUTED, fontSize: 12, fontFamily: font } },
+      yAxis: { type: 'value', splitLine: { lineStyle: { color: GRID } }, axisLabel: { color: MUTED, fontSize: 11, fontFamily: font }, axisLine: { show: false }, axisTick: { show: false }, minInterval: 1 },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow', shadowStyle: { color: 'rgba(10,31,60,0.05)' } }, backgroundColor: '#0A1F3C', borderWidth: 0, padding: [10, 14], textStyle: { color: '#fff', fontFamily: font, fontSize: 13 }, extraCssText: 'border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.25)' }
+    }; }
+    function isPeak(i) { return D.peakMonths.indexOf(i) >= 0; }
+    var charts = [];
+    function contractsChart(sel, months, counts) {
+      var el = document.querySelector(sel); if (!el) return;
+      var c = echarts.init(el, null, { renderer: 'svg' }); var o = base();
+      o.xAxis.data = months;
+      o.series = [{ type: 'bar', barWidth: '58%', label: { show: true, position: 'top', color: INK, fontSize: 12, fontFamily: font },
+        data: counts.map(function (v, i) { return { value: v, itemStyle: { color: isPeak(i) ? PEAK : REST, borderRadius: [4, 4, 0, 0] } }; }) }];
+      o.tooltip.formatter = function (p) { var x = p[0]; return '<b>' + x.name + '</b><br/>' + x.value + ' contract' + (x.value === 1 ? '' : 's') + ' signed'; };
+      c.setOption(o); charts.push(c);
+    }
+    function oddsChart(sel, windows) {
+      var el = document.querySelector(sel); if (!el) return;
+      var c = echarts.init(el, null, { renderer: 'svg' }); var o = base();
+      o.xAxis.data = windows.map(function (w) { return w.label; });
+      o.yAxis.max = 100; o.yAxis.minInterval = 20; o.yAxis.axisLabel.formatter = '{value}%';
+      o.series = [{ type: 'bar', barWidth: '52%', label: { show: true, position: 'top', color: INK, fontSize: 13, fontFamily: font, formatter: function (p) { return p.value + '%'; } },
+        data: windows.map(function (w, i) { return { value: w.pct, itemStyle: { color: i === D.peakWindow ? PEAK : REST, borderRadius: [4, 4, 0, 0] } }; }) }];
+      o.tooltip.formatter = function (p) { var x = p[0]; var w = windows[x.dataIndex];
+        return '<b>Launched ' + w.label + '</b><br/>' + w.hit60 + ' of ' + w.attempts + ' listings under contract within 60 days<br/><span style="opacity:.7">' + w.sold + ' of ' + w.attempts + ' eventually sold' + (w.medianDays != null ? ' · median ' + w.medianDays + ' days to contract' : '') + '</span>'; };
+      c.setOption(o); charts.push(c);
+    }
+    contractsChart('[data-chart=contracts]', D.months, D.contractsByMonth);
+    // oddsChart() and the D.recent views are kept for the brief and for a future toggle;
+    // the page shows the single five-year chart (Ryan, 2026-09-11).
+    window.addEventListener('resize', function () { charts.forEach(function (c) { c.resize(); }); });
+  })();
 </script>
 </BaseLayout>
