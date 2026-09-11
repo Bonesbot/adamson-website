@@ -239,8 +239,11 @@ SIDES = {
         "seasonality": {
             "data": "src/data/communities/gulf-and-bay-club-beachfront-seasonality.json",
             "eyebrow": "Peak Buyer Season",
-            "title": "Now is the time to prep your condo for peak buyer season, whether you are here or away.",
-            "copy": "Five years of Gulf &amp; Bay closings say the same thing: buyers sign between January and April, and residences that launch by March find a buyer in weeks, not months. Prep, photography and pricing happen in the fall so the listing is live when they arrive.",
+            "title": "Now is the time to discuss and prepare for a seasonal listing.",
+            # {pct} is filled from the data file: share of contracts signed January to April.
+            "stat_label": "of buyers purchase within the peak season, January to April",
+            # Same message as the Owner Brief back page (Marketing/Siesta/GB, v2 2026-09-11).
+            "copy": "Let us advise you on how to best prepare your condo to maximize its value. Or try a private exclusive this fall: test your price with more than 300,000 agents in our global network, with no sign, no public photos and no days on market accruing. A win-win either way, whether you are here or away.",
             "cta": "Plan a January Launch",
             "cta_sub": "No obligation. We coordinate prep and vendors remotely for owners who are away.",
         },
@@ -590,62 +593,32 @@ def render_seasonality(cfg):
     except Exception:
         as_of_fmt = as_of
     payload = json.dumps({k: data[k] for k in ("months", "contractsByMonth", "peakMonths", "launchWindows", "peakWindow", "recent")})
-    rc = data["recent"]; rlw = rc["launchWindows"]; rlw_n = sum(w["attempts"] for w in rlw)
-    rc_peak = sum(rc["contractsByMonth"][i] for i in data["peakMonths"])
     lw = data["launchWindows"]; since = data.get("launchWindowsSince", 2022)
     lw_n = sum(w["attempts"] for w in lw)
+    pct = round(100 * n_peak / n_total)
     return f'''
   <section class="section gbc-season" id="peak-season">
     <div class="container">
-      <div class="gbc-season-head">
+      <div class="gbc-season-head gbc-season-single">
         <div>
           <p class="section-label mb-3">{sc["eyebrow"]}</p>
           <h2 class="accent-underline mb-5">{sc["title"]}</h2>
+          <p class="gbc-season-stat"><span class="gbc-season-big">{pct}%</span><span class="gbc-season-stat-label">{sc["stat_label"]}</span></p>
           <p class="gbc-about">{sc["copy"]}</p>
+          <div class="gbc-season-cta">
+            <a href="#contact" class="gbc-btn gbc-btn-gold">{sc["cta"]}</a>
+            <p class="gbc-chart-sub">{sc["cta_sub"]}</p>
+          </div>
         </div>
-        <div class="gbc-season-cta">
-          <a href="#contact" class="gbc-btn gbc-btn-gold">{sc["cta"]}</a>
-          <p class="gbc-chart-sub">{sc["cta_sub"]}</p>
-        </div>
-      </div>
-      <div class="gbc-season-grid">
         <div class="gbc-chart-card">
           <p class="gbc-chart-title">When buyers sign</p>
           <p class="gbc-chart-sub">Contracts signed by calendar month, all {esc(cfg["name"])} closings 2021 to 2026</p>
           <p class="gbc-legend"><span><i class="gbc-sw-peak"></i>Peak season, Jan to Apr</span><span><i class="gbc-sw-rest"></i>Rest of year</span></p>
           <div class="gbc-chart" data-chart="contracts" role="img" aria-label="Bar chart of contracts signed by month; January through April carry {n_peak} of {n_total}."></div>
-          <p class="gbc-chart-foot">{n_total} closed sales. {n_peak} of them ({round(100 * n_peak / n_total)}%) went under contract January through April.</p>
-        </div>
-        <div class="gbc-chart-card">
-          <p class="gbc-chart-title">Odds of a contract within 60 days</p>
-          <p class="gbc-chart-sub">Share of all listings, sold or not, that went under contract within 60 days of launch, by launch window ({since} to 2026)</p>
-          <p class="gbc-legend"><span><i class="gbc-sw-peak"></i>Peak-season launch</span><span><i class="gbc-sw-rest"></i>Other launch windows</span></p>
-          <div class="gbc-chart" data-chart="odds" role="img" aria-label="Bar chart of the share of listings under contract within 60 days by launch window; {lw[0]['pct']}% for January to March launches, {lw[1]['pct']}% for April to May, {lw[2]['pct']}% for June to September, {lw[3]['pct']}% for October to December."></div>
-          <p class="gbc-chart-foot">{lw_n} listing attempts since {since}, expired and canceled listings counted as misses. The 2021 surge year is left out so it cannot flatter any window.</p>
+          <p class="gbc-chart-foot">{n_total} closed sales. {n_peak} of them ({pct}%) went under contract January through April.</p>
         </div>
       </div>
-
-      <div class="gbc-season-rowhead">
-        <p class="gbc-chart-title">The cooled market, {rc["label"]}</p>
-        <p class="gbc-chart-sub">Same two views, only the two slow years after rates rose. Smaller counts, same shape.</p>
-      </div>
-      <div class="gbc-season-grid">
-        <div class="gbc-chart-card">
-          <p class="gbc-chart-title">When buyers signed, {rc["label"]}</p>
-          <p class="gbc-chart-sub">Contracts signed by calendar month, {esc(cfg["name"])} closings with a contract date in 2024 or 2025</p>
-          <p class="gbc-legend"><span><i class="gbc-sw-peak"></i>Peak season, Jan to Apr</span><span><i class="gbc-sw-rest"></i>Rest of year</span></p>
-          <div class="gbc-chart" data-chart="contracts-recent" role="img" aria-label="Bar chart of contracts signed by month in 2024 and 2025; January through April carry {rc_peak} of {rc["contractsTotal"]}."></div>
-          <p class="gbc-chart-foot">{rc["contractsTotal"]} closed sales. {rc_peak} of them ({round(100 * rc_peak / rc["contractsTotal"])}%) went under contract January through April.</p>
-        </div>
-        <div class="gbc-chart-card">
-          <p class="gbc-chart-title">Odds of a contract within 60 days, {rc["label"]}</p>
-          <p class="gbc-chart-sub">Share of all listings launched in 2024 or 2025, sold or not, under contract within 60 days, by launch window</p>
-          <p class="gbc-legend"><span><i class="gbc-sw-peak"></i>Peak-season launch</span><span><i class="gbc-sw-rest"></i>Other launch windows</span></p>
-          <div class="gbc-chart" data-chart="odds-recent" role="img" aria-label="Bar chart of the share of 2024 and 2025 listings under contract within 60 days by launch window; {rlw[0]['pct']}% for January to March launches, {rlw[1]['pct']}% for April to May, {rlw[2]['pct']}% for June to September, {rlw[3]['pct']}% for October to December."></div>
-          <p class="gbc-chart-foot">{rlw_n} listing attempts. Hover a bar for the median days to contract of the sales in that window. Today&rsquo;s 34 median days on market (past 180 days) is the 2026 season: every one of those closings launched January to March. In {rc["label"]} the same window ran a median {rlw[0]["medianDays"]} days and every other window ran {min(w["medianDays"] for w in rlw[1:])} or more.</p>
-        </div>
-      </div>
-      <p class="gbc-season-note">Source: Stellar MLS, {esc(cfg["name"])} ({cfg.get("street", "")}), listings January 2021 through September 2026. Contracts counted by contract date; contract odds by the month the listing launched. Data as of {as_of_fmt}.</p>
+      <p class="gbc-season-note">Source: Stellar MLS, {esc(cfg["name"])} ({cfg.get("street", "")}), listings January 2021 through September 2026. Contracts counted by contract date. Data as of {as_of_fmt}.</p>
     </div>
     <script type="application/json" data-season-data>{payload}</script>
   </section>'''
@@ -669,6 +642,13 @@ SEASON_STYLES = '''
   .gbc-legend { display:flex; flex-wrap:wrap; gap:0.5rem 1.25rem; font-family:var(--font-accent); font-size:0.66rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--color-text-muted); margin:0 0 0.25rem; }
   .gbc-legend i { display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:0.45rem; vertical-align:-1px; }
   .gbc-sw-peak { background:#A8801F; } .gbc-sw-rest { background:#2F62B8; }
+  .gbc-season-single { align-items:center; margin-bottom:0; }
+  @media (min-width:960px){ .gbc-season-single { grid-template-columns:5fr 7fr; } }
+  .gbc-season-stat { display:flex; align-items:baseline; gap:0.9rem; margin:0 0 1.25rem; }
+  .gbc-season-big { font-family:var(--font-display); font-size:clamp(3rem,6vw,4.5rem); line-height:1; color:#A8801F; font-weight:600; }
+  .gbc-season-stat-label { font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--color-black); max-width:16rem; line-height:1.5; }
+  .gbc-season-single .gbc-season-cta { align-items:flex-start; text-align:left; margin-top:1.5rem; }
+  .gbc-season-single .gbc-about { margin-bottom:0; }
   .gbc-season-rowhead { margin:2.5rem 0 1rem; padding-top:2rem; border-top:1px solid rgba(201,169,97,0.35); }
   .gbc-season-rowhead .gbc-chart-title { font-size:1.45rem; }
   .gbc-season-note { font-size:0.78rem; color:rgba(0,0,0,0.5); margin-top:1.5rem; line-height:1.6; }
@@ -716,11 +696,8 @@ SEASON_SCRIPT = '''
       c.setOption(o); charts.push(c);
     }
     contractsChart('[data-chart=contracts]', D.months, D.contractsByMonth);
-    oddsChart('[data-chart=odds]', D.launchWindows);
-    if (D.recent) {
-      contractsChart('[data-chart=contracts-recent]', D.months, D.recent.contractsByMonth);
-      oddsChart('[data-chart=odds-recent]', D.recent.launchWindows);
-    }
+    // oddsChart() and the D.recent views are kept for the brief and for a future toggle;
+    // the page shows the single five-year chart (Ryan, 2026-09-11).
     window.addEventListener('resize', function () { charts.forEach(function (c) { c.resize(); }); });
   })();
 </script>
