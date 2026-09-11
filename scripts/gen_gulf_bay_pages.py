@@ -942,7 +942,7 @@ def render_forms(cfg):
     community = cfg["name"]
     slug = cfg["slug"]
     return f'''
-  <section class="section light-section">
+  <section id="contact" class="section light-section">
     <div class="container">
       <p class="section-label mb-3">Two Ways In</p>
       <h2 class="accent-underline mb-6">Work With Us on {esc(cfg["short"])}</h2>
