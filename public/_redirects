@@ -17,15 +17,19 @@
 # what is printed, so both spellings are listed for clarity.
 
 https://www.siestareport.com/*  https://siestareport.com/:splat                              301!
-https://siestareport.com/GB     /siesta-key/gulf-and-bay-club-beachfront/                    200
-https://siestareport.com/gb     /siesta-key/gulf-and-bay-club-beachfront/                    200
-https://siestareport.com/GB/*   /siesta-key/gulf-and-bay-club-beachfront/?qr=:splat&src=typed 200
-https://siestareport.com/gb/*   /siesta-key/gulf-and-bay-club-beachfront/?qr=:splat&src=typed 200
+# /GB serves the SiestaReport.com twin of the page (src/pages/siesta-report/gb.astro:
+# SRLayout, no AdamsonFL nav), generated alongside the hub page by gen_gulf_bay_pages.py.
+https://siestareport.com/GB     /siesta-report/gb/                                           200
+https://siestareport.com/gb     /siesta-report/gb/                                           200
+https://siestareport.com/GB/*   /siesta-report/gb/?qr=:splat&src=typed                       200
+https://siestareport.com/gb/*   /siesta-report/gb/?qr=:splat&src=typed                       200
 # 200! (forced): the hub's own /index.html exists, and an unforced rewrite never shadows a real file.
 https://siestareport.com/       /siesta-report/                                              200!
 # On the hub host the SiestaReport home has no business being reachable: one public address.
-https://adamsonfl.com/siesta-report    https://siestareport.com/                             301!
-https://adamsonfl.com/siesta-report/*  https://siestareport.com/                             301!
+https://adamsonfl.com/siesta-report/gb   https://siestareport.com/GB                         301!
+https://adamsonfl.com/siesta-report/gb/  https://siestareport.com/GB                         301!
+https://adamsonfl.com/siesta-report      https://siestareport.com/                           301!
+https://adamsonfl.com/siesta-report/*    https://siestareport.com/                           301!
 
 # Printed on the Sept 2026 Gulf & Bay Owner Brief proof before the domain existed.
 /gulfbay   https://siestareport.com/GB?utm_source=mailer&utm_medium=direct-mail&utm_campaign=gb-owner-brief   301
