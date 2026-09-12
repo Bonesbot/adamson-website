@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-11T11:10:15.202727+00:00",
+  "lastUpdated": "2026-09-12T10:52:25.063776+00:00",
   "counts": {
-    "sold": 875,
-    "pending": 80,
-    "active": 211,
-    "total": 955
+    "sold": 879,
+    "pending": 79,
+    "active": 212,
+    "total": 958
   },
   "metrics": {
-    "avgPrice": "$561,441",
+    "avgPrice": "$561,938",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,048",
+    "avgLivingSqFt": "2,050",
     "avgLotSqFt": null,
     "avgDom": 80
   },
@@ -22,21 +22,21 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 211,
-    "medianPrice": "$419,000",
+    "count": 212,
+    "medianPrice": "$417,000",
     "medianPricePerSqFt": "$253",
     "waterfrontCount": 36,
     "newConstructionCount": 30
   },
   "sold": {
-    "count": 170,
+    "count": 174,
     "medianPrice": "$460,000",
-    "medianDom": 52,
-    "saleToListRatio": "92.0%",
+    "medianDom": 53,
+    "saleToListRatio": "91.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.7,
+    "condo": 5.8,
     "sfhVilla": 2.9,
     "blended": 3.6,
     "method": "active / (trailing-12mo closed / 12)",
@@ -54,19 +54,58 @@
     }
   },
   "priceBands": {
-    "under900k": 189,
+    "under900k": 191,
     "band900kTo1_5m": 18,
-    "band1_5mTo3m": 4,
+    "band1_5mTo3m": 3,
     "band3mPlus": 0
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 211
+      "count": 212
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4678913",
+      "address": "9402 GLEN ABBEY LN",
+      "subdivision": "STONEYBROOK GOLF & COUNTRY CLUB",
+      "soldPrice": "$839,000",
+      "soldDate": "2026-09-11",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,966",
+      "yearBuilt": 1998,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "J1005113",
+      "address": "2414 VALENTINE ST",
+      "subdivision": "PINE TREE ACRES",
+      "soldPrice": "$200,000",
+      "soldDate": "2026-09-11",
+      "bedrooms": 2,
+      "bathrooms": 1.0,
+      "livingSqFt": "974",
+      "yearBuilt": 1972,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4695038",
+      "address": "5516 NORTHERN JUNIPER CT",
+      "subdivision": "PROMENADE ESTATES PH I",
+      "soldPrice": "$978,888",
+      "soldDate": "2026-09-10",
+      "bedrooms": 4,
+      "bathrooms": 4.0,
+      "livingSqFt": "3,182",
+      "yearBuilt": 2020,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4695956",
       "address": "12635 NIGHT VIEW DR",
@@ -81,54 +120,15 @@
       "isWaterfront": false
     },
     {
-      "listingId": "A4691819",
-      "address": "6392 DRAW LN #40",
-      "subdivision": "SUNRISE GOLF CLUB PH I",
-      "soldPrice": "$155,000",
+      "listingId": "A4687332",
+      "address": "6271 STURBRIDGE CT",
+      "subdivision": "HAMPTONS UNIT 1",
+      "soldPrice": "$555,000",
       "soldDate": "2026-09-10",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,482",
-      "yearBuilt": 1974,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4683113",
-      "address": "3639 MUIRFIELD DR #3A",
-      "subdivision": "BALLANTRAE",
-      "soldPrice": "$450,000",
-      "soldDate": "2026-09-08",
       "bedrooms": 3,
       "bathrooms": 2.0,
-      "livingSqFt": "1,802",
-      "yearBuilt": 1981,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4694055",
-      "address": "7106 LA RONDA CT",
-      "subdivision": "MIRA LAGO AT PALMER RANCH",
-      "soldPrice": "$432,000",
-      "soldDate": "2026-09-08",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,771",
-      "yearBuilt": 1995,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4699499",
-      "address": "3670 GLENEAGLE DR #8A",
-      "subdivision": "BALLANTRAE",
-      "soldPrice": "$325,000",
-      "soldDate": "2026-09-08",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,730",
-      "yearBuilt": 1981,
+      "livingSqFt": "1,987",
+      "yearBuilt": 1999,
       "propertyType": "Residential",
       "isWaterfront": false
     }
@@ -142,17 +142,17 @@
       "avgPrice": "$307,475",
       "avgPricePerSqFt": "$194",
       "avgLivingSqFt": "1,596",
-      "avgDom": 113
+      "avgDom": 114
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 74,
-      "avgPrice": "$299,670",
+      "activeCount": 76,
+      "avgPrice": "$302,292",
       "avgPricePerSqFt": "$231",
-      "avgLivingSqFt": "1,295",
-      "avgDom": 121
+      "avgLivingSqFt": "1,306",
+      "avgDom": 113
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$400,867",
       "avgPricePerSqFt": "$241",
       "avgLivingSqFt": "1,679",
-      "avgDom": 84
+      "avgDom": 85
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$350,078",
       "avgPricePerSqFt": "$218",
       "avgLivingSqFt": "1,605",
-      "avgDom": 85
+      "avgDom": 86
     }
   ],
   "condoTiersScope": {
@@ -196,8 +196,8 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 40,
-      "soldCount": 199,
+      "activeCount": 41,
+      "soldCount": 200,
       "soldMedianPricePerSqFt": "$260",
       "soldMedianPrice": "$475,000",
       "lowSample": false
@@ -215,7 +215,7 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 135,
-      "soldCount": 488,
+      "soldCount": 491,
       "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$440,000",
       "lowSample": false
@@ -223,24 +223,24 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 3.6,
-    "monthsOfSupplyCondo": 5.7,
+    "monthsOfSupplyCondo": 5.8,
     "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
-    "activeCount": 211,
+    "activeCount": 212,
     "sold365Count": 700,
-    "sold90Count": 170,
+    "sold90Count": 174,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 497,
-      "activeCount": 85,
+      "soldCount": 501,
+      "activeCount": 84,
       "soldMedianPrice": "$650,000",
-      "soldMedianPricePerSqFt": "$289"
+      "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
       "soldCount": 378,
-      "activeCount": 126,
+      "activeCount": 128,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
@@ -253,22 +253,22 @@
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 211 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 212 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Palmer Ranch?",
-      "a": "Single-family homes sell around $650,000 ($289/sq ft), while condos, villas and townhouses sell around $325,000 ($211/sq ft)."
+      "a": "Single-family homes sell around $650,000 ($288/sq ft), while condos, villas and townhouses sell around $325,000 ($211/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $419,000."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $417,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 52 days on market and closed at 92.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 53 days on market and closed at 91.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

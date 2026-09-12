@@ -2,20 +2,20 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-11T11:10:11.456194+00:00",
+  "lastUpdated": "2026-09-12T10:52:21.252910+00:00",
   "counts": {
-    "sold": 325,
-    "pending": 69,
+    "sold": 327,
+    "pending": 68,
     "active": 185,
-    "total": 394
+    "total": 395
   },
   "metrics": {
-    "avgPrice": "$1,747,583",
-    "avgPricePerSqFt": "$775",
+    "avgPrice": "$1,755,323",
+    "avgPricePerSqFt": "$777",
     "avgYearBuilt": 2002,
-    "avgLivingSqFt": "1,975",
+    "avgLivingSqFt": "1,978",
     "avgLotSqFt": null,
-    "avgDom": 106
+    "avgDom": 105
   },
   "range": {
     "minPrice": "$190,000",
@@ -25,14 +25,14 @@
     "count": 185,
     "medianPrice": "$1,750,000",
     "medianPricePerSqFt": "$920",
-    "waterfrontCount": 52,
+    "waterfrontCount": 51,
     "newConstructionCount": 89
   },
   "sold": {
-    "count": 66,
+    "count": 68,
     "medianPrice": "$820,000",
     "medianDom": 105,
-    "saleToListRatio": "86.9%",
+    "saleToListRatio": "87.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -43,8 +43,8 @@
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,600",
-    "medianMonthlyCondoFee": "$1,680",
+    "medianMonthlyAssociation": "$1,606",
+    "medianMonthlyCondoFee": "$1,683",
     "minMonthlyCondoFee": "$352",
     "maxMonthlyCondoFee": "$11,729",
     "condoFeeRange": {
@@ -67,6 +67,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4689553",
+      "address": "1155 N GULFSTREAM AVE #306",
+      "subdivision": "VUE SARASOTA BAY",
+      "soldPrice": "$1,625,000",
+      "soldDate": "2026-09-11",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,770",
+      "yearBuilt": 2017,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4701440",
+      "address": "101 S GULFSTREAM AVE #4J",
+      "subdivision": "DOLPHIN TOWER",
+      "soldPrice": "$505,000",
+      "soldDate": "2026-09-11",
+      "bedrooms": 1,
+      "bathrooms": 2.0,
+      "livingSqFt": "963",
+      "yearBuilt": 1974,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4673505",
       "address": "1659 DEVONSHIRE LN",
@@ -105,32 +131,6 @@
       "yearBuilt": 1974,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4678497",
-      "address": "401 QUAY COMMONS #1501",
-      "subdivision": "RITZ CARLTON RESIDENCES",
-      "soldPrice": "$6,762,500",
-      "soldDate": "2026-09-03",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "3,798",
-      "yearBuilt": 2021,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4693470",
-      "address": "35 WATERGATE DR #502",
-      "subdivision": "THE TOWER RESIDENCES",
-      "soldPrice": "$2,700,000",
-      "soldDate": "2026-09-02",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "3,751",
-      "yearBuilt": 2003,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,17 +142,17 @@
       "avgPrice": "$1,180,911",
       "avgPricePerSqFt": "$687",
       "avgLivingSqFt": "1,621",
-      "avgDom": 167
+      "avgDom": 168
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 25,
-      "avgPrice": "$1,369,112",
-      "avgPricePerSqFt": "$655",
+      "avgPrice": "$1,368,072",
+      "avgPricePerSqFt": "$654",
       "avgLivingSqFt": "1,891",
-      "avgDom": 118
+      "avgDom": 119
     },
     {
       "tier": "2006to2019",
@@ -162,16 +162,16 @@
       "avgPrice": "$1,395,116",
       "avgPricePerSqFt": "$668",
       "avgLivingSqFt": "1,870",
-      "avgDom": 91
+      "avgDom": 92
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 87,
-      "avgPrice": "$3,797,471",
-      "avgPricePerSqFt": "$1,335",
-      "avgLivingSqFt": "2,668",
+      "avgPrice": "$3,779,023",
+      "avgPricePerSqFt": "$1,329",
+      "avgLivingSqFt": "2,666",
       "avgDom": 220
     }
   ],
@@ -196,19 +196,19 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 51,
-      "soldCount": 65,
-      "soldMedianPricePerSqFt": "$652",
-      "soldMedianPrice": "$1,150,000",
+      "activeCount": 50,
+      "soldCount": 66,
+      "soldMedianPricePerSqFt": "$651",
+      "soldMedianPrice": "$1,137,500",
       "lowSample": false
     },
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 62,
-      "soldCount": 152,
-      "soldMedianPricePerSqFt": "$767",
-      "soldMedianPrice": "$1,437,500",
+      "activeCount": 63,
+      "soldCount": 153,
+      "soldMedianPricePerSqFt": "$769",
+      "soldMedianPrice": "$1,450,000",
       "lowSample": false
     },
     {
@@ -236,8 +236,8 @@
     "monthsOfSupplySfhVilla": 8.6,
     "label": "buyer's market",
     "activeCount": 185,
-    "sold365Count": 263,
-    "sold90Count": 66,
+    "sold365Count": 265,
+    "sold90Count": 68,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,7 +248,7 @@
       "soldMedianPricePerSqFt": "$534"
     },
     "condo": {
-      "soldCount": 309,
+      "soldCount": 311,
       "activeCount": 180,
       "soldMedianPrice": "$1,125,000",
       "soldMedianPricePerSqFt": "$677"
@@ -256,7 +256,7 @@
   },
   "boating": {
     "activeWithDock": 25,
-    "activeWaterfront": 52
+    "activeWaterfront": 51
   },
   "marketQuestions": [
     {
@@ -277,17 +277,17 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Downtown Sarasota?",
-      "a": "Recently sold homes took a median 105 days on market and closed at 86.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 105 days on market and closed at 87.1% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Downtown Sarasota homes have a dock?",
-      "a": "Of 52 active waterfront listings, 25 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 51 active waterfront listings, 25 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Downtown Sarasota?",
-      "a": "The median monthly condo fee is $1,680 and the median monthly association fee is $1,600."
+      "a": "The median monthly condo fee is $1,683 and the median monthly association fee is $1,606."
     }
   ],
   "costBreakdown90": null

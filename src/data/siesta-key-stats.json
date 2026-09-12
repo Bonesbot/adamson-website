@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-11T11:10:10.638542+00:00",
+  "lastUpdated": "2026-09-12T10:52:20.362892+00:00",
   "counts": {
-    "sold": 732,
-    "pending": 51,
-    "active": 273,
+    "sold": 734,
+    "pending": 49,
+    "active": 272,
     "total": 783
   },
   "metrics": {
-    "avgPrice": "$1,424,247",
-    "avgPricePerSqFt": "$700",
+    "avgPrice": "$1,424,335",
+    "avgPricePerSqFt": "$699",
     "avgYearBuilt": 1979,
-    "avgLivingSqFt": "1,837",
+    "avgLivingSqFt": "1,838",
     "avgLotSqFt": null,
     "avgDom": 101
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 273,
+    "count": 272,
     "medianPrice": "$1,150,000",
-    "medianPricePerSqFt": "$757",
-    "waterfrontCount": 149,
+    "medianPricePerSqFt": "$764",
+    "waterfrontCount": 147,
     "newConstructionCount": 47
   },
   "sold": {
-    "count": 110,
-    "medianPrice": "$1,011,000",
+    "count": 112,
+    "medianPrice": "$987,500",
     "medianDom": 106,
-    "saleToListRatio": "88.8%",
+    "saleToListRatio": "88.7%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 6.9,
+    "condo": 6.8,
     "sfhVilla": 6.7,
-    "blended": 6.8,
+    "blended": 6.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 115,
+    "under900k": 114,
     "band900kTo1_5m": 52,
     "band1_5mTo3m": 43,
     "band3mPlus": 63
@@ -62,11 +62,37 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 273
+      "count": 272
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4662545",
+      "address": "1350 N PORTOFINO DR #107",
+      "subdivision": "SIESTA HARBOR II",
+      "soldPrice": "$312,450",
+      "soldDate": "2026-09-11",
+      "bedrooms": 1,
+      "bathrooms": 2.0,
+      "livingSqFt": "780",
+      "yearBuilt": 1969,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4699926",
+      "address": "6518 MIDNIGHT PASS RD #309",
+      "subdivision": "HOUSE SUN",
+      "soldPrice": "$880,000",
+      "soldDate": "2026-09-10",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,215",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4701036",
       "address": "757 BEACH RD #510",
@@ -105,32 +131,6 @@
       "yearBuilt": 1964,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4699817",
-      "address": "70 AVENIDA VENECCIA #201",
-      "subdivision": "SUNSET BEACH",
-      "soldPrice": "$6,400,000",
-      "soldDate": "2026-09-08",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "3,348",
-      "yearBuilt": 2026,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4681768",
-      "address": "6934 BELGRAVE DR",
-      "subdivision": "PRINCES GATE",
-      "soldPrice": "$2,800,000",
-      "soldDate": "2026-09-08",
-      "bedrooms": 4,
-      "bathrooms": 6.5,
-      "livingSqFt": "4,652",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 151,
-      "avgPrice": "$832,021",
-      "avgPricePerSqFt": "$689",
-      "avgLivingSqFt": "1,200",
-      "avgDom": 130
+      "activeCount": 149,
+      "avgPrice": "$834,779",
+      "avgPricePerSqFt": "$696",
+      "avgLivingSqFt": "1,194",
+      "avgDom": 132
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,438,475",
       "avgPricePerSqFt": "$723",
       "avgLivingSqFt": "1,999",
-      "avgDom": 179
+      "avgDom": 180
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$2,525,780",
       "avgPricePerSqFt": "$1,178",
       "avgLivingSqFt": "1,959",
-      "avgDom": 249
+      "avgDom": 250
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,692,636",
       "avgPricePerSqFt": "$1,490",
       "avgLivingSqFt": "3,298",
-      "avgDom": 214
+      "avgDom": 215
     }
   ],
   "condoTiersScope": {
@@ -187,9 +187,9 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 78,
-      "soldCount": 251,
-      "soldMedianPricePerSqFt": "$750",
+      "activeCount": 76,
+      "soldCount": 252,
+      "soldMedianPricePerSqFt": "$749",
       "soldMedianPrice": "$1,000,000",
       "lowSample": false
     },
@@ -197,15 +197,15 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 67,
-      "soldCount": 236,
-      "soldMedianPricePerSqFt": "$599",
-      "soldMedianPrice": "$1,162,500",
+      "soldCount": 237,
+      "soldMedianPricePerSqFt": "$596",
+      "soldMedianPrice": "$1,150,000",
       "lowSample": false
     },
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 47,
+      "activeCount": 48,
       "soldCount": 90,
       "soldMedianPricePerSqFt": "$590",
       "soldMedianPrice": "$730,500",
@@ -231,43 +231,43 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 6.8,
-    "monthsOfSupplyCondo": 6.9,
+    "monthsOfSupply": 6.7,
+    "monthsOfSupplyCondo": 6.8,
     "monthsOfSupplySfhVilla": 6.7,
     "label": "balanced market",
-    "activeCount": 273,
-    "sold365Count": 483,
-    "sold90Count": 110,
+    "activeCount": 272,
+    "sold365Count": 484,
+    "sold90Count": 112,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 237,
-      "activeCount": 102,
+      "activeCount": 103,
       "soldMedianPrice": "$1,525,000",
       "soldMedianPricePerSqFt": "$646"
     },
     "condo": {
-      "soldCount": 495,
-      "activeCount": 171,
+      "soldCount": 497,
+      "activeCount": 169,
       "soldMedianPrice": "$800,000",
       "soldMedianPricePerSqFt": "$631"
     }
   },
   "boating": {
-    "activeWithDock": 65,
-    "activeWaterfront": 149
+    "activeWithDock": 63,
+    "activeWaterfront": 147
   },
   "marketQuestions": [
     {
       "facet": "waterfront",
       "q": "How much more does beachfront cost than bayfront on Siesta Key?",
-      "a": "Gulf-front / beachfront homes sell at a median $750 per sq ft versus $599 for bay- or canal-front \u2014 about a 25% waterfront premium (Stellar MLS, recent closed sales)."
+      "a": "Gulf-front / beachfront homes sell at a median $749 per sq ft versus $596 for bay- or canal-front \u2014 about a 26% waterfront premium (Stellar MLS, recent closed sales)."
     },
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 273 active listings and roughly 40 closed sales a month (trailing 12 months), Siesta Key has about 6.8 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 272 active listings and roughly 40 closed sales a month (trailing 12 months), Siesta Key has about 6.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -282,12 +282,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 106 days on market and closed at 88.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 106 days on market and closed at 88.7% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Siesta Key homes have a dock?",
-      "a": "Of 149 active waterfront listings, 65 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 147 active waterfront listings, 63 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
