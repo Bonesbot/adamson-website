@@ -17,22 +17,29 @@
 # what is printed, so both spellings are listed for clarity.
 
 https://www.siestareport.com/*  https://siestareport.com/:splat                              301!
-# /GB serves the SiestaReport.com twin of the page (src/pages/siesta-report/gb.astro:
+# /GBC serves the SiestaReport.com twin of the page (src/pages/siesta-report/gbc.astro:
 # SRLayout, no AdamsonFL nav), generated alongside the hub page by gen_gulf_bay_pages.py.
-https://siestareport.com/GB     /siesta-report/gb/                                           200
-https://siestareport.com/gb     /siesta-report/gb/                                           200
-https://siestareport.com/GB/*   /siesta-report/gb/?qr=:splat&src=typed                       200
-https://siestareport.com/gb/*   /siesta-report/gb/?qr=:splat&src=typed                       200
+# Renamed from /GB on 2026-09-14; the old path 301s here so the September proofs and any
+# QR already in the wild keep landing on the page (ordered BEFORE the /GBC rules because
+# Netlify matches top-down and /GB is not a prefix of /GBC, so neither shadows the other).
+https://siestareport.com/GB     https://siestareport.com/GBC                                 301!
+https://siestareport.com/gb     https://siestareport.com/GBC                                 301!
+https://siestareport.com/GB/*   https://siestareport.com/GBC/:splat                          301!
+https://siestareport.com/gb/*   https://siestareport.com/GBC/:splat                          301!
+https://siestareport.com/GBC    /siesta-report/gbc/                                          200
+https://siestareport.com/gbc    /siesta-report/gbc/                                          200
+https://siestareport.com/GBC/*  /siesta-report/gbc/?qr=:splat&src=typed                      200
+https://siestareport.com/gbc/*  /siesta-report/gbc/?qr=:splat&src=typed                      200
 # 200! (forced): the hub's own /index.html exists, and an unforced rewrite never shadows a real file.
 https://siestareport.com/       /siesta-report/                                              200!
 # On the hub host the SiestaReport home has no business being reachable: one public address.
-https://adamsonfl.com/siesta-report/gb   https://siestareport.com/GB                         301!
-https://adamsonfl.com/siesta-report/gb/  https://siestareport.com/GB                         301!
+https://adamsonfl.com/siesta-report/gbc  https://siestareport.com/GBC                        301!
+https://adamsonfl.com/siesta-report/gbc/ https://siestareport.com/GBC                        301!
 https://adamsonfl.com/siesta-report      https://siestareport.com/                           301!
 https://adamsonfl.com/siesta-report/*    https://siestareport.com/                           301!
 
 # Printed on the Sept 2026 Gulf & Bay Owner Brief proof before the domain existed.
-/gulfbay   https://siestareport.com/GB?utm_source=mailer&utm_medium=direct-mail&utm_campaign=gb-owner-brief   301
+/gulfbay   https://siestareport.com/GBC?utm_source=mailer&utm_medium=direct-mail&utm_campaign=gb-owner-brief  301
 
 # ---------------------------------------------------------------------------
 # IDX Broker Dynamic Wrapper proxy

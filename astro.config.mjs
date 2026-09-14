@@ -27,7 +27,7 @@ export default defineConfig({
       // Remove the filter to restore.
       // siesta-report is the SiestaReport.com home page (served there by a host-scoped
       // rewrite); it must not be listed as an adamsonfl.com URL.
-      filter: (page) => !/\/(srqmap|srq-map|siesta-report(\/gb)?)\/?$/i.test(page),
+      filter: (page) => !/\/(srqmap|srq-map|siesta-report(\/gbc)?)\/?$/i.test(page),
     }),
     mdx(),
   ],

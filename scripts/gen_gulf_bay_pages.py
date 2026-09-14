@@ -261,8 +261,10 @@ SIDES = {
         # SiestaReport.com twin (2026-09-11): the same page rendered inside SRLayout (Kelli +
         # Ryan header/footer, no AdamsonFL nav), served at https://siestareport.com/GB by the
         # host-scoped rewrite in public/_redirects. See sr_variant().
-        "sr_path": "src/pages/siesta-report/gb.astro",
-        "sr_url": "https://siestareport.com/GB",
+        "sr_path": "src/pages/siesta-report/gbc.astro",
+        # /GBC since 2026-09-14 (was /GB). Legacy /GB and /gb 301 to it in public/_redirects
+        # so the September proofs that printed the old path keep working.
+        "sr_url": "https://siestareport.com/GBC",
         # IDX Broker legacy Showcase widget bound (Edit-By-Hand querystring) to the
         # saved-link polygon sk-gulf-and-bay-beachside (slID 7854), Active only.
         "idx_widget_id": "50169",
