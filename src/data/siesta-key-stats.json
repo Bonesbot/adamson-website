@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-13T10:55:08.713331+00:00",
+  "lastUpdated": "2026-09-14T11:09:02.801829+00:00",
   "counts": {
     "sold": 734,
-    "pending": 50,
-    "active": 270,
-    "total": 784
+    "pending": 51,
+    "active": 269,
+    "total": 785
   },
   "metrics": {
-    "avgPrice": "$1,423,315",
+    "avgPrice": "$1,422,317",
     "avgPricePerSqFt": "$699",
     "avgYearBuilt": 1979,
-    "avgLivingSqFt": "1,838",
+    "avgLivingSqFt": "1,837",
     "avgLotSqFt": null,
     "avgDom": 101
   },
@@ -22,16 +22,16 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 270,
-    "medianPrice": "$1,155,000",
-    "medianPricePerSqFt": "$765",
-    "waterfrontCount": 147,
+    "count": 269,
+    "medianPrice": "$1,160,000",
+    "medianPricePerSqFt": "$766",
+    "waterfrontCount": 146,
     "newConstructionCount": 47
   },
   "sold": {
-    "count": 112,
-    "medianPrice": "$987,500",
-    "medianDom": 106,
+    "count": 109,
+    "medianPrice": "$1,022,000",
+    "medianDom": 105,
     "saleToListRatio": "88.7%",
     "windowDays": 90
   },
@@ -43,7 +43,7 @@
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,163",
+    "medianMonthlyAssociation": "$1,161",
     "medianMonthlyCondoFee": "$1,276",
     "minMonthlyCondoFee": "$208",
     "maxMonthlyCondoFee": "$8,995",
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 112,
+    "under900k": 111,
     "band900kTo1_5m": 52,
     "band1_5mTo3m": 43,
     "band3mPlus": 63
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 270
+      "count": 269
     }
   ],
   "buildingClasses": [],
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 148,
-      "avgPrice": "$836,196",
-      "avgPricePerSqFt": "$698",
-      "avgLivingSqFt": "1,193",
-      "avgDom": 133
+      "activeCount": 147,
+      "avgPrice": "$837,531",
+      "avgPricePerSqFt": "$699",
+      "avgLivingSqFt": "1,192",
+      "avgDom": 134
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,438,475",
       "avgPricePerSqFt": "$723",
       "avgLivingSqFt": "1,999",
-      "avgDom": 181
+      "avgDom": 182
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$2,525,780",
       "avgPricePerSqFt": "$1,178",
       "avgLivingSqFt": "1,959",
-      "avgDom": 251
+      "avgDom": 252
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,692,636",
       "avgPricePerSqFt": "$1,490",
       "avgLivingSqFt": "3,298",
-      "avgDom": 216
+      "avgDom": 217
     }
   ],
   "condoTiersScope": {
@@ -187,7 +187,7 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 76,
+      "activeCount": 75,
       "soldCount": 252,
       "soldMedianPricePerSqFt": "$749",
       "soldMedianPrice": "$1,000,000",
@@ -235,9 +235,9 @@
     "monthsOfSupplyCondo": 6.8,
     "monthsOfSupplySfhVilla": 6.7,
     "label": "balanced market",
-    "activeCount": 270,
+    "activeCount": 269,
     "sold365Count": 481,
-    "sold90Count": 112,
+    "sold90Count": 109,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -249,14 +249,14 @@
     },
     "condo": {
       "soldCount": 497,
-      "activeCount": 168,
+      "activeCount": 167,
       "soldMedianPrice": "$800,000",
       "soldMedianPricePerSqFt": "$631"
     }
   },
   "boating": {
     "activeWithDock": 63,
-    "activeWaterfront": 147
+    "activeWaterfront": 146
   },
   "marketQuestions": [
     {
@@ -267,7 +267,7 @@
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 270 active listings and roughly 40 closed sales a month (trailing 12 months), Siesta Key has about 6.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 269 active listings and roughly 40 closed sales a month (trailing 12 months), Siesta Key has about 6.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -277,22 +277,22 @@
     {
       "facet": "range",
       "q": "What's the price range on Siesta Key?",
-      "a": "Active listings run from $240,000 to $29,995,000, with a median asking price of $1,155,000."
+      "a": "Active listings run from $240,000 to $29,995,000, with a median asking price of $1,160,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 106 days on market and closed at 88.7% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 105 days on market and closed at 88.7% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Siesta Key homes have a dock?",
-      "a": "Of 147 active waterfront listings, 63 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 146 active waterfront listings, 63 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Siesta Key?",
-      "a": "The median monthly condo fee is $1,276 and the median monthly association fee is $1,163."
+      "a": "The median monthly condo fee is $1,276 and the median monthly association fee is $1,161."
     }
   ],
   "costBreakdown90": null
