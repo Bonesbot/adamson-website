@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-14T11:09:02.801829+00:00",
+  "lastUpdated": "2026-09-15T11:05:22.862938+00:00",
   "counts": {
-    "sold": 734,
+    "sold": 736,
     "pending": 51,
-    "active": 269,
-    "total": 785
+    "active": 268,
+    "total": 787
   },
   "metrics": {
-    "avgPrice": "$1,422,317",
+    "avgPrice": "$1,421,286",
     "avgPricePerSqFt": "$699",
     "avgYearBuilt": 1979,
-    "avgLivingSqFt": "1,837",
+    "avgLivingSqFt": "1,836",
     "avgLotSqFt": null,
     "avgDom": 101
   },
@@ -22,22 +22,22 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 269,
-    "medianPrice": "$1,160,000",
-    "medianPricePerSqFt": "$766",
+    "count": 268,
+    "medianPrice": "$1,177,500",
+    "medianPricePerSqFt": "$767",
     "waterfrontCount": 146,
     "newConstructionCount": 47
   },
   "sold": {
-    "count": 109,
-    "medianPrice": "$1,022,000",
-    "medianDom": 105,
-    "saleToListRatio": "88.7%",
+    "count": 110,
+    "medianPrice": "$1,036,000",
+    "medianDom": 106,
+    "saleToListRatio": "88.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 6.8,
-    "sfhVilla": 6.7,
+    "condo": 6.7,
+    "sfhVilla": 6.6,
     "blended": 6.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 111,
+    "under900k": 110,
     "band900kTo1_5m": 52,
     "band1_5mTo3m": 43,
     "band3mPlus": 63
@@ -62,11 +62,37 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 269
+      "count": 268
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4687498",
+      "address": "925 BEACH RD #107",
+      "subdivision": "LA SIESTA",
+      "soldPrice": "$512,000",
+      "soldDate": "2026-09-14",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "940",
+      "yearBuilt": 1972,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4665123",
+      "address": "854 NORSOTA WAY",
+      "subdivision": "BAY ISLAND",
+      "soldPrice": "$1,200,000",
+      "soldDate": "2026-09-11",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,667",
+      "yearBuilt": 1979,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4662545",
       "address": "1350 N PORTOFINO DR #107",
@@ -105,32 +131,6 @@
       "yearBuilt": 1970,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "J1005072",
-      "address": "9275 BLIND PASS RD",
-      "subdivision": "NONE",
-      "soldPrice": "$2,400,000",
-      "soldDate": "2026-09-09",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,156",
-      "yearBuilt": 1970,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "W7883717",
-      "address": "742 EDGEMERE",
-      "subdivision": "SIESTA ISLES",
-      "soldPrice": "$1,525,000",
-      "soldDate": "2026-09-09",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,454",
-      "yearBuilt": 1964,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 147,
-      "avgPrice": "$837,531",
+      "activeCount": 146,
+      "avgPrice": "$839,329",
       "avgPricePerSqFt": "$699",
-      "avgLivingSqFt": "1,192",
-      "avgDom": 134
+      "avgLivingSqFt": "1,194",
+      "avgDom": 136
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,438,475",
       "avgPricePerSqFt": "$723",
       "avgLivingSqFt": "1,999",
-      "avgDom": 182
+      "avgDom": 183
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$2,525,780",
       "avgPricePerSqFt": "$1,178",
       "avgLivingSqFt": "1,959",
-      "avgDom": 252
+      "avgDom": 253
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,692,636",
       "avgPricePerSqFt": "$1,490",
       "avgLivingSqFt": "3,298",
-      "avgDom": 217
+      "avgDom": 218
     }
   ],
   "condoTiersScope": {
@@ -206,9 +206,9 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 47,
-      "soldCount": 90,
-      "soldMedianPricePerSqFt": "$590",
-      "soldMedianPrice": "$730,500",
+      "soldCount": 91,
+      "soldMedianPricePerSqFt": "$599",
+      "soldMedianPrice": "$731,000",
       "lowSample": false
     },
     {
@@ -223,35 +223,35 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 76,
-      "soldCount": 143,
-      "soldMedianPricePerSqFt": "$560",
+      "activeCount": 75,
+      "soldCount": 144,
+      "soldMedianPricePerSqFt": "$559",
       "soldMedianPrice": "$775,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 6.7,
-    "monthsOfSupplyCondo": 6.8,
-    "monthsOfSupplySfhVilla": 6.7,
+    "monthsOfSupplyCondo": 6.7,
+    "monthsOfSupplySfhVilla": 6.6,
     "label": "balanced market",
-    "activeCount": 269,
-    "sold365Count": 481,
-    "sold90Count": 109,
+    "activeCount": 268,
+    "sold365Count": 483,
+    "sold90Count": 110,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 237,
+      "soldCount": 238,
       "activeCount": 102,
       "soldMedianPrice": "$1,525,000",
       "soldMedianPricePerSqFt": "$646"
     },
     "condo": {
-      "soldCount": 497,
-      "activeCount": 167,
+      "soldCount": 498,
+      "activeCount": 166,
       "soldMedianPrice": "$800,000",
-      "soldMedianPricePerSqFt": "$631"
+      "soldMedianPricePerSqFt": "$630"
     }
   },
   "boating": {
@@ -267,22 +267,22 @@
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 269 active listings and roughly 40 closed sales a month (trailing 12 months), Siesta Key has about 6.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 268 active listings and roughly 40 closed sales a month (trailing 12 months), Siesta Key has about 6.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Siesta Key?",
-      "a": "Single-family homes sell around $1,525,000 ($646/sq ft), while condos, villas and townhouses sell around $800,000 ($631/sq ft)."
+      "a": "Single-family homes sell around $1,525,000 ($646/sq ft), while condos, villas and townhouses sell around $800,000 ($630/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Siesta Key?",
-      "a": "Active listings run from $240,000 to $29,995,000, with a median asking price of $1,160,000."
+      "a": "Active listings run from $240,000 to $29,995,000, with a median asking price of $1,177,500."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 105 days on market and closed at 88.7% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 106 days on market and closed at 88.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

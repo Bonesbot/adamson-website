@@ -2,15 +2,15 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-14T11:09:01.275165+00:00",
+  "lastUpdated": "2026-09-15T11:05:21.134536+00:00",
   "counts": {
-    "sold": 1230,
+    "sold": 1231,
     "pending": 37,
     "active": 214,
-    "total": 1267
+    "total": 1268
   },
   "metrics": {
-    "avgPrice": "$2,030,908",
+    "avgPrice": "$2,031,322",
     "avgPricePerSqFt": "$806",
     "avgYearBuilt": 1985,
     "avgLivingSqFt": "2,198",
@@ -23,21 +23,21 @@
   },
   "active": {
     "count": 214,
-    "medianPrice": "$1,047,000",
-    "medianPricePerSqFt": "$680",
+    "medianPrice": "$1,034,500",
+    "medianPricePerSqFt": "$677",
     "waterfrontCount": 163,
     "newConstructionCount": 16
   },
   "sold": {
-    "count": 134,
-    "medianPrice": "$1,070,000",
-    "medianDom": 91,
-    "saleToListRatio": "94.8%",
+    "count": 135,
+    "medianPrice": "$1,060,000",
+    "medianDom": 95,
+    "saleToListRatio": "94.7%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 4.7,
-    "sfhVilla": 5.4,
+    "sfhVilla": 5.2,
     "blended": 5.0,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,10 +54,10 @@
     }
   },
   "priceBands": {
-    "under900k": 86,
+    "under900k": 87,
     "band900kTo1_5m": 51,
-    "band1_5mTo3m": 41,
-    "band3mPlus": 36
+    "band1_5mTo3m": 42,
+    "band3mPlus": 34
   },
   "propertyTypes": [
     {
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4683180",
+      "address": "2326 HARBOUR OAKS DR",
+      "subdivision": "HARBOUR OAKS 2",
+      "soldPrice": "$775,000",
+      "soldDate": "2026-09-15",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,282",
+      "yearBuilt": 1986,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4680786",
       "address": "552 JUAN ANASCO DRIVE",
@@ -118,19 +131,6 @@
       "yearBuilt": 1963,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "TB8483958",
-      "address": "5655 GULF OF MEXICO DR #D107",
-      "subdivision": "CEDARS WEST OF LONGBOAT INC",
-      "soldPrice": "$735,000",
-      "soldDate": "2026-09-10",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,274",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 117,
-      "avgPrice": "$839,824",
-      "avgPricePerSqFt": "$646",
-      "avgLivingSqFt": "1,329",
-      "avgDom": 157
+      "activeCount": 118,
+      "avgPrice": "$839,444",
+      "avgPricePerSqFt": "$645",
+      "avgLivingSqFt": "1,330",
+      "avgDom": 156
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 28,
-      "avgPrice": "$2,294,957",
-      "avgPricePerSqFt": "$840",
-      "avgLivingSqFt": "2,477",
-      "avgDom": 155
+      "avgPrice": "$1,909,421",
+      "avgPricePerSqFt": "$772",
+      "avgLivingSqFt": "2,407",
+      "avgDom": 153
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$6,499,667",
       "avgPricePerSqFt": "$1,695",
       "avgLivingSqFt": "3,801",
-      "avgDom": 220
+      "avgDom": 221
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 3,
-      "avgPrice": "$6,574,667",
-      "avgPricePerSqFt": "$2,085",
+      "avgPrice": "$6,563,000",
+      "avgPricePerSqFt": "$2,081",
       "avgLivingSqFt": "2,832",
-      "avgDom": 554
+      "avgDom": 555
     }
   ],
   "condoTiersScope": {
@@ -187,7 +187,7 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 75,
+      "activeCount": 76,
       "soldCount": 524,
       "soldMedianPricePerSqFt": "$891",
       "soldMedianPrice": "$1,400,000",
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 84,
+      "activeCount": 83,
       "soldCount": 404,
       "soldMedianPricePerSqFt": "$600",
       "soldMedianPrice": "$1,175,000",
@@ -215,8 +215,8 @@
       "segment": "other_wf",
       "label": "Other waterfront",
       "activeCount": 4,
-      "soldCount": 21,
-      "soldMedianPricePerSqFt": "$468",
+      "soldCount": 22,
+      "soldMedianPricePerSqFt": "$460",
       "soldMedianPrice": "$1,175,000",
       "lowSample": false
     },
@@ -233,23 +233,23 @@
   "marketBalance": {
     "monthsOfSupply": 5.0,
     "monthsOfSupplyCondo": 4.7,
-    "monthsOfSupplySfhVilla": 5.4,
+    "monthsOfSupplySfhVilla": 5.2,
     "label": "balanced market",
     "activeCount": 214,
-    "sold365Count": 517,
-    "sold90Count": 134,
+    "sold365Count": 518,
+    "sold90Count": 135,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 317,
-      "activeCount": 58,
+      "activeCount": 57,
       "soldMedianPrice": "$2,100,000",
       "soldMedianPricePerSqFt": "$727"
     },
     "condo": {
-      "soldCount": 910,
-      "activeCount": 154,
+      "soldCount": 911,
+      "activeCount": 155,
       "soldMedianPrice": "$1,000,000",
       "soldMedianPricePerSqFt": "$646"
     }
@@ -262,7 +262,7 @@
     {
       "facet": "cost",
       "q": "What do properties cost on Longboat Key?",
-      "a": "Over the past 90 days, 134 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $890,000 ($554/sq ft), while single-family homes closed around $2,300,000 ($730/sq ft). By location, Gulf-front and beachfront properties closed at a median $818 per square foot, compared with $502 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
+      "a": "Over the past 90 days, 135 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $880,000 ($553/sq ft), while single-family homes closed around $2,300,000 ($730/sq ft). By location, Gulf-front and beachfront properties closed at a median $818 per square foot, compared with $502 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
     },
     {
       "facet": "balance",
@@ -272,7 +272,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Longboat Key?",
-      "a": "Recently sold homes took a median 91 days on market and closed at 94.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 95 days on market and closed at 94.7% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
@@ -287,12 +287,12 @@
   ],
   "costBreakdown90": {
     "windowDays": 90,
-    "soldCount": 134,
+    "soldCount": 135,
     "byPropertyType": {
       "condo": {
-        "soldCount": 98,
-        "soldMedianPrice": "$890,000",
-        "soldMedianPricePerSqFt": "$554"
+        "soldCount": 99,
+        "soldMedianPrice": "$880,000",
+        "soldMedianPricePerSqFt": "$553"
       },
       "single_family": {
         "soldCount": 36,

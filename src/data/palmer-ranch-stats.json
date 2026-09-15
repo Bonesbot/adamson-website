@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-14T11:09:07.161912+00:00",
+  "lastUpdated": "2026-09-15T11:05:27.319649+00:00",
   "counts": {
-    "sold": 880,
-    "pending": 79,
+    "sold": 881,
+    "pending": 81,
     "active": 210,
-    "total": 959
+    "total": 962
   },
   "metrics": {
-    "avgPrice": "$561,644",
+    "avgPrice": "$560,853",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,049",
+    "avgLivingSqFt": "2,047",
     "avgLotSqFt": null,
     "avgDom": 80
   },
@@ -23,20 +23,20 @@
   },
   "active": {
     "count": 210,
-    "medianPrice": "$417,000",
+    "medianPrice": "$419,450",
     "medianPricePerSqFt": "$253",
-    "waterfrontCount": 36,
-    "newConstructionCount": 30
+    "waterfrontCount": 37,
+    "newConstructionCount": 31
   },
   "sold": {
-    "count": 168,
+    "count": 169,
     "medianPrice": "$460,000",
     "medianDom": 52,
-    "saleToListRatio": "92.0%",
+    "saleToListRatio": "91.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.7,
+    "condo": 5.6,
     "sfhVilla": 2.9,
     "blended": 3.6,
     "method": "active / (trailing-12mo closed / 12)",
@@ -54,8 +54,8 @@
     }
   },
   "priceBands": {
-    "under900k": 189,
-    "band900kTo1_5m": 18,
+    "under900k": 188,
+    "band900kTo1_5m": 19,
     "band1_5mTo3m": 3,
     "band3mPlus": 0
   },
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4690192",
+      "address": "4601 LAS BRISAS LN",
+      "subdivision": "PRESTANCIA/VILLA D'ESTE",
+      "soldPrice": "$555,000",
+      "soldDate": "2026-09-14",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,428",
+      "yearBuilt": 1988,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4678913",
       "address": "9402 GLEN ABBEY LN",
@@ -118,19 +131,6 @@
       "yearBuilt": 2022,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4687332",
-      "address": "6271 STURBRIDGE CT",
-      "subdivision": "HAMPTONS UNIT 1",
-      "soldPrice": "$555,000",
-      "soldDate": "2026-09-10",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,987",
-      "yearBuilt": 1999,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,30 +139,30 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 32,
-      "avgPrice": "$311,828",
-      "avgPricePerSqFt": "$195",
+      "avgPrice": "$311,047",
+      "avgPricePerSqFt": "$194",
       "avgLivingSqFt": "1,614",
-      "avgDom": 112
+      "avgDom": 113
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 74,
-      "avgPrice": "$297,787",
-      "avgPricePerSqFt": "$229",
+      "activeCount": 72,
+      "avgPrice": "$296,907",
+      "avgPricePerSqFt": "$228",
       "avgLivingSqFt": "1,301",
-      "avgDom": 115
+      "avgDom": 119
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
       "activeCount": 9,
-      "avgPrice": "$400,867",
-      "avgPricePerSqFt": "$241",
+      "avgPrice": "$398,533",
+      "avgPricePerSqFt": "$240",
       "avgLivingSqFt": "1,679",
-      "avgDom": 87
+      "avgDom": 88
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$349,533",
       "avgPricePerSqFt": "$218",
       "avgLivingSqFt": "1,605",
-      "avgDom": 88
+      "avgDom": 89
     }
   ],
   "condoTiersScope": {
@@ -205,7 +205,7 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 36,
+      "activeCount": 37,
       "soldCount": 187,
       "soldMedianPricePerSqFt": "$275",
       "soldMedianPrice": "$600,000",
@@ -214,8 +214,8 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 133,
-      "soldCount": 491,
+      "activeCount": 132,
+      "soldCount": 492,
       "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$440,000",
       "lowSample": false
@@ -223,31 +223,31 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 3.6,
-    "monthsOfSupplyCondo": 5.7,
+    "monthsOfSupplyCondo": 5.6,
     "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
     "activeCount": 210,
-    "sold365Count": 699,
-    "sold90Count": 168,
+    "sold365Count": 700,
+    "sold90Count": 169,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 502,
-      "activeCount": 84,
+      "activeCount": 86,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 378,
-      "activeCount": 126,
+      "soldCount": 379,
+      "activeCount": 124,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 36
+    "activeWaterfront": 37
   },
   "marketQuestions": [
     {
@@ -263,17 +263,17 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $417,000."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $419,450."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 52 days on market and closed at 92.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 52 days on market and closed at 91.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 36 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 37 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

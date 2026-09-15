@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-14T11:09:04.318187+00:00",
+  "lastUpdated": "2026-09-15T11:05:24.361401+00:00",
   "counts": {
-    "sold": 211,
+    "sold": 212,
     "pending": 25,
     "active": 75,
-    "total": 236
+    "total": 237
   },
   "metrics": {
-    "avgPrice": "$2,429,757",
-    "avgPricePerSqFt": "$725",
+    "avgPrice": "$2,420,243",
+    "avgPricePerSqFt": "$724",
     "avgYearBuilt": 1985,
-    "avgLivingSqFt": "2,981",
+    "avgLivingSqFt": "2,979",
     "avgLotSqFt": null,
     "avgDom": 120
   },
@@ -29,15 +29,15 @@
     "newConstructionCount": 29
   },
   "sold": {
-    "count": 32,
-    "medianPrice": "$1,850,000",
+    "count": 33,
+    "medianPrice": "$1,875,000",
     "medianDom": 124,
-    "saleToListRatio": "85.9%",
+    "saleToListRatio": "86.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 3.8,
-    "sfhVilla": 6.0,
+    "sfhVilla": 5.9,
     "blended": 5.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -55,8 +55,8 @@
   },
   "priceBands": {
     "under900k": 8,
-    "band900kTo1_5m": 6,
-    "band1_5mTo3m": 23,
+    "band900kTo1_5m": 7,
+    "band1_5mTo3m": 22,
     "band3mPlus": 38
   },
   "propertyTypes": [
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4699257",
+      "address": "1372 HARBOR DR",
+      "subdivision": "HARBOR ACRES",
+      "soldPrice": "$13,350,000",
+      "soldDate": "2026-09-14",
+      "bedrooms": 4,
+      "bathrooms": 5.5,
+      "livingSqFt": "5,843",
+      "yearBuilt": 2009,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4626321",
       "address": "4431 CAMINO REAL",
@@ -118,19 +131,6 @@
       "yearBuilt": 2013,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4671493",
-      "address": "1610 N LODGE DR",
-      "subdivision": "CHEROKEE LODGE",
-      "soldPrice": "$10,140,000",
-      "soldDate": "2026-09-03",
-      "bedrooms": 5,
-      "bathrooms": 6.5,
-      "livingSqFt": "7,110",
-      "yearBuilt": 2024,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$399,400",
       "avgPricePerSqFt": "$363",
       "avgLivingSqFt": "1,042",
-      "avgDom": 106
+      "avgDom": 107
     },
     {
       "tier": "1990to2005",
@@ -188,9 +188,9 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 17,
-      "soldCount": 27,
-      "soldMedianPricePerSqFt": "$1,051",
-      "soldMedianPrice": "$3,875,000",
+      "soldCount": 28,
+      "soldMedianPricePerSqFt": "$1,052",
+      "soldMedianPrice": "$4,162,500",
       "lowSample": false
     },
     {
@@ -224,19 +224,19 @@
   "marketBalance": {
     "monthsOfSupply": 5.7,
     "monthsOfSupplyCondo": 3.8,
-    "monthsOfSupplySfhVilla": 6.0,
+    "monthsOfSupplySfhVilla": 5.9,
     "label": "balanced market",
     "activeCount": 75,
-    "sold365Count": 157,
-    "sold90Count": 32,
+    "sold365Count": 158,
+    "sold90Count": 33,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 191,
+      "soldCount": 192,
       "activeCount": 70,
       "soldMedianPrice": "$1,850,000",
-      "soldMedianPricePerSqFt": "$675"
+      "soldMedianPricePerSqFt": "$677"
     },
     "condo": {
       "soldCount": 20,
@@ -258,7 +258,7 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,850,000 ($675/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
+      "a": "Single-family homes sell around $1,850,000 ($677/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
     },
     {
       "facet": "range",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 124 days on market and closed at 85.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 124 days on market and closed at 86.0% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
