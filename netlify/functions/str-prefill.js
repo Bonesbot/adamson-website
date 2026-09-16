@@ -23,7 +23,7 @@ const CORS = {
 const FIELDS = [
   "listing_id", "standard_status", "unparsed_address", "city", "postal_code", "subdivision_name",
   "detected_area", "property_sub_type", "property_type", "bedrooms_total", "bathrooms_full",
-  "bathrooms_half", "living_area", "year_built", "pool_private_yn", "current_price",
+  "bathrooms_half", "living_area", "lot_size_square_feet", "lot_size_acres", "year_built", "pool_private_yn", "current_price",
   "original_list_price", "close_date", "listing_contract_date", "cumulative_days_on_market",
   "tax_annual_amount", "tax_year", "monthly_hoa_amount", "monthly_condo_fee_amount",
   "association_fee", "association_fee_frequency", "total_annual_fees", "monthly_association_cost",
