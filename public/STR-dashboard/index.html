@@ -1217,8 +1217,9 @@ recalc();
     SLUG=slug;
     loadProperty(slug).then(function(d){
       if(d && d.property){ $('addr').value=d.property.address; }
-      else { $('status').innerHTML='<span style="color:#b23b3b">No property registered as '+slug+'. Enter its address and Save to create it.</span>'; }
+      else { $('addr').value=slug.replace(/-/g,' ').replace(/\b([a-z])/g,function(m){return m.toUpperCase()})+', Sarasota, FL'; }
       $('go').click();
+      if(!(d && d.property)) setTimeout(function(){ $('status').innerHTML='<span style="color:#8a6516">Not registered yet as /mkt/'+slug+'/. Check the address, then Save analysis to create the property folder.</span>'; }, 1500);
     });
   } else { loadStats(); window.addEventListener('load', function(){ setTimeout(function(){ $('go').click(); }, 500); }); }
 })();
