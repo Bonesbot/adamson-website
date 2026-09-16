@@ -478,7 +478,7 @@
       </div>
       <div class="apibar"><span>Last API run: <b id="cp_last">never</b></span><span id="cp_cost"></span><span id="cp_note"></span></div>
       <div id="cmap"></div>
-      <div class="mini" style="margin:0 0 8px">Gold = subject. Numbered pins match the table; click a pin or its checkbox to include or exclude a comp. Grey pins are excluded. Circle = search radius. "Sq ft - Built" comes from the nearest MLS record within 150 ft of the pin, when one exists (AirROI does not publish size or age).</div>
+      <div class="mini" style="margin:0 0 8px">Gold = subject. Numbered pins match the table; click a pin or its checkbox to include or exclude a comp. Grey pins are excluded. Circle = search radius. "Sq ft - Built" comes from the nearest MLS record within 150 ft of the pin, only for listings that publish an exact location (AirROI does not carry size or age; most Airbnb pins are offset for privacy).</div>
       <div class="tblwrap" style="overflow:auto"><table class="t comps" id="cp_tbl"></table></div>
       <div id="cp_stats" style="margin-top:10px"></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
@@ -1126,7 +1126,7 @@ function matchCompsToMls(){
   fetch('/.netlify/functions/str-comps?'+qs).then(function(r){return r.json()}).then(function(d){
     var rows=(d.comps||[]).filter(function(r){return r.latitude&&r.longitude});
     COMPS.forEach(function(c,i){
-      if(c.lat==null) return; var best=null, bd=1e9;
+      if(c.lat==null || c.exact_location===false) return; var best=null, bd=1e9;
       rows.forEach(function(r){ var dl=(Number(r.latitude)-c.lat)*364000, dn=(Number(r.longitude)-c.lon)*364000*Math.cos(c.lat*Math.PI/180), ft=Math.sqrt(dl*dl+dn*dn); if(ft<bd){ bd=ft; best=r; } });
       if(best && bd<=150){ c.mls_match={address:best.unparsed_address, ft:Math.round(bd), sqft:best.living_area?Math.round(best.living_area):null, year:best.year_built||null, label:(best.living_area?Math.round(best.living_area).toLocaleString():'?')+' - '+(best.year_built||'?')}; }
       var cell=document.querySelector('#cp_tbl tr[data-row="'+i+'"] td.sqb'); if(cell&&c.mls_match){ cell.textContent=c.mls_match.label; cell.title='MLS: '+c.mls_match.address+' ('+c.mls_match.ft+' ft away)'; }
