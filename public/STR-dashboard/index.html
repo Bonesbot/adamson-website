@@ -244,12 +244,14 @@
     <div class="tab" data-t="market">Market</div>
     <div class="tab" data-t="comps">STR Comps</div>
     <div class="tab" data-t="elig">Eligibility &amp; Zoning</div>
-    <div class="tab dis" title="Phase 2">Reports (soon)</div>
+    <div class="tab" data-t="reports">Reports</div>
   </div>
 
   <!-- ================= DEAL ANALYZER ================= -->
   <div class="pane on" id="tab-deal">
     <div class="toolbar">
+      <span id="prop_links" style="flex:1;font-size:12px;color:var(--muted);align-self:center"></span>
+      <button class="btn sm" id="btn_save">Save analysis</button>
       <button class="btn sm gold" id="btn_print">Print / Save PDF</button>
       <button class="btn sm" id="btn_reset">Reset to defaults</button>
     </div>
@@ -520,6 +522,21 @@
     </div>
   </div>
 
+  <!-- ================= REPORTS ================= -->
+  <div class="pane" id="tab-reports">
+    <div class="card">
+      <h2>This property <span class="srcchip" id="rp_slug"></span></h2>
+      <div class="hint">Saved investment analyses for the address above. Open one to reload every input; the client report link is public and shows the saved numbers, not live ones.</div>
+      <table class="t" id="rp_tbl"></table>
+      <div class="mini" id="rp_note"></div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <h2>All properties <span style="font-size:11px;color:var(--muted);font-family:-apple-system,Segoe UI,Arial">CMA + investment, one row per address</span></h2>
+      <div class="hint">Same registry the CMA admin page uses (<a href="/mkt/admin/">/mkt/admin/</a>). Slugs are address-based, so a CMA and an investment analysis for the same house share a folder: /mkt/&lt;slug&gt;/.</div>
+      <table class="t" id="all_tbl"></table>
+    </div>
+  </div>
+
   <footer>
     <span class="noprint"><b>Data sources.</b> Zoning, overlay districts &amp; City of Sarasota limits: Sarasota County Enterprise GIS (CountyZoning &amp; ZoningOverlayDistrict FeatureServers), served through a cached proxy. Address geocoding: U.S. Census Geocoder. Basemap: OpenStreetMap. STR market metrics and comparable rentals: AirROI, trailing 12 months, pulled on demand and cached in the AdamsonGroup warehouse (last run shown on each panel). Property facts: Stellar MLS via the AdamsonGroup Supabase warehouse. Millage: Sarasota County Tax Collector 2025 final rates.<br></span>
     Sarasota County GIS data is provided &ldquo;as is&rdquo; without warranty; figures are estimates, deemed reliable but not guaranteed. Short-term-rental eligibility is jurisdiction- and property-specific and can be overridden by HOA or deed restrictions. Nothing here constitutes legal, zoning, tax or investment advice. &copy; 2026 The Adamson Group &bull; Coldwell Banker Realty.
@@ -762,6 +779,7 @@ $('go').onclick = function(){
   var s = $('status'); s.style.color=""; s.textContent = "Locating address…";
   $('pr_addr').textContent=a;
   STATE.verdict=null; STATE.zoning=null; STATE.mls=null; $('vlease').textContent='—'; $('vflood').textContent='—';
+  if(!SLUG || SLUG!==slugify(a)){ SLUG=slugify(a); PROP=null; REPORT_LOCK=false; if(!PENDING_REPORT) loadProperty(SLUG); }
   ['h_price','h_hoa','h_flood'].forEach(function(id){ $(id).textContent=''; }); $('h_tax').textContent='Est. = price x 85% x millage';
   clearFacts();
   prefill(a).then(function(mlsLoc){ return mlsLoc || geocode(a); }).then(function(loc){
@@ -770,7 +788,7 @@ $('go').onclick = function(){
     SUBJ={lat:loc.lat, lon:loc.lon}; COMPS=null; COMPS_BANDS=null; if(BAND_SRC==='comps') applyBands('market');
     loadStats(loc.lat, loc.lon);
     syncCompInputs(); loadComps(false); loadMls();
-    queryPoint(loc.lat, loc.lon, function(z,ov){ s.textContent=""; showVerdict(z,ov); });
+    queryPoint(loc.lat, loc.lon, function(z,ov){ s.textContent=""; showVerdict(z,ov); if(PENDING_REPORT){ var pr=PENDING_REPORT; PENDING_REPORT=null; applyReport(pr); } propLinks(); });
   }).catch(function(){
     s.innerHTML = "<span style='color:#b23b3b'>Couldn't locate that address. Try a fuller address, or click the property on the map (Eligibility tab).</span>";
     renderChips();
@@ -816,7 +834,7 @@ function renderMarket(d){
     $('season').innerHTML=h;
   }
   $('bands_note').textContent='AirROI, trailing '+(B.months||12)+' months, data as of '+(d.as_of||'')+', pulled '+fmtDT(d.fetched_at)+'. Percentiles are across individual active listings (monthly bands averaged); annual revenue = sum of the monthly bands. Market average is listing-weighted.';
-  if(BAND_SRC==='market'){ BANDS=MARKET_BANDS; var on=document.querySelector('#rev_presets button.on'); applyPreset(on?on.dataset.p:'avg'); }
+  if(BAND_SRC==='market' && !REPORT_LOCK){ BANDS=MARKET_BANDS; var on=document.querySelector('#rev_presets button.on'); applyPreset(on?on.dataset.p:'avg'); }
   renderChips();
 }
 var MARKET_BANDS=null, BAND_SRC='market';
@@ -849,7 +867,7 @@ function applyPreset(p){
   document.querySelectorAll('#rev_presets button').forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
   recalc();
 }
-document.querySelectorAll('#rev_presets button').forEach(function(b){ b.onclick=function(){ applyPreset(b.dataset.p); }; });
+document.querySelectorAll('#rev_presets button').forEach(function(b){ b.onclick=function(){ REPORT_LOCK=false; applyPreset(b.dataset.p); }; });
 document.querySelectorAll('#facts input, #facts select').forEach(function(el){ el.addEventListener('change', syncCompInputs); });
 document.querySelectorAll('#plat_presets button').forEach(function(b){ b.onclick=function(){ $('s_plat').value=b.dataset.v; document.querySelectorAll('#plat_presets button').forEach(function(x){x.classList.toggle('on',x===b)}); recalc(); }; });
 
@@ -1018,7 +1036,9 @@ function compsIncluded(){ return (COMPS||[]).filter(function(c){ return c._on!==
 function renderComps(d){
   if(!d || !d.comps){ $('cp_tbl').innerHTML=''; $('cp_stats').innerHTML=''; $('cp_src').textContent = d && d.note ? d.note : 'not loaded'; $('cp_last').textContent=fmtDT(d&&d.fetched_at); $('btn_apply_comps').disabled=true; return; }
   var poolF=$('c_pool').value;
-  COMPS=d.comps.map(function(c){ c._on = (poolF===''? true : poolF==='1'? !!c.pool : !c.pool) && c.ttm && c.ttm.adr!=null && c.ttm.occupancy!=null; return c; });
+  STATE.comps_meta={fetched_at:d.fetched_at, params:d.params};
+  var src=PENDING_REPORT||LAST_REPORT; var off=(src&&src.inputs&&src.inputs.comps_off)||[];
+  COMPS=d.comps.map(function(c){ c._on = (poolF===''? true : poolF==='1'? !!c.pool : !c.pool) && c.ttm && c.ttm.adr!=null && c.ttm.occupancy!=null && off.indexOf(c.id)<0; return c; });
   $('cp_src').textContent=(d.source==='cache'?'cached':'live')+' · '+d.comps.length+' comps · '+d.params.bedrooms+'bd/'+d.params.baths+'ba/'+d.params.guests+'g within '+d.params.radius+' mi';
   $('cp_last').textContent=fmtDT(d.fetched_at); $('cp_cost').textContent='About $'+Number(d.est_cost||0.5).toFixed(2)+' per live call';
   var h='<tr><th></th><th>Listing</th><th>Bd/Ba/Gst</th><th>Pool</th><th>Dist</th><th>Rating</th><th>Min nts</th><th>TTM Occ</th><th>TTM ADR</th><th>TTM RevPAR</th><th>TTM Revenue</th><th>L90D Occ</th><th>L90D ADR</th></tr>';
@@ -1045,10 +1065,10 @@ function compsStats(){
     +'<tr><td class="k">TTM ADR</td><td>'+money(COMPS_BANDS.adr.p25)+'</td><td>'+money(COMPS_BANDS.adr.p50)+'</td><td>'+money(COMPS_BANDS.adr.avg)+'</td><td>'+money(COMPS_BANDS.adr.p75)+'</td></tr>'
     +'<tr><td class="k">TTM revenue</td><td>'+money(pctl(rev,.25)||0)+'</td><td>'+money(pctl(rev,.5)||0)+'</td><td>'+money(rev.filter(Boolean).reduce(function(a,b){return a+b},0)/Math.max(1,rev.filter(Boolean).length))+'</td><td>'+money(pctl(rev,.75)||0)+'</td></tr></table>';
   $('btn_apply_comps').disabled=false;
-  if(BAND_SRC==='comps') applyBands('comps');
+  if(BAND_SRC==='comps' && !REPORT_LOCK) applyBands('comps');
 }
 function applyBands(src){
-  BAND_SRC=src;
+  REPORT_LOCK=false; BAND_SRC=src;
   if(src==='comps' && COMPS_BANDS){ BANDS={occ:{p25:COMPS_BANDS.occ.p25,p50:COMPS_BANDS.occ.p25,avg:COMPS_BANDS.occ.p50,p75:COMPS_BANDS.occ.p75,p90:COMPS_BANDS.occ.p90}, adr:{p25:COMPS_BANDS.adr.p25,p50:COMPS_BANDS.adr.p25,avg:COMPS_BANDS.adr.p50,p75:COMPS_BANDS.adr.p75,p90:COMPS_BANDS.adr.p90}, live:true, label:COMPS_BANDS.label}; $('rev_src').textContent='Comps: Low/Mid/High = p25 / median / p75 of '+compsIncluded().length+' listings'; }
   else { BAND_SRC='market'; BANDS=MARKET_BANDS||BANDS; $('rev_src').textContent=(MARKET_BANDS?MARKET_BANDS.label:'Sample bands')+' · Low/Mid/High = p50 / average / p75'; }
   var on=document.querySelector('#rev_presets button.on'); applyPreset(on?on.dataset.p:'avg');
@@ -1105,12 +1125,103 @@ function renderWhatIf(I){
   $('whatif').innerHTML=h;
 }
 
+
+/* =====================================================================
+   PROPERTY REGISTRY + SAVED REPORTS (shared with the CMA system)
+   ===================================================================== */
+var SLUG=null, PENDING_REPORT=null, LAST_REPORT=null, REPORT_LOCK=false, PROP=null;
+function slugify(a){ return String(a||'').split(',')[0].toLowerCase().replace(/#/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+function slugFromUrl(){ var m=location.pathname.match(/^\/mkt\/([a-z0-9][a-z0-9-]{2,63})\/invest\/?$/i); if(m) return m[1].toLowerCase(); var q=new URLSearchParams(location.search).get('slug'); return q? q.toLowerCase() : null; }
+var INPUT_IDS=['i_price','i_down','i_rate','i_term','i_lender','i_closing','i_furnish','i_reno','i_other','i_cleanpass','i_cleancost','i_los','i_muni','i_tax','i_nav','i_hoi','i_flood','i_hoa','i_sa','i_lic','i_maint','i_capex','i_supp','i_elec','i_water','i_gas','i_net','i_pool','i_land','i_pest','i_misc','i_app','i_rg','i_eg','i_sell','s_adr','s_occ','s_mgmt','s_plat','g_target','c_beds','c_baths','c_guests','c_radius','c_pool','m_sqmin','m_sqmax','m_ymin','m_ymax','m_since'];
+var FACT_IDS=['f_type','f_sqft','f_beds','f_baths','f_lot','f_pool','f_garage','f_year'];
+function collectInputs(){ var o={}; INPUT_IDS.forEach(function(id){ o[id]=$(id).value; }); o.preset=(document.querySelector('#rev_presets button.on')||{}).dataset ? document.querySelector('#rev_presets button.on').dataset.p : 'avg'; o.band_src=BAND_SRC; o.tax_manual=taxDirty; o.comps_off=(COMPS||[]).filter(function(c){return c._on===false}).map(function(c){return c.id}); return o; }
+function collectFacts(){ var o={}; FACT_IDS.forEach(function(id){ o[id]=$(id).value; }); return o; }
+function applyReport(rep){
+  if(!rep) return;
+  var I=rep.inputs||{}, F=(PROP&&PROP.facts)||rep.facts||{};
+  FACT_IDS.forEach(function(id){ if(F[id]!=null && F[id]!=='') $(id).value=F[id]; });
+  INPUT_IDS.forEach(function(id){ if(I[id]!=null) $(id).value=I[id]; });
+  taxDirty=!!I.tax_manual;
+  if(rep.bands){ BANDS=rep.bands; BAND_SRC=I.band_src||'market'; $('rev_src').textContent=(BANDS.label||'Saved bands')+(BAND_SRC==='comps'?' (comps, as saved)':' (as saved)'); }
+  document.querySelectorAll('#rev_presets button').forEach(function(b){ b.classList.toggle('on', b.dataset.p===(I.preset||'avg')); });
+  LAST_REPORT=rep;
+  if(COMPS && I.comps_off){ COMPS.forEach(function(c){ c._on = I.comps_off.indexOf(c.id)<0; }); }
+  REPORT_LOCK=true; recalc();
+  $('status').innerHTML='<span style="color:#2e7d52">Loaded saved analysis: '+(rep.title||'')+' ('+fmtDT(rep.created_at)+'). Presets are held until you click one.</span>';
+}
+function unlockReport(){ REPORT_LOCK=false; }
+function propLinks(){
+  var slug=SLUG||slugify($('addr').value); var h='<b>/mkt/'+slug+'/</b>';
+  if(PROP && PROP.cma) h+=' · <a href="'+PROP.cma.workbench_url+'">CMA workbench</a> · <a href="'+PROP.cma.client_url+'" target="_blank">CMA client page</a>';
+  if(PROP && PROP.reports && PROP.reports.length) h+=' · <a href="/mkt/'+slug+'/report" target="_blank">Client report</a> ('+PROP.reports.length+' saved)';
+  $('prop_links').innerHTML=h;
+}
+function loadProperty(slug){
+  return fetch('/.netlify/functions/str-reports?action=property&slug='+encodeURIComponent(slug)).then(function(r){return r.json()}).then(function(d){
+    PROP = d && d.property ? Object.assign({}, d.property, {reports:d.reports||[], cma: d.cma? {slug:d.cma.slug, profile:d.cma.profile, workbench_url:'/mkt/'+d.cma.slug+'/workbench.html', client_url:'/mkt/'+d.cma.slug+'/'} : null}) : null;
+    if(d && d.latest) PENDING_REPORT=d.latest;
+    renderReportsTab(d);
+    return d;
+  }).catch(function(){ return null; });
+}
+function renderReportsTab(d){
+  $('rp_slug').textContent = SLUG || slugify($('addr').value) || '';
+  var reps=(d && d.reports)||[];
+  var h='<tr><th>Saved</th><th>Title</th><th>Scenario</th><th>NOI</th><th>Cash flow / yr</th><th>CoC</th><th></th></tr>';
+  if(!reps.length) h+='<tr><td colspan="7" class="k">No saved analyses yet for this property. Use Save analysis on the Deal Analyzer.</td></tr>';
+  reps.forEach(function(r){ var hl=r.headline||{}; h+='<tr><td>'+fmtDT(r.created_at)+'</td><td>'+(r.title||'')+'</td><td>'+({p50:'Low',avg:'Mid',p75:'High'}[r.scenario]||r.scenario||'')+'</td><td>'+(hl.noi!=null?money(hl.noi):'—')+'</td><td>'+(hl.cf!=null?money(hl.cf):'—')+'</td><td>'+(hl.coc!=null?pct(hl.coc):'—')+'</td><td><a href="#" data-open="'+r.id+'">Open</a> · <a href="/mkt/'+(SLUG||'')+'/report?id='+r.id+'" target="_blank">Client report</a> · <a href="#" data-del="'+r.id+'" style="color:var(--no)">Delete</a></td></tr>'; });
+  $('rp_tbl').innerHTML=h;
+  document.querySelectorAll('#rp_tbl a[data-open]').forEach(function(a){ a.onclick=function(ev){ ev.preventDefault(); fetch('/.netlify/functions/str-reports?action=report&id='+a.dataset.open).then(function(r){return r.json()}).then(function(x){ if(x&&x.report){ applyReport(x.report); document.querySelector('.tab[data-t="deal"]').click(); } }); }; });
+  document.querySelectorAll('#rp_tbl a[data-del]').forEach(function(a){ a.onclick=function(ev){ ev.preventDefault(); if(!confirm('Delete this saved analysis?')) return; var k=editKey(); if(!k) return; fetch('/.netlify/functions/str-reports?action=delete&id='+a.dataset.del,{method:'POST',headers:{'x-cma-key':k},body:'{}'}).then(function(){ loadProperty(SLUG||slugify($('addr').value)).then(propLinks); }); }; });
+  propLinks();
+}
+function loadAllProperties(){
+  fetch('/.netlify/functions/str-reports?action=list').then(function(r){return r.json()}).then(function(d){
+    var rows=(d&&d.properties)||[]; var h='<tr><th>Address</th><th>Slug</th><th>CMA</th><th>Investment analyses</th><th>Updated</th></tr>';
+    rows.forEach(function(p){ var latest=p.reports&&p.reports[0]; h+='<tr><td><b>'+(p.address||p.slug)+'</b></td><td style="font-family:monospace;font-size:11px">'+p.slug+'</td><td>'+(p.cma?('<a href="'+p.cma.workbench_url+'">workbench</a> · <a href="'+p.cma.client_url+'" target="_blank">client</a> <span class="srcchip">'+p.cma.profile+'</span>'):'<span style="color:var(--muted)">none</span>')+'</td><td>'+(p.reports&&p.reports.length?('<a href="'+p.invest_url+'">open</a> · <a href="'+p.report_url+'" target="_blank">client report</a> <span class="srcchip">'+p.reports.length+' saved'+(latest&&latest.headline&&latest.headline.cf!=null?' · CF '+money(latest.headline.cf):'')+'</span>'):('<a href="'+p.invest_url+'">start</a>'))+'</td><td>'+(p.updated_at?fmtDT(p.updated_at):'')+'</td></tr>'; });
+    if(!rows.length) h+='<tr><td colspan="5" class="k">No properties registered yet.</td></tr>';
+    $('all_tbl').innerHTML=h;
+  }).catch(function(){});
+}
+$('btn_save').onclick=function(){
+  var addr=$('addr').value.trim(); if(!addr){ alert('Enter and analyze an address first.'); return; }
+  var k=editKey(); if(!k) return;
+  var slug=SLUG||slugify(addr);
+  var title=prompt('Title for this analysis', addr.split(',')[0]+' · '+new Date().toLocaleDateString('en-US')); if(title==null) return;
+  var I=inputs(), R=model(I), on=document.querySelector('#rev_presets button.on'), scenario=on?on.dataset.p:'avg';
+  var wi={}; [['p50','low'],['avg','mid'],['p75','high']].forEach(function(d){ var a=BANDS.adr[d[0]]!=null?BANDS.adr[d[0]]:BANDS.adr.avg, o=BANDS.occ[d[0]]!=null?BANDS.occ[d[0]]:BANDS.occ.avg; if(a!=null&&o!=null){ var t=model(I,a,o); wi[d[1]]={adr:a,occ:o,gross:t.gross,noi:t.noi,cf:t.cf,coc:t.coc,cap:t.cap,dscr:t.dscr}; } });
+  var outputs={ headline:{gross:R.gross,noi:R.noi,cf:R.cf,coc:R.coc,cap:R.cap,dscr:R.dscr,cash:R.cash,adr:I.adr,occ:I.occ,price:I.price}, whatif:wi, model:R };
+  var html={ facts:$('facts').outerHTML, chips:$('chips').innerHTML, results:document.querySelector('#tab-deal .results').innerHTML, acq:document.querySelector('#tab-deal .acols').innerHTML };
+  // freeze input values into the HTML snapshot so the client report renders them
+  var tmp=document.createElement('div'); tmp.innerHTML=html.acq; tmp.querySelectorAll('input,select').forEach(function(el){ var live=$(el.id); if(!live) return; if(el.tagName==='SELECT'){ el.querySelectorAll('option').forEach(function(o){ o.toggleAttribute('selected', o.value===live.value); }); } else el.setAttribute('value', live.value); }); html.acq=tmp.innerHTML;
+  tmp.innerHTML=html.facts; tmp.querySelectorAll('input,select').forEach(function(el){ var live=$(el.id); if(!live) return; if(el.tagName==='SELECT'){ el.querySelectorAll('option').forEach(function(o){ o.toggleAttribute('selected', o.value===live.value); }); } else el.setAttribute('value', live.value); }); html.facts=tmp.innerHTML;
+  var body={ slug:slug, address:addr, lat:SUBJ.lat, lon:SUBJ.lon, mls_id:STATE.mls&&STATE.mls.listing?STATE.mls.listing.listing_id:null, facts:collectFacts(), title:title, scenario:scenario,
+             inputs:collectInputs(), outputs:outputs, market:STATE.market?{market:STATE.market.market,fetched_at:STATE.market.fetched_at,as_of:STATE.market.as_of,summary:STATE.market.summary}:null,
+             comps: COMPS? {fetched_at:(STATE.comps_meta||{}).fetched_at||null, included:compsIncluded().map(function(c){return {id:c.id,name:c.name,url:c.url,bedrooms:c.bedrooms,baths:c.baths,guests:c.guests,pool:c.pool,distance_mi:c.distance_mi,rating:c.rating,reviews:c.reviews,ttm:c.ttm,l90d:c.l90d}}), bands:COMPS_BANDS} : null,
+             bands: BANDS, html: JSON.stringify(html) };
+  $('btn_save').disabled=true; $('btn_save').textContent='Saving…';
+  fetch('/.netlify/functions/str-reports?action=save',{method:'POST',headers:{'x-cma-key':k,'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){ if(r.status===401){ localStorage.removeItem(KEY_KEY); throw new Error('Edit key rejected'); } return r.json(); })
+    .then(function(d){ if(!d||!d.ok) throw new Error((d&&d.error)||'save failed'); SLUG=d.slug; history.replaceState(null,'','/mkt/'+d.slug+'/invest'); $('status').innerHTML='<span style="color:#2e7d52">Saved. Client report: <a href="'+d.report_url+'" target="_blank">'+location.origin+d.report_url+'</a></span>'; loadProperty(d.slug).then(propLinks); loadAllProperties(); })
+    .catch(function(e){ alert('Save failed: '+(e.message||e)); })
+    .finally(function(){ $('btn_save').disabled=false; $('btn_save').textContent='Save analysis'; });
+};
+
 /* =====================================================================
    BOOT
    ===================================================================== */
-loadStats(); loadUsage();
+loadUsage(); loadAllProperties();
 recalc();
-window.addEventListener('load', function(){ setTimeout(function(){ $('go').click(); }, 500); });
+(function(){
+  var slug=slugFromUrl();
+  if(slug){
+    SLUG=slug;
+    loadProperty(slug).then(function(d){
+      if(d && d.property){ $('addr').value=d.property.address; }
+      else { $('status').innerHTML='<span style="color:#b23b3b">No property registered as '+slug+'. Enter its address and Save to create it.</span>'; }
+      $('go').click();
+    });
+  } else { loadStats(); window.addEventListener('load', function(){ setTimeout(function(){ $('go').click(); }, 500); }); }
+})();
 </script>
 </body>
 </html>
