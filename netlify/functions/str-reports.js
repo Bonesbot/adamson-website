@@ -31,7 +31,7 @@ function sb() {
   const h = { apikey: key, Authorization: "Bearer " + key, "Content-Type": "application/json" };
   return {
     get: async (path) => { const r = await fetch(url + "/rest/v1/" + path, { headers: h }); if (!r.ok) throw new Error("supabase " + r.status + " " + (await r.text()).slice(0, 200)); return r.json(); },
-    post: async (path, body, prefer) => { const r = await fetch(url + "/rest/v1/" + path, { method: "POST", headers: Object.assign({ Prefer: prefer || "return=representation" }, h), body: JSON.stringify(body) }); if (!r.ok) throw new Error("supabase " + r.status + " " + (await r.text()).slice(0, 200)); return prefer === "return=minimal" ? null : r.json(); },
+    post: async (path, body, prefer) => { const r = await fetch(url + "/rest/v1/" + path, { method: "POST", headers: Object.assign({ Prefer: prefer || "return=representation" }, h), body: JSON.stringify(body) }); if (!r.ok) throw new Error("supabase " + r.status + " " + (await r.text()).slice(0, 200)); return /return=minimal/.test(prefer || "") ? null : r.json(); },
     del: async (path) => { const r = await fetch(url + "/rest/v1/" + path, { method: "DELETE", headers: h }); if (!r.ok) throw new Error("supabase " + r.status); return true; }
   };
 }
