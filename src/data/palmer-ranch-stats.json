@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-15T11:05:27.319649+00:00",
+  "lastUpdated": "2026-09-16T10:54:43.258937+00:00",
   "counts": {
-    "sold": 881,
-    "pending": 81,
-    "active": 210,
-    "total": 962
+    "sold": 885,
+    "pending": 80,
+    "active": 208,
+    "total": 965
   },
   "metrics": {
-    "avgPrice": "$560,853",
+    "avgPrice": "$561,871",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,047",
+    "avgLivingSqFt": "2,049",
     "avgLotSqFt": null,
     "avgDom": 80
   },
@@ -22,21 +22,21 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 210,
-    "medianPrice": "$419,450",
+    "count": 208,
+    "medianPrice": "$417,000",
     "medianPricePerSqFt": "$253",
-    "waterfrontCount": 37,
-    "newConstructionCount": 31
+    "waterfrontCount": 36,
+    "newConstructionCount": 29
   },
   "sold": {
-    "count": 169,
+    "count": 170,
     "medianPrice": "$460,000",
-    "medianDom": 52,
-    "saleToListRatio": "91.9%",
+    "medianDom": 53,
+    "saleToListRatio": "91.8%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.6,
+    "condo": 5.5,
     "sfhVilla": 2.9,
     "blended": 3.6,
     "method": "active / (trailing-12mo closed / 12)",
@@ -55,18 +55,70 @@
   },
   "priceBands": {
     "under900k": 188,
-    "band900kTo1_5m": 19,
+    "band900kTo1_5m": 17,
     "band1_5mTo3m": 3,
     "band3mPlus": 0
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 210
+      "count": 208
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4701124",
+      "address": "8712 BAY MEADOW DR",
+      "subdivision": "SUNRISE PRESERVE",
+      "soldPrice": "$585,500",
+      "soldDate": "2026-09-15",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,843",
+      "yearBuilt": 2021,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4695500",
+      "address": "9532 FOREST HILLS CIRCLE",
+      "subdivision": "STONEYBROOK GOLF & COUNTRY CLUB",
+      "soldPrice": "$538,500",
+      "soldDate": "2026-09-15",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,741",
+      "yearBuilt": 1998,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4688391",
+      "address": "9320 CLUBSIDE CIR #2108",
+      "subdivision": "STONEYBROOK CLUBSIDE 2",
+      "soldPrice": "$275,000",
+      "soldDate": "2026-09-15",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,398",
+      "yearBuilt": 1995,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4693098",
+      "address": "8370 WINGATE DR #716",
+      "subdivision": "PINESTONE AT PALMER RANCH",
+      "soldPrice": "$210,000",
+      "soldDate": "2026-09-15",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,068",
+      "yearBuilt": 1996,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4690192",
       "address": "4601 LAS BRISAS LN",
@@ -77,58 +129,6 @@
       "bathrooms": 2.0,
       "livingSqFt": "2,428",
       "yearBuilt": 1988,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4678913",
-      "address": "9402 GLEN ABBEY LN",
-      "subdivision": "STONEYBROOK GOLF & COUNTRY CLUB",
-      "soldPrice": "$839,000",
-      "soldDate": "2026-09-11",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,966",
-      "yearBuilt": 1998,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "J1005113",
-      "address": "2414 VALENTINE ST",
-      "subdivision": "PINE TREE ACRES",
-      "soldPrice": "$200,000",
-      "soldDate": "2026-09-11",
-      "bedrooms": 2,
-      "bathrooms": 1.0,
-      "livingSqFt": "974",
-      "yearBuilt": 1972,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4695038",
-      "address": "5516 NORTHERN JUNIPER CT",
-      "subdivision": "PROMENADE ESTATES PH I",
-      "soldPrice": "$978,888",
-      "soldDate": "2026-09-10",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "3,182",
-      "yearBuilt": 2020,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4695956",
-      "address": "12635 NIGHT VIEW DR",
-      "subdivision": "PROMENADE ESTATES PH I",
-      "soldPrice": "$920,000",
-      "soldDate": "2026-09-10",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "3,182",
-      "yearBuilt": 2022,
       "propertyType": "Residential",
       "isWaterfront": false
     }
@@ -142,17 +142,17 @@
       "avgPrice": "$311,047",
       "avgPricePerSqFt": "$194",
       "avgLivingSqFt": "1,614",
-      "avgDom": 113
+      "avgDom": 114
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 72,
-      "avgPrice": "$296,907",
-      "avgPricePerSqFt": "$228",
-      "avgLivingSqFt": "1,301",
-      "avgDom": 119
+      "activeCount": 73,
+      "avgPrice": "$301,530",
+      "avgPricePerSqFt": "$229",
+      "avgLivingSqFt": "1,311",
+      "avgDom": 116
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$398,533",
       "avgPricePerSqFt": "$240",
       "avgLivingSqFt": "1,679",
-      "avgDom": 88
+      "avgDom": 89
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$349,533",
       "avgPricePerSqFt": "$218",
       "avgLivingSqFt": "1,605",
-      "avgDom": 89
+      "avgDom": 90
     }
   ],
   "condoTiersScope": {
@@ -196,8 +196,8 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 41,
-      "soldCount": 200,
+      "activeCount": 40,
+      "soldCount": 202,
       "soldMedianPricePerSqFt": "$260",
       "soldMedianPrice": "$475,000",
       "lowSample": false
@@ -205,10 +205,10 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 37,
-      "soldCount": 187,
+      "activeCount": 36,
+      "soldCount": 189,
       "soldMedianPricePerSqFt": "$275",
-      "soldMedianPrice": "$600,000",
+      "soldMedianPrice": "$595,000",
       "lowSample": false
     },
     {
@@ -223,37 +223,37 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 3.6,
-    "monthsOfSupplyCondo": 5.6,
+    "monthsOfSupplyCondo": 5.5,
     "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
-    "activeCount": 210,
-    "sold365Count": 700,
-    "sold90Count": 169,
+    "activeCount": 208,
+    "sold365Count": 698,
+    "sold90Count": 170,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 502,
-      "activeCount": 86,
+      "soldCount": 503,
+      "activeCount": 83,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 379,
-      "activeCount": 124,
+      "soldCount": 382,
+      "activeCount": 125,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 37
+    "activeWaterfront": 36
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 210 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 208 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,17 +263,17 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $419,450."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $417,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 52 days on market and closed at 91.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 53 days on market and closed at 91.8% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 37 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 36 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

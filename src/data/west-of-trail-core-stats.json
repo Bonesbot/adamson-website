@@ -2,43 +2,43 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-15T11:05:24.361401+00:00",
+  "lastUpdated": "2026-09-16T10:54:40.260019+00:00",
   "counts": {
-    "sold": 212,
-    "pending": 25,
-    "active": 75,
-    "total": 237
+    "sold": 214,
+    "pending": 24,
+    "active": 73,
+    "total": 238
   },
   "metrics": {
-    "avgPrice": "$2,420,243",
+    "avgPrice": "$2,423,562",
     "avgPricePerSqFt": "$724",
     "avgYearBuilt": 1985,
-    "avgLivingSqFt": "2,979",
+    "avgLivingSqFt": "2,983",
     "avgLotSqFt": null,
-    "avgDom": 120
+    "avgDom": 119
   },
   "range": {
     "minPrice": "$3,150",
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 75,
-    "medianPrice": "$3,095,000",
+    "count": 73,
+    "medianPrice": "$2,999,000",
     "medianPricePerSqFt": "$893",
     "waterfrontCount": 18,
-    "newConstructionCount": 29
+    "newConstructionCount": 28
   },
   "sold": {
-    "count": 33,
+    "count": 35,
     "medianPrice": "$1,875,000",
     "medianDom": 124,
-    "saleToListRatio": "86.0%",
+    "saleToListRatio": "85.6%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 3.8,
-    "sfhVilla": 5.9,
-    "blended": 5.7,
+    "sfhVilla": 5.7,
+    "blended": 5.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -57,16 +57,42 @@
     "under900k": 8,
     "band900kTo1_5m": 7,
     "band1_5mTo3m": 22,
-    "band3mPlus": 38
+    "band3mPlus": 36
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 75
+      "count": 73
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4694616",
+      "address": "1915 CLEMATIS ST",
+      "subdivision": "DESOTA PARK",
+      "soldPrice": "$2,800,000",
+      "soldDate": "2026-09-15",
+      "bedrooms": 4,
+      "bathrooms": 4.0,
+      "livingSqFt": "3,161",
+      "yearBuilt": 2009,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4676645",
+      "address": "1864 GOLDENROD ST",
+      "subdivision": "POINSETTIA PARK 2",
+      "soldPrice": "$1,485,000",
+      "soldDate": "2026-09-15",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,307",
+      "yearBuilt": 2003,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4699257",
       "address": "1372 HARBOR DR",
@@ -105,32 +131,6 @@
       "yearBuilt": 2023,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4705114",
-      "address": "1862 PROSPECT ST",
-      "subdivision": "FLOYD & CAMERON SUB",
-      "soldPrice": "$2,575,000",
-      "soldDate": "2026-09-04",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,439",
-      "yearBuilt": 1928,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4700129",
-      "address": "1711 KENILWORTH ST",
-      "subdivision": "KENILWORTH ESTATES",
-      "soldPrice": "$1,435,000",
-      "soldDate": "2026-09-04",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "3,734",
-      "yearBuilt": 2013,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$399,400",
       "avgPricePerSqFt": "$363",
       "avgLivingSqFt": "1,042",
-      "avgDom": 107
+      "avgDom": 108
     },
     {
       "tier": "1990to2005",
@@ -214,27 +214,27 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 57,
-      "soldCount": 175,
-      "soldMedianPricePerSqFt": "$642",
+      "activeCount": 55,
+      "soldCount": 177,
+      "soldMedianPricePerSqFt": "$644",
       "soldMedianPrice": "$1,640,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.7,
+    "monthsOfSupply": 5.5,
     "monthsOfSupplyCondo": 3.8,
-    "monthsOfSupplySfhVilla": 5.9,
+    "monthsOfSupplySfhVilla": 5.7,
     "label": "balanced market",
-    "activeCount": 75,
-    "sold365Count": 158,
-    "sold90Count": 33,
+    "activeCount": 73,
+    "sold365Count": 160,
+    "sold90Count": 35,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 192,
-      "activeCount": 70,
+      "soldCount": 194,
+      "activeCount": 68,
       "soldMedianPrice": "$1,850,000",
       "soldMedianPricePerSqFt": "$677"
     },
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 75 active listings and roughly 13 closed sales a month (trailing 12 months), West Of Trail Core has about 5.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 73 active listings and roughly 13 closed sales a month (trailing 12 months), West Of Trail Core has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,12 +263,12 @@
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $3,150 to $26,400,000, with a median asking price of $3,095,000."
+      "a": "Active listings run from $3,150 to $26,400,000, with a median asking price of $2,999,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 124 days on market and closed at 86.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 124 days on market and closed at 85.6% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

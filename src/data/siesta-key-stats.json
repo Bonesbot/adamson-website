@@ -2,15 +2,15 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-15T11:05:22.862938+00:00",
+  "lastUpdated": "2026-09-16T10:54:38.713622+00:00",
   "counts": {
-    "sold": 736,
-    "pending": 51,
+    "sold": 737,
+    "pending": 50,
     "active": 268,
     "total": 787
   },
   "metrics": {
-    "avgPrice": "$1,421,286",
+    "avgPrice": "$1,421,616",
     "avgPricePerSqFt": "$699",
     "avgYearBuilt": 1979,
     "avgLivingSqFt": "1,836",
@@ -24,15 +24,15 @@
   "active": {
     "count": 268,
     "medianPrice": "$1,177,500",
-    "medianPricePerSqFt": "$767",
+    "medianPricePerSqFt": "$764",
     "waterfrontCount": 146,
     "newConstructionCount": 47
   },
   "sold": {
-    "count": 110,
-    "medianPrice": "$1,036,000",
-    "medianDom": 106,
-    "saleToListRatio": "88.4%",
+    "count": 108,
+    "medianPrice": "$1,011,000",
+    "medianDom": 107,
+    "saleToListRatio": "88.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -43,7 +43,7 @@
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,161",
+    "medianMonthlyAssociation": "$1,158",
     "medianMonthlyCondoFee": "$1,276",
     "minMonthlyCondoFee": "$208",
     "maxMonthlyCondoFee": "$8,995",
@@ -54,10 +54,10 @@
     }
   },
   "priceBands": {
-    "under900k": 110,
-    "band900kTo1_5m": 52,
-    "band1_5mTo3m": 43,
-    "band3mPlus": 63
+    "under900k": 111,
+    "band900kTo1_5m": 51,
+    "band1_5mTo3m": 44,
+    "band3mPlus": 62
   },
   "propertyTypes": [
     {
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4698323",
+      "address": "208 HOURGLASS WAY #V11",
+      "subdivision": "WHISPERING SANDS",
+      "soldPrice": "$410,000",
+      "soldDate": "2026-09-15",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,432",
+      "yearBuilt": 1968,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4687498",
       "address": "925 BEACH RD #107",
@@ -118,19 +131,6 @@
       "yearBuilt": 1975,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4701036",
-      "address": "757 BEACH RD #510",
-      "subdivision": "CRESCENT ROYALE",
-      "soldPrice": "$585,000",
-      "soldDate": "2026-09-10",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,122",
-      "yearBuilt": 1970,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,9 +139,9 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 146,
-      "avgPrice": "$839,329",
-      "avgPricePerSqFt": "$699",
-      "avgLivingSqFt": "1,194",
+      "avgPrice": "$832,850",
+      "avgPricePerSqFt": "$693",
+      "avgLivingSqFt": "1,192",
       "avgDom": 136
     },
     {
@@ -152,7 +152,7 @@
       "avgPrice": "$1,438,475",
       "avgPricePerSqFt": "$723",
       "avgLivingSqFt": "1,999",
-      "avgDom": 183
+      "avgDom": 184
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$2,525,780",
       "avgPricePerSqFt": "$1,178",
       "avgLivingSqFt": "1,959",
-      "avgDom": 253
+      "avgDom": 254
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,692,636",
       "avgPricePerSqFt": "$1,490",
       "avgLivingSqFt": "3,298",
-      "avgDom": 218
+      "avgDom": 219
     }
   ],
   "condoTiersScope": {
@@ -188,8 +188,8 @@
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
       "activeCount": 75,
-      "soldCount": 252,
-      "soldMedianPricePerSqFt": "$749",
+      "soldCount": 253,
+      "soldMedianPricePerSqFt": "$748",
       "soldMedianPrice": "$1,000,000",
       "lowSample": false
     },
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 47,
+      "activeCount": 45,
       "soldCount": 91,
       "soldMedianPricePerSqFt": "$599",
       "soldMedianPrice": "$731,000",
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 75,
+      "activeCount": 77,
       "soldCount": 144,
       "soldMedianPricePerSqFt": "$559",
       "soldMedianPrice": "$775,000",
@@ -237,7 +237,7 @@
     "label": "balanced market",
     "activeCount": 268,
     "sold365Count": 483,
-    "sold90Count": 110,
+    "sold90Count": 108,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,7 +248,7 @@
       "soldMedianPricePerSqFt": "$646"
     },
     "condo": {
-      "soldCount": 498,
+      "soldCount": 499,
       "activeCount": 166,
       "soldMedianPrice": "$800,000",
       "soldMedianPricePerSqFt": "$630"
@@ -262,7 +262,7 @@
     {
       "facet": "waterfront",
       "q": "How much more does beachfront cost than bayfront on Siesta Key?",
-      "a": "Gulf-front / beachfront homes sell at a median $749 per sq ft versus $596 for bay- or canal-front \u2014 about a 26% waterfront premium (Stellar MLS, recent closed sales)."
+      "a": "Gulf-front / beachfront homes sell at a median $748 per sq ft versus $596 for bay- or canal-front \u2014 about a 26% waterfront premium (Stellar MLS, recent closed sales)."
     },
     {
       "facet": "balance",
@@ -282,7 +282,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 106 days on market and closed at 88.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 107 days on market and closed at 88.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
@@ -292,7 +292,7 @@
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Siesta Key?",
-      "a": "The median monthly condo fee is $1,276 and the median monthly association fee is $1,161."
+      "a": "The median monthly condo fee is $1,276 and the median monthly association fee is $1,158."
     }
   ],
   "costBreakdown90": null
