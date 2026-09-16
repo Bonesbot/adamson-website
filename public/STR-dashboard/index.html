@@ -178,6 +178,18 @@
   .modal h2{font-size:17px;color:var(--navy);margin-bottom:4px}
   .modal label.ck{display:flex;gap:10px;align-items:center;padding:7px 0;border-bottom:1px dashed #eef1f5;font-size:13.5px;cursor:pointer}
   .modal label.ck small{color:var(--muted);display:block;font-size:11px}
+  .modal label.ck{cursor:grab;user-select:none;position:relative;background:#fff}
+  .modal label.ck .grip{color:#b6bfcc;font-size:15px;letter-spacing:-2px;width:14px;flex:none}
+  .modal label.ck .ord{width:20px;height:20px;border-radius:50%;background:var(--navy);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none}
+  .modal label.ck span.tx{flex:1}
+  .modal label.ck .mv{display:flex;flex-direction:column;gap:1px;flex:none}
+  .modal label.ck .mv button{border:1px solid #cdd6e2;background:#fff;color:var(--navy);border-radius:4px;font-size:9px;line-height:1;padding:2px 5px;cursor:pointer}
+  .modal label.ck .mv button:hover{background:#eef2f8}
+  .modal label.ck.dragging{opacity:.4}
+  .modal label.ck.over-top{box-shadow:0 -3px 0 0 var(--gold) inset, 0 -2px 0 0 var(--gold)}
+  .modal label.ck.over-bot{box-shadow:0 3px 0 0 var(--gold) inset, 0 2px 0 0 var(--gold)}
+  .modal label.ck:has(input:not(:checked)) .ord{background:#cdd6e2;color:#5b6675}
+  .modal .rm-hint{font-size:11px;color:var(--muted);margin:6px 0 0}
   .toolbar{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-bottom:10px}
   footer{margin-top:26px;font-size:11.5px;color:var(--muted);line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
   .printonly{display:none}
@@ -538,6 +550,7 @@
   <div class="modal" id="rmodal"><div class="box">
     <h2>Generate client report</h2>
     <div class="hint">Pick the sections. The report saves this analysis, opens the client page in a new tab, and Print / Save PDF there produces the PDF with clickable listing links.</div>
+    <div id="rm_list">
     <label class="ck"><input type="checkbox" data-sec="facts" checked><span>Property facts &amp; eligibility<small>Address, MLS facts, zoning verdict, tax district, flood zone</small></span></label>
     <label class="ck"><input type="checkbox" data-sec="market" checked><span>STR market summary<small>Last 12 months: occupancy, ADR, RevPAR, revenue per listing, bands, seasonality</small></span></label>
     <label class="ck"><input type="checkbox" data-sec="inputs" checked><span>Deal analyzer inputs<small>Acquisition, financing, revenue assumptions, operating expenses</small></span></label>
@@ -546,7 +559,9 @@
     <label class="ck"><input type="checkbox" data-sec="comps" checked><span>Comparable rentals list<small>Included AirROI comps with clickable listing links</small></span></label>
     <label class="ck"><input type="checkbox" data-sec="map" checked><span>Comps map<small>Numbered pins around the subject</small></span></label>
     <label class="ck"><input type="checkbox" data-sec="mls"><span>MLS comps<small>Nearby sales and listings from the warehouse</small></span></label>
-    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px"><button class="btn sm" id="rm_cancel" style="background:#fff;color:var(--navy);border:1px solid #cdd6e2">Cancel</button><button class="btn sm gold" id="rm_go">Generate report</button></div>
+    </div>
+    <div class="rm-hint">Drag a row (or use the arrows) to set the order the sections appear in the report. Your order and selections are remembered on this browser.</div>
+    <div style="display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:14px"><button class="btn sm" id="rm_reset" style="background:#fff;color:var(--navy);border:1px solid #cdd6e2">Default order</button><span style="display:flex;gap:8px"><button class="btn sm" id="rm_cancel" style="background:#fff;color:var(--navy);border:1px solid #cdd6e2">Cancel</button><button class="btn sm gold" id="rm_go">Generate report</button></span></div>
   </div></div>
 
   <!-- ================= REPORTS ================= -->
@@ -1291,6 +1306,40 @@ function saveAnalysis(sections, openReport){
     .finally(function(){ $('btn_save').disabled=false; $('btn_save').textContent='Save analysis'; });
 }
 $('btn_save').onclick=function(){ saveAnalysis(null,false); };
+// ---- report builder: drag-and-drop section order (persisted per browser) ----
+var RM_DEFAULT=['facts','market','inputs','results','sens','comps','map','mls'];
+function rmRows(){ return Array.prototype.slice.call(document.querySelectorAll('#rm_list label.ck')); }
+function rmRenumber(){ rmRows().forEach(function(l,i){ var o=l.querySelector('.ord'); if(o) o.textContent=i+1; }); }
+function rmApplyOrder(order){ var list=$('rm_list'), rows=rmRows(); var by={}; rows.forEach(function(l){ by[l.querySelector('input').dataset.sec]=l; });
+  (order||[]).concat(RM_DEFAULT).forEach(function(k){ if(by[k]){ list.appendChild(by[k]); delete by[k]; } }); rmRenumber(); }
+function rmSave(){ try{ var order=[],checked=[]; rmRows().forEach(function(l){ var cb=l.querySelector('input'); order.push(cb.dataset.sec); if(cb.checked) checked.push(cb.dataset.sec); });
+  localStorage.setItem('str-report-order',JSON.stringify(order)); localStorage.setItem('str-report-checked',JSON.stringify(checked)); }catch(e){} }
+function rmMove(l,dir){ var s=dir<0?l.previousElementSibling:l.nextElementSibling; if(!s) return; if(dir<0) l.parentNode.insertBefore(l,s); else l.parentNode.insertBefore(s,l); rmRenumber(); rmSave(); }
+(function initReportModal(){
+  var list=$('rm_list'); if(!list) return; var dragEl=null;
+  rmRows().forEach(function(l){
+    l.setAttribute('draggable','true');
+    var tx=l.querySelector('span'); if(tx) tx.classList.add('tx');
+    var g=document.createElement('span'); g.className='grip'; g.innerHTML='&#8942;&#8942;'; l.insertBefore(g,l.firstChild);
+    var o=document.createElement('span'); o.className='ord'; l.insertBefore(o,l.querySelector('input'));
+    var mv=document.createElement('span'); mv.className='mv';
+    mv.innerHTML='<button type="button" data-mv="-1" title="Move up">&#9650;</button><button type="button" data-mv="1" title="Move down">&#9660;</button>'; l.appendChild(mv);
+    mv.addEventListener('click',function(e){ var b=e.target.closest('button[data-mv]'); if(!b) return; e.preventDefault(); e.stopPropagation(); rmMove(l,+b.dataset.mv); });
+    l.querySelector('input').addEventListener('change',rmSave);
+    l.addEventListener('dragstart',function(e){ dragEl=l; l.classList.add('dragging'); try{ e.dataTransfer.effectAllowed='move'; e.dataTransfer.setData('text/plain',l.querySelector('input').dataset.sec); }catch(x){} });
+    l.addEventListener('dragend',function(){ l.classList.remove('dragging'); rmRows().forEach(function(x){ x.classList.remove('over-top','over-bot'); }); dragEl=null; rmRenumber(); rmSave(); });
+    l.addEventListener('dragover',function(e){ if(!dragEl||dragEl===l) return; e.preventDefault(); try{ e.dataTransfer.dropEffect='move'; }catch(x){}
+      var r=l.getBoundingClientRect(), before=(e.clientY-r.top)<r.height/2; l.classList.toggle('over-top',before); l.classList.toggle('over-bot',!before); });
+    l.addEventListener('dragleave',function(){ l.classList.remove('over-top','over-bot'); });
+    l.addEventListener('drop',function(e){ if(!dragEl||dragEl===l) return; e.preventDefault();
+      var r=l.getBoundingClientRect(), before=(e.clientY-r.top)<r.height/2; l.classList.remove('over-top','over-bot');
+      if(before) list.insertBefore(dragEl,l); else list.insertBefore(dragEl,l.nextSibling); rmRenumber(); rmSave(); });
+  });
+  var order=null, checked=null; try{ order=JSON.parse(localStorage.getItem('str-report-order')||'null'); checked=JSON.parse(localStorage.getItem('str-report-checked')||'null'); }catch(e){}
+  if(Array.isArray(order)&&order.length) rmApplyOrder(order); else rmRenumber();
+  if(Array.isArray(checked)) rmRows().forEach(function(l){ var cb=l.querySelector('input'); cb.checked=checked.indexOf(cb.dataset.sec)>=0; });
+  $('rm_reset').onclick=function(){ rmApplyOrder(RM_DEFAULT); rmRows().forEach(function(l){ var cb=l.querySelector('input'); cb.checked=cb.dataset.sec!=='mls'; }); rmSave(); };
+})();
 $('btn_report').onclick=function(){ $('rmodal').classList.add('on'); };
 $('rm_cancel').onclick=function(){ $('rmodal').classList.remove('on'); };
 $('rm_go').onclick=function(){ var secs=[]; document.querySelectorAll('#rmodal input[data-sec]').forEach(function(cb){ if(cb.checked) secs.push(cb.dataset.sec); }); $('rmodal').classList.remove('on'); saveAnalysis(secs,true); };
