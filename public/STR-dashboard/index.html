@@ -595,6 +595,10 @@ map.on('click', function(e){
   queryPoint(e.latlng.lat, e.latlng.lng, function(z,ov){ $('status').textContent=""; showVerdict(z,ov); });
 });
 function geocode(addr){
+  return fetch(PROXY+"?mode=geocode&address="+encodeURIComponent(addr)).then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(function(g){
+    if(g && g.lat!=null) return {lat:g.lat, lon:g.lon, label:g.label};
+    throw new Error("proxy no match");
+  }).catch(function(){
   var c = "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address="+encodeURIComponent(addr)+"&benchmark=4&format=json";
   return fetch(c).then(function(r){return r.json()}).then(function(j){
     var m = j.result && j.result.addressMatches && j.result.addressMatches[0];
@@ -607,6 +611,7 @@ function geocode(addr){
       throw new Error("no match");
     });
   });
+  });
 }
 
 /* =====================================================================
@@ -615,7 +620,7 @@ function geocode(addr){
 function prefill(addr){
   return fetch('/.netlify/functions/str-prefill?address='+encodeURIComponent(addr)).then(function(r){return r.json()}).then(function(d){
     STATE.mls = d && d.match ? d : null;
-    if(!STATE.mls){ renderChips(); return; }
+    if(!STATE.mls){ renderChips(); return null; }
     var L=d.listing, D=d.derived;
     if(L.current_price){ $('i_price').value=Math.round(L.current_price); $('h_price').textContent=(D.price_basis==='close'?'MLS close price ':'MLS list price ')+money(L.current_price)+(L.standard_status?' ('+L.standard_status+')':''); }
     if(D.monthly_association_cost!=null){ $('i_hoa').value=Math.round(D.monthly_association_cost); $('h_hoa').textContent='MLS: '+money(D.monthly_association_cost)+'/mo'; }
@@ -627,7 +632,8 @@ function prefill(addr){
     $('vlease').textContent = D.min_lease || '—';
     $('vflood').textContent = L.flood_zone_code || '—';
     taxDirty=false; recalc(); renderChips();
-  }).catch(function(){ STATE.mls=null; renderChips(); });
+    return (L.latitude && L.longitude) ? {lat:Number(L.latitude), lon:Number(L.longitude), label:L.unparsed_address} : null;
+  }).catch(function(){ STATE.mls=null; renderChips(); return null; });
 }
 
 function renderChips(){
@@ -653,13 +659,15 @@ $('go').onclick = function(){
   var a = $('addr').value.trim(); if(!a) return;
   var s = $('status'); s.style.color=""; s.textContent = "Locating address…";
   $('pr_addr').textContent=a;
-  prefill(a);
-  geocode(a).then(function(loc){
+  STATE.verdict=null; STATE.zoning=null; STATE.mls=null; $('vlease').textContent='—'; $('vflood').textContent='—';
+  ['h_price','h_hoa','h_flood'].forEach(function(id){ $(id).textContent=''; }); $('h_tax').textContent='Est. = price x 85% x millage';
+  prefill(a).then(function(mlsLoc){ return mlsLoc || geocode(a); }).then(function(loc){
     setMarker(loc.lat, loc.lon); map.setView([loc.lat, loc.lon], 17);
     s.textContent = "Reading county zoning…";
     queryPoint(loc.lat, loc.lon, function(z,ov){ s.textContent=""; showVerdict(z,ov); });
   }).catch(function(){
     s.innerHTML = "<span style='color:#b23b3b'>Couldn't locate that address. Try a fuller address, or click the property on the map (Eligibility tab).</span>";
+    renderChips();
   });
 };
 
