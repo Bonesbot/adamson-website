@@ -163,16 +163,36 @@ exports.handler = async (event) => {
 
     if (mode === "bands") {
       const raw = await postJSON(key, "/markets/metrics/all", marketBody(entry));
-      const occ = collectPercentiles(findMetric(raw, ["occupancy"]));
-      const adr = collectPercentiles(findMetric(raw, ["average_daily_rate", "adr", "daily_rate"]));
-      const rev = collectPercentiles(findMetric(raw, ["revenue"]));
-      const norm = (o) => ({ p25: pct(o.p25), p50: pct(o.p50), p75: pct(o.p75), p90: pct(o.p90), mean: pct(o.mean) });
+      // Observed shape (2026-09): { market, results: [ { date, occupancy:{avg,p25,p50,p75,p90},
+      //   average_daily_rate:{...}, revpar:{...}, revenue:{...} (per listing, per month),
+      //   booking_lead_time, length_of_stay, min_nights, active_listings_count }, ... ] }
+      const months = Array.isArray(raw.results) ? raw.results : (Array.isArray(raw) ? raw : []);
+      const KEYS = ["avg", "p25", "p50", "p75", "p90"];
+      const agg = (metric, sum) => {
+        const o = {}; KEYS.forEach((k) => { o[k] = []; });
+        months.forEach((m) => { const v = m && m[metric]; if (v && typeof v === "object") KEYS.forEach((k) => { const n = num(v[k]); if (n != null) o[k].push(n); }); });
+        const out = {}; KEYS.forEach((k) => { out[k] = o[k].length ? (sum ? o[k].reduce((s, x) => s + x, 0) : o[k].reduce((s, x) => s + x, 0) / o[k].length) : null; });
+        out.n = o.p50.length; return out;
+      };
+      let occ, adr, rev, revpar, los, lead, minn;
+      if (months.length) {
+        occ = agg("occupancy"); adr = agg("average_daily_rate"); revpar = agg("revpar");
+        rev = agg("revenue", true); los = agg("length_of_stay"); lead = agg("booking_lead_time"); minn = agg("min_nights");
+      } else { // fallback to the shape-tolerant walker
+        const c = (x) => Object.assign({ avg: x.mean, n: x.n }, x);
+        occ = c(collectPercentiles(findMetric(raw, ["occupancy"]))); adr = c(collectPercentiles(findMetric(raw, ["average_daily_rate", "adr"])));
+        rev = c(collectPercentiles(findMetric(raw, ["revenue"]))); revpar = los = lead = minn = { avg: null, p25: null, p50: null, p75: null, p90: null, n: 0 };
+      }
+      const P = (o) => ({ avg: pct(o.avg), p25: pct(o.p25), p50: pct(o.p50), p75: pct(o.p75), p90: pct(o.p90) });
+      const D = (o) => ({ avg: o.avg, p25: o.p25, p50: o.p50, p75: o.p75, p90: o.p90 });
       const out = {
-        source: (occ.p50 != null || occ.mean != null) ? "live" : "partial",
-        market_key: mk, market: name, zip: M.zip, window_months: 12,
-        occupancy: norm(occ),
-        adr: { p25: adr.p25, p50: adr.p50, p75: adr.p75, p90: adr.p90, mean: adr.mean },
-        revenue: { p25: rev.p25, p50: rev.p50, p75: rev.p75, p90: rev.p90, mean: rev.mean },
+        source: occ.p50 != null ? "live" : "partial",
+        market_key: mk, market: name, zip: M.zip, window_months: months.length || 12, months_used: occ.n,
+        occupancy: P(occ), adr: D(adr), revpar: D(revpar),
+        revenue_annual: D(rev), // sum of the monthly per-listing bands
+        length_of_stay: D(los), booking_lead_time: D(lead), min_nights: D(minn),
+        active_listings: months.length ? Math.round(months.reduce((s, m) => s + (num(m.active_listings_count) || 0), 0) / months.length) : null,
+        monthly: months.map((m) => ({ date: m.date, occ: num(m.occupancy && m.occupancy.avg), adr: num(m.average_daily_rate && m.average_daily_rate.avg), revpar: num(m.revpar && m.revpar.avg), listings: num(m.active_listings_count) })),
         as_of: new Date().toISOString().slice(0, 7)
       };
       if (debug) out.debug = JSON.stringify(raw).slice(0, 4000);
