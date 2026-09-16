@@ -3,12 +3,21 @@
 // Server-side proxy for AirROI short-term-rental market stats (ZIP 34242 / Siesta Key).
 // Keeps the AirROI API key OFF the client. Returns normalized JSON the STR dashboard renders.
 //
-// Activation: set env var AIRROI_API_KEY in the Netlify dashboard (Site settings > Env vars)
-//   after creating an AirROI account and depositing credits (min $10). Until then this
-//   returns clearly-labeled placeholder sample data so the page still works.
+// Activation: set env var AIRROI_API_KEY in the Netlify dashboard (Site settings > Env vars,
+// scope Functions, context Production). Until then this returns clearly-labeled placeholder
+// sample data so the page still works.
 //
-// AirROI: GET https://api.airroi.com/markets/search?query=...  (header: x-api-key)
-//   -> { markets: [{ name, active_listings, avg_occupancy, avg_daily_rate, avg_revpar }], total_results }
+// AirROI API (docs: https://www.airroi.com/api/documentation), header X-API-KEY:
+//   GET  https://api.airroi.com/markets/search?query=...
+//        -> { entries: [{ full_name, country, region, locality, district, native_currency, active_listings_count }] }
+//   POST https://api.airroi.com/markets/summary
+//        body { market: { country, region, locality, district? }, currency: "usd", num_months: 12 }
+//        -> { market, occupancy (0-1), average_daily_rate, rev_par, revenue, booking_lead_time,
+//             length_of_stay, min_nights, active_listings_count }
+//
+// 2026-09-16: rewritten to the real AirROI response shape. The first version expected
+// { markets: [{ avg_occupancy, avg_daily_rate, ... }] } from /markets/search, which the API never
+// returns, so it silently fell back to placeholder even with a valid key.
 //
 // No npm deps — global fetch (Netlify Node 18+).
 
@@ -31,12 +40,36 @@ const CORS = {
   "Cache-Control": "public, max-age=21600" // 6h
 };
 
-async function fetchMarket(key, query) {
-  const url = "https://api.airroi.com/markets/search?query=" + encodeURIComponent(query);
-  const r = await fetch(url, { headers: { "x-api-key": key } });
-  if (!r.ok) throw new Error("airroi " + r.status);
+const API = "https://api.airroi.com";
+const QUERIES = ["Siesta Key, Florida", "Siesta Key", "Sarasota, Florida"];
+
+function num(v) { return v == null || v === "" || isNaN(Number(v)) ? null : Number(v); }
+
+async function searchMarket(key, query) {
+  const r = await fetch(API + "/markets/search?query=" + encodeURIComponent(query), {
+    headers: { "X-API-KEY": key }
+  });
+  if (!r.ok) throw new Error("airroi search " + r.status);
   const j = await r.json();
-  return (j.markets && j.markets[0]) ? j.markets[0] : null;
+  const entries = Array.isArray(j.entries) ? j.entries : (Array.isArray(j.markets) ? j.markets : []);
+  if (!entries.length) return null;
+  // Prefer a Siesta Key match, then anything in Florida, then the first hit.
+  const isFL = (e) => /florida|^fl$/i.test(String(e.region || "")) || /florida/i.test(String(e.full_name || ""));
+  return entries.find((e) => /siesta/i.test(String(e.full_name || "") + " " + String(e.locality || "") + " " + String(e.district || "")) && isFL(e))
+      || entries.find(isFL)
+      || entries[0];
+}
+
+async function marketSummary(key, entry) {
+  const market = { country: entry.country, region: entry.region, locality: entry.locality };
+  if (entry.district) market.district = entry.district;
+  const r = await fetch(API + "/markets/summary", {
+    method: "POST",
+    headers: { "X-API-KEY": key, "Content-Type": "application/json" },
+    body: JSON.stringify({ market, currency: "usd", num_months: 12 })
+  });
+  if (!r.ok) throw new Error("airroi summary " + r.status);
+  return r.json();
 }
 
 exports.handler = async (event) => {
@@ -44,37 +77,44 @@ exports.handler = async (event) => {
 
   const key = process.env.AIRROI_API_KEY;
   if (!key) {
-    return { statusCode: 200, headers: CORS, body: JSON.stringify(PLACEHOLDER) };
+    return { statusCode: 200, headers: CORS, body: JSON.stringify(Object.assign({}, PLACEHOLDER, { note: "AIRROI_API_KEY not set" })) };
   }
 
   try {
-    // Prefer the tightest match; fall back to the Sarasota metro if Siesta Key isn't a distinct market.
-    let m = await fetchMarket(key, "Siesta Key, Florida");
-    if (!m) m = await fetchMarket(key, "34242");
-    if (!m) m = await fetchMarket(key, "Sarasota, Florida");
-    if (!m) return { statusCode: 200, headers: CORS, body: JSON.stringify(PLACEHOLDER) };
-
-    const occ = m.avg_occupancy != null ? Number(m.avg_occupancy) : null;
-    const adr = m.avg_daily_rate != null ? Number(m.avg_daily_rate) : null;
-    const revpar = m.avg_revpar != null ? Number(m.avg_revpar)
-                  : (occ != null && adr != null ? adr * occ : null);
-    if (occ == null || adr == null) {
-      return { statusCode: 200, headers: CORS, body: JSON.stringify(PLACEHOLDER) };
+    let entry = null;
+    for (const q of QUERIES) {
+      entry = await searchMarket(key, q);
+      if (entry) break;
     }
+    if (!entry) {
+      return { statusCode: 200, headers: CORS, body: JSON.stringify(Object.assign({}, PLACEHOLDER, { note: "no market match for " + QUERIES.join(" | ") })) };
+    }
+
+    const s = await marketSummary(key, entry);
+    const occ = num(s.occupancy);
+    const adr = num(s.average_daily_rate);
+    const revpar = num(s.rev_par) != null ? num(s.rev_par) : (occ != null && adr != null ? adr * occ : null);
+    if (occ == null || adr == null) {
+      return { statusCode: 200, headers: CORS, body: JSON.stringify(Object.assign({}, PLACEHOLDER, { note: "summary missing occupancy/adr", market: entry.full_name })) };
+    }
+    const revenue = num(s.revenue);
     const out = {
       source: "live",
       zip: "34242",
-      market: m.name || "Siesta Key / Sarasota",
-      occupancy: occ,
+      market: entry.full_name || [entry.locality, entry.region].filter(Boolean).join(", "),
+      occupancy: occ > 1 ? occ / 100 : occ,
       adr: adr,
       revpar: revpar,
-      active_listings: m.active_listings != null ? Number(m.active_listings) : null,
-      est_annual_revenue: revpar != null ? Math.round(revpar * 365) : Math.round(adr * 365 * occ),
+      active_listings: num(s.active_listings_count) != null ? num(s.active_listings_count) : num(entry.active_listings_count),
+      est_annual_revenue: revenue != null ? Math.round(revenue) : (revpar != null ? Math.round(revpar * 365) : Math.round(adr * 365 * occ)),
+      booking_lead_time: num(s.booking_lead_time),
+      length_of_stay: num(s.length_of_stay),
+      window_months: 12,
       as_of: new Date().toISOString().slice(0, 7)
     };
     return { statusCode: 200, headers: CORS, body: JSON.stringify(out) };
   } catch (e) {
-    // On any upstream/credit/network error, degrade gracefully to placeholder.
+    // On any upstream/credit/network error, degrade gracefully to placeholder and say why.
     return { statusCode: 200, headers: CORS, body: JSON.stringify(Object.assign({}, PLACEHOLDER, { note: String(e.message || e) })) };
   }
 };
