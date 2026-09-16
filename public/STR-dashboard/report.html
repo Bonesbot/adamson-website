@@ -231,8 +231,9 @@
     <div><div class="addr" id="r_addr">Loading&hellip;</div><div class="meta" id="r_meta"></div></div>
     <div class="noprint"><button class="btn sm gold" onclick="window.print()">Print / Save PDF</button></div>
   </div>
-  <div class="chips" id="r_chips" style="margin:0 0 12px"></div>
-  <div id="r_facts"></div>
+  <div id="r_body">
+  <div id="sec_facts"><div class="chips" id="r_chips" style="margin:0 0 12px"></div>
+  <div id="r_facts"></div></div>
   <div class="card" id="r_market" style="display:none;margin-bottom:16px">
     <h2>Short-term rental market <span id="r_mk_name" style="font-size:13px;color:var(--muted);font-family:-apple-system,Segoe UI,Arial"></span></h2>
     <div class="mini" style="display:block!important" id="r_mk_meta"></div>
@@ -242,6 +243,7 @@
   </div>
   <div class="acols" id="r_acq"></div>
   <div class="results" id="r_results" style="margin-top:16px"></div>
+  <div class="results" id="r_sens" style="margin-top:16px"></div>
   <div class="card" id="r_mapcard" style="margin-top:16px;display:none">
     <h2>Comparable rentals near the subject</h2>
     <div id="r_map"></div>
@@ -255,6 +257,7 @@
     <h2>Nearby sales and listings (MLS)</h2>
     <div class="mini" style="display:block!important" id="r_mls_stats"></div>
     <table class="t comps" id="r_mls_tbl"></table>
+  </div>
   </div>
   <div class="disc" style="margin-top:14px">Estimates only, deemed reliable but not guaranteed. Prepared by Ryan Adamson, PA, The Adamson Group, Coldwell Banker Realty, 941.713.9234. Market statistics and comparable rentals from AirROI (trailing 12 months) as of the dates shown; property facts from Stellar MLS where available; property tax estimated for a non-homestead purchase at 85% of price and the district's 2025 millage; insurance premiums as entered. Nothing here is legal, tax, zoning or investment advice. Verify short-term-rental eligibility, HOA/condo rental minimums and licensing before purchase.</div>
   <footer>&copy; 2026 The Adamson Group &bull; Coldwell Banker Realty. Saved analysis; figures reflect the inputs at the time it was saved, not live data.</footer>
@@ -281,13 +284,21 @@ fetch(url).then(function(r){return r.json()}).then(function(d){
   if(H.acq && has('inputs')) $('r_acq').innerHTML=H.acq;
   if(H.results && (has('results')||has('sens'))){
     $('r_results').innerHTML=H.results;
-    var blocks=$('r_results').children, r2=0;
-    Array.prototype.forEach.call(blocks,function(b){
-      if(b.classList.contains('whatif')||b.classList.contains('hero')){ if(!has('results')) b.remove(); return; }
-      if(b.classList.contains('r2')){ r2++; if(r2===1 && !has('results')) b.remove(); if(r2===2 && !has('sens')) b.remove(); return; }
+    var blocks=Array.prototype.slice.call($('r_results').children), r2=0, tail=false;
+    blocks.forEach(function(b){
+      if(b.classList.contains('r2')) r2++;
+      if(r2>=2) tail=true;               // second .r2 (sensitivity + hold) and anything after it belongs to "sens"
+      if(tail){ if(has('sens')) $('r_sens').appendChild(b); else b.remove(); return; }
+      if(!has('results')) b.remove();
     });
   }
-  document.querySelectorAll('#r_results .card').forEach(function(c){ if(c.querySelector('#g_target')) c.classList.add('goalcard'); });
+  // order the sections the way they were chosen in the report builder
+  (function(){ var MAP={facts:'sec_facts',market:'r_market',inputs:'r_acq',results:'r_results',sens:'r_sens',comps:'r_comps',map:'r_mapcard',mls:'r_mls'}, body=$('r_body'); if(!body) return;
+    var seen={}; SEC.forEach(function(k){ var el=MAP[k]&&$(MAP[k]); if(el&&!seen[k]){ seen[k]=1; body.appendChild(el); } });
+    Object.keys(MAP).forEach(function(k){ if(!seen[k]){ var el=$(MAP[k]); if(el) el.style.display='none'; } });
+    var first=true; SEC.forEach(function(k){ var el=MAP[k]&&$(MAP[k]); if(!el||!seen[k]) return; el.style.marginBottom='0'; el.style.marginTop=first?'0':'16px'; first=false; });
+  })();
+  document.querySelectorAll('#r_results .card,#r_sens .card').forEach(function(c){ if(c.querySelector('#g_target')) c.classList.add('goalcard'); });
   document.querySelectorAll('input,select').forEach(function(el){ el.setAttribute('readonly',''); el.setAttribute('disabled',''); });
   // market summary (last 12 months)
   var M=R.market, MB=R.outputs&&R.outputs.market_bands;
