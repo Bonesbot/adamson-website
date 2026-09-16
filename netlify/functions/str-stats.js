@@ -105,7 +105,7 @@ exports.handler = async (event) => {
       occupancy: occ > 1 ? occ / 100 : occ,
       adr: adr,
       revpar: revpar,
-      active_listings: num(s.active_listings_count) != null ? num(s.active_listings_count) : num(entry.active_listings_count),
+      active_listings: num(s.active_listings_count) != null ? Math.round(num(s.active_listings_count)) : num(entry.active_listings_count),
       est_annual_revenue: revenue != null ? Math.round(revenue) : (revpar != null ? Math.round(revpar * 365) : Math.round(adr * 365 * occ)),
       booking_lead_time: num(s.booking_lead_time),
       length_of_stay: num(s.length_of_stay),
