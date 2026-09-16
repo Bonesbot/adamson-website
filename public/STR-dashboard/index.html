@@ -145,6 +145,29 @@
   .seasons .sb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
   .seasons .sb i{display:block;width:100%;background:var(--navy);border-radius:4px 4px 0 0;min-height:2px}
   .seasons .sb span{font-size:10px;color:var(--muted);margin-top:4px}
+  .apibar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:6px 0 10px;font-size:12px;color:var(--muted)}
+  .apibar .btn{margin:0}
+  .apibar b{color:var(--navy)}
+  .meter{font-size:11px;color:var(--muted);border-top:1px dashed var(--line);margin-top:10px;padding-top:8px}
+  .whatif{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 12px}
+  @media(max-width:760px){.whatif{grid-template-columns:1fr}}
+  .wi{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}
+  .wi.on{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,169,97,.25)}
+  .wi .h{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .wi .h b{color:var(--navy);font-family:Georgia,serif;font-size:14px;text-transform:none;letter-spacing:0}
+  .wi .row{display:flex;justify-content:space-between;font-size:12.5px;padding:3px 0;border-bottom:1px dashed #eef1f5}
+  .wi .row:last-child{border:0}
+  .wi .row b{font-variant-numeric:tabular-nums}
+  .wi .neg{color:var(--no)} .wi .pos{color:var(--ok)}
+  .cgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;align-items:end}
+  @media(max-width:900px){.cgrid{grid-template-columns:repeat(3,1fr)}}
+  .cgrid label{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+  .cgrid input,.cgrid select{padding:7px 8px;font-size:13px}
+  table.comps{font-size:12px}
+  table.comps td,table.comps th{padding:5px 6px;white-space:nowrap}
+  table.comps td.nm{white-space:normal;max-width:220px}
+  table.comps tr.off td{opacity:.4}
+  .srcchip{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:10px;background:#eaf0f7;color:var(--cb);margin-left:6px;vertical-align:middle}
   .toolbar{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-bottom:10px}
   footer{margin-top:26px;font-size:11.5px;color:var(--muted);line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
   .printonly{display:none}
@@ -153,7 +176,7 @@
   @media print{
     @page{margin:12mm}
     body{background:#fff}
-    header,.subbar,.tabs,.toolbar,.propbar button,.presets,.mini,.hint,footer .noprint,#tab-elig,#tab-market,#tab-reports{display:none!important}
+    header,.subbar,.tabs,.toolbar,.propbar button,.presets,.mini,.hint,footer .noprint,#tab-elig,#tab-market,#tab-comps,#tab-reports{display:none!important}
     .pane{display:none!important}
     #tab-deal{display:block!important}
     .propbar{border:0;padding:0;margin-bottom:6px}
@@ -219,6 +242,7 @@
   <div class="tabs" id="tabs">
     <div class="tab on" data-t="deal">Deal Analyzer</div>
     <div class="tab" data-t="market">Market</div>
+    <div class="tab" data-t="comps">STR Comps</div>
     <div class="tab" data-t="elig">Eligibility &amp; Zoning</div>
     <div class="tab dis" title="Phase 2">Reports (soon)</div>
   </div>
@@ -256,11 +280,11 @@
       <!-- Revenue -->
       <div class="card">
         <h2>Revenue</h2>
-        <div class="hint" id="rev_hint">Seeded from the live market. Median listing / Market average / Top quartile come from AirROI's trailing 12 months.</div>
+        <div class="hint" id="rev_hint">Low / Mid / High come from the cached AirROI market bands (p50 / average / p75) until you apply comps. <span class="srcchip" id="rev_src">Market bands</span></div>
         <div class="presets" id="rev_presets">
-          <button data-p="p50">Median listing</button>
-          <button data-p="avg" class="on">Market average</button>
-          <button data-p="p75">Top quartile</button>
+          <button data-p="p50">Low</button>
+          <button data-p="avg" class="on">Mid</button>
+          <button data-p="p75">High</button>
         </div>
         <div class="slider"><div class="top"><span>Average nightly rate (ADR)</span><b id="l_adr">$415</b></div><input type="range" id="s_adr" min="100" max="2500" step="5" value="415"></div>
         <div class="slider"><div class="top"><span>Occupancy</span><b id="l_occ">62%</b></div><input type="range" id="s_occ" min="10" max="95" step="1" value="62"></div>
@@ -311,6 +335,7 @@
 
     <!-- Results -->
     <div class="results">
+      <div class="whatif" id="whatif"></div>
       <div class="hero">
         <div class="obox hi"><div class="lab">Gross revenue</div><div class="v" id="o_gross">&mdash;</div><div class="s" id="o_gross_s"></div></div>
         <div class="obox"><div class="lab">NOI</div><div class="v" id="o_noi">&mdash;</div><div class="s" id="o_noi_s">per year</div></div>
@@ -384,6 +409,11 @@
     <div class="card">
       <h2>STR Market Snapshot &mdash; <span id="mk_name">Siesta Key</span></h2>
       <div class="hint">Trailing 12 months of active short-term rentals in this market. <span id="mk_meta"></span></div>
+      <div class="apibar">
+        <button class="btn sm gold" id="btn_api_market">Live API call</button>
+        <span>Last API run: <b id="mk_last">never</b></span>
+        <span id="mk_cost"></span>
+      </div>
       <div class="kpis">
         <div class="kpi"><div class="lab">Avg annual revenue / listing</div><div class="num" id="k_rev">&mdash;</div></div>
         <div class="kpi"><div class="lab">Occupancy</div><div class="num" id="k_occ">&mdash;</div></div>
@@ -416,6 +446,44 @@
         <tr><td class="k">Average length of stay</td><td id="mk_los">&mdash;</td></tr>
         <tr><td class="k">Typical minimum nights</td><td id="mk_min">&mdash;</td></tr>
       </table>
+      <div class="meter" id="meter">AirROI usage: loading&hellip;</div>
+    </div>
+  </div>
+
+  <!-- ================= COMPS ================= -->
+  <div class="pane" id="tab-comps">
+    <div class="card">
+      <h2>AirROI comparable rentals <span class="srcchip" id="cp_src">not loaded</span></h2>
+      <div class="hint">Active short-term rentals near the subject, matched on bedrooms, baths and guests. AirROI listings carry no square footage or year built, so those filters apply to the MLS comps below.</div>
+      <div class="cgrid">
+        <div><label>Bedrooms</label><input type="number" id="c_beds" step="1" min="0" value="3"></div>
+        <div><label>Baths</label><input type="number" id="c_baths" step="0.5" min="0" value="2"></div>
+        <div><label>Guests</label><input type="number" id="c_guests" step="1" min="1" value="6"></div>
+        <div><label>Radius (mi)</label><input type="number" id="c_radius" step="0.5" min="1" max="10" value="2"></div>
+        <div><label>Private pool</label><select id="c_pool"><option value="">Any</option><option value="1">Yes</option><option value="0">No</option></select></div>
+        <div><button class="btn sm gold" id="btn_api_comps" style="width:100%">Live API call</button></div>
+      </div>
+      <div class="apibar"><span>Last API run: <b id="cp_last">never</b></span><span id="cp_cost"></span><span id="cp_note"></span></div>
+      <div class="tblwrap" style="overflow:auto"><table class="t comps" id="cp_tbl"></table></div>
+      <div id="cp_stats" style="margin-top:10px"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+        <button class="btn sm" id="btn_apply_comps" disabled>Apply comps to worksheet (Low / Mid / High = p25 / median / p75)</button>
+        <button class="btn sm" id="btn_use_market" style="background:#fff;color:var(--navy);border:1px solid #cdd6e2">Back to market bands</button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <h2>MLS comps <span style="font-size:11px;color:var(--muted);font-family:-apple-system,Segoe UI,Arial">your warehouse, free</span></h2>
+      <div class="hint">What houses like this sell and list for nearby. Filters: beds (&plusmn;1), heated sq ft range, build era, private pool, radius.</div>
+      <div class="cgrid">
+        <div><label>Sq ft min</label><input type="number" id="m_sqmin" step="50" value=""></div>
+        <div><label>Sq ft max</label><input type="number" id="m_sqmax" step="50" value=""></div>
+        <div><label>Built from</label><input type="number" id="m_ymin" step="1" value=""></div>
+        <div><label>Built to</label><input type="number" id="m_ymax" step="1" value=""></div>
+        <div><label>Closed since</label><input type="text" id="m_since" value=""></div>
+        <div><button class="btn sm" id="btn_mls" style="width:100%">Refresh MLS comps</button></div>
+      </div>
+      <div class="tblwrap" style="overflow:auto;margin-top:10px"><table class="t comps" id="m_tbl"></table></div>
+      <div class="mini" id="m_stats"></div>
     </div>
   </div>
 
@@ -453,7 +521,7 @@
   </div>
 
   <footer>
-    <span class="noprint"><b>Data sources.</b> Zoning, overlay districts &amp; City of Sarasota limits: Sarasota County Enterprise GIS (CountyZoning &amp; ZoningOverlayDistrict FeatureServers), served through a cached proxy. Address geocoding: U.S. Census Geocoder. Basemap: OpenStreetMap. STR market metrics: AirROI, trailing 12 months, cached 6 hours. Property facts: Stellar MLS via the AdamsonGroup Supabase warehouse. Millage: Sarasota County Tax Collector 2025 final rates.<br></span>
+    <span class="noprint"><b>Data sources.</b> Zoning, overlay districts &amp; City of Sarasota limits: Sarasota County Enterprise GIS (CountyZoning &amp; ZoningOverlayDistrict FeatureServers), served through a cached proxy. Address geocoding: U.S. Census Geocoder. Basemap: OpenStreetMap. STR market metrics and comparable rentals: AirROI, trailing 12 months, pulled on demand and cached in the AdamsonGroup warehouse (last run shown on each panel). Property facts: Stellar MLS via the AdamsonGroup Supabase warehouse. Millage: Sarasota County Tax Collector 2025 final rates.<br></span>
     Sarasota County GIS data is provided &ldquo;as is&rdquo; without warranty; figures are estimates, deemed reliable but not guaranteed. Short-term-rental eligibility is jurisdiction- and property-specific and can be overridden by HOA or deed restrictions. Nothing here constitutes legal, zoning, tax or investment advice. &copy; 2026 The Adamson Group &bull; Coldwell Banker Realty.
   </footer>
 </div>
@@ -664,6 +732,7 @@ function setFacts(L, D){
   $('f_pool').value = L.pool_private_yn===true?'1': L.pool_private_yn===false?'0':'';
   $('f_garage').value = L.garage_spaces!=null? Math.round(L.garage_spaces) : '';
   $('f_year').value = L.year_built||'';
+  syncCompInputs();
   $('f_src').innerHTML = 'From MLS <b>'+(L.listing_id||'')+'</b> · '+(L.unparsed_address||'')+' · '+(L.standard_status||'')+(L.subdivision_name?' · '+L.subdivision_name:'')+(L.detected_area?' · area: '+L.detected_area:'')+'. Edit anything by hand.';
 }
 function clearFacts(){ ['f_sqft','f_beds','f_baths','f_lot','f_garage','f_year'].forEach(function(id){ $(id).value=''; }); $('f_pool').value=''; $('f_type').value='SFH'; $('f_src').textContent='No MLS match for this address; enter the facts by hand.'; }
@@ -671,7 +740,8 @@ function renderChips(){
   var c=[];
   var v=STATE.verdict;
   if(v) c.push('<span class="chip '+v.cls+'">'+v.ic+' <b>'+v.t+'</b></span>');
-  if(STATE.market && STATE.market.market) c.push('<span class="chip">STR market: <b>'+STATE.market.market+'</b>'+(STATE.market.source==='live'?' · AirROI':'')+'</span>');
+  if(STATE.market && STATE.market.market) c.push('<span class="chip">STR market: <b>'+STATE.market.market+'</b> · AirROI '+fmtDT(STATE.market.fetched_at)+'</span>');
+  else if(STATE.market && STATE.market.source==='none') c.push('<span class="chip warn">No cached AirROI data for this market. Market tab → Live API call.</span>');
   if(STATE.zoning) c.push('<span class="chip">Tax district: <b>'+MILLAGE[$('i_muni').value].label+'</b> '+MILLAGE[$('i_muni').value].total.toFixed(4)+' mills</span>');
   if(STATE.mls){
     var L=STATE.mls.listing, D=STATE.mls.derived;
@@ -697,7 +767,9 @@ $('go').onclick = function(){
   prefill(a).then(function(mlsLoc){ return mlsLoc || geocode(a); }).then(function(loc){
     setMarker(loc.lat, loc.lon); map.setView([loc.lat, loc.lon], 17);
     s.textContent = "Reading county zoning…";
+    SUBJ={lat:loc.lat, lon:loc.lon}; COMPS=null; COMPS_BANDS=null; if(BAND_SRC==='comps') applyBands('market');
     loadStats(loc.lat, loc.lon);
+    syncCompInputs(); loadComps(false); loadMls();
     queryPoint(loc.lat, loc.lon, function(z,ov){ s.textContent=""; showVerdict(z,ov); });
   }).catch(function(){
     s.innerHTML = "<span style='color:#b23b3b'>Couldn't locate that address. Try a fuller address, or click the property on the map (Eligibility tab).</span>";
@@ -708,70 +780,77 @@ $('go').onclick = function(){
 /* =====================================================================
    MARKET DATA
    ===================================================================== */
-var BANDS = { occ:{p25:0.20,p50:0.32,avg:0.46,p75:0.52,p90:0.72}, adr:{p25:250,p50:340,avg:557,p75:560,p90:1000}, live:false };
-var STATS_REQ=0;
-function loadStats(lat, lon){
-  var qs = (lat!=null && lon!=null) ? 'lat='+lat.toFixed(5)+'&lon='+lon.toFixed(5) : 'market='+MARKET_KEY;
-  var req=++STATS_REQ;
-  $('p_str').textContent='Loading…'; $('mk_meta').textContent='Loading market for this property…';
-  fetch('/.netlify/functions/str-stats?'+qs).then(function(r){return r.json()}).then(function(d){
+var BANDS = { occ:{p25:0.20,p50:0.32,avg:0.46,p75:0.52,p90:0.72}, adr:{p25:250,p50:340,avg:557,p75:560,p90:1000}, live:false, label:'Sample bands' };
+var STATS_REQ=0, MK_KEYQS='';
+var KEY_KEY="cma-edit-key";
+function editKey(){ var k=localStorage.getItem(KEY_KEY); if(!k){ k=prompt('Edit key (same as the CMA workbench). Live AirROI calls spend credits, so they are gated.'); if(k){ localStorage.setItem(KEY_KEY,k); } } return k||''; }
+function fmtDT(iso){ if(!iso) return 'never'; var d=new Date(iso); return d.toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'}); }
+function renderMarket(d){
+  STATE.market=d;
+  var S=d.summary||{}, B=d.bands||{}, live = d.source==='live'||d.source==='cache';
+  $('hd_market').textContent = (d.market||'Sarasota')+(d.zip?' • ZIP '+d.zip:'');
+  $('mk_name').textContent = d.market || '—';
+  $('mk_meta').textContent = live ? ('AirROI · data as of '+(d.as_of||'')+' · cached') : (d.note||'');
+  $('mk_last').textContent = fmtDT(d.fetched_at);
+  $('mk_cost').textContent = d.est_cost!=null ? ('This market costs about $'+Number(d.est_cost).toFixed(2)+' per live call') : '';
+  if(!live){ $('p_str').textContent='No cached data. Run a live API call.'; $('p_str_dot').classList.add('ph'); $('k_src').textContent='Not loaded'; return; }
+  $('k_rev').textContent = money(S.est_annual_revenue||0);
+  $('k_occ').innerHTML = Math.round((S.occupancy||0)*100)+'<small>%</small>';
+  $('k_adr').textContent = money(S.adr||0); $('k_revpar').textContent = money(S.revpar||0);
+  $('mk_act').textContent = S.active_listings!=null ? Number(S.active_listings).toLocaleString() : '—';
+  $('mk_lead').textContent = S.booking_lead_time!=null ? Math.round(S.booking_lead_time)+' days' : '—';
+  $('mk_los').textContent = S.length_of_stay!=null ? Number(S.length_of_stay).toFixed(1)+' nights' : '—';
+  $('mk_min').textContent = S.min_nights!=null ? Math.round(S.min_nights)+' nights' : '—';
+  var tag=$('k_src'); tag.textContent='AirROI · pulled '+fmtDT(d.fetched_at); tag.style.color='#2e7d52'; tag.style.borderColor='rgba(46,125,82,.5)';
+  $('p_str').textContent='AirROI · '+fmtDT(d.fetched_at); $('p_str_dot').classList.remove('ph');
+  if(S.length_of_stay){ $('i_los').value=Number(S.length_of_stay).toFixed(1); $('h_los').textContent='Market average '+Number(S.length_of_stay).toFixed(1)+' nights (AirROI)'; }
+  var o=B.occupancy||{}, a=B.adr||{}, r=B.revenue_annual||{};
+  MARKET_BANDS = { occ:{p25:o.p25,p50:o.p50,avg:S.occupancy||o.avg,p75:o.p75,p90:o.p90}, adr:{p25:a.p25,p50:a.p50,avg:S.adr||a.avg,p75:a.p75,p90:a.p90}, live:true, label:'Market bands · '+(d.market||'') };
+  ['25','50','avg','75','90'].forEach(function(p){ var k=p==='avg'?'avg':'p'+p;
+    $('b_occ'+p).textContent = o[k]!=null ? pct(o[k],0) : (k==='avg'&&S.occupancy!=null?pct(S.occupancy,0):'—');
+    $('b_adr'+p).textContent = a[k]!=null ? money(a[k]) : (k==='avg'&&S.adr!=null?money(S.adr):'—');
+    $('b_rev'+p).textContent = r[k]!=null ? money(r[k]) : '—'; });
+  if(B.monthly && B.monthly.length){
+    var mx=Math.max.apply(null,B.monthly.map(function(m){return m.revpar||0}))||1, h='';
+    B.monthly.forEach(function(m){ var dd=new Date(m.date+'T00:00:00'); h+='<div class="sb" title="'+m.date+': '+Math.round((m.occ||0)*100)+'% occ · '+money(m.adr||0)+' ADR · RevPAR '+money(m.revpar||0)+'"><i style="height:'+Math.round((m.revpar||0)/mx*100)+'%"></i><span>'+dd.toLocaleString('en-US',{month:'short'})+'</span></div>'; });
+    $('season').innerHTML=h;
+  }
+  $('bands_note').textContent='AirROI, trailing '+(B.months||12)+' months, data as of '+(d.as_of||'')+', pulled '+fmtDT(d.fetched_at)+'. Percentiles are across individual active listings (monthly bands averaged); annual revenue = sum of the monthly bands. Market average is listing-weighted.';
+  if(BAND_SRC==='market'){ BANDS=MARKET_BANDS; var on=document.querySelector('#rev_presets button.on'); applyPreset(on?on.dataset.p:'avg'); }
+  renderChips();
+}
+var MARKET_BANDS=null, BAND_SRC='market';
+function loadStats(lat, lon, refresh){
+  MK_KEYQS = (lat!=null && lon!=null) ? 'lat='+lat.toFixed(5)+'&lon='+lon.toFixed(5) : 'market='+MARKET_KEY;
+  var req=++STATS_REQ, hdr={};
+  if(refresh){ var k=editKey(); if(!k) return; hdr['x-cma-key']=k; $('btn_api_market').disabled=true; $('btn_api_market').textContent='Calling AirROI…'; }
+  $('p_str').textContent='Loading…';
+  fetch('/.netlify/functions/str-stats?'+MK_KEYQS+(refresh?'&refresh=1':''), {headers:hdr}).then(function(r){ if(r.status===401){ localStorage.removeItem(KEY_KEY); throw new Error('Edit key rejected'); } return r.json(); }).then(function(d){
     if(req!==STATS_REQ) return;
-    if(!d || d.occupancy==null) return;
-    STATE.market=d;
-    $('hd_market').textContent = (d.market||'Sarasota')+(d.zip?' • ZIP '+d.zip:'');
-    var live = d.source==='live';
-    $('k_rev').textContent = money(d.est_annual_revenue);
-    $('k_occ').innerHTML = Math.round(d.occupancy*100)+'<small>%</small>';
-    $('k_adr').textContent = money(d.adr); $('k_revpar').textContent = money(d.revpar);
-    $('mk_name').textContent = d.market || 'Siesta Key';
-    $('mk_meta').textContent = live ? ('AirROI · as of '+(d.as_of||'')) : 'Sample data';
-    $('mk_act').textContent = d.active_listings!=null ? Number(d.active_listings).toLocaleString() : '—';
-    $('mk_lead').textContent = d.booking_lead_time!=null ? Math.round(d.booking_lead_time)+' days' : '—';
-    $('mk_los').textContent = d.length_of_stay!=null ? Number(d.length_of_stay).toFixed(1)+' nights' : '—';
-    $('mk_min').textContent = d.min_nights!=null ? Math.round(d.min_nights)+' nights' : '—';
-    var tag=$('k_src'); tag.textContent = live ? ('Live · AirROI'+(d.as_of?(' · '+d.as_of):'')) : 'Sample data';
-    if(live){ tag.style.color='#2e7d52'; tag.style.borderColor='rgba(46,125,82,.5)'; $('p_str').textContent='Live — AirROI '+(d.as_of||''); $('p_str_dot').classList.remove('ph'); }
-    else { $('p_str').textContent='Sample data'+(d.note?' ('+d.note+')':''); }
-    if(live){
-      BANDS.occ.avg=d.occupancy; BANDS.adr.avg=d.adr;
-      if(d.length_of_stay) { $('i_los').value=Number(d.length_of_stay).toFixed(1); $('h_los').textContent='Market average '+Number(d.length_of_stay).toFixed(1)+' nights (AirROI)'; }
-      applyPreset('avg');
-    }
-    renderChips();
-  }).catch(function(){ $('p_str').textContent='Unavailable'; });
-  fetch('/.netlify/functions/str-stats?'+qs+'&mode=bands').then(function(r){return r.json()}).then(function(b){
-    if(req!==STATS_REQ) return;
-    if(!b || !b.occupancy) return;
-    STATE.bands=b;
-    var o=b.occupancy, a=b.adr, r=b.revenue_annual||{};
-    var okO = o.p50!=null && o.p75!=null, okA = a.p50!=null && a.p75!=null;
-    if(okO){ BANDS.occ={p25:o.p25,p50:o.p50,avg:o.avg||BANDS.occ.avg,p75:o.p75,p90:o.p90}; }
-    if(okA){ BANDS.adr={p25:a.p25,p50:a.p50,avg:a.avg||BANDS.adr.avg,p75:a.p75,p90:a.p90}; }
-    BANDS.live = okO && okA && b.source==='live';
-    ['25','50','avg','75','90'].forEach(function(p){
-      var k = p==='avg'?'avg':'p'+p;
-      $('b_occ'+p).textContent = o[k]!=null ? pct(o[k],0) : '—';
-      $('b_adr'+p).textContent = a[k]!=null ? money(a[k]) : '—';
-      $('b_rev'+p).textContent = r[k]!=null ? money(r[k]) : '—';
-    });
-    if(b.monthly && b.monthly.length){
-      var mx=Math.max.apply(null,b.monthly.map(function(m){return m.revpar||0}))||1, h='';
-      b.monthly.forEach(function(m){ var d=new Date(m.date+'T00:00:00'); h+='<div class="sb" title="'+m.date+': '+Math.round((m.occ||0)*100)+'% occ · '+money(m.adr||0)+' ADR · RevPAR '+money(m.revpar||0)+'"><i style="height:'+Math.round((m.revpar||0)/mx*100)+'%"></i><span>'+d.toLocaleString('en-US',{month:'short'})+'</span></div>'; });
-      $('season').innerHTML=h;
-    }
-    $('bands_note').textContent = BANDS.live ? 'AirROI, trailing '+(b.window_months||12)+' months as of '+(b.as_of||'')+'. Percentiles are across individual active listings (monthly bands averaged over the year); annual revenue = sum of the monthly bands. The market average is listing-weighted and is what the snapshot above shows.'
-                                             : 'Bands unavailable from AirROI for this market; presets use ±20% around the market average.';
-    if(!BANDS.live){ var m=BANDS.occ.avg, ma=BANDS.adr.avg; BANDS.occ={p25:m*0.7,p50:m*0.8,avg:m,p75:Math.min(0.95,m*1.2),p90:Math.min(0.95,m*1.4)}; BANDS.adr={p25:ma*0.7,p50:ma*0.8,avg:ma,p75:ma*1.2,p90:ma*1.45}; }
-    $('rev_hint').textContent = BANDS.live ? 'Seeded from the live market (AirROI, trailing 12 months). Median listing = p50 of all active listings; Market average = listing-weighted; Top quartile = p75.' : 'Seeded from the live market average. Median / Top quartile = ±20% until AirROI bands are available.';
-    var on=document.querySelector('#rev_presets button.on'); applyPreset(on?on.dataset.p:'avg');
+    renderMarket(d||{source:'none'});
+    if(refresh) loadUsage();
+  }).catch(function(e){ $('p_str').textContent='Unavailable'; $('mk_meta').textContent=String(e.message||e); })
+  .finally(function(){ $('btn_api_market').disabled=false; $('btn_api_market').textContent='Live API call'; });
+}
+function loadUsage(){
+  fetch('/.netlify/functions/str-stats?mode=usage').then(function(r){return r.json()}).then(function(u){
+    if(!u || u.error) return;
+    $('meter').innerHTML='AirROI usage: <b>$'+u.est_spent.toFixed(2)+'</b> across '+u.calls+' calls since '+u.since+' · est. <b>$'+u.est_remaining.toFixed(2)+'</b> of $'+u.deposit.toFixed(2)+' remaining · last call '+fmtDT(u.last_call)+' ('+(u.last_endpoint||'')+'). <i>Estimate only at list prices; see the AirROI developer dashboard for the real balance.</i> <a href="#" id="setbal">Set deposit</a>';
+    $('setbal').onclick=function(ev){ ev.preventDefault(); var k=editKey(); if(!k) return; var dep=prompt('Deposit amount ($)', u.deposit); var since=prompt('Count usage since (YYYY-MM-DD)', u.since); if(dep==null) return;
+      fetch('/.netlify/functions/str-stats?mode=setbalance',{method:'POST',headers:{'x-cma-key':k,'Content-Type':'application/json'},body:JSON.stringify({deposit:parseFloat(dep)||10, since:since||u.since})}).then(loadUsage); };
   }).catch(function(){});
 }
+$('btn_api_market').onclick=function(){ var m=MK_KEYQS.match(/lat=([\-\d.]+)&lon=([\-\d.]+)/); loadStats(m?parseFloat(m[1]):null, m?parseFloat(m[2]):null, true); };
 function applyPreset(p){
-  $('s_adr').value=Math.round(BANDS.adr[p]||BANDS.adr.avg); $('s_occ').value=Math.round((BANDS.occ[p]||BANDS.occ.avg)*100);
+  if(!BANDS) return;
+  var a=BANDS.adr[p]!=null?BANDS.adr[p]:BANDS.adr.avg, o=BANDS.occ[p]!=null?BANDS.occ[p]:BANDS.occ.avg;
+  if(a==null||o==null) return;
+  $('s_adr').value=Math.round(a); $('s_occ').value=Math.round(o*100);
   document.querySelectorAll('#rev_presets button').forEach(function(b){ b.classList.toggle('on', b.dataset.p===p); });
   recalc();
 }
 document.querySelectorAll('#rev_presets button').forEach(function(b){ b.onclick=function(){ applyPreset(b.dataset.p); }; });
+document.querySelectorAll('#facts input, #facts select').forEach(function(el){ el.addEventListener('change', syncCompInputs); });
 document.querySelectorAll('#plat_presets button').forEach(function(b){ b.onclick=function(){ $('s_plat').value=b.dataset.v; document.querySelectorAll('#plat_presets button').forEach(function(x){x.classList.toggle('on',x===b)}); recalc(); }; });
 
 /* =====================================================================
@@ -840,6 +919,7 @@ function recalc(){
   $('o_cf').textContent=money(R.cf/12); $('o_cf').className='v '+(R.cf<0?'neg':'pos'); $('o_cf_s').textContent=money(R.cf)+' per year, after debt';
   $('o_coc').textContent=pct(R.coc); $('o_coc').className='v '+(R.coc<0?'neg':'');
   $('o_dscr').textContent=R.dscr==null?'n/a (cash)':R.dscr.toFixed(2)+'x'; $('o_dscr').className='v '+(R.dscr!=null&&R.dscr<1.25?'neg':'');
+  renderWhatIf(I);
   $('m_grm').textContent=R.grm?R.grm.toFixed(1)+'x':'—';
   $('m_r1').innerHTML=pct(R.r1,2)+ruleTag(R.r1>=0.01, R.r1>=0.008);
   $('m_r2').innerHTML=pct(R.r1,2)+ruleTag(R.r1>=0.02, R.r1>=0.015);
@@ -918,10 +998,117 @@ $('g_run').onclick=function(){
 $('btn_print').onclick=function(){ window.print(); };
 $('btn_reset').onclick=function(){ if(confirm('Reset all analyzer inputs to defaults?')) location.reload(); };
 
+
+/* =====================================================================
+   COMPS (AirROI cached/live + MLS warehouse)
+   ===================================================================== */
+var COMPS=null, COMPS_BANDS=null, SUBJ={lat:null,lon:null};
+function syncCompInputs(){
+  var b=num('f_beds'), ba=num('f_baths');
+  if(b>0){ $('c_beds').value=b; $('c_guests').value=Math.max(2,b*2); }
+  if(ba>0) $('c_baths').value=ba;
+  var pool=$('f_pool').value; $('c_pool').value = pool==='1'?'1': pool==='0'?'0':'';
+  var sf=num('f_sqft'), yr=num('f_year');
+  if(sf>0){ $('m_sqmin').value=Math.round(sf*0.75/50)*50; $('m_sqmax').value=Math.round(sf*1.25/50)*50; }
+  if(yr>0){ $('m_ymin').value=yr-15; $('m_ymax').value=yr+15; }
+  if(!$('m_since').value){ var d=new Date(); d.setFullYear(d.getFullYear()-1); $('m_since').value=d.toISOString().slice(0,10); }
+}
+function pctl(arr,p){ var a=arr.filter(function(x){return x!=null&&!isNaN(x)}).sort(function(x,y){return x-y}); if(!a.length) return null; var i=(a.length-1)*p, lo=Math.floor(i), hi=Math.ceil(i); return a[lo]+(a[hi]-a[lo])*(i-lo); }
+function compsIncluded(){ return (COMPS||[]).filter(function(c){ return c._on!==false; }); }
+function renderComps(d){
+  if(!d || !d.comps){ $('cp_tbl').innerHTML=''; $('cp_stats').innerHTML=''; $('cp_src').textContent = d && d.note ? d.note : 'not loaded'; $('cp_last').textContent=fmtDT(d&&d.fetched_at); $('btn_apply_comps').disabled=true; return; }
+  var poolF=$('c_pool').value;
+  COMPS=d.comps.map(function(c){ c._on = (poolF===''? true : poolF==='1'? !!c.pool : !c.pool) && c.ttm && c.ttm.adr!=null && c.ttm.occupancy!=null; return c; });
+  $('cp_src').textContent=(d.source==='cache'?'cached':'live')+' · '+d.comps.length+' comps · '+d.params.bedrooms+'bd/'+d.params.baths+'ba/'+d.params.guests+'g within '+d.params.radius+' mi';
+  $('cp_last').textContent=fmtDT(d.fetched_at); $('cp_cost').textContent='About $'+Number(d.est_cost||0.5).toFixed(2)+' per live call';
+  var h='<tr><th></th><th>Listing</th><th>Bd/Ba/Gst</th><th>Pool</th><th>Dist</th><th>Rating</th><th>Min nts</th><th>TTM Occ</th><th>TTM ADR</th><th>TTM RevPAR</th><th>TTM Revenue</th><th>L90D Occ</th><th>L90D ADR</th></tr>';
+  COMPS.forEach(function(c,i){
+    h+='<tr class="'+(c._on?'':'off')+'"><td><input type="checkbox" data-i="'+i+'" '+(c._on?'checked':'')+'></td>'
+      +'<td class="nm">'+(c.url?'<a href="'+c.url+'" target="_blank" rel="noopener">':'')+(c.name||c.id)+(c.url?'</a>':'')+(c.superhost?' <span class="srcchip">superhost</span>':'')+(c.pro_managed?' <span class="srcchip">pro</span>':'')+'</td>'
+      +'<td>'+(c.bedrooms!=null?c.bedrooms:'?')+'/'+(c.baths!=null?c.baths:'?')+'/'+(c.guests!=null?c.guests:'?')+'</td><td>'+(c.pool?'Yes':'No')+'</td><td>'+(c.distance_mi!=null?c.distance_mi+' mi':'—')+'</td>'
+      +'<td>'+(c.rating!=null?c.rating.toFixed(2)+' ('+(c.reviews||0)+')':'—')+'</td><td>'+(c.min_nights!=null?c.min_nights:'—')+'</td>'
+      +'<td>'+(c.ttm.occupancy!=null?pct(c.ttm.occupancy,0):'—')+'</td><td>'+(c.ttm.adr!=null?money(c.ttm.adr):'—')+'</td><td>'+(c.ttm.revpar!=null?money(c.ttm.revpar):'—')+'</td><td>'+(c.ttm.revenue!=null?money(c.ttm.revenue):'—')+'</td>'
+      +'<td>'+(c.l90d.occupancy!=null?pct(c.l90d.occupancy,0):'—')+'</td><td>'+(c.l90d.adr!=null?money(c.l90d.adr):'—')+'</td></tr>';
+  });
+  $('cp_tbl').innerHTML=h;
+  document.querySelectorAll('#cp_tbl input[type=checkbox]').forEach(function(cb){ cb.onchange=function(){ COMPS[+cb.dataset.i]._on=cb.checked; cb.closest('tr').classList.toggle('off',!cb.checked); compsStats(); }; });
+  compsStats();
+}
+function compsStats(){
+  var inc=compsIncluded();
+  if(inc.length<2){ $('cp_stats').innerHTML='<div class="flag a">Include at least 2 comps with trailing-12-month data to build bands.</div>'; $('btn_apply_comps').disabled=true; COMPS_BANDS=null; return; }
+  var occ=inc.map(function(c){return c.ttm.occupancy}), adr=inc.map(function(c){return c.ttm.adr}), rev=inc.map(function(c){return c.ttm.revenue});
+  COMPS_BANDS={ occ:{p25:pctl(occ,.25),p50:pctl(occ,.5),avg:occ.reduce(function(a,b){return a+b},0)/occ.length,p75:pctl(occ,.75),p90:pctl(occ,.9)},
+                adr:{p25:pctl(adr,.25),p50:pctl(adr,.5),avg:adr.reduce(function(a,b){return a+b},0)/adr.length,p75:pctl(adr,.75),p90:pctl(adr,.9)}, live:true, label:'Comps ('+inc.length+' listings)' };
+  $('cp_stats').innerHTML='<table class="t"><tr><th>Included comps: '+inc.length+'</th><th>p25 (Low)</th><th>Median (Mid)</th><th>Average</th><th>p75 (High)</th></tr>'
+    +'<tr><td class="k">TTM occupancy</td><td>'+pct(COMPS_BANDS.occ.p25,0)+'</td><td>'+pct(COMPS_BANDS.occ.p50,0)+'</td><td>'+pct(COMPS_BANDS.occ.avg,0)+'</td><td>'+pct(COMPS_BANDS.occ.p75,0)+'</td></tr>'
+    +'<tr><td class="k">TTM ADR</td><td>'+money(COMPS_BANDS.adr.p25)+'</td><td>'+money(COMPS_BANDS.adr.p50)+'</td><td>'+money(COMPS_BANDS.adr.avg)+'</td><td>'+money(COMPS_BANDS.adr.p75)+'</td></tr>'
+    +'<tr><td class="k">TTM revenue</td><td>'+money(pctl(rev,.25)||0)+'</td><td>'+money(pctl(rev,.5)||0)+'</td><td>'+money(rev.filter(Boolean).reduce(function(a,b){return a+b},0)/Math.max(1,rev.filter(Boolean).length))+'</td><td>'+money(pctl(rev,.75)||0)+'</td></tr></table>';
+  $('btn_apply_comps').disabled=false;
+  if(BAND_SRC==='comps') applyBands('comps');
+}
+function applyBands(src){
+  BAND_SRC=src;
+  if(src==='comps' && COMPS_BANDS){ BANDS={occ:{p25:COMPS_BANDS.occ.p25,p50:COMPS_BANDS.occ.p25,avg:COMPS_BANDS.occ.p50,p75:COMPS_BANDS.occ.p75,p90:COMPS_BANDS.occ.p90}, adr:{p25:COMPS_BANDS.adr.p25,p50:COMPS_BANDS.adr.p25,avg:COMPS_BANDS.adr.p50,p75:COMPS_BANDS.adr.p75,p90:COMPS_BANDS.adr.p90}, live:true, label:COMPS_BANDS.label}; $('rev_src').textContent='Comps: Low/Mid/High = p25 / median / p75 of '+compsIncluded().length+' listings'; }
+  else { BAND_SRC='market'; BANDS=MARKET_BANDS||BANDS; $('rev_src').textContent=(MARKET_BANDS?MARKET_BANDS.label:'Sample bands')+' · Low/Mid/High = p50 / average / p75'; }
+  var on=document.querySelector('#rev_presets button.on'); applyPreset(on?on.dataset.p:'avg');
+}
+function loadComps(refresh){
+  if(SUBJ.lat==null){ $('cp_note').textContent='Analyze a property first.'; return; }
+  var qs='mode=airroi&lat='+SUBJ.lat.toFixed(5)+'&lon='+SUBJ.lon.toFixed(5)+'&bedrooms='+(num('c_beds')||3)+'&baths='+(num('c_baths')||2)+'&guests='+(num('c_guests')||6)+'&radius='+(num('c_radius')||2);
+  var hdr={}; if(refresh){ var k=editKey(); if(!k) return; hdr['x-cma-key']=k; $('btn_api_comps').disabled=true; $('btn_api_comps').textContent='Calling AirROI…'; }
+  $('cp_note').textContent='';
+  fetch('/.netlify/functions/str-comps?'+qs+(refresh?'&refresh=1':''),{headers:hdr}).then(function(r){ if(r.status===401){ localStorage.removeItem(KEY_KEY); throw new Error('Edit key rejected'); } return r.json(); })
+    .then(function(d){ renderComps(d); if(d && d.source==='error') $('cp_note').textContent=d.note||''; if(refresh) loadUsage(); })
+    .catch(function(e){ $('cp_note').textContent=String(e.message||e); })
+    .finally(function(){ $('btn_api_comps').disabled=false; $('btn_api_comps').textContent='Live API call'; });
+}
+function loadMls(){
+  if(SUBJ.lat==null){ $('m_stats').textContent='Analyze a property first.'; return; }
+  var qs='mode=mls&lat='+SUBJ.lat.toFixed(5)+'&lon='+SUBJ.lon.toFixed(5)+'&radius='+(num('c_radius')||2)+'&beds='+(num('c_beds')||3)+'&pool='+$('c_pool').value
+    +($('m_sqmin').value?'&sqft_min='+num('m_sqmin'):'')+($('m_sqmax').value?'&sqft_max='+num('m_sqmax'):'')+($('m_ymin').value?'&year_min='+num('m_ymin'):'')+($('m_ymax').value?'&year_max='+num('m_ymax'):'')+($('m_since').value?'&closed_since='+$('m_since').value:'')
+    +'&type='+encodeURIComponent($('f_type').value==='SFH'?'Single Family Residence':$('f_type').value==='Condo'?'Condominium':$('f_type').value);
+  $('m_stats').textContent='Loading…';
+  fetch('/.netlify/functions/str-comps?'+qs).then(function(r){return r.json()}).then(function(d){
+    var rows=d.comps||[]; var h='<tr><th>Status</th><th>Address</th><th>Bd/Ba</th><th>Sq ft</th><th>Built</th><th>Pool</th><th>Dist</th><th>Price</th><th>$/sf</th><th>CDOM</th><th>Financing</th><th>Min lease</th><th>Closed</th></tr>';
+    rows.forEach(function(r){ var sf=Number(r.living_area)||0; h+='<tr><td>'+r.standard_status+'</td><td class="nm">'+r.unparsed_address+(r.subdivision_name?'<br><span style="color:var(--muted)">'+r.subdivision_name+'</span>':'')+'</td><td>'+(r.bedrooms_total||'?')+'/'+(r.bathrooms_full||'?')+'</td><td>'+(sf?sf.toLocaleString():'—')+'</td><td>'+(r.year_built||'—')+'</td><td>'+(r.pool_private_yn?'Yes':'No')+'</td><td>'+r.distance_mi+' mi</td><td>'+money(r.current_price)+'</td><td>'+(sf?money(r.current_price/sf):'—')+'</td><td>'+(r.cumulative_days_on_market!=null?r.cumulative_days_on_market:'—')+'</td><td>'+(r.buyer_financing||'')+'</td><td>'+(r.minimum_lease||'')+'</td><td>'+(r.close_date||'')+'</td></tr>'; });
+    $('m_tbl').innerHTML=h;
+    var closed=rows.filter(function(r){return r.standard_status==='Closed'}), act=rows.filter(function(r){return r.standard_status==='Active'});
+    var ppsf=closed.map(function(r){return Number(r.living_area)?r.current_price/Number(r.living_area):null}).filter(Boolean);
+    $('m_stats').textContent=rows.length+' comps · '+closed.length+' closed (median '+money(pctl(closed.map(function(r){return Number(r.current_price)}),.5)||0)+', median '+money(pctl(ppsf,.5)||0)+'/sf, '+Math.round(100*closed.filter(function(r){return r.buyer_financing==='Cash'}).length/Math.max(1,closed.length))+'% cash) · '+act.length+' active.';
+  }).catch(function(){ $('m_stats').textContent='MLS comps unavailable.'; });
+}
+$('btn_api_comps').onclick=function(){ loadComps(true); };
+$('btn_apply_comps').onclick=function(){ applyBands('comps'); document.querySelector('.tab[data-t="deal"]').click(); };
+$('btn_use_market').onclick=function(){ applyBands('market'); };
+$('btn_mls').onclick=loadMls;
+['c_beds','c_baths','c_guests','c_radius'].forEach(function(id){ $(id).addEventListener('change', function(){ loadComps(false); }); });
+$('c_pool').addEventListener('change', function(){ if(COMPS) renderComps({comps:COMPS, source:'cache', params:{bedrooms:num('c_beds'),baths:num('c_baths'),guests:num('c_guests'),radius:num('c_radius')}, fetched_at:null}); });
+
+/* what-if strip: Low / Mid / High side by side against current expenses */
+function renderWhatIf(I){
+  if(!BANDS) return;
+  var defs=[['p50','Low'],['avg','Mid'],['p75','High']], on=(document.querySelector('#rev_presets button.on')||{}).dataset||{};
+  var h='';
+  defs.forEach(function(d){
+    var a=BANDS.adr[d[0]]!=null?BANDS.adr[d[0]]:BANDS.adr.avg, o=BANDS.occ[d[0]]!=null?BANDS.occ[d[0]]:BANDS.occ.avg;
+    if(a==null||o==null){ h+='<div class="wi"><div class="h"><b>'+d[1]+'</b><span>no band</span></div></div>'; return; }
+    var R=model(I,a,o);
+    h+='<div class="wi '+(on.p===d[0]?'on':'')+'"><div class="h"><b>'+d[1]+'</b><span>'+money(a)+' · '+Math.round(o*100)+'%</span></div>'
+      +'<div class="row"><span>Gross revenue</span><b>'+money(R.gross)+'</b></div>'
+      +'<div class="row"><span>NOI</span><b class="'+(R.noi<0?'neg':'')+'">'+money(R.noi)+'</b></div>'
+      +'<div class="row"><span>Cash flow / yr</span><b class="'+(R.cf<0?'neg':'pos')+'">'+money(R.cf)+'</b></div>'
+      +'<div class="row"><span>Cash-on-cash</span><b class="'+(R.coc<0?'neg':'')+'">'+pct(R.coc)+'</b></div>'
+      +'<div class="row"><span>Cap rate</span><b>'+pct(R.cap)+'</b></div>'
+      +'<div class="row"><span>DSCR</span><b>'+(R.dscr==null?'n/a':R.dscr.toFixed(2)+'x')+'</b></div></div>';
+  });
+  $('whatif').innerHTML=h;
+}
+
 /* =====================================================================
    BOOT
    ===================================================================== */
-loadStats();
+loadStats(); loadUsage();
 recalc();
 window.addEventListener('load', function(){ setTimeout(function(){ $('go').click(); }, 500); });
 </script>
