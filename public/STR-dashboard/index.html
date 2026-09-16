@@ -205,7 +205,7 @@
       <div class="div"></div>
       <div class="cb">Coldwell Banker<br>Global Luxury</div>
     </div>
-    <div class="htag">STR Intelligence &mdash; <span id="hd_market">Siesta Key &bull; ZIP 34242</span></div>
+    <div class="htag"><a href="/mkt/" style="color:#cdd6e4;text-decoration:none">&larr; Workspaces</a> &nbsp;&middot;&nbsp; STR Intelligence &mdash; <span id="hd_market">Siesta Key &bull; ZIP 34242</span></div>
   </div>
 </header>
 <div class="subbar">
@@ -1221,7 +1221,11 @@ recalc();
       $('go').click();
       if(!(d && d.property)) setTimeout(function(){ $('status').innerHTML='<span style="color:#8a6516">Not registered yet as /mkt/'+slug+'/. Check the address, then Save analysis to create the property folder.</span>'; }, 1500);
     });
-  } else { loadStats(); window.addEventListener('load', function(){ setTimeout(function(){ $('go').click(); }, 500); }); }
+  } else {
+    var addrQ=new URLSearchParams(location.search).get('address');
+    if(addrQ){ $('addr').value=addrQ; SLUG=slugify(addrQ); loadProperty(SLUG).then(function(){ $('go').click(); }); }
+    else { loadStats(); window.addEventListener('load', function(){ setTimeout(function(){ $('go').click(); }, 500); }); }
+  }
 })();
 </script>
 </body>
