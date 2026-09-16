@@ -218,7 +218,8 @@ exports.handler = async (event) => {
       adr: adr,
       revpar: revpar,
       active_listings: num(s.active_listings_count) != null ? Math.round(num(s.active_listings_count)) : num(entry.active_listings_count),
-      est_annual_revenue: revenue != null ? Math.round(revenue) : (revpar != null ? Math.round(revpar * 365) : Math.round(adr * 365 * occ)),
+      est_annual_revenue: revpar != null ? Math.round(revpar * 365) : Math.round(adr * 365 * occ), // listing-weighted, matches the bands
+      revenue_reported: revenue,
       booking_lead_time: num(s.booking_lead_time),
       length_of_stay: num(s.length_of_stay),
       min_nights: num(s.min_nights),
