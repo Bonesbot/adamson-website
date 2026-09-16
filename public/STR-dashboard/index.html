@@ -1210,7 +1210,7 @@ function renderWhatIf(I){
    PROPERTY REGISTRY + SAVED REPORTS (shared with the CMA system)
    ===================================================================== */
 var SLUG=null, PENDING_REPORT=null, LAST_REPORT=null, REPORT_LOCK=false, PROP=null;
-function slugify(a){ return String(a||'').split(',')[0].toLowerCase().replace(/#/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+function slugify(a){ var t=String(a||'').split(',')[0].toLowerCase().replace(/\s+(sarasota|siesta key|longboat key|lido key|osprey|nokomis|venice|bradenton|florida|fl)(\s+fl|\s+florida)?(\s+\d{5})?\s*$/i,''); return t.replace(/#/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
 function slugFromUrl(){ var m=location.pathname.match(/^\/mkt\/([a-z0-9][a-z0-9-]{2,63})\/invest\/?$/i); if(m) return m[1].toLowerCase(); var q=new URLSearchParams(location.search).get('slug'); return q? q.toLowerCase() : null; }
 var INPUT_IDS=['i_price','i_down','i_rate','i_term','i_lender','i_closing','i_furnish','i_reno','i_other','i_cleanpass','i_cleancost','i_los','i_muni','i_tax','i_nav','i_hoi','i_flood','i_hoa','i_sa','i_lic','i_maint','i_capex','i_supp','i_elec','i_water','i_gas','i_net','i_pool','i_land','i_pest','i_misc','i_app','i_rg','i_eg','i_sell','s_adr','s_occ','s_mgmt','s_plat','g_target','c_beds','c_baths','c_guests','c_radius','c_pool','m_sqmin','m_sqmax','m_ymin','m_ymax','m_since'];
 var FACT_IDS=['f_type','f_sqft','f_beds','f_baths','f_lot','f_pool','f_garage','f_year'];
