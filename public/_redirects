@@ -82,3 +82,12 @@ https://adamsonfl.com/siesta-report/*    https://siestareport.com/              
 /gbq/*   /siesta-key/gulf-and-bay-club-beachfront/?qr=:splat&src=scan     302
 /gb/*    /siesta-key/gulf-and-bay-club-beachfront/?qr=:splat&src=typed    302
 /gb      /siesta-key/gulf-and-bay-club-beachfront/?src=typed              302
+
+# ---------------------------------------------------------------------------
+# Property folders: 2026-09-16
+# ---------------------------------------------------------------------------
+# One address, one slug. /mkt/<slug>/ is the CMA client page (real folder, wins over these
+# rules when it exists). The investment analyzer and its client report are single pages
+# served under the same slug via 200 rewrites; the pages read the slug from the path.
+/mkt/:slug/invest   /str-dashboard/index.html    200
+/mkt/:slug/report   /str-dashboard/report.html   200
