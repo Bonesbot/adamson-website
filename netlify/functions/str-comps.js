@@ -67,6 +67,7 @@ function normalize(raw, lat, lon) {
     bedrooms: num(L.bedrooms), baths: num(L.baths), guests: num(L.guests), beds: num(L.beds),
     pool, amenities_n: am.length, amenities: am.slice(0, 60),
     lat: la, lon: lo, distance_mi: la != null && lo != null && lat != null ? Math.round(distMi(lat, lon, la, lo) * 100) / 100 : null,
+    exact_location: L.exact_location == null ? null : !!L.exact_location,
     rating: num(L.rating_overall), reviews: num(L.num_reviews), superhost: !!L.superhost, pro_managed: !!L.professional_management,
     min_nights: num(L.min_nights), cleaning_fee: num(L.cleaning_fee), photo: L.cover_photo_url || null,
     ttm: { occupancy: pct(L.ttm_occupancy), adj_occupancy: pct(L.ttm_adjusted_occupancy), adr: num(L.ttm_avg_rate), revpar: num(L.ttm_revpar), revenue: num(L.ttm_revenue),
@@ -128,12 +129,14 @@ exports.handler = async (event) => {
     const u = API + "/listings/comparables?latitude=" + lat + "&longitude=" + lon + "&bedrooms=" + bedrooms + "&baths=" + baths + "&guests=" + guests + "&radius=" + radius + "&room_type=" + encodeURIComponent(roomType) + "&currency=usd";
     const r = await fetch(u, { headers: { "X-API-KEY": key } });
     const s = sb(); if (s) s.insert("api_usage", { service: "airroi", endpoint: "listings/comparables", est_cost: COST["listings/comparables"], note: lat.toFixed(4) + "," + lon.toFixed(4) + " b" + bedrooms });
-    if (!r.ok) return out(200, { source: "error", note: "airroi comparables " + r.status + " " + (await r.text()).slice(0, 200) });
-    const j = await r.json();
+    const text = await r.text();
+    if (!r.ok) return out(200, { source: "error", note: "airroi comparables " + r.status + " " + text.slice(0, 200) });
+    // Airbnb listing ids exceed 2^53; quote them before JSON.parse so the last digits survive.
+    const j = JSON.parse(text.replace(/"listing_id":\s*(\d{15,})/g, '"listing_id":"$1"'));
     let list = Array.isArray(j) ? j : (j.comparables || j.listings || j.entries || j.results || j.data || []);
     if (!Array.isArray(list)) list = [];
     const comps = list.map((L) => normalize(L, lat, lon));
-    const sample = list[0] ? JSON.stringify(list[0]).slice(0, 2500) : null;
+    const sample = list[0] ? JSON.stringify(list[0], (k, v) => (k === "description" || k === "photo_urls" || k === "amenities") ? undefined : v).slice(0, 4000) : null;
     const topKeys = Array.isArray(j) ? ["<array>"] : Object.keys(j);
     const payload = { params: { bedrooms, baths, guests, radius, roomType }, raw_count: list.length, comps, subject: j.subject || null, as_of: new Date().toISOString().slice(0, 10), est_cost: COST["listings/comparables"], raw_top_keys: topKeys, raw_sample: sample };
     if (q.debug === "1") payload.debug = JSON.stringify(j).slice(0, 3000);
