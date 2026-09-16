@@ -168,6 +168,16 @@
   table.comps td.nm{white-space:normal;max-width:220px}
   table.comps tr.off td{opacity:.4}
   .srcchip{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:10px;background:#eaf0f7;color:var(--cb);margin-left:6px;vertical-align:middle}
+  #cmap{height:380px;border-radius:12px;border:1px solid var(--line);margin:10px 0}
+  .nmk{background:var(--navy);color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-size:11px;font-weight:700;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .nmk.off{background:#9aa5b5;color:#fff;opacity:.8}
+  .nmk.subj{background:var(--gold);color:#1a2233;width:30px;height:30px;line-height:26px;font-size:14px}
+  .modal{position:fixed;inset:0;background:rgba(10,31,60,.45);display:none;align-items:center;justify-content:center;z-index:2000}
+  .modal.on{display:flex}
+  .modal .box{background:#fff;border-radius:12px;padding:20px 22px;width:min(560px,92vw);box-shadow:0 10px 40px rgba(0,0,0,.3)}
+  .modal h2{font-size:17px;color:var(--navy);margin-bottom:4px}
+  .modal label.ck{display:flex;gap:10px;align-items:center;padding:7px 0;border-bottom:1px dashed #eef1f5;font-size:13.5px;cursor:pointer}
+  .modal label.ck small{color:var(--muted);display:block;font-size:11px}
   .toolbar{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-bottom:10px}
   footer{margin-top:26px;font-size:11.5px;color:var(--muted);line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
   .printonly{display:none}
@@ -252,6 +262,7 @@
     <div class="toolbar">
       <span id="prop_links" style="flex:1;font-size:12px;color:var(--muted);align-self:center"></span>
       <button class="btn sm" id="btn_save">Save analysis</button>
+      <button class="btn sm gold" id="btn_report">Generate client report</button>
       <button class="btn sm gold" id="btn_print">Print / Save PDF</button>
       <button class="btn sm" id="btn_reset">Reset to defaults</button>
     </div>
@@ -466,6 +477,8 @@
         <div><button class="btn sm gold" id="btn_api_comps" style="width:100%">Live API call</button></div>
       </div>
       <div class="apibar"><span>Last API run: <b id="cp_last">never</b></span><span id="cp_cost"></span><span id="cp_note"></span></div>
+      <div id="cmap"></div>
+      <div class="mini" style="margin:0 0 8px">Gold = subject. Numbered pins match the table; click a pin or its checkbox to include or exclude a comp. Grey pins are excluded. Circle = search radius. "Sq ft - Built" comes from the nearest MLS record within 150 ft of the pin, when one exists (AirROI does not publish size or age).</div>
       <div class="tblwrap" style="overflow:auto"><table class="t comps" id="cp_tbl"></table></div>
       <div id="cp_stats" style="margin-top:10px"></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
@@ -522,6 +535,20 @@
     </div>
   </div>
 
+  <div class="modal" id="rmodal"><div class="box">
+    <h2>Generate client report</h2>
+    <div class="hint">Pick the sections. The report saves this analysis, opens the client page in a new tab, and Print / Save PDF there produces the PDF with clickable listing links.</div>
+    <label class="ck"><input type="checkbox" data-sec="facts" checked><span>Property facts &amp; eligibility<small>Address, MLS facts, zoning verdict, tax district, flood zone</small></span></label>
+    <label class="ck"><input type="checkbox" data-sec="market" checked><span>STR market summary<small>Last 12 months: occupancy, ADR, RevPAR, revenue per listing, bands, seasonality</small></span></label>
+    <label class="ck"><input type="checkbox" data-sec="inputs" checked><span>Deal analyzer inputs<small>Acquisition, financing, revenue assumptions, operating expenses</small></span></label>
+    <label class="ck"><input type="checkbox" data-sec="results" checked><span>Results &amp; Low / Mid / High<small>Headline metrics, return metrics, expense breakdown, what-if strip</small></span></label>
+    <label class="ck"><input type="checkbox" data-sec="sens" checked><span>Sensitivity &amp; hold projection<small>ADR x occupancy grid, 1/3/5/10-year projection, IRR</small></span></label>
+    <label class="ck"><input type="checkbox" data-sec="comps" checked><span>Comparable rentals list<small>Included AirROI comps with clickable listing links</small></span></label>
+    <label class="ck"><input type="checkbox" data-sec="map" checked><span>Comps map<small>Numbered pins around the subject</small></span></label>
+    <label class="ck"><input type="checkbox" data-sec="mls"><span>MLS comps<small>Nearby sales and listings from the warehouse</small></span></label>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px"><button class="btn sm" id="rm_cancel" style="background:#fff;color:var(--navy);border:1px solid #cdd6e2">Cancel</button><button class="btn sm gold" id="rm_go">Generate report</button></div>
+  </div></div>
+
   <!-- ================= REPORTS ================= -->
   <div class="pane" id="tab-reports">
     <div class="card">
@@ -575,6 +602,7 @@ document.querySelectorAll('.tab[data-t]').forEach(function(t){
     document.querySelectorAll('.pane').forEach(function(x){x.classList.remove('on')});
     t.classList.add('on'); $('tab-'+t.dataset.t).classList.add('on');
     if(t.dataset.t==='elig') setTimeout(function(){ map.invalidateSize(); }, 60);
+    if(t.dataset.t==='comps' && CMAP) fitCmap();
   };
 });
 
@@ -785,7 +813,7 @@ $('go').onclick = function(){
   prefill(a).then(function(mlsLoc){ return mlsLoc || geocode(a); }).then(function(loc){
     setMarker(loc.lat, loc.lon); map.setView([loc.lat, loc.lon], 17);
     s.textContent = "Reading county zoning…";
-    SUBJ={lat:loc.lat, lon:loc.lon}; COMPS=null; COMPS_BANDS=null; if(BAND_SRC==='comps') applyBands('market');
+    SUBJ={lat:loc.lat, lon:loc.lon}; COMPS=null; COMPS_BANDS=null; if(BAND_SRC==='comps') applyBands('market'); if(CLAYER){ CLAYER.clearLayers(); CMARKERS=[]; }
     loadStats(loc.lat, loc.lon);
     syncCompInputs(); loadComps(false); loadMls();
     queryPoint(loc.lat, loc.lon, function(z,ov){ s.textContent=""; showVerdict(z,ov); if(PENDING_REPORT){ var pr=PENDING_REPORT; PENDING_REPORT=null; applyReport(pr); } propLinks(); });
@@ -1041,18 +1069,69 @@ function renderComps(d){
   COMPS=d.comps.map(function(c){ c._on = (poolF===''? true : poolF==='1'? !!c.pool : !c.pool) && c.ttm && c.ttm.adr!=null && c.ttm.occupancy!=null && off.indexOf(c.id)<0; return c; });
   $('cp_src').textContent=(d.source==='cache'?'cached':'live')+' · '+d.comps.length+' comps · '+d.params.bedrooms+'bd/'+d.params.baths+'ba/'+d.params.guests+'g within '+d.params.radius+' mi';
   $('cp_last').textContent=fmtDT(d.fetched_at); $('cp_cost').textContent='About $'+Number(d.est_cost||0.5).toFixed(2)+' per live call';
-  var h='<tr><th></th><th>Listing</th><th>Bd/Ba/Gst</th><th>Pool</th><th>Dist</th><th>Rating</th><th>Min nts</th><th>TTM Occ</th><th>TTM ADR</th><th>TTM RevPAR</th><th>TTM Revenue</th><th>L90D Occ</th><th>L90D ADR</th></tr>';
+  var h='<tr><th></th><th>#</th><th>Listing</th><th>Bd/Ba/Gst</th><th>Sq ft - Built</th><th>Pool</th><th>Dist</th><th>Rating</th><th>Min nts</th><th>12-mo Occ</th><th>12-mo ADR</th><th>12-mo RevPAR</th><th>12-mo Revenue</th><th>90-day Occ</th><th>90-day ADR</th></tr>';
   COMPS.forEach(function(c,i){
-    h+='<tr class="'+(c._on?'':'off')+'"><td><input type="checkbox" data-i="'+i+'" '+(c._on?'checked':'')+'></td>'
+    h+='<tr class="'+(c._on?'':'off')+'" data-row="'+i+'"><td><input type="checkbox" data-i="'+i+'" '+(c._on?'checked':'')+'></td><td><b>'+(i+1)+'</b></td>'
       +'<td class="nm">'+(c.url?'<a href="'+c.url+'" target="_blank" rel="noopener">':'')+(c.name||c.id)+(c.url?'</a>':'')+(c.superhost?' <span class="srcchip">superhost</span>':'')+(c.pro_managed?' <span class="srcchip">pro</span>':'')+'</td>'
-      +'<td>'+(c.bedrooms!=null?c.bedrooms:'?')+'/'+(c.baths!=null?c.baths:'?')+'/'+(c.guests!=null?c.guests:'?')+'</td><td>'+(c.pool?'Yes':'No')+'</td><td>'+(c.distance_mi!=null?c.distance_mi+' mi':'—')+'</td>'
+      +'<td>'+(c.bedrooms!=null?c.bedrooms:'?')+'/'+(c.baths!=null?c.baths:'?')+'/'+(c.guests!=null?c.guests:'?')+'</td><td class="sqb" title="'+(c.mls_match?('MLS: '+c.mls_match.address+' ('+c.mls_match.ft+' ft away)'):'no MLS record within 150 ft')+'">'+(c.mls_match?c.mls_match.label:'—')+'</td><td>'+(c.pool?'Yes':'No')+'</td><td>'+(c.distance_mi!=null?c.distance_mi+' mi':'—')+'</td>'
       +'<td>'+(c.rating!=null?c.rating.toFixed(2)+' ('+(c.reviews||0)+')':'—')+'</td><td>'+(c.min_nights!=null?c.min_nights:'—')+'</td>'
       +'<td>'+(c.ttm.occupancy!=null?pct(c.ttm.occupancy,0):'—')+'</td><td>'+(c.ttm.adr!=null?money(c.ttm.adr):'—')+'</td><td>'+(c.ttm.revpar!=null?money(c.ttm.revpar):'—')+'</td><td>'+(c.ttm.revenue!=null?money(c.ttm.revenue):'—')+'</td>'
       +'<td>'+(c.l90d.occupancy!=null?pct(c.l90d.occupancy,0):'—')+'</td><td>'+(c.l90d.adr!=null?money(c.l90d.adr):'—')+'</td></tr>';
   });
   $('cp_tbl').innerHTML=h;
-  document.querySelectorAll('#cp_tbl input[type=checkbox]').forEach(function(cb){ cb.onchange=function(){ COMPS[+cb.dataset.i]._on=cb.checked; cb.closest('tr').classList.toggle('off',!cb.checked); compsStats(); }; });
+  document.querySelectorAll('#cp_tbl input[type=checkbox]').forEach(function(cb){ cb.onchange=function(){ toggleComp(+cb.dataset.i, cb.checked); }; });
+  compsStats(); drawCompsMap(); matchCompsToMls();
+}
+function toggleComp(i, on){
+  COMPS[i]._on=on;
+  var row=document.querySelector('#cp_tbl tr[data-row="'+i+'"]'); if(row){ row.classList.toggle('off',!on); row.querySelector('input[type=checkbox]').checked=on; }
+  if(CMARKERS[i]) CMARKERS[i].setIcon(numIcon(i+1, on));
   compsStats();
+}
+/* ---- comps map ---- */
+var CMAP=null, CMARKERS=[], CSUBJ=null, CCIRCLE=null, CLAYER=null, CPTS=null;
+function numIcon(n, on){ return L.divIcon({className:'', html:'<div class="nmk '+(on?'':'off')+'">'+n+'</div>', iconSize:[24,24], iconAnchor:[12,12], popupAnchor:[0,-12]}); }
+function ensureCmap(){
+  if(CMAP) return CMAP;
+  CMAP=L.map('cmap',{scrollWheelZoom:false});
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap contributors',maxZoom:19}).addTo(CMAP);
+  CLAYER=L.layerGroup().addTo(CMAP);
+  return CMAP;
+}
+function drawCompsMap(){
+  if(SUBJ.lat==null) return;
+  var map=ensureCmap(); CLAYER.clearLayers(); CMARKERS=[];
+  var subj=L.marker([SUBJ.lat,SUBJ.lon],{icon:L.divIcon({className:'',html:'<div class="nmk subj">&#9733;</div>',iconSize:[30,30],iconAnchor:[15,15]}),zIndexOffset:1000}).addTo(CLAYER).bindPopup('<b>Subject</b><br>'+$('addr').value);
+  var r=(num('c_radius')||2)*1609.34;
+  L.circle([SUBJ.lat,SUBJ.lon],{radius:r,color:'#C9A961',weight:1.2,fill:false,dashArray:'4 4'}).addTo(CLAYER);
+  var pts=[[SUBJ.lat,SUBJ.lon]];
+  (COMPS||[]).forEach(function(c,i){
+    if(c.lat==null||c.lon==null){ CMARKERS[i]=null; return; }
+    var m=L.marker([c.lat,c.lon],{icon:numIcon(i+1,c._on!==false),riseOnHover:true}).addTo(CLAYER);
+    m.bindTooltip('<b>#'+(i+1)+' '+(c.name||c.id)+'</b><br>'+(c.bedrooms||'?')+'bd/'+(c.baths||'?')+'ba · '+(c.pool?'pool':'no pool')+' · '+(c.distance_mi!=null?c.distance_mi+' mi':'')+(c.mls_match?' · '+c.mls_match.label:'')+'<br>12-mo: '+(c.ttm.occupancy!=null?pct(c.ttm.occupancy,0):'—')+' occ · '+(c.ttm.adr!=null?money(c.ttm.adr):'—')+' ADR · '+(c.ttm.revenue!=null?money(c.ttm.revenue):'—')+'<br><i>Click to '+(c._on!==false?'exclude':'include')+'</i>',{direction:'top',offset:[0,-12]});
+    m.on('click', function(){ toggleComp(i, COMPS[i]._on===false); m.setTooltipContent(m.getTooltip().getContent().replace(/Click to (exclude|include)/, 'Click to '+(COMPS[i]._on!==false?'exclude':'include'))); });
+    CMARKERS[i]=m; pts.push([c.lat,c.lon]);
+  });
+  CPTS=pts; fitCmap();
+}
+function fitCmap(){
+  if(!CMAP||!CPTS) return;
+  var el=$('cmap'); if(!el.offsetParent) return; // hidden tab: fit when it is shown
+  setTimeout(function(){ CMAP.invalidateSize(); if(CPTS.length>1) CMAP.fitBounds(CPTS,{padding:[24,24]}); else CMAP.setView(CPTS[0],14); },80);
+}
+/* ---- nearest MLS record per AirROI comp (size + age) ---- */
+function matchCompsToMls(){
+  if(!COMPS||!COMPS.length||SUBJ.lat==null) return;
+  var qs='mode=mls&lat='+SUBJ.lat.toFixed(5)+'&lon='+SUBJ.lon.toFixed(5)+'&radius='+Math.min(10,(num('c_radius')||2)+0.5)+'&type=any&status=Closed,Active,Pending,Expired,Canceled,Withdrawn,Hold';
+  fetch('/.netlify/functions/str-comps?'+qs).then(function(r){return r.json()}).then(function(d){
+    var rows=(d.comps||[]).filter(function(r){return r.latitude&&r.longitude});
+    COMPS.forEach(function(c,i){
+      if(c.lat==null) return; var best=null, bd=1e9;
+      rows.forEach(function(r){ var dl=(Number(r.latitude)-c.lat)*364000, dn=(Number(r.longitude)-c.lon)*364000*Math.cos(c.lat*Math.PI/180), ft=Math.sqrt(dl*dl+dn*dn); if(ft<bd){ bd=ft; best=r; } });
+      if(best && bd<=150){ c.mls_match={address:best.unparsed_address, ft:Math.round(bd), sqft:best.living_area?Math.round(best.living_area):null, year:best.year_built||null, label:(best.living_area?Math.round(best.living_area).toLocaleString():'?')+' - '+(best.year_built||'?')}; }
+      var cell=document.querySelector('#cp_tbl tr[data-row="'+i+'"] td.sqb'); if(cell&&c.mls_match){ cell.textContent=c.mls_match.label; cell.title='MLS: '+c.mls_match.address+' ('+c.mls_match.ft+' ft away)'; }
+    });
+  }).catch(function(){});
 }
 function compsStats(){
   var inc=compsIncluded();
@@ -1061,9 +1140,9 @@ function compsStats(){
   COMPS_BANDS={ occ:{p25:pctl(occ,.25),p50:pctl(occ,.5),avg:occ.reduce(function(a,b){return a+b},0)/occ.length,p75:pctl(occ,.75),p90:pctl(occ,.9)},
                 adr:{p25:pctl(adr,.25),p50:pctl(adr,.5),avg:adr.reduce(function(a,b){return a+b},0)/adr.length,p75:pctl(adr,.75),p90:pctl(adr,.9)}, live:true, label:'Comps ('+inc.length+' listings)' };
   $('cp_stats').innerHTML='<table class="t"><tr><th>Included comps: '+inc.length+'</th><th>p25 (Low)</th><th>Median (Mid)</th><th>Average</th><th>p75 (High)</th></tr>'
-    +'<tr><td class="k">TTM occupancy</td><td>'+pct(COMPS_BANDS.occ.p25,0)+'</td><td>'+pct(COMPS_BANDS.occ.p50,0)+'</td><td>'+pct(COMPS_BANDS.occ.avg,0)+'</td><td>'+pct(COMPS_BANDS.occ.p75,0)+'</td></tr>'
-    +'<tr><td class="k">TTM ADR</td><td>'+money(COMPS_BANDS.adr.p25)+'</td><td>'+money(COMPS_BANDS.adr.p50)+'</td><td>'+money(COMPS_BANDS.adr.avg)+'</td><td>'+money(COMPS_BANDS.adr.p75)+'</td></tr>'
-    +'<tr><td class="k">TTM revenue</td><td>'+money(pctl(rev,.25)||0)+'</td><td>'+money(pctl(rev,.5)||0)+'</td><td>'+money(rev.filter(Boolean).reduce(function(a,b){return a+b},0)/Math.max(1,rev.filter(Boolean).length))+'</td><td>'+money(pctl(rev,.75)||0)+'</td></tr></table>';
+    +'<tr><td class="k">12-mo occupancy</td><td>'+pct(COMPS_BANDS.occ.p25,0)+'</td><td>'+pct(COMPS_BANDS.occ.p50,0)+'</td><td>'+pct(COMPS_BANDS.occ.avg,0)+'</td><td>'+pct(COMPS_BANDS.occ.p75,0)+'</td></tr>'
+    +'<tr><td class="k">12-mo ADR</td><td>'+money(COMPS_BANDS.adr.p25)+'</td><td>'+money(COMPS_BANDS.adr.p50)+'</td><td>'+money(COMPS_BANDS.adr.avg)+'</td><td>'+money(COMPS_BANDS.adr.p75)+'</td></tr>'
+    +'<tr><td class="k">12-mo revenue</td><td>'+money(pctl(rev,.25)||0)+'</td><td>'+money(pctl(rev,.5)||0)+'</td><td>'+money(rev.filter(Boolean).reduce(function(a,b){return a+b},0)/Math.max(1,rev.filter(Boolean).length))+'</td><td>'+money(pctl(rev,.75)||0)+'</td></tr></table>';
   $('btn_apply_comps').disabled=false;
   if(BAND_SRC==='comps' && !REPORT_LOCK) applyBands('comps');
 }
@@ -1090,8 +1169,8 @@ function loadMls(){
     +'&type='+encodeURIComponent($('f_type').value==='SFH'?'Single Family Residence':$('f_type').value==='Condo'?'Condominium':$('f_type').value);
   $('m_stats').textContent='Loading…';
   fetch('/.netlify/functions/str-comps?'+qs).then(function(r){return r.json()}).then(function(d){
-    var rows=d.comps||[]; var h='<tr><th>Status</th><th>Address</th><th>Bd/Ba</th><th>Sq ft</th><th>Built</th><th>Pool</th><th>Dist</th><th>Price</th><th>$/sf</th><th>CDOM</th><th>Financing</th><th>Min lease</th><th>Closed</th></tr>';
-    rows.forEach(function(r){ var sf=Number(r.living_area)||0; h+='<tr><td>'+r.standard_status+'</td><td class="nm">'+r.unparsed_address+(r.subdivision_name?'<br><span style="color:var(--muted)">'+r.subdivision_name+'</span>':'')+'</td><td>'+(r.bedrooms_total||'?')+'/'+(r.bathrooms_full||'?')+'</td><td>'+(sf?sf.toLocaleString():'—')+'</td><td>'+(r.year_built||'—')+'</td><td>'+(r.pool_private_yn?'Yes':'No')+'</td><td>'+r.distance_mi+' mi</td><td>'+money(r.current_price)+'</td><td>'+(sf?money(r.current_price/sf):'—')+'</td><td>'+(r.cumulative_days_on_market!=null?r.cumulative_days_on_market:'—')+'</td><td>'+(r.buyer_financing||'')+'</td><td>'+(r.minimum_lease||'')+'</td><td>'+(r.close_date||'')+'</td></tr>'; });
+    var rows=d.comps||[]; var h='<tr><th>Status</th><th>Address</th><th>Bd/Ba</th><th>Sq ft - Built</th><th>Pool</th><th>Dist</th><th>Price</th><th>$/sf</th><th>CDOM</th><th>Financing</th><th>Min lease</th><th>Closed</th></tr>';
+    rows.forEach(function(r){ var sf=Number(r.living_area)||0; h+='<tr><td>'+r.standard_status+'</td><td class="nm">'+r.unparsed_address+(r.subdivision_name?'<br><span style="color:var(--muted)">'+r.subdivision_name+'</span>':'')+'</td><td>'+(r.bedrooms_total||'?')+'/'+(r.bathrooms_full||'?')+'</td><td>'+(sf?sf.toLocaleString():'?')+' - '+(r.year_built||'?')+'</td><td>'+(r.pool_private_yn?'Yes':'No')+'</td><td>'+r.distance_mi+' mi</td><td>'+money(r.current_price)+'</td><td>'+(sf?money(r.current_price/sf):'—')+'</td><td>'+(r.cumulative_days_on_market!=null?r.cumulative_days_on_market:'—')+'</td><td>'+(r.buyer_financing||'')+'</td><td>'+(r.minimum_lease||'')+'</td><td>'+(r.close_date||'')+'</td></tr>'; });
     $('m_tbl').innerHTML=h;
     var closed=rows.filter(function(r){return r.standard_status==='Closed'}), act=rows.filter(function(r){return r.standard_status==='Active'});
     var ppsf=closed.map(function(r){return Number(r.living_area)?r.current_price/Number(r.living_area):null}).filter(Boolean);
@@ -1103,6 +1182,7 @@ $('btn_apply_comps').onclick=function(){ applyBands('comps'); document.querySele
 $('btn_use_market').onclick=function(){ applyBands('market'); };
 $('btn_mls').onclick=loadMls;
 ['c_beds','c_baths','c_guests','c_radius'].forEach(function(id){ $(id).addEventListener('change', function(){ loadComps(false); }); });
+$('c_pool').addEventListener('change', function(){ setTimeout(drawCompsMap, 50); });
 $('c_pool').addEventListener('change', function(){ if(COMPS) renderComps({comps:COMPS, source:'cache', params:{bedrooms:num('c_beds'),baths:num('c_baths'),guests:num('c_guests'),radius:num('c_radius')}, fetched_at:null}); });
 
 /* what-if strip: Low / Mid / High side by side against current expenses */
@@ -1183,7 +1263,7 @@ function loadAllProperties(){
     $('all_tbl').innerHTML=h;
   }).catch(function(){});
 }
-$('btn_save').onclick=function(){
+function saveAnalysis(sections, openReport){
   var addr=$('addr').value.trim(); if(!addr){ alert('Enter and analyze an address first.'); return; }
   var k=editKey(); if(!k) return;
   var slug=SLUG||slugify(addr);
@@ -1197,14 +1277,23 @@ $('btn_save').onclick=function(){
   tmp.innerHTML=html.facts; tmp.querySelectorAll('input,select').forEach(function(el){ var live=$(el.id); if(!live) return; if(el.tagName==='SELECT'){ el.querySelectorAll('option').forEach(function(o){ o.toggleAttribute('selected', o.value===live.value); }); } else el.setAttribute('value', live.value); }); html.facts=tmp.innerHTML;
   var body={ slug:slug, address:addr, lat:SUBJ.lat, lon:SUBJ.lon, mls_id:STATE.mls&&STATE.mls.listing?STATE.mls.listing.listing_id:null, facts:collectFacts(), title:title, scenario:scenario,
              inputs:collectInputs(), outputs:outputs, market:STATE.market?{market:STATE.market.market,fetched_at:STATE.market.fetched_at,as_of:STATE.market.as_of,summary:STATE.market.summary}:null,
-             comps: COMPS? {fetched_at:(STATE.comps_meta||{}).fetched_at||null, included:compsIncluded().map(function(c){return {id:c.id,name:c.name,url:c.url,bedrooms:c.bedrooms,baths:c.baths,guests:c.guests,pool:c.pool,distance_mi:c.distance_mi,rating:c.rating,reviews:c.reviews,ttm:c.ttm,l90d:c.l90d}}), bands:COMPS_BANDS} : null,
+             comps: COMPS? {fetched_at:(STATE.comps_meta||{}).fetched_at||null, params:(STATE.comps_meta||{}).params||null, included:compsIncluded().map(function(c){return {n:COMPS.indexOf(c)+1,id:c.id,name:c.name,url:c.url,bedrooms:c.bedrooms,baths:c.baths,guests:c.guests,pool:c.pool,distance_mi:c.distance_mi,rating:c.rating,reviews:c.reviews,lat:c.lat,lon:c.lon,mls_match:c.mls_match||null,ttm:c.ttm,l90d:c.l90d}}), bands:COMPS_BANDS} : null,
              bands: BANDS, html: JSON.stringify(html) };
+  html.mls=$('m_tbl').innerHTML; html.mls_stats=$('m_stats').textContent; body.html=JSON.stringify(html);
+  body.inputs.sections = sections || null;
+  body.outputs.subject = {lat:SUBJ.lat, lon:SUBJ.lon, radius:num('c_radius')||2};
+  body.outputs.market_bands = STATE.market && STATE.market.bands ? {occupancy:STATE.market.bands.occupancy, adr:STATE.market.bands.adr, revenue_annual:STATE.market.bands.revenue_annual, monthly:STATE.market.bands.monthly, months:STATE.market.bands.months} : null;
+  body.outputs.verdict = STATE.verdict ? {cls:STATE.verdict.cls, t:STATE.verdict.t, s:STATE.verdict.s} : null;
   $('btn_save').disabled=true; $('btn_save').textContent='Saving…';
   fetch('/.netlify/functions/str-reports?action=save',{method:'POST',headers:{'x-cma-key':k,'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){ if(r.status===401){ localStorage.removeItem(KEY_KEY); throw new Error('Edit key rejected'); } return r.json(); })
-    .then(function(d){ if(!d||!d.ok) throw new Error((d&&d.error)||'save failed'); SLUG=d.slug; history.replaceState(null,'','/mkt/'+d.slug+'/invest'); $('status').innerHTML='<span style="color:#2e7d52">Saved. Client report: <a href="'+d.report_url+'" target="_blank">'+location.origin+d.report_url+'</a></span>'; loadProperty(d.slug).then(propLinks); loadAllProperties(); })
+    .then(function(d){ if(!d||!d.ok) throw new Error((d&&d.error)||'save failed'); SLUG=d.slug; history.replaceState(null,'','/mkt/'+d.slug+'/invest'); $('status').innerHTML='<span style="color:#2e7d52">Saved. Client report: <a href="'+d.report_url+'" target="_blank">'+location.origin+d.report_url+'</a></span>'; loadProperty(d.slug).then(propLinks); loadAllProperties(); if(openReport) window.open(d.report_url,'_blank'); })
     .catch(function(e){ alert('Save failed: '+(e.message||e)); })
     .finally(function(){ $('btn_save').disabled=false; $('btn_save').textContent='Save analysis'; });
-};
+}
+$('btn_save').onclick=function(){ saveAnalysis(null,false); };
+$('btn_report').onclick=function(){ $('rmodal').classList.add('on'); };
+$('rm_cancel').onclick=function(){ $('rmodal').classList.remove('on'); };
+$('rm_go').onclick=function(){ var secs=[]; document.querySelectorAll('#rmodal input[data-sec]').forEach(function(cb){ if(cb.checked) secs.push(cb.dataset.sec); }); $('rmodal').classList.remove('on'); saveAnalysis(secs,true); };
 
 /* =====================================================================
    BOOT
