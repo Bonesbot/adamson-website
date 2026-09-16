@@ -6,6 +6,7 @@
 //   GET /.netlify/functions/str-stats                  -> 12-month market summary (default market)
 //   GET /.netlify/functions/str-stats?mode=bands       -> p25 / p50 / p75 bands for occupancy + ADR
 //   GET /.netlify/functions/str-stats?market=<key>     -> another configured submarket (see MARKETS)
+//   GET /.netlify/functions/str-stats?lat=..&lon=..     -> market resolved from coordinates (/markets/lookup)
 //   GET ...&debug=1                                    -> include a trimmed raw upstream sample
 //
 // Activation: set env var AIRROI_API_KEY in the Netlify dashboard (Site settings > Env vars,
@@ -56,7 +57,7 @@ const CORS = {
 
 const API = "https://api.airroi.com";
 // Published Standard-tier list prices (airroi.com/api/pricing), used for the ESTIMATED ledger only.
-const COST = { "markets/search": 0.01, "markets/summary": 0.10, "markets/metrics/all": 0.25 };
+const COST = { "markets/search": 0.01, "markets/lookup": 0.01, "markets/summary": 0.10, "markets/metrics/all": 0.25 };
 
 function num(v) { return v == null || v === "" || isNaN(Number(v)) ? null : Number(v); }
 function pct(v) { const n = num(v); return n == null ? null : (n > 1 ? n / 100 : n); }
@@ -87,6 +88,18 @@ async function searchMarket(key, query) {
   return entries.find((e) => String(e.full_name || "").toLowerCase().indexOf(want) >= 0 && isFL(e))
       || entries.find(isFL)
       || entries[0];
+}
+
+async function lookupMarket(key, lat, lon) {
+  const r = await fetch(API + "/markets/lookup?lat=" + encodeURIComponent(lat) + "&lng=" + encodeURIComponent(lon), { headers: { "X-API-KEY": key } });
+  logUsage("markets/lookup", lat + "," + lon);
+  if (!r.ok) throw new Error("airroi lookup " + r.status);
+  const j = await r.json();
+  const m = j && (j.market || j.entry || j);
+  if (!m || !m.locality) return null;
+  return { country: m.country, region: m.region, locality: m.locality, district: m.district || null,
+           full_name: m.full_name || [m.district, m.locality, m.region, m.country].filter(Boolean).join(", "),
+           active_listings_count: m.active_listings_count };
 }
 
 function marketBody(entry) {
@@ -146,8 +159,10 @@ function collectPercentiles(m) {
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") return { statusCode: 204, headers: CORS, body: "" };
   const q = event.queryStringParameters || {};
-  const mk = MARKETS[q.market] ? q.market : "siesta-key";
-  const M = MARKETS[mk];
+  const lat = num(q.lat), lon = num(q.lon);
+  const byCoord = lat != null && lon != null;
+  const mk = MARKETS[q.market] ? q.market : (byCoord ? "by-coordinates" : "siesta-key");
+  const M = MARKETS[mk] || { label: "By coordinates", zip: null, queries: [] };
   const mode = q.mode === "bands" ? "bands" : "summary";
   const debug = q.debug === "1";
   const ph = Object.assign({}, PLACEHOLDER, { market_key: mk, zip: M.zip });
@@ -157,8 +172,9 @@ exports.handler = async (event) => {
 
   try {
     let entry = null;
-    for (const query of M.queries) { entry = await searchMarket(key, query); if (entry) break; }
-    if (!entry) return { statusCode: 200, headers: CORS, body: JSON.stringify(Object.assign({}, ph, { note: "no market match for " + M.queries.join(" | ") })) };
+    if (byCoord) entry = await lookupMarket(key, lat, lon);
+    for (const query of M.queries) { if (entry) break; entry = await searchMarket(key, query); }
+    if (!entry) return { statusCode: 200, headers: CORS, body: JSON.stringify(Object.assign({}, ph, { note: byCoord ? "no AirROI market at " + lat + "," + lon : "no market match for " + M.queries.join(" | ") })) };
     const name = entry.full_name || [entry.locality, entry.region].filter(Boolean).join(", ");
 
     if (mode === "bands") {
