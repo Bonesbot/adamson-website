@@ -50,7 +50,7 @@ exports.handler = async (event) => {
   try {
     if (action === "list") {
       const [props, reports, cmas] = await Promise.all([
-        s.get("properties?select=slug,address,lat,lon,mls_id,facts,updated_at&order=updated_at.desc&limit=500"),
+        s.get("properties?select=slug,address,lat,lon,mls_id,facts,pages,updated_at&order=updated_at.desc&limit=500"),
         s.get("str_reports?select=" + INDEX_COLS + "&order=created_at.desc&limit=2000"),
         s.get("cma_pages?select=slug,profile,address,status,updated_at&order=updated_at.desc&limit=500").catch(() => [])
       ]);
@@ -65,8 +65,18 @@ exports.handler = async (event) => {
         if (!p) { p = bySlug[base] = { slug: base, address: c.address || base, lat: null, lon: null, facts: null, updated_at: c.updated_at, reports: [], cma: null, registry: "cma-only" }; }
         p.cma = { slug: c.slug, profile: c.profile, status: c.status, updated_at: c.updated_at, client_url: "/mkt/" + c.slug + "/", workbench_url: "/mkt/" + c.slug + "/workbench.html" };
       });
-      const list = Object.values(bySlug).map((p) => Object.assign({}, p, { invest_url: "/mkt/" + p.slug + "/invest", report_url: p.reports.length ? "/mkt/" + p.slug + "/report" : null }))
-        .sort((a, b) => String(b.updated_at || "").localeCompare(String(a.updated_at || "")));
+      const list = Object.values(bySlug).map((p) => {
+        const pg = p.pages || {}; const folder = pg.folder || (p.cma ? p.cma.slug : null);
+        return Object.assign({}, p, {
+          invest_url: "/mkt/" + p.slug + "/invest", report_url: p.reports.length ? "/mkt/" + p.slug + "/report" : null,
+          home_url: "/mkt/" + p.slug + "/",
+          estimator_url: pg.estimator && folder ? "/mkt/" + folder + "/estimator.html" : null,
+          cma_url: p.cma ? p.cma.client_url : (pg.cma && folder ? "/mkt/" + folder + "/" : null),
+          workbench_url: p.cma ? p.cma.workbench_url : (pg.workbench && folder ? "/mkt/" + folder + "/workbench.html" : null),
+          last_used: [p.updated_at, p.cma && p.cma.updated_at, p.reports[0] && p.reports[0].created_at].filter(Boolean).sort().pop() || null
+        });
+      })
+        .sort((a, b) => String(b.last_used || "").localeCompare(String(a.last_used || "")));
       return out(200, { properties: list });
     }
 
