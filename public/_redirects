@@ -91,3 +91,7 @@ https://adamsonfl.com/siesta-report/*    https://siestareport.com/              
 # served under the same slug via 200 rewrites; the pages read the slug from the path.
 /mkt/:slug/invest   /str-dashboard/index.html    200
 /mkt/:slug/report   /str-dashboard/report.html   200
+# Property home for slugs that have no CMA folder (real folders such as /mkt/admin/ and any
+# scaffolded CMA win over these rules automatically). /mkt/ itself is the workspace index.
+/mkt/:slug/         /mkt/property.html            200
+/mkt/:slug          /mkt/property.html            200
