@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Property · The Adamson Group</title>
+<meta name="robots" content="noindex,nofollow">
+<style>
+  :root{--navy:#0A1F3C;--cb:#012169;--gold:#C9A961;--muted:#6b7688;--line:#e4e8ef;--bg:#f4f6f9;--ok:#2e7d52;--no:#b23b3b}
+  *{box-sizing:border-box} body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#16233a;background:var(--bg)}
+  h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:600;margin:0}
+  header{background:var(--navy);color:#fff;border-bottom:3px solid var(--gold)}
+  .hd{max-width:1240px;margin:0 auto;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:14px} .brand .ag{font-family:Georgia,serif;font-size:20px;letter-spacing:.14em;text-transform:uppercase}
+  .brand .div{width:1px;height:30px;background:var(--gold);opacity:.7} .brand .cb{font-size:10px;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;line-height:1.5}
+  .htag{font-family:Georgia,serif;color:#cdd6e4;font-size:13px;font-style:italic} .htag a{color:#cdd6e4}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 18px 60px}
+  h1.title{font-size:26px;color:var(--navy);margin:22px 0 3px} .sub{color:var(--muted);font-size:14px;margin-bottom:16px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 1px 2px rgba(16,31,60,.04);margin-bottom:14px}
+  .card h2{font-size:15px;color:var(--cb);margin-bottom:8px}
+  .btn{background:var(--navy);color:#fff;border:0;border-radius:8px;padding:10px 14px;font-size:13.5px;cursor:pointer;text-decoration:none;display:inline-block;margin:4px 6px 4px 0}
+  .btn.gold{background:var(--gold);color:#1a2233} .btn.ghost{background:#fff;color:var(--navy);border:1px solid #cdd6e2}
+  .kv{display:flex;justify-content:space-between;gap:10px;padding:7px 2px;border-bottom:1px solid var(--line);font-size:13.5px} .kv:last-child{border:0} .kv span{color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:13px} th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left} th{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px} @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .muted{color:var(--muted)} .neg{color:var(--no)} .pos{color:var(--ok)}
+</style>
+</head>
+<body>
+<header><div class="hd"><div class="brand"><div class="ag">The Adamson Group</div><div class="div"></div><div class="cb">Coldwell Banker<br>Global Luxury</div></div><div class="htag"><a href="/mkt/">&larr; All workspaces</a></div></div></header>
+<div class="wrap">
+  <h1 class="title" id="addr">Loading&hellip;</h1>
+  <div class="sub" id="meta"></div>
+  <div class="card" id="actions"></div>
+  <div class="grid">
+    <div class="card"><h2>Property facts</h2><div id="facts" class="muted">No facts saved yet.</div></div>
+    <div class="card"><h2>Latest investment analysis</h2><div id="latest" class="muted">None saved yet.</div></div>
+  </div>
+  <div class="card"><h2>Saved analyses</h2><table id="reports"><tr><td class="muted">None yet.</td></tr></table></div>
+</div>
+<script>
+function $(id){return document.getElementById(id)}
+function money(n){ n=Math.round(n||0); return (n<0?"-$":"$")+Math.abs(n).toLocaleString(); }
+function fmtDT(iso){ if(!iso) return ''; return new Date(iso).toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'}); }
+var m=location.pathname.match(/^\/mkt\/([a-z0-9][a-z0-9-]{2,63})\/?$/i);
+var slug=m?m[1].toLowerCase():new URLSearchParams(location.search).get('slug');
+if(!slug){ $('addr').textContent='No property selected.'; }
+else Promise.all([
+  fetch('/.netlify/functions/str-reports?action=property&slug='+encodeURIComponent(slug),{cache:'no-store'}).then(function(r){return r.json()}),
+  fetch('/.netlify/functions/str-reports?action=list',{cache:'no-store'}).then(function(r){return r.json()}).catch(function(){return {}})
+]).then(function(res){
+  var d=res[0]||{}, L=((res[1]&&res[1].properties)||[]).find(function(p){return p.slug===slug})||{};
+  var P=d.property||{};
+  document.title=(P.address||slug)+' · The Adamson Group';
+  $('addr').textContent=P.address||L.address||slug.replace(/-/g,' ');
+  $('meta').textContent='/mkt/'+slug+'/'+(P.mls_id?' · MLS '+P.mls_id:'')+(L.last_used?' · last used '+fmtDT(L.last_used):'');
+  var a='';
+  a+='<a class="btn gold" href="/mkt/'+slug+'/invest">'+((d.reports&&d.reports.length)?'Open investment analysis':'Start investment analysis')+'</a>';
+  if(d.reports&&d.reports.length) a+='<a class="btn" href="/mkt/'+slug+'/report" target="_blank">Client investment report</a>';
+  if(L.workbench_url) a+='<a class="btn ghost" href="'+L.workbench_url+'">CMA workbench</a>';
+  if(L.cma_url) a+='<a class="btn ghost" href="'+L.cma_url+'" target="_blank">CMA client page</a>';
+  if(!L.cma_url) a+='<a class="btn ghost" href="/mkt/admin/">Create CMA (admin)</a>';
+  if(L.estimator_url) a+='<a class="btn ghost" href="'+L.estimator_url+'" target="_blank">Estimator</a>';
+  if(!P.address && !L.address) a+='<div class="muted" style="margin-top:8px">Nothing is registered under this slug yet. Starting an investment analysis and saving it will create the property.</div>';
+  $('actions').innerHTML=a;
+  var f=P.facts||{};
+  if(Object.keys(f).length){
+    var rows=[['Type',f.f_type],['Heated sq ft',f.f_sqft?Number(f.f_sqft).toLocaleString():null],['Bedrooms',f.f_beds],['Bathrooms',f.f_baths],['Lot size',f.f_lot?Number(f.f_lot).toLocaleString()+' sf':null],['Private pool',f.f_pool==='1'?'Yes':f.f_pool==='0'?'No':null],['Garage spaces',f.f_garage],['Year built',f.f_year]].filter(function(r){return r[1]!=null&&r[1]!==''});
+    $('facts').innerHTML=rows.map(function(r){return '<div class="kv"><span>'+r[0]+'</span><b>'+r[1]+'</b></div>'}).join('')||'No facts saved yet.'; $('facts').classList.remove('muted');
+  }
+  var lt=d.latest;
+  if(lt){ var h=(lt.outputs&&lt.outputs.headline)||{}, w=(lt.outputs&&lt.outputs.whatif)||{};
+    var x='<div class="kv"><span>Saved</span><b>'+fmtDT(lt.created_at)+'</b></div><div class="kv"><span>Title</span><b>'+(lt.title||'')+'</b></div>';
+    if(h.price) x+='<div class="kv"><span>Purchase price</span><b>'+money(h.price)+'</b></div>';
+    if(h.adr) x+='<div class="kv"><span>ADR / occupancy</span><b>'+money(h.adr)+' at '+Math.round((h.occ||0)*100)+'%</b></div>';
+    if(h.noi!=null) x+='<div class="kv"><span>NOI</span><b>'+money(h.noi)+'</b></div>';
+    if(h.cf!=null) x+='<div class="kv"><span>Cash flow / yr</span><b class="'+(h.cf<0?'neg':'pos')+'">'+money(h.cf)+'</b></div>';
+    if(h.coc!=null) x+='<div class="kv"><span>Cash-on-cash</span><b>'+(h.coc*100).toFixed(1)+'%</b></div>';
+    if(w.low&&w.high) x+='<div class="kv"><span>Low / Mid / High cash flow</span><b>'+money(w.low.cf)+' / '+money(w.mid?w.mid.cf:0)+' / '+money(w.high.cf)+'</b></div>';
+    if(lt.market&&lt.market.market) x+='<div class="kv"><span>STR market</span><b>'+lt.market.market+' (AirROI '+(lt.market.as_of||'')+')</b></div>';
+    $('latest').innerHTML=x; $('latest').classList.remove('muted');
+  }
+  var reps=d.reports||[];
+  if(reps.length){ $('reports').innerHTML='<tr><th>Saved</th><th>Title</th><th>Scenario</th><th>NOI</th><th>Cash flow / yr</th><th>CoC</th><th></th></tr>'+reps.map(function(r){ var hl=r.headline||{}; return '<tr><td>'+fmtDT(r.created_at)+'</td><td>'+(r.title||'')+'</td><td>'+({p50:'Low',avg:'Mid',p75:'High'}[r.scenario]||'')+'</td><td>'+(hl.noi!=null?money(hl.noi):'')+'</td><td class="'+(hl.cf<0?'neg':'pos')+'">'+(hl.cf!=null?money(hl.cf):'')+'</td><td>'+(hl.coc!=null?(hl.coc*100).toFixed(1)+'%':'')+'</td><td><a href="/mkt/'+slug+'/report?id='+r.id+'" target="_blank">Client report</a></td></tr>'; }).join(''); }
+}).catch(function(){ $('addr').textContent='Could not load this property.'; });
+</script>
+</body>
+</html>
