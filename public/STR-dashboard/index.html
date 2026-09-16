@@ -55,6 +55,11 @@
   .chip.no{background:#f8e7e7;border-color:#e3b9b9;color:#7d2a2a}
   .chip.warn{background:#fbf3e3;border-color:#e6cf9c;color:#8a6516}
 
+  .facts{grid-column:1/-1;display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+  @media(max-width:900px){.facts{grid-template-columns:repeat(4,1fr)}}
+  .facts label{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+  .facts input,.facts select{padding:7px 8px;font-size:13px}
+  .facts .src{grid-column:1/-1;font-size:11px;color:var(--muted)}
   /* ---- tabs ---- */
   .tabs{display:flex;gap:4px;border-bottom:2px solid var(--line);margin-bottom:16px;flex-wrap:wrap}
   .tab{padding:10px 16px;font-size:14px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px;font-family:Georgia,serif}
@@ -152,6 +157,8 @@
     .pane{display:none!important}
     #tab-deal{display:block!important}
     .propbar{border:0;padding:0;margin-bottom:6px}
+    .facts{grid-template-columns:repeat(8,1fr);border-top:0}
+    .facts input,.facts select{border:0;padding:0;font-size:11px;background:transparent}
     .printonly{display:block}
     .card{box-shadow:none;border-color:#ccc;page-break-inside:avoid}
     .acols{grid-template-columns:1fr 1fr 1fr;gap:10px}
@@ -195,6 +202,17 @@
     </div>
     <div><button class="btn" id="go" style="margin:0;min-width:180px">Analyze property</button></div>
     <div class="chips" id="chips"><span class="chip">Enter an address and click Analyze.</span></div>
+    <div class="facts" id="facts">
+      <div><label>Type</label><select id="f_type"><option>SFH</option><option>Condo</option><option>Townhouse</option><option>Villa</option></select></div>
+      <div><label>Heated sq ft</label><input type="number" id="f_sqft" value="" placeholder="—"></div>
+      <div><label>Bedrooms</label><input type="number" id="f_beds" value="" placeholder="—" step="1"></div>
+      <div><label>Bathrooms</label><input type="number" id="f_baths" value="" placeholder="—" step="0.5"></div>
+      <div><label>Lot size (sq ft)</label><input type="number" id="f_lot" value="" placeholder="—"></div>
+      <div><label>Private pool</label><select id="f_pool"><option value="">—</option><option value="1">Yes</option><option value="0">No</option></select></div>
+      <div><label>Garage spaces</label><input type="number" id="f_garage" value="" placeholder="—" step="1"></div>
+      <div><label>Year built</label><input type="number" id="f_year" value="" placeholder="—" step="1"></div>
+      <div class="src" id="f_src">Property facts prefill from the MLS when an address matches; edit anything by hand.</div>
+    </div>
     <div class="mini" id="status" style="grid-column:1/-1;margin-top:0"></div>
   </div>
 
@@ -622,6 +640,7 @@ function prefill(addr){
     STATE.mls = d && d.match ? d : null;
     if(!STATE.mls){ renderChips(); return null; }
     var L=d.listing, D=d.derived;
+    setFacts(L, D);
     if(L.current_price){ $('i_price').value=Math.round(L.current_price); $('h_price').textContent=(D.price_basis==='close'?'MLS close price ':'MLS list price ')+money(L.current_price)+(L.standard_status?' ('+L.standard_status+')':''); }
     if(D.monthly_association_cost!=null){ $('i_hoa').value=Math.round(D.monthly_association_cost); $('h_hoa').textContent='MLS: '+money(D.monthly_association_cost)+'/mo'; }
     if(L.tax_annual_amount){ $('h_tax').textContent='Seller\'s current bill (MLS'+(L.tax_year?' '+L.tax_year:'')+'): '+money(L.tax_annual_amount)+'/yr. Estimate resets at sale.'; }
@@ -636,10 +655,23 @@ function prefill(addr){
   }).catch(function(){ STATE.mls=null; renderChips(); return null; });
 }
 
+function setFacts(L, D){
+  $('f_type').value = /condo/i.test(L.property_sub_type||'')?'Condo':/town/i.test(L.property_sub_type||'')?'Townhouse':/villa/i.test(L.property_sub_type||'')?'Villa':'SFH';
+  $('f_sqft').value = L.living_area? Math.round(L.living_area) : '';
+  $('f_beds').value = L.bedrooms_total!=null? L.bedrooms_total : '';
+  $('f_baths').value = L.bathrooms_full!=null? (Number(L.bathrooms_full)+0.5*Number(L.bathrooms_half||0)) : '';
+  $('f_lot').value = L.lot_size_square_feet? Math.round(L.lot_size_square_feet) : (L.lot_size_acres? Math.round(L.lot_size_acres*43560) : '');
+  $('f_pool').value = L.pool_private_yn===true?'1': L.pool_private_yn===false?'0':'';
+  $('f_garage').value = L.garage_spaces!=null? Math.round(L.garage_spaces) : '';
+  $('f_year').value = L.year_built||'';
+  $('f_src').innerHTML = 'From MLS <b>'+(L.listing_id||'')+'</b> · '+(L.unparsed_address||'')+' · '+(L.standard_status||'')+(L.subdivision_name?' · '+L.subdivision_name:'')+(L.detected_area?' · area: '+L.detected_area:'')+'. Edit anything by hand.';
+}
+function clearFacts(){ ['f_sqft','f_beds','f_baths','f_lot','f_garage','f_year'].forEach(function(id){ $(id).value=''; }); $('f_pool').value=''; $('f_type').value='SFH'; $('f_src').textContent='No MLS match for this address; enter the facts by hand.'; }
 function renderChips(){
   var c=[];
   var v=STATE.verdict;
   if(v) c.push('<span class="chip '+v.cls+'">'+v.ic+' <b>'+v.t+'</b></span>');
+  if(STATE.market && STATE.market.market) c.push('<span class="chip">STR market: <b>'+STATE.market.market+'</b>'+(STATE.market.source==='live'?' · AirROI':'')+'</span>');
   if(STATE.zoning) c.push('<span class="chip">Tax district: <b>'+MILLAGE[$('i_muni').value].label+'</b> '+MILLAGE[$('i_muni').value].total.toFixed(4)+' mills</span>');
   if(STATE.mls){
     var L=STATE.mls.listing, D=STATE.mls.derived;
@@ -661,9 +693,11 @@ $('go').onclick = function(){
   $('pr_addr').textContent=a;
   STATE.verdict=null; STATE.zoning=null; STATE.mls=null; $('vlease').textContent='—'; $('vflood').textContent='—';
   ['h_price','h_hoa','h_flood'].forEach(function(id){ $(id).textContent=''; }); $('h_tax').textContent='Est. = price x 85% x millage';
+  clearFacts();
   prefill(a).then(function(mlsLoc){ return mlsLoc || geocode(a); }).then(function(loc){
     setMarker(loc.lat, loc.lon); map.setView([loc.lat, loc.lon], 17);
     s.textContent = "Reading county zoning…";
+    loadStats(loc.lat, loc.lon);
     queryPoint(loc.lat, loc.lon, function(z,ov){ s.textContent=""; showVerdict(z,ov); });
   }).catch(function(){
     s.innerHTML = "<span style='color:#b23b3b'>Couldn't locate that address. Try a fuller address, or click the property on the map (Eligibility tab).</span>";
@@ -675,10 +709,16 @@ $('go').onclick = function(){
    MARKET DATA
    ===================================================================== */
 var BANDS = { occ:{p25:0.20,p50:0.32,avg:0.46,p75:0.52,p90:0.72}, adr:{p25:250,p50:340,avg:557,p75:560,p90:1000}, live:false };
-function loadStats(){
-  fetch('/.netlify/functions/str-stats?market='+MARKET_KEY).then(function(r){return r.json()}).then(function(d){
+var STATS_REQ=0;
+function loadStats(lat, lon){
+  var qs = (lat!=null && lon!=null) ? 'lat='+lat.toFixed(5)+'&lon='+lon.toFixed(5) : 'market='+MARKET_KEY;
+  var req=++STATS_REQ;
+  $('p_str').textContent='Loading…'; $('mk_meta').textContent='Loading market for this property…';
+  fetch('/.netlify/functions/str-stats?'+qs).then(function(r){return r.json()}).then(function(d){
+    if(req!==STATS_REQ) return;
     if(!d || d.occupancy==null) return;
     STATE.market=d;
+    $('hd_market').textContent = (d.market||'Sarasota')+(d.zip?' • ZIP '+d.zip:'');
     var live = d.source==='live';
     $('k_rev').textContent = money(d.est_annual_revenue);
     $('k_occ').innerHTML = Math.round(d.occupancy*100)+'<small>%</small>';
@@ -697,8 +737,10 @@ function loadStats(){
       if(d.length_of_stay) { $('i_los').value=Number(d.length_of_stay).toFixed(1); $('h_los').textContent='Market average '+Number(d.length_of_stay).toFixed(1)+' nights (AirROI)'; }
       applyPreset('avg');
     }
+    renderChips();
   }).catch(function(){ $('p_str').textContent='Unavailable'; });
-  fetch('/.netlify/functions/str-stats?market='+MARKET_KEY+'&mode=bands').then(function(r){return r.json()}).then(function(b){
+  fetch('/.netlify/functions/str-stats?'+qs+'&mode=bands').then(function(r){return r.json()}).then(function(b){
+    if(req!==STATS_REQ) return;
     if(!b || !b.occupancy) return;
     STATE.bands=b;
     var o=b.occupancy, a=b.adr, r=b.revenue_annual||{};
@@ -811,7 +853,7 @@ function recalc(){
   $('m_beadr').textContent = bea==null?'—':money(bea);
   $('m_revpan').textContent=money(R.gross/365);
   $('m_nights').textContent=Math.round(R.nights)+' / '+Math.round(R.turnovers);
-  var sf = STATE.mls && STATE.mls.listing.living_area ? Number(STATE.mls.listing.living_area) : 0;
+  var sf = num('f_sqft');
   $('m_ppsf').textContent = sf>0 ? money(I.price/sf)+' ('+Math.round(sf).toLocaleString()+' sf)' : '—';
   $('m_ds').textContent=money(R.ds); $('m_cash').textContent=money(R.cash);
   var tot=Math.max(R.gross,1), cfp=Math.max(R.cf,0);
@@ -862,7 +904,8 @@ function recalc(){
   $('pr_date').textContent=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
   if(STATE.zoning) renderChips();
 }
-document.querySelectorAll('#tab-deal input, #tab-deal select').forEach(function(el){ el.addEventListener('input', recalc); el.addEventListener('change', recalc); });
+document.querySelectorAll('#tab-deal input, #tab-deal select, #facts input, #facts select').forEach(function(el){ el.addEventListener('input', recalc); el.addEventListener('change', recalc); });
+$('f_pool').addEventListener('change', function(){ if(this.value==='1' && num('i_pool')===0) $('i_pool').value=150; if(this.value==='0') $('i_pool').value=0; recalc(); });
 
 $('g_run').onclick=function(){
   var target=parseFloat(($('g_target').value||"0").replace(/[^0-9.\-]/g,''))||0, I=inputs(), res=$('g_res'); res.style.display='block';
