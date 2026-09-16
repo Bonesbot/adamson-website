@@ -46,7 +46,17 @@ function sb() {
   };
 }
 
-function normalize(L, lat, lon) {
+// AirROI nests listing details and performance under sub-objects in some responses. Flatten up to
+// three levels so the documented field names resolve wherever they sit (first occurrence wins).
+function flatten(obj, depth, acc) {
+  acc = acc || {}; depth = depth == null ? 3 : depth;
+  if (!obj || typeof obj !== "object" || Array.isArray(obj)) return acc;
+  for (const k of Object.keys(obj)) { const v = obj[k]; if (!(k in acc) && (v == null || typeof v !== "object" || Array.isArray(v))) acc[k] = v; }
+  if (depth > 0) for (const k of Object.keys(obj)) { const v = obj[k]; if (v && typeof v === "object" && !Array.isArray(v)) flatten(v, depth - 1, acc); }
+  return acc;
+}
+function normalize(raw, lat, lon) {
+  const L = flatten(raw);
   const am = Array.isArray(L.amenities) ? L.amenities.map(String) : (typeof L.amenities === "string" ? L.amenities.split(/[,|;]/) : []);
   const pool = am.some((a) => /\bpool\b/i.test(a) && !/table|hot tub/i.test(a));
   const la = num(L.latitude), lo = num(L.longitude);
@@ -122,8 +132,10 @@ exports.handler = async (event) => {
     const j = await r.json();
     let list = Array.isArray(j) ? j : (j.comparables || j.listings || j.entries || j.results || j.data || []);
     if (!Array.isArray(list)) list = [];
-    const comps = list.map((L) => normalize(L.listing || L, lat, lon));
-    const payload = { params: { bedrooms, baths, guests, radius, roomType }, raw_count: list.length, comps, subject: j.subject || null, as_of: new Date().toISOString().slice(0, 10), est_cost: COST["listings/comparables"] };
+    const comps = list.map((L) => normalize(L, lat, lon));
+    const sample = list[0] ? JSON.stringify(list[0]).slice(0, 2500) : null;
+    const topKeys = Array.isArray(j) ? ["<array>"] : Object.keys(j);
+    const payload = { params: { bedrooms, baths, guests, radius, roomType }, raw_count: list.length, comps, subject: j.subject || null, as_of: new Date().toISOString().slice(0, 10), est_cost: COST["listings/comparables"], raw_top_keys: topKeys, raw_sample: sample };
     if (q.debug === "1") payload.debug = JSON.stringify(j).slice(0, 3000);
     if (s) await s.upsert("str_api_cache", { cache_key: cacheKey, kind: "comps", label: bedrooms + "bd/" + baths + "ba/" + guests + "g r" + radius + " @ " + lat.toFixed(3) + "," + lon.toFixed(3), payload, fetched_at: new Date().toISOString() });
     return out(200, Object.assign({ source: "live", fetched_at: new Date().toISOString(), cache_key: cacheKey }, payload));
