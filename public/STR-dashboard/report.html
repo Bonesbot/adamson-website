@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Investment Analysis · The Adamson Group</title>
 <meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   :root{
     --navy:#0A1F3C; --cb:#012169; --gold:#C9A961; --white:#fff;
@@ -205,6 +207,15 @@
   .slider .top{border-bottom:1px dashed #eef1f5;padding:4px 0}
   .sens td.mk{outline:2px solid var(--gold);outline-offset:-2px}
   .card.goalcard{display:none}
+  #r_map{height:420px;border-radius:12px;border:1px solid var(--line)}
+  .nmk{background:var(--navy);color:#fff;border-radius:50%;width:24px;height:24px;line-height:24px;text-align:center;font-size:11px;font-weight:700;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .nmk.subj{background:var(--gold);color:#1a2233;width:30px;height:30px;line-height:26px;font-size:14px}
+  .seasons{display:flex;gap:6px;align-items:flex-end;height:110px;padding-top:6px}
+  .seasons .sb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+  .seasons .sb i{display:block;width:100%;background:var(--navy);border-radius:4px 4px 0 0;min-height:2px}
+  .seasons .sb span{font-size:10px;color:var(--muted);margin-top:4px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  @media print{ #r_map{height:360px} .leaflet-control{display:none!important} }
   @media print{ @page{margin:12mm} body{background:#fff} header .hd{padding:10px 18px} .noprint{display:none!important} .card{box-shadow:none;border-color:#ccc;page-break-inside:avoid} .acols{grid-template-columns:1fr 1fr 1fr;gap:10px} .hero{grid-template-columns:repeat(6,1fr)} .r2{grid-template-columns:1fr 1fr} .obox .v{font-size:17px} }
 </style>
 </head>
@@ -222,11 +233,28 @@
   </div>
   <div class="chips" id="r_chips" style="margin:0 0 12px"></div>
   <div id="r_facts"></div>
+  <div class="card" id="r_market" style="display:none;margin-bottom:16px">
+    <h2>Short-term rental market <span id="r_mk_name" style="font-size:13px;color:var(--muted);font-family:-apple-system,Segoe UI,Arial"></span></h2>
+    <div class="mini" style="display:block!important" id="r_mk_meta"></div>
+    <div class="kpis" id="r_mk_kpis"></div>
+    <table class="t" id="r_mk_bands" style="margin-top:10px"></table>
+    <div class="seasons" id="r_season"></div>
+  </div>
   <div class="acols" id="r_acq"></div>
   <div class="results" id="r_results" style="margin-top:16px"></div>
+  <div class="card" id="r_mapcard" style="margin-top:16px;display:none">
+    <h2>Comparable rentals near the subject</h2>
+    <div id="r_map"></div>
+    <div class="mini" style="display:block!important">Gold star = subject. Numbers match the comparable rentals table. Dashed circle = search radius.</div>
+  </div>
   <div class="card" id="r_comps" style="margin-top:16px;display:none">
-    <h2>Comparable rentals used</h2>
+    <h2>Comparable rentals used <span style="font-size:12px;color:var(--muted);font-family:-apple-system,Segoe UI,Arial">last 12 months of actual bookings, AirROI</span></h2>
     <table class="t comps" id="r_comps_tbl"></table>
+  </div>
+  <div class="card" id="r_mls" style="margin-top:16px;display:none">
+    <h2>Nearby sales and listings (MLS)</h2>
+    <div class="mini" style="display:block!important" id="r_mls_stats"></div>
+    <table class="t comps" id="r_mls_tbl"></table>
   </div>
   <div class="disc" style="margin-top:14px">Estimates only, deemed reliable but not guaranteed. Prepared by Ryan Adamson, PA, The Adamson Group, Coldwell Banker Realty, 941.713.9234. Market statistics and comparable rentals from AirROI (trailing 12 months) as of the dates shown; property facts from Stellar MLS where available; property tax estimated for a non-homestead purchase at 85% of price and the district's 2025 millage; insurance premiums as entered. Nothing here is legal, tax, zoning or investment advice. Verify short-term-rental eligibility, HOA/condo rental minimums and licensing before purchase.</div>
   <footer>&copy; 2026 The Adamson Group &bull; Coldwell Banker Realty. Saved analysis; figures reflect the inputs at the time it was saved, not live data.</footer>
@@ -246,19 +274,61 @@ fetch(url).then(function(r){return r.json()}).then(function(d){
   $('r_addr').textContent=P.address||R.slug;
   var hl=R.outputs&&R.outputs.headline||{};
   $('r_meta').innerHTML=(R.title||'')+' · saved '+fmtDT(R.created_at)+(R.market&&R.market.market?' · STR market: '+R.market.market+' (AirROI as of '+(R.market.as_of||'')+', pulled '+fmtDT(R.market.fetched_at)+')':'')+(hl.price?' · Purchase price '+money(hl.price)+' · '+money(hl.adr)+' ADR at '+Math.round((hl.occ||0)*100)+'% occupancy':'');
-  $('r_chips').innerHTML=H.chips||'';
-  if(H.facts) $('r_facts').innerHTML=H.facts;
-  if(H.acq) $('r_acq').innerHTML=H.acq;
-  if(H.results) $('r_results').innerHTML=H.results;
+  var SEC=(R.inputs&&R.inputs.sections)||['facts','market','inputs','results','sens','comps','map'];
+  var has=function(k){ return SEC.indexOf(k)>=0; };
+  $('r_chips').innerHTML=has('facts')?(H.chips||''):'';
+  if(H.facts && has('facts')) $('r_facts').innerHTML=H.facts;
+  if(H.acq && has('inputs')) $('r_acq').innerHTML=H.acq;
+  if(H.results && (has('results')||has('sens'))){
+    $('r_results').innerHTML=H.results;
+    var blocks=$('r_results').children, r2=0;
+    Array.prototype.forEach.call(blocks,function(b){
+      if(b.classList.contains('whatif')||b.classList.contains('hero')){ if(!has('results')) b.remove(); return; }
+      if(b.classList.contains('r2')){ r2++; if(r2===1 && !has('results')) b.remove(); if(r2===2 && !has('sens')) b.remove(); return; }
+    });
+  }
   document.querySelectorAll('#r_results .card').forEach(function(c){ if(c.querySelector('#g_target')) c.classList.add('goalcard'); });
   document.querySelectorAll('input,select').forEach(function(el){ el.setAttribute('readonly',''); el.setAttribute('disabled',''); });
-  if(R.comps && R.comps.included && R.comps.included.length){
+  // market summary (last 12 months)
+  var M=R.market, MB=R.outputs&&R.outputs.market_bands;
+  if(has('market') && M && M.summary){
+    var S=M.summary; $('r_market').style.display='block';
+    $('r_mk_name').textContent=M.market||''; $('r_mk_meta').textContent='Last 12 months of actual short-term rental bookings in this market. Source: AirROI, data through '+(M.as_of||'')+', pulled '+fmtDT(M.fetched_at)+'.';
+    $('r_mk_kpis').innerHTML=[['Avg annual revenue / listing',money(S.est_annual_revenue||0)],['Occupancy',Math.round((S.occupancy||0)*100)+'%'],['ADR',money(S.adr||0)],['RevPAR',money(S.revpar||0)]].map(function(k){return '<div class="kpi"><div class="lab">'+k[0]+'</div><div class="num">'+k[1]+'</div></div>'}).join('');
+    if(MB && MB.occupancy){ var o=MB.occupancy,a=MB.adr||{},rv=MB.revenue_annual||{};
+      $('r_mk_bands').innerHTML='<tr><th>Last 12 months</th><th>Bottom quartile</th><th>Median listing</th><th>Market average</th><th>Top quartile</th></tr>'
+        +'<tr><td class="k">Occupancy</td><td>'+(o.p25!=null?pct(o.p25,0):'—')+'</td><td>'+(o.p50!=null?pct(o.p50,0):'—')+'</td><td>'+pct(S.occupancy||o.avg||0,0)+'</td><td>'+(o.p75!=null?pct(o.p75,0):'—')+'</td></tr>'
+        +'<tr><td class="k">ADR</td><td>'+(a.p25!=null?money(a.p25):'—')+'</td><td>'+(a.p50!=null?money(a.p50):'—')+'</td><td>'+money(S.adr||a.avg||0)+'</td><td>'+(a.p75!=null?money(a.p75):'—')+'</td></tr>'
+        +'<tr><td class="k">Annual revenue / listing</td><td>'+(rv.p25!=null?money(rv.p25):'—')+'</td><td>'+(rv.p50!=null?money(rv.p50):'—')+'</td><td>'+(rv.avg!=null?money(rv.avg):'—')+'</td><td>'+(rv.p75!=null?money(rv.p75):'—')+'</td></tr>';
+      if(MB.monthly&&MB.monthly.length){ var mx=Math.max.apply(null,MB.monthly.map(function(m){return m.revpar||0}))||1; $('r_season').innerHTML=MB.monthly.map(function(m){ var dd=new Date(m.date+'T00:00:00'); return '<div class="sb" title="'+m.date+'"><i style="height:'+Math.round((m.revpar||0)/mx*100)+'%"></i><span>'+dd.toLocaleString('en-US',{month:'short'})+'</span></div>'; }).join(''); }
+    }
+  }
+  // comps
+  var inc=(R.comps&&R.comps.included)||[];
+  if(has('comps') && inc.length){
     $('r_comps').style.display='block';
-    var h='<tr><th>Listing</th><th>Bd/Ba/Gst</th><th>Pool</th><th>Dist</th><th>Rating</th><th>TTM Occ</th><th>TTM ADR</th><th>TTM RevPAR</th><th>TTM Revenue</th></tr>';
-    R.comps.included.forEach(function(c){ h+='<tr><td class="nm">'+(c.url?'<a href="'+c.url+'" target="_blank" rel="noopener">':'')+(c.name||c.id)+(c.url?'</a>':'')+'</td><td>'+(c.bedrooms??'?')+'/'+(c.baths??'?')+'/'+(c.guests??'?')+'</td><td>'+(c.pool?'Yes':'No')+'</td><td>'+(c.distance_mi!=null?c.distance_mi+' mi':'—')+'</td><td>'+(c.rating!=null?c.rating.toFixed(2)+' ('+(c.reviews||0)+')':'—')+'</td><td>'+(c.ttm.occupancy!=null?pct(c.ttm.occupancy,0):'—')+'</td><td>'+(c.ttm.adr!=null?money(c.ttm.adr):'—')+'</td><td>'+(c.ttm.revpar!=null?money(c.ttm.revpar):'—')+'</td><td>'+(c.ttm.revenue!=null?money(c.ttm.revenue):'—')+'</td></tr>'; });
-    if(R.comps.bands) h+='<tr><td class="k"><b>Included comps: Low / Mid / High</b></td><td colspan="4">Occupancy '+pct(R.comps.bands.occ.p25,0)+' / '+pct(R.comps.bands.occ.p50,0)+' / '+pct(R.comps.bands.occ.p75,0)+'</td><td colspan="4">ADR '+money(R.comps.bands.adr.p25)+' / '+money(R.comps.bands.adr.p50)+' / '+money(R.comps.bands.adr.p75)+(R.comps.fetched_at?' · AirROI pulled '+fmtDT(R.comps.fetched_at):'')+'</td></tr>';
+    var h='<tr><th>#</th><th>Listing</th><th>Bd/Ba/Gst</th><th>Sq ft - Built</th><th>Pool</th><th>Dist</th><th>Rating</th><th>Occupancy</th><th>ADR</th><th>RevPAR</th><th>Revenue</th></tr>';
+    inc.forEach(function(c,i){ h+='<tr><td><b>'+(c.n||i+1)+'</b></td><td class="nm">'+(c.url?'<a href="'+c.url+'" target="_blank" rel="noopener">':'')+(c.name||c.id)+(c.url?'</a>':'')+'</td><td>'+(c.bedrooms??'?')+'/'+(c.baths??'?')+'/'+(c.guests??'?')+'</td><td>'+(c.mls_match?c.mls_match.label:'—')+'</td><td>'+(c.pool?'Yes':'No')+'</td><td>'+(c.distance_mi!=null?c.distance_mi+' mi':'—')+'</td><td>'+(c.rating!=null?c.rating.toFixed(2)+' ('+(c.reviews||0)+')':'—')+'</td><td>'+(c.ttm.occupancy!=null?pct(c.ttm.occupancy,0):'—')+'</td><td>'+(c.ttm.adr!=null?money(c.ttm.adr):'—')+'</td><td>'+(c.ttm.revpar!=null?money(c.ttm.revpar):'—')+'</td><td>'+(c.ttm.revenue!=null?money(c.ttm.revenue):'—')+'</td></tr>'; });
+    if(R.comps.bands) h+='<tr><td colspan="2" class="k"><b>Included comps: Low / Mid / High</b></td><td colspan="4">Occupancy '+pct(R.comps.bands.occ.p25,0)+' / '+pct(R.comps.bands.occ.p50,0)+' / '+pct(R.comps.bands.occ.p75,0)+'</td><td colspan="5">ADR '+money(R.comps.bands.adr.p25)+' / '+money(R.comps.bands.adr.p50)+' / '+money(R.comps.bands.adr.p75)+(R.comps.fetched_at?' · AirROI, last 12 months, pulled '+fmtDT(R.comps.fetched_at):'')+'</td></tr>';
     $('r_comps_tbl').innerHTML=h;
   }
+  // relabel any TTM / L90D text left in snapshots (text nodes only, so the map DOM stays intact)
+  (function(){ var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT), n; while((n=w.nextNode())){ if(/TTM|L90D|12-mo|90-day/.test(n.nodeValue)) n.nodeValue=n.nodeValue.replace(/\bTTM\b/g,'Last 12 months').replace(/\bL90D\b/g,'Last 90 days').replace(/12-mo /g,'Last 12 months ').replace(/90-day /g,'Last 90 days '); } })();
+  // map
+  var subj=(R.outputs&&R.outputs.subject)||{lat:P.lat,lon:P.lon,radius:2};
+  if(has('map') && subj && subj.lat!=null && inc.length && typeof L!=='undefined'){
+    $('r_mapcard').style.display='block';
+    var map=L.map('r_map',{scrollWheelZoom:false,zoomControl:false});
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap contributors',maxZoom:19}).addTo(map);
+    var pts=[[Number(subj.lat),Number(subj.lon)]];
+    L.marker(pts[0],{icon:L.divIcon({className:'',html:'<div class="nmk subj">&#9733;</div>',iconSize:[30,30],iconAnchor:[15,15]}),zIndexOffset:1000}).addTo(map);
+    L.circle(pts[0],{radius:(subj.radius||2)*1609.34,color:'#C9A961',weight:1.2,fill:false,dashArray:'4 4'}).addTo(map);
+    inc.forEach(function(c,i){ if(c.lat==null) return; pts.push([c.lat,c.lon]); L.marker([c.lat,c.lon],{icon:L.divIcon({className:'',html:'<div class="nmk">'+(c.n||i+1)+'</div>',iconSize:[24,24],iconAnchor:[12,12]})}).addTo(map).bindPopup('<b>#'+(c.n||i+1)+'</b> '+(c.name||'')); });
+    setTimeout(function(){ map.invalidateSize(); map.fitBounds(pts,{padding:[24,24]}); },150);
+  }
+  // mls comps
+  if(has('mls') && H.mls){ $('r_mls').style.display='block'; $('r_mls_tbl').innerHTML=H.mls; $('r_mls_stats').textContent=H.mls_stats||''; }
+
 }).catch(function(){ $('r_addr').textContent='Could not load this analysis.'; });
 </script>
 </body>
