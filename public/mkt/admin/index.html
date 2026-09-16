@@ -60,10 +60,18 @@
   <div id="app-view" class="hide">
     <div class="card">
       <h2 style="display:flex;justify-content:space-between;align-items:center;">Your CMAs
-        <span><button class="btn sm" onclick="loadList()">Refresh list</button>
+        <span><button class="btn sm" onclick="loadList();loadProps()">Refresh list</button>
               <button class="btn sm" onclick="logOut()">Log out</button></span></h2>
       <div class="sub">The client page link is shareable and has no password. The workbench is where you adjust.</div>
       <table id="cma-table"><tbody><tr><td>loading…</td></tr></tbody></table>
+    </div>
+
+    <div class="card">
+      <h2 style="display:flex;justify-content:space-between;align-items:center;">Properties: CMA + investment analysis
+        <span><a class="btn sm" href="/str-dashboard/">New investment analysis</a></span></h2>
+      <div class="sub">One row per address. The investment analyzer (STR dashboard) saves under the same slug as the CMA, so
+        <code>/mkt/&lt;slug&gt;/</code> is the CMA client page, <code>/mkt/&lt;slug&gt;/invest</code> the analyzer and <code>/mkt/&lt;slug&gt;/report</code> the client-facing investment report.</div>
+      <table id="prop-table"><tbody><tr><td>loading…</td></tr></tbody></table>
     </div>
 
     <div class="card">
@@ -200,7 +208,7 @@ async function post(qs, body){
 function showApp(){
   $("login-view").classList.add("hide");
   $("app-view").classList.remove("hide");
-  toggleProfile(); loadList();
+  toggleProfile(); loadList(); loadProps();
 }
 function toggleProfile(){
   const p=$("f-profile").value;
@@ -232,6 +240,23 @@ async function loadList(){
         </td></tr>`).join("") : "<tr><td colspan=5>No CMAs registered yet.</td></tr>")
     + "</tbody>";
   $("r-slug").innerHTML = rows.map(p=>`<option value="${p.slug}">${p.address||p.slug}</option>`).join("");
+}
+
+/* ---------- property registry (CMA + investment, shared with the STR dashboard) ---------- */
+async function loadProps(){
+  try{
+    const r=await fetch("/.netlify/functions/str-reports?action=list",{cache:"no-store"}); const d=await r.json();
+    const rows=d.properties||[];
+    const money=n=>(n<0?"-$":"$")+Math.abs(Math.round(n||0)).toLocaleString();
+    $("prop-table").innerHTML = "<thead><tr><th>Address</th><th>Slug</th><th>CMA</th><th>Investment</th><th>Updated</th></tr></thead><tbody>"
+      + (rows.length ? rows.map(p=>{ const l=p.reports&&p.reports[0]; return `<tr>
+        <td><b>${p.address||p.slug}</b></td>
+        <td style="font-family:monospace;font-size:11px;">${p.slug}</td>
+        <td style="white-space:nowrap;">${p.cma?`<span class="tag ${p.cma.profile}">${p.cma.profile}</span> <a class="btn sm" href="${p.cma.workbench_url}">Workbench</a> <a class="btn sm" href="${p.cma.client_url}" target="_blank">Client</a>`:`<span style="color:#888">none</span>`}</td>
+        <td style="white-space:nowrap;">${p.reports&&p.reports.length?`<a class="btn sm" href="${p.invest_url}">Open</a> <a class="btn sm" href="${p.report_url}" target="_blank">Client report</a> <span style="font-size:11px;color:#666">${p.reports.length} saved${l&&l.headline&&l.headline.cf!=null?" · CF "+money(l.headline.cf)+"/yr":""}</span>`:`<a class="btn sm" href="${p.invest_url}">Start</a>`}</td>
+        <td style="font-size:11px;">${p.updated_at? new Date(p.updated_at).toLocaleDateString():""}</td></tr>`; }).join("") : "<tr><td colspan=5>No properties yet.</td></tr>")
+      + "</tbody>";
+  }catch(e){ $("prop-table").innerHTML="<tbody><tr><td>Could not load the property registry.</td></tr></tbody>"; }
 }
 
 /* ---------- CSV adapters ---------- */
