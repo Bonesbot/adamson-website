@@ -8,6 +8,7 @@
 //   ?mode=area                -> { zoning:<GeoJSON FC>, overlays:<GeoJSON FC> }  (Siesta Key bbox)
 //   ?mode=city                -> { city:<GeoJSON FC> }  (City of Sarasota limits, simplified)
 //   ?mode=point&lat=..&lon=.. -> { zoning:{...}|null, overlays:[names] }
+//   ?mode=geocode&address=..  -> { lat, lon, label, source }  (Census first, Nominatim fallback)
 //
 // No npm deps — global fetch (Netlify Node 18+).
 
@@ -35,6 +36,26 @@ exports.handler = async (event) => {
   const mode = q.mode || "area";
 
   try {
+    if (mode === "geocode") {
+      // Server-side geocode (the Census geocoder does not send CORS headers to browsers).
+      const address = String(q.address || "").trim();
+      if (!address) return { statusCode: 400, headers: cors(0), body: JSON.stringify({ error: "address required" }) };
+      const c = "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=" + encodeURIComponent(address) + "&benchmark=4&format=json";
+      let out = null;
+      try {
+        const j = await getJSON(c);
+        const m = j.result && j.result.addressMatches && j.result.addressMatches[0];
+        if (m) out = { lat: m.coordinates.y, lon: m.coordinates.x, label: m.matchedAddress, source: "census" };
+      } catch (e) { /* fall through */ }
+      if (!out) {
+        try {
+          const r = await fetch("https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" + encodeURIComponent(address), { headers: { "User-Agent": "adamsonfl.com STR dashboard (leads@adamsonfl.com)" } });
+          const a = r.ok ? await r.json() : null;
+          if (a && a[0]) out = { lat: parseFloat(a[0].lat), lon: parseFloat(a[0].lon), label: a[0].display_name, source: "nominatim" };
+        } catch (e) { /* ignore */ }
+      }
+      return { statusCode: 200, headers: cors(86400), body: JSON.stringify(out || { error: "no match" }) };
+    }
     if (mode === "point") {
       const lat = parseFloat(q.lat), lon = parseFloat(q.lon);
       if (isNaN(lat) || isNaN(lon)) return { statusCode: 400, headers: cors(0), body: JSON.stringify({ error: "lat/lon required" }) };
