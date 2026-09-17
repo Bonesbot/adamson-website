@@ -41,10 +41,10 @@
 <header><div class="hd"><div class="brand"><div class="ag">The Adamson Group</div><div class="div"></div><div class="cb">Coldwell Banker<br>Global Luxury</div></div><div class="htag">Property workspaces</div></div></header>
 <div class="wrap">
   <h1 class="title">Workspaces</h1>
-  <div class="sub">Every property you've worked: CMA, investment analysis, estimator and client reports, one tile per address. Type to filter, or enter a new address to start.</div>
+  <div class="sub">Every property you've worked: CMA, closing costs, STR investment analysis and client reports, one tile per address. Type to filter, or enter a new address to start.</div>
   <div class="bar">
     <input type="text" id="q" placeholder="Search by address, or type a new one (e.g. 2215 Grove St)" autofocus>
-    <a class="btn gold" id="btn_new" href="/str-dashboard/">Start investment analysis</a>
+    <a class="btn gold" id="btn_new" href="/str-dashboard/">Analyze a property</a>
     <a class="btn ghost" href="/mkt/admin/">CMA admin</a>
   </div>
   <div class="section" id="sec_recent">Recently used</div>
@@ -61,7 +61,7 @@ function render(){
   var rows=ALL.filter(function(p){ return !q || (p.address||'').toLowerCase().indexOf(q)>=0 || (p.slug||'').indexOf(q.replace(/[^a-z0-9]+/g,'-'))>=0; });
   $('sec_recent').textContent = q ? rows.length+' match'+(rows.length===1?'':'es') : 'Recently used';
   $('btn_new').href = '/str-dashboard/' + (q && !rows.length ? '?address='+encodeURIComponent($('q').value.trim()) : '');
-  $('btn_new').textContent = q && !rows.length ? 'Start "'+$('q').value.trim()+'"' : 'Start investment analysis';
+  $('btn_new').textContent = q && !rows.length ? 'Analyze "'+$('q').value.trim()+'"' : 'Analyze a property';
   if(!rows.length){ $('tiles').innerHTML='<div class="empty">'+(q?'No workspace for that address yet. Use the button above to start one.':'No properties yet.')+'</div>'; return; }
   $('tiles').innerHTML=rows.map(function(p){
     var l=p.reports&&p.reports[0], hl=l&&l.headline||{}, f=p.facts||{};
@@ -74,7 +74,7 @@ function render(){
     var acts='<a class="btn sm" href="'+p.home_url+'">Open</a>';
     if(p.workbench_url) acts+='<a class="btn sm ghost" href="'+p.workbench_url+'">CMA workbench</a>';
     if(p.cma_url) acts+='<a class="btn sm ghost" href="'+p.cma_url+'" target="_blank">CMA client</a>';
-    acts+='<a class="btn sm ghost" href="'+p.invest_url+'">'+(p.reports&&p.reports.length?'Investment':'Start investment')+'</a>';
+    acts+='<a class="btn sm ghost" href="'+p.invest_url+'">Property Intelligence</a>';
     if(p.report_url) acts+='<a class="btn sm ghost" href="'+p.report_url+'" target="_blank">Client report</a>';
     if(p.estimator_url) acts+='<a class="btn sm ghost" href="'+p.estimator_url+'" target="_blank">Estimator</a>';
     return '<div class="tile"><div class="addr"><a href="'+p.home_url+'">'+(p.address||p.slug)+'</a></div><div class="slug">/mkt/'+p.slug+'/ · last used '+fmt(p.last_used)+'</div><div class="badges">'+badges+'</div>'
