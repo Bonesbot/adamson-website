@@ -416,6 +416,15 @@ async function refreshComps(){
   msg("refresh-msg","ok", res.body.unchanged? "No change: the export matches what is deployed."
     : `Committed ${comps.length} comps + ${actives.length} actives. Netlify rebuilding; reviewed and frozen adjustments are untouched.`);
 }
+/* ---------- prefill "New CMA" from the Property Intelligence hub (?address=...&list=...) ---------- */
+(function(){
+  const q=new URLSearchParams(location.search); if(!q.get("address")) return;
+  const map={profile:"f-profile",mls:"f-mls",address:"f-address",subdivision:"f-subdivision",city:"f-city",state:"f-state",zip:"f-zip",list:"f-list",sqft:"f-sqft",year:"f-year",beds:"f-beds",fb:"f-fb",hb:"f-hb",lot:"f-lot",garage:"f-garage",taxes:"f-taxes",taxyear:"f-taxyear",flood:"f-flood",lat:"f-lat",lng:"f-lng",fee:"f-fee",minlease:"f-minlease",slug:"f-slug"};
+  Object.keys(map).forEach(k=>{ const v=q.get(k); const el=$(map[k]); if(v!=null && el) el.value=v; });
+  toggleProfile(); deriveSlug();
+  const card=$("f-address").closest(".card")||$("f-address"); setTimeout(()=>{ card.scrollIntoView({behavior:"smooth",block:"start"}); }, 400);
+  msg("create-msg","info","Subject prefilled from Property Intelligence for "+q.get("address")+". Add the comp CSV and Create.");
+})();
 </script>
 </body>
 </html>
