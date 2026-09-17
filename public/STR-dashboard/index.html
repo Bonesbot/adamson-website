@@ -36,7 +36,7 @@
   .card .hint{color:var(--muted);font-size:12px;margin-bottom:12px}
   label.fld{display:block;font-size:12px;color:#43506a;margin:2px 0 5px;font-weight:600}
   input[type=text],input[type=number],select{width:100%;padding:10px 11px;border:1px solid #cdd6e2;border-radius:8px;font-size:14px;background:#fff}
-  input[type=number]{text-align:right;font-variant-numeric:tabular-nums}
+  input[type=number],input.cur{text-align:right;font-variant-numeric:tabular-nums}
   .btn{width:100%;margin-top:9px;background:var(--navy);color:#fff;border:0;border-radius:8px;padding:11px;font-size:14px;letter-spacing:.03em;cursor:pointer;transition:.15s}
   .btn:hover{background:#12294a}
   .btn.gold{background:var(--gold);color:#1a2233}
@@ -106,7 +106,7 @@
   .f:last-child{border:0}
   .f label{font-size:12.5px;color:#2b3a55}
   .f label small{display:block;color:var(--muted);font-size:10.5px}
-  .f input[type=number],.f select{padding:7px 9px;font-size:13px}
+  .f input[type=number],.f input.cur,.f select{padding:7px 9px;font-size:13px}
   .f .unit{display:flex;align-items:center;gap:4px}
   .f .unit span{font-size:12px;color:var(--muted)}
   .f .unit input{flex:1;min-width:0}
@@ -220,6 +220,7 @@
 </style>
 </head>
 <body>
+<script src="/mkt/nav.js" data-internal="1"></script>
 <header>
   <div class="hd">
     <div class="brand">
@@ -227,7 +228,7 @@
       <div class="div"></div>
       <div class="cb">Coldwell Banker<br>Global Luxury</div>
     </div>
-    <div class="htag"><a href="/mkt/" style="color:#cdd6e4;text-decoration:none">&larr; Workspaces</a> &nbsp;&middot;&nbsp; STR Intelligence &mdash; <span id="hd_market">Siesta Key &bull; ZIP 34242</span></div>
+    <div class="htag">STR Intelligence &mdash; <span id="hd_market">Siesta Key &bull; ZIP 34242</span></div>
   </div>
 </header>
 <div class="subbar">
@@ -286,20 +287,22 @@
       <!-- Acquisition -->
       <div class="card">
         <h2>Acquisition &amp; Financing</h2>
-        <div class="hint">Purchase, loan and cash to close. Florida buyer-side stamps on the note are computed automatically.</div>
+        <div class="hint">Purchase, loan and cash to close. Note stamps, intangible tax and the owner's title policy (Florida promulgated rates) are computed automatically.</div>
         <div class="f"><label>Purchase price<small id="h_price"></small></label><div class="unit"><span>$</span><input type="number" id="i_price" value="1200000" step="5000"></div></div>
         <div class="f"><label>Down payment</label><div class="unit"><input type="number" id="i_down" value="25" step="1" min="0" max="100"><span>%</span></div></div>
         <div class="f"><label>Interest rate<small>Investment-property pricing</small></label><div class="unit"><input type="number" id="i_rate" value="7.0" step="0.125"><span>%</span></div></div>
         <div class="f"><label>Term</label><div class="unit"><input type="number" id="i_term" value="30" step="5"><span>yrs</span></div></div>
         <div class="f"><label>Lender fees<small>Origination, underwriting</small></label><div class="unit"><span>$</span><input type="number" id="i_lender" value="1500" step="100"></div></div>
-        <div class="f"><label>Other closing costs<small>Lender title policy, inspections, survey, appraisal, endorsements</small></label><div class="unit"><span>$</span><input type="number" id="i_closing" value="6500" step="100"></div></div>
+        <div class="f"><label>Owner's title policy<small id="h_title">FL promulgated rate on the price</small></label><div class="unit"><span>$</span><input type="number" id="i_title" value="0" step="25"></div></div>
+        <div class="f"><label>Title policy paid by<small>Sarasota custom: seller pays (FAR/BAR 9(c)(i))</small></label><select id="i_titlepay"><option value="buyer">Buyer (include in cash to close)</option><option value="seller">Seller (not a buyer cost)</option></select></div>
+        <div class="f"><label>Other closing expenses<small>Inspections, appraisal, survey, closing attorney, lender's policy</small></label><div class="unit"><span>$</span><input type="number" id="i_closing" value="1200" step="100"></div></div>
         <div class="f"><label>Furnishing &amp; setup<small>Furniture, linens, smart locks, photos</small></label><div class="unit"><span>$</span><input type="number" id="i_furnish" value="40000" step="1000"></div></div>
         <div class="f"><label>Renovation before renting</label><div class="unit"><span>$</span><input type="number" id="i_reno" value="0" step="1000"></div></div>
         <div class="sec">Computed</div>
         <div class="f"><label>Loan amount</label><div id="o_loan" style="text-align:right;font-weight:600">&mdash;</div></div>
         <div class="f"><label>Note doc stamps + intangible tax<small>0.35% + 0.20% of loan (buyer side)</small></label><div id="o_stamps" style="text-align:right;font-weight:600">&mdash;</div></div>
         <div class="f"><label>Monthly P&amp;I</label><div id="o_pi" style="text-align:right;font-weight:600">&mdash;</div></div>
-        <div class="f"><label><b>Total cash invested</b><small>Down + closing + furnishing + reno</small></label><div id="o_cash" style="text-align:right;font-weight:700;color:var(--navy)">&mdash;</div></div>
+        <div class="f"><label><b>Total cash invested</b><small>Down + closing costs + furnishing + reno</small></label><div id="o_cash" style="text-align:right;font-weight:700;color:var(--navy)">&mdash;</div></div>
       </div>
 
       <!-- Revenue -->
@@ -331,10 +334,10 @@
 
       <!-- Operating expenses -->
       <div class="card">
-        <h2>Operating Expenses <span style="font-size:11px;color:var(--muted);font-family:-apple-system,Segoe UI,Arial">monthly</span></h2>
+        <h2>Operating Expenses <span style="font-size:11px;color:var(--muted);font-family:-apple-system,Segoe UI,Arial">monthly unless marked /yr</span></h2>
         <div class="hint">Property tax is estimated for a non-homestead purchase; insurance is entered per property.</div>
         <div class="f"><label>Tax district<small id="h_muni">Set from the zoning lookup</small></label><select id="i_muni"><option value="SC">Sarasota County (unincorp.)</option><option value="CS">City of Sarasota</option><option value="TLK">Longboat Key (Sarasota side)</option></select></div>
-        <div class="f"><label>Property tax<small id="h_tax">Est. = price x 85% x millage</small></label><div class="unit"><span>$</span><input type="number" id="i_tax" value="0" step="10"></div></div>
+        <div class="f"><label>Property tax (est.)<small id="h_tax">Est. = price x 85% x millage</small></label><div class="unit"><span>$</span><input type="number" id="i_tax" value="0" step="100"><span>/yr</span></div></div>
         <div class="f"><label>Non-ad valorem<small>Fire, stormwater, solid waste, CDD (annual)</small></label><div class="unit"><span>$</span><input type="number" id="i_nav" value="600" step="50"><span>/yr</span></div></div>
         <div class="f"><label>Homeowners insurance<small>Annual premium, as quoted</small></label><div class="unit"><span>$</span><input type="number" id="i_hoi" value="6000" step="100"><span>/yr</span></div></div>
         <div class="f"><label>Flood insurance<small id="h_flood"></small></label><div class="unit"><span>$</span><input type="number" id="i_flood" value="1800" step="100"><span>/yr</span></div></div>
@@ -363,27 +366,25 @@
       <div class="whatif" id="whatif"></div>
       <div class="hero">
         <div class="obox hi"><div class="lab">Gross revenue</div><div class="v" id="o_gross">&mdash;</div><div class="s" id="o_gross_s"></div></div>
-        <div class="obox"><div class="lab">NOI</div><div class="v" id="o_noi">&mdash;</div><div class="s" id="o_noi_s">per year</div></div>
-        <div class="obox"><div class="lab">Cap rate</div><div class="v" id="o_cap">&mdash;</div><div class="s">NOI / price</div></div>
-        <div class="obox"><div class="lab">Cash flow</div><div class="v" id="o_cf">&mdash;</div><div class="s" id="o_cf_s">per month, after debt</div></div>
-        <div class="obox"><div class="lab">Cash-on-cash</div><div class="v" id="o_coc">&mdash;</div><div class="s">annual CF / cash invested</div></div>
-        <div class="obox"><div class="lab">DSCR</div><div class="v" id="o_dscr">&mdash;</div><div class="s">NOI / debt service</div></div>
+        <div class="obox"><div class="lab">Net operating income</div><div class="v" id="o_noi">&mdash;</div><div class="s" id="o_noi_s">per year, after expenses, before the mortgage</div></div>
+        <div class="obox"><div class="lab">Cap rate</div><div class="v" id="o_cap">&mdash;</div><div class="s">yearly NOI &divide; price (return if paid in cash)</div></div>
+        <div class="obox"><div class="lab">Cash flow</div><div class="v" id="o_cf">&mdash;</div><div class="s" id="o_cf_s">per month, after the mortgage</div></div>
+        <div class="obox"><div class="lab">Cash-on-cash return</div><div class="v" id="o_coc">&mdash;</div><div class="s">yearly cash flow &divide; cash you put in</div></div>
+        <div class="obox"><div class="lab">Debt coverage (DSCR)</div><div class="v" id="o_dscr">&mdash;</div><div class="s">NOI &divide; mortgage payments; under 1.0 = income doesn't cover the loan</div></div>
       </div>
       <div class="r2">
         <div class="card">
           <h2>Return metrics</h2>
           <table class="t" id="metrics">
-            <tr><td class="k">Gross rent multiplier <small>(price / gross revenue)</small></td><td id="m_grm">&mdash;</td></tr>
-            <tr><td class="k">1% rule <small>(monthly gross / price)</small></td><td id="m_r1">&mdash;</td></tr>
-            <tr><td class="k">2% rule</td><td id="m_r2">&mdash;</td></tr>
-            <tr><td class="k">50% rule check <small>(opex / gross, ex debt)</small></td><td id="m_r50">&mdash;</td></tr>
-            <tr><td class="k">Expense ratio</td><td id="m_er">&mdash;</td></tr>
-            <tr><td class="k">Break-even occupancy <small>(covers opex + debt)</small></td><td id="m_beocc">&mdash;</td></tr>
-            <tr><td class="k">Break-even ADR <small>(at current occupancy)</small></td><td id="m_beadr">&mdash;</td></tr>
-            <tr><td class="k">Revenue per available night</td><td id="m_revpan">&mdash;</td></tr>
-            <tr><td class="k">Booked nights / turnovers per year</td><td id="m_nights">&mdash;</td></tr>
+            <tr><td class="k">Gross rent multiplier <small>(price &divide; yearly revenue; lower is better, ~10x or under is strong)</small></td><td id="m_grm">&mdash;</td></tr>
+            <tr><td class="k">1% rule <small>(monthly revenue &divide; price; 1% is the classic target)</small></td><td id="m_r1">&mdash;</td></tr>
+            <tr><td class="k">Operating expense ratio <small>(all costs before the mortgage &divide; revenue; STR rule of thumb is about 50%)</small></td><td id="m_er">&mdash;</td></tr>
+            <tr><td class="k">Break-even occupancy <small>(needed to cover expenses and the mortgage at this nightly rate)</small></td><td id="m_beocc">&mdash;</td></tr>
+            <tr><td class="k">Break-even nightly rate <small>(at this occupancy)</small></td><td id="m_beadr">&mdash;</td></tr>
+            <tr><td class="k">Revenue per available night <small>(yearly revenue &divide; 365)</small></td><td id="m_revpan">&mdash;</td></tr>
+            <tr><td class="k">Booked nights / guest turnovers per year</td><td id="m_nights">&mdash;</td></tr>
             <tr><td class="k">Price per sq ft</td><td id="m_ppsf">&mdash;</td></tr>
-            <tr><td class="k">Annual debt service</td><td id="m_ds">&mdash;</td></tr>
+            <tr><td class="k">Yearly mortgage payments <small>(principal + interest)</small></td><td id="m_ds">&mdash;</td></tr>
             <tr><td class="k">Total cash invested</td><td id="m_cash">&mdash;</td></tr>
           </table>
           <div class="bar" id="bar" title="Revenue split">
@@ -606,7 +607,14 @@ var COL = {ok:'#2e7d52', no:'#b23b3b', warn:'#c08a2d'};
 function $(id){return document.getElementById(id)}
 function money(n){ n=Math.round(n||0); return (n<0?"-$":"$")+Math.abs(n).toLocaleString(); }
 function pct(n,d){ return (n*100).toFixed(d==null?1:d)+'%'; }
-function num(id){ var v=parseFloat($(id).value); return isNaN(v)?0:v; }
+function num(id){ var v=parseFloat(String($(id).value).replace(/[^0-9.\-]/g,'')); return isNaN(v)?0:v; }
+// currency inputs: text fields that show thousands separators when not focused (type=number cannot display commas)
+function fmtCur(inp){ if(document.activeElement===inp) return; var v=parseFloat(String(inp.value).replace(/[^0-9.\-]/g,'')); if(isNaN(v)){ return; } inp.value=(Math.round(v*100)/100).toLocaleString('en-US',{maximumFractionDigits:2}); }
+function fmtCurAll(){ document.querySelectorAll('input.cur').forEach(fmtCur); }
+document.querySelectorAll('.unit').forEach(function(u){ var sp=u.firstElementChild, inp=u.querySelector('input[type=number]'); if(!sp||sp.tagName!=='SPAN'||sp.textContent.trim()!=='$'||!inp) return;
+  inp.type='text'; inp.setAttribute('inputmode','decimal'); inp.classList.add('cur'); inp.removeAttribute('step');
+  inp.addEventListener('focus',function(){ inp.value=String(inp.value).replace(/,/g,''); try{ inp.select(); }catch(e){} });
+  inp.addEventListener('blur',function(){ fmtCur(inp); }); fmtCur(inp); });
 
 /* =====================================================================
    TABS
@@ -823,6 +831,7 @@ $('go').onclick = function(){
   $('pr_addr').textContent=a;
   STATE.verdict=null; STATE.zoning=null; STATE.mls=null; $('vlease').textContent='—'; $('vflood').textContent='—';
   if(!SLUG || SLUG!==slugify(a)){ SLUG=slugify(a); PROP=null; REPORT_LOCK=false; if(!PENDING_REPORT) loadProperty(SLUG); }
+  if(window.AGNav) AGNav.setSlug(SLUG);
   ['h_price','h_hoa','h_flood'].forEach(function(id){ $(id).textContent=''; }); $('h_tax').textContent='Est. = price x 85% x millage';
   clearFacts();
   prefill(a).then(function(mlsLoc){ return mlsLoc || geocode(a); }).then(function(loc){
@@ -917,12 +926,18 @@ document.querySelectorAll('#plat_presets button').forEach(function(b){ b.onclick
 /* =====================================================================
    THE MODEL
    ===================================================================== */
-var taxDirty=false;
+var taxDirty=false; var LAST_BE={occ:null,adr:null};
 $('i_tax').addEventListener('input', function(){ taxDirty=true; });
 $('i_muni').addEventListener('change', function(){ taxDirty=false; $('h_muni').textContent='Manually set'; recalc(); });
-$('i_price').addEventListener('input', function(){ taxDirty=false; });
+$('i_price').addEventListener('input', function(){ taxDirty=false; titleDirty=false; });
 
 function estTax(price, muni){ return price*ASSESS_RATIO*(MILLAGE[muni].total/1000); }
+// Florida promulgated owner's title premium, original rate (Fla. Admin. Code R. 69O-186.003) — same tiers as the closing cost estimator
+function ownersPremium(amount){ if(!(amount>0)) return 0; var tiers=[[100000,5.75],[1000000,5.00],[5000000,2.50],[10000000,2.25],[Infinity,2.00]], prev=0, p=0;
+  for(var i=0;i<tiers.length;i++){ if(amount<=prev) break; p+=(Math.min(amount,tiers[i][0])-prev)/1000*tiers[i][1]; prev=tiers[i][0]; } return Math.max(100, Math.round(p*100)/100); }
+var titleDirty=false;
+$('i_title').addEventListener('input', function(){ titleDirty=true; });
+$('i_titlepay').addEventListener('change', function(){ titleDirty=false; });
 
 function pmt(L, r, n){ if(L<=0) return 0; var i=r/12, m=n*12; return i===0? L/m : L*i/(1-Math.pow(1+i,-m)); }
 function balance(L, r, n, yrs){ if(L<=0) return 0; var i=r/12, m=n*12, k=yrs*12, p=pmt(L,r,n); return i===0? L-p*k : L*Math.pow(1+i,k) - p*(Math.pow(1+i,k)-1)/i; }
@@ -935,9 +950,9 @@ function irr(cfs){ // bisection on annual cash flows, cfs[0] negative
 
 function inputs(){
   var I={};
-  ['price','down','rate','term','lender','closing','furnish','reno','other','cleancost','los','tax','nav','hoi','flood','hoa','sa','lic','maint','capex','supp','elec','water','gas','net','pool','land','pest','misc','app','rg','eg','sell'].forEach(function(k){ I[k]=num('i_'+k); });
+  ['price','down','rate','term','lender','title','closing','furnish','reno','other','cleancost','los','tax','nav','hoi','flood','hoa','sa','lic','maint','capex','supp','elec','water','gas','net','pool','land','pest','misc','app','rg','eg','sell'].forEach(function(k){ I[k]=num('i_'+k); });
   I.adr=+$('s_adr').value; I.occ=+$('s_occ').value/100; I.mgmt=+$('s_mgmt').value/100; I.plat=+$('s_plat').value/100;
-  I.cleanpass=$('i_cleanpass').value==='1'; I.muni=$('i_muni').value;
+  I.cleanpass=$('i_cleanpass').value==='1'; I.muni=$('i_muni').value; I.titlepay=$('i_titlepay').value;
   return I;
 }
 
@@ -948,16 +963,17 @@ function model(I, adr, occ){
   var fees = gross*(I.mgmt+I.plat);
   var cleaning = I.cleanpass ? 0 : turnovers*I.cleancost;
   var variable = gross*((I.maint+I.capex+I.supp)/100);
-  var fixedMo = I.tax + I.hoi/12 + I.flood/12 + I.hoa + I.sa + I.elec + I.water + I.gas + I.net + I.pool + I.land + I.pest + I.misc;   // hoi/flood entered per year
+  var fixedMo = I.tax/12 + I.hoi/12 + I.flood/12 + I.hoa + I.sa + I.elec + I.water + I.gas + I.net + I.pool + I.land + I.pest + I.misc;   // hoi/flood entered per year
   var fixed = fixedMo*12 + I.nav + I.lic;
   var opex = fixed + variable + cleaning;           // operating expenses ex debt, ex mgmt/platform
   var noi = gross - fees - opex;
   var loan = I.price*(1-I.down/100);
   var pi = pmt(loan, I.rate/100, I.term), ds = pi*12;
   var stamps = loan*(NOTE_STAMP+INTANGIBLE);
-  var cash = I.price*I.down/100 + I.lender + I.closing + stamps + I.furnish + I.reno;
+  var titleCost = I.titlepay==='seller' ? 0 : I.title;
+  var cash = I.price*I.down/100 + I.lender + titleCost + I.closing + stamps + I.furnish + I.reno;
   var cf = noi - ds;
-  return {gross:gross, nights:nights, turnovers:turnovers, fees:fees, cleaning:cleaning, variable:variable, fixed:fixed, opex:opex, noi:noi,
+  return {gross:gross, nights:nights, turnovers:turnovers, fees:fees, cleaning:cleaning, variable:variable, fixed:fixed, opex:opex, noi:noi, title:titleCost,
           loan:loan, pi:pi, ds:ds, stamps:stamps, cash:cash, cf:cf, adr:adr, occ:occ,
           cap: I.price>0? noi/I.price : 0, coc: cash>0? cf/cash : 0, dscr: ds>0? noi/ds : null,
           grm: gross>0? I.price/gross : null, r1: I.price>0? (gross/12)/I.price : 0, r50: gross>0? (opex+fees)/gross : 0, er: gross>0? (opex+fees)/gross : 0};
@@ -967,31 +983,33 @@ function ruleTag(ok, warn){ return '<span class="rule '+(ok?'ok':warn?'warn':'no
 
 function recalc(){
   var I=inputs();
-  if(!taxDirty){ $('i_tax').value = Math.round(estTax(I.price, I.muni)/12); I.tax=num('i_tax'); }
+  if(!taxDirty){ $('i_tax').value = Math.round(estTax(I.price, I.muni)); I.tax=num('i_tax'); }
+  if(!titleDirty){ $('i_title').value = Math.round(ownersPremium(I.price)); I.title=num('i_title'); }
+  $('h_title').textContent = I.titlepay==='seller' ? 'FL promulgated rate · seller-paid, excluded from cash to close' : 'FL promulgated rate on the price (original issue)';
   $('l_adr').textContent=money(I.adr); $('l_occ').textContent=Math.round(I.occ*100)+'%';
   $('l_mgmt').textContent=Math.round(I.mgmt*100)+'%'; $('l_mgmt_note').textContent = I.mgmt===0?'(self-managed)':'';
   $('l_plat').textContent=(I.plat*100).toFixed(1).replace('.0','')+'%';
   var R=model(I);
   $('o_loan').textContent=money(R.loan); $('o_stamps').textContent=money(R.stamps); $('o_pi').textContent=money(R.pi)+'/mo'; $('o_cash').textContent=money(R.cash);
   $('o_opex_mo').textContent=money((R.opex)/12)+' /mo';
+  fmtCurAll();
   $('o_gross').textContent=money(R.gross); $('o_gross_s').textContent=Math.round(R.nights)+' booked nights · '+money(I.adr)+' ADR · '+Math.round(I.occ*100)+'% occ';
   $('o_noi').textContent=money(R.noi); $('o_noi').className='v '+(R.noi<0?'neg':'');
   $('o_cap').textContent=pct(R.cap);
-  $('o_cf').textContent=money(R.cf/12); $('o_cf').className='v '+(R.cf<0?'neg':'pos'); $('o_cf_s').textContent=money(R.cf)+' per year, after debt';
+  $('o_cf').textContent=money(R.cf/12); $('o_cf').className='v '+(R.cf<0?'neg':'pos'); $('o_cf_s').textContent=money(R.cf)+' per year, after the mortgage';
   $('o_coc').textContent=pct(R.coc); $('o_coc').className='v '+(R.coc<0?'neg':'');
   $('o_dscr').textContent=R.dscr==null?'n/a (cash)':R.dscr.toFixed(2)+'x'; $('o_dscr').className='v '+(R.dscr!=null&&R.dscr<1.25?'neg':'');
   renderWhatIf(I);
   $('m_grm').textContent=R.grm?R.grm.toFixed(1)+'x':'—';
   $('m_r1').innerHTML=pct(R.r1,2)+ruleTag(R.r1>=0.01, R.r1>=0.008);
-  $('m_r2').innerHTML=pct(R.r1,2)+ruleTag(R.r1>=0.02, R.r1>=0.015);
-  $('m_r50').innerHTML=pct(R.r50,0)+ruleTag(R.r50<=0.5, R.r50<=0.6);
-  $('m_er').textContent=pct(R.er,0);
+  $('m_er').innerHTML=pct(R.er,0)+ruleTag(R.er<=0.5, R.er<=0.6);
   // break-even occupancy: gross needed = (opex_fixed + ds + cleaning_var...) solve linear in occ ignoring cleaning nonlinearity by iteration
   var need = R.fixed + R.ds; var be=null;
   for(var o=0.01;o<=1;o+=0.005){ var t=model(I,I.adr,o); if(t.cf>=0){ be=o; break; } }
   $('m_beocc').innerHTML = be==null? '>100%<span class="rule no">not achievable</span>' : Math.round(be*100)+'%'+ruleTag(be<=BANDS.occ.avg, be<=BANDS.occ.p75);
   var bea=null; for(var a=50;a<=5000;a+=5){ var t2=model(I,a,I.occ); if(t2.cf>=0){ bea=a; break; } }
   $('m_beadr').textContent = bea==null?'—':money(bea);
+  LAST_BE={occ:be, adr:bea};
   $('m_revpan').textContent=money(R.gross/365);
   $('m_nights').textContent=Math.round(R.nights)+' / '+Math.round(R.turnovers);
   var sf = num('f_sqft');
@@ -1000,14 +1018,14 @@ function recalc(){
   var tot=Math.max(R.gross, R.ds+R.opex+R.fees, 1), cfp=Math.max(R.cf,0);   // when outflows exceed gross, the bar fills 100% with no cash-flow segment
   $('seg_cf').style.width=(cfp/tot*100)+'%'; $('seg_ds').style.width=(R.ds/tot*100)+'%'; $('seg_op').style.width=(R.opex/tot*100)+'%'; $('seg_fee').style.width=(R.fees/tot*100)+'%';
   // expense table
-  var rows=[['Property tax (est.)',I.tax*12],['Non-ad valorem',I.nav],['Homeowners insurance',I.hoi],['Flood insurance',I.flood],['HOA / COA dues',I.hoa*12],['Special assessment reserve',I.sa*12],['Licenses & registration',I.lic],
+  var rows=[['Property tax (est.)',I.tax],['Non-ad valorem',I.nav],['Homeowners insurance',I.hoi],['Flood insurance',I.flood],['HOA / COA dues',I.hoa*12],['Special assessment reserve',I.sa*12],['Licenses & registration',I.lic],
             ['Maintenance '+I.maint+'%',R.gross*I.maint/100],['CapEx reserve '+I.capex+'%',R.gross*I.capex/100],['Supplies '+I.supp+'%',R.gross*I.supp/100],['Turnover cleaning (owner-paid)',R.cleaning],
             ['Electric',I.elec*12],['Water / sewer',I.water*12],['Gas',I.gas*12],['Internet & cable',I.net*12],['Pool care',I.pool*12],['Landscape',I.land*12],['Pest control',I.pest*12],['Misc',I.misc*12]].filter(function(r){return r[1]>0});
   var h='<tr><th>Item</th><th>Annual</th><th>% of gross</th></tr>';
   rows.forEach(function(r){ h+='<tr><td class="k">'+r[0]+'</td><td>'+money(r[1])+'</td><td>'+(R.gross>0?pct(r[1]/R.gross,1):'—')+'</td></tr>'; });
-  h+='<tr><td class="k"><b>Operating expenses</b></td><td><b>'+money(R.opex)+'</b></td><td><b>'+(R.gross>0?pct(R.opex/R.gross,0):'—')+'</b></td></tr>';
+  h+='<tr><td class="k"><b>Operating expenses (before management &amp; platform)</b></td><td><b>'+money(R.opex)+'</b></td><td><b>'+(R.gross>0?pct(R.opex/R.gross,0):'—')+'</b></td></tr>';
   h+='<tr><td class="k">Management '+Math.round(I.mgmt*100)+'% + platform '+(I.plat*100).toFixed(1).replace('.0','')+'%</td><td>'+money(R.fees)+'</td><td>'+(R.gross>0?pct(R.fees/R.gross,0):'—')+'</td></tr>';
-  h+='<tr><td class="k">Debt service</td><td>'+money(R.ds)+'</td><td>'+(R.gross>0?pct(R.ds/R.gross,0):'—')+'</td></tr>';
+  h+='<tr><td class="k">Mortgage payments (P&amp;I)</td><td>'+money(R.ds)+'</td><td>'+(R.gross>0?pct(R.ds/R.gross,0):'—')+'</td></tr>';
   $('exp_tbl').innerHTML=h;
   // sensitivity
   var adrs=[-0.2,-0.1,0,0.1,0.2].map(function(d){return Math.round(I.adr*(1+d))});
@@ -1082,6 +1100,9 @@ function renderComps(d){
   STATE.comps_meta={fetched_at:d.fetched_at, params:d.params};
   var src=PENDING_REPORT||LAST_REPORT; var off=(src&&src.inputs&&src.inputs.comps_off)||[];
   COMPS=d.comps.map(function(c){ c._on = (poolF===''? true : poolF==='1'? !!c.pool : !c.pool) && c.ttm && c.ttm.adr!=null && c.ttm.occupancy!=null && off.indexOf(c.id)<0; return c; });
+  var sb=num('f_beds')||num('c_beds')||0;   // nearest first; within the same 1/10 mile, bedroom count closest to the subject first
+  COMPS.sort(function(a,b){ var da=a.distance_mi!=null?a.distance_mi:99, db=b.distance_mi!=null?b.distance_mi:99, ta=Math.round(da*10), tb=Math.round(db*10);
+    if(ta!==tb) return ta-tb; var ba=a.bedrooms!=null?Math.abs(a.bedrooms-sb):9, bb=b.bedrooms!=null?Math.abs(b.bedrooms-sb):9; if(ba!==bb) return ba-bb; return da-db; });
   $('cp_src').textContent=(d.source==='cache'?'cached':'live')+' · '+d.comps.length+' comps · '+d.params.bedrooms+'bd/'+d.params.baths+'ba/'+d.params.guests+'g within '+d.params.radius+' mi';
   $('cp_last').textContent=fmtDT(d.fetched_at); $('cp_cost').textContent='About $'+Number(d.est_cost||0.5).toFixed(2)+' per live call';
   var h='<tr><th></th><th>#</th><th>Listing</th><th>Bd/Ba/Gst</th><th>Sq ft - Built</th><th>Pool</th><th>Dist</th><th>Rating</th><th>Min nts</th><th>12-mo Occ</th><th>12-mo ADR</th><th>12-mo RevPAR</th><th>12-mo Revenue</th><th>90-day Occ</th><th>90-day ADR</th></tr>';
@@ -1204,13 +1225,13 @@ $('c_pool').addEventListener('change', function(){ if(COMPS) renderComps({comps:
 /* what-if strip: Low / Mid / High side by side against current expenses */
 function renderWhatIf(I){
   if(!BANDS) return;
-  var defs=[['p50','Low'],['avg','Mid'],['p75','High']], on=(document.querySelector('#rev_presets button.on')||{}).dataset||{};
+  var defs=[['p50','Low','median comp'],['avg','Mid','average of comps'],['p75','High','top quarter of comps']], on=(document.querySelector('#rev_presets button.on')||{}).dataset||{};
   var h='';
   defs.forEach(function(d){
     var a=BANDS.adr[d[0]]!=null?BANDS.adr[d[0]]:BANDS.adr.avg, o=BANDS.occ[d[0]]!=null?BANDS.occ[d[0]]:BANDS.occ.avg;
     if(a==null||o==null){ h+='<div class="wi"><div class="h"><b>'+d[1]+'</b><span>no band</span></div></div>'; return; }
     var R=model(I,a,o);
-    h+='<div class="wi '+(on.p===d[0]?'on':'')+'"><div class="h"><b>'+d[1]+'</b><span>'+money(a)+' · '+Math.round(o*100)+'%</span></div>'
+    h+='<div class="wi '+(on.p===d[0]?'on':'')+'"><div class="h"><b>'+d[1]+' <small style="font-weight:400;text-transform:none;letter-spacing:0;font-size:10.5px;font-family:-apple-system,Segoe UI,Arial">'+d[2]+'</small></b><span>'+money(a)+' · '+Math.round(o*100)+'%</span></div>'
       +'<div class="row"><span>Gross revenue</span><b>'+money(R.gross)+'</b></div>'
       +'<div class="row"><span>NOI</span><b class="'+(R.noi<0?'neg':'')+'">'+money(R.noi)+'</b></div>'
       +'<div class="row"><span>Cash flow / yr</span><b class="'+(R.cf<0?'neg':'pos')+'">'+money(R.cf)+'</b></div>'
@@ -1228,16 +1249,19 @@ function renderWhatIf(I){
 var SLUG=null, PENDING_REPORT=null, LAST_REPORT=null, REPORT_LOCK=false, PROP=null;
 function slugify(a){ var t=String(a||'').split(',')[0].toLowerCase().replace(/\s+(sarasota|siesta key|longboat key|lido key|osprey|nokomis|venice|bradenton|florida|fl)(\s+fl|\s+florida)?(\s+\d{5})?\s*$/i,''); return t.replace(/#/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
 function slugFromUrl(){ var m=location.pathname.match(/^\/mkt\/([a-z0-9][a-z0-9-]{2,63})\/invest\/?$/i); if(m) return m[1].toLowerCase(); var q=new URLSearchParams(location.search).get('slug'); return q? q.toLowerCase() : null; }
-var INPUT_IDS=['i_price','i_down','i_rate','i_term','i_lender','i_closing','i_furnish','i_reno','i_other','i_cleanpass','i_cleancost','i_los','i_muni','i_tax','i_nav','i_hoi','i_flood','i_hoa','i_sa','i_lic','i_maint','i_capex','i_supp','i_elec','i_water','i_gas','i_net','i_pool','i_land','i_pest','i_misc','i_app','i_rg','i_eg','i_sell','s_adr','s_occ','s_mgmt','s_plat','g_target','c_beds','c_baths','c_guests','c_radius','c_pool','m_sqmin','m_sqmax','m_ymin','m_ymax','m_since'];
+var INPUT_IDS=['i_price','i_down','i_rate','i_term','i_lender','i_title','i_titlepay','i_closing','i_furnish','i_reno','i_other','i_cleanpass','i_cleancost','i_los','i_muni','i_tax','i_nav','i_hoi','i_flood','i_hoa','i_sa','i_lic','i_maint','i_capex','i_supp','i_elec','i_water','i_gas','i_net','i_pool','i_land','i_pest','i_misc','i_app','i_rg','i_eg','i_sell','s_adr','s_occ','s_mgmt','s_plat','g_target','c_beds','c_baths','c_guests','c_radius','c_pool','m_sqmin','m_sqmax','m_ymin','m_ymax','m_since'];
 var FACT_IDS=['f_type','f_sqft','f_beds','f_baths','f_lot','f_pool','f_garage','f_year'];
-function collectInputs(){ var o={}; INPUT_IDS.forEach(function(id){ o[id]=$(id).value; }); o.preset=(document.querySelector('#rev_presets button.on')||{}).dataset ? document.querySelector('#rev_presets button.on').dataset.p : 'avg'; o.band_src=BAND_SRC; o.tax_manual=taxDirty; o.ins_yearly=true; o.comps_off=(COMPS||[]).filter(function(c){return c._on===false}).map(function(c){return c.id}); return o; }
+function collectInputs(){ var o={}; INPUT_IDS.forEach(function(id){ o[id]=$(id).classList.contains('cur')?String(num(id)):$(id).value; }); o.preset=(document.querySelector('#rev_presets button.on')||{}).dataset ? document.querySelector('#rev_presets button.on').dataset.p : 'avg'; o.band_src=BAND_SRC; o.tax_manual=taxDirty; o.title_manual=titleDirty; o.ins_yearly=true; o.tax_yearly=true; o.be_occ=LAST_BE.occ; o.be_adr=LAST_BE.adr; o.comps_off=(COMPS||[]).filter(function(c){return c._on===false}).map(function(c){return c.id}); return o; }
 function collectFacts(){ var o={}; FACT_IDS.forEach(function(id){ o[id]=$(id).value; }); return o; }
 function applyReport(rep){
   if(!rep) return;
   var I=rep.inputs||{}, F=(PROP&&PROP.facts)||rep.facts||{};
   FACT_IDS.forEach(function(id){ if(F[id]!=null && F[id]!=='') $(id).value=F[id]; });
   INPUT_IDS.forEach(function(id){ if(I[id]!=null) $(id).value=I[id]; });
-  if(!I.ins_yearly){ ['i_hoi','i_flood'].forEach(function(id){ if(I[id]!=null) $(id).value=Math.round(Number(I[id])*12); }); }   // analyses saved when these were monthly
+  var clean=function(v){ var n=parseFloat(String(v).replace(/[^0-9.\-]/g,'')); return isNaN(n)?0:n; };
+  if(!I.ins_yearly){ ['i_hoi','i_flood'].forEach(function(id){ if(I[id]!=null) $(id).value=Math.round(clean(I[id])*12); }); }   // analyses saved when these were monthly
+  if(!I.tax_yearly && I.i_tax!=null){ $('i_tax').value=Math.round(clean(I.i_tax)*12); }
+  if(I.i_title==null){ $('i_title').value=0; titleDirty=true; $('i_titlepay').value='buyer'; } else titleDirty=!!I.title_manual;   // older analyses folded title into "other closing costs"
   taxDirty=!!I.tax_manual;
   if(rep.bands){ BANDS=rep.bands; BAND_SRC=I.band_src||'market'; $('rev_src').textContent=(BANDS.label||'Saved bands')+(BAND_SRC==='comps'?' (comps, as saved)':' (as saved)'); }
   document.querySelectorAll('#rev_presets button').forEach(function(b){ b.classList.toggle('on', b.dataset.p===(I.preset||'avg')); });
@@ -1288,7 +1312,7 @@ function saveAnalysis(sections, openReport){
   var title=prompt('Title for this analysis', addr.split(',')[0]+' · '+new Date().toLocaleDateString('en-US')); if(title==null) return;
   var I=inputs(), R=model(I), on=document.querySelector('#rev_presets button.on'), scenario=on?on.dataset.p:'avg';
   var wi={}; [['p50','low'],['avg','mid'],['p75','high']].forEach(function(d){ var a=BANDS.adr[d[0]]!=null?BANDS.adr[d[0]]:BANDS.adr.avg, o=BANDS.occ[d[0]]!=null?BANDS.occ[d[0]]:BANDS.occ.avg; if(a!=null&&o!=null){ var t=model(I,a,o); wi[d[1]]={adr:a,occ:o,gross:t.gross,noi:t.noi,cf:t.cf,coc:t.coc,cap:t.cap,dscr:t.dscr}; } });
-  var outputs={ headline:{gross:R.gross,noi:R.noi,cf:R.cf,coc:R.coc,cap:R.cap,dscr:R.dscr,cash:R.cash,adr:I.adr,occ:I.occ,price:I.price}, whatif:wi, model:R };
+  var outputs={ headline:{gross:R.gross,noi:R.noi,cf:R.cf,coc:R.coc,cap:R.cap,dscr:R.dscr,cash:R.cash,adr:I.adr,occ:I.occ,price:I.price,opex:R.opex,fees:R.fees,ds:R.ds,be_occ:LAST_BE.occ,be_adr:LAST_BE.adr,nights:R.nights}, whatif:wi, model:R };
   var html={ facts:$('facts').outerHTML, chips:$('chips').innerHTML, results:document.querySelector('#tab-deal .results').innerHTML, acq:document.querySelector('#tab-deal .acols').innerHTML };
   // freeze input values into the HTML snapshot so the client report renders them
   var tmp=document.createElement('div'); tmp.innerHTML=html.acq; tmp.querySelectorAll('input,select').forEach(function(el){ var live=$(el.id); if(!live) return; if(el.tagName==='SELECT'){ el.querySelectorAll('option').forEach(function(o){ o.toggleAttribute('selected', o.value===live.value); }); } else el.setAttribute('value', live.value); }); html.acq=tmp.innerHTML;
@@ -1304,7 +1328,7 @@ function saveAnalysis(sections, openReport){
   body.outputs.verdict = STATE.verdict ? {cls:STATE.verdict.cls, t:STATE.verdict.t, s:STATE.verdict.s} : null;
   $('btn_save').disabled=true; $('btn_save').textContent='Saving…';
   fetch('/.netlify/functions/str-reports?action=save',{method:'POST',headers:{'x-cma-key':k,'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){ if(r.status===401){ localStorage.removeItem(KEY_KEY); throw new Error('Edit key rejected'); } return r.json(); })
-    .then(function(d){ if(!d||!d.ok) throw new Error((d&&d.error)||'save failed'); SLUG=d.slug; history.replaceState(null,'','/mkt/'+d.slug+'/invest'); $('status').innerHTML='<span style="color:#2e7d52">Saved. Client report: <a href="'+d.report_url+'" target="_blank">'+location.origin+d.report_url+'</a></span>'; loadProperty(d.slug).then(propLinks); loadAllProperties(); if(openReport) window.open(d.report_url,'_blank'); })
+    .then(function(d){ if(!d||!d.ok) throw new Error((d&&d.error)||'save failed'); SLUG=d.slug; history.replaceState(null,'','/mkt/'+d.slug+'/invest'); if(window.AGNav) AGNav.invalidate(); $('status').innerHTML='<span style="color:#2e7d52">Saved. Client report: <a href="'+d.report_url+'" target="_blank">'+location.origin+d.report_url+'</a></span>'; loadProperty(d.slug).then(propLinks); loadAllProperties(); if(openReport) window.open(d.report_url,'_blank'); })
     .catch(function(e){ alert('Save failed: '+(e.message||e)); })
     .finally(function(){ $('btn_save').disabled=false; $('btn_save').textContent='Save analysis'; });
 }
