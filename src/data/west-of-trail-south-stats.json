@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-16T10:54:41.782534+00:00",
+  "lastUpdated": "2026-09-17T10:53:02.369691+00:00",
   "counts": {
-    "sold": 289,
-    "pending": 30,
-    "active": 84,
-    "total": 319
+    "sold": 292,
+    "pending": 32,
+    "active": 83,
+    "total": 324
   },
   "metrics": {
-    "avgPrice": "$631,056",
-    "avgPricePerSqFt": "$329",
+    "avgPrice": "$630,737",
+    "avgPricePerSqFt": "$328",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,741",
+    "avgLivingSqFt": "1,744",
     "avgLotSqFt": null,
     "avgDom": 80
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$5,650,000"
   },
   "active": {
-    "count": 84,
-    "medianPrice": "$487,450",
-    "medianPricePerSqFt": "$324",
+    "count": 83,
+    "medianPrice": "$489,900",
+    "medianPricePerSqFt": "$326",
     "waterfrontCount": 23,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 50,
-    "medianPrice": "$413,750",
-    "medianDom": 60,
-    "saleToListRatio": "86.6%",
+    "count": 51,
+    "medianPrice": "$405,000",
+    "medianDom": 52,
+    "saleToListRatio": "87.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 4.3,
-    "sfhVilla": 4.4,
-    "blended": 4.3,
+    "condo": 4.1,
+    "sfhVilla": 4.3,
+    "blended": 4.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,15 +54,15 @@
     }
   },
   "priceBands": {
-    "under900k": 64,
-    "band900kTo1_5m": 8,
-    "band1_5mTo3m": 7,
+    "under900k": 63,
+    "band900kTo1_5m": 9,
+    "band1_5mTo3m": 6,
     "band3mPlus": 5
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 84
+      "count": 83
     }
   ],
   "buildingClasses": [],
@@ -94,6 +94,19 @@
       "isWaterfront": false
     },
     {
+      "listingId": "A4699871",
+      "address": "2136 BRUECKNER DR",
+      "subdivision": "BREEZEWOOD ACRES",
+      "soldPrice": "$416,000",
+      "soldDate": "2026-09-15",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,133",
+      "yearBuilt": 1955,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "A4700570",
       "address": "7217 CLOISTER DR #203",
       "subdivision": "GULF GATE GARDENS",
@@ -118,19 +131,6 @@
       "yearBuilt": 1960,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4694069",
-      "address": "5927 DRIFTWOOD AVE",
-      "subdivision": "FLORENCE",
-      "soldPrice": "$445,000",
-      "soldDate": "2026-09-10",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,412",
-      "yearBuilt": 1969,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 42,
-      "avgPrice": "$347,307",
+      "activeCount": 41,
+      "avgPrice": "$346,266",
       "avgPricePerSqFt": "$286",
-      "avgLivingSqFt": "1,202",
-      "avgDom": 103
+      "avgLivingSqFt": "1,200",
+      "avgDom": 106
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$605,750",
       "avgPricePerSqFt": "$288",
       "avgLivingSqFt": "2,110",
-      "avgDom": 211
+      "avgDom": 212
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$589,667",
       "avgPricePerSqFt": "$345",
       "avgLivingSqFt": "1,711",
-      "avgDom": 163
+      "avgDom": 164
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$627,000",
       "avgPricePerSqFt": "$352",
       "avgLivingSqFt": "1,785",
-      "avgDom": 192
+      "avgDom": 193
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 21,
+      "activeCount": 20,
       "soldCount": 58,
       "soldMedianPricePerSqFt": "$366",
       "soldMedianPrice": "$500,500",
@@ -214,7 +214,7 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 2,
+      "activeCount": 3,
       "soldCount": 12,
       "soldMedianPricePerSqFt": "$317",
       "soldMedianPrice": "$622,500",
@@ -223,33 +223,33 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 52,
-      "soldCount": 186,
-      "soldMedianPricePerSqFt": "$285",
-      "soldMedianPrice": "$427,000",
+      "activeCount": 51,
+      "soldCount": 189,
+      "soldMedianPricePerSqFt": "$286",
+      "soldMedianPrice": "$425,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.3,
-    "monthsOfSupplyCondo": 4.3,
-    "monthsOfSupplySfhVilla": 4.4,
+    "monthsOfSupply": 4.2,
+    "monthsOfSupplyCondo": 4.1,
+    "monthsOfSupplySfhVilla": 4.3,
     "label": "seller's market",
-    "activeCount": 84,
-    "sold365Count": 233,
-    "sold90Count": 50,
+    "activeCount": 83,
+    "sold365Count": 236,
+    "sold90Count": 51,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 153,
+      "soldCount": 156,
       "activeCount": 33,
-      "soldMedianPrice": "$533,000",
+      "soldMedianPrice": "$520,000",
       "soldMedianPricePerSqFt": "$322"
     },
     "condo": {
       "soldCount": 136,
-      "activeCount": 51,
+      "activeCount": 50,
       "soldMedianPrice": "$346,250",
       "soldMedianPricePerSqFt": "$257"
     }
@@ -262,22 +262,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 84 active listings and roughly 19 closed sales a month (trailing 12 months), West Of Trail South has about 4.3 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 83 active listings and roughly 20 closed sales a month (trailing 12 months), West Of Trail South has about 4.2 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $533,000 ($322/sq ft), while condos, villas and townhouses sell around $346,250 ($257/sq ft)."
+      "a": "Single-family homes sell around $520,000 ($322/sq ft), while condos, villas and townhouses sell around $346,250 ($257/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $110,000 to $5,650,000, with a median asking price of $487,450."
+      "a": "Active listings run from $110,000 to $5,650,000, with a median asking price of $489,900."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 60 days on market and closed at 86.6% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 52 days on market and closed at 87.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

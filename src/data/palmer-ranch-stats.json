@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-16T10:54:43.258937+00:00",
+  "lastUpdated": "2026-09-17T10:53:03.859475+00:00",
   "counts": {
-    "sold": 885,
-    "pending": 80,
-    "active": 208,
-    "total": 965
+    "sold": 889,
+    "pending": 77,
+    "active": 210,
+    "total": 966
   },
   "metrics": {
-    "avgPrice": "$561,871",
+    "avgPrice": "$562,745",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,049",
+    "avgLivingSqFt": "2,052",
     "avgLotSqFt": null,
     "avgDom": 80
   },
@@ -22,21 +22,21 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 208,
-    "medianPrice": "$417,000",
+    "count": 210,
+    "medianPrice": "$415,000",
     "medianPricePerSqFt": "$253",
-    "waterfrontCount": 36,
-    "newConstructionCount": 29
+    "waterfrontCount": 37,
+    "newConstructionCount": 30
   },
   "sold": {
-    "count": 170,
-    "medianPrice": "$460,000",
-    "medianDom": 53,
+    "count": 168,
+    "medianPrice": "$457,500",
+    "medianDom": 55,
     "saleToListRatio": "91.8%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.5,
+    "condo": 5.6,
     "sfhVilla": 2.9,
     "blended": 3.6,
     "method": "active / (trailing-12mo closed / 12)",
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 188,
+    "under900k": 190,
     "band900kTo1_5m": 17,
     "band1_5mTo3m": 3,
     "band3mPlus": 0
@@ -62,11 +62,50 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 208
+      "count": 210
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4698015",
+      "address": "5153 HIGHBURY CIR",
+      "subdivision": "THE HAMPTONS",
+      "soldPrice": "$559,000",
+      "soldDate": "2026-09-16",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,053",
+      "yearBuilt": 1999,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4694500",
+      "address": "5290 DESCANSO CT #201B19",
+      "subdivision": "PARISIENNE GARDENS",
+      "soldPrice": "$440,000",
+      "soldDate": "2026-09-16",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,969",
+      "yearBuilt": 2005,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4700180",
+      "address": "6761 PASEO CASTILLE",
+      "subdivision": "MARBELLA",
+      "soldPrice": "$360,000",
+      "soldDate": "2026-09-16",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,755",
+      "yearBuilt": 1989,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4701124",
       "address": "8712 BAY MEADOW DR",
@@ -92,45 +131,6 @@
       "yearBuilt": 1998,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4688391",
-      "address": "9320 CLUBSIDE CIR #2108",
-      "subdivision": "STONEYBROOK CLUBSIDE 2",
-      "soldPrice": "$275,000",
-      "soldDate": "2026-09-15",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,398",
-      "yearBuilt": 1995,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4693098",
-      "address": "8370 WINGATE DR #716",
-      "subdivision": "PINESTONE AT PALMER RANCH",
-      "soldPrice": "$210,000",
-      "soldDate": "2026-09-15",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,068",
-      "yearBuilt": 1996,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4690192",
-      "address": "4601 LAS BRISAS LN",
-      "subdivision": "PRESTANCIA/VILLA D'ESTE",
-      "soldPrice": "$555,000",
-      "soldDate": "2026-09-14",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,428",
-      "yearBuilt": 1988,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,16 +142,16 @@
       "avgPrice": "$311,047",
       "avgPricePerSqFt": "$194",
       "avgLivingSqFt": "1,614",
-      "avgDom": 114
+      "avgDom": 115
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 73,
-      "avgPrice": "$301,530",
+      "activeCount": 75,
+      "avgPrice": "$298,216",
       "avgPricePerSqFt": "$229",
-      "avgLivingSqFt": "1,311",
+      "avgLivingSqFt": "1,299",
       "avgDom": 116
     },
     {
@@ -162,7 +162,7 @@
       "avgPrice": "$398,533",
       "avgPricePerSqFt": "$240",
       "avgLivingSqFt": "1,679",
-      "avgDom": 89
+      "avgDom": 90
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$349,533",
       "avgPricePerSqFt": "$218",
       "avgLivingSqFt": "1,605",
-      "avgDom": 90
+      "avgDom": 91
     }
   ],
   "condoTiersScope": {
@@ -197,7 +197,7 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 40,
-      "soldCount": 202,
+      "soldCount": 204,
       "soldMedianPricePerSqFt": "$260",
       "soldMedianPrice": "$475,000",
       "lowSample": false
@@ -205,17 +205,17 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 36,
-      "soldCount": 189,
-      "soldMedianPricePerSqFt": "$275",
-      "soldMedianPrice": "$595,000",
+      "activeCount": 37,
+      "soldCount": 190,
+      "soldMedianPricePerSqFt": "$274",
+      "soldMedianPrice": "$592,000",
       "lowSample": false
     },
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 132,
-      "soldCount": 492,
+      "activeCount": 133,
+      "soldCount": 493,
       "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$440,000",
       "lowSample": false
@@ -223,37 +223,37 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 3.6,
-    "monthsOfSupplyCondo": 5.5,
+    "monthsOfSupplyCondo": 5.6,
     "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
-    "activeCount": 208,
-    "sold365Count": 698,
-    "sold90Count": 170,
+    "activeCount": 210,
+    "sold365Count": 700,
+    "sold90Count": 168,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 503,
+      "soldCount": 505,
       "activeCount": 83,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 382,
-      "activeCount": 125,
+      "soldCount": 384,
+      "activeCount": 127,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 36
+    "activeWaterfront": 37
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 208 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 210 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,17 +263,17 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $417,000."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $415,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 53 days on market and closed at 91.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 55 days on market and closed at 91.8% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 36 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 37 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
