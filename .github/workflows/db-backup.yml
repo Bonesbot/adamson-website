@@ -1,0 +1,103 @@
+name: Supabase database backup
+
+# Weekly logical backup of the AdamsonFL Supabase Postgres database, independent of the BonesBot mini-PC.
+#   - pg_dump (custom format, restorable with pg_restore) + a plain schema-only SQL for reference
+#   - uploaded to Google Drive (folder "supabase_backups") via rclone when RCLONE_DRIVE_TOKEN is set
+#   - an encrypted copy is kept as a workflow artifact for 90 days as a fallback (this repo is public,
+#     so nothing leaves the runner unencrypted except the private Drive upload)
+# Secrets: DATABASE_URL (Supabase session pooler URL), BACKUP_PASSPHRASE, RCLONE_DRIVE_TOKEN (optional)
+
+on:
+  schedule:
+    - cron: "0 9 * * 0"      # Sundays 09:00 UTC = 5:00 AM Eastern
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: db-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DRIVE_FOLDER_ID: 1Dd48cAvhKdJBxHPPpgsIQ875dp3KAYin
+      KEEP_DAYS: 120
+      HAS_DRIVE: ${{ secrets.RCLONE_DRIVE_TOKEN != '' }}
+    steps:
+      - name: Install PostgreSQL 17 client (matches the Supabase server major version)
+        run: |
+          set -e
+          sudo install -d /usr/share/postgresql-common/pgdg
+          sudo curl -fsSL -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc https://www.postgresql.org/media/keys/ACCC4CF8.asc
+          echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client-17
+          /usr/lib/postgresql/17/bin/pg_dump --version
+
+      - name: Dump the database
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          set -e
+          if [ -z "$DATABASE_URL" ]; then echo "DATABASE_URL secret is not set"; exit 1; fi
+          STAMP=$(date -u +%Y%m%d-%H%M)
+          echo "STAMP=$STAMP" >> "$GITHUB_ENV"
+          mkdir -p out
+          PGD=/usr/lib/postgresql/17/bin/pg_dump
+          # full logical backup, custom format (pg_restore -d <db> file.dump)
+          $PGD "$DATABASE_URL" --format=custom --no-owner --no-privileges \
+            --exclude-schema=auth --exclude-schema=storage --exclude-schema=realtime --exclude-schema=supabase_functions \
+            --exclude-schema=extensions --exclude-schema=graphql --exclude-schema=graphql_public --exclude-schema=pgbouncer \
+            --exclude-schema=vault --exclude-schema=net --exclude-schema=supabase_migrations --exclude-schema=cron \
+            --exclude-table=public.spatial_ref_sys \
+            --file "out/adamsonfl-supabase-$STAMP.dump"
+          # human-readable schema for reference
+          $PGD "$DATABASE_URL" --schema-only --no-owner --no-privileges --schema=public --file "out/adamsonfl-schema-$STAMP.sql"
+          gzip -9 "out/adamsonfl-schema-$STAMP.sql"
+          ls -la out
+          echo "Row counts (sanity):"
+          /usr/lib/postgresql/17/bin/psql "$DATABASE_URL" -Atc "select relname||': '||n_live_tup from pg_stat_user_tables where schemaname='public' order by n_live_tup desc limit 15"
+
+      - name: Upload to Google Drive
+        if: ${{ env.HAS_DRIVE == 'true' }}
+        env:
+          RCLONE_CONFIG_GDRIVE_TYPE: drive
+          RCLONE_CONFIG_GDRIVE_SCOPE: drive
+          RCLONE_CONFIG_GDRIVE_TOKEN: ${{ secrets.RCLONE_DRIVE_TOKEN }}
+        run: |
+          set -e
+          curl -fsSL https://rclone.org/install.sh | sudo bash >/dev/null 2>&1 || sudo apt-get install -y -qq rclone
+          export RCLONE_CONFIG_GDRIVE_ROOT_FOLDER_ID="$DRIVE_FOLDER_ID"
+          rclone copy out gdrive: --drive-chunk-size 64M --stats-one-line -v
+          echo "Backups now in Drive:"; rclone lsl gdrive: --include "adamsonfl-*"
+          # prune backups older than KEEP_DAYS (only files this job created, by name pattern)
+          rclone delete gdrive: --include "adamsonfl-supabase-*.dump" --min-age "${KEEP_DAYS}d" -v || true
+          rclone delete gdrive: --include "adamsonfl-schema-*.sql.gz" --min-age "${KEEP_DAYS}d" -v || true
+
+      - name: Note when Drive upload is not configured
+        if: ${{ env.HAS_DRIVE != 'true' }}
+        run: echo "::warning::RCLONE_DRIVE_TOKEN secret not set; backup kept only as the encrypted workflow artifact."
+
+      - name: Encrypt fallback copy for the workflow artifact
+        env:
+          BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          set -e
+          if [ -z "$BACKUP_PASSPHRASE" ]; then echo "BACKUP_PASSPHRASE secret is not set"; exit 1; fi
+          mkdir -p enc
+          for f in out/*; do
+            gpg --batch --yes --symmetric --cipher-algo AES256 --pinentry-mode loopback --passphrase "$BACKUP_PASSPHRASE" -o "enc/$(basename "$f").gpg" "$f"
+          done
+          ls -la enc
+
+      - name: Keep encrypted copy as artifact (90 days)
+        uses: actions/upload-artifact@v4
+        with:
+          name: adamsonfl-supabase-${{ env.STAMP }}
+          path: enc/
+          retention-days: 90
+          if-no-files-found: error
