@@ -1592,8 +1592,25 @@ async function prefillFromCma(){
   });
 
   render();
-  prefillFromCma();
+  prefillFromCma().then(prefillFromQuery);
 })();
+
+/* Standalone prefill from the Property Intelligence hub: /mkt/_template/estimator.html?address=&price=&tax=&hoa=[&condo=1]
+   Applied when there is no data.json and the restored work-in-progress is for a different address. */
+function prefillFromQuery(){
+  try{
+    if(CMA) return;
+    const q = new URLSearchParams(location.search), addr = q.get('address'); if(!addr) return;
+    if(RESTORED && ($('address').value||'').trim().toLowerCase() === addr.trim().toLowerCase()) return;
+    $('address').value = addr;
+    if(q.get('price')) { setMoney('price', q.get('price')); syncLoan('ltv'); }
+    if(q.get('tax'))   setMoney('annualTax', q.get('tax'));
+    const hoa = parseFloat(q.get('hoa')||'0');
+    if(q.get('condo')==='1' || hoa>0){ hoaPick(true); setMoney('hoaDues', hoa||0); $('hoaFreq').value='1'; if(q.get('condo')==='1') setMoney('fee_b_survey', 0); }
+    syncUI(); if(!$('scenarioName').value) $('scenarioName').value = addr.split(',')[0];
+    render(); autosave(); ind('Prefilled from Property Intelligence', 'ok');
+  }catch(e){}
+}
 </script>
 </body>
 </html>
