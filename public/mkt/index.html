@@ -28,6 +28,8 @@
   .badges{display:flex;gap:6px;flex-wrap:wrap} .badge{font-size:10.5px;padding:2px 8px;border-radius:10px;background:#eaf0f7;color:var(--cb);letter-spacing:.03em}
   .badge.ok{background:#e9f4ee;color:#215d3d} .badge.gold{background:#fbf3e3;color:#8a6516}
   .kv{font-size:12px;color:var(--muted)} .kv b{color:#16233a}
+  .reps{font-size:12px;border-top:1px dashed var(--line);padding-top:6px;margin-top:2px} .reps .lab{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+  .reps a{display:flex;justify-content:space-between;gap:8px;color:var(--cb);text-decoration:none;padding:2px 0} .reps a:hover{text-decoration:underline} .reps a small{color:var(--muted);white-space:nowrap}
   .actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
   .empty{color:var(--muted);padding:30px;text-align:center}
   .section{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px;font-weight:600}
@@ -35,6 +37,7 @@
 </style>
 </head>
 <body>
+<script src="/mkt/nav.js" data-internal="1"></script>
 <header><div class="hd"><div class="brand"><div class="ag">The Adamson Group</div><div class="div"></div><div class="cb">Coldwell Banker<br>Global Luxury</div></div><div class="htag">Property workspaces</div></div></header>
 <div class="wrap">
   <h1 class="title">Workspaces</h1>
@@ -77,6 +80,7 @@ function render(){
     return '<div class="tile"><div class="addr"><a href="'+p.home_url+'">'+(p.address||p.slug)+'</a></div><div class="slug">/mkt/'+p.slug+'/ · last used '+fmt(p.last_used)+'</div><div class="badges">'+badges+'</div>'
       +(facts?'<div class="kv">'+facts+'</div>':'')
       +(l?'<div class="kv">Latest analysis: <b>'+(l.title||'')+'</b>'+(hl.price?' · '+money(hl.price):'')+(hl.cf!=null?' · cash flow <b>'+money(hl.cf)+'/yr</b>':'')+(hl.coc!=null?' · CoC <b>'+(hl.coc*100).toFixed(1)+'%</b>':'')+'</div>':'')
+      +(p.reports&&p.reports.length?'<div class="reps"><div class="lab">Client reports</div>'+p.reports.slice(0,4).map(function(r){ return '<a href="/mkt/'+p.slug+'/report?id='+r.id+'" target="_blank">'+(r.title||'Report')+'<small>'+fmt(r.created_at)+'</small></a>'; }).join('')+(p.reports.length>4?'<a href="'+p.home_url+'">All '+p.reports.length+' reports &rarr;</a>':'')+'</div>':'')
       +'<div class="actions">'+acts+'</div></div>';
   }).join('');
 }
