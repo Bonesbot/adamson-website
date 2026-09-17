@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>STR Intelligence — Sarasota · The Adamson Group</title>
+<title>Property Intelligence — Sarasota · The Adamson Group</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -66,6 +66,11 @@
   .tab.on{color:var(--navy);border-color:var(--gold)}
   .tab.dis{opacity:.45;cursor:default}
   .pane{display:none}.pane.on{display:block}
+  .embed{width:100%;height:calc(100vh - 150px);min-height:820px;border:1px solid var(--line);border-radius:12px;background:#fff}
+  .embedbar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:10px;font-size:13px;color:var(--muted)}
+  .embedbar b{color:var(--navy)}
+  .nocma{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px;max-width:720px}
+  .nocma h2{font-size:17px;color:var(--navy);margin-bottom:6px} .nocma p{margin:0 0 12px;font-size:14px;color:#3b4658}
 
   /* ---- eligibility ---- */
   .grid{display:grid;grid-template-columns:390px 1fr;gap:18px}
@@ -228,7 +233,7 @@
       <div class="div"></div>
       <div class="cb">Coldwell Banker<br>Global Luxury</div>
     </div>
-    <div class="htag">STR Intelligence &mdash; <span id="hd_market">Siesta Key &bull; ZIP 34242</span></div>
+    <div class="htag">Property Intelligence &mdash; STR market: <span id="hd_market">Siesta Key &bull; ZIP 34242</span></div>
   </div>
 </header>
 <div class="subbar">
@@ -238,8 +243,8 @@
   <span class="pill"><span class="dot"></span> MLS facts: <b>Live &mdash; Stellar via Supabase</b></span>
 </div>
 <div class="wrap">
-  <h1 class="title">Short-Term Rental Intelligence</h1>
-  <div class="sub">Eligibility, live market data and a full investment analysis for one property, in one place. Enter an address to begin.</div>
+  <h1 class="title">Property Intelligence</h1>
+  <div class="sub">CMA, closing costs, short-term rental eligibility, live market data and a full investment analysis for one property, in one place. Enter an address to begin.</div>
 
   <div class="propbar">
     <div>
@@ -263,14 +268,33 @@
   </div>
 
   <div class="tabs" id="tabs">
-    <div class="tab on" data-t="deal">Deal Analyzer</div>
-    <div class="tab" data-t="market">Market</div>
+    <div class="tab" data-t="cma">CMA</div>
+    <div class="tab" data-t="est">Closing Costs</div>
+    <div class="tab on" data-t="deal">STR Deal Analyzer</div>
+    <div class="tab" data-t="market">STR Market</div>
     <div class="tab" data-t="comps">STR Comps</div>
-    <div class="tab" data-t="elig">Eligibility &amp; Zoning</div>
+    <div class="tab" data-t="elig">STR Eligibility &amp; Zoning</div>
     <div class="tab" data-t="reports">Reports</div>
   </div>
 
   <!-- ================= DEAL ANALYZER ================= -->
+  <!-- ================= CMA (embedded workbench) ================= -->
+  <div class="pane" id="tab-cma">
+    <div class="embedbar"><span id="cma_status">Analyze a property to see its CMA.</span><span><a id="cma_open" href="#" target="_blank" style="display:none">Open full page &#8599;</a></span></div>
+    <div class="nocma" id="cma_none" style="display:none">
+      <h2>No CMA for this property yet</h2>
+      <p>A CMA workbench is scaffolded from the CMA admin (subject facts, judgment buckets, comp CSV) and takes a Netlify rebuild to appear. The subject facts from this page carry over.</p>
+      <a class="btn gold" id="cma_create" href="/mkt/admin/">Create the CMA in admin &rarr;</a>
+    </div>
+    <iframe class="embed" id="cma_frame" title="CMA workbench" style="display:none"></iframe>
+  </div>
+
+  <!-- ================= CLOSING COST ESTIMATOR (embedded) ================= -->
+  <div class="pane" id="tab-est">
+    <div class="embedbar"><span id="est_status">Florida buyer &amp; seller closing costs. Prefilled with this property's address, price, tax and HOA.</span><span><a id="est_open" href="/mkt/_template/estimator.html" target="_blank">Open full page &#8599;</a></span></div>
+    <iframe class="embed" id="est_frame" title="Closing cost estimator"></iframe>
+  </div>
+
   <div class="pane on" id="tab-deal">
     <div class="toolbar">
       <span id="prop_links" style="flex:1;font-size:12px;color:var(--muted);align-self:center"></span>
@@ -625,6 +649,7 @@ document.querySelectorAll('.tab[data-t]').forEach(function(t){
     document.querySelectorAll('.pane').forEach(function(x){x.classList.remove('on')});
     t.classList.add('on'); $('tab-'+t.dataset.t).classList.add('on');
     if(t.dataset.t==='elig') setTimeout(function(){ map.invalidateSize(); }, 60);
+    if(t.dataset.t==='cma'||t.dataset.t==='est') renderEmbeds(true);
     if(t.dataset.t==='comps' && CMAP) fitCmap();
   };
 });
@@ -1274,11 +1299,33 @@ function applyReport(rep){
   $('status').innerHTML='<span style="color:#2e7d52">Loaded saved analysis: '+(rep.title||'')+' ('+fmtDT(rep.created_at)+'). Presets are held until you click one.</span>';
 }
 function unlockReport(){ REPORT_LOCK=false; }
+// ---- embedded CMA workbench + closing cost estimator (loaded on first visit to the tab) ----
+var EMBED={cma:null, est:null};
+function embedUrls(){
+  var slug=SLUG||slugify($('addr').value)||'', pg=(PROP&&PROP.pages)||{}, folder=pg.folder||(PROP&&PROP.cma?PROP.cma.slug:null);
+  var cma = PROP&&PROP.cma ? PROP.cma.workbench_url : (pg.workbench&&folder ? '/mkt/'+folder+'/workbench.html' : null);
+  var addr=$('addr').value.trim(), q='?address='+encodeURIComponent(addr)+'&price='+Math.round(num('i_price'))+'&tax='+Math.round(num('i_tax'))+'&hoa='+Math.round(num('i_hoa'))+(($('f_type').value==='Condo')?'&condo=1':'');
+  var est = pg.estimator&&folder ? '/mkt/'+folder+'/estimator.html' : (addr ? '/mkt/_template/estimator.html'+q : '/mkt/_template/estimator.html');
+  // admin "New CMA" prefill from the facts row
+  var st=addr.split(',')[0], zip=(addr.match(/\b(\d{5})\b/)||[])[1]||'', L=(STATE.mls&&STATE.mls.listing)||{};
+  var ap={profile:$('f_type').value==='Condo'?'condo':'sfh', address:st, city:'Sarasota', state:'FL', zip:zip, list:Math.round(num('i_price')), sqft:num('f_sqft')||'', year:num('f_year')||'', beds:num('f_beds')||'', fb:Math.floor(num('f_baths'))||'', hb:(num('f_baths')%1)?1:'', lot:num('f_lot')||'', garage:num('f_garage')||'', taxes:L.tax_annual_amount||'', taxyear:L.tax_year||'', flood:L.flood_zone_code||'', lat:SUBJ.lat||'', lng:SUBJ.lon||'', mls:L.listing_id||'', subdivision:L.subdivision_name||'', slug:slug?slug+'-cma':''};
+  var admin='/mkt/admin/?'+Object.keys(ap).filter(function(k){return ap[k]!==''&&ap[k]!=null}).map(function(k){return k+'='+encodeURIComponent(ap[k])}).join('&');
+  return {cma:cma, est:est, admin:admin, addr:addr};
+}
+function renderEmbeds(load){
+  var u=embedUrls();
+  if(u.cma){ $('cma_status').innerHTML='CMA workbench for <b>'+u.addr+'</b>'+(PROP&&PROP.cma&&PROP.cma.profile?' · '+PROP.cma.profile:''); $('cma_open').href=u.cma; $('cma_open').style.display=''; $('cma_none').style.display='none'; $('cma_frame').style.display='';
+    if(load && EMBED.cma!==u.cma){ EMBED.cma=u.cma; $('cma_frame').src=u.cma; } }
+  else { $('cma_status').textContent = u.addr ? 'No CMA workbench exists for '+u.addr+' yet.' : 'Analyze a property to see its CMA.'; $('cma_open').style.display='none'; $('cma_frame').style.display='none'; $('cma_none').style.display=u.addr?'':'none'; $('cma_create').href=u.admin; }
+  $('est_open').href=u.est;
+  if(load && EMBED.est!==u.est){ EMBED.est=u.est; $('est_frame').src=u.est; }
+}
 function propLinks(){
   var slug=SLUG||slugify($('addr').value); var h='<b>/mkt/'+slug+'/</b>';
   if(PROP && PROP.cma) h+=' · <a href="'+PROP.cma.workbench_url+'">CMA workbench</a> · <a href="'+PROP.cma.client_url+'" target="_blank">CMA client page</a>';
   if(PROP && PROP.reports && PROP.reports.length) h+=' · <a href="/mkt/'+slug+'/report" target="_blank">Client report</a> ('+PROP.reports.length+' saved)';
   $('prop_links').innerHTML=h;
+  renderEmbeds(false);
 }
 function loadProperty(slug){
   return fetch('/.netlify/functions/str-reports?action=property&slug='+encodeURIComponent(slug)).then(function(r){return r.json()}).then(function(d){
