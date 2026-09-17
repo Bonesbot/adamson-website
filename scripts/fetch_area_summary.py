@@ -67,9 +67,38 @@ def fmt_pct(n, digits=1):
     return f"{float(n) * 100:.{digits}f}%"
 
 
+# ---- Composite areas: one area page fed by several detected_area slugs --------------
+# A site area normally equals one raw_listings.detected_area value. A composite area is
+# built from several polygon submarkets instead (West Bradenton = four drawn polygons).
+# Every query filters on detected_area = ANY(%(slugs)s), so a plain area is simply the
+# one-element case and is unchanged. The umbrella slug 'west-bradenton' (zip fallback,
+# listings outside all four polygons, e.g. Cutrona) is deliberately NOT in the list:
+# Ryan's call 2026-09-17, those rows stay out of the analysis.
+AREA_SLUG_GROUPS = {
+    "west-bradenton": [
+        ("west-bradenton-el-con-img-aqua",     "El Conquistador / IMG / Aqua"),
+        ("west-bradenton-coral-shores-cortez", "Coral Shores / Cortez"),
+        ("west-bradenton-seaflower",           "SeaFlower"),
+        ("west-bradenton-tidy-island",         "Tidy Island"),
+    ],
+}
+# Areas that get the property-type x waterfront price matrix (priceMatrix block).
+PRICE_MATRIX_AREAS = {"west-bradenton"}
+# Areas where the condo build-era table is not wanted (condoTiers emitted empty).
+SKIP_CONDO_TIERS = {"west-bradenton"}
+
+
+def _slugs(slug):
+    return [s for s, _ in AREA_SLUG_GROUPS[slug]] if slug in AREA_SLUG_GROUPS else [slug]
+
+
+def _params(slug):
+    return {"slug": slug, "slugs": _slugs(slug)}
+
+
 HEADLINE_QUERY = """
 WITH t AS (
-    SELECT * FROM raw_listings WHERE detected_area = %(slug)s
+    SELECT * FROM raw_listings WHERE detected_area = ANY(%(slugs)s)
 )
 SELECT
     COUNT(*) FILTER (WHERE mls_status = 'Active')                                     AS active_count,
@@ -129,13 +158,13 @@ SELECT
     COUNT(*) FILTER (WHERE current_price >= 1500000 AND current_price < 3000000) AS band_1_5m_3m,
     COUNT(*) FILTER (WHERE current_price >= 3000000)                            AS band_3m_plus
 FROM raw_listings
-WHERE detected_area = %(slug)s AND mls_status = 'Active' AND current_price IS NOT NULL;
+WHERE detected_area = ANY(%(slugs)s) AND mls_status = 'Active' AND current_price IS NOT NULL;
 """
 
 PROPERTY_TYPE_QUERY = """
 SELECT property_type, COUNT(*) AS cnt
 FROM raw_listings
-WHERE detected_area = %(slug)s AND mls_status = 'Active'
+WHERE detected_area = ANY(%(slugs)s) AND mls_status = 'Active'
 GROUP BY property_type
 ORDER BY cnt DESC;
 """
@@ -143,7 +172,7 @@ ORDER BY cnt DESC;
 BUILDING_CLASS_QUERY = """
 SELECT building_class, COUNT(*) AS cnt
 FROM raw_listings
-WHERE detected_area = %(slug)s AND mls_status = 'Active' AND building_class IS NOT NULL
+WHERE detected_area = ANY(%(slugs)s) AND mls_status = 'Active' AND building_class IS NOT NULL
 GROUP BY building_class
 ORDER BY cnt DESC;
 """
@@ -163,7 +192,7 @@ SELECT
     property_type,
     is_waterfront
 FROM raw_listings
-WHERE detected_area = %(slug)s
+WHERE detected_area = ANY(%(slugs)s)
   AND mls_status = 'Sold'
   AND close_date IS NOT NULL
   AND close_date >= CURRENT_DATE - INTERVAL '90 days'
@@ -184,7 +213,7 @@ WITH t AS (
         END AS tier,
         current_price, living_area, days_on_market
     FROM raw_listings
-    WHERE detected_area = %(slug)s
+    WHERE detected_area = ANY(%(slugs)s)
       AND mls_status = 'Active'
       AND property_sub_type IN ('Condominium','Villa','Townhouse')
 )
@@ -211,7 +240,7 @@ def compute_condo_tiers(slug, conn):
     """Active condo/villa/townhouse inventory, grouped by construction era.
     Returns (tiers_list, scope_dict). Empty list if the area has no condos."""
     with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-        cur.execute(CONDO_TIER_QUERY, {"slug": slug})
+        cur.execute(CONDO_TIER_QUERY, _params(slug))
         by_tier = {r['tier']: r for r in cur.fetchall()}
     if not any(r.get('active_count') for r in by_tier.values()):
         return [], None
@@ -243,7 +272,7 @@ WITH t AS (
       WHEN water_view_yn = TRUE THEN 'waterview'
       ELSE 'none'
     END AS seg
-  FROM raw_listings WHERE detected_area = %(slug)s
+  FROM raw_listings WHERE detected_area = ANY(%(slugs)s)
 )
 SELECT seg,
   COUNT(*) FILTER (WHERE mls_status='Active') AS active_n,
@@ -263,7 +292,7 @@ WITH t AS (
       WHEN property_sub_type ILIKE '%%Condo%%' OR property_sub_type ILIKE '%%Villa%%' OR property_sub_type ILIKE '%%Townhouse%%' THEN 'condo'
       ELSE 'other'
     END AS ptype
-  FROM raw_listings WHERE detected_area = %(slug)s
+  FROM raw_listings WHERE detected_area = ANY(%(slugs)s)
 )
 SELECT ptype,
   COUNT(*) FILTER (WHERE mls_status='Active') AS active_n,
@@ -286,7 +315,7 @@ WITH t AS (
       ELSE 'none'
     END AS seg
   FROM raw_listings
-  WHERE detected_area = %(slug)s
+  WHERE detected_area = ANY(%(slugs)s)
     AND mls_status = 'Sold'
     AND close_date >= CURRENT_DATE - INTERVAL '90 days'
 )
@@ -308,7 +337,7 @@ WITH t AS (
       ELSE 'other'
     END AS ptype
   FROM raw_listings
-  WHERE detected_area = %(slug)s
+  WHERE detected_area = ANY(%(slugs)s)
     AND mls_status = 'Sold'
     AND close_date >= CURRENT_DATE - INTERVAL '90 days'
 )
@@ -325,7 +354,7 @@ BOATING_QUERY = """
 SELECT
   COUNT(*) FILTER (WHERE mls_status='Active' AND has_dock = TRUE) AS active_dock,
   COUNT(*) FILTER (WHERE mls_status='Active' AND is_waterfront = TRUE) AS active_wf
-FROM raw_listings WHERE detected_area = %(slug)s;
+FROM raw_listings WHERE detected_area = ANY(%(slugs)s);
 """
 
 SEG_LABELS = {"gulf_beachfront":"Gulf / Beachfront","bay_canal":"Bay / Canal-front",
@@ -349,6 +378,20 @@ AREA_MARKET_FAQ = {
         "drop": {"waterfront", "type", "range"},
         "rename": {"balance": "Is it a good time to buy on Longboat Key?"},
         "cost": ["property_type", "waterfront"],
+    },
+    # Mainland area: the generic questions say "on <Area>" (island phrasing), so reword them.
+    # The beachfront-vs-bayfront facet does not apply here (no Gulf frontage).
+    "west-bradenton": {
+        "drop": {"waterfront"},
+        "rename": {
+            "balance": "Is West Bradenton a buyer's or seller's market right now?",
+            "type": "What does a single-family home cost versus a condo in West Bradenton?",
+            "range": "What is the price range in West Bradenton?",
+            "speed": "How quickly do homes sell in West Bradenton?",
+            "boating": "Can I keep a boat in West Bradenton, and how many homes have a dock?",
+            "fees": "What are typical HOA and condo fees in West Bradenton?",
+        },
+        "cost": None,
     },
 }
 
@@ -414,11 +457,11 @@ def build_cost_question(name, sold90_count, cost_dims, pts90, segs90):
 
 def compute_extras(slug, conn, head):
     with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-        cur.execute(WF_SEGMENT_QUERY, {"slug": slug}); segs = {r["seg"]: r for r in cur.fetchall()}
-        cur.execute(PTYPE_SPLIT_QUERY, {"slug": slug}); pts = {r["ptype"]: r for r in cur.fetchall()}
-        cur.execute(BOATING_QUERY, {"slug": slug}); boat = cur.fetchone() or {}
-        cur.execute(WF_SEGMENT_QUERY_90, {"slug": slug}); segs90 = {r["seg"]: r for r in cur.fetchall()}
-        cur.execute(PTYPE_SPLIT_QUERY_90, {"slug": slug}); pts90 = {r["ptype"]: r for r in cur.fetchall()}
+        cur.execute(WF_SEGMENT_QUERY, _params(slug)); segs = {r["seg"]: r for r in cur.fetchall()}
+        cur.execute(PTYPE_SPLIT_QUERY, _params(slug)); pts = {r["ptype"]: r for r in cur.fetchall()}
+        cur.execute(BOATING_QUERY, _params(slug)); boat = cur.fetchone() or {}
+        cur.execute(WF_SEGMENT_QUERY_90, _params(slug)); segs90 = {r["seg"]: r for r in cur.fetchall()}
+        cur.execute(PTYPE_SPLIT_QUERY_90, _params(slug)); pts90 = {r["ptype"]: r for r in cur.fetchall()}
 
     # waterfront segments (suppress sold $/sqft when n < MIN_N)
     wf = []
@@ -502,17 +545,132 @@ def compute_extras(slug, conn, head):
             "boating": boating, "marketQuestions": q, "costBreakdown90": cost_bd}
 
 
+# ---- Composite-area breakdowns: submarket table + property-type x waterfront matrix ----
+# "Waterfront" here means salt or brackish water a boat can use (bay, harbor, saltwater or
+# brackish canal, Intracoastal, lagoon). MLS also flags lake and pond lots as waterfront; those
+# price like interior lots, so they are counted as non-waterfront in this matrix.
+_SALT_WF = ("(is_waterfront = TRUE AND waterfront_features ~* "
+            "'(bay|harbor|saltwater|brackish|intracoastal|gulf|lagoon|estuary|bayou|river|canal front|marina|beach)')")
+
+PRICE_MATRIX_QUERY = """
+SELECT
+  CASE WHEN property_sub_type = 'Single Family Residence' THEN 'single_family' ELSE 'attached' END AS ptype,
+  CASE WHEN """ + _SALT_WF + """ THEN 'waterfront' ELSE 'non_waterfront' END AS wf,
+  COUNT(*) FILTER (WHERE mls_status = 'Sold' AND close_date >= CURRENT_DATE - INTERVAL '365 days') AS sold_n,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY current_price)
+      FILTER (WHERE mls_status = 'Sold' AND close_date >= CURRENT_DATE - INTERVAL '365 days' AND current_price IS NOT NULL) AS sold_median,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY (current_price / NULLIF(living_area,0)))
+      FILTER (WHERE mls_status = 'Sold' AND close_date >= CURRENT_DATE - INTERVAL '365 days' AND living_area > 0) AS sold_psf,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY days_on_market)
+      FILTER (WHERE mls_status = 'Sold' AND close_date >= CURRENT_DATE - INTERVAL '365 days' AND days_on_market IS NOT NULL) AS sold_dom,
+  COUNT(*) FILTER (WHERE mls_status = 'Active') AS active_n,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY current_price)
+      FILTER (WHERE mls_status = 'Active' AND current_price IS NOT NULL) AS active_median
+FROM raw_listings
+WHERE detected_area = ANY(%(slugs)s)
+  AND property_sub_type IN ('Single Family Residence','Condominium','Villa','Townhouse')
+GROUP BY 1, 2;
+"""
+
+SUBMARKET_QUERY = """
+SELECT detected_area AS slug,
+  COUNT(*) FILTER (WHERE mls_status = 'Active') AS active_n,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY current_price)
+      FILTER (WHERE mls_status = 'Active' AND current_price IS NOT NULL) AS active_median,
+  COUNT(*) FILTER (WHERE mls_status = 'Pending') AS pending_n,
+  COUNT(*) FILTER (WHERE mls_status = 'Sold' AND close_date >= CURRENT_DATE - INTERVAL '365 days') AS sold_n,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY current_price)
+      FILTER (WHERE mls_status = 'Sold' AND close_date >= CURRENT_DATE - INTERVAL '365 days' AND current_price IS NOT NULL) AS sold_median,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY (current_price / NULLIF(living_area,0)))
+      FILTER (WHERE mls_status = 'Sold' AND close_date >= CURRENT_DATE - INTERVAL '365 days' AND living_area > 0) AS sold_psf,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY days_on_market)
+      FILTER (WHERE mls_status = 'Sold' AND close_date >= CURRENT_DATE - INTERVAL '365 days' AND days_on_market IS NOT NULL) AS sold_dom,
+  COUNT(*) FILTER (WHERE mls_status = 'Sold' AND close_date >= CURRENT_DATE - INTERVAL '365 days'
+                   AND property_sub_type = 'Single Family Residence') AS sold_sfh_n
+FROM raw_listings
+WHERE detected_area = ANY(%(slugs)s)
+GROUP BY 1;
+"""
+
+MATRIX_MIN_N = 5   # medians on fewer closed sales than this are suppressed (lowSample)
+PTYPE_LABELS = {"single_family": "Single-Family Homes", "attached": "Condos, Villas & Townhomes"}
+WF_LABELS = {"waterfront": "Waterfront", "non_waterfront": "Non-Waterfront"}
+
+
+def compute_area_breakdown(slug, conn):
+    """Extra blocks for composite / configured areas. Returns {} for every other area,
+    so existing stats files are byte-for-byte unaffected."""
+    out = {}
+    with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+        if slug in AREA_SLUG_GROUPS:
+            cur.execute(SUBMARKET_QUERY, _params(slug))
+            rows = {r["slug"]: r for r in cur.fetchall()}
+            subs = []
+            for sub_slug, label in AREA_SLUG_GROUPS[slug]:
+                r = rows.get(sub_slug)
+                if not r:
+                    continue
+                low = (r["sold_n"] or 0) < MATRIX_MIN_N
+                subs.append({
+                    "slug": sub_slug, "name": label,
+                    "activeCount": r["active_n"], "pendingCount": r["pending_n"],
+                    "activeMedianPrice": fmt_currency(r["active_median"]),
+                    "soldCount": r["sold_n"],
+                    "soldMedianPrice": None if low else fmt_currency(r["sold_median"]),
+                    "soldMedianPricePerSqFt": None if low else fmt_currency(r["sold_psf"]),
+                    "soldMedianDom": None if low else fmt_int(r["sold_dom"]),
+                    "soldSingleFamilyShare": (fmt_pct(r["sold_sfh_n"] / r["sold_n"], 0) if r["sold_n"] else None),
+                    "lowSample": low,
+                })
+            out["submarkets"] = subs
+            out["submarketsWindowDays"] = 365
+
+        if slug in PRICE_MATRIX_AREAS:
+            cur.execute(PRICE_MATRIX_QUERY, _params(slug))
+            cells = {(r["ptype"], r["wf"]): r for r in cur.fetchall()}
+            rows_out = []
+            for pt in ("single_family", "attached"):
+                row = {"propertyType": pt, "label": PTYPE_LABELS[pt], "cells": []}
+                psf = {}
+                for wf in ("waterfront", "non_waterfront"):
+                    r = cells.get((pt, wf)) or {}
+                    n = r.get("sold_n") or 0
+                    low = n < MATRIX_MIN_N
+                    psf[wf] = None if low or not r.get("sold_psf") else float(r["sold_psf"])
+                    row["cells"].append({
+                        "waterfront": wf, "label": WF_LABELS[wf],
+                        "soldCount": n,
+                        "soldMedianPrice": None if low else fmt_currency(r.get("sold_median")),
+                        "soldMedianPricePerSqFt": None if low else fmt_currency(r.get("sold_psf")),
+                        "soldMedianDom": None if low else fmt_int(r.get("sold_dom")),
+                        "activeCount": r.get("active_n") or 0,
+                        "activeMedianPrice": fmt_currency(r.get("active_median")) if (r.get("active_n") or 0) >= 3 else None,
+                        "lowSample": low,
+                    })
+                if psf.get("waterfront") and psf.get("non_waterfront"):
+                    row["waterfrontPremiumPerSqFt"] = fmt_pct(psf["waterfront"] / psf["non_waterfront"] - 1, 0)
+                rows_out.append(row)
+            out["priceMatrix"] = {
+                "windowDays": 365,
+                "rows": rows_out,
+                "waterfrontDefinition": ("Salt or brackish boating water: bay, harbor, saltwater canal, Intracoastal "
+                                         "or lagoon frontage. Lake and pond lots are counted as non-waterfront."),
+                "minSample": MATRIX_MIN_N,
+            }
+    return out
+
+
 def compute_summary(slug, conn):
     with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-        cur.execute(HEADLINE_QUERY, {"slug": slug})
+        cur.execute(HEADLINE_QUERY, _params(slug))
         head = cur.fetchone()
-        cur.execute(PRICE_BAND_QUERY, {"slug": slug})
+        cur.execute(PRICE_BAND_QUERY, _params(slug))
         bands = cur.fetchone() or {}
-        cur.execute(PROPERTY_TYPE_QUERY, {"slug": slug})
+        cur.execute(PROPERTY_TYPE_QUERY, _params(slug))
         prop_types = cur.fetchall()
-        cur.execute(BUILDING_CLASS_QUERY, {"slug": slug})
+        cur.execute(BUILDING_CLASS_QUERY, _params(slug))
         bldg_classes = cur.fetchall()
-        cur.execute(TOP_SOLD_COMPS_QUERY, {"slug": slug})
+        cur.execute(TOP_SOLD_COMPS_QUERY, _params(slug))
         comps = cur.fetchall()
 
     if not head or head["total_count"] == 0:
@@ -526,6 +684,7 @@ def compute_summary(slug, conn):
         }
 
     condo_tiers_list, condo_tiers_scope = compute_condo_tiers(slug, conn)
+    condo_heavy = bool(condo_tiers_list and any(t['activeCount'] for t in condo_tiers_list))
 
     result = {
         "areaSlug": slug,
@@ -620,12 +779,18 @@ def compute_summary(slug, conn):
     # suppress two fields that produce misleading or duplicative content on
     # the area page. avgLotSqFt sums whole-tower lots into a single number;
     # buildingClasses is replaced conceptually by the CondoTiersTable.
-    if condo_tiers_list and any(t['activeCount'] for t in condo_tiers_list):
+    if condo_heavy:
         if 'metrics' in result:
             result['metrics']['avgLotSqFt'] = None
         result['buildingClasses'] = []
 
+    if slug in SKIP_CONDO_TIERS:
+        # Build-era table not wanted for this area; the condo-heavy trim above still applied.
+        result["condoTiers"] = []
+        result["condoTiersScope"] = None
+
     result.update(compute_extras(slug, conn, head))
+    result.update(compute_area_breakdown(slug, conn))
     return result
 
 

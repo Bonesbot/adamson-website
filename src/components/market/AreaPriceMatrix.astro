@@ -1,0 +1,177 @@
+---
+/**
+ * Area Price Matrix: property type x waterfront pricing, plus a submarket table.
+ *
+ * Rendered only when the area's <slug>-stats.json carries a `priceMatrix` block
+ * (scripts/fetch_area_summary.py, PRICE_MATRIX_AREAS) and, for composite areas built
+ * from several polygons, a `submarkets` block (AREA_SLUG_GROUPS). First user: West Bradenton.
+ * Numbers are baked at build time from the daily MLS pipeline; nothing here is hand-entered.
+ * Semantic tables + a schema.org Dataset mirror so answer engines can cite the figures.
+ */
+interface Cell {
+  waterfront: string; label: string;
+  soldCount: number; soldMedianPrice: string | null; soldMedianPricePerSqFt: string | null; soldMedianDom: number | null;
+  activeCount: number; activeMedianPrice: string | null; lowSample: boolean;
+}
+interface Row { propertyType: string; label: string; cells: Cell[]; waterfrontPremiumPerSqFt?: string }
+interface Submarket {
+  slug: string; name: string; activeCount: number; pendingCount: number; activeMedianPrice: string | null;
+  soldCount: number; soldMedianPrice: string | null; soldMedianPricePerSqFt: string | null;
+  soldMedianDom: number | null; soldSingleFamilyShare: string | null; lowSample: boolean;
+}
+interface Props {
+  areaName: string;
+  areaSlug: string;
+  matrix: { windowDays: number; rows: Row[]; waterfrontDefinition: string; minSample: number };
+  submarkets?: Submarket[];
+  lastUpdated: string;
+}
+const { areaName, areaSlug, matrix, submarkets = [], lastUpdated } = Astro.props;
+
+const updatedFmt = new Date(lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const windowLabel = matrix.windowDays === 365 ? 'last 12 months' : `last ${matrix.windowDays} days`;
+const dash = 'n/a';
+
+const th = 'px-4 py-3 font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue)]';
+
+const datasetSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: `${areaName} Home Prices by Property Type and Waterfront`,
+  description: `Median closed sale price, price per square foot and days on market in ${areaName}, Florida over the ${windowLabel}, split by single-family homes versus condos, villas and townhomes, and by waterfront versus non-waterfront. ${matrix.waterfrontDefinition}`,
+  url: `https://adamsonfl.com/areas/${areaSlug}`,
+  dateModified: lastUpdated,
+  creator: { '@type': 'RealEstateAgent', name: 'Ryan Adamson', worksFor: { '@type': 'Organization', name: 'Coldwell Banker Realty, St. Armands' } },
+  isBasedOn: { '@type': 'Dataset', name: 'Stellar MLS' },
+  variableMeasured: [
+    ...matrix.rows.flatMap((r) => r.cells.flatMap((c) => {
+      const k = `${r.label}, ${c.label}`;
+      return [
+        { '@type': 'PropertyValue', name: `${k}: Closed Sales (${windowLabel})`, value: c.soldCount },
+        ...(c.soldMedianPrice ? [{ '@type': 'PropertyValue', name: `${k}: Median Sold Price`, value: c.soldMedianPrice }] : []),
+        ...(c.soldMedianPricePerSqFt ? [{ '@type': 'PropertyValue', name: `${k}: Median Sold Price / Sq Ft`, value: c.soldMedianPricePerSqFt }] : []),
+        { '@type': 'PropertyValue', name: `${k}: Active Listings`, value: c.activeCount },
+      ];
+    })),
+    ...submarkets.flatMap((s) => [
+      { '@type': 'PropertyValue', name: `${s.name}: Closed Sales (${windowLabel})`, value: s.soldCount },
+      ...(s.soldMedianPrice ? [{ '@type': 'PropertyValue', name: `${s.name}: Median Sold Price`, value: s.soldMedianPrice }] : []),
+      ...(s.soldMedianPricePerSqFt ? [{ '@type': 'PropertyValue', name: `${s.name}: Median Sold Price / Sq Ft`, value: s.soldMedianPricePerSqFt }] : []),
+    ]),
+  ],
+};
+---
+
+<section class="section light-section" aria-labelledby={`${areaSlug}-price-matrix-heading`}>
+  <div class="container-narrow">
+    <div class="mb-8">
+      <p class="section-label text-[var(--color-cbgl-blue)] mb-2">Pricing Breakdown</p>
+      <h2 id={`${areaSlug}-price-matrix-heading`} class="accent-underline">
+        {areaName} Prices: Homes vs Condos, Waterfront vs Not
+      </h2>
+      <p class="text-[var(--color-text-muted)] mt-4 leading-relaxed">
+        Median closed prices over the {windowLabel}, split the two ways that move value most here:
+        what kind of property it is, and whether it sits on boating water.
+      </p>
+    </div>
+
+    <!-- Waterfront premium callouts -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+      {matrix.rows.filter((r) => r.waterfrontPremiumPerSqFt).map((r) => (
+        <div class="rounded-lg border border-[var(--color-border)] bg-white shadow-sm px-6 py-5">
+          <p class="font-accent text-xs uppercase tracking-wider text-[var(--color-cbgl-blue)] mb-1">{r.label}</p>
+          <p class="font-display text-3xl font-bold text-[var(--color-cbgl-blue)]">
+            {r.waterfrontPremiumPerSqFt?.startsWith('-') ? '' : '+'}{r.waterfrontPremiumPerSqFt}
+            <span class="text-sm text-[var(--color-text-muted)] font-normal ml-2">waterfront premium per sq ft</span>
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <div class="overflow-x-auto rounded-lg border border-[var(--color-border)] bg-white shadow-sm">
+      <table class="w-full text-sm">
+        <caption class="sr-only">{areaName} median sold price by property type and waterfront, {windowLabel}</caption>
+        <thead>
+          <tr class="border-b border-[var(--color-border)]">
+            <th scope="col" class={`${th} text-left`}>Segment</th>
+            <th scope="col" class={`${th} text-right`}>Closed</th>
+            <th scope="col" class={`${th} text-right`}>Median Sold</th>
+            <th scope="col" class={`${th} text-right`}>Median $/Sq Ft</th>
+            <th scope="col" class={`${th} text-right`}>Median DOM</th>
+            <th scope="col" class={`${th} text-right`}>Active Now</th>
+            <th scope="col" class={`${th} text-right`}>Median Ask</th>
+          </tr>
+        </thead>
+        {matrix.rows.map((r) => (
+          <tbody>
+            <tr class="border-b border-[var(--color-border)] bg-[var(--color-cbgl-blue)]/[0.06]">
+              <th scope="colgroup" colspan="7" class="px-4 py-2.5 text-left font-display font-bold text-[var(--color-black)]">{r.label}</th>
+            </tr>
+            {r.cells.map((c) => (
+              <tr class="border-b border-[var(--color-border)] last:border-b-0 hover:bg-[var(--color-cbgl-blue)]/5 transition-colors">
+                <th scope="row" class="px-4 py-4 pl-8 text-left font-body text-[var(--color-text)] font-normal whitespace-nowrap">{c.label}</th>
+                <td class="px-4 py-4 text-right text-[var(--color-text)]">{c.soldCount}</td>
+                <td class="px-4 py-4 text-right font-display text-base font-bold text-[var(--color-black)]">{c.soldMedianPrice ?? <span class="text-[var(--color-text-muted)]/50">{dash}</span>}</td>
+                <td class="px-4 py-4 text-right text-[var(--color-text)]">{c.soldMedianPricePerSqFt ?? <span class="text-[var(--color-text-muted)]/50">{dash}</span>}</td>
+                <td class="px-4 py-4 text-right text-[var(--color-text)]">{c.soldMedianDom != null ? <>{c.soldMedianDom}<span class="ml-1 text-xs text-[var(--color-text-muted)]">days</span></> : <span class="text-[var(--color-text-muted)]/50">{dash}</span>}</td>
+                <td class="px-4 py-4 text-right text-[var(--color-text)]">{c.activeCount}</td>
+                <td class="px-4 py-4 text-right text-[var(--color-text)]">{c.activeMedianPrice ?? <span class="text-[var(--color-text-muted)]/50">{dash}</span>}</td>
+              </tr>
+            ))}
+          </tbody>
+        ))}
+      </table>
+    </div>
+
+    {submarkets.length > 0 && (
+      <div class="mt-14">
+        <h3 class="font-display text-2xl font-bold mb-3">{areaName} by Neighborhood</h3>
+        <p class="text-[var(--color-text-muted)] leading-relaxed mb-6">
+          The same 12 months, by the four pockets that make up this market. Boundaries are drawn by hand
+          and every listing is placed by its map coordinates, not its zip code.
+        </p>
+        <div class="overflow-x-auto rounded-lg border border-[var(--color-border)] bg-white shadow-sm">
+          <table class="w-full text-sm">
+            <caption class="sr-only">{areaName} neighborhoods: closed sales, median sold price, price per square foot and active inventory</caption>
+            <thead>
+              <tr class="border-b border-[var(--color-border)]">
+                <th scope="col" class={`${th} text-left`}>Neighborhood</th>
+                <th scope="col" class={`${th} text-right`}>Closed</th>
+                <th scope="col" class={`${th} text-right`}>Median Sold</th>
+                <th scope="col" class={`${th} text-right`}>Median $/Sq Ft</th>
+                <th scope="col" class={`${th} text-right`}>Median DOM</th>
+                <th scope="col" class={`${th} text-right`}>Active Now</th>
+                <th scope="col" class={`${th} text-right`}>Median Ask</th>
+              </tr>
+            </thead>
+            <tbody>
+              {submarkets.map((s, idx) => (
+                <tr class={`${idx !== submarkets.length - 1 ? 'border-b border-[var(--color-border)]' : ''} hover:bg-[var(--color-cbgl-blue)]/5 transition-colors`}>
+                  <th scope="row" class="px-4 py-4 text-left font-body text-[var(--color-text)] font-normal">
+                    <span class="block font-display font-bold">{s.name}</span>
+                    {s.soldSingleFamilyShare && <span class="block text-xs text-[var(--color-text-muted)] mt-0.5">{s.soldSingleFamilyShare} of sales single-family</span>}
+                  </th>
+                  <td class="px-4 py-4 text-right text-[var(--color-text)]">{s.soldCount}</td>
+                  <td class="px-4 py-4 text-right font-display text-base font-bold text-[var(--color-black)]">{s.soldMedianPrice ?? <span class="text-[var(--color-text-muted)]/50">{dash}</span>}</td>
+                  <td class="px-4 py-4 text-right text-[var(--color-text)]">{s.soldMedianPricePerSqFt ?? <span class="text-[var(--color-text-muted)]/50">{dash}</span>}</td>
+                  <td class="px-4 py-4 text-right text-[var(--color-text)]">{s.soldMedianDom != null ? <>{s.soldMedianDom}<span class="ml-1 text-xs text-[var(--color-text-muted)]">days</span></> : <span class="text-[var(--color-text-muted)]/50">{dash}</span>}</td>
+                  <td class="px-4 py-4 text-right text-[var(--color-text)]">{s.activeCount}</td>
+                  <td class="px-4 py-4 text-right text-[var(--color-text)]">{s.activeMedianPrice ?? <span class="text-[var(--color-text-muted)]/50">{dash}</span>}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )}
+
+    <p class="text-xs text-[var(--color-text-muted)] mt-6 leading-relaxed">
+      Waterfront means {matrix.waterfrontDefinition.charAt(0).toLowerCase() + matrix.waterfrontDefinition.slice(1)}
+      Medians on fewer than {matrix.minSample} closed sales are withheld. Neighborhood medians blend property types,
+      so compare them alongside the single-family share shown. Closed sales cover the {windowLabel}; active counts are current.
+      Source: Stellar MLS via the Adamson Group data pipeline. Last updated {updatedFmt}.
+    </p>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(datasetSchema)} />
+</section>

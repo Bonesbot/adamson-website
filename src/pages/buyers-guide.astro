@@ -36,7 +36,9 @@ const TRAITS: Record<string, Record<string, number>> = {
 // ---- Build the client payload from areas.json + live stats ----------------
 const pctNum = (s: any) => { const n = parseFloat(String(s || '').replace(/[^0-9.]/g, '')); return isNaN(n) ? null : n; };
 
-const AREAS = areasData.areas.map((a) => {
+// Banner-tile areas (outside the core Sarasota set, e.g. West Bradenton) are not part of the
+// nine-area lifestyle quiz: they have no trait scores and the copy says nine.
+const AREAS = areasData.areas.filter((a: any) => a.tile !== 'banner').map((a) => {
   const s = statsBySlug[a.slug] || {};
   const bands = s.priceBands || {};
   const supply = s.marketBalance?.monthsOfSupply ?? s.monthsOfSupply?.blended ?? null;

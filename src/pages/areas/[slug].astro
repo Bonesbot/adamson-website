@@ -5,6 +5,7 @@ import DetailedMarketTable from '@/components/market/DetailedMarketTable.astro';
 import AreaMarketSummary from '@/components/market/AreaMarketSummary.astro';
 import WaterfrontSegments from '@/components/market/WaterfrontSegments.astro';
 import CondoTiersTable from '@/components/market/CondoTiersTable.astro';
+import AreaPriceMatrix from '@/components/market/AreaPriceMatrix.astro';
 import FAQSchema from '@/components/seo/FAQSchema.astro';
 import IdxAreaShowcase from '@/components/IdxAreaShowcase.astro';
 import Button from '@/components/ui/Button.astro';
@@ -63,6 +64,9 @@ const idxWidgetId = (area as any).idxWidgetId || (fallbackArea as any)?.idxWidge
 // condo-centric blocks: condo tiers, condo dues, and condo-facet living FAQs. The flag
 // lives in areas.json rather than the stats JSON so it survives the daily pipeline
 // regeneration of src/data/*-stats.json.
+// City for schema text. Every area is in Sarasota except the ones that say otherwise in areas.json.
+const locality = (area as any).locality || (fallbackArea as any)?.locality || 'Sarasota';
+
 const sfhOnly = (area as any).propertyMix === 'sfh' || (fallbackArea as any)?.propertyMix === 'sfh';
 
 // Optional: detailed Sold+Pending stats from the Supabase pipeline.
@@ -141,7 +145,7 @@ const jsonLd = [
     description: area.description,
     address: {
       '@type': 'PostalAddress',
-      addressLocality: area.name,
+      addressLocality: (area as any).locality || (fallbackArea as any)?.locality || area.name,
       addressRegion: 'FL',
       postalCode: area.zipCodes?.[0] || '',
       addressCountry: 'US',
@@ -290,12 +294,24 @@ if (media.video) {
 
   <!-- Detailed Sold + Pending Market Table (live MLS pipeline) -->
   {detailedStats && (
-    <DetailedMarketTable areaName={area.name} stats={detailedStats} />
+    <DetailedMarketTable areaName={area.name} stats={detailedStats} locality={locality} />
+  )}
+
+  <!-- Property type x waterfront pricing + neighborhood table. Only for areas whose stats
+       carry a priceMatrix block (fetch_area_summary.py PRICE_MATRIX_AREAS); West Bradenton first. -->
+  {detailedStats?.priceMatrix && (
+    <AreaPriceMatrix
+      areaName={area.name}
+      areaSlug={area.slug}
+      matrix={detailedStats.priceMatrix}
+      submarkets={detailedStats.submarkets}
+      lastUpdated={detailedStats.lastUpdated}
+    />
   )}
 
   <!-- Enriched AEO market summary — active inventory, price bands, sold comps -->
   {detailedStats && (detailedStats.active || detailedStats.sold) && (
-    <AreaMarketSummary areaName={area.name} areaSlug={area.slug} stats={detailedStats} suppressCondo={sfhOnly} />
+    <AreaMarketSummary areaName={area.name} areaSlug={area.slug} stats={detailedStats} suppressCondo={sfhOnly} locality={locality} />
   )}
 
   <!-- Condo tier table — active inventory grouped by construction era.

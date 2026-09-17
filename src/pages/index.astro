@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import AreaCard from '@/components/market/AreaCard.astro';
+import AreaBanner from '@/components/market/AreaBanner.astro';
 import Testimonials from '@/components/Testimonials.astro';
 import Button from '@/components/ui/Button.astro';
 import { getAreas, getSiteSettings } from '@/lib/sanity';
@@ -35,8 +36,17 @@ const areas = areasFallback.areas.map((fallback) => {
     medianPrice: statsBySlug[fallback.slug]?.active?.medianPrice || sanity?.marketStats?.medianPrice || fallback.marketStats?.medianPrice || '',
     imageSrc: sanity?.cardImage || (areaMedia as Record<string, any>)[fallback.slug]?.cardImage || undefined,
     imageWebp: (areaMedia as Record<string, any>)[fallback.slug]?.cardWebp || undefined,
+    // areas.json `"tile": "banner"` = a full-width tile under the grid (a different geography,
+    // and it keeps the 3-column grid from ending on an orphan card).
+    tile: (fallback as any).tile || 'card',
+    county: (fallback as any).county || null,
+    activeCount: statsBySlug[fallback.slug]?.active?.count || undefined,
+    bannerSrc: (areaMedia as Record<string, any>)[fallback.slug]?.bannerImage || undefined,
+    bannerWebp: (areaMedia as Record<string, any>)[fallback.slug]?.bannerWebp || undefined,
   };
 });
+const gridAreas = areas.filter((a) => a.tile !== 'banner');
+const bannerAreas = areas.filter((a) => a.tile === 'banner');
 
 // JSON-LD structured data for homepage
 const jsonLd = [
@@ -194,7 +204,7 @@ const jsonLd = [
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {areas.map((area) => (
+        {gridAreas.map((area) => (
           <AreaCard
             name={area.name}
             slug={area.slug}
@@ -205,6 +215,24 @@ const jsonLd = [
           />
         ))}
       </div>
+
+      {bannerAreas.length > 0 && (
+        <div class="mt-6 grid grid-cols-1 gap-6">
+          {bannerAreas.map((area) => (
+            <AreaBanner
+              name={area.name}
+              slug={area.slug}
+              tagline={area.tagline}
+              eyebrow={area.county ? `Also Serving: ${area.county} County` : 'Also Serving'}
+              blurb="The neighborhoods around world-famous IMG Academy, plus Tidy Island, SeaFlower, Coral Shores and Cortez village: the north shore of Sarasota Bay, tracked with the same daily MLS data as the Sarasota guides."
+              medianPrice={area.medianPrice}
+              activeCount={area.activeCount}
+              imageSrc={area.bannerSrc || area.imageSrc}
+              imageWebp={area.bannerWebp || area.imageWebp}
+            />
+          ))}
+        </div>
+      )}
     </div>
   </section>
 

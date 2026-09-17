@@ -64,9 +64,11 @@ interface Props {
   stats: EnrichedStats;
   /** Predominantly single-family area: omit condo-fee facts from the Dataset schema. */
   suppressCondo?: boolean;
+  /** City used in schema descriptions. Defaults to Sarasota; West Bradenton passes Bradenton. */
+  locality?: string;
 }
 
-const { areaName, areaSlug, stats, suppressCondo = false } = Astro.props;
+const { areaName, areaSlug, stats, suppressCondo = false, locality = 'Sarasota' } = Astro.props;
 
 const updatedFmt = new Date(stats.lastUpdated).toLocaleDateString("en-US", {
   month: "long",
@@ -100,7 +102,7 @@ const datasetSchema = {
   "@context": "https://schema.org",
   "@type": "Dataset",
   name: `${areaName} Active Real Estate Market Summary`,
-  description: `Live MLS-sourced active inventory, pricing, and recent sold comparables for ${areaName}, Sarasota, FL, refreshed from Stellar MLS.`,
+  description: `Live MLS-sourced active inventory, pricing, and recent sold comparables for ${areaName}, ${locality}, FL, refreshed from Stellar MLS.`,
   url: `https://adamsonfl.com/areas/${areaSlug}`,
   dateModified: stats.lastUpdated,
   datePublished: stats.lastUpdated,

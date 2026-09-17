@@ -380,6 +380,53 @@
           "answer": "The Legacy Trail is an 18.5-mile paved rail-trail running from Payne Park in downtown Sarasota south to Venice, with multiple access points cutting directly through Palmer Ranch. Trail access is a major lifestyle draw for the community — several villages back directly onto the trail, and the broader Palmer Ranch master plan integrates pedestrian and cycling connections to it."
         }
       ]
+    },
+    {
+      "name": "West Bradenton",
+      "slug": "west-bradenton",
+      "tagline": "Sarasota Bay golf, boating canals and IMG Academy next door",
+      "locality": "Bradenton",
+      "county": "Manatee",
+      "tile": "banner",
+      "description": "West Bradenton is the Manatee County mainland along the north shore of Sarasota Bay, across the water from the north end of Longboat Key and a short drive over the Cortez Bridge to the Anna Maria Island beaches. It is four distinct pockets rather than one neighborhood. El Conquistador, Wild Oak Bay, Legends Bay and the newer Aqua community wrap around IMG Academy, the world-known boarding school and sports training campus that grew out of Nick Bollettieri's tennis academy, and its bayfront golf course. Homes here are condos, villas and single-family houses under mature oak canopy, and the academy is a steady source of demand from athlete families, coaches and staff who want to live minutes from campus. Coral Shores, San Remo Shores and the historic Cortez fishing village are the boating side of the market, where saltwater canals lead to the Intracoastal and the Gulf. SeaFlower is the area's new-construction master-planned community. Tidy Island is a small guard-gated enclave of condos and villas set inside a mangrove preserve on the bay. Prices here run well below the Sarasota barrier islands for comparable water access, which is the main reason buyers look north.",
+      "highlights": [
+        "Minutes from IMG Academy",
+        "Sarasota Bay frontage",
+        "Saltwater canal boating",
+        "Bayfront golf",
+        "Cortez fishing village",
+        "New construction at SeaFlower"
+      ],
+      "zipCodes": [
+        "34210",
+        "34215"
+      ],
+      "marketStats": {
+        "medianPrice": "",
+        "lastUpdated": "2026-09-17"
+      },
+      "faqs": [
+        {
+          "question": "Which neighborhoods make up West Bradenton?",
+          "answer": "This guide tracks four pockets, each drawn as its own map boundary so listings are placed by coordinates rather than zip code: El Conquistador, Wild Oak Bay, Legends Bay and Aqua around IMG Academy; Coral Shores, San Remo Shores and Cortez village along the saltwater canals; the SeaFlower master-planned community; and guard-gated Tidy Island on Sarasota Bay. As of {{asOf}} the four together have {{active.count}} active listings at a median asking price of {{active.medianPrice}}."
+        },
+        {
+          "question": "Which West Bradenton neighborhoods are closest to IMG Academy?",
+          "answer": "El Conquistador, Wild Oak Bay, Legends Bay and Aqua sit directly around the IMG Academy campus and its golf course, and this guide tracks them together as one pocket. Over the last 12 months that pocket recorded {{submarkets.0.soldCount}} closed sales at a median {{submarkets.0.soldMedianPrice}} ({{submarkets.0.soldMedianPricePerSqFt}} per square foot), with {{submarkets.0.activeCount}} homes on the market as of {{asOf}}. It is the most attainable of the four West Bradenton pockets and is mostly condos and villas, which suits families relocating for a student-athlete and owners who want a lock-and-leave home near campus. Rental rules vary by association, so check the minimum lease term before buying with rental income in mind. The Adamson Group is not affiliated with IMG Academy."
+        },
+        {
+          "question": "How much more does waterfront cost in West Bradenton?",
+          "answer": "Over the last 12 months, single-family homes on boating water sold for a median {{priceMatrix.rows.0.cells.0.soldMedianPrice}} ({{priceMatrix.rows.0.cells.0.soldMedianPricePerSqFt}} per square foot), against {{priceMatrix.rows.0.cells.1.soldMedianPrice}} ({{priceMatrix.rows.0.cells.1.soldMedianPricePerSqFt}} per square foot) off the water: a {{priceMatrix.rows.0.waterfrontPremiumPerSqFt}} premium per square foot. For condos, villas and townhomes the gap is narrower: {{priceMatrix.rows.1.cells.0.soldMedianPrice}} on the water versus {{priceMatrix.rows.1.cells.1.soldMedianPrice}} off it, a {{priceMatrix.rows.1.waterfrontPremiumPerSqFt}} premium per square foot. Waterfront here means bay, saltwater canal or Intracoastal frontage; lake and pond lots are counted as non-waterfront. Data as of {{asOf}}, Stellar MLS."
+        },
+        {
+          "question": "Is West Bradenton in Sarasota County or Manatee County?",
+          "answer": "Manatee County. West Bradenton sits on the mainland side of Sarasota Bay, across from the north end of Longboat Key and Anna Maria Island. Ryan Adamson works this market alongside Sarasota's barrier islands, and the figures on this page come from the same Stellar MLS feed and the same daily data pipeline as the Sarasota area guides."
+        },
+        {
+          "question": "Can you get to the Gulf by boat from West Bradenton?",
+          "answer": "Yes, from the canal communities. Coral Shores, San Remo Shores and the Cortez waterfront sit on saltwater canals that open to the Intracoastal Waterway, with the Gulf of Mexico reached through Longboat Pass. Bridge clearance, canal depth and seawall condition vary street by street, so they are worth checking on any specific property. As of {{asOf}}, {{boating.activeWithDock}} of the {{active.waterfrontCount}} active waterfront listings include a private dock."
+        }
+      ]
     }
   ]
 }

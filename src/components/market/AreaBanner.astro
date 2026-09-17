@@ -1,0 +1,46 @@
+---
+/**
+ * Area Banner: a full-width tile for an area that sits outside the core Sarasota grid
+ * (areas.json `"tile": "banner"`). Used on the homepage and /areas under the 3-column
+ * AreaCard grid, so a tenth area never leaves an orphan card on the last row and a
+ * different geography reads as its own thing. First user: West Bradenton (Manatee County).
+ */
+interface Props {
+  name: string;
+  slug: string;
+  tagline: string;
+  eyebrow?: string;
+  blurb?: string;
+  imageSrc?: string;
+  imageWebp?: string;
+  medianPrice?: string;
+  activeCount?: number;
+}
+const { name, slug, tagline, eyebrow = 'Also Serving', blurb, imageSrc = '/images/placeholder-area.jpg', imageWebp, medianPrice, activeCount } = Astro.props;
+
+// Same two-declaration trick as AreaCard: plain url() first, image-set() second.
+const bg = imageWebp
+  ? `background-image: url('${imageSrc}'); background-image: image-set(url('${imageWebp}') type('image/webp'), url('${imageSrc}') type('image/jpeg'));`
+  : `background-image: url('${imageSrc}');`;
+---
+
+<a href={`/areas/${slug}`} class="group block relative overflow-hidden rounded-lg min-h-[260px] md:min-h-[300px]">
+  <div
+    class="absolute inset-0 bg-cover transition-transform duration-700 group-hover:scale-105"
+    style={`${bg} background-position: center 60%; background-color: var(--color-charcoal);`}
+  />
+  <div class="absolute inset-0" style="background-image: linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.12) 100%);" />
+
+  <div class="relative z-10 flex flex-col justify-end h-full min-h-[260px] md:min-h-[300px] p-6 md:p-10 max-w-2xl">
+    <p class="section-label text-[var(--color-cbgl-blue-light)] mb-2">{eyebrow}</p>
+    <h3 class="font-display text-3xl md:text-4xl font-bold text-white mb-2 group-hover:text-[var(--color-gold-light)] transition-colors">{name}</h3>
+    <p class="text-base text-white/80 mb-3">{tagline}</p>
+    {blurb && <p class="text-sm text-white/60 mb-4 leading-relaxed hidden sm:block">{blurb}</p>}
+    <p class="font-accent text-xs uppercase tracking-wider text-[var(--color-gold)]">
+      {medianPrice && <>Median {medianPrice}</>}
+      {medianPrice && activeCount ? <span class="text-white/30 mx-2">|</span> : null}
+      {activeCount ? <>{activeCount} active listings</> : null}
+      <span class="text-white/30 mx-2">|</span><span class="text-white/80 group-hover:text-white">View market guide &rarr;</span>
+    </p>
+  </div>
+</a>
