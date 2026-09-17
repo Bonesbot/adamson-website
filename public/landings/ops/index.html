@@ -176,7 +176,8 @@ flowchart LR
     <tbody>
       <tr><td class="k">5:30 AM</td><td>backup-to-drive</td><td>Windows Task Scheduler</td><td>Mirrors the automation folder to Drive backups</td><td>backup-log.txt older than 25h</td></tr>
       <tr><td class="k">6:38 AM</td><td>mls-export</td><td>Cowork scheduled task, mini-PC</td><td>Stellar export, Supabase upsert, stats JSON for 9 areas plus community pages, one commit, Netlify build</td><td>last-run.json, watchdog <span class="pill bad">alerting unreliable</span></td></tr>
-      <tr><td class="k">7:36 AM</td><td>mls-export-watchdog</td><td>Cowork scheduled task</td><td>Checks the heartbeat</td><td>Shares the job's failure modes</td></tr>
+      <tr><td class="k">8:06 AM</td><td>mls-export-watchdog</td><td>Cowork scheduled task</td><td>Checks the heartbeat. Retire candidate: superseded by the Netlify watchdog below</td><td>Shares the job's failure modes</td></tr>
+      <tr><td class="k">10:00 AM</td><td>mls-watchdog</td><td>Netlify scheduled function, off the mini-PC</td><td>Reads the newest import_batches row; emails Ryan through Resend if no load in 26 hours; posts the mls-export light to the Command Center</td><td>The alert email itself</td></tr>
       <tr><td class="k">8:00 AM</td><td>morning-brief</td><td>Cloud scheduled task</td><td>Emails this map plus open work, milestones, and state of the business</td><td>No email by 8:15 <span class="pill ok">new 2026-09-03</span></td></tr>
       <tr><td class="k">every 15 min</td><td>cc-queue-poller</td><td>Cowork scheduled task</td><td>Command Center requests, lead relay to Zoho, hourly deals sync, heartbeat</td><td>App pill "rounds late"</td></tr>
       <tr><td class="k">daily</td><td>srqmap-events</td><td>Cowork scheduled task</td><td>Refreshes event pins on /srqmap</td><td>Stale events</td></tr>
