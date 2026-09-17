@@ -7,6 +7,7 @@
   var me=document.currentScript||{}; var internal=me.getAttribute&&me.getAttribute('data-internal')==='1';
   var hasKey=false; try{ hasKey=!!localStorage.getItem('cma-edit-key'); }catch(e){}
   if(!internal && !hasKey) return;
+  try{ if(window.top!==window) return; }catch(e){ return; }   // embedded in the Property Intelligence tabs: no second nav bar
   var path=location.pathname, seg=(path.match(/^\/mkt\/([a-z0-9][a-z0-9-]{2,63})(?:\/|$)/i)||[])[1];
   if(seg==='admin') seg=null;
   if(!seg){ var qs=new URLSearchParams(location.search).get('slug'); if(qs&&/^[a-z0-9][a-z0-9-]{2,63}$/i.test(qs)) seg=qs.toLowerCase(); }
@@ -38,13 +39,13 @@
       var reps=P.reports||[];
       h+='<span class="sep">|</span><a class="prop" href="'+(P.home_url||('/mkt/'+slug+'/'))+'" title="Property home">'+esc(P.address||slug)+'</a><span class="sep">&rsaquo;</span>';
       h+=link(P.workbench_url,'CMA workbench','workbench')+link(P.cma_url,'CMA client page','cma')+link(P.estimator_url,'Closing costs','estimator');
-      h+=link(P.invest_url||('/mkt/'+slug+'/invest'),'Investment analysis','invest');
+      h+=link(P.invest_url||('/mkt/'+slug+'/invest'),'Property Intelligence','invest');
       h+='<span class="dd"><span>Client reports'+(reps.length?' ('+reps.length+')':'')+' &#9662;</span><div class="menu">'
         +(reps.length?'<div class="hd">Saved investment reports</div>'+reps.slice(0,12).map(function(r){ return '<a href="/mkt/'+slug+'/report?id='+r.id+'" target="_blank">'+esc(r.title||'Report')+'<small>'+fmt(r.created_at)+'</small></a>'; }).join(''):'<div class="hd">No investment reports saved yet</div>')
         +(P.cma_url?'<div class="hd">CMA</div><a href="'+P.cma_url+'" target="_blank">CMA client page<small>'+(P.cma&&P.cma.profile?esc(P.cma.profile):'')+'</small></a>':'')
         +'<a href="'+(P.home_url||('/mkt/'+slug+'/'))+'">All files for this property &rarr;</a></div></span>';
     } else if(seg){ h+='<span class="sep">|</span><span class="prop">'+esc(seg)+'</span>'; }
-    h+='<span class="right">'+link('/str-dashboard/','+ New analysis','')+link('/mkt/admin/','CMA admin','admin')+'</span>';
+    h+='<span class="right">'+link('/str-dashboard/','+ New property','')+link('/mkt/admin/','CMA admin','admin')+'</span>';
     nav.innerHTML='<div class="in">'+h+'</div>';
     nav.querySelectorAll('.dd>span').forEach(function(s){ s.onclick=function(e){ e.stopPropagation(); s.parentNode.classList.toggle('open'); }; });
     document.addEventListener('click',function(){ nav.querySelectorAll('.dd.open').forEach(function(d){ d.classList.remove('open'); }); });
