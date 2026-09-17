@@ -59,6 +59,10 @@ const heroPos = media.heroPosition || 'center';
 // areas.json (fallback record) so it survives the Sanity content overlay.
 const fallbackArea = areasFallback.areas.find((a: any) => a.slug === slug);
 const idxWidgetId = (area as any).idxWidgetId || (fallbackArea as any)?.idxWidgetId || null;
+// Legacy middleware widgets (Showcase grids such as 50172) load from customshowcasejs.php rather than
+// /idx/widgets/<id>, so areas.json can carry the full embed URL plus an optional section label.
+const idxWidgetSrc = (fallbackArea as any)?.idxWidgetSrc || undefined;
+const idxLabel = (fallbackArea as any)?.idxLabel || 'Live Listings';
 
 // Predominantly single-family areas (propertyMix: "sfh" in areas.json) suppress the
 // condo-centric blocks: condo tiers, condo dues, and condo-facet living FAQs. The flag
@@ -278,8 +282,9 @@ if (media.video) {
   {idxWidgetId && (
     <IdxAreaShowcase
       widgetId={idxWidgetId}
+      scriptSrc={idxWidgetSrc}
       areaName={area.name}
-      label="Live Listings"
+      label={idxLabel}
     />
   )}
 
