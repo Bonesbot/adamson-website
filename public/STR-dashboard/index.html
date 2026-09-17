@@ -855,7 +855,9 @@ $('go').onclick = function(){
   var s = $('status'); s.style.color=""; s.textContent = "Locating address…";
   $('pr_addr').textContent=a;
   STATE.verdict=null; STATE.zoning=null; STATE.mls=null; $('vlease').textContent='—'; $('vflood').textContent='—';
-  if(!SLUG || SLUG!==slugify(a)){ SLUG=slugify(a); PROP=null; REPORT_LOCK=false; if(!PENDING_REPORT) loadProperty(SLUG); }
+  // keep a registry slug (e.g. 6116-43rd-305d, set by the CMA admin) when the typed address is that property's address
+  var sameProp = PROP && PROP.address && PROP.address.replace(/\W+/g,'').toLowerCase()===a.replace(/\W+/g,'').toLowerCase();
+  if(!sameProp && (!SLUG || SLUG!==slugify(a))){ SLUG=slugify(a); PROP=null; REPORT_LOCK=false; if(!PENDING_REPORT) loadProperty(SLUG); }
   if(window.AGNav) AGNav.setSlug(SLUG);
   ['h_price','h_hoa','h_flood'].forEach(function(id){ $(id).textContent=''; }); $('h_tax').textContent='Est. = price x 85% x millage';
   clearFacts();
