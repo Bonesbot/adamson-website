@@ -52,6 +52,35 @@ async function fetchLastIngest() {
   return Array.isArray(rows) && rows.length ? rows[0] : null;
 }
 
+/**
+ * Command Center traffic light. Posts an 'ok' row for mls-export to cc_job_runs
+ * ONLY when the data is fresh. When stale we post nothing, so the light ages out
+ * exactly as it does for any job that stopped reporting. This replaces the one
+ * duty the on-box mls-export-watchdog Cowork task still had (2026-09-17), so that
+ * task can be retired. Never throws: a heartbeat failure must not mask the verdict.
+ */
+async function postHeartbeat(note) {
+  try {
+    const base = process.env.SUPABASE_URL;
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!base || !key) return { posted: false, error: 'supabase env missing' };
+    const res = await fetch(`${base.replace(/\/$/, '')}/rest/v1/cc_job_runs`, {
+      method: 'POST',
+      headers: {
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal',
+      },
+      body: JSON.stringify({ job: 'mls-export', finished_at: new Date().toISOString(), status: 'ok', note }),
+    });
+    if (!res.ok) return { posted: false, error: `supabase ${res.status}: ${(await res.text()).slice(0, 160)}` };
+    return { posted: true };
+  } catch (e) {
+    return { posted: false, error: e.message || String(e) };
+  }
+}
+
 async function sendAlert(subject, text) {
   const key = process.env.RESEND_API_KEY;
   if (!key) return { sent: false, error: 'RESEND_API_KEY not configured' };
@@ -160,7 +189,13 @@ exports.handler = async (event) => {
     stale,
     scheduled: isScheduled,
     emailed: null,
+    heartbeat: null,
   };
+
+  // Fresh data + a real scheduled run: light the Command Center lamp for mls-export.
+  if (!stale && isScheduled) {
+    out.heartbeat = await postHeartbeat(`via netlify mls-watchdog; last load ${out.hoursSince}h ago`);
+  }
 
   if (stale && maySend) {
     const days = Number.isFinite(hours) ? Math.max(1, Math.round(hours / 24)) : '?';

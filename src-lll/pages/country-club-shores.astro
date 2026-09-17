@@ -918,7 +918,10 @@ const jsonLd = [
             notes: data.notes,
             lead_type: form.dataset.leadType,
             community: form.dataset.community,
-            page: window.location.pathname,
+            // Pinned: on longboatlido.com this page lives at /country-club-shores/, which
+            // lead-routing.js would send to the default route (Ryan only). The pinned path
+            // matches /^\/longboat-key\// (Ryan + Anne) and keeps the 'country-club-shores' source tag.
+            page: '/longboat-key/country-club-shores/',
           }),
         });
         if (!res.ok) throw new Error('bad status ' + res.status);
