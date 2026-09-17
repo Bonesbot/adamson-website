@@ -56,7 +56,7 @@ else Promise.all([
   $('addr').textContent=P.address||L.address||slug.replace(/-/g,' ');
   $('meta').textContent='/mkt/'+slug+'/'+(P.mls_id?' · MLS '+P.mls_id:'')+(L.last_used?' · last used '+fmtDT(L.last_used):'');
   var a='';
-  a+='<a class="btn gold" href="/mkt/'+slug+'/invest">'+((d.reports&&d.reports.length)?'Open investment analysis':'Start investment analysis')+'</a>';
+  a+='<a class="btn gold" href="/mkt/'+slug+'/invest">Property Intelligence (CMA · closing costs · STR)</a>';
   if(d.reports&&d.reports.length) a+='<a class="btn" href="/mkt/'+slug+'/report" target="_blank">Client investment report</a>';
   if(L.workbench_url) a+='<a class="btn ghost" href="'+L.workbench_url+'">CMA workbench</a>';
   if(L.cma_url) a+='<a class="btn ghost" href="'+L.cma_url+'" target="_blank">CMA client page</a>';
