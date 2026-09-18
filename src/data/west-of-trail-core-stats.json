@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-17T10:53:00.872582+00:00",
+  "lastUpdated": "2026-09-18T10:53:08.137166+00:00",
   "counts": {
-    "sold": 259,
+    "sold": 260,
     "pending": 32,
     "active": 92,
-    "total": 291
+    "total": 292
   },
   "metrics": {
-    "avgPrice": "$2,120,397",
-    "avgPricePerSqFt": "$663",
+    "avgPrice": "$2,115,012",
+    "avgPricePerSqFt": "$662",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,763",
+    "avgLivingSqFt": "2,761",
     "avgLotSqFt": null,
     "avgDom": 109
   },
@@ -29,10 +29,10 @@
     "newConstructionCount": 29
   },
   "sold": {
-    "count": 41,
-    "medianPrice": "$1,600,000",
-    "medianDom": 118,
-    "saleToListRatio": "86.8%",
+    "count": 42,
+    "medianPrice": "$1,675,000",
+    "medianDom": 120,
+    "saleToListRatio": "86.6%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -54,8 +54,8 @@
     }
   },
   "priceBands": {
-    "under900k": 24,
-    "band900kTo1_5m": 10,
+    "under900k": 25,
+    "band900kTo1_5m": 9,
     "band1_5mTo3m": 22,
     "band3mPlus": 36
   },
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4669078",
+      "address": "3631 SAN REMO TER",
+      "subdivision": "SAN REMO ESTATES",
+      "soldPrice": "$7,000,000",
+      "soldDate": "2026-09-17",
+      "bedrooms": 4,
+      "bathrooms": 3.5,
+      "livingSqFt": "4,705",
+      "yearBuilt": 2021,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4694616",
       "address": "1915 CLEMATIS ST",
@@ -118,19 +131,6 @@
       "yearBuilt": 2026,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4687005",
-      "address": "3319 S OSPREY AVE",
-      "subdivision": "POINSETTIA PARK 2",
-      "soldPrice": "$1,750,000",
-      "soldDate": "2026-09-09",
-      "bedrooms": 4,
-      "bathrooms": 4.5,
-      "livingSqFt": "3,554",
-      "yearBuilt": 2023,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -188,9 +188,9 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 17,
-      "soldCount": 28,
+      "soldCount": 29,
       "soldMedianPricePerSqFt": "$1,052",
-      "soldMedianPrice": "$4,162,500",
+      "soldMedianPrice": "$4,450,000",
       "lowSample": false
     },
     {
@@ -228,15 +228,15 @@
     "label": "balanced market",
     "activeCount": 92,
     "sold365Count": 205,
-    "sold90Count": 41,
+    "sold90Count": 42,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 239,
+      "soldCount": 240,
       "activeCount": 84,
       "soldMedianPrice": "$1,600,000",
-      "soldMedianPricePerSqFt": "$621"
+      "soldMedianPricePerSqFt": "$625"
     },
     "condo": {
       "soldCount": 20,
@@ -258,7 +258,7 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,600,000 ($621/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
+      "a": "Single-family homes sell around $1,600,000 ($625/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
     },
     {
       "facet": "range",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 118 days on market and closed at 86.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 120 days on market and closed at 86.6% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

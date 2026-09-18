@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-17T10:53:03.859475+00:00",
+  "lastUpdated": "2026-09-18T10:53:11.244741+00:00",
   "counts": {
-    "sold": 889,
+    "sold": 890,
     "pending": 77,
-    "active": 210,
-    "total": 966
+    "active": 208,
+    "total": 967
   },
   "metrics": {
-    "avgPrice": "$562,745",
+    "avgPrice": "$562,343",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,052",
+    "avgLivingSqFt": "2,051",
     "avgLotSqFt": null,
     "avgDom": 80
   },
@@ -22,10 +22,10 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 210,
-    "medianPrice": "$415,000",
+    "count": 208,
+    "medianPrice": "$417,000",
     "medianPricePerSqFt": "$253",
-    "waterfrontCount": 37,
+    "waterfrontCount": 36,
     "newConstructionCount": 30
   },
   "sold": {
@@ -36,7 +36,7 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.6,
+    "condo": 5.5,
     "sfhVilla": 2.9,
     "blended": 3.6,
     "method": "active / (trailing-12mo closed / 12)",
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 190,
+    "under900k": 188,
     "band900kTo1_5m": 17,
     "band1_5mTo3m": 3,
     "band3mPlus": 0
@@ -62,11 +62,24 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 210
+      "count": 208
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4690061",
+      "address": "11176 ROSEATE CT",
+      "subdivision": "SANDHILL PRESERVE",
+      "soldPrice": "$975,000",
+      "soldDate": "2026-09-16",
+      "bedrooms": 4,
+      "bathrooms": 4.0,
+      "livingSqFt": "3,704",
+      "yearBuilt": 2014,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4698015",
       "address": "5153 HIGHBURY CIR",
@@ -118,19 +131,6 @@
       "yearBuilt": 2021,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4695500",
-      "address": "9532 FOREST HILLS CIRCLE",
-      "subdivision": "STONEYBROOK GOLF & COUNTRY CLUB",
-      "soldPrice": "$538,500",
-      "soldDate": "2026-09-15",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,741",
-      "yearBuilt": 1998,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 32,
-      "avgPrice": "$311,047",
-      "avgPricePerSqFt": "$194",
-      "avgLivingSqFt": "1,614",
-      "avgDom": 115
+      "activeCount": 30,
+      "avgPrice": "$317,383",
+      "avgPricePerSqFt": "$196",
+      "avgLivingSqFt": "1,635",
+      "avgDom": 118
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$298,216",
       "avgPricePerSqFt": "$229",
       "avgLivingSqFt": "1,299",
-      "avgDom": 116
+      "avgDom": 117
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$398,533",
       "avgPricePerSqFt": "$240",
       "avgLivingSqFt": "1,679",
-      "avgDom": 90
+      "avgDom": 91
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$349,533",
       "avgPricePerSqFt": "$218",
       "avgLivingSqFt": "1,605",
-      "avgDom": 91
+      "avgDom": 92
     }
   ],
   "condoTiersScope": {
@@ -197,15 +197,15 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 40,
-      "soldCount": 204,
-      "soldMedianPricePerSqFt": "$260",
+      "soldCount": 205,
+      "soldMedianPricePerSqFt": "$261",
       "soldMedianPrice": "$475,000",
       "lowSample": false
     },
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 37,
+      "activeCount": 36,
       "soldCount": 190,
       "soldMedianPricePerSqFt": "$274",
       "soldMedianPrice": "$592,000",
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 133,
+      "activeCount": 132,
       "soldCount": 493,
       "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$440,000",
@@ -223,37 +223,37 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 3.6,
-    "monthsOfSupplyCondo": 5.6,
+    "monthsOfSupplyCondo": 5.5,
     "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
-    "activeCount": 210,
-    "sold365Count": 700,
+    "activeCount": 208,
+    "sold365Count": 698,
     "sold90Count": 168,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 505,
+      "soldCount": 506,
       "activeCount": 83,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
       "soldCount": 384,
-      "activeCount": 127,
+      "activeCount": 125,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 37
+    "activeWaterfront": 36
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 210 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 208 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,7 +263,7 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $415,000."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $417,000."
     },
     {
       "facet": "speed",
@@ -273,7 +273,7 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 37 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 36 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

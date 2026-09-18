@@ -2,30 +2,30 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-14T11:09:06.442090+00:00",
+  "lastUpdated": "2026-09-18T10:53:10.466543+00:00",
   "counts": {
     "sold": 39,
-    "pending": 2,
-    "active": 15,
-    "total": 41
+    "pending": 4,
+    "active": 13,
+    "total": 43
   },
   "metrics": {
-    "avgPrice": "$4,365,183",
-    "avgPricePerSqFt": "$1,115",
+    "avgPrice": "$4,387,733",
+    "avgPricePerSqFt": "$1,127",
     "avgYearBuilt": 1991,
-    "avgLivingSqFt": "3,800",
-    "avgLotSqFt": "14,446",
-    "avgDom": 110
+    "avgLivingSqFt": "3,772",
+    "avgLotSqFt": "14,430",
+    "avgDom": 117
   },
   "range": {
     "minPrice": "$1,150,000",
     "maxPrice": "$13,950,000"
   },
   "active": {
-    "count": 15,
+    "count": 13,
     "medianPrice": "$6,990,000",
     "medianPricePerSqFt": "$1,456",
-    "waterfrontCount": 9,
+    "waterfrontCount": 8,
     "newConstructionCount": 5
   },
   "sold": {
@@ -37,8 +37,8 @@
   },
   "monthsOfSupply": {
     "condo": null,
-    "sfhVilla": 5.5,
-    "blended": 5.5,
+    "sfhVilla": 4.7,
+    "blended": 4.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -52,19 +52,19 @@
   "priceBands": {
     "under900k": 0,
     "band900kTo1_5m": 1,
-    "band1_5mTo3m": 3,
-    "band3mPlus": 11
+    "band1_5mTo3m": 2,
+    "band3mPlus": 10
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 15
+      "count": 13
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 11
+      "count": 9
     }
   ],
   "recentSoldComps": [
@@ -149,7 +149,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 8,
+      "activeCount": 7,
       "soldCount": 24,
       "soldMedianPricePerSqFt": "$1,305",
       "soldMedianPrice": "$4,806,250",
@@ -167,7 +167,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 6,
+      "activeCount": 5,
       "soldCount": 13,
       "soldMedianPricePerSqFt": "$834",
       "soldMedianPrice": "$2,185,000",
@@ -175,11 +175,11 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.5,
+    "monthsOfSupply": 4.7,
     "monthsOfSupplyCondo": null,
-    "monthsOfSupplySfhVilla": 5.5,
-    "label": "balanced market",
-    "activeCount": 15,
+    "monthsOfSupplySfhVilla": 4.7,
+    "label": "seller's market",
+    "activeCount": 13,
     "sold365Count": 33,
     "sold90Count": 8,
     "method": "active / (trailing-12mo closed / 12)"
@@ -187,20 +187,20 @@
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 39,
-      "activeCount": 15,
+      "activeCount": 13,
       "soldMedianPrice": "$4,000,000",
       "soldMedianPricePerSqFt": "$1,152"
     }
   },
   "boating": {
-    "activeWithDock": 5,
-    "activeWaterfront": 9
+    "activeWithDock": 4,
+    "activeWaterfront": 8
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Bird Key a buyer's or seller's market right now?",
-      "a": "With 15 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 13 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 4.7 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "range",
@@ -215,7 +215,7 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Bird Key homes have a dock?",
-      "a": "Of 9 active waterfront listings, 5 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 8 active waterfront listings, 4 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
