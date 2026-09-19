@@ -2,15 +2,15 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-18T10:53:11.244741+00:00",
+  "lastUpdated": "2026-09-19T10:53:05.578258+00:00",
   "counts": {
-    "sold": 890,
-    "pending": 77,
-    "active": 208,
+    "sold": 891,
+    "pending": 76,
+    "active": 209,
     "total": 967
   },
   "metrics": {
-    "avgPrice": "$562,343",
+    "avgPrice": "$562,589",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
     "avgLivingSqFt": "2,051",
@@ -22,15 +22,15 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 208,
-    "medianPrice": "$417,000",
+    "count": 209,
+    "medianPrice": "$415,000",
     "medianPricePerSqFt": "$253",
-    "waterfrontCount": 36,
+    "waterfrontCount": 37,
     "newConstructionCount": 30
   },
   "sold": {
-    "count": 168,
-    "medianPrice": "$457,500",
+    "count": 169,
+    "medianPrice": "$455,000",
     "medianDom": 55,
     "saleToListRatio": "91.8%",
     "windowDays": 90
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 188,
+    "under900k": 189,
     "band900kTo1_5m": 17,
     "band1_5mTo3m": 3,
     "band3mPlus": 0
@@ -62,11 +62,24 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 208
+      "count": 209
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4679786",
+      "address": "7526 QUINTO DR",
+      "subdivision": "VILLAGEWALK",
+      "soldPrice": "$400,000",
+      "soldDate": "2026-09-18",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,534",
+      "yearBuilt": 2003,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4690061",
       "address": "11176 ROSEATE CT",
@@ -118,19 +131,6 @@
       "yearBuilt": 1989,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4701124",
-      "address": "8712 BAY MEADOW DR",
-      "subdivision": "SUNRISE PRESERVE",
-      "soldPrice": "$585,500",
-      "soldDate": "2026-09-15",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,843",
-      "yearBuilt": 2021,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 30,
-      "avgPrice": "$317,383",
-      "avgPricePerSqFt": "$196",
-      "avgLivingSqFt": "1,635",
-      "avgDom": 118
+      "activeCount": 32,
+      "avgPrice": "$316,422",
+      "avgPricePerSqFt": "$195",
+      "avgLivingSqFt": "1,633",
+      "avgDom": 114
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 75,
-      "avgPrice": "$298,216",
+      "activeCount": 74,
+      "avgPrice": "$298,745",
       "avgPricePerSqFt": "$229",
-      "avgLivingSqFt": "1,299",
-      "avgDom": 117
+      "avgLivingSqFt": "1,300",
+      "avgDom": 116
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$398,533",
       "avgPricePerSqFt": "$240",
       "avgLivingSqFt": "1,679",
-      "avgDom": 91
+      "avgDom": 92
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$349,533",
       "avgPricePerSqFt": "$218",
       "avgLivingSqFt": "1,605",
-      "avgDom": 92
+      "avgDom": 93
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 40,
+      "activeCount": 41,
       "soldCount": 205,
       "soldMedianPricePerSqFt": "$261",
       "soldMedianPrice": "$475,000",
@@ -205,7 +205,7 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 36,
+      "activeCount": 37,
       "soldCount": 190,
       "soldMedianPricePerSqFt": "$274",
       "soldMedianPrice": "$592,000",
@@ -214,8 +214,8 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 132,
-      "soldCount": 493,
+      "activeCount": 131,
+      "soldCount": 494,
       "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$440,000",
       "lowSample": false
@@ -226,9 +226,9 @@
     "monthsOfSupplyCondo": 5.5,
     "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
-    "activeCount": 208,
-    "sold365Count": 698,
-    "sold90Count": 168,
+    "activeCount": 209,
+    "sold365Count": 699,
+    "sold90Count": 169,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -239,21 +239,21 @@
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 384,
-      "activeCount": 125,
+      "soldCount": 385,
+      "activeCount": 126,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 36
+    "activeWaterfront": 37
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 208 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 209 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,7 +263,7 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $417,000."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $415,000."
     },
     {
       "facet": "speed",
@@ -273,7 +273,7 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 36 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 37 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

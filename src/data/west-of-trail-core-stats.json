@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-18T10:53:08.137166+00:00",
+  "lastUpdated": "2026-09-19T10:53:02.621721+00:00",
   "counts": {
-    "sold": 260,
+    "sold": 261,
     "pending": 32,
-    "active": 92,
-    "total": 292
+    "active": 90,
+    "total": 293
   },
   "metrics": {
-    "avgPrice": "$2,115,012",
-    "avgPricePerSqFt": "$662",
+    "avgPrice": "$2,128,186",
+    "avgPricePerSqFt": "$664",
     "avgYearBuilt": 1983,
-    "avgLivingSqFt": "2,761",
+    "avgLivingSqFt": "2,770",
     "avgLotSqFt": null,
     "avgDom": 109
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 92,
+    "count": 90,
     "medianPrice": "$2,222,500",
     "medianPricePerSqFt": "$800",
-    "waterfrontCount": 19,
+    "waterfrontCount": 18,
     "newConstructionCount": 29
   },
   "sold": {
-    "count": 42,
-    "medianPrice": "$1,675,000",
-    "medianDom": 120,
-    "saleToListRatio": "86.6%",
+    "count": 43,
+    "medianPrice": "$1,600,000",
+    "medianDom": 118,
+    "saleToListRatio": "86.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 6.0,
-    "sfhVilla": 5.3,
-    "blended": 5.4,
+    "condo": 5.2,
+    "sfhVilla": 5.2,
+    "blended": 5.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,15 +54,15 @@
     }
   },
   "priceBands": {
-    "under900k": 25,
+    "under900k": 24,
     "band900kTo1_5m": 9,
     "band1_5mTo3m": 22,
-    "band3mPlus": 36
+    "band3mPlus": 35
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 92
+      "count": 90
     }
   ],
   "buildingClasses": [],
@@ -79,6 +79,19 @@
       "yearBuilt": 2021,
       "propertyType": "Residential",
       "isWaterfront": true
+    },
+    {
+      "listingId": "A4697370",
+      "address": "1631 WORRINGTON ST",
+      "subdivision": "JOHNSON ESTATES",
+      "soldPrice": "$785,000",
+      "soldDate": "2026-09-17",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,469",
+      "yearBuilt": 2015,
+      "propertyType": "Residential",
+      "isWaterfront": false
     },
     {
       "listingId": "A4694616",
@@ -118,19 +131,6 @@
       "yearBuilt": 2009,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4626321",
-      "address": "4431 CAMINO REAL",
-      "subdivision": "OYSTER BAY ESTATES",
-      "soldPrice": "$4,225,000",
-      "soldDate": "2026-09-10",
-      "bedrooms": 4,
-      "bathrooms": 4.5,
-      "livingSqFt": "3,787",
-      "yearBuilt": 2026,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 8,
-      "avgPrice": "$341,875",
-      "avgPricePerSqFt": "$300",
-      "avgLivingSqFt": "1,134",
-      "avgDom": 94
+      "activeCount": 7,
+      "avgPrice": "$369,429",
+      "avgPricePerSqFt": "$321",
+      "avgLivingSqFt": "1,154",
+      "avgDom": 86
     },
     {
       "tier": "1990to2005",
@@ -187,7 +187,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 17,
+      "activeCount": 16,
       "soldCount": 29,
       "soldMedianPricePerSqFt": "$1,052",
       "soldMedianPrice": "$4,450,000",
@@ -214,51 +214,51 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 72,
-      "soldCount": 218,
-      "soldMedianPricePerSqFt": "$572",
+      "activeCount": 71,
+      "soldCount": 219,
+      "soldMedianPricePerSqFt": "$570",
       "soldMedianPrice": "$1,450,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.4,
-    "monthsOfSupplyCondo": 6.0,
-    "monthsOfSupplySfhVilla": 5.3,
+    "monthsOfSupply": 5.2,
+    "monthsOfSupplyCondo": 5.2,
+    "monthsOfSupplySfhVilla": 5.2,
     "label": "balanced market",
-    "activeCount": 92,
-    "sold365Count": 205,
-    "sold90Count": 42,
+    "activeCount": 90,
+    "sold365Count": 206,
+    "sold90Count": 43,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 240,
-      "activeCount": 84,
+      "soldCount": 241,
+      "activeCount": 83,
       "soldMedianPrice": "$1,600,000",
-      "soldMedianPricePerSqFt": "$625"
+      "soldMedianPricePerSqFt": "$621"
     },
     "condo": {
       "soldCount": 20,
-      "activeCount": 8,
+      "activeCount": 7,
       "soldMedianPrice": "$322,500",
       "soldMedianPricePerSqFt": "$320"
     }
   },
   "boating": {
     "activeWithDock": 14,
-    "activeWaterfront": 19
+    "activeWaterfront": 18
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 92 active listings and roughly 17 closed sales a month (trailing 12 months), West Of Trail Core has about 5.4 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 90 active listings and roughly 17 closed sales a month (trailing 12 months), West Of Trail Core has about 5.2 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,600,000 ($625/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
+      "a": "Single-family homes sell around $1,600,000 ($621/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
     },
     {
       "facet": "range",
@@ -268,12 +268,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 120 days on market and closed at 86.6% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 118 days on market and closed at 86.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail Core homes have a dock?",
-      "a": "Of 19 active waterfront listings, 14 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 18 active waterfront listings, 14 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
