@@ -2,16 +2,16 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-19T10:53:05.578258+00:00",
+  "lastUpdated": "2026-09-20T10:50:56.779113+00:00",
   "counts": {
-    "sold": 891,
-    "pending": 76,
-    "active": 209,
-    "total": 967
+    "sold": 892,
+    "pending": 78,
+    "active": 207,
+    "total": 970
   },
   "metrics": {
-    "avgPrice": "$562,589",
-    "avgPricePerSqFt": "$262",
+    "avgPrice": "$562,925",
+    "avgPricePerSqFt": "$263",
     "avgYearBuilt": 2001,
     "avgLivingSqFt": "2,051",
     "avgLotSqFt": null,
@@ -22,21 +22,21 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 209,
+    "count": 207,
     "medianPrice": "$415,000",
-    "medianPricePerSqFt": "$253",
-    "waterfrontCount": 37,
+    "medianPricePerSqFt": "$251",
+    "waterfrontCount": 36,
     "newConstructionCount": 30
   },
   "sold": {
-    "count": 169,
-    "medianPrice": "$455,000",
+    "count": 170,
+    "medianPrice": "$452,500",
     "medianDom": 55,
-    "saleToListRatio": "91.8%",
+    "saleToListRatio": "91.7%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.5,
+    "condo": 5.4,
     "sfhVilla": 2.9,
     "blended": 3.6,
     "method": "active / (trailing-12mo closed / 12)",
@@ -54,15 +54,15 @@
     }
   },
   "priceBands": {
-    "under900k": 189,
-    "band900kTo1_5m": 17,
+    "under900k": 188,
+    "band900kTo1_5m": 16,
     "band1_5mTo3m": 3,
     "band3mPlus": 0
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 209
+      "count": 207
     }
   ],
   "buildingClasses": [],
@@ -77,6 +77,19 @@
       "bathrooms": 2.0,
       "livingSqFt": "1,534",
       "yearBuilt": 2003,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4684462",
+      "address": "5134 NORTHRIDGE RD #302",
+      "subdivision": "SERENADE ON PALMER RANCH",
+      "soldPrice": "$119,900",
+      "soldDate": "2026-09-18",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "843",
+      "yearBuilt": 1999,
       "propertyType": "Residential",
       "isWaterfront": false
     },
@@ -118,19 +131,6 @@
       "yearBuilt": 2005,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4700180",
-      "address": "6761 PASEO CASTILLE",
-      "subdivision": "MARBELLA",
-      "soldPrice": "$360,000",
-      "soldDate": "2026-09-16",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,755",
-      "yearBuilt": 1989,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -142,17 +142,17 @@
       "avgPrice": "$316,422",
       "avgPricePerSqFt": "$195",
       "avgLivingSqFt": "1,633",
-      "avgDom": 114
+      "avgDom": 115
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 74,
-      "avgPrice": "$298,745",
+      "avgPrice": "$298,853",
       "avgPricePerSqFt": "$229",
       "avgLivingSqFt": "1,300",
-      "avgDom": 116
+      "avgDom": 117
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$398,533",
       "avgPricePerSqFt": "$240",
       "avgLivingSqFt": "1,679",
-      "avgDom": 92
+      "avgDom": 93
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$349,533",
       "avgPricePerSqFt": "$218",
       "avgLivingSqFt": "1,605",
-      "avgDom": 93
+      "avgDom": 94
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 41,
+      "activeCount": 40,
       "soldCount": 205,
       "soldMedianPricePerSqFt": "$261",
       "soldMedianPrice": "$475,000",
@@ -205,7 +205,7 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 37,
+      "activeCount": 36,
       "soldCount": 190,
       "soldMedianPricePerSqFt": "$274",
       "soldMedianPrice": "$592,000",
@@ -215,7 +215,7 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 131,
-      "soldCount": 494,
+      "soldCount": 495,
       "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$440,000",
       "lowSample": false
@@ -223,23 +223,23 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 3.6,
-    "monthsOfSupplyCondo": 5.5,
+    "monthsOfSupplyCondo": 5.4,
     "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
-    "activeCount": 209,
-    "sold365Count": 699,
-    "sold90Count": 169,
+    "activeCount": 207,
+    "sold365Count": 698,
+    "sold90Count": 170,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 506,
-      "activeCount": 83,
+      "activeCount": 81,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 385,
+      "soldCount": 386,
       "activeCount": 126,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
@@ -247,13 +247,13 @@
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 37
+    "activeWaterfront": 36
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 209 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 207 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -268,12 +268,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 55 days on market and closed at 91.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 55 days on market and closed at 91.7% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 37 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 36 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
