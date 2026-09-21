@@ -2,16 +2,16 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-20T10:50:53.046048+00:00",
+  "lastUpdated": "2026-09-21T10:50:13.850327+00:00",
   "counts": {
     "sold": 289,
-    "pending": 66,
-    "active": 158,
-    "total": 355
+    "pending": 67,
+    "active": 157,
+    "total": 356
   },
   "metrics": {
-    "avgPrice": "$1,929,797",
-    "avgPricePerSqFt": "$830",
+    "avgPrice": "$1,930,542",
+    "avgPricePerSqFt": "$831",
     "avgYearBuilt": 2003,
     "avgLivingSqFt": "2,078",
     "avgLotSqFt": null,
@@ -22,23 +22,23 @@
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 158,
+    "count": 157,
     "medianPrice": "$1,999,000",
-    "medianPricePerSqFt": "$959",
+    "medianPricePerSqFt": "$957",
     "waterfrontCount": 51,
-    "newConstructionCount": 76
+    "newConstructionCount": 75
   },
   "sold": {
-    "count": 57,
-    "medianPrice": "$1,200,000",
-    "medianDom": 106,
-    "saleToListRatio": "86.9%",
+    "count": 54,
+    "medianPrice": "$1,218,750",
+    "medianDom": 123,
+    "saleToListRatio": "86.5%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 8.2,
+    "condo": 8.1,
     "sfhVilla": 7.8,
-    "blended": 8.2,
+    "blended": 8.1,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -56,13 +56,13 @@
   "priceBands": {
     "under900k": 34,
     "band900kTo1_5m": 31,
-    "band1_5mTo3m": 38,
+    "band1_5mTo3m": 37,
     "band3mPlus": 55
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 158
+      "count": 157
     }
   ],
   "buildingClasses": [],
@@ -142,7 +142,7 @@
       "avgPrice": "$1,157,076",
       "avgPricePerSqFt": "$677",
       "avgLivingSqFt": "1,602",
-      "avgDom": 171
+      "avgDom": 172
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,555,729",
       "avgPricePerSqFt": "$720",
       "avgLivingSqFt": "2,026",
-      "avgDom": 121
+      "avgDom": 122
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$1,629,818",
       "avgPricePerSqFt": "$744",
       "avgLivingSqFt": "2,019",
-      "avgDom": 105
+      "avgDom": 106
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 74,
-      "avgPrice": "$4,278,973",
-      "avgPricePerSqFt": "$1,413",
-      "avgLivingSqFt": "2,906",
-      "avgDom": 208
+      "activeCount": 73,
+      "avgPrice": "$4,307,521",
+      "avgPricePerSqFt": "$1,419",
+      "avgLivingSqFt": "2,915",
+      "avgDom": 210
     }
   ],
   "condoTiersScope": {
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 46,
+      "activeCount": 45,
       "soldCount": 79,
       "soldMedianPricePerSqFt": "$555",
       "soldMedianPrice": "$749,000",
@@ -222,13 +222,13 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 8.2,
-    "monthsOfSupplyCondo": 8.2,
+    "monthsOfSupply": 8.1,
+    "monthsOfSupplyCondo": 8.1,
     "monthsOfSupplySfhVilla": 7.8,
     "label": "buyer's market",
-    "activeCount": 158,
+    "activeCount": 157,
     "sold365Count": 232,
-    "sold90Count": 57,
+    "sold90Count": 54,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -240,7 +240,7 @@
     },
     "condo": {
       "soldCount": 278,
-      "activeCount": 154,
+      "activeCount": 153,
       "soldMedianPrice": "$1,200,000",
       "soldMedianPricePerSqFt": "$718"
     }
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Downtown Sarasota a buyer's or seller's market right now?",
-      "a": "With 158 active listings and roughly 19 closed sales a month (trailing 12 months), Downtown Sarasota has about 8.2 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 157 active listings and roughly 19 closed sales a month (trailing 12 months), Downtown Sarasota has about 8.1 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Downtown Sarasota?",
-      "a": "Recently sold homes took a median 106 days on market and closed at 86.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 123 days on market and closed at 86.5% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
