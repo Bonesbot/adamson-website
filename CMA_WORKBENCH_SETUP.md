@@ -127,3 +127,24 @@ Zillow forecast, one-time setup:
    1st and 15th, 12:00 UTC) keeps it current. Free public CSV, no key.
 3. The client page reads `?action=forecast&zip=` from `cma-adjustments`. ZIP comes from
    `data.json subject.zip`, or type one in the workbench.
+
+## Client page controls (added 2026-09-22, evening)
+
+Workbench card "Client Page: Sections, Titles & Fields", all saved in the overlay:
+- `include{...}`: untick a section (Your Residence, Comparable Sales, Currently on the Market,
+  Up Close, Pricing Ladder, Comp Locations, Market Update, Zillow forecast, Online Estimates)
+  and it leaves the client page and the PDF.
+- `titles{...}`: retitle any section for the client (blank = default).
+- `hidden{subject:[], comps:[], mu:[]}`: per-field hides (subject facts, comp columns, Market
+  Update columns). Hidden items go grey and struck through in the workbench, including the
+  matching columns in the adjustment grid and the Market Update grid.
+- Comparable Sales now has a Status column on both pages. The grid's Status box overrides the
+  MLS status per comp (`overlay[mls].statusLabel`), for failed listings shown as comps:
+  "Withdrawn (WDC)", "Canceled (CAN)", "Coming Soon" and so on. Non-sales carry their last
+  asking price in `price`, and the client page says "asking" on their Up Close card.
+- Subject facts include Garage / Parking (`subject.parking` free text, else `subject.garage`).
+- Market Update gets a Dist (mi) column (haversine from `subject.lat/lng` to the row's MLS
+  Latitude/Longitude, captured by the CSV importer; rows imported before this need a re-import).
+- Online Estimates: `avms[{name,value,asOf,url}]`. No AVM has a public API for agents, so
+  "Open lookup pages" opens Zillow, Redfin, Realtor.com and Homes.com searches for the subject
+  in new tabs and you type the numbers in. The section renders only when a value is entered.

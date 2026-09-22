@@ -97,6 +97,8 @@
   .zf .t .v.neg { color:#8a3b2f; }
   .zf .t .l { font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:#7c8798; margin-top:4px; }
   .zf .t .s { font-size:11px; color:#5a6b85; margin-top:3px; }
+  .zf .t .v.avm { font-size:20px; }
+  .zf .t .n { font-family:Georgia,serif; font-size:13px; color:var(--navy); margin-bottom:2px; }
   .zf-note { font-size:11px; color:#5a6b85; line-height:1.5; margin-top:12px; border-left:3px solid var(--gold); padding-left:10px; }
   @media (max-width:820px){ .zf{grid-template-columns:repeat(2,1fr);} }
   @media print {
@@ -138,19 +140,19 @@
 <div class="wrap">
   <div class="subject-strip" id="strip"></div>
   <div class="card"><div class="estimate-box" id="estimate"></div></div>
-  <div class="card">
+  <div class="card" id="subject-card">
     <h2 id="subject-h2">Your Home</h2>
     <div class="sub">The baseline every comparable sale is measured against</div>
     <table id="subject-table"></table>
   </div>
-  <div class="card">
-    <h2>Comparable Sales</h2>
+  <div class="card" id="comps-card">
+    <h2 id="t-comps">Comparable Sales</h2>
     <div class="sub" id="comps-sub"></div>
     <div style="overflow-x:auto;"><table id="comps-table"></table></div>
     <div style="font-size:11px;color:#8a94a5;margin-top:8px;" id="ppsf-note"></div>
   </div>
   <div class="card" id="actives-card">
-    <h2>Currently on the Market</h2>
+    <h2 id="t-actives">Currently on the Market</h2>
     <div class="sub">What a buyer can choose instead today. These are asking prices, not sales.</div>
     <div style="overflow-x:auto;"><table id="actives-table"></table></div>
   </div>
@@ -164,24 +166,30 @@
       Highlighted and bold rows are the ones your agent wants you to notice. Source: Stellar MLS.</div>
   </div>
   <div class="card" id="zf-card" style="display:none;">
-    <h2>Zillow Zip Code Forecast</h2>
+    <h2 id="t-forecast">Zillow Zip Code Forecast</h2>
     <div class="sub" id="zf-sub"></div>
     <div class="zf" id="zf-tiles"></div>
     <div class="zf-note" id="zf-note"></div>
   </div>
   <div class="card" id="blocks-card">
-    <h2>The Comparables, Up Close</h2>
+    <h2 id="t-blocks">The Comparables, Up Close</h2>
     <div class="sub">Photos from each sale, chosen to show the condition and location differences behind the adjustments. Click any photo to enlarge.</div>
     <div id="comp-blocks"></div>
   </div>
-  <div class="grid2">
-    <div class="card">
-      <h2>Pricing Ladder</h2>
+  <div class="card" id="avm-card" style="display:none;">
+    <h2 id="t-avms">Online Estimates</h2>
+    <div class="sub">Automated valuations from public websites, entered by your agent on the date shown. None of them has seen the inside of this home.</div>
+    <div class="zf" id="avm-tiles"></div>
+    <div class="zf-note" id="avm-note"></div>
+  </div>
+  <div class="grid2" id="ladder-map-row">
+    <div class="card" id="ladder-card">
+      <h2 id="t-ladder">Pricing Ladder</h2>
       <div class="sub">Where each price point lands relative to the current list price</div>
       <table class="ladder" id="ladder"></table>
     </div>
     <div class="card" id="map-card">
-      <h2>Comp Locations</h2>
+      <h2 id="t-map">Comp Locations</h2>
       <div class="sub">★ Subject · Lettered pins = comparable sales · Hollow pins = active listings</div>
       <div id="map"></div>
     </div>
@@ -222,6 +230,19 @@ const rooms  = o => (o.beds||0) + (o.fullBaths||0) + (o.halfBaths||0)*0.5;
 const num    = (v,d) => (v===0||v) ? Number(v).toLocaleString() : (d??"—");
 
 let D=null, ADJ=null, lbList=[], lbIdx=0;
+/* Client-page controls that live in the overlay (edited in the workbench):
+     ADJ.titles  {subject, comps, actives, blocks, ladder, map, marketUpdate, forecast, avms}   section headings
+     ADJ.include {subject, comps, actives, blocks, ladder, map, marketUpdate, forecast, avms}   false hides the section
+     ADJ.hidden  {subject:[field keys], comps:[column keys], mu:[column keys]}                  per-field hides
+     ADJ.avms    [{name, value, asOf, url}]                                                       online estimates  */
+const DEFAULT_TITLES = { subject:null, comps:"Comparable Sales", actives:"Currently on the Market", blocks:"The Comparables, Up Close",
+  ladder:"Pricing Ladder", map:"Comp Locations", marketUpdate:"Market Update", forecast:"Zillow Zip Code Forecast", avms:"Online Estimates" };
+const T   = (k,dflt) => ((ADJ&&ADJ.titles)||{})[k] || DEFAULT_TITLES[k] || dflt || "";
+const INC = k => { const v=((ADJ&&ADJ.include)||{})[k]; return v!==false; };
+const HID = (g,k) => (((ADJ&&ADJ.hidden)||{})[g]||[]).includes(k);
+const distMi = (a,b,c,d) => { if(![a,b,c,d].every(v=>Number.isFinite(Number(v)))) return null;
+  const R=3958.8, toR=x=>x*Math.PI/180, dLat=toR(d-b), dLng=toR(c-a); const h=Math.sin(dLat/2)**2+Math.cos(toR(b))*Math.cos(toR(d))*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.sqrt(h)); };
 const OV = mls => (ADJ && ADJ.overlay && ADJ.overlay[mls]) || { manual:{}, reviewed:false, excluded:false, clientNote:"", photos:[] };
 const P  = k => Number((D.meta.params||{})[k]) || 0;
 function monthsSince(d){ if(!d) return 0; return Math.max(0,(Date.now()-new Date(d+"T12:00:00").getTime())/(1000*60*60*24*30.4375)); }
@@ -239,12 +260,13 @@ const PROFILES = {
       time:    c.price * (P("trendPctMonth")/100) * monthsSince(c.closeDate),
     }),
     compCols: [
-      {h:"Bldg",    c:x=>`<td>${bmark(x.building)}</td>`},
-      {h:"Unit",    cls:"num", c:x=>`<td class="num">${x.unit||"—"}</td>`},
-      {h:"Flr",     cls:"num", c:x=>`<td class="num">${x.floor??"—"}</td>`},
-      {h:"Sold",    cls:"num", c:x=>`<td class="num">${fmtD(x.closeDate)}</td>`},
-      {h:"DOM",     cls:"num", c:x=>`<td class="num">${x.dom??"—"}</td>`},
-      {h:"Fee/mo",  cls:"num", c:x=>`<td class="num">${x.feeMonthly?"$"+num(x.feeMonthly):"—"}</td>`},
+      {k:"building",h:"Bldg",    c:x=>`<td>${bmark(x.building)}</td>`},
+      {k:"unit",    h:"Unit",    cls:"num", c:x=>`<td class="num">${x.unit||"—"}</td>`},
+      {k:"floor",   h:"Flr",     cls:"num", c:x=>`<td class="num">${x.floor??"—"}</td>`},
+      {k:"closeDate",h:"Date",   cls:"num", c:x=>`<td class="num">${fmtD(x.closeDate)}</td>`},
+      {k:"dom",     h:"DOM",     cls:"num", c:x=>`<td class="num">${x.dom??"—"}</td>`},
+      {k:"sqft",    h:"Sq Ft",   cls:"num", c:x=>`<td class="num">${num(x.sqft)}</td>`},
+      {k:"fee",     h:"Fee/mo",  cls:"num", c:x=>`<td class="num">${x.feeMonthly?"$"+num(x.feeMonthly):"—"}</td>`},
     ],
     activeCols: [
       {h:"Bldg", c:x=>`<td>${bmark(x.building)}</td>`},
@@ -253,13 +275,21 @@ const PROFILES = {
       {h:"Built",cls:"num", c:x=>`<td class="num">${x.yearBuilt||"—"}</td>`},
       {h:"Fee/mo",cls:"num",c:x=>`<td class="num">${x.feeMonthly?"$"+num(x.feeMonthly):"—"}</td>`},
     ],
-    subjectRows: s => `
-      <tr><td>Address</td><td><b>${s.address}</b></td><td>Building / Unit / Floor</td><td><b>${s.building?`Bldg ${s.building} · `:""}${s.unit?`Unit ${s.unit} · `:""}Floor ${s.floor??"—"}</b></td></tr>
-      <tr><td>Heated Area</td><td><b>${num(s.sqft)} sq ft</b>${s.totalSqft?` (${num(s.totalSqft)} total)`:""}</td><td>Year Built</td><td><b>${s.yearBuilt}</b></td></tr>
-      <tr><td>Beds / Baths</td><td><b>${s.beds} bd / ${s.fullBaths} ba${s.halfBaths?` + ${s.halfBaths} half`:""}</b></td><td>Condo Fee</td><td><b>$${num(Math.round(s.feeMonthly||0))}/mo</b>${s.feeAnnual?` ($${num(s.feeAnnual)}/yr)`:""}</td></tr>
-      <tr><td>Taxes</td><td><b>${s.taxes?"$"+num(s.taxes):"—"}</b>${s.taxYear?` (${s.taxYear})`:""}</td><td>Pool</td><td><b>${s.pool||"—"}</b></td></tr>
-      <tr><td>Minimum Lease</td><td><b>${s.minLease||"—"}</b>${s.ownershipYearsBeforeLease?`, after ${s.ownershipYearsBeforeLease} year of ownership`:""}</td><td>Pets</td><td><b>${s.pets||"—"}</b></td></tr>
-      <tr><td>View</td><td><b>${s.view||"—"}</b></td><td>Flood Zone / MLS</td><td><b>${s.floodZone?`Zone ${s.floodZone} · `:""}${s.mls||"—"}</b></td></tr>`,
+    subjectFields: s => [
+      {k:"address",  l:"Address", v:`${s.address}`},
+      {k:"bldgUnit", l:"Building / Unit / Floor", v:`${s.building?`Bldg ${s.building} · `:""}${s.unit?`Unit ${s.unit} · `:""}Floor ${s.floor??"\u2014"}`},
+      {k:"sqft",     l:"Heated Area", v:`${num(s.sqft)} sq ft`, x:s.totalSqft?` (${num(s.totalSqft)} total)`:""},
+      {k:"yearBuilt",l:"Year Built", v:`${s.yearBuilt}`},
+      {k:"bedBath",  l:"Beds / Baths", v:`${s.beds} bd / ${s.fullBaths} ba${s.halfBaths?` + ${s.halfBaths} half`:""}`},
+      {k:"fee",      l:"Condo Fee", v:s.feeMonthly?`$${num(Math.round(s.feeMonthly))}/mo`:"\u2014", x:s.feeAnnual?` ($${num(s.feeAnnual)}/yr)`:""},
+      {k:"parking",  l:"Garage / Parking", v:s.parking||(s.garage!=null?`${s.garage} space${s.garage==1?"":"s"}`:"\u2014")},
+      {k:"taxes",    l:"Taxes", v:s.taxes?"$"+num(s.taxes):"\u2014", x:s.taxYear?` (${s.taxYear})`:""},
+      {k:"pool",     l:"Pool", v:s.pool||"\u2014"},
+      {k:"minLease", l:"Minimum Lease", v:s.minLease||"\u2014", x:s.ownershipYearsBeforeLease?`, after ${s.ownershipYearsBeforeLease} year of ownership`:""},
+      {k:"pets",     l:"Pets", v:s.pets||"\u2014"},
+      {k:"view",     l:"View", v:s.view||"\u2014"},
+      {k:"floodMls", l:"Flood Zone / MLS", v:`${s.floodZone?`Zone ${s.floodZone} · `:""}${s.mls||"\u2014"}`},
+    ],
     subjectPin: s => `Bldg ${s.building||"—"}, Floor ${s.floor??"—"}`,
     compPin:  c => `Bldg ${c.building||"—"}, Floor ${c.floor??"—"}`,
     blockLoc: c => ` · Bldg ${c.building||"—"}, Floor ${c.floor??"—"}`,
@@ -277,13 +307,13 @@ const PROFILES = {
       time:    c.price * (P("trendPctMonth")/100) * monthsSince(c.closeDate),
     }),
     compCols: [
-      {h:"Sold",  cls:"num", c:x=>`<td class="num">${fmtD(x.closeDate)}</td>`},
-      {h:"DOM",   cls:"num", c:x=>`<td class="num">${x.dom??"—"}</td>`},
-      {h:"Sq Ft", cls:"num", c:x=>`<td class="num">${num(x.sqft)}</td>`},
-      {h:"Lot",   cls:"num", c:x=>`<td class="num">${num(x.lot)}</td>`},
-      {h:"Built", cls:"num", c:x=>`<td class="num">${x.yearBuilt||"—"}</td>`},
-      {h:"Gar",   cls:"num", c:x=>`<td class="num">${x.garage??"—"}</td>`},
-      {h:"Bd/Ba", cls:"num", c:x=>`<td class="num">${x.beds}/${x.fullBaths}${x.halfBaths?".5":""}</td>`},
+      {k:"closeDate",h:"Date", cls:"num", c:x=>`<td class="num">${fmtD(x.closeDate)}</td>`},
+      {k:"dom",   h:"DOM",   cls:"num", c:x=>`<td class="num">${x.dom??"—"}</td>`},
+      {k:"sqft",  h:"Sq Ft", cls:"num", c:x=>`<td class="num">${num(x.sqft)}</td>`},
+      {k:"lot",   h:"Lot",   cls:"num", c:x=>`<td class="num">${num(x.lot)}</td>`},
+      {k:"yearBuilt",h:"Built", cls:"num", c:x=>`<td class="num">${x.yearBuilt||"—"}</td>`},
+      {k:"garage",h:"Gar",   cls:"num", c:x=>`<td class="num">${x.garage??"—"}</td>`},
+      {k:"bedBath",h:"Bd/Ba", cls:"num", c:x=>`<td class="num">${x.beds}/${x.fullBaths}${x.halfBaths?".5":""}</td>`},
     ],
     activeCols: [
       {h:"Sq Ft", cls:"num", c:x=>`<td class="num">${num(x.sqft)}</td>`},
@@ -291,11 +321,18 @@ const PROFILES = {
       {h:"Built", cls:"num", c:x=>`<td class="num">${x.yearBuilt||"—"}</td>`},
       {h:"Gar",   cls:"num", c:x=>`<td class="num">${x.garage??"—"}</td>`},
     ],
-    subjectRows: s => `
-      <tr><td>Address</td><td><b>${s.address}, ${s.city}</b> (${s.subdivision})</td><td>Heated Space</td><td><b>${num(s.sqft)} sq ft</b></td></tr>
-      <tr><td>Lot Size</td><td><b>${num(s.lot)} sq ft</b></td><td>Year Built</td><td><b>${s.yearBuilt}</b></td></tr>
-      <tr><td>Garage</td><td><b>${s.garage??"—"} spaces</b></td><td>Beds / Baths</td><td><b>${s.beds} bd / ${s.fullBaths} ba${s.halfBaths?` + ${s.halfBaths} half`:""}</b></td></tr>
-      <tr><td>Taxes</td><td><b>${s.taxes?"$"+num(s.taxes):"—"}</b>${s.taxYear?` (${s.taxYear})`:""}</td><td>Flood Zone / MLS</td><td><b>${s.floodZone?`Zone ${s.floodZone} · `:""}${s.mls||"—"}</b></td></tr>`,
+    subjectFields: s => [
+      {k:"address",  l:"Address", v:`${s.address}, ${s.city}`, x:s.subdivision?` (${s.subdivision})`:""},
+      {k:"sqft",     l:"Heated Space", v:`${num(s.sqft)} sq ft`},
+      {k:"lot",      l:"Lot Size", v:`${num(s.lot)} sq ft`},
+      {k:"yearBuilt",l:"Year Built", v:`${s.yearBuilt}`},
+      {k:"parking",  l:"Garage / Parking", v:s.parking||(s.garage!=null?`${s.garage} space${s.garage==1?"":"s"}`:"\u2014")},
+      {k:"bedBath",  l:"Beds / Baths", v:`${s.beds} bd / ${s.fullBaths} ba${s.halfBaths?` + ${s.halfBaths} half`:""}`},
+      {k:"taxes",    l:"Taxes", v:s.taxes?"$"+num(s.taxes):"\u2014", x:s.taxYear?` (${s.taxYear})`:""},
+      {k:"pool",     l:"Pool", v:s.pool||"\u2014"},
+      {k:"view",     l:"View", v:s.view||"\u2014"},
+      {k:"floodMls", l:"Flood Zone / MLS", v:`${s.floodZone?`Zone ${s.floodZone} · `:""}${s.mls||"\u2014"}`},
+    ],
     subjectPin: s => s.subdivision||"",
     compPin:  c => c.subdivision||"",
     blockLoc: c => c.subdivision?` · ${c.subdivision}`:"",
@@ -310,42 +347,60 @@ function renderMarketUpdate(){
   const inc = (ADJ && ADJ.include) || {};
   const mu  = (ADJ && ADJ.marketUpdate) || null;
   const card = document.getElementById("mu-card");
-  if (!mu || inc.marketUpdate === false || !(mu.rows||[]).length) { card.style.display = "none"; return; }
+  if (!mu || !INC("marketUpdate") || !(mu.rows||[]).length) { card.style.display = "none"; return; }
   card.style.display = "";
-  document.getElementById("mu-title").textContent = mu.title || "Market Update";
+  document.getElementById("mu-title").textContent = mu.title || T("marketUpdate");
   document.getElementById("mu-asof").textContent = mu.asOf ? "Data as of " + new Date(mu.asOf+"T12:00:00").toLocaleDateString("en-US",{month:"numeric",day:"numeric",year:"numeric"}) : "";
   document.getElementById("mu-crit").textContent = mu.subtitle || "";
   const link = document.getElementById("mu-link"), lp = document.getElementById("mu-link-print");
   if (mu.link) { link.href = mu.link; link.style.display = ""; lp.textContent = "Properties referenced: " + mu.link; }
   else { link.style.display = "none"; lp.textContent = ""; }
   const rows = mu.rows.slice().sort((a,b)=>(a.price??Infinity)-(b.price??Infinity));
-  const hasNote = rows.some(r=>(r.note||"").trim());
+  const hasNote = rows.some(r=>(r.note||"").trim()) && !HID("mu","note");
+  const sLat=Number((D.subject||{}).lat), sLng=Number((D.subject||{}).lng);
+  const hasDist = !HID("mu","dist") && rows.some(r=>distMi(sLng,sLat,r.lng,r.lat)!==null);
+  const MUC = [["status","Status"],["subdivision","Subdivision"],["dist","Dist (mi)"],["sqft","Sq Ft"],["beds","Bed"],["baths","Bath"],["yearBuilt","Built"],["garage","Gar"],["price","List / Sale"],["ppsf","$/SqFt"],["dom","DOM"],["pctOrig","% Orig"]]
+    .filter(([k])=>!HID("mu",k) && (k!=="dist"||hasDist));
+  const on = k => MUC.some(([x])=>x===k);
   const f = (v,k) => v===null||v===undefined||v==="" ? "—" : k==="$" ? money(v) : k==="ppsf" ? "$"+Math.round(v) : k==="yr" ? String(Math.round(v)) : k==="x" ? (Math.round(v*10)/10).toString() : Math.round(v).toLocaleString();
-  let h = `<thead><tr>${hasNote?'<th>Agent note</th>':''}<th>Address</th><th>Status</th><th>Subdivision</th><th class="num">Sq Ft</th><th class="num">Bed</th><th class="num">Bath</th>
-    <th class="num">Built</th><th class="num">Gar</th><th class="num">List / Sale</th><th class="num">$/SqFt</th><th class="num">DOM</th><th class="num">% Orig</th></tr></thead><tbody>`;
+  let h = `<thead><tr>${hasNote?'<th>Agent note</th>':''}<th>Address</th>` + MUC.map(([k,l])=>`<th${["status","subdivision"].includes(k)?"":' class="num"'}>${l}</th>`).join("") + `</tr></thead><tbody>`;
   rows.forEach(r=>{
     const ppsf = r.price&&r.sqft ? r.price/r.sqft : null, pct = r.price&&r.origPrice ? Math.round(r.price/r.origPrice*100)+"%" : "—";
     const stc = r.status==="Sold"?"st-sold":r.status==="Pending"?"st-pending":"";
-    h += `<tr class="${r.bold?"b ":""}${r.hl?"hl-"+r.hl:""}">${hasNote?`<td class="note">${escH(r.note)}</td>`:""}
-      <td class="addr">${escH(r.address)}</td><td class="${stc}">${escH(r.status)}${r.status==="Sold"&&r.closeDate?`<br><span style="font-size:9.5px;color:#7c8798;">${fmtD(r.closeDate)}</span>`:""}</td>
-      <td class="subd">${escH(r.subdivision)}</td><td class="num">${f(r.sqft)}</td><td class="num">${f(r.beds,"x")}</td><td class="num">${f(r.baths,"x")}</td>
-      <td class="num">${f(r.yearBuilt,"yr")}</td><td class="num">${f(r.garage,"x")}</td><td class="num">${f(r.price,"$")}</td><td class="num">${f(ppsf,"ppsf")}</td>
-      <td class="num">${f(r.dom)}</td><td class="num">${pct}</td></tr>`;
+    const dist = distMi(sLng,sLat,r.lng,r.lat);
+    const cell = { status:`<td class="${stc}">${escH(r.status)}${r.status==="Sold"&&r.closeDate?`<br><span style="font-size:9.5px;color:#7c8798;">${fmtD(r.closeDate)}</span>`:""}</td>`,
+      subdivision:`<td class="subd">${escH(r.subdivision)}</td>`, dist:`<td class="num">${dist===null?"\u2014":dist.toFixed(1)}</td>`,
+      sqft:`<td class="num">${f(r.sqft)}</td>`, beds:`<td class="num">${f(r.beds,"x")}</td>`, baths:`<td class="num">${f(r.baths,"x")}</td>`,
+      yearBuilt:`<td class="num">${f(r.yearBuilt,"yr")}</td>`, garage:`<td class="num">${f(r.garage,"x")}</td>`, price:`<td class="num">${f(r.price,"$")}</td>`,
+      ppsf:`<td class="num">${f(ppsf,"ppsf")}</td>`, dom:`<td class="num">${f(r.dom)}</td>`, pctOrig:`<td class="num">${pct}</td>` };
+    h += `<tr class="${r.bold?"b ":""}${r.hl?"hl-"+r.hl:""}">${hasNote?`<td class="note">${escH(r.note)}</td>`:""}<td class="addr">${escH(r.address)}</td>` + MUC.map(([k])=>cell[k]).join("") + `</tr>`;
   });
   const vals = k => rows.map(r=>k==="ppsf"?(r.price&&r.sqft?r.price/r.sqft:null):r[k]).filter(v=>v!==null&&v!==undefined&&v!==""&&Number.isFinite(Number(v))).map(Number).sort((a,b)=>a-b);
   const med = a => !a.length?null:(a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2);
   const agg = { min:a=>a.length?a[0]:null, med, avg:a=>a.length?a.reduce((t,v)=>t+v,0)/a.length:null, max:a=>a.length?a[a.length-1]:null };
   [["min","Min"],["med","Median"],["avg","Average"],["max","Max"]].forEach(([k,l],i)=>{
-    h += `<tr class="stat${i===0?" first":""}">${hasNote?"<td></td>":""}<td></td><td></td><td style="text-align:right">${l}</td>`
-      + [["sqft",""],["beds","x"],["baths","x"],["yearBuilt","yr"],["garage","x"],["price","$"],["ppsf","ppsf"],["dom",""]].map(([c,t])=>`<td class="num">${f(agg[k](vals(c)),t)}</td>`).join("")
-      + `<td></td></tr>`; });
+    const fmtT = {sqft:"",beds:"x",baths:"x",yearBuilt:"yr",garage:"x",price:"$",ppsf:"ppsf",dom:""};
+    h += `<tr class="stat${i===0?" first":""}">${hasNote?"<td></td>":""}<td style="text-align:right">${l}</td>`
+      + MUC.map(([c])=> c in fmtT ? `<td class="num">${f(agg[k](vals(c)),fmtT[c])}</td>` : (c==="dist"?`<td class="num">${(()=>{const a=rows.map(r=>distMi(sLng,sLat,r.lng,r.lat)).filter(v=>v!==null).sort((x,y)=>x-y); const v=agg[k](a); return v===null?"\u2014":v.toFixed(1);})()}</td>`:"<td></td>")).join("")
+      + `</tr>`; });
   document.getElementById("mu-table").innerHTML = h + "</tbody>";
+}
+function renderAvms(central){
+  const card = document.getElementById("avm-card");
+  const list = ((ADJ&&ADJ.avms)||[]).filter(a=>a && a.name && Number(a.value)>0);
+  if (!list.length || !INC("avms")) { card.style.display="none"; return; }
+  card.style.display="";
+  document.getElementById("avm-tiles").innerHTML = list.map(a=>{ const v=Number(a.value); const d=central?v-central:null;
+    return `<div class="t"><div class="n">${escH(a.name)}</div><div class="v avm">${money(v)}</div>
+      <div class="l">${a.asOf?"as of "+fmtD(a.asOf):"&nbsp;"}</div>
+      <div class="s">${d===null?"":(d>=0?"+":"\u2212")+"$"+Math.abs(Math.round(d)).toLocaleString()+" vs. our central estimate"}${a.url?` · <a href="${escH(a.url)}" target="_blank" rel="noopener" class="no-print" style="color:#24507f;">source</a>`:""}</div></div>`; }).join("");
+  document.getElementById("avm-note").innerHTML = `<b>Why these are here.</b> Buyers look these up, so we show them before they ask. Each is an automated model using public records and nearby sales; none has been inside, and none knows the view, floor, finishes or the competing listings above. The comparable-sales analysis on this page is the opinion of value; these are the numbers a buyer's phone will show them.`;
 }
 async function renderForecast(central){
   const inc = (ADJ && ADJ.include) || {};
   const card = document.getElementById("zf-card");
   const zip = (ADJ && ADJ.forecastZip) || String((D.subject||{}).zip||"").slice(0,5);
-  if (!inc.zillowForecast || !zip) { card.style.display="none"; return; }
+  if (inc.zillowForecast!==true || !zip) { card.style.display="none"; return; }
   let j=null;
   try { const r = await fetch("/.netlify/functions/cma-adjustments?action=forecast&zip="+encodeURIComponent(zip),{cache:"no-store"}); if(r.ok) j = await r.json(); } catch(e){}
   if (!j || !j.rows || !j.rows.length) { card.style.display="none"; return; }
@@ -357,6 +412,7 @@ async function renderForecast(central){
   const proj = v => v===undefined||v===null||!central ? "" : money(central*(1+v/100));
   const tile = (v,l,s) => `<div class="t"><div class="v${v<0?" neg":""}">${pct(v)}</div><div class="l">${l}</div><div class="s">${s}</div></div>`;
   card.style.display = "";
+  document.getElementById("t-forecast").textContent = T("forecast");
   document.getElementById("zf-sub").textContent = `Zillow Home Value Forecast for ZIP ${zip}${j.city?" ("+j.city+")":""}, published from a ${base} base. Typical-home values, all property types.`;
   document.getElementById("zf-tiles").innerHTML =
     tile(m1,"Next month", proj(m1)?`central estimate to ${proj(m1)}`:"") + tile(m3,"3 months", proj(m3)?`to ${proj(m3)}`:"")
@@ -414,7 +470,11 @@ function render(){
   const pend = reviewed < live.length;
 
   document.title = `Comparative Market Analysis: ${s.address} | The Adamson Group`;
-  document.getElementById("subject-h2").textContent = PR.subjectLabel;
+  document.getElementById("subject-h2").textContent = T("subject", PR.subjectLabel);
+  [["comps","t-comps"],["actives","t-actives"],["blocks","t-blocks"],["ladder","t-ladder"],["map","t-map"],["forecast","t-forecast"],["avms","t-avms"]]
+    .forEach(([k,id])=>{ const el=document.getElementById(id); if(el) el.textContent=T(k); });
+  const secShow = (id,k,also) => { const el=document.getElementById(id); if(el) el.style.display = (INC(k) && also!==false) ? "" : "none"; };
+  secShow("subject-card","subject"); secShow("comps-card","comps"); secShow("ladder-card","ladder");
   document.getElementById("hdr-sub").textContent =
     `${s.address}, ${s.city}, ${s.state||"FL"} ${s.zip||""} · ${s.subdivision}`;
   document.getElementById("hdr-date").textContent =
@@ -439,27 +499,34 @@ function render(){
     <div><div class="l">Central Estimate</div><div class="mid">${money(e.central)}</div></div>
     <div><div class="l">vs. Current List</div><div class="mid">${moneyS(e.central - s.list)}</div></div>`;
 
-  document.getElementById("subject-table").innerHTML = PR.subjectRows(s);
+  { const f = PR.subjectFields(s).filter(x=>!HID("subject",x.k)); let sh="";
+    for (let i=0;i<f.length;i+=2){ const a=f[i], b=f[i+1];
+      sh += `<tr><td>${a.l}</td><td><b>${a.v}</b>${a.x||""}</td>${b?`<td>${b.l}</td><td><b>${b.v}</b>${b.x||""}</td>`:"<td></td><td></td>"}</tr>`; }
+    document.getElementById("subject-table").innerHTML = sh; }
   document.getElementById("comps-sub").textContent = PR.compsSub(s);
 
-  let h = `<thead><tr><th title="Comp number, ordered by relevancy">Comp #</th><th>Address</th><th>Rel.</th>`
-    + PR.compCols.map(col=>`<th${col.cls?` class="${col.cls}"`:""}>${col.h}</th>`).join("")
-    + `<th class="num">Concess.</th><th>Terms</th><th class="num">Sale Price</th><th class="num">$/SqFt</th>
-       <th class="num">Adjustments</th>
-       <th class="num">Adj. Price</th><th class="num">Adj. $/SqFt</th></tr></thead><tbody>`;
-  const NCOLS = PR.compCols.length + 10;
+  const STATUS = c => OV(c.mls).statusLabel || c.status || "Sold";
+  const CC = PR.compCols.filter(col=>!HID("comps",col.k));
+  const showRel = !HID("comps","rel"), showSt = !HID("comps","status"), showCon = !HID("comps","concess"), showTerms = !HID("comps","terms"),
+        showPrice = !HID("comps","price"), showPpsf = !HID("comps","ppsf"), showAdj = !HID("comps","adj"), showAdjP = !HID("comps","adjPrice"), showAdjPpsf = !HID("comps","adjPpsf");
+  let h = `<thead><tr><th title="Comp number, ordered by relevancy">Comp #</th><th>Address</th>${showRel?"<th>Rel.</th>":""}${showSt?"<th>Status</th>":""}`
+    + CC.map(col=>`<th${col.cls?` class="${col.cls}"`:""}>${col.h}</th>`).join("")
+    + `${showCon?'<th class="num">Concess.</th>':""}${showTerms?"<th>Terms</th>":""}${showPrice?'<th class="num">Sale / Ask Price</th>':""}${showPpsf?'<th class="num">$/SqFt</th>':""}
+       ${showAdj?'<th class="num">Adjustments</th>':""}
+       ${showAdjP?'<th class="num">Adj. Price</th>':""}${showAdjPpsf?'<th class="num">Adj. $/SqFt</th>':""}</tr></thead><tbody>`;
+  const NCOLS = 2 + CC.length + [showRel,showSt,showCon,showTerms,showPrice,showPpsf,showAdj,showAdjP,showAdjPpsf].filter(Boolean).length;
   const relBadge = c => { const v=OV(c.mls).relevancy;
     return v==="X" ? '<span class="rb X">Excl.</span>' : v ? `<span class="rb ${v}">${v}</span>`
       : '<span style="color:#b08a1f;font-size:9.5px;">unrev</span>'; };
   rows.forEach(({c,r})=>{
     const note = OV(c.mls).clientNote||"";
     h += `<tr class="hasd"><td><span class="lettermark">${NUM.get(c.mls)}</span></td>
-      <td>${c.address}</td><td>${relBadge(c)}</td>`
-      + PR.compCols.map(col=>col.c(c)).join("")
-      + `<td class="num">${c.credit?money(c.credit):"—"}</td><td>${c.financing||"—"}</td>
-      <td class="num">${money(c.price)}</td><td class="num">$${r.ppsf.toFixed(2)}</td>
-      <td class="num">${moneyS(r.autoAdj+r.manualAdj)}</td>
-      <td class="num" style="font-weight:bold;">${money(r.adjPrice)}</td><td class="num">$${r.adjPpsf.toFixed(2)}</td></tr>
+      <td>${c.address}</td>${showRel?`<td>${relBadge(c)}</td>`:""}${showSt?`<td>${STATUS(c)}</td>`:""}`
+      + CC.map(col=>col.c(c)).join("")
+      + `${showCon?`<td class="num">${c.credit?money(c.credit):"—"}</td>`:""}${showTerms?`<td>${c.financing||"—"}</td>`:""}
+      ${showPrice?`<td class="num">${money(c.price)}</td>`:""}${showPpsf?`<td class="num">$${r.ppsf.toFixed(2)}</td>`:""}
+      ${showAdj?`<td class="num">${moneyS(r.autoAdj+r.manualAdj)}</td>`:""}
+      ${showAdjP?`<td class="num" style="font-weight:bold;">${money(r.adjPrice)}</td>`:""}${showAdjPpsf?`<td class="num">$${r.adjPpsf.toFixed(2)}</td>`:""}</tr>
     <tr class="drow"><td></td><td colspan="${NCOLS-1}">
       ${note?`<div class="cnote">${note}</div>`:""}
       <div class="cadj">${adjLine(c,r)}</div></td></tr>`;
@@ -467,18 +534,18 @@ function render(){
   excl.forEach(c=>{
     const note = OV(c.mls).clientNote || OV(c.mls).notes || "";
     h += `<tr class="exc hasd"><td><span class="lettermark" style="background:#aab3c2;color:#fff;">${NUM.get(c.mls)}</span></td>
-      <td>${c.address}</td><td><span class="rb X">Excl.</span></td>`
-      + PR.compCols.map(col=>col.c(c)).join("")
-      + `<td class="num">${c.credit?money(c.credit):"\u2014"}</td><td>${c.financing||"\u2014"}</td>
-      <td class="num">${money(c.price)}</td><td class="num">$${(c.price/c.sqft).toFixed(2)}</td>
-      <td class="num">\u2014</td><td class="num">\u2014</td><td class="num">\u2014</td></tr>
+      <td>${c.address}</td>${showRel?`<td><span class="rb X">Excl.</span></td>`:""}${showSt?`<td>${STATUS(c)}</td>`:""}`
+      + CC.map(col=>col.c(c)).join("")
+      + `${showCon?`<td class="num">${c.credit?money(c.credit):"\u2014"}</td>`:""}${showTerms?`<td>${c.financing||"\u2014"}</td>`:""}
+      ${showPrice?`<td class="num">${money(c.price)}</td>`:""}${showPpsf?`<td class="num">$${(c.price/c.sqft).toFixed(2)}</td>`:""}
+      ${showAdj?`<td class="num">\u2014</td>`:""}${showAdjP?`<td class="num">\u2014</td>`:""}${showAdjPpsf?`<td class="num">\u2014</td>`:""}</tr>
     <tr class="drow exc"><td></td><td colspan="${NCOLS-1}">
       ${note?`<div class="cnote">${note}</div>`:""}
       <div class="cadj"><b>Excluded from the analysis</b> \u2014 not counted in any average or the value range.</div></td></tr>`;
   });
-  h += `<tr class="totals"><td></td><td>Averages of ${rows.length} included</td><td colspan="${PR.compCols.length+3}"></td>
-    <td class="num">${money(a.price)}</td><td class="num">$${a.ppsf.toFixed(2)}</td><td></td>
-    <td class="num">${money(a.adjPrice)}</td><td class="num">$${a.adjPpsf.toFixed(2)}</td></tr></tbody>`;
+  h += `<tr class="totals"><td></td><td>Averages of ${rows.length} included</td><td colspan="${CC.length+[showRel,showSt,showCon,showTerms].filter(Boolean).length}"></td>
+    ${showPrice?`<td class="num">${money(a.price)}</td>`:""}${showPpsf?`<td class="num">$${a.ppsf.toFixed(2)}</td>`:""}${showAdj?"<td></td>":""}
+    ${showAdjP?`<td class="num">${money(a.adjPrice)}</td>`:""}${showAdjPpsf?`<td class="num">$${a.adjPpsf.toFixed(2)}</td>`:""}</tr></tbody>`;
   document.getElementById("comps-table").innerHTML = h;
 
   const bl = (ADJ.buckets||[]).map(b=>b.label).join(" · ");
@@ -489,7 +556,7 @@ function render(){
      <b>B</b> support the range, <b>C</b> provide context. Excluded sales appear for completeness but sit outside every average and the value range.`;
 
   const acts = D.actives||[];
-  document.getElementById("actives-card").style.display = acts.length ? "" : "none";
+  document.getElementById("actives-card").style.display = (acts.length && INC("actives")) ? "" : "none";
   let ah = `<thead><tr><th>Address</th>`
     + PR.activeCols.map(col=>`<th${col.cls?` class="${col.cls}"`:""}>${col.h}</th>`).join("")
     + `<th class="num">DOM</th><th class="num">Orig. List</th><th class="num">Current List</th><th class="num">Change</th><th class="num">$/SqFt</th></tr></thead><tbody>`;
@@ -504,12 +571,12 @@ function render(){
   document.getElementById("actives-table").innerHTML = ah;
 
   const withPhotos = rows.filter(({c}) => (OV(c.mls).photos||[]).filter(p=>p.clientVisible!==false).length);
-  document.getElementById("blocks-card").style.display = withPhotos.length ? "" : "none";
+  document.getElementById("blocks-card").style.display = (withPhotos.length && INC("blocks")) ? "" : "none";
   document.getElementById("comp-blocks").innerHTML = withPhotos.map(({c,r})=>`
     <div class="comp-block">
       <div class="head">
         <div class="addr"><span class="lettermark" style="margin-right:8px;">${NUM.get(c.mls)}</span>Comp ${NUM.get(c.mls)} · ${c.address}${PR.blockLoc(c)}</div>
-        <div class="price">Sold ${fmtD(c.closeDate)} at ${money(c.price)}, adjusted <b>${money(r.adjPrice)}</b></div>
+        <div class="price">${STATUS(c)==="Sold"?`Sold ${fmtD(c.closeDate)} at ${money(c.price)}`:`${STATUS(c)}${c.closeDate?" "+fmtD(c.closeDate):""}, asking ${money(c.price)}`}, adjusted <b>${money(r.adjPrice)}</b></div>
       </div>
       <div class="note">${OV(c.mls).clientNote||""}</div>
       <div class="photo-strip">${(OV(c.mls).photos||[]).filter(p=>p.clientVisible!==false).map((p,i)=>`
@@ -527,10 +594,12 @@ function render(){
       <td class="num">${money(p)}</td><td class="num">$${(p/s.sqft).toFixed(2)}</td></tr>`;
   }
   document.getElementById("ladder").innerHTML = lh + "</tbody>";
-  drawMap(rows, PR, NUM);
+  document.getElementById("map-card").style.display = INC("map") ? "" : "none";
+  if (INC("map")) drawMap(rows, PR, NUM);
   window.__NUM = NUM;
   renderMarketUpdate();
   renderForecast(e.central);
+  renderAvms(e.central);
 }
 
 function drawMap(rows, PR, NUM){

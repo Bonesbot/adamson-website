@@ -81,6 +81,21 @@ if (!localStorage.getItem("cma-edit-key"))
     body.print-handout #handout { display:block; }
     @page { size:letter landscape; margin:9mm; }
   }
+  /* Client page controls */
+  .sec { display:grid; grid-template-columns:150px 1fr auto; gap:10px; align-items:center; padding:7px 0; border-bottom:1px solid #eef1f5; }
+  .sec .nm { font-size:12px; color:var(--navy); font-weight:bold; }
+  .sec input[type=text] { width:100%; font:12.5px Georgia; padding:5px 7px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
+  .sec.off .nm, .sec.off input { color:#a3adbd; text-decoration:line-through; background:#f6f7f9; }
+  .fields { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 12px; }
+  .chip { display:inline-flex; align-items:center; gap:5px; font-size:11.5px; padding:4px 9px; border:1px solid #d8dde6; border-radius:14px; background:#fff; cursor:pointer; user-select:none; }
+  .chip.hid { background:#ececec; color:#98a2b2; text-decoration:line-through; border-style:dashed; }
+  .chip input { margin:0; }
+  .fl { font-size:11px; color:#5a6b85; margin:8px 0 2px; text-transform:uppercase; letter-spacing:.06em; }
+  #grid th.hid, #grid td.hid, #mu-grid th.hid, #mu-grid td.hid { background:#ececec !important; color:#a3adbd !important; }
+  #grid th.hid { text-decoration:line-through; }
+  input.st { width:92px; font:11.5px Arial; padding:3px 5px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
+  .avm-row { display:grid; grid-template-columns:1.2fr 1fr 130px 2fr 40px; gap:8px; margin-bottom:6px; align-items:center; }
+  .avm-row input { font:12px Arial; padding:5px 6px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; width:100%; }
   /* Market Update card */
   .mu-meta { display:grid; grid-template-columns:1.2fr 2fr 130px 2fr; gap:10px; margin-bottom:10px; }
   .mu-meta label { font-size:11px; color:#5a6b85; display:block; margin-bottom:3px; }
@@ -146,6 +161,15 @@ if (!localStorage.getItem("cma-edit-key"))
     <div style="overflow-x:auto;"><table id="grid"></table></div>
     <div class="warn" id="freeze-note"></div>
   </div>
+  <div class="card" id="cp-card">
+    <h2>Client Page: Sections, Titles &amp; Fields</h2>
+    <div class="sub">What the homeowner sees. Untick a section to drop it from the client page and the PDF; retitle any section; untick a field to hide that column or fact.
+      Hidden items turn grey here so you can see what you hid. Saved with Save.</div>
+    <div id="cp-sections"></div>
+    <div class="fl">Your Residence / Your Home: facts shown</div><div class="fields" id="cp-subject"></div>
+    <div class="fl">Comparable Sales: columns shown</div><div class="fields" id="cp-comps"></div>
+    <div class="fl">Market Update: columns shown</div><div class="fields" id="cp-mu"></div>
+  </div>
   <div class="card" id="mu-card">
     <h2>Market Update</h2>
     <div class="sub">Active competition and recent activity around the subject. Import a Stellar MLS CSV export (any saved search); rows sort by price, low to high.
@@ -171,6 +195,17 @@ if (!localStorage.getItem("cma-edit-key"))
       <span class="ind" id="mu-ind" style="margin-left:0;color:#7c8798;"></span>
     </div>
     <div style="overflow-x:auto;"><table id="mu-grid"></table></div>
+  </div>
+  <div class="card" id="avm-card">
+    <h2>Online Estimates (AVMs)</h2>
+    <div class="sub">Zestimate, Redfin Estimate, Realtor.com and the like for the subject. None of these sites offers a public API for third parties, so this is a
+      look-up-and-type step: <b>Open lookup pages</b> opens each site's search for the subject address in new tabs; enter what you see. Shows on the client page when the section is ticked above.</div>
+    <div class="mu-tools">
+      <button class="btn" onclick="avmOpen()">Open lookup pages</button>
+      <button class="btn" onclick="avmAdd()">Add estimate</button>
+    </div>
+    <div class="avm-row" style="font-size:11px;color:#5a6b85;"><div>Source</div><div>Value ($)</div><div>As of</div><div>Link (optional)</div><div></div></div>
+    <div id="avm-rows"></div>
   </div>
   <div class="card">
     <h2>Notes</h2>
@@ -473,7 +508,9 @@ function renderAll(){
      <input class="p" type="number" step="any" value="${P(k)}" onchange="setParam('${k}',this.value)"><div class="h">${h}</div></div>`).join("");
   renderGrid();
   renderNotes();
+  renderCP();
   renderMU();
+  renderAvms();
   recalc();
   const frozen = D.comps.filter(c=>OV(c.mls).frozen).length;
   document.getElementById("freeze-note").innerHTML =
@@ -485,22 +522,23 @@ function renderAll(){
 
 function renderGrid(){
   let h = `<thead><tr><th title="Comp number, ordered by relevancy">Comp #</th><th>Address</th>`
-    + PR.factCols.map(f=>`<th${f.cls?` class="${f.cls}"`:""}>${f.h}</th>`).join("")
-    + `<th class="num">Sold</th><th class="num">DOM</th><th class="num">Sale Price</th><th class="num">$/SqFt</th>`
+    + PR.factCols.map(f=>`<th class="${f.cls||""} ${isHid("comps",GRID_KEY[f.h]||"")?"hid":""}">${f.h}</th>`).join("")
+    + `<th class="man ${isHid("comps","status")?"hid":""}">Status</th><th class="num ${isHid("comps","closeDate")?"hid":""}">Sold</th><th class="num ${isHid("comps","dom")?"hid":""}">DOM</th><th class="num ${isHid("comps","price")?"hid":""}">Sale Price</th><th class="num ${isHid("comps","ppsf")?"hid":""}">$/SqFt</th>`
     + PR.autoCols.map(([k,l])=>`<th class="auto num">${l}</th>`).join("")
     + (ADJ.buckets||[]).map(b=>`<th class="man num">${b.label}</th>`).join("")
-    + `<th class="man">Furnish</th><th class="man">Relevancy</th>
-       <th class="num">Total Adj.</th><th class="num">Adj. Price</th><th class="num">Adj. $/SqFt</th>
+    + `<th class="man">Furnish</th><th class="man ${isHid("comps","rel")?"hid":""}">Relevancy</th>
+       <th class="num ${isHid("comps","adj")?"hid":""}">Total Adj.</th><th class="num ${isHid("comps","adjPrice")?"hid":""}">Adj. Price</th><th class="num ${isHid("comps","adjPpsf")?"hid":""}">Adj. $/SqFt</th>
        <th class="num">Frz</th><th>Internal Note</th></tr></thead><tbody>`;
   (ORDER.length?ORDER:D.comps).forEach(c=>{
     const o=OV(c.mls);
     h += `<tr data-mls="${c.mls}" class="${o.excluded?"exc":(o.reviewed?"rev":"")}">
       <td><span class="lettermark">${NUM.get(c.mls)||"?"}</span></td>
       <td>${c.address}<span class="flag f frzflag" style="${o.frozen?"":"display:none;"}">FROZEN</span></td>`
-      + PR.factCols.map(f=>f.c(c)).join("")
-      + `<td class="num">${fmtD(c.closeDate)}</td><td class="num">${c.dom??"—"}</td>
-      <td class="num">${money(c.price)}${c.credit?`<br><span style="font-size:9.5px;color:#b08a1f;">${money(c.credit)} concess.</span>`:""}</td>
-      <td class="num">$${(c.price/c.sqft).toFixed(2)}</td>`
+      + PR.factCols.map(f=>isHid("comps",GRID_KEY[f.h]||"") ? f.c(c).replace(/^<td class="/,'<td class="hid ').replace(/^<td(?! class)/,'<td class="hid"') : f.c(c)).join("")
+      + `<td class="${isHid("comps","status")?"hid":""}"><input class="st" type="text" list="st-names" placeholder="${escA(c.status||"Sold")}" value="${escA(o.statusLabel||"")}" onchange="setStatus('${c.mls}',this.value)"></td>
+      <td class="num ${isHid("comps","closeDate")?"hid":""}">${fmtD(c.closeDate)}</td><td class="num ${isHid("comps","dom")?"hid":""}">${c.dom??"—"}</td>
+      <td class="num ${isHid("comps","price")?"hid":""}">${money(c.price)}${c.credit?`<br><span style="font-size:9.5px;color:#b08a1f;">${money(c.credit)} concess.</span>`:""}</td>
+      <td class="num ${isHid("comps","ppsf")?"hid":""}">$${(c.price/c.sqft).toFixed(2)}</td>`
       + PR.autoCols.map(([k])=>`<td class="num" id="au-${c.mls}-${k}"></td>`).join("")
       + (ADJ.buckets||[]).map(b=>`<td class="num"><input class="b" type="text" inputmode="numeric" value="${fmtC(o.manual[b.key])}"
           ${o.frozen?"disabled title='Frozen. Untick Frz to edit.'":""} oninput="ciInput(this)"
@@ -509,15 +547,16 @@ function renderGrid(){
           ${["","No","Opt","Full"].map(v=>`<option value="${v}" ${o.furnishings===v?"selected":""}>${v||"\u2014"}</option>`).join("")}</select></td>
       <td><select class="sel" style="font-weight:bold;" onchange="setRel2('${c.mls}',this.value)">
           ${[["",""],["A","A"],["B","B"],["C","C"],["X","Exclude"]].map(([v,l])=>`<option value="${v}" ${(o.relevancy||"")===v?"selected":""}>${l||"\u2014"}</option>`).join("")}</select></td>
-      <td class="num" id="tadj-${c.mls}"></td>
-      <td class="num" style="font-weight:bold;" id="aprice-${c.mls}"></td>
-      <td class="num" id="appsf-${c.mls}"></td>
+      <td class="num ${isHid("comps","adj")?"hid":""}" id="tadj-${c.mls}"></td>
+      <td class="num ${isHid("comps","adjPrice")?"hid":""}" style="font-weight:bold;" id="aprice-${c.mls}"></td>
+      <td class="num ${isHid("comps","adjPpsf")?"hid":""}" id="appsf-${c.mls}"></td>
       <td class="num"><input type="checkbox" ${o.frozen?"checked":""} onchange="setFrz('${c.mls}',this.checked)"></td>
       <td><input class="gn" type="text" placeholder="${o.excluded?"why excluded":"internal note"}" value="${escA(o.notes)}"
           onchange="setNote('${c.mls}','notes',this.value)"></td></tr>`;
   });
+  h += `<datalist id="st-names"><option>Sold</option><option>Pending</option><option>Active</option><option>Withdrawn (WDC)</option><option>Canceled (CAN)</option><option>Expired</option><option>Coming Soon</option><option>Off Market</option></datalist>`;
   h += `<tr class="tot"><td></td><td id="avg-label"></td>
-    <td colspan="${PR.factCols.length+2}"></td>
+    <td colspan="${PR.factCols.length+3}"></td>
     <td class="num" id="avg-price"></td><td class="num" id="avg-ppsf"></td>
     <td colspan="${PR.autoCols.length+(ADJ.buckets||[]).length+3}"></td>
     <td class="num" id="avg-adj"></td><td class="num" id="avg-appsf"></td><td colspan="2"></td></tr></tbody>`;
@@ -570,6 +609,58 @@ function renderNotes(){
 }
 
 
+/* ---------- Client page: sections, titles, hidden fields, AVMs (all in the overlay) ---------- */
+const SECTIONS = [["subject","Your Residence / Your Home"],["comps","Comparable Sales"],["actives","Currently on the Market"],["blocks","The Comparables, Up Close"],
+  ["ladder","Pricing Ladder"],["map","Comp Locations"],["marketUpdate","Market Update"],["zillowForecast","Zillow Zip Code Forecast"],["avms","Online Estimates"]];
+const SUBJECT_FIELDS = { condo:[["address","Address"],["bldgUnit","Building / Unit / Floor"],["sqft","Heated Area"],["yearBuilt","Year Built"],["bedBath","Beds / Baths"],["fee","Condo Fee"],
+    ["parking","Garage / Parking"],["taxes","Taxes"],["pool","Pool"],["minLease","Minimum Lease"],["pets","Pets"],["view","View"],["floodMls","Flood Zone / MLS"]],
+  sfh:[["address","Address"],["sqft","Heated Space"],["lot","Lot Size"],["yearBuilt","Year Built"],["parking","Garage / Parking"],["bedBath","Beds / Baths"],["taxes","Taxes"],["pool","Pool"],["view","View"],["floodMls","Flood Zone / MLS"]] };
+const COMP_FIELDS = { condo:[["rel","Rel."],["status","Status"],["building","Bldg"],["unit","Unit"],["floor","Flr"],["closeDate","Date"],["dom","DOM"],["sqft","Sq Ft"],["fee","Fee/mo"]],
+  sfh:[["rel","Rel."],["status","Status"],["closeDate","Date"],["dom","DOM"],["sqft","Sq Ft"],["lot","Lot"],["yearBuilt","Built"],["garage","Gar"],["bedBath","Bd/Ba"]] };
+const COMP_FIXED = [["concess","Concess."],["terms","Terms"],["price","Sale / Ask Price"],["ppsf","$/SqFt"],["adj","Adjustments"],["adjPrice","Adj. Price"],["adjPpsf","Adj. $/SqFt"]];
+const MU_FIELDS = [["note","Agent note"],["status","Status"],["subdivision","Subdivision"],["dist","Dist (mi)"],["sqft","Sq Ft"],["beds","Bed"],["baths","Bath"],["yearBuilt","Built"],["garage","Gar"],["price","List / Sale"],["ppsf","$/SqFt"],["dom","DOM"],["pctOrig","% Orig"]];
+const TT  = () => (ADJ.titles ||= {});
+const HD  = () => (ADJ.hidden ||= { subject:[], comps:[], mu:[] });
+const isHid = (g,k) => ((HD()[g])||[]).includes(k);
+function setTitle(k,v){ if(v.trim()) TT()[k]=v.trim(); else delete TT()[k]; touch(); }
+function setHid(g,k,hide){ const a=(HD()[g] ||= []); const i=a.indexOf(k); if(hide&&i<0) a.push(k); if(!hide&&i>=0) a.splice(i,1); touch(); renderCP(); renderGrid(); recalc(); renderMU(); }
+function setSec(k,on){ INC()[k]=!!on; touch(); renderCP(); if(k==="zillowForecast") zfPreview(); }
+function renderCP(){
+  const inc=INC();
+  document.getElementById("cp-sections").innerHTML = SECTIONS.map(([k,l])=>`<div class="sec ${inc[k]===false||(k==="zillowForecast"&&!inc[k])?"off":""}">
+    <label class="nm"><input type="checkbox" ${k==="zillowForecast"?(inc[k]?"checked":""):(inc[k]===false?"":"checked")} onchange="setSec('${k}',this.checked)"> ${l}</label>
+    <input type="text" placeholder="${l} (client-page title)" value="${escA(TT()[k]||"")}" onchange="setTitle('${k}',this.value)">
+    <span style="font-size:10.5px;color:#96a0ae;">${k==="subject"?"title defaults to Your Residence / Your Home":k==="marketUpdate"?"title field below wins if set":""}</span></div>`).join("");
+  const chips = (g,list) => list.map(([k,l])=>`<label class="chip ${isHid(g,k)?"hid":""}"><input type="checkbox" ${isHid(g,k)?"":"checked"} onchange="setHid('${g}','${k}',!this.checked)">${l}</label>`).join("");
+  const prof = D.meta.profile==="condo"?"condo":"sfh";
+  document.getElementById("cp-subject").innerHTML = chips("subject", SUBJECT_FIELDS[prof]);
+  document.getElementById("cp-comps").innerHTML = chips("comps", COMP_FIELDS[prof].concat(COMP_FIXED));
+  document.getElementById("cp-mu").innerHTML = chips("mu", MU_FIELDS);
+  document.getElementById("inc-mu").checked = inc.marketUpdate!==false; document.getElementById("inc-zf").checked = !!inc.zillowForecast;
+}
+const GRID_KEY = { "Sold":"closeDate","DOM":"dom","Sale Price":"price","$/SqFt":"ppsf","SqFt":"sqft","Lot":"lot","Gar":"garage","Bldg":"building","Flr":"floor","Fee/mo":"fee","Relevancy":"rel","Total Adj.":"adj","Adj. Price":"adjPrice","Adj. $/SqFt":"adjPpsf","Status":"status" };
+function setStatus(mls,v){ OV(mls).statusLabel = v.trim(); touch(); }
+const AVMS = () => (ADJ.avms ||= []);
+function avmAdd(name){ AVMS().push({ name:name||"", value:"", asOf:today(), url:"" }); touch(); renderAvms(); }
+function avmSet(i,k,v){ const a=AVMS()[i]; if(!a) return; a[k] = k==="value" ? (Number(String(v).replace(/[^0-9.]/g,""))||"") : v; touch(); if(k==="value") renderAvms(); }
+function avmDel(i){ AVMS().splice(i,1); touch(); renderAvms(); }
+function renderAvms(){
+  const list=AVMS();
+  document.getElementById("avm-rows").innerHTML = (list.length ? list.map((a,i)=>`<div class="avm-row">
+    <input type="text" list="avm-names" placeholder="Zestimate" value="${escA(a.name)}" onchange="avmSet(${i},'name',this.value)">
+    <input type="text" inputmode="numeric" placeholder="605000" value="${a.value?Number(a.value).toLocaleString():""}" onchange="avmSet(${i},'value',this.value)">
+    <input type="date" value="${a.asOf||""}" onchange="avmSet(${i},'asOf',this.value)">
+    <input type="url" placeholder="https://www.zillow.com/homes/..." value="${escA(a.url)}" onchange="avmSet(${i},'url',this.value)">
+    <button class="btn" style="padding:3px 8px;" onclick="avmDel(${i})">&times;</button></div>`).join("") : `<div style="font-size:12px;color:#7c8798;">none yet</div>`)
+    + `<datalist id="avm-names"><option>Zestimate (Zillow)</option><option>Redfin Estimate</option><option>Realtor.com RealEstimate</option><option>Homes.com Estimate</option><option>RPR RVM</option><option>Home Platform (CIH)</option></datalist>`;
+}
+function avmOpen(){
+  const s=D.subject; const q=encodeURIComponent(`${s.address}${s.unit&&!/#/.test(s.address)?" #"+s.unit:""}, ${s.city||""}, ${s.state||"FL"} ${s.zip||""}`.replace(/\s+/g," ").trim());
+  [`https://www.zillow.com/homes/${q}_rb/`, `https://www.redfin.com/search#query=${q}`, `https://www.realtor.com/realestateandhomes-search/${q}`, `https://www.homes.com/search/?q=${q}`]
+    .forEach(u=>window.open(u,"_blank","noopener"));
+  if(!AVMS().length){ ["Zestimate (Zillow)","Redfin Estimate","Realtor.com RealEstimate"].forEach(n=>AVMS().push({name:n,value:"",asOf:today(),url:""})); touch(); renderAvms(); }
+}
+
 /* ---------- Market Update + client-page section toggles (live in the overlay, save with Save) ----------
    ADJ.include      = { marketUpdate:true, zillowForecast:false }
    ADJ.forecastZip  = "34210"   (blank = use data.json subject.zip)
@@ -607,7 +698,7 @@ function muImport(file){
     const H=rows[0].map(h=>h.trim()); const ix=n=>H.indexOf(n);
     const col={ mls:ix("MLS Number"), addr:ix("Address"), st:ix("Status")>=0?ix("Status"):ix("Standard Status"), sub:ix("Legal Subdivision Name"),
       sqft:ix("Heated Area"), beds:ix("Beds"), fb:ix("Full Baths"), hb:ix("Half Baths"), yb:ix("Year Built"), gar:ix("Garage Spaces"),
-      price:ix("Current Price"), orig:ix("Original List Price"), dom:ix("CDOM")>=0?ix("CDOM"):ix("ADOM"), close:ix("Close Date") };
+      price:ix("Current Price"), orig:ix("Original List Price"), dom:ix("CDOM")>=0?ix("CDOM"):ix("ADOM"), close:ix("Close Date"), lat:ix("Latitude"), lng:ix("Longitude") };
     if(col.addr<0||col.price<0){ alert("This does not look like a Stellar export (need Address and Current Price columns)."); return; }
     const mu=MU(); const byMls=new Map(mu.rows.map(r=>[r.mls||r.address,r]));
     let added=0, updated=0;
@@ -616,7 +707,7 @@ function muImport(file){
       const mls=String(g(col.mls)||"").trim(); const key=mls||String(g(col.addr)).trim(); if(!key) return;
       const fresh={ mls, address:String(g(col.addr)).trim(), status:normStatus(g(col.st)), subdivision:String(g(col.sub)||"").trim(),
         sqft:N(g(col.sqft)), beds:N(g(col.beds)), baths:(N(g(col.fb))||0)+((N(g(col.hb))||0)*0.5), yearBuilt:N(g(col.yb)), garage:N(g(col.gar)),
-        price:N(g(col.price)), origPrice:N(g(col.orig)), dom:N(g(col.dom)), closeDate:String(g(col.close)||"").slice(0,10) };
+        price:N(g(col.price)), origPrice:N(g(col.orig)), dom:N(g(col.dom)), closeDate:String(g(col.close)||"").slice(0,10), lat:N(g(col.lat)), lng:N(g(col.lng)) };
       const ex=byMls.get(key);
       if(ex){ Object.assign(ex,fresh); updated++; }
       else { mu.rows.push(Object.assign({ id:key, note:"", bold:false, hl:"" }, fresh)); byMls.set(key, mu.rows[mu.rows.length-1]); added++; }
@@ -644,6 +735,9 @@ function muStats(rows){
   cols.forEach(k=>{ const a=vals(k); out[k]={ min:a.length?a[0]:null, med:med(a), avg:a.length?a.reduce((t,v)=>t+v,0)/a.length:null, max:a.length?a[a.length-1]:null }; });
   return out;
 }
+const distMi = (a,b,c,d) => { if(![a,b,c,d].every(v=>Number.isFinite(Number(v)))) return null;
+  const R=3958.8, toR=x=>x*Math.PI/180, dLat=toR(d-b), dLng=toR(c-a); const h=Math.sin(dLat/2)**2+Math.cos(toR(b))*Math.cos(toR(d))*Math.sin(dLng/2)**2; return 2*R*Math.asin(Math.sqrt(h)); };
+const rowDist = r => distMi(Number(D.subject.lng),Number(D.subject.lat),r.lng,r.lat);
 const fmtMU = (k,v) => v===null||v===undefined ? "—" : k==="price" ? money(v) : k==="ppsf" ? "$"+Math.round(v) : k==="yearBuilt" ? String(Math.round(v)) : k==="baths"||k==="garage"||k==="beds" ? (Math.round(v*10)/10).toString() : Math.round(v).toLocaleString();
 function renderMU(){
   const mu=MU(), inc=INC();
@@ -655,33 +749,37 @@ function renderMU(){
   document.getElementById("inc-zf").checked = !!inc.zillowForecast;
   document.getElementById("zf-zip").value   = ADJ.forecastZip||""; document.getElementById("zf-zip").placeholder = subjectZip()||"zip";
   const rows=muSorted();
-  let h=`<thead><tr><th>Your note (prints left of the row)</th><th>Address</th><th>Status</th><th>Subdivision</th><th class="num">Sq Ft</th><th class="num">Bed</th><th class="num">Bath</th>
-    <th class="num">Built</th><th class="num">Gar</th><th class="num">List / Sale</th><th class="num">Orig. List</th><th class="num">$/SqFt</th><th class="num">DOM</th><th class="num">% Orig</th><th>Bold</th><th>Highlight</th><th></th></tr></thead><tbody>`;
+  const H = (k,l,n) => `<th class="${n?"num":""} ${isHid("mu",k)?"hid":""}">${l}</th>`;
+  let h=`<thead><tr>${H("note","Your note (prints left of the row)")}<th>Address</th>${H("status","Status")}${H("subdivision","Subdivision")}${H("dist","Dist (mi)",1)}${H("sqft","Sq Ft",1)}${H("beds","Bed",1)}${H("baths","Bath",1)}
+    ${H("yearBuilt","Built",1)}${H("garage","Gar",1)}${H("price","List / Sale",1)}<th class="num">Orig. List</th>${H("ppsf","$/SqFt",1)}${H("dom","DOM",1)}${H("pctOrig","% Orig",1)}<th>Bold</th><th>Highlight</th><th></th></tr></thead><tbody>`;
+  const C = k => isHid("mu",k)?"hid":"";
   rows.forEach(r=>{
     const ppsf=r.price&&r.sqft?r.price/r.sqft:null, pct=r.price&&r.origPrice?r.price/r.origPrice*100:null;
     const stc = r.status==="Sold"?"st-sold":r.status==="Pending"?"st-pending":"";
     h+=`<tr class="${r.bold?"b ":""}${r.hl?"hl-"+r.hl:""}">
-      <td><input class="note" type="text" placeholder="Unit above, updated kitchen, better view" value="${escA(r.note)}" onchange="muSet('${r.id}','note',this.value)"></td>
+      <td class="${C("note")}"><input class="note" type="text" placeholder="Unit above, updated kitchen, better view" value="${escA(r.note)}" onchange="muSet('${r.id}','note',this.value)"></td>
       <td><input class="f w" type="text" value="${escA(r.address)}" onchange="muSet('${r.id}','address',this.value)"></td>
-      <td class="${stc}"><select class="hl" onchange="muSet('${r.id}','status',this.value)">${["Active","Pending","Sold","Withdrawn","Canceled","Expired"].map(v=>`<option ${r.status===v?"selected":""}>${v}</option>`).join("")}</select></td>
-      <td><input class="f w" type="text" value="${escA(r.subdivision)}" onchange="muSet('${r.id}','subdivision',this.value)"></td>
-      <td class="num"><input class="f" value="${r.sqft??""}" onchange="muSet('${r.id}','sqft',this.value)"></td>
-      <td class="num"><input class="f" style="width:40px" value="${r.beds??""}" onchange="muSet('${r.id}','beds',this.value)"></td>
-      <td class="num"><input class="f" style="width:40px" value="${r.baths??""}" onchange="muSet('${r.id}','baths',this.value)"></td>
-      <td class="num"><input class="f" style="width:52px" value="${r.yearBuilt??""}" onchange="muSet('${r.id}','yearBuilt',this.value)"></td>
-      <td class="num"><input class="f" style="width:40px" value="${r.garage??""}" onchange="muSet('${r.id}','garage',this.value)"></td>
-      <td class="num"><input class="f" style="width:84px" value="${r.price??""}" onchange="muSet('${r.id}','price',this.value)"></td>
+      <td class="${stc} ${C("status")}"><select class="hl" onchange="muSet('${r.id}','status',this.value)">${["Active","Pending","Sold","Withdrawn","Canceled","Expired"].map(v=>`<option ${r.status===v?"selected":""}>${v}</option>`).join("")}</select></td>
+      <td class="${C("subdivision")}"><input class="f w" type="text" value="${escA(r.subdivision)}" onchange="muSet('${r.id}','subdivision',this.value)"></td>
+      <td class="num ${C("dist")}" title="${r.lat&&r.lng?"from MLS coordinates":"no coordinates: re-import the CSV"}">${(d=>d===null?"—":d.toFixed(1))(rowDist(r))}</td>
+      <td class="num ${C("sqft")}"><input class="f" value="${r.sqft??""}" onchange="muSet('${r.id}','sqft',this.value)"></td>
+      <td class="num ${C("beds")}"><input class="f" style="width:40px" value="${r.beds??""}" onchange="muSet('${r.id}','beds',this.value)"></td>
+      <td class="num ${C("baths")}"><input class="f" style="width:40px" value="${r.baths??""}" onchange="muSet('${r.id}','baths',this.value)"></td>
+      <td class="num ${C("yearBuilt")}"><input class="f" style="width:52px" value="${r.yearBuilt??""}" onchange="muSet('${r.id}','yearBuilt',this.value)"></td>
+      <td class="num ${C("garage")}"><input class="f" style="width:40px" value="${r.garage??""}" onchange="muSet('${r.id}','garage',this.value)"></td>
+      <td class="num ${C("price")}"><input class="f" style="width:84px" value="${r.price??""}" onchange="muSet('${r.id}','price',this.value)"></td>
       <td class="num"><input class="f" style="width:84px" value="${r.origPrice??""}" onchange="muSet('${r.id}','origPrice',this.value)"></td>
-      <td class="num">${fmtMU("ppsf",ppsf)}</td>
-      <td class="num"><input class="f" style="width:48px" value="${r.dom??""}" onchange="muSet('${r.id}','dom',this.value)"></td>
-      <td class="num">${pct===null?"—":Math.round(pct)+"%"}</td>
+      <td class="num ${C("ppsf")}">${fmtMU("ppsf",ppsf)}</td>
+      <td class="num ${C("dom")}"><input class="f" style="width:48px" value="${r.dom??""}" onchange="muSet('${r.id}','dom',this.value)"></td>
+      <td class="num ${C("pctOrig")}">${pct===null?"—":Math.round(pct)+"%"}</td>
       <td style="text-align:center"><input type="checkbox" ${r.bold?"checked":""} onchange="muSet('${r.id}','bold',this.checked)"></td>
       <td><select class="hl" onchange="muSet('${r.id}','hl',this.value)">${[["","none"],["green","green"],["yellow","yellow"],["gray","gray"]].map(([v,l])=>`<option value="${v}" ${r.hl===v?"selected":""}>${l}</option>`).join("")}</select></td>
       <td><button class="btn" style="padding:3px 8px;" title="remove row" onclick="muDel('${r.id}')">&times;</button></td></tr>`;
   });
   const st=muStats(rows);
   [["min","Min"],["med","Median"],["avg","Average"],["max","Max"]].forEach(([k,l])=>{
-    h+=`<tr class="stat"><td></td><td></td><td></td><td style="text-align:right">${l}</td>`+
+    const dv=rows.map(rowDist).filter(v=>v!==null).sort((a,b)=>a-b); const dd = {min:dv[0], med:dv.length?(dv.length%2?dv[(dv.length-1)/2]:(dv[dv.length/2-1]+dv[dv.length/2])/2):null, avg:dv.length?dv.reduce((t,v)=>t+v,0)/dv.length:null, max:dv[dv.length-1]}[k];
+    h+=`<tr class="stat"><td></td><td></td><td></td><td style="text-align:right">${l}</td><td class="num">${dd===null||dd===undefined?"—":dd.toFixed(1)}</td>`+
       ["sqft","beds","baths","yearBuilt","garage","price"].map(c=>`<td class="num">${fmtMU(c,st[c][k])}</td>`).join("")+
       `<td></td><td class="num">${fmtMU("ppsf",st.ppsf[k])}</td><td class="num">${fmtMU("dom",st.dom[k])}</td><td colspan="4"></td></tr>`; });
   h+=`</tbody>`;
