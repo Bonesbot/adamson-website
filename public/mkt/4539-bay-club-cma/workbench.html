@@ -96,6 +96,11 @@ if (!localStorage.getItem("cma-edit-key"))
   input.st { width:92px; font:11.5px Arial; padding:3px 5px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
   .avm-row { display:grid; grid-template-columns:1.2fr 1fr 130px 2fr 40px; gap:8px; margin-bottom:6px; align-items:center; }
   .avm-row input { font:12px Arial; padding:5px 6px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; width:100%; }
+  .sec { grid-template-columns:22px 150px 1fr auto; cursor:grab; }
+  .sec .grip { color:#b4bccb; font-size:15px; line-height:1; text-align:center; user-select:none; }
+  .sec.dragging { opacity:.45; } .sec.over { border-top:2px solid var(--gold); }
+  textarea.sum { width:100%; min-height:74px; font:13px/1.5 Georgia,serif; padding:8px 10px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; resize:vertical; }
+  .sumlbl { font-size:11px; color:#5a6b85; margin:12px 0 4px; text-transform:uppercase; letter-spacing:.06em; }
   /* Market Update card */
   .mu-meta { display:grid; grid-template-columns:1.2fr 2fr 130px 2fr; gap:10px; margin-bottom:10px; }
   .mu-meta label { font-size:11px; color:#5a6b85; display:block; margin-bottom:3px; }
@@ -159,12 +164,14 @@ if (!localStorage.getItem("cma-edit-key"))
       Relevancy: <b>A</b> strongest comps &middot; <b>B</b> supporting &middot; <b>C</b> context &middot; <b>Exclude</b> removes from the analysis.
       Setting relevancy marks the comp reviewed; the grid re-orders A, B, C, ungraded, excluded on load and after each save.</div>
     <div style="overflow-x:auto;"><table id="grid"></table></div>
+    <div class="sumlbl">Client summary: prints under the comparables table on the client page (blank = nothing shown)</div>
+    <textarea class="sum" id="sum-comps" placeholder="Tell the story of these comps in a few sentences: which ones matter, why the failed listings are here, what the pattern says about price." onchange="setSummary('comps',this.value)"></textarea>
     <div class="warn" id="freeze-note"></div>
   </div>
   <div class="card" id="cp-card">
     <h2>Client Page: Sections, Titles &amp; Fields</h2>
-    <div class="sub">What the homeowner sees. Untick a section to drop it from the client page and the PDF; retitle any section; untick a field to hide that column or fact.
-      Hidden items turn grey here so you can see what you hid. Saved with Save.</div>
+    <div class="sub">What the homeowner sees. Drag the handle to reorder sections top to bottom; untick a section to drop it from the client page and the PDF; retitle any section;
+      untick a field to hide that column or fact. Hidden items turn grey here so you can see what you hid. Saved with Save.</div>
     <div id="cp-sections"></div>
     <div class="fl">Your Residence / Your Home: facts shown</div><div class="fields" id="cp-subject"></div>
     <div class="fl">Comparable Sales: columns shown</div><div class="fields" id="cp-comps"></div>
@@ -195,6 +202,8 @@ if (!localStorage.getItem("cma-edit-key"))
       <span class="ind" id="mu-ind" style="margin-left:0;color:#7c8798;"></span>
     </div>
     <div style="overflow-x:auto;"><table id="mu-grid"></table></div>
+    <div class="sumlbl">Client summary: prints under the Market Update table (blank = nothing shown)</div>
+    <textarea class="sum" id="sum-mu" placeholder="General notes on the competition: what is sitting, what moved, where the subject fits." onchange="setSummary('marketUpdate',this.value)"></textarea>
   </div>
   <div class="card" id="avm-card">
     <h2>Online Estimates (AVMs)</h2>
@@ -619,6 +628,16 @@ const COMP_FIELDS = { condo:[["rel","Rel."],["status","Status"],["building","Bld
   sfh:[["rel","Rel."],["status","Status"],["closeDate","Date"],["dom","DOM"],["sqft","Sq Ft"],["lot","Lot"],["yearBuilt","Built"],["garage","Gar"],["bedBath","Bd/Ba"]] };
 const COMP_FIXED = [["concess","Concess."],["terms","Terms"],["price","Sale / Ask Price"],["ppsf","$/SqFt"],["adj","Adjustments"],["adjPrice","Adj. Price"],["adjPpsf","Adj. $/SqFt"]];
 const MU_FIELDS = [["note","Agent note"],["status","Status"],["subdivision","Subdivision"],["dist","Dist (mi)"],["sqft","Sq Ft"],["beds","Bed"],["baths","Bath"],["yearBuilt","Built"],["garage","Gar"],["price","List / Sale"],["ppsf","$/SqFt"],["dom","DOM"],["pctOrig","% Orig"]];
+const SUMS = () => (ADJ.summaries ||= {});
+function setSummary(k,v){ SUMS()[k]=v; touch(); }
+const ORD = () => { const keys=SECTIONS.map(([k])=>k); const o=(ADJ.order||[]).filter(k=>keys.includes(k)); keys.forEach(k=>{ if(!o.includes(k)) o.push(k); }); return o; };
+let dragKey=null;
+function secDrag(e,k){ dragKey=k; e.dataTransfer.effectAllowed="move"; e.currentTarget.classList.add("dragging"); }
+function secOver(e){ e.preventDefault(); e.currentTarget.classList.add("over"); }
+function secLeave(e){ e.currentTarget.classList.remove("over"); }
+function secDrop(e,k){ e.preventDefault(); e.currentTarget.classList.remove("over"); if(!dragKey||dragKey===k) return;
+  const o=ORD().filter(x=>x!==dragKey); o.splice(o.indexOf(k),0,dragKey); ADJ.order=o; dragKey=null; touch(); renderCP(); }
+function secEnd(e){ e.currentTarget.classList.remove("dragging"); dragKey=null; }
 const TT  = () => (ADJ.titles ||= {});
 const HD  = () => (ADJ.hidden ||= { subject:[], comps:[], mu:[] });
 const isHid = (g,k) => ((HD()[g])||[]).includes(k);
@@ -627,7 +646,10 @@ function setHid(g,k,hide){ const a=(HD()[g] ||= []); const i=a.indexOf(k); if(hi
 function setSec(k,on){ INC()[k]=!!on; touch(); renderCP(); if(k==="zillowForecast") zfPreview(); }
 function renderCP(){
   const inc=INC();
-  document.getElementById("cp-sections").innerHTML = SECTIONS.map(([k,l])=>`<div class="sec ${inc[k]===false||(k==="zillowForecast"&&!inc[k])?"off":""}">
+  const byKey = Object.fromEntries(SECTIONS);
+  document.getElementById("cp-sections").innerHTML = ORD().map(k=>[k,byKey[k]]).map(([k,l])=>`<div class="sec ${inc[k]===false||(k==="zillowForecast"&&!inc[k])?"off":""}" draggable="true"
+      ondragstart="secDrag(event,'${k}')" ondragover="secOver(event)" ondragleave="secLeave(event)" ondrop="secDrop(event,'${k}')" ondragend="secEnd(event)">
+    <span class="grip" title="drag to reorder">&#8942;&#8942;</span>
     <label class="nm"><input type="checkbox" ${k==="zillowForecast"?(inc[k]?"checked":""):(inc[k]===false?"":"checked")} onchange="setSec('${k}',this.checked)"> ${l}</label>
     <input type="text" placeholder="${l} (client-page title)" value="${escA(TT()[k]||"")}" onchange="setTitle('${k}',this.value)">
     <span style="font-size:10.5px;color:#96a0ae;">${k==="subject"?"title defaults to Your Residence / Your Home":k==="marketUpdate"?"title field below wins if set":""}</span></div>`).join("");
@@ -637,6 +659,7 @@ function renderCP(){
   document.getElementById("cp-comps").innerHTML = chips("comps", COMP_FIELDS[prof].concat(COMP_FIXED));
   document.getElementById("cp-mu").innerHTML = chips("mu", MU_FIELDS);
   document.getElementById("inc-mu").checked = inc.marketUpdate!==false; document.getElementById("inc-zf").checked = !!inc.zillowForecast;
+  document.getElementById("sum-comps").value = SUMS().comps||""; document.getElementById("sum-mu").value = SUMS().marketUpdate||"";
 }
 const GRID_KEY = { "Sold":"closeDate","DOM":"dom","Sale Price":"price","$/SqFt":"ppsf","SqFt":"sqft","Lot":"lot","Gar":"garage","Bldg":"building","Flr":"floor","Fee/mo":"fee","Relevancy":"rel","Total Adj.":"adj","Adj. Price":"adjPrice","Adj. $/SqFt":"adjPpsf","Status":"status" };
 function setStatus(mls,v){ OV(mls).statusLabel = v.trim(); touch(); }

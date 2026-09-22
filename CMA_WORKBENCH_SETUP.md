@@ -148,3 +148,10 @@ Workbench card "Client Page: Sections, Titles & Fields", all saved in the overla
 - Online Estimates: `avms[{name,value,asOf,url}]`. No AVM has a public API for agents, so
   "Open lookup pages" opens Zillow, Redfin, Realtor.com and Homes.com searches for the subject
   in new tabs and you type the numbers in. The section renders only when a value is entered.
+- Section order: drag the handle in the Sections card; saved as `order[]`. Ladder and map are
+  now independent cards so they can move like everything else.
+- Client summaries: `summaries{comps, marketUpdate}` free text, shown under the comparables
+  table and under the Market Update table (blank = not shown).
+- Print (2026-09-22 evening): dedicated print stylesheet, whole-dollar $/sq ft everywhere, bold
+  sale/ask price, DOM and sq ft averages in the comparables totals row, comps subheader and the
+  fine print under the table removed, Market Update starts a new page.
