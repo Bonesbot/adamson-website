@@ -2,16 +2,16 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-21T10:50:11.511245+00:00",
+  "lastUpdated": "2026-09-22T10:56:23.625318+00:00",
   "counts": {
-    "sold": 1233,
+    "sold": 1234,
     "pending": 41,
-    "active": 218,
-    "total": 1274
+    "active": 217,
+    "total": 1275
   },
   "metrics": {
-    "avgPrice": "$2,026,137",
-    "avgPricePerSqFt": "$805",
+    "avgPrice": "$2,025,387",
+    "avgPricePerSqFt": "$804",
     "avgYearBuilt": 1985,
     "avgLivingSqFt": "2,196",
     "avgLotSqFt": null,
@@ -22,29 +22,29 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 218,
+    "count": 217,
     "medianPrice": "$999,000",
-    "medianPricePerSqFt": "$676",
-    "waterfrontCount": 166,
+    "medianPricePerSqFt": "$679",
+    "waterfrontCount": 165,
     "newConstructionCount": 16
   },
   "sold": {
-    "count": 123,
-    "medianPrice": "$975,000",
+    "count": 121,
+    "medianPrice": "$1,000,000",
     "medianDom": 95,
-    "saleToListRatio": "95.2%",
+    "saleToListRatio": "95.5%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 4.9,
-    "sfhVilla": 5.4,
+    "condo": 4.8,
+    "sfhVilla": 5.5,
     "blended": 5.1,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
     "medianMonthlyAssociation": "$1,600",
-    "medianMonthlyCondoFee": "$1,712",
+    "medianMonthlyCondoFee": "$1,717",
     "minMonthlyCondoFee": "$125",
     "maxMonthlyCondoFee": "$10,909",
     "condoFeeRange": {
@@ -55,18 +55,31 @@
   },
   "priceBands": {
     "under900k": 91,
-    "band900kTo1_5m": 51,
+    "band900kTo1_5m": 50,
     "band1_5mTo3m": 42,
     "band3mPlus": 34
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 218
+      "count": 217
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4695851",
+      "address": "2301 GULF OF MEXICO DR #12N",
+      "subdivision": "ISLANDER CLUB OF LONGBOAT",
+      "soldPrice": "$1,100,000",
+      "soldDate": "2026-09-21",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,235",
+      "yearBuilt": 1970,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4683180",
       "address": "2326 HARBOUR OAKS DR",
@@ -118,19 +131,6 @@
       "yearBuilt": 1992,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4702915",
-      "address": "225 SANDS POINT RD #6103",
-      "subdivision": "INN ON THE BEACH PH III",
-      "soldPrice": "$510,000",
-      "soldDate": "2026-09-11",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "642",
-      "yearBuilt": 1983,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 123,
-      "avgPrice": "$845,227",
-      "avgPricePerSqFt": "$649",
-      "avgLivingSqFt": "1,340",
-      "avgDom": 153
+      "activeCount": 122,
+      "avgPrice": "$839,572",
+      "avgPricePerSqFt": "$654",
+      "avgLivingSqFt": "1,320",
+      "avgDom": 154
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,907,581",
       "avgPricePerSqFt": "$777",
       "avgLivingSqFt": "2,372",
-      "avgDom": 150
+      "avgDom": 151
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$6,499,667",
       "avgPricePerSqFt": "$1,695",
       "avgLivingSqFt": "3,801",
-      "avgDom": 227
+      "avgDom": 228
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 3,
-      "avgPrice": "$6,563,000",
-      "avgPricePerSqFt": "$2,081",
+      "avgPrice": "$6,551,333",
+      "avgPricePerSqFt": "$2,078",
       "avgLivingSqFt": "2,832",
-      "avgDom": 559
+      "avgDom": 560
     }
   ],
   "condoTiersScope": {
@@ -187,7 +187,7 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 76,
+      "activeCount": 77,
       "soldCount": 526,
       "soldMedianPricePerSqFt": "$891",
       "soldMedianPrice": "$1,400,000",
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 86,
+      "activeCount": 84,
       "soldCount": 404,
       "soldMedianPricePerSqFt": "$600",
       "soldMedianPrice": "$1,175,000",
@@ -224,20 +224,20 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 29,
-      "soldCount": 176,
-      "soldMedianPricePerSqFt": "$487",
+      "soldCount": 177,
+      "soldMedianPricePerSqFt": "$489",
       "soldMedianPrice": "$850,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 5.1,
-    "monthsOfSupplyCondo": 4.9,
-    "monthsOfSupplySfhVilla": 5.4,
+    "monthsOfSupplyCondo": 4.8,
+    "monthsOfSupplySfhVilla": 5.5,
     "label": "balanced market",
-    "activeCount": 218,
-    "sold365Count": 514,
-    "sold90Count": 123,
+    "activeCount": 217,
+    "sold365Count": 515,
+    "sold90Count": 121,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,54 +248,54 @@
       "soldMedianPricePerSqFt": "$727"
     },
     "condo": {
-      "soldCount": 913,
-      "activeCount": 159,
+      "soldCount": 914,
+      "activeCount": 158,
       "soldMedianPrice": "$1,000,000",
       "soldMedianPricePerSqFt": "$647"
     }
   },
   "boating": {
-    "activeWithDock": 64,
-    "activeWaterfront": 166
+    "activeWithDock": 63,
+    "activeWaterfront": 165
   },
   "marketQuestions": [
     {
       "facet": "cost",
       "q": "What do properties cost on Longboat Key?",
-      "a": "Over the past 90 days, 123 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $870,000 ($555/sq ft), while single-family homes closed around $2,187,500 ($730/sq ft). By location, Gulf-front and beachfront properties closed at a median $817 per square foot, compared with $495 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
+      "a": "Over the past 90 days, 121 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $875,000 ($561/sq ft), while single-family homes closed around $2,187,500 ($730/sq ft). By location, Gulf-front and beachfront properties closed at a median $817 per square foot, compared with $495 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
     },
     {
       "facet": "balance",
       "q": "Is it a good time to buy on Longboat Key?",
-      "a": "With 218 active listings and roughly 43 closed sales a month (trailing 12 months), Longboat Key has about 5.1 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 217 active listings and roughly 43 closed sales a month (trailing 12 months), Longboat Key has about 5.1 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Longboat Key?",
-      "a": "Recently sold homes took a median 95 days on market and closed at 95.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 95 days on market and closed at 95.5% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Longboat Key homes have a dock?",
-      "a": "Of 166 active waterfront listings, 64 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 165 active waterfront listings, 63 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Longboat Key?",
-      "a": "The median monthly condo fee is $1,712 and the median monthly association fee is $1,600."
+      "a": "The median monthly condo fee is $1,717 and the median monthly association fee is $1,600."
     }
   ],
   "costBreakdown90": {
     "windowDays": 90,
-    "soldCount": 123,
+    "soldCount": 121,
     "byPropertyType": {
       "condo": {
         "soldCount": 93,
-        "soldMedianPrice": "$870,000",
-        "soldMedianPricePerSqFt": "$555"
+        "soldMedianPrice": "$875,000",
+        "soldMedianPricePerSqFt": "$561"
       },
       "single_family": {
-        "soldCount": 30,
+        "soldCount": 28,
         "soldMedianPrice": "$2,187,500",
         "soldMedianPricePerSqFt": "$730"
       }

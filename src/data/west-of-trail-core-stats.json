@@ -2,11 +2,11 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-21T10:50:14.678817+00:00",
+  "lastUpdated": "2026-09-22T10:56:26.865653+00:00",
   "counts": {
-    "sold": 261,
-    "pending": 32,
-    "active": 90,
+    "sold": 262,
+    "pending": 31,
+    "active": 91,
     "total": 293
   },
   "metrics": {
@@ -22,23 +22,23 @@
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 90,
-    "medianPrice": "$2,222,500",
-    "medianPricePerSqFt": "$800",
+    "count": 91,
+    "medianPrice": "$2,150,000",
+    "medianPricePerSqFt": "$793",
     "waterfrontCount": 18,
     "newConstructionCount": 29
   },
   "sold": {
-    "count": 42,
-    "medianPrice": "$1,675,000",
-    "medianDom": 120,
-    "saleToListRatio": "86.7%",
+    "count": 43,
+    "medianPrice": "$1,750,000",
+    "medianDom": 118,
+    "saleToListRatio": "87.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 5.2,
-    "sfhVilla": 5.2,
-    "blended": 5.2,
+    "sfhVilla": 5.3,
+    "blended": 5.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 24,
-    "band900kTo1_5m": 9,
-    "band1_5mTo3m": 22,
+    "under900k": 25,
+    "band900kTo1_5m": 10,
+    "band1_5mTo3m": 21,
     "band3mPlus": 35
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 90
+      "count": 91
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4700259",
+      "address": "1555 EASTBROOK DR",
+      "subdivision": "KENTWOOD ESTATES",
+      "soldPrice": "$4,250,000",
+      "soldDate": "2026-09-21",
+      "bedrooms": 5,
+      "bathrooms": 5.5,
+      "livingSqFt": "3,967",
+      "yearBuilt": 2025,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4669078",
       "address": "3631 SAN REMO TER",
@@ -118,19 +131,6 @@
       "yearBuilt": 2003,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4699257",
-      "address": "1372 HARBOR DR",
-      "subdivision": "HARBOR ACRES",
-      "soldPrice": "$13,350,000",
-      "soldDate": "2026-09-14",
-      "bedrooms": 4,
-      "bathrooms": 5.5,
-      "livingSqFt": "5,843",
-      "yearBuilt": 2009,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$369,429",
       "avgPricePerSqFt": "$321",
       "avgLivingSqFt": "1,154",
-      "avgDom": 88
+      "avgDom": 89
     },
     {
       "tier": "1990to2005",
@@ -197,7 +197,7 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 1,
-      "soldCount": 6,
+      "soldCount": 7,
       "soldMedianPricePerSqFt": null,
       "soldMedianPrice": null,
       "lowSample": true
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 71,
+      "activeCount": 72,
       "soldCount": 219,
       "soldMedianPricePerSqFt": "$570",
       "soldMedianPrice": "$1,450,000",
@@ -222,21 +222,21 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.2,
+    "monthsOfSupply": 5.3,
     "monthsOfSupplyCondo": 5.2,
-    "monthsOfSupplySfhVilla": 5.2,
+    "monthsOfSupplySfhVilla": 5.3,
     "label": "balanced market",
-    "activeCount": 90,
-    "sold365Count": 206,
-    "sold90Count": 42,
+    "activeCount": 91,
+    "sold365Count": 207,
+    "sold90Count": 43,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 241,
-      "activeCount": 83,
+      "soldCount": 242,
+      "activeCount": 84,
       "soldMedianPrice": "$1,600,000",
-      "soldMedianPricePerSqFt": "$621"
+      "soldMedianPricePerSqFt": "$625"
     },
     "condo": {
       "soldCount": 20,
@@ -253,22 +253,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 90 active listings and roughly 17 closed sales a month (trailing 12 months), West Of Trail Core has about 5.2 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 91 active listings and roughly 17 closed sales a month (trailing 12 months), West Of Trail Core has about 5.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,600,000 ($621/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
+      "a": "Single-family homes sell around $1,600,000 ($625/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,222,500."
+      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,150,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 120 days on market and closed at 86.7% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 118 days on market and closed at 87.0% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

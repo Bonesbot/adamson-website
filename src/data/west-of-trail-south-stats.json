@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-21T10:50:16.302345+00:00",
+  "lastUpdated": "2026-09-22T10:56:28.418643+00:00",
   "counts": {
-    "sold": 297,
+    "sold": 298,
     "pending": 28,
-    "active": 85,
-    "total": 325
+    "active": 84,
+    "total": 326
   },
   "metrics": {
-    "avgPrice": "$628,505",
+    "avgPrice": "$626,592",
     "avgPricePerSqFt": "$327",
     "avgYearBuilt": 1980,
     "avgLivingSqFt": "1,745",
@@ -22,22 +22,22 @@
     "maxPrice": "$5,650,000"
   },
   "active": {
-    "count": 85,
-    "medianPrice": "$475,000",
-    "medianPricePerSqFt": "$315",
+    "count": 84,
+    "medianPrice": "$480,000",
+    "medianPricePerSqFt": "$316",
     "waterfrontCount": 22,
     "newConstructionCount": 2
   },
   "sold": {
     "count": 56,
-    "medianPrice": "$407,500",
-    "medianDom": 52,
-    "saleToListRatio": "86.4%",
+    "medianPrice": "$413,000",
+    "medianDom": 60,
+    "saleToListRatio": "86.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 4.4,
-    "sfhVilla": 4.1,
+    "sfhVilla": 4.0,
     "blended": 4.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 66,
+    "under900k": 65,
     "band900kTo1_5m": 7,
     "band1_5mTo3m": 7,
     "band3mPlus": 5
@@ -62,11 +62,24 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 85
+      "count": 84
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4684647",
+      "address": "7637 COVE TER",
+      "subdivision": "SOUTHPOINTE SHORES UNIT 1",
+      "soldPrice": "$2,850,000",
+      "soldDate": "2026-09-21",
+      "bedrooms": 4,
+      "bathrooms": 4.0,
+      "livingSqFt": "3,799",
+      "yearBuilt": 2004,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4697076",
       "address": "6448 HOLLYWOOD BLVD",
@@ -118,19 +131,6 @@
       "yearBuilt": 1975,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4652636",
-      "address": "7273 CLOISTER DR #121",
-      "subdivision": "GULF GATE GARDENS",
-      "soldPrice": "$95,000",
-      "soldDate": "2026-09-18",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "734",
-      "yearBuilt": 1984,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$347,488",
       "avgPricePerSqFt": "$276",
       "avgLivingSqFt": "1,251",
-      "avgDom": 94
+      "avgDom": 95
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$605,750",
       "avgPricePerSqFt": "$288",
       "avgLivingSqFt": "2,110",
-      "avgDom": 216
+      "avgDom": 217
     },
     {
       "tier": "2006to2019",
@@ -172,7 +172,7 @@
       "avgPrice": "$587,000",
       "avgPricePerSqFt": "$330",
       "avgLivingSqFt": "1,785",
-      "avgDom": 197
+      "avgDom": 198
     }
   ],
   "condoTiersScope": {
@@ -197,9 +197,9 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 20,
-      "soldCount": 60,
-      "soldMedianPricePerSqFt": "$366",
-      "soldMedianPrice": "$500,500",
+      "soldCount": 61,
+      "soldMedianPricePerSqFt": "$370",
+      "soldMedianPrice": "$506,000",
       "lowSample": false
     },
     {
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 54,
+      "activeCount": 53,
       "soldCount": 192,
       "soldMedianPricePerSqFt": "$285",
       "soldMedianPrice": "$425,000",
@@ -233,19 +233,19 @@
   "marketBalance": {
     "monthsOfSupply": 4.2,
     "monthsOfSupplyCondo": 4.4,
-    "monthsOfSupplySfhVilla": 4.1,
+    "monthsOfSupplySfhVilla": 4.0,
     "label": "seller's market",
-    "activeCount": 85,
-    "sold365Count": 240,
+    "activeCount": 84,
+    "sold365Count": 241,
     "sold90Count": 56,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 159,
-      "activeCount": 33,
-      "soldMedianPrice": "$520,000",
-      "soldMedianPricePerSqFt": "$322"
+      "soldCount": 160,
+      "activeCount": 32,
+      "soldMedianPrice": "$526,500",
+      "soldMedianPricePerSqFt": "$323"
     },
     "condo": {
       "soldCount": 138,
@@ -262,22 +262,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 85 active listings and roughly 20 closed sales a month (trailing 12 months), West Of Trail South has about 4.2 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 84 active listings and roughly 20 closed sales a month (trailing 12 months), West Of Trail South has about 4.2 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $520,000 ($322/sq ft), while condos, villas and townhouses sell around $342,500 ($251/sq ft)."
+      "a": "Single-family homes sell around $526,500 ($323/sq ft), while condos, villas and townhouses sell around $342,500 ($251/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $5,650,000, with a median asking price of $475,000."
+      "a": "Active listings run from $95,000 to $5,650,000, with a median asking price of $480,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 52 days on market and closed at 86.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 60 days on market and closed at 86.1% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
