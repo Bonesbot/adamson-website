@@ -90,6 +90,7 @@
   .cover-name { font-size:17px; font-weight:bold; color:#111; }
   .cover-contact { font-size:12.5px; color:#5a6b85; line-height:1.55; margin-top:3px; }
   .cover-prepared { background:#f2f4f8; margin:0 -44px; padding:9px; font-size:11px; color:#4a5871; }
+  .cover-print-top, .cover-img { display:none; }
   .cover-scroll { position:absolute; bottom:22px; left:0; right:0; text-align:center; color:#fff; font-size:12px; letter-spacing:.06em; text-shadow:0 1px 6px rgba(0,0,0,.6); }
   @media (max-width:620px){ .cover-addr{font-size:26px;} .cover-card{padding:24px 22px 0;} .cover-prepared{margin:0 -22px;} }
   footer { text-align:center; font-size:11px; color:#8a94a5; padding:26px 16px; line-height:1.6; }
@@ -124,16 +125,16 @@
   .zf-note { font-size:11px; color:#5a6b85; line-height:1.5; margin-top:12px; border-left:3px solid var(--gold); padding-left:10px; }
   @media (max-width:820px){ .zf{grid-template-columns:repeat(2,1fr);} }
   @media print {
-    @page { size:letter portrait; margin:11mm 10mm; }
+    @page { size:letter portrait; margin:12.7mm 12.7mm; }
     html, body { background:#fff; font-size:10px; }
     .no-print, .lightbox, #pending-banner, .mu-link { display:none !important; }
     .wrap { max-width:none; padding:0; }
-    header { padding:12px 0 10px; border-bottom-width:3px; }
+    header { padding:10px 0 9px; border-bottom-width:3px; }
     header h1 { font-size:21px; }
     .brandline { margin-bottom:8px; } .wordmark { font-size:12px; } .cb { font-size:9px; }
     .crit { font-size:10.5px; margin-top:3px; }
-    .subject-strip { grid-template-columns:repeat(4,1fr); gap:8px; margin:12px 0 0; }
-    .stat { padding:8px 10px; border-radius:5px; } .stat .v { font-size:17px; } .stat .l { font-size:8.5px; }
+    .subject-strip { grid-template-columns:repeat(4,1fr); gap:8px; margin:9px 0 0; }
+    .stat { padding:6px 10px; border-radius:5px; } .stat .v { font-size:16px; } .stat .l { font-size:8px; }
     .card { page-break-inside:auto; break-inside:auto; border:1px solid #e3e7ee; margin-top:10px; padding:11px 13px; border-radius:5px; }
     #subject-card, #ladder-card, #zf-card, #avm-card, #map-card { page-break-inside:avoid; break-inside:avoid; }
     .card h2 { font-size:15px; margin-bottom:2px; } .card .sub { font-size:9.5px; margin-bottom:8px; }
@@ -143,18 +144,33 @@
     #subject-table td { padding:4px 6px; font-size:9.5px; }
     #comps-table { width:100%; table-layout:auto; }
     #comps-table td, #comps-table th { padding:4px 3px; white-space:nowrap; }
-    #comps-table td:nth-child(2) { white-space:normal; }
+    #comps-table tr.drow td { white-space:normal; }
+    #comps-table td.addr { white-space:normal; font-size:11px; max-width:150px; line-height:1.15; }
+    #comps-table td:nth-child(4) { white-space:normal; max-width:70px; line-height:1.15; }
+    #comps-table { font-size:8.6px; }
+    #comps-table .cnum { min-width:22px; height:22px; font-size:12.5px; }
     tr.hasd, tr.drow { page-break-inside:avoid; break-inside:avoid; }
     tr.drow td { padding:3px 8px 8px; }
-    .cnote { font-size:9.5px; line-height:1.4; margin-bottom:2px; } .cadj { font-size:8px; line-height:1.35; }
+    .cnote { font-size:9px; line-height:1.35; margin-bottom:1px; } .cadj { font-size:7.8px; line-height:1.3; }
+    tr.drow td { padding:2px 8px 6px; }
     .lettermark { width:17px; height:17px; font-size:9.5px; }
     .rb { min-width:16px; height:16px; font-size:9px; }
     .summary { font-size:10.5px; line-height:1.5; padding:8px 12px; margin-top:8px; page-break-inside:avoid; }
     #mu-card { page-break-before:always; }
-    #cover { page-break-after:always; height:255mm; overflow:hidden; }
-    .cover-hero { min-height:0; height:calc(255mm - 52px); padding:20px; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-    .cover-card { max-width:470px; box-shadow:none; border:1px solid #d8dde6; }
-    .cover-addr { font-size:28px; } .cover-agent img { width:72px; height:72px; }
+    /* Cover, print: the Home Platform PDF layout. Logo and date on top, contained photo, kicker, address, agent card. */
+    #cover { page-break-after:always; break-after:page; height:auto; overflow:visible; padding:6mm 0 0; }
+    .cover-bar, .cover-scroll, .cover-prepared { display:none !important; }
+    .cover-print-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:9mm; }
+    .cover-print-top img { height:11mm; } .cover-print-top span { font-size:10.5px; color:#333; }
+    .cover-hero { display:block; min-height:0; height:auto; padding:0; background:none !important; }
+    .cover-img { display:block; width:100%; height:112mm; object-fit:cover; }
+    .cover-img:not([src]) { display:none; }
+    .cover-card { max-width:none; width:auto; padding:11mm 0 0; box-shadow:none; border:none; text-align:left; background:none; }
+    .cover-kicker { font-size:10px; letter-spacing:.22em; color:#333; margin-bottom:5mm; }
+    .cover-addr { font-size:34px; margin-bottom:16mm; color:#111; }
+    .cover-agent { justify-content:flex-start; gap:12px; margin:0; }
+    .cover-agent img { width:26mm; height:26mm; border-radius:2px; }
+    .cover-name { font-size:16px; } .cover-contact { font-size:10.5px; line-height:1.6; }
     table.mu { font-size:8.2px; width:100%; } table.mu th { font-size:7.6px; padding:4px 3px; } table.mu td { padding:3px 3px; }
     table.mu td.note { font-size:8px; min-width:90px; max-width:130px; } table.mu td.subd { max-width:105px; font-size:7.6px; }
     .mu-head .asof { font-size:9.5px; } .mu-crit { font-size:10px; margin-bottom:8px; } .mu-foot { font-size:8.5px; }
@@ -174,7 +190,9 @@
 <script src="/mkt/nav.js"></script>
 <section id="cover" style="display:none;">
   <div class="cover-bar"><span class="cover-wm">THE <span>ADAMSON</span> GROUP</span><img class="cover-cb" src="/images/logos/cb-horz-dark.png" alt="Coldwell Banker Realty"></div>
+  <div class="cover-print-top"><img src="/images/logos/cb-horz-dark.png" alt="Coldwell Banker Realty"><span id="cover-date"></span></div>
   <div class="cover-hero" id="cover-hero">
+    <img id="cover-img" class="cover-img" src="" alt="">
     <div class="cover-card">
       <div class="cover-kicker" id="cover-kicker">COMPARATIVE MARKET ANALYSIS</div>
       <div class="cover-addr" id="cover-addr"></div>
@@ -551,6 +569,8 @@ function render(){
     if (INC("cover") && ADJ && ADJ.include && ADJ.include.cover===true) {
       el.style.display="";
       document.getElementById("cover-hero").style.backgroundImage = cv.photo ? `url("${cv.photo}")` : "linear-gradient(160deg,#0A1F3C,#24507f)";
+      const ci = document.getElementById("cover-img"); if (cv.photo) ci.src = cv.photo; else ci.removeAttribute("src");
+      document.getElementById("cover-date").textContent = new Date((cv.preparedOn || D.meta.asOf)+"T12:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
       document.getElementById("cover-kicker").textContent = cv.kicker || "COMPARATIVE MARKET ANALYSIS";
       document.getElementById("cover-addr").textContent = cv.address || s.address;
       document.getElementById("cover-name").textContent = cv.agentName || "Ryan Adamson, PA";
