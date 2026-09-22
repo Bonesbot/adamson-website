@@ -49,6 +49,11 @@
   .no-print {}
   .lettermark { display:inline-flex; width:21px; height:21px; border-radius:50%; background:var(--navy); color:var(--gold);
      font-size:11.5px; font-weight:bold; align-items:center; justify-content:center; font-family:Georgia,serif; }
+  #comps-table .cnum { display:inline-flex; min-width:26px; height:26px; padding:0 6px; border-radius:6px; border:1.5px solid var(--navy); background:#fff; color:var(--navy);
+     font:bold 15px Georgia,serif; align-items:center; justify-content:center; }
+  #comps-table td.addr { font-size:14px; font-weight:bold; color:var(--navy); }
+  #comps-table td .ask { color:#8a6d1f; font-weight:bold; margin-left:2px; }
+  .ask-note { font-size:11.5px; color:#8a6d1f; margin-top:8px; }
   .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
   #map { height:380px; border-radius:8px; z-index:0; }
   .ladder td { padding:4px 8px; }
@@ -173,8 +178,9 @@
   </div>
   <div class="card" id="comps-card">
     <h2 id="t-comps">Comparable Sales</h2>
-    <div class="sub" id="comps-sub" style="display:none;"></div>
+    <div class="sub" id="comps-sub"></div>
     <div style="overflow-x:auto;"><table id="comps-table"></table></div>
+    <div class="ask-note" id="ask-note" style="display:none;"></div>
     <div class="summary" id="comps-summary" style="display:none;"></div>
   </div>
   <div class="card" id="actives-card">
@@ -514,6 +520,8 @@ function render(){
     Unreviewed comps carry attribute math only, with no condition or location call yet applied.
     Internal preview, noindex and unlinked.</div>` : "";
 
+  const stripOn = INC("strip") && Number(s.list) > 0;
+  document.getElementById("strip").style.display = stripOn ? "" : "none";
   document.getElementById("strip").innerHTML = `
     <div class="stat"><div class="v">${money(s.list)}</div><div class="l">Current List Price</div></div>
     <div class="stat"><div class="v">$${Math.round(s.list/s.sqft)}</div><div class="l">List $ per Sq Ft</div></div>
@@ -523,15 +531,19 @@ function render(){
   document.getElementById("estimate").innerHTML = `
     <div><div class="l">Indicated Value Range</div><div class="big">${money(e.lo)} to ${money(e.hi)}</div></div>
     <div><div class="l">Central Estimate</div><div class="mid">${money(e.central)}</div></div>
-    <div><div class="l">vs. Current List</div><div class="mid">${moneyS(e.central - s.list)}</div></div>`;
+    ${stripOn?`<div><div class="l">vs. Current List</div><div class="mid">${moneyS(e.central - s.list)}</div></div>`:""}`;
 
   { const f = PR.subjectFields(s).filter(x=>!HID("subject",x.k)); let sh="";
     for (let i=0;i<f.length;i+=2){ const a=f[i], b=f[i+1];
       sh += `<tr><td>${a.l}</td><td><b>${a.v}</b>${a.x||""}</td>${b?`<td>${b.l}</td><td><b>${b.v}</b>${b.x||""}</td>`:"<td></td><td></td>"}</tr>`; }
     document.getElementById("subject-table").innerHTML = sh; }
-  document.getElementById("comps-sub").textContent = PR.compsSub(s);
+  { const tpl = ((ADJ&&ADJ.titles)||{}).compsSub;
+    const dflt = "Adjustments column includes manual adjustments for updates along with square footage difference calculated at {ppsf} per sq ft for difference in living space.";
+    const txt = (tpl===undefined||tpl===null ? dflt : tpl).replace(/\{ppsf\}/g, "$"+Math.round(P("ppsfAdj")).toLocaleString());
+    const el=document.getElementById("comps-sub"); el.textContent = txt; el.style.display = txt.trim() ? "" : "none"; }
 
   const STATUS = c => OV(c.mls).statusLabel || c.status || "Sold";
+  let anyAsk = false;
   const CC = PR.compCols.filter(col=>!HID("comps",col.k));
   const showRel = !HID("comps","rel"), showSt = !HID("comps","status"), showCon = !HID("comps","concess"), showTerms = !HID("comps","terms"),
         showPrice = !HID("comps","price"), showPpsf = !HID("comps","ppsf"), showAdj = !HID("comps","adj"), showAdjP = !HID("comps","adjPrice"), showAdjPpsf = !HID("comps","adjPpsf");
@@ -546,11 +558,12 @@ function render(){
       : '<span style="color:#b08a1f;font-size:9.5px;">unrev</span>'; };
   rows.forEach(({c,r})=>{
     const note = OV(c.mls).clientNote||"";
-    h += `<tr class="hasd"><td><span class="lettermark">${NUM.get(c.mls)}</span></td>
-      <td>${c.address}</td>${showRel?`<td>${relBadge(c)}</td>`:""}${showSt?`<td>${STATUS(c)}</td>`:""}`
+    const nonSale = STATUS(c)!=="Sold"; if(nonSale) anyAsk=true;
+    h += `<tr class="hasd"><td><span class="cnum">${NUM.get(c.mls)}${nonSale?"*":""}</span></td>
+      <td class="addr">${c.address}${nonSale?'<span class="ask">*</span>':""}</td>${showRel?`<td>${relBadge(c)}</td>`:""}${showSt?`<td>${STATUS(c)}</td>`:""}`
       + CC.map(col=>col.c(c)).join("")
       + `${showCon?`<td class="num">${c.credit?money(c.credit):"—"}</td>`:""}${showTerms?`<td>${c.financing||"—"}</td>`:""}
-      ${showPrice?`<td class="num" style="font-weight:bold;">${money(c.price)}</td>`:""}${showPpsf?`<td class="num">$${Math.round(r.ppsf)}</td>`:""}
+      ${showPrice?`<td class="num" style="font-weight:bold;">${money(c.price)}${nonSale?'<span class="ask">*</span>':""}</td>`:""}${showPpsf?`<td class="num">$${Math.round(r.ppsf)}</td>`:""}
       ${showAdj?`<td class="num">${moneyS(r.autoAdj+r.manualAdj)}</td>`:""}
       ${showAdjP?`<td class="num" style="font-weight:bold;">${money(r.adjPrice)}</td>`:""}${showAdjPpsf?`<td class="num">$${Math.round(r.adjPpsf)}</td>`:""}</tr>
     <tr class="drow"><td></td><td colspan="${NCOLS-1}">
@@ -559,8 +572,8 @@ function render(){
   });
   excl.forEach(c=>{
     const note = OV(c.mls).clientNote || OV(c.mls).notes || "";
-    h += `<tr class="exc hasd"><td><span class="lettermark" style="background:#aab3c2;color:#fff;">${NUM.get(c.mls)}</span></td>
-      <td>${c.address}</td>${showRel?`<td><span class="rb X">Excl.</span></td>`:""}${showSt?`<td>${STATUS(c)}</td>`:""}`
+    h += `<tr class="exc hasd"><td><span class="cnum" style="border-color:#aab3c2;color:#98a2b2;">${NUM.get(c.mls)}${STATUS(c)!=="Sold"?"*":""}</span></td>
+      <td class="addr" style="color:#98a2b2;">${c.address}</td>${showRel?`<td><span class="rb X">Excl.</span></td>`:""}${showSt?`<td>${STATUS(c)}</td>`:""}`
       + CC.map(col=>col.c(c)).join("")
       + `${showCon?`<td class="num">${c.credit?money(c.credit):"\u2014"}</td>`:""}${showTerms?`<td>${c.financing||"\u2014"}</td>`:""}
       ${showPrice?`<td class="num" style="font-weight:bold;">${money(c.price)}</td>`:""}${showPpsf?`<td class="num">$${Math.round(c.price/c.sqft)}</td>`:""}
@@ -577,6 +590,8 @@ function render(){
     ${showPrice?`<td class="num">${money(a.price)}</td>`:""}${showPpsf?`<td class="num">$${Math.round(a.ppsf)}</td>`:""}${showAdj?"<td></td>":""}
     ${showAdjP?`<td class="num">${money(a.adjPrice)}</td>`:""}${showAdjPpsf?`<td class="num">$${Math.round(a.adjPpsf)}</td>`:""}</tr></tbody>`;
   document.getElementById("comps-table").innerHTML = h;
+  document.getElementById("ask-note").innerHTML = anyAsk ? "* Not a closed sale. The price shown is the last asking price, which is what a seller hoped for, not what a buyer paid. It is included to show where this floor plan did not sell." : "";
+  document.getElementById("ask-note").style.display = anyAsk ? "" : "none";
 
   const bl = (ADJ.buckets||[]).map(b=>b.label).join(" · ");
   const _unused_note =

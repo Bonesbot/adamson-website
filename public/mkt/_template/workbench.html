@@ -168,6 +168,11 @@ if (!localStorage.getItem("cma-edit-key"))
     <textarea class="sum" id="sum-comps" placeholder="Tell the story of these comps in a few sentences: which ones matter, why the failed listings are here, what the pattern says about price." onchange="setSummary('comps',this.value)"></textarea>
     <div class="warn" id="freeze-note"></div>
   </div>
+  <div class="card">
+    <h2>Notes</h2>
+    <div class="sub">Internal note is private to this workbench. Client note prints on the shared CMA page under that comp.</div>
+    <div id="notes"></div>
+  </div>
   <div class="card" id="cp-card">
     <h2>Client Page: Sections, Titles &amp; Fields</h2>
     <div class="sub">What the homeowner sees. Drag the handle to reorder sections top to bottom; untick a section to drop it from the client page and the PDF; retitle any section;
@@ -215,11 +220,6 @@ if (!localStorage.getItem("cma-edit-key"))
     </div>
     <div class="avm-row" style="font-size:11px;color:#5a6b85;"><div>Source</div><div>Value ($)</div><div>As of</div><div>Link (optional)</div><div></div></div>
     <div id="avm-rows"></div>
-  </div>
-  <div class="card">
-    <h2>Notes</h2>
-    <div class="sub">Internal note is private to this workbench. Client note prints on the shared CMA page under that comp.</div>
-    <div id="notes"></div>
   </div>
 </div>
 
@@ -619,7 +619,7 @@ function renderNotes(){
 
 
 /* ---------- Client page: sections, titles, hidden fields, AVMs (all in the overlay) ---------- */
-const SECTIONS = [["subject","Your Residence / Your Home"],["comps","Comparable Sales"],["actives","Currently on the Market"],["blocks","The Comparables, Up Close"],
+const SECTIONS = [["strip","Top tiles (list price, list $/sq ft, comp count, adjusted $/sq ft)"],["subject","Your Residence / Your Home"],["comps","Comparable Sales"],["actives","Currently on the Market"],["blocks","The Comparables, Up Close"],
   ["ladder","Pricing Ladder"],["map","Comp Locations"],["marketUpdate","Market Update"],["zillowForecast","Zillow Zip Code Forecast"],["avms","Online Estimates"]];
 const SUBJECT_FIELDS = { condo:[["address","Address"],["bldgUnit","Building / Unit / Floor"],["sqft","Heated Area"],["yearBuilt","Year Built"],["bedBath","Beds / Baths"],["fee","Condo Fee"],
     ["parking","Garage / Parking"],["taxes","Taxes"],["pool","Pool"],["minLease","Minimum Lease"],["pets","Pets"],["view","View"],["floodMls","Flood Zone / MLS"]],
@@ -641,6 +641,8 @@ function secEnd(e){ e.currentTarget.classList.remove("dragging"); dragKey=null; 
 const TT  = () => (ADJ.titles ||= {});
 const HD  = () => (ADJ.hidden ||= { subject:[], comps:[], mu:[] });
 const isHid = (g,k) => ((HD()[g])||[]).includes(k);
+const COMPS_SUB_DFLT = "Adjustments column includes manual adjustments for updates along with square footage difference calculated at {ppsf} per sq ft for difference in living space.";
+function setCompsSub(v){ if(v==="") delete TT().compsSub; else TT().compsSub = v; touch(); }
 function setTitle(k,v){ if(v.trim()) TT()[k]=v.trim(); else delete TT()[k]; touch(); }
 function setHid(g,k,hide){ const a=(HD()[g] ||= []); const i=a.indexOf(k); if(hide&&i<0) a.push(k); if(!hide&&i>=0) a.splice(i,1); touch(); renderCP(); renderGrid(); recalc(); renderMU(); }
 function setSec(k,on){ INC()[k]=!!on; touch(); renderCP(); if(k==="zillowForecast") zfPreview(); }
@@ -652,7 +654,10 @@ function renderCP(){
     <span class="grip" title="drag to reorder">&#8942;&#8942;</span>
     <label class="nm"><input type="checkbox" ${k==="zillowForecast"?(inc[k]?"checked":""):(inc[k]===false?"":"checked")} onchange="setSec('${k}',this.checked)"> ${l}</label>
     <input type="text" placeholder="${l} (client-page title)" value="${escA(TT()[k]||"")}" onchange="setTitle('${k}',this.value)">
-    <span style="font-size:10.5px;color:#96a0ae;">${k==="subject"?"title defaults to Your Residence / Your Home":k==="marketUpdate"?"title field below wins if set":""}</span></div>`).join("");
+    <span style="font-size:10.5px;color:#96a0ae;">${k==="subject"?"title defaults to Your Residence / Your Home":k==="marketUpdate"?"title field below wins if set":k==="strip"?"no title; hides automatically when list price is 0":""}</span></div>`
+    + (k==="comps" ? `<div class="sec" style="cursor:default;"><span></span><span class="nm" style="font-weight:normal;color:#5a6b85;">Subheader</span>
+        <input type="text" placeholder="${escA(COMPS_SUB_DFLT)}" value="${escA(TT().compsSub===undefined?"":TT().compsSub)}" onchange="setCompsSub(this.value)">
+        <span style="font-size:10.5px;color:#96a0ae;">{ppsf} = current per-sq-ft rate; blank = default, a space = none</span></div>` : "")).join("");
   const chips = (g,list) => list.map(([k,l])=>`<label class="chip ${isHid(g,k)?"hid":""}"><input type="checkbox" ${isHid(g,k)?"":"checked"} onchange="setHid('${g}','${k}',!this.checked)">${l}</label>`).join("");
   const prof = D.meta.profile==="condo"?"condo":"sfh";
   document.getElementById("cp-subject").innerHTML = chips("subject", SUBJECT_FIELDS[prof]);

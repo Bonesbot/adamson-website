@@ -155,3 +155,9 @@ Workbench card "Client Page: Sections, Titles & Fields", all saved in the overla
 - Print (2026-09-22 evening): dedicated print stylesheet, whole-dollar $/sq ft everywhere, bold
   sale/ask price, DOM and sq ft averages in the comparables totals row, comps subheader and the
   fine print under the table removed, Market Update starts a new page.
+- Non-sales in the comparables table carry an asterisk on the comp number, address and price,
+  with a one-line note under the table. Comp numbers are plain outlined boxes; addresses are
+  larger. Comparables subheader is editable (`titles.compsSub`, `{ppsf}` inserts the current
+  per-sq-ft rate; a single space hides it). "Top tiles" is a section toggle (`include.strip`)
+  and hides itself when the list price is 0; the "vs. Current List" figure goes with it.
+  Notes card sits directly under the Adjustment Grid.
