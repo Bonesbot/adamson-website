@@ -38,6 +38,23 @@
 //   alter table public.cma_pages       enable row level security;
 //   -- no policies: only this function's service role key reaches these tables.
 //
+//   create table if not exists public.forecast_zip (        -- written by zhvf-refresh.js (1st + 15th)
+//     source         text    not null,                       -- 'zillow_zhvf'
+//     zip            text    not null,
+//     base_date      date    not null,                       -- Zillow BaseDate column
+//     horizon_months int     not null,                       -- 1, 3, 12
+//     pct_change     numeric not null,                       -- forecast % change from base
+//     city text, county text, metro text, state text,
+//     fetched_at     timestamptz not null default now(),
+//     primary key (source, zip, base_date, horizon_months)
+//   );
+//   alter table public.forecast_zip enable row level security;
+//
+//   GET ?action=forecast&zip=34210   public read of the newest base_date rows for a ZIP
+//
+//   Overlay keys added 2026-09-22 (no DDL change, jsonb): include{marketUpdate,zillowForecast},
+//   forecastZip, marketUpdate{title,subtitle,asOf,link,rows[]}. See _template/workbench.html.
+//
 // ─────────────────────────────────────────────────────────────────────────────
 // Env vars: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, CMA_EDIT_KEY
 //   git-touching actions (create/savedata/snapshot): GITHUB_TOKEN (Contents:write),
@@ -169,6 +186,21 @@ exports.handler = async (event) => {
   const db = sb();
   if (!db) { console.error('cma: missing SUPABASE env'); return json(500, { error: 'Server configuration error' }); }
   const adjRow = `${db.url}/rest/v1/cma_adjustments`;
+
+  // ── public read: Zillow ZIP forecast (rows written by zhvf-refresh.js) ──
+  if (event.httpMethod === 'GET' && action === 'forecast') {
+    const zip = String(qs.zip || '').replace(/\D/g, '').slice(0, 5);
+    if (zip.length !== 5) return json(400, { error: 'zip must be 5 digits' });
+    try {
+      const r = await fetch(`${db.url}/rest/v1/forecast_zip?source=eq.zillow_zhvf&zip=eq.${zip}&select=base_date,horizon_months,pct_change,city,fetched_at&order=base_date.desc,horizon_months.asc&limit=9`, { headers: db.headers });
+      if (!r.ok) return json(502, { error: 'store read failed' });
+      const all = await r.json();
+      if (!all.length) return json(200, { zip, rows: [] });
+      const base = all[0].base_date;
+      const rows = all.filter(x => x.base_date === base);
+      return json(200, { zip, base_date: base, city: rows[0].city || null, fetched_at: rows[0].fetched_at, rows });
+    } catch (e) { console.error('cma: forecast read error', e); return json(500, { error: 'Internal server error' }); }
+  }
 
   // ── public read ─────────────────────────────────────────────────────────
   if (event.httpMethod === 'GET') {

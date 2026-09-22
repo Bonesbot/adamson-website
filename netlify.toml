@@ -61,3 +61,11 @@
 # ---------------------------------------------------------------------------
 [functions."mls-watchdog"]
   schedule = "0 14 * * *"
+
+# ---------------------------------------------------------------------------
+# zhvf-refresh: Zillow ZIP-level Home Value Forecast -> Supabase forecast_zip.
+# 1st and 15th at 12:00 UTC (Zillow publishes monthly; twice a month catches
+# every release). Feeds the CMA "Zillow Zip Code Forecast" section. Free, no key.
+# ---------------------------------------------------------------------------
+[functions."zhvf-refresh"]
+  schedule = "0 12 1,15 * *"

@@ -107,3 +107,23 @@ Existing CMAs keep their copied version until you re-copy the template over thei
 HTML files (data and adjustments are untouched by that). Old v1 pages (e.g. the
 Featherstone CMA under `cma-7333-featherstone/`) keep working as-is; migrate one by
 creating it fresh in the admin and porting the overlay, or leave it alone.
+
+## Market Update table + Zillow Zip Code Forecast (added 2026-09-22)
+
+Both live in the overlay (Supabase `cma_adjustments.adjustments`, jsonb), so they save
+with the workbench Save button and need no rebuild. New keys: `include{marketUpdate,
+zillowForecast}`, `forecastZip`, `marketUpdate{title,subtitle,asOf,link,rows[]}`.
+
+Workbench, "Market Update" card: Import MLS CSV (any Stellar export; rows merge by MLS #,
+sort by price low to high), a one-line note per row that prints LEFT of the row on the
+client page, Bold and Highlight (green / yellow / gray) per row, Min / Median / Average /
+Max footer, a "See the properties referenced" link, and the two "Client page & PDF
+sections" checkboxes. The client page shows the sections only when checked.
+
+Zillow forecast, one-time setup:
+1. Run `supabase/sql/2026-09-22_forecast_zip.sql` in the Supabase SQL editor.
+2. `node scripts/seed_zhvf.cjs` from `AG_website/` loads today's Florida rows (about
+   2,600). After that the Netlify scheduled function `zhvf-refresh` (netlify.toml,
+   1st and 15th, 12:00 UTC) keeps it current. Free public CSV, no key.
+3. The client page reads `?action=forecast&zip=` from `cma-adjustments`. ZIP comes from
+   `data.json subject.zip`, or type one in the workbench.
