@@ -81,6 +81,18 @@ if (!localStorage.getItem("cma-edit-key"))
     body.print-handout #handout { display:block; }
     @page { size:letter landscape; margin:9mm; }
   }
+  /* Your Residence editor */
+  .sf { display:grid; grid-template-columns:150px 1fr; gap:8px 12px; align-items:center; }
+  .sf .lab { display:flex; align-items:center; gap:7px; font-size:12px; color:var(--navy); font-weight:bold; }
+  .sf .lab.off { color:#a3adbd; text-decoration:line-through; }
+  .sf .ins { display:flex; gap:6px; flex-wrap:wrap; }
+  .sf input[type=text] { font:12px Arial; padding:5px 6px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; min-width:80px; }
+  .sf input.wide { flex:1; min-width:220px; } .sf input.short { width:80px; } .sf .ph { font-size:10.5px; color:#96a0ae; align-self:center; }
+  .sf .lab.off + .ins input { background:#f3f4f6; color:#a3adbd; }
+  .cover-form { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:10px; }
+  .cover-form label { font-size:11px; color:#5a6b85; display:block; margin-bottom:3px; }
+  .cover-form input[type=text], .cover-form input[type=date], .cover-form input[type=url] { width:100%; font:12px Arial; padding:5px 6px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
+  .cover-prev { margin-top:10px; height:150px; border-radius:6px; background:#0A1F3C center/cover no-repeat; border:1px solid #e3e7ee; }
   /* Client page controls */
   .sec { display:grid; grid-template-columns:150px 1fr auto; gap:10px; align-items:center; padding:7px 0; border-bottom:1px solid #eef1f5; }
   .sec .nm { font-size:12px; color:var(--navy); font-weight:bold; }
@@ -151,6 +163,12 @@ if (!localStorage.getItem("cma-edit-key"))
 </div></div>
 
 <div class="wrap">
+  <div class="card" id="subj-card">
+    <h2>Your Residence</h2>
+    <div class="sub">The subject as the client sees it. Facts come from data.json; anything you type here overrides them (and feeds the adjustment math).
+      Untick a row to hide it from the client page; hidden rows grey out. Saved with Save.</div>
+    <div class="sf" id="subj-form"></div>
+  </div>
   <div class="card"><div class="est" id="est"></div></div>
   <div class="card">
     <h2>Multipliers</h2>
@@ -178,7 +196,6 @@ if (!localStorage.getItem("cma-edit-key"))
     <div class="sub">What the homeowner sees. Drag the handle to reorder sections top to bottom; untick a section to drop it from the client page and the PDF; retitle any section;
       untick a field to hide that column or fact. Hidden items turn grey here so you can see what you hid. Saved with Save.</div>
     <div id="cp-sections"></div>
-    <div class="fl">Your Residence / Your Home: facts shown</div><div class="fields" id="cp-subject"></div>
     <div class="fl">Comparable Sales: columns shown</div><div class="fields" id="cp-comps"></div>
     <div class="fl">Market Update: columns shown</div><div class="fields" id="cp-mu"></div>
   </div>
@@ -199,6 +216,8 @@ if (!localStorage.getItem("cma-edit-key"))
       <label>ZIP <input class="zip" type="text" id="zf-zip" maxlength="5" placeholder="auto" onchange="setZip(this.value)"></label>
       <span class="zf-prev" id="zf-prev">forecast: not loaded</span>
     </div>
+    <div class="sumlbl">Forecast summary: prints under the Zillow section (blank = nothing shown)</div>
+    <textarea class="sum" id="sum-zf" placeholder="Your read on the forecast for this ZIP and what it means for timing." onchange="setSummary('forecast',this.value)"></textarea>
     <div class="mu-tools">
       <button class="btn" onclick="document.getElementById('mu-file').click()">Import MLS CSV</button>
       <input type="file" id="mu-file" accept=".csv,text/csv" style="display:none" onchange="muImport(this.files[0]); this.value='';">
@@ -209,6 +228,18 @@ if (!localStorage.getItem("cma-edit-key"))
     <div style="overflow-x:auto;"><table id="mu-grid"></table></div>
     <div class="sumlbl">Client summary: prints under the Market Update table (blank = nothing shown)</div>
     <textarea class="sum" id="sum-mu" placeholder="General notes on the competition: what is sitting, what moved, where the subject fits." onchange="setSummary('marketUpdate',this.value)"></textarea>
+  </div>
+  <div class="card" id="cover-card">
+    <h2>Cover Page</h2>
+    <div class="sub">Full-page cover ahead of the report: your photo of the property, the address, your headshot and contact, the prepared-on date.
+      Turn it on in the Sections card ("Cover page"). Photos are resized in the browser and stored with the CMA.</div>
+    <div class="mu-tools">
+      <button class="btn" onclick="document.getElementById('cover-file').click()">Upload cover photo</button>
+      <input type="file" id="cover-file" accept="image/*" style="display:none" onchange="coverUpload(this.files[0]); this.value='';">
+      <span class="ind" id="cover-ind" style="margin-left:0;color:#7c8798;"></span>
+    </div>
+    <div class="cover-form" id="cover-form"></div>
+    <div class="cover-prev" id="cover-prev"></div>
   </div>
   <div class="card" id="avm-card">
     <h2>Online Estimates (AVMs)</h2>
@@ -334,6 +365,7 @@ async function boot(){
   try { const d=localStorage.getItem(DRAFT_KEY); if(d){ const p=JSON.parse(d);
         if(p && p.adj && p.adj.overlay && confirm("This device has unsaved edits from "+new Date(p.at).toLocaleString()+".\n\nOK = keep them.  Cancel = discard and use "+source+".")) { ADJ=p.adj; dirty=true; }
         else localStorage.removeItem(DRAFT_KEY); } }catch(e){}
+  applySubjectOverride();
   applySort(); renderAll();
 }
 function reload(){ if(dirty && !confirm("Discard unsaved edits and reload the saved version?")) return;
@@ -619,7 +651,7 @@ function renderNotes(){
 
 
 /* ---------- Client page: sections, titles, hidden fields, AVMs (all in the overlay) ---------- */
-const SECTIONS = [["strip","Top tiles (list price, list $/sq ft, comp count, adjusted $/sq ft)"],["subject","Your Residence / Your Home"],["comps","Comparable Sales"],["actives","Currently on the Market"],["blocks","The Comparables, Up Close"],
+const SECTIONS = [["cover","Cover page (photo, address, agent card)"],["strip","Top tiles (list price, list $/sq ft, comp count, adjusted $/sq ft)"],["estimate","Indicated value range box"],["subject","Your Residence / Your Home"],["comps","Comparable Sales"],["actives","Currently on the Market"],["blocks","The Comparables, Up Close"],
   ["ladder","Pricing Ladder"],["map","Comp Locations"],["marketUpdate","Market Update"],["zillowForecast","Zillow Zip Code Forecast"],["avms","Online Estimates"]];
 const SUBJECT_FIELDS = { condo:[["address","Address"],["bldgUnit","Building / Unit / Floor"],["sqft","Heated Area"],["yearBuilt","Year Built"],["bedBath","Beds / Baths"],["fee","Condo Fee"],
     ["parking","Garage / Parking"],["taxes","Taxes"],["pool","Pool"],["minLease","Minimum Lease"],["pets","Pets"],["view","View"],["floodMls","Flood Zone / MLS"]],
@@ -638,6 +670,53 @@ function secLeave(e){ e.currentTarget.classList.remove("over"); }
 function secDrop(e,k){ e.preventDefault(); e.currentTarget.classList.remove("over"); if(!dragKey||dragKey===k) return;
   const o=ORD().filter(x=>x!==dragKey); o.splice(o.indexOf(k),0,dragKey); ADJ.order=o; dragKey=null; touch(); renderCP(); }
 function secEnd(e){ e.currentTarget.classList.remove("dragging"); dragKey=null; }
+/* ---- Your Residence editor: ADJ.subjectOverride (raw field -> value), display rows keyed like the client page's subjectFields ---- */
+const SUBJ_NUM = ["sqft","totalSqft","yearBuilt","beds","fullBaths","halfBaths","feeMonthly","feeAnnual","taxes","taxYear","list","lot","garage","floor","lat","lng"];
+const SO = () => (ADJ.subjectOverride ||= {});
+function applySubjectOverride(){ Object.entries(SO()).forEach(([k,v])=>{ if(v===""||v===null||v===undefined) return;
+  D.subject[k] = SUBJ_NUM.includes(k) ? (Number(String(v).replace(/[^0-9.\-]/g,""))||0) : v; }); }
+const SUBJ_ROWS = {
+  condo: [["address","Address",[["address","wide"]]],["bldgUnit","Building / Unit / Floor",[["building","short","bldg"],["unit","short","unit"],["floor","short","floor"]]],
+    ["sqft","Heated Area",[["sqft","short","sq ft"],["totalSqft","short","total"]]],["yearBuilt","Year Built",[["yearBuilt","short"]]],
+    ["bedBath","Beds / Baths",[["beds","short","beds"],["fullBaths","short","full"],["halfBaths","short","half"]]],["fee","Condo Fee",[["feeMonthly","short","$/mo"],["feeAnnual","short","$/yr"]]],
+    ["parking","Garage / Parking",[["parking","wide"]]],["taxes","Taxes",[["taxes","short","$"],["taxYear","short","year"]]],["pool","Pool",[["pool","wide"]]],
+    ["minLease","Minimum Lease",[["minLease","wide"]]],["pets","Pets",[["pets","wide"]]],["view","View",[["view","wide"]]],["floodMls","Flood Zone / MLS",[["floodZone","short","zone"],["mls","short","MLS #"]]]],
+  sfh: [["address","Address",[["address","wide"],["city","short","city"]]],["sqft","Heated Space",[["sqft","short"]]],["lot","Lot Size",[["lot","short","sq ft"]]],["yearBuilt","Year Built",[["yearBuilt","short"]]],
+    ["parking","Garage / Parking",[["parking","wide"],["garage","short","spaces"]]],["bedBath","Beds / Baths",[["beds","short","beds"],["fullBaths","short","full"],["halfBaths","short","half"]]],
+    ["taxes","Taxes",[["taxes","short","$"],["taxYear","short","year"]]],["pool","Pool",[["pool","wide"]]],["view","View",[["view","wide"]]],["floodMls","Flood Zone / MLS",[["floodZone","short","zone"],["mls","short","MLS #"]]]],
+};
+const SUBJ_EXTRA = [["list","List price",[["list","short","$ (0 = not set)"]]],["latlng","Coordinates",[["lat","short","lat"],["lng","short","lng"]]],["zip","ZIP",[["zip","short"]]]];
+function setSubj(k,v){ SO()[k]=v; touch(); applySubjectOverride(); recalc(); }
+function renderSubj(){
+  const prof = D.meta.profile==="condo"?"condo":"sfh"; const rows = SUBJ_ROWS[prof].concat(SUBJ_EXTRA);
+  document.getElementById("subj-form").innerHTML = rows.map(([key,label,ins])=>{ const hideable = !["list","latlng","zip"].includes(key); const hid = hideable && isHid("subject",key);
+    return `<div class="lab ${hid?"off":""}">${hideable?`<input type="checkbox" ${hid?"":"checked"} title="show on client page" onchange="setHid('subject','${key}',!this.checked)">`:"<span style='width:13px;display:inline-block'></span>"}${label}</div>
+      <div class="ins">${ins.map(([f,cls,ph])=>`<input type="text" class="${cls}" placeholder="${escA(ph||"")}" value="${escA(SO()[f]!==undefined?SO()[f]:(D.subject[f]??""))}" onchange="setSubj('${f}',this.value)">`).join("")}</div>`; }).join("");
+}
+/* ---- Cover page: ADJ.cover ---- */
+const COVER = () => (ADJ.cover ||= {});
+const COVER_FIELDS = [["kicker","Kicker line","COMPARATIVE MARKET ANALYSIS"],["address","Address line (blank = subject address)",""],["agentName","Agent name","Ryan Adamson, PA"],
+  ["agentEmail","Email","Ryan@Adamson-Group.com"],["agentPhone","Phone","941.713.9234"],["headshot","Headshot URL","/images/ryan-adamson-square.jpg"],["photo","Cover photo URL (or use Upload)",""],["preparedOn","Prepared on (date)",""]];
+function setCover(k,v){ if(v==="") delete COVER()[k]; else COVER()[k]=v; touch(); renderCover(); }
+function renderCover(){
+  const c=COVER();
+  document.getElementById("cover-form").innerHTML = COVER_FIELDS.map(([k,l,ph])=>`<div><label>${l}</label><input type="${k==="preparedOn"?"date":"text"}" placeholder="${escA(ph)}" value="${escA(c[k]||"")}" onchange="setCover('${k}',this.value)"></div>`).join("");
+  document.getElementById("cover-prev").style.backgroundImage = c.photo ? `url("${c.photo}")` : "linear-gradient(160deg,#0A1F3C,#24507f)";
+}
+function coverUpload(file){
+  if(!file) return; const ind=document.getElementById("cover-ind"); ind.textContent="resizing...";
+  const img=new Image(); const url=URL.createObjectURL(file);
+  img.onload = async () => {
+    const max=1800, sc=Math.min(1, max/Math.max(img.width,img.height)); const cv=document.createElement("canvas"); cv.width=Math.round(img.width*sc); cv.height=Math.round(img.height*sc);
+    cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height); URL.revokeObjectURL(url);
+    const dataUrl = cv.toDataURL("image/jpeg",0.82); ind.textContent = `uploading ${Math.round(dataUrl.length*0.75/1024)} KB...`;
+    const res = await post("&action=cover-photo", { dataUrl });
+    if(!res || res.status!==200){ ind.textContent = "upload failed: " + ((res&&res.body&&res.body.error)||"cancelled"); return; }
+    COVER().photo = res.body.url; touch(); renderCover(); ind.textContent = "uploaded";
+  };
+  img.onerror = () => { ind.textContent="could not read that image"; };
+  img.src = url;
+}
 const TT  = () => (ADJ.titles ||= {});
 const HD  = () => (ADJ.hidden ||= { subject:[], comps:[], mu:[] });
 const isHid = (g,k) => ((HD()[g])||[]).includes(k);
@@ -649,10 +728,10 @@ function setSec(k,on){ INC()[k]=!!on; touch(); renderCP(); if(k==="zillowForecas
 function renderCP(){
   const inc=INC();
   const byKey = Object.fromEntries(SECTIONS);
-  document.getElementById("cp-sections").innerHTML = ORD().map(k=>[k,byKey[k]]).map(([k,l])=>`<div class="sec ${inc[k]===false||(k==="zillowForecast"&&!inc[k])?"off":""}" draggable="true"
+  document.getElementById("cp-sections").innerHTML = ORD().map(k=>[k,byKey[k]]).map(([k,l])=>`<div class="sec ${inc[k]===false||((k==="zillowForecast"||k==="cover")&&!inc[k])?"off":""}" draggable="true"
       ondragstart="secDrag(event,'${k}')" ondragover="secOver(event)" ondragleave="secLeave(event)" ondrop="secDrop(event,'${k}')" ondragend="secEnd(event)">
     <span class="grip" title="drag to reorder">&#8942;&#8942;</span>
-    <label class="nm"><input type="checkbox" ${k==="zillowForecast"?(inc[k]?"checked":""):(inc[k]===false?"":"checked")} onchange="setSec('${k}',this.checked)"> ${l}</label>
+    <label class="nm"><input type="checkbox" ${(k==="zillowForecast"||k==="cover")?(inc[k]?"checked":""):(inc[k]===false?"":"checked")} onchange="setSec('${k}',this.checked)"> ${l}</label>
     <input type="text" placeholder="${l} (client-page title)" value="${escA(TT()[k]||"")}" onchange="setTitle('${k}',this.value)">
     <span style="font-size:10.5px;color:#96a0ae;">${k==="subject"?"title defaults to Your Residence / Your Home":k==="marketUpdate"?"title field below wins if set":k==="strip"?"no title; hides automatically when list price is 0":""}</span></div>`
     + (k==="comps" ? `<div class="sec" style="cursor:default;"><span></span><span class="nm" style="font-weight:normal;color:#5a6b85;">Subheader</span>
@@ -660,11 +739,12 @@ function renderCP(){
         <span style="font-size:10.5px;color:#96a0ae;">{ppsf} = current per-sq-ft rate; blank = default, a space = none</span></div>` : "")).join("");
   const chips = (g,list) => list.map(([k,l])=>`<label class="chip ${isHid(g,k)?"hid":""}"><input type="checkbox" ${isHid(g,k)?"":"checked"} onchange="setHid('${g}','${k}',!this.checked)">${l}</label>`).join("");
   const prof = D.meta.profile==="condo"?"condo":"sfh";
-  document.getElementById("cp-subject").innerHTML = chips("subject", SUBJECT_FIELDS[prof]);
+  renderSubj();
   document.getElementById("cp-comps").innerHTML = chips("comps", COMP_FIELDS[prof].concat(COMP_FIXED));
   document.getElementById("cp-mu").innerHTML = chips("mu", MU_FIELDS);
   document.getElementById("inc-mu").checked = inc.marketUpdate!==false; document.getElementById("inc-zf").checked = !!inc.zillowForecast;
-  document.getElementById("sum-comps").value = SUMS().comps||""; document.getElementById("sum-mu").value = SUMS().marketUpdate||"";
+  document.getElementById("sum-comps").value = SUMS().comps||""; document.getElementById("sum-mu").value = SUMS().marketUpdate||""; document.getElementById("sum-zf").value = SUMS().forecast||"";
+  renderCover();
 }
 const GRID_KEY = { "Sold":"closeDate","DOM":"dom","Sale Price":"price","$/SqFt":"ppsf","SqFt":"sqft","Lot":"lot","Gar":"garage","Bldg":"building","Flr":"floor","Fee/mo":"fee","Relevancy":"rel","Total Adj.":"adj","Adj. Price":"adjPrice","Adj. $/SqFt":"adjPpsf","Status":"status" };
 function setStatus(mls,v){ OV(mls).statusLabel = v.trim(); touch(); }

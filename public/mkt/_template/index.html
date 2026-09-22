@@ -76,6 +76,22 @@
   .lightbox .nav { display:flex; gap:12px; margin-top:14px; }
   .btn { background:#fff; color:var(--navy); border:1px solid #c8d0dc; padding:7px 16px; border-radius:5px; font-size:12.5px; cursor:pointer; }
   .btn.gold { background:var(--gold); border-color:var(--gold); font-weight:bold; }
+  /* Cover page */
+  #cover { background:#fff; }
+  .cover-bar { display:flex; justify-content:space-between; align-items:center; padding:14px 28px; border-bottom:1px solid #e3e7ee; }
+  .cover-wm { font-family:Georgia,serif; letter-spacing:.18em; font-size:14px; color:var(--navy); } .cover-wm span { color:var(--gold); }
+  .cover-cb { height:26px; }
+  .cover-hero { position:relative; min-height:calc(100vh - 56px); background:#0A1F3C center/cover no-repeat; display:flex; align-items:center; justify-content:center; padding:40px 20px; }
+  .cover-card { background:#fff; padding:34px 44px 0; max-width:560px; width:100%; box-shadow:0 10px 40px rgba(0,0,0,.35); text-align:center; }
+  .cover-kicker { font-size:10.5px; letter-spacing:.2em; color:#7c8798; margin-bottom:10px; }
+  .cover-addr { font-family:Georgia,serif; font-size:34px; color:#111; line-height:1.15; margin-bottom:22px; }
+  .cover-agent { display:flex; align-items:center; justify-content:center; gap:16px; text-align:left; margin-bottom:26px; }
+  .cover-agent img { width:88px; height:88px; object-fit:cover; border-radius:3px; }
+  .cover-name { font-size:17px; font-weight:bold; color:#111; }
+  .cover-contact { font-size:12.5px; color:#5a6b85; line-height:1.55; margin-top:3px; }
+  .cover-prepared { background:#f2f4f8; margin:0 -44px; padding:9px; font-size:11px; color:#4a5871; }
+  .cover-scroll { position:absolute; bottom:22px; left:0; right:0; text-align:center; color:#fff; font-size:12px; letter-spacing:.06em; text-shadow:0 1px 6px rgba(0,0,0,.6); }
+  @media (max-width:620px){ .cover-addr{font-size:26px;} .cover-card{padding:24px 22px 0;} .cover-prepared{margin:0 -22px;} }
   footer { text-align:center; font-size:11px; color:#8a94a5; padding:26px 16px; line-height:1.6; }
   @media (max-width:820px){ .subject-strip{grid-template-columns:repeat(2,1fr);} .grid2{grid-template-columns:1fr;} .photo-strip .ph{width:47%;} }
   /* Market Update (active competition and recent activity) */
@@ -135,6 +151,10 @@
     .rb { min-width:16px; height:16px; font-size:9px; }
     .summary { font-size:10.5px; line-height:1.5; padding:8px 12px; margin-top:8px; page-break-inside:avoid; }
     #mu-card { page-break-before:always; }
+    #cover { page-break-after:always; height:255mm; overflow:hidden; }
+    .cover-hero { min-height:0; height:calc(255mm - 52px); padding:20px; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .cover-card { max-width:470px; box-shadow:none; border:1px solid #d8dde6; }
+    .cover-addr { font-size:28px; } .cover-agent img { width:72px; height:72px; }
     table.mu { font-size:8.2px; width:100%; } table.mu th { font-size:7.6px; padding:4px 3px; } table.mu td { padding:3px 3px; }
     table.mu td.note { font-size:8px; min-width:90px; max-width:130px; } table.mu td.subd { max-width:105px; font-size:7.6px; }
     .mu-head .asof { font-size:9.5px; } .mu-crit { font-size:10px; margin-bottom:8px; } .mu-foot { font-size:8.5px; }
@@ -152,6 +172,21 @@
 </head>
 <body>
 <script src="/mkt/nav.js"></script>
+<section id="cover" style="display:none;">
+  <div class="cover-bar"><span class="cover-wm">THE <span>ADAMSON</span> GROUP</span><img class="cover-cb" src="/images/logos/cb-horz-dark.png" alt="Coldwell Banker Realty"></div>
+  <div class="cover-hero" id="cover-hero">
+    <div class="cover-card">
+      <div class="cover-kicker" id="cover-kicker">COMPARATIVE MARKET ANALYSIS</div>
+      <div class="cover-addr" id="cover-addr"></div>
+      <div class="cover-agent">
+        <img id="cover-headshot" src="/images/ryan-adamson-square.jpg" alt="">
+        <div><div class="cover-name" id="cover-name"></div><div class="cover-contact" id="cover-contact"></div></div>
+      </div>
+      <div class="cover-prepared" id="cover-prepared"></div>
+    </div>
+    <div class="cover-scroll no-print">Scroll down to start &#8595;</div>
+  </div>
+</section>
 <header>
   <div class="wrap">
     <div class="brandline">
@@ -170,7 +205,7 @@
 
 <div class="wrap">
   <div class="subject-strip" id="strip"></div>
-  <div class="card"><div class="estimate-box" id="estimate"></div></div>
+  <div class="card" id="estimate-card"><div class="estimate-box" id="estimate"></div></div>
   <div class="card" id="subject-card">
     <h2 id="subject-h2">Your Home</h2>
     <div class="sub">The baseline every comparable sale is measured against</div>
@@ -203,6 +238,7 @@
     <div class="sub" id="zf-sub"></div>
     <div class="zf" id="zf-tiles"></div>
     <div class="zf-note" id="zf-note"></div>
+    <div class="summary" id="zf-summary" style="display:none;"></div>
   </div>
   <div class="card" id="blocks-card">
     <h2 id="t-blocks">The Comparables, Up Close</h2>
@@ -266,6 +302,13 @@ let D=null, ADJ=null, lbList=[], lbIdx=0;
      ADJ.include {subject, comps, actives, blocks, ladder, map, marketUpdate, forecast, avms}   false hides the section
      ADJ.hidden  {subject:[field keys], comps:[column keys], mu:[column keys]}                  per-field hides
      ADJ.avms    [{name, value, asOf, url}]                                                       online estimates  */
+/* Subject facts edited in the workbench (ADJ.subjectOverride) win over data.json; numeric fields are coerced, blanks are ignored. */
+const SUBJ_NUM = ["sqft","totalSqft","yearBuilt","beds","fullBaths","halfBaths","feeMonthly","feeAnnual","taxes","taxYear","list","lot","garage","floor","lat","lng"];
+function applySubjectOverride(D, ADJ){
+  const o = (ADJ && ADJ.subjectOverride) || {};
+  Object.entries(o).forEach(([k,v])=>{ if(v===""||v===null||v===undefined) return;
+    D.subject[k] = SUBJ_NUM.includes(k) ? (Number(String(v).replace(/[^0-9.\-]/g,"")) || 0) : v; });
+}
 const DEFAULT_TITLES = { subject:null, comps:"Comparable Sales", actives:"Currently on the Market", blocks:"The Comparables, Up Close",
   ladder:"Pricing Ladder", map:"Comp Locations", marketUpdate:"Market Update", forecast:"Zillow Zip Code Forecast", avms:"Online Estimates" };
 const T   = (k,dflt) => ((ADJ&&ADJ.titles)||{})[k] || DEFAULT_TITLES[k] || dflt || "";
@@ -449,6 +492,7 @@ async function renderForecast(central){
   document.getElementById("zf-tiles").innerHTML =
     tile(m1,"Next month", proj(m1)?`central estimate to ${proj(m1)}`:"") + tile(m3,"3 months", proj(m3)?`to ${proj(m3)}`:"")
     + tile(m6,"6 months (interpolated)", proj(m6)?`to ${proj(m6)}`:"") + tile(m12,"12 months", proj(m12)?`to ${proj(m12)}`:"");
+  { const el=document.getElementById("zf-summary"); const txt=((ADJ&&ADJ.summaries)||{}).forecast||""; el.textContent=txt; el.style.display=txt.trim()?"":"none"; }
   document.getElementById("zf-note").innerHTML =
     `<b>Reference only.</b> This is Zillow's statistical forecast for every home in the ZIP code, not an opinion about this property, this building, or this street.
      It does not see condition, view, floor, or the competing listings above. Hyper-local factors move individual sales far more than a ZIP-wide index does;
@@ -464,6 +508,7 @@ async function boot(){
   if (!D || !D.subject) { document.body.innerHTML = "<p style='padding:40px;font-family:Georgia'>CMA data not found.</p>"; return; }
   ADJ = (fresh && fresh.source === "supabase" && fresh.adjustments) ? fresh.adjustments
       : (snapshot || { buckets:[], overlay:{} });
+  applySubjectOverride(D, ADJ);
   render();
 }
 
@@ -502,11 +547,22 @@ function render(){
   const pend = reviewed < live.length;
 
   document.title = `Comparative Market Analysis: ${s.address} | The Adamson Group`;
+  { const cv = (ADJ&&ADJ.cover)||{}; const el=document.getElementById("cover");
+    if (INC("cover") && ADJ && ADJ.include && ADJ.include.cover===true) {
+      el.style.display="";
+      document.getElementById("cover-hero").style.backgroundImage = cv.photo ? `url("${cv.photo}")` : "linear-gradient(160deg,#0A1F3C,#24507f)";
+      document.getElementById("cover-kicker").textContent = cv.kicker || "COMPARATIVE MARKET ANALYSIS";
+      document.getElementById("cover-addr").textContent = cv.address || s.address;
+      document.getElementById("cover-name").textContent = cv.agentName || "Ryan Adamson, PA";
+      document.getElementById("cover-contact").innerHTML = `${cv.agentEmail||"Ryan@Adamson-Group.com"}<br>${cv.agentPhone||"941.713.9234"}`;
+      if (cv.headshot) document.getElementById("cover-headshot").src = cv.headshot;
+      const pd = cv.preparedOn || D.meta.asOf; document.getElementById("cover-prepared").textContent = "Prepared on " + new Date(pd+"T12:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
+    } else el.style.display="none"; }
   document.getElementById("subject-h2").textContent = T("subject", PR.subjectLabel);
   [["comps","t-comps"],["actives","t-actives"],["blocks","t-blocks"],["ladder","t-ladder"],["map","t-map"],["forecast","t-forecast"],["avms","t-avms"]]
     .forEach(([k,id])=>{ const el=document.getElementById(id); if(el) el.textContent=T(k); });
   const secShow = (id,k,also) => { const el=document.getElementById(id); if(el) el.style.display = (INC(k) && also!==false) ? "" : "none"; };
-  secShow("subject-card","subject"); secShow("comps-card","comps"); secShow("ladder-card","ladder");
+  secShow("subject-card","subject"); secShow("comps-card","comps"); secShow("ladder-card","ladder"); secShow("estimate-card","estimate");
   document.getElementById("hdr-sub").textContent =
     `${s.address}, ${s.city}, ${s.state||"FL"} ${s.zip||""} · ${s.subdivision}`;
   document.getElementById("hdr-date").textContent =
@@ -582,15 +638,25 @@ function render(){
       ${note?`<div class="cnote">${note}</div>`:""}
       <div class="cadj"><b>Excluded from the analysis</b> \u2014 not counted in any average or the value range.</div></td></tr>`;
   });
-  const avgOf = k => { const v=rows.map(x=>Number(x.c[k])).filter(Number.isFinite); return v.length ? v.reduce((t,x)=>t+x,0)/v.length : null; };
-  h += `<tr class="totals"><td></td><td>Averages of ${rows.length} included</td>${showRel?"<td></td>":""}${showSt?"<td></td>":""}`
-    + CC.map(col => col.k==="dom" ? `<td class="num">${avgOf("dom")===null?"":Math.round(avgOf("dom"))}</td>`
-                  : col.k==="sqft" ? `<td class="num">${avgOf("sqft")===null?"":Math.round(avgOf("sqft")).toLocaleString()}</td>` : "<td></td>").join("")
-    + `${showCon?"<td></td>":""}${showTerms?"<td></td>":""}
-    ${showPrice?`<td class="num">${money(a.price)}</td>`:""}${showPpsf?`<td class="num">$${Math.round(a.ppsf)}</td>`:""}${showAdj?"<td></td>":""}
-    ${showAdjP?`<td class="num">${money(a.adjPrice)}</td>`:""}${showAdjPpsf?`<td class="num">$${Math.round(a.adjPpsf)}</td>`:""}</tr></tbody>`;
+  const totalsRow = (label, set) => {
+    const n = set.length || 1;
+    const avg = f => set.reduce((t,x)=>t+f(x),0)/n;
+    const avgK = k => { const v=set.map(x=>Number(x.c[k])).filter(Number.isFinite); return v.length ? v.reduce((t,x)=>t+x,0)/v.length : null; };
+    return `<tr class="totals"><td></td><td>${label}</td>${showRel?"<td></td>":""}${showSt?"<td></td>":""}`
+      + CC.map(col => col.k==="dom" ? `<td class="num">${avgK("dom")===null?"":Math.round(avgK("dom"))}</td>`
+                    : col.k==="sqft" ? `<td class="num">${avgK("sqft")===null?"":Math.round(avgK("sqft")).toLocaleString()}</td>` : "<td></td>").join("")
+      + `${showCon?"<td></td>":""}${showTerms?"<td></td>":""}`
+      + (set.length ? `${showPrice?`<td class="num">${money(avg(x=>x.c.price))}</td>`:""}${showPpsf?`<td class="num">$${Math.round(avg(x=>x.r.ppsf))}</td>`:""}${showAdj?"<td></td>":""}
+         ${showAdjP?`<td class="num">${money(avg(x=>x.r.adjPrice))}</td>`:""}${showAdjPpsf?`<td class="num">$${Math.round(avg(x=>x.r.adjPpsf))}</td>`:""}`
+         : `<td colspan="${[showPrice,showPpsf,showAdj,showAdjP,showAdjPpsf].filter(Boolean).length}"></td>`)
+      + `</tr>`;
+  };
+  const soldRows = rows.filter(x=>STATUS(x.c)==="Sold");
+  h += totalsRow(`Averages of all ${rows.length} comps above`, rows);
+  if (soldRows.length && soldRows.length < rows.length) h += totalsRow(`Averages of ${soldRows.length} <u>Sold</u> comp${soldRows.length===1?"":"s"}`, soldRows);
+  h += `</tbody>`;
   document.getElementById("comps-table").innerHTML = h;
-  document.getElementById("ask-note").innerHTML = anyAsk ? "* Not a closed sale. The price shown is the last asking price, which is what a seller hoped for, not what a buyer paid. It is included to show where this floor plan did not sell." : "";
+  document.getElementById("ask-note").innerHTML = anyAsk ? "* Not a closed sale, price reflects the last list price." : "";
   document.getElementById("ask-note").style.display = anyAsk ? "" : "none";
 
   const bl = (ADJ.buckets||[]).map(b=>b.label).join(" · ");

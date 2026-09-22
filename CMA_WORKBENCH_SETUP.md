@@ -161,3 +161,13 @@ Workbench card "Client Page: Sections, Titles & Fields", all saved in the overla
   per-sq-ft rate; a single space hides it). "Top tiles" is a section toggle (`include.strip`)
   and hides itself when the list price is 0; the "vs. Current List" figure goes with it.
   Notes card sits directly under the Adjustment Grid.
+- Your Residence editor is the first card in the workbench: every subject fact is editable
+  (`subjectOverride`, wins over data.json and feeds the adjustment math) with a show/hide box
+  per row. Sections card adds "Cover page" (off by default) and "Indicated value range box".
+- Cover page (`cover{photo, kicker, address, agentName, agentEmail, agentPhone, headshot,
+  preparedOn}`): full-page hero photo behind a white card, in the Home Platform style; prints
+  as page 1. Upload resizes in the browser to 1800 px JPEG and POSTs `?action=cover-photo` to
+  `cma-adjustments`, which stores it in the public Storage bucket `cma-assets` (created on
+  first use) and returns the URL. Headshot defaults to /images/ryan-adamson-square.jpg.
+- Comparables totals: "Averages of all N comps above" plus "Averages of N Sold comps" when the
+  set mixes sales and non-sales. Forecast summary text (`summaries.forecast`) under Zillow.

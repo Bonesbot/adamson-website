@@ -14,6 +14,8 @@
 //                                         registers the page. One rebuild.
 //   POST ?slug=<slug>&action=savedata    comp refresh: commit a new data.json
 //   POST ?slug=<slug>&action=snapshot    freeze live overlay to git
+//   POST ?slug=<slug>&action=cover-photo {dataUrl}  store a resized cover JPEG in
+//                                         Storage bucket cma-assets (public), returns {url}
 //
 // All POSTs require header x-cma-key == env CMA_EDIT_KEY.
 //
@@ -237,10 +239,34 @@ exports.handler = async (event) => {
 
   if (!SLUG_RE.test(slug)) return json(400, { error: 'bad or missing slug' });
 
-  const raw = event.body || '';
-  if (Buffer.byteLength(raw, 'utf8') > MAX_BYTES) return json(413, { error: 'payload too large' });
+  const raw = event.isBase64Encoded ? Buffer.from(event.body || '', 'base64').toString('utf8') : (event.body || '');
+  if (Buffer.byteLength(raw, 'utf8') > (action === 'cover-photo' ? 5 * 1024 * 1024 : MAX_BYTES)) return json(413, { error: 'payload too large' });
   let body;
   try { body = JSON.parse(raw || '{}'); } catch { return json(400, { error: 'body is not valid JSON' }); }
+
+  // ── cover photo upload: base64 JPEG -> Supabase Storage (public bucket cma-assets) ──
+  if (action === 'cover-photo') {
+    if (!SLUG_RE.test(slug)) return json(400, { error: 'bad or missing slug' });
+    const m = /^data:image\/(jpeg|jpg|png|webp);base64,([A-Za-z0-9+/=]+)$/.exec(String(body.dataUrl || ''));
+    if (!m) return json(400, { error: 'dataUrl must be a base64 image' });
+    const bytes = Buffer.from(m[2], 'base64');
+    if (bytes.length > 4 * 1024 * 1024) return json(413, { error: 'image over 4 MB after resize' });
+    const ext = m[1] === 'jpg' ? 'jpeg' : m[1];
+    const path = `${slug}/cover-${Date.now()}.${ext === 'jpeg' ? 'jpg' : ext}`;
+    try {
+      // create the bucket once (409 = already there)
+      const mk = await fetch(`${db.url}/storage/v1/bucket`, { method: 'POST', headers: db.headers,
+        body: JSON.stringify({ id: 'cma-assets', name: 'cma-assets', public: true, file_size_limit: 6291456, allowed_mime_types: ['image/jpeg','image/png','image/webp'] }) });
+      if (!mk.ok && mk.status !== 409) { const t = await mk.text(); if (!/already exists/i.test(t)) { console.error('cma: bucket', mk.status, t); return json(502, { error: 'storage bucket unavailable' }); } }
+      const up = await fetch(`${db.url}/storage/v1/object/cma-assets/${path}`, { method: 'POST',
+        headers: { apikey: db.headers.apikey, Authorization: db.headers.Authorization, 'Content-Type': `image/${ext}`, 'x-upsert': 'true' }, body: bytes });
+      if (!up.ok) { console.error('cma: upload', up.status, await up.text()); return json(502, { error: 'upload failed' }); }
+      const url = `${db.url}/storage/v1/object/public/cma-assets/${path}`;
+      console.log('cma: cover photo', slug, bytes.length, 'bytes');
+      return json(200, { ok: true, url, bytes: bytes.length });
+    } catch (e) { console.error('cma: cover-photo error', e); return json(500, { error: 'Internal server error' }); }
+  }
+
 
   // ── scaffold a new CMA page ─────────────────────────────────────────────
   if (action === 'create') {
