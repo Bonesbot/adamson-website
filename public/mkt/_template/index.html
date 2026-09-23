@@ -200,7 +200,7 @@
     .comp-block .head .addr { font-size:12px; } .comp-block .head .price { font-size:11px; } .comp-block .note { font-size:9.5px; }
     .photo-strip { gap:5px; } .photo-strip .ph { width:118px; height:80px; border-width:1px; }
     .ladder td { padding:3px 8px; }
-    .zf { gap:8px; } .zf .t { padding:9px 11px; } .zf .t .v { font-size:15px; } .zf .t .l { font-size:8px; } .zf .t .s { font-size:8.5px; }
+    .zf { gap:8px; grid-template-columns:repeat(4,1fr); } #zf-card { margin-top:8px; } .zf .t { padding:9px 11px; } .zf .t .v { font-size:15px; } .zf .t .l { font-size:8px; } .zf .t .s { font-size:8.5px; }
     .zf-note { font-size:8.5px; line-height:1.45; margin-top:8px; }
     #map { height:300px; }
     footer { font-size:8.5px; padding:14px 8px; line-height:1.5; }
@@ -509,14 +509,15 @@ const MKT_DFLT = {
   sub: "How we prepare, position and market your residence, from the first walk-through to closing day.",
   phases: [
     { title: "Prepare", items: [
-      { h: "Pre-list designer visit", p: "Before a single photo is taken, our interior designer walks the home with you. The goal is to get the most out of what you already own: furniture placement, flow, lighting, and editing out what distracts. Most homes need rearranging, not replacing." },
-      { h: "Organizing and decluttering", p: "Buyers need to picture their own life in the space. We advise room by room on what to store, what to keep and what buyers in this market expect to see, so the home shows its best features instead of its belongings." },
-      { h: "Staging and virtual staging", p: "If a room still does not present well, we connect you with trusted staging vendors, or use professional virtual staging in the photos only. Virtual staging is a presentation tool, always disclosed, and it keeps the home comfortable while you live in it and gets us to market faster." },
-      { h: "Cleaning and punch list", p: "Once the heavy lifting is done, a professional clean and a final walk-through for the small items: bulbs, touch-up paint, a sticky door, tired caulk. Nothing should distract a buyer on tour." } ] },
+      { h: "Pre-list designer visit", p: "Before a single photo is taken, we bring our interior designer through the home. The goal is to get the most out of what is already there: furniture placement, flow, lighting, and editing out what distracts. Most homes need rearranging, not replacing, and we coordinate every step of it." },
+      { h: "Organizing and decluttering", p: "Buyers need to picture their own life in the space. We map it out room by room, arrange storage or movers where needed, and handle the logistics so the home shows its best features instead of its belongings." },
+      { h: "Staging and virtual staging", p: "If a room still does not present well, we bring in our staging partners, or use professional virtual staging in the photos only. Virtual staging is a presentation tool, always disclosed, and it keeps the home comfortable while you live in it and gets us to market faster. We schedule and manage the vendors." },
+      { h: "Cleaning and punch list", p: "Once the heavy lifting is done, we arrange the professional clean and walk the home for the small items: bulbs, touch-up paint, a sticky door, tired caulk. Our tradespeople handle the list. Nothing should distract a buyer on tour." } ] },
     { title: "Present", items: [
       { h: "Professional photography", p: "Tasteful photography that leads with the home's strongest features and views. The first photo decides whether a buyer keeps scrolling, so we plan the shot list around it." },
       { h: "Video and aerial", p: "Lifestyle video and drone footage to show the setting, the water and the surroundings, not just the rooms. Out-of-area buyers decide whether to fly in based on this." },
-      { h: "Floor plan", p: "A measured floor plan so buyers understand the flow and scale before they ever walk in, and can picture where their furniture goes." },
+      { h: "Custom floor plan", p: "A custom floor plan drawn to accentuate the lifestyle of the home, how the rooms open to one another and to the view, so buyers understand flow and scale before they walk in and can picture where their furniture goes." },
+      { h: "360 virtual tour", p: "An immersive 360 tour that lets out-of-town buyers walk the property from their couch and gives them a real feel for the space. It is the piece that turns a curious buyer into one who books a flight." },
       { h: "Positioning", p: "Every asset answers the same question: why would someone want to live here? We connect the residence to the lifestyle around it, the water, beaches, golf, dining and culture, rather than listing features." } ] },
     { title: "Find the Buyer", items: [
       { h: "Hyperlocal digital advertising", p: "Targeted campaigns aimed at the geographies and search behavior most likely to produce a buyer for this specific property, including the feeder markets that historically buy here. Likely buyers, not generic impressions." },
@@ -531,7 +532,7 @@ const MKT_DFLT = {
       { h: "Offers and contingencies", p: "We stay current on Florida contract forms, addenda and disclosures, and we screen every offer for the terms most likely to close: financing strength, contingencies, inspection scope and timelines." },
       { h: "Closing logistics", p: "Open communication on timelines and expectations from contract through moving day, so this is as low-stress an experience as it can be." } ] }
   ],
-  close: "These are the highlights of a fuller list of services. No two homes or sales are the same, so this plan is tailored to your residence, your timeline and how you want to live while the home is on the market. We appreciate the opportunity and look forward to working with you."
+  close: "These are the highlights of a fuller list of services. No two homes or sales are the same, so this plan is tailored to your residence, your timeline and how you want to live while the home is on the market. We appreciate and cherish the opportunity to represent your property, and we take a great deal of pride in doing it well."
 };
 function renderMarketing(){
   const card = document.getElementById("mkt-card");
