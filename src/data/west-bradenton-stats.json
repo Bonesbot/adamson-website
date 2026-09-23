@@ -2,11 +2,11 @@
   "areaSlug": "west-bradenton",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-22T10:56:30.657426+00:00",
+  "lastUpdated": "2026-09-23T11:04:06.313600+00:00",
   "counts": {
     "sold": 311,
     "pending": 48,
-    "active": 138,
+    "active": 139,
     "total": 359
   },
   "metrics": {
@@ -22,47 +22,47 @@
     "maxPrice": "$7,250,000"
   },
   "active": {
-    "count": 138,
-    "medianPrice": "$462,499",
-    "medianPricePerSqFt": "$291",
+    "count": 139,
+    "medianPrice": "$464,999",
+    "medianPricePerSqFt": "$293",
     "waterfrontCount": 48,
-    "newConstructionCount": 44
+    "newConstructionCount": 45
   },
   "sold": {
-    "count": 79,
-    "medianPrice": "$450,000",
+    "count": 77,
+    "medianPrice": "$449,999",
     "medianDom": 54,
-    "saleToListRatio": "90.8%",
+    "saleToListRatio": "91.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 6.5,
-    "sfhVilla": 5.2,
+    "sfhVilla": 5.3,
     "blended": 5.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$640",
-    "medianMonthlyCondoFee": "$790",
+    "medianMonthlyAssociation": "$641",
+    "medianMonthlyCondoFee": "$795",
     "minMonthlyCondoFee": "$105",
     "maxMonthlyCondoFee": "$3,869",
     "condoFeeRange": {
       "min": 105,
-      "median": 790,
+      "median": 795,
       "max": 3869
     }
   },
   "priceBands": {
     "under900k": 106,
     "band900kTo1_5m": 19,
-    "band1_5mTo3m": 10,
+    "band1_5mTo3m": 11,
     "band3mPlus": 3
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 138
+      "count": 139
     }
   ],
   "buildingClasses": [],
@@ -175,7 +175,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 71,
+      "activeCount": 72,
       "soldCount": 158,
       "soldMedianPricePerSqFt": "$254",
       "soldMedianPrice": "$445,800",
@@ -185,17 +185,17 @@
   "marketBalance": {
     "monthsOfSupply": 5.7,
     "monthsOfSupplyCondo": 6.5,
-    "monthsOfSupplySfhVilla": 5.2,
+    "monthsOfSupplySfhVilla": 5.3,
     "label": "balanced market",
-    "activeCount": 138,
-    "sold365Count": 293,
-    "sold90Count": 79,
+    "activeCount": 139,
+    "sold365Count": 291,
+    "sold90Count": 77,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 133,
-      "activeCount": 52,
+      "activeCount": 53,
       "soldMedianPrice": "$750,000",
       "soldMedianPricePerSqFt": "$350"
     },
@@ -214,7 +214,7 @@
     {
       "facet": "balance",
       "q": "Is West Bradenton a buyer's or seller's market right now?",
-      "a": "With 138 active listings and roughly 24 closed sales a month (trailing 12 months), West Bradenton has about 5.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 139 active listings and roughly 24 closed sales a month (trailing 12 months), West Bradenton has about 5.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -224,12 +224,12 @@
     {
       "facet": "range",
       "q": "What is the price range in West Bradenton?",
-      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $462,499."
+      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $464,999."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell in West Bradenton?",
-      "a": "Recently sold homes took a median 54 days on market and closed at 90.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 54 days on market and closed at 91.1% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
@@ -239,7 +239,7 @@
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees in West Bradenton?",
-      "a": "The median monthly condo fee is $790 and the median monthly association fee is $640."
+      "a": "The median monthly condo fee is $795 and the median monthly association fee is $641."
     }
   ],
   "costBreakdown90": null,
@@ -247,14 +247,14 @@
     {
       "slug": "west-bradenton-el-con-img-aqua",
       "name": "El Conquistador / IMG / Aqua",
-      "activeCount": 48,
+      "activeCount": 49,
       "pendingCount": 12,
-      "activeMedianPrice": "$362,500",
-      "soldCount": 107,
+      "activeMedianPrice": "$375,000",
+      "soldCount": 106,
       "soldMedianPrice": "$385,000",
       "soldMedianPricePerSqFt": "$204",
-      "soldMedianDom": 83,
-      "soldSingleFamilyShare": "33%",
+      "soldMedianDom": 82,
+      "soldSingleFamilyShare": "32%",
       "lowSample": false
     },
     {
@@ -263,11 +263,11 @@
       "activeCount": 55,
       "pendingCount": 12,
       "activeMedianPrice": "$500,000",
-      "soldCount": 106,
-      "soldMedianPrice": "$477,500",
-      "soldMedianPricePerSqFt": "$314",
+      "soldCount": 105,
+      "soldMedianPrice": "$475,000",
+      "soldMedianPricePerSqFt": "$316",
       "soldMedianDom": 80,
-      "soldSingleFamilyShare": "58%",
+      "soldSingleFamilyShare": "57%",
       "lowSample": false
     },
     {
@@ -308,10 +308,10 @@
           {
             "waterfront": "waterfront",
             "label": "Waterfront",
-            "soldCount": 31,
-            "soldMedianPrice": "$1,150,000",
-            "soldMedianPricePerSqFt": "$552",
-            "soldMedianDom": 76,
+            "soldCount": 30,
+            "soldMedianPrice": "$1,160,250",
+            "soldMedianPricePerSqFt": "$561",
+            "soldMedianDom": 72,
             "activeCount": 16,
             "activeMedianPrice": "$1,237,500",
             "lowSample": false
@@ -319,16 +319,16 @@
           {
             "waterfront": "non_waterfront",
             "label": "Non-Waterfront",
-            "soldCount": 100,
-            "soldMedianPrice": "$667,084",
-            "soldMedianPricePerSqFt": "$319",
-            "soldMedianDom": 36,
-            "activeCount": 36,
-            "activeMedianPrice": "$817,500",
+            "soldCount": 99,
+            "soldMedianPrice": "$661,520",
+            "soldMedianPricePerSqFt": "$317",
+            "soldMedianDom": 35,
+            "activeCount": 37,
+            "activeMedianPrice": "$825,000",
             "lowSample": false
           }
         ],
-        "waterfrontPremiumPerSqFt": "73%"
+        "waterfrontPremiumPerSqFt": "77%"
       },
       {
         "propertyType": "attached",

@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-22T10:56:27.634070+00:00",
+  "lastUpdated": "2026-09-23T11:04:03.327516+00:00",
   "counts": {
-    "sold": 98,
-    "pending": 13,
-    "active": 35,
+    "sold": 99,
+    "pending": 12,
+    "active": 37,
     "total": 111
   },
   "metrics": {
-    "avgPrice": "$1,090,132",
+    "avgPrice": "$1,090,042",
     "avgPricePerSqFt": "$502",
     "avgYearBuilt": 1972,
     "avgLivingSqFt": "1,950",
@@ -22,23 +22,23 @@
     "maxPrice": "$22,900,000"
   },
   "active": {
-    "count": 35,
-    "medianPrice": "$739,000",
-    "medianPricePerSqFt": "$548",
+    "count": 37,
+    "medianPrice": "$750,000",
+    "medianPricePerSqFt": "$547",
     "waterfrontCount": 14,
     "newConstructionCount": 13
   },
   "sold": {
-    "count": 17,
-    "medianPrice": "$665,000",
-    "medianDom": 108,
-    "saleToListRatio": "83.9%",
+    "count": 18,
+    "medianPrice": "$627,500",
+    "medianDom": 102,
+    "saleToListRatio": "84.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 6.4,
-    "sfhVilla": 4.6,
-    "blended": 4.9,
+    "sfhVilla": 4.9,
+    "blended": 5.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 19,
-    "band900kTo1_5m": 6,
+    "under900k": 20,
+    "band900kTo1_5m": 7,
     "band1_5mTo3m": 2,
     "band3mPlus": 8
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 35
+      "count": 37
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4694145",
+      "address": "3440 CHAPEL DR",
+      "subdivision": "DESOTO TERRACE",
+      "soldPrice": "$405,000",
+      "soldDate": "2026-09-22",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,080",
+      "yearBuilt": 1969,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "O6392929",
       "address": "3723 NORWOOD CT",
@@ -118,19 +131,6 @@
       "yearBuilt": 1955,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4689749",
-      "address": "922 INDIAN BEACH DR",
-      "subdivision": "OLD OAKS",
-      "soldPrice": "$1,600,000",
-      "soldDate": "2026-08-21",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "3,234",
-      "yearBuilt": 2001,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$550,000",
       "avgPricePerSqFt": "$436",
       "avgLivingSqFt": "1,262",
-      "avgDom": 130
+      "avgDom": 131
     },
     {
       "tier": "1990to2005",
@@ -169,10 +169,10 @@
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 8,
-      "avgPrice": "$563,875",
-      "avgPricePerSqFt": "$594",
+      "avgPrice": "$561,500",
+      "avgPricePerSqFt": "$591",
       "avgLivingSqFt": "951",
-      "avgDom": 112
+      "avgDom": 113
     }
   ],
   "condoTiersScope": {
@@ -214,29 +214,29 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 18,
-      "soldCount": 69,
-      "soldMedianPricePerSqFt": "$394",
-      "soldMedianPrice": "$575,000",
+      "activeCount": 20,
+      "soldCount": 70,
+      "soldMedianPricePerSqFt": "$393",
+      "soldMedianPrice": "$572,500",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.9,
+    "monthsOfSupply": 5.2,
     "monthsOfSupplyCondo": 6.4,
-    "monthsOfSupplySfhVilla": 4.6,
-    "label": "seller's market",
-    "activeCount": 35,
-    "sold365Count": 85,
-    "sold90Count": 17,
+    "monthsOfSupplySfhVilla": 4.9,
+    "label": "balanced market",
+    "activeCount": 37,
+    "sold365Count": 86,
+    "sold90Count": 18,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 78,
-      "activeCount": 26,
-      "soldMedianPrice": "$671,515",
-      "soldMedianPricePerSqFt": "$413"
+      "soldCount": 79,
+      "activeCount": 28,
+      "soldMedianPrice": "$665,000",
+      "soldMedianPricePerSqFt": "$412"
     },
     "condo": {
       "soldCount": 20,
@@ -253,22 +253,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 35 active listings and roughly 7 closed sales a month (trailing 12 months), West Of Trail North has about 4.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 37 active listings and roughly 7 closed sales a month (trailing 12 months), West Of Trail North has about 5.2 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail North?",
-      "a": "Single-family homes sell around $671,515 ($413/sq ft), while condos, villas and townhouses sell around $472,500 ($500/sq ft)."
+      "a": "Single-family homes sell around $665,000 ($412/sq ft), while condos, villas and townhouses sell around $472,500 ($500/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail North?",
-      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $739,000."
+      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $750,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 108 days on market and closed at 83.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 102 days on market and closed at 84.1% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

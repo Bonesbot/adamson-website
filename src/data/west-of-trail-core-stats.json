@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-22T10:56:26.865653+00:00",
+  "lastUpdated": "2026-09-23T11:04:02.564068+00:00",
   "counts": {
-    "sold": 262,
-    "pending": 31,
-    "active": 91,
+    "sold": 263,
+    "pending": 30,
+    "active": 90,
     "total": 293
   },
   "metrics": {
-    "avgPrice": "$2,128,186",
+    "avgPrice": "$2,127,862",
     "avgPricePerSqFt": "$664",
     "avgYearBuilt": 1983,
     "avgLivingSqFt": "2,770",
@@ -22,23 +22,23 @@
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 91,
-    "medianPrice": "$2,150,000",
+    "count": 90,
+    "medianPrice": "$2,125,000",
     "medianPricePerSqFt": "$793",
     "waterfrontCount": 18,
-    "newConstructionCount": 29
+    "newConstructionCount": 28
   },
   "sold": {
     "count": 43,
     "medianPrice": "$1,750,000",
-    "medianDom": 118,
-    "saleToListRatio": "87.0%",
+    "medianDom": 122,
+    "saleToListRatio": "86.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 5.2,
-    "sfhVilla": 5.3,
-    "blended": 5.3,
+    "sfhVilla": 5.2,
+    "blended": 5.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -57,12 +57,12 @@
     "under900k": 25,
     "band900kTo1_5m": 10,
     "band1_5mTo3m": 21,
-    "band3mPlus": 35
+    "band3mPlus": 34
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 91
+      "count": 90
     }
   ],
   "buildingClasses": [],
@@ -77,6 +77,19 @@
       "bathrooms": 5.5,
       "livingSqFt": "3,967",
       "yearBuilt": 2025,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4682724",
+      "address": "1751 FLOYD ST",
+      "subdivision": "MATHENEYS SUB",
+      "soldPrice": "$1,400,000",
+      "soldDate": "2026-09-21",
+      "bedrooms": 4,
+      "bathrooms": 5.0,
+      "livingSqFt": "2,881",
+      "yearBuilt": 1926,
       "propertyType": "Residential",
       "isWaterfront": false
     },
@@ -118,19 +131,6 @@
       "yearBuilt": 2009,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4676645",
-      "address": "1864 GOLDENROD ST",
-      "subdivision": "POINSETTIA PARK 2",
-      "soldPrice": "$1,485,000",
-      "soldDate": "2026-09-15",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,307",
-      "yearBuilt": 2003,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$369,429",
       "avgPricePerSqFt": "$321",
       "avgLivingSqFt": "1,154",
-      "avgDom": 89
+      "avgDom": 90
     },
     {
       "tier": "1990to2005",
@@ -214,29 +214,29 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 72,
-      "soldCount": 219,
+      "activeCount": 71,
+      "soldCount": 220,
       "soldMedianPricePerSqFt": "$570",
-      "soldMedianPrice": "$1,450,000",
+      "soldMedianPrice": "$1,428,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.3,
+    "monthsOfSupply": 5.2,
     "monthsOfSupplyCondo": 5.2,
-    "monthsOfSupplySfhVilla": 5.3,
+    "monthsOfSupplySfhVilla": 5.2,
     "label": "balanced market",
-    "activeCount": 91,
-    "sold365Count": 207,
+    "activeCount": 90,
+    "sold365Count": 208,
     "sold90Count": 43,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 242,
-      "activeCount": 84,
+      "soldCount": 243,
+      "activeCount": 83,
       "soldMedianPrice": "$1,600,000",
-      "soldMedianPricePerSqFt": "$625"
+      "soldMedianPricePerSqFt": "$621"
     },
     "condo": {
       "soldCount": 20,
@@ -253,22 +253,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 91 active listings and roughly 17 closed sales a month (trailing 12 months), West Of Trail Core has about 5.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 90 active listings and roughly 17 closed sales a month (trailing 12 months), West Of Trail Core has about 5.2 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,600,000 ($625/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
+      "a": "Single-family homes sell around $1,600,000 ($621/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,150,000."
+      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,125,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 118 days on market and closed at 87.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 122 days on market and closed at 86.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

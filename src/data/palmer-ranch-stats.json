@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-22T10:56:29.910243+00:00",
+  "lastUpdated": "2026-09-23T11:04:05.562663+00:00",
   "counts": {
-    "sold": 896,
-    "pending": 77,
-    "active": 203,
-    "total": 973
+    "sold": 897,
+    "pending": 75,
+    "active": 207,
+    "total": 972
   },
   "metrics": {
-    "avgPrice": "$562,934",
+    "avgPrice": "$563,230",
     "avgPricePerSqFt": "$263",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,051",
+    "avgLivingSqFt": "2,052",
     "avgLotSqFt": null,
     "avgDom": 80
   },
@@ -22,21 +22,21 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 203,
+    "count": 207,
     "medianPrice": "$415,000",
-    "medianPricePerSqFt": "$253",
+    "medianPricePerSqFt": "$251",
     "waterfrontCount": 35,
-    "newConstructionCount": 30
+    "newConstructionCount": 31
   },
   "sold": {
-    "count": 167,
+    "count": 164,
     "medianPrice": "$460,000",
     "medianDom": 55,
     "saleToListRatio": "91.8%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.2,
+    "condo": 5.3,
     "sfhVilla": 2.9,
     "blended": 3.5,
     "method": "active / (trailing-12mo closed / 12)",
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 183,
+    "under900k": 187,
     "band900kTo1_5m": 17,
     "band1_5mTo3m": 3,
     "band3mPlus": 0
@@ -62,11 +62,24 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 203
+      "count": 207
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4703217",
+      "address": "5735 FERRARA DR",
+      "subdivision": "VILLAGEWALK",
+      "soldPrice": "$749,000",
+      "soldDate": "2026-09-21",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,008",
+      "yearBuilt": 2002,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4665075",
       "address": "1400 BURGOS DR",
@@ -118,19 +131,6 @@
       "yearBuilt": 2003,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4684462",
-      "address": "5134 NORTHRIDGE RD #302",
-      "subdivision": "SERENADE ON PALMER RANCH",
-      "soldPrice": "$119,900",
-      "soldDate": "2026-09-18",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "843",
-      "yearBuilt": 1999,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,17 +142,17 @@
       "avgPrice": "$314,758",
       "avgPricePerSqFt": "$195",
       "avgLivingSqFt": "1,626",
-      "avgDom": 120
+      "avgDom": 121
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 71,
-      "avgPrice": "$301,667",
+      "activeCount": 73,
+      "avgPrice": "$301,963",
       "avgPricePerSqFt": "$230",
-      "avgLivingSqFt": "1,306",
-      "avgDom": 118
+      "avgLivingSqFt": "1,310",
+      "avgDom": 119
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$398,533",
       "avgPricePerSqFt": "$240",
       "avgLivingSqFt": "1,679",
-      "avgDom": 95
+      "avgDom": 96
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 11,
-      "avgPrice": "$349,305",
-      "avgPricePerSqFt": "$217",
-      "avgLivingSqFt": "1,605",
-      "avgDom": 96
+      "activeCount": 12,
+      "avgPrice": "$355,197",
+      "avgPricePerSqFt": "$220",
+      "avgLivingSqFt": "1,610",
+      "avgDom": 89
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 39,
+      "activeCount": 40,
       "soldCount": 206,
       "soldMedianPricePerSqFt": "$260",
       "soldMedianPrice": "$475,000",
@@ -214,8 +214,8 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 129,
-      "soldCount": 496,
+      "activeCount": 132,
+      "soldCount": 497,
       "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$440,000",
       "lowSample": false
@@ -223,24 +223,24 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 3.5,
-    "monthsOfSupplyCondo": 5.2,
+    "monthsOfSupplyCondo": 5.3,
     "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
-    "activeCount": 203,
+    "activeCount": 207,
     "sold365Count": 702,
-    "sold90Count": 167,
+    "sold90Count": 164,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 508,
-      "activeCount": 81,
+      "soldCount": 509,
+      "activeCount": 82,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
       "soldCount": 388,
-      "activeCount": 122,
+      "activeCount": 125,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 203 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 207 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",

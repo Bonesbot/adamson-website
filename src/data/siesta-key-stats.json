@@ -2,20 +2,20 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-22T10:56:25.267783+00:00",
+  "lastUpdated": "2026-09-23T11:04:01.013928+00:00",
   "counts": {
-    "sold": 717,
+    "sold": 718,
     "pending": 49,
     "active": 245,
-    "total": 766
+    "total": 767
   },
   "metrics": {
-    "avgPrice": "$1,354,193",
-    "avgPricePerSqFt": "$694",
+    "avgPrice": "$1,353,666",
+    "avgPricePerSqFt": "$693",
     "avgYearBuilt": 1979,
     "avgLivingSqFt": "1,781",
     "avgLotSqFt": null,
-    "avgDom": 102
+    "avgDom": 103
   },
   "range": {
     "minPrice": "$240,000",
@@ -24,15 +24,15 @@
   "active": {
     "count": 245,
     "medianPrice": "$1,150,000",
-    "medianPricePerSqFt": "$749",
-    "waterfrontCount": 136,
-    "newConstructionCount": 40
+    "medianPricePerSqFt": "$754",
+    "waterfrontCount": 135,
+    "newConstructionCount": 41
   },
   "sold": {
-    "count": 106,
-    "medianPrice": "$1,060,000",
+    "count": 105,
+    "medianPrice": "$1,022,000",
     "medianDom": 106,
-    "saleToListRatio": "88.4%",
+    "saleToListRatio": "88.5%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -55,9 +55,9 @@
   },
   "priceBands": {
     "under900k": 107,
-    "band900kTo1_5m": 46,
-    "band1_5mTo3m": 41,
-    "band3mPlus": 51
+    "band900kTo1_5m": 45,
+    "band1_5mTo3m": 43,
+    "band3mPlus": 50
   },
   "propertyTypes": [
     {
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4701791",
+      "address": "6154 MIDNIGHT PASS RD #B5",
+      "subdivision": "CASA BLANCA VILLAS",
+      "soldPrice": "$585,000",
+      "soldDate": "2026-09-22",
+      "bedrooms": 2,
+      "bathrooms": 1.5,
+      "livingSqFt": "836",
+      "yearBuilt": 1966,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4702975",
       "address": "5955 MIDNIGHT PASS RD #20E",
@@ -118,19 +131,6 @@
       "yearBuilt": 2024,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4669037",
-      "address": "5453 AVENIDA DEL MARE",
-      "subdivision": "SARASOTA BEACH",
-      "soldPrice": "$1,100,000",
-      "soldDate": "2026-09-17",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,510",
-      "yearBuilt": 1950,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 141,
-      "avgPrice": "$822,277",
-      "avgPricePerSqFt": "$692",
-      "avgLivingSqFt": "1,179",
-      "avgDom": 134
+      "avgPrice": "$820,865",
+      "avgPricePerSqFt": "$691",
+      "avgLivingSqFt": "1,180",
+      "avgDom": 133
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,438,475",
       "avgPricePerSqFt": "$723",
       "avgLivingSqFt": "1,999",
-      "avgDom": 190
+      "avgDom": 191
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$2,032,225",
       "avgPricePerSqFt": "$1,063",
       "avgLivingSqFt": "1,762",
-      "avgDom": 256
+      "avgDom": 257
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,692,636",
       "avgPricePerSqFt": "$1,490",
       "avgLivingSqFt": "3,298",
-      "avgDom": 224
+      "avgDom": 225
     }
   ],
   "condoTiersScope": {
@@ -188,7 +188,7 @@
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
       "activeCount": 67,
-      "soldCount": 254,
+      "soldCount": 255,
       "soldMedianPricePerSqFt": "$748",
       "soldMedianPrice": "$1,000,000",
       "lowSample": false
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 65,
+      "activeCount": 64,
       "soldCount": 227,
       "soldMedianPricePerSqFt": "$582",
       "soldMedianPrice": "$1,097,000",
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 68,
+      "activeCount": 69,
       "soldCount": 136,
       "soldMedianPricePerSqFt": "$575",
       "soldMedianPrice": "$773,125",
@@ -237,7 +237,7 @@
     "label": "balanced market",
     "activeCount": 245,
     "sold365Count": 464,
-    "sold90Count": 106,
+    "sold90Count": 105,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,15 +248,15 @@
       "soldMedianPricePerSqFt": "$646"
     },
     "condo": {
-      "soldCount": 502,
+      "soldCount": 503,
       "activeCount": 160,
-      "soldMedianPrice": "$795,500",
-      "soldMedianPricePerSqFt": "$628"
+      "soldMedianPrice": "$795,000",
+      "soldMedianPricePerSqFt": "$629"
     }
   },
   "boating": {
-    "activeWithDock": 60,
-    "activeWaterfront": 136
+    "activeWithDock": 59,
+    "activeWaterfront": 135
   },
   "marketQuestions": [
     {
@@ -272,7 +272,7 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Siesta Key?",
-      "a": "Single-family homes sell around $1,525,000 ($646/sq ft), while condos, villas and townhouses sell around $795,500 ($628/sq ft)."
+      "a": "Single-family homes sell around $1,525,000 ($646/sq ft), while condos, villas and townhouses sell around $795,000 ($629/sq ft)."
     },
     {
       "facet": "range",
@@ -282,12 +282,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 106 days on market and closed at 88.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 106 days on market and closed at 88.5% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Siesta Key homes have a dock?",
-      "a": "Of 136 active waterfront listings, 60 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 135 active waterfront listings, 59 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

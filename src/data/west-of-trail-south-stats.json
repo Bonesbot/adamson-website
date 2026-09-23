@@ -2,43 +2,43 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-22T10:56:28.418643+00:00",
+  "lastUpdated": "2026-09-23T11:04:04.075713+00:00",
   "counts": {
-    "sold": 298,
-    "pending": 28,
-    "active": 84,
-    "total": 326
+    "sold": 299,
+    "pending": 30,
+    "active": 81,
+    "total": 329
   },
   "metrics": {
-    "avgPrice": "$626,592",
+    "avgPrice": "$627,132",
     "avgPricePerSqFt": "$327",
     "avgYearBuilt": 1980,
     "avgLivingSqFt": "1,745",
     "avgLotSqFt": null,
-    "avgDom": 79
+    "avgDom": 80
   },
   "range": {
     "minPrice": "$95,000",
     "maxPrice": "$5,650,000"
   },
   "active": {
-    "count": 84,
-    "medianPrice": "$480,000",
-    "medianPricePerSqFt": "$316",
+    "count": 81,
+    "medianPrice": "$450,000",
+    "medianPricePerSqFt": "$312",
     "waterfrontCount": 22,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 56,
-    "medianPrice": "$413,000",
-    "medianDom": 60,
-    "saleToListRatio": "86.1%",
+    "count": 54,
+    "medianPrice": "$407,500",
+    "medianDom": 71,
+    "saleToListRatio": "85.5%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 4.4,
-    "sfhVilla": 4.0,
-    "blended": 4.2,
+    "sfhVilla": 3.7,
+    "blended": 4.0,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 65,
-    "band900kTo1_5m": 7,
+    "under900k": 63,
+    "band900kTo1_5m": 6,
     "band1_5mTo3m": 7,
     "band3mPlus": 5
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 84
+      "count": 81
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4701687",
+      "address": "1638 STICKNEY POINT RD #38-102",
+      "subdivision": "CASTEL DEL MARE",
+      "soldPrice": "$247,500",
+      "soldDate": "2026-09-22",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,016",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4684647",
       "address": "7637 COVE TER",
@@ -118,19 +131,6 @@
       "yearBuilt": 1954,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4701694",
-      "address": "1640 STICKNEY POINT RD #201",
-      "subdivision": "CASTEL DEL MARE",
-      "soldPrice": "$225,000",
-      "soldDate": "2026-09-18",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,016",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 43,
-      "avgPrice": "$347,488",
-      "avgPricePerSqFt": "$276",
-      "avgLivingSqFt": "1,251",
-      "avgDom": 95
+      "activeCount": 44,
+      "avgPrice": "$347,068",
+      "avgPricePerSqFt": "$277",
+      "avgLivingSqFt": "1,248",
+      "avgDom": 94
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 4,
-      "avgPrice": "$605,750",
-      "avgPricePerSqFt": "$288",
-      "avgLivingSqFt": "2,110",
-      "avgDom": 217
+      "activeCount": 3,
+      "avgPrice": "$609,333",
+      "avgPricePerSqFt": "$281",
+      "avgLivingSqFt": "2,167",
+      "avgDom": 214
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$589,667",
       "avgPricePerSqFt": "$345",
       "avgLivingSqFt": "1,711",
-      "avgDom": 167
+      "avgDom": 168
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$587,000",
       "avgPricePerSqFt": "$330",
       "avgLivingSqFt": "1,785",
-      "avgDom": 198
+      "avgDom": 199
     }
   ],
   "condoTiersScope": {
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 9,
+      "activeCount": 8,
       "soldCount": 30,
       "soldMedianPricePerSqFt": "$307",
       "soldMedianPrice": "$442,944",
@@ -223,35 +223,35 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 53,
-      "soldCount": 192,
-      "soldMedianPricePerSqFt": "$285",
+      "activeCount": 51,
+      "soldCount": 193,
+      "soldMedianPricePerSqFt": "$283",
       "soldMedianPrice": "$425,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.2,
+    "monthsOfSupply": 4.0,
     "monthsOfSupplyCondo": 4.4,
-    "monthsOfSupplySfhVilla": 4.0,
+    "monthsOfSupplySfhVilla": 3.7,
     "label": "seller's market",
-    "activeCount": 84,
-    "sold365Count": 241,
-    "sold90Count": 56,
+    "activeCount": 81,
+    "sold365Count": 242,
+    "sold90Count": 54,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 160,
-      "activeCount": 32,
+      "activeCount": 29,
       "soldMedianPrice": "$526,500",
       "soldMedianPricePerSqFt": "$323"
     },
     "condo": {
-      "soldCount": 138,
+      "soldCount": 139,
       "activeCount": 52,
-      "soldMedianPrice": "$342,500",
-      "soldMedianPricePerSqFt": "$251"
+      "soldMedianPrice": "$340,000",
+      "soldMedianPricePerSqFt": "$250"
     }
   },
   "boating": {
@@ -262,22 +262,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 84 active listings and roughly 20 closed sales a month (trailing 12 months), West Of Trail South has about 4.2 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 81 active listings and roughly 20 closed sales a month (trailing 12 months), West Of Trail South has about 4.0 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $526,500 ($323/sq ft), while condos, villas and townhouses sell around $342,500 ($251/sq ft)."
+      "a": "Single-family homes sell around $526,500 ($323/sq ft), while condos, villas and townhouses sell around $340,000 ($250/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $5,650,000, with a median asking price of $480,000."
+      "a": "Active listings run from $95,000 to $5,650,000, with a median asking price of $450,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 60 days on market and closed at 86.1% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 71 days on market and closed at 85.5% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
