@@ -158,6 +158,8 @@
     .estimate-box { padding:11px 16px; gap:24px; border-radius:5px; }
     .estimate-box .big { font-size:19px; } .estimate-box .mid { font-size:14px; } .estimate-box .l { font-size:8.5px; }
     table { font-size:9px; } th { font-size:8.5px; padding:5px 4px; } td { padding:4px 4px; }
+    /* header rows print light-on-dark poorly (thin white type, and invisible when background graphics are off): print them dark on light instead */
+    th { background:#eef1f5 !important; color:#0A1F3C !important; font-weight:bold; border-bottom:1.5px solid #0A1F3C; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
     #subject-table td { padding:3px 6px; font-size:9.5px; }
     #comps-table { width:100%; table-layout:auto; }
     #comps-table td, #comps-table th { padding:3px 3px; white-space:nowrap; }
