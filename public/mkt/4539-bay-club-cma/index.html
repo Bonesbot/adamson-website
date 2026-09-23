@@ -58,6 +58,17 @@
   #map { height:380px; border-radius:8px; z-index:0; }
   .ladder td { padding:4px 8px; }
   .comp-block { border:1px solid #e3e7ee; border-radius:8px; padding:16px 18px; margin-bottom:16px; }
+  /* Prep and Marketing Plan */
+  .mkt-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px 28px; margin-top:6px; }
+  .phase { break-inside:avoid; }
+  .phase.wide { grid-column:1 / -1; }
+  .phase.wide .items { display:grid; grid-template-columns:1fr 1fr; gap:0 28px; }
+  .phase .ph-h { display:flex; align-items:center; gap:10px; font:bold 16px Georgia,serif; color:var(--navy); border-bottom:2px solid var(--gold); padding-bottom:7px; margin-bottom:12px; }
+  .phase .ph-n { display:inline-flex; width:24px; height:24px; border-radius:50%; background:var(--navy); color:var(--gold); font:bold 12.5px Georgia,serif; align-items:center; justify-content:center; flex:none; }
+  .mkt-item { margin-bottom:11px; }
+  .mkt-item b { display:block; font:bold 13px Arial,sans-serif; color:#22304a; margin-bottom:2px; }
+  .mkt-item p { font:13px/1.5 Georgia,serif; color:#33415c; margin:0; }
+  .mkt-close { font:14px/1.6 Georgia,serif; color:#22304a; margin-top:18px; padding:12px 16px; background:#fbfaf6; border-left:3px solid var(--gold); border-radius:0 6px 6px 0; }
   .comp-block .head { display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px; margin-bottom:4px; }
   .comp-block .head .addr { font-family:Georgia,serif; font-size:16px; color:var(--navy); font-weight:bold; }
   .comp-block .head .price { font-family:Georgia,serif; font-size:15px; color:var(--navy); }
@@ -158,6 +169,15 @@
     .summary { font-size:12.5px; line-height:1.55; padding:10px 14px; margin-top:10px; page-break-inside:avoid; }
     #comps-card .summary { font-size:13.5px; line-height:1.5; padding:10px 14px; margin-top:8px; border-left-width:4px; }
     #mu-card { page-break-before:always; }
+    #mkt-card { page-break-before:always; }
+    .mkt-grid { gap:12px 22px; margin-top:2px; }
+    .phase { page-break-inside:avoid; }
+    .phase .ph-h { font-size:13px; padding-bottom:4px; margin-bottom:7px; gap:8px; }
+    .phase .ph-n { width:19px; height:19px; font-size:10.5px; }
+    .mkt-item { margin-bottom:7px; }
+    .mkt-item b { font-size:10.5px; margin-bottom:1px; }
+    .mkt-item p { font-size:10px; line-height:1.45; }
+    .mkt-close { font-size:11px; line-height:1.5; padding:9px 13px; margin-top:12px; page-break-inside:avoid; }
     /* Cover, print: the Home Platform PDF layout. Logo and date on top, contained photo, kicker, address, agent card. */
     #cover { page-break-after:always; break-after:page; height:auto; overflow:visible; padding:6mm 0 0; }
     .cover-bar, .cover-scroll, .cover-prepared { display:none !important; }
@@ -270,6 +290,12 @@
     <div class="zf" id="avm-tiles"></div>
     <div class="zf-note" id="avm-note"></div>
   </div>
+  <div class="card" id="mkt-card" style="display:none;">
+    <h2 id="t-marketing">Prep and Marketing Plan</h2>
+    <div class="sub" id="mkt-sub"></div>
+    <div class="mkt-grid" id="mkt-phases"></div>
+    <div class="mkt-close" id="mkt-close"></div>
+  </div>
   <div class="card" id="ladder-card">
     <h2 id="t-ladder">Pricing Ladder</h2>
     <div class="sub">Where each price point lands relative to the current list price</div>
@@ -329,7 +355,7 @@ function applySubjectOverride(D, ADJ){
     D.subject[k] = SUBJ_NUM.includes(k) ? (Number(String(v).replace(/[^0-9.\-]/g,"")) || 0) : v; });
 }
 const DEFAULT_TITLES = { subject:null, comps:"Comparable Sales", actives:"Currently on the Market", blocks:"The Comparables, Up Close",
-  ladder:"Pricing Ladder", map:"Comp Locations", marketUpdate:"Market Update", forecast:"Zillow Zip Code Forecast", avms:"Online Estimates" };
+  ladder:"Pricing Ladder", map:"Comp Locations", marketUpdate:"Market Update", forecast:"Zillow Zip Code Forecast", avms:"Online Estimates", marketing:"Prep and Marketing Plan" };
 const T   = (k,dflt) => ((ADJ&&ADJ.titles)||{})[k] || DEFAULT_TITLES[k] || dflt || "";
 const INC = k => { const v=((ADJ&&ADJ.include)||{})[k]; return v!==false; };
 const HID = (g,k) => (((ADJ&&ADJ.hidden)||{})[g]||[]).includes(k);
@@ -478,6 +504,50 @@ function renderMarketUpdate(){
       + `</tr>`; });
   document.getElementById("mu-table").innerHTML = h + "</tbody>";
   { const el=document.getElementById("mu-summary"); const txt=((ADJ&&ADJ.summaries)||{}).marketUpdate||""; el.textContent=txt; el.style.display=txt.trim()?"":"none"; }
+}
+const MKT_DFLT = {
+  sub: "How we prepare, position and market your residence, from the first walk-through to closing day.",
+  phases: [
+    { title: "Prepare", items: [
+      { h: "Pre-list designer visit", p: "Before a single photo is taken, our interior designer walks the home with you. The goal is to get the most out of what you already own: furniture placement, flow, lighting, and editing out what distracts. Most homes need rearranging, not replacing." },
+      { h: "Organizing and decluttering", p: "Buyers need to picture their own life in the space. We advise room by room on what to store, what to keep and what buyers in this market expect to see, so the home shows its best features instead of its belongings." },
+      { h: "Staging and virtual staging", p: "If a room still does not present well, we connect you with trusted staging vendors, or use professional virtual staging in the photos only. Virtual staging is a presentation tool, always disclosed, and it keeps the home comfortable while you live in it and gets us to market faster." },
+      { h: "Cleaning and punch list", p: "Once the heavy lifting is done, a professional clean and a final walk-through for the small items: bulbs, touch-up paint, a sticky door, tired caulk. Nothing should distract a buyer on tour." } ] },
+    { title: "Present", items: [
+      { h: "Professional photography", p: "Tasteful photography that leads with the home's strongest features and views. The first photo decides whether a buyer keeps scrolling, so we plan the shot list around it." },
+      { h: "Video and aerial", p: "Lifestyle video and drone footage to show the setting, the water and the surroundings, not just the rooms. Out-of-area buyers decide whether to fly in based on this." },
+      { h: "Floor plan", p: "A measured floor plan so buyers understand the flow and scale before they ever walk in, and can picture where their furniture goes." },
+      { h: "Positioning", p: "Every asset answers the same question: why would someone want to live here? We connect the residence to the lifestyle around it, the water, beaches, golf, dining and culture, rather than listing features." } ] },
+    { title: "Find the Buyer", items: [
+      { h: "Hyperlocal digital advertising", p: "Targeted campaigns aimed at the geographies and search behavior most likely to produce a buyer for this specific property, including the feeder markets that historically buy here. Likely buyers, not generic impressions." },
+      { h: "Our prospect database", p: "Direct outreach to prior buyer prospects who have shown interest in {community} and comparable properties, plus custom emails to our client network. These are people already looking for what you have." },
+      { h: "Agent-to-agent outreach", p: "Direct distribution to the agents who actively sell in this area, so the professionals most likely to have a buyer know about your home before it reaches the portals." },
+      { h: "Tried and true", p: "Just Listed mailers to the neighborhood, open houses and broker previews still work here, and they get the area talking about your home." } ] },
+    { title: "Local Knowledge That Protects the Sale", items: [
+      { h: "Market awareness", p: "We track every new listing, price change and pending sale that competes with yours, and we review with you what it means for our position as it happens, not after the fact." },
+      { h: "Community expertise", p: "Buyers and their agents get informed answers about {community}: association operations, financials, reserves, capital projects, assessments and outlook. Answering early removes uncertainty and settles objections before they become deal problems." },
+      { h: "Measure and adjust", p: "Online views, saves, showing activity and feedback are reviewed with you weekly, and the plan adjusts to how the market is actually responding." } ] },
+    { title: "Contract to Closing", items: [
+      { h: "Offers and contingencies", p: "We stay current on Florida contract forms, addenda and disclosures, and we screen every offer for the terms most likely to close: financing strength, contingencies, inspection scope and timelines." },
+      { h: "Closing logistics", p: "Open communication on timelines and expectations from contract through moving day, so this is as low-stress an experience as it can be." } ] }
+  ],
+  close: "These are the highlights of a fuller list of services. No two homes or sales are the same, so this plan is tailored to your residence, your timeline and how you want to live while the home is on the market. We appreciate the opportunity and look forward to working with you."
+};
+function renderMarketing(){
+  const card = document.getElementById("mkt-card");
+  const inc = (ADJ && ADJ.include) || {};
+  if (inc.marketing!==true) { card.style.display="none"; return; }
+  card.style.display="";
+  const m = Object.assign({}, MKT_DFLT, (ADJ && ADJ.marketing) || {});
+  const community = (D.subject.subdivision || "").trim() || "your community";
+  const tx = t => escH(String(t||"").replace(/\{community\}/g, community));
+  document.getElementById("t-marketing").textContent = T("marketing");
+  const sub = document.getElementById("mkt-sub"); sub.textContent = String(m.sub||"").replace(/\{community\}/g, community); sub.style.display = (m.sub||"").trim() ? "" : "none";
+  const phases = (m.phases||[]).filter(ph => ph && (ph.items||[]).some(it => it && (it.h||it.p)));
+  document.getElementById("mkt-phases").innerHTML = phases.map((ph,i)=>`<div class="phase ${(i===phases.length-1 && phases.length%2===1)?"wide":""}">
+    <div class="ph-h"><span class="ph-n">${i+1}</span>${tx(ph.title)}</div>
+    <div class="items">${(ph.items||[]).filter(it=>it&&(it.h||it.p)).map(it=>`<div class="mkt-item"><b>${tx(it.h)}</b><p>${tx(it.p)}</p></div>`).join("")}</div></div>`).join("");
+  const cl = document.getElementById("mkt-close"); cl.textContent = String(m.close||"").replace(/\{community\}/g, community); cl.style.display = (m.close||"").trim() ? "" : "none";
 }
 function renderAvms(central){
   const card = document.getElementById("avm-card");
@@ -731,7 +801,7 @@ function render(){
   putSum("comps-summary", SUM.comps);
   document.getElementById("map-card").style.display = INC("map") ? "" : "none";
   /* section order: ADJ.order lists section keys top to bottom; unknown/missing keys keep default order at the end */
-  { const CARD = { subject:"subject-card", comps:"comps-card", actives:"actives-card", blocks:"blocks-card", marketUpdate:"mu-card", zillowForecast:"zf-card", avms:"avm-card", ladder:"ladder-card", map:"map-card" };
+  { const CARD = { subject:"subject-card", comps:"comps-card", actives:"actives-card", blocks:"blocks-card", marketUpdate:"mu-card", zillowForecast:"zf-card", avms:"avm-card", marketing:"mkt-card", ladder:"ladder-card", map:"map-card" };
     const dflt = Object.keys(CARD); const ord = ((ADJ&&ADJ.order)||[]).filter(k=>CARD[k]); dflt.forEach(k=>{ if(!ord.includes(k)) ord.push(k); });
     const wrap = document.getElementById("subject-card").parentElement; ord.forEach(k=>{ const el=document.getElementById(CARD[k]); if(el) wrap.appendChild(el); }); }
   if (INC("map")) drawMap(rows, PR, NUM);
@@ -739,6 +809,7 @@ function render(){
   renderMarketUpdate();
   renderForecast(e.central);
   renderAvms(e.central);
+  renderMarketing();
 }
 
 function drawMap(rows, PR, NUM){

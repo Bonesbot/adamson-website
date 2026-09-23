@@ -150,6 +150,13 @@ Workbench card "Client Page: Sections, Titles & Fields", all saved in the overla
   in new tabs and you type the numbers in. The section renders only when a value is entered.
 - Section order: drag the handle in the Sections card; saved as `order[]`. Ladder and map are
   now independent cards so they can move like everything else.
+- Prep and Marketing Plan (2026-09-23): optional section, opt-in via `include.marketing`, title
+  in `titles.marketing`. Copy lives in the template (`MKT_DFLT`: subtitle, five numbered phases
+  of heading + sentence items, closing paragraph) and prints on one page in a two-column grid;
+  `{community}` becomes `subject.subdivision`. Editing anything in the workbench card copies the
+  standard text into `marketing{sub, phases[{title, items[{h,p}]}], close}` for that listing;
+  "Reset to standard copy" deletes the key. Absent key = standard copy, so template updates flow
+  to every CMA that has not customized it.
 - Client summaries: `summaries{comps, marketUpdate}` free text, shown under the comparables
   table and under the Market Update table (blank = not shown).
 - Print (2026-09-22 evening): dedicated print stylesheet, whole-dollar $/sq ft everywhere, bold

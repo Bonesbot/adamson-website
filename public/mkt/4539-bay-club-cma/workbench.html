@@ -113,6 +113,13 @@ if (!localStorage.getItem("cma-edit-key"))
   .sec.dragging { opacity:.45; } .sec.over { border-top:2px solid var(--gold); }
   textarea.sum { width:100%; min-height:74px; font:13px/1.5 Georgia,serif; padding:8px 10px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; resize:vertical; }
   .sumlbl { font-size:11px; color:#5a6b85; margin:12px 0 4px; text-transform:uppercase; letter-spacing:.06em; }
+  .mkt-ph { border:1px solid #e3e7ee; border-left:4px solid var(--gold,#C9A961); border-radius:6px; padding:10px 12px; margin-top:10px; background:#fff; }
+  .mkt-ph .ph-row { display:flex; gap:8px; align-items:center; margin-bottom:8px; }
+  .mkt-ph .ph-row input { flex:1; font:bold 13px Georgia,serif; padding:5px 7px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
+  .mkt-it { display:grid; grid-template-columns:200px 1fr 32px; gap:8px; margin-bottom:6px; align-items:start; }
+  .mkt-it input { font:bold 12px Arial; padding:5px 6px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; width:100%; }
+  .mkt-it textarea { font:12px/1.45 Georgia,serif; padding:5px 7px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; width:100%; min-height:52px; resize:vertical; }
+  .mkt-x { font:12px Arial; color:#a33; background:none; border:1px solid #e3c7c7; border-radius:4px; cursor:pointer; padding:4px 0; }
   /* Market Update card */
   .mu-meta { display:grid; grid-template-columns:1.2fr 2fr 130px 2fr; gap:10px; margin-bottom:10px; }
   .mu-meta label { font-size:11px; color:#5a6b85; display:block; margin-bottom:3px; }
@@ -240,6 +247,21 @@ if (!localStorage.getItem("cma-edit-key"))
     </div>
     <div class="cover-form" id="cover-form"></div>
     <div class="cover-prev" id="cover-prev"></div>
+  </div>
+  <div class="card" id="mkt-card">
+    <h2>Prep and Marketing Plan</h2>
+    <div class="sub">Optional 1 to 2 page section: how the home gets prepared, presented and marketed, from designer visit to closing. Turn it on in the Sections card.
+      Ships with our standard copy; edit any line for this listing. <code>{community}</code> is replaced with the subject's subdivision on the client page. Blank a heading and its text to drop that item.</div>
+    <div class="mu-tools">
+      <button class="btn" onclick="mktAddPhase()">Add phase</button>
+      <button class="btn" onclick="mktReset()">Reset to standard copy</button>
+      <span class="ind" id="mkt-ind" style="margin-left:0;color:#7c8798;"></span>
+    </div>
+    <div class="sumlbl">Subtitle under the section title</div>
+    <textarea class="sum" id="mkt-sub" style="min-height:44px;" onchange="mktSet('sub',this.value)"></textarea>
+    <div id="mkt-phases"></div>
+    <div class="sumlbl">Closing paragraph</div>
+    <textarea class="sum" id="mkt-close" onchange="mktSet('close',this.value)"></textarea>
   </div>
   <div class="card" id="avm-card">
     <h2>Online Estimates (AVMs)</h2>
@@ -652,7 +674,8 @@ function renderNotes(){
 
 /* ---------- Client page: sections, titles, hidden fields, AVMs (all in the overlay) ---------- */
 const SECTIONS = [["cover","Cover page (photo, address, agent card)"],["strip","Top tiles (list price, list $/sq ft, comp count, adjusted $/sq ft)"],["estimate","Indicated value range box"],["subject","Your Residence / Your Home"],["comps","Comparable Sales"],["actives","Currently on the Market"],["blocks","The Comparables, Up Close"],
-  ["ladder","Pricing Ladder"],["map","Comp Locations"],["marketUpdate","Market Update"],["zillowForecast","Zillow Zip Code Forecast"],["avms","Online Estimates"]];
+  ["ladder","Pricing Ladder"],["map","Comp Locations"],["marketUpdate","Market Update"],["zillowForecast","Zillow Zip Code Forecast"],["avms","Online Estimates"],["marketing","Prep and Marketing Plan"]];
+const OPT_IN = ["zillowForecast","cover","marketing"];
 const SUBJECT_FIELDS = { condo:[["address","Address"],["bldgUnit","Building / Unit / Floor"],["sqft","Heated Area"],["yearBuilt","Year Built"],["bedBath","Beds / Baths"],["fee","Condo Fee"],
     ["parking","Garage / Parking"],["taxes","Taxes"],["pool","Pool"],["minLease","Minimum Lease"],["pets","Pets"],["view","View"],["floodMls","Flood Zone / MLS"]],
   sfh:[["address","Address"],["sqft","Heated Space"],["lot","Lot Size"],["yearBuilt","Year Built"],["parking","Garage / Parking"],["bedBath","Beds / Baths"],["taxes","Taxes"],["pool","Pool"],["view","View"],["floodMls","Flood Zone / MLS"]] };
@@ -717,6 +740,57 @@ function coverUpload(file){
   img.onerror = () => { ind.textContent="could not read that image"; };
   img.src = url;
 }
+const MKT_DFLT = {
+  sub: "How we prepare, position and market your residence, from the first walk-through to closing day.",
+  phases: [
+    { title: "Prepare", items: [
+      { h: "Pre-list designer visit", p: "Before a single photo is taken, our interior designer walks the home with you. The goal is to get the most out of what you already own: furniture placement, flow, lighting, and editing out what distracts. Most homes need rearranging, not replacing." },
+      { h: "Organizing and decluttering", p: "Buyers need to picture their own life in the space. We advise room by room on what to store, what to keep and what buyers in this market expect to see, so the home shows its best features instead of its belongings." },
+      { h: "Staging and virtual staging", p: "If a room still does not present well, we connect you with trusted staging vendors, or use professional virtual staging in the photos only. Virtual staging is a presentation tool, always disclosed, and it keeps the home comfortable while you live in it and gets us to market faster." },
+      { h: "Cleaning and punch list", p: "Once the heavy lifting is done, a professional clean and a final walk-through for the small items: bulbs, touch-up paint, a sticky door, tired caulk. Nothing should distract a buyer on tour." } ] },
+    { title: "Present", items: [
+      { h: "Professional photography", p: "Tasteful photography that leads with the home's strongest features and views. The first photo decides whether a buyer keeps scrolling, so we plan the shot list around it." },
+      { h: "Video and aerial", p: "Lifestyle video and drone footage to show the setting, the water and the surroundings, not just the rooms. Out-of-area buyers decide whether to fly in based on this." },
+      { h: "Floor plan", p: "A measured floor plan so buyers understand the flow and scale before they ever walk in, and can picture where their furniture goes." },
+      { h: "Positioning", p: "Every asset answers the same question: why would someone want to live here? We connect the residence to the lifestyle around it, the water, beaches, golf, dining and culture, rather than listing features." } ] },
+    { title: "Find the Buyer", items: [
+      { h: "Hyperlocal digital advertising", p: "Targeted campaigns aimed at the geographies and search behavior most likely to produce a buyer for this specific property, including the feeder markets that historically buy here. Likely buyers, not generic impressions." },
+      { h: "Our prospect database", p: "Direct outreach to prior buyer prospects who have shown interest in {community} and comparable properties, plus custom emails to our client network. These are people already looking for what you have." },
+      { h: "Agent-to-agent outreach", p: "Direct distribution to the agents who actively sell in this area, so the professionals most likely to have a buyer know about your home before it reaches the portals." },
+      { h: "Tried and true", p: "Just Listed mailers to the neighborhood, open houses and broker previews still work here, and they get the area talking about your home." } ] },
+    { title: "Local Knowledge That Protects the Sale", items: [
+      { h: "Market awareness", p: "We track every new listing, price change and pending sale that competes with yours, and we review with you what it means for our position as it happens, not after the fact." },
+      { h: "Community expertise", p: "Buyers and their agents get informed answers about {community}: association operations, financials, reserves, capital projects, assessments and outlook. Answering early removes uncertainty and settles objections before they become deal problems." },
+      { h: "Measure and adjust", p: "Online views, saves, showing activity and feedback are reviewed with you weekly, and the plan adjusts to how the market is actually responding." } ] },
+    { title: "Contract to Closing", items: [
+      { h: "Offers and contingencies", p: "We stay current on Florida contract forms, addenda and disclosures, and we screen every offer for the terms most likely to close: financing strength, contingencies, inspection scope and timelines." },
+      { h: "Closing logistics", p: "Open communication on timelines and expectations from contract through moving day, so this is as low-stress an experience as it can be." } ] }
+  ],
+  close: "These are the highlights of a fuller list of services. No two homes or sales are the same, so this plan is tailored to your residence, your timeline and how you want to live while the home is on the market. We appreciate the opportunity and look forward to working with you."
+};
+/* ---- Prep and Marketing Plan: ADJ.marketing (absent = standard copy) ---- */
+const MKT = () => (ADJ.marketing ||= JSON.parse(JSON.stringify(MKT_DFLT)));
+function mktSet(k,v){ MKT()[k]=v; touch(); }
+function mktPh(i,v){ MKT().phases[i].title=v; touch(); }
+function mktIt(i,j,k,v){ MKT().phases[i].items[j][k]=v; touch(); }
+function mktAddItem(i){ MKT().phases[i].items.push({h:"",p:""}); touch(); renderMkt(); }
+function mktDelItem(i,j){ MKT().phases[i].items.splice(j,1); if(!MKT().phases[i].items.length) MKT().phases.splice(i,1); touch(); renderMkt(); }
+function mktAddPhase(){ MKT().phases.push({title:"New phase",items:[{h:"",p:""}]}); touch(); renderMkt(); }
+function mktMove(i,d){ const a=MKT().phases; const j=i+d; if(j<0||j>=a.length) return; [a[i],a[j]]=[a[j],a[i]]; touch(); renderMkt(); }
+function mktReset(){ if(!confirm("Replace this listing's Prep and Marketing Plan copy with the standard text?")) return; delete ADJ.marketing; touch(); renderMkt(); }
+function renderMkt(){
+  const m = (ADJ.marketing) || MKT_DFLT;
+  document.getElementById("mkt-sub").value = m.sub||""; document.getElementById("mkt-close").value = m.close||"";
+  document.getElementById("mkt-ind").textContent = ADJ.marketing ? "custom copy for this listing" : "standard copy (edits create a copy for this listing)";
+  document.getElementById("mkt-phases").innerHTML = (m.phases||[]).map((ph,i)=>`<div class="mkt-ph">
+    <div class="ph-row"><span class="lettermark" style="display:inline-flex;width:22px;height:22px;border-radius:50%;background:#0A1F3C;color:#C9A961;font:bold 11px Georgia;align-items:center;justify-content:center;">${i+1}</span>
+      <input type="text" value="${escA(ph.title)}" placeholder="Phase title" onchange="mktPh(${i},this.value)">
+      <button class="btn" title="move up" onclick="mktMove(${i},-1)">&uarr;</button><button class="btn" title="move down" onclick="mktMove(${i},1)">&darr;</button>
+      <button class="btn" onclick="mktAddItem(${i})">Add item</button></div>
+    ${(ph.items||[]).map((it,j)=>`<div class="mkt-it"><input type="text" value="${escA(it.h)}" placeholder="Heading" onchange="mktIt(${i},${j},'h',this.value)">
+      <textarea placeholder="One or two sentences" onchange="mktIt(${i},${j},'p',this.value)">${escA(it.p)}</textarea>
+      <button class="mkt-x" title="remove item" onclick="mktDelItem(${i},${j})">&times;</button></div>`).join("")}</div>`).join("");
+}
 const TT  = () => (ADJ.titles ||= {});
 const HD  = () => (ADJ.hidden ||= { subject:[], comps:[], mu:[] });
 const isHid = (g,k) => ((HD()[g])||[]).includes(k);
@@ -728,10 +802,10 @@ function setSec(k,on){ INC()[k]=!!on; touch(); renderCP(); if(k==="zillowForecas
 function renderCP(){
   const inc=INC();
   const byKey = Object.fromEntries(SECTIONS);
-  document.getElementById("cp-sections").innerHTML = ORD().map(k=>[k,byKey[k]]).map(([k,l])=>`<div class="sec ${inc[k]===false||((k==="zillowForecast"||k==="cover")&&!inc[k])?"off":""}" draggable="true"
+  document.getElementById("cp-sections").innerHTML = ORD().map(k=>[k,byKey[k]]).map(([k,l])=>`<div class="sec ${inc[k]===false||(OPT_IN.includes(k)&&!inc[k])?"off":""}" draggable="true"
       ondragstart="secDrag(event,'${k}')" ondragover="secOver(event)" ondragleave="secLeave(event)" ondrop="secDrop(event,'${k}')" ondragend="secEnd(event)">
     <span class="grip" title="drag to reorder">&#8942;&#8942;</span>
-    <label class="nm"><input type="checkbox" ${(k==="zillowForecast"||k==="cover")?(inc[k]?"checked":""):(inc[k]===false?"":"checked")} onchange="setSec('${k}',this.checked)"> ${l}</label>
+    <label class="nm"><input type="checkbox" ${OPT_IN.includes(k)?(inc[k]?"checked":""):(inc[k]===false?"":"checked")} onchange="setSec('${k}',this.checked)"> ${l}</label>
     <input type="text" placeholder="${l} (client-page title)" value="${escA(TT()[k]||"")}" onchange="setTitle('${k}',this.value)">
     <span style="font-size:10.5px;color:#96a0ae;">${k==="subject"?"title defaults to Your Residence / Your Home":k==="marketUpdate"?"title field below wins if set":k==="strip"?"no title; hides automatically when list price is 0":""}</span></div>`
     + (k==="comps" ? `<div class="sec" style="cursor:default;"><span></span><span class="nm" style="font-weight:normal;color:#5a6b85;">Subheader</span>
@@ -745,6 +819,7 @@ function renderCP(){
   document.getElementById("inc-mu").checked = inc.marketUpdate!==false; document.getElementById("inc-zf").checked = !!inc.zillowForecast;
   document.getElementById("sum-comps").value = SUMS().comps||""; document.getElementById("sum-mu").value = SUMS().marketUpdate||""; document.getElementById("sum-zf").value = SUMS().forecast||"";
   renderCover();
+  renderMkt();
 }
 const GRID_KEY = { "Sold":"closeDate","DOM":"dom","Sale Price":"price","$/SqFt":"ppsf","SqFt":"sqft","Lot":"lot","Gar":"garage","Bldg":"building","Flr":"floor","Fee/mo":"fee","Relevancy":"rel","Total Adj.":"adj","Adj. Price":"adjPrice","Adj. $/SqFt":"adjPpsf","Status":"status" };
 function setStatus(mls,v){ OV(mls).statusLabel = v.trim(); touch(); }
