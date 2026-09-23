@@ -69,6 +69,12 @@
   .mkt-item b { display:block; font:bold 13px Arial,sans-serif; color:#22304a; margin-bottom:2px; }
   .mkt-item p { font:13px/1.5 Georgia,serif; color:#33415c; margin:0; }
   .mkt-close { font:14px/1.6 Georgia,serif; color:#22304a; margin-top:18px; padding:12px 16px; background:#fbfaf6; border-left:3px solid var(--gold); border-radius:0 6px 6px 0; }
+  .mkt-foot { display:flex; gap:22px; align-items:center; margin-top:18px; }
+  .mkt-foot .mkt-close { flex:1; margin-top:0; }
+  .mkt-agent { display:flex; align-items:center; gap:14px; flex:none; }
+  .mkt-agent img { width:64px; height:64px; object-fit:cover; border-radius:3px; }
+  .mkt-agent .nm { font:bold 15px Georgia,serif; color:var(--navy); white-space:nowrap; }
+  .mkt-agent .ct { font-size:12px; color:#5a6b85; line-height:1.55; margin-top:2px; }
   .comp-block .head { display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px; margin-bottom:4px; }
   .comp-block .head .addr { font-family:Georgia,serif; font-size:16px; color:var(--navy); font-weight:bold; }
   .comp-block .head .price { font-family:Georgia,serif; font-size:15px; color:var(--navy); }
@@ -174,10 +180,14 @@
     .phase { page-break-inside:avoid; }
     .phase .ph-h { font-size:13px; padding-bottom:4px; margin-bottom:7px; gap:8px; }
     .phase .ph-n { width:19px; height:19px; font-size:10.5px; }
-    .mkt-item { margin-bottom:7px; }
+    .mkt-item { margin-bottom:6px; }
     .mkt-item b { font-size:10.5px; margin-bottom:1px; }
-    .mkt-item p { font-size:10px; line-height:1.45; }
-    .mkt-close { font-size:11px; line-height:1.5; padding:9px 13px; margin-top:12px; page-break-inside:avoid; }
+    .mkt-item p { font-size:10px; line-height:1.42; }
+    .mkt-close { font-size:11px; line-height:1.5; padding:8px 12px; margin-top:0; }
+    .mkt-foot { margin-top:12px; gap:16px; page-break-inside:avoid; }
+    .mkt-agent { gap:10px; }
+    .mkt-agent img { width:19mm; height:19mm; } .mkt-agent .nm { font-size:13px; } .mkt-agent .ct { font-size:10px; line-height:1.5; }
+    body.mkt-last footer { display:none; }
     /* Cover, print: the Home Platform PDF layout. Logo and date on top, contained photo, kicker, address, agent card. */
     #cover { page-break-after:always; break-after:page; height:auto; overflow:visible; padding:6mm 0 0; }
     .cover-bar, .cover-scroll, .cover-prepared { display:none !important; }
@@ -294,7 +304,8 @@
     <h2 id="t-marketing">Prep and Marketing Plan</h2>
     <div class="sub" id="mkt-sub"></div>
     <div class="mkt-grid" id="mkt-phases"></div>
-    <div class="mkt-close" id="mkt-close"></div>
+    <div class="mkt-foot"><div class="mkt-close" id="mkt-close"></div>
+    <div class="mkt-agent" id="mkt-agent"><img id="mkt-headshot" src="/images/ryan-adamson-square.jpg" alt=""><div><div class="nm" id="mkt-agent-name"></div><div class="ct" id="mkt-agent-contact"></div></div></div></div>
   </div>
   <div class="card" id="ladder-card">
     <h2 id="t-ladder">Pricing Ladder</h2>
@@ -356,7 +367,8 @@ function applySubjectOverride(D, ADJ){
 }
 const DEFAULT_TITLES = { subject:null, comps:"Comparable Sales", actives:"Currently on the Market", blocks:"The Comparables, Up Close",
   ladder:"Pricing Ladder", map:"Comp Locations", marketUpdate:"Market Update", forecast:"Zillow Zip Code Forecast", avms:"Online Estimates", marketing:"Prep and Marketing Plan" };
-const T   = (k,dflt) => ((ADJ&&ADJ.titles)||{})[k] || DEFAULT_TITLES[k] || dflt || "";
+const T_ALIAS = { forecast:"zillowForecast" };
+const T   = (k,dflt) => { const t=(ADJ&&ADJ.titles)||{}; return t[k] || (T_ALIAS[k]&&t[T_ALIAS[k]]) || DEFAULT_TITLES[k] || dflt || ""; };
 const INC = k => { const v=((ADJ&&ADJ.include)||{})[k]; return v!==false; };
 const HID = (g,k) => (((ADJ&&ADJ.hidden)||{})[g]||[]).includes(k);
 const distMi = (a,b,c,d) => { if(![a,b,c,d].every(v=>Number.isFinite(Number(v)))) return null;
@@ -549,6 +561,13 @@ function renderMarketing(){
     <div class="ph-h"><span class="ph-n">${i+1}</span>${tx(ph.title)}</div>
     <div class="items">${(ph.items||[]).filter(it=>it&&(it.h||it.p)).map(it=>`<div class="mkt-item"><b>${tx(it.h)}</b><p>${tx(it.p)}</p></div>`).join("")}</div></div>`).join("");
   const cl = document.getElementById("mkt-close"); cl.textContent = String(m.close||"").replace(/\{community\}/g, community); cl.style.display = (m.close||"").trim() ? "" : "none";
+  const cv = (ADJ && ADJ.cover) || {};
+  document.getElementById("mkt-agent-name").textContent = cv.agentName || "Ryan Adamson, PA";
+  document.getElementById("mkt-agent-contact").innerHTML = `The Adamson Group \u00b7 Coldwell Banker Realty<br>${escH(cv.agentEmail||"Ryan@Adamson-Group.com")} \u00b7 ${escH(cv.agentPhone||"941.713.9234")}`;
+  if (cv.headshot) document.getElementById("mkt-headshot").src = cv.headshot;
+  /* when the plan is the last printed section its agent card is the sign-off; drop the site footer so the page ends cleanly */
+  const cards = [...document.querySelectorAll(".wrap > .card")].filter(e => e.style.display!=="none"); const last = cards[cards.length-1];
+  document.body.classList.toggle("mkt-last", !!last && last.id==="mkt-card");
 }
 function renderAvms(central){
   const card = document.getElementById("avm-card");
@@ -583,10 +602,7 @@ async function renderForecast(central){
     tile(m1,"Next month", proj(m1)?`central estimate to ${proj(m1)}`:"") + tile(m3,"3 months", proj(m3)?`to ${proj(m3)}`:"")
     + tile(m6,"6 months (interpolated)", proj(m6)?`to ${proj(m6)}`:"") + tile(m12,"12 months", proj(m12)?`to ${proj(m12)}`:"");
   { const el=document.getElementById("zf-summary"); const txt=((ADJ&&ADJ.summaries)||{}).forecast||""; el.textContent=txt; el.style.display=txt.trim()?"":"none"; }
-  document.getElementById("zf-note").innerHTML =
-    `<b>Reference only.</b> This is Zillow's statistical forecast for every home in the ZIP code, not an opinion about this property, this building, or this street.
-     It does not see condition, view, floor, or the competing listings above. Hyper-local factors move individual sales far more than a ZIP-wide index does;
-     it is shown here to answer "what if we wait" with a neutral third-party number. Source: Zillow Research ZHVF (smoothed, seasonally adjusted, mid-tier), retrieved ${j.fetched_at?new Date(j.fetched_at).toLocaleDateString("en-US"):"recently"}. The 6-month figure is interpolated between Zillow's 3 and 12 month points.`;
+  document.getElementById("zf-note").style.display="none";
 }
 
 async function boot(){
