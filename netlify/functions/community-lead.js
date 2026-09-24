@@ -404,8 +404,14 @@ export const handler = async (event) => {
   // application/x-www-form-urlencoded; answer with a 303 to the thank-you page.
   const ctype = String((event.headers && (event.headers['content-type'] || event.headers['Content-Type'])) || '');
   const native = /application\/x-www-form-urlencoded/i.test(ctype);
+  // Send the visitor back to the site they posted from (longboatlido.com posts here cross-origin).
+  let backTo = '';
+  try {
+    const o = new URL(event.headers.referer || event.headers.Referer || '');
+    if (/^(www\.)?(adamsonfl|siestareport|longboatlido)\.com$/i.test(o.hostname)) backTo = o.origin;
+  } catch (_) {}
   const done = (code, obj) => (native
-    ? { statusCode: 303, headers: { Location: code < 400 ? '/thank-you/' : '/contact/' }, body: '' }
+    ? { statusCode: 303, headers: { Location: backTo + (code < 400 ? '/thank-you/' : '/') }, body: '' }
     : json(code, obj));
 
   let lead;

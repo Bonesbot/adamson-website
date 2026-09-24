@@ -39,8 +39,10 @@ const tsKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 (function () {
   try {
     var w = window, d = document, l = location, n = navigator, T0 = Date.now();
-    var HOSTS = /(^|\.)(adamsonfl|siestareport|longboatlido)\.com$/i;
-    var EP = HOSTS.test(l.hostname) && !/^(command|search)\./i.test(l.hostname) ? '/api/pv' : 'https://adamsonfl.com/api/pv';
+    // Same-origin on the adamsonfl Netlify project (adamsonfl.com + siestareport.com alias);
+    // everything else (longboatlido.com, the IDX pages) beacons to adamsonfl.com, whose
+    // functions hold the Supabase key.
+    var EP = /^(www\.)?(adamsonfl|siestareport)\.com$/i.test(l.hostname) ? '/api/pv' : 'https://adamsonfl.com/api/pv';
     var ls = null, ss = null;
     try { ls = w.localStorage; ss = w.sessionStorage; } catch (e) {}
     function get(st, k) { try { return st ? st.getItem(k) : null; } catch (e) { return null; } }
