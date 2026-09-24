@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-23T11:04:02.564068+00:00",
+  "lastUpdated": "2026-09-24T19:40:30.029457+00:00",
   "counts": {
-    "sold": 263,
-    "pending": 30,
+    "sold": 264,
+    "pending": 29,
     "active": 90,
     "total": 293
   },
   "metrics": {
-    "avgPrice": "$2,127,862",
+    "avgPrice": "$2,127,628",
     "avgPricePerSqFt": "$664",
     "avgYearBuilt": 1983,
     "avgLivingSqFt": "2,770",
@@ -29,10 +29,10 @@
     "newConstructionCount": 28
   },
   "sold": {
-    "count": 43,
-    "medianPrice": "$1,750,000",
-    "medianDom": 122,
-    "saleToListRatio": "86.9%",
+    "count": 44,
+    "medianPrice": "$1,762,500",
+    "medianDom": 123,
+    "saleToListRatio": "87.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4676686",
+      "address": "1516 S ORANGE AVE",
+      "subdivision": "HARBOR ACRES",
+      "soldPrice": "$4,328,750",
+      "soldDate": "2026-09-24",
+      "bedrooms": 4,
+      "bathrooms": 4.5,
+      "livingSqFt": "4,224",
+      "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4700259",
       "address": "1555 EASTBROOK DR",
@@ -118,19 +131,6 @@
       "yearBuilt": 2015,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4694616",
-      "address": "1915 CLEMATIS ST",
-      "subdivision": "DESOTA PARK",
-      "soldPrice": "$2,800,000",
-      "soldDate": "2026-09-15",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "3,161",
-      "yearBuilt": 2009,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 7,
-      "avgPrice": "$369,429",
-      "avgPricePerSqFt": "$321",
+      "avgPrice": "$367,143",
+      "avgPricePerSqFt": "$319",
       "avgLivingSqFt": "1,154",
-      "avgDom": 90
+      "avgDom": 91
     },
     {
       "tier": "1990to2005",
@@ -215,9 +215,9 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 71,
-      "soldCount": 220,
+      "soldCount": 221,
       "soldMedianPricePerSqFt": "$570",
-      "soldMedianPrice": "$1,428,000",
+      "soldMedianPrice": "$1,450,000",
       "lowSample": false
     }
   ],
@@ -227,16 +227,16 @@
     "monthsOfSupplySfhVilla": 5.2,
     "label": "balanced market",
     "activeCount": 90,
-    "sold365Count": 208,
-    "sold90Count": 43,
+    "sold365Count": 209,
+    "sold90Count": 44,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 243,
+      "soldCount": 244,
       "activeCount": 83,
       "soldMedianPrice": "$1,600,000",
-      "soldMedianPricePerSqFt": "$621"
+      "soldMedianPricePerSqFt": "$625"
     },
     "condo": {
       "soldCount": 20,
@@ -258,7 +258,7 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,600,000 ($621/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
+      "a": "Single-family homes sell around $1,600,000 ($625/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
     },
     {
       "facet": "range",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 122 days on market and closed at 86.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 123 days on market and closed at 87.0% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

@@ -2,18 +2,18 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-23T11:04:01.781212+00:00",
+  "lastUpdated": "2026-09-24T19:40:29.194759+00:00",
   "counts": {
-    "sold": 291,
-    "pending": 67,
+    "sold": 292,
+    "pending": 66,
     "active": 156,
     "total": 358
   },
   "metrics": {
-    "avgPrice": "$1,922,941",
-    "avgPricePerSqFt": "$829",
+    "avgPrice": "$1,922,034",
+    "avgPricePerSqFt": "$828",
     "avgYearBuilt": 2003,
-    "avgLivingSqFt": "2,076",
+    "avgLivingSqFt": "2,077",
     "avgLotSqFt": null,
     "avgDom": 103
   },
@@ -24,15 +24,15 @@
   "active": {
     "count": 156,
     "medianPrice": "$1,999,000",
-    "medianPricePerSqFt": "$959",
+    "medianPricePerSqFt": "$956",
     "waterfrontCount": 51,
-    "newConstructionCount": 75
+    "newConstructionCount": 76
   },
   "sold": {
     "count": 55,
     "medianPrice": "$1,237,500",
-    "medianDom": 124,
-    "saleToListRatio": "86.3%",
+    "medianDom": 122,
+    "saleToListRatio": "86.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4683398",
+      "address": "505 S ORANGE AVE #901",
+      "subdivision": "KANAYA",
+      "soldPrice": "$1,520,000",
+      "soldDate": "2026-09-24",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,003",
+      "yearBuilt": 2007,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4671195",
       "address": "509 GOLDEN GATE PT #4",
@@ -118,19 +131,6 @@
       "yearBuilt": 1998,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "D6145929",
-      "address": "235 COCOANUT AVE #117C",
-      "subdivision": "MARQUEE EN VILLE",
-      "soldPrice": "$749,000",
-      "soldDate": "2026-09-15",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "2,649",
-      "yearBuilt": 2006,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 38,
-      "avgPrice": "$1,144,495",
-      "avgPricePerSqFt": "$672",
+      "avgPrice": "$1,137,364",
+      "avgPricePerSqFt": "$668",
       "avgLivingSqFt": "1,598",
-      "avgDom": 170
+      "avgDom": 171
     },
     {
       "tier": "1990to2005",
@@ -152,27 +152,27 @@
       "avgPrice": "$1,566,015",
       "avgPricePerSqFt": "$715",
       "avgLivingSqFt": "2,044",
-      "avgDom": 116
+      "avgDom": 117
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 21,
-      "avgPrice": "$1,668,852",
+      "activeCount": 20,
+      "avgPrice": "$1,688,595",
       "avgPricePerSqFt": "$758",
-      "avgLivingSqFt": "2,029",
-      "avgDom": 110
+      "avgLivingSqFt": "2,046",
+      "avgDom": 116
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 73,
-      "avgPrice": "$4,307,521",
-      "avgPricePerSqFt": "$1,419",
-      "avgLivingSqFt": "2,915",
-      "avgDom": 212
+      "activeCount": 74,
+      "avgPrice": "$4,269,568",
+      "avgPricePerSqFt": "$1,412",
+      "avgLivingSqFt": "2,897",
+      "avgDom": 211
     }
   ],
   "condoTiersScope": {
@@ -205,16 +205,16 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 60,
-      "soldCount": 145,
-      "soldMedianPricePerSqFt": "$793",
+      "activeCount": 61,
+      "soldCount": 146,
+      "soldMedianPricePerSqFt": "$792",
       "soldMedianPrice": "$1,475,000",
       "lowSample": false
     },
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 45,
+      "activeCount": 44,
       "soldCount": 80,
       "soldMedianPricePerSqFt": "$556",
       "soldMedianPrice": "$749,495",
@@ -227,7 +227,7 @@
     "monthsOfSupplySfhVilla": 7.8,
     "label": "buyer's market",
     "activeCount": 156,
-    "sold365Count": 234,
+    "sold365Count": 235,
     "sold90Count": 55,
     "method": "active / (trailing-12mo closed / 12)"
   },
@@ -239,7 +239,7 @@
       "soldMedianPricePerSqFt": "$563"
     },
     "condo": {
-      "soldCount": 280,
+      "soldCount": 281,
       "activeCount": 152,
       "soldMedianPrice": "$1,200,000",
       "soldMedianPricePerSqFt": "$720"
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Downtown Sarasota?",
-      "a": "Recently sold homes took a median 124 days on market and closed at 86.3% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 122 days on market and closed at 86.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

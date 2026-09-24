@@ -2,11 +2,11 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-23T11:04:03.327516+00:00",
+  "lastUpdated": "2026-09-24T19:40:30.813614+00:00",
   "counts": {
-    "sold": 99,
-    "pending": 12,
-    "active": 37,
+    "sold": 100,
+    "pending": 11,
+    "active": 38,
     "total": 111
   },
   "metrics": {
@@ -22,22 +22,22 @@
     "maxPrice": "$22,900,000"
   },
   "active": {
-    "count": 37,
-    "medianPrice": "$750,000",
-    "medianPricePerSqFt": "$547",
+    "count": 38,
+    "medianPrice": "$744,500",
+    "medianPricePerSqFt": "$543",
     "waterfrontCount": 14,
     "newConstructionCount": 13
   },
   "sold": {
-    "count": 18,
-    "medianPrice": "$627,500",
-    "medianDom": 102,
-    "saleToListRatio": "84.1%",
+    "count": 19,
+    "medianPrice": "$590,000",
+    "medianDom": 97,
+    "saleToListRatio": "84.5%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 6.4,
-    "sfhVilla": 4.9,
+    "sfhVilla": 5.0,
     "blended": 5.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 20,
+    "under900k": 21,
     "band900kTo1_5m": 7,
     "band1_5mTo3m": 2,
     "band3mPlus": 8
@@ -62,11 +62,24 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 37
+      "count": 38
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4695931",
+      "address": "1020 23RD ST",
+      "subdivision": "SYLVAN SHORES",
+      "soldPrice": "$427,500",
+      "soldDate": "2026-09-24",
+      "bedrooms": 2,
+      "bathrooms": 1.0,
+      "livingSqFt": "952",
+      "yearBuilt": 1954,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4694145",
       "address": "3440 CHAPEL DR",
@@ -118,19 +131,6 @@
       "yearBuilt": 1956,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4699914",
-      "address": "418 SAPPHIRE DR",
-      "subdivision": "SAPPHIRE SHORES",
-      "soldPrice": "$1,080,000",
-      "soldDate": "2026-08-27",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,724",
-      "yearBuilt": 1955,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$550,000",
       "avgPricePerSqFt": "$436",
       "avgLivingSqFt": "1,262",
-      "avgDom": 131
+      "avgDom": 132
     },
     {
       "tier": "1990to2005",
@@ -172,7 +172,7 @@
       "avgPrice": "$561,500",
       "avgPricePerSqFt": "$591",
       "avgLivingSqFt": "951",
-      "avgDom": 113
+      "avgDom": 114
     }
   ],
   "condoTiersScope": {
@@ -214,29 +214,29 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 20,
-      "soldCount": 70,
-      "soldMedianPricePerSqFt": "$393",
-      "soldMedianPrice": "$572,500",
+      "activeCount": 21,
+      "soldCount": 71,
+      "soldMedianPricePerSqFt": "$394",
+      "soldMedianPrice": "$570,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 5.2,
     "monthsOfSupplyCondo": 6.4,
-    "monthsOfSupplySfhVilla": 4.9,
+    "monthsOfSupplySfhVilla": 5.0,
     "label": "balanced market",
-    "activeCount": 37,
-    "sold365Count": 86,
-    "sold90Count": 18,
+    "activeCount": 38,
+    "sold365Count": 87,
+    "sold90Count": 19,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 79,
-      "activeCount": 28,
-      "soldMedianPrice": "$665,000",
-      "soldMedianPricePerSqFt": "$412"
+      "soldCount": 80,
+      "activeCount": 29,
+      "soldMedianPrice": "$660,000",
+      "soldMedianPricePerSqFt": "$413"
     },
     "condo": {
       "soldCount": 20,
@@ -253,22 +253,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 37 active listings and roughly 7 closed sales a month (trailing 12 months), West Of Trail North has about 5.2 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 38 active listings and roughly 7 closed sales a month (trailing 12 months), West Of Trail North has about 5.2 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail North?",
-      "a": "Single-family homes sell around $665,000 ($412/sq ft), while condos, villas and townhouses sell around $472,500 ($500/sq ft)."
+      "a": "Single-family homes sell around $660,000 ($413/sq ft), while condos, villas and townhouses sell around $472,500 ($500/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail North?",
-      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $750,000."
+      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $744,500."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 102 days on market and closed at 84.1% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 97 days on market and closed at 84.5% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
