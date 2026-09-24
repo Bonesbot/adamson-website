@@ -36,6 +36,7 @@ const {
 
 const siteTitle = 'Siesta Report: Siesta Key Real Estate, by the Numbers';
 const fullTitle = title === 'Home' ? siteTitle : `${title} | Siesta Report`;
+import SiteAnalytics from '../components/analytics/SiteAnalytics.astro';
 ---
 
 <!DOCTYPE html>
@@ -64,6 +65,8 @@ const fullTitle = title === 'Home' ? siteTitle : `${title} | Siesta Report`;
     />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- First-party analytics + lead stamp (+ GA4 / Turnstile when configured) -->
+    <SiteAnalytics />
     <!-- Home Platform Pixel Tracker (connects the site to the CRM) -->
     <script src="https://www.homeplatform.com/cxlp/a.min.js" id="cxlp-ajs" data-client-id="fl4xsh4e3vj4" async is:inline></script>
   </head>

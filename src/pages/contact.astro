@@ -33,10 +33,7 @@ const jsonLd = {
       <form
         name="contact"
         method="POST"
-        action="/thank-you"
-        netlify
-        data-netlify="true"
-        netlify-honeypot="bot-field"
+        action="/.netlify/functions/community-lead"
         class="space-y-6"
       >
         <!-- Hidden form-name field — required by Netlify when using JS-based form submissions or custom action -->
@@ -121,13 +118,6 @@ const jsonLd = {
           ></textarea>
         </div>
 
-        <!-- Netlify-managed reCAPTCHA v2 ("I'm not a robot" checkbox).
-             The attribute on a child div (NOT on the <form> tag) is the correct
-             placement — Netlify replaces this div with the widget at deploy time
-             using its own managed Google keys. -->
-        <div class="flex justify-center pt-2">
-          <div data-netlify-recaptcha="true"></div>
-        </div>
 
         <div class="text-center pt-2">
           <button
@@ -180,10 +170,19 @@ const jsonLd = {
       btn.disabled = true;
 
       try {
-        const res = await fetch('/', {
+        const interest = String(fd.get('interest') || '');
+        const intent = interest === 'buying' ? 'buyer' : interest === 'selling' ? 'seller' : 'general';
+        const res = await fetch('/.netlify/functions/community-lead', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(fd as any).toString(),
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: fd.get('name'), email: fd.get('email'), phone: fd.get('phone'),
+            notes: [interest ? 'Interest: ' + interest : '', String(fd.get('message') || '')].filter(Boolean).join('\n'),
+            lead_type: intent === 'seller' ? 'Seller' : 'Buyer',
+            community: 'Website contact form',
+            page: '/contact',
+            source: 'contact:' + intent,
+          }),
         });
         if (!res.ok) throw new Error('status ' + res.status);
 
@@ -196,7 +195,7 @@ const jsonLd = {
       } catch (err) {
         console.error(err);
         statusEl.textContent =
-          'Something didn’t go through — please check the reCAPTCHA box and try again, or call (941) 713-9234.';
+          'Something didn’t go through. Please try again, or call (941) 713-9234.';
         btn.disabled = false;
       }
     });

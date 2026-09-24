@@ -250,7 +250,7 @@ const jsonLd: Record<string, any>[] = [
           Ryan will reply personally with the current availability sheet for your matched neighborhoods
           &mdash; including off-market and pre-list opportunities that never reach the public feed.
         </p>
-        <form name="buyers-guide-match" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="space-y-5">
+        <form name="buyers-guide-match" method="POST" action="/.netlify/functions/community-lead" class="space-y-5">
           <input type="hidden" name="form-name" value="buyers-guide-match" />
           <input type="hidden" name="matches" id="bg-form-matches" />
           <input type="hidden" name="preferences" id="bg-form-prefs" />
@@ -311,6 +311,35 @@ const jsonLd: Record<string, any>[] = [
       </div>
     </div>
   </section>
+<script is:inline>
+  // Posts through community-lead (spam check, Supabase, Zoho, team email) instead of
+  // Netlify Forms. If the request fails, falls back to a native POST to the same
+  // function, which answers with a redirect to /thank-you/.
+  (function () {
+    var f = document.querySelector('form[name="buyers-guide-match"]');
+    if (!f) return;
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var fd = new FormData(f);
+      var btn = f.querySelector('button[type=submit]');
+      if (btn) btn.disabled = true;
+      fetch('/.netlify/functions/community-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: fd.get('firstName'), email: fd.get('email'),
+          notes: 'Matched areas: ' + (fd.get('matches') || '-') + '\n' + (fd.get('preferences') || ''),
+          lead_type: 'Buyer', community: 'Buyers Guide', page: location.pathname,
+          source: 'buyers-guide:buyer', 'bot-field': fd.get('bot-field') || ''
+        }),
+      }).then(function (r) {
+        if (!r.ok) throw new Error('status ' + r.status);
+        window.location.href = '/thank-you/';
+      }).catch(function () { f.submit(); });
+    });
+  })();
+</script>
+
 </BaseLayout>
 
 <style is:global>

@@ -209,7 +209,7 @@ const jsonLd = [
           <h3 class="gbc-tile-title">Reach out for a private consult</h3>
           <p class="gbc-tile-copy">Curious what your home would bring today? We&rsquo;ll walk the real closed-sale data above against your lot, dockage, and condition. Canal, bayfront, and interior homes are different markets, and we price them that way. Privately, with no obligation and no listing pressure.</p>
           <form class="gbc-form" data-lead-type="Seller" data-community="Country Club Shores"
-                name="home-lead-seller" method="POST" action="/thank-you/" data-team="Anne &amp; Ryan" data-netlify="true" netlify-honeypot="bot-field">
+                name="home-lead-seller" method="POST" action="/.netlify/functions/community-lead" data-team="Anne &amp; Ryan">
             <input type="hidden" name="form-name" value="home-lead-seller" />
             <input type="hidden" name="lead_type" value="Seller" />
             <input type="hidden" name="community" value="Country Club Shores" />
@@ -233,7 +233,7 @@ const jsonLd = [
           <h3 class="gbc-tile-title">Add me to the coming-soon list</h3>
           <p class="gbc-tile-copy">Only a couple dozen homes trade in Country Club Shores each year, and the best canal lots often change hands before they reach the MLS. Get on the list and we&rsquo;ll reach out first on available and off-market homes.</p>
           <form class="gbc-form" data-lead-type="Buyer" data-community="Country Club Shores"
-                name="home-lead-buyer" method="POST" action="/thank-you/" data-team="Anne &amp; Ryan" data-netlify="true" netlify-honeypot="bot-field">
+                name="home-lead-buyer" method="POST" action="/.netlify/functions/community-lead" data-team="Anne &amp; Ryan">
             <input type="hidden" name="form-name" value="home-lead-buyer" />
             <input type="hidden" name="lead_type" value="Buyer" />
             <input type="hidden" name="community" value="Country Club Shores" />
@@ -563,12 +563,6 @@ const jsonLd = [
         });
         if (!res.ok) throw new Error('bad status ' + res.status);
 
-        // Mirror to Netlify Forms so the built-in email notification fires too.
-        fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(fd).toString(),
-        }).catch(() => {});
 
         const first = String(data.name || '').trim().split(/\s+/)[0].replace(/[<>&"']/g, '');
         const team  = (form.dataset.team || 'our team').replace(/[<>"']/g, '');

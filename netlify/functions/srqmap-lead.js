@@ -12,21 +12,21 @@
 //                     IDX_API_KEY (optional — enables Engage sync).
 // No npm deps — global fetch (Netlify Node 18+).
 
+import { assessSpam, logBlocked, spamDetails } from './_lib/spam.js';
+
 const CORS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers: CORS, body: '' };
   if (event.httpMethod !== 'POST') return { statusCode: 405, headers: CORS, body: 'Method Not Allowed' };
 
   try {
     const body = JSON.parse(event.body || '{}');
 
-    // Honeypot — silently accept & discard bots
-    if (body['bot-field']) return { statusCode: 200, headers: CORS, body: JSON.stringify({ success: true }) };
 
     const SUPABASE_URL = process.env.SUPABASE_URL;
     const KEY          = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -43,11 +43,24 @@ exports.handler = async (event) => {
       return { statusCode: 400, headers: CORS, body: JSON.stringify({ error: 'A valid email is required' }) };
     }
 
+
+    // ── Spam gate (see _lib/spam.js) ──
+    let verdict = null;
+    try {
+      verdict = await assessSpam({ body, event, headers: event.headers, source: (body.source || 'srqmap-gate'),
+        fields: { name: [first, last].filter(Boolean).join(' '), email: email, phone: phone, message: (body.message || body.notes || '') } });
+    } catch (e) { console.error('srqmap-lead: spam check failed (treated as ok):', String(e.message || e)); }
+    if (verdict && verdict.kind === 'bot') {
+      await logBlocked(verdict, { body, event, headers: event.headers, source: (body.source || 'srqmap-gate') });
+      return { statusCode: 200, headers: { ...CORS, 'Content-Type': 'application/json' }, body: JSON.stringify({ success: true }) };
+    }
+    const flagged = Boolean(verdict && verdict.spam);
+
     // ── IDX Engage sync (best-effort, time-bounded) ──
     let idxLeadId = null;
     let idxSync   = 'skipped';
     const IDX_API_KEY = process.env.IDX_API_KEY;
-    if (IDX_API_KEY) {
+    if (IDX_API_KEY && !flagged) {
       const ctrl  = new AbortController();
       const timer = setTimeout(() => ctrl.abort(), 6000);
       try {
@@ -93,6 +106,8 @@ exports.handler = async (event) => {
       source:      (body.source || 'srqmap-gate').trim() || 'srqmap-gate',
       idx_lead_id: idxLeadId ? String(idxLeadId) : null,
       idx_sync:    idxSync,
+      ...(flagged ? { status: 'spam', zoho_sync: 'skipped:spam' } : {}),
+      details: verdict ? spamDetails(verdict) : null,
       raw_payload: body,
     };
     const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {

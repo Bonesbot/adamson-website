@@ -33,6 +33,7 @@ const {
 
 const siteTitle = 'Longboat Key and Lido Luxury Real Estate';
 const fullTitle = title === 'Home' ? siteTitle : `${title} | Longboat Key and Lido Luxury Real Estate`;
+import SiteAnalytics from '@/components/analytics/SiteAnalytics.astro';
 ---
 
 <!DOCTYPE html>
@@ -63,6 +64,8 @@ const fullTitle = title === 'Home' ? siteTitle : `${title} | Longboat Key and Li
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- First-party analytics + lead stamp (+ GA4 / Turnstile when configured) -->
+    <SiteAnalytics />
     <!-- Home Platform Pixel Tracker (connects the site to the CRM) -->
     <!-- begin Pixel Code -->
     <script src="https://www.homeplatform.com/cxlp/a.min.js" id="cxlp-ajs" data-client-id="fl4xsh4e3vj4" async is:inline></script>

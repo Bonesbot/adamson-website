@@ -17,7 +17,10 @@
 // Env vars (Netlify dashboard): SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY.
 // No npm deps — global fetch (Netlify Node 18+).
 
-exports.handler = async (event) => {
+import { assessSpam, logBlocked, spamDetails } from './_lib/spam.js';
+import { notifyTeam, cameFromLine } from './_lib/notify.js';
+
+export const handler = async (event) => {
   try {
     const body = JSON.parse(event.body || '{}');
 
@@ -39,10 +42,18 @@ exports.handler = async (event) => {
       return { statusCode: 200, body: 'netlify event acknowledged (supabase handled by direct call)' };
     }
 
-    // Honeypot — silently ignore bots.
-    if (d['bot-field']) {
-      return { statusCode: 200, body: 'ignored (honeypot)' };
+
+    // ── Spam gate (see _lib/spam.js) ──
+    let verdict = null;
+    try {
+      verdict = await assessSpam({ body: { ...d, _meta: body._meta }, event, headers: event.headers, source: 'find-my-dream-home:buyer',
+        fields: { name: [d.name, ''].filter(Boolean).join(' '), email: d.email, phone: d.phone, message: (d.message || '') } });
+    } catch (e) { console.error('submission-created: spam check failed (treated as ok):', String(e.message || e)); }
+    if (verdict && verdict.kind === 'bot') {
+      await logBlocked(verdict, { body: { ...d, _meta: body._meta }, event, headers: event.headers, source: 'find-my-dream-home:buyer' });
+      return { statusCode: 200, body: 'ok' };
     }
+    const flagged = Boolean(verdict && verdict.spam);
 
     const SUPABASE_URL = process.env.SUPABASE_URL;
     const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -96,7 +107,9 @@ exports.handler = async (event) => {
         bedrooms_min: intOf(d['bedrooms']),
         bathrooms_min: intOf(d['bathrooms']),
         must_have_features: mustHaves,
+        ...(verdict ? spamDetails(verdict) : {}),
       },
+      ...(flagged ? { status: 'spam', zoho_sync: 'skipped:spam' } : {}),
       raw_payload: d,
     };
 
@@ -118,6 +131,31 @@ exports.handler = async (event) => {
     }
 
     console.log('submission-created: wishlist stored for', row.email);
+
+    // Team email (replaces the old Netlify Forms notification). Tag mode marks spam.
+    if (!(flagged && verdict.mode === 'quarantine')) {
+      try {
+        const x = row.details;
+        await notifyTeam({
+          subject: `${flagged ? '[SPAM?] ' : ''}[WISHLIST] ${d.name || d.email} - Find My Dream Home`,
+          lines: [
+            flagged ? `SPAM FILTER: flagged as likely spam (score ${verdict.score}: ${verdict.reasons.join(', ')}). Not sent to Zoho.\n` : null,
+            'New Find My Dream Home wishlist.', '',
+            `Name:      ${d.name || '-'}`, `Email:     ${d.email || '-'}`, `Phone:     ${d.phone || '-'}`,
+            `Budget:    ${x.budget_usd ? '$' + x.budget_usd.toLocaleString('en-US') : '-'}`,
+            `Timeline:  ${x.timeline || '-'}`,
+            `Areas:     ${(x.preferred_areas || []).join(', ') || '-'}`,
+            `Types:     ${(x.property_types || []).join(', ') || '-'}`,
+            `Beds/Bath: ${x.bedrooms_min || '-'} / ${x.bathrooms_min || '-'}`,
+            `Must-haves: ${(x.must_have_features || []).join(', ') || '-'}`,
+            d.message ? `\nWhat they told us:\n${d.message}\n` : '',
+            cameFromLine(verdict),
+            `Received:  ${new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })} ET`,
+            '', '- Adamson Group site automation',
+          ],
+        });
+      } catch (e) { console.error('submission-created: wishlist email failed', String(e.message || e)); }
+    }
     return { statusCode: 200, body: 'wishlist stored' };
   } catch (err) {
     console.error('submission-created: error', err);

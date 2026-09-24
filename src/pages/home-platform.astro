@@ -25,7 +25,7 @@ const description = 'Your private home-search workspace with The Adamson Group o
 
         <!-- SWAP POINT: when the direct Home Platform invite URL exists, replace
              this form with: <a class="hp-btn" href="THE_URL">Open Home Platform</a> -->
-        <form id="hp-form" name="home-platform-invite" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="bot-field">
+        <form id="hp-form" name="home-platform-invite" method="POST" action="/.netlify/functions/community-lead">
           <input type="hidden" name="form-name" value="home-platform-invite" />
           <p class="hp-hp"><label>Don&rsquo;t fill this out: <input name="bot-field" /></label></p>
           <div class="hp-grid">
@@ -79,8 +79,6 @@ const description = 'Your private home-search workspace with The Adamson Group o
           body:JSON.stringify({name:d.name,email:d.email,notes:'Home Platform invitation request',
             lead_type:'Buyer',community:'Home Platform',page:location.pathname})});
         if(!res.ok) throw new Error('bad status '+res.status);
-        fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
-          body:new URLSearchParams(fd).toString()}).catch(function(){});
         var done=document.createElement('div'); done.className='hp-done';
         done.innerHTML='<h2 class="font-display">Invitation requested</h2><p>We&rsquo;ll send your Home Platform invite personally, usually the same day.</p>';
         form.replaceWith(done);

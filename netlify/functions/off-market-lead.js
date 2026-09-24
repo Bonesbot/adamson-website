@@ -34,7 +34,9 @@
 // Env vars (Netlify dashboard): SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
 // No npm deps — uses global fetch (Netlify Node 18+)
 
-exports.handler = async (event) => {
+import { assessSpam, logBlocked, spamDetails } from './_lib/spam.js';
+
+export const handler = async (event) => {
   // CORS preflight
   if (event.httpMethod === 'OPTIONS') {
     return {
@@ -55,10 +57,6 @@ exports.handler = async (event) => {
   try {
     const body = JSON.parse(event.body || '{}');
 
-    // Honeypot — silently discard bots
-    if (body['bot-field']) {
-      return { statusCode: 200, body: JSON.stringify({ success: true }) };
-    }
 
     const SUPABASE_URL = process.env.SUPABASE_URL;
     const KEY          = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -92,6 +90,19 @@ exports.handler = async (event) => {
       };
     }
 
+
+    // ── Spam gate (see _lib/spam.js) ──
+    let verdict = null;
+    try {
+      verdict = await assessSpam({ body, event, headers: event.headers, source: 'off-market:seller',
+        fields: { name: [body.first_name, body.last_name].filter(Boolean).join(' '), email: body.email, phone: body.phone, message: (body.notes || '') } });
+    } catch (e) { console.error('off-market-lead: spam check failed (treated as ok):', String(e.message || e)); }
+    if (verdict && verdict.kind === 'bot') {
+      await logBlocked(verdict, { body, event, headers: event.headers, source: 'off-market:seller' });
+      return { statusCode: 200, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ success: true }) };
+    }
+    const flagged = Boolean(verdict && verdict.spam);
+
     // ── Build row ──────────────────────────────────────────────────
     const row = {
       first_name:  (body.first_name || '').trim() || null,
@@ -112,7 +123,9 @@ exports.handler = async (event) => {
         price_threshold_min:      toInt(body.price_threshold_min),
         price_threshold_max:      toInt(body.price_threshold_max),
         timeline:                 (body.timeline    || '').trim() || null,
+        ...(verdict ? spamDetails(verdict) : {}),
       },
+      ...(flagged ? { status: 'spam', zoho_sync: 'skipped:spam' } : {}),
       raw_payload: body,
     };
 

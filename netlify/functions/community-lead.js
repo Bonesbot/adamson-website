@@ -35,6 +35,9 @@ import { routeFor } from './lead-routing.js';
 // inbound parser files the lead automatically. Fire-and-forget; never fatal.
 import { forwardLeadToHomePlatform } from './homeplatform-lead-forward.js';
 
+// Spam verdict + lead attribution (page stamp from the SiteAnalytics component).
+import { assessSpam, logBlocked, spamDetails } from './_lib/spam.js';
+
 const json = (statusCode, obj) => ({
   statusCode,
   headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
@@ -170,8 +173,19 @@ async function sendTeamNotification(lead, zohoId) {
   if (!process.env.RESEND_API_KEY) return queueGmailDraft(lead, zohoId);
   const kind = lead.lead_type === 'Seller' ? 'SELLER'
     : lead.lead_type === 'Showing' ? 'SHOWING' : 'BUYER';
-  const subject = `[${kind} LEAD] ${lead.name || lead.email} - ${lead.community || 'Website'}`;
+  const flagged = lead.spam && lead.spam.spam;
+  const subject = `${flagged ? '[SPAM?] ' : ''}[${kind} LEAD] ${lead.name || lead.email} - ${lead.community || 'Website'}`;
+  const ft = lead.spam && lead.spam.attribution && lead.spam.attribution.first_touch;
+  const cameFrom = ft
+    ? [ft.uc ? `campaign ${ft.uc}` : null, ft.us ? `source ${ft.us}` : null,
+       !ft.uc && ft.ref ? `referrer ${ft.ref}` : null, ft.lp ? `landed on ${ft.lp}` : null].filter(Boolean).join(' | ')
+    : null;
   const body = [
+    ...(flagged ? [
+      'SPAM FILTER: this submission was flagged as likely spam (score ' + lead.spam.score + ': ' + lead.spam.reasons.join(', ') + ').',
+      'It was NOT sent to Zoho or Home Platform. If it is a real person, reply normally and tell Claude so the filter can be tuned.',
+      '',
+    ] : []),
     `New ${kind.toLowerCase()} lead from the ${lead.community || 'website'} landing page.`,
     '',
     `Name:      ${lead.name || '-'}`,
@@ -183,8 +197,9 @@ async function sendTeamNotification(lead, zohoId) {
     `Page:      https://adamsonfl.com${lead.page || ''}`,
     `Received:  ${new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })} ET`,
     `Routed to: ${lead.route ? lead.route.label : 'Ryan (default)'}`,
+    ...(cameFrom ? [`Came from: ${cameFrom}`] : []),
     '',
-    zohoId
+    flagged ? 'Zoho: skipped (flagged as spam).' : zohoId
       ? `Zoho lead created (status "${LEAD_STATUS}"): https://crm.zoho.com/crm/tab/Leads/${zohoId}`
       : 'NOTE: Zoho lead was NOT created: check the function logs.',
     '',
@@ -348,18 +363,18 @@ async function storeLead(lead, zohoId, zohoError) {
       lead_type: lead.lead_type,
       community: lead.community || null,
       page: lead.page || null,
+      ...(lead.spam && lead.spam.spam ? { status: 'spam' } : {}),
       zoho_lead_id: zohoId || null,
-      zoho_sync: zohoId ? 'ok' : null,
+      zoho_sync: lead.spam && lead.spam.spam ? 'skipped:spam' : (zohoId ? 'ok' : null),
       zoho_error: zohoError || null,
-      details: (lead.route || lead.notes)
-        ? {
-            ...(lead.route
-              ? { routing: lead.route.label, routed_to: lead.route.notify, agents: lead.route.agents }
-              : {}),
-            ...(lead.notes ? { notes: lead.notes } : {}),
-          }
-        : null,
-      raw_payload: lead,
+      details: {
+        ...(lead.route
+          ? { routing: lead.route.label, routed_to: lead.route.notify, agents: lead.route.agents }
+          : {}),
+        ...(lead.notes ? { notes: lead.notes } : {}),
+        ...(lead.spam ? spamDetails(lead.spam) : {}),
+      },
+      raw_payload: (({ spam, route, ...rest }) => rest)(lead),
     }),
   });
   if (!res.ok) {
@@ -385,13 +400,36 @@ export const handler = async (event) => {
   }
   if (event.httpMethod !== 'POST') return json(405, { error: 'Method Not Allowed' });
 
+  // No-JS fallback: forms post here natively (action=this function) as
+  // application/x-www-form-urlencoded; answer with a 303 to the thank-you page.
+  const ctype = String((event.headers && (event.headers['content-type'] || event.headers['Content-Type'])) || '');
+  const native = /application\/x-www-form-urlencoded/i.test(ctype);
+  const done = (code, obj) => (native
+    ? { statusCode: 303, headers: { Location: code < 400 ? '/thank-you/' : '/contact/' }, body: '' }
+    : json(code, obj));
+
   let lead;
+  let body;
   try {
-    const body = JSON.parse(event.body || '{}');
-    if (body['bot-field']) return json(200, { success: true });   // honeypot
+    const raw = event.isBase64Encoded ? Buffer.from(event.body || '', 'base64').toString('utf8') : (event.body || '');
+    if (native) {
+      body = Object.fromEntries(new URLSearchParams(raw));
+      if (!body.page) {
+        try { body.page = new URL(event.headers.referer || event.headers.Referer).pathname; } catch (_) {}
+      }
+      if (!body.notes && body.message) body.notes = body.message;
+      if (!body.name && body.firstName) body.name = body.firstName;
+      if (!body.lead_type && /seller/i.test(body['form-name'] || '')) body.lead_type = 'Seller';
+      const STD = new Set(['name', 'firstName', 'email', 'phone', 'notes', 'message', 'lead_type', 'community',
+        'page', 'source', 'form-name', 'bot-field', 'consent']);
+      const extra = Object.entries(body).filter(([k, v]) => !STD.has(k) && v).map(([k, v]) => `${k}: ${v}`);
+      if (extra.length) body.notes = [body.notes, ...extra].filter(Boolean).join('\n');
+    } else {
+      body = JSON.parse(raw || '{}');
+    }
 
     if (!body.email || !String(body.email).trim()) {
-      return json(400, { error: 'Email is required' });
+      return done(400, { error: 'Email is required' });
     }
     lead = {
       name: (body.name || '').trim() || null,
@@ -407,14 +445,35 @@ export const handler = async (event) => {
     lead.source = sourceFor(body);
     lead.route = routeFor(lead.page);
   } catch (err) {
-    return json(400, { error: 'Bad request' });
+    return done(400, { error: 'Bad request' });
   }
+
+  // ── Spam gate ────────────────────────────────────────────────────────────────
+  // bot  -> logged to web_events, nothing stored as a lead, visitor sees success.
+  // spam -> stored with status 'spam', no Zoho / Home Platform; team email only in
+  //         SPAM_MODE=tag (default), with a [SPAM?] subject.
+  try {
+    lead.spam = await assessSpam({
+      body, event, headers: event.headers, source: lead.source,
+      fields: { name: lead.name, email: lead.email, phone: lead.phone, message: lead.notes },
+    });
+  } catch (err) {
+    console.error('community-lead: spam check failed (lead treated as ok):', String(err.message || err));
+    lead.spam = null;
+  }
+  if (lead.spam && lead.spam.kind === 'bot') {
+    await logBlocked(lead.spam, { body, event, headers: event.headers, source: lead.source });
+    console.log('community-lead: bot blocked |', lead.spam.reasons.join(','));
+    return done(200, { success: true });
+  }
+  const flagged = Boolean(lead.spam && lead.spam.spam);
+  if (flagged) console.warn('community-lead: flagged spam |', lead.spam.score, lead.spam.reasons.join(','));
 
   // Zoho first so its id can ride along into Supabase + the notification.
   let zohoId = null;
   let zohoError = null;
   try {
-    const r = await createZohoLead(lead);
+    const r = flagged ? { skipped: 'flagged as spam' } : await createZohoLead(lead);
     if (r.skipped) console.warn('community-lead: zoho skipped —', r.skipped);
     else { zohoId = r.id; console.log('community-lead: zoho lead', zohoId); }
   } catch (err) {
@@ -424,8 +483,10 @@ export const handler = async (event) => {
 
   const results = await Promise.allSettled([
     storeLead(lead, zohoId, zohoError),
-    sendTeamNotification(lead, zohoId),
-    sendCourtesyReply(lead),
+    flagged && lead.spam.mode === 'quarantine'
+      ? Promise.resolve({ skipped: 'spam quarantined' })
+      : sendTeamNotification(lead, zohoId),
+    flagged ? Promise.resolve({ skipped: 'spam' }) : sendCourtesyReply(lead),
   ]);
   const [stored, mailed, courtesy] = results;
   if (courtesy && courtesy.status === 'rejected') console.error('community-lead: courtesy reply —', courtesy.reason);
@@ -438,7 +499,7 @@ export const handler = async (event) => {
 
   // ── Home platform forward (after Supabase write + our own notifications) ────
   // Failure logs to the function console and never breaks the visitor response.
-  try {
+  if (!flagged) try {
     const { first, last } = splitName(lead.name);
     const fwd = await forwardLeadToHomePlatform({
       firstName: first || '',
@@ -462,8 +523,8 @@ export const handler = async (event) => {
   // Forms still has the submission via the page's mirrored POST.
   const savedSomewhere =
     (stored.status === 'fulfilled' && stored.value && stored.value.ok) || Boolean(zohoId);
-  if (!savedSomewhere) return json(500, { error: 'Failed to save your request' });
+  if (!savedSomewhere) return done(500, { error: 'Failed to save your request' });
 
   console.log('community-lead:', lead.source, '| stored', lead.email, '| zoho', zohoId || 'skipped');
-  return json(200, { success: true });
+  return done(200, { success: true });
 };

@@ -91,8 +91,6 @@ const budgetFmt = "var d=this.value.replace(/[^0-9]/g,'');this.value=d?'$'+Numbe
       <form
         name="wishlist"
         method="POST"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
         class="space-y-12"
       >
         <input type="hidden" name="form-name" value="wishlist" />
@@ -267,13 +265,9 @@ const budgetFmt = "var d=this.value.replace(/[^0-9]/g,'');this.value=d?'$'+Numbe
           body: JSON.stringify({ direct: true, data: data }),
         });
 
-        // (2) Netlify Forms — fires the instant email notification
-        const netlifyPost = fetch('/', {
-          method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(new FormData(form)).toString(),
-        });
-
-        Promise.allSettled([fnPost, netlifyPost]).then(function () { window.location = dest; });
+        // The function stores the wishlist, runs the spam check and emails the team
+        // (the old Netlify Forms mirror is retired: it was an unfiltered side door).
+        Promise.allSettled([fnPost]).then(function () { window.location = dest; });
       });
     })();
   </script>

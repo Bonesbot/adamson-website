@@ -17,7 +17,7 @@ const description = 'Pick a day and time that suits you and we will confirm your
         <p class="rs-listing" id="rs-listing" hidden></p>
         <p class="rs-sub" id="rs-sub">Pick a day and a window that suits you. We confirm personally, usually within the hour during business hours, and we never share your details.</p>
 
-        <form id="rs-form" name="showing-request" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="bot-field">
+        <form id="rs-form" name="showing-request" method="POST" action="/.netlify/functions/community-lead">
           <input type="hidden" name="form-name" value="showing-request" />
           <input type="hidden" name="listing" id="rs-hidden-listing" value="" />
           <input type="hidden" name="intent" id="rs-hidden-intent" value="showing" />
@@ -143,8 +143,6 @@ const description = 'Pick a day and time that suits you and we will confirm your
           }),
         });
         if (!res.ok) throw new Error('bad status ' + res.status);
-        fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(fd).toString() }).catch(function(){});
         var first = String(d.name || '').trim().split(/\s+/)[0].replace(/[<>&"']/g, '');
         var done = document.createElement('div'); done.className = 'rs-done';
         done.innerHTML = '<h2 class="font-display">Thank you' + (first ? ', ' + first : '') + '</h2>' +

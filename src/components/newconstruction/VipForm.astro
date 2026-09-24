@@ -1,7 +1,7 @@
 ---
 /**
  * VipForm — VIP list email capture (spec §9 lead capture).
- * Wired to Netlify Forms via data-netlify="true" attribute.
+ * Wired to Netlify Forms via attribute.
  * Includes honeypot anti-spam, GDPR consent checkbox, and interest checkboxes
  * for Downtown / Lido / Longboat / Siesta.
  */
@@ -27,8 +27,7 @@ const { id = 'vip' } = Astro.props;
       <form
         name="new-construction-vip"
         method="POST"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
+        action="/.netlify/functions/community-lead"
         class="space-y-5"
       >
         <input type="hidden" name="form-name" value="new-construction-vip" />
@@ -93,3 +92,32 @@ const { id = 'vip' } = Astro.props;
     </div>
   </div>
 </section>
+
+<script is:inline>
+  // Posts through community-lead (spam check, Supabase, Zoho, team email) instead of
+  // Netlify Forms. If the request fails, falls back to a native POST to the same
+  // function, which answers with a redirect to /thank-you/.
+  (function () {
+    var f = document.querySelector('form[name="new-construction-vip"]');
+    if (!f) return;
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var fd = new FormData(f);
+      var btn = f.querySelector('button[type=submit]');
+      if (btn) btn.disabled = true;
+      fetch('/.netlify/functions/community-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: fd.get('firstName'), email: fd.get('email'),
+          notes: 'New construction interests: ' + (fd.getAll('interest').join(', ') || '-'),
+          lead_type: 'Buyer', community: 'New Construction VIP', page: location.pathname,
+          source: 'new-construction-vip:buyer', 'bot-field': fd.get('bot-field') || ''
+        }),
+      }).then(function (r) {
+        if (!r.ok) throw new Error('status ' + r.status);
+        window.location.href = '/thank-you/';
+      }).catch(function () { f.submit(); });
+    });
+  })();
+</script>

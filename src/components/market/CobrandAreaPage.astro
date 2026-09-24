@@ -346,7 +346,7 @@ const duesPct = Math.min(94, Math.max(6, duesMedianPct));
           <h3 class="gbc-tile-title">Reach out for a private consult</h3>
           <p class="gbc-tile-copy">{sellerCopy}</p>
           <form class="gbc-form" data-lead-type="Seller" data-community={areaName}
-                name="home-lead-seller" method="POST" action="/thank-you/" data-team={agentsShort} data-phone={altPhone} data-phone-href={altPhoneHref} data-lead-page={leadPage} data-netlify="true" netlify-honeypot="bot-field">
+                name="home-lead-seller" method="POST" action="/.netlify/functions/community-lead" data-team={agentsShort} data-phone={altPhone} data-phone-href={altPhoneHref} data-lead-page={leadPage}>
             <input type="hidden" name="form-name" value="home-lead-seller" />
             <input type="hidden" name="lead_type" value="Seller" />
             <input type="hidden" name="community" value={areaName} />
@@ -369,7 +369,7 @@ const duesPct = Math.min(94, Math.max(6, duesMedianPct));
           <h3 class="gbc-tile-title">Add me to the coming-soon list</h3>
           <p class="gbc-tile-copy">{buyerCopy}</p>
           <form class="gbc-form" data-lead-type="Buyer" data-community={areaName}
-                name="home-lead-buyer" method="POST" action="/thank-you/" data-team={agentsShort} data-phone={altPhone} data-phone-href={altPhoneHref} data-lead-page={leadPage} data-netlify="true" netlify-honeypot="bot-field">
+                name="home-lead-buyer" method="POST" action="/.netlify/functions/community-lead" data-team={agentsShort} data-phone={altPhone} data-phone-href={altPhoneHref} data-lead-page={leadPage}>
             <input type="hidden" name="form-name" value="home-lead-buyer" />
             <input type="hidden" name="lead_type" value="Buyer" />
             <input type="hidden" name="community" value={areaName} />
@@ -686,12 +686,6 @@ const duesPct = Math.min(94, Math.max(6, duesMedianPct));
         });
         if (!res.ok) throw new Error('bad status ' + res.status);
 
-        // Mirror to Netlify Forms so the built-in email notification fires too.
-        fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(fd).toString(),
-        }).catch(() => {});
 
         const first = String(data.name || '').trim().split(/\s+/)[0].replace(/[<>&"']/g, '');
         const team  = (form.dataset.team || 'our team').replace(/[<>"']/g, '');

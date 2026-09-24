@@ -1,0 +1,166 @@
+---
+/**
+ * SiteAnalytics: one tracker for every domain this repo serves
+ * (adamsonfl.com, siestareport.com, longboatlido.com). Included once in the
+ * <head> of BaseLayout, SRLayout and LLLLayout.
+ *
+ * 1. First-party analytics: a small beacon per pageview (+ engage, form_submit,
+ *    contact_click, outbound) to /api/pv (netlify/functions/web-track.js), which
+ *    stores it in Supabase public.web_events with city/state from Netlify geo.
+ *    Anonymous visitor id in localStorage; no cookies; no raw IPs stored.
+ * 2. Lead attribution + spam stamp: POSTs to the lead functions get a `_meta`
+ *    block (page age, visitor/session ids, first-touch UTM, landing page and, when
+ *    configured, a Cloudflare Turnstile token). The functions score spam from it
+ *    (netlify/functions/_lib/spam.js). Forms need no per-form changes.
+ * 3. GA4 backup: only rendered when PUBLIC_GA4_ID is set in the Netlify build env.
+ *
+ * Team devices: open any page once with ?internal=1 to tag that browser as
+ * internal (excluded from reports; GA4 traffic_type=internal). ?internal=0 undoes it.
+ */
+const ga4 = import.meta.env.PUBLIC_GA4_ID || '';
+const tsKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+---
+{ga4 && (
+  <>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ga4}`}></script>
+    <script is:inline define:vars={{ ga4 }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag('js', new Date());
+      var agInt = false; try { agInt = localStorage.getItem('ag_internal') === '1' || /[?&]internal=1/.test(location.search); } catch (e) {}
+      if (agInt) gtag('set', { traffic_type: 'internal' });
+      gtag('config', ga4, { linker: { domains: ['adamsonfl.com', 'siestareport.com', 'longboatlido.com'] } });
+    </script>
+  </>
+)}
+{tsKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=agTsReady" async defer></script>}
+<script is:inline define:vars={{ tsKey }}>
+(function () {
+  try {
+    var w = window, d = document, l = location, n = navigator, T0 = Date.now();
+    var HOSTS = /(^|\.)(adamsonfl|siestareport|longboatlido)\.com$/i;
+    var EP = HOSTS.test(l.hostname) && !/^(command|search)\./i.test(l.hostname) ? '/api/pv' : 'https://adamsonfl.com/api/pv';
+    var ls = null, ss = null;
+    try { ls = w.localStorage; ss = w.sessionStorage; } catch (e) {}
+    function get(st, k) { try { return st ? st.getItem(k) : null; } catch (e) { return null; } }
+    function set(st, k, v) { try { st && st.setItem(k, v); } catch (e) {} }
+    function rid() { return (Date.now().toString(36) + Math.random().toString(36).slice(2, 10)); }
+
+    var qs = new URLSearchParams(l.search);
+    if (qs.get('internal') === '1') set(ls, 'ag_internal', '1');
+    if (qs.get('internal') === '0') { try { ls.removeItem('ag_internal'); } catch (e) {} }
+    var internal = get(ls, 'ag_internal') === '1';
+
+    var vid = get(ls, 'ag_vid'), nv = false;
+    if (!vid) { vid = rid(); nv = true; set(ls, 'ag_vid', vid); }
+    var now = Date.now(), last = parseInt(get(ls, 'ag_sts') || '0', 10), sid = get(ls, 'ag_sid'), ns = false;
+    if (!sid || now - last > 30 * 60 * 1000) { sid = rid(); ns = true; set(ls, 'ag_sid', sid); }
+    set(ls, 'ag_sts', String(now));
+    var pid = rid();
+
+    // First touch of the session: UTM + landing page + referrer, carried onto leads.
+    var ft = null;
+    try { ft = JSON.parse(get(ss, 'ag_ft') || 'null'); } catch (e) {}
+    if (!ft || ns) {
+      ft = { us: qs.get('utm_source'), um: qs.get('utm_medium'), uc: qs.get('utm_campaign'),
+             lp: l.hostname + l.pathname + l.search, ref: d.referrer || null };
+      set(ss, 'ag_ft', JSON.stringify(ft));
+    }
+
+    function send(o) {
+      o.h = l.hostname; o.p = l.pathname; o.v = vid; o.s = sid; o.pid = pid;
+      if (internal) o.i = true;
+      if (n.webdriver) o.wd = true;
+      var body = JSON.stringify(o);
+      try {
+        if (n.sendBeacon && n.sendBeacon(EP, new Blob([body], { type: 'text/plain' }))) return;
+      } catch (e) {}
+      try { fetch(EP, { method: 'POST', body: body, keepalive: true, headers: { 'Content-Type': 'text/plain' } }); } catch (e) {}
+    }
+    w.agTrack = function (e, label) { send({ e: e, l: label || null }); };
+
+    send({ e: 'pageview', q: l.search, t: d.title, r: d.referrer, nv: nv, ns: ns,
+           sw: (w.screen && w.screen.width) || null, lg: n.language || null,
+           us: ft.us, um: ft.um, uc: ft.uc });
+
+    // Engagement: visible seconds + deepest scroll, sent whenever the page is hidden.
+    var vis = 0, since = d.visibilityState === 'visible' ? Date.now() : 0, maxSc = 0;
+    function sc() {
+      var h = Math.max(d.documentElement.scrollHeight, d.body ? d.body.scrollHeight : 0);
+      var p = h > 0 ? Math.round(((w.scrollY || 0) + w.innerHeight) / h * 100) : 0;
+      if (p > maxSc) maxSc = Math.min(p, 100);
+    }
+    w.addEventListener('scroll', sc, { passive: true });
+    d.addEventListener('visibilitychange', function () {
+      if (d.visibilityState === 'hidden') {
+        if (since) { vis += Date.now() - since; since = 0; }
+        sc();
+        if (vis > 1000) send({ e: 'engage', sec: Math.round(vis / 1000), sc: maxSc });
+      } else { since = Date.now(); }
+    });
+
+    d.addEventListener('click', function (ev) {
+      var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+      if (/^(tel|sms|mailto):/i.test(href)) { send({ e: 'contact_click', l: href.slice(0, 80) }); return; }
+      if (a.host && a.host !== l.host && /^https?:/i.test(a.href)) send({ e: 'outbound', l: a.host + a.pathname.slice(0, 80) });
+    }, true);
+    d.addEventListener('submit', function (ev) {
+      var f = ev.target;
+      send({ e: 'form_submit', l: (f && (f.getAttribute('name') || f.id)) || 'form' });
+    }, true);
+
+    // Cloudflare Turnstile (only when PUBLIC_TURNSTILE_SITE_KEY is set at build).
+    var tsWidget = null, tsWaiters = [];
+    function tsFlush(t) { var q = tsWaiters; tsWaiters = []; q.forEach(function (f) { f(t); }); }
+    w.agTsReady = function () {
+      try {
+        var c = d.createElement('div');
+        c.id = 'ag-ts';
+        c.style.cssText = 'position:fixed;right:12px;bottom:12px;z-index:2147483000';
+        d.body.appendChild(c);
+        tsWidget = w.turnstile.render(c, { sitekey: tsKey, execution: 'execute', appearance: 'interaction-only',
+          callback: function (t) { tsFlush(t); }, 'error-callback': function () { tsFlush(null); } });
+      } catch (e) { tsWidget = null; }
+    };
+    function tsToken() {
+      if (!tsKey || !w.turnstile || tsWidget === null) return Promise.resolve(null);
+      return new Promise(function (res) {
+        var done = false;
+        tsWaiters.push(function (t) { if (!done) { done = true; res(t); } });
+        setTimeout(function () { if (!done) { done = true; res(null); } }, 15000);
+        try { w.turnstile.reset(tsWidget); w.turnstile.execute(tsWidget); } catch (e) { tsFlush(null); }
+      });
+    }
+
+    // Stamp lead POSTs with _meta (attribution + spam signals). Anything unexpected
+    // passes through untouched, so a tracker bug can never block a lead.
+    var LEAD = /\/\.netlify\/functions\/(community-lead|srqmap-lead|off-market-lead|submission-created)(\?|$)/;
+    var of = w.fetch;
+    if (of) {
+      w.fetch = function (input, init) {
+        try {
+          var url = typeof input === 'string' ? input : (input && input.url) || '';
+          if (LEAD.test(url) && init && typeof init.body === 'string' && String(init.method || '').toUpperCase() === 'POST') {
+            var obj = JSON.parse(init.body);
+            if (obj && typeof obj === 'object' && !Array.isArray(obj)) {
+              var args = arguments;
+              return tsToken().then(function (tok) {
+                obj._meta = { ts: Date.now() - T0, v: vid, s: sid, pid: pid, ft: ft, tt: tok,
+                              h: l.hostname, p: l.pathname, q: l.search.slice(0, 300), i: internal || undefined };
+                var init2 = {};
+                for (var k in init) init2[k] = init[k];
+                init2.body = JSON.stringify(obj);
+                return of.call(w, input, init2);
+              }, function () { return of.apply(w, args); });
+            }
+          }
+        } catch (e) {}
+        return of.apply(w, arguments);
+      };
+    }
+  } catch (e) {}
+})();
+</script>
