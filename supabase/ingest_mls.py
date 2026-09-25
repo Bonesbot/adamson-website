@@ -187,6 +187,11 @@ CSV_TO_DB = {
     "Longitude": "longitude",
     "View": "listing_view",
     "ParcelNumber": "parcel_number",
+    "PublicRemarks": "public_remarks",
+    "ExteriorFeatures": "exterior_features",
+    "ArchitecturalStyle": "architectural_style",
+    "Flooring": "flooring",
+    "OpenHousePublicUpcoming": "open_house_upcoming",
 }
 
 NUMERIC_COLS = {
@@ -224,7 +229,7 @@ TIMESTAMP_COLS = {
 # The columns we INSERT into raw_listings (all mapped MLS cols + pipeline cols)
 # Enriched/computed columns are handled by the trigger function
 INSERT_COLS = sorted(CSV_TO_DB.values()) + [
-    "import_batch_id", "raw_mls_data", "data_hash",
+    "import_batch_id", "raw_mls_data", "data_hash", "remarks_hash",
 ]
 
 # The exact CSV header this ingest expects, derived from the field map so it
@@ -346,8 +351,18 @@ def file_hash(filepath):
             sha.update(chunk)
     return sha.hexdigest()
 
+# Volatile free-text fields that must NOT bump change_count / data_hash.
+# public_remarks gets its own hash (remarks_hash) for the extraction step.
+HASH_EXCLUDE = {"public_remarks", "open_house_upcoming"}
+
+
+def remarks_hash(text):
+    return hashlib.sha256((text or "").strip().encode("utf-8")).hexdigest()
+
+
 def row_data_hash(row_dict):
-    hash_data = {k: row_dict.get(k, "") for k in sorted(CSV_TO_DB.values())}
+    hash_data = {k: row_dict.get(k, "") for k in sorted(CSV_TO_DB.values())
+                 if k not in HASH_EXCLUDE}
     return hashlib.sha256(
         json.dumps(hash_data, sort_keys=True, default=str).encode()
     ).hexdigest()
@@ -556,6 +571,7 @@ def ingest_csv(filepath, conn, dry_run=False):
             db_row, raw_mls = parse_csv_row(csv_row)
             db_row["raw_mls_data"] = raw_mls
             db_row["data_hash"] = row_data_hash(db_row)
+            db_row["remarks_hash"] = remarks_hash(db_row.get("public_remarks"))
             parsed_rows.append(db_row)
 
     total_rows = len(parsed_rows)
