@@ -2,11 +2,11 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-24T19:40:31.613494+00:00",
+  "lastUpdated": "2026-09-25T10:47:27.695665+00:00",
   "counts": {
     "sold": 299,
     "pending": 31,
-    "active": 83,
+    "active": 86,
     "total": 330
   },
   "metrics": {
@@ -22,9 +22,9 @@
     "maxPrice": "$5,650,000"
   },
   "active": {
-    "count": 83,
-    "medianPrice": "$449,000",
-    "medianPricePerSqFt": "$312",
+    "count": 86,
+    "medianPrice": "$449,500",
+    "medianPricePerSqFt": "$310",
     "waterfrontCount": 22,
     "newConstructionCount": 1
   },
@@ -36,9 +36,9 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 4.5,
-    "sfhVilla": 3.8,
-    "blended": 4.1,
+    "condo": 4.6,
+    "sfhVilla": 4.0,
+    "blended": 4.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 65,
+    "under900k": 68,
     "band900kTo1_5m": 6,
     "band1_5mTo3m": 7,
     "band3mPlus": 5
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 83
+      "count": 86
     }
   ],
   "buildingClasses": [],
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 46,
-      "avgPrice": "$342,848",
-      "avgPricePerSqFt": "$275",
-      "avgLivingSqFt": "1,240",
-      "avgDom": 91
+      "activeCount": 48,
+      "avgPrice": "$346,271",
+      "avgPricePerSqFt": "$278",
+      "avgLivingSqFt": "1,241",
+      "avgDom": 88
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$609,333",
       "avgPricePerSqFt": "$281",
       "avgLivingSqFt": "2,167",
-      "avgDom": 215
+      "avgDom": 216
     },
     {
       "tier": "2006to2019",
@@ -172,7 +172,7 @@
       "avgPrice": "$675,000",
       "avgPricePerSqFt": "$387",
       "avgLivingSqFt": "1,745",
-      "avgDom": 29
+      "avgDom": 30
     }
   ],
   "condoTiersScope": {
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 53,
+      "activeCount": 56,
       "soldCount": 193,
       "soldMedianPricePerSqFt": "$283",
       "soldMedianPrice": "$425,000",
@@ -231,11 +231,11 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.1,
-    "monthsOfSupplyCondo": 4.5,
-    "monthsOfSupplySfhVilla": 3.8,
+    "monthsOfSupply": 4.3,
+    "monthsOfSupplyCondo": 4.6,
+    "monthsOfSupplySfhVilla": 4.0,
     "label": "seller's market",
-    "activeCount": 83,
+    "activeCount": 86,
     "sold365Count": 242,
     "sold90Count": 54,
     "method": "active / (trailing-12mo closed / 12)"
@@ -243,13 +243,13 @@
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 160,
-      "activeCount": 30,
+      "activeCount": 31,
       "soldMedianPrice": "$526,500",
       "soldMedianPricePerSqFt": "$323"
     },
     "condo": {
       "soldCount": 139,
-      "activeCount": 53,
+      "activeCount": 55,
       "soldMedianPrice": "$340,000",
       "soldMedianPricePerSqFt": "$250"
     }
@@ -262,7 +262,7 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 83 active listings and roughly 20 closed sales a month (trailing 12 months), West Of Trail South has about 4.1 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 86 active listings and roughly 20 closed sales a month (trailing 12 months), West Of Trail South has about 4.3 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -272,7 +272,7 @@
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $5,650,000, with a median asking price of $449,000."
+      "a": "Active listings run from $95,000 to $5,650,000, with a median asking price of $449,500."
     },
     {
       "facet": "speed",

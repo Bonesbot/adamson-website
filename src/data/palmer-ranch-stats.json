@@ -2,15 +2,15 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-24T19:40:33.203806+00:00",
+  "lastUpdated": "2026-09-25T10:47:29.268452+00:00",
   "counts": {
     "sold": 899,
-    "pending": 75,
+    "pending": 76,
     "active": 208,
-    "total": 974
+    "total": 975
   },
   "metrics": {
-    "avgPrice": "$563,398",
+    "avgPrice": "$563,371",
     "avgPricePerSqFt": "$263",
     "avgYearBuilt": 2001,
     "avgLivingSqFt": "2,052",
@@ -23,21 +23,21 @@
   },
   "active": {
     "count": 208,
-    "medianPrice": "$415,000",
-    "medianPricePerSqFt": "$253",
+    "medianPrice": "$412,500",
+    "medianPricePerSqFt": "$252",
     "waterfrontCount": 33,
     "newConstructionCount": 31
   },
   "sold": {
-    "count": 163,
+    "count": 157,
     "medianPrice": "$460,000",
     "medianDom": 55,
     "saleToListRatio": "91.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.2,
-    "sfhVilla": 3.0,
+    "condo": 5.3,
+    "sfhVilla": 2.9,
     "blended": 3.6,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -142,17 +142,17 @@
       "avgPrice": "$313,790",
       "avgPricePerSqFt": "$196",
       "avgLivingSqFt": "1,618",
-      "avgDom": 119
+      "avgDom": 120
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 72,
-      "avgPrice": "$299,350",
+      "activeCount": 73,
+      "avgPrice": "$299,702",
       "avgPricePerSqFt": "$229",
       "avgLivingSqFt": "1,303",
-      "avgDom": 118
+      "avgDom": 117
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$398,533",
       "avgPricePerSqFt": "$240",
       "avgLivingSqFt": "1,679",
-      "avgDom": 97
+      "avgDom": 98
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$355,197",
       "avgPricePerSqFt": "$220",
       "avgLivingSqFt": "1,610",
-      "avgDom": 90
+      "avgDom": 91
     }
   ],
   "condoTiersScope": {
@@ -223,24 +223,24 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 3.6,
-    "monthsOfSupplyCondo": 5.2,
-    "monthsOfSupplySfhVilla": 3.0,
+    "monthsOfSupplyCondo": 5.3,
+    "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
     "activeCount": 208,
-    "sold365Count": 703,
-    "sold90Count": 163,
+    "sold365Count": 702,
+    "sold90Count": 157,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 509,
-      "activeCount": 84,
+      "activeCount": 83,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
       "soldCount": 390,
-      "activeCount": 124,
+      "activeCount": 125,
       "soldMedianPrice": "$324,690",
       "soldMedianPricePerSqFt": "$211"
     }
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 208 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 208 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,7 +263,7 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $415,000."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $412,500."
     },
     {
       "facet": "speed",

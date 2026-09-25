@@ -2,11 +2,11 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-24T19:40:29.194759+00:00",
+  "lastUpdated": "2026-09-25T10:47:25.384620+00:00",
   "counts": {
     "sold": 292,
     "pending": 66,
-    "active": 156,
+    "active": 157,
     "total": 358
   },
   "metrics": {
@@ -22,23 +22,23 @@
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 156,
+    "count": 157,
     "medianPrice": "$1,999,000",
-    "medianPricePerSqFt": "$956",
+    "medianPricePerSqFt": "$947",
     "waterfrontCount": 51,
     "newConstructionCount": 76
   },
   "sold": {
-    "count": 55,
-    "medianPrice": "$1,237,500",
-    "medianDom": 122,
-    "saleToListRatio": "86.4%",
+    "count": 52,
+    "medianPrice": "$1,218,750",
+    "medianDom": 113,
+    "saleToListRatio": "86.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 8.0,
-    "sfhVilla": 7.8,
-    "blended": 8.0,
+    "sfhVilla": 9.0,
+    "blended": 8.1,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -56,13 +56,13 @@
   "priceBands": {
     "under900k": 34,
     "band900kTo1_5m": 30,
-    "band1_5mTo3m": 37,
+    "band1_5mTo3m": 38,
     "band3mPlus": 55
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 156
+      "count": 157
     }
   ],
   "buildingClasses": [],
@@ -142,7 +142,7 @@
       "avgPrice": "$1,137,364",
       "avgPricePerSqFt": "$668",
       "avgLivingSqFt": "1,598",
-      "avgDom": 171
+      "avgDom": 172
     },
     {
       "tier": "1990to2005",
@@ -152,17 +152,17 @@
       "avgPrice": "$1,566,015",
       "avgPricePerSqFt": "$715",
       "avgLivingSqFt": "2,044",
-      "avgDom": 117
+      "avgDom": 118
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
       "activeCount": 20,
-      "avgPrice": "$1,688,595",
-      "avgPricePerSqFt": "$758",
+      "avgPrice": "$1,683,595",
+      "avgPricePerSqFt": "$755",
       "avgLivingSqFt": "2,046",
-      "avgDom": 116
+      "avgDom": 117
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,269,568",
       "avgPricePerSqFt": "$1,412",
       "avgLivingSqFt": "2,897",
-      "avgDom": 211
+      "avgDom": 212
     }
   ],
   "condoTiersScope": {
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 44,
+      "activeCount": 45,
       "soldCount": 80,
       "soldMedianPricePerSqFt": "$556",
       "soldMedianPrice": "$749,495",
@@ -222,19 +222,19 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 8.0,
+    "monthsOfSupply": 8.1,
     "monthsOfSupplyCondo": 8.0,
-    "monthsOfSupplySfhVilla": 7.8,
+    "monthsOfSupplySfhVilla": 9.0,
     "label": "buyer's market",
-    "activeCount": 156,
-    "sold365Count": 235,
-    "sold90Count": 55,
+    "activeCount": 157,
+    "sold365Count": 233,
+    "sold90Count": 52,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 11,
-      "activeCount": 4,
+      "activeCount": 5,
       "soldMedianPrice": "$885,000",
       "soldMedianPricePerSqFt": "$563"
     },
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Downtown Sarasota a buyer's or seller's market right now?",
-      "a": "With 156 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 8.0 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 157 active listings and roughly 19 closed sales a month (trailing 12 months), Downtown Sarasota has about 8.1 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Downtown Sarasota?",
-      "a": "Recently sold homes took a median 122 days on market and closed at 86.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 113 days on market and closed at 86.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
