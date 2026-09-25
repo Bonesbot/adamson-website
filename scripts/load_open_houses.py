@@ -84,7 +84,7 @@ def fix_times(start, end):
     if s_h < 7 and (s_h + 12) * 60 + s_m < e_h * 60 + e_m:
         s_h += 12
         suspect = True
-    if (s_h, s_m) >= (e_h, e_m):
+    if (s_h, s_m) >= (e_h, e_m) or s_h < 7:
         suspect = True
     return time(s_h % 24, s_m), time(e_h % 24, e_m), suspect
 
