@@ -466,10 +466,12 @@ def upsert_listings(cur, rows, batch_id):
         # First, check existing hashes for this batch
         listing_ids = [r["listing_id"] for r in batch if r.get("listing_id")]
         cur.execute(
-            "SELECT listing_id, data_hash FROM raw_listings WHERE listing_id = ANY(%s)",
+            "SELECT listing_id, data_hash, remarks_hash, open_house_upcoming "
+            "FROM raw_listings WHERE listing_id = ANY(%s)",
             (listing_ids,)
         )
-        existing = {row[0]: row[1] for row in cur.fetchall()}
+        # listing_id -> (data_hash, remarks_hash, open_house_upcoming)
+        existing = {row[0]: (row[1], row[2], row[3]) for row in cur.fetchall()}
 
         batch_inserted = 0
         batch_updated = 0
@@ -482,9 +484,17 @@ def upsert_listings(cur, rows, batch_id):
                 continue
 
             new_hash = row.get("data_hash", "")
-            old_hash = existing.get(lid)
+            old_side = existing.get(lid)
+            old_hash = old_side[0] if old_side else None
 
-            if old_hash == new_hash and old_hash is not None:
+            # public_remarks / open_house_upcoming are excluded from data_hash so they do not
+            # bump change_count, but a change in either must still be written.
+            volatile_same = bool(old_side) and (
+                old_side[1] == row.get("remarks_hash")
+                and (old_side[2] or None) == (row.get("open_house_upcoming") or None)
+            )
+
+            if old_hash == new_hash and old_hash is not None and volatile_same:
                 batch_unchanged += 1
                 continue
 
@@ -497,6 +507,8 @@ def upsert_listings(cur, rows, batch_id):
                     values.append(json.dumps(row.get("raw_mls_data", {})))
                 elif col == "data_hash":
                     values.append(row.get("data_hash", ""))
+                elif col == "remarks_hash":
+                    values.append(row.get("remarks_hash"))
                 else:
                     values.append(row.get(col))
 
