@@ -142,12 +142,15 @@ def main():
             cur.execute(DDL)
             psycopg2.extras.execute_values(cur, UPSERT, rows, page_size=500)
             conn.commit()
-            cur.execute("""select count(*), count(*) filter (where unparsed_address is null),
-                                  count(*) filter (where oh_date between current_date and current_date + 7)
+            cur.execute("""select count(*), count(*) filter (where oh_date between current_date and current_date + 7)
                            from vw_open_houses_upcoming""")
-            total, unmatched, week = cur.fetchone()
-        print(f"Upserted {len(rows)} events. Upcoming in view: {total} "
-              f"(next 7 days: {week}; no matching listing in raw_listings: {unmatched})")
+            total, week = cur.fetchone()
+            ids = sorted({r[0] for r in rows})
+            cur.execute("select count(*) from unnest(%s::text[]) i where not exists "
+                        "(select 1 from raw_listings rl where rl.listing_id = i)", (ids,))
+            outside = cur.fetchone()[0]
+        print(f"Upserted {len(rows)} events. Published in view (listings we have MLS data for): {total} "
+              f"(next 7 days: {week}). Scraped listings outside raw_listings, stored but not published: {outside}")
     finally:
         conn.close()
 
