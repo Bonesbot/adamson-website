@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-25T10:47:29.268452+00:00",
+  "lastUpdated": "2026-09-26T10:53:32.966608+00:00",
   "counts": {
-    "sold": 899,
-    "pending": 76,
+    "sold": 903,
+    "pending": 73,
     "active": 208,
-    "total": 975
+    "total": 976
   },
   "metrics": {
-    "avgPrice": "$563,371",
+    "avgPrice": "$563,169",
     "avgPricePerSqFt": "$263",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,052",
+    "avgLivingSqFt": "2,050",
     "avgLotSqFt": null,
     "avgDom": 80
   },
@@ -24,12 +24,12 @@
   "active": {
     "count": 208,
     "medianPrice": "$412,500",
-    "medianPricePerSqFt": "$252",
+    "medianPricePerSqFt": "$250",
     "waterfrontCount": 33,
-    "newConstructionCount": 31
+    "newConstructionCount": 33
   },
   "sold": {
-    "count": 157,
+    "count": 161,
     "medianPrice": "$460,000",
     "medianDom": 55,
     "saleToListRatio": "91.9%",
@@ -38,7 +38,7 @@
   "monthsOfSupply": {
     "condo": 5.3,
     "sfhVilla": 2.9,
-    "blended": 3.6,
+    "blended": 3.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,8 +54,8 @@
     }
   },
   "priceBands": {
-    "under900k": 189,
-    "band900kTo1_5m": 16,
+    "under900k": 190,
+    "band900kTo1_5m": 15,
     "band1_5mTo3m": 3,
     "band3mPlus": 0
   },
@@ -67,6 +67,45 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4703320",
+      "address": "8716 AMARETTO AVE",
+      "subdivision": "COBBLESTONE/PALMER RANCH PH 1",
+      "soldPrice": "$699,000",
+      "soldDate": "2026-09-25",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,111",
+      "yearBuilt": 2017,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4680387",
+      "address": "3685 SQUARE WEST LN #28",
+      "subdivision": "PALMER SQUARE WEST",
+      "soldPrice": "$445,000",
+      "soldDate": "2026-09-25",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,741",
+      "yearBuilt": 2005,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4698093",
+      "address": "8624 STARGAZER ST",
+      "subdivision": "PROMENADE/PALMER RANCH PH 1",
+      "soldPrice": "$347,100",
+      "soldDate": "2026-09-25",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,724",
+      "yearBuilt": 2018,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4698956",
       "address": "4065 CROCKERS LAKE BLVD #14",
@@ -92,45 +131,6 @@
       "yearBuilt": 1989,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4703217",
-      "address": "5735 FERRARA DR",
-      "subdivision": "VILLAGEWALK",
-      "soldPrice": "$749,000",
-      "soldDate": "2026-09-21",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,008",
-      "yearBuilt": 2002,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4665075",
-      "address": "1400 BURGOS DR",
-      "subdivision": "ISLES OF SARASOTA",
-      "soldPrice": "$310,000",
-      "soldDate": "2026-09-21",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,672",
-      "yearBuilt": 2006,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4695261",
-      "address": "4769 SWEETMEADOW CIR",
-      "subdivision": "TURTLE ROCK",
-      "soldPrice": "$780,000",
-      "soldDate": "2026-09-18",
-      "bedrooms": 5,
-      "bathrooms": 3.0,
-      "livingSqFt": "3,531",
-      "yearBuilt": 1997,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,16 +142,16 @@
       "avgPrice": "$313,790",
       "avgPricePerSqFt": "$196",
       "avgLivingSqFt": "1,618",
-      "avgDom": 120
+      "avgDom": 121
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 73,
-      "avgPrice": "$299,702",
-      "avgPricePerSqFt": "$229",
-      "avgLivingSqFt": "1,303",
+      "activeCount": 72,
+      "avgPrice": "$300,310",
+      "avgPricePerSqFt": "$230",
+      "avgLivingSqFt": "1,305",
       "avgDom": 117
     },
     {
@@ -162,7 +162,7 @@
       "avgPrice": "$398,533",
       "avgPricePerSqFt": "$240",
       "avgLivingSqFt": "1,679",
-      "avgDom": 98
+      "avgDom": 99
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$355,197",
       "avgPricePerSqFt": "$220",
       "avgLivingSqFt": "1,610",
-      "avgDom": 91
+      "avgDom": 92
     }
   ],
   "condoTiersScope": {
@@ -197,7 +197,7 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 40,
-      "soldCount": 207,
+      "soldCount": 209,
       "soldMedianPricePerSqFt": "$260",
       "soldMedianPrice": "$475,000",
       "lowSample": false
@@ -215,33 +215,33 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 135,
-      "soldCount": 498,
+      "soldCount": 500,
       "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$440,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 3.6,
+    "monthsOfSupply": 3.5,
     "monthsOfSupplyCondo": 5.3,
     "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
     "activeCount": 208,
-    "sold365Count": 702,
-    "sold90Count": 157,
+    "sold365Count": 704,
+    "sold90Count": 161,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 509,
-      "activeCount": 83,
+      "soldCount": 511,
+      "activeCount": 84,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 390,
-      "activeCount": 125,
-      "soldMedianPrice": "$324,690",
+      "soldCount": 392,
+      "activeCount": 124,
+      "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
   },
@@ -253,12 +253,12 @@
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 208 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 208 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Palmer Ranch?",
-      "a": "Single-family homes sell around $650,000 ($288/sq ft), while condos, villas and townhouses sell around $324,690 ($211/sq ft)."
+      "a": "Single-family homes sell around $650,000 ($288/sq ft), while condos, villas and townhouses sell around $325,000 ($211/sq ft)."
     },
     {
       "facet": "range",

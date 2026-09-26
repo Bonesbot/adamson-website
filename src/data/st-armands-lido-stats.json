@@ -2,15 +2,15 @@
   "areaSlug": "st-armands-lido",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-25T10:47:23.593780+00:00",
+  "lastUpdated": "2026-09-26T10:53:27.658032+00:00",
   "counts": {
-    "sold": 133,
-    "pending": 18,
+    "sold": 134,
+    "pending": 17,
     "active": 78,
     "total": 151
   },
   "metrics": {
-    "avgPrice": "$3,128,495",
+    "avgPrice": "$3,126,542",
     "avgPricePerSqFt": "$1,015",
     "avgYearBuilt": 1985,
     "avgLivingSqFt": "2,466",
@@ -29,16 +29,16 @@
     "newConstructionCount": 20
   },
   "sold": {
-    "count": 35,
-    "medianPrice": "$5,100,000",
-    "medianDom": 23,
-    "saleToListRatio": "91.0%",
+    "count": 36,
+    "medianPrice": "$4,400,000",
+    "medianDom": 42,
+    "saleToListRatio": "90.7%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 6.1,
-    "sfhVilla": 13.2,
-    "blended": 8.0,
+    "sfhVilla": 12.8,
+    "blended": 7.9,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4668129",
+      "address": "1354 WESTWAY DR",
+      "subdivision": "LIDO SHORES",
+      "soldPrice": "$3,200,000",
+      "soldDate": "2026-09-25",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "3,364",
+      "yearBuilt": 1962,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4567655",
       "address": "1000 BENJAMIN FRANKLIN DR #703",
@@ -118,19 +131,6 @@
       "yearBuilt": 2024,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4555898",
-      "address": "1000 BENJAMIN FRANKLIN DR #503",
-      "subdivision": "ROSEWOOD RESIDENCES LIDO KEY",
-      "soldPrice": "$7,600,000",
-      "soldDate": "2026-09-18",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "4,081",
-      "yearBuilt": 2026,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 37,
-      "avgPrice": "$755,050",
-      "avgPricePerSqFt": "$654",
+      "avgPrice": "$754,888",
+      "avgPricePerSqFt": "$653",
       "avgLivingSqFt": "1,157",
-      "avgDom": 158
+      "avgDom": 159
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$5,219,500",
       "avgPricePerSqFt": "$1,302",
       "avgLivingSqFt": "3,839",
-      "avgDom": 136
+      "avgDom": 137
     },
     {
       "tier": "2006to2019",
@@ -172,7 +172,7 @@
       "avgPrice": "$9,670,000",
       "avgPricePerSqFt": "$2,276",
       "avgLivingSqFt": "4,187",
-      "avgDom": 573
+      "avgDom": 574
     }
   ],
   "condoTiersScope": {
@@ -215,28 +215,28 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 29,
-      "soldCount": 42,
-      "soldMedianPricePerSqFt": "$774",
-      "soldMedianPrice": "$1,340,000",
+      "soldCount": 43,
+      "soldMedianPricePerSqFt": "$778",
+      "soldMedianPrice": "$1,345,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 8.0,
+    "monthsOfSupply": 7.9,
     "monthsOfSupplyCondo": 6.1,
-    "monthsOfSupplySfhVilla": 13.2,
+    "monthsOfSupplySfhVilla": 12.8,
     "label": "buyer's market",
     "activeCount": 78,
-    "sold365Count": 117,
-    "sold90Count": 35,
+    "sold365Count": 118,
+    "sold90Count": 36,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 40,
+      "soldCount": 41,
       "activeCount": 32,
-      "soldMedianPrice": "$2,787,500",
-      "soldMedianPricePerSqFt": "$958"
+      "soldMedianPrice": "$2,825,000",
+      "soldMedianPricePerSqFt": "$951"
     },
     "condo": {
       "soldCount": 93,
@@ -258,12 +258,12 @@
     {
       "facet": "balance",
       "q": "Is St Armands Lido a buyer's or seller's market right now?",
-      "a": "With 78 active listings and roughly 10 closed sales a month (trailing 12 months), St Armands Lido has about 8.0 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 78 active listings and roughly 10 closed sales a month (trailing 12 months), St Armands Lido has about 7.9 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on St Armands Lido?",
-      "a": "Single-family homes sell around $2,787,500 ($958/sq ft), while condos, villas and townhouses sell around $1,150,000 ($777/sq ft)."
+      "a": "Single-family homes sell around $2,825,000 ($951/sq ft), while condos, villas and townhouses sell around $1,150,000 ($777/sq ft)."
     },
     {
       "facet": "range",
@@ -273,7 +273,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on St Armands Lido?",
-      "a": "Recently sold homes took a median 23 days on market and closed at 91.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 42 days on market and closed at 90.7% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

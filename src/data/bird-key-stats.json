@@ -2,29 +2,29 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-25T10:47:28.440141+00:00",
+  "lastUpdated": "2026-09-26T10:53:32.213906+00:00",
   "counts": {
     "sold": 40,
-    "pending": 4,
-    "active": 12,
-    "total": 44
+    "pending": 5,
+    "active": 11,
+    "total": 45
   },
   "metrics": {
-    "avgPrice": "$4,350,398",
-    "avgPricePerSqFt": "$1,123",
+    "avgPrice": "$4,283,167",
+    "avgPricePerSqFt": "$1,114",
     "avgYearBuilt": 1990,
-    "avgLivingSqFt": "3,753",
-    "avgLotSqFt": "14,388",
-    "avgDom": 117
+    "avgLivingSqFt": "3,710",
+    "avgLotSqFt": "14,371",
+    "avgDom": 125
   },
   "range": {
     "minPrice": "$1,150,000",
     "maxPrice": "$13,950,000"
   },
   "active": {
-    "count": 12,
-    "medianPrice": "$7,395,000",
-    "medianPricePerSqFt": "$1,484",
+    "count": 11,
+    "medianPrice": "$7,800,000",
+    "medianPricePerSqFt": "$1,512",
     "waterfrontCount": 8,
     "newConstructionCount": 5
   },
@@ -37,8 +37,8 @@
   },
   "monthsOfSupply": {
     "condo": null,
-    "sfhVilla": 4.5,
-    "blended": 4.5,
+    "sfhVilla": 4.1,
+    "blended": 4.1,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -51,20 +51,20 @@
   },
   "priceBands": {
     "under900k": 0,
-    "band900kTo1_5m": 1,
+    "band900kTo1_5m": 0,
     "band1_5mTo3m": 1,
     "band3mPlus": 10
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 12
+      "count": 11
     }
   ],
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 8
+      "count": 7
     }
   ],
   "recentSoldComps": [
@@ -167,7 +167,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 4,
+      "activeCount": 3,
       "soldCount": 13,
       "soldMedianPricePerSqFt": "$834",
       "soldMedianPrice": "$2,185,000",
@@ -175,11 +175,11 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.5,
+    "monthsOfSupply": 4.1,
     "monthsOfSupplyCondo": null,
-    "monthsOfSupplySfhVilla": 4.5,
+    "monthsOfSupplySfhVilla": 4.1,
     "label": "seller's market",
-    "activeCount": 12,
+    "activeCount": 11,
     "sold365Count": 32,
     "sold90Count": 7,
     "method": "active / (trailing-12mo closed / 12)"
@@ -187,7 +187,7 @@
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 40,
-      "activeCount": 12,
+      "activeCount": 11,
       "soldMedianPrice": "$3,975,000",
       "soldMedianPricePerSqFt": "$1,131"
     }
@@ -200,12 +200,12 @@
     {
       "facet": "balance",
       "q": "Is Bird Key a buyer's or seller's market right now?",
-      "a": "With 12 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 4.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 11 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 4.1 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Bird Key?",
-      "a": "Active listings run from $1,150,000 to $13,950,000, with a median asking price of $7,395,000."
+      "a": "Active listings run from $1,150,000 to $13,950,000, with a median asking price of $7,800,000."
     },
     {
       "facet": "speed",
