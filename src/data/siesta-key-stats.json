@@ -2,15 +2,15 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-26T10:53:28.431625+00:00",
+  "lastUpdated": "2026-09-27T10:55:18.081762+00:00",
   "counts": {
-    "sold": 721,
-    "pending": 47,
+    "sold": 722,
+    "pending": 46,
     "active": 244,
     "total": 768
   },
   "metrics": {
-    "avgPrice": "$1,353,018",
+    "avgPrice": "$1,352,907",
     "avgPricePerSqFt": "$694",
     "avgYearBuilt": 1979,
     "avgLivingSqFt": "1,780",
@@ -29,15 +29,15 @@
     "newConstructionCount": 41
   },
   "sold": {
-    "count": 106,
-    "medianPrice": "$1,060,000",
-    "medianDom": 106,
-    "saleToListRatio": "88.5%",
+    "count": 107,
+    "medianPrice": "$1,050,000",
+    "medianDom": 105,
+    "saleToListRatio": "88.6%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 6.5,
-    "sfhVilla": 6.0,
+    "sfhVilla": 6.1,
     "blended": 6.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4700837",
+      "address": "9000 BLIND PASS RD #B114",
+      "subdivision": "FISHERMANS COVE",
+      "soldPrice": "$815,000",
+      "soldDate": "2026-09-25",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "969",
+      "yearBuilt": 1968,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4691608",
       "address": "306 BEACH RD #306",
@@ -118,19 +131,6 @@
       "yearBuilt": 1966,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4702975",
-      "address": "5955 MIDNIGHT PASS RD #20E",
-      "subdivision": "CONTNTLS SEA CLUB 2 P1",
-      "soldPrice": "$436,000",
-      "soldDate": "2026-09-21",
-      "bedrooms": 2,
-      "bathrooms": 1.0,
-      "livingSqFt": "754",
-      "yearBuilt": 1978,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$821,063",
       "avgPricePerSqFt": "$691",
       "avgLivingSqFt": "1,177",
-      "avgDom": 130
+      "avgDom": 131
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,438,475",
       "avgPricePerSqFt": "$723",
       "avgLivingSqFt": "1,999",
-      "avgDom": 194
+      "avgDom": 195
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$2,032,225",
       "avgPricePerSqFt": "$1,063",
       "avgLivingSqFt": "1,762",
-      "avgDom": 260
+      "avgDom": 261
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,692,636",
       "avgPricePerSqFt": "$1,490",
       "avgLivingSqFt": "3,298",
-      "avgDom": 228
+      "avgDom": 229
     }
   ],
   "condoTiersScope": {
@@ -188,7 +188,7 @@
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
       "activeCount": 66,
-      "soldCount": 256,
+      "soldCount": 257,
       "soldMedianPricePerSqFt": "$748",
       "soldMedianPrice": "$1,000,000",
       "lowSample": false
@@ -233,11 +233,11 @@
   "marketBalance": {
     "monthsOfSupply": 6.3,
     "monthsOfSupplyCondo": 6.5,
-    "monthsOfSupplySfhVilla": 6.0,
+    "monthsOfSupplySfhVilla": 6.1,
     "label": "balanced market",
     "activeCount": 244,
-    "sold365Count": 463,
-    "sold90Count": 106,
+    "sold365Count": 462,
+    "sold90Count": 107,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,9 +248,9 @@
       "soldMedianPricePerSqFt": "$651"
     },
     "condo": {
-      "soldCount": 505,
+      "soldCount": 506,
       "activeCount": 161,
-      "soldMedianPrice": "$796,000",
+      "soldMedianPrice": "$798,000",
       "soldMedianPricePerSqFt": "$630"
     }
   },
@@ -267,12 +267,12 @@
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 244 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 6.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 244 active listings and roughly 38 closed sales a month (trailing 12 months), Siesta Key has about 6.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Siesta Key?",
-      "a": "Single-family homes sell around $1,525,000 ($651/sq ft), while condos, villas and townhouses sell around $796,000 ($630/sq ft)."
+      "a": "Single-family homes sell around $1,525,000 ($651/sq ft), while condos, villas and townhouses sell around $798,000 ($630/sq ft)."
     },
     {
       "facet": "range",
@@ -282,7 +282,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 106 days on market and closed at 88.5% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 105 days on market and closed at 88.6% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
