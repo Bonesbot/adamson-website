@@ -619,6 +619,30 @@ def build_payload(conn):
     return files, stats
 
 
+
+def _read_repo_file(rel_path):
+    """Read a repo-relative data file, falling back to origin/main when it is not
+    on disk. The daily runner executes this generator from a /tmp copy assembled
+    from a fixed fetch list (mls-export SKILL.md, PIPELINE_FILES); a data file the
+    generator needs but that list does not name is simply absent there. That is
+    exactly what stopped the Gulf & Bay pages publishing from 2026-09-12 to
+    2026-09-28 (FileNotFoundError on the seasonality JSON, caught upstream, so the
+    page went stale while every other area kept shipping). Same source the
+    publisher uses for its own generator fallback, so this cannot drift."""
+    import urllib.request
+    local = PROJECT_ROOT / rel_path
+    if local.exists():
+        return local.read_text(encoding="utf-8")
+    repo = os.environ.get("GITHUB_REPO", "Bonesbot/adamson-website")
+    br = os.environ.get("GITHUB_BRANCH", "main")
+    tok = os.environ.get("GITHUB_TOKEN", "")
+    req = urllib.request.Request(
+        f"https://api.github.com/repos/{repo}/contents/{rel_path}?ref={br}",
+        headers={"Authorization": f"Bearer {tok}", "Accept": "application/vnd.github.raw",
+                 "X-GitHub-Api-Version": "2022-11-28", "User-Agent": "agw/1.0"})
+    print(f"[INFO] {rel_path} not on disk; reading from origin/{br}", file=sys.stderr)
+    return urllib.request.urlopen(req, timeout=30).read().decode("utf-8")
+
 # ── Rendering ─────────────────────────────────────────────────────────────────
 
 def render_seasonality(cfg):
@@ -628,7 +652,7 @@ def render_seasonality(cfg):
     sc = cfg.get("seasonality")
     if not sc:
         return ""
-    data = json.loads((PROJECT_ROOT / sc["data"]).read_text(encoding="utf-8"))
+    data = json.loads(_read_repo_file(sc["data"]))
     n_total = sum(data["contractsByMonth"])
     n_peak = sum(data["contractsByMonth"][i] for i in data["peakMonths"])
     as_of = data.get("asOf", "")
