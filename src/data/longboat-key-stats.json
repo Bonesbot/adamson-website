@@ -2,7 +2,7 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-27T10:55:16.213355+00:00",
+  "lastUpdated": "2026-09-28T10:53:34.515348+00:00",
   "counts": {
     "sold": 1237,
     "pending": 43,
@@ -29,10 +29,10 @@
     "newConstructionCount": 17
   },
   "sold": {
-    "count": 112,
+    "count": 110,
     "medianPrice": "$1,025,000",
     "medianDom": 100,
-    "saleToListRatio": "96.0%",
+    "saleToListRatio": "96.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 118,
-      "avgPrice": "$831,379",
+      "avgPrice": "$831,167",
       "avgPricePerSqFt": "$647",
       "avgLivingSqFt": "1,316",
-      "avgDom": 157
+      "avgDom": 158
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,845,712",
       "avgPricePerSqFt": "$732",
       "avgLivingSqFt": "2,405",
-      "avgDom": 144
+      "avgDom": 145
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$6,499,667",
       "avgPricePerSqFt": "$1,695",
       "avgLivingSqFt": "3,801",
-      "avgDom": 233
+      "avgDom": 234
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$6,551,333",
       "avgPricePerSqFt": "$2,078",
       "avgLivingSqFt": "2,832",
-      "avgDom": 563
+      "avgDom": 564
     }
   ],
   "condoTiersScope": {
@@ -237,7 +237,7 @@
     "label": "seller's market",
     "activeCount": 212,
     "sold365Count": 515,
-    "sold90Count": 112,
+    "sold90Count": 110,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -262,7 +262,7 @@
     {
       "facet": "cost",
       "q": "What do properties cost on Longboat Key?",
-      "a": "Over the past 90 days, 112 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $880,000 ($570/sq ft), while single-family homes closed around $2,125,000 ($740/sq ft). By location, Gulf-front and beachfront properties closed at a median $846 per square foot, compared with $510 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
+      "a": "Over the past 90 days, 110 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $890,000 ($573/sq ft), while single-family homes closed around $2,287,500 ($765/sq ft). By location, Gulf-front and beachfront properties closed at a median $846 per square foot, compared with $502 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
     },
     {
       "facet": "balance",
@@ -272,7 +272,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Longboat Key?",
-      "a": "Recently sold homes took a median 100 days on market and closed at 96.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 100 days on market and closed at 96.1% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
@@ -287,17 +287,17 @@
   ],
   "costBreakdown90": {
     "windowDays": 90,
-    "soldCount": 112,
+    "soldCount": 110,
     "byPropertyType": {
       "condo": {
-        "soldCount": 85,
-        "soldMedianPrice": "$880,000",
-        "soldMedianPricePerSqFt": "$570"
+        "soldCount": 84,
+        "soldMedianPrice": "$890,000",
+        "soldMedianPricePerSqFt": "$573"
       },
       "single_family": {
-        "soldCount": 27,
-        "soldMedianPrice": "$2,125,000",
-        "soldMedianPricePerSqFt": "$740"
+        "soldCount": 26,
+        "soldMedianPrice": "$2,287,500",
+        "soldMedianPricePerSqFt": "$765"
       }
     },
     "byWaterfront": {
@@ -307,9 +307,9 @@
         "soldMedianPricePerSqFt": "$846"
       },
       "bay_canal": {
-        "soldCount": 42,
-        "soldMedianPrice": "$1,040,000",
-        "soldMedianPricePerSqFt": "$510"
+        "soldCount": 41,
+        "soldMedianPrice": "$1,000,000",
+        "soldMedianPricePerSqFt": "$502"
       }
     }
   }

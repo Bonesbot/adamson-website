@@ -2,15 +2,15 @@
   "areaSlug": "west-bradenton",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-27T10:55:23.699256+00:00",
+  "lastUpdated": "2026-09-28T10:53:41.323369+00:00",
   "counts": {
     "sold": 314,
-    "pending": 47,
-    "active": 144,
-    "total": 361
+    "pending": 48,
+    "active": 143,
+    "total": 362
   },
   "metrics": {
-    "avgPrice": "$651,016",
+    "avgPrice": "$650,819",
     "avgPricePerSqFt": "$311",
     "avgYearBuilt": 1997,
     "avgLivingSqFt": "1,976",
@@ -22,11 +22,11 @@
     "maxPrice": "$7,250,000"
   },
   "active": {
-    "count": 144,
-    "medianPrice": "$519,500",
-    "medianPricePerSqFt": "$294",
+    "count": 143,
+    "medianPrice": "$509,000",
+    "medianPricePerSqFt": "$293",
     "waterfrontCount": 50,
-    "newConstructionCount": 47
+    "newConstructionCount": 46
   },
   "sold": {
     "count": 74,
@@ -37,7 +37,7 @@
   },
   "monthsOfSupply": {
     "condo": 6.9,
-    "sfhVilla": 5.6,
+    "sfhVilla": 5.5,
     "blended": 6.0,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 108,
+    "under900k": 107,
     "band900kTo1_5m": 21,
     "band1_5mTo3m": 12,
     "band3mPlus": 3
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 144
+      "count": 143
     }
   ],
   "buildingClasses": [],
@@ -175,7 +175,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 75,
+      "activeCount": 74,
       "soldCount": 160,
       "soldMedianPricePerSqFt": "$254",
       "soldMedianPrice": "$445,800",
@@ -185,9 +185,9 @@
   "marketBalance": {
     "monthsOfSupply": 6.0,
     "monthsOfSupplyCondo": 6.9,
-    "monthsOfSupplySfhVilla": 5.6,
+    "monthsOfSupplySfhVilla": 5.5,
     "label": "balanced market",
-    "activeCount": 144,
+    "activeCount": 143,
     "sold365Count": 287,
     "sold90Count": 74,
     "method": "active / (trailing-12mo closed / 12)"
@@ -195,7 +195,7 @@
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 135,
-      "activeCount": 59,
+      "activeCount": 58,
       "soldMedianPrice": "$750,000",
       "soldMedianPricePerSqFt": "$349"
     },
@@ -214,7 +214,7 @@
     {
       "facet": "balance",
       "q": "Is West Bradenton a buyer's or seller's market right now?",
-      "a": "With 144 active listings and roughly 24 closed sales a month (trailing 12 months), West Bradenton has about 6.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 143 active listings and roughly 24 closed sales a month (trailing 12 months), West Bradenton has about 6.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -224,7 +224,7 @@
     {
       "facet": "range",
       "q": "What is the price range in West Bradenton?",
-      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $519,500."
+      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $509,000."
     },
     {
       "facet": "speed",
@@ -273,9 +273,9 @@
     {
       "slug": "west-bradenton-seaflower",
       "name": "SeaFlower",
-      "activeCount": 30,
-      "pendingCount": 23,
-      "activeMedianPrice": "$577,450",
+      "activeCount": 29,
+      "pendingCount": 24,
+      "activeMedianPrice": "$574,999",
       "soldCount": 68,
       "soldMedianPrice": "$506,485",
       "soldMedianPricePerSqFt": "$264",
@@ -323,8 +323,8 @@
             "soldMedianPrice": "$673,824",
             "soldMedianPricePerSqFt": "$321",
             "soldMedianDom": 38,
-            "activeCount": 42,
-            "activeMedianPrice": "$817,500",
+            "activeCount": 41,
+            "activeMedianPrice": "$825,000",
             "lowSample": false
           }
         ],
