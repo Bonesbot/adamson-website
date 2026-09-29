@@ -2,16 +2,16 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-26T10:53:32.213906+00:00",
+  "lastUpdated": "2026-09-29T10:54:32.299265+00:00",
   "counts": {
-    "sold": 40,
-    "pending": 5,
+    "sold": 41,
+    "pending": 4,
     "active": 11,
     "total": 45
   },
   "metrics": {
-    "avgPrice": "$4,283,167",
-    "avgPricePerSqFt": "$1,114",
+    "avgPrice": "$4,269,278",
+    "avgPricePerSqFt": "$1,111",
     "avgYearBuilt": 1990,
     "avgLivingSqFt": "3,710",
     "avgLotSqFt": "14,371",
@@ -29,16 +29,16 @@
     "newConstructionCount": 5
   },
   "sold": {
-    "count": 7,
-    "medianPrice": "$4,512,500",
-    "medianDom": 72,
-    "saleToListRatio": "87.4%",
+    "count": 8,
+    "medianPrice": "$5,531,250",
+    "medianDom": 108,
+    "saleToListRatio": "86.7%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": null,
-    "sfhVilla": 4.1,
-    "blended": 4.1,
+    "sfhVilla": 4.0,
+    "blended": 4.0,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -68,6 +68,19 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4675575",
+      "address": "259 ROBIN DR",
+      "subdivision": "BIRD KEY SUB",
+      "soldPrice": "$7,275,000",
+      "soldDate": "2026-09-28",
+      "bedrooms": 3,
+      "bathrooms": 4.0,
+      "livingSqFt": "4,078",
+      "yearBuilt": 1996,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4689563",
       "address": "476 MEADOW LARK DR",
@@ -119,19 +132,6 @@
       "yearBuilt": 2018,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4666605",
-      "address": "440 MEADOW LARK DR",
-      "subdivision": "BIRD KEY SUB",
-      "soldPrice": "$10,600,000",
-      "soldDate": "2026-07-30",
-      "bedrooms": 4,
-      "bathrooms": 6.0,
-      "livingSqFt": "6,880",
-      "yearBuilt": 2023,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [],
@@ -150,9 +150,9 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 7,
-      "soldCount": 25,
-      "soldMedianPricePerSqFt": "$1,285",
-      "soldMedianPrice": "$4,512,500",
+      "soldCount": 26,
+      "soldMedianPricePerSqFt": "$1,305",
+      "soldMedianPrice": "$4,806,250",
       "lowSample": false
     },
     {
@@ -175,21 +175,21 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.1,
+    "monthsOfSupply": 4.0,
     "monthsOfSupplyCondo": null,
-    "monthsOfSupplySfhVilla": 4.1,
+    "monthsOfSupplySfhVilla": 4.0,
     "label": "seller's market",
     "activeCount": 11,
-    "sold365Count": 32,
-    "sold90Count": 7,
+    "sold365Count": 33,
+    "sold90Count": 8,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 40,
+      "soldCount": 41,
       "activeCount": 11,
-      "soldMedianPrice": "$3,975,000",
-      "soldMedianPricePerSqFt": "$1,131"
+      "soldMedianPrice": "$4,000,000",
+      "soldMedianPricePerSqFt": "$1,152"
     }
   },
   "boating": {
@@ -200,7 +200,7 @@
     {
       "facet": "balance",
       "q": "Is Bird Key a buyer's or seller's market right now?",
-      "a": "With 11 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 4.1 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 11 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 4.0 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "range",
@@ -210,7 +210,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Bird Key?",
-      "a": "Recently sold homes took a median 72 days on market and closed at 87.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 108 days on market and closed at 86.7% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

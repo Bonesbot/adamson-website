@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-28T10:53:37.565067+00:00",
+  "lastUpdated": "2026-09-29T10:54:30.095452+00:00",
   "counts": {
     "sold": 265,
     "pending": 29,
-    "active": 89,
+    "active": 88,
     "total": 294
   },
   "metrics": {
-    "avgPrice": "$2,125,408",
-    "avgPricePerSqFt": "$664",
-    "avgYearBuilt": 1982,
-    "avgLivingSqFt": "2,767",
+    "avgPrice": "$2,126,105",
+    "avgPricePerSqFt": "$665",
+    "avgYearBuilt": 1983,
+    "avgLivingSqFt": "2,764",
     "avgLotSqFt": null,
     "avgDom": 109
   },
@@ -22,14 +22,14 @@
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 89,
-    "medianPrice": "$2,150,000",
-    "medianPricePerSqFt": "$792",
+    "count": 88,
+    "medianPrice": "$2,125,000",
+    "medianPricePerSqFt": "$784",
     "waterfrontCount": 18,
     "newConstructionCount": 27
   },
   "sold": {
-    "count": 44,
+    "count": 42,
     "medianPrice": "$1,675,000",
     "medianDom": 120,
     "saleToListRatio": "87.5%",
@@ -37,8 +37,8 @@
   },
   "monthsOfSupply": {
     "condo": 5.2,
-    "sfhVilla": 5.1,
-    "blended": 5.1,
+    "sfhVilla": 5.0,
+    "blended": 5.0,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 26,
+    "under900k": 25,
     "band900kTo1_5m": 9,
     "band1_5mTo3m": 20,
     "band3mPlus": 34
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 89
+      "count": 88
     }
   ],
   "buildingClasses": [],
@@ -142,7 +142,7 @@
       "avgPrice": "$367,143",
       "avgPricePerSqFt": "$319",
       "avgLivingSqFt": "1,154",
-      "avgDom": 95
+      "avgDom": 96
     },
     {
       "tier": "1990to2005",
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 69,
+      "activeCount": 68,
       "soldCount": 222,
       "soldMedianPricePerSqFt": "$570",
       "soldMedianPrice": "$1,428,000",
@@ -222,19 +222,19 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.1,
+    "monthsOfSupply": 5.0,
     "monthsOfSupplyCondo": 5.2,
-    "monthsOfSupplySfhVilla": 5.1,
+    "monthsOfSupplySfhVilla": 5.0,
     "label": "balanced market",
-    "activeCount": 89,
+    "activeCount": 88,
     "sold365Count": 210,
-    "sold90Count": 44,
+    "sold90Count": 42,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 245,
-      "activeCount": 82,
+      "activeCount": 81,
       "soldMedianPrice": "$1,600,000",
       "soldMedianPricePerSqFt": "$621"
     },
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 89 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 5.1 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 88 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 5.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,7 +263,7 @@
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,150,000."
+      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,125,000."
     },
     {
       "facet": "speed",

@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-28T10:53:36.077694+00:00",
+  "lastUpdated": "2026-09-29T10:54:28.557680+00:00",
   "counts": {
-    "sold": 722,
+    "sold": 723,
     "pending": 47,
-    "active": 243,
-    "total": 769
+    "active": 242,
+    "total": 770
   },
   "metrics": {
-    "avgPrice": "$1,351,843",
+    "avgPrice": "$1,353,271",
     "avgPricePerSqFt": "$693",
     "avgYearBuilt": 1979,
-    "avgLivingSqFt": "1,779",
+    "avgLivingSqFt": "1,781",
     "avgLotSqFt": null,
     "avgDom": 102
   },
@@ -22,17 +22,17 @@
     "maxPrice": "$29,995,000"
   },
   "active": {
-    "count": 243,
+    "count": 242,
     "medianPrice": "$1,150,000",
-    "medianPricePerSqFt": "$754",
+    "medianPricePerSqFt": "$755",
     "waterfrontCount": 135,
     "newConstructionCount": 41
   },
   "sold": {
-    "count": 104,
-    "medianPrice": "$1,060,000",
+    "count": 105,
+    "medianPrice": "$1,070,000",
     "medianDom": 106,
-    "saleToListRatio": "88.5%",
+    "saleToListRatio": "88.6%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 107,
+    "under900k": 106,
     "band900kTo1_5m": 44,
     "band1_5mTo3m": 43,
     "band3mPlus": 49
@@ -62,11 +62,24 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 243
+      "count": 242
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4696120",
+      "address": "3942 HAMILTON CLUB CIR #13",
+      "subdivision": "HAMILTON CLUB",
+      "soldPrice": "$1,300,000",
+      "soldDate": "2026-09-28",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,691",
+      "yearBuilt": 1997,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4700837",
       "address": "9000 BLIND PASS RD #B114",
@@ -118,19 +131,6 @@
       "yearBuilt": 1970,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4701791",
-      "address": "6154 MIDNIGHT PASS RD #B5",
-      "subdivision": "CASA BLANCA VILLAS",
-      "soldPrice": "$585,000",
-      "soldDate": "2026-09-22",
-      "bedrooms": 2,
-      "bathrooms": 1.5,
-      "livingSqFt": "836",
-      "yearBuilt": 1966,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 140,
-      "avgPrice": "$824,603",
-      "avgPricePerSqFt": "$693",
-      "avgLivingSqFt": "1,178",
-      "avgDom": 133
+      "activeCount": 139,
+      "avgPrice": "$824,672",
+      "avgPricePerSqFt": "$694",
+      "avgLivingSqFt": "1,177",
+      "avgDom": 132
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,438,475",
       "avgPricePerSqFt": "$723",
       "avgLivingSqFt": "1,999",
-      "avgDom": 196
+      "avgDom": 197
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$2,032,225",
       "avgPricePerSqFt": "$1,063",
       "avgLivingSqFt": "1,762",
-      "avgDom": 262
+      "avgDom": 263
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,692,636",
       "avgPricePerSqFt": "$1,490",
       "avgLivingSqFt": "3,298",
-      "avgDom": 230
+      "avgDom": 231
     }
   ],
   "condoTiersScope": {
@@ -205,9 +205,9 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 41,
-      "soldCount": 88,
-      "soldMedianPricePerSqFt": "$590",
+      "activeCount": 40,
+      "soldCount": 89,
+      "soldMedianPricePerSqFt": "$581",
       "soldMedianPrice": "$730,000",
       "lowSample": false
     },
@@ -235,9 +235,9 @@
     "monthsOfSupplyCondo": 6.4,
     "monthsOfSupplySfhVilla": 6.2,
     "label": "balanced market",
-    "activeCount": 243,
-    "sold365Count": 462,
-    "sold90Count": 104,
+    "activeCount": 242,
+    "sold365Count": 463,
+    "sold90Count": 105,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,9 +248,9 @@
       "soldMedianPricePerSqFt": "$651"
     },
     "condo": {
-      "soldCount": 506,
-      "activeCount": 159,
-      "soldMedianPrice": "$798,000",
+      "soldCount": 507,
+      "activeCount": 158,
+      "soldMedianPrice": "$800,000",
       "soldMedianPricePerSqFt": "$630"
     }
   },
@@ -267,12 +267,12 @@
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 243 active listings and roughly 38 closed sales a month (trailing 12 months), Siesta Key has about 6.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 242 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 6.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Siesta Key?",
-      "a": "Single-family homes sell around $1,525,000 ($651/sq ft), while condos, villas and townhouses sell around $798,000 ($630/sq ft)."
+      "a": "Single-family homes sell around $1,525,000 ($651/sq ft), while condos, villas and townhouses sell around $800,000 ($630/sq ft)."
     },
     {
       "facet": "range",
@@ -282,7 +282,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 106 days on market and closed at 88.5% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 106 days on market and closed at 88.6% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
