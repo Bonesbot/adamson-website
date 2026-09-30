@@ -2,29 +2,29 @@
   "areaSlug": "st-armands-lido",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-29T10:54:27.701674+00:00",
+  "lastUpdated": "2026-09-30T10:53:46.471447+00:00",
   "counts": {
     "sold": 134,
-    "pending": 19,
-    "active": 76,
-    "total": 153
+    "pending": 20,
+    "active": 75,
+    "total": 154
   },
   "metrics": {
-    "avgPrice": "$3,094,554",
-    "avgPricePerSqFt": "$1,008",
+    "avgPrice": "$3,078,349",
+    "avgPricePerSqFt": "$1,006",
     "avgYearBuilt": 1984,
-    "avgLivingSqFt": "2,451",
+    "avgLivingSqFt": "2,441",
     "avgLotSqFt": null,
-    "avgDom": 124
+    "avgDom": 125
   },
   "range": {
     "minPrice": "$275,000",
     "maxPrice": "$25,000,000"
   },
   "active": {
-    "count": 76,
-    "medianPrice": "$2,622,500",
-    "medianPricePerSqFt": "$953",
+    "count": 75,
+    "medianPrice": "$2,895,000",
+    "medianPricePerSqFt": "$959",
     "waterfrontCount": 37,
     "newConstructionCount": 20
   },
@@ -36,9 +36,9 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.9,
+    "condo": 5.8,
     "sfhVilla": 12.8,
-    "blended": 7.8,
+    "blended": 7.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 28,
+    "under900k": 27,
     "band900kTo1_5m": 5,
     "band1_5mTo3m": 6,
     "band3mPlus": 37
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 76
+      "count": 75
     }
   ],
   "buildingClasses": [],
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 35,
-      "avgPrice": "$753,224",
+      "activeCount": 34,
+      "avgPrice": "$757,760",
       "avgPricePerSqFt": "$666",
-      "avgLivingSqFt": "1,130",
-      "avgDom": 158
+      "avgLivingSqFt": "1,137",
+      "avgDom": 156
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$5,219,500",
       "avgPricePerSqFt": "$1,302",
       "avgLivingSqFt": "3,839",
-      "avgDom": 140
+      "avgDom": 141
     },
     {
       "tier": "2006to2019",
@@ -172,7 +172,7 @@
       "avgPrice": "$9,670,000",
       "avgPricePerSqFt": "$2,276",
       "avgLivingSqFt": "4,187",
-      "avgDom": 577
+      "avgDom": 578
     }
   ],
   "condoTiersScope": {
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 28,
+      "activeCount": 27,
       "soldCount": 43,
       "soldMedianPricePerSqFt": "$778",
       "soldMedianPrice": "$1,345,000",
@@ -222,11 +222,11 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.8,
-    "monthsOfSupplyCondo": 5.9,
+    "monthsOfSupply": 7.7,
+    "monthsOfSupplyCondo": 5.8,
     "monthsOfSupplySfhVilla": 12.8,
     "label": "buyer's market",
-    "activeCount": 76,
+    "activeCount": 75,
     "sold365Count": 117,
     "sold90Count": 35,
     "method": "active / (trailing-12mo closed / 12)"
@@ -240,7 +240,7 @@
     },
     "condo": {
       "soldCount": 93,
-      "activeCount": 44,
+      "activeCount": 43,
       "soldMedianPrice": "$1,150,000",
       "soldMedianPricePerSqFt": "$777"
     }
@@ -258,7 +258,7 @@
     {
       "facet": "balance",
       "q": "Is St Armands Lido a buyer's or seller's market right now?",
-      "a": "With 76 active listings and roughly 10 closed sales a month (trailing 12 months), St Armands Lido has about 7.8 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 75 active listings and roughly 10 closed sales a month (trailing 12 months), St Armands Lido has about 7.7 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -268,7 +268,7 @@
     {
       "facet": "range",
       "q": "What's the price range on St Armands Lido?",
-      "a": "Active listings run from $275,000 to $25,000,000, with a median asking price of $2,622,500."
+      "a": "Active listings run from $275,000 to $25,000,000, with a median asking price of $2,895,000."
     },
     {
       "facet": "speed",
