@@ -2,16 +2,16 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-30T10:53:48.813057+00:00",
+  "lastUpdated": "2026-10-01T10:52:36.564996+00:00",
   "counts": {
-    "sold": 265,
-    "pending": 29,
+    "sold": 266,
+    "pending": 28,
     "active": 87,
     "total": 294
   },
   "metrics": {
-    "avgPrice": "$2,123,043",
-    "avgPricePerSqFt": "$664",
+    "avgPrice": "$2,122,023",
+    "avgPricePerSqFt": "$663",
     "avgYearBuilt": 1982,
     "avgLivingSqFt": "2,763",
     "avgLotSqFt": null,
@@ -23,15 +23,15 @@
   },
   "active": {
     "count": 87,
-    "medianPrice": "$2,100,000",
-    "medianPricePerSqFt": "$792",
-    "waterfrontCount": 17,
+    "medianPrice": "$2,150,000",
+    "medianPricePerSqFt": "$793",
+    "waterfrontCount": 18,
     "newConstructionCount": 26
   },
   "sold": {
-    "count": 42,
-    "medianPrice": "$1,675,000",
-    "medianDom": 120,
+    "count": 41,
+    "medianPrice": "$1,750,000",
+    "medianDom": 122,
     "saleToListRatio": "87.5%",
     "windowDays": 90
   },
@@ -56,8 +56,8 @@
   "priceBands": {
     "under900k": 24,
     "band900kTo1_5m": 9,
-    "band1_5mTo3m": 21,
-    "band3mPlus": 33
+    "band1_5mTo3m": 20,
+    "band3mPlus": 34
   },
   "propertyTypes": [
     {
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4678496",
+      "address": "1400 SIESTA DR",
+      "subdivision": "ACREAGE & UNREC",
+      "soldPrice": "$3,700,000",
+      "soldDate": "2026-09-29",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "4,660",
+      "yearBuilt": 1978,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4676686",
       "address": "1516 S ORANGE AVE",
@@ -118,19 +131,6 @@
       "yearBuilt": 1926,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4669078",
-      "address": "3631 SAN REMO TER",
-      "subdivision": "SAN REMO ESTATES",
-      "soldPrice": "$7,000,000",
-      "soldDate": "2026-09-17",
-      "bedrooms": 4,
-      "bathrooms": 3.5,
-      "livingSqFt": "4,705",
-      "yearBuilt": 2021,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$367,143",
       "avgPricePerSqFt": "$319",
       "avgLivingSqFt": "1,154",
-      "avgDom": 97
+      "avgDom": 98
     },
     {
       "tier": "1990to2005",
@@ -187,10 +187,10 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 15,
-      "soldCount": 29,
+      "activeCount": 16,
+      "soldCount": 30,
       "soldMedianPricePerSqFt": "$1,052",
-      "soldMedianPrice": "$4,450,000",
+      "soldMedianPrice": "$4,162,500",
       "lowSample": false
     },
     {
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 68,
+      "activeCount": 67,
       "soldCount": 222,
       "soldMedianPricePerSqFt": "$570",
       "soldMedianPrice": "$1,428,000",
@@ -228,15 +228,15 @@
     "label": "balanced market",
     "activeCount": 87,
     "sold365Count": 210,
-    "sold90Count": 42,
+    "sold90Count": 41,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 245,
+      "soldCount": 246,
       "activeCount": 80,
       "soldMedianPrice": "$1,600,000",
-      "soldMedianPricePerSqFt": "$621"
+      "soldMedianPricePerSqFt": "$625"
     },
     "condo": {
       "soldCount": 20,
@@ -246,8 +246,8 @@
     }
   },
   "boating": {
-    "activeWithDock": 13,
-    "activeWaterfront": 17
+    "activeWithDock": 14,
+    "activeWaterfront": 18
   },
   "marketQuestions": [
     {
@@ -258,22 +258,22 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,600,000 ($621/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
+      "a": "Single-family homes sell around $1,600,000 ($625/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,100,000."
+      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,150,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 120 days on market and closed at 87.5% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 122 days on market and closed at 87.5% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail Core homes have a dock?",
-      "a": "Of 17 active waterfront listings, 13 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 18 active waterfront listings, 14 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

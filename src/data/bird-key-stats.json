@@ -2,23 +2,23 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-29T10:54:32.299265+00:00",
+  "lastUpdated": "2026-10-01T10:52:38.888591+00:00",
   "counts": {
-    "sold": 41,
-    "pending": 4,
+    "sold": 42,
+    "pending": 3,
     "active": 11,
     "total": 45
   },
   "metrics": {
-    "avgPrice": "$4,269,278",
-    "avgPricePerSqFt": "$1,111",
+    "avgPrice": "$4,261,833",
+    "avgPricePerSqFt": "$1,106",
     "avgYearBuilt": 1990,
     "avgLivingSqFt": "3,710",
     "avgLotSqFt": "14,371",
     "avgDom": 125
   },
   "range": {
-    "minPrice": "$1,150,000",
+    "minPrice": "$990,000",
     "maxPrice": "$13,950,000"
   },
   "active": {
@@ -29,16 +29,16 @@
     "newConstructionCount": 5
   },
   "sold": {
-    "count": 8,
-    "medianPrice": "$5,531,250",
-    "medianDom": 108,
-    "saleToListRatio": "86.7%",
+    "count": 9,
+    "medianPrice": "$4,512,500",
+    "medianDom": 143,
+    "saleToListRatio": "84.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": null,
-    "sfhVilla": 4.0,
-    "blended": 4.0,
+    "sfhVilla": 3.9,
+    "blended": 3.9,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -68,6 +68,19 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4654386",
+      "address": "223 SEAGULL LN",
+      "subdivision": "BIRD KEY SUB",
+      "soldPrice": "$990,000",
+      "soldDate": "2026-09-30",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,814",
+      "yearBuilt": 1961,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4675575",
       "address": "259 ROBIN DR",
@@ -119,19 +132,6 @@
       "yearBuilt": 2009,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4666317",
-      "address": "412 PHEASANT WAY",
-      "subdivision": "BIRD KEY SUB",
-      "soldPrice": "$2,805,000",
-      "soldDate": "2026-08-06",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,677",
-      "yearBuilt": 2018,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [],
@@ -168,28 +168,28 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 3,
-      "soldCount": 13,
-      "soldMedianPricePerSqFt": "$834",
-      "soldMedianPrice": "$2,185,000",
+      "soldCount": 14,
+      "soldMedianPricePerSqFt": "$810",
+      "soldMedianPrice": "$2,090,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.0,
+    "monthsOfSupply": 3.9,
     "monthsOfSupplyCondo": null,
-    "monthsOfSupplySfhVilla": 4.0,
+    "monthsOfSupplySfhVilla": 3.9,
     "label": "seller's market",
     "activeCount": 11,
-    "sold365Count": 33,
-    "sold90Count": 8,
+    "sold365Count": 34,
+    "sold90Count": 9,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 41,
+      "soldCount": 42,
       "activeCount": 11,
-      "soldMedianPrice": "$4,000,000",
-      "soldMedianPricePerSqFt": "$1,152"
+      "soldMedianPrice": "$3,975,000",
+      "soldMedianPricePerSqFt": "$1,131"
     }
   },
   "boating": {
@@ -200,17 +200,17 @@
     {
       "facet": "balance",
       "q": "Is Bird Key a buyer's or seller's market right now?",
-      "a": "With 11 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 4.0 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 11 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 3.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Bird Key?",
-      "a": "Active listings run from $1,150,000 to $13,950,000, with a median asking price of $7,800,000."
+      "a": "Active listings run from $990,000 to $13,950,000, with a median asking price of $7,800,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Bird Key?",
-      "a": "Recently sold homes took a median 108 days on market and closed at 86.7% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 143 days on market and closed at 84.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

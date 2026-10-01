@@ -2,20 +2,20 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-30T10:53:51.758540+00:00",
+  "lastUpdated": "2026-10-01T10:52:39.758656+00:00",
   "counts": {
-    "sold": 907,
-    "pending": 84,
+    "sold": 913,
+    "pending": 80,
     "active": 199,
-    "total": 991
+    "total": 993
   },
   "metrics": {
-    "avgPrice": "$562,565",
-    "avgPricePerSqFt": "$263",
+    "avgPrice": "$562,102",
+    "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
     "avgLivingSqFt": "2,050",
     "avgLotSqFt": null,
-    "avgDom": 79
+    "avgDom": 80
   },
   "range": {
     "minPrice": "$110,000",
@@ -23,20 +23,20 @@
   },
   "active": {
     "count": 199,
-    "medianPrice": "$409,000",
-    "medianPricePerSqFt": "$248",
+    "medianPrice": "$405,000",
+    "medianPricePerSqFt": "$247",
     "waterfrontCount": 32,
-    "newConstructionCount": 32
+    "newConstructionCount": 30
   },
   "sold": {
-    "count": 154,
-    "medianPrice": "$460,000",
+    "count": 157,
+    "medianPrice": "$450,000",
     "medianDom": 55,
     "saleToListRatio": "92.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.4,
+    "condo": 5.3,
     "sfhVilla": 2.7,
     "blended": 3.4,
     "method": "active / (trailing-12mo closed / 12)",
@@ -68,66 +68,66 @@
   "buildingClasses": [],
   "recentSoldComps": [
     {
-      "listingId": "A4695601",
-      "address": "5697 LONG SHORE LOOP",
-      "subdivision": "SUNRISE PRESERVE PH 5",
-      "soldPrice": "$799,999",
-      "soldDate": "2026-09-29",
+      "listingId": "A4687190",
+      "address": "6124 ABACO DR",
+      "subdivision": "ISLES OF SARASOTA",
+      "soldPrice": "$735,000",
+      "soldDate": "2026-09-30",
       "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,293",
-      "yearBuilt": 2022,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,489",
+      "yearBuilt": 2013,
       "propertyType": "Residential",
       "isWaterfront": true
     },
     {
-      "listingId": "A4701328",
-      "address": "4859 SABAL LAKE CIR",
-      "subdivision": "TURTLE ROCK PARCELS I & J",
-      "soldPrice": "$499,000",
-      "soldDate": "2026-09-29",
+      "listingId": "A4693858",
+      "address": "5362 CICERONE ST",
+      "subdivision": "ESPLANADE ON PALMER RANCH",
+      "soldPrice": "$705,000",
+      "soldDate": "2026-09-30",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,918",
+      "yearBuilt": 2021,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4702662",
+      "address": "7596 ANDORA DR",
+      "subdivision": "VILLAGEWALK",
+      "soldPrice": "$410,000",
+      "soldDate": "2026-09-30",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,672",
+      "yearBuilt": 2004,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4687543",
+      "address": "4639 CHAPEL HILL DR #2925",
+      "subdivision": "STONEYBROOK VERANDA GREENS NORTH 02",
+      "soldPrice": "$330,000",
+      "soldDate": "2026-09-30",
       "bedrooms": 2,
       "bathrooms": 2.0,
-      "livingSqFt": "1,677",
-      "yearBuilt": 1998,
+      "livingSqFt": "1,333",
+      "yearBuilt": 1997,
       "propertyType": "Residential",
-      "isWaterfront": true
+      "isWaterfront": false
     },
     {
-      "listingId": "A4701186",
-      "address": "9539 HAWKSMOOR LN",
-      "subdivision": "STONEYBROOK AT PALMER RANCH",
-      "soldPrice": "$430,000",
-      "soldDate": "2026-09-29",
-      "bedrooms": 3,
+      "listingId": "A4700596",
+      "address": "9320 CLUBSIDE CIR #2205",
+      "subdivision": "STONEYBROOK CLUBSIDE 2",
+      "soldPrice": "$280,000",
+      "soldDate": "2026-09-30",
+      "bedrooms": 2,
       "bathrooms": 2.0,
-      "livingSqFt": "2,100",
-      "yearBuilt": 1993,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4703320",
-      "address": "8716 AMARETTO AVE",
-      "subdivision": "COBBLESTONE/PALMER RANCH PH 1",
-      "soldPrice": "$699,000",
-      "soldDate": "2026-09-25",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,111",
-      "yearBuilt": 2017,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4661730",
-      "address": "8809 HAVENRIDGE DR",
-      "subdivision": "HUNTINGTON POINTE",
-      "soldPrice": "$630,000",
-      "soldDate": "2026-09-25",
-      "bedrooms": 4,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,794",
+      "livingSqFt": "1,106",
       "yearBuilt": 1995,
       "propertyType": "Residential",
       "isWaterfront": false
@@ -138,41 +138,41 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 31,
-      "avgPrice": "$310,371",
+      "activeCount": 34,
+      "avgPrice": "$310,626",
       "avgPricePerSqFt": "$198",
-      "avgLivingSqFt": "1,584",
-      "avgDom": 122
+      "avgLivingSqFt": "1,586",
+      "avgDom": 112
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 73,
-      "avgPrice": "$296,265",
+      "avgPrice": "$294,978",
       "avgPricePerSqFt": "$229",
-      "avgLivingSqFt": "1,288",
+      "avgLivingSqFt": "1,283",
       "avgDom": 118
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 7,
-      "avgPrice": "$386,971",
-      "avgPricePerSqFt": "$230",
-      "avgLivingSqFt": "1,701",
-      "avgDom": 111
+      "activeCount": 5,
+      "avgPrice": "$361,980",
+      "avgPricePerSqFt": "$214",
+      "avgLivingSqFt": "1,707",
+      "avgDom": 97
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 12,
-      "avgPrice": "$360,114",
-      "avgPricePerSqFt": "$220",
-      "avgLivingSqFt": "1,635",
-      "avgDom": 87
+      "activeCount": 10,
+      "avgPrice": "$355,138",
+      "avgPricePerSqFt": "$219",
+      "avgLivingSqFt": "1,625",
+      "avgDom": 79
     }
   ],
   "condoTiersScope": {
@@ -196,26 +196,26 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 40,
-      "soldCount": 209,
-      "soldMedianPricePerSqFt": "$260",
-      "soldMedianPrice": "$475,000",
+      "activeCount": 42,
+      "soldCount": 213,
+      "soldMedianPricePerSqFt": "$258",
+      "soldMedianPrice": "$470,000",
       "lowSample": false
     },
     {
       "segment": "other_wf",
       "label": "Other waterfront",
       "activeCount": 32,
-      "soldCount": 194,
+      "soldCount": 195,
       "soldMedianPricePerSqFt": "$275",
-      "soldMedianPrice": "$592,000",
+      "soldMedianPrice": "$595,000",
       "lowSample": false
     },
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 127,
-      "soldCount": 502,
+      "activeCount": 125,
+      "soldCount": 503,
       "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$440,000",
       "lowSample": false
@@ -223,24 +223,24 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 3.4,
-    "monthsOfSupplyCondo": 5.4,
+    "monthsOfSupplyCondo": 5.3,
     "monthsOfSupplySfhVilla": 2.7,
     "label": "seller's market",
     "activeCount": 199,
-    "sold365Count": 701,
-    "sold90Count": 154,
+    "sold365Count": 704,
+    "sold90Count": 157,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 515,
-      "activeCount": 76,
+      "soldCount": 517,
+      "activeCount": 77,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 392,
-      "activeCount": 123,
+      "soldCount": 396,
+      "activeCount": 122,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 199 active listings and roughly 58 closed sales a month (trailing 12 months), Palmer Ranch has about 3.4 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 199 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.4 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,7 +263,7 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $409,000."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $405,000."
     },
     {
       "facet": "speed",

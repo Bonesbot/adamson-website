@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-09-30T10:53:49.549595+00:00",
+  "lastUpdated": "2026-10-01T10:52:37.328051+00:00",
   "counts": {
-    "sold": 100,
-    "pending": 11,
+    "sold": 102,
+    "pending": 9,
     "active": 37,
     "total": 111
   },
   "metrics": {
-    "avgPrice": "$1,090,042",
+    "avgPrice": "$1,089,385",
     "avgPricePerSqFt": "$502",
     "avgYearBuilt": 1972,
     "avgLivingSqFt": "1,950",
@@ -29,16 +29,16 @@
     "newConstructionCount": 13
   },
   "sold": {
-    "count": 17,
+    "count": 19,
     "medianPrice": "$590,000",
     "medianDom": 97,
-    "saleToListRatio": "84.0%",
+    "saleToListRatio": "84.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 6.4,
-    "sfhVilla": 4.9,
-    "blended": 5.2,
+    "sfhVilla": 4.7,
+    "blended": 5.0,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -67,6 +67,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4697956",
+      "address": "859 PATTERSON DR",
+      "subdivision": "BAY HAVEN",
+      "soldPrice": "$675,000",
+      "soldDate": "2026-09-30",
+      "bedrooms": 4,
+      "bathrooms": 4.0,
+      "livingSqFt": "2,850",
+      "yearBuilt": 1951,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4687030",
+      "address": "2310 HICKORY AVE",
+      "subdivision": "SARASOTA BAY PARK",
+      "soldPrice": "$590,000",
+      "soldDate": "2026-09-30",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,354",
+      "yearBuilt": 1937,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4695931",
       "address": "1020 23RD ST",
@@ -105,32 +131,6 @@
       "yearBuilt": 2024,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "TB8493607",
-      "address": "4050 TURKS CAP PL",
-      "subdivision": "INDIAN BEACH MAP OF",
-      "soldPrice": "$800,000",
-      "soldDate": "2026-09-17",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,038",
-      "yearBuilt": 1955,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4699500",
-      "address": "4735 REMINGTON DR",
-      "subdivision": "SAPPHIRE HEIGHTS",
-      "soldPrice": "$500,000",
-      "soldDate": "2026-09-01",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,762",
-      "yearBuilt": 1956,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$550,000",
       "avgPricePerSqFt": "$436",
       "avgLivingSqFt": "1,262",
-      "avgDom": 138
+      "avgDom": 139
     },
     {
       "tier": "1990to2005",
@@ -172,7 +172,7 @@
       "avgPrice": "$561,500",
       "avgPricePerSqFt": "$591",
       "avgLivingSqFt": "951",
-      "avgDom": 120
+      "avgDom": 121
     }
   ],
   "condoTiersScope": {
@@ -215,25 +215,25 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 20,
-      "soldCount": 71,
+      "soldCount": 73,
       "soldMedianPricePerSqFt": "$394",
-      "soldMedianPrice": "$570,000",
+      "soldMedianPrice": "$575,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.2,
+    "monthsOfSupply": 5.0,
     "monthsOfSupplyCondo": 6.4,
-    "monthsOfSupplySfhVilla": 4.9,
+    "monthsOfSupplySfhVilla": 4.7,
     "label": "balanced market",
     "activeCount": 37,
-    "sold365Count": 86,
-    "sold90Count": 17,
+    "sold365Count": 88,
+    "sold90Count": 19,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 80,
+      "soldCount": 82,
       "activeCount": 28,
       "soldMedianPrice": "$660,000",
       "soldMedianPricePerSqFt": "$413"
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 37 active listings and roughly 7 closed sales a month (trailing 12 months), West Of Trail North has about 5.2 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 37 active listings and roughly 7 closed sales a month (trailing 12 months), West Of Trail North has about 5.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 97 days on market and closed at 84.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 97 days on market and closed at 84.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
