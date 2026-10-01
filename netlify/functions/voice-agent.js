@@ -21,11 +21,11 @@ import events from '../../src/data/srqmap-events.json' with { type: 'json' };
 import pins from '../../src/data/srqmap-pins.json' with { type: 'json' };
 import { routeFor } from './lead-routing.js';
 
-const MODEL = process.env.VOICE_MODEL || 'claude-sonnet-5-5';
+const MODEL = process.env.VOICE_MODEL || 'claude-haiku-4-5-20251001';
 const DAILY_CAP = parseFloat(process.env.VOICE_DAILY_CAP_USD || '5');
 // Rough list prices per million tokens for the spend ledger; est_cost only, never billed.
-const PRICE_IN = parseFloat(process.env.VOICE_PRICE_IN || '3');
-const PRICE_OUT = parseFloat(process.env.VOICE_PRICE_OUT || '15');
+const PRICE_IN = parseFloat(process.env.VOICE_PRICE_IN || '1');
+const PRICE_OUT = parseFloat(process.env.VOICE_PRICE_OUT || '5');
 
 const json = (statusCode, obj) => ({
   statusCode,
