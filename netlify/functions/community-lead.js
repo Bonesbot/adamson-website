@@ -460,7 +460,7 @@ export const handler = async (event) => {
   //         SPAM_MODE=tag (default), with a [SPAM?] subject.
   try {
     lead.spam = await assessSpam({
-      body, event, headers: event.headers, source: lead.source,
+      body, event, headers: event.headers, source: lead.source, native,
       fields: { name: lead.name, email: lead.email, phone: lead.phone, message: lead.notes },
     });
   } catch (err) {
@@ -489,8 +489,8 @@ export const handler = async (event) => {
 
   const results = await Promise.allSettled([
     storeLead(lead, zohoId, zohoError),
-    flagged && lead.spam.mode === 'quarantine'
-      ? Promise.resolve({ skipped: 'spam quarantined' })
+    flagged && (lead.spam.mode === 'quarantine' || lead.spam.notify === false)
+      ? Promise.resolve({ skipped: lead.spam.notify === false ? 'spam quiet (score ' + lead.spam.score + ')' : 'spam quarantined' })
       : sendTeamNotification(lead, zohoId),
     flagged ? Promise.resolve({ skipped: 'spam' }) : sendCourtesyReply(lead),
   ]);

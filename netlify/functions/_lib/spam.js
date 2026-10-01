@@ -9,9 +9,15 @@
 //   SCORED (>= SPAM_THRESHOLD flags the lead as spam):
 //     no client stamp (_meta missing: a direct POST, not our page) · no Turnstile token
 //     (only when TURNSTILE_SECRET_KEY is set) · fast submit (< 4 s) · burst from one IP ·
-//     solicitation language (web design, SEO, "your website"...) · links in the message ·
-//     greeting the domain ("Hi siestareport.com") · gibberish names/messages · Cyrillic/CJK text ·
-//     gmail dot-trick addresses
+//     solicitation language (web design, SEO, "your website"...) · links in the message
+//     (incl. bare domains like "example.com") · greeting the domain ("Hi siestareport.com") ·
+//     gibberish names/messages · glued CamelCase names ("DavidDueli") · Cyrillic/CJK text ·
+//     gmail dot-trick addresses · Russian-format phones (8 + 10 digits) · non-NANP phones ·
+//     native (urlencoded) POST with no Referer from our own domains · solicitation email
+//     domains (virtual team, seo, agency...) · email domain spoofing one of our brands
+//   QUIET (score >= SPAM_QUIET_THRESHOLD): still stored with status 'spam' for audit, but
+//     no team email even in SPAM_MODE=tag. The 2026-09-24..10-01 flood was 34 direct POSTs
+//     that all scored 8+ under these rules; [SPAM?] mail is reserved for the borderline.
 //
 // Flagged leads: stored in public.leads with status 'spam' and zoho_sync 'skipped:spam'
 // (so cc-queue-poller never pushes them to Zoho), no Zoho, no Home Platform forward.
@@ -21,6 +27,7 @@
 import { ipHash, clientIp, geoFrom, supaInsert, supaCount } from './web-common.js';
 
 export const SPAM_THRESHOLD = 5;
+export const SPAM_QUIET_THRESHOLD = 8;   // >= this: flagged AND silent (no [SPAM?] email)
 export const spamMode = () => (process.env.SPAM_MODE === 'quarantine' ? 'quarantine' : 'tag');
 
 const SOLICIT = [
@@ -33,6 +40,12 @@ const SOLICIT = [
   /pardon the intrusion|i came across your (website|site|business)|i (noticed|visited) your (website|site)|reply (stop|no)|unsubscribe|opt[- ]out/i,
 ];
 const OWN_DOMAIN = /\b(hi|hello|hey|dear|greetings)\b[\s,]*(the\s+)?(team\s+at\s+)?(www\.)?(adamsonfl|siestareport|longboatlido|ccshores)\.com/i;
+const OUR_HOSTS = /^(www\.)?(adamsonfl|siestareport|longboatlido|ccshores)\.com$/i;
+const BRAND_WORDS = /adamsonfl|siestareport|longboatlido|ccshores/i;
+// Email domains that sell services, not buy houses ("melissa@trustedvirtualteam.com").
+const SOLICIT_DOMAIN = /virtual|\bseo\b|seo[a-z-]|marketing|design|digital|agency|outsourc|leadgen|webdev|studio/i;
+// Bare domains in a message ("ukbreakingnews24x7.com") count as links; emails are stripped first.
+const BARE_DOMAIN = /\b[a-z0-9][a-z0-9-]{1,62}\.(com|net|org|top|online|site|xyz|ru|info|io|biz|shop|club|pl|co|us|me|app|link|click|cc)\b/gi;
 
 function vowelRatio(w) { const v = (w.match(/[aeiouy]/gi) || []).length; return v / w.length; }
 function gibberishWord(w) {
@@ -42,7 +55,8 @@ function gibberishWord(w) {
 }
 
 /**
- * @param {object} p  { body, fields: {name, email, phone, message}, event, headers, req, context, source }
+ * @param {object} p  { body, fields: {name, email, phone, message}, event, headers, req, context, source,
+ *                      native: true when the POST was application/x-www-form-urlencoded (no-JS form post) }
  */
 export async function assessSpam(p) {
   const body = p.body || {};
@@ -76,8 +90,16 @@ export async function assessSpam(p) {
   }
 
   // ── scored signals ──
-  if (!meta) add(3, 'no_client_stamp');
+  if (!meta) add(4, 'no_client_stamp');
   else if (typeof meta.ts === 'number' && meta.ts < 4000) add(3, 'fast_submit');
+
+  // A browser submitting our form natively (no JS) always sends a Referer from one of our
+  // domains. A bot replaying the harvested form usually sends none, or someone else's.
+  if (p.native) {
+    let refHost = '';
+    try { refHost = new URL(hdr.referer || hdr.Referer || '').hostname; } catch (_) {}
+    if (!OUR_HOSTS.test(refHost)) add(2, 'native_no_referer');
+  }
 
   if (ipH) {
     try {
@@ -96,7 +118,9 @@ export async function assessSpam(p) {
   for (const re of SOLICIT) if (re.test(msg)) sol += 2;
   if (sol) add(Math.min(sol, 6), 'solicitation');
   if (OWN_DOMAIN.test(msg)) add(3, 'greets_domain');
-  const links = (msg.match(/https?:\/\/|www\.[a-z0-9-]+\.[a-z]{2,}/gi) || []).length;
+  const msgNoEmail = msg.replace(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/gi, ' ');
+  const links = (msgNoEmail.match(/https?:\/\/|www\.[a-z0-9-]+\.[a-z]{2,}/gi) || []).length
+    + (msgNoEmail.replace(/https?:\/\/\S+|www\.\S+/gi, ' ').match(BARE_DOMAIN) || []).length;
   if (links) add(Math.min(links * 2, 4), 'links_in_message');
   if (/[Ѐ-ӿ一-鿿぀-ヿ]/.test(text)) add(3, 'foreign_script');
   const gib = name.split(/\s+/).filter(gibberishWord).length;
@@ -104,6 +128,24 @@ export async function assessSpam(p) {
   if (/^\S{12,}$/.test(msg.trim()) && gibberishWord(msg.trim().replace(/[^a-z]/gi, '').slice(0, 30))) add(3, 'gibberish_message');
   const local = email.split('@')[0] || '';
   if (/@gmail\.com$/i.test(email) && (local.match(/\./g) || []).length >= 3) add(2, 'gmail_dot_trick');
+  const edomain = (email.split('@')[1] || '').toLowerCase();
+  if (edomain && SOLICIT_DOMAIN.test(edomain.replace(/\.[a-z]+$/, ''))) add(2, 'solicit_domain');
+  if (edomain && BRAND_WORDS.test(edomain) && !OUR_HOSTS.test(edomain)) add(3, 'spoof_domain');
+
+  // Phone shape. Russian bot kits fill "8" + 10 digits; real Sarasota buyers type a NANP
+  // number (10 digits, or 11 with a leading 1, or +1). Other international is only a nudge:
+  // Canadian and European buyers are real, but they rarely arrive without a page stamp.
+  const phoneRaw = String(f.phone || '').trim();
+  const digits = phoneRaw.replace(/\D/g, '');
+  if (digits) {
+    if (digits.length === 11 && /^[78]/.test(digits) && !phoneRaw.startsWith('+')) add(3, 'ru_phone_format');
+    else if (!(digits.length === 10 || (digits.length === 11 && digits[0] === '1'))) add(1, 'non_nanp_phone');
+  }
+  // "DavidDueli", "RobertJek": one token, a capital glued mid-word, no space. Mc/De/La are fine.
+  const nm = name.trim();
+  if (/^[A-Za-z]+$/.test(nm) && !/\s/.test(nm) && /[a-z][A-Z]/.test(nm)
+      && !/^(Mc|Mac|De|Di|La|Le|Van|Von|Da|Du|St)[A-Z]/.test(nm)) add(2, 'glued_name');
+  if (/^[\d\s().+-]{7,}$/.test(msg.trim())) add(1, 'digits_only_message');
 
   return verdict(score >= SPAM_THRESHOLD ? 'spam' : 'ok', reasons);
 
@@ -112,6 +154,8 @@ export async function assessSpam(p) {
       kind,                                   // 'ok' | 'spam' | 'bot'
       spam: kind !== 'ok',
       score: kind === 'bot' ? 99 : score,
+      // false when the score is so high that a [SPAM?] email would only be noise.
+      notify: !(kind === 'spam' && score >= SPAM_QUIET_THRESHOLD),
       reasons: why,
       ipHash: ipH,
       mode: spamMode(),

@@ -133,7 +133,7 @@ export const handler = async (event) => {
     console.log('submission-created: wishlist stored for', row.email);
 
     // Team email (replaces the old Netlify Forms notification). Tag mode marks spam.
-    if (!(flagged && verdict.mode === 'quarantine')) {
+    if (!(flagged && (verdict.mode === 'quarantine' || verdict.notify === false))) {
       try {
         const x = row.details;
         await notifyTeam({
