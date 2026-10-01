@@ -1,0 +1,189 @@
+---
+// /voice/ : the AdamsonFL.com voice agent (MVP 2026-10-01). Hidden from search while it
+// is being tuned. Speech-to-text and text-to-speech run in the browser (Web Speech API,
+// no account, no per-minute cost); the brain is /.netlify/functions/voice-agent.
+// Chrome, Edge and Safari support the mic; everywhere else the typed box still works.
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const description =
+  'Talk to Ryan Adamson\'s digital assistant about homes for sale in Sarasota, Longboat Key, Siesta Key and West Bradenton. Say what you are looking for and hear what is on the market this morning.';
+---
+
+<BaseLayout title="Talk to the Market" description={description} noIndex={true} standalone={true}>
+  <section class="relative overflow-hidden pt-32 pb-16 min-h-screen" style="background-color: var(--color-navy);">
+    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
+    <div
+      class="absolute -top-1/3 left-1/2 -translate-x-1/2 w-[60rem] h-[60rem] rounded-full opacity-20 blur-3xl pointer-events-none"
+      style="background: radial-gradient(circle, var(--color-cbgl-blue) 0%, transparent 60%);"
+    ></div>
+
+    <div class="relative z-10 container max-w-3xl mx-auto px-4 text-center text-white">
+      <p class="uppercase tracking-[0.3em] text-xs mb-4" style="color: var(--color-gold);">The Adamson Group</p>
+      <h1 class="font-display text-4xl md:text-5xl font-semibold mb-3">Talk to the market.</h1>
+      <p class="text-white/70 max-w-xl mx-auto mb-10">
+        Say what you are looking for, out loud. “A three-two with a pool in a golf community.” “What is on the water under two million on Longboat?” “Anything fun this weekend?”
+      </p>
+
+      <!-- Mic -->
+      <button id="mic" type="button" aria-label="Hold to talk"
+        class="relative mx-auto flex h-28 w-28 items-center justify-center rounded-full border-2 transition-transform active:scale-95"
+        style="border-color: var(--color-gold); background: rgba(201,169,97,0.12);">
+        <span id="ring" class="absolute inset-0 rounded-full" style="box-shadow: 0 0 0 0 rgba(201,169,97,0.5);"></span>
+        <svg class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="color: var(--color-gold);" aria-hidden="true">
+          <rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <p id="status" class="mt-4 text-sm text-white/60 h-5">Tap the microphone and start talking.</p>
+
+      <!-- Typed fallback -->
+      <form id="typed" class="mt-6 flex gap-2 max-w-md mx-auto">
+        <input id="text" type="text" autocomplete="off" placeholder="Or type it here"
+          class="flex-1 rounded-full bg-white/10 border border-white/20 px-5 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[var(--color-gold)]" />
+        <button type="submit" class="rounded-full px-5 py-3 font-medium" style="background: var(--color-gold); color: var(--color-navy);">Ask</button>
+      </form>
+
+      <!-- Transcript -->
+      <div id="log" class="mt-10 space-y-4 text-left"></div>
+
+      <!-- Cards -->
+      <div id="cards" class="mt-8 grid gap-4 sm:grid-cols-2 text-left"></div>
+
+      <p class="mt-14 text-xs text-white/40">
+        Listings are as of this morning’s MLS refresh. The assistant is digital; Ryan is not.
+        Prefer a person? Call <a href="tel:+19417139234" class="underline">(941) 713-9234</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+(function () {
+  var mic = document.getElementById('mic'), ring = document.getElementById('ring'), status = document.getElementById('status');
+  var log = document.getElementById('log'), cards = document.getElementById('cards');
+  var form = document.getElementById('typed'), text = document.getElementById('text');
+  var messages = [];
+  var sid = Math.random().toString(36).slice(2, 12);
+  var busy = false, listening = false;
+
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var rec = null;
+  if (SR) {
+    rec = new SR();
+    rec.lang = 'en-US'; rec.interimResults = true; rec.continuous = false; rec.maxAlternatives = 1;
+    rec.onresult = function (ev) {
+      var t = '';
+      for (var i = ev.resultIndex; i < ev.results.length; i++) t += ev.results[i][0].transcript;
+      status.textContent = t;
+      if (ev.results[ev.results.length - 1].isFinal) send(t.trim());
+    };
+    rec.onerror = function (ev) { stopListening(); status.textContent = ev.error === 'not-allowed' ? 'Microphone blocked. You can type instead.' : 'Did not catch that. Try again or type it.'; };
+    rec.onend = function () { stopListening(); };
+  } else {
+    status.textContent = 'This browser has no microphone support. Type below instead.';
+    mic.disabled = true; mic.style.opacity = 0.4;
+  }
+
+  function startListening() {
+    if (!rec || busy) return;
+    try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) {}
+    listening = true;
+    ring.style.animation = 'agpulse 1.4s ease-out infinite';
+    status.textContent = 'Listening…';
+    try { rec.start(); } catch (e) {}
+  }
+  function stopListening() { listening = false; ring.style.animation = ''; }
+  mic.addEventListener('click', function () { listening ? rec.stop() : startListening(); });
+  form.addEventListener('submit', function (e) { e.preventDefault(); var t = text.value.trim(); if (t) { text.value = ''; send(t); } });
+
+  function bubble(role, content) {
+    var d = document.createElement('div');
+    d.className = role === 'user' ? 'ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-white/10 px-4 py-3' : 'mr-auto max-w-[85%] rounded-2xl rounded-bl-sm px-4 py-3';
+    if (role !== 'user') d.style.background = 'rgba(201,169,97,0.14)';
+    d.textContent = content;
+    log.appendChild(d);
+    d.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    return d;
+  }
+
+  function speak(t) {
+    if (!window.speechSynthesis) return;
+    try {
+      speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(t);
+      var voices = speechSynthesis.getVoices();
+      var pick = voices.find(function (v) { return /en-US/i.test(v.lang) && /Samantha|Google US English|Aria|Jenny|Natural/i.test(v.name); })
+        || voices.find(function (v) { return /en-US/i.test(v.lang); });
+      if (pick) u.voice = pick;
+      u.rate = 1.0; u.pitch = 1.0;
+      speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+
+  function fmtPrice(n) { return n == null ? '' : '$' + Math.round(n).toLocaleString('en-US'); }
+
+  function render(data) {
+    cards.innerHTML = '';
+    (data.listings || []).forEach(function (l) {
+      var a = document.createElement('a');
+      a.href = l.url; a.target = '_blank'; a.rel = 'noopener';
+      a.className = 'block rounded-xl border border-white/10 bg-white/5 p-4 hover:border-[var(--color-gold)] transition-colors';
+      a.innerHTML =
+        '<div class="text-xs uppercase tracking-widest" style="color: var(--color-gold);">' + esc(l.area) + (l.subdivision ? ' · ' + esc(l.subdivision) : '') + '</div>' +
+        '<div class="mt-1 font-display text-lg">' + fmtPrice(l.price) + '</div>' +
+        '<div class="text-sm text-white/80">' + esc(l.address) + '</div>' +
+        '<div class="mt-2 text-xs text-white/60">' + [l.beds ? l.beds + ' bd' : '', l.baths ? l.baths + ' ba' : '', l.sqft ? l.sqft.toLocaleString('en-US') + ' sf' : '',
+          l.pool ? 'pool' : '', l.waterfront ? 'waterfront' : '', l.golf ? 'golf' : '', l.dock ? 'dock' : ''].filter(Boolean).join(' · ') + '</div>' +
+        (l.remarks ? '<div class="mt-2 text-xs text-white/50 line-clamp-2">' + esc(l.remarks) + '</div>' : '') +
+        '<div class="mt-3 text-xs underline" style="color: var(--color-gold);">See photos and details</div>';
+      cards.appendChild(a);
+    });
+    (data.events || []).forEach(function (e) {
+      var d = document.createElement('div');
+      d.className = 'rounded-xl border border-white/10 bg-white/5 p-4';
+      d.innerHTML = '<div class="text-xs uppercase tracking-widest" style="color: var(--color-gold);">This week</div>' +
+        '<div class="mt-1 font-display text-lg">' + esc(e.name) + '</div>' +
+        '<div class="text-sm text-white/80">' + esc(e.venue || '') + (e.when ? ' · ' + esc(e.when) : '') + '</div>' +
+        (e.website ? '<a class="mt-2 inline-block text-xs underline" style="color: var(--color-gold);" target="_blank" rel="noopener" href="' + esc(e.website) + '">Details</a>' : '');
+      cards.appendChild(d);
+    });
+    (data.places || []).forEach(function (p) {
+      var d = document.createElement('div');
+      d.className = 'rounded-xl border border-white/10 bg-white/5 p-4';
+      d.innerHTML = '<div class="text-xs uppercase tracking-widest" style="color: var(--color-gold);">' + esc(p.kind || 'Local') + '</div>' +
+        '<div class="mt-1 font-display text-lg">' + esc(p.name) + '</div>' +
+        (p.ryans_tip ? '<div class="mt-1 text-sm text-white/70">Ryan’s tip: ' + esc(p.ryans_tip) + '</div>' : '');
+      cards.appendChild(d);
+    });
+  }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+  function send(t) {
+    if (!t || busy) return;
+    busy = true;
+    bubble('user', t);
+    messages.push({ role: 'user', content: t });
+    status.textContent = 'Thinking…';
+    var thinking = bubble('assistant', '…');
+    fetch('/.netlify/functions/voice-agent', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: messages.slice(-12), sid: sid }),
+    }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        var reply = res.ok ? res.j.reply : (res.j && res.j.error) || 'Something went wrong. Try again in a moment.';
+        thinking.textContent = reply;
+        if (res.ok) { messages.push({ role: 'assistant', content: reply }); render(res.j); }
+        status.textContent = res.ok ? 'Tap the microphone to reply.' : '';
+        speak(reply);
+      })
+      .catch(function () { thinking.textContent = 'I lost the connection for a second. Try again?'; status.textContent = ''; })
+      .then(function () { busy = false; });
+  }
+
+  // Warm the voice list (Chrome loads it async) and tag the session for analytics.
+  if (window.speechSynthesis) speechSynthesis.getVoices();
+})();
+</script>
+
+<style is:inline>
+  @keyframes agpulse { 0% { box-shadow: 0 0 0 0 rgba(201,169,97,0.55); } 100% { box-shadow: 0 0 0 28px rgba(201,169,97,0); } }
+</style>
