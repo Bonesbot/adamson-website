@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-01T10:52:36.564996+00:00",
+  "lastUpdated": "2026-10-02T10:54:08.551813+00:00",
   "counts": {
-    "sold": 266,
-    "pending": 28,
-    "active": 87,
+    "sold": 267,
+    "pending": 27,
+    "active": 85,
     "total": 294
   },
   "metrics": {
-    "avgPrice": "$2,122,023",
+    "avgPrice": "$2,120,918",
     "avgPricePerSqFt": "$663",
     "avgYearBuilt": 1982,
     "avgLivingSqFt": "2,763",
@@ -22,23 +22,23 @@
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 87,
+    "count": 85,
     "medianPrice": "$2,150,000",
-    "medianPricePerSqFt": "$793",
-    "waterfrontCount": 18,
-    "newConstructionCount": 26
+    "medianPricePerSqFt": "$792",
+    "waterfrontCount": 17,
+    "newConstructionCount": 25
   },
   "sold": {
-    "count": 41,
-    "medianPrice": "$1,750,000",
-    "medianDom": 122,
-    "saleToListRatio": "87.5%",
+    "count": 42,
+    "medianPrice": "$1,762,500",
+    "medianDom": 123,
+    "saleToListRatio": "87.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 5.2,
-    "sfhVilla": 4.9,
-    "blended": 5.0,
+    "sfhVilla": 4.8,
+    "blended": 4.8,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -56,17 +56,30 @@
   "priceBands": {
     "under900k": 24,
     "band900kTo1_5m": 9,
-    "band1_5mTo3m": 20,
-    "band3mPlus": 34
+    "band1_5mTo3m": 19,
+    "band3mPlus": 33
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 87
+      "count": 85
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4657794",
+      "address": "1838 ALTA VISTA ST",
+      "subdivision": "AVONDALE REP",
+      "soldPrice": "$2,875,000",
+      "soldDate": "2026-09-30",
+      "bedrooms": 5,
+      "bathrooms": 5.0,
+      "livingSqFt": "4,452",
+      "yearBuilt": 2022,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4678496",
       "address": "1400 SIESTA DR",
@@ -118,19 +131,6 @@
       "yearBuilt": 2025,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4682724",
-      "address": "1751 FLOYD ST",
-      "subdivision": "MATHENEYS SUB",
-      "soldPrice": "$1,400,000",
-      "soldDate": "2026-09-21",
-      "bedrooms": 4,
-      "bathrooms": 5.0,
-      "livingSqFt": "2,881",
-      "yearBuilt": 1926,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$367,143",
       "avgPricePerSqFt": "$319",
       "avgLivingSqFt": "1,154",
-      "avgDom": 98
+      "avgDom": 99
     },
     {
       "tier": "1990to2005",
@@ -187,7 +187,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 16,
+      "activeCount": 15,
       "soldCount": 30,
       "soldMedianPricePerSqFt": "$1,052",
       "soldMedianPrice": "$4,162,500",
@@ -214,29 +214,29 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 67,
-      "soldCount": 222,
+      "activeCount": 66,
+      "soldCount": 223,
       "soldMedianPricePerSqFt": "$570",
-      "soldMedianPrice": "$1,428,000",
+      "soldMedianPrice": "$1,450,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.0,
+    "monthsOfSupply": 4.8,
     "monthsOfSupplyCondo": 5.2,
-    "monthsOfSupplySfhVilla": 4.9,
-    "label": "balanced market",
-    "activeCount": 87,
-    "sold365Count": 210,
-    "sold90Count": 41,
+    "monthsOfSupplySfhVilla": 4.8,
+    "label": "seller's market",
+    "activeCount": 85,
+    "sold365Count": 211,
+    "sold90Count": 42,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 246,
-      "activeCount": 80,
+      "soldCount": 247,
+      "activeCount": 78,
       "soldMedianPrice": "$1,600,000",
-      "soldMedianPricePerSqFt": "$625"
+      "soldMedianPricePerSqFt": "$629"
     },
     "condo": {
       "soldCount": 20,
@@ -246,19 +246,19 @@
     }
   },
   "boating": {
-    "activeWithDock": 14,
-    "activeWaterfront": 18
+    "activeWithDock": 13,
+    "activeWaterfront": 17
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 87 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 5.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 85 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 4.8 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,600,000 ($625/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
+      "a": "Single-family homes sell around $1,600,000 ($629/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
     },
     {
       "facet": "range",
@@ -268,12 +268,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 122 days on market and closed at 87.5% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 123 days on market and closed at 87.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail Core homes have a dock?",
-      "a": "Of 18 active waterfront listings, 14 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 17 active waterfront listings, 13 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

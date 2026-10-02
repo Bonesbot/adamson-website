@@ -2,16 +2,16 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-01T10:52:38.126553+00:00",
+  "lastUpdated": "2026-10-02T10:54:10.130753+00:00",
   "counts": {
-    "sold": 310,
-    "pending": 25,
+    "sold": 312,
+    "pending": 24,
     "active": 90,
-    "total": 335
+    "total": 336
   },
   "metrics": {
-    "avgPrice": "$621,798",
-    "avgPricePerSqFt": "$326",
+    "avgPrice": "$621,290",
+    "avgPricePerSqFt": "$325",
     "avgYearBuilt": 1980,
     "avgLivingSqFt": "1,742",
     "avgLotSqFt": null,
@@ -29,16 +29,16 @@
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 60,
-    "medianPrice": "$413,000",
-    "medianDom": 52,
-    "saleToListRatio": "86.5%",
+    "count": 61,
+    "medianPrice": "$410,000",
+    "medianDom": 53,
+    "saleToListRatio": "86.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 4.5,
     "sfhVilla": 4.2,
-    "blended": 4.4,
+    "blended": 4.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -56,8 +56,8 @@
   "priceBands": {
     "under900k": 71,
     "band900kTo1_5m": 8,
-    "band1_5mTo3m": 6,
-    "band3mPlus": 5
+    "band1_5mTo3m": 7,
+    "band3mPlus": 4
   },
   "propertyTypes": [
     {
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4686630",
+      "address": "1732 KESTRAL PARK WAY S #43",
+      "subdivision": "THE LANDINGS",
+      "soldPrice": "$500,000",
+      "soldDate": "2026-10-01",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,368",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4678685",
       "address": "1500 CARIBBEAN DR",
@@ -107,30 +120,17 @@
       "isWaterfront": true
     },
     {
-      "listingId": "A4696425",
-      "address": "6470 HOLLYWOOD BLVD #208",
-      "subdivision": "ALMERIA ON THE BAY",
-      "soldPrice": "$310,000",
+      "listingId": "A4684687",
+      "address": "1715 PELICAN COVE RD #GL438",
+      "subdivision": "PELICAN COVE XIV",
+      "soldPrice": "$315,000",
       "soldDate": "2026-09-30",
       "bedrooms": 2,
       "bathrooms": 2.0,
-      "livingSqFt": "910",
-      "yearBuilt": 1978,
+      "livingSqFt": "1,288",
+      "yearBuilt": 1979,
       "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4703872",
-      "address": "1704 PELICAN COVE RD #T138",
-      "subdivision": "PELICAN COVE V",
-      "soldPrice": "$260,000",
-      "soldDate": "2026-09-30",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,906",
-      "yearBuilt": 1976,
-      "propertyType": "Residential",
-      "isWaterfront": true
+      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,9 +139,9 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 48,
-      "avgPrice": "$354,200",
+      "avgPrice": "$356,304",
       "avgPricePerSqFt": "$283",
-      "avgLivingSqFt": "1,255",
+      "avgLivingSqFt": "1,263",
       "avgDom": 91
     },
     {
@@ -152,7 +152,7 @@
       "avgPrice": "$609,333",
       "avgPricePerSqFt": "$281",
       "avgLivingSqFt": "2,167",
-      "avgDom": 222
+      "avgDom": 223
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$617,225",
       "avgPricePerSqFt": "$361",
       "avgLivingSqFt": "1,710",
-      "avgDom": 131
+      "avgDom": 132
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$675,000",
       "avgPricePerSqFt": "$387",
       "avgLivingSqFt": "1,745",
-      "avgDom": 36
+      "avgDom": 37
     }
   ],
   "condoTiersScope": {
@@ -224,20 +224,20 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 57,
-      "soldCount": 197,
+      "soldCount": 199,
       "soldMedianPricePerSqFt": "$286",
       "soldMedianPrice": "$425,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.4,
+    "monthsOfSupply": 4.3,
     "monthsOfSupplyCondo": 4.5,
     "monthsOfSupplySfhVilla": 4.2,
     "label": "seller's market",
     "activeCount": 90,
-    "sold365Count": 248,
-    "sold90Count": 60,
+    "sold365Count": 249,
+    "sold90Count": 61,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,7 +248,7 @@
       "soldMedianPricePerSqFt": "$324"
     },
     "condo": {
-      "soldCount": 145,
+      "soldCount": 147,
       "activeCount": 56,
       "soldMedianPrice": "$340,000",
       "soldMedianPricePerSqFt": "$250"
@@ -262,7 +262,7 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 90 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 4.4 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 90 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 4.3 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -277,7 +277,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 52 days on market and closed at 86.5% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 53 days on market and closed at 86.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

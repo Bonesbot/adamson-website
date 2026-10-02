@@ -2,18 +2,18 @@
   "areaSlug": "west-bradenton",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-01T10:52:40.562625+00:00",
+  "lastUpdated": "2026-10-02T10:54:13.692249+00:00",
   "counts": {
     "sold": 318,
-    "pending": 46,
+    "pending": 47,
     "active": 143,
-    "total": 364
+    "total": 365
   },
   "metrics": {
-    "avgPrice": "$649,153",
+    "avgPrice": "$648,950",
     "avgPricePerSqFt": "$311",
     "avgYearBuilt": 1997,
-    "avgLivingSqFt": "1,973",
+    "avgLivingSqFt": "1,974",
     "avgLotSqFt": null,
     "avgDom": 98
   },
@@ -23,10 +23,10 @@
   },
   "active": {
     "count": 143,
-    "medianPrice": "$509,000",
+    "medianPrice": "$530,000",
     "medianPricePerSqFt": "$293",
-    "waterfrontCount": 52,
-    "newConstructionCount": 47
+    "waterfrontCount": 51,
+    "newConstructionCount": 46
   },
   "sold": {
     "count": 69,
@@ -43,7 +43,7 @@
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$637",
+    "medianMonthlyAssociation": "$638",
     "medianMonthlyCondoFee": "$790",
     "minMonthlyCondoFee": "$105",
     "maxMonthlyCondoFee": "$3,869",
@@ -54,8 +54,8 @@
     }
   },
   "priceBands": {
-    "under900k": 106,
-    "band900kTo1_5m": 20,
+    "under900k": 105,
+    "band900kTo1_5m": 21,
     "band1_5mTo3m": 14,
     "band3mPlus": 3
   },
@@ -157,7 +157,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 18,
+      "activeCount": 19,
       "soldCount": 36,
       "soldMedianPricePerSqFt": "$253",
       "soldMedianPrice": "$408,500",
@@ -166,7 +166,7 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 14,
+      "activeCount": 13,
       "soldCount": 23,
       "soldMedianPricePerSqFt": "$267",
       "soldMedianPrice": "$407,500",
@@ -188,27 +188,27 @@
     "monthsOfSupplySfhVilla": 5.5,
     "label": "balanced market",
     "activeCount": 143,
-    "sold365Count": 288,
+    "sold365Count": 287,
     "sold90Count": 69,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 135,
-      "activeCount": 58,
+      "activeCount": 59,
       "soldMedianPrice": "$750,000",
       "soldMedianPricePerSqFt": "$349"
     },
     "condo": {
       "soldCount": 183,
-      "activeCount": 85,
+      "activeCount": 84,
       "soldMedianPrice": "$389,999",
       "soldMedianPricePerSqFt": "$231"
     }
   },
   "boating": {
-    "activeWithDock": 36,
-    "activeWaterfront": 52
+    "activeWithDock": 34,
+    "activeWaterfront": 51
   },
   "marketQuestions": [
     {
@@ -224,7 +224,7 @@
     {
       "facet": "range",
       "q": "What is the price range in West Bradenton?",
-      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $509,000."
+      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $530,000."
     },
     {
       "facet": "speed",
@@ -234,12 +234,12 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat in West Bradenton, and how many homes have a dock?",
-      "a": "Of 52 active waterfront listings, 36 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 51 active waterfront listings, 34 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees in West Bradenton?",
-      "a": "The median monthly condo fee is $790 and the median monthly association fee is $637."
+      "a": "The median monthly condo fee is $790 and the median monthly association fee is $638."
     }
   ],
   "costBreakdown90": null,
@@ -247,9 +247,9 @@
     {
       "slug": "west-bradenton-el-con-img-aqua",
       "name": "El Conquistador / IMG / Aqua",
-      "activeCount": 52,
+      "activeCount": 53,
       "pendingCount": 9,
-      "activeMedianPrice": "$382,000",
+      "activeMedianPrice": "$360,000",
       "soldCount": 106,
       "soldMedianPrice": "$385,000",
       "soldMedianPricePerSqFt": "$208",
@@ -260,21 +260,21 @@
     {
       "slug": "west-bradenton-coral-shores-cortez",
       "name": "Coral Shores / Cortez",
-      "activeCount": 55,
+      "activeCount": 53,
       "pendingCount": 13,
-      "activeMedianPrice": "$500,000",
-      "soldCount": 102,
+      "activeMedianPrice": "$509,000",
+      "soldCount": 101,
       "soldMedianPrice": "$480,000",
       "soldMedianPricePerSqFt": "$317",
       "soldMedianDom": 80,
-      "soldSingleFamilyShare": "58%",
+      "soldSingleFamilyShare": "57%",
       "lowSample": false
     },
     {
       "slug": "west-bradenton-seaflower",
       "name": "SeaFlower",
-      "activeCount": 30,
-      "pendingCount": 23,
+      "activeCount": 29,
+      "pendingCount": 24,
       "activeMedianPrice": "$579,999",
       "soldCount": 69,
       "soldMedianPrice": "$502,980",
@@ -286,9 +286,9 @@
     {
       "slug": "west-bradenton-tidy-island",
       "name": "Tidy Island",
-      "activeCount": 6,
+      "activeCount": 8,
       "pendingCount": 1,
-      "activeMedianPrice": "$810,000",
+      "activeMedianPrice": "$855,000",
       "soldCount": 11,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$246",
@@ -308,11 +308,11 @@
           {
             "waterfront": "waterfront",
             "label": "Waterfront",
-            "soldCount": 29,
-            "soldMedianPrice": "$1,170,500",
-            "soldMedianPricePerSqFt": "$552",
-            "soldMedianDom": 69,
-            "activeCount": 17,
+            "soldCount": 28,
+            "soldMedianPrice": "$1,222,750",
+            "soldMedianPricePerSqFt": "$561",
+            "soldMedianDom": 68,
+            "activeCount": 18,
             "activeMedianPrice": "$1,275,000",
             "lowSample": false
           },
@@ -328,7 +328,7 @@
             "lowSample": false
           }
         ],
-        "waterfrontPremiumPerSqFt": "72%"
+        "waterfrontPremiumPerSqFt": "75%"
       },
       {
         "propertyType": "attached",
@@ -341,8 +341,8 @@
             "soldMedianPrice": "$420,000",
             "soldMedianPricePerSqFt": "$268",
             "soldMedianDom": 106,
-            "activeCount": 20,
-            "activeMedianPrice": "$594,000",
+            "activeCount": 19,
+            "activeMedianPrice": "$599,000",
             "lowSample": false
           },
           {

@@ -2,43 +2,43 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-01T10:52:39.758656+00:00",
+  "lastUpdated": "2026-10-02T10:54:11.844536+00:00",
   "counts": {
-    "sold": 913,
-    "pending": 80,
-    "active": 199,
-    "total": 993
+    "sold": 921,
+    "pending": 73,
+    "active": 205,
+    "total": 994
   },
   "metrics": {
-    "avgPrice": "$562,102",
+    "avgPrice": "$561,917",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,050",
+    "avgLivingSqFt": "2,051",
     "avgLotSqFt": null,
-    "avgDom": 80
+    "avgDom": 79
   },
   "range": {
     "minPrice": "$110,000",
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 199,
-    "medianPrice": "$405,000",
+    "count": 205,
+    "medianPrice": "$409,000",
     "medianPricePerSqFt": "$247",
-    "waterfrontCount": 32,
-    "newConstructionCount": 30
+    "waterfrontCount": 34,
+    "newConstructionCount": 33
   },
   "sold": {
-    "count": 157,
-    "medianPrice": "$450,000",
+    "count": 165,
+    "medianPrice": "$460,000",
     "medianDom": 55,
     "saleToListRatio": "92.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.3,
-    "sfhVilla": 2.7,
-    "blended": 3.4,
+    "condo": 5.4,
+    "sfhVilla": 2.8,
+    "blended": 3.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 182,
+    "under900k": 188,
     "band900kTo1_5m": 14,
     "band1_5mTo3m": 3,
     "band3mPlus": 0
@@ -62,73 +62,73 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 199
+      "count": 205
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
     {
-      "listingId": "A4687190",
-      "address": "6124 ABACO DR",
-      "subdivision": "ISLES OF SARASOTA",
-      "soldPrice": "$735,000",
-      "soldDate": "2026-09-30",
+      "listingId": "A4691224",
+      "address": "5301 GREENBROOK DR",
+      "subdivision": "LEGACY ESTATES AT ESPLANADE ON PALMER RANCH",
+      "soldPrice": "$1,900,000",
+      "soldDate": "2026-10-01",
+      "bedrooms": 5,
+      "bathrooms": 5.0,
+      "livingSqFt": "5,171",
+      "yearBuilt": 2019,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4699943",
+      "address": "8314 CYPRESS HOLLOW DR",
+      "subdivision": "DEER CREEK",
+      "soldPrice": "$1,175,000",
+      "soldDate": "2026-10-01",
       "bedrooms": 3,
       "bathrooms": 3.0,
-      "livingSqFt": "2,489",
-      "yearBuilt": 2013,
+      "livingSqFt": "2,928",
+      "yearBuilt": 1990,
       "propertyType": "Residential",
       "isWaterfront": true
     },
     {
-      "listingId": "A4693858",
-      "address": "5362 CICERONE ST",
-      "subdivision": "ESPLANADE ON PALMER RANCH",
-      "soldPrice": "$705,000",
-      "soldDate": "2026-09-30",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,918",
-      "yearBuilt": 2021,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4702662",
-      "address": "7596 ANDORA DR",
-      "subdivision": "VILLAGEWALK",
-      "soldPrice": "$410,000",
-      "soldDate": "2026-09-30",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,672",
-      "yearBuilt": 2004,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4687543",
-      "address": "4639 CHAPEL HILL DR #2925",
-      "subdivision": "STONEYBROOK VERANDA GREENS NORTH 02",
-      "soldPrice": "$330,000",
-      "soldDate": "2026-09-30",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,333",
-      "yearBuilt": 1997,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4700596",
-      "address": "9320 CLUBSIDE CIR #2205",
-      "subdivision": "STONEYBROOK CLUBSIDE 2",
-      "soldPrice": "$280,000",
-      "soldDate": "2026-09-30",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,106",
+      "listingId": "A4691573",
+      "address": "4839 SWEETMEADOW CIR",
+      "subdivision": "TURTLE ROCK",
+      "soldPrice": "$850,000",
+      "soldDate": "2026-10-01",
+      "bedrooms": 4,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,930",
       "yearBuilt": 1995,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4696600",
+      "address": "8315 DEERBROOK CIR",
+      "subdivision": "TURTLE ROCK",
+      "soldPrice": "$750,000",
+      "soldDate": "2026-10-01",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,742",
+      "yearBuilt": 1998,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "J1005808",
+      "address": "4436 CALLE SERENA",
+      "subdivision": "PRESTANCIA/VILLA LAS PALMERAS",
+      "soldPrice": "$655,000",
+      "soldDate": "2026-10-01",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,037",
+      "yearBuilt": 1989,
       "propertyType": "Residential",
       "isWaterfront": false
     }
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 34,
-      "avgPrice": "$310,626",
-      "avgPricePerSqFt": "$198",
-      "avgLivingSqFt": "1,586",
+      "activeCount": 33,
+      "avgPrice": "$313,342",
+      "avgPricePerSqFt": "$199",
+      "avgLivingSqFt": "1,593",
       "avgDom": 112
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 73,
-      "avgPrice": "$294,978",
+      "activeCount": 75,
+      "avgPrice": "$296,459",
       "avgPricePerSqFt": "$229",
-      "avgLivingSqFt": "1,283",
-      "avgDom": 118
+      "avgLivingSqFt": "1,289",
+      "avgDom": 115
     },
     {
       "tier": "2006to2019",
@@ -162,16 +162,16 @@
       "avgPrice": "$361,980",
       "avgPricePerSqFt": "$214",
       "avgLivingSqFt": "1,707",
-      "avgDom": 97
+      "avgDom": 98
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 10,
-      "avgPrice": "$355,138",
-      "avgPricePerSqFt": "$219",
-      "avgLivingSqFt": "1,625",
+      "activeCount": 12,
+      "avgPrice": "$369,698",
+      "avgPricePerSqFt": "$222",
+      "avgLivingSqFt": "1,665",
       "avgDom": 79
     }
   ],
@@ -196,64 +196,64 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 42,
-      "soldCount": 213,
-      "soldMedianPricePerSqFt": "$258",
-      "soldMedianPrice": "$470,000",
+      "activeCount": 43,
+      "soldCount": 214,
+      "soldMedianPricePerSqFt": "$259",
+      "soldMedianPrice": "$472,500",
       "lowSample": false
     },
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 32,
-      "soldCount": 195,
+      "activeCount": 34,
+      "soldCount": 196,
       "soldMedianPricePerSqFt": "$275",
-      "soldMedianPrice": "$595,000",
+      "soldMedianPrice": "$597,500",
       "lowSample": false
     },
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 125,
-      "soldCount": 503,
+      "activeCount": 128,
+      "soldCount": 509,
       "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$440,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 3.4,
-    "monthsOfSupplyCondo": 5.3,
-    "monthsOfSupplySfhVilla": 2.7,
+    "monthsOfSupply": 3.5,
+    "monthsOfSupplyCondo": 5.4,
+    "monthsOfSupplySfhVilla": 2.8,
     "label": "seller's market",
-    "activeCount": 199,
-    "sold365Count": 704,
-    "sold90Count": 157,
+    "activeCount": 205,
+    "sold365Count": 708,
+    "sold90Count": 165,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 517,
-      "activeCount": 77,
+      "soldCount": 524,
+      "activeCount": 80,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 396,
-      "activeCount": 122,
+      "soldCount": 397,
+      "activeCount": 125,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 32
+    "activeWaterfront": 34
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 199 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.4 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 205 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,7 +263,7 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $405,000."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $409,000."
     },
     {
       "facet": "speed",
@@ -273,7 +273,7 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 32 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 34 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
