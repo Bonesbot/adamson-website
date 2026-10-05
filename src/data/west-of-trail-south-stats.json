@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-02T10:54:10.130753+00:00",
+  "lastUpdated": "2026-10-05T11:31:25.266880+00:00",
   "counts": {
-    "sold": 312,
+    "sold": 313,
     "pending": 24,
-    "active": 90,
-    "total": 336
+    "active": 93,
+    "total": 337
   },
   "metrics": {
-    "avgPrice": "$621,290",
+    "avgPrice": "$620,277",
     "avgPricePerSqFt": "$325",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,742",
+    "avgLivingSqFt": "1,740",
     "avgLotSqFt": null,
     "avgDom": 80
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$5,650,000"
   },
   "active": {
-    "count": 90,
+    "count": 93,
     "medianPrice": "$450,000",
-    "medianPricePerSqFt": "$320",
+    "medianPricePerSqFt": "$325",
     "waterfrontCount": 24,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 61,
-    "medianPrice": "$410,000",
-    "medianDom": 53,
-    "saleToListRatio": "86.9%",
+    "count": 62,
+    "medianPrice": "$407,500",
+    "medianDom": 52,
+    "saleToListRatio": "87.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 4.5,
-    "sfhVilla": 4.2,
-    "blended": 4.3,
+    "condo": 4.6,
+    "sfhVilla": 4.4,
+    "blended": 4.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 71,
+    "under900k": 73,
     "band900kTo1_5m": 8,
-    "band1_5mTo3m": 7,
+    "band1_5mTo3m": 8,
     "band3mPlus": 4
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 90
+      "count": 93
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4703607",
+      "address": "6344 GLENCOE AVE",
+      "subdivision": "PINE SHORES ESTATE 3RD ADD",
+      "soldPrice": "$320,000",
+      "soldDate": "2026-10-02",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "861",
+      "yearBuilt": 1955,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4686630",
       "address": "1732 KESTRAL PARK WAY S #43",
@@ -118,19 +131,6 @@
       "yearBuilt": 1980,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4684687",
-      "address": "1715 PELICAN COVE RD #GL438",
-      "subdivision": "PELICAN COVE XIV",
-      "soldPrice": "$315,000",
-      "soldDate": "2026-09-30",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,288",
-      "yearBuilt": 1979,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 48,
-      "avgPrice": "$356,304",
+      "avgPrice": "$356,408",
       "avgPricePerSqFt": "$283",
-      "avgLivingSqFt": "1,263",
-      "avgDom": 91
+      "avgLivingSqFt": "1,261",
+      "avgDom": 94
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$609,333",
       "avgPricePerSqFt": "$281",
       "avgLivingSqFt": "2,167",
-      "avgDom": 223
+      "avgDom": 226
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$617,225",
       "avgPricePerSqFt": "$361",
       "avgLivingSqFt": "1,710",
-      "avgDom": 132
+      "avgDom": 134
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 1,
-      "avgPrice": "$675,000",
-      "avgPricePerSqFt": "$387",
+      "avgPrice": "$635,000",
+      "avgPricePerSqFt": "$364",
       "avgLivingSqFt": "1,745",
-      "avgDom": 37
+      "avgDom": 40
     }
   ],
   "condoTiersScope": {
@@ -223,29 +223,29 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 57,
-      "soldCount": 199,
+      "activeCount": 60,
+      "soldCount": 200,
       "soldMedianPricePerSqFt": "$286",
       "soldMedianPrice": "$425,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.3,
-    "monthsOfSupplyCondo": 4.5,
-    "monthsOfSupplySfhVilla": 4.2,
+    "monthsOfSupply": 4.5,
+    "monthsOfSupplyCondo": 4.6,
+    "monthsOfSupplySfhVilla": 4.4,
     "label": "seller's market",
-    "activeCount": 90,
-    "sold365Count": 249,
-    "sold90Count": 61,
+    "activeCount": 93,
+    "sold365Count": 248,
+    "sold90Count": 62,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 165,
-      "activeCount": 34,
-      "soldMedianPrice": "$534,900",
-      "soldMedianPricePerSqFt": "$324"
+      "soldCount": 166,
+      "activeCount": 37,
+      "soldMedianPrice": "$533,950",
+      "soldMedianPricePerSqFt": "$325"
     },
     "condo": {
       "soldCount": 147,
@@ -262,12 +262,12 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 90 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 4.3 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 93 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 4.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $534,900 ($324/sq ft), while condos, villas and townhouses sell around $340,000 ($250/sq ft)."
+      "a": "Single-family homes sell around $533,950 ($325/sq ft), while condos, villas and townhouses sell around $340,000 ($250/sq ft)."
     },
     {
       "facet": "range",
@@ -277,7 +277,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 53 days on market and closed at 86.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 52 days on market and closed at 87.0% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

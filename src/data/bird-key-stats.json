@@ -2,16 +2,16 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-01T10:52:38.888591+00:00",
+  "lastUpdated": "2026-10-05T11:31:26.015312+00:00",
   "counts": {
-    "sold": 42,
-    "pending": 3,
+    "sold": 43,
+    "pending": 2,
     "active": 11,
     "total": 45
   },
   "metrics": {
-    "avgPrice": "$4,261,833",
-    "avgPricePerSqFt": "$1,106",
+    "avgPrice": "$4,261,944",
+    "avgPricePerSqFt": "$1,107",
     "avgYearBuilt": 1990,
     "avgLivingSqFt": "3,710",
     "avgLotSqFt": "14,371",
@@ -29,16 +29,16 @@
     "newConstructionCount": 5
   },
   "sold": {
-    "count": 9,
-    "medianPrice": "$4,512,500",
-    "medianDom": 143,
-    "saleToListRatio": "84.4%",
+    "count": 10,
+    "medianPrice": "$4,431,250",
+    "medianDom": 108,
+    "saleToListRatio": "86.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": null,
-    "sfhVilla": 3.9,
-    "blended": 3.9,
+    "sfhVilla": 3.8,
+    "blended": 3.8,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -68,6 +68,19 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4705169",
+      "address": "516 SPOONBILL WAY",
+      "subdivision": "BIRD KEY",
+      "soldPrice": "$1,675,000",
+      "soldDate": "2026-10-02",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,930",
+      "yearBuilt": 1965,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4654386",
       "address": "223 SEAGULL LN",
@@ -119,19 +132,6 @@
       "yearBuilt": 1973,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4692992",
-      "address": "667 MOURNING DOVE DR",
-      "subdivision": "BIRD KEY SUB",
-      "soldPrice": "$10,500,000",
-      "soldDate": "2026-08-25",
-      "bedrooms": 5,
-      "bathrooms": 6.0,
-      "livingSqFt": "6,570",
-      "yearBuilt": 2009,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [],
@@ -168,28 +168,28 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 3,
-      "soldCount": 14,
-      "soldMedianPricePerSqFt": "$810",
-      "soldMedianPrice": "$2,090,000",
+      "soldCount": 15,
+      "soldMedianPricePerSqFt": "$834",
+      "soldMedianPrice": "$1,995,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 3.9,
+    "monthsOfSupply": 3.8,
     "monthsOfSupplyCondo": null,
-    "monthsOfSupplySfhVilla": 3.9,
+    "monthsOfSupplySfhVilla": 3.8,
     "label": "seller's market",
     "activeCount": 11,
-    "sold365Count": 34,
-    "sold90Count": 9,
+    "sold365Count": 35,
+    "sold90Count": 10,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 42,
+      "soldCount": 43,
       "activeCount": 11,
-      "soldMedianPrice": "$3,975,000",
-      "soldMedianPricePerSqFt": "$1,131"
+      "soldMedianPrice": "$3,950,000",
+      "soldMedianPricePerSqFt": "$1,109"
     }
   },
   "boating": {
@@ -200,7 +200,7 @@
     {
       "facet": "balance",
       "q": "Is Bird Key a buyer's or seller's market right now?",
-      "a": "With 11 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 3.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 11 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 3.8 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "range",
@@ -210,7 +210,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Bird Key?",
-      "a": "Recently sold homes took a median 143 days on market and closed at 84.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 108 days on market and closed at 86.0% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

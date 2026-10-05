@@ -2,11 +2,11 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-02T10:54:09.315399+00:00",
+  "lastUpdated": "2026-10-05T11:31:24.528725+00:00",
   "counts": {
     "sold": 102,
     "pending": 9,
-    "active": 36,
+    "active": 37,
     "total": 111
   },
   "metrics": {
@@ -22,10 +22,10 @@
     "maxPrice": "$22,900,000"
   },
   "active": {
-    "count": 36,
-    "medianPrice": "$744,500",
-    "medianPricePerSqFt": "$561",
-    "waterfrontCount": 14,
+    "count": 37,
+    "medianPrice": "$739,000",
+    "medianPricePerSqFt": "$552",
+    "waterfrontCount": 15,
     "newConstructionCount": 13
   },
   "sold": {
@@ -36,9 +36,9 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 6.4,
+    "condo": 7.1,
     "sfhVilla": 4.6,
-    "blended": 4.9,
+    "blended": 5.0,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 20,
+    "under900k": 21,
     "band900kTo1_5m": 6,
     "band1_5mTo3m": 2,
     "band3mPlus": 8
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 36
+      "count": 37
     }
   ],
   "buildingClasses": [],
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 1,
-      "avgPrice": "$550,000",
-      "avgPricePerSqFt": "$436",
-      "avgLivingSqFt": "1,262",
-      "avgDom": 140
+      "activeCount": 2,
+      "avgPrice": "$594,950",
+      "avgPricePerSqFt": "$494",
+      "avgLivingSqFt": "1,211",
+      "avgDom": 72
     },
     {
       "tier": "1990to2005",
@@ -172,7 +172,7 @@
       "avgPrice": "$561,500",
       "avgPricePerSqFt": "$591",
       "avgLivingSqFt": "951",
-      "avgDom": 122
+      "avgDom": 124
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 14,
+      "activeCount": 15,
       "soldCount": 26,
       "soldMedianPricePerSqFt": "$542",
       "soldMedianPrice": "$650,000",
@@ -222,11 +222,11 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.9,
-    "monthsOfSupplyCondo": 6.4,
+    "monthsOfSupply": 5.0,
+    "monthsOfSupplyCondo": 7.1,
     "monthsOfSupplySfhVilla": 4.6,
-    "label": "seller's market",
-    "activeCount": 36,
+    "label": "balanced market",
+    "activeCount": 37,
     "sold365Count": 88,
     "sold90Count": 18,
     "method": "active / (trailing-12mo closed / 12)"
@@ -240,20 +240,20 @@
     },
     "condo": {
       "soldCount": 20,
-      "activeCount": 9,
+      "activeCount": 10,
       "soldMedianPrice": "$472,500",
       "soldMedianPricePerSqFt": "$500"
     }
   },
   "boating": {
     "activeWithDock": 5,
-    "activeWaterfront": 14
+    "activeWaterfront": 15
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 36 active listings and roughly 7 closed sales a month (trailing 12 months), West Of Trail North has about 4.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 37 active listings and roughly 7 closed sales a month (trailing 12 months), West Of Trail North has about 5.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,7 +263,7 @@
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail North?",
-      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $744,500."
+      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $739,000."
     },
     {
       "facet": "speed",
@@ -273,7 +273,7 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail North homes have a dock?",
-      "a": "Of 14 active waterfront listings, 5 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 15 active waterfront listings, 5 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

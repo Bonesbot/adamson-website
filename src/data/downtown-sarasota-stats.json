@@ -2,20 +2,20 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-02T10:54:07.725118+00:00",
+  "lastUpdated": "2026-10-05T11:31:22.996918+00:00",
   "counts": {
     "sold": 296,
-    "pending": 66,
+    "pending": 68,
     "active": 164,
-    "total": 362
+    "total": 364
   },
   "metrics": {
-    "avgPrice": "$1,912,494",
-    "avgPricePerSqFt": "$826",
+    "avgPrice": "$1,905,555",
+    "avgPricePerSqFt": "$824",
     "avgYearBuilt": 2002,
-    "avgLivingSqFt": "2,072",
+    "avgLivingSqFt": "2,068",
     "avgLotSqFt": null,
-    "avgDom": 102
+    "avgDom": 101
   },
   "range": {
     "minPrice": "$260,000",
@@ -36,27 +36,27 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 8.3,
+    "condo": 8.4,
     "sfhVilla": 9.8,
     "blended": 8.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,782",
-    "medianMonthlyCondoFee": "$1,862",
-    "minMonthlyCondoFee": "$717",
+    "medianMonthlyAssociation": "$1,769",
+    "medianMonthlyCondoFee": "$1,859",
+    "minMonthlyCondoFee": "$600",
     "maxMonthlyCondoFee": "$11,729",
     "condoFeeRange": {
-      "min": 717,
+      "min": 600,
       "median": 1862,
       "max": 11729
     }
   },
   "priceBands": {
-    "under900k": 36,
+    "under900k": 35,
     "band900kTo1_5m": 30,
-    "band1_5mTo3m": 39,
+    "band1_5mTo3m": 40,
     "band3mPlus": 59
   },
   "propertyTypes": [
@@ -139,30 +139,30 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 37,
-      "avgPrice": "$1,123,286",
-      "avgPricePerSqFt": "$660",
-      "avgLivingSqFt": "1,585",
-      "avgDom": 155
+      "avgPrice": "$1,121,313",
+      "avgPricePerSqFt": "$661",
+      "avgLivingSqFt": "1,578",
+      "avgDom": 158
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 22,
-      "avgPrice": "$1,750,873",
-      "avgPricePerSqFt": "$724",
-      "avgLivingSqFt": "2,090",
-      "avgDom": 97
+      "activeCount": 23,
+      "avgPrice": "$1,780,183",
+      "avgPricePerSqFt": "$729",
+      "avgLivingSqFt": "2,121",
+      "avgDom": 111
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 24,
-      "avgPrice": "$1,613,788",
-      "avgPricePerSqFt": "$738",
-      "avgLivingSqFt": "2,028",
-      "avgDom": 104
+      "activeCount": 23,
+      "avgPrice": "$1,656,996",
+      "avgPricePerSqFt": "$752",
+      "avgLivingSqFt": "2,053",
+      "avgDom": 110
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,324,519",
       "avgPricePerSqFt": "$1,414",
       "avgLivingSqFt": "2,937",
-      "avgDom": 212
+      "avgDom": 215
     }
   ],
   "condoTiersScope": {
@@ -223,11 +223,11 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 8.4,
-    "monthsOfSupplyCondo": 8.3,
+    "monthsOfSupplyCondo": 8.4,
     "monthsOfSupplySfhVilla": 9.8,
     "label": "buyer's market",
     "activeCount": 164,
-    "sold365Count": 234,
+    "sold365Count": 233,
     "sold90Count": 49,
     "method": "active / (trailing-12mo closed / 12)"
   },
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Downtown Sarasota a buyer's or seller's market right now?",
-      "a": "With 164 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 8.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 164 active listings and roughly 19 closed sales a month (trailing 12 months), Downtown Sarasota has about 8.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -278,7 +278,7 @@
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Downtown Sarasota?",
-      "a": "The median monthly condo fee is $1,862 and the median monthly association fee is $1,782."
+      "a": "The median monthly condo fee is $1,859 and the median monthly association fee is $1,769."
     }
   ],
   "costBreakdown90": null

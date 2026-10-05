@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-02T10:54:11.844536+00:00",
+  "lastUpdated": "2026-10-05T11:31:26.832326+00:00",
   "counts": {
-    "sold": 921,
-    "pending": 73,
-    "active": 205,
-    "total": 994
+    "sold": 927,
+    "pending": 70,
+    "active": 203,
+    "total": 997
   },
   "metrics": {
-    "avgPrice": "$561,917",
+    "avgPrice": "$561,688",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,051",
+    "avgLivingSqFt": "2,050",
     "avgLotSqFt": null,
     "avgDom": 79
   },
@@ -22,14 +22,14 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 205,
+    "count": 203,
     "medianPrice": "$409,000",
-    "medianPricePerSqFt": "$247",
-    "waterfrontCount": 34,
+    "medianPricePerSqFt": "$246",
+    "waterfrontCount": 33,
     "newConstructionCount": 33
   },
   "sold": {
-    "count": 165,
+    "count": 170,
     "medianPrice": "$460,000",
     "medianDom": 55,
     "saleToListRatio": "92.0%",
@@ -38,7 +38,7 @@
   "monthsOfSupply": {
     "condo": 5.4,
     "sfhVilla": 2.8,
-    "blended": 3.5,
+    "blended": 3.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,45 @@
     }
   },
   "priceBands": {
-    "under900k": 188,
+    "under900k": 187,
     "band900kTo1_5m": 14,
-    "band1_5mTo3m": 3,
+    "band1_5mTo3m": 2,
     "band3mPlus": 0
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 205
+      "count": 203
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4701454",
+      "address": "3643 MERIDALE RD",
+      "subdivision": "CLARK LAKES SUB",
+      "soldPrice": "$545,000",
+      "soldDate": "2026-10-02",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,732",
+      "yearBuilt": 1989,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4706457",
+      "address": "9010 ASHBOURNE CT",
+      "subdivision": "HUNTINGTON POINTE",
+      "soldPrice": "$542,000",
+      "soldDate": "2026-10-02",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,089",
+      "yearBuilt": 1992,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4691224",
       "address": "5301 GREENBROOK DR",
@@ -105,32 +131,6 @@
       "yearBuilt": 1995,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4696600",
-      "address": "8315 DEERBROOK CIR",
-      "subdivision": "TURTLE ROCK",
-      "soldPrice": "$750,000",
-      "soldDate": "2026-10-01",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,742",
-      "yearBuilt": 1998,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "J1005808",
-      "address": "4436 CALLE SERENA",
-      "subdivision": "PRESTANCIA/VILLA LAS PALMERAS",
-      "soldPrice": "$655,000",
-      "soldDate": "2026-10-01",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "3,037",
-      "yearBuilt": 1989,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,20 +139,20 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 33,
-      "avgPrice": "$313,342",
+      "avgPrice": "$313,312",
       "avgPricePerSqFt": "$199",
       "avgLivingSqFt": "1,593",
-      "avgDom": 112
+      "avgDom": 115
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 75,
-      "avgPrice": "$296,459",
-      "avgPricePerSqFt": "$229",
-      "avgLivingSqFt": "1,289",
-      "avgDom": 115
+      "activeCount": 74,
+      "avgPrice": "$299,681",
+      "avgPricePerSqFt": "$228",
+      "avgLivingSqFt": "1,310",
+      "avgDom": 117
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$361,980",
       "avgPricePerSqFt": "$214",
       "avgLivingSqFt": "1,707",
-      "avgDom": 98
+      "avgDom": 101
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$369,698",
       "avgPricePerSqFt": "$222",
       "avgLivingSqFt": "1,665",
-      "avgDom": 79
+      "avgDom": 82
     }
   ],
   "condoTiersScope": {
@@ -196,8 +196,8 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 43,
-      "soldCount": 214,
+      "activeCount": 44,
+      "soldCount": 216,
       "soldMedianPricePerSqFt": "$259",
       "soldMedianPrice": "$472,500",
       "lowSample": false
@@ -205,55 +205,55 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 34,
-      "soldCount": 196,
-      "soldMedianPricePerSqFt": "$275",
+      "activeCount": 33,
+      "soldCount": 198,
+      "soldMedianPricePerSqFt": "$276",
       "soldMedianPrice": "$597,500",
       "lowSample": false
     },
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 128,
-      "soldCount": 509,
+      "activeCount": 126,
+      "soldCount": 511,
       "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$440,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 3.5,
+    "monthsOfSupply": 3.4,
     "monthsOfSupplyCondo": 5.4,
     "monthsOfSupplySfhVilla": 2.8,
     "label": "seller's market",
-    "activeCount": 205,
-    "sold365Count": 708,
-    "sold90Count": 165,
+    "activeCount": 203,
+    "sold365Count": 712,
+    "sold90Count": 170,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 524,
-      "activeCount": 80,
+      "soldCount": 527,
+      "activeCount": 79,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 397,
-      "activeCount": 125,
+      "soldCount": 400,
+      "activeCount": 124,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 34
+    "activeWaterfront": 33
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 205 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 203 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.4 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -273,7 +273,7 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 34 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 33 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
