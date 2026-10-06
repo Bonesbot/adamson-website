@@ -2,11 +2,11 @@
   "areaSlug": "st-armands-lido",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-05T11:31:21.369369+00:00",
+  "lastUpdated": "2026-10-06T15:06:04.584503+00:00",
   "counts": {
     "sold": 140,
     "pending": 18,
-    "active": 74,
+    "active": 75,
     "total": 158
   },
   "metrics": {
@@ -22,9 +22,9 @@
     "maxPrice": "$25,000,000"
   },
   "active": {
-    "count": 74,
-    "medianPrice": "$3,095,000",
-    "medianPricePerSqFt": "$965",
+    "count": 75,
+    "medianPrice": "$3,295,000",
+    "medianPricePerSqFt": "$971",
     "waterfrontCount": 36,
     "newConstructionCount": 20
   },
@@ -37,13 +37,13 @@
   },
   "monthsOfSupply": {
     "condo": 5.4,
-    "sfhVilla": 12.8,
-    "blended": 7.3,
+    "sfhVilla": 13.1,
+    "blended": 7.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,429",
+    "medianMonthlyAssociation": "$1,414",
     "medianMonthlyCondoFee": "$1,483",
     "minMonthlyCondoFee": "$595",
     "maxMonthlyCondoFee": "$6,590",
@@ -57,12 +57,12 @@
     "under900k": 26,
     "band900kTo1_5m": 5,
     "band1_5mTo3m": 6,
-    "band3mPlus": 37
+    "band3mPlus": 38
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 74
+      "count": 75
     }
   ],
   "buildingClasses": [],
@@ -142,7 +142,7 @@
       "avgPrice": "$753,480",
       "avgPricePerSqFt": "$667",
       "avgLivingSqFt": "1,128",
-      "avgDom": 166
+      "avgDom": 167
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$5,219,500",
       "avgPricePerSqFt": "$1,302",
       "avgLivingSqFt": "3,839",
-      "avgDom": 146
+      "avgDom": 147
     },
     {
       "tier": "2006to2019",
@@ -172,7 +172,7 @@
       "avgPrice": "$9,670,000",
       "avgPricePerSqFt": "$2,276",
       "avgLivingSqFt": "4,187",
-      "avgDom": 583
+      "avgDom": 584
     }
   ],
   "condoTiersScope": {
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 27,
+      "activeCount": 28,
       "soldCount": 44,
       "soldMedianPricePerSqFt": "$774",
       "soldMedianPrice": "$1,340,000",
@@ -222,11 +222,11 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.3,
+    "monthsOfSupply": 7.4,
     "monthsOfSupplyCondo": 5.4,
-    "monthsOfSupplySfhVilla": 12.8,
+    "monthsOfSupplySfhVilla": 13.1,
     "label": "buyer's market",
-    "activeCount": 74,
+    "activeCount": 75,
     "sold365Count": 121,
     "sold90Count": 40,
     "method": "active / (trailing-12mo closed / 12)"
@@ -234,7 +234,7 @@
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 42,
-      "activeCount": 32,
+      "activeCount": 33,
       "soldMedianPrice": "$2,837,500",
       "soldMedianPricePerSqFt": "$960"
     },
@@ -258,7 +258,7 @@
     {
       "facet": "balance",
       "q": "Is St Armands Lido a buyer's or seller's market right now?",
-      "a": "With 74 active listings and roughly 10 closed sales a month (trailing 12 months), St Armands Lido has about 7.3 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 75 active listings and roughly 10 closed sales a month (trailing 12 months), St Armands Lido has about 7.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -268,7 +268,7 @@
     {
       "facet": "range",
       "q": "What's the price range on St Armands Lido?",
-      "a": "Active listings run from $275,000 to $25,000,000, with a median asking price of $3,095,000."
+      "a": "Active listings run from $275,000 to $25,000,000, with a median asking price of $3,295,000."
     },
     {
       "facet": "speed",
@@ -283,7 +283,7 @@
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on St Armands Lido?",
-      "a": "The median monthly condo fee is $1,483 and the median monthly association fee is $1,429."
+      "a": "The median monthly condo fee is $1,483 and the median monthly association fee is $1,414."
     }
   ],
   "costBreakdown90": null

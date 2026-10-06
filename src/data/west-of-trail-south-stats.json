@@ -2,20 +2,20 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-05T11:31:25.266880+00:00",
+  "lastUpdated": "2026-10-06T15:06:08.578631+00:00",
   "counts": {
-    "sold": 313,
-    "pending": 24,
+    "sold": 315,
+    "pending": 25,
     "active": 93,
-    "total": 337
+    "total": 340
   },
   "metrics": {
-    "avgPrice": "$620,277",
-    "avgPricePerSqFt": "$325",
+    "avgPrice": "$628,180",
+    "avgPricePerSqFt": "$326",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,740",
+    "avgLivingSqFt": "1,749",
     "avgLotSqFt": null,
-    "avgDom": 80
+    "avgDom": 79
   },
   "range": {
     "minPrice": "$95,000",
@@ -25,19 +25,19 @@
     "count": 93,
     "medianPrice": "$450,000",
     "medianPricePerSqFt": "$325",
-    "waterfrontCount": 24,
+    "waterfrontCount": 23,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 62,
+    "count": 64,
     "medianPrice": "$407,500",
     "medianDom": 52,
-    "saleToListRatio": "87.0%",
+    "saleToListRatio": "87.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 4.6,
-    "sfhVilla": 4.4,
+    "condo": 4.5,
+    "sfhVilla": 4.5,
     "blended": 4.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -67,6 +67,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4699936",
+      "address": "1602 STICKNEY POINT RD #2-104",
+      "subdivision": "CASTEL DEL MARE",
+      "soldPrice": "$499,000",
+      "soldDate": "2026-10-05",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,016",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4692199",
+      "address": "5940 DRIFTWOOD AVE #15",
+      "subdivision": "BAYWOOD COLONY SEC 1",
+      "soldPrice": "$299,000",
+      "soldDate": "2026-10-05",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,155",
+      "yearBuilt": 1973,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4703607",
       "address": "6344 GLENCOE AVE",
@@ -105,32 +131,6 @@
       "yearBuilt": 2009,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4698549",
-      "address": "1893 RITA ST",
-      "subdivision": "MEAD HELEN D",
-      "soldPrice": "$427,450",
-      "soldDate": "2026-09-30",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,420",
-      "yearBuilt": 1974,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4687045",
-      "address": "1636 BROOKHOUSE DR #230",
-      "subdivision": "PELICAN COVE XVI",
-      "soldPrice": "$320,000",
-      "soldDate": "2026-09-30",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,283",
-      "yearBuilt": 1980,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -138,10 +138,10 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 48,
-      "avgPrice": "$356,408",
-      "avgPricePerSqFt": "$283",
-      "avgLivingSqFt": "1,261",
+      "activeCount": 47,
+      "avgPrice": "$357,098",
+      "avgPricePerSqFt": "$287",
+      "avgLivingSqFt": "1,243",
       "avgDom": 94
     },
     {
@@ -152,7 +152,7 @@
       "avgPrice": "$609,333",
       "avgPricePerSqFt": "$281",
       "avgLivingSqFt": "2,167",
-      "avgDom": 226
+      "avgDom": 227
     },
     {
       "tier": "2006to2019",
@@ -172,7 +172,7 @@
       "avgPrice": "$635,000",
       "avgPricePerSqFt": "$364",
       "avgLivingSqFt": "1,745",
-      "avgDom": 40
+      "avgDom": 41
     }
   ],
   "condoTiersScope": {
@@ -196,19 +196,19 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 21,
-      "soldCount": 68,
-      "soldMedianPricePerSqFt": "$366",
-      "soldMedianPrice": "$500,500",
+      "activeCount": 20,
+      "soldCount": 69,
+      "soldMedianPricePerSqFt": "$370",
+      "soldMedianPrice": "$499,000",
       "lowSample": false
     },
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 9,
-      "soldCount": 30,
-      "soldMedianPricePerSqFt": "$307",
-      "soldMedianPrice": "$442,944",
+      "activeCount": 8,
+      "soldCount": 31,
+      "soldMedianPricePerSqFt": "$299",
+      "soldMedianPrice": "$435,888",
       "lowSample": false
     },
     {
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 60,
+      "activeCount": 62,
       "soldCount": 200,
       "soldMedianPricePerSqFt": "$286",
       "soldMedianPrice": "$425,000",
@@ -232,31 +232,31 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 4.5,
-    "monthsOfSupplyCondo": 4.6,
-    "monthsOfSupplySfhVilla": 4.4,
+    "monthsOfSupplyCondo": 4.5,
+    "monthsOfSupplySfhVilla": 4.5,
     "label": "seller's market",
     "activeCount": 93,
-    "sold365Count": 248,
-    "sold90Count": 62,
+    "sold365Count": 250,
+    "sold90Count": 64,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 166,
-      "activeCount": 37,
+      "activeCount": 38,
       "soldMedianPrice": "$533,950",
       "soldMedianPricePerSqFt": "$325"
     },
     "condo": {
-      "soldCount": 147,
-      "activeCount": 56,
+      "soldCount": 149,
+      "activeCount": 55,
       "soldMedianPrice": "$340,000",
-      "soldMedianPricePerSqFt": "$250"
+      "soldMedianPricePerSqFt": "$253"
     }
   },
   "boating": {
     "activeWithDock": 11,
-    "activeWaterfront": 24
+    "activeWaterfront": 23
   },
   "marketQuestions": [
     {
@@ -267,7 +267,7 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $533,950 ($325/sq ft), while condos, villas and townhouses sell around $340,000 ($250/sq ft)."
+      "a": "Single-family homes sell around $533,950 ($325/sq ft), while condos, villas and townhouses sell around $340,000 ($253/sq ft)."
     },
     {
       "facet": "range",
@@ -277,12 +277,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 52 days on market and closed at 87.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 52 days on market and closed at 87.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 24 active waterfront listings, 11 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 23 active waterfront listings, 11 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
