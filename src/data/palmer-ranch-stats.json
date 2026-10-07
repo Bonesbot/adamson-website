@@ -2,15 +2,15 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-06T15:06:10.283820+00:00",
+  "lastUpdated": "2026-10-07T10:43:06.137849+00:00",
   "counts": {
-    "sold": 928,
-    "pending": 70,
-    "active": 206,
-    "total": 998
+    "sold": 931,
+    "pending": 68,
+    "active": 204,
+    "total": 999
   },
   "metrics": {
-    "avgPrice": "$560,288",
+    "avgPrice": "$560,016",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
     "avgLivingSqFt": "2,044",
@@ -22,23 +22,23 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 206,
+    "count": 204,
     "medianPrice": "$409,500",
     "medianPricePerSqFt": "$246",
-    "waterfrontCount": 34,
+    "waterfrontCount": 33,
     "newConstructionCount": 31
   },
   "sold": {
-    "count": 167,
-    "medianPrice": "$460,000",
+    "count": 169,
+    "medianPrice": "$455,000",
     "medianDom": 58,
-    "saleToListRatio": "91.9%",
+    "saleToListRatio": "91.8%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.5,
-    "sfhVilla": 2.8,
-    "blended": 3.5,
+    "condo": 5.4,
+    "sfhVilla": 2.7,
+    "blended": 3.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 189,
+    "under900k": 187,
     "band900kTo1_5m": 15,
     "band1_5mTo3m": 2,
     "band3mPlus": 0
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 206
+      "count": 204
     }
   ],
   "buildingClasses": [],
@@ -81,6 +81,45 @@
       "isWaterfront": true
     },
     {
+      "listingId": "A4686348",
+      "address": "1418 BURGOS DR",
+      "subdivision": "ISLES OF SARASOTA",
+      "soldPrice": "$330,000",
+      "soldDate": "2026-10-05",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,672",
+      "yearBuilt": 2006,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4701594",
+      "address": "4057 CROCKERS LAKE BLVD #16",
+      "subdivision": "VINTAGE GRAND",
+      "soldPrice": "$178,000",
+      "soldDate": "2026-10-05",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,260",
+      "yearBuilt": 1989,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4685667",
+      "address": "5824 WILLOW MARSH CT",
+      "subdivision": "HAMMOCK PRESERVE",
+      "soldPrice": "$580,000",
+      "soldDate": "2026-10-02",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,164",
+      "yearBuilt": 2019,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
       "listingId": "A4701454",
       "address": "3643 MERIDALE RD",
       "subdivision": "CLARK LAKES SUB",
@@ -92,45 +131,6 @@
       "yearBuilt": 1989,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4706457",
-      "address": "9010 ASHBOURNE CT",
-      "subdivision": "HUNTINGTON POINTE",
-      "soldPrice": "$542,000",
-      "soldDate": "2026-10-02",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,089",
-      "yearBuilt": 1992,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4691224",
-      "address": "5301 GREENBROOK DR",
-      "subdivision": "LEGACY ESTATES AT ESPLANADE ON PALMER RANCH",
-      "soldPrice": "$1,900,000",
-      "soldDate": "2026-10-01",
-      "bedrooms": 5,
-      "bathrooms": 5.0,
-      "livingSqFt": "5,171",
-      "yearBuilt": 2019,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4699943",
-      "address": "8314 CYPRESS HOLLOW DR",
-      "subdivision": "DEER CREEK",
-      "soldPrice": "$1,175,000",
-      "soldDate": "2026-10-01",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,928",
-      "yearBuilt": 1990,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -139,20 +139,20 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 34,
-      "avgPrice": "$309,832",
+      "avgPrice": "$309,773",
       "avgPricePerSqFt": "$197",
       "avgLivingSqFt": "1,586",
-      "avgDom": 117
+      "avgDom": 118
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 74,
-      "avgPrice": "$297,317",
+      "activeCount": 73,
+      "avgPrice": "$296,737",
       "avgPricePerSqFt": "$228",
-      "avgLivingSqFt": "1,302",
-      "avgDom": 118
+      "avgLivingSqFt": "1,292",
+      "avgDom": 119
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$361,980",
       "avgPricePerSqFt": "$214",
       "avgLivingSqFt": "1,707",
-      "avgDom": 102
+      "avgDom": 103
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$383,539",
       "avgPricePerSqFt": "$225",
       "avgLivingSqFt": "1,705",
-      "avgDom": 77
+      "avgDom": 78
     }
   ],
   "condoTiersScope": {
@@ -197,63 +197,63 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 45,
-      "soldCount": 216,
-      "soldMedianPricePerSqFt": "$259",
-      "soldMedianPrice": "$472,500",
+      "soldCount": 217,
+      "soldMedianPricePerSqFt": "$258",
+      "soldMedianPrice": "$470,000",
       "lowSample": false
     },
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 34,
-      "soldCount": 199,
-      "soldMedianPricePerSqFt": "$276",
-      "soldMedianPrice": "$595,000",
+      "activeCount": 33,
+      "soldCount": 200,
+      "soldMedianPricePerSqFt": "$275",
+      "soldMedianPrice": "$592,000",
       "lowSample": false
     },
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 127,
-      "soldCount": 511,
-      "soldMedianPricePerSqFt": "$243",
+      "activeCount": 126,
+      "soldCount": 512,
+      "soldMedianPricePerSqFt": "$242",
       "soldMedianPrice": "$440,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 3.5,
-    "monthsOfSupplyCondo": 5.5,
-    "monthsOfSupplySfhVilla": 2.8,
+    "monthsOfSupply": 3.4,
+    "monthsOfSupplyCondo": 5.4,
+    "monthsOfSupplySfhVilla": 2.7,
     "label": "seller's market",
-    "activeCount": 206,
-    "sold365Count": 713,
-    "sold90Count": 167,
+    "activeCount": 204,
+    "sold365Count": 715,
+    "sold90Count": 169,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 527,
-      "activeCount": 83,
+      "soldCount": 528,
+      "activeCount": 82,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 401,
-      "activeCount": 123,
+      "soldCount": 403,
+      "activeCount": 122,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 34
+    "activeWaterfront": 33
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 206 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 204 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.4 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -268,12 +268,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 58 days on market and closed at 91.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 58 days on market and closed at 91.8% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 34 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 33 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
