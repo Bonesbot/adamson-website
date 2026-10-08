@@ -240,6 +240,14 @@ function amenities(b) {
   const hi = new Set(['Rooftop / sun deck', 'Lounge / social room', 'Concierge', 'Guard gate', 'Dock / marina', 'Restaurant', 'Guest suite', 'Spa']);
   return [...out].sort((a, c) => (hi.has(c) - hi.has(a)) || a.localeCompare(c)).map((a) => ({ a, hi: hi.has(a) }));
 }
+function views(b) {
+  const seen = new Set();
+  String(b.water_views || '').split(/\s*[|,]\s*/).forEach((t) => {
+    t = t.trim().replace(/^(Gulf|Bay|Lake|Pond|River|Canal)Full$/i, '$1 (full)').replace(/^(Gulf|Bay)\/(Ocean|Harbor)\s*-\s*Partial$/i, '$1 (partial)').replace(/^Gulf\/Ocean to Bay$/i, 'Gulf to Bay').replace(/^Bay\/Harbor\s*-\s*Full$/i, 'Bay (full)').replace(/^Gulf\/Ocean\s*-\s*Full$/i, 'Gulf (full)');
+    if (t) seen.add(t);
+  });
+  return [...seen].join(' · ');
+}
 function pets(b) {
   if (b.pets_override) return { v: b.pets_override, ov: true };
   if (!b.pets_allowed) return { v: '—' };
@@ -417,7 +425,7 @@ function renderDetail(b) {
         <div class="k">Pets</div><div class="v ${p.ov ? 'ov' : ''}">${esc(p.v)}${p.s ? `<small>${esc(p.s)}</small>` : ''}${p.ov ? '<small>team override</small>' : ''}</div>
         <div class="k">Rentals</div><div class="v ${r.ov ? 'ov' : ''}">${esc(r.v)}${r.ov ? '<small>team override</small>' : ''}</div>
         <div class="k">Parking</div><div class="v ${pk.ov ? 'ov' : ''}">${esc(pk.v)}${pk.ov ? '<small>team override</small>' : ''}</div>
-        ${b.water_views ? `<div class="k">Views</div><div class="v">${esc(b.water_views.split(' | ').map((s) => s.replace(/,\s*/g, ', ')).join(' · ').slice(0, 140))}</div>` : ''}
+        ${b.water_views ? `<div class="k">Views</div><div class="v">${esc(views(b))}</div>` : ''}
       </div>
     </div>
     <div class="sec"><h3>Amenities${amOv ? ' <span style="color:var(--navy);text-transform:none;letter-spacing:0">(team override)</span>' : ''}</h3>
