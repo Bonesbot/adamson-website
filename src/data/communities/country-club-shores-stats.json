@@ -1,32 +1,32 @@
 {
  "slug": "country-club-shores",
  "name": "Country Club Shores",
- "asOf": "2026-10-07",
- "generatedAt": "2026-10-07T10:43:09",
+ "asOf": "2026-10-08",
+ "generatedAt": "2026-10-08T10:57:18",
  "headlineWindowDays": 180,
  "ledgerWindowDays": 365,
  "snap": {
-  "n": 15,
+  "n": 16,
   "mn": 1500000.0,
   "md": 2600000.0,
   "mx": 5650000.0,
-  "psf": 1006.01,
-  "cdom": 151.0,
-  "splp": 0.95,
-  "price_avg": 3019666.6666666665,
-  "psf_avg": 1017.6713333333333,
-  "cdom_avg": 121.46666666666667,
-  "splp_avg": 0.9486666666666667
+  "psf": 980.29,
+  "cdom": 152.0,
+  "splp": 0.945,
+  "price_avg": 2993437.5,
+  "psf_avg": 998.906875,
+  "cdom_avg": 128.0,
+  "splp_avg": 0.9437500000000001
  },
  "segments": {
   "canal": {
-   "n": 22,
+   "n": 23,
    "mn": 1500000.0,
-   "md": 2750000.0,
+   "md": 2700000.0,
    "mx": 5650000.0,
-   "psf": 1019.31,
-   "cdom": 130.0,
-   "splp": 0.945
+   "psf": 1006.01,
+   "cdom": 151.0,
+   "splp": 0.94
   },
   "bay": {
    "n": 2,
@@ -48,6 +48,21 @@
   }
  },
  "ledger": [
+  {
+   "addr": "1005 BOGEY LN",
+   "bed": 4,
+   "bf": 4,
+   "bh": 0,
+   "sqft": 3624,
+   "price": 2600000.0,
+   "psf": 717.44,
+   "close": "2026-10-07",
+   "cdom": 226,
+   "splp": 0.87,
+   "seg": "canal",
+   "view": "Canal",
+   "sub": "COUNTRY CLUB SHORES"
+  },
   {
    "addr": "530 GOLF LINKS LN",
    "bed": 3,
@@ -453,12 +468,19 @@
    "md": 3100000.0,
    "psf": 1131.79,
    "toDate": false
+  },
+  {
+   "q": "2026-Q4",
+   "n": 1,
+   "md": 2600000.0,
+   "psf": 717.44,
+   "toDate": true
   }
  ],
  "actives": {
   "n": 6,
-  "avg_dom": 170.16666666666666,
-  "med_dom": 123.0,
+  "avg_dom": 171.16666666666666,
+  "med_dom": 124.0,
   "min_p": 1999000.0,
   "max_p": 9400000.0,
   "med_p": 3649495.0

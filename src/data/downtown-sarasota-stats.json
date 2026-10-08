@@ -2,18 +2,18 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-07T10:43:02.306705+00:00",
+  "lastUpdated": "2026-10-08T10:57:10.882780+00:00",
   "counts": {
     "sold": 297,
-    "pending": 68,
-    "active": 166,
-    "total": 365
+    "pending": 69,
+    "active": 164,
+    "total": 366
   },
   "metrics": {
-    "avgPrice": "$1,917,622",
+    "avgPrice": "$1,914,090",
     "avgPricePerSqFt": "$825",
     "avgYearBuilt": 2002,
-    "avgLivingSqFt": "2,073",
+    "avgLivingSqFt": "2,070",
     "avgLotSqFt": null,
     "avgDom": 102
   },
@@ -22,7 +22,7 @@
     "maxPrice": "$12,499,000"
   },
   "active": {
-    "count": 166,
+    "count": 164,
     "medianPrice": "$1,999,000",
     "medianPricePerSqFt": "$949",
     "waterfrontCount": 50,
@@ -36,9 +36,9 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 8.4,
+    "condo": 8.3,
     "sfhVilla": 9.8,
-    "blended": 8.5,
+    "blended": 8.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,15 +54,15 @@
     }
   },
   "priceBands": {
-    "under900k": 35,
+    "under900k": 34,
     "band900kTo1_5m": 30,
-    "band1_5mTo3m": 41,
+    "band1_5mTo3m": 40,
     "band3mPlus": 60
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 166
+      "count": 164
     }
   ],
   "buildingClasses": [],
@@ -139,30 +139,30 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 39,
-      "avgPrice": "$1,157,913",
-      "avgPricePerSqFt": "$660",
+      "avgPrice": "$1,152,785",
+      "avgPricePerSqFt": "$658",
       "avgLivingSqFt": "1,639",
-      "avgDom": 154
+      "avgDom": 155
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 23,
-      "avgPrice": "$1,840,835",
-      "avgPricePerSqFt": "$730",
-      "avgLivingSqFt": "2,203",
-      "avgDom": 109
+      "activeCount": 21,
+      "avgPrice": "$1,867,390",
+      "avgPricePerSqFt": "$727",
+      "avgLivingSqFt": "2,233",
+      "avgDom": 110
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
       "activeCount": 23,
-      "avgPrice": "$1,653,996",
-      "avgPricePerSqFt": "$751",
+      "avgPrice": "$1,651,822",
+      "avgPricePerSqFt": "$750",
       "avgLivingSqFt": "2,053",
-      "avgDom": 112
+      "avgDom": 113
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,320,623",
       "avgPricePerSqFt": "$1,413",
       "avgLivingSqFt": "2,937",
-      "avgDom": 213
+      "avgDom": 214
     }
   ],
   "condoTiersScope": {
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 65,
+      "activeCount": 63,
       "soldCount": 149,
       "soldMedianPricePerSqFt": "$791",
       "soldMedianPrice": "$1,475,000",
@@ -222,11 +222,11 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 8.5,
-    "monthsOfSupplyCondo": 8.4,
+    "monthsOfSupply": 8.4,
+    "monthsOfSupplyCondo": 8.3,
     "monthsOfSupplySfhVilla": 9.8,
     "label": "buyer's market",
-    "activeCount": 166,
+    "activeCount": 164,
     "sold365Count": 234,
     "sold90Count": 47,
     "method": "active / (trailing-12mo closed / 12)"
@@ -240,7 +240,7 @@
     },
     "condo": {
       "soldCount": 286,
-      "activeCount": 162,
+      "activeCount": 160,
       "soldMedianPrice": "$1,200,000",
       "soldMedianPricePerSqFt": "$720"
     }
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Downtown Sarasota a buyer's or seller's market right now?",
-      "a": "With 166 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 8.5 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 164 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 8.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",

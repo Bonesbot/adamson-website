@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-07T10:43:06.137849+00:00",
+  "lastUpdated": "2026-10-08T10:57:15.039408+00:00",
   "counts": {
-    "sold": 931,
-    "pending": 68,
-    "active": 204,
-    "total": 999
+    "sold": 933,
+    "pending": 67,
+    "active": 205,
+    "total": 1000
   },
   "metrics": {
-    "avgPrice": "$560,016",
+    "avgPrice": "$560,094",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,044",
+    "avgLivingSqFt": "2,045",
     "avgLotSqFt": null,
     "avgDom": 79
   },
@@ -22,22 +22,22 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 204,
-    "medianPrice": "$409,500",
+    "count": 205,
+    "medianPrice": "$410,000",
     "medianPricePerSqFt": "$246",
-    "waterfrontCount": 33,
-    "newConstructionCount": 31
+    "waterfrontCount": 32,
+    "newConstructionCount": 32
   },
   "sold": {
-    "count": 169,
-    "medianPrice": "$455,000",
+    "count": 167,
+    "medianPrice": "$460,000",
     "medianDom": 58,
-    "saleToListRatio": "91.8%",
+    "saleToListRatio": "91.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 5.4,
-    "sfhVilla": 2.7,
+    "sfhVilla": 2.8,
     "blended": 3.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 187,
+    "under900k": 188,
     "band900kTo1_5m": 15,
     "band1_5mTo3m": 2,
     "band3mPlus": 0
@@ -62,11 +62,37 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 204
+      "count": 205
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4704525",
+      "address": "2133 BURGOS DR",
+      "subdivision": "ISLES OF SARASOTA",
+      "soldPrice": "$401,000",
+      "soldDate": "2026-10-07",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,549",
+      "yearBuilt": 2009,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4700059",
+      "address": "5735 WILENA PL",
+      "subdivision": "VILLAGEWALK",
+      "soldPrice": "$630,000",
+      "soldDate": "2026-10-06",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,008",
+      "yearBuilt": 2005,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4689669",
       "address": "5867 HELICON PL",
@@ -105,32 +131,6 @@
       "yearBuilt": 1989,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4685667",
-      "address": "5824 WILLOW MARSH CT",
-      "subdivision": "HAMMOCK PRESERVE",
-      "soldPrice": "$580,000",
-      "soldDate": "2026-10-02",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,164",
-      "yearBuilt": 2019,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4701454",
-      "address": "3643 MERIDALE RD",
-      "subdivision": "CLARK LAKES SUB",
-      "soldPrice": "$545,000",
-      "soldDate": "2026-10-02",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,732",
-      "yearBuilt": 1989,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -142,27 +142,27 @@
       "avgPrice": "$309,773",
       "avgPricePerSqFt": "$197",
       "avgLivingSqFt": "1,586",
-      "avgDom": 118
+      "avgDom": 119
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 73,
-      "avgPrice": "$296,737",
+      "avgPrice": "$296,655",
       "avgPricePerSqFt": "$228",
       "avgLivingSqFt": "1,292",
-      "avgDom": 119
+      "avgDom": 120
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
       "activeCount": 5,
-      "avgPrice": "$361,980",
-      "avgPricePerSqFt": "$214",
+      "avgPrice": "$360,780",
+      "avgPricePerSqFt": "$213",
       "avgLivingSqFt": "1,707",
-      "avgDom": 103
+      "avgDom": 104
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$383,539",
       "avgPricePerSqFt": "$225",
       "avgLivingSqFt": "1,705",
-      "avgDom": 78
+      "avgDom": 79
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 45,
+      "activeCount": 46,
       "soldCount": 217,
       "soldMedianPricePerSqFt": "$258",
       "soldMedianPrice": "$470,000",
@@ -205,18 +205,18 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 33,
-      "soldCount": 200,
-      "soldMedianPricePerSqFt": "$275",
-      "soldMedianPrice": "$592,000",
+      "activeCount": 32,
+      "soldCount": 201,
+      "soldMedianPricePerSqFt": "$276",
+      "soldMedianPrice": "$595,000",
       "lowSample": false
     },
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 126,
-      "soldCount": 512,
-      "soldMedianPricePerSqFt": "$242",
+      "activeCount": 127,
+      "soldCount": 513,
+      "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$440,000",
       "lowSample": false
     }
@@ -224,17 +224,17 @@
   "marketBalance": {
     "monthsOfSupply": 3.4,
     "monthsOfSupplyCondo": 5.4,
-    "monthsOfSupplySfhVilla": 2.7,
+    "monthsOfSupplySfhVilla": 2.8,
     "label": "seller's market",
-    "activeCount": 204,
-    "sold365Count": 715,
-    "sold90Count": 169,
+    "activeCount": 205,
+    "sold365Count": 717,
+    "sold90Count": 167,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 528,
-      "activeCount": 82,
+      "soldCount": 530,
+      "activeCount": 83,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
@@ -247,13 +247,13 @@
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 33
+    "activeWaterfront": 32
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 204 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.4 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 205 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.4 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,17 +263,17 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $409,500."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $410,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 58 days on market and closed at 91.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 58 days on market and closed at 91.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 33 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 32 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

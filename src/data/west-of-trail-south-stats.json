@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-07T10:43:04.599005+00:00",
+  "lastUpdated": "2026-10-08T10:57:13.343685+00:00",
   "counts": {
-    "sold": 315,
+    "sold": 316,
     "pending": 25,
-    "active": 93,
-    "total": 340
+    "active": 92,
+    "total": 341
   },
   "metrics": {
-    "avgPrice": "$628,180",
+    "avgPrice": "$626,851",
     "avgPricePerSqFt": "$326",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,749",
+    "avgLivingSqFt": "1,747",
     "avgLotSqFt": null,
     "avgDom": 79
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$5,650,000"
   },
   "active": {
-    "count": 93,
-    "medianPrice": "$450,000",
+    "count": 92,
+    "medianPrice": "$449,500",
     "medianPricePerSqFt": "$325",
     "waterfrontCount": 23,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 64,
-    "medianPrice": "$407,500",
-    "medianDom": 52,
-    "saleToListRatio": "87.3%",
+    "count": 62,
+    "medianPrice": "$405,000",
+    "medianDom": 60,
+    "saleToListRatio": "87.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 4.6,
+    "condo": 4.5,
     "sfhVilla": 4.4,
-    "blended": 4.5,
+    "blended": 4.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 73,
+    "under900k": 72,
     "band900kTo1_5m": 8,
     "band1_5mTo3m": 8,
     "band3mPlus": 4
@@ -62,11 +62,24 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 93
+      "count": 92
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4684312",
+      "address": "1711 PELICAN COVE RD #341",
+      "subdivision": "PELICAN COVE XIV",
+      "soldPrice": "$250,000",
+      "soldDate": "2026-10-07",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,127",
+      "yearBuilt": 1979,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4699936",
       "address": "1602 STICKNEY POINT RD #2-104",
@@ -118,19 +131,6 @@
       "yearBuilt": 1982,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4678685",
-      "address": "1500 CARIBBEAN DR",
-      "subdivision": "CORAL COVE",
-      "soldPrice": "$3,700,000",
-      "soldDate": "2026-09-30",
-      "bedrooms": 4,
-      "bathrooms": 5.5,
-      "livingSqFt": "5,222",
-      "yearBuilt": 2009,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -139,20 +139,20 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 48,
-      "avgPrice": "$363,617",
-      "avgPricePerSqFt": "$288",
-      "avgLivingSqFt": "1,257",
-      "avgDom": 93
+      "avgPrice": "$366,617",
+      "avgPricePerSqFt": "$291",
+      "avgLivingSqFt": "1,256",
+      "avgDom": 92
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 3,
-      "avgPrice": "$609,333",
-      "avgPricePerSqFt": "$281",
-      "avgLivingSqFt": "2,167",
-      "avgDom": 228
+      "activeCount": 2,
+      "avgPrice": "$581,500",
+      "avgPricePerSqFt": "$269",
+      "avgLivingSqFt": "2,165",
+      "avgDom": 170
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$610,975",
       "avgPricePerSqFt": "$357",
       "avgLivingSqFt": "1,710",
-      "avgDom": 135
+      "avgDom": 136
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$635,000",
       "avgPricePerSqFt": "$364",
       "avgLivingSqFt": "1,745",
-      "avgDom": 42
+      "avgDom": 43
     }
   ],
   "condoTiersScope": {
@@ -223,21 +223,21 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 62,
-      "soldCount": 200,
+      "activeCount": 61,
+      "soldCount": 201,
       "soldMedianPricePerSqFt": "$286",
       "soldMedianPrice": "$425,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.5,
-    "monthsOfSupplyCondo": 4.6,
+    "monthsOfSupply": 4.4,
+    "monthsOfSupplyCondo": 4.5,
     "monthsOfSupplySfhVilla": 4.4,
     "label": "seller's market",
-    "activeCount": 93,
-    "sold365Count": 248,
-    "sold90Count": 64,
+    "activeCount": 92,
+    "sold365Count": 249,
+    "sold90Count": 62,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,10 +248,10 @@
       "soldMedianPricePerSqFt": "$325"
     },
     "condo": {
-      "soldCount": 149,
-      "activeCount": 56,
-      "soldMedianPrice": "$340,000",
-      "soldMedianPricePerSqFt": "$253"
+      "soldCount": 150,
+      "activeCount": 55,
+      "soldMedianPrice": "$339,500",
+      "soldMedianPricePerSqFt": "$251"
     }
   },
   "boating": {
@@ -262,22 +262,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 93 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 4.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 92 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 4.4 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $533,950 ($325/sq ft), while condos, villas and townhouses sell around $340,000 ($253/sq ft)."
+      "a": "Single-family homes sell around $533,950 ($325/sq ft), while condos, villas and townhouses sell around $339,500 ($251/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $5,650,000, with a median asking price of $450,000."
+      "a": "Active listings run from $95,000 to $5,650,000, with a median asking price of $449,500."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 52 days on market and closed at 87.3% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 60 days on market and closed at 87.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
