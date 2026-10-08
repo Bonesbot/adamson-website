@@ -284,10 +284,13 @@ async function api(qs, body) {
 // ── map ─────────────────────────────────────────────────────────────────────
 function initMap() {
   map = L.map('map', { zoomControl: true, attributionControl: true, tap: true }).setView([27.32, -82.58], 12);
-  baseStreet = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { maxZoom: 20, attribution: '&copy; OpenStreetMap &copy; CARTO' }).addTo(map);
+  // Same OSM tiles SRQmap uses (CARTO raster now wants an API key). Satellite = Esri imagery
+  // with Esri's place/road reference overlay so streets stay readable; both key-free.
+  baseStreet = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
   baseSat = L.layerGroup([
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, attribution: 'Imagery &copy; Esri, Maxar, Earthstar Geographics' }),
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', { maxZoom: 20, opacity: .9 }),
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, opacity: .9 }),
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, opacity: .8 }),
   ]);
   map.on('click', (e) => { if (armed) { setPos(e.latlng.lat, e.latlng.lng, true); armed = false; $('#fab-pin').classList.remove('armed'); $('#hint').style.display = 'none'; } });
   try { const p = JSON.parse(localStorage.getItem(POS_KEY) || 'null'); if (p && p.lat) setPos(p.lat, p.lng, !!p.manual, true); } catch {}
