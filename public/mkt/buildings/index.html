@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#0A1F3C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AG Buildings">
+<title>AG Buildings: condo field guide</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/images/logos/cb-square.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+  :root{
+    --navy:#0A1F3C; --navy2:#12294d; --gold:#C9A961; --gulf:#2F6F9F; --sand:#E9DFC9; --cream:#FAF7F0;
+    --ink:#16233a; --muted:#6b778c; --line:#e3e6ec; --ok:#2e8b57; --warn:#b5651d; --bad:#b23a3a;
+    --sheet-h:46vh; --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box} html,body{height:100%;margin:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;color:var(--ink);background:var(--cream);overflow:hidden;-webkit-tap-highlight-color:transparent}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:600;margin:0}
+  button{font:inherit;cursor:pointer}
+  input,textarea,select{font:inherit}
+
+  /* ── top bar ── */
+  #bar{position:fixed;top:0;left:0;right:0;z-index:1100;background:var(--navy);color:#fff;padding:calc(8px + var(--sat)) 12px 8px;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+  #bar .row{display:flex;align-items:center;gap:8px}
+  #bar .brand{font-family:Georgia,serif;letter-spacing:.14em;text-transform:uppercase;font-size:13px;white-space:nowrap}
+  #bar .brand b{color:var(--gold);font-weight:600}
+  #bar .sub{font-size:10px;color:#B4BECD;letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+  #search{flex:1;min-width:0;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;border-radius:10px;padding:9px 12px;font-size:15px;outline:none}
+  #search::placeholder{color:#B4BECD}
+  .chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-top:8px;padding-bottom:2px}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none;border:1px solid rgba(255,255,255,.3);background:transparent;color:#dfe5ef;border-radius:999px;padding:5px 11px;font-size:12px;letter-spacing:.02em}
+  .chip.on{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:600}
+  .ib{border:none;background:rgba(255,255,255,.12);color:#fff;border-radius:10px;width:38px;height:38px;display:grid;place-items:center;flex:none}
+  .ib svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .ib.on{background:var(--gold);color:var(--navy)}
+
+  /* ── map ── */
+  #map{position:absolute;inset:0;background:#d9e3ea}
+  .leaflet-control-attribution{font-size:9px;opacity:.8}
+  .leaflet-bottom{bottom:calc(var(--sheet-h) + 6px)}
+  .leaflet-left .leaflet-control-zoom{display:none}
+  .pin{width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35);display:grid;place-items:center}
+  .pin i{transform:rotate(45deg);font-style:normal;font-size:9px;font-weight:700;color:#fff;letter-spacing:-.02em}
+  .pin.e1{background:#B9843A} .pin.e2{background:var(--gulf)} .pin.e3{background:var(--navy)}
+  .pin.gulf{border-color:var(--gold)}
+  .pin.sel{outline:3px solid var(--gold);outline-offset:1px}
+  .me{width:18px;height:18px;border-radius:50%;background:#1a73e8;border:3px solid #fff;box-shadow:0 0 0 2px rgba(26,115,232,.35),0 2px 6px rgba(0,0,0,.3)}
+  .me.manual{background:var(--gold)}
+  .pulse{position:absolute;inset:-14px;border-radius:50%;background:rgba(26,115,232,.18);animation:pulse 2s ease-out infinite}
+  @keyframes pulse{0%{transform:scale(.4);opacity:.9}100%{transform:scale(1.6);opacity:0}}
+
+  /* floating map buttons */
+  #fabs{position:fixed;right:12px;bottom:calc(var(--sheet-h) + 14px + var(--sab));z-index:1000;display:flex;flex-direction:column;gap:8px;transition:bottom .25s}
+  .fab{width:44px;height:44px;border-radius:12px;border:none;background:#fff;color:var(--navy);box-shadow:0 2px 10px rgba(0,0,0,.25);display:grid;place-items:center}
+  .fab svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .fab.on{background:var(--gold)}
+  .fab.armed{background:var(--navy);color:var(--gold)}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);top:calc(118px + var(--sat));z-index:1000;background:var(--navy);color:#fff;padding:8px 14px;border-radius:999px;font-size:13px;box-shadow:0 2px 10px rgba(0,0,0,.3);display:none}
+
+  /* ── bottom sheet ── */
+  #sheet{position:fixed;left:0;right:0;bottom:0;height:var(--sheet-h);z-index:1050;background:#fff;border-radius:18px 18px 0 0;box-shadow:0 -4px 24px rgba(0,0,0,.18);display:flex;flex-direction:column;transition:height .25s;padding-bottom:var(--sab)}
+  #sheet.tall{height:88vh} #sheet.short{height:84px}
+  #grip{flex:none;padding:8px 14px 4px;display:flex;align-items:center;justify-content:space-between;cursor:grab}
+  #grip .bar{width:40px;height:4px;border-radius:2px;background:#cfd5de;margin:0 auto 6px}
+  #grip .t{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+  #sheet .body{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+
+  /* list */
+  .item{display:flex;gap:12px;align-items:center;padding:11px 14px;border-top:1px solid var(--line)}
+  .item:active{background:#f3f5f8}
+  .item .dot{flex:none;width:12px;height:12px;border-radius:50%} .dot.e1{background:#B9843A}.dot.e2{background:var(--gulf)}.dot.e3{background:var(--navy)}
+  .item .nm{font-weight:600;font-size:15px;line-height:1.2} .item .ad{font-size:12px;color:var(--muted);margin-top:2px}
+  .item .r{margin-left:auto;text-align:right;flex:none} .item .r b{display:block;font-size:14px} .item .r span{font-size:11px;color:var(--muted)}
+  .tag{display:inline-block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:4px;background:var(--sand);color:#6a5425;margin-left:6px;vertical-align:middle}
+  .tag.gulf{background:#fff3d6;color:#8a6a1f} .tag.note{background:#e6f0f8;color:var(--gulf)}
+
+  /* detail */
+  .det{padding:0 0 30px}
+  .photo{position:relative;height:200px;background:linear-gradient(160deg,#dfe6ee,#c9d3df);overflow:hidden}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .photo .ph{position:absolute;inset:0;display:grid;place-items:center;color:#5a6a80;font-size:13px;text-align:center;padding:20px}
+  .photo .back{position:absolute;top:10px;left:10px;background:rgba(10,31,60,.85);color:#fff;border:none;border-radius:999px;padding:7px 12px;font-size:13px}
+  .photo .credit{position:absolute;right:8px;bottom:6px;font-size:10px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+  .head{padding:14px 16px 6px}
+  .head h2{font-size:22px;line-height:1.15}
+  .head .addr{font-size:13px;color:var(--muted);margin-top:4px}
+  .head .addr a{color:var(--gulf);text-decoration:none}
+  .badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .b{font-size:11px;padding:4px 8px;border-radius:6px;background:#eef1f5;color:#3a4657;letter-spacing:.02em}
+  .b.gold{background:#fff3d6;color:#8a6a1f} .b.navy{background:var(--navy);color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px 16px}
+  .st{background:#f6f7f9;border-radius:10px;padding:10px 10px 8px}
+  .st .l{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)} .st .v{font-family:Georgia,serif;font-size:19px;margin-top:3px;color:var(--navy)} .st .s{font-size:11px;color:var(--muted);margin-top:1px}
+  .sec{padding:10px 16px 0} .sec h3{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:inherit;font-weight:600;margin-bottom:6px}
+  .kv{display:grid;grid-template-columns:110px 1fr;gap:4px 10px;font-size:14px}
+  .kv .k{color:var(--muted)} .kv .v{color:var(--ink)} .kv .v.ov{color:var(--navy)}
+  .kv .v small{color:var(--muted);font-size:11px;display:block}
+  .chipsw{display:flex;flex-wrap:wrap;gap:6px}
+  .am{font-size:12px;padding:5px 9px;border-radius:999px;background:#eef4f9;color:#24456b}
+  .am.hi{background:#fff3d6;color:#8a6a1f}
+  .notes .n{border-top:1px solid var(--line);padding:9px 0;font-size:14px;line-height:1.4;position:relative}
+  .notes .n .m{font-size:11px;color:var(--muted);margin-top:3px}
+  .notes .n .x{position:absolute;right:0;top:8px;border:none;background:none;color:#aab;font-size:16px;padding:4px}
+  .nform{display:flex;gap:8px;margin-top:8px}
+  .nform textarea{flex:1;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:15px;min-height:46px;resize:vertical}
+  .nform input{width:56px;border:1px solid var(--line);border-radius:10px;padding:9px 8px;text-align:center;text-transform:uppercase;font-size:14px}
+  .btn{border:none;border-radius:10px;padding:10px 14px;font-weight:600;font-size:14px;background:var(--navy);color:#fff}
+  .btn.gold{background:var(--gold);color:var(--navy)} .btn.ghost{background:#eef1f5;color:var(--navy)} .btn.sm{padding:7px 10px;font-size:13px}
+  .actions{display:flex;gap:8px;padding:14px 16px 0;flex-wrap:wrap}
+  .ovf{padding:10px 16px;display:none} .ovf.open{display:block}
+  .ovf label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin:8px 0 3px}
+  .ovf input,.ovf textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:15px}
+  .empty{padding:30px 20px;text-align:center;color:var(--muted);font-size:14px}
+
+  /* ── login ── */
+  #login{position:fixed;inset:0;z-index:2000;background:var(--navy);color:#fff;display:grid;place-items:center;padding:24px}
+  #login .card{width:100%;max-width:360px;background:var(--navy2);border:1px solid rgba(201,169,97,.35);border-radius:16px;padding:26px 22px}
+  #login h1{font-size:22px;letter-spacing:.06em} #login .sub{color:#B4BECD;font-size:13px;margin:6px 0 16px}
+  #login input{width:100%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;border-radius:10px;padding:12px;font-size:16px;margin-bottom:10px}
+  #login .err{color:#f3b0b0;font-size:13px;min-height:18px;margin-bottom:6px}
+  #toast{position:fixed;left:50%;bottom:calc(var(--sheet-h) + 70px);transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 14px;border-radius:10px;font-size:13px;z-index:1200;opacity:0;transition:opacity .2s;pointer-events:none}
+  #toast.show{opacity:1}
+
+  @media (min-width:900px){
+    :root{--sheet-h:100vh}
+    #sheet{left:auto;right:0;top:calc(112px + var(--sat));width:420px;height:auto!important;border-radius:0;box-shadow:-4px 0 24px rgba(0,0,0,.12)}
+    #map{right:420px} #fabs{right:432px;bottom:24px!important} #grip .bar{display:none}
+    .leaflet-bottom{bottom:0} #toast{left:calc(50% - 210px);bottom:30px}
+    .leaflet-left .leaflet-control-zoom{display:block;margin-top:calc(122px + var(--sat))}
+  }
+</style>
+</head>
+<body>
+
+<div id="login">
+  <div class="card">
+    <h1>AG <span style="color:var(--gold)">Buildings</span></h1>
+    <div class="sub">Adamson Group condo field guide. Internal; enter the team edit key.</div>
+    <input type="password" id="login-key" placeholder="Edit key" autocomplete="current-password" onkeydown="if(event.key==='Enter')logIn()">
+    <div class="err" id="login-err"></div>
+    <button class="btn gold" style="width:100%" onclick="logIn()">Sign in</button>
+  </div>
+</div>
+
+<div id="bar">
+  <div class="row">
+    <div>
+      <div class="brand">AG <b>Buildings</b></div>
+      <div class="sub" id="count">loading</div>
+    </div>
+    <input id="search" type="search" placeholder="Building or address" autocomplete="off">
+    <button class="ib" id="btn-list" title="List" onclick="showList()"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  </div>
+  <div class="chips" id="chips">
+    <button class="chip on" data-f="zip:34236">Lido / St Armands / Downtown 34236</button>
+    <button class="chip on" data-f="zip:34228">Longboat 34228</button>
+    <button class="chip" data-f="gulf">Gulf front</button>
+    <button class="chip" data-f="e1">Pre-1980</button>
+    <button class="chip" data-f="e2">1980-2005</button>
+    <button class="chip" data-f="e3">2006+</button>
+    <button class="chip" data-f="active">Active listings</button>
+    <button class="chip" data-f="notes">Has notes</button>
+  </div>
+</div>
+
+<div id="map"></div>
+<div id="hint">Tap the map to set your position</div>
+
+<div id="fabs">
+  <button class="fab" id="fab-sat" title="Satellite" onclick="toggleSat()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></button>
+  <button class="fab" id="fab-pin" title="Set position by tapping the map" onclick="armPin()"><svg viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></svg></button>
+  <button class="fab" id="fab-loc" title="Use my location" onclick="locate()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg></button>
+</div>
+
+<div id="sheet">
+  <div id="grip" onclick="toggleSheet()">
+    <div style="flex:1">
+      <div class="bar"></div>
+      <div class="t"><span id="sheet-title">Nearest buildings</span><span id="sheet-sub"></span></div>
+    </div>
+  </div>
+  <div class="body" id="body"><div class="empty">Loading buildings</div></div>
+</div>
+<div id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+'use strict';
+const API = '/.netlify/functions/buildings';
+const KEY_KEY = 'cma-edit-key';            // same localStorage slot as /mkt/admin so one login covers both
+const AUTHOR_KEY = 'ag-buildings-author';
+const POS_KEY = 'ag-buildings-pos';
+const ZIPS = ['34236', '34228'];
+
+let DATA = { buildings: [], notes: [] }, NOTES = {}, PHOTOS = false;
+let map, baseStreet, baseSat, satOn = false, markers = {}, meMarker = null, meCircle = null, pos = null, posManual = false, armed = false;
+let filters = new Set(['zip:34236', 'zip:34228']), query = '', selected = null, view = 'list';
+
+// ── helpers ─────────────────────────────────────────────────────────────────
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const money = (n) => (n == null || isNaN(n)) ? '—' : (n >= 1e6 ? '$' + (n / 1e6).toFixed(n >= 1e7 ? 1 : 2).replace(/\.?0+$/, '') + 'M' : '$' + Math.round(n / 1000) + 'k');
+const moneyFull = (n) => (n == null || isNaN(n)) ? '—' : '$' + Math.round(n).toLocaleString();
+const num = (n) => (n == null || isNaN(n)) ? '—' : Math.round(n).toLocaleString();
+const title = (s) => String(s || '').toLowerCase().replace(/\b([a-z])/g, (m) => m.toUpperCase()).replace(/\bOf\b/g, 'of').replace(/\bAt\b/g, 'at').replace(/\bOn\b/g, 'on').replace(/\bThe\b/g, 'the').replace(/^the\b/, 'The').replace(/\b(Ii|Iii|Iv|Vi|Ph|Lbk|Amd)\b/g, (m) => m.toUpperCase()).replace(/\bL Elegance\b/, "L'Elegance").replace(/\bL Ambiance\b/, "L'Ambiance");
+const era = (y) => (!y ? 'e2' : y < 1980 ? 'e1' : y <= 2005 ? 'e2' : 'e3');
+const name = (b) => b.display_name || title(b.subdivision) || title(b.bkey);
+function dist(a, b) { // meters
+  const R = 6371000, toRad = (d) => d * Math.PI / 180;
+  const dLat = toRad(b.lat - a.lat), dLng = toRad(b.lng - a.lng);
+  const x = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(x));
+}
+const fmtDist = (m) => m == null ? '' : m < 160 ? Math.round(m * 3.281) + ' ft' : (m / 1609.34).toFixed(m < 16000 ? 1 : 0) + ' mi';
+function toast(t) { const el = $('#toast'); el.textContent = t; el.classList.add('show'); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 2200); }
+
+// Collapse the MLS community_features soup into one clean amenity list.
+const AMEN_MAP = [
+  [/pool/i, 'Pool'], [/fitness|gym/i, 'Fitness center'], [/clubhouse/i, 'Clubhouse'], [/tennis/i, 'Tennis'], [/pickleball/i, 'Pickleball'],
+  [/elevator/i, 'Elevator'], [/gated.*guard|guard/i, 'Guard gate'], [/gated/i, 'Gated'], [/dock|marina|boat slip/i, 'Dock / marina'],
+  [/golf/i, 'Golf'], [/restaurant/i, 'Restaurant'], [/spa|hot tub/i, 'Spa'], [/sauna/i, 'Sauna'], [/beach/i, 'Beach access'],
+  [/rooftop|roof top|roof deck|sun deck/i, 'Rooftop / sun deck'], [/lounge|social room|community room|party room/i, 'Lounge / social room'],
+  [/concierge|doorman/i, 'Concierge'], [/storage/i, 'Storage'], [/bike|bicycle/i, 'Bike storage'], [/kayak|canoe/i, 'Kayak launch'],
+  [/grill|bbq|outdoor kitchen/i, 'Grills'], [/guest suite/i, 'Guest suite'], [/business center|library/i, 'Library / business center'],
+  [/playground|park/i, 'Park / playground'], [/shuffle/i, 'Shuffleboard'], [/laundry/i, 'Laundry'], [/wheelchair|handicap/i, 'Accessible'],
+  [/water.?front|waterfront/i, 'Waterfront complex'], [/security/i, 'Security'], [/car wash/i, 'Car wash'], [/dog park/i, 'Dog park'],
+];
+function amenities(b) {
+  const out = new Set();
+  const raw = [b.community_features_raw, b.exterior_features_raw].filter(Boolean).join(', ');
+  raw.split(/\s*[,|]\s*/).forEach((tok) => { for (const [re, lab] of AMEN_MAP) if (re.test(tok)) { out.add(lab); break; } });
+  if (b.has_pool) out.add('Pool'); if (b.has_fitness) out.add('Fitness center'); if (b.has_tennis) out.add('Tennis'); if (b.has_pickleball) out.add('Pickleball');
+  if (b.elevator) out.add('Elevator'); if (b.gated) out.add('Gated'); if (b.has_dock) out.add('Dock / marina'); if (b.has_restaurant) out.add('Restaurant');
+  const hi = new Set(['Rooftop / sun deck', 'Lounge / social room', 'Concierge', 'Guard gate', 'Dock / marina', 'Restaurant', 'Guest suite', 'Spa']);
+  return [...out].sort((a, c) => (hi.has(c) - hi.has(a)) || a.localeCompare(c)).map((a) => ({ a, hi: hi.has(a) }));
+}
+function pets(b) {
+  if (b.pets_override) return { v: b.pets_override, ov: true };
+  if (!b.pets_allowed) return { v: '—' };
+  let v = b.pets_allowed;
+  if (/^no$/i.test(v)) v = 'No pets';
+  else { const p = []; if (/dogs/i.test(v)) p.push('Dogs'); if (/cats/i.test(v)) p.push('Cats'); if (!p.length && /yes/i.test(v)) p.push('Allowed'); v = p.join(' & ') || v; if (b.max_pet_weight) v += ` · ${Math.round(b.max_pet_weight)} lb max`; if (b.number_of_pets) v += ` · ${String(b.number_of_pets).replace(/\s*\(.*\)/, '')} pet${String(b.number_of_pets) === '1' ? '' : 's'}`; if (/size limit|weight limit/i.test(b.pets_allowed) && !b.max_pet_weight) v += ' · size limit'; }
+  return { v, s: b.pet_restrictions ? b.pet_restrictions.slice(0, 120) : null };
+}
+function rental(b) {
+  if (b.rental_override) return { v: b.rental_override, ov: true };
+  if (!b.minimum_lease && b.lease_restrictions == null) return { v: '—' };
+  let v = b.minimum_lease ? `${b.minimum_lease} minimum` : (b.lease_restrictions ? 'Restricted' : 'No stated minimum');
+  if (b.own_years_before_lease) v += ` · own ${b.own_years_before_lease} yr before leasing`;
+  return { v };
+}
+function parking(b) {
+  if (b.parking_override) return { v: b.parking_override, ov: true };
+  const g = Number(b.garage_spaces_max) || 0, share = b.listings_total ? b.garage_listings / b.listings_total : 0;
+  if (g > 0 && share >= 0.5) return { v: `Garage · ${g} space${g > 1 ? 's' : ''} typical` };
+  if (g > 0) return { v: `Garage on some units (${b.garage_listings} of ${b.listings_total} listings)` };
+  if (/covered|carport|under building/i.test(b.exterior_features_raw || '') || /covered|carport|under building/i.test(b.community_features_raw || '')) return { v: 'Covered / carport' };
+  return { v: 'Open lot (no garage in MLS)' };
+}
+
+// ── auth ────────────────────────────────────────────────────────────────────
+async function verifyKey(k) {
+  const r = await fetch(API + '?action=verify', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-cma-key': k }, body: '{}' });
+  return r.ok;
+}
+async function logIn() {
+  const k = $('#login-key').value.trim(); if (!k) return;
+  $('#login-err').textContent = '';
+  try { if (await verifyKey(k)) { localStorage.setItem(KEY_KEY, k); $('#login').style.display = 'none'; boot(); } else $('#login-err').textContent = 'That key did not work.'; }
+  catch { $('#login-err').textContent = 'Network error, try again.'; }
+}
+async function api(qs, body) {
+  const r = await fetch(API + qs, { method: body ? 'POST' : 'GET', headers: { 'Content-Type': 'application/json', 'x-cma-key': localStorage.getItem(KEY_KEY) || '' }, body: body ? JSON.stringify(body) : undefined });
+  if (r.status === 401) { localStorage.removeItem(KEY_KEY); location.reload(); return null; }
+  const j = await r.json(); if (!r.ok || j.error) throw new Error(j.error || r.status); return j;
+}
+
+// ── map ─────────────────────────────────────────────────────────────────────
+function initMap() {
+  map = L.map('map', { zoomControl: true, attributionControl: true, tap: true }).setView([27.32, -82.58], 12);
+  baseStreet = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { maxZoom: 20, attribution: '&copy; OpenStreetMap &copy; CARTO' }).addTo(map);
+  baseSat = L.layerGroup([
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, attribution: 'Imagery &copy; Esri, Maxar, Earthstar Geographics' }),
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', { maxZoom: 20, opacity: .9 }),
+  ]);
+  map.on('click', (e) => { if (armed) { setPos(e.latlng.lat, e.latlng.lng, true); armed = false; $('#fab-pin').classList.remove('armed'); $('#hint').style.display = 'none'; } });
+  try { const p = JSON.parse(localStorage.getItem(POS_KEY) || 'null'); if (p && p.lat) setPos(p.lat, p.lng, !!p.manual, true); } catch {}
+}
+function toggleSat() { satOn = !satOn; if (satOn) { map.removeLayer(baseStreet); baseSat.addTo(map); } else { map.removeLayer(baseSat); baseStreet.addTo(map); } $('#fab-sat').classList.toggle('on', satOn); }
+function armPin() { armed = !armed; $('#fab-pin').classList.toggle('armed', armed); $('#hint').style.display = armed ? 'block' : 'none'; }
+function locate() {
+  if (!navigator.geolocation) return toast('No GPS on this device');
+  toast('Finding you');
+  navigator.geolocation.getCurrentPosition((p) => { setPos(p.coords.latitude, p.coords.longitude, false); map.setView([p.coords.latitude, p.coords.longitude], Math.max(map.getZoom(), 16)); },
+    (e) => toast('Location blocked: tap the pin button and tap the map instead'), { enableHighAccuracy: true, timeout: 10000, maximumAge: 30000 });
+}
+function setPos(lat, lng, manual, quiet) {
+  pos = { lat, lng }; posManual = manual;
+  try { localStorage.setItem(POS_KEY, JSON.stringify({ lat, lng, manual })); } catch {}
+  const icon = L.divIcon({ className: '', html: `<div style="position:relative"><div class="pulse"></div><div class="me ${manual ? 'manual' : ''}"></div></div>`, iconSize: [18, 18], iconAnchor: [9, 9] });
+  if (meMarker) meMarker.setLatLng([lat, lng]).setIcon(icon); else meMarker = L.marker([lat, lng], { icon, zIndexOffset: 1000, draggable: true }).addTo(map).on('dragend', (e) => { const ll = e.target.getLatLng(); setPos(ll.lat, ll.lng, true); });
+  $('#fab-loc').classList.toggle('on', !manual); $('#fab-pin').classList.toggle('on', manual);
+  if (!quiet) { toast(manual ? 'Position set (drag the gold dot to adjust)' : 'Position set from GPS'); if (manual) map.panTo([lat, lng]); }
+  if (view === 'list') renderList();
+}
+function makeIcon(b, sel) {
+  const yy = b.year_built ? String(b.year_built).slice(2) : '';
+  return L.divIcon({ className: '', html: `<div class="pin ${era(b.year_built)} ${b.gulf_front ? 'gulf' : ''} ${sel ? 'sel' : ''}"><i>${yy}</i></div>`, iconSize: [26, 26], iconAnchor: [13, 26], popupAnchor: [0, -24] });
+}
+function drawMarkers() {
+  const vis = visible();
+  const keep = new Set(vis.map((b) => b.bkey));
+  for (const k in markers) if (!keep.has(k)) { map.removeLayer(markers[k]); delete markers[k]; }
+  vis.forEach((b) => {
+    if (markers[b.bkey]) return;
+    const m = L.marker([b.lat, b.lng], { icon: makeIcon(b, selected === b.bkey), title: name(b) }).addTo(map);
+    m.on('click', () => openDetail(b.bkey));
+    markers[b.bkey] = m;
+  });
+}
+
+// ── filtering ───────────────────────────────────────────────────────────────
+function visible() {
+  const q = query.trim().toLowerCase();
+  return DATA.buildings.filter((b) => {
+    if (b.hidden) return false;
+    if (!filters.has('zip:' + b.postal_code)) return false;
+    if (filters.has('gulf') && !b.gulf_front) return false;
+    const eras = ['e1', 'e2', 'e3'].filter((e) => filters.has(e));
+    if (eras.length && !eras.includes(era(b.year_built))) return false;
+    if (filters.has('active') && !(b.active_count > 0)) return false;
+    if (filters.has('notes') && !(NOTES[b.bkey] || []).length) return false;
+    if (q) { const hay = `${name(b)} ${b.bkey} ${(b.subdivision_names || []).join(' ')}`.toLowerCase(); if (!hay.includes(q)) return false; }
+    return true;
+  });
+}
+function withDist(list) { return list.map((b) => ({ b, d: pos ? dist(pos, b) : null })).sort((x, y) => (x.d ?? 1e12) - (y.d ?? 1e12) || (y.b.listings_total - x.b.listings_total)); }
+
+// ── sheet: list ─────────────────────────────────────────────────────────────
+function showList() {
+  view = 'list';
+  if (selected && markers[selected]) markers[selected].setIcon(makeIcon(DATA.buildings.find((b) => b.bkey === selected), false));
+  selected = null; drawMarkers(); renderList(); $('#sheet').classList.remove('short');
+}
+function renderList() {
+  const rows = withDist(visible());
+  $('#sheet-title').textContent = pos ? 'Nearest buildings' : 'Buildings (set your position for distances)';
+  $('#sheet-sub').textContent = rows.length + ' shown';
+  if (!rows.length) { $('#body').innerHTML = '<div class="empty">Nothing matches. Loosen the chips above.</div>'; return; }
+  $('#body').innerHTML = rows.slice(0, 150).map(({ b, d }) => `
+    <div class="item" onclick="openDetail('${esc(b.bkey)}')">
+      <div class="dot ${era(b.year_built)}"></div>
+      <div style="min-width:0">
+        <div class="nm">${esc(name(b))}${b.gulf_front ? '<span class="tag gulf">Gulf</span>' : ''}${(NOTES[b.bkey] || []).length ? `<span class="tag note">${(NOTES[b.bkey] || []).length} note${(NOTES[b.bkey] || []).length > 1 ? 's' : ''}</span>` : ''}</div>
+        <div class="ad">${esc(title(b.bkey))} · ${b.year_built || '—'}${b.stories ? ' · ' + b.stories + ' fl' : ''}${b.active_count ? ' · <b style="color:var(--ok)">' + b.active_count + ' active</b>' : ''}</div>
+      </div>
+      <div class="r"><b>${money(b.closed24_median ?? b.all_closed_median)}</b><span>${d != null ? fmtDist(d) : (b.closed24_count ? b.closed24_count + ' sold/24mo' : 'median')}</span></div>
+    </div>`).join('');
+}
+
+// ── sheet: detail ───────────────────────────────────────────────────────────
+function openDetail(key) {
+  const b = DATA.buildings.find((x) => x.bkey === key); if (!b) return;
+  if (selected && markers[selected]) markers[selected].setIcon(makeIcon(DATA.buildings.find((x) => x.bkey === selected), false));
+  selected = key; view = 'detail';
+  if (markers[key]) markers[key].setIcon(makeIcon(b, true));
+  map.panTo([b.lat, b.lng], { animate: true });
+  $('#sheet').classList.remove('short');
+  renderDetail(b);
+  $('#body').scrollTop = 0;
+}
+function renderDetail(b) {
+  const d = pos ? dist(pos, b) : null, am = amenities(b), p = pets(b), r = rental(b), pk = parking(b), notes = NOTES[b.bkey] || [];
+  const amOv = b.amenities_override ? b.amenities_override.split(/\s*[,;]\s*/).filter(Boolean) : null;
+  $('#sheet-title').textContent = name(b); $('#sheet-sub').textContent = d != null ? fmtDist(d) + ' away' : '';
+  const photo = PHOTOS || b.photo_url
+    ? `<img src="${b.photo_url ? esc(b.photo_url) : API + '?action=photo&key=' + encodeURIComponent(b.bkey)}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="ph" style="display:none">No street-level photo for this address yet</div><div class="credit">${b.photo_url ? '' : 'Google Street View'}</div>`
+    : `<div class="ph">Photo slot: Street View turns on once the Google key is added<br><small>${esc(title(b.bkey))}</small></div>`;
+  const gm = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(b.bkey + ', ' + (b.city || 'Sarasota') + ' FL ' + b.postal_code)}`;
+  $('#body').innerHTML = `
+  <div class="det">
+    <div class="photo">${photo}<button class="back" onclick="showList()">‹ List</button></div>
+    <div class="head">
+      <h2>${esc(name(b))}</h2>
+      <div class="addr">${esc(title(b.bkey))}, ${esc(title(b.city || 'Sarasota'))} ${esc(b.postal_code)} · <a href="${gm}" target="_blank" rel="noopener">Open in Maps</a></div>
+      <div class="badges">
+        <span class="b navy">Built ${b.year_built || '—'}</span>
+        ${b.stories ? `<span class="b">${b.stories} stories</span>` : ''}
+        ${b.gulf_front ? '<span class="b gold">Gulf front</span>' : b.bay_front ? '<span class="b">Bay front</span>' : b.waterfront ? '<span class="b">Waterfront</span>' : ''}
+        ${b.elevator ? '<span class="b">Elevator</span>' : ''}
+        ${b.building_class ? `<span class="b">${esc(b.building_class)}</span>` : ''}
+        <span class="b">${b.listings_total} MLS records</span>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="st"><div class="l">Active now</div><div class="v">${b.active_count || 0}</div><div class="s">${b.active_count ? money(b.active_min) + (b.active_max !== b.active_min ? ' – ' + money(b.active_max) : '') : 'none listed'}</div></div>
+      <div class="st"><div class="l">Median sold</div><div class="v">${money(b.closed24_median)}</div><div class="s">${b.closed24_count ? b.closed24_count + ' closed / 24 mo' : (b.all_closed_count ? 'none in 24 mo · all-time ' + money(b.all_closed_median) : 'no closed sales')}</div></div>
+      <div class="st"><div class="l">$ / sq ft</div><div class="v">${b.closed24_median_ppsf ? '$' + num(b.closed24_median_ppsf) : '—'}</div><div class="s">median, closed 24 mo</div></div>
+      <div class="st"><div class="l">Min sold</div><div class="v">${money(b.closed24_min)}</div><div class="s">24 mo low</div></div>
+      <div class="st"><div class="l">Max sold</div><div class="v">${money(b.closed24_max)}</div><div class="s">24 mo high</div></div>
+      <div class="st"><div class="l">Median size</div><div class="v">${num(b.median_size)}</div><div class="s">sq ft</div></div>
+      <div class="st"><div class="l">HOA / mo</div><div class="v">${b.hoa_mo ? moneyFull(b.hoa_mo) : '—'}</div><div class="s">median of listings</div></div>
+      <div class="st"><div class="l">Last activity</div><div class="v" style="font-size:15px;margin-top:6px">${b.last_activity ? esc(String(b.last_activity).slice(0, 7)) : '—'}</div><div class="s">close or list date</div></div>
+      <div class="st"><div class="l">Notes</div><div class="v">${notes.length}</div><div class="s">team field notes</div></div>
+    </div>
+    <div class="sec"><h3>Rules & parking</h3>
+      <div class="kv">
+        <div class="k">Pets</div><div class="v ${p.ov ? 'ov' : ''}">${esc(p.v)}${p.s ? `<small>${esc(p.s)}</small>` : ''}${p.ov ? '<small>team override</small>' : ''}</div>
+        <div class="k">Rentals</div><div class="v ${r.ov ? 'ov' : ''}">${esc(r.v)}${r.ov ? '<small>team override</small>' : ''}</div>
+        <div class="k">Parking</div><div class="v ${pk.ov ? 'ov' : ''}">${esc(pk.v)}${pk.ov ? '<small>team override</small>' : ''}</div>
+        ${b.water_views ? `<div class="k">Views</div><div class="v">${esc(b.water_views.split(' | ').map((s) => s.replace(/,\s*/g, ', ')).join(' · ').slice(0, 140))}</div>` : ''}
+      </div>
+    </div>
+    <div class="sec"><h3>Amenities${amOv ? ' <span style="color:var(--navy);text-transform:none;letter-spacing:0">(team override)</span>' : ''}</h3>
+      <div class="chipsw">${(amOv ? amOv.map((a) => ({ a, hi: false })) : am).map((x) => `<span class="am ${x.hi ? 'hi' : ''}">${esc(x.a)}</span>`).join('') || '<span class="am">Nothing coded in MLS</span>'}</div>
+    </div>
+    <div class="sec notes"><h3>Field notes</h3>
+      <div id="notes">${notes.map(noteHtml).join('') || '<div style="font-size:13px;color:var(--muted)">No notes yet. Add what you see: lobby condition, assessments, management, parking reality, view lines.</div>'}</div>
+      <div class="nform">
+        <textarea id="note-text" placeholder="Add a field note" rows="2"></textarea>
+        <input id="note-author" maxlength="4" placeholder="RA" value="${esc(localStorage.getItem(AUTHOR_KEY) || '')}">
+      </div>
+      <div style="margin-top:8px;display:flex;gap:8px"><button class="btn gold sm" onclick="addNote('${esc(b.bkey)}')">Save note</button><button class="btn ghost sm" onclick="toggleOverride()">Edit facts</button></div>
+    </div>
+    <div class="ovf" id="ovf">
+      <label>Display name</label><input id="ov-name" value="${esc(b.display_name || '')}" placeholder="${esc(name(b))}">
+      <label>Pets (override)</label><input id="ov-pets" value="${esc(b.pets_override || '')}" placeholder="e.g. 1 dog under 30 lb">
+      <label>Rentals (override)</label><input id="ov-rental" value="${esc(b.rental_override || '')}" placeholder="e.g. 3 month min, 2x per year">
+      <label>Parking (override)</label><input id="ov-parking" value="${esc(b.parking_override || '')}" placeholder="e.g. Under-building covered, 1 assigned">
+      <label>Amenities (override, comma separated)</label><textarea id="ov-amen" rows="2" placeholder="Pool, Rooftop deck, Gym, Lounge">${esc(b.amenities_override || '')}</textarea>
+      <label>Photo URL (override Street View)</label><input id="ov-photo" value="${esc(b.photo_url || '')}" placeholder="https://">
+      <div style="margin-top:10px;display:flex;gap:8px;align-items:center"><button class="btn sm" onclick="saveOverride('${esc(b.bkey)}')">Save facts</button><button class="btn ghost sm" onclick="hideBuilding('${esc(b.bkey)}')">Hide building</button><span style="font-size:11px;color:var(--muted)">${b.updated_by ? 'last edit ' + esc(b.updated_by) + ' ' + esc(String(b.updated_at).slice(0, 10)) : ''}</span></div>
+    </div>
+    <div class="sec" style="font-size:11px;color:var(--muted);line-height:1.4">Stats roll up every MLS record at this street address (Stellar MLS via the daily import). Min / median / max and $/sf use closed sales in the last 24 months; HOA is the median monthly fee across listings; pets, lease and parking are the most common MLS entry. Verify with the association before quoting.</div>
+  </div>`;
+}
+function noteHtml(n) { return `<div class="n">${esc(n.note)}<div class="m">${esc(n.author || '—')} · ${esc(String(n.created_at).slice(0, 10))}</div><button class="x" title="Delete" onclick="delNote(${n.id},'${esc(n.building_key)}')">×</button></div>`; }
+function toggleOverride() { $('#ovf').classList.toggle('open'); }
+async function addNote(key) {
+  const note = $('#note-text').value.trim(), author = $('#note-author').value.trim().toUpperCase();
+  if (!note) return toast('Type a note first'); if (!author) return toast('Add your initials');
+  localStorage.setItem(AUTHOR_KEY, author);
+  try { const j = await api('?action=note', { building_key: key, note, author }); if (!j) return; (NOTES[key] = NOTES[key] || []).unshift(j.note); openDetail(key); toast('Note saved'); } catch (e) { toast('Save failed: ' + e.message); }
+}
+async function delNote(id, key) {
+  if (!confirm('Delete this note?')) return;
+  try { await api('?action=delnote', { id }); NOTES[key] = (NOTES[key] || []).filter((n) => n.id !== id); openDetail(key); } catch (e) { toast('Delete failed'); }
+}
+async function saveOverride(key) {
+  const author = ($('#note-author').value.trim() || localStorage.getItem(AUTHOR_KEY) || '').toUpperCase(); if (!author) return toast('Add your initials in the note box');
+  localStorage.setItem(AUTHOR_KEY, author);
+  const body = { building_key: key, author, display_name: $('#ov-name').value, pets_override: $('#ov-pets').value, rental_override: $('#ov-rental').value, parking_override: $('#ov-parking').value, amenities_override: $('#ov-amen').value, photo_url: $('#ov-photo').value };
+  try { const j = await api('?action=override', body); if (!j) return; const b = DATA.buildings.find((x) => x.bkey === key); Object.assign(b, j.building, { hidden: !!j.building.hidden }); if (markers[key]) markers[key].setIcon(makeIcon(b, true)); openDetail(key); toast('Saved'); } catch (e) { toast('Save failed: ' + e.message); }
+}
+async function hideBuilding(key) {
+  if (!confirm('Hide this building from the map for everyone? (Undo via Supabase condo_buildings.hidden)')) return;
+  try { await api('?action=override', { building_key: key, hidden: true, author: localStorage.getItem(AUTHOR_KEY) || '' }); const b = DATA.buildings.find((x) => x.bkey === key); b.hidden = true; showList(); toast('Hidden'); } catch (e) { toast('Failed'); }
+}
+function toggleSheet() { const s = $('#sheet'); if (window.innerWidth >= 900) return; s.classList.toggle('tall'); s.classList.remove('short'); }
+
+// ── boot ────────────────────────────────────────────────────────────────────
+async function load() {
+  const j = await api('?zips=' + ZIPS.join(',')); if (!j) return;
+  DATA = j; PHOTOS = !!j.photos; NOTES = {};
+  j.notes.forEach((n) => (NOTES[n.building_key] = NOTES[n.building_key] || []).push(n));
+  $('#count').textContent = `${j.buildings.filter((b) => !b.hidden).length} buildings · ${ZIPS.join(' / ')}`;
+  drawMarkers(); renderList();
+}
+async function boot() {
+  if (!map) initMap();
+  try { await load(); } catch (e) { $('#body').innerHTML = `<div class="empty">Could not load: ${esc(e.message)}</div>`; }
+  if (!pos) { const vis = visible(); if (vis.length) map.fitBounds(L.latLngBounds(vis.map((b) => [b.lat, b.lng])).pad(0.05)); }
+  else map.setView([pos.lat, pos.lng], 15);
+}
+document.getElementById('chips').addEventListener('click', (e) => {
+  const c = e.target.closest('.chip'); if (!c) return; const f = c.dataset.f;
+  if (filters.has(f)) filters.delete(f); else filters.add(f);
+  c.classList.toggle('on', filters.has(f)); drawMarkers(); if (view === 'list') renderList();
+});
+$('#search').addEventListener('input', (e) => { query = e.target.value; drawMarkers(); if (view !== 'list') showList(); else renderList(); });
+// sheet drag: swipe up/down on the grip
+(() => { let y0 = null; const g = $('#grip'); g.addEventListener('touchstart', (e) => { y0 = e.touches[0].clientY; }, { passive: true }); g.addEventListener('touchend', (e) => { if (y0 == null) return; const dy = e.changedTouches[0].clientY - y0; y0 = null; const s = $('#sheet'); if (dy < -30) { s.classList.add('tall'); s.classList.remove('short'); } else if (dy > 30) { if (s.classList.contains('tall')) s.classList.remove('tall'); else s.classList.add('short'); } }, { passive: true }); })();
+
+(async () => {
+  const k = localStorage.getItem(KEY_KEY);
+  if (k && await verifyKey(k).catch(() => false)) { $('#login').style.display = 'none'; boot(); }
+  else { localStorage.removeItem(KEY_KEY); setTimeout(() => $('#login-key').focus(), 100); }
+})();
+</script>
+</body>
+</html>

@@ -50,6 +50,16 @@
     X-Robots-Tag = "noindex, nofollow"
 
 # ---------------------------------------------------------------------------
+# /mkt/buildings/: internal condo field guide for Adamson Group agents
+# (2026-10-08). Gated by the CMA edit key client-side, so the HTTP layer adds
+# belt-and-braces noindex. Never linked from the hub site.
+# ---------------------------------------------------------------------------
+[[headers]]
+  for = "/mkt/buildings/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+
+# ---------------------------------------------------------------------------
 # mls-watchdog: off-machine dead-man's-switch for the daily MLS export.
 # Runs at 14:00 UTC (10am EDT / 9am EST), a few hours after the mini-PC job's
 # ~6:50am ET window, so a normal run has had time to land. It queries Postgres
