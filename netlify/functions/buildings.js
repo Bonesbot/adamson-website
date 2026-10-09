@@ -173,7 +173,9 @@ exports.handler = async (event) => {
       const accept = String(event.headers['accept-encoding'] || event.headers['Accept-Encoding'] || '');
       if (/gzip/.test(accept)) {
         const gz = require('zlib').gzipSync(Buffer.from(JSON.stringify(payload)));
-        return { statusCode: 200, headers: { 'Content-Type': 'application/json', 'Content-Encoding': 'gzip', 'Cache-Control': 'no-store', 'Access-Control-Allow-Origin': '*' }, body: gz.toString('base64'), isBase64Encoded: true };
+        // Short private cache: the view aggregates every listing on each call (~2 s), and the
+        // page patches its own copy after a note or override, so a 2-minute reuse is safe.
+        return { statusCode: 200, headers: { 'Content-Type': 'application/json', 'Content-Encoding': 'gzip', 'Cache-Control': 'private, max-age=120', 'Access-Control-Allow-Origin': '*' }, body: gz.toString('base64'), isBase64Encoded: true };
       }
       return json(200, payload);
     }
