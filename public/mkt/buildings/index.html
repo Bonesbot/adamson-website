@@ -16,7 +16,7 @@
   :root{
     --navy:#0A1F3C; --navy2:#12294d; --gold:#C9A961; --gulf:#2F6F9F; --sand:#E9DFC9; --cream:#FAF7F0;
     --ink:#16233a; --muted:#6b778c; --line:#e3e6ec; --ok:#2e8b57; --warn:#b5651d; --bad:#b23a3a;
-    --sheet-h:46vh; --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
+    --sheet-h:46vh; --sheet-h:46dvh; --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
   }
   *{box-sizing:border-box} html,body{height:100%;margin:0}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;color:var(--ink);background:var(--cream);overflow:hidden;-webkit-tap-highlight-color:transparent}
@@ -30,11 +30,13 @@
   #bar .brand{font-family:Georgia,serif;letter-spacing:.14em;text-transform:uppercase;font-size:13px;white-space:nowrap}
   #bar .brand b{color:var(--gold);font-weight:600}
   #bar .sub{font-size:10px;color:#B4BECD;letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
-  #search{flex:1;min-width:0;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;border-radius:10px;padding:9px 12px;font-size:15px;outline:none}
+  #search{flex:1;min-width:0;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;border-radius:10px;padding:8px 12px;font-size:16px;outline:none;-webkit-appearance:none}
   #search::placeholder{color:#B4BECD}
-  .chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-top:8px;padding-bottom:2px}
+  .chips{display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;scrollbar-width:none;margin-top:8px;padding-bottom:2px;-webkit-overflow-scrolling:touch}
   .chips::-webkit-scrollbar{display:none}
-  .chip{flex:none;border:1px solid rgba(255,255,255,.3);background:transparent;color:#dfe5ef;border-radius:999px;padding:5px 11px;font-size:12px;letter-spacing:.02em}
+  .chip{flex:none;border:1px solid rgba(255,255,255,.3);background:transparent;color:#dfe5ef;border-radius:999px;padding:5px 11px;font-size:12px;letter-spacing:.02em;white-space:nowrap;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+  .chip.clear{border-color:var(--gold);color:var(--gold);display:none} .chip.clear.show{display:inline-block}
+  button,.fab,.ib{touch-action:manipulation}
   .chip.on{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:600}
   .ib{border:none;background:rgba(255,255,255,.12);color:#fff;border-radius:10px;width:38px;height:38px;display:grid;place-items:center;flex:none}
   .ib svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
@@ -65,7 +67,7 @@
 
   /* ── bottom sheet ── */
   #sheet{position:fixed;left:0;right:0;bottom:0;height:var(--sheet-h);z-index:1050;background:#fff;border-radius:18px 18px 0 0;box-shadow:0 -4px 24px rgba(0,0,0,.18);display:flex;flex-direction:column;transition:height .25s;padding-bottom:var(--sab)}
-  #sheet.tall{height:88vh} #sheet.short{height:84px}
+  #sheet.tall{height:88vh;height:88dvh} #sheet.short{height:84px}
   #grip{flex:none;padding:8px 14px 4px;display:flex;align-items:center;justify-content:space-between;cursor:grab}
   #grip .bar{width:40px;height:4px;border-radius:2px;background:#cfd5de;margin:0 auto 6px}
   #grip .t{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
@@ -108,21 +110,21 @@
   .notes .n .m{font-size:11px;color:var(--muted);margin-top:3px}
   .notes .n .x{position:absolute;right:0;top:8px;border:none;background:none;color:#aab;font-size:16px;padding:4px}
   .nform{display:flex;gap:8px;margin-top:8px}
-  .nform textarea{flex:1;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:15px;min-height:46px;resize:vertical}
-  .nform input{width:56px;border:1px solid var(--line);border-radius:10px;padding:9px 8px;text-align:center;text-transform:uppercase;font-size:14px}
+  .nform textarea{flex:1;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:16px;min-height:46px;resize:vertical}
+  .nform input{width:56px;border:1px solid var(--line);border-radius:10px;padding:9px 8px;text-align:center;text-transform:uppercase;font-size:16px}
   .btn{border:none;border-radius:10px;padding:10px 14px;font-weight:600;font-size:14px;background:var(--navy);color:#fff}
   .btn.gold{background:var(--gold);color:var(--navy)} .btn.ghost{background:#eef1f5;color:var(--navy)} .btn.sm{padding:7px 10px;font-size:13px}
   .actions{display:flex;gap:8px;padding:14px 16px 0;flex-wrap:wrap}
   .ovf{padding:10px 16px;display:none} .ovf.open{display:block}
   .ovf label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin:8px 0 3px}
-  .ovf input,.ovf textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:15px}
+  .ovf input,.ovf textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:16px}
   .empty{padding:30px 20px;text-align:center;color:var(--muted);font-size:14px}
 
   /* ── login ── */
   #login{position:fixed;inset:0;z-index:2000;background:var(--navy);color:#fff;display:grid;place-items:center;padding:24px}
   #login .card{width:100%;max-width:360px;background:var(--navy2);border:1px solid rgba(201,169,97,.35);border-radius:16px;padding:26px 22px}
   #login h1{font-size:22px;letter-spacing:.06em} #login .sub{color:#B4BECD;font-size:13px;margin:6px 0 16px}
-  #login input{width:100%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;border-radius:10px;padding:12px;font-size:16px;margin-bottom:10px}
+  #login input{width:100%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;border-radius:10px;padding:12px;font-size:16px;-webkit-appearance:none;margin-bottom:10px}
   #login .err{color:#f3b0b0;font-size:13px;min-height:18px;margin-bottom:6px}
   #toast{position:fixed;left:50%;bottom:calc(var(--sheet-h) + 70px);transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 14px;border-radius:10px;font-size:13px;z-index:1200;opacity:0;transition:opacity .2s;pointer-events:none}
   #toast.show{opacity:1}
@@ -158,6 +160,7 @@
     <button class="ib" id="btn-list" title="List" onclick="showList()"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
   </div>
   <div class="chips" id="chips">
+    <button class="chip clear" data-f="__clear">✕ Clear</button>
     <span id="area-chips"></span>
     <button class="chip" data-f="gulf">Gulf front</button>
     <button class="chip" data-f="e1">Pre-1980</button>
@@ -508,10 +511,14 @@ async function boot() {
 }
 document.getElementById('chips').addEventListener('click', (e) => {
   const c = e.target.closest('.chip'); if (!c) return; const f = c.dataset.f;
-  if (filters.has(f)) filters.delete(f); else filters.add(f);
-  c.classList.toggle('on', filters.has(f)); drawMarkers(); if (view === 'list') renderList();
+  if (f === '__clear') { filters = new Set(AREAS.map((a) => 'area:' + a.id)); query = ''; $('#search').value = ''; }
+  else if (filters.has(f)) filters.delete(f); else filters.add(f);
+  document.querySelectorAll('#chips .chip[data-f]').forEach((el) => { if (el.dataset.f !== '__clear') el.classList.toggle('on', filters.has(el.dataset.f)); });
+  syncClear(); drawMarkers(); if (view === 'list') renderList(); else showList();
 });
-$('#search').addEventListener('input', (e) => { query = e.target.value; drawMarkers(); if (view !== 'list') showList(); else renderList(); });
+function syncClear() { const narrowed = query.trim() || AREAS.some((a) => !filters.has('area:' + a.id)) || [...filters].some((f) => !f.startsWith('area:')); $('#chips .chip.clear').classList.toggle('show', !!narrowed); }
+$('#search').addEventListener('input', (e) => { query = e.target.value; syncClear(); drawMarkers(); if (view !== 'list') showList(); else renderList(); });
+$('#search').addEventListener('keydown', (e) => { if (e.key === 'Enter') e.target.blur(); });
 // sheet drag: swipe up/down on the grip
 (() => { let y0 = null; const g = $('#grip'); g.addEventListener('touchstart', (e) => { y0 = e.touches[0].clientY; }, { passive: true }); g.addEventListener('touchend', (e) => { if (y0 == null) return; const dy = e.changedTouches[0].clientY - y0; y0 = null; const s = $('#sheet'); if (dy < -30) { s.classList.add('tall'); s.classList.remove('short'); } else if (dy > 30) { if (s.classList.contains('tall')) s.classList.remove('tall'); else s.classList.add('short'); } }, { passive: true }); })();
 
