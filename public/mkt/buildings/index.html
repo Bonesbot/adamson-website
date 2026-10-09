@@ -35,7 +35,8 @@
   .chips{display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;scrollbar-width:none;margin-top:8px;padding-bottom:2px;-webkit-overflow-scrolling:touch}
   .chips::-webkit-scrollbar{display:none}
   .chip{flex:none;border:1px solid rgba(255,255,255,.3);background:transparent;color:#dfe5ef;border-radius:999px;padding:5px 11px;font-size:12px;letter-spacing:.02em;white-space:nowrap;touch-action:manipulation;-webkit-user-select:none;user-select:none}
-  .chip.clear{border-color:var(--gold);color:var(--gold);display:none} .chip.clear.show{display:inline-block}
+  .chip.clear{border-color:var(--gold);color:var(--gold);display:none}
+  #area-chips{display:contents} .chip.clear.show{display:inline-block}
   button,.fab,.ib{touch-action:manipulation}
   .chip.on{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:600}
   .ib{border:none;background:rgba(255,255,255,.12);color:#fff;border-radius:10px;width:38px;height:38px;display:grid;place-items:center;flex:none}
