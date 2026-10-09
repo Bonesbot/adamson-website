@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>
+/* Login gate: no key on this device -> go sign in at the CMA admin page.
+   Writes are independently enforced server-side by CMA_EDIT_KEY, so this gate
+   is about not letting the internal tooling be stumbled into, not about security. */
+if (!localStorage.getItem("cma-edit-key"))
+  location.replace("/mkt/admin/?next=" + encodeURIComponent(location.pathname));
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>CMA Workbench | Internal</title>
+<style>
+  :root { --navy:#0A1F3C; --gold:#C9A961; --muted:#B4BECD; --bg:#F7F8FA; --bronze:#8a6d1f; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:Arial,"Helvetica Neue",sans-serif; background:var(--bg); color:#22304a; }
+  h1,h2 { font-family:Georgia,serif; color:var(--navy); }
+  .wrap { max-width:1500px; margin:0 auto; padding:0 18px 60px; }
+  header { background:var(--navy); color:#fff; padding:20px 0 18px; border-bottom:4px solid var(--gold); }
+  header h1 { color:#fff; font-size:23px; font-weight:400; }
+  .crit { color:var(--muted); margin-top:5px; font-size:13px; }
+  .bar { background:#132c50; padding:10px 0; position:sticky; top:0; z-index:50; box-shadow:0 2px 8px rgba(0,0,0,.25); }
+  .bar .wrap { display:flex; gap:10px; align-items:center; flex-wrap:wrap; padding-bottom:0; }
+  .btn { background:#fff; color:var(--navy); border:1px solid #c8d0dc; padding:8px 15px; border-radius:5px; font-size:12.5px; cursor:pointer; text-decoration:none; display:inline-block; }
+  .btn.gold { background:var(--gold); border-color:var(--gold); font-weight:bold; }
+  .btn:hover { filter:brightness(1.06); }
+  .ind { color:var(--muted); font-size:11.5px; margin-left:auto; }
+  .card { background:#fff; border:1px solid #e3e7ee; border-radius:8px; padding:18px; margin-top:20px; }
+  .card h2 { font-size:17px; margin-bottom:3px; }
+  .card .sub { font-size:12px; color:#7c8798; margin-bottom:12px; }
+  table { width:100%; border-collapse:collapse; font-size:12px; }
+  th { background:var(--navy); color:#fff; padding:7px 5px; text-align:left; font-weight:normal; font-size:10.5px; white-space:nowrap; vertical-align:bottom; }
+  th.auto { background:#24507f; }
+  th.man  { background:var(--bronze); }
+  td { padding:5px; border-bottom:1px solid #eef1f5; white-space:nowrap; }
+  tr.tot td { background:#f2f4f8; font-weight:bold; color:var(--navy); border-top:2px solid var(--navy); }
+  tr.rev td { background:#f7fbf7; }
+  .num { text-align:right; }
+  input.b { width:74px; text-align:right; font:12px Arial; padding:4px 5px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
+  input.b:focus { outline:2px solid var(--gold); background:#fff; }
+  input.p { width:88px; text-align:right; font:12px Arial; padding:5px; border:1px solid #d8dde6; border-radius:4px; }
+  textarea.n { width:100%; min-height:44px; font:12px Arial; padding:6px; border:1px solid #d8dde6; border-radius:4px; resize:vertical; }
+  .lettermark { display:inline-flex; width:20px; height:20px; border-radius:50%; background:var(--navy); color:var(--gold);
+     font:bold 11px Georgia; align-items:center; justify-content:center; }
+  .bmark { display:inline-flex; width:20px; height:20px; border-radius:50%; background:#5b6b85; color:#fff;
+     font:bold 11px Georgia; align-items:center; justify-content:center; }
+  .params { display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:10px; }
+  .par { border:1px solid #e3e7ee; border-radius:6px; padding:9px 11px; }
+  .par .l { font-size:11px; color:#5a6b85; margin-bottom:4px; }
+  .par .h { font-size:10px; color:#96a0ae; margin-top:3px; }
+  .est { background:var(--navy); color:#fff; border-radius:8px; padding:16px 20px; display:flex; gap:34px; flex-wrap:wrap; align-items:center; }
+  .est .big { font-size:26px; font-family:Georgia,serif; color:var(--gold); }
+  .est .mid { font-size:18px; font-family:Georgia,serif; }
+  .est .l { font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); }
+  .flag { font-size:10px; padding:2px 7px; border-radius:3px; font-weight:bold; letter-spacing:.03em; }
+  .flag.f { background:#dbe9f7; color:#1d4f80; }
+  .flag.r { background:#e3f3e6; color:#1e7a32; }
+  tr.exc td { background:#f1f2f5; color:#94a0b1; }
+  input.gn { width:240px; font:12px Arial; padding:4px 6px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
+  select.sel { font:12px Arial; padding:4px 3px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
+  #grid th:nth-child(1), #grid td:nth-child(1) { position:sticky; left:0; z-index:2; width:40px; min-width:40px; }
+  #grid th:nth-child(2), #grid td:nth-child(2) { position:sticky; left:40px; z-index:2; min-width:158px;
+     box-shadow:6px 0 6px -5px rgba(10,31,60,.18); }
+  #grid th:nth-child(1), #grid th:nth-child(2) { z-index:3; }
+  #grid td:nth-child(1), #grid td:nth-child(2) { background:#fff; }
+  tr.rev td:nth-child(1), tr.rev td:nth-child(2) { background:#f7fbf7; }
+  tr.exc td:nth-child(1), tr.exc td:nth-child(2) { background:#f1f2f5; }
+  tr.tot td:nth-child(1), tr.tot td:nth-child(2) { background:#f2f4f8; }
+  .expmenu { position:relative; display:inline-block; }
+  .expmenu .dd { display:none; position:absolute; top:110%; left:0; background:#fff; border:1px solid #c8d0dc;
+     border-radius:6px; box-shadow:0 4px 14px rgba(0,0,0,.18); z-index:120; min-width:200px; }
+  .expmenu.open .dd { display:block; }
+  .expmenu .dd button { display:block; width:100%; text-align:left; background:none; border:none;
+     padding:9px 13px; font:12.5px Arial; cursor:pointer; color:var(--navy); }
+  .expmenu .dd button:hover { background:#f2f5fa; }
+  #handout { display:none; }
+  @media print {
+    body.print-handout header, body.print-handout .bar, body.print-handout .wrap { display:none !important; }
+    body.print-handout #handout { display:block; }
+    @page { size:letter landscape; margin:9mm; }
+  }
+  /* Your Residence editor */
+  .sf { display:grid; grid-template-columns:150px 1fr; gap:8px 12px; align-items:center; }
+  .sf .lab { display:flex; align-items:center; gap:7px; font-size:12px; color:var(--navy); font-weight:bold; }
+  .sf .lab.off { color:#a3adbd; text-decoration:line-through; }
+  .sf .ins { display:flex; gap:6px; flex-wrap:wrap; }
+  .sf input[type=text] { font:12px Arial; padding:5px 6px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; min-width:80px; }
+  .sf input.wide { flex:1; min-width:220px; } .sf input.short { width:80px; } .sf .ph { font-size:10.5px; color:#96a0ae; align-self:center; }
+  .sf .lab.off + .ins input { background:#f3f4f6; color:#a3adbd; }
+  .cover-form { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:10px; }
+  .cover-form label { font-size:11px; color:#5a6b85; display:block; margin-bottom:3px; }
+  .cover-form input[type=text], .cover-form input[type=date], .cover-form input[type=url] { width:100%; font:12px Arial; padding:5px 6px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
+  .cover-prev { margin-top:10px; height:150px; border-radius:6px; background:#0A1F3C center/cover no-repeat; border:1px solid #e3e7ee; }
+  /* Client page controls */
+  .sec { display:grid; grid-template-columns:150px 1fr auto; gap:10px; align-items:center; padding:7px 0; border-bottom:1px solid #eef1f5; }
+  .sec .nm { font-size:12px; color:var(--navy); font-weight:bold; }
+  .sec input[type=text] { width:100%; font:12.5px Georgia; padding:5px 7px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
+  .sec.off .nm, .sec.off input { color:#a3adbd; text-decoration:line-through; background:#f6f7f9; }
+  .fields { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 12px; }
+  .chip { display:inline-flex; align-items:center; gap:5px; font-size:11.5px; padding:4px 9px; border:1px solid #d8dde6; border-radius:14px; background:#fff; cursor:pointer; user-select:none; }
+  .chip.hid { background:#ececec; color:#98a2b2; text-decoration:line-through; border-style:dashed; }
+  .chip input { margin:0; }
+  .fl { font-size:11px; color:#5a6b85; margin:8px 0 2px; text-transform:uppercase; letter-spacing:.06em; }
+  #grid th.hid, #grid td.hid, #mu-grid th.hid, #mu-grid td.hid { background:#ececec !important; color:#a3adbd !important; }
+  #grid th.hid { text-decoration:line-through; }
+  input.st { width:92px; font:11.5px Arial; padding:3px 5px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
+  .avm-row { display:grid; grid-template-columns:1.2fr 1fr 130px 2fr 40px; gap:8px; margin-bottom:6px; align-items:center; }
+  .avm-row input { font:12px Arial; padding:5px 6px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; width:100%; }
+  .sec { grid-template-columns:22px 150px 1fr auto; cursor:grab; }
+  .sec .grip { color:#b4bccb; font-size:15px; line-height:1; text-align:center; user-select:none; }
+  .sec.dragging { opacity:.45; } .sec.over { border-top:2px solid var(--gold); }
+  textarea.sum { width:100%; min-height:74px; font:13px/1.5 Georgia,serif; padding:8px 10px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; resize:vertical; }
+  .sumlbl { font-size:11px; color:#5a6b85; margin:12px 0 4px; text-transform:uppercase; letter-spacing:.06em; }
+  .mkt-ph { border:1px solid #e3e7ee; border-left:4px solid var(--gold,#C9A961); border-radius:6px; padding:10px 12px; margin-top:10px; background:#fff; }
+  .mkt-ph .ph-row { display:flex; gap:8px; align-items:center; margin-bottom:8px; }
+  .mkt-ph .ph-row input { flex:1; font:bold 13px Georgia,serif; padding:5px 7px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
+  .mkt-it { display:grid; grid-template-columns:200px 1fr 32px; gap:8px; margin-bottom:6px; align-items:start; }
+  .mkt-it input { font:bold 12px Arial; padding:5px 6px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; width:100%; }
+  .mkt-it textarea { font:12px/1.45 Georgia,serif; padding:5px 7px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; width:100%; min-height:52px; resize:vertical; }
+  .mkt-x { font:12px Arial; color:#a33; background:none; border:1px solid #e3c7c7; border-radius:4px; cursor:pointer; padding:4px 0; }
+  /* Market Update card */
+  .mu-meta { display:grid; grid-template-columns:1.2fr 2fr 130px 2fr; gap:10px; margin-bottom:10px; }
+  .mu-meta label { font-size:11px; color:#5a6b85; display:block; margin-bottom:3px; }
+  .mu-meta input[type=text], .mu-meta input[type=date], .mu-meta input[type=url] { width:100%; font:12px Arial; padding:5px 6px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
+  .mu-inc { display:flex; gap:22px; flex-wrap:wrap; align-items:center; margin:8px 0 12px; font-size:12.5px; }
+  .mu-inc label { display:flex; align-items:center; gap:6px; cursor:pointer; }
+  .mu-inc input.zip { width:70px; font:12px Arial; padding:4px 6px; border:1px solid #d8dde6; border-radius:4px; }
+  .mu-tools { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:10px; }
+  #mu-grid td { white-space:nowrap; }
+  #mu-grid input.note { width:230px; font:12px Georgia; padding:4px 6px; border:1px solid #d8dde6; border-radius:4px; background:#fffdf6; }
+  #mu-grid input.f { width:64px; font:11.5px Arial; padding:3px 5px; border:1px solid #e3e7ee; border-radius:4px; text-align:right; }
+  #mu-grid input.f.w { width:150px; text-align:left; }
+  #mu-grid select.hl { font:11px Arial; padding:3px; border:1px solid #d8dde6; border-radius:4px; }
+  #mu-grid tr.b td { font-weight:bold; }
+  #mu-grid tr.hl-green td { background:#e2efd9; } #mu-grid tr.hl-yellow td { background:#fff2cc; } #mu-grid tr.hl-gray td { background:#ececec; }
+  #mu-grid td.st-sold { background:#f4cccc; } #mu-grid td.st-pending { background:#fce5cd; }
+  #mu-grid tr.stat td { background:#f2f4f8; font-weight:bold; color:var(--navy); }
+  #mu-grid tr.stat:first-of-type td { border-top:2px solid var(--navy); }
+  .zf-prev { font-size:11.5px; color:#5a6b85; }
+  .zf-prev b { color:var(--navy); }
+  .warn { background:#fff8e5; border-left:4px solid var(--gold); padding:10px 14px; font-size:12px; margin-top:14px; border-radius:0 5px 5px 0; }
+</style>
+</head>
+<body>
+<script src="/mkt/nav.js" data-internal="1"></script>
+<header><div class="wrap">
+  <h1>CMA Workbench <span style="font-size:13px;color:var(--gold);">INTERNAL</span></h1>
+  <div class="crit" id="hdr"></div>
+</div></header>
+
+<div class="bar"><div class="wrap">
+  <button class="btn gold" onclick="saveLive()">Save</button>
+  <button class="btn" onclick="freezeToGit()">Freeze to git</button>
+  <button class="btn" onclick="reload()">Reload</button>
+  <a class="btn" href="./" target="_blank">Client page ↗</a>
+  <a class="btn" href="./estimator.html">Closing costs</a>
+  <a class="btn" href="/mkt/admin/">All CMAs</a>
+  <span class="expmenu" id="expmenu">
+    <button class="btn" onclick="document.getElementById('expmenu').classList.toggle('open')">Export &#9662;</button>
+    <span class="dd">
+      <button onclick="exportPdf()">One-page PDF (print dialog)</button>
+      <button onclick="exportDoc()">Word handout (.doc)</button>
+      <button onclick="downloadAdjustments()">adjustments.json backup</button>
+    </span>
+  </span>
+  <button class="btn" onclick="logOut()">Log out</button>
+  <span class="ind" id="ind">loading</span>
+</div></div>
+
+<div class="wrap">
+  <div class="card" id="subj-card">
+    <h2>Your Residence</h2>
+    <div class="sub">The subject as the client sees it. Facts come from data.json; anything you type here overrides them (and feeds the adjustment math).
+      Untick a row to hide it from the client page; hidden rows grey out. Saved with Save.</div>
+    <div class="sf" id="subj-form"></div>
+  </div>
+  <div class="card"><div class="est" id="est"></div></div>
+  <div class="card">
+    <h2>Multipliers</h2>
+    <div class="sub">Arithmetic adjustments. These live in data.json and apply to every comp. Saved with Save.</div>
+    <div class="params" id="params"></div>
+  </div>
+  <div class="card">
+    <h2>Adjustment Grid</h2>
+    <div class="sub">Blue = arithmetic, computed, do not touch. Bronze = your judgment buckets, keyed to the comp's MLS #.
+      Sign convention: (+) subject superior to comp, (&minus;) subject inferior. Green row = graded.
+      Relevancy: <b>A</b> strongest comps &middot; <b>B</b> supporting &middot; <b>C</b> context &middot; <b>Exclude</b> removes from the analysis.
+      Setting relevancy marks the comp reviewed; the grid re-orders A, B, C, ungraded, excluded on load and after each save.</div>
+    <div style="overflow-x:auto;"><table id="grid"></table></div>
+    <div class="sumlbl">Client summary: prints under the comparables table on the client page (blank = nothing shown)</div>
+    <textarea class="sum" id="sum-comps" placeholder="Tell the story of these comps in a few sentences: which ones matter, why the failed listings are here, what the pattern says about price." onchange="setSummary('comps',this.value)"></textarea>
+    <div class="warn" id="freeze-note"></div>
+  </div>
+  <div class="card">
+    <h2>Notes</h2>
+    <div class="sub">Internal note is private to this workbench. Client note prints on the shared CMA page under that comp.</div>
+    <div id="notes"></div>
+  </div>
+  <div class="card" id="cp-card">
+    <h2>Client Page: Sections, Titles &amp; Fields</h2>
+    <div class="sub">What the homeowner sees. Drag the handle to reorder sections top to bottom; untick a section to drop it from the client page and the PDF; retitle any section;
+      untick a field to hide that column or fact. Hidden items turn grey here so you can see what you hid. Saved with Save.</div>
+    <div id="cp-sections"></div>
+    <div class="fl">Comparable Sales: columns shown</div><div class="fields" id="cp-comps"></div>
+    <div class="fl">Market Update: columns shown</div><div class="fields" id="cp-mu"></div>
+  </div>
+  <div class="card" id="mu-card">
+    <h2>Market Update</h2>
+    <div class="sub">Active competition and recent activity around the subject. Import a Stellar MLS CSV export (any saved search); rows sort by price, low to high.
+      The note prints to the LEFT of each row on the client page. Bold and highlight print too. Everything here saves with Save, no rebuild.</div>
+    <div class="mu-meta">
+      <div><label>Title</label><input type="text" id="mu-title" onchange="setMU('title',this.value)"></div>
+      <div><label>Subtitle (the search criteria, in plain words)</label><input type="text" id="mu-sub" placeholder="Waterfront condos 1,700+ sq ft with garage or carport, under $1MM" onchange="setMU('subtitle',this.value)"></div>
+      <div><label>Data as of</label><input type="date" id="mu-asof" onchange="setMU('asOf',this.value)"></div>
+      <div><label>"See the properties referenced" link (OneHome share, CIH collection, etc.)</label><input type="url" id="mu-link" placeholder="https://portal.onehome.com/en-US/share/..." onchange="setMU('link',this.value)"></div>
+    </div>
+    <div class="mu-inc">
+      <b style="color:var(--navy);">Client page &amp; PDF sections:</b>
+      <label><input type="checkbox" id="inc-mu" onchange="setInc('marketUpdate',this.checked)"> Market Update table</label>
+      <label><input type="checkbox" id="inc-zf" onchange="setInc('zillowForecast',this.checked)"> Zillow Zip Code Forecast</label>
+      <label>ZIP <input class="zip" type="text" id="zf-zip" maxlength="5" placeholder="auto" onchange="setZip(this.value)"></label>
+      <span class="zf-prev" id="zf-prev">forecast: not loaded</span>
+    </div>
+    <div class="sumlbl">Forecast summary: prints under the Zillow section (blank = nothing shown)</div>
+    <textarea class="sum" id="sum-zf" placeholder="Your read on the forecast for this ZIP and what it means for timing." onchange="setSummary('forecast',this.value)"></textarea>
+    <div class="mu-tools">
+      <button class="btn" onclick="document.getElementById('mu-file').click()">Import MLS CSV</button>
+      <input type="file" id="mu-file" accept=".csv,text/csv" style="display:none" onchange="muImport(this.files[0]); this.value='';">
+      <button class="btn" onclick="muAddRow()">Add blank row</button>
+      <button class="btn" onclick="muClear()">Clear all rows</button>
+      <span class="ind" id="mu-ind" style="margin-left:0;color:#7c8798;"></span>
+    </div>
+    <div style="overflow-x:auto;"><table id="mu-grid"></table></div>
+    <div class="sumlbl">Client summary: prints under the Market Update table (blank = nothing shown)</div>
+    <textarea class="sum" id="sum-mu" placeholder="General notes on the competition: what is sitting, what moved, where the subject fits." onchange="setSummary('marketUpdate',this.value)"></textarea>
+  </div>
+  <div class="card" id="cover-card">
+    <h2>Cover Page</h2>
+    <div class="sub">Full-page cover ahead of the report: your photo of the property, the address, your headshot and contact, the prepared-on date.
+      Turn it on in the Sections card ("Cover page"). Photos are resized in the browser and stored with the CMA.</div>
+    <div class="mu-tools">
+      <button class="btn" onclick="document.getElementById('cover-file').click()">Upload cover photo</button>
+      <input type="file" id="cover-file" accept="image/*" style="display:none" onchange="coverUpload(this.files[0]); this.value='';">
+      <span class="ind" id="cover-ind" style="margin-left:0;color:#7c8798;"></span>
+    </div>
+    <div class="cover-form" id="cover-form"></div>
+    <div class="cover-prev" id="cover-prev"></div>
+  </div>
+  <div class="card" id="mkt-card">
+    <h2>Prep and Marketing Plan</h2>
+    <div class="sub">Optional 1 to 2 page section: how the home gets prepared, presented and marketed, from designer visit to closing. Turn it on in the Sections card.
+      Ships with our standard copy; edit any line for this listing. <code>{community}</code> is replaced with the subject's subdivision on the client page. Blank a heading and its text to drop that item.</div>
+    <div class="mu-tools">
+      <button class="btn" onclick="mktAddPhase()">Add phase</button>
+      <button class="btn" onclick="mktReset()">Reset to standard copy</button>
+      <span class="ind" id="mkt-ind" style="margin-left:0;color:#7c8798;"></span>
+    </div>
+    <div class="sumlbl">Subtitle under the section title</div>
+    <textarea class="sum" id="mkt-sub" style="min-height:44px;" onchange="mktSet('sub',this.value)"></textarea>
+    <div id="mkt-phases"></div>
+    <div class="sumlbl">Closing paragraph</div>
+    <textarea class="sum" id="mkt-close" onchange="mktSet('close',this.value)"></textarea>
+  </div>
+  <div class="card" id="avm-card">
+    <h2>Online Estimates (AVMs)</h2>
+    <div class="sub">Zestimate, Redfin Estimate, Realtor.com and the like for the subject. None of these sites offers a public API for third parties, so this is a
+      look-up-and-type step: <b>Open lookup pages</b> opens each site's search for the subject address in new tabs; enter what you see. Shows on the client page when the section is ticked above.</div>
+    <div class="mu-tools">
+      <button class="btn" onclick="avmOpen()">Open lookup pages</button>
+      <button class="btn" onclick="avmAdd()">Add estimate</button>
+    </div>
+    <div class="avm-row" style="font-size:11px;color:#5a6b85;"><div>Source</div><div>Value ($)</div><div>As of</div><div>Link (optional)</div><div></div></div>
+    <div id="avm-rows"></div>
+  </div>
+</div>
+
+<div id="handout"></div>
+
+<script>
+/* INTERNAL WORKBENCH, one template for every listing.
+   Reads data.json (facts) + the live Supabase overlay via the cma-adjustments
+   function (falls back to committed adjustments.json). meta.profile picks the
+   auto-adjustment columns and multipliers. Save is instant, no rebuild.
+   Multiplier edits ride along inside the overlay as ADJ.params so they also
+   save without a rebuild; data.json params are the seed. */
+const SLUG = (location.pathname.match(/\/mkt\/([^/]+)\//) || [])[1] || "";
+const API  = "/.netlify/functions/cma-adjustments?slug=" + encodeURIComponent(SLUG);
+const DRAFT_KEY = "cma-draft-" + SLUG;
+const KEY_KEY   = "cma-edit-key";
+let D=null, ADJ=null, dirty=false, REV=null, source="";
+
+const money  = v => (v<0?"−$":"$") + Math.abs(Math.round(v)).toLocaleString();
+const moneyS = v => !v ? "—" : (v>0?"+":"−") + "$" + Math.abs(Math.round(v)).toLocaleString();
+const fmtD   = d => { if(!d) return "—"; const x=new Date(d+"T12:00:00"); return (x.getMonth()+1)+"/"+x.getDate()+"/"+String(x.getFullYear()).slice(2); };
+const rooms  = o => (o.beds||0)+(o.fullBaths||0)+(o.halfBaths||0)*0.5;
+const P = k => { const o=(ADJ&&ADJ.params)||{}; if (k in o) return Number(o[k])||0;
+                 return Number((D.meta.params||{})[k])||0; };
+const OV = mls => ADJ.overlay[mls] ||= { pinned:true, excluded:false, excludeReason:"", reviewed:false,
+    frozen:false, reviewedOn:"", relevancy:"", furnishings:"",
+    manual:Object.fromEntries((ADJ.buckets||[]).map(b=>[b.key,0])), notes:"", clientNote:"", photos:[] };
+const RANK = v => ({A:0,B:1,C:2,X:4})[v] ?? 3;
+let ORDER = [];
+function applySort(){ ORDER = D.comps.slice().sort((a,b)=>RANK(OV(a.mls).relevancy)-RANK(OV(b.mls).relevancy)); }
+const escA = s => String(s??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+const fmtC = v => { const n=Math.round(Number(v)||0); return n.toLocaleString("en-US"); };
+const parseC = t => { const n=Number(String(t).replace(/[^0-9\-]/g,"")); return Number.isFinite(n)?n:0; };
+function ciInput(el){ const neg=/^\s*[\u2212-]/.test(el.value); const d=el.value.replace(/[^0-9]/g,"");
+  el.value=(neg?"-":"")+(d?Number(d).toLocaleString("en-US"):""); }
+function monthsSince(d){ if(!d) return 0; return Math.max(0,(Date.now()-new Date(d+"T12:00:00").getTime())/(1000*60*60*24*30.4375)); }
+
+const PROFILES = {
+  condo: {
+    params: [
+      ["agePerYear","Age (per year)","× build-year difference"],
+      ["bedBathPerRoom","Bed/Bath (per room)","half bath = 0.5 room"],
+      ["ppsfAdj","Price per Sq Ft Adj.","× heated sq-ft difference"],
+      ["feePerDollarMonth","Condo Fee (per $1/mo)","× monthly fee difference · 0 = handled in a fee bucket"],
+      ["trendPctMonth","Market trend (%/month)","time adj vs sale date · 0 = off"],
+    ],
+    auto: (s,c) => ({
+      age:     (s.yearBuilt-c.yearBuilt)*P("agePerYear"),
+      bedBath: (rooms(s)-rooms(c))*P("bedBathPerRoom"),
+      sqft:    ((s.sqft||0)-(c.sqft||0))*P("ppsfAdj"),
+      fee:     ((c.feeMonthly||0)-(s.feeMonthly||0))*P("feePerDollarMonth"),
+      time:    c.price*(P("trendPctMonth")/100)*monthsSince(c.closeDate),
+    }),
+    autoCols: [["age","Age"],["bedBath","Bed/Bath"],["sqft","Sq Ft"],["fee","Fee"],["time","Time"]],
+    factCols: [
+      {h:"Bldg", c:x=>`<td style="font-weight:bold;">${x.building||"—"}</td>`},
+      {h:"Flr", cls:"num", c:x=>`<td class="num">${x.floor??"—"}</td>`},
+      {h:"Fee/mo", cls:"num", c:x=>`<td class="num">${x.feeMonthly?"$"+x.feeMonthly:"—"}</td>`},
+    ],
+    hdr: s => `Bldg ${s.building||"—"}, Unit ${s.unit||"—"}, Floor ${s.floor??"—"}`,
+    noteLoc: c => `Bldg ${c.building||"—"}, Flr ${c.floor??"—"}`,
+  },
+  sfh: {
+    params: [
+      ["agePerYear","Age (per year)","× build-year difference"],
+      ["garagePerSpace","Garage (per space)","× garage-bay difference"],
+      ["lotPerSqft","Lot Size (per sq ft)","× lot sq-ft difference"],
+      ["bedBathPerRoom","Bed/Bath (per room)","half bath = 0.5 room"],
+      ["ppsfAdj","Price per Sq Ft Adj.","× heated sq-ft difference"],
+      ["trendPctMonth","Market trend (%/month)","time adj vs sale date · 0 = off"],
+    ],
+    auto: (s,c) => ({
+      age:     (s.yearBuilt-c.yearBuilt)*P("agePerYear"),
+      garage:  ((s.garage||0)-(c.garage||0))*P("garagePerSpace"),
+      lot:     ((s.lot||0)-(c.lot||0))*P("lotPerSqft"),
+      bedBath: (rooms(s)-rooms(c))*P("bedBathPerRoom"),
+      sqft:    ((s.sqft||0)-(c.sqft||0))*P("ppsfAdj"),
+      time:    c.price*(P("trendPctMonth")/100)*monthsSince(c.closeDate),
+    }),
+    autoCols: [["age","Age"],["garage","Gar"],["lot","Lot"],["bedBath","Bed/Bath"],["sqft","Sq Ft"],["time","Time"]],
+    factCols: [
+      {h:"SqFt", cls:"num", c:x=>`<td class="num">${(x.sqft||0).toLocaleString()}</td>`},
+      {h:"Lot",  cls:"num", c:x=>`<td class="num">${(x.lot||0).toLocaleString()}</td>`},
+      {h:"Gar",  cls:"num", c:x=>`<td class="num">${x.garage??"—"}</td>`},
+    ],
+    hdr: s => s.subdivision||"",
+    noteLoc: c => c.subdivision||"",
+  },
+};
+let PR = null;
+
+async function boot(){
+  const grab = async f => { const r = await fetch(f,{cache:"no-store"}); if(!r.ok) throw new Error(f); return r.json(); };
+  let snapshot;
+  try { [D,snapshot] = await Promise.all([grab("./data.json"), grab("./adjustments.json")]); }
+  catch(e){ document.body.innerHTML="<p style='padding:40px;font-family:Georgia'>Could not load data.json / adjustments.json. Serve over http, not file://.</p>"; return; }
+  PR = PROFILES[D.meta.profile] || PROFILES.sfh;
+  ADJ = snapshot; REV = null; source = "committed snapshot";
+  try {
+    const r = await fetch(API, {cache:"no-store"});
+    if (r.ok) {
+      const live = await r.json();
+      if (live.source === "supabase" && live.adjustments) {
+        ADJ = live.adjustments; REV = live.rev;
+        source = "live, rev " + live.rev + (live.updated_at ? " saved " + new Date(live.updated_at).toLocaleString() : "");
+      } else { source = "committed snapshot, nothing saved live yet"; }
+    } else { source = "committed snapshot, live store unreachable"; }
+  } catch(e){ source = "committed snapshot, live store unreachable"; }
+  Object.values((ADJ&&ADJ.overlay)||{}).forEach(o=>{
+    if(o.relevancy===undefined) o.relevancy = o.excluded ? "X" : "";
+    if(o.furnishings===undefined) o.furnishings = ""; });
+  try { const d=localStorage.getItem(DRAFT_KEY); if(d){ const p=JSON.parse(d);
+        if(p && p.adj && p.adj.overlay && confirm("This device has unsaved edits from "+new Date(p.at).toLocaleString()+".\n\nOK = keep them.  Cancel = discard and use "+source+".")) { ADJ=p.adj; dirty=true; }
+        else localStorage.removeItem(DRAFT_KEY); } }catch(e){}
+  applySubjectOverride();
+  applySort(); renderAll();
+}
+function reload(){ if(dirty && !confirm("Discard unsaved edits and reload the saved version?")) return;
+  localStorage.removeItem(DRAFT_KEY); location.reload(); }
+function logOut(){ localStorage.removeItem(KEY_KEY); location.replace("/mkt/admin/"); }
+
+function touch(){ dirty=true;
+  try{ localStorage.setItem(DRAFT_KEY, JSON.stringify({adj:ADJ, at:Date.now()})); }catch(e){}
+  setInd("unsaved · press Save", "#f0c86a"); }
+function setInd(t, c){ const el=document.getElementById("ind"); el.textContent=t; el.style.color=c||""; }
+
+function editKey(force){
+  let k = force ? null : localStorage.getItem(KEY_KEY);
+  if (!k) { k = prompt("Edit key"); if (!k) return null; localStorage.setItem(KEY_KEY, k); }
+  return k;
+}
+async function post(qs, body, retryOnAuth){
+  const k = editKey(false); if (!k) return null;
+  const r = await fetch(API + (qs||""), {
+    method:"POST", headers:{"Content-Type":"application/json","x-cma-key":k},
+    body: JSON.stringify(body||{}),
+  });
+  let j={}; try { j = await r.json(); } catch(e){}
+  if (r.status === 401 && !retryOnAuth) {
+    localStorage.removeItem(KEY_KEY);
+    if (confirm("That edit key was rejected. Try again?")) { editKey(true); return post(qs, body, true); }
+    return null;
+  }
+  return { status:r.status, body:j };
+}
+async function saveLive(){
+  setInd("saving...");
+  const res = await post("", { adjustments: ADJ, rev: REV });
+  if (!res) { setInd("save cancelled", "#f0c86a"); return; }
+  if (res.status === 409) {
+    setInd("conflict", "#ffb3b3");
+    if (confirm((res.body.message||"This CMA changed since you loaded it.")+"\n\nOK = reload the saved version (your unsaved edits here are lost).\nCancel = keep editing.")) {
+      localStorage.removeItem(DRAFT_KEY); location.reload();
+    }
+    return;
+  }
+  if (res.status !== 200) { setInd("save failed: "+(res.body.error||res.status), "#ffb3b3");
+    alert("Save failed: "+(res.body.error||res.status)+"\n\nYour edits are still cached on this device. Use Download as a fallback."); return; }
+  REV = res.body.rev; dirty=false; localStorage.removeItem(DRAFT_KEY);
+  applySort(); renderAll();
+  setInd("saved rev "+REV+" at "+new Date().toLocaleTimeString(), "#9fe0a8");
+}
+async function freezeToGit(){
+  if (dirty && !confirm("You have unsaved edits. Freeze commits the last SAVED version, not what is on screen.\n\nContinue?")) return;
+  setInd("freezing to git...");
+  const res = await post("&action=snapshot", {});
+  if (!res) { setInd("freeze cancelled", "#f0c86a"); return; }
+  if (res.status !== 200) { setInd("freeze failed: "+(res.body.error||res.status), "#ffb3b3"); return; }
+  if (res.body.unchanged) { setInd("git already matches rev "+res.body.rev, "#9fe0a8"); return; }
+  setInd("frozen to git "+(res.body.commit||"")+" · Netlify rebuilding", "#9fe0a8");
+}
+const AUTOL = { age:"Age", bedBath:"Bed/Bath", sqft:"Sq Ft", fee:"Condo Fee", time:"Market Time", garage:"Garage", lot:"Lot" };
+function adjTerms(c){
+  const r=compute(c), t=[];
+  PR.autoCols.forEach(([k])=>{ const v=r.auto[k]; if(Math.abs(v)>=1) t.push(moneyS(v)+" "+(AUTOL[k]||k)); });
+  (ADJ.buckets||[]).forEach(b=>{ const v=Number(OV(c.mls).manual[b.key])||0; if(v) t.push(moneyS(v)+" "+b.label); });
+  return { total:r.autoAdj+r.manualAdj, terms:t, r };
+}
+function buildHandout(){
+  const s=D.subject;
+  const inc = ORDER.filter(c=>!OV(c.mls).excluded);
+  const exN = ORDER.length-inc.length;
+  const rows = inc.map(c=>({c, o:OV(c.mls), a:adjTerms(c)}));
+  const n=rows.length||1;
+  const ap=rows.map(x=>x.a.r.adjPrice);
+  const central=ap.reduce((t,v)=>t+v,0)/n;
+  const facts = D.meta.profile==="condo"
+    ? c=>`${c.building||"\u2014"} / ${c.floor??"\u2014"}`
+    : c=>`${(c.sqft||0).toLocaleString()} sf / ${c.garage??0} gar`;
+  const factH = D.meta.profile==="condo" ? "Bldg/Flr" : "SqFt/Gar";
+  const td='padding:4px 6px;border:1px solid #c9d1dc;font-size:10px;font-family:Arial,sans-serif;';
+  const th=td+'background:#0A1F3C;color:#fff;border-color:#0A1F3C;text-align:left;';
+  const num=td+'text-align:right;';
+  return `<div style="font-family:Arial,sans-serif;color:#22304a;">
+    <div style="border-bottom:3px solid #C9A961;padding-bottom:6px;margin-bottom:8px;">
+      <span style="font-family:Georgia,serif;letter-spacing:.15em;font-size:13px;color:#0A1F3C;">THE <span style="color:#8a6d1f;">ADAMSON</span> GROUP</span>
+      <span style="float:right;font-size:10px;color:#5a6b85;">Coldwell Banker Realty \u00b7 ${new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})}</span>
+    </div>
+    <div style="font-family:Georgia,serif;font-size:16px;color:#0A1F3C;margin-bottom:2px;">Comparative Market Analysis \u2014 ${s.address}, ${s.city||""}</div>
+    <div style="font-size:10.5px;color:#5a6b85;margin-bottom:8px;">${s.subdivision} \u00b7 ${s.sqft.toLocaleString()} sq ft \u00b7 ${s.beds} bd / ${s.fullBaths} ba \u00b7 List ${money(s.list)} ($${(s.list/s.sqft).toFixed(2)}/sq ft)</div>
+    <table style="border-collapse:collapse;width:100%;">
+      <tr><th style="${th}">Comp #</th><th style="${th}">Address</th><th style="${th}">${factH}</th>
+        <th style="${th}text-align:right;">Sold</th><th style="${th}text-align:right;">Sale Price</th>
+        <th style="${th}text-align:right;">$/SqFt</th><th style="${th}text-align:right;">Adjustments</th>
+        <th style="${th}text-align:right;">Adj. Price</th><th style="${th}text-align:right;">Adj. $/SqFt</th><th style="${th}">Rel.</th></tr>
+      ${rows.map(({c,o,a})=>`<tr>
+        <td style="${td}text-align:center;font-weight:bold;">${NUM.get(c.mls)}</td>
+        <td style="${td}">${c.address}</td><td style="${td}">${facts(c)}</td>
+        <td style="${num}">${fmtD(c.closeDate)}</td><td style="${num}">${money(c.price)}</td>
+        <td style="${num}">$${(c.price/c.sqft).toFixed(2)}</td><td style="${num}">${moneyS(a.total)}</td>
+        <td style="${num}font-weight:bold;">${money(a.r.adjPrice)}</td><td style="${num}">$${a.r.adjPpsf.toFixed(2)}</td>
+        <td style="${td}text-align:center;font-weight:bold;">${o.relevancy||"\u2014"}</td></tr>`).join("")}
+      <tr><td colspan="4" style="${td}font-weight:bold;background:#f2f4f8;">Averages of ${rows.length} included${exN?` (${exN} excluded)`:""}</td>
+        <td style="${num}font-weight:bold;background:#f2f4f8;">${money(rows.reduce((t,x)=>t+x.c.price,0)/n)}</td>
+        <td style="${num}background:#f2f4f8;"></td><td style="${num}background:#f2f4f8;"></td>
+        <td style="${num}font-weight:bold;background:#f2f4f8;">${money(central)}</td>
+        <td style="${num}font-weight:bold;background:#f2f4f8;">$${(central/s.sqft).toFixed(2)}</td>
+        <td style="${td}background:#f2f4f8;"></td></tr>
+    </table>
+    <div style="margin-top:8px;padding:8px 12px;background:#0A1F3C;color:#fff;font-size:11px;">
+      <b style="color:#C9A961;">Indicated range ${money(Math.min(...ap))} to ${money(Math.max(...ap))}</b>
+      &nbsp;\u00b7&nbsp; Central estimate ${money(central)} &nbsp;\u00b7&nbsp; vs. list ${money(s.list)}: ${moneyS(central-s.list)}
+    </div>
+    ${(()=>{ const noted = ORDER.filter(c=>{ const o=OV(c.mls); return (o.notes||"").trim(); });
+      if(!noted.length) return "";
+      return `<div style="margin-top:10px;">
+        <div style="font-family:Georgia,serif;font-size:12.5px;color:#0A1F3C;border-bottom:2px solid #C9A961;padding-bottom:3px;margin-bottom:5px;">Agent Notes</div>
+        ${noted.map(c=>{ const o=OV(c.mls);
+          return `<div style="font-size:10px;color:#33415c;margin-bottom:4px;line-height:1.45;">
+            <b>Comp ${NUM.get(c.mls)}</b> \u00b7 ${c.address}${o.relevancy==="X"?" <b style=\'color:#8a6d1f;\'>(excluded)</b>":o.relevancy?` (Rel. ${o.relevancy})`:""} \u2014 ${escA(o.notes)}</div>`; }).join("")}
+      </div>`; })()}
+    <div style="margin-top:6px;font-size:8.5px;color:#8a94a5;">Relevancy: A strongest comps, B supporting, C context; excluded sales are outside all averages.
+      Comparable data from Stellar MLS, deemed reliable but not guaranteed. Adjusted values are opinions of value, not appraisals.
+      Prepared by Ryan Adamson, Lic. SL3457783 \u00b7 The Adamson Group \u00b7 Coldwell Banker Realty.</div>
+  </div>`;
+}
+function exportPdf(){
+  document.getElementById('expmenu').classList.remove('open');
+  document.getElementById("handout").innerHTML = buildHandout();
+  document.body.classList.add("print-handout");
+  const done=()=>{ document.body.classList.remove("print-handout"); window.removeEventListener("afterprint",done); };
+  window.addEventListener("afterprint",done);
+  window.print();
+}
+function exportDoc(){
+  document.getElementById('expmenu').classList.remove('open');
+  const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">
+<head><meta charset="utf-8"><title>CMA ${D.subject.address}</title>
+<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->
+<style>@page WordSection1 { size:11in 8.5in; mso-page-orientation:landscape; margin:.5in; } div.WordSection1 { page:WordSection1; }</style>
+</head><body><div class="WordSection1">${buildHandout()}</div></body></html>`;
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob(["\ufeff"+html],{type:"application/msword"}));
+  a.download="CMA-"+SLUG+".doc"; a.click();
+}
+function downloadAdjustments(){
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(ADJ,null,2)],{type:"application/json"}));
+  a.download="adjustments.json"; a.click();
+}
+function setB(mls,key,v){ OV(mls).manual[key] = Number(v)||0; touch(); recalc(); }
+function setFrz(mls,v){ const o=OV(mls); o.frozen=v; touch();
+  const tr=document.querySelector(`#grid tr[data-mls="${mls}"]`); if(!tr) return;
+  tr.querySelectorAll("input.b").forEach(i=>{ i.disabled=v; i.title=v?"Frozen. Untick Frz to edit.":""; });
+  const f=tr.querySelector(".frzflag"); if(f) f.style.display=v?"":"none"; }
+function setRel2(mls,v){ const o=OV(mls); o.relevancy=v; o.excluded=(v==="X");
+  o.reviewed = v!==""; o.reviewedOn = v!=="" ? (o.reviewedOn||new Date().toISOString().slice(0,10)) : "";
+  touch();
+  const tr=document.querySelector(`#grid tr[data-mls="${mls}"]`);
+  if(tr){ tr.className = o.excluded?"exc":(o.reviewed?"rev":"");
+    const ni=tr.querySelector("input.gn"); if(ni) ni.placeholder = o.excluded?"why excluded":"internal note"; }
+  recalc(); renderNotes(); }
+function setFurn(mls,v){ OV(mls).furnishings=v; touch(); }
+function setNote(mls,f,v){ OV(mls)[f]=v; touch();
+  if(f==="notes"){ const el=document.getElementById("niv-"+mls);
+    if(el) el.innerHTML = v ? escA(v) : "<span style='color:#b9c2cf'>none</span>"; } }
+function setParam(k,v){ (ADJ.params ||= {})[k]=Number(v)||0; touch(); recalc(); }
+
+function compute(c){
+  const auto = PR.auto(D.subject, c);
+  const autoAdj = Object.values(auto).reduce((t,v)=>t+v,0);
+  const manualAdj = (ADJ.buckets||[]).reduce((t,b)=>t+(Number(OV(c.mls).manual[b.key])||0),0);
+  const adjPrice = c.price+autoAdj+manualAdj;
+  return { auto, autoAdj, manualAdj, adjPrice, ppsf:c.price/c.sqft, adjPpsf:adjPrice/D.subject.sqft };
+}
+
+let NUM = new Map();
+
+function renderAll(){
+  const s=D.subject;
+  NUM = new Map(ORDER.map((c,i)=>[c.mls,i+1]));
+  document.getElementById("hdr").textContent =
+    `${s.address} · ${PR.hdr(s)} · ${s.subdivision} · list ${money(s.list)} · saved search "${D.meta.savedSearch||"none"}" · profile ${D.meta.profile}`;
+  document.getElementById("params").innerHTML = PR.params.map(([k,l,h])=>
+    `<div class="par"><div class="l">${l}</div>
+     <input class="p" type="number" step="any" value="${P(k)}" onchange="setParam('${k}',this.value)"><div class="h">${h}</div></div>`).join("");
+  renderGrid();
+  renderNotes();
+  renderCP();
+  renderMU();
+  renderAvms();
+  recalc();
+  const frozen = D.comps.filter(c=>OV(c.mls).frozen).length;
+  document.getElementById("freeze-note").innerHTML =
+    `<b>${frozen} of ${D.comps.length} comps frozen.</b> Freezing locks a closed, reviewed sale so a comp refresh or a later pass cannot change it.
+     A refresh rewrites <code>data.json</code> only; this overlay is keyed by MLS # and is never auto-touched.
+     Save writes it live; Freeze to git also commits <code>adjustments.json</code> as the versioned backup.
+     Comp #s follow relevancy order and re-number on save; the client page uses the same numbering.`;
+}
+
+function renderGrid(){
+  let h = `<thead><tr><th title="Comp number, ordered by relevancy">Comp #</th><th>Address</th>`
+    + PR.factCols.map(f=>`<th class="${f.cls||""} ${isHid("comps",GRID_KEY[f.h]||"")?"hid":""}">${f.h}</th>`).join("")
+    + `<th class="man ${isHid("comps","status")?"hid":""}">Status</th><th class="num ${isHid("comps","closeDate")?"hid":""}">Sold</th><th class="num ${isHid("comps","dom")?"hid":""}">DOM</th><th class="num ${isHid("comps","price")?"hid":""}">Sale Price</th><th class="num ${isHid("comps","ppsf")?"hid":""}">$/SqFt</th>`
+    + PR.autoCols.map(([k,l])=>`<th class="auto num">${l}</th>`).join("")
+    + (ADJ.buckets||[]).map(b=>`<th class="man num">${b.label}</th>`).join("")
+    + `<th class="man">Furnish</th><th class="man ${isHid("comps","rel")?"hid":""}">Relevancy</th>
+       <th class="num ${isHid("comps","adj")?"hid":""}">Total Adj.</th><th class="num ${isHid("comps","adjPrice")?"hid":""}">Adj. Price</th><th class="num ${isHid("comps","adjPpsf")?"hid":""}">Adj. $/SqFt</th>
+       <th class="num">Frz</th><th>Internal Note</th></tr></thead><tbody>`;
+  (ORDER.length?ORDER:D.comps).forEach(c=>{
+    const o=OV(c.mls);
+    h += `<tr data-mls="${c.mls}" class="${o.excluded?"exc":(o.reviewed?"rev":"")}">
+      <td><span class="lettermark">${NUM.get(c.mls)||"?"}</span></td>
+      <td>${c.address}<span class="flag f frzflag" style="${o.frozen?"":"display:none;"}">FROZEN</span></td>`
+      + PR.factCols.map(f=>isHid("comps",GRID_KEY[f.h]||"") ? f.c(c).replace(/^<td class="/,'<td class="hid ').replace(/^<td(?! class)/,'<td class="hid"') : f.c(c)).join("")
+      + `<td class="${isHid("comps","status")?"hid":""}"><input class="st" type="text" list="st-names" placeholder="${escA(c.status||"Sold")}" value="${escA(o.statusLabel||"")}" onchange="setStatus('${c.mls}',this.value)"></td>
+      <td class="num ${isHid("comps","closeDate")?"hid":""}">${fmtD(c.closeDate)}</td><td class="num ${isHid("comps","dom")?"hid":""}">${c.dom??"—"}</td>
+      <td class="num ${isHid("comps","price")?"hid":""}">${money(c.price)}${c.credit?`<br><span style="font-size:9.5px;color:#b08a1f;">${money(c.credit)} concess.</span>`:""}</td>
+      <td class="num ${isHid("comps","ppsf")?"hid":""}">$${(c.price/c.sqft).toFixed(2)}</td>`
+      + PR.autoCols.map(([k])=>`<td class="num" id="au-${c.mls}-${k}"></td>`).join("")
+      + (ADJ.buckets||[]).map(b=>`<td class="num"><input class="b" type="text" inputmode="numeric" value="${fmtC(o.manual[b.key])}"
+          ${o.frozen?"disabled title='Frozen. Untick Frz to edit.'":""} oninput="ciInput(this)"
+          onchange="setB('${c.mls}','${b.key}',parseC(this.value))"></td>`).join("")
+      + `<td><select class="sel" onchange="setFurn('${c.mls}',this.value)">
+          ${["","No","Opt","Full"].map(v=>`<option value="${v}" ${o.furnishings===v?"selected":""}>${v||"\u2014"}</option>`).join("")}</select></td>
+      <td><select class="sel" style="font-weight:bold;" onchange="setRel2('${c.mls}',this.value)">
+          ${[["",""],["A","A"],["B","B"],["C","C"],["X","Exclude"]].map(([v,l])=>`<option value="${v}" ${(o.relevancy||"")===v?"selected":""}>${l||"\u2014"}</option>`).join("")}</select></td>
+      <td class="num ${isHid("comps","adj")?"hid":""}" id="tadj-${c.mls}"></td>
+      <td class="num ${isHid("comps","adjPrice")?"hid":""}" style="font-weight:bold;" id="aprice-${c.mls}"></td>
+      <td class="num ${isHid("comps","adjPpsf")?"hid":""}" id="appsf-${c.mls}"></td>
+      <td class="num"><input type="checkbox" ${o.frozen?"checked":""} onchange="setFrz('${c.mls}',this.checked)"></td>
+      <td><input class="gn" type="text" placeholder="${o.excluded?"why excluded":"internal note"}" value="${escA(o.notes)}"
+          onchange="setNote('${c.mls}','notes',this.value)"></td></tr>`;
+  });
+  h += `<datalist id="st-names"><option>Sold</option><option>Pending</option><option>Active</option><option>Withdrawn (WDC)</option><option>Canceled (CAN)</option><option>Expired</option><option>Coming Soon</option><option>Off Market</option></datalist>`;
+  h += `<tr class="tot"><td></td><td id="avg-label"></td>
+    <td colspan="${PR.factCols.length+3}"></td>
+    <td class="num" id="avg-price"></td><td class="num" id="avg-ppsf"></td>
+    <td colspan="${PR.autoCols.length+(ADJ.buckets||[]).length+3}"></td>
+    <td class="num" id="avg-adj"></td><td class="num" id="avg-appsf"></td><td colspan="2"></td></tr></tbody>`;
+  document.getElementById("grid").innerHTML = h;
+}
+
+function recalc(){
+  const s=D.subject;
+  const set=(id,t)=>{ const el=document.getElementById(id); if(el) el.textContent=t; };
+  D.comps.forEach(c=>{
+    const r=compute(c);
+    PR.autoCols.forEach(([k])=>set(`au-${c.mls}-${k}`, moneyS(r.auto[k])));
+    set(`tadj-${c.mls}`, moneyS(r.autoAdj+r.manualAdj));
+    set(`aprice-${c.mls}`, money(r.adjPrice));
+    set(`appsf-${c.mls}`, "$"+r.adjPpsf.toFixed(2));
+  });
+  const live = D.comps.filter(c=>!OV(c.mls).excluded);
+  const rows = live.map(c=>({c,r:compute(c)}));
+  const n = rows.length||1;
+  const avg = k => rows.reduce((t,x)=>t+(k==="price"?x.c.price:x.r[k]),0)/n;
+  const ap = rows.map(x=>x.r.adjPrice);
+  const central = avg("adjPrice");
+  set("avg-label", `Averages of ${rows.length} included`);
+  set("avg-price", money(avg("price"))); set("avg-ppsf", "$"+avg("ppsf").toFixed(2));
+  set("avg-adj", money(central)); set("avg-appsf", "$"+avg("adjPpsf").toFixed(2));
+  document.getElementById("est").innerHTML = `
+    <div><div class="l">Indicated Range</div><div class="big">${rows.length?money(Math.min(...ap))+" to "+money(Math.max(...ap)):"—"}</div></div>
+    <div><div class="l">Central Estimate</div><div class="mid">${money(central)}</div></div>
+    <div><div class="l">Adjusted $/Sq Ft</div><div class="mid">$${avg("adjPpsf").toFixed(2)}</div></div>
+    <div><div class="l">vs. List ${money(s.list)}</div><div class="mid">${moneyS(central-s.list)}</div></div>
+    <div><div class="l">Graded</div><div class="mid">${live.filter(c=>OV(c.mls).reviewed).length} / ${live.length}</div></div>`;
+  if(!dirty) setInd(`${source} · ${live.filter(c=>OV(c.mls).reviewed).length}/${live.length} graded`);
+}
+
+function renderNotes(){
+  document.getElementById("notes").innerHTML = (ORDER.length?ORDER:D.comps).map(c=>{
+    const o=OV(c.mls);
+    const relFlag = o.relevancy==="X" ? '<span class="flag" style="background:#e6e8ec;color:#7c8798;">EXCLUDED</span>'
+      : o.relevancy ? `<span class="flag r">RELEVANCY ${o.relevancy}${o.reviewedOn?" \u00b7 "+o.reviewedOn:""}</span>` : "";
+    return `<div style="margin-bottom:14px;">
+      <div style="font:bold 13px Georgia;color:var(--navy);margin-bottom:5px;">
+        <span class="lettermark">${NUM.get(c.mls)||"?"}</span> Comp ${NUM.get(c.mls)||"?"} \u00b7 ${c.address} \u00b7 ${PR.noteLoc(c)} ${relFlag}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div><div style="font-size:10.5px;color:#7c8798;margin-bottom:3px;">INTERNAL \u00b7 edit in the grid row</div>
+          <div id="niv-${c.mls}" style="font:12px Arial;color:#4a5871;white-space:pre-wrap;min-height:34px;border:1px dashed #dde2ea;border-radius:4px;padding:6px 8px;background:#fafbfc;">${o.notes?escA(o.notes):"<span style=\'color:#b9c2cf\'>none</span>"}</div></div>
+        <div><div style="font-size:10.5px;color:#7c8798;margin-bottom:3px;">CLIENT FACING \u00b7 prints on the shared page</div>
+          <textarea class="n" onchange="setNote('${c.mls}','clientNote',this.value)">${o.clientNote||""}</textarea></div>
+      </div></div>`;
+  }).join("");
+}
+
+
+/* ---------- Client page: sections, titles, hidden fields, AVMs (all in the overlay) ---------- */
+const SECTIONS = [["cover","Cover page (photo, address, agent card)"],["strip","Top tiles (list price, list $/sq ft, comp count, adjusted $/sq ft)"],["estimate","Indicated value range box"],["subject","Your Residence / Your Home"],["comps","Comparable Sales"],["actives","Currently on the Market"],["blocks","The Comparables, Up Close"],
+  ["ladder","Pricing Ladder"],["map","Comp Locations"],["marketUpdate","Market Update"],["zillowForecast","Zillow Zip Code Forecast"],["avms","Online Estimates"],["marketing","Prep and Marketing Plan"]];
+const OPT_IN = ["zillowForecast","cover","marketing"];
+const SUBJECT_FIELDS = { condo:[["address","Address"],["bldgUnit","Building / Unit / Floor"],["sqft","Heated Area"],["yearBuilt","Year Built"],["bedBath","Beds / Baths"],["fee","Condo Fee"],
+    ["parking","Garage / Parking"],["taxes","Taxes"],["pool","Pool"],["minLease","Minimum Lease"],["pets","Pets"],["view","View"],["floodMls","Flood Zone / MLS"]],
+  sfh:[["address","Address"],["sqft","Heated Space"],["lot","Lot Size"],["yearBuilt","Year Built"],["parking","Garage / Parking"],["bedBath","Beds / Baths"],["taxes","Taxes"],["pool","Pool"],["view","View"],["floodMls","Flood Zone / MLS"]] };
+const COMP_FIELDS = { condo:[["rel","Rel."],["status","Status"],["building","Bldg"],["unit","Unit"],["floor","Flr"],["closeDate","Date"],["dom","DOM"],["sqft","Sq Ft"],["fee","Fee/mo"]],
+  sfh:[["rel","Rel."],["status","Status"],["closeDate","Date"],["dom","DOM"],["sqft","Sq Ft"],["lot","Lot"],["yearBuilt","Built"],["garage","Gar"],["bedBath","Bd/Ba"]] };
+const COMP_FIXED = [["concess","Concess."],["terms","Terms"],["price","Sale / Ask Price"],["ppsf","$/SqFt"],["adj","Adjustments"],["adjPrice","Adj. Price"],["adjPpsf","Adj. $/SqFt"]];
+const MU_FIELDS = [["note","Agent note"],["status","Status"],["subdivision","Subdivision"],["dist","Dist (mi)"],["sqft","Sq Ft"],["beds","Bed"],["baths","Bath"],["yearBuilt","Built"],["garage","Gar"],["price","List / Sale"],["ppsf","$/SqFt"],["dom","DOM"],["pctOrig","% Orig"]];
+const SUMS = () => (ADJ.summaries ||= {});
+function setSummary(k,v){ SUMS()[k]=v; touch(); }
+const ORD = () => { const keys=SECTIONS.map(([k])=>k); const o=(ADJ.order||[]).filter(k=>keys.includes(k)); keys.forEach(k=>{ if(!o.includes(k)) o.push(k); }); return o; };
+let dragKey=null;
+function secDrag(e,k){ dragKey=k; e.dataTransfer.effectAllowed="move"; e.currentTarget.classList.add("dragging"); }
+function secOver(e){ e.preventDefault(); e.currentTarget.classList.add("over"); }
+function secLeave(e){ e.currentTarget.classList.remove("over"); }
+function secDrop(e,k){ e.preventDefault(); e.currentTarget.classList.remove("over"); if(!dragKey||dragKey===k) return;
+  const o=ORD().filter(x=>x!==dragKey); o.splice(o.indexOf(k),0,dragKey); ADJ.order=o; dragKey=null; touch(); renderCP(); }
+function secEnd(e){ e.currentTarget.classList.remove("dragging"); dragKey=null; }
+/* ---- Your Residence editor: ADJ.subjectOverride (raw field -> value), display rows keyed like the client page's subjectFields ---- */
+const SUBJ_NUM = ["sqft","totalSqft","yearBuilt","beds","fullBaths","halfBaths","feeMonthly","feeAnnual","taxes","taxYear","list","lot","garage","floor","lat","lng"];
+const SO = () => (ADJ.subjectOverride ||= {});
+function applySubjectOverride(){ Object.entries(SO()).forEach(([k,v])=>{ if(v===""||v===null||v===undefined) return;
+  D.subject[k] = SUBJ_NUM.includes(k) ? (Number(String(v).replace(/[^0-9.\-]/g,""))||0) : v; }); }
+const SUBJ_ROWS = {
+  condo: [["address","Address",[["address","wide"]]],["bldgUnit","Building / Unit / Floor",[["building","short","bldg"],["unit","short","unit"],["floor","short","floor"]]],
+    ["sqft","Heated Area",[["sqft","short","sq ft"],["totalSqft","short","total"]]],["yearBuilt","Year Built",[["yearBuilt","short"]]],
+    ["bedBath","Beds / Baths",[["beds","short","beds"],["fullBaths","short","full"],["halfBaths","short","half"]]],["fee","Condo Fee",[["feeMonthly","short","$/mo"],["feeAnnual","short","$/yr"]]],
+    ["parking","Garage / Parking",[["parking","wide"]]],["taxes","Taxes",[["taxes","short","$"],["taxYear","short","year"]]],["pool","Pool",[["pool","wide"]]],
+    ["minLease","Minimum Lease",[["minLease","wide"]]],["pets","Pets",[["pets","wide"]]],["view","View",[["view","wide"]]],["floodMls","Flood Zone / MLS",[["floodZone","short","zone"],["mls","short","MLS #"]]]],
+  sfh: [["address","Address",[["address","wide"],["city","short","city"]]],["sqft","Heated Space",[["sqft","short"]]],["lot","Lot Size",[["lot","short","sq ft"]]],["yearBuilt","Year Built",[["yearBuilt","short"]]],
+    ["parking","Garage / Parking",[["parking","wide"],["garage","short","spaces"]]],["bedBath","Beds / Baths",[["beds","short","beds"],["fullBaths","short","full"],["halfBaths","short","half"]]],
+    ["taxes","Taxes",[["taxes","short","$"],["taxYear","short","year"]]],["pool","Pool",[["pool","wide"]]],["view","View",[["view","wide"]]],["floodMls","Flood Zone / MLS",[["floodZone","short","zone"],["mls","short","MLS #"]]]],
+};
+const SUBJ_EXTRA = [["list","List price",[["list","short","$ (0 = not set)"]]],["latlng","Coordinates",[["lat","short","lat"],["lng","short","lng"]]],["zip","ZIP",[["zip","short"]]]];
+function setSubj(k,v){ SO()[k]=v; touch(); applySubjectOverride(); recalc(); }
+function renderSubj(){
+  const prof = D.meta.profile==="condo"?"condo":"sfh"; const rows = SUBJ_ROWS[prof].concat(SUBJ_EXTRA);
+  document.getElementById("subj-form").innerHTML = rows.map(([key,label,ins])=>{ const hideable = !["list","latlng","zip"].includes(key); const hid = hideable && isHid("subject",key);
+    return `<div class="lab ${hid?"off":""}">${hideable?`<input type="checkbox" ${hid?"":"checked"} title="show on client page" onchange="setHid('subject','${key}',!this.checked)">`:"<span style='width:13px;display:inline-block'></span>"}${label}</div>
+      <div class="ins">${ins.map(([f,cls,ph])=>`<input type="text" class="${cls}" placeholder="${escA(ph||"")}" value="${escA(SO()[f]!==undefined?SO()[f]:(D.subject[f]??""))}" onchange="setSubj('${f}',this.value)">`).join("")}</div>`; }).join("");
+}
+/* ---- Cover page: ADJ.cover ---- */
+const COVER = () => (ADJ.cover ||= {});
+const COVER_FIELDS = [["kicker","Kicker line","COMPARATIVE MARKET ANALYSIS"],["address","Address line (blank = subject address)",""],["agentName","Agent name","Ryan Adamson, PA"],
+  ["agentEmail","Email","Ryan@Adamson-Group.com"],["agentPhone","Phone","941.713.9234"],["headshot","Headshot URL","/images/ryan-adamson-square.jpg"],["photo","Cover photo URL (or use Upload)",""],["preparedOn","Prepared on (date)",""]];
+function setCover(k,v){ if(v==="") delete COVER()[k]; else COVER()[k]=v; touch(); renderCover(); }
+function renderCover(){
+  const c=COVER();
+  document.getElementById("cover-form").innerHTML = COVER_FIELDS.map(([k,l,ph])=>`<div><label>${l}</label><input type="${k==="preparedOn"?"date":"text"}" placeholder="${escA(ph)}" value="${escA(c[k]||"")}" onchange="setCover('${k}',this.value)"></div>`).join("");
+  document.getElementById("cover-prev").style.backgroundImage = c.photo ? `url("${c.photo}")` : "linear-gradient(160deg,#0A1F3C,#24507f)";
+}
+function coverUpload(file){
+  if(!file) return; const ind=document.getElementById("cover-ind"); ind.textContent="resizing...";
+  const img=new Image(); const url=URL.createObjectURL(file);
+  img.onload = async () => {
+    const max=1800, sc=Math.min(1, max/Math.max(img.width,img.height)); const cv=document.createElement("canvas"); cv.width=Math.round(img.width*sc); cv.height=Math.round(img.height*sc);
+    cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height); URL.revokeObjectURL(url);
+    const dataUrl = cv.toDataURL("image/jpeg",0.82); ind.textContent = `uploading ${Math.round(dataUrl.length*0.75/1024)} KB...`;
+    const res = await post("&action=cover-photo", { dataUrl });
+    if(!res || res.status!==200){ ind.textContent = "upload failed: " + ((res&&res.body&&res.body.error)||"cancelled"); return; }
+    COVER().photo = res.body.url; touch(); renderCover(); ind.textContent = "uploaded";
+  };
+  img.onerror = () => { ind.textContent="could not read that image"; };
+  img.src = url;
+}
+const MKT_DFLT = {
+  sub: "How we prepare, position and market your residence, from the first walk-through to closing day.",
+  phases: [
+    { title: "Prepare", items: [
+      { h: "Pre-list designer visit", p: "Before a single photo is taken, we bring our interior designer through the home. The goal is to get the most out of what is already there: furniture placement, flow, lighting, and editing out what distracts. Most homes need rearranging, not replacing, and we coordinate every step of it." },
+      { h: "Organizing and decluttering", p: "Buyers need to picture their own life in the space. We map it out room by room, arrange storage or movers where needed, and handle the logistics so the home shows its best features instead of its belongings." },
+      { h: "Staging and virtual staging", p: "If a room still does not present well, we bring in our staging partners, or use professional virtual staging in the photos only. Virtual staging is a presentation tool, always disclosed, and it keeps the home comfortable while you live in it and gets us to market faster. We schedule and manage the vendors." },
+      { h: "Cleaning and punch list", p: "Once the heavy lifting is done, we arrange the professional clean and walk the home for the small items: bulbs, touch-up paint, a sticky door, tired caulk. Our tradespeople handle the list. Nothing should distract a buyer on tour." } ] },
+    { title: "Present", items: [
+      { h: "Professional photography", p: "Tasteful photography that leads with the home's strongest features and views. The first photo decides whether a buyer keeps scrolling, so we plan the shot list around it." },
+      { h: "Video and aerial", p: "Lifestyle video and drone footage to show the setting, the water and the surroundings, not just the rooms. Out-of-area buyers decide whether to fly in based on this." },
+      { h: "Custom floor plan", p: "A custom floor plan drawn to accentuate the lifestyle of the home, how the rooms open to one another and to the view, so buyers understand flow and scale before they walk in and can picture where their furniture goes." },
+      { h: "360 virtual tour", p: "An immersive 360 tour that lets out-of-town buyers walk the property from their couch and gives them a real feel for the space. It is the piece that turns a curious buyer into one who books a flight." },
+      { h: "Positioning", p: "Every asset answers the same question: why would someone want to live here? We connect the residence to the lifestyle around it, the water, beaches, golf, dining and culture, rather than listing features." } ] },
+    { title: "Find the Buyer", items: [
+      { h: "Hyperlocal digital advertising", p: "Targeted campaigns aimed at the geographies and search behavior most likely to produce a buyer for this specific property, including the feeder markets that historically buy here. Likely buyers, not generic impressions." },
+      { h: "Our prospect database", p: "Direct outreach to prior buyer prospects who have shown interest in {community} and comparable properties, plus custom emails to our client network. These are people already looking for what you have." },
+      { h: "Agent-to-agent outreach", p: "Direct distribution to the agents who actively sell in this area, so the professionals most likely to have a buyer know about your home before it reaches the portals." },
+      { h: "Tried and true", p: "Just Listed mailers to the neighborhood, open houses and broker previews still work here, and they get the area talking about your home." } ] },
+    { title: "Local Knowledge That Protects the Sale", items: [
+      { h: "Market awareness", p: "We track every new listing, price change and pending sale that competes with yours, and we review with you what it means for our position as it happens, not after the fact." },
+      { h: "Community expertise", p: "Buyers and their agents get informed answers about {community}: association operations, financials, reserves, capital projects, assessments and outlook. Answering early removes uncertainty and settles objections before they become deal problems." },
+      { h: "Measure and adjust", p: "Online views, saves, showing activity and feedback are reviewed with you weekly, and the plan adjusts to how the market is actually responding." } ] },
+    { title: "Contract to Closing", items: [
+      { h: "Offers and contingencies", p: "We stay current on Florida contract forms, addenda and disclosures, and we screen every offer for the terms most likely to close: financing strength, contingencies, inspection scope and timelines." },
+      { h: "Closing logistics", p: "Open communication on timelines and expectations from contract through moving day, so this is as low-stress an experience as it can be." } ] }
+  ],
+  close: "These are the highlights of a fuller list of services. No two homes or sales are the same, so this plan is tailored to your residence, your timeline and how you want to live while the home is on the market. We appreciate and cherish the opportunity to represent your property, and we take a great deal of pride in doing it well."
+};
+/* ---- Prep and Marketing Plan: ADJ.marketing (absent = standard copy) ---- */
+const MKT = () => (ADJ.marketing ||= JSON.parse(JSON.stringify(MKT_DFLT)));
+function mktSet(k,v){ MKT()[k]=v; touch(); }
+function mktPh(i,v){ MKT().phases[i].title=v; touch(); }
+function mktIt(i,j,k,v){ MKT().phases[i].items[j][k]=v; touch(); }
+function mktAddItem(i){ MKT().phases[i].items.push({h:"",p:""}); touch(); renderMkt(); }
+function mktDelItem(i,j){ MKT().phases[i].items.splice(j,1); if(!MKT().phases[i].items.length) MKT().phases.splice(i,1); touch(); renderMkt(); }
+function mktAddPhase(){ MKT().phases.push({title:"New phase",items:[{h:"",p:""}]}); touch(); renderMkt(); }
+function mktMove(i,d){ const a=MKT().phases; const j=i+d; if(j<0||j>=a.length) return; [a[i],a[j]]=[a[j],a[i]]; touch(); renderMkt(); }
+function mktReset(){ if(!confirm("Replace this listing's Prep and Marketing Plan copy with the standard text?")) return; delete ADJ.marketing; touch(); renderMkt(); }
+function renderMkt(){
+  const m = (ADJ.marketing) || MKT_DFLT;
+  document.getElementById("mkt-sub").value = m.sub||""; document.getElementById("mkt-close").value = m.close||"";
+  document.getElementById("mkt-ind").textContent = ADJ.marketing ? "custom copy for this listing" : "standard copy (edits create a copy for this listing)";
+  document.getElementById("mkt-phases").innerHTML = (m.phases||[]).map((ph,i)=>`<div class="mkt-ph">
+    <div class="ph-row"><span class="lettermark" style="display:inline-flex;width:22px;height:22px;border-radius:50%;background:#0A1F3C;color:#C9A961;font:bold 11px Georgia;align-items:center;justify-content:center;">${i+1}</span>
+      <input type="text" value="${escA(ph.title)}" placeholder="Phase title" onchange="mktPh(${i},this.value)">
+      <button class="btn" title="move up" onclick="mktMove(${i},-1)">&uarr;</button><button class="btn" title="move down" onclick="mktMove(${i},1)">&darr;</button>
+      <button class="btn" onclick="mktAddItem(${i})">Add item</button></div>
+    ${(ph.items||[]).map((it,j)=>`<div class="mkt-it"><input type="text" value="${escA(it.h)}" placeholder="Heading" onchange="mktIt(${i},${j},'h',this.value)">
+      <textarea placeholder="One or two sentences" onchange="mktIt(${i},${j},'p',this.value)">${escA(it.p)}</textarea>
+      <button class="mkt-x" title="remove item" onclick="mktDelItem(${i},${j})">&times;</button></div>`).join("")}</div>`).join("");
+}
+const TT  = () => (ADJ.titles ||= {});
+const HD  = () => (ADJ.hidden ||= { subject:[], comps:[], mu:[] });
+const isHid = (g,k) => ((HD()[g])||[]).includes(k);
+const COMPS_SUB_DFLT = "Adjustments column includes manual adjustments for updates along with square footage difference calculated at {ppsf} per sq ft for difference in living space.";
+function setCompsSub(v){ if(v==="") delete TT().compsSub; else TT().compsSub = v; touch(); }
+function setTitle(k,v){ if(v.trim()) TT()[k]=v.trim(); else delete TT()[k]; touch(); }
+function setHid(g,k,hide){ const a=(HD()[g] ||= []); const i=a.indexOf(k); if(hide&&i<0) a.push(k); if(!hide&&i>=0) a.splice(i,1); touch(); renderCP(); renderGrid(); recalc(); renderMU(); }
+function setSec(k,on){ INC()[k]=!!on; touch(); renderCP(); if(k==="zillowForecast") zfPreview(); }
+function renderCP(){
+  const inc=INC();
+  const byKey = Object.fromEntries(SECTIONS);
+  document.getElementById("cp-sections").innerHTML = ORD().map(k=>[k,byKey[k]]).map(([k,l])=>`<div class="sec ${inc[k]===false||(OPT_IN.includes(k)&&!inc[k])?"off":""}" draggable="true"
+      ondragstart="secDrag(event,'${k}')" ondragover="secOver(event)" ondragleave="secLeave(event)" ondrop="secDrop(event,'${k}')" ondragend="secEnd(event)">
+    <span class="grip" title="drag to reorder">&#8942;&#8942;</span>
+    <label class="nm"><input type="checkbox" ${OPT_IN.includes(k)?(inc[k]?"checked":""):(inc[k]===false?"":"checked")} onchange="setSec('${k}',this.checked)"> ${l}</label>
+    <input type="text" placeholder="${l} (client-page title)" value="${escA(TT()[k]||"")}" onchange="setTitle('${k}',this.value)">
+    <span style="font-size:10.5px;color:#96a0ae;">${k==="subject"?"title defaults to Your Residence / Your Home":k==="marketUpdate"?"title field below wins if set":k==="strip"?"no title; hides automatically when list price is 0":""}</span></div>`
+    + (k==="comps" ? `<div class="sec" style="cursor:default;"><span></span><span class="nm" style="font-weight:normal;color:#5a6b85;">Subheader</span>
+        <input type="text" placeholder="${escA(COMPS_SUB_DFLT)}" value="${escA(TT().compsSub===undefined?"":TT().compsSub)}" onchange="setCompsSub(this.value)">
+        <span style="font-size:10.5px;color:#96a0ae;">{ppsf} = current per-sq-ft rate; blank = default, a space = none</span></div>` : "")).join("");
+  const chips = (g,list) => list.map(([k,l])=>`<label class="chip ${isHid(g,k)?"hid":""}"><input type="checkbox" ${isHid(g,k)?"":"checked"} onchange="setHid('${g}','${k}',!this.checked)">${l}</label>`).join("");
+  const prof = D.meta.profile==="condo"?"condo":"sfh";
+  renderSubj();
+  document.getElementById("cp-comps").innerHTML = chips("comps", COMP_FIELDS[prof].concat(COMP_FIXED));
+  document.getElementById("cp-mu").innerHTML = chips("mu", MU_FIELDS);
+  document.getElementById("inc-mu").checked = inc.marketUpdate!==false; document.getElementById("inc-zf").checked = !!inc.zillowForecast;
+  document.getElementById("sum-comps").value = SUMS().comps||""; document.getElementById("sum-mu").value = SUMS().marketUpdate||""; document.getElementById("sum-zf").value = SUMS().forecast||"";
+  renderCover();
+  renderMkt();
+}
+const GRID_KEY = { "Sold":"closeDate","DOM":"dom","Sale Price":"price","$/SqFt":"ppsf","SqFt":"sqft","Lot":"lot","Gar":"garage","Bldg":"building","Flr":"floor","Fee/mo":"fee","Relevancy":"rel","Total Adj.":"adj","Adj. Price":"adjPrice","Adj. $/SqFt":"adjPpsf","Status":"status" };
+function setStatus(mls,v){ OV(mls).statusLabel = v.trim(); touch(); }
+const AVMS = () => (ADJ.avms ||= []);
+function avmAdd(name){ AVMS().push({ name:name||"", value:"", asOf:today(), url:"" }); touch(); renderAvms(); }
+function avmSet(i,k,v){ const a=AVMS()[i]; if(!a) return; a[k] = k==="value" ? (Number(String(v).replace(/[^0-9.]/g,""))||"") : v; touch(); if(k==="value") renderAvms(); }
+function avmDel(i){ AVMS().splice(i,1); touch(); renderAvms(); }
+function renderAvms(){
+  const list=AVMS();
+  document.getElementById("avm-rows").innerHTML = (list.length ? list.map((a,i)=>`<div class="avm-row">
+    <input type="text" list="avm-names" placeholder="Zestimate" value="${escA(a.name)}" onchange="avmSet(${i},'name',this.value)">
+    <input type="text" inputmode="numeric" placeholder="605000" value="${a.value?Number(a.value).toLocaleString():""}" onchange="avmSet(${i},'value',this.value)">
+    <input type="date" value="${a.asOf||""}" onchange="avmSet(${i},'asOf',this.value)">
+    <input type="url" placeholder="https://www.zillow.com/homes/..." value="${escA(a.url)}" onchange="avmSet(${i},'url',this.value)">
+    <button class="btn" style="padding:3px 8px;" onclick="avmDel(${i})">&times;</button></div>`).join("") : `<div style="font-size:12px;color:#7c8798;">none yet</div>`)
+    + `<datalist id="avm-names"><option>Zestimate (Zillow)</option><option>Redfin Estimate</option><option>Realtor.com RealEstimate</option><option>Homes.com Estimate</option><option>RPR RVM</option><option>Home Platform (CIH)</option></datalist>`;
+}
+function avmOpen(){
+  const s=D.subject; const q=encodeURIComponent(`${s.address}${s.unit&&!/#/.test(s.address)?" #"+s.unit:""}, ${s.city||""}, ${s.state||"FL"} ${s.zip||""}`.replace(/\s+/g," ").trim());
+  [`https://www.zillow.com/homes/${q}_rb/`, `https://www.redfin.com/search#query=${q}`, `https://www.realtor.com/realestateandhomes-search/${q}`, `https://www.homes.com/search/?q=${q}`]
+    .forEach(u=>window.open(u,"_blank","noopener"));
+  if(!AVMS().length){ ["Zestimate (Zillow)","Redfin Estimate","Realtor.com RealEstimate"].forEach(n=>AVMS().push({name:n,value:"",asOf:today(),url:""})); touch(); renderAvms(); }
+}
+
+/* ---------- Market Update + client-page section toggles (live in the overlay, save with Save) ----------
+   ADJ.include      = { marketUpdate:true, zillowForecast:false }
+   ADJ.forecastZip  = "34210"   (blank = use data.json subject.zip)
+   ADJ.marketUpdate = { title, subtitle, asOf, link, rows:[ {id, mls, address, status, subdivision, sqft, beds, baths,
+                        yearBuilt, garage, price, origPrice, dom, closeDate, note, bold, hl} ] }                 */
+const today = () => new Date().toISOString().slice(0,10);
+const INC = () => (ADJ.include ||= { marketUpdate:true, zillowForecast:false });
+const MU  = () => (ADJ.marketUpdate ||= { title:"Active Competition & Recent Activity", subtitle:"", asOf:today(), link:"", rows:[] });
+function setMU(k,v){ MU()[k]=v; touch(); }
+function setInc(k,v){ INC()[k]=!!v; touch(); if(k==="zillowForecast") zfPreview(); }
+function setZip(v){ ADJ.forecastZip = String(v||"").replace(/\D/g,"").slice(0,5); touch(); zfPreview(); }
+const subjectZip = () => ADJ.forecastZip || String((D.subject||{}).zip||"").slice(0,5);
+
+/* RFC 4180 CSV: quoted fields, embedded commas, quotes and newlines (Stellar remarks have all three). */
+function parseCSV(text){
+  const rows=[]; let row=[], f="", q=false;
+  for (let i=0;i<text.length;i++){ const c=text[i];
+    if(q){ if(c==='"'){ if(text[i+1]==='"'){ f+='"'; i++; } else q=false; } else f+=c; }
+    else if(c==='"') q=true;
+    else if(c===','){ row.push(f); f=""; }
+    else if(c==='\n'||c==='\r'){ if(c==='\r'&&text[i+1]==='\n') i++; row.push(f); rows.push(row); row=[]; f=""; }
+    else f+=c; }
+  if(f!==""||row.length){ row.push(f); rows.push(row); }
+  return rows.filter(r=>r.length>1);
+}
+const N = v => { const n=Number(String(v??"").replace(/[^0-9.\-]/g,"")); return Number.isFinite(n)?n:null; };
+function normStatus(v){ v=String(v||"").trim(); const l=v.toLowerCase();
+  if(/^(sold|closed)/.test(l)) return "Sold"; if(/^pending/.test(l)) return "Pending"; if(/^active/.test(l)) return "Active";
+  if(/withdrawn|canceled|cancelled|expired/.test(l)) return v.split(" ")[0]; return v||"Active"; }
+function muImport(file){
+  if(!file) return;
+  const rd=new FileReader();
+  rd.onload = () => {
+    const rows=parseCSV(rd.result); if(rows.length<2){ alert("No rows found in that CSV."); return; }
+    const H=rows[0].map(h=>h.trim()); const ix=n=>H.indexOf(n);
+    const col={ mls:ix("MLS Number"), addr:ix("Address"), st:ix("Status")>=0?ix("Status"):ix("Standard Status"), sub:ix("Legal Subdivision Name"),
+      sqft:ix("Heated Area"), beds:ix("Beds"), fb:ix("Full Baths"), hb:ix("Half Baths"), yb:ix("Year Built"), gar:ix("Garage Spaces"),
+      price:ix("Current Price"), orig:ix("Original List Price"), dom:ix("CDOM")>=0?ix("CDOM"):ix("ADOM"), close:ix("Close Date"), lat:ix("Latitude"), lng:ix("Longitude") };
+    if(col.addr<0||col.price<0){ alert("This does not look like a Stellar export (need Address and Current Price columns)."); return; }
+    const mu=MU(); const byMls=new Map(mu.rows.map(r=>[r.mls||r.address,r]));
+    let added=0, updated=0;
+    rows.slice(1).forEach(r=>{
+      const g=i=>i>=0?r[i]:"";
+      const mls=String(g(col.mls)||"").trim(); const key=mls||String(g(col.addr)).trim(); if(!key) return;
+      const fresh={ mls, address:String(g(col.addr)).trim(), status:normStatus(g(col.st)), subdivision:String(g(col.sub)||"").trim(),
+        sqft:N(g(col.sqft)), beds:N(g(col.beds)), baths:(N(g(col.fb))||0)+((N(g(col.hb))||0)*0.5), yearBuilt:N(g(col.yb)), garage:N(g(col.gar)),
+        price:N(g(col.price)), origPrice:N(g(col.orig)), dom:N(g(col.dom)), closeDate:String(g(col.close)||"").slice(0,10), lat:N(g(col.lat)), lng:N(g(col.lng)) };
+      const ex=byMls.get(key);
+      if(ex){ Object.assign(ex,fresh); updated++; }
+      else { mu.rows.push(Object.assign({ id:key, note:"", bold:false, hl:"" }, fresh)); byMls.set(key, mu.rows[mu.rows.length-1]); added++; }
+    });
+    if(!mu.subtitle && D.meta && D.meta.savedSearch) mu.subtitle = "";
+    mu.asOf = mu.asOf || today();
+    touch(); renderMU();
+    document.getElementById("mu-ind").textContent = `imported ${file.name}: ${added} added, ${updated} updated`;
+  };
+  rd.readAsText(file);
+}
+function muAddRow(){ MU().rows.push({ id:"row-"+Date.now(), mls:"", address:"", status:"Active", subdivision:"", sqft:null, beds:null, baths:null,
+  yearBuilt:null, garage:null, price:null, origPrice:null, dom:null, closeDate:"", note:"", bold:false, hl:"" }); touch(); renderMU(); }
+function muClear(){ if(!confirm("Remove every Market Update row? (Title, subtitle and link stay.)")) return; MU().rows=[]; touch(); renderMU(); }
+function muDel(id){ const mu=MU(); mu.rows=mu.rows.filter(r=>r.id!==id); touch(); renderMU(); }
+function muSet(id,k,v){ const r=MU().rows.find(x=>x.id===id); if(!r) return;
+  r[k] = (k==="note"||k==="address"||k==="subdivision"||k==="status"||k==="mls"||k==="closeDate"||k==="hl") ? v : (k==="bold" ? !!v : N(v));
+  touch(); if(k==="bold"||k==="hl"||k==="price"||k==="status"||k==="sqft"||k==="origPrice") renderMU(); }
+const muSorted = () => MU().rows.slice().sort((a,b)=>(a.price??Infinity)-(b.price??Infinity));
+function muStats(rows){
+  const cols=["sqft","beds","baths","yearBuilt","garage","price","ppsf","dom"];
+  const vals=k=>rows.map(r=>k==="ppsf"?(r.price&&r.sqft?r.price/r.sqft:null):r[k]).filter(v=>v!==null&&v!==undefined&&Number.isFinite(v)).sort((a,b)=>a-b);
+  const med=a=>!a.length?null:(a.length%2?a[(a.length-1)/2]:(a[a.length/2-1]+a[a.length/2])/2);
+  const out={};
+  cols.forEach(k=>{ const a=vals(k); out[k]={ min:a.length?a[0]:null, med:med(a), avg:a.length?a.reduce((t,v)=>t+v,0)/a.length:null, max:a.length?a[a.length-1]:null }; });
+  return out;
+}
+const distMi = (a,b,c,d) => { if(![a,b,c,d].every(v=>Number.isFinite(Number(v)))) return null;
+  const R=3958.8, toR=x=>x*Math.PI/180, dLat=toR(d-b), dLng=toR(c-a); const h=Math.sin(dLat/2)**2+Math.cos(toR(b))*Math.cos(toR(d))*Math.sin(dLng/2)**2; return 2*R*Math.asin(Math.sqrt(h)); };
+const rowDist = r => distMi(Number(D.subject.lng),Number(D.subject.lat),r.lng,r.lat);
+const fmtMU = (k,v) => v===null||v===undefined ? "—" : k==="price" ? money(v) : k==="ppsf" ? "$"+Math.round(v) : k==="yearBuilt" ? String(Math.round(v)) : k==="baths"||k==="garage"||k==="beds" ? (Math.round(v*10)/10).toString() : Math.round(v).toLocaleString();
+function renderMU(){
+  const mu=MU(), inc=INC();
+  document.getElementById("mu-title").value = mu.title||"";
+  document.getElementById("mu-sub").value   = mu.subtitle||"";
+  document.getElementById("mu-asof").value  = mu.asOf||"";
+  document.getElementById("mu-link").value  = mu.link||"";
+  document.getElementById("inc-mu").checked = inc.marketUpdate!==false;
+  document.getElementById("inc-zf").checked = !!inc.zillowForecast;
+  document.getElementById("zf-zip").value   = ADJ.forecastZip||""; document.getElementById("zf-zip").placeholder = subjectZip()||"zip";
+  const rows=muSorted();
+  const H = (k,l,n) => `<th class="${n?"num":""} ${isHid("mu",k)?"hid":""}">${l}</th>`;
+  let h=`<thead><tr>${H("note","Your note (prints left of the row)")}<th>Address</th>${H("status","Status")}${H("subdivision","Subdivision")}${H("dist","Dist (mi)",1)}${H("sqft","Sq Ft",1)}${H("beds","Bed",1)}${H("baths","Bath",1)}
+    ${H("yearBuilt","Built",1)}${H("garage","Gar",1)}${H("price","List / Sale",1)}<th class="num">Orig. List</th>${H("ppsf","$/SqFt",1)}${H("dom","DOM",1)}${H("pctOrig","% Orig",1)}<th>Bold</th><th>Highlight</th><th></th></tr></thead><tbody>`;
+  const C = k => isHid("mu",k)?"hid":"";
+  rows.forEach(r=>{
+    const ppsf=r.price&&r.sqft?r.price/r.sqft:null, pct=r.price&&r.origPrice?r.price/r.origPrice*100:null;
+    const stc = r.status==="Sold"?"st-sold":r.status==="Pending"?"st-pending":"";
+    h+=`<tr class="${r.bold?"b ":""}${r.hl?"hl-"+r.hl:""}">
+      <td class="${C("note")}"><input class="note" type="text" placeholder="Unit above, updated kitchen, better view" value="${escA(r.note)}" onchange="muSet('${r.id}','note',this.value)"></td>
+      <td><input class="f w" type="text" value="${escA(r.address)}" onchange="muSet('${r.id}','address',this.value)"></td>
+      <td class="${stc} ${C("status")}"><select class="hl" onchange="muSet('${r.id}','status',this.value)">${["Active","Pending","Sold","Withdrawn","Canceled","Expired"].map(v=>`<option ${r.status===v?"selected":""}>${v}</option>`).join("")}</select></td>
+      <td class="${C("subdivision")}"><input class="f w" type="text" value="${escA(r.subdivision)}" onchange="muSet('${r.id}','subdivision',this.value)"></td>
+      <td class="num ${C("dist")}" title="${r.lat&&r.lng?"from MLS coordinates":"no coordinates: re-import the CSV"}">${(d=>d===null?"—":d.toFixed(1))(rowDist(r))}</td>
+      <td class="num ${C("sqft")}"><input class="f" value="${r.sqft??""}" onchange="muSet('${r.id}','sqft',this.value)"></td>
+      <td class="num ${C("beds")}"><input class="f" style="width:40px" value="${r.beds??""}" onchange="muSet('${r.id}','beds',this.value)"></td>
+      <td class="num ${C("baths")}"><input class="f" style="width:40px" value="${r.baths??""}" onchange="muSet('${r.id}','baths',this.value)"></td>
+      <td class="num ${C("yearBuilt")}"><input class="f" style="width:52px" value="${r.yearBuilt??""}" onchange="muSet('${r.id}','yearBuilt',this.value)"></td>
+      <td class="num ${C("garage")}"><input class="f" style="width:40px" value="${r.garage??""}" onchange="muSet('${r.id}','garage',this.value)"></td>
+      <td class="num ${C("price")}"><input class="f" style="width:84px" value="${r.price??""}" onchange="muSet('${r.id}','price',this.value)"></td>
+      <td class="num"><input class="f" style="width:84px" value="${r.origPrice??""}" onchange="muSet('${r.id}','origPrice',this.value)"></td>
+      <td class="num ${C("ppsf")}">${fmtMU("ppsf",ppsf)}</td>
+      <td class="num ${C("dom")}"><input class="f" style="width:48px" value="${r.dom??""}" onchange="muSet('${r.id}','dom',this.value)"></td>
+      <td class="num ${C("pctOrig")}">${pct===null?"—":Math.round(pct)+"%"}</td>
+      <td style="text-align:center"><input type="checkbox" ${r.bold?"checked":""} onchange="muSet('${r.id}','bold',this.checked)"></td>
+      <td><select class="hl" onchange="muSet('${r.id}','hl',this.value)">${[["","none"],["green","green"],["yellow","yellow"],["gray","gray"]].map(([v,l])=>`<option value="${v}" ${r.hl===v?"selected":""}>${l}</option>`).join("")}</select></td>
+      <td><button class="btn" style="padding:3px 8px;" title="remove row" onclick="muDel('${r.id}')">&times;</button></td></tr>`;
+  });
+  const st=muStats(rows);
+  [["min","Min"],["med","Median"],["avg","Average"],["max","Max"]].forEach(([k,l])=>{
+    const dv=rows.map(rowDist).filter(v=>v!==null).sort((a,b)=>a-b); const dd = {min:dv[0], med:dv.length?(dv.length%2?dv[(dv.length-1)/2]:(dv[dv.length/2-1]+dv[dv.length/2])/2):null, avg:dv.length?dv.reduce((t,v)=>t+v,0)/dv.length:null, max:dv[dv.length-1]}[k];
+    h+=`<tr class="stat"><td></td><td></td><td></td><td style="text-align:right">${l}</td><td class="num">${dd===null||dd===undefined?"—":dd.toFixed(1)}</td>`+
+      ["sqft","beds","baths","yearBuilt","garage","price"].map(c=>`<td class="num">${fmtMU(c,st[c][k])}</td>`).join("")+
+      `<td></td><td class="num">${fmtMU("ppsf",st.ppsf[k])}</td><td class="num">${fmtMU("dom",st.dom[k])}</td><td colspan="4"></td></tr>`; });
+  h+=`</tbody>`;
+  document.getElementById("mu-grid").innerHTML=h;
+  if(!rows.length) document.getElementById("mu-ind").textContent = "no rows yet: import a Stellar CSV export";
+  zfPreview();
+}
+let ZF=null;
+async function zfPreview(){
+  const el=document.getElementById("zf-prev"); const zip=subjectZip();
+  if(!INC().zillowForecast){ el.textContent = "forecast: off"; return; }
+  if(!zip){ el.textContent = "forecast: no ZIP (subject.zip missing, type one)"; return; }
+  el.textContent="forecast: loading "+zip+"...";
+  try { const r=await fetch("/.netlify/functions/cma-adjustments?action=forecast&zip="+zip,{cache:"no-store"}); const j=await r.json();
+    if(!r.ok||!j.rows||!j.rows.length){ el.textContent="forecast: no Zillow row for "+zip+" (run zhvf-refresh or check the ZIP)"; return; }
+    ZF=j; const f=Object.fromEntries(j.rows.map(x=>[x.horizon_months,x.pct_change]));
+    el.innerHTML=`Zillow ZHVF ${zip}, base ${j.base_date}: <b>1 mo ${f[1]>=0?"+":""}${f[1]}%</b> · <b>3 mo ${f[3]>=0?"+":""}${f[3]}%</b> · <b>12 mo ${f[12]>=0?"+":""}${f[12]}%</b>`;
+  } catch(e){ el.textContent="forecast: unreachable"; }
+}
+
+window.addEventListener("beforeunload", e => { if(dirty){ e.preventDefault(); e.returnValue=""; } });
+boot();
+</script>
+</body>
+</html>
