@@ -14,6 +14,10 @@
 //   POST ?action=delnote   {id}
 //   POST ?action=override  {building_key, display_name?, pets_override?, rental_override?,
 //                           parking_override?, amenities_override?, hidden?, author}
+//   POST ?action=signal    {id?, title, category, lat, lng, address?, blurb?, details?, source_url?,
+//                           source_label?, signal_date?, expires_at?, building_key?, author}
+//                          upsert into map_signals (the "Signals" reference-pin layer)
+//   POST ?action=delsignal {id}
 //
 // Every call except the photo requires header x-cma-key == env CMA_EDIT_KEY (decision
 // 2026-10-08: reuse the CMA key rather than mint a second one). Photos are keyed by building
@@ -168,7 +172,8 @@ exports.handler = async (event) => {
       const keys = new Set(buildings.map((b) => b.bkey));
       const allNotes = await rest(db, 'condo_building_notes?select=id,building_key,note,author,created_at&order=created_at.desc&limit=10000');
       const notes = allNotes.filter((n) => keys.has(n.building_key));
-      const payload = { ok: true, zips: all ? 'all' : zips, generated_at: new Date().toISOString(), buildings, notes, photos: !!process.env.GOOGLE_MAPS_KEY };
+      const signals = await rest(db, `map_signals?select=*&hidden=eq.false&or=(expires_at.is.null,expires_at.gte.${new Date().toISOString().slice(0, 10)})&order=signal_date.desc&limit=2000`);
+      const payload = { ok: true, zips: all ? 'all' : zips, generated_at: new Date().toISOString(), buildings, notes, signals, photos: !!process.env.GOOGLE_MAPS_KEY };
       // ~1,400 buildings is a couple of MB raw; gzip it when the browser accepts (always).
       const accept = String(event.headers['accept-encoding'] || event.headers['Accept-Encoding'] || '');
       if (/gzip/.test(accept)) {
@@ -210,6 +215,30 @@ exports.handler = async (event) => {
       if ('hidden' in body) row.hidden = !!body.hidden;
       const rows = await rest(db, 'condo_buildings?on_conflict=building_key', { method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=representation' }, body: JSON.stringify(row) });
       return json(200, { ok: true, building: rows[0] });
+    }
+
+    if (action === 'signal') {
+      const lat = Number(body.lat), lng = Number(body.lng);
+      const title = clean(body.title, 160);
+      if (!title || !(lat > 26.9 && lat < 27.8 && lng > -83.0 && lng < -82.2)) return json(400, { error: 'title and a Sarasota-area lat/lng required' });
+      const row = {
+        title, category: ['development', 'zoning', 'assessment', 'infrastructure', 'sale', 'other'].includes(body.category) ? body.category : 'other',
+        lat, lng, address: clean(body.address, 200), postal_code: clean(body.postal_code, 10), blurb: clean(body.blurb, 600), details: clean(body.details, 4000),
+        source_url: clean(body.source_url, 1000), source_label: clean(body.source_label, 120),
+        signal_date: /^\d{4}-\d{2}-\d{2}$/.test(body.signal_date || '') ? body.signal_date : new Date().toISOString().slice(0, 10),
+        expires_at: /^\d{4}-\d{2}-\d{2}$/.test(body.expires_at || '') ? body.expires_at : null,
+        building_key: clean(body.building_key, 100), author: clean(body.author, 40), updated_at: new Date().toISOString(),
+      };
+      if (Number.isInteger(Number(body.id)) && Number(body.id) > 0) row.id = Number(body.id);
+      const rows = await rest(db, 'map_signals?on_conflict=id', { method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=representation' }, body: JSON.stringify(row) });
+      return json(200, { ok: true, signal: rows[0] });
+    }
+
+    if (action === 'delsignal') {
+      const id = Number(body.id);
+      if (!Number.isInteger(id) || id <= 0) return json(400, { error: 'id required' });
+      await rest(db, `map_signals?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ hidden: true, updated_at: new Date().toISOString() }) });
+      return json(200, { ok: true });
     }
 
     return json(400, { error: `unknown action ${action}` });

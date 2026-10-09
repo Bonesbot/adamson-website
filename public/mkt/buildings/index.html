@@ -53,6 +53,16 @@
   .pin.e1{background:#B9843A} .pin.e2{background:var(--gulf)} .pin.e3{background:var(--navy)}
   .pin.gulf{border-color:var(--gold)}
   .pin.sel{outline:3px solid var(--gold);outline-offset:1px}
+  .sigpin{width:24px;height:24px;transform:rotate(45deg);background:var(--gold);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35);display:grid;place-items:center;border-radius:4px}
+  .sigpin i{transform:rotate(-45deg);font-style:normal;font-size:11px;font-weight:800;color:var(--navy)}
+  .sigpin.zoning{background:#8a5cf6} .sigpin.assessment{background:#d9534f} .sigpin.infrastructure{background:#2e8b57} .sigpin.sale{background:#1a73e8} .sigpin.zoning i,.sigpin.assessment i,.sigpin.infrastructure i,.sigpin.sale i{color:#fff}
+  .sigpin.sel{outline:3px solid var(--navy);outline-offset:1px}
+  .dot.sig{border-radius:3px;transform:rotate(45deg);background:var(--gold)}
+  .tag.sig{background:var(--navy);color:var(--gold)}
+  .sigform{padding:10px 16px 20px} .sigform label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin:8px 0 3px}
+  .sigform input,.sigform textarea,.sigform select{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:16px;background:#fff}
+  .sigform .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .det p{margin:0 0 8px;font-size:14px;line-height:1.45}
   .me{width:18px;height:18px;border-radius:50%;background:#1a73e8;border:3px solid #fff;box-shadow:0 0 0 2px rgba(26,115,232,.35),0 2px 6px rgba(0,0,0,.3)}
   .me.manual{background:var(--gold)}
   .pulse{position:absolute;inset:-14px;border-radius:50%;background:rgba(26,115,232,.18);animation:pulse 2s ease-out infinite}
@@ -169,6 +179,7 @@
     <button class="chip" data-f="e3">2006+</button>
     <button class="chip" data-f="active">Active listings</button>
     <button class="chip" data-f="notes">Has notes</button>
+    <button class="chip on" data-f="signals">Signals</button>
   </div>
 </div>
 
@@ -212,9 +223,10 @@ const AREAS = [
 ];
 const areaOf = (zip) => (AREAS.find((a) => a.zips.includes(zip)) || AREAS[AREAS.length - 1]).id;
 
-let DATA = { buildings: [], notes: [] }, NOTES = {}, PHOTOS = false;
+let DATA = { buildings: [], notes: [], signals: [] }, NOTES = {}, PHOTOS = false, smarkers = {}, selectedSig = null;
 let map, baseStreet, baseSat, satOn = false, markers = {}, meMarker = null, meCircle = null, pos = null, posManual = false, armed = false;
-let filters = new Set(AREAS.map((a) => 'area:' + a.id)), query = '', selected = null, view = 'list';
+let filters = new Set([...AREAS.map((a) => 'area:' + a.id), 'signals']), query = '', selected = null, view = 'list';
+const SIG_CATS = { development: 'New development', zoning: 'Zoning / land use', assessment: 'Assessment / inspection', infrastructure: 'Infrastructure', sale: 'Notable sale', other: 'Other' };
 
 // ── helpers ─────────────────────────────────────────────────────────────────
 const $ = (s) => document.querySelector(s);
@@ -352,6 +364,21 @@ function drawMarkers() {
     m.on('click', () => openDetail(b.bkey));
     markers[b.bkey] = m;
   });
+  // Signals layer (reference pins): gold diamonds, same viewport rule.
+  const sigs = filters.has('signals') ? visibleSignals().filter((g) => g.id === selectedSig || bounds.contains([g.lat, g.lng])) : [];
+  const keepS = new Set(sigs.map((g) => g.id));
+  for (const k in smarkers) if (!keepS.has(Number(k))) { map.removeLayer(smarkers[k]); delete smarkers[k]; }
+  sigs.forEach((g) => {
+    if (smarkers[g.id]) return;
+    const m = L.marker([g.lat, g.lng], { icon: sigIcon(g, selectedSig === g.id), title: g.title, zIndexOffset: 500 }).addTo(map);
+    m.on('click', () => openSignal(g.id));
+    smarkers[g.id] = m;
+  });
+}
+function sigIcon(g, sel) { return L.divIcon({ className: '', html: `<div class="sigpin ${esc(g.category)} ${sel ? 'sel' : ''}"><i>!</i></div>`, iconSize: [24, 24], iconAnchor: [12, 12] }); }
+function visibleSignals() {
+  const q = query.trim().toLowerCase();
+  return DATA.signals.filter((g) => !q || `${g.title} ${g.address || ''} ${g.blurb || ''}`.toLowerCase().includes(q));
 }
 
 // ── filtering ───────────────────────────────────────────────────────────────
@@ -375,14 +402,26 @@ function withDist(list) { return list.map((b) => ({ b, d: pos ? dist(pos, b) : n
 function showList() {
   view = 'list';
   if (selected && markers[selected]) markers[selected].setIcon(makeIcon(DATA.buildings.find((b) => b.bkey === selected), false));
-  selected = null; drawMarkers(); renderList(); $('#sheet').classList.remove('short');
+  if (selectedSig && smarkers[selectedSig]) smarkers[selectedSig].setIcon(sigIcon(DATA.signals.find((g) => g.id === selectedSig), false));
+  selected = null; selectedSig = null; drawMarkers(); renderList(); $('#sheet').classList.remove('short');
 }
 function renderList() {
   const rows = withDist(visible());
+  const sigRows = filters.has('signals') ? visibleSignals().map((g) => ({ g, d: pos ? dist(pos, g) : null })).sort((x, y) => (x.d ?? 1e12) - (y.d ?? 1e12)) : [];
   $('#sheet-title').textContent = pos ? 'Nearest buildings' : 'Buildings (set your position for distances)';
   $('#sheet-sub').textContent = rows.length + ' shown';
-  if (!rows.length) { $('#body').innerHTML = '<div class="empty">Nothing matches. Loosen the chips above.</div>'; return; }
-  $('#body').innerHTML = rows.slice(0, 150).map(({ b, d }) => `
+  const addBtn = `<div style="padding:8px 14px 2px;display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="btn ghost sm" onclick="newSignal()">+ Signal here</button><span style="font-size:11px;color:var(--muted)">${pos ? 'drops a reference pin at your position' : 'set a position first'}</span></div>`;
+  if (!rows.length && !sigRows.length) { $('#body').innerHTML = addBtn + '<div class="empty">Nothing matches. Loosen the chips above.</div>'; return; }
+  const sigHtml = sigRows.slice(0, 40).map(({ g, d }) => `
+    <div class="item" onclick="openSignal(${g.id})">
+      <div class="dot sig"></div>
+      <div style="min-width:0">
+        <div class="nm">${esc(g.title)}<span class="tag sig">${esc(SIG_CATS[g.category] || g.category)}</span></div>
+        <div class="ad">${esc(g.address || '')}${g.address ? ' · ' : ''}${esc(String(g.signal_date || '').slice(0, 10))}${g.blurb ? ' · ' + esc(g.blurb.slice(0, 80)) : ''}</div>
+      </div>
+      <div class="r"><b>${d != null ? fmtDist(d) : ''}</b></div>
+    </div>`).join('');
+  $('#body').innerHTML = addBtn + sigHtml + rows.slice(0, 150).map(({ b, d }) => `
     <div class="item" onclick="openDetail('${esc(b.bkey)}')">
       <div class="dot ${era(b.year_built)}"></div>
       <div style="min-width:0">
@@ -397,7 +436,8 @@ function renderList() {
 function openDetail(key) {
   const b = DATA.buildings.find((x) => x.bkey === key); if (!b) return;
   if (selected && markers[selected]) markers[selected].setIcon(makeIcon(DATA.buildings.find((x) => x.bkey === selected), false));
-  selected = key; view = 'detail';
+  if (selectedSig && smarkers[selectedSig]) smarkers[selectedSig].setIcon(sigIcon(DATA.signals.find((g) => g.id === selectedSig), false));
+  selected = key; selectedSig = null; view = 'detail';
   if (markers[key]) markers[key].setIcon(makeIcon(b, true));
   map.panTo([b.lat, b.lng], { animate: true });
   $('#sheet').classList.remove('short');
@@ -493,10 +533,84 @@ async function hideBuilding(key) {
 }
 function toggleSheet() { const s = $('#sheet'); if (window.innerWidth >= 900) return; s.classList.toggle('tall'); s.classList.remove('short'); }
 
+// ── signals: card, add, edit ────────────────────────────────────────────────
+function openSignal(id) {
+  const g = DATA.signals.find((x) => x.id === id); if (!g) return;
+  if (selected && markers[selected]) markers[selected].setIcon(makeIcon(DATA.buildings.find((x) => x.bkey === selected), false));
+  if (selectedSig && smarkers[selectedSig]) smarkers[selectedSig].setIcon(sigIcon(DATA.signals.find((x) => x.id === selectedSig), false));
+  selected = null; selectedSig = id; view = 'signal';
+  if (smarkers[id]) smarkers[id].setIcon(sigIcon(g, true));
+  map.panTo([g.lat, g.lng], { animate: true });
+  $('#sheet').classList.remove('short');
+  const d = pos ? dist(pos, g) : null;
+  $('#sheet-title').textContent = g.title; $('#sheet-sub').textContent = d != null ? fmtDist(d) + ' away' : '';
+  const linked = g.building_key ? DATA.buildings.find((b) => b.bkey === g.building_key) : null;
+  const paras = String(g.details || '').split(/\n+/).filter(Boolean).map((t) => `<p>${esc(t)}</p>`).join('');
+  $('#body').innerHTML = `
+  <div class="det">
+    <div style="padding:12px 16px 0"><button class="btn ghost sm" onclick="showList()">‹ List</button></div>
+    <div class="head">
+      <h2>${esc(g.title)}</h2>
+      <div class="addr">${esc(g.address || '')}${g.address ? ' · ' : ''}<a href="https://www.google.com/maps/search/?api=1&query=${g.lat},${g.lng}" target="_blank" rel="noopener">Open in Maps</a></div>
+      <div class="badges">
+        <span class="b navy">${esc(SIG_CATS[g.category] || g.category)}</span>
+        <span class="b">${esc(String(g.signal_date || '').slice(0, 10))}</span>
+        ${g.expires_at ? `<span class="b">until ${esc(String(g.expires_at).slice(0, 10))}</span>` : ''}
+        ${g.author ? `<span class="b">by ${esc(g.author)}</span>` : ''}
+      </div>
+    </div>
+    ${g.blurb ? `<div class="sec"><p style="font-size:15px;font-weight:600;line-height:1.4">${esc(g.blurb)}</p></div>` : ''}
+    ${paras ? `<div class="sec"><h3>Details</h3>${paras}</div>` : ''}
+    ${g.source_url ? `<div class="sec"><h3>Source</h3><a href="${esc(g.source_url)}" target="_blank" rel="noopener" style="color:var(--gulf);font-size:14px;word-break:break-all">${esc(g.source_label || g.source_url)}</a></div>` : ''}
+    ${linked ? `<div class="sec"><h3>Linked building</h3><button class="btn ghost sm" onclick="openDetail('${esc(linked.bkey)}')">${esc(name(linked))} ›</button></div>` : ''}
+    <div class="actions"><button class="btn gold sm" onclick="editSignal(${g.id})">Edit</button><button class="btn ghost sm" onclick="removeSignal(${g.id})">Remove pin</button></div>
+    <div class="sec" style="font-size:11px;color:var(--muted);line-height:1.4">Reference pin added by the team, not an MLS building. Facts come from the source linked above; verify before quoting to a client.</div>
+  </div>`;
+  $('#body').scrollTop = 0;
+}
+function signalForm(g) {
+  const v = (k) => esc(g[k] || '');
+  const opts = Object.entries(SIG_CATS).map(([k, l]) => `<option value="${k}" ${g.category === k ? 'selected' : ''}>${l}</option>`).join('');
+  $('#sheet-title').textContent = g.id ? 'Edit signal' : 'New signal'; $('#sheet-sub').textContent = '';
+  $('#sheet').classList.add('tall');
+  $('#body').innerHTML = `
+  <div class="sigform">
+    <div style="display:flex;gap:8px;align-items:center"><button class="btn ghost sm" onclick="${g.id ? `openSignal(${g.id})` : 'showList()'}">‹ Back</button><span style="font-size:12px;color:var(--muted)">${g.lat.toFixed(5)}, ${g.lng.toFixed(5)}${g.id ? '' : ' (your position)'}</span></div>
+    <label>Title</label><input id="sg-title" value="${v('title')}" placeholder="e.g. Opal hotel replacing the Sandcastle">
+    <div class="two"><div><label>Category</label><select id="sg-cat">${opts}</select></div><div><label>Date</label><input id="sg-date" type="date" value="${v('signal_date').slice(0, 10) || new Date().toISOString().slice(0, 10)}"></div></div>
+    <label>Address</label><input id="sg-addr" value="${v('address')}" placeholder="1540 Benjamin Franklin Dr">
+    <label>One-line summary</label><input id="sg-blurb" value="${v('blurb')}" placeholder="What an agent needs to know in one breath">
+    <label>Details (one point per line)</label><textarea id="sg-details" rows="6">${v('details')}</textarea>
+    <div class="two"><div><label>Source URL</label><input id="sg-url" value="${v('source_url')}" placeholder="https://"></div><div><label>Source label</label><input id="sg-src" value="${v('source_label')}" placeholder="Your Observer, Aug 2025"></div></div>
+    <div class="two"><div><label>Expires (optional)</label><input id="sg-exp" type="date" value="${v('expires_at').slice(0, 10)}"></div><div><label>Your initials</label><input id="sg-author" maxlength="4" value="${esc(g.author || localStorage.getItem(AUTHOR_KEY) || '')}" style="text-transform:uppercase"></div></div>
+    <div style="margin-top:12px;display:flex;gap:8px"><button class="btn gold" onclick="saveSignal(${g.id || 0}, ${g.lat}, ${g.lng})">Save pin</button></div>
+  </div>`;
+  $('#body').scrollTop = 0;
+}
+function newSignal() { if (!pos) return toast('Set your position first (GPS or tap the map)'); signalForm({ lat: pos.lat, lng: pos.lng, category: 'development' }); }
+function editSignal(id) { const g = DATA.signals.find((x) => x.id === id); if (g) signalForm(g); }
+async function saveSignal(id, lat, lng) {
+  const author = $('#sg-author').value.trim().toUpperCase(); if (!author) return toast('Add your initials');
+  localStorage.setItem(AUTHOR_KEY, author);
+  const body = { id: id || undefined, lat, lng, author, title: $('#sg-title').value, category: $('#sg-cat').value, signal_date: $('#sg-date').value, address: $('#sg-addr').value, blurb: $('#sg-blurb').value, details: $('#sg-details').value, source_url: $('#sg-url').value, source_label: $('#sg-src').value, expires_at: $('#sg-exp').value };
+  if (!body.title.trim()) return toast('Give it a title');
+  try {
+    const j = await api('?action=signal', body); if (!j) return;
+    const i = DATA.signals.findIndex((x) => x.id === j.signal.id);
+    if (i >= 0) DATA.signals[i] = j.signal; else DATA.signals.unshift(j.signal);
+    if (smarkers[j.signal.id]) { map.removeLayer(smarkers[j.signal.id]); delete smarkers[j.signal.id]; }
+    drawMarkers(); openSignal(j.signal.id); toast('Pin saved');
+  } catch (e) { toast('Save failed: ' + e.message); }
+}
+async function removeSignal(id) {
+  if (!confirm('Remove this pin for everyone?')) return;
+  try { await api('?action=delsignal', { id }); DATA.signals = DATA.signals.filter((x) => x.id !== id); if (smarkers[id]) { map.removeLayer(smarkers[id]); delete smarkers[id]; } selectedSig = null; showList(); toast('Removed'); } catch (e) { toast('Failed'); }
+}
+
 // ── boot ────────────────────────────────────────────────────────────────────
 async function load() {
   const j = await api('?zips=all'); if (!j) return;
-  DATA = j; PHOTOS = !!j.photos; NOTES = {};
+  DATA = j; DATA.signals = j.signals || []; PHOTOS = !!j.photos; NOTES = {};
   j.notes.forEach((n) => (NOTES[n.building_key] = NOTES[n.building_key] || []).push(n));
   const counts = {}; j.buildings.forEach((b) => { if (!b.hidden) counts[areaOf(b.postal_code)] = (counts[areaOf(b.postal_code)] || 0) + 1; });
   $('#area-chips').innerHTML = AREAS.filter((a) => counts[a.id]).map((a) => `<button class="chip ${filters.has('area:' + a.id) ? 'on' : ''}" data-f="area:${a.id}">${a.label} <span style="opacity:.7">${counts[a.id]}</span></button>`).join('');
@@ -512,12 +626,12 @@ async function boot() {
 }
 document.getElementById('chips').addEventListener('click', (e) => {
   const c = e.target.closest('.chip'); if (!c) return; const f = c.dataset.f;
-  if (f === '__clear') { filters = new Set(AREAS.map((a) => 'area:' + a.id)); query = ''; $('#search').value = ''; }
+  if (f === '__clear') { filters = new Set([...AREAS.map((a) => 'area:' + a.id), 'signals']); query = ''; $('#search').value = ''; }
   else if (filters.has(f)) filters.delete(f); else filters.add(f);
   document.querySelectorAll('#chips .chip[data-f]').forEach((el) => { if (el.dataset.f !== '__clear') el.classList.toggle('on', filters.has(el.dataset.f)); });
   syncClear(); drawMarkers(); if (view === 'list') renderList(); else showList();
 });
-function syncClear() { const narrowed = query.trim() || AREAS.some((a) => !filters.has('area:' + a.id)) || [...filters].some((f) => !f.startsWith('area:')); $('#chips .chip.clear').classList.toggle('show', !!narrowed); }
+function syncClear() { const narrowed = query.trim() || AREAS.some((a) => !filters.has('area:' + a.id)) || !filters.has('signals') || [...filters].some((f) => !f.startsWith('area:') && f !== 'signals'); $('#chips .chip.clear').classList.toggle('show', !!narrowed); }
 $('#search').addEventListener('input', (e) => { query = e.target.value; syncClear(); drawMarkers(); if (view !== 'list') showList(); else renderList(); });
 $('#search').addEventListener('keydown', (e) => { if (e.key === 'Enter') e.target.blur(); });
 // sheet drag: swipe up/down on the grip
