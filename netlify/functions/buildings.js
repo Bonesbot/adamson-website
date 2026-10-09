@@ -5,7 +5,7 @@
 // by the Supabase view v_condo_buildings, plus team overrides (condo_buildings) and shared
 // field notes (condo_building_notes).
 //
-//   GET  ?zips=34236,34228                      building list + overrides + notes (needs key)
+//   GET  ?zips=all | ?zips=34236,34228          building list + overrides + notes (needs key)
 //   GET  ?action=photo&key=<building_key>       Street View photo of the building (proxied,
 //                                              server-side GOOGLE_MAPS_KEY; 404 until the key
 //                                              exists so the page can show a placeholder)
@@ -127,8 +127,11 @@ exports.handler = async (event) => {
     if (!keyMatches(given, expected)) return json(401, { error: 'bad edit key' });
 
     if (event.httpMethod === 'GET') {
-      const zips = String(q.zips || '34236,34228').split(',').map((z) => z.trim()).filter((z) => /^\d{5}$/.test(z)).slice(0, 12);
-      if (!zips.length) return json(400, { error: 'zips required' });
+      // zips=all (the page default since 2026-10-08) returns every zip the import covers;
+      // a comma list narrows it.
+      const all = !q.zips || q.zips === 'all';
+      const zips = all ? [] : String(q.zips).split(',').map((z) => z.trim()).filter((z) => /^\d{5}$/.test(z)).slice(0, 20);
+      if (!all && !zips.length) return json(400, { error: 'zips required' });
       const sel = [
         'bkey', 'slug', 'postal_code', 'city', 'subdivision', 'subdivision_names', 'lat', 'lng', 'year_built', 'stories',
         'listings_total', 'last_activity', 'active_count', 'active_min', 'active_max',
@@ -142,7 +145,14 @@ exports.handler = async (event) => {
         'display_name', 'photo_url', 'pets_override', 'rental_override', 'parking_override', 'amenities_override', 'hidden',
         'updated_by', 'updated_at', 'note_count',
       ].join(',');
-      const buildings = await rest(db, `v_condo_buildings?select=${sel}&postal_code=in.(${zips.join(',')})&order=listings_total.desc&limit=2000`);
+      const where = all ? '' : `&postal_code=in.(${zips.join(',')})`;
+      // PostgREST caps a response at 1,000 rows (Supabase max-rows), so page through.
+      const buildings = [];
+      for (let off = 0; off < 10000; off += 1000) {
+        const page = await rest(db, `v_condo_buildings?select=${sel}${where}&order=listings_total.desc,bkey.asc&limit=1000&offset=${off}`);
+        buildings.push(...page);
+        if (page.length < 1000) break;
+      }
       // Trim payload for phones: percentile_cont returns 15-digit doubles; nobody needs those.
       for (const b of buildings) {
         for (const k of Object.keys(b)) {
@@ -158,7 +168,14 @@ exports.handler = async (event) => {
       const keys = new Set(buildings.map((b) => b.bkey));
       const allNotes = await rest(db, 'condo_building_notes?select=id,building_key,note,author,created_at&order=created_at.desc&limit=10000');
       const notes = allNotes.filter((n) => keys.has(n.building_key));
-      return json(200, { ok: true, zips, generated_at: new Date().toISOString(), buildings, notes, photos: !!process.env.GOOGLE_MAPS_KEY });
+      const payload = { ok: true, zips: all ? 'all' : zips, generated_at: new Date().toISOString(), buildings, notes, photos: !!process.env.GOOGLE_MAPS_KEY };
+      // ~1,400 buildings is a couple of MB raw; gzip it when the browser accepts (always).
+      const accept = String(event.headers['accept-encoding'] || event.headers['Accept-Encoding'] || '');
+      if (/gzip/.test(accept)) {
+        const gz = require('zlib').gzipSync(Buffer.from(JSON.stringify(payload)));
+        return { statusCode: 200, headers: { 'Content-Type': 'application/json', 'Content-Encoding': 'gzip', 'Cache-Control': 'no-store', 'Access-Control-Allow-Origin': '*' }, body: gz.toString('base64'), isBase64Encoded: true };
+      }
+      return json(200, payload);
     }
 
     if (event.httpMethod !== 'POST') return json(405, { error: 'method' });

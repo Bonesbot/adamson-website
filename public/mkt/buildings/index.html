@@ -158,8 +158,7 @@
     <button class="ib" id="btn-list" title="List" onclick="showList()"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
   </div>
   <div class="chips" id="chips">
-    <button class="chip on" data-f="zip:34236">Lido / St Armands / Downtown 34236</button>
-    <button class="chip on" data-f="zip:34228">Longboat 34228</button>
+    <span id="area-chips"></span>
     <button class="chip" data-f="gulf">Gulf front</button>
     <button class="chip" data-f="e1">Pre-1980</button>
     <button class="chip" data-f="e2">1980-2005</button>
@@ -196,11 +195,22 @@ const API = '/.netlify/functions/buildings';
 const KEY_KEY = 'cma-edit-key';            // same localStorage slot as /mkt/admin so one login covers both
 const AUTHOR_KEY = 'ag-buildings-author';
 const POS_KEY = 'ag-buildings-pos';
-const ZIPS = ['34236', '34228'];
+// Area chips: every zip the MLS import covers that has condos. A zip not listed here still
+// loads (the function returns everything) and lands in "Other".
+const AREAS = [
+  { id: 'lido', label: 'Lido / Downtown', zips: ['34236'] },
+  { id: 'lbk', label: 'Longboat', zips: ['34228'] },
+  { id: 'siesta', label: 'Siesta', zips: ['34242'] },
+  { id: 'palmer', label: 'Palmer Ranch', zips: ['34238'] },
+  { id: 'wbrad', label: 'W Bradenton', zips: ['34210', '34215'] },
+  { id: 'south', label: 'Gulf Gate / South', zips: ['34231', '34239'] },
+  { id: 'other', label: 'Other Sarasota', zips: ['34237', '34234', '34232', '34235', '34229'] },
+];
+const areaOf = (zip) => (AREAS.find((a) => a.zips.includes(zip)) || AREAS[AREAS.length - 1]).id;
 
 let DATA = { buildings: [], notes: [] }, NOTES = {}, PHOTOS = false;
 let map, baseStreet, baseSat, satOn = false, markers = {}, meMarker = null, meCircle = null, pos = null, posManual = false, armed = false;
-let filters = new Set(['zip:34236', 'zip:34228']), query = '', selected = null, view = 'list';
+let filters = new Set(AREAS.map((a) => 'area:' + a.id)), query = '', selected = null, view = 'list';
 
 // ── helpers ─────────────────────────────────────────────────────────────────
 const $ = (s) => document.querySelector(s);
@@ -300,6 +310,7 @@ function initMap() {
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, opacity: .9 }),
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, opacity: .8 }),
   ]);
+  map.on('moveend', () => { if (DATA.buildings.length) drawMarkers(); });
   map.on('click', (e) => { if (armed) { setPos(e.latlng.lat, e.latlng.lng, true); armed = false; $('#fab-pin').classList.remove('armed'); $('#hint').style.display = 'none'; } });
   try { const p = JSON.parse(localStorage.getItem(POS_KEY) || 'null'); if (p && p.lat) setPos(p.lat, p.lng, !!p.manual, true); } catch {}
 }
@@ -325,7 +336,10 @@ function makeIcon(b, sel) {
   return L.divIcon({ className: '', html: `<div class="pin ${era(b.year_built)} ${b.gulf_front ? 'gulf' : ''} ${sel ? 'sel' : ''}"><i>${yy}</i></div>`, iconSize: [26, 26], iconAnchor: [13, 26], popupAnchor: [0, -24] });
 }
 function drawMarkers() {
-  const vis = visible();
+  // 1,400 div-icon pins is more than a phone wants at once: only mount the ones inside the
+  // (padded) viewport, plus the selected pin; moveend re-runs this.
+  const bounds = map.getBounds().pad(0.4);
+  const vis = visible().filter((b) => b.bkey === selected || bounds.contains([b.lat, b.lng]));
   const keep = new Set(vis.map((b) => b.bkey));
   for (const k in markers) if (!keep.has(k)) { map.removeLayer(markers[k]); delete markers[k]; }
   vis.forEach((b) => {
@@ -341,7 +355,7 @@ function visible() {
   const q = query.trim().toLowerCase();
   return DATA.buildings.filter((b) => {
     if (b.hidden) return false;
-    if (!filters.has('zip:' + b.postal_code)) return false;
+    if (!filters.has('area:' + areaOf(b.postal_code))) return false;
     if (filters.has('gulf') && !b.gulf_front) return false;
     const eras = ['e1', 'e2', 'e3'].filter((e) => filters.has(e));
     if (eras.length && !eras.includes(era(b.year_built))) return false;
@@ -477,10 +491,12 @@ function toggleSheet() { const s = $('#sheet'); if (window.innerWidth >= 900) re
 
 // ── boot ────────────────────────────────────────────────────────────────────
 async function load() {
-  const j = await api('?zips=' + ZIPS.join(',')); if (!j) return;
+  const j = await api('?zips=all'); if (!j) return;
   DATA = j; PHOTOS = !!j.photos; NOTES = {};
   j.notes.forEach((n) => (NOTES[n.building_key] = NOTES[n.building_key] || []).push(n));
-  $('#count').textContent = `${j.buildings.filter((b) => !b.hidden).length} buildings · ${ZIPS.join(' / ')}`;
+  const counts = {}; j.buildings.forEach((b) => { if (!b.hidden) counts[areaOf(b.postal_code)] = (counts[areaOf(b.postal_code)] || 0) + 1; });
+  $('#area-chips').innerHTML = AREAS.filter((a) => counts[a.id]).map((a) => `<button class="chip ${filters.has('area:' + a.id) ? 'on' : ''}" data-f="area:${a.id}">${a.label} <span style="opacity:.7">${counts[a.id]}</span></button>`).join('');
+  $('#count').textContent = `${j.buildings.filter((b) => !b.hidden).length} buildings · ${new Set(j.buildings.map((b) => b.postal_code)).size} zips`;
   drawMarkers(); renderList();
 }
 async function boot() {
@@ -488,6 +504,7 @@ async function boot() {
   try { await load(); } catch (e) { $('#body').innerHTML = `<div class="empty">Could not load: ${esc(e.message)}</div>`; }
   if (!pos) { const vis = visible(); if (vis.length) map.fitBounds(L.latLngBounds(vis.map((b) => [b.lat, b.lng])).pad(0.05)); }
   else map.setView([pos.lat, pos.lng], 15);
+  drawMarkers();
 }
 document.getElementById('chips').addEventListener('click', (e) => {
   const c = e.target.closest('.chip'); if (!c) return; const f = c.dataset.f;

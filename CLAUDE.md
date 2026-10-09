@@ -90,12 +90,13 @@ The `srqmap-events` scheduled task keeps running while hidden; it only touches
 ## AG Buildings: internal condo field guide (/mkt/buildings/, since 2026-10-08)
 
 Phone-first map for Adamson Group agents only (noindex meta + `X-Robots-Tag` header, never
-linked from the hub). Locate or tap-to-place a position, see every condo building in 34236 and
-34228 nearest-first, open a card: Street View photo, active range, closed-24-month min / median
+linked from the hub). Locate or tap-to-place a position, see every condo building the MLS
+import covers (13 zips, ~1,400 buildings; area chips group them) nearest-first, open a card: Street View photo, active range, closed-24-month min / median
 / max and $/sf, median size, year, stories, HOA/mo, pets, rentals, parking, amenities, shared
 team notes, "edit facts" overrides. Satellite toggle (Esri imagery).
 
-- `public/mkt/buildings/index.html` (self-contained; `ZIPS` const adds coverage),
+- `public/mkt/buildings/index.html` (self-contained; the function returns every zip, the
+  `AREAS` const only decides which chip a zip lands in),
   `netlify/functions/buildings.js` (list / notes / overrides / Street View proxy),
   `supabase/migrations/condo_buildings_field_tool.sql` (`condo_building_key()`,
   `v_condo_buildings`, `condo_buildings`, `condo_building_notes`).
