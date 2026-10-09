@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-08T10:57:11.698345+00:00",
+  "lastUpdated": "2026-10-09T10:53:58.107907+00:00",
   "counts": {
     "sold": 270,
-    "pending": 27,
-    "active": 84,
-    "total": 297
+    "pending": 26,
+    "active": 85,
+    "total": 296
   },
   "metrics": {
-    "avgPrice": "$2,114,747",
-    "avgPricePerSqFt": "$661",
+    "avgPrice": "$2,120,743",
+    "avgPricePerSqFt": "$663",
     "avgYearBuilt": 1982,
-    "avgLivingSqFt": "2,762",
+    "avgLivingSqFt": "2,765",
     "avgLotSqFt": null,
     "avgDom": 108
   },
@@ -22,22 +22,22 @@
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 84,
-    "medianPrice": "$2,222,500",
-    "medianPricePerSqFt": "$795",
+    "count": 85,
+    "medianPrice": "$2,150,000",
+    "medianPricePerSqFt": "$793",
     "waterfrontCount": 18,
     "newConstructionCount": 25
   },
   "sold": {
-    "count": 42,
-    "medianPrice": "$1,650,000",
-    "medianDom": 124,
-    "saleToListRatio": "87.2%",
+    "count": 41,
+    "medianPrice": "$1,600,000",
+    "medianDom": 125,
+    "saleToListRatio": "87.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 5.2,
-    "sfhVilla": 4.7,
+    "sfhVilla": 4.8,
     "blended": 4.8,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 22,
+    "under900k": 23,
     "band900kTo1_5m": 11,
     "band1_5mTo3m": 18,
     "band3mPlus": 33
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 84
+      "count": 85
     }
   ],
   "buildingClasses": [],
@@ -142,7 +142,7 @@
       "avgPrice": "$367,143",
       "avgPricePerSqFt": "$319",
       "avgLivingSqFt": "1,154",
-      "avgDom": 105
+      "avgDom": 106
     },
     {
       "tier": "1990to2005",
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 64,
+      "activeCount": 65,
       "soldCount": 226,
       "soldMedianPricePerSqFt": "$573",
       "soldMedianPrice": "$1,450,000",
@@ -224,17 +224,17 @@
   "marketBalance": {
     "monthsOfSupply": 4.8,
     "monthsOfSupplyCondo": 5.2,
-    "monthsOfSupplySfhVilla": 4.7,
+    "monthsOfSupplySfhVilla": 4.8,
     "label": "seller's market",
-    "activeCount": 84,
+    "activeCount": 85,
     "sold365Count": 211,
-    "sold90Count": 42,
+    "sold90Count": 41,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 250,
-      "activeCount": 77,
+      "activeCount": 78,
       "soldMedianPrice": "$1,600,000",
       "soldMedianPricePerSqFt": "$625"
     },
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 84 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 4.8 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 85 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 4.8 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,12 +263,12 @@
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,222,500."
+      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,150,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 124 days on market and closed at 87.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 125 days on market and closed at 87.1% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

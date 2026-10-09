@@ -2,61 +2,61 @@
   "areaSlug": "st-armands-lido",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-08T10:57:09.339142+00:00",
+  "lastUpdated": "2026-10-09T10:53:55.647976+00:00",
   "counts": {
-    "sold": 141,
-    "pending": 19,
+    "sold": 757,
+    "pending": 20,
     "active": 74,
-    "total": 160
+    "total": 777
   },
   "metrics": {
-    "avgPrice": "$3,155,880",
-    "avgPricePerSqFt": "$1,024",
-    "avgYearBuilt": 1985,
-    "avgLivingSqFt": "2,457",
+    "avgPrice": "$1,594,344",
+    "avgPricePerSqFt": "$688",
+    "avgYearBuilt": 1982,
+    "avgLivingSqFt": "1,908",
     "avgLotSqFt": null,
-    "avgDom": 122
+    "avgDom": 108
   },
   "range": {
-    "minPrice": "$275,000",
+    "minPrice": "$229,000",
     "maxPrice": "$25,000,000"
   },
   "active": {
     "count": 74,
     "medianPrice": "$3,422,500",
-    "medianPricePerSqFt": "$1,006",
-    "waterfrontCount": 36,
+    "medianPricePerSqFt": "$965",
+    "waterfrontCount": 35,
     "newConstructionCount": 20
   },
   "sold": {
-    "count": 40,
+    "count": 42,
     "medianPrice": "$5,800,000",
-    "medianDom": 6,
-    "saleToListRatio": "92.0%",
+    "medianDom": 2,
+    "saleToListRatio": "92.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.2,
+    "condo": 5.1,
     "sfhVilla": 13.1,
-    "blended": 7.3,
+    "blended": 7.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,429",
-    "medianMonthlyCondoFee": "$1,488",
-    "minMonthlyCondoFee": "$595",
+    "medianMonthlyAssociation": "$979",
+    "medianMonthlyCondoFee": "$1,082",
+    "minMonthlyCondoFee": "$340",
     "maxMonthlyCondoFee": "$6,590",
     "condoFeeRange": {
-      "min": 595,
-      "median": 1488,
+      "min": 340,
+      "median": 1082,
       "max": 6590
     }
   },
   "priceBands": {
-    "under900k": 25,
+    "under900k": 26,
     "band900kTo1_5m": 5,
-    "band1_5mTo3m": 6,
+    "band1_5mTo3m": 5,
     "band3mPlus": 38
   },
   "propertyTypes": [
@@ -79,6 +79,19 @@
       "yearBuilt": 2024,
       "propertyType": "Residential",
       "isWaterfront": true
+    },
+    {
+      "listingId": "J1006036",
+      "address": "1000 BENJAMIN FRANKLIN DRIVE #505",
+      "subdivision": "ROSEWOOD RESIDENCES LIDO KEY",
+      "soldPrice": "$5,600,000",
+      "soldDate": "2026-10-07",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,350",
+      "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": false
     },
     {
       "listingId": "A4675500",
@@ -118,19 +131,6 @@
       "yearBuilt": 1954,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4680142",
-      "address": "1000 BENJAMIN FRANKLIN DR #1107",
-      "subdivision": "ROSEWOOD RESIDENCES LIDO KEY",
-      "soldPrice": "$9,880,000",
-      "soldDate": "2026-09-30",
-      "bedrooms": 4,
-      "bathrooms": 4.5,
-      "livingSqFt": "4,482",
-      "yearBuilt": 2026,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 32,
-      "avgPrice": "$759,839",
-      "avgPricePerSqFt": "$669",
-      "avgLivingSqFt": "1,135",
-      "avgDom": 170
+      "activeCount": 33,
+      "avgPrice": "$749,541",
+      "avgPricePerSqFt": "$673",
+      "avgLivingSqFt": "1,118",
+      "avgDom": 166
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 4,
-      "avgPrice": "$5,219,500",
-      "avgPricePerSqFt": "$1,302",
-      "avgLivingSqFt": "3,839",
-      "avgDom": 149
+      "activeCount": 3,
+      "avgPrice": "$6,176,667",
+      "avgPricePerSqFt": "$1,348",
+      "avgLivingSqFt": "4,446",
+      "avgDom": 158
     },
     {
       "tier": "2006to2019",
@@ -172,7 +172,7 @@
       "avgPrice": "$9,670,000",
       "avgPricePerSqFt": "$2,276",
       "avgLivingSqFt": "4,187",
-      "avgDom": 586
+      "avgDom": 587
     }
   ],
   "condoTiersScope": {
@@ -187,48 +187,48 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 24,
-      "soldCount": 61,
-      "soldMedianPricePerSqFt": "$1,037",
-      "soldMedianPrice": "$2,000,000",
+      "activeCount": 23,
+      "soldCount": 527,
+      "soldMedianPricePerSqFt": "$561",
+      "soldMedianPrice": "$800,000",
       "lowSample": false
     },
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 12,
-      "soldCount": 17,
-      "soldMedianPricePerSqFt": "$1,148",
-      "soldMedianPrice": "$3,650,000",
+      "soldCount": 18,
+      "soldMedianPricePerSqFt": "$1,092",
+      "soldMedianPrice": "$3,575,000",
       "lowSample": false
     },
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 10,
-      "soldCount": 19,
-      "soldMedianPricePerSqFt": "$777",
-      "soldMedianPrice": "$1,060,000",
+      "soldCount": 124,
+      "soldMedianPricePerSqFt": "$570",
+      "soldMedianPrice": "$758,750",
       "lowSample": false
     },
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 28,
-      "soldCount": 44,
-      "soldMedianPricePerSqFt": "$774",
-      "soldMedianPrice": "$1,340,000",
+      "activeCount": 29,
+      "soldCount": 88,
+      "soldMedianPricePerSqFt": "$661",
+      "soldMedianPrice": "$822,500",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.3,
-    "monthsOfSupplyCondo": 5.2,
+    "monthsOfSupply": 7.2,
+    "monthsOfSupplyCondo": 5.1,
     "monthsOfSupplySfhVilla": 13.1,
     "label": "buyer's market",
     "activeCount": 74,
-    "sold365Count": 122,
-    "sold90Count": 40,
+    "sold365Count": 124,
+    "sold90Count": 42,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -239,51 +239,51 @@
       "soldMedianPricePerSqFt": "$960"
     },
     "condo": {
-      "soldCount": 99,
+      "soldCount": 715,
       "activeCount": 41,
-      "soldMedianPrice": "$1,250,000",
-      "soldMedianPricePerSqFt": "$778"
+      "soldMedianPrice": "$750,000",
+      "soldMedianPricePerSqFt": "$556"
     }
   },
   "boating": {
     "activeWithDock": 10,
-    "activeWaterfront": 36
+    "activeWaterfront": 35
   },
   "marketQuestions": [
     {
       "facet": "waterfront",
       "q": "How much more does beachfront cost than bayfront on St Armands Lido?",
-      "a": "Gulf-front / beachfront homes sell at a median $1,037 per sq ft versus $1,148 for bay- or canal-front \u2014 about a -10% waterfront premium (Stellar MLS, recent closed sales)."
+      "a": "Gulf-front / beachfront homes sell at a median $561 per sq ft versus $1,092 for bay- or canal-front \u2014 about a -49% waterfront premium (Stellar MLS, recent closed sales)."
     },
     {
       "facet": "balance",
       "q": "Is St Armands Lido a buyer's or seller's market right now?",
-      "a": "With 74 active listings and roughly 10 closed sales a month (trailing 12 months), St Armands Lido has about 7.3 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 74 active listings and roughly 10 closed sales a month (trailing 12 months), St Armands Lido has about 7.2 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on St Armands Lido?",
-      "a": "Single-family homes sell around $2,837,500 ($960/sq ft), while condos, villas and townhouses sell around $1,250,000 ($778/sq ft)."
+      "a": "Single-family homes sell around $2,837,500 ($960/sq ft), while condos, villas and townhouses sell around $750,000 ($556/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on St Armands Lido?",
-      "a": "Active listings run from $275,000 to $25,000,000, with a median asking price of $3,422,500."
+      "a": "Active listings run from $229,000 to $25,000,000, with a median asking price of $3,422,500."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on St Armands Lido?",
-      "a": "Recently sold homes took a median 6 days on market and closed at 92.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 2 days on market and closed at 92.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many St Armands Lido homes have a dock?",
-      "a": "Of 36 active waterfront listings, 10 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 35 active waterfront listings, 10 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on St Armands Lido?",
-      "a": "The median monthly condo fee is $1,488 and the median monthly association fee is $1,429."
+      "a": "The median monthly condo fee is $1,082 and the median monthly association fee is $979."
     }
   ],
   "costBreakdown90": null

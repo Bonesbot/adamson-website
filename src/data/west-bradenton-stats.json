@@ -2,18 +2,18 @@
   "areaSlug": "west-bradenton",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-08T10:57:15.783122+00:00",
+  "lastUpdated": "2026-10-09T10:54:01.905958+00:00",
   "counts": {
-    "sold": 325,
+    "sold": 326,
     "pending": 49,
-    "active": 143,
-    "total": 374
+    "active": 142,
+    "total": 375
   },
   "metrics": {
-    "avgPrice": "$651,783",
-    "avgPricePerSqFt": "$312",
+    "avgPrice": "$650,408",
+    "avgPricePerSqFt": "$311",
     "avgYearBuilt": 1997,
-    "avgLivingSqFt": "1,975",
+    "avgLivingSqFt": "1,973",
     "avgLotSqFt": null,
     "avgDom": 98
   },
@@ -22,22 +22,22 @@
     "maxPrice": "$7,250,000"
   },
   "active": {
-    "count": 143,
-    "medianPrice": "$499,900",
+    "count": 142,
+    "medianPrice": "$514,950",
     "medianPricePerSqFt": "$289",
     "waterfrontCount": 49,
     "newConstructionCount": 44
   },
   "sold": {
-    "count": 74,
-    "medianPrice": "$420,000",
-    "medianDom": 53,
-    "saleToListRatio": "99.8%",
+    "count": 72,
+    "medianPrice": "$439,999",
+    "medianDom": 58,
+    "saleToListRatio": "100.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 6.9,
-    "sfhVilla": 5.4,
+    "condo": 7.0,
+    "sfhVilla": 5.3,
     "blended": 5.9,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 106,
+    "under900k": 105,
     "band900kTo1_5m": 22,
     "band1_5mTo3m": 12,
     "band3mPlus": 3
@@ -62,11 +62,24 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 143
+      "count": 142
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4677439",
+      "address": "12007 45TH AVE W",
+      "subdivision": "CORTEZ S OF CORTEZ RD",
+      "soldPrice": "$521,000",
+      "soldDate": "2026-10-08",
+      "bedrooms": 2,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,356",
+      "yearBuilt": 1936,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4694061",
       "address": "4904 61ST AVENUE TER W",
@@ -118,19 +131,6 @@
       "yearBuilt": 1997,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4702161",
-      "address": "4512 86TH ST W",
-      "subdivision": "CORTEZ ADD",
-      "soldPrice": "$295,000",
-      "soldDate": "2026-10-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "728",
-      "yearBuilt": 1954,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [],
@@ -175,33 +175,33 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 73,
-      "soldCount": 170,
-      "soldMedianPricePerSqFt": "$247",
-      "soldMedianPrice": "$430,500",
+      "activeCount": 72,
+      "soldCount": 171,
+      "soldMedianPricePerSqFt": "$248",
+      "soldMedianPrice": "$430,999",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 5.9,
-    "monthsOfSupplyCondo": 6.9,
-    "monthsOfSupplySfhVilla": 5.4,
+    "monthsOfSupplyCondo": 7.0,
+    "monthsOfSupplySfhVilla": 5.3,
     "label": "balanced market",
-    "activeCount": 143,
+    "activeCount": 142,
     "sold365Count": 289,
-    "sold90Count": 74,
+    "sold90Count": 72,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 139,
+      "soldCount": 140,
       "activeCount": 58,
-      "soldMedianPrice": "$750,000",
+      "soldMedianPrice": "$737,500",
       "soldMedianPricePerSqFt": "$349"
     },
     "condo": {
       "soldCount": 186,
-      "activeCount": 85,
+      "activeCount": 84,
       "soldMedianPrice": "$385,000",
       "soldMedianPricePerSqFt": "$229"
     }
@@ -214,22 +214,22 @@
     {
       "facet": "balance",
       "q": "Is West Bradenton a buyer's or seller's market right now?",
-      "a": "With 143 active listings and roughly 24 closed sales a month (trailing 12 months), West Bradenton has about 5.9 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 142 active listings and roughly 24 closed sales a month (trailing 12 months), West Bradenton has about 5.9 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo in West Bradenton?",
-      "a": "Single-family homes sell around $750,000 ($349/sq ft), while condos, villas and townhouses sell around $385,000 ($229/sq ft)."
+      "a": "Single-family homes sell around $737,500 ($349/sq ft), while condos, villas and townhouses sell around $385,000 ($229/sq ft)."
     },
     {
       "facet": "range",
       "q": "What is the price range in West Bradenton?",
-      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $499,900."
+      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $514,950."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell in West Bradenton?",
-      "a": "Recently sold homes took a median 53 days on market and closed at 99.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 58 days on market and closed at 100.1% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
@@ -250,22 +250,22 @@
       "activeCount": 53,
       "pendingCount": 4,
       "activeMedianPrice": "$380,000",
-      "soldCount": 110,
+      "soldCount": 109,
       "soldMedianPrice": "$385,000",
-      "soldMedianPricePerSqFt": "$208",
-      "soldMedianDom": 82,
+      "soldMedianPricePerSqFt": "$212",
+      "soldMedianDom": 83,
       "soldSingleFamilyShare": "34%",
       "lowSample": false
     },
     {
       "slug": "west-bradenton-coral-shores-cortez",
       "name": "Coral Shores / Cortez",
-      "activeCount": 55,
+      "activeCount": 54,
       "pendingCount": 15,
-      "activeMedianPrice": "$499,000",
-      "soldCount": 99,
+      "activeMedianPrice": "$539,450",
+      "soldCount": 100,
       "soldMedianPrice": "$480,000",
-      "soldMedianPricePerSqFt": "$317",
+      "soldMedianPricePerSqFt": "$319",
       "soldMedianDom": 80,
       "soldSingleFamilyShare": "58%",
       "lowSample": false
@@ -319,16 +319,16 @@
           {
             "waterfront": "non_waterfront",
             "label": "Non-Waterfront",
-            "soldCount": 99,
-            "soldMedianPrice": "$672,648",
-            "soldMedianPricePerSqFt": "$321",
-            "soldMedianDom": 42,
+            "soldCount": 100,
+            "soldMedianPrice": "$667,084",
+            "soldMedianPricePerSqFt": "$322",
+            "soldMedianDom": 43,
             "activeCount": 39,
             "activeMedianPrice": "$864,000",
             "lowSample": false
           }
         ],
-        "waterfrontPremiumPerSqFt": "78%"
+        "waterfrontPremiumPerSqFt": "77%"
       },
       {
         "propertyType": "attached",
@@ -348,16 +348,16 @@
           {
             "waterfront": "non_waterfront",
             "label": "Non-Waterfront",
-            "soldCount": 117,
-            "soldMedianPrice": "$370,000",
-            "soldMedianPricePerSqFt": "$202",
-            "soldMedianDom": 78,
-            "activeCount": 66,
-            "activeMedianPrice": "$322,000",
+            "soldCount": 116,
+            "soldMedianPrice": "$372,500",
+            "soldMedianPricePerSqFt": "$203",
+            "soldMedianDom": 79,
+            "activeCount": 65,
+            "activeMedianPrice": "$325,000",
             "lowSample": false
           }
         ],
-        "waterfrontPremiumPerSqFt": "33%"
+        "waterfrontPremiumPerSqFt": "32%"
       }
     ],
     "waterfrontDefinition": "Salt or brackish boating water: bay, harbor, saltwater canal, Intracoastal or lagoon frontage. Lake and pond lots are counted as non-waterfront.",
