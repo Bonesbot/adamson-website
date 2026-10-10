@@ -2,15 +2,15 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-09T10:54:01.154198+00:00",
+  "lastUpdated": "2026-10-10T10:57:32.134613+00:00",
   "counts": {
-    "sold": 936,
-    "pending": 64,
+    "sold": 938,
+    "pending": 63,
     "active": 207,
-    "total": 1000
+    "total": 1001
   },
   "metrics": {
-    "avgPrice": "$560,074",
+    "avgPrice": "$560,151",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
     "avgLivingSqFt": "2,045",
@@ -24,12 +24,12 @@
   "active": {
     "count": 207,
     "medianPrice": "$415,000",
-    "medianPricePerSqFt": "$247",
+    "medianPricePerSqFt": "$246",
     "waterfrontCount": 32,
     "newConstructionCount": 33
   },
   "sold": {
-    "count": 168,
+    "count": 170,
     "medianPrice": "$457,500",
     "medianDom": 58,
     "saleToListRatio": "92.0%",
@@ -68,6 +68,19 @@
   "buildingClasses": [],
   "recentSoldComps": [
     {
+      "listingId": "A4702085",
+      "address": "11258 SANDHILL PRESERVE DR",
+      "subdivision": "SANDHILL PRESERVE",
+      "soldPrice": "$510,000",
+      "soldDate": "2026-10-09",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,675",
+      "yearBuilt": 2016,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "A4692503",
       "address": "8937 OLDE HICKORY AVE",
       "subdivision": "STONEYBROOK GOLF & COUNTRY CLUB",
@@ -79,6 +92,19 @@
       "yearBuilt": 1995,
       "propertyType": "Residential",
       "isWaterfront": true
+    },
+    {
+      "listingId": "A4684485",
+      "address": "4138 CENTRAL SARASOTA PKWY #1526",
+      "subdivision": "BELLA VILLINO IV",
+      "soldPrice": "$139,000",
+      "soldDate": "2026-10-08",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "661",
+      "yearBuilt": 1998,
+      "propertyType": "Residential",
+      "isWaterfront": false
     },
     {
       "listingId": "A4704525",
@@ -105,32 +131,6 @@
       "yearBuilt": 1999,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4700059",
-      "address": "5735 WILENA PL",
-      "subdivision": "VILLAGEWALK",
-      "soldPrice": "$630,000",
-      "soldDate": "2026-10-06",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,008",
-      "yearBuilt": 2005,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4689669",
-      "address": "5867 HELICON PL",
-      "subdivision": "VILLAGEWALK",
-      "soldPrice": "$370,000",
-      "soldDate": "2026-10-05",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,534",
-      "yearBuilt": 2002,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 34,
-      "avgPrice": "$309,038",
+      "avgPrice": "$309,009",
       "avgPricePerSqFt": "$197",
       "avgLivingSqFt": "1,586",
-      "avgDom": 120
+      "avgDom": 121
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$296,588",
       "avgPricePerSqFt": "$228",
       "avgLivingSqFt": "1,292",
-      "avgDom": 121
+      "avgDom": 122
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$360,780",
       "avgPricePerSqFt": "$213",
       "avgLivingSqFt": "1,707",
-      "avgDom": 105
+      "avgDom": 106
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 10,
-      "avgPrice": "$383,139",
+      "avgPrice": "$382,539",
       "avgPricePerSqFt": "$225",
       "avgLivingSqFt": "1,705",
-      "avgDom": 80
+      "avgDom": 81
     }
   ],
   "condoTiersScope": {
@@ -197,7 +197,7 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 47,
-      "soldCount": 217,
+      "soldCount": 218,
       "soldMedianPricePerSqFt": "$258",
       "soldMedianPrice": "$470,000",
       "lowSample": false
@@ -215,7 +215,7 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 128,
-      "soldCount": 515,
+      "soldCount": 516,
       "soldMedianPricePerSqFt": "$242",
       "soldMedianPrice": "$440,000",
       "lowSample": false
@@ -228,18 +228,18 @@
     "label": "seller's market",
     "activeCount": 207,
     "sold365Count": 718,
-    "sold90Count": 168,
+    "sold90Count": 170,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 531,
+      "soldCount": 532,
       "activeCount": 85,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 405,
+      "soldCount": 406,
       "activeCount": 122,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"

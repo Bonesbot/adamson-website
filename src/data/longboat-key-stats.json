@@ -2,15 +2,15 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-09T10:53:54.825291+00:00",
+  "lastUpdated": "2026-10-10T10:57:25.805263+00:00",
   "counts": {
-    "sold": 1252,
-    "pending": 43,
-    "active": 217,
-    "total": 1295
+    "sold": 1257,
+    "pending": 37,
+    "active": 218,
+    "total": 1294
   },
   "metrics": {
-    "avgPrice": "$2,015,714",
+    "avgPrice": "$2,016,372",
     "avgPricePerSqFt": "$804",
     "avgYearBuilt": 1985,
     "avgLivingSqFt": "2,192",
@@ -22,22 +22,22 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 217,
+    "count": 218,
     "medianPrice": "$1,050,000",
-    "medianPricePerSqFt": "$679",
+    "medianPricePerSqFt": "$675",
     "waterfrontCount": 164,
     "newConstructionCount": 22
   },
   "sold": {
-    "count": 109,
-    "medianPrice": "$915,000",
-    "medianDom": 108,
-    "saleToListRatio": "95.6%",
+    "count": 114,
+    "medianPrice": "$941,500",
+    "medianDom": 100,
+    "saleToListRatio": "95.5%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 4.6,
-    "sfhVilla": 5.9,
+    "sfhVilla": 5.8,
     "blended": 5.0,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 91,
+    "under900k": 92,
     "band900kTo1_5m": 48,
     "band1_5mTo3m": 39,
     "band3mPlus": 39
@@ -62,73 +62,73 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 217
+      "count": 218
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
     {
-      "listingId": "A4696535",
-      "address": "549 HALYARD LN",
-      "subdivision": "COUNTRY CLUB SHORES",
-      "soldPrice": "$1,925,000",
-      "soldDate": "2026-10-08",
+      "listingId": "A4674911",
+      "address": "4561 GULF OF MEXICO DR #202",
+      "subdivision": "THE GRANDE AT LONGBOAT KEY",
+      "soldPrice": "$2,525,000",
+      "soldDate": "2026-10-09",
       "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,594",
-      "yearBuilt": 1965,
+      "bathrooms": 4.5,
+      "livingSqFt": "3,260",
+      "yearBuilt": 1999,
       "propertyType": "Residential",
       "isWaterfront": true
     },
     {
-      "listingId": "A4680006",
-      "address": "1005 BOGEY LN",
-      "subdivision": "COUNTRY CLUB SHORES",
-      "soldPrice": "$2,600,000",
-      "soldDate": "2026-10-07",
+      "listingId": "A4706018",
+      "address": "1211 GULF OF MEXICO DR #603",
+      "subdivision": "PROMENADE",
+      "soldPrice": "$1,575,000",
+      "soldDate": "2026-10-09",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,585",
+      "yearBuilt": 1985,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4701961",
+      "address": "1055 GULF OF MEXICO DR #301",
+      "subdivision": "BEACHPLACE III",
+      "soldPrice": "$1,349,000",
+      "soldDate": "2026-10-09",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,172",
+      "yearBuilt": 1981,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4705267",
+      "address": "1975 GULF OF MEXICO DR #G4-307",
+      "subdivision": "SEAPLACE III",
+      "soldPrice": "$830,000",
+      "soldDate": "2026-10-09",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,257",
+      "yearBuilt": 1977,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4697745",
+      "address": "617 WESTON POINTE CT",
+      "subdivision": "WESTON POINTE",
+      "soldPrice": "$2,800,000",
+      "soldDate": "2026-10-08",
       "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "3,624",
-      "yearBuilt": 2017,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4705980",
-      "address": "415 L AMBIANCE DR #C203",
-      "subdivision": "L AMBIANCE AT LONGBOAT KEY CLUB",
-      "soldPrice": "$2,420,000",
-      "soldDate": "2026-10-06",
-      "bedrooms": 2,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,634",
+      "bathrooms": 5.0,
+      "livingSqFt": "4,395",
       "yearBuilt": 1994,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4701426",
-      "address": "2425 GULF OF MEXICO DR #1B",
-      "subdivision": "SEA GATE CLUB",
-      "soldPrice": "$1,450,000",
-      "soldDate": "2026-10-06",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,472",
-      "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "TB8453208",
-      "address": "4621 GULF OF MEXICO DR #10D",
-      "subdivision": "LONGBOAT KEY CASA DEL MAR",
-      "soldPrice": "$600,000",
-      "soldDate": "2026-10-06",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "756",
-      "yearBuilt": 1973,
       "propertyType": "Residential",
       "isWaterfront": true
     }
@@ -139,20 +139,20 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 121,
-      "avgPrice": "$827,041",
+      "avgPrice": "$830,462",
       "avgPricePerSqFt": "$635",
-      "avgLivingSqFt": "1,328",
-      "avgDom": 145
+      "avgLivingSqFt": "1,334",
+      "avgDom": 141
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 23,
-      "avgPrice": "$1,931,948",
-      "avgPricePerSqFt": "$754",
-      "avgLivingSqFt": "2,464",
-      "avgDom": 133
+      "activeCount": 24,
+      "avgPrice": "$1,876,446",
+      "avgPricePerSqFt": "$739",
+      "avgLivingSqFt": "2,422",
+      "avgDom": 132
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$6,750,000",
       "avgPricePerSqFt": "$1,778",
       "avgLivingSqFt": "3,741",
-      "avgDom": 140
+      "avgDom": 142
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$8,109,250",
       "avgPricePerSqFt": "$2,186",
       "avgLivingSqFt": "3,436",
-      "avgDom": 294
+      "avgDom": 295
     }
   ],
   "condoTiersScope": {
@@ -187,8 +187,8 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 77,
-      "soldCount": 535,
+      "activeCount": 76,
+      "soldCount": 539,
       "soldMedianPricePerSqFt": "$887",
       "soldMedianPrice": "$1,395,000",
       "lowSample": false
@@ -196,16 +196,16 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 83,
-      "soldCount": 407,
-      "soldMedianPricePerSqFt": "$602",
+      "activeCount": 84,
+      "soldCount": 408,
+      "soldMedianPricePerSqFt": "$603",
       "soldMedianPrice": "$1,200,000",
       "lowSample": false
     },
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 23,
+      "activeCount": 24,
       "soldCount": 107,
       "soldMedianPricePerSqFt": "$624",
       "soldMedianPrice": "$1,178,550",
@@ -233,25 +233,25 @@
   "marketBalance": {
     "monthsOfSupply": 5.0,
     "monthsOfSupplyCondo": 4.6,
-    "monthsOfSupplySfhVilla": 5.9,
+    "monthsOfSupplySfhVilla": 5.8,
     "label": "balanced market",
-    "activeCount": 217,
-    "sold365Count": 518,
-    "sold90Count": 109,
+    "activeCount": 218,
+    "sold365Count": 523,
+    "sold90Count": 114,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 321,
+      "soldCount": 322,
       "activeCount": 60,
-      "soldMedianPrice": "$2,100,000",
-      "soldMedianPricePerSqFt": "$727"
+      "soldMedianPrice": "$2,105,000",
+      "soldMedianPricePerSqFt": "$726"
     },
     "condo": {
-      "soldCount": 928,
-      "activeCount": 155,
+      "soldCount": 932,
+      "activeCount": 156,
       "soldMedianPrice": "$1,000,000",
-      "soldMedianPricePerSqFt": "$646"
+      "soldMedianPricePerSqFt": "$648"
     }
   },
   "boating": {
@@ -262,17 +262,17 @@
     {
       "facet": "cost",
       "q": "What do properties cost on Longboat Key?",
-      "a": "Over the past 90 days, 109 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $850,000 ($549/sq ft), while single-family homes closed around $2,125,000 ($720/sq ft). By location, Gulf-front and beachfront properties closed at a median $846 per square foot, compared with $502 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
+      "a": "Over the past 90 days, 114 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $860,000 ($573/sq ft), while single-family homes closed around $2,287,500 ($719/sq ft). By location, Gulf-front and beachfront properties closed at a median $846 per square foot, compared with $510 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
     },
     {
       "facet": "balance",
       "q": "Is it a good time to buy on Longboat Key?",
-      "a": "With 217 active listings and roughly 43 closed sales a month (trailing 12 months), Longboat Key has about 5.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 218 active listings and roughly 44 closed sales a month (trailing 12 months), Longboat Key has about 5.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Longboat Key?",
-      "a": "Recently sold homes took a median 108 days on market and closed at 95.6% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 100 days on market and closed at 95.5% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
@@ -287,29 +287,29 @@
   ],
   "costBreakdown90": {
     "windowDays": 90,
-    "soldCount": 109,
+    "soldCount": 114,
     "byPropertyType": {
       "condo": {
-        "soldCount": 84,
-        "soldMedianPrice": "$850,000",
-        "soldMedianPricePerSqFt": "$549"
+        "soldCount": 88,
+        "soldMedianPrice": "$860,000",
+        "soldMedianPricePerSqFt": "$573"
       },
       "single_family": {
-        "soldCount": 25,
-        "soldMedianPrice": "$2,125,000",
-        "soldMedianPricePerSqFt": "$720"
+        "soldCount": 26,
+        "soldMedianPrice": "$2,287,500",
+        "soldMedianPricePerSqFt": "$719"
       }
     },
     "byWaterfront": {
       "gulf_beachfront": {
-        "soldCount": 39,
-        "soldMedianPrice": "$975,000",
+        "soldCount": 43,
+        "soldMedianPrice": "$1,050,000",
         "soldMedianPricePerSqFt": "$846"
       },
       "bay_canal": {
-        "soldCount": 39,
-        "soldMedianPrice": "$950,000",
-        "soldMedianPricePerSqFt": "$502"
+        "soldCount": 40,
+        "soldMedianPrice": "$975,000",
+        "soldMedianPricePerSqFt": "$510"
       }
     }
   }

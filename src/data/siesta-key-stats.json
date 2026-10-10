@@ -2,15 +2,15 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-09T10:53:56.434957+00:00",
+  "lastUpdated": "2026-10-10T10:57:27.532421+00:00",
   "counts": {
-    "sold": 741,
-    "pending": 37,
-    "active": 252,
+    "sold": 744,
+    "pending": 34,
+    "active": 251,
     "total": 778
   },
   "metrics": {
-    "avgPrice": "$1,335,023",
+    "avgPrice": "$1,334,798",
     "avgPricePerSqFt": "$691",
     "avgYearBuilt": 1979,
     "avgLivingSqFt": "1,774",
@@ -22,22 +22,22 @@
     "maxPrice": "$26,000,000"
   },
   "active": {
-    "count": 252,
+    "count": 251,
     "medianPrice": "$1,100,000",
-    "medianPricePerSqFt": "$728",
+    "medianPricePerSqFt": "$720",
     "waterfrontCount": 135,
-    "newConstructionCount": 38
+    "newConstructionCount": 37
   },
   "sold": {
-    "count": 110,
+    "count": 113,
     "medianPrice": "$1,100,000",
-    "medianDom": 98,
+    "medianDom": 100,
     "saleToListRatio": "88.8%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 6.7,
-    "sfhVilla": 6.1,
+    "condo": 6.6,
+    "sfhVilla": 6.0,
     "blended": 6.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,19 +54,58 @@
     }
   },
   "priceBands": {
-    "under900k": 116,
+    "under900k": 117,
     "band900kTo1_5m": 43,
     "band1_5mTo3m": 45,
-    "band3mPlus": 48
+    "band3mPlus": 46
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 252
+      "count": 251
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4669686",
+      "address": "5400 OCEAN BLVD #5-3",
+      "subdivision": "TERRACE",
+      "soldPrice": "$1,295,000",
+      "soldDate": "2026-10-09",
+      "bedrooms": 1,
+      "bathrooms": 1.5,
+      "livingSqFt": "928",
+      "yearBuilt": 1970,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4679889",
+      "address": "8764 MIDNIGHT PASS RD #A306",
+      "subdivision": "ISLAND REEF I",
+      "soldPrice": "$1,200,000",
+      "soldDate": "2026-10-09",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,883",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4702984",
+      "address": "1055 BEACH RD #B602",
+      "subdivision": "OUR HOUSE AT THE BCH PH I",
+      "soldPrice": "$825,000",
+      "soldDate": "2026-10-09",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,204",
+      "yearBuilt": 1981,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4658380",
       "address": "1240 DOLPHIN BAY WAY #401",
@@ -92,45 +131,6 @@
       "yearBuilt": 1978,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4702889",
-      "address": "19 WHISPERING SANDS DR #201",
-      "subdivision": "WHISPERING SANDS SEC 7",
-      "soldPrice": "$800,000",
-      "soldDate": "2026-10-05",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,282",
-      "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4700455",
-      "address": "1135 LAKE HOUSE CIR #C115",
-      "subdivision": "OUR HOUSE AT THE BCH PHII",
-      "soldPrice": "$790,000",
-      "soldDate": "2026-10-05",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,352",
-      "yearBuilt": 1981,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4696604",
-      "address": "521 CUMMINGS ST",
-      "subdivision": "OCEAN BEACH REP",
-      "soldPrice": "$1,160,000",
-      "soldDate": "2026-10-02",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,500",
-      "yearBuilt": 1983,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 146,
-      "avgPrice": "$822,337",
-      "avgPricePerSqFt": "$688",
-      "avgLivingSqFt": "1,185",
-      "avgDom": 128
+      "activeCount": 147,
+      "avgPrice": "$819,362",
+      "avgPricePerSqFt": "$686",
+      "avgLivingSqFt": "1,182",
+      "avgDom": 129
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,438,475",
       "avgPricePerSqFt": "$723",
       "avgLivingSqFt": "1,999",
-      "avgDom": 207
+      "avgDom": 208
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$1,915,780",
       "avgPricePerSqFt": "$974",
       "avgLivingSqFt": "1,842",
-      "avgDom": 219
+      "avgDom": 220
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 11,
-      "avgPrice": "$4,692,636",
-      "avgPricePerSqFt": "$1,490",
-      "avgLivingSqFt": "3,298",
-      "avgDom": 239
+      "activeCount": 10,
+      "avgPrice": "$4,672,000",
+      "avgPricePerSqFt": "$1,439",
+      "avgLivingSqFt": "3,376",
+      "avgDom": 237
     }
   ],
   "condoTiersScope": {
@@ -187,8 +187,8 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 64,
-      "soldCount": 262,
+      "activeCount": 63,
+      "soldCount": 264,
       "soldMedianPricePerSqFt": "$749",
       "soldMedianPrice": "$1,000,000",
       "lowSample": false
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 67,
+      "activeCount": 68,
       "soldCount": 231,
       "soldMedianPricePerSqFt": "$582",
       "soldMedianPrice": "$1,100,000",
@@ -206,9 +206,9 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 43,
-      "soldCount": 93,
-      "soldMedianPricePerSqFt": "$584",
-      "soldMedianPrice": "$731,000",
+      "soldCount": 94,
+      "soldMedianPricePerSqFt": "$588",
+      "soldMedianPrice": "$733,000",
       "lowSample": false
     },
     {
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 74,
+      "activeCount": 73,
       "soldCount": 143,
       "soldMedianPricePerSqFt": "$576",
       "soldMedianPrice": "$775,000",
@@ -232,30 +232,30 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 6.4,
-    "monthsOfSupplyCondo": 6.7,
-    "monthsOfSupplySfhVilla": 6.1,
+    "monthsOfSupplyCondo": 6.6,
+    "monthsOfSupplySfhVilla": 6.0,
     "label": "balanced market",
-    "activeCount": 252,
-    "sold365Count": 471,
-    "sold90Count": 110,
+    "activeCount": 251,
+    "sold365Count": 474,
+    "sold90Count": 113,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 223,
-      "activeCount": 86,
+      "activeCount": 85,
       "soldMedianPrice": "$1,527,000",
       "soldMedianPricePerSqFt": "$657"
     },
     "condo": {
-      "soldCount": 518,
+      "soldCount": 521,
       "activeCount": 166,
       "soldMedianPrice": "$800,000",
-      "soldMedianPricePerSqFt": "$627"
+      "soldMedianPricePerSqFt": "$629"
     }
   },
   "boating": {
-    "activeWithDock": 59,
+    "activeWithDock": 60,
     "activeWaterfront": 135
   },
   "marketQuestions": [
@@ -267,12 +267,12 @@
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 252 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 6.4 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 251 active listings and roughly 40 closed sales a month (trailing 12 months), Siesta Key has about 6.4 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Siesta Key?",
-      "a": "Single-family homes sell around $1,527,000 ($657/sq ft), while condos, villas and townhouses sell around $800,000 ($627/sq ft)."
+      "a": "Single-family homes sell around $1,527,000 ($657/sq ft), while condos, villas and townhouses sell around $800,000 ($629/sq ft)."
     },
     {
       "facet": "range",
@@ -282,12 +282,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 98 days on market and closed at 88.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 100 days on market and closed at 88.8% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Siesta Key homes have a dock?",
-      "a": "Of 135 active waterfront listings, 59 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 135 active waterfront listings, 60 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
