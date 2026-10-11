@@ -2,7 +2,7 @@
   "areaSlug": "st-armands-lido",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-10T10:57:26.649505+00:00",
+  "lastUpdated": "2026-10-11T10:52:59.532807+00:00",
   "counts": {
     "sold": 758,
     "pending": 18,
@@ -36,14 +36,14 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.0,
+    "condo": 5.1,
     "sfhVilla": 13.5,
-    "blended": 7.2,
+    "blended": 7.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$979",
+    "medianMonthlyAssociation": "$977",
     "medianMonthlyCondoFee": "$1,082",
     "minMonthlyCondoFee": "$340",
     "maxMonthlyCondoFee": "$6,590",
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 33,
-      "avgPrice": "$749,541",
+      "avgPrice": "$749,995",
       "avgPricePerSqFt": "$673",
-      "avgLivingSqFt": "1,118",
-      "avgDom": 167
+      "avgLivingSqFt": "1,119",
+      "avgDom": 162
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$6,176,667",
       "avgPricePerSqFt": "$1,348",
       "avgLivingSqFt": "4,446",
-      "avgDom": 159
+      "avgDom": 160
     },
     {
       "tier": "2006to2019",
@@ -172,7 +172,7 @@
       "avgPrice": "$9,670,000",
       "avgPricePerSqFt": "$2,276",
       "avgLivingSqFt": "4,187",
-      "avgDom": 588
+      "avgDom": 589
     }
   ],
   "condoTiersScope": {
@@ -222,12 +222,12 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.2,
-    "monthsOfSupplyCondo": 5.0,
+    "monthsOfSupply": 7.3,
+    "monthsOfSupplyCondo": 5.1,
     "monthsOfSupplySfhVilla": 13.5,
     "label": "buyer's market",
     "activeCount": 75,
-    "sold365Count": 125,
+    "sold365Count": 124,
     "sold90Count": 43,
     "method": "active / (trailing-12mo closed / 12)"
   },
@@ -258,7 +258,7 @@
     {
       "facet": "balance",
       "q": "Is St Armands Lido a buyer's or seller's market right now?",
-      "a": "With 75 active listings and roughly 10 closed sales a month (trailing 12 months), St Armands Lido has about 7.2 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 75 active listings and roughly 10 closed sales a month (trailing 12 months), St Armands Lido has about 7.3 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -283,7 +283,7 @@
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on St Armands Lido?",
-      "a": "The median monthly condo fee is $1,082 and the median monthly association fee is $979."
+      "a": "The median monthly condo fee is $1,082 and the median monthly association fee is $977."
     }
   ],
   "costBreakdown90": null

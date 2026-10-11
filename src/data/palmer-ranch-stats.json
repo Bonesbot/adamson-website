@@ -2,11 +2,11 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-10T10:57:32.134613+00:00",
+  "lastUpdated": "2026-10-11T10:53:05.250410+00:00",
   "counts": {
     "sold": 938,
     "pending": 63,
-    "active": 207,
+    "active": 209,
     "total": 1001
   },
   "metrics": {
@@ -22,11 +22,11 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 207,
+    "count": 209,
     "medianPrice": "$415,000",
     "medianPricePerSqFt": "$246",
-    "waterfrontCount": 32,
-    "newConstructionCount": 33
+    "waterfrontCount": 33,
+    "newConstructionCount": 34
   },
   "sold": {
     "count": 170,
@@ -37,7 +37,7 @@
   },
   "monthsOfSupply": {
     "condo": 5.4,
-    "sfhVilla": 2.8,
+    "sfhVilla": 2.9,
     "blended": 3.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 190,
+    "under900k": 192,
     "band900kTo1_5m": 15,
     "band1_5mTo3m": 2,
     "band3mPlus": 0
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 207
+      "count": 209
     }
   ],
   "buildingClasses": [],
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 34,
-      "avgPrice": "$309,009",
-      "avgPricePerSqFt": "$197",
-      "avgLivingSqFt": "1,586",
-      "avgDom": 121
+      "activeCount": 33,
+      "avgPrice": "$309,285",
+      "avgPricePerSqFt": "$196",
+      "avgLivingSqFt": "1,593",
+      "avgDom": 120
     },
     {
       "tier": "1990to2005",
@@ -152,17 +152,17 @@
       "avgPrice": "$296,588",
       "avgPricePerSqFt": "$228",
       "avgLivingSqFt": "1,292",
-      "avgDom": 122
+      "avgDom": 123
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 5,
-      "avgPrice": "$360,780",
-      "avgPricePerSqFt": "$213",
-      "avgLivingSqFt": "1,707",
-      "avgDom": 106
+      "activeCount": 6,
+      "avgPrice": "$367,300",
+      "avgPricePerSqFt": "$214",
+      "avgLivingSqFt": "1,726",
+      "avgDom": 90
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$382,539",
       "avgPricePerSqFt": "$225",
       "avgLivingSqFt": "1,705",
-      "avgDom": 81
+      "avgDom": 82
     }
   ],
   "condoTiersScope": {
@@ -205,7 +205,7 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 32,
+      "activeCount": 33,
       "soldCount": 202,
       "soldMedianPricePerSqFt": "$276",
       "soldMedianPrice": "$597,500",
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 128,
+      "activeCount": 129,
       "soldCount": 516,
       "soldMedianPricePerSqFt": "$242",
       "soldMedianPrice": "$440,000",
@@ -224,17 +224,17 @@
   "marketBalance": {
     "monthsOfSupply": 3.5,
     "monthsOfSupplyCondo": 5.4,
-    "monthsOfSupplySfhVilla": 2.8,
+    "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
-    "activeCount": 207,
-    "sold365Count": 718,
+    "activeCount": 209,
+    "sold365Count": 714,
     "sold90Count": 170,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 532,
-      "activeCount": 85,
+      "activeCount": 87,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
@@ -247,13 +247,13 @@
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 32
+    "activeWaterfront": 33
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 207 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 209 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -273,7 +273,7 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 32 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 33 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
