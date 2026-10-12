@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-11T10:53:05.250410+00:00",
+  "lastUpdated": "2026-10-12T10:53:37.733682+00:00",
   "counts": {
     "sold": 938,
-    "pending": 63,
-    "active": 209,
-    "total": 1001
+    "pending": 65,
+    "active": 207,
+    "total": 1003
   },
   "metrics": {
-    "avgPrice": "$560,151",
+    "avgPrice": "$560,154",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,045",
+    "avgLivingSqFt": "2,044",
     "avgLotSqFt": null,
     "avgDom": 79
   },
@@ -22,22 +22,22 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 209,
+    "count": 207,
     "medianPrice": "$415,000",
     "medianPricePerSqFt": "$246",
     "waterfrontCount": 33,
     "newConstructionCount": 34
   },
   "sold": {
-    "count": 170,
-    "medianPrice": "$457,500",
+    "count": 168,
+    "medianPrice": "$460,000",
     "medianDom": 58,
-    "saleToListRatio": "92.0%",
+    "saleToListRatio": "91.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 5.4,
-    "sfhVilla": 2.9,
+    "sfhVilla": 2.8,
     "blended": 3.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 192,
+    "under900k": 190,
     "band900kTo1_5m": 15,
     "band1_5mTo3m": 2,
     "band3mPlus": 0
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 209
+      "count": 207
     }
   ],
   "buildingClasses": [],
@@ -142,7 +142,7 @@
       "avgPrice": "$309,285",
       "avgPricePerSqFt": "$196",
       "avgLivingSqFt": "1,593",
-      "avgDom": 120
+      "avgDom": 121
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$296,588",
       "avgPricePerSqFt": "$228",
       "avgLivingSqFt": "1,292",
-      "avgDom": 123
+      "avgDom": 124
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$367,300",
       "avgPricePerSqFt": "$214",
       "avgLivingSqFt": "1,726",
-      "avgDom": 90
+      "avgDom": 91
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$382,539",
       "avgPricePerSqFt": "$225",
       "avgLivingSqFt": "1,705",
-      "avgDom": 82
+      "avgDom": 83
     }
   ],
   "condoTiersScope": {
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 129,
+      "activeCount": 127,
       "soldCount": 516,
       "soldMedianPricePerSqFt": "$242",
       "soldMedianPrice": "$440,000",
@@ -224,17 +224,17 @@
   "marketBalance": {
     "monthsOfSupply": 3.5,
     "monthsOfSupplyCondo": 5.4,
-    "monthsOfSupplySfhVilla": 2.9,
+    "monthsOfSupplySfhVilla": 2.8,
     "label": "seller's market",
-    "activeCount": 209,
+    "activeCount": 207,
     "sold365Count": 714,
-    "sold90Count": 170,
+    "sold90Count": 168,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 532,
-      "activeCount": 87,
+      "activeCount": 85,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 209 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 207 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 58 days on market and closed at 92.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 58 days on market and closed at 91.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
