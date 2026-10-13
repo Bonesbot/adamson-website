@@ -2,16 +2,16 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-12T10:53:36.206610+00:00",
+  "lastUpdated": "2026-10-13T10:52:04.901999+00:00",
   "counts": {
     "sold": 316,
-    "pending": 26,
+    "pending": 27,
     "active": 93,
-    "total": 342
+    "total": 343
   },
   "metrics": {
-    "avgPrice": "$628,378",
-    "avgPricePerSqFt": "$327",
+    "avgPrice": "$627,552",
+    "avgPricePerSqFt": "$326",
     "avgYearBuilt": 1980,
     "avgLivingSqFt": "1,746",
     "avgLotSqFt": null,
@@ -24,7 +24,7 @@
   "active": {
     "count": 93,
     "medianPrice": "$449,000",
-    "medianPricePerSqFt": "$314",
+    "medianPricePerSqFt": "$318",
     "waterfrontCount": 23,
     "newConstructionCount": 2
   },
@@ -36,8 +36,8 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 4.5,
-    "sfhVilla": 4.5,
+    "condo": 4.4,
+    "sfhVilla": 4.6,
     "blended": 4.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 50,
-      "avgPrice": "$357,852",
-      "avgPricePerSqFt": "$285",
-      "avgLivingSqFt": "1,245",
-      "avgDom": 89
+      "activeCount": 49,
+      "avgPrice": "$358,114",
+      "avgPricePerSqFt": "$287",
+      "avgLivingSqFt": "1,234",
+      "avgDom": 92
     },
     {
       "tier": "1990to2005",
@@ -162,7 +162,7 @@
       "avgPrice": "$591,300",
       "avgPricePerSqFt": "$347",
       "avgLivingSqFt": "1,706",
-      "avgDom": 175
+      "avgDom": 176
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$635,000",
       "avgPricePerSqFt": "$364",
       "avgLivingSqFt": "1,745",
-      "avgDom": 47
+      "avgDom": 48
     }
   ],
   "condoTiersScope": {
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 7,
+      "activeCount": 6,
       "soldCount": 31,
       "soldMedianPricePerSqFt": "$299",
       "soldMedianPrice": "$435,888",
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 63,
+      "activeCount": 64,
       "soldCount": 201,
       "soldMedianPricePerSqFt": "$286",
       "soldMedianPrice": "$425,000",
@@ -232,8 +232,8 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 4.5,
-    "monthsOfSupplyCondo": 4.5,
-    "monthsOfSupplySfhVilla": 4.5,
+    "monthsOfSupplyCondo": 4.4,
+    "monthsOfSupplySfhVilla": 4.6,
     "label": "seller's market",
     "activeCount": 93,
     "sold365Count": 246,
@@ -243,13 +243,13 @@
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 166,
-      "activeCount": 37,
+      "activeCount": 38,
       "soldMedianPrice": "$533,950",
       "soldMedianPricePerSqFt": "$325"
     },
     "condo": {
       "soldCount": 150,
-      "activeCount": 56,
+      "activeCount": 55,
       "soldMedianPrice": "$339,500",
       "soldMedianPricePerSqFt": "$251"
     }

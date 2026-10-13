@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-12T10:53:37.733682+00:00",
+  "lastUpdated": "2026-10-13T10:52:06.404522+00:00",
   "counts": {
     "sold": 938,
-    "pending": 65,
-    "active": 207,
-    "total": 1003
+    "pending": 66,
+    "active": 206,
+    "total": 1004
   },
   "metrics": {
-    "avgPrice": "$560,154",
+    "avgPrice": "$560,274",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,044",
+    "avgLivingSqFt": "2,046",
     "avgLotSqFt": null,
     "avgDom": 79
   },
@@ -22,14 +22,14 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 207,
-    "medianPrice": "$415,000",
-    "medianPricePerSqFt": "$246",
+    "count": 206,
+    "medianPrice": "$409,500",
+    "medianPricePerSqFt": "$247",
     "waterfrontCount": 33,
-    "newConstructionCount": 34
+    "newConstructionCount": 35
   },
   "sold": {
-    "count": 168,
+    "count": 165,
     "medianPrice": "$460,000",
     "medianDom": 58,
     "saleToListRatio": "91.9%",
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 190,
+    "under900k": 189,
     "band900kTo1_5m": 15,
     "band1_5mTo3m": 2,
     "band3mPlus": 0
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 207
+      "count": 206
     }
   ],
   "buildingClasses": [],
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 33,
-      "avgPrice": "$309,285",
+      "avgPrice": "$309,254",
       "avgPricePerSqFt": "$196",
       "avgLivingSqFt": "1,593",
-      "avgDom": 121
+      "avgDom": 122
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$296,588",
       "avgPricePerSqFt": "$228",
       "avgLivingSqFt": "1,292",
-      "avgDom": 124
+      "avgDom": 125
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$367,300",
       "avgPricePerSqFt": "$214",
       "avgLivingSqFt": "1,726",
-      "avgDom": 91
+      "avgDom": 92
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$382,539",
       "avgPricePerSqFt": "$225",
       "avgLivingSqFt": "1,705",
-      "avgDom": 83
+      "avgDom": 84
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 47,
+      "activeCount": 48,
       "soldCount": 218,
       "soldMedianPricePerSqFt": "$258",
       "soldMedianPrice": "$470,000",
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 127,
+      "activeCount": 125,
       "soldCount": 516,
       "soldMedianPricePerSqFt": "$242",
       "soldMedianPrice": "$440,000",
@@ -226,15 +226,15 @@
     "monthsOfSupplyCondo": 5.4,
     "monthsOfSupplySfhVilla": 2.8,
     "label": "seller's market",
-    "activeCount": 207,
+    "activeCount": 206,
     "sold365Count": 714,
-    "sold90Count": 168,
+    "sold90Count": 165,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 532,
-      "activeCount": 85,
+      "activeCount": 84,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 207 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 206 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,7 +263,7 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $415,000."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $409,500."
     },
     {
       "facet": "speed",

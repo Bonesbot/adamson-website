@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-12T10:53:34.732801+00:00",
+  "lastUpdated": "2026-10-13T10:52:03.258358+00:00",
   "counts": {
     "sold": 271,
-    "pending": 27,
-    "active": 85,
-    "total": 298
+    "pending": 28,
+    "active": 84,
+    "total": 299
   },
   "metrics": {
-    "avgPrice": "$2,134,202",
-    "avgPricePerSqFt": "$665",
+    "avgPrice": "$2,129,238",
+    "avgPricePerSqFt": "$664",
     "avgYearBuilt": 1982,
-    "avgLivingSqFt": "2,771",
+    "avgLivingSqFt": "2,769",
     "avgLotSqFt": null,
     "avgDom": 109
   },
@@ -22,22 +22,22 @@
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 85,
-    "medianPrice": "$2,100,000",
-    "medianPricePerSqFt": "$777",
+    "count": 84,
+    "medianPrice": "$2,125,000",
+    "medianPricePerSqFt": "$784",
     "waterfrontCount": 17,
     "newConstructionCount": 25
   },
   "sold": {
-    "count": 42,
-    "medianPrice": "$1,650,000",
-    "medianDom": 124,
-    "saleToListRatio": "87.0%",
+    "count": 41,
+    "medianPrice": "$1,700,000",
+    "medianDom": 125,
+    "saleToListRatio": "87.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 5.2,
-    "sfhVilla": 4.8,
+    "sfhVilla": 4.7,
     "blended": 4.8,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 23,
+    "under900k": 22,
     "band900kTo1_5m": 13,
     "band1_5mTo3m": 17,
     "band3mPlus": 32
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 85
+      "count": 84
     }
   ],
   "buildingClasses": [],
@@ -142,7 +142,7 @@
       "avgPrice": "$367,143",
       "avgPricePerSqFt": "$319",
       "avgLivingSqFt": "1,154",
-      "avgDom": 109
+      "avgDom": 110
     },
     {
       "tier": "1990to2005",
@@ -196,7 +196,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 2,
+      "activeCount": 1,
       "soldCount": 7,
       "soldMedianPricePerSqFt": null,
       "soldMedianPrice": null,
@@ -224,17 +224,17 @@
   "marketBalance": {
     "monthsOfSupply": 4.8,
     "monthsOfSupplyCondo": 5.2,
-    "monthsOfSupplySfhVilla": 4.8,
+    "monthsOfSupplySfhVilla": 4.7,
     "label": "seller's market",
-    "activeCount": 85,
+    "activeCount": 84,
     "sold365Count": 212,
-    "sold90Count": 42,
+    "sold90Count": 41,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 251,
-      "activeCount": 78,
+      "activeCount": 77,
       "soldMedianPrice": "$1,600,000",
       "soldMedianPricePerSqFt": "$621"
     },
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 85 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 4.8 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 84 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 4.8 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,12 +263,12 @@
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,100,000."
+      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,125,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 124 days on market and closed at 87.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 125 days on market and closed at 87.1% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
