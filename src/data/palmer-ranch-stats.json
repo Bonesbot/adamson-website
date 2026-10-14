@@ -2,15 +2,15 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-13T10:52:06.404522+00:00",
+  "lastUpdated": "2026-10-14T14:24:55.498253+00:00",
   "counts": {
-    "sold": 938,
-    "pending": 66,
-    "active": 206,
-    "total": 1004
+    "sold": 941,
+    "pending": 64,
+    "active": 208,
+    "total": 1005
   },
   "metrics": {
-    "avgPrice": "$560,274",
+    "avgPrice": "$560,690",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
     "avgLivingSqFt": "2,046",
@@ -22,21 +22,21 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 206,
-    "medianPrice": "$409,500",
-    "medianPricePerSqFt": "$247",
+    "count": 208,
+    "medianPrice": "$409,000",
+    "medianPricePerSqFt": "$246",
     "waterfrontCount": 33,
     "newConstructionCount": 35
   },
   "sold": {
-    "count": 165,
+    "count": 167,
     "medianPrice": "$460,000",
     "medianDom": 58,
     "saleToListRatio": "91.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.4,
+    "condo": 5.5,
     "sfhVilla": 2.8,
     "blended": 3.5,
     "method": "active / (trailing-12mo closed / 12)",
@@ -54,19 +54,58 @@
     }
   },
   "priceBands": {
-    "under900k": 189,
-    "band900kTo1_5m": 15,
+    "under900k": 192,
+    "band900kTo1_5m": 14,
     "band1_5mTo3m": 2,
     "band3mPlus": 0
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 206
+      "count": 208
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4700661",
+      "address": "8672 DOLCE LN",
+      "subdivision": "VILLAGEWALK",
+      "soldPrice": "$756,000",
+      "soldDate": "2026-10-13",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,521",
+      "yearBuilt": 2002,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4704555",
+      "address": "7564 PESARO DR",
+      "subdivision": "VILLAGEWALK",
+      "soldPrice": "$415,000",
+      "soldDate": "2026-10-12",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,534",
+      "yearBuilt": 2003,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4702609",
+      "address": "5748 WOODLAND SAGE DR",
+      "subdivision": "PROMENADE ESTATES PH II",
+      "soldPrice": "$613,000",
+      "soldDate": "2026-10-10",
+      "bedrooms": 5,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,970",
+      "yearBuilt": 2022,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4702085",
       "address": "11258 SANDHILL PRESERVE DR",
@@ -92,45 +131,6 @@
       "yearBuilt": 1995,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4684485",
-      "address": "4138 CENTRAL SARASOTA PKWY #1526",
-      "subdivision": "BELLA VILLINO IV",
-      "soldPrice": "$139,000",
-      "soldDate": "2026-10-08",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "661",
-      "yearBuilt": 1998,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4704525",
-      "address": "2133 BURGOS DR",
-      "subdivision": "ISLES OF SARASOTA",
-      "soldPrice": "$401,000",
-      "soldDate": "2026-10-07",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,549",
-      "yearBuilt": 2009,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4683874",
-      "address": "5146 NORTHRIDGE RD #309",
-      "subdivision": "SERENADE ON PALMER RANCH",
-      "soldPrice": "$115,000",
-      "soldDate": "2026-10-07",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "812",
-      "yearBuilt": 1999,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,41 +138,41 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 33,
-      "avgPrice": "$309,254",
+      "activeCount": 34,
+      "avgPrice": "$310,612",
       "avgPricePerSqFt": "$196",
-      "avgLivingSqFt": "1,593",
-      "avgDom": 122
+      "avgLivingSqFt": "1,602",
+      "avgDom": 119
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 73,
-      "avgPrice": "$296,588",
+      "avgPrice": "$294,785",
       "avgPricePerSqFt": "$228",
-      "avgLivingSqFt": "1,292",
+      "avgLivingSqFt": "1,289",
       "avgDom": 125
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 6,
-      "avgPrice": "$367,300",
-      "avgPricePerSqFt": "$214",
-      "avgLivingSqFt": "1,726",
-      "avgDom": 92
+      "activeCount": 7,
+      "avgPrice": "$371,828",
+      "avgPricePerSqFt": "$212",
+      "avgLivingSqFt": "1,771",
+      "avgDom": 80
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 10,
-      "avgPrice": "$382,539",
-      "avgPricePerSqFt": "$225",
+      "avgPrice": "$382,240",
+      "avgPricePerSqFt": "$224",
       "avgLivingSqFt": "1,705",
-      "avgDom": 84
+      "avgDom": 85
     }
   ],
   "condoTiersScope": {
@@ -206,16 +206,16 @@
       "segment": "other_wf",
       "label": "Other waterfront",
       "activeCount": 33,
-      "soldCount": 202,
+      "soldCount": 203,
       "soldMedianPricePerSqFt": "$276",
-      "soldMedianPrice": "$597,500",
+      "soldMedianPrice": "$600,000",
       "lowSample": false
     },
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 125,
-      "soldCount": 516,
+      "activeCount": 127,
+      "soldCount": 518,
       "soldMedianPricePerSqFt": "$242",
       "soldMedianPrice": "$440,000",
       "lowSample": false
@@ -223,24 +223,24 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 3.5,
-    "monthsOfSupplyCondo": 5.4,
+    "monthsOfSupplyCondo": 5.5,
     "monthsOfSupplySfhVilla": 2.8,
     "label": "seller's market",
-    "activeCount": 206,
-    "sold365Count": 714,
-    "sold90Count": 165,
+    "activeCount": 208,
+    "sold365Count": 717,
+    "sold90Count": 167,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 532,
+      "soldCount": 534,
       "activeCount": 84,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 406,
-      "activeCount": 122,
+      "soldCount": 407,
+      "activeCount": 124,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 206 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 208 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,7 +263,7 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $409,500."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $409,000."
     },
     {
       "facet": "speed",

@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-13T10:52:04.901999+00:00",
+  "lastUpdated": "2026-10-14T14:24:53.797698+00:00",
   "counts": {
-    "sold": 316,
-    "pending": 27,
-    "active": 93,
-    "total": 343
+    "sold": 317,
+    "pending": 28,
+    "active": 92,
+    "total": 345
   },
   "metrics": {
-    "avgPrice": "$627,552",
-    "avgPricePerSqFt": "$326",
+    "avgPrice": "$639,340",
+    "avgPricePerSqFt": "$328",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,746",
+    "avgLivingSqFt": "1,756",
     "avgLotSqFt": null,
     "avgDom": 79
   },
@@ -22,22 +22,22 @@
     "maxPrice": "$5,650,000"
   },
   "active": {
-    "count": 93,
-    "medianPrice": "$449,000",
-    "medianPricePerSqFt": "$318",
-    "waterfrontCount": 23,
+    "count": 92,
+    "medianPrice": "$439,000",
+    "medianPricePerSqFt": "$316",
+    "waterfrontCount": 22,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 60,
-    "medianPrice": "$407,500",
-    "medianDom": 52,
-    "saleToListRatio": "87.8%",
+    "count": 59,
+    "medianPrice": "$410,000",
+    "medianDom": 51,
+    "saleToListRatio": "88.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 4.4,
-    "sfhVilla": 4.6,
+    "sfhVilla": 4.5,
     "blended": 4.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -57,16 +57,29 @@
     "under900k": 74,
     "band900kTo1_5m": 7,
     "band1_5mTo3m": 8,
-    "band3mPlus": 4
+    "band3mPlus": 3
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 93
+      "count": 92
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4709489",
+      "address": "1624 STICKNEY POINT RD #24-407",
+      "subdivision": "CASTEL DEL MARE",
+      "soldPrice": "$372,000",
+      "soldDate": "2026-10-13",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "800",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4684312",
       "address": "1711 PELICAN COVE RD #341",
@@ -118,19 +131,6 @@
       "yearBuilt": 1955,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4686630",
-      "address": "1732 KESTRAL PARK WAY S #43",
-      "subdivision": "THE LANDINGS",
-      "soldPrice": "$500,000",
-      "soldDate": "2026-10-01",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,368",
-      "yearBuilt": 1982,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 49,
-      "avgPrice": "$358,114",
+      "avgPrice": "$357,808",
       "avgPricePerSqFt": "$287",
       "avgLivingSqFt": "1,234",
-      "avgDom": 92
+      "avgDom": 93
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$581,500",
       "avgPricePerSqFt": "$269",
       "avgLivingSqFt": "2,165",
-      "avgDom": 174
+      "avgDom": 176
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$591,300",
       "avgPricePerSqFt": "$347",
       "avgLivingSqFt": "1,706",
-      "avgDom": 176
+      "avgDom": 177
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$635,000",
       "avgPricePerSqFt": "$364",
       "avgLivingSqFt": "1,745",
-      "avgDom": 48
+      "avgDom": 49
     }
   ],
   "condoTiersScope": {
@@ -196,10 +196,10 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 20,
-      "soldCount": 69,
-      "soldMedianPricePerSqFt": "$370",
-      "soldMedianPrice": "$499,000",
+      "activeCount": 19,
+      "soldCount": 70,
+      "soldMedianPricePerSqFt": "$384",
+      "soldMedianPrice": "$497,000",
       "lowSample": false
     },
     {
@@ -233,56 +233,56 @@
   "marketBalance": {
     "monthsOfSupply": 4.5,
     "monthsOfSupplyCondo": 4.4,
-    "monthsOfSupplySfhVilla": 4.6,
+    "monthsOfSupplySfhVilla": 4.5,
     "label": "seller's market",
-    "activeCount": 93,
-    "sold365Count": 246,
-    "sold90Count": 60,
+    "activeCount": 92,
+    "sold365Count": 247,
+    "sold90Count": 59,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 166,
-      "activeCount": 38,
+      "activeCount": 37,
       "soldMedianPrice": "$533,950",
       "soldMedianPricePerSqFt": "$325"
     },
     "condo": {
-      "soldCount": 150,
+      "soldCount": 151,
       "activeCount": 55,
-      "soldMedianPrice": "$339,500",
-      "soldMedianPricePerSqFt": "$251"
+      "soldMedianPrice": "$340,000",
+      "soldMedianPricePerSqFt": "$253"
     }
   },
   "boating": {
     "activeWithDock": 11,
-    "activeWaterfront": 23
+    "activeWaterfront": 22
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 93 active listings and roughly 20 closed sales a month (trailing 12 months), West Of Trail South has about 4.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 92 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 4.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $533,950 ($325/sq ft), while condos, villas and townhouses sell around $339,500 ($251/sq ft)."
+      "a": "Single-family homes sell around $533,950 ($325/sq ft), while condos, villas and townhouses sell around $340,000 ($253/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $5,650,000, with a median asking price of $449,000."
+      "a": "Active listings run from $95,000 to $5,650,000, with a median asking price of $439,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 52 days on market and closed at 87.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 51 days on market and closed at 88.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 23 active waterfront listings, 11 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 22 active waterfront listings, 11 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

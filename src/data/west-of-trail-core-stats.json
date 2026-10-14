@@ -2,43 +2,43 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-13T10:52:03.258358+00:00",
+  "lastUpdated": "2026-10-14T14:24:52.185584+00:00",
   "counts": {
-    "sold": 271,
-    "pending": 28,
-    "active": 84,
-    "total": 299
+    "sold": 273,
+    "pending": 30,
+    "active": 82,
+    "total": 303
   },
   "metrics": {
-    "avgPrice": "$2,129,238",
-    "avgPricePerSqFt": "$664",
+    "avgPrice": "$2,109,459",
+    "avgPricePerSqFt": "$660",
     "avgYearBuilt": 1982,
-    "avgLivingSqFt": "2,769",
+    "avgLivingSqFt": "2,758",
     "avgLotSqFt": null,
-    "avgDom": 109
+    "avgDom": 108
   },
   "range": {
     "minPrice": "$1,000",
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 84,
-    "medianPrice": "$2,125,000",
-    "medianPricePerSqFt": "$784",
+    "count": 82,
+    "medianPrice": "$2,285,000",
+    "medianPricePerSqFt": "$793",
     "waterfrontCount": 17,
     "newConstructionCount": 25
   },
   "sold": {
-    "count": 41,
-    "medianPrice": "$1,700,000",
-    "medianDom": 125,
-    "saleToListRatio": "87.1%",
+    "count": 42,
+    "medianPrice": "$1,723,600",
+    "medianDom": 124,
+    "saleToListRatio": "87.5%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.2,
-    "sfhVilla": 4.7,
-    "blended": 4.8,
+    "condo": 4.5,
+    "sfhVilla": 4.6,
+    "blended": 4.6,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,45 @@
     }
   },
   "priceBands": {
-    "under900k": 22,
-    "band900kTo1_5m": 13,
-    "band1_5mTo3m": 17,
+    "under900k": 21,
+    "band900kTo1_5m": 11,
+    "band1_5mTo3m": 18,
     "band3mPlus": 32
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 84
+      "count": 82
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4705384",
+      "address": "1622 KENILWORTH ST",
+      "subdivision": "JOHNSON ESTATES",
+      "soldPrice": "$3,375,000",
+      "soldDate": "2026-10-13",
+      "bedrooms": 4,
+      "bathrooms": 4.5,
+      "livingSqFt": "4,058",
+      "yearBuilt": 2017,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4702810",
+      "address": "1959 HIBISCUS ST",
+      "subdivision": "DESOTA PARK",
+      "soldPrice": "$2,175,000",
+      "soldDate": "2026-10-13",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,720",
+      "yearBuilt": 2019,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4699567",
       "address": "1511 N LAKE SHORE DR",
@@ -105,32 +131,6 @@
       "yearBuilt": 1954,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4681932",
-      "address": "1780 SPRING CREEK DR",
-      "subdivision": "SHORELAND WOODS",
-      "soldPrice": "$1,265,000",
-      "soldDate": "2026-10-02",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,595",
-      "yearBuilt": 1954,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4657794",
-      "address": "1838 ALTA VISTA ST",
-      "subdivision": "AVONDALE REP",
-      "soldPrice": "$2,875,000",
-      "soldDate": "2026-09-30",
-      "bedrooms": 5,
-      "bathrooms": 5.0,
-      "livingSqFt": "4,452",
-      "yearBuilt": 2022,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 7,
-      "avgPrice": "$367,143",
-      "avgPricePerSqFt": "$319",
-      "avgLivingSqFt": "1,154",
-      "avgDom": 110
+      "activeCount": 6,
+      "avgPrice": "$384,167",
+      "avgPricePerSqFt": "$333",
+      "avgLivingSqFt": "1,160",
+      "avgDom": 125
     },
     {
       "tier": "1990to2005",
@@ -214,33 +214,33 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 66,
-      "soldCount": 227,
+      "activeCount": 64,
+      "soldCount": 229,
       "soldMedianPricePerSqFt": "$573",
-      "soldMedianPrice": "$1,450,000",
+      "soldMedianPrice": "$1,475,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.8,
-    "monthsOfSupplyCondo": 5.2,
-    "monthsOfSupplySfhVilla": 4.7,
+    "monthsOfSupply": 4.6,
+    "monthsOfSupplyCondo": 4.5,
+    "monthsOfSupplySfhVilla": 4.6,
     "label": "seller's market",
-    "activeCount": 84,
-    "sold365Count": 212,
-    "sold90Count": 41,
+    "activeCount": 82,
+    "sold365Count": 214,
+    "sold90Count": 42,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 251,
-      "activeCount": 77,
-      "soldMedianPrice": "$1,600,000",
-      "soldMedianPricePerSqFt": "$621"
+      "soldCount": 253,
+      "activeCount": 76,
+      "soldMedianPrice": "$1,615,000",
+      "soldMedianPricePerSqFt": "$629"
     },
     "condo": {
       "soldCount": 20,
-      "activeCount": 7,
+      "activeCount": 6,
       "soldMedianPrice": "$322,500",
       "soldMedianPricePerSqFt": "$320"
     }
@@ -253,22 +253,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 84 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 4.8 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 82 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 4.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,600,000 ($621/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
+      "a": "Single-family homes sell around $1,615,000 ($629/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,125,000."
+      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,285,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 125 days on market and closed at 87.1% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 124 days on market and closed at 87.5% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
