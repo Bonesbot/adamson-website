@@ -102,7 +102,9 @@ async function createZohoLead(lead) {
 
   const api = process.env.ZOHO_API_DOMAIN || 'https://www.zohoapis.com';
   const { first, last } = splitName(lead.name);
-  const intent = lead.lead_type === 'Seller'
+  const intent = lead.make_me_move
+    ? `Named a Make Me Move price of $${lead.make_me_move.toLocaleString('en-US')} (no agreement)`
+    : lead.lead_type === 'Seller'
     ? 'Requested a private seller consult'
     : 'Asked to join the coming-soon / off-market list';
 
@@ -171,10 +173,12 @@ async function sendResendEmail({ to, subject, text, replyTo }) {
 
 async function sendTeamNotification(lead, zohoId) {
   if (!process.env.RESEND_API_KEY) return queueGmailDraft(lead, zohoId);
-  const kind = lead.lead_type === 'Seller' ? 'SELLER'
+  const kind = lead.make_me_move ? 'MAKE ME MOVE'
+    : lead.lead_type === 'Seller' ? 'SELLER'
     : lead.lead_type === 'Showing' ? 'SHOWING' : 'BUYER';
   const flagged = lead.spam && lead.spam.spam;
-  const subject = `${flagged ? '[SPAM?] ' : ''}[${kind} LEAD] ${lead.name || lead.email} - ${lead.community || 'Website'}`;
+  const mmmTag = lead.make_me_move ? ` - $${lead.make_me_move.toLocaleString('en-US')}` : '';
+  const subject = `${flagged ? '[SPAM?] ' : ''}[${kind} LEAD] ${lead.name || lead.email} - ${lead.community || 'Website'}${mmmTag}`;
   const ft = lead.spam && lead.spam.attribution && lead.spam.attribution.first_touch;
   const cameFrom = ft
     ? [ft.uc ? `campaign ${ft.uc}` : null, ft.us ? `source ${ft.us}` : null,
@@ -372,6 +376,7 @@ async function storeLead(lead, zohoId, zohoError) {
           ? { routing: lead.route.label, routed_to: lead.route.notify, agents: lead.route.agents }
           : {}),
         ...(lead.notes ? { notes: lead.notes } : {}),
+        ...(lead.make_me_move ? { make_me_move: lead.make_me_move } : {}),
         ...(lead.spam ? spamDetails(lead.spam) : {}),
       },
       raw_payload: (({ spam, route, ...rest }) => rest)(lead),
@@ -448,6 +453,16 @@ export const handler = async (event) => {
       community: (body.community || '').trim() || null,
       page: (body.page || '').trim() || null,
     };
+    // Make Me Move: an optional price the owner names on the Seller form. No agreement,
+    // no obligation; the team reaches out only if a buyer will meet it. Digits only,
+    // sanity-capped, and written into the notes so every downstream channel sees it.
+    const mmmDigits = String(body.make_me_move || '').replace(/[^0-9]/g, '');
+    const mmm = mmmDigits ? Number(mmmDigits) : 0;
+    if (mmm >= 100000 && mmm < 1e9) {
+      lead.make_me_move = mmm;
+      const line = `Make Me Move price: $${mmm.toLocaleString('en-US')} (no agreement; reach out only with a buyer at this number)`;
+      lead.notes = lead.notes ? `${line}\n${lead.notes}` : line;
+    }
     lead.source = sourceFor(body);
     lead.route = routeFor(lead.page);
   } catch (err) {

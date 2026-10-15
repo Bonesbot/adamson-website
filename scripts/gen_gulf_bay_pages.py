@@ -990,6 +990,19 @@ def render_forms(cfg):
               <input id="s-email-{slug}" name="email" type="email" required autocomplete="email" /></div>
             <div class="gbc-field"><label for="s-phone-{slug}">Phone</label>
               <input id="s-phone-{slug}" name="phone" type="tel" autocomplete="tel" /></div>
+            <div class="gbc-mmm">
+              <div class="gbc-mmm-head">
+                <span class="gbc-mmm-eyebrow">Make Me Move</span>
+                <span class="gbc-optional">optional</span>
+              </div>
+              <p class="gbc-mmm-copy">Not listing, but there&rsquo;s a number that would move you? Name it.</p>
+              <label class="gbc-mmm-input" for="mmm-{slug}">
+                <span class="gbc-mmm-dollar" aria-hidden="true">$</span>
+                <input id="mmm-{slug}" name="make_me_move" type="text" inputmode="numeric" autocomplete="off"
+                       placeholder="Your number" aria-label="Make Me Move price" />
+              </label>
+              <p class="gbc-mmm-note">No agreement signed. We reach out only if we find a buyer for this amount.</p>
+            </div>
             <div class="gbc-field"><label for="s-notes-{slug}">Other details you&rsquo;d like to share <span class="gbc-optional">optional</span></label>
               <textarea id="s-notes-{slug}" name="notes" rows="3" maxlength="1200"
                         placeholder="Unit number, floor, view, any updates you&rsquo;ve made, timing you have in mind"></textarea></div>
@@ -1141,6 +1154,18 @@ STYLES = r'''<style is:global>
   .gbc-field input:focus,
   .gbc-field textarea:focus { outline:none; border-color:var(--color-gold); box-shadow:0 0 0 3px rgba(197,165,90,0.15); }
   .gbc-hp { position:absolute; left:-9999px; }
+  /* Make Me Move: optional price inside the owner form (no agreement, no obligation) */
+  .gbc-mmm { margin:0.2rem 0 1.1rem; padding:0.95rem 1rem 0.85rem; border:1px solid rgba(197,165,90,0.45); border-left:3px solid var(--color-gold); border-radius:0.5rem; background:linear-gradient(180deg, rgba(197,165,90,0.10), rgba(197,165,90,0.04)); }
+  .gbc-mmm-head { display:flex; align-items:baseline; gap:0.35rem; }
+  .gbc-mmm-eyebrow { font-family:var(--font-accent); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--color-gold); font-weight:600; }
+  .gbc-mmm-copy { margin:0.3rem 0 0.6rem; font-size:0.86rem; line-height:1.5; color:var(--color-text-muted); }
+  .gbc-mmm-input { display:flex; align-items:center; background:#fff; border:1px solid rgba(0,0,0,0.14); border-radius:0.35rem; transition:border-color .15s, box-shadow .15s; }
+  .gbc-mmm-input:focus-within { border-color:var(--color-gold); box-shadow:0 0 0 3px rgba(197,165,90,0.15); }
+  .gbc-mmm-dollar { padding:0 0 0 0.85rem; font-family:var(--font-display); font-size:1.05rem; color:var(--color-gold); }
+  .gbc-mmm-input input { flex:1; width:100%; padding:0.7rem 0.85rem 0.7rem 0.4rem; border:0; background:transparent; font-size:1.02rem; font-variant-numeric:tabular-nums; color:var(--color-black); }
+  .gbc-mmm-input input:focus { outline:none; }
+  .gbc-mmm-input input::placeholder { color:rgba(0,0,0,0.3); font-size:0.95rem; }
+  .gbc-mmm-note { margin:0.5rem 0 0; font-size:0.72rem; line-height:1.45; color:rgba(0,0,0,0.5); }
   .gbc-form-status { margin-top:0.8rem; font-size:0.85rem; min-height:1.2em; }
   .gbc-form-done { text-align:center; padding:1.6rem 1rem 0.6rem; }
   .gbc-done-medallion { width:52px; height:52px; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; border-radius:50%; border:1px solid rgba(197,165,90,0.45); background:rgba(197,165,90,0.12); color:var(--color-gold); }
@@ -1233,6 +1258,14 @@ SCRIPTS = r'''<script is:inline>
     apply();
   });
 
+  // ── Make Me Move price: digits only, commas as they type ────────
+  document.querySelectorAll('input[name=make_me_move]').forEach((el) => {
+    el.addEventListener('input', () => {
+      const digits = el.value.replace(/[^0-9]/g, '').slice(0, 9);
+      el.value = digits ? Number(digits).toLocaleString('en-US') : '';
+    });
+  });
+
   // ── Lead forms ──────────────────────────────────────────────────
   document.querySelectorAll('form.gbc-form').forEach((form) => {
     form.addEventListener('submit', async (e) => {
@@ -1254,6 +1287,7 @@ SCRIPTS = r'''<script is:inline>
           body: JSON.stringify({
             name: data.name, email: data.email, phone: data.phone,
             notes: data.notes,
+            make_me_move: data.make_me_move,
             lead_type: form.dataset.leadType,
             community: form.dataset.community,
             page: window.location.pathname,
@@ -1265,14 +1299,17 @@ SCRIPTS = r'''<script is:inline>
         const first = String(data.name || '').trim().split(/\s+/)[0].replace(/[<>&"']/g, '');
         const team  = (form.dataset.team || 'our team').replace(/[<>"']/g, '');
         const isSeller = form.dataset.leadType === 'Seller';
+        const mmm = String(data.make_me_move || '').replace(/[^0-9,]/g, '');
         const done = document.createElement('div');
         done.className = 'gbc-form-done';
         done.setAttribute('role', 'status');
         done.innerHTML =
           '<div class="gbc-done-medallion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>' +
-          '<p class="gbc-done-eyebrow">' + (isSeller ? 'Request received' : 'You&rsquo;re on the list') + '</p>' +
+          '<p class="gbc-done-eyebrow">' + (mmm ? 'Price on file' : isSeller ? 'Request received' : 'You&rsquo;re on the list') + '</p>' +
           '<h4 class="gbc-done-title">Thank you' + (first ? ', ' + first : '') + '</h4>' +
-          '<p class="gbc-done-copy">' + (isSeller
+          '<p class="gbc-done-copy">' + (mmm
+            ? 'Your Make Me Move price of $' + mmm + ' is on file with ' + team + '. Nothing is signed; we reach out only if a buyer is ready to meet it.'
+            : isSeller
             ? 'Your private consult request has gone directly to ' + team + '. Expect a personal reply within one business day.'
             : team + ' will reach out the moment something fits, often before it reaches the MLS.') + '</p>' +
           '<p class="gbc-done-alt">Prefer to talk sooner? <a href="tel:+19417139234">(941) 713-9234</a></p>';
