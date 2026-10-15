@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-14T14:24:52.947681+00:00",
+  "lastUpdated": "2026-10-15T10:55:10.504485+00:00",
   "counts": {
-    "sold": 104,
-    "pending": 10,
+    "sold": 106,
+    "pending": 8,
     "active": 37,
     "total": 114
   },
   "metrics": {
-    "avgPrice": "$1,075,418",
+    "avgPrice": "$1,073,664",
     "avgPricePerSqFt": "$499",
     "avgYearBuilt": 1972,
     "avgLivingSqFt": "1,934",
@@ -29,10 +29,10 @@
     "newConstructionCount": 13
   },
   "sold": {
-    "count": 19,
+    "count": 20,
     "medianPrice": "$590,000",
-    "medianDom": 81,
-    "saleToListRatio": "84.9%",
+    "medianDom": 78,
+    "saleToListRatio": "85.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -67,6 +67,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4701947",
+      "address": "4875 BRYWILL CIR",
+      "subdivision": "SAPPHIRE SHORES",
+      "soldPrice": "$1,300,000",
+      "soldDate": "2026-10-14",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,478",
+      "yearBuilt": 1960,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4687776",
+      "address": "1040 SYLVAN DR",
+      "subdivision": "SYLVAN SHORES",
+      "soldPrice": "$1,350,000",
+      "soldDate": "2026-10-13",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,949",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4696695",
       "address": "831 HIGHLAND ST",
@@ -105,32 +131,6 @@
       "yearBuilt": 1951,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4687030",
-      "address": "2310 HICKORY AVE",
-      "subdivision": "SARASOTA BAY PARK",
-      "soldPrice": "$590,000",
-      "soldDate": "2026-09-30",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,354",
-      "yearBuilt": 1937,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4695931",
-      "address": "1020 23RD ST",
-      "subdivision": "SYLVAN SHORES",
-      "soldPrice": "$427,500",
-      "soldDate": "2026-09-24",
-      "bedrooms": 2,
-      "bathrooms": 1.0,
-      "livingSqFt": "952",
-      "yearBuilt": 1954,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$594,950",
       "avgPricePerSqFt": "$494",
       "avgLivingSqFt": "1,211",
-      "avgDom": 81
+      "avgDom": 82
     },
     {
       "tier": "1990to2005",
@@ -172,7 +172,7 @@
       "avgPrice": "$576,750",
       "avgPricePerSqFt": "$610",
       "avgLivingSqFt": "951",
-      "avgDom": 120
+      "avgDom": 121
     }
   ],
   "condoTiersScope": {
@@ -197,8 +197,8 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 15,
-      "soldCount": 26,
-      "soldMedianPricePerSqFt": "$542",
+      "soldCount": 27,
+      "soldMedianPricePerSqFt": "$550",
       "soldMedianPrice": "$650,000",
       "lowSample": false
     },
@@ -215,9 +215,9 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 19,
-      "soldCount": 75,
+      "soldCount": 76,
       "soldMedianPricePerSqFt": "$393",
-      "soldMedianPrice": "$570,000",
+      "soldMedianPrice": "$572,500",
       "lowSample": false
     }
   ],
@@ -228,15 +228,15 @@
     "label": "seller's market",
     "activeCount": 37,
     "sold365Count": 90,
-    "sold90Count": 19,
+    "sold90Count": 20,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 84,
+      "soldCount": 86,
       "activeCount": 27,
-      "soldMedianPrice": "$652,500",
-      "soldMedianPricePerSqFt": "$408"
+      "soldMedianPrice": "$660,000",
+      "soldMedianPricePerSqFt": "$413"
     },
     "condo": {
       "soldCount": 20,
@@ -258,7 +258,7 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail North?",
-      "a": "Single-family homes sell around $652,500 ($408/sq ft), while condos, villas and townhouses sell around $472,500 ($500/sq ft)."
+      "a": "Single-family homes sell around $660,000 ($413/sq ft), while condos, villas and townhouses sell around $472,500 ($500/sq ft)."
     },
     {
       "facet": "range",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 81 days on market and closed at 84.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 78 days on market and closed at 85.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

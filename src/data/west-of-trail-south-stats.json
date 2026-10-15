@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-14T14:24:53.797698+00:00",
+  "lastUpdated": "2026-10-15T10:55:11.286966+00:00",
   "counts": {
-    "sold": 317,
-    "pending": 28,
-    "active": 92,
+    "sold": 320,
+    "pending": 25,
+    "active": 91,
     "total": 345
   },
   "metrics": {
-    "avgPrice": "$639,340",
+    "avgPrice": "$639,024",
     "avgPricePerSqFt": "$328",
     "avgYearBuilt": 1980,
     "avgLivingSqFt": "1,756",
@@ -22,23 +22,23 @@
     "maxPrice": "$5,650,000"
   },
   "active": {
-    "count": 92,
-    "medianPrice": "$439,000",
-    "medianPricePerSqFt": "$316",
+    "count": 91,
+    "medianPrice": "$449,000",
+    "medianPricePerSqFt": "$318",
     "waterfrontCount": 22,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 59,
+    "count": 61,
     "medianPrice": "$410,000",
-    "medianDom": 51,
+    "medianDom": 48,
     "saleToListRatio": "88.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 4.4,
+    "condo": 4.2,
     "sfhVilla": 4.5,
-    "blended": 4.5,
+    "blended": 4.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 74,
+    "under900k": 73,
     "band900kTo1_5m": 7,
     "band1_5mTo3m": 8,
     "band3mPlus": 3
@@ -62,11 +62,37 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 92
+      "count": 91
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4689911",
+      "address": "1732 PINE HARRIER CIR",
+      "subdivision": "THE LANDINGS",
+      "soldPrice": "$850,000",
+      "soldDate": "2026-10-14",
+      "bedrooms": 4,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,500",
+      "yearBuilt": 1984,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "TB8550163",
+      "address": "6470 HOLLYWOOD BLVD #110",
+      "subdivision": "ALMERIA ON THE BAY",
+      "soldPrice": "$166,000",
+      "soldDate": "2026-10-14",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "910",
+      "yearBuilt": 1978,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4709489",
       "address": "1624 STICKNEY POINT RD #24-407",
@@ -81,6 +107,19 @@
       "isWaterfront": true
     },
     {
+      "listingId": "A4705266",
+      "address": "1630 STICKNEY POINT RD #30-101",
+      "subdivision": "CASTEL DEL MARE",
+      "soldPrice": "$235,000",
+      "soldDate": "2026-10-13",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "800",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "A4684312",
       "address": "1711 PELICAN COVE RD #341",
       "subdivision": "PELICAN COVE XIV",
@@ -92,45 +131,6 @@
       "yearBuilt": 1979,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4699936",
-      "address": "1602 STICKNEY POINT RD #2-104",
-      "subdivision": "CASTEL DEL MARE",
-      "soldPrice": "$499,000",
-      "soldDate": "2026-10-05",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,016",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4692199",
-      "address": "5940 DRIFTWOOD AVE #15",
-      "subdivision": "BAYWOOD COLONY SEC 1",
-      "soldPrice": "$299,000",
-      "soldDate": "2026-10-05",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,155",
-      "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4703607",
-      "address": "6344 GLENCOE AVE",
-      "subdivision": "PINE SHORES ESTATE 3RD ADD",
-      "soldPrice": "$320,000",
-      "soldDate": "2026-10-02",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "861",
-      "yearBuilt": 1955,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 49,
-      "avgPrice": "$357,808",
+      "activeCount": 48,
+      "avgPrice": "$360,679",
       "avgPricePerSqFt": "$287",
-      "avgLivingSqFt": "1,234",
-      "avgDom": 93
+      "avgLivingSqFt": "1,245",
+      "avgDom": 92
     },
     {
       "tier": "1990to2005",
@@ -162,7 +162,7 @@
       "avgPrice": "$591,300",
       "avgPricePerSqFt": "$347",
       "avgLivingSqFt": "1,706",
-      "avgDom": 177
+      "avgDom": 178
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$635,000",
       "avgPricePerSqFt": "$364",
       "avgLivingSqFt": "1,745",
-      "avgDom": 49
+      "avgDom": 50
     }
   ],
   "condoTiersScope": {
@@ -206,9 +206,9 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 6,
-      "soldCount": 31,
-      "soldMedianPricePerSqFt": "$299",
-      "soldMedianPrice": "$435,888",
+      "soldCount": 32,
+      "soldMedianPricePerSqFt": "$307",
+      "soldMedianPrice": "$442,944",
       "lowSample": false
     },
     {
@@ -223,34 +223,34 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 64,
-      "soldCount": 201,
+      "activeCount": 63,
+      "soldCount": 203,
       "soldMedianPricePerSqFt": "$286",
       "soldMedianPrice": "$425,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.5,
-    "monthsOfSupplyCondo": 4.4,
+    "monthsOfSupply": 4.4,
+    "monthsOfSupplyCondo": 4.2,
     "monthsOfSupplySfhVilla": 4.5,
     "label": "seller's market",
-    "activeCount": 92,
-    "sold365Count": 247,
-    "sold90Count": 59,
+    "activeCount": 91,
+    "sold365Count": 250,
+    "sold90Count": 61,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 166,
+      "soldCount": 167,
       "activeCount": 37,
-      "soldMedianPrice": "$533,950",
+      "soldMedianPrice": "$534,900",
       "soldMedianPricePerSqFt": "$325"
     },
     "condo": {
-      "soldCount": 151,
-      "activeCount": 55,
-      "soldMedianPrice": "$340,000",
+      "soldCount": 153,
+      "activeCount": 54,
+      "soldMedianPrice": "$339,000",
       "soldMedianPricePerSqFt": "$253"
     }
   },
@@ -262,22 +262,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 92 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 4.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 91 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 4.4 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $533,950 ($325/sq ft), while condos, villas and townhouses sell around $340,000 ($253/sq ft)."
+      "a": "Single-family homes sell around $534,900 ($325/sq ft), while condos, villas and townhouses sell around $339,000 ($253/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $5,650,000, with a median asking price of $439,000."
+      "a": "Active listings run from $95,000 to $5,650,000, with a median asking price of $449,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 51 days on market and closed at 88.3% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 48 days on market and closed at 88.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

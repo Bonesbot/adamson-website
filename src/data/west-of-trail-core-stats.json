@@ -2,20 +2,20 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-14T14:24:52.185584+00:00",
+  "lastUpdated": "2026-10-15T10:55:09.753649+00:00",
   "counts": {
-    "sold": 273,
-    "pending": 30,
+    "sold": 274,
+    "pending": 28,
     "active": 82,
-    "total": 303
+    "total": 302
   },
   "metrics": {
-    "avgPrice": "$2,109,459",
-    "avgPricePerSqFt": "$660",
+    "avgPrice": "$2,115,136",
+    "avgPricePerSqFt": "$661",
     "avgYearBuilt": 1982,
-    "avgLivingSqFt": "2,758",
+    "avgLivingSqFt": "2,764",
     "avgLotSqFt": null,
-    "avgDom": 108
+    "avgDom": 107
   },
   "range": {
     "minPrice": "$1,000",
@@ -24,20 +24,20 @@
   "active": {
     "count": 82,
     "medianPrice": "$2,285,000",
-    "medianPricePerSqFt": "$793",
+    "medianPricePerSqFt": "$784",
     "waterfrontCount": 17,
     "newConstructionCount": 25
   },
   "sold": {
     "count": 42,
-    "medianPrice": "$1,723,600",
-    "medianDom": 124,
-    "saleToListRatio": "87.5%",
+    "medianPrice": "$1,650,000",
+    "medianDom": 123,
+    "saleToListRatio": "87.8%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 4.5,
-    "sfhVilla": 4.6,
+    "condo": 5.2,
+    "sfhVilla": 4.5,
     "blended": 4.6,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,8 +54,8 @@
     }
   },
   "priceBands": {
-    "under900k": 21,
-    "band900kTo1_5m": 11,
+    "under900k": 22,
+    "band900kTo1_5m": 10,
     "band1_5mTo3m": 18,
     "band3mPlus": 32
   },
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4696114",
+      "address": "1864 CLEMATIS ST ST",
+      "subdivision": "LOT 13 & W 25 FT OF LOT 15 BLK C DESOTA PARK",
+      "soldPrice": "$1,600,000",
+      "soldDate": "2026-10-14",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,330",
+      "yearBuilt": 1925,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4705384",
       "address": "1622 KENILWORTH ST",
@@ -118,19 +131,6 @@
       "yearBuilt": 1950,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4688301",
-      "address": "1880 LOMA LINDA ST",
-      "subdivision": "FLOYD & CAMERON SUB",
-      "soldPrice": "$1,700,000",
-      "soldDate": "2026-10-06",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "2,904",
-      "yearBuilt": 1954,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 6,
-      "avgPrice": "$384,167",
-      "avgPricePerSqFt": "$333",
-      "avgLivingSqFt": "1,160",
-      "avgDom": 125
+      "activeCount": 7,
+      "avgPrice": "$361,286",
+      "avgPricePerSqFt": "$317",
+      "avgLivingSqFt": "1,136",
+      "avgDom": 136
     },
     {
       "tier": "1990to2005",
@@ -215,32 +215,32 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 64,
-      "soldCount": 229,
-      "soldMedianPricePerSqFt": "$573",
-      "soldMedianPrice": "$1,475,000",
+      "soldCount": 230,
+      "soldMedianPricePerSqFt": "$574",
+      "soldMedianPrice": "$1,480,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 4.6,
-    "monthsOfSupplyCondo": 4.5,
-    "monthsOfSupplySfhVilla": 4.6,
+    "monthsOfSupplyCondo": 5.2,
+    "monthsOfSupplySfhVilla": 4.5,
     "label": "seller's market",
     "activeCount": 82,
-    "sold365Count": 214,
+    "sold365Count": 215,
     "sold90Count": 42,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 253,
-      "activeCount": 76,
-      "soldMedianPrice": "$1,615,000",
-      "soldMedianPricePerSqFt": "$629"
+      "soldCount": 254,
+      "activeCount": 75,
+      "soldMedianPrice": "$1,607,500",
+      "soldMedianPricePerSqFt": "$635"
     },
     "condo": {
       "soldCount": 20,
-      "activeCount": 6,
+      "activeCount": 7,
       "soldMedianPrice": "$322,500",
       "soldMedianPricePerSqFt": "$320"
     }
@@ -258,7 +258,7 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,615,000 ($629/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
+      "a": "Single-family homes sell around $1,607,500 ($635/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
     },
     {
       "facet": "range",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 124 days on market and closed at 87.5% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 123 days on market and closed at 87.8% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
