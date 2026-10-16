@@ -2,15 +2,15 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-15T10:55:08.235041+00:00",
+  "lastUpdated": "2026-10-16T10:53:40.348326+00:00",
   "counts": {
-    "sold": 745,
+    "sold": 747,
     "pending": 34,
     "active": 261,
-    "total": 779
+    "total": 781
   },
   "metrics": {
-    "avgPrice": "$1,334,388",
+    "avgPrice": "$1,333,858",
     "avgPricePerSqFt": "$691",
     "avgYearBuilt": 1979,
     "avgLivingSqFt": "1,772",
@@ -25,18 +25,18 @@
     "count": 261,
     "medianPrice": "$1,100,000",
     "medianPricePerSqFt": "$720",
-    "waterfrontCount": 138,
+    "waterfrontCount": 137,
     "newConstructionCount": 39
   },
   "sold": {
     "count": 106,
     "medianPrice": "$1,112,500",
-    "medianDom": 86,
-    "saleToListRatio": "89.2%",
+    "medianDom": 82,
+    "saleToListRatio": "89.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 6.7,
+    "condo": 6.6,
     "sfhVilla": 6.6,
     "blended": 6.6,
     "method": "active / (trailing-12mo closed / 12)",
@@ -44,20 +44,20 @@
   },
   "fees": {
     "medianMonthlyAssociation": "$1,158",
-    "medianMonthlyCondoFee": "$1,276",
+    "medianMonthlyCondoFee": "$1,270",
     "minMonthlyCondoFee": "$208",
     "maxMonthlyCondoFee": "$8,995",
     "condoFeeRange": {
       "min": 208,
-      "median": 1276,
+      "median": 1270,
       "max": 8995
     }
   },
   "priceBands": {
     "under900k": 121,
-    "band900kTo1_5m": 43,
+    "band900kTo1_5m": 42,
     "band1_5mTo3m": 50,
-    "band3mPlus": 47
+    "band3mPlus": 48
   },
   "propertyTypes": [
     {
@@ -67,6 +67,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4689477",
+      "address": "5924 MIDNIGHT PASS RD #507",
+      "subdivision": "SARASOTA SURF & RACQUET",
+      "soldPrice": "$1,225,000",
+      "soldDate": "2026-10-15",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,195",
+      "yearBuilt": 1971,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4703966",
+      "address": "8710 MIDNIGHT PASS RD #203B",
+      "subdivision": "TORTUGA",
+      "soldPrice": "$610,000",
+      "soldDate": "2026-10-15",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,650",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4704924",
       "address": "1200 E PEPPERTREE LN #505",
@@ -105,32 +131,6 @@
       "yearBuilt": 1975,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4702984",
-      "address": "1055 BEACH RD #B602",
-      "subdivision": "OUR HOUSE AT THE BCH PH I",
-      "soldPrice": "$825,000",
-      "soldDate": "2026-10-09",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,204",
-      "yearBuilt": 1981,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4658380",
-      "address": "1240 DOLPHIN BAY WAY #401",
-      "subdivision": "DOLPHIN BAY",
-      "soldPrice": "$1,150,000",
-      "soldDate": "2026-10-07",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,200",
-      "yearBuilt": 1998,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -139,9 +139,9 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 152,
-      "avgPrice": "$821,162",
-      "avgPricePerSqFt": "$684",
-      "avgLivingSqFt": "1,192",
+      "avgPrice": "$819,910",
+      "avgPricePerSqFt": "$682",
+      "avgLivingSqFt": "1,194",
       "avgDom": 126
     },
     {
@@ -152,7 +152,7 @@
       "avgPrice": "$1,438,475",
       "avgPricePerSqFt": "$723",
       "avgLivingSqFt": "1,999",
-      "avgDom": 213
+      "avgDom": 214
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$1,915,780",
       "avgPricePerSqFt": "$974",
       "avgLivingSqFt": "1,842",
-      "avgDom": 225
+      "avgDom": 226
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,672,000",
       "avgPricePerSqFt": "$1,439",
       "avgLivingSqFt": "3,376",
-      "avgDom": 242
+      "avgDom": 243
     }
   ],
   "condoTiersScope": {
@@ -188,7 +188,7 @@
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
       "activeCount": 62,
-      "soldCount": 264,
+      "soldCount": 266,
       "soldMedianPricePerSqFt": "$749",
       "soldMedianPrice": "$1,000,000",
       "lowSample": false
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 72,
+      "activeCount": 71,
       "soldCount": 231,
       "soldMedianPricePerSqFt": "$582",
       "soldMedianPrice": "$1,100,000",
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 79,
+      "activeCount": 80,
       "soldCount": 143,
       "soldMedianPricePerSqFt": "$576",
       "soldMedianPrice": "$775,000",
@@ -232,11 +232,11 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 6.6,
-    "monthsOfSupplyCondo": 6.7,
+    "monthsOfSupplyCondo": 6.6,
     "monthsOfSupplySfhVilla": 6.6,
     "label": "balanced market",
     "activeCount": 261,
-    "sold365Count": 472,
+    "sold365Count": 473,
     "sold90Count": 106,
     "method": "active / (trailing-12mo closed / 12)"
   },
@@ -248,15 +248,15 @@
       "soldMedianPricePerSqFt": "$657"
     },
     "condo": {
-      "soldCount": 522,
+      "soldCount": 524,
       "activeCount": 171,
       "soldMedianPrice": "$800,000",
       "soldMedianPricePerSqFt": "$628"
     }
   },
   "boating": {
-    "activeWithDock": 65,
-    "activeWaterfront": 138
+    "activeWithDock": 64,
+    "activeWaterfront": 137
   },
   "marketQuestions": [
     {
@@ -282,17 +282,17 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 86 days on market and closed at 89.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 82 days on market and closed at 89.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Siesta Key homes have a dock?",
-      "a": "Of 138 active waterfront listings, 65 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 137 active waterfront listings, 64 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Siesta Key?",
-      "a": "The median monthly condo fee is $1,276 and the median monthly association fee is $1,158."
+      "a": "The median monthly condo fee is $1,270 and the median monthly association fee is $1,158."
     }
   ],
   "costBreakdown90": null

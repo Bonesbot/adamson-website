@@ -2,18 +2,18 @@
   "areaSlug": "st-armands-lido",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-15T10:55:07.457589+00:00",
+  "lastUpdated": "2026-10-16T10:53:39.164123+00:00",
   "counts": {
-    "sold": 759,
+    "sold": 760,
     "pending": 17,
-    "active": 75,
-    "total": 776
+    "active": 74,
+    "total": 777
   },
   "metrics": {
-    "avgPrice": "$1,592,647",
-    "avgPricePerSqFt": "$687",
+    "avgPrice": "$1,607,843",
+    "avgPricePerSqFt": "$690",
     "avgYearBuilt": 1982,
-    "avgLivingSqFt": "1,906",
+    "avgLivingSqFt": "1,910",
     "avgLotSqFt": null,
     "avgDom": 108
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$25,000,000"
   },
   "active": {
-    "count": 75,
-    "medianPrice": "$3,295,000",
-    "medianPricePerSqFt": "$959",
-    "waterfrontCount": 36,
-    "newConstructionCount": 21
+    "count": 74,
+    "medianPrice": "$3,095,000",
+    "medianPricePerSqFt": "$953",
+    "waterfrontCount": 35,
+    "newConstructionCount": 20
   },
   "sold": {
-    "count": 42,
+    "count": 43,
     "medianPrice": "$5,600,000",
-    "medianDom": 2,
-    "saleToListRatio": "92.5%",
+    "medianDom": 1,
+    "saleToListRatio": "92.7%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.2,
-    "sfhVilla": 13.5,
-    "blended": 7.3,
+    "condo": 5.1,
+    "sfhVilla": 13.6,
+    "blended": 7.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -57,16 +57,29 @@
     "under900k": 27,
     "band900kTo1_5m": 5,
     "band1_5mTo3m": 5,
-    "band3mPlus": 38
+    "band3mPlus": 37
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 75
+      "count": 74
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4539483",
+      "address": "1000 BENJAMIN FRANKLIN DR #1001",
+      "subdivision": "ROSEWOOD RESIDENCES LIDO KEY",
+      "soldPrice": "$13,400,000",
+      "soldDate": "2026-10-14",
+      "bedrooms": 4,
+      "bathrooms": 4.5,
+      "livingSqFt": "4,942",
+      "yearBuilt": 2024,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4666804",
       "address": "1800 BENJAMIN FRANKLIN DR #B207",
@@ -118,19 +131,6 @@
       "yearBuilt": 2026,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4675500",
-      "address": "1418 JOHN RINGLING PKWY",
-      "subdivision": "LIDO C",
-      "soldPrice": "$7,210,000",
-      "soldDate": "2026-10-01",
-      "bedrooms": 5,
-      "bathrooms": 6.5,
-      "livingSqFt": "5,582",
-      "yearBuilt": 2004,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$744,828",
       "avgPricePerSqFt": "$672",
       "avgLivingSqFt": "1,113",
-      "avgDom": 161
+      "avgDom": 162
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$6,176,667",
       "avgPricePerSqFt": "$1,348",
       "avgLivingSqFt": "4,446",
-      "avgDom": 164
+      "avgDom": 165
     },
     {
       "tier": "2006to2019",
@@ -172,7 +172,7 @@
       "avgPrice": "$9,670,000",
       "avgPricePerSqFt": "$2,276",
       "avgLivingSqFt": "4,187",
-      "avgDom": 593
+      "avgDom": 594
     }
   ],
   "condoTiersScope": {
@@ -188,15 +188,15 @@
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
       "activeCount": 23,
-      "soldCount": 529,
+      "soldCount": 530,
       "soldMedianPricePerSqFt": "$562",
-      "soldMedianPrice": "$800,000",
+      "soldMedianPrice": "$807,500",
       "lowSample": false
     },
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 13,
+      "activeCount": 12,
       "soldCount": 18,
       "soldMedianPricePerSqFt": "$1,092",
       "soldMedianPrice": "$3,575,000",
@@ -222,24 +222,24 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.3,
-    "monthsOfSupplyCondo": 5.2,
-    "monthsOfSupplySfhVilla": 13.5,
+    "monthsOfSupply": 7.2,
+    "monthsOfSupplyCondo": 5.1,
+    "monthsOfSupplySfhVilla": 13.6,
     "label": "buyer's market",
-    "activeCount": 75,
+    "activeCount": 74,
     "sold365Count": 124,
-    "sold90Count": 42,
+    "sold90Count": 43,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 42,
-      "activeCount": 33,
+      "activeCount": 32,
       "soldMedianPrice": "$2,837,500",
       "soldMedianPricePerSqFt": "$960"
     },
     "condo": {
-      "soldCount": 717,
+      "soldCount": 718,
       "activeCount": 42,
       "soldMedianPrice": "$750,000",
       "soldMedianPricePerSqFt": "$557"
@@ -247,7 +247,7 @@
   },
   "boating": {
     "activeWithDock": 10,
-    "activeWaterfront": 36
+    "activeWaterfront": 35
   },
   "marketQuestions": [
     {
@@ -258,7 +258,7 @@
     {
       "facet": "balance",
       "q": "Is St Armands Lido a buyer's or seller's market right now?",
-      "a": "With 75 active listings and roughly 10 closed sales a month (trailing 12 months), St Armands Lido has about 7.3 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 74 active listings and roughly 10 closed sales a month (trailing 12 months), St Armands Lido has about 7.2 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -268,17 +268,17 @@
     {
       "facet": "range",
       "q": "What's the price range on St Armands Lido?",
-      "a": "Active listings run from $229,000 to $25,000,000, with a median asking price of $3,295,000."
+      "a": "Active listings run from $229,000 to $25,000,000, with a median asking price of $3,095,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on St Armands Lido?",
-      "a": "Recently sold homes took a median 2 days on market and closed at 92.5% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 1 days on market and closed at 92.7% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many St Armands Lido homes have a dock?",
-      "a": "Of 36 active waterfront listings, 10 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 35 active waterfront listings, 10 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

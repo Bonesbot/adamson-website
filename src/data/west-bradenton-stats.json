@@ -2,11 +2,11 @@
   "areaSlug": "west-bradenton",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-15T10:55:13.636474+00:00",
+  "lastUpdated": "2026-10-16T10:53:46.341969+00:00",
   "counts": {
     "sold": 329,
     "pending": 51,
-    "active": 142,
+    "active": 144,
     "total": 380
   },
   "metrics": {
@@ -22,10 +22,10 @@
     "maxPrice": "$7,250,000"
   },
   "active": {
-    "count": 142,
-    "medianPrice": "$499,450",
+    "count": 144,
+    "medianPrice": "$514,950",
     "medianPricePerSqFt": "$286",
-    "waterfrontCount": 49,
+    "waterfrontCount": 50,
     "newConstructionCount": 43
   },
   "sold": {
@@ -37,32 +37,32 @@
   },
   "monthsOfSupply": {
     "condo": 7.1,
-    "sfhVilla": 5.2,
+    "sfhVilla": 5.3,
     "blended": 5.9,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$641",
+    "medianMonthlyAssociation": "$640",
     "medianMonthlyCondoFee": "$790",
     "minMonthlyCondoFee": "$105",
     "maxMonthlyCondoFee": "$3,869",
     "condoFeeRange": {
       "min": 105,
-      "median": 795,
+      "median": 790,
       "max": 3869
     }
   },
   "priceBands": {
     "under900k": 105,
-    "band900kTo1_5m": 20,
-    "band1_5mTo3m": 13,
+    "band900kTo1_5m": 21,
+    "band1_5mTo3m": 14,
     "band3mPlus": 4
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 142
+      "count": 144
     }
   ],
   "buildingClasses": [],
@@ -148,7 +148,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 37,
+      "activeCount": 38,
       "soldCount": 95,
       "soldMedianPricePerSqFt": "$317",
       "soldMedianPrice": "$560,000",
@@ -175,7 +175,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 73,
+      "activeCount": 74,
       "soldCount": 173,
       "soldMedianPricePerSqFt": "$248",
       "soldMedianPrice": "$430,999",
@@ -185,9 +185,9 @@
   "marketBalance": {
     "monthsOfSupply": 5.9,
     "monthsOfSupplyCondo": 7.1,
-    "monthsOfSupplySfhVilla": 5.2,
+    "monthsOfSupplySfhVilla": 5.3,
     "label": "balanced market",
-    "activeCount": 142,
+    "activeCount": 144,
     "sold365Count": 291,
     "sold90Count": 72,
     "method": "active / (trailing-12mo closed / 12)"
@@ -195,7 +195,7 @@
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 141,
-      "activeCount": 57,
+      "activeCount": 59,
       "soldMedianPrice": "$750,000",
       "soldMedianPricePerSqFt": "$349"
     },
@@ -207,14 +207,14 @@
     }
   },
   "boating": {
-    "activeWithDock": 35,
-    "activeWaterfront": 49
+    "activeWithDock": 36,
+    "activeWaterfront": 50
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Bradenton a buyer's or seller's market right now?",
-      "a": "With 142 active listings and roughly 24 closed sales a month (trailing 12 months), West Bradenton has about 5.9 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 144 active listings and roughly 24 closed sales a month (trailing 12 months), West Bradenton has about 5.9 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -224,7 +224,7 @@
     {
       "facet": "range",
       "q": "What is the price range in West Bradenton?",
-      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $499,450."
+      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $514,950."
     },
     {
       "facet": "speed",
@@ -234,12 +234,12 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat in West Bradenton, and how many homes have a dock?",
-      "a": "Of 49 active waterfront listings, 35 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 50 active waterfront listings, 36 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees in West Bradenton?",
-      "a": "The median monthly condo fee is $790 and the median monthly association fee is $641."
+      "a": "The median monthly condo fee is $790 and the median monthly association fee is $640."
     }
   ],
   "costBreakdown90": null,
@@ -249,7 +249,7 @@
       "name": "El Conquistador / IMG / Aqua",
       "activeCount": 55,
       "pendingCount": 3,
-      "activeMedianPrice": "$380,000",
+      "activeMedianPrice": "$365,000",
       "soldCount": 110,
       "soldMedianPrice": "$385,000",
       "soldMedianPricePerSqFt": "$208",
@@ -260,9 +260,9 @@
     {
       "slug": "west-bradenton-coral-shores-cortez",
       "name": "Coral Shores / Cortez",
-      "activeCount": 54,
+      "activeCount": 56,
       "pendingCount": 16,
-      "activeMedianPrice": "$462,000",
+      "activeMedianPrice": "$539,450",
       "soldCount": 101,
       "soldMedianPrice": "$480,000",
       "soldMedianPricePerSqFt": "$317",
@@ -312,8 +312,8 @@
             "soldMedianPrice": "$1,275,000",
             "soldMedianPricePerSqFt": "$570",
             "soldMedianDom": 69,
-            "activeCount": 19,
-            "activeMedianPrice": "$1,275,000",
+            "activeCount": 20,
+            "activeMedianPrice": "$1,335,000",
             "lowSample": false
           },
           {
@@ -323,8 +323,8 @@
             "soldMedianPrice": "$667,084",
             "soldMedianPricePerSqFt": "$322",
             "soldMedianDom": 43,
-            "activeCount": 38,
-            "activeMedianPrice": "$873,495",
+            "activeCount": 39,
+            "activeMedianPrice": "$882,990",
             "lowSample": false
           }
         ],
@@ -353,7 +353,7 @@
             "soldMedianPricePerSqFt": "$202",
             "soldMedianDom": 80,
             "activeCount": 67,
-            "activeMedianPrice": "$319,000",
+            "activeMedianPrice": "$310,000",
             "lowSample": false
           }
         ],
