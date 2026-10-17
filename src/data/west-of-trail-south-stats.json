@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-16T10:53:43.704067+00:00",
+  "lastUpdated": "2026-10-17T10:54:34.115588+00:00",
   "counts": {
-    "sold": 320,
-    "pending": 26,
+    "sold": 322,
+    "pending": 25,
     "active": 93,
-    "total": 346
+    "total": 347
   },
   "metrics": {
-    "avgPrice": "$638,839",
+    "avgPrice": "$637,661",
     "avgPricePerSqFt": "$328",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,757",
+    "avgLivingSqFt": "1,754",
     "avgLotSqFt": null,
     "avgDom": 79
   },
@@ -23,21 +23,21 @@
   },
   "active": {
     "count": 93,
-    "medianPrice": "$449,000",
-    "medianPricePerSqFt": "$318",
+    "medianPrice": "$450,000",
+    "medianPricePerSqFt": "$314",
     "waterfrontCount": 23,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 61,
-    "medianPrice": "$410,000",
-    "medianDom": 48,
-    "saleToListRatio": "88.3%",
+    "count": 62,
+    "medianPrice": "$413,000",
+    "medianDom": 52,
+    "saleToListRatio": "87.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 4.3,
-    "sfhVilla": 4.7,
+    "condo": 4.2,
+    "sfhVilla": 4.8,
     "blended": 4.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -67,6 +67,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4656077",
+      "address": "1347 LANDINGS DR #6",
+      "subdivision": "LANDINGS TREEHOUSE",
+      "soldPrice": "$570,000",
+      "soldDate": "2026-10-16",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,564",
+      "yearBuilt": 1981,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4699301",
+      "address": "1915 COLLEEN ST",
+      "subdivision": "NORTH VAMO SUB 1",
+      "soldPrice": "$310,000",
+      "soldDate": "2026-10-16",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "988",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4689911",
       "address": "1732 PINE HARRIER CIR",
@@ -105,32 +131,6 @@
       "yearBuilt": 1975,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4705266",
-      "address": "1630 STICKNEY POINT RD #30-101",
-      "subdivision": "CASTEL DEL MARE",
-      "soldPrice": "$235,000",
-      "soldDate": "2026-10-13",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "800",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4684312",
-      "address": "1711 PELICAN COVE RD #341",
-      "subdivision": "PELICAN COVE XIV",
-      "soldPrice": "$250,000",
-      "soldDate": "2026-10-07",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,127",
-      "yearBuilt": 1979,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 49,
-      "avgPrice": "$357,604",
-      "avgPricePerSqFt": "$287",
-      "avgLivingSqFt": "1,234",
-      "avgDom": 95
+      "activeCount": 48,
+      "avgPrice": "$357,554",
+      "avgPricePerSqFt": "$285",
+      "avgLivingSqFt": "1,240",
+      "avgDom": 97
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$602,667",
       "avgPricePerSqFt": "$278",
       "avgLivingSqFt": "2,167",
-      "avgDom": 119
+      "avgDom": 120
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$591,300",
       "avgPricePerSqFt": "$347",
       "avgLivingSqFt": "1,706",
-      "avgDom": 179
+      "avgDom": 180
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$635,000",
       "avgPricePerSqFt": "$364",
       "avgLivingSqFt": "1,745",
-      "avgDom": 51
+      "avgDom": 52
     }
   ],
   "condoTiersScope": {
@@ -206,9 +206,9 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 6,
-      "soldCount": 32,
-      "soldMedianPricePerSqFt": "$307",
-      "soldMedianPrice": "$442,944",
+      "soldCount": 33,
+      "soldMedianPricePerSqFt": "$299",
+      "soldMedianPrice": "$450,000",
       "lowSample": false
     },
     {
@@ -224,34 +224,34 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 64,
-      "soldCount": 203,
+      "soldCount": 204,
       "soldMedianPricePerSqFt": "$286",
-      "soldMedianPrice": "$425,000",
+      "soldMedianPrice": "$423,750",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 4.5,
-    "monthsOfSupplyCondo": 4.3,
-    "monthsOfSupplySfhVilla": 4.7,
+    "monthsOfSupplyCondo": 4.2,
+    "monthsOfSupplySfhVilla": 4.8,
     "label": "seller's market",
     "activeCount": 93,
     "sold365Count": 248,
-    "sold90Count": 61,
+    "sold90Count": 62,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 167,
-      "activeCount": 37,
-      "soldMedianPrice": "$534,900",
+      "soldCount": 168,
+      "activeCount": 38,
+      "soldMedianPrice": "$533,950",
       "soldMedianPricePerSqFt": "$325"
     },
     "condo": {
-      "soldCount": 153,
-      "activeCount": 56,
-      "soldMedianPrice": "$339,000",
-      "soldMedianPricePerSqFt": "$253"
+      "soldCount": 154,
+      "activeCount": 55,
+      "soldMedianPrice": "$339,500",
+      "soldMedianPricePerSqFt": "$251"
     }
   },
   "boating": {
@@ -267,17 +267,17 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $534,900 ($325/sq ft), while condos, villas and townhouses sell around $339,000 ($253/sq ft)."
+      "a": "Single-family homes sell around $533,950 ($325/sq ft), while condos, villas and townhouses sell around $339,500 ($251/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $5,650,000, with a median asking price of $449,000."
+      "a": "Active listings run from $95,000 to $5,650,000, with a median asking price of $450,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 48 days on market and closed at 88.3% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 52 days on market and closed at 87.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
