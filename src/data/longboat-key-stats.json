@@ -2,15 +2,15 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-17T10:54:28.745090+00:00",
+  "lastUpdated": "2026-10-18T10:42:11.042420+00:00",
   "counts": {
-    "sold": 1264,
-    "pending": 34,
+    "sold": 1265,
+    "pending": 33,
     "active": 230,
     "total": 1298
   },
   "metrics": {
-    "avgPrice": "$2,013,372",
+    "avgPrice": "$2,013,361",
     "avgPricePerSqFt": "$803",
     "avgYearBuilt": 1985,
     "avgLivingSqFt": "2,192",
@@ -29,15 +29,15 @@
     "newConstructionCount": 23
   },
   "sold": {
-    "count": 105,
-    "medianPrice": "$935,000",
+    "count": 106,
+    "medianPrice": "$922,500",
     "medianDom": 95,
     "saleToListRatio": "96.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 4.9,
-    "sfhVilla": 6.2,
+    "sfhVilla": 6.1,
     "blended": 5.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4665172",
+      "address": "847 EVERGREEN WAY",
+      "subdivision": "CEDARS EAST SEC 3",
+      "soldPrice": "$585,000",
+      "soldDate": "2026-10-16",
+      "bedrooms": 2,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,440",
+      "yearBuilt": 1991,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4687106",
       "address": "3481 BAYOU SOUND",
@@ -118,19 +131,6 @@
       "yearBuilt": 1991,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4700558",
-      "address": "1906 HARBOURSIDE DR #304",
-      "subdivision": "FAIRWAY BAY 1",
-      "soldPrice": "$1,150,000",
-      "soldDate": "2026-10-14",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,135",
-      "yearBuilt": 1982,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$827,481",
       "avgPricePerSqFt": "$639",
       "avgLivingSqFt": "1,324",
-      "avgDom": 140
+      "avgDom": 141
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$2,430,886",
       "avgPricePerSqFt": "$836",
       "avgLivingSqFt": "2,604",
-      "avgDom": 120
+      "avgDom": 121
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$6,750,000",
       "avgPricePerSqFt": "$1,778",
       "avgLivingSqFt": "3,741",
-      "avgDom": 148
+      "avgDom": 150
     },
     {
       "tier": "2020plus",
@@ -224,20 +224,20 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 34,
-      "soldCount": 182,
-      "soldMedianPricePerSqFt": "$482",
-      "soldMedianPrice": "$837,500",
+      "soldCount": 183,
+      "soldMedianPricePerSqFt": "$479",
+      "soldMedianPrice": "$825,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 5.3,
     "monthsOfSupplyCondo": 4.9,
-    "monthsOfSupplySfhVilla": 6.2,
+    "monthsOfSupplySfhVilla": 6.1,
     "label": "balanced market",
     "activeCount": 230,
-    "sold365Count": 523,
-    "sold90Count": 105,
+    "sold365Count": 522,
+    "sold90Count": 106,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,7 +248,7 @@
       "soldMedianPricePerSqFt": "$726"
     },
     "condo": {
-      "soldCount": 937,
+      "soldCount": 938,
       "activeCount": 165,
       "soldMedianPrice": "$1,000,000",
       "soldMedianPricePerSqFt": "$647"
@@ -262,7 +262,7 @@
     {
       "facet": "cost",
       "q": "What do properties cost on Longboat Key?",
-      "a": "Over the past 90 days, 105 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $850,000 ($550/sq ft), while single-family homes closed around $1,945,000 ($717/sq ft). By location, Gulf-front and beachfront properties closed at a median $817 per square foot, compared with $517 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
+      "a": "Over the past 90 days, 106 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $850,000 ($539/sq ft), while single-family homes closed around $1,945,000 ($717/sq ft). By location, Gulf-front and beachfront properties closed at a median $817 per square foot, compared with $517 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
     },
     {
       "facet": "balance",
@@ -287,12 +287,12 @@
   ],
   "costBreakdown90": {
     "windowDays": 90,
-    "soldCount": 105,
+    "soldCount": 106,
     "byPropertyType": {
       "condo": {
-        "soldCount": 80,
+        "soldCount": 81,
         "soldMedianPrice": "$850,000",
-        "soldMedianPricePerSqFt": "$550"
+        "soldMedianPricePerSqFt": "$539"
       },
       "single_family": {
         "soldCount": 25,

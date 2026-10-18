@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-17T10:54:32.532127+00:00",
+  "lastUpdated": "2026-10-18T10:42:14.157609+00:00",
   "counts": {
-    "sold": 277,
-    "pending": 25,
+    "sold": 278,
+    "pending": 24,
     "active": 86,
     "total": 302
   },
   "metrics": {
-    "avgPrice": "$2,096,046",
+    "avgPrice": "$2,095,950",
     "avgPricePerSqFt": "$658",
     "avgYearBuilt": 1982,
     "avgLivingSqFt": "2,753",
@@ -29,10 +29,10 @@
     "newConstructionCount": 28
   },
   "sold": {
-    "count": 43,
-    "medianPrice": "$1,700,000",
-    "medianDom": 93,
-    "saleToListRatio": "88.2%",
+    "count": 44,
+    "medianPrice": "$1,650,000",
+    "medianDom": 85,
+    "saleToListRatio": "88.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -81,6 +81,19 @@
       "isWaterfront": false
     },
     {
+      "listingId": "A4704809",
+      "address": "2439 GOLDENROD ST",
+      "subdivision": "SOUTH GATE",
+      "soldPrice": "$460,000",
+      "soldDate": "2026-10-16",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,983",
+      "yearBuilt": 1957,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "A4702897",
       "address": "1041 CITRUS AVE",
       "subdivision": "BUNGALOW HILL",
@@ -118,19 +131,6 @@
       "yearBuilt": 1925,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4705384",
-      "address": "1622 KENILWORTH ST",
-      "subdivision": "JOHNSON ESTATES",
-      "soldPrice": "$3,375,000",
-      "soldDate": "2026-10-13",
-      "bedrooms": 4,
-      "bathrooms": 4.5,
-      "livingSqFt": "4,058",
-      "yearBuilt": 2017,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$422,375",
       "avgPricePerSqFt": "$356",
       "avgLivingSqFt": "1,164",
-      "avgDom": 121
+      "avgDom": 122
     },
     {
       "tier": "1990to2005",
@@ -215,9 +215,9 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 68,
-      "soldCount": 233,
+      "soldCount": 234,
       "soldMedianPricePerSqFt": "$574",
-      "soldMedianPrice": "$1,485,000",
+      "soldMedianPrice": "$1,480,000",
       "lowSample": false
     }
   ],
@@ -227,16 +227,16 @@
     "monthsOfSupplySfhVilla": 4.7,
     "label": "seller's market",
     "activeCount": 86,
-    "sold365Count": 216,
-    "sold90Count": 43,
+    "sold365Count": 217,
+    "sold90Count": 44,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 257,
+      "soldCount": 258,
       "activeCount": 78,
       "soldMedianPrice": "$1,600,000",
-      "soldMedianPricePerSqFt": "$641"
+      "soldMedianPricePerSqFt": "$635"
     },
     "condo": {
       "soldCount": 20,
@@ -258,7 +258,7 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,600,000 ($641/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
+      "a": "Single-family homes sell around $1,600,000 ($635/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
     },
     {
       "facet": "range",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 93 days on market and closed at 88.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 85 days on market and closed at 88.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
