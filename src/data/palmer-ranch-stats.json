@@ -2,15 +2,15 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-19T10:47:14.830331+00:00",
+  "lastUpdated": "2026-10-20T10:43:12.854331+00:00",
   "counts": {
-    "sold": 950,
-    "pending": 60,
+    "sold": 951,
+    "pending": 61,
     "active": 215,
-    "total": 1010
+    "total": 1012
   },
   "metrics": {
-    "avgPrice": "$559,651",
+    "avgPrice": "$559,752",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
     "avgLivingSqFt": "2,043",
@@ -26,17 +26,17 @@
     "medianPrice": "$409,000",
     "medianPricePerSqFt": "$245",
     "waterfrontCount": 34,
-    "newConstructionCount": 39
+    "newConstructionCount": 40
   },
   "sold": {
-    "count": 170,
-    "medianPrice": "$472,000",
-    "medianDom": 58,
-    "saleToListRatio": "92.0%",
+    "count": 169,
+    "medianPrice": "$475,000",
+    "medianDom": 57,
+    "saleToListRatio": "92.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.5,
+    "condo": 5.4,
     "sfhVilla": 3.0,
     "blended": 3.6,
     "method": "active / (trailing-12mo closed / 12)",
@@ -54,8 +54,8 @@
     }
   },
   "priceBands": {
-    "under900k": 201,
-    "band900kTo1_5m": 12,
+    "under900k": 202,
+    "band900kTo1_5m": 11,
     "band1_5mTo3m": 2,
     "band3mPlus": 0
   },
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4702162",
+      "address": "4300 CAMINO MADERA",
+      "subdivision": "VILLA PALMERAS / PRESTANCIA",
+      "soldPrice": "$484,000",
+      "soldDate": "2026-10-19",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,676",
+      "yearBuilt": 1988,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4690117",
       "address": "8615 WOODBRIAR DR",
@@ -118,19 +131,6 @@
       "yearBuilt": 1980,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4702121",
-      "address": "6339 STURBRIDGE CT",
-      "subdivision": "WELLINGTON CHASE",
-      "soldPrice": "$455,000",
-      "soldDate": "2026-10-15",
-      "bedrooms": 4,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,222",
-      "yearBuilt": 1999,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,20 +139,20 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 33,
-      "avgPrice": "$322,138",
+      "avgPrice": "$321,532",
       "avgPricePerSqFt": "$196",
       "avgLivingSqFt": "1,641",
-      "avgDom": 118
+      "avgDom": 119
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 72,
-      "avgPrice": "$289,807",
-      "avgPricePerSqFt": "$225",
-      "avgLivingSqFt": "1,278",
-      "avgDom": 127
+      "activeCount": 71,
+      "avgPrice": "$291,593",
+      "avgPricePerSqFt": "$227",
+      "avgLivingSqFt": "1,280",
+      "avgDom": 129
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$371,543",
       "avgPricePerSqFt": "$211",
       "avgLivingSqFt": "1,771",
-      "avgDom": 85
+      "avgDom": 86
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 16,
-      "avgPrice": "$353,952",
+      "avgPrice": "$353,796",
       "avgPricePerSqFt": "$219",
       "avgLivingSqFt": "1,614",
-      "avgDom": 58
+      "avgDom": 59
     }
   ],
   "condoTiersScope": {
@@ -206,9 +206,9 @@
       "segment": "other_wf",
       "label": "Other waterfront",
       "activeCount": 34,
-      "soldCount": 203,
+      "soldCount": 204,
       "soldMedianPricePerSqFt": "$276",
-      "soldMedianPrice": "$600,000",
+      "soldMedianPrice": "$597,500",
       "lowSample": false
     },
     {
@@ -223,24 +223,24 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 3.6,
-    "monthsOfSupplyCondo": 5.5,
+    "monthsOfSupplyCondo": 5.4,
     "monthsOfSupplySfhVilla": 3.0,
     "label": "seller's market",
     "activeCount": 215,
-    "sold365Count": 716,
-    "sold90Count": 170,
+    "sold365Count": 717,
+    "sold90Count": 169,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 541,
-      "activeCount": 87,
+      "soldCount": 542,
+      "activeCount": 88,
       "soldMedianPrice": "$650,000",
-      "soldMedianPricePerSqFt": "$289"
+      "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
       "soldCount": 409,
-      "activeCount": 128,
+      "activeCount": 127,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
@@ -258,7 +258,7 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Palmer Ranch?",
-      "a": "Single-family homes sell around $650,000 ($289/sq ft), while condos, villas and townhouses sell around $325,000 ($211/sq ft)."
+      "a": "Single-family homes sell around $650,000 ($288/sq ft), while condos, villas and townhouses sell around $325,000 ($211/sq ft)."
     },
     {
       "facet": "range",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 58 days on market and closed at 92.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 57 days on market and closed at 92.1% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
