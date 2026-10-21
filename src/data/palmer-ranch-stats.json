@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-20T10:43:12.854331+00:00",
+  "lastUpdated": "2026-10-21T10:43:58.240652+00:00",
   "counts": {
-    "sold": 951,
-    "pending": 61,
+    "sold": 954,
+    "pending": 60,
     "active": 215,
-    "total": 1012
+    "total": 1014
   },
   "metrics": {
-    "avgPrice": "$559,752",
+    "avgPrice": "$559,572",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,043",
+    "avgLivingSqFt": "2,042",
     "avgLotSqFt": null,
     "avgDom": 79
   },
@@ -25,18 +25,18 @@
     "count": 215,
     "medianPrice": "$409,000",
     "medianPricePerSqFt": "$245",
-    "waterfrontCount": 34,
+    "waterfrontCount": 35,
     "newConstructionCount": 40
   },
   "sold": {
-    "count": 169,
+    "count": 170,
     "medianPrice": "$475,000",
-    "medianDom": 57,
-    "saleToListRatio": "92.1%",
+    "medianDom": 56,
+    "saleToListRatio": "92.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.4,
+    "condo": 5.5,
     "sfhVilla": 3.0,
     "blended": 3.6,
     "method": "active / (trailing-12mo closed / 12)",
@@ -68,6 +68,32 @@
   "buildingClasses": [],
   "recentSoldComps": [
     {
+      "listingId": "A4704685",
+      "address": "5310 CICERONE ST",
+      "subdivision": "ESPLANADE/PALMER RANCH PH 4C",
+      "soldPrice": "$1,030,000",
+      "soldDate": "2026-10-20",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,391",
+      "yearBuilt": 2021,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4705103",
+      "address": "9570 HIGH GATE DR #1715",
+      "subdivision": "STONEYBROOK VERANDA GREENS",
+      "soldPrice": "$350,000",
+      "soldDate": "2026-10-20",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,333",
+      "yearBuilt": 1996,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "A4702162",
       "address": "4300 CAMINO MADERA",
       "subdivision": "VILLA PALMERAS / PRESTANCIA",
@@ -81,6 +107,19 @@
       "isWaterfront": true
     },
     {
+      "listingId": "TB8499125",
+      "address": "8660 PALMER PARK CIR",
+      "subdivision": "PALMER RANCH PH 1",
+      "soldPrice": "$340,000",
+      "soldDate": "2026-10-17",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,724",
+      "yearBuilt": 2019,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "A4690117",
       "address": "8615 WOODBRIAR DR",
       "subdivision": "DEER CREEK",
@@ -90,45 +129,6 @@
       "bathrooms": 3.5,
       "livingSqFt": "3,215",
       "yearBuilt": 1991,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4703104",
-      "address": "3659 TORREY PINES BLVD",
-      "subdivision": "COUNTRY CLUB OF SARASOTA THE",
-      "soldPrice": "$595,000",
-      "soldDate": "2026-10-16",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,579",
-      "yearBuilt": 1981,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4704602",
-      "address": "4451 DEER TRAIL BLVD",
-      "subdivision": "VILLAS AT DEER CREEK",
-      "soldPrice": "$475,000",
-      "soldDate": "2026-10-16",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,056",
-      "yearBuilt": 1993,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4680907",
-      "address": "3783 BENEVA OAKS BLVD",
-      "subdivision": "BENEVA OAKS",
-      "soldPrice": "$1,575,000",
-      "soldDate": "2026-10-15",
-      "bedrooms": 5,
-      "bathrooms": 4.0,
-      "livingSqFt": "5,251",
-      "yearBuilt": 1980,
       "propertyType": "Residential",
       "isWaterfront": false
     }
@@ -142,37 +142,37 @@
       "avgPrice": "$321,532",
       "avgPricePerSqFt": "$196",
       "avgLivingSqFt": "1,641",
-      "avgDom": 119
+      "avgDom": 120
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 71,
-      "avgPrice": "$291,593",
-      "avgPricePerSqFt": "$227",
+      "activeCount": 72,
+      "avgPrice": "$291,279",
+      "avgPricePerSqFt": "$226",
       "avgLivingSqFt": "1,280",
-      "avgDom": 129
+      "avgDom": 128
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 7,
-      "avgPrice": "$371,543",
-      "avgPricePerSqFt": "$211",
-      "avgLivingSqFt": "1,771",
-      "avgDom": 86
+      "activeCount": 6,
+      "avgPrice": "$373,467",
+      "avgPricePerSqFt": "$212",
+      "avgLivingSqFt": "1,779",
+      "avgDom": 70
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 16,
-      "avgPrice": "$353,796",
+      "avgPrice": "$353,609",
       "avgPricePerSqFt": "$219",
       "avgLivingSqFt": "1,614",
-      "avgDom": 59
+      "avgDom": 60
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 49,
+      "activeCount": 48,
       "soldCount": 223,
       "soldMedianPricePerSqFt": "$257",
       "soldMedianPrice": "$475,000",
@@ -205,7 +205,7 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 34,
+      "activeCount": 35,
       "soldCount": 204,
       "soldMedianPricePerSqFt": "$276",
       "soldMedianPrice": "$597,500",
@@ -215,7 +215,7 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 132,
-      "soldCount": 522,
+      "soldCount": 525,
       "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$440,000",
       "lowSample": false
@@ -223,23 +223,23 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 3.6,
-    "monthsOfSupplyCondo": 5.4,
+    "monthsOfSupplyCondo": 5.5,
     "monthsOfSupplySfhVilla": 3.0,
     "label": "seller's market",
     "activeCount": 215,
-    "sold365Count": 717,
-    "sold90Count": 169,
+    "sold365Count": 718,
+    "sold90Count": 170,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 542,
+      "soldCount": 543,
       "activeCount": 88,
       "soldMedianPrice": "$650,000",
-      "soldMedianPricePerSqFt": "$288"
+      "soldMedianPricePerSqFt": "$289"
     },
     "condo": {
-      "soldCount": 409,
+      "soldCount": 411,
       "activeCount": 127,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
@@ -247,7 +247,7 @@
   },
   "boating": {
     "activeWithDock": 0,
-    "activeWaterfront": 34
+    "activeWaterfront": 35
   },
   "marketQuestions": [
     {
@@ -258,7 +258,7 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Palmer Ranch?",
-      "a": "Single-family homes sell around $650,000 ($288/sq ft), while condos, villas and townhouses sell around $325,000 ($211/sq ft)."
+      "a": "Single-family homes sell around $650,000 ($289/sq ft), while condos, villas and townhouses sell around $325,000 ($211/sq ft)."
     },
     {
       "facet": "range",
@@ -268,12 +268,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 57 days on market and closed at 92.1% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 56 days on market and closed at 92.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 34 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 35 active waterfront listings, 0 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

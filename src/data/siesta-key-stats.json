@@ -2,15 +2,15 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-20T10:43:08.411241+00:00",
+  "lastUpdated": "2026-10-21T10:43:53.601386+00:00",
   "counts": {
-    "sold": 747,
-    "pending": 37,
+    "sold": 749,
+    "pending": 35,
     "active": 264,
     "total": 784
   },
   "metrics": {
-    "avgPrice": "$1,332,174",
+    "avgPrice": "$1,331,715",
     "avgPricePerSqFt": "$694",
     "avgYearBuilt": 1979,
     "avgLivingSqFt": "1,767",
@@ -29,16 +29,16 @@
     "newConstructionCount": 40
   },
   "sold": {
-    "count": 104,
+    "count": 103,
     "medianPrice": "$1,100,000",
-    "medianDom": 82,
-    "saleToListRatio": "89.4%",
+    "medianDom": 81,
+    "saleToListRatio": "89.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 6.8,
-    "sfhVilla": 6.7,
-    "blended": 6.8,
+    "sfhVilla": 6.6,
+    "blended": 6.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -67,6 +67,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4695589",
+      "address": "4925 PRIMROSE PATH",
+      "subdivision": "HARMONY",
+      "soldPrice": "$1,400,000",
+      "soldDate": "2026-10-20",
+      "bedrooms": 4,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,609",
+      "yearBuilt": 1969,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4691064",
+      "address": "239 HOURGLASS WAY #V7",
+      "subdivision": "WHISPERING SANDS",
+      "soldPrice": "$575,000",
+      "soldDate": "2026-10-20",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,327",
+      "yearBuilt": 1968,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4689477",
       "address": "5924 MIDNIGHT PASS RD #507",
@@ -105,32 +131,6 @@
       "yearBuilt": 1972,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4669686",
-      "address": "5400 OCEAN BLVD #5-3",
-      "subdivision": "TERRACE",
-      "soldPrice": "$1,295,000",
-      "soldDate": "2026-10-09",
-      "bedrooms": 1,
-      "bathrooms": 1.5,
-      "livingSqFt": "928",
-      "yearBuilt": 1970,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4679889",
-      "address": "8764 MIDNIGHT PASS RD #A306",
-      "subdivision": "ISLAND REEF I",
-      "soldPrice": "$1,200,000",
-      "soldDate": "2026-10-09",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,883",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 157,
-      "avgPrice": "$818,934",
+      "avgPrice": "$818,871",
       "avgPricePerSqFt": "$685",
       "avgLivingSqFt": "1,188",
-      "avgDom": 126
+      "avgDom": 127
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,438,475",
       "avgPricePerSqFt": "$723",
       "avgLivingSqFt": "1,999",
-      "avgDom": 218
+      "avgDom": 219
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$1,847,225",
       "avgPricePerSqFt": "$907",
       "avgLivingSqFt": "1,862",
-      "avgDom": 156
+      "avgDom": 157
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,672,000",
       "avgPricePerSqFt": "$1,439",
       "avgLivingSqFt": "3,376",
-      "avgDom": 246
+      "avgDom": 247
     }
   ],
   "condoTiersScope": {
@@ -188,8 +188,8 @@
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
       "activeCount": 65,
-      "soldCount": 266,
-      "soldMedianPricePerSqFt": "$749",
+      "soldCount": 267,
+      "soldMedianPricePerSqFt": "$748",
       "soldMedianPrice": "$1,000,000",
       "lowSample": false
     },
@@ -197,9 +197,9 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 74,
-      "soldCount": 231,
-      "soldMedianPricePerSqFt": "$582",
-      "soldMedianPrice": "$1,100,000",
+      "soldCount": 232,
+      "soldMedianPricePerSqFt": "$580",
+      "soldMedianPrice": "$1,107,500",
       "lowSample": false
     },
     {
@@ -231,24 +231,24 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 6.8,
+    "monthsOfSupply": 6.7,
     "monthsOfSupplyCondo": 6.8,
-    "monthsOfSupplySfhVilla": 6.7,
+    "monthsOfSupplySfhVilla": 6.6,
     "label": "balanced market",
     "activeCount": 264,
-    "sold365Count": 469,
-    "sold90Count": 104,
+    "sold365Count": 471,
+    "sold90Count": 103,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 223,
+      "soldCount": 224,
       "activeCount": 89,
-      "soldMedianPrice": "$1,527,000",
-      "soldMedianPricePerSqFt": "$657"
+      "soldMedianPrice": "$1,526,000",
+      "soldMedianPricePerSqFt": "$651"
     },
     "condo": {
-      "soldCount": 524,
+      "soldCount": 525,
       "activeCount": 175,
       "soldMedianPrice": "$800,000",
       "soldMedianPricePerSqFt": "$628"
@@ -262,17 +262,17 @@
     {
       "facet": "waterfront",
       "q": "How much more does beachfront cost than bayfront on Siesta Key?",
-      "a": "Gulf-front / beachfront homes sell at a median $749 per sq ft versus $582 for bay- or canal-front \u2014 about a 29% waterfront premium (Stellar MLS, recent closed sales)."
+      "a": "Gulf-front / beachfront homes sell at a median $748 per sq ft versus $580 for bay- or canal-front \u2014 about a 29% waterfront premium (Stellar MLS, recent closed sales)."
     },
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 264 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 6.8 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 264 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 6.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Siesta Key?",
-      "a": "Single-family homes sell around $1,527,000 ($657/sq ft), while condos, villas and townhouses sell around $800,000 ($628/sq ft)."
+      "a": "Single-family homes sell around $1,526,000 ($651/sq ft), while condos, villas and townhouses sell around $800,000 ($628/sq ft)."
     },
     {
       "facet": "range",
@@ -282,7 +282,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 82 days on market and closed at 89.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 81 days on market and closed at 89.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
