@@ -176,6 +176,10 @@ const jsonLd = [
         <div class="gbc-stat-label">Minimum Lease Period</div>
         <div class="gbc-stat-sub">100% of 164 MLS records</div>
       </div></div>
+      <div class="gbc-nudge">
+        <p class="gbc-nudge-text"><span class="gbc-nudge-eyebrow">Only curious?</span> Name your number. A private price on file, nothing signed; we reach out only if a buyer meets it.</p>
+        <a class="gbc-nudge-link" href="#make-me-move" data-mmm-jump>Name my number</a>
+      </div>
       
 
       <h3 class="font-display gbc-subhead">By the Building</h3>
@@ -541,7 +545,7 @@ const jsonLd = [
               <input id="s-email-gulf-and-bay-club-beachfront" name="email" type="email" required autocomplete="email" /></div>
             <div class="gbc-field"><label for="s-phone-gulf-and-bay-club-beachfront">Phone</label>
               <input id="s-phone-gulf-and-bay-club-beachfront" name="phone" type="tel" autocomplete="tel" /></div>
-            <div class="gbc-mmm">
+            <div class="gbc-mmm" id="make-me-move">
               <div class="gbc-mmm-head">
                 <span class="gbc-mmm-eyebrow">Make Me Move</span>
                 <span class="gbc-optional">optional</span>
@@ -805,6 +809,15 @@ const jsonLd = [
   .gbc-field input:focus,
   .gbc-field textarea:focus { outline:none; border-color:var(--color-gold); box-shadow:0 0 0 3px rgba(197,165,90,0.15); }
   .gbc-hp { position:absolute; left:-9999px; }
+  /* Name-your-number nudge under the stat row; jumps to the Make Me Move field */
+  .gbc-nudge { display:flex; align-items:center; justify-content:space-between; gap:1.25rem; flex-wrap:wrap; margin:1.6rem 0 2.1rem; padding:1rem 0; border-top:1px solid rgba(197,165,90,0.35); border-bottom:1px solid rgba(197,165,90,0.35); }
+  .gbc-nudge-text { flex:1 1 30rem; margin:0; color:rgba(255,255,255,0.78); font-size:0.92rem; line-height:1.6; }
+  .gbc-nudge-eyebrow { font-family:var(--font-accent); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--color-gold); margin-right:0.6rem; }
+  .gbc-nudge-link { flex:none; font-family:var(--font-accent); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--color-gold); text-decoration:none; padding:0.6rem 1.1rem; border:1px solid rgba(197,165,90,0.6); border-radius:9999px; transition:background .2s, color .2s; }
+  .gbc-nudge-link:hover { background:var(--color-gold); color:var(--color-dark); }
+  .gbc-mmm { scroll-margin-top:110px; }
+  .gbc-mmm.is-spotlight { animation:gbcMmmPulse 1.8s ease-out 1; }
+  @keyframes gbcMmmPulse { 0% { box-shadow:0 0 0 0 rgba(197,165,90,0.6); } 100% { box-shadow:0 0 0 16px rgba(197,165,90,0); } }
   /* Make Me Move: optional price inside the owner form (no agreement, no obligation) */
   .gbc-mmm { margin:0.2rem 0 1.1rem; padding:0.95rem 1rem 0.85rem; border:1px solid rgba(197,165,90,0.45); border-left:3px solid var(--color-gold); border-radius:0.5rem; background:linear-gradient(180deg, rgba(197,165,90,0.10), rgba(197,165,90,0.04)); }
   .gbc-mmm-head { display:flex; align-items:baseline; gap:0.35rem; }
@@ -906,6 +919,17 @@ const jsonLd = [
     });
     apply();
   });
+
+  // ── Make Me Move: jump + spotlight (nudge link or #make-me-move) ───
+  const mmmBox = document.getElementById('make-me-move');
+  const mmmJump = () => {
+    if (!mmmBox) return;
+    mmmBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    mmmBox.classList.remove('is-spotlight'); void mmmBox.offsetWidth; mmmBox.classList.add('is-spotlight');
+    setTimeout(() => { const i = mmmBox.querySelector('input'); if (i) i.focus({ preventScroll: true }); }, 650);
+  };
+  document.querySelectorAll('[data-mmm-jump]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); history.replaceState(null, '', '#make-me-move'); mmmJump(); }));
+  if (location.hash === '#make-me-move') setTimeout(mmmJump, 300);
 
   // ── Make Me Move price: digits only, commas as they type ────────
   document.querySelectorAll('input[name=make_me_move]').forEach((el) => {
