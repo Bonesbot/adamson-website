@@ -78,36 +78,23 @@ const jsonLd = [
       <hr class="gbc-hero-rule" />
       <p class="section-label text-cbgl-blue-light mb-3">Longboat Key &middot; 34228 &middot; Canal-Front</p>
       <h1 class="font-display text-white mb-4">Country Club Shores</h1>
-    </div>
-  </section>
-
-  <section class="section light-section">
-    <div class="container">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
-        <div>
-          <h2 class="accent-underline mb-6">About Country Club Shores</h2>
-          <p class="gbc-about">Country Club Shores is the south end of Longboat Key&rsquo;s signature canal neighborhood: four sections of single-family homes laid out in the late 1950s and 1960s on streets named for golf and sailing, from Putter and Birdie Lane to Ketch, Sloop and Halyard. Nearly every home backs to a deep-water canal off Sarasota Bay, minutes by boat to New Pass and the Gulf, with the Longboat Key Club&rsquo;s fairways just across Gulf of Mexico Drive and St. Armands Circle a five-minute drive south. The housing stock runs from original ranch homes on wide canal lots to brand-new coastal construction, which is exactly what makes the market here worth tracking closely. This page follows the real closed-sale market, straight from the MLS, with canal-front, open-bayfront and interior homes broken out separately.</p>
-          <div class="flex flex-wrap gap-3 mt-6">
-            <span class="gbc-chip">Deep-Water Canals</span>
-            <span class="gbc-chip">Minutes to New Pass</span>
-            <span class="gbc-chip">Single-Family Only</span>
-            <span class="gbc-chip">Golf Across the Street</span>
-            <span class="gbc-chip">5 Min to St. Armands</span>
-            <span class="gbc-chip">No HOA Towers</span>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-3 lg:gap-4">
-          <figure class="gbc-fig"><picture><source srcset="/images/country-club-shores/ccs-entrance-sign.webp" type="image/webp" /><img src="/images/country-club-shores/ccs-entrance-sign.jpg" alt="The Country Club Shores IV South entrance monument on Longboat Key, palms and mature canopy behind it" loading="lazy" decoding="async" width="1600" height="1200" /></picture></figure>
-          <figure class="gbc-fig"><picture><source srcset="/images/country-club-shores/canal-point-lots-sarasota-bay.webp" type="image/webp" /><img src="/images/country-club-shores/canal-point-lots-sarasota-bay.jpg" alt="Aerial over Country Club Shores: canal-front homes and the open-bayfront point lots reaching into Sarasota Bay" loading="lazy" decoding="async" width="1600" height="1200" /></picture></figure>
-          <figure class="gbc-fig"><picture><source srcset="/images/country-club-shores/royal-palm-street.webp" type="image/webp" /><img src="/images/country-club-shores/royal-palm-street.jpg" alt="A quiet Country Club Shores street lined with royal palms and single-story homes" loading="lazy" decoding="async" width="1600" height="1200" /></picture></figure>
-          <figure class="gbc-fig"><picture><source srcset="/images/country-club-shores/beach-access-longboat-key-gulf.webp" type="image/webp" /><img src="/images/country-club-shores/beach-access-longboat-key-gulf.jpg" alt="The Gulf beach and Longboat Key Club towers a short walk from Country Club Shores, golf course inland" loading="lazy" decoding="async" width="1600" height="1200" /></picture></figure>
-          <figure class="gbc-fig gbc-fig-wide"><picture><source srcset="/images/country-club-shores/golf-canals-to-the-bay-aerial.webp" type="image/webp" /><img src="/images/country-club-shores/golf-canals-to-the-bay-aerial.jpg" alt="Wide aerial of Country Club Shores: the golf course across Gulf of Mexico Drive, the canal grid, and Sarasota Bay beyond" loading="lazy" decoding="async" width="1600" height="900" /></picture></figure>
-        </div>
+      <div class="gbc-pulse" aria-label="Country Club Shores market pulse">
+        <a class="gbc-pulse-item" href="#market">
+          <span class="gbc-pulse-k">Latest closing</span>
+          <span class="gbc-pulse-v">549 Halyard Ln &middot; $1,925,000</span>
+          <span class="gbc-pulse-s">closed Oct 8</span>
+        </a>
+        <a class="gbc-pulse-item" href="#market">
+          <span class="gbc-pulse-k">180-day median</span>
+          <span class="gbc-pulse-v">$2,600,000</span>
+          <span class="gbc-pulse-s">17 closed sales</span>
+        </a>
       </div>
     </div>
   </section>
 
-  <section class="section dark-section">
+
+  <section id="market" class="section dark-section">
     <div class="container">
       <p class="section-label text-cbgl-blue-light mb-3">Country Club Shores</p>
       <h2 class="font-display mb-3">Closed Market Snapshot</h2>
@@ -588,6 +575,32 @@ const jsonLd = [
     showOffMarketCta={false}
   />
 
+  <section class="section light-section">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
+        <div>
+          <h2 class="accent-underline mb-6">About Country Club Shores</h2>
+          <p class="gbc-about">Country Club Shores is the south end of Longboat Key&rsquo;s signature canal neighborhood: four sections of single-family homes laid out in the late 1950s and 1960s on streets named for golf and sailing, from Putter and Birdie Lane to Ketch, Sloop and Halyard. Nearly every home backs to a deep-water canal off Sarasota Bay, minutes by boat to New Pass and the Gulf, with the Longboat Key Club&rsquo;s fairways just across Gulf of Mexico Drive and St. Armands Circle a five-minute drive south. The housing stock runs from original ranch homes on wide canal lots to brand-new coastal construction, which is exactly what makes the market here worth tracking closely. This page follows the real closed-sale market, straight from the MLS, with canal-front, open-bayfront and interior homes broken out separately.</p>
+          <div class="flex flex-wrap gap-3 mt-6">
+            <span class="gbc-chip">Deep-Water Canals</span>
+            <span class="gbc-chip">Minutes to New Pass</span>
+            <span class="gbc-chip">Single-Family Only</span>
+            <span class="gbc-chip">Golf Across the Street</span>
+            <span class="gbc-chip">5 Min to St. Armands</span>
+            <span class="gbc-chip">No HOA Towers</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3 lg:gap-4">
+          <figure class="gbc-fig"><picture><source srcset="/images/country-club-shores/ccs-entrance-sign.webp" type="image/webp" /><img src="/images/country-club-shores/ccs-entrance-sign.jpg" alt="The Country Club Shores IV South entrance monument on Longboat Key, palms and mature canopy behind it" loading="lazy" decoding="async" width="1600" height="1200" /></picture></figure>
+          <figure class="gbc-fig"><picture><source srcset="/images/country-club-shores/canal-point-lots-sarasota-bay.webp" type="image/webp" /><img src="/images/country-club-shores/canal-point-lots-sarasota-bay.jpg" alt="Aerial over Country Club Shores: canal-front homes and the open-bayfront point lots reaching into Sarasota Bay" loading="lazy" decoding="async" width="1600" height="1200" /></picture></figure>
+          <figure class="gbc-fig"><picture><source srcset="/images/country-club-shores/royal-palm-street.webp" type="image/webp" /><img src="/images/country-club-shores/royal-palm-street.jpg" alt="A quiet Country Club Shores street lined with royal palms and single-story homes" loading="lazy" decoding="async" width="1600" height="1200" /></picture></figure>
+          <figure class="gbc-fig"><picture><source srcset="/images/country-club-shores/beach-access-longboat-key-gulf.webp" type="image/webp" /><img src="/images/country-club-shores/beach-access-longboat-key-gulf.jpg" alt="The Gulf beach and Longboat Key Club towers a short walk from Country Club Shores, golf course inland" loading="lazy" decoding="async" width="1600" height="1200" /></picture></figure>
+          <figure class="gbc-fig gbc-fig-wide"><picture><source srcset="/images/country-club-shores/golf-canals-to-the-bay-aerial.webp" type="image/webp" /><img src="/images/country-club-shores/golf-canals-to-the-bay-aerial.jpg" alt="Wide aerial of Country Club Shores: the golf course across Gulf of Mexico Drive, the canal grid, and Sarasota Bay beyond" loading="lazy" decoding="async" width="1600" height="900" /></picture></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="contact" class="section light-section">
     <div class="container">
       <p class="section-label mb-3">Two Ways In</p>
@@ -702,7 +715,7 @@ const jsonLd = [
 
 <style is:global>
   .gbc-hero.gbc-hero--video {
-    min-height:clamp(540px, 84vh, 920px);
+    min-height:clamp(480px, 64vh, 760px);
     display:flex; align-items:flex-end;
     padding-top:7rem; padding-bottom:4rem;
   }
@@ -727,8 +740,26 @@ const jsonLd = [
     width:64px; height:2px; margin:0 0 1.5rem; border:0;
     background:var(--color-gold); box-shadow:0 1px 10px rgba(4,12,26,0.5);
   }
+  /* hero pulse: the two numbers a returning owner came for, before any scrolling */
+  .gbc-pulse { display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:1.25rem; }
+  .gbc-pulse-item {
+    display:flex; flex-direction:column; gap:0.15rem; min-width:14rem;
+    padding:0.8rem 1.1rem; border-radius:0.6rem; text-decoration:none;
+    background:rgba(4,12,26,0.55); border:1px solid rgba(255,255,255,0.18);
+    backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .gbc-pulse-item:hover { border-color:var(--color-gold); background:rgba(4,12,26,0.72); }
+  .gbc-pulse-k { font-family:var(--font-accent); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--color-gold); }
+  .gbc-pulse-v { font-family:var(--font-display); font-size:1.25rem; line-height:1.2; color:#fff; }
+  .gbc-pulse-s { font-size:0.8rem; color:rgba(255,255,255,0.72); }
   @media (max-width:640px) {
-    .gbc-hero.gbc-hero--video { min-height:clamp(460px, 76vh, 680px); padding-top:6rem; padding-bottom:2.5rem; }
+    .gbc-pulse { gap:0.5rem; }
+    .gbc-pulse-item { flex:1 1 100%; min-width:0; padding:0.65rem 0.9rem; }
+    .gbc-pulse-v { font-size:1.1rem; }
+  }
+  @media (max-width:640px) {
+    .gbc-hero.gbc-hero--video { min-height:clamp(420px, 60vh, 560px); padding-top:6rem; padding-bottom:2.5rem; }
   }
   @media (prefers-reduced-motion: reduce) {
     .gbc-hero-video { display:none; }

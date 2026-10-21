@@ -371,6 +371,27 @@ def load_template():
     return _gh_raw(REL_TEMPLATE)
 
 
+
+def pulse_tokens(s):
+    """Hero strip: the newest closing and the 180-day headline, so a returning owner
+    sees what moved before scrolling. Ledger is most-recent-first; empty ledger
+    (never happened, but) degrades to dashes rather than a crashed build."""
+    led = s["ledger"]
+    if led:
+        r = led[0]
+        d = date.fromisoformat(r["close"])
+        addr = " ".join(w.capitalize() for w in (r["addr"] or "").split())
+        latest_addr, latest_price, latest_date = esc(addr), money(r["price"]), f"{d.strftime('%b')} {d.day}"
+    else:
+        latest_addr = latest_price = latest_date = "—"
+    return {
+        "LATEST_ADDR": latest_addr,
+        "LATEST_PRICE": latest_price,
+        "LATEST_DATE": latest_date,
+        "SNAP_MEDIAN": money(s["snap"]["md"]),
+        "SNAP_N": str(s["snap"]["n"]),
+    }
+
 def render_page(s, template=None):
     tpl = template or load_template()
     as_of = date.fromisoformat(s["asOf"])
@@ -403,6 +424,7 @@ def render_page(s, template=None):
         "LEDGER_COUNT": str(total),
         "LEDGER_ROWS": render_ledger(s),
         "TREND_GRID": render_trend(s),
+        **pulse_tokens(s),
     }
     out = tpl
     for k, v in tokens.items():
