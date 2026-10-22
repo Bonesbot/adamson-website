@@ -18,6 +18,7 @@ import BreadcrumbNav from '@/components/newconstruction/BreadcrumbNav.astro';
 import QuickFactsPanel from '@/components/newconstruction/QuickFactsPanel.astro';
 import LocationBlock from '@/components/newconstruction/LocationBlock.astro';
 import ComparableProjects from '@/components/newconstruction/ComparableProjects.astro';
+import ProjectIdxFeed from '@/components/newconstruction/ProjectIdxFeed.astro';
 import FAQSchema from '@/components/seo/FAQSchema.astro';
 import SchedulerEmbed from '@/components/newconstruction/SchedulerEmbed.astro';
 import StickyMobileCta from '@/components/newconstruction/StickyMobileCta.astro';
@@ -297,7 +298,7 @@ const jsonLd: Record<string, any>[] = [
           <div class="mt-10 bg-black border-l-4 border-[var(--color-gold)] rounded-r-lg p-6 md:p-8">
             <p class="font-accent text-[10px] uppercase tracking-[0.2em] text-[var(--color-gold)] mb-3">Ryan's take</p>
             <p class="text-white/80 leading-relaxed">
-              Downtown has had bigger towers and newer towers, but it has never had a project on a full city block of South Palm with a landmark at its feet. Mira Mar is the one I point to when a client wants true pre-construction pricing, the longest runway for floor-plan and finish selection of any tower in the core, and a service model built with Forbes Travel Guide's consulting division. Seaward is a local developer with a delivered track record here (Epoch, 7 One One Palm, Park Residences on Lido Key), which matters more than anything else in condominium development. The pricing-by-floor sheet, the release calendar and the full plan set are things I walk through in person; what is on this page is the starting point.
+              Downtown has had bigger towers and newer towers, but it has never had a project on a full city block of South Palm with a landmark at its feet. Mira Mar is the one I point to when a client wants true pre-construction pricing, the longest runway for floor-plan and finish selection of any tower in the core, and a service model built with Forbes Travel Guide's consulting division. Seaward is a local developer with a delivered track record here (Epoch, 7 One One Palm, Park Residences on Lido Key), which matters more than anything else in condominium development. The pricing-by-floor sheet, the release calendar and the full plan set are things I walk through in person; what is on this page is the starting point. The developer's released residences are listed in the MLS under 65 S. Palm Avenue, and that live feed is further down this page.
             </p>
             <p class="mt-4 text-sm text-white/50">Ryan Adamson, PA &middot; Coldwell Banker Realty, St. Armands Circle</p>
           </div>
@@ -544,6 +545,9 @@ const jsonLd: Record<string, any>[] = [
 
   <!-- ───────────── LOCATION ───────────── -->
   <LocationBlock address="47 S. Palm Avenue, Sarasota, FL 34236" lat={27.3348} lng={-82.543} callouts={locationCallouts} />
+
+  <!-- ───────────── LIVE MLS AVAILABILITY (IDX Broker widget 50180: subdivision Mira Mar, 65 S Palm Ave) ───────────── -->
+  <ProjectIdxFeed project={project} label="On the market now" />
 
   <!-- ───────────── REQUEST FORM (held-back items) ───────────── -->
   <section id="request" class="cbgl-section py-16 md:py-20 scroll-mt-20">

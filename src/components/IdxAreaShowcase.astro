@@ -47,7 +47,14 @@ const {
   label = 'Active Listings',
   offMarketUrl = '/find-my-dream-home',
   showOffMarketCta = true,
+  heading,
+  intro = 'Live from Stellar MLS. Updated continuously.',
+  viewAllLabel,
+  offMarketText,
+  headingLevel = 'h2',
 } = Astro.props;
+const headingText = heading || `Currently for Sale in ${areaName}`;
+const Heading = headingLevel;
 ---
 
 <section class="section dark-section idx-area-showcase">
@@ -56,11 +63,9 @@ const {
       <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">
         {label}
       </p>
-      <h2 class="accent-underline-center">
-        Currently for Sale in {areaName}
-      </h2>
+      <Heading class="accent-underline-center" set:html={headingText} />
       <p class="text-white/60 text-sm max-w-xl mx-auto mt-3">
-        Live from Stellar MLS. Updated continuously.
+        {intro}
       </p>
       {showOffMarketCta && (
         <p class="text-sm max-w-xl mx-auto mt-2 text-white/70">
@@ -155,7 +160,7 @@ const {
           href={viewAllUrl}
           class="inline-flex items-center justify-center font-accent uppercase tracking-wider transition-all duration-200 rounded bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] font-semibold text-sm px-8 py-4"
         >
-          View All {areaName} Listings
+          {viewAllLabel || <>View All {areaName} Listings</>}
         </a>
       </div>
     )}
@@ -168,8 +173,8 @@ const {
               Don't see the home you want?
             </h3>
             <p class="text-white/70 text-sm md:text-base m-0 max-w-2xl">
-              Many of {areaName}'s finest properties trade quietly : before they ever reach the MLS.
-              Tell Ryan what you're looking for and get matched against off-market and pre-list opportunities.
+              {offMarketText || <>Many of {areaName}'s finest properties trade quietly : before they ever reach the MLS.
+              Tell Ryan what you're looking for and get matched against off-market and pre-list opportunities.</>}
             </p>
           </div>
           <a

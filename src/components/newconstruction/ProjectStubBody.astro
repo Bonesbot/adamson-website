@@ -7,7 +7,7 @@
  * Per spec build_depth definition: "Fill out in Phase 2."
  */
 import QuickFactsPanel from './QuickFactsPanel.astro';
-import IdxListingGrid from './IdxListingGrid.astro';
+import ProjectIdxFeed from './ProjectIdxFeed.astro';
 import SchedulerEmbed from './SchedulerEmbed.astro';
 
 interface Props {
@@ -35,12 +35,6 @@ const { project } = Astro.props;
           </p>
         </div>
 
-        <h3 class="font-display text-2xl text-white mb-4">Currently for sale</h3>
-        <IdxListingGrid
-          subdivisions={project.mls_subdivision && !String(project.mls_subdivision).startsWith('FILL_IN') ? [project.mls_subdivision] : []}
-          heading=""
-          limit={3}
-        />
       </div>
       <div>
         <QuickFactsPanel project={project} />
@@ -48,5 +42,7 @@ const { project } = Astro.props;
     </div>
   </div>
 </section>
+
+<ProjectIdxFeed project={project} />
 
 <SchedulerEmbed projectName={project.name} />

@@ -15,7 +15,7 @@ import Hero from '@/components/newconstruction/Hero.astro';
 import QuickFactsPanel from '@/components/newconstruction/QuickFactsPanel.astro';
 import AmenitiesGrid from '@/components/newconstruction/AmenitiesGrid.astro';
 import LocationBlock from '@/components/newconstruction/LocationBlock.astro';
-import IdxListingGrid from '@/components/newconstruction/IdxListingGrid.astro';
+import ProjectIdxFeed from '@/components/newconstruction/ProjectIdxFeed.astro';
 import ComparableProjects from '@/components/newconstruction/ComparableProjects.astro';
 import FAQSchema from '@/components/seo/FAQSchema.astro';
 import SchedulerEmbed from '@/components/newconstruction/SchedulerEmbed.astro';
@@ -147,21 +147,8 @@ const lastVerified = project.last_verified && !String(project.last_verified).sta
       <!-- Location -->
       <LocationBlock address={project.address} lat={project.lat} lng={project.lng} />
 
-      <!-- Live availability (IDX filtered to project subdivision) -->
-      <section class="section dark-section">
-        <div class="container">
-          <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Availability</p>
-          <h2 class="accent-underline mb-3">Currently Available at {project.name}</h2>
-          <p class="text-white/60 mb-10 max-w-2xl">
-            Resale and pre-construction availability through the Stellar MLS feed.
-          </p>
-          <IdxListingGrid
-            heading=""
-            subdivisions={project.mls_subdivision && !String(project.mls_subdivision).startsWith('FILL_IN') ? [project.mls_subdivision] : []}
-            limit={6}
-          />
-        </div>
-      </section>
+      <!-- Live availability: IDX Broker showcase widget per project (projects.json idx.widget_id) -->
+      <ProjectIdxFeed project={project} />
 
       <!-- Comparable projects -->
       <ComparableProjects

@@ -9,6 +9,7 @@
  */
 import ProjectCard from './ProjectCard.astro';
 import IdxListingGrid from './IdxListingGrid.astro';
+import IdxAreaShowcase from '@/components/IdxAreaShowcase.astro';
 
 interface Project {
   slug: string;
@@ -34,6 +35,8 @@ interface Props {
   /** Drives the per-island IDX feed filter. */
   zipCodes?: string[];
   subdivisionKeywords?: string[];
+  /** When the island's projects carry an IDX widget, render the live feed from the first one. */
+  idxProjects?: any[];
 }
 
 const {
@@ -46,7 +49,9 @@ const {
   islandFaqs,
   zipCodes = [],
   subdivisionKeywords = [],
+  idxProjects = [],
 } = Astro.props;
+const idxProject = idxProjects.find((p: any) => p && p.idx && p.idx.widget_id);
 ---
 
 <section id={anchor} class="section dark-section-elevated scroll-mt-20">
@@ -86,13 +91,31 @@ const {
       </div>
     )}
 
-    <h3 class="font-display text-xl text-white mb-6">Currently for sale on {islandName}</h3>
-    <IdxListingGrid
-      island={islandSlug}
-      zipCodes={zipCodes}
-      subdivisionKeywords={subdivisionKeywords}
-      limit={3}
-    />
+    {idxProject ? (
+      <div class="idx-island-feed -mx-4 md:mx-0">
+        <IdxAreaShowcase
+          widgetId={String(idxProject.idx.widget_id)}
+          scriptSrc={`https://adamsonfl.idxbroker.com/idx/customshowcasejs.php?widgetid=${idxProject.idx.widget_id}`}
+          areaName={idxProject.name}
+          headingLevel="h3"
+          heading={`Currently Listed at ${idxProject.name}`}
+          intro={`Live Stellar MLS listings on ${islandName}${idxProject.mls_street_address ? `, ${idxProject.mls_street_address}` : ''}. Updated continuously.`}
+          viewAllUrl={idxProject.idx.results_path}
+          viewAllLabel={`View all ${idxProject.name} listings`}
+          showOffMarketCta={false}
+        />
+      </div>
+    ) : (
+      <>
+        <h3 class="font-display text-xl text-white mb-6">Currently for sale on {islandName}</h3>
+        <IdxListingGrid
+          island={islandSlug}
+          zipCodes={zipCodes}
+          subdivisionKeywords={subdivisionKeywords}
+          limit={3}
+        />
+      </>
+    )}
 
     {islandFaqs.length > 0 && (
       <div class="mt-12">

@@ -10,7 +10,7 @@ import TrustBar from '@/components/newconstruction/TrustBar.astro';
 import ProjectMap from '@/components/newconstruction/ProjectMap.astro';
 import ProjectComparisonTable from '@/components/newconstruction/ProjectComparisonTable.astro';
 import AreaSection from '@/components/newconstruction/AreaSection.astro';
-import IdxListingGrid from '@/components/newconstruction/IdxListingGrid.astro';
+import IdxAreaShowcase from '@/components/IdxAreaShowcase.astro';
 import MarketDataKpis from '@/components/newconstruction/MarketDataKpis.astro';
 import WhyRyanBlock from '@/components/newconstruction/WhyRyanBlock.astro';
 import FAQSchema from '@/components/seo/FAQSchema.astro';
@@ -149,17 +149,18 @@ const jsonLd: Record<string, any>[] = [
     variant="elevated"
   />
 
-  <!-- 5. Active listings (IDX slot) -->
-  <section class="section dark-section">
-    <div class="container">
-      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Currently available</p>
-      <h2 class="accent-underline mb-3">Currently Available in Sarasota New Construction</h2>
-      <p class="text-white/60 mb-10 max-w-2xl">
-        Live MLS listings across the projects tracked on this page.
-      </p>
-      <IdxListingGrid heading="" limit={6} slotId="idx-hub-new-construction" />
-    </div>
-  </section>
+  <!-- 5. Active listings: IDX Broker showcase widget 50188 (all 8 tracked projects, ZIP 34236) -->
+  <IdxAreaShowcase
+    widgetId="50188"
+    scriptSrc="https://adamsonfl.idxbroker.com/idx/customshowcasejs.php?widgetid=50188"
+    areaName="Sarasota New Construction"
+    label="Currently available"
+    heading="Currently Listed Across Sarasota's New Towers"
+    intro="Live Stellar MLS listings from the eight projects tracked on this page: Mira Mar, The Owen, The Ritz-Carlton Residences, Rosewood Lido Key, Amara, The Edge, The Gallery and SIX88."
+    viewAllUrl="/idx/results/listings?idxID=d003&pt=1&ccz=zipcode&zipcode[]=34236&a_subdivision[]=Mira+Mar&a_subdivision[]=The+Owen+Golden+Gate+Point&a_subdivision[]=Ritz-carlton+Residences%2C+Sarasota+Bay&a_subdivision[]=Ritz-carlton+Residences%2C+Sarasota&a_subdivision[]=Ritz+Carlton+Residences+Sarasota&a_subdivision[]=Ritz+Carlton+Residences+Quay+Sarasota&a_subdivision[]=Rosewood+Residences+Lido+Key&a_subdivision[]=Amara+On+Sarasota+Bay&a_subdivision[]=The+Edge+Sarasota&a_subdivision[]=The+Gallery+Sarasota&a_subdivision[]=Six88+Sarasota&per=100"
+    viewAllLabel="View every new-construction listing"
+    offMarketText="Developer releases and pre-construction reservations usually never reach the MLS. Tell Ryan what you are looking for and he will source it across every sales gallery in town."
+  />
 
   <!-- 6. Market data snapshot (live pipeline stats) -->
   <MarketDataKpis scope="Downtown Sarasota Market" kpis={kpis} asOf={statsAsOf} source="Stellar MLS via Adamson Group data pipeline" />
