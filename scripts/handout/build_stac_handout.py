@@ -264,7 +264,7 @@ CSS = f"""
 @page {{ size: 5.75in 8.75in; margin: 0; }}
 * {{ box-sizing: border-box; }}
 body {{ margin:0; font-family: Inter, sans-serif; color:{INK}; -webkit-print-color-adjust: exact; print-color-adjust: exact; }}
-.page {{ width:5.75in; height:8.75in; padding:{PAD}pt; background:{CREAM}; position:relative; overflow:hidden; page-break-after: always; }}
+.page {{ width:5.75in; height:8.75in; padding:{PAD}pt {PAD}pt {PAD - 2}pt; background:{CREAM}; position:relative; overflow:hidden; page-break-after: always; }}
 .page:last-child {{ page-break-after: auto; }}
 h1 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:23pt; margin:0; color:{NAVY}; line-height:1; }}
 .kicker {{ font-family: Montserrat, sans-serif; font-weight:700; font-size:6.8pt; color:{GOLD}; text-transform:uppercase; margin:0 0 4pt; }}
@@ -297,15 +297,19 @@ h1 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:23pt; ma
 /* back */
 .life {{ display:flex; gap:10pt; align-items:center; }}
 .life ul {{ margin:4pt 0 0; padding:0; list-style:none; }}
-.life li {{ font-size:7pt; line-height:1.35; white-space:nowrap; color:{NAVY}; font-weight:600; }}
+.life li {{ font-size:7pt; line-height:1.3; white-space:nowrap; color:{NAVY}; font-weight:600; }}
 .life li span {{ color:{GOLD}; margin-right:4pt; }}
 .life .qrc {{ flex:none; text-align:center; }}
 .life .qrc img {{ width:54pt; height:54pt; display:block; margin:0 auto 2pt; }}
 .life .qrc small {{ font-family:Montserrat; font-weight:700; font-size:5.8pt; color:{NAVY}; display:block; line-height:1.2; }}
 .nums {{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:6pt; margin-top:4pt; }}
-.stat {{ text-align:center; background:{CREAM}; border-radius:7pt; padding:4pt 3pt; }}
-.stat b {{ display:block; font-family:Montserrat; font-weight:700; font-size:11pt; color:{NAVY}; line-height:1; }}
-.stat small {{ display:block; font-size:5.8pt; color:#55656F; margin-top:2pt; line-height:1.25; }}
+.nums.four {{ grid-template-columns:1fr 1fr; gap:4pt; margin-top:2pt; }}
+.stat b i {{ font-style:normal; font-family:Inter; font-weight:400; font-size:7pt; color:#8E9AA3; }}
+.stat {{ text-align:center; background:{CREAM}; border-radius:7pt; padding:3.5pt 3pt; }}
+.stat b {{ display:block; font-family:Montserrat; font-weight:700; font-size:9.2pt; color:{NAVY}; line-height:1; white-space:nowrap; }}
+.stat small {{ display:block; font-size:5.8pt; color:#55656F; margin-top:1.5pt; line-height:1.2; }}
+.card.wide {{ margin-bottom:5pt; }}
+.cols {{ display:grid; grid-template-columns:1fr 1fr; gap:10pt; }}
 .events {{ background:#fff; border:1pt solid #E4DCCB; border-radius:9pt; padding:4pt 9pt; margin-bottom:5pt; font-size:6.6pt; line-height:1.42; color:#3B4A55; }}
 .events b {{ color:{NAVY}; }}
 .events .h {{ font-family:Montserrat; font-weight:700; font-size:7pt; color:{GOLD}; text-transform:uppercase; margin-right:6pt; }}
@@ -313,10 +317,10 @@ h1 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:23pt; ma
 .lead {{ font-size:7.6pt; line-height:1.38; color:#3B4A55; margin:0 0 6pt; }}
 .slots {{ display:grid; grid-template-columns:repeat(3,1fr); gap:7pt; margin-bottom:4pt; }}
 .slot {{ background:#fff; border:1pt solid #E4DCCB; border-radius:8pt; overflow:hidden; }}
-.slot .ph {{ height:40pt; background-size:cover; background-position:center; }}
+.slot .ph {{ height:36pt; background-size:cover; background-position:center; }}
 .slot .st {{ display:inline-block; font-family:Montserrat; font-weight:700; font-size:5pt; text-transform:uppercase; color:#fff; background:{NAVY}; border-radius:999pt; padding:2pt 5pt; margin:5pt 0 0 5pt; }}
 .nc-head {{ display:flex; align-items:center; gap:9pt; margin:0 0 5pt; }}
-.nc-head img {{ width:54pt; height:54pt; flex:none; }}
+.nc-head img {{ width:50pt; height:50pt; flex:none; }}
 .nc-head .u {{ font-family:Montserrat; font-weight:700; font-size:6.4pt; color:{NAVY}; }}
 .credit {{ font-size:5.4pt; color:#9AA5AD; margin:-3pt 0 6pt; }}
 .slot .b {{ padding:5pt 6pt 6pt; }}
@@ -324,16 +328,16 @@ h1 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:23pt; ma
 .slot .a {{ font-size:6.5pt; color:#55656F; margin-top:2pt; line-height:1.3; }}
 .slot .pr {{ font-family:Montserrat; font-weight:700; font-size:7pt; color:{GOLD}; margin-top:3pt; }}
 .slot .f {{ font-size:6pt; color:#7B8993; margin-top:2pt; }}
-.band {{ background:{NAVY}; color:#fff; border-radius:10pt; padding:8pt 12pt; margin-bottom:6pt; display:flex; align-items:center; gap:12pt; }}
+.band {{ background:{NAVY}; color:#fff; border-radius:10pt; padding:7pt 12pt; margin-bottom:5pt; display:flex; align-items:center; gap:12pt; }}
 .band .big {{ font-family:'Playfair Display', serif; font-size:13pt; line-height:1.12; }}
 .band .num {{ font-family:Montserrat; font-weight:700; font-size:15pt; color:{GOLD}; white-space:nowrap; }}
 .band .s {{ font-size:7pt; color:#C8D3DB; margin-top:3pt; }}
 .two {{ display:grid; grid-template-columns:1fr 1fr; gap:7pt; margin-bottom:5pt; }}
 .card {{ background:#fff; border:1pt solid #E4DCCB; border-radius:9pt; padding:6pt 9pt; }}
 .card h3 {{ font-family:Montserrat; font-weight:700; font-size:7.4pt; text-transform:uppercase; color:{GOLD}; margin:0 0 4pt; }}
-.card p {{ font-size:7.1pt; line-height:1.38; margin:0; color:#3B4A55; }}
+.card p {{ font-size:7pt; line-height:1.34; margin:0; color:#3B4A55; }}
 .line {{ border-bottom:.7pt solid #B9C2C9; height:9pt; margin-top:4pt; }}
-.contact {{ display:flex; align-items:center; gap:10pt; border-top:1pt solid {GOLD}; padding-top:6pt; }}
+.contact {{ display:flex; align-items:center; gap:10pt; border-top:1pt solid {GOLD}; padding-top:5pt; }}
 .contact img {{ height:26pt; }}
 .contact .nm2 {{ font-family:'Playfair Display', serif; font-size:11.5pt; color:{NAVY}; line-height:1.05; }}
 .contact .r {{ font-size:7pt; color:#55656F; line-height:1.4; }}
@@ -377,12 +381,19 @@ back = f"""
   <div class="band"><div><div class="big">Text my assistant anything about Sarasota.</div><div class="s">Prices on Longboat, which buildings allow rentals, where to eat tonight, what insurance really costs on the water. Trained on my notes, answers in a minute, hands you to me when it matters.</div></div><div class="num">941-XXX-XXXX</div></div>
   <div class="two">
     <div class="card"><h3>Let's find your lifestyle</h3><div class="life"><div><p style="margin-bottom:2pt">Scan, then just say one of these:</p><ul><li><span>›</span>"Toes in the sand."</li><li><span>›</span>"Gated golf, two bedrooms."</li><li><span>›</span>"A boat in the backyard."</li><li><span>›</span>"Walk to dinner, no car."</li></ul></div><div class="qrc"><img src="assets/qr-talk.png" alt="QR code"><small>adamsonfl.com/talk</small></div></div></div>
-    <div class="card"><h3>The islands, in three numbers</h3><div class="nums"><div class="stat"><b>{CASH_LB}%</b><small>cash sales, Longboat Key ({CASH_SL}% Lido &amp; downtown)</small></div><div class="stat"><b>{MOS_SL} mo</b><small>condo supply, Lido &amp; St. Armands ({MOS_LB} Longboat)</small></div><div class="stat"><b>{PPSF_LB}</b><small>avg per sq ft, Longboat ({PPSF_SL} Lido &amp; St. Armands)</small></div></div><p style="margin-top:4pt;font-size:6.4pt;color:#55656F">From my daily MLS pull. Translation: you have choices and leverage this season.</p></div>
+    <div class="card"><h3>How's the market? It depends.</h3>
+      <div class="nums four">
+        <div class="stat"><b>$817 <i>vs</i> $459</b><small>per sq ft, beachfront vs bayfront condos</small></div>
+        <div class="stat"><b>4.3 <i>vs</i> 6.7 mo</b><small>supply: beachfront tight, bayfront a buyer's market</small></div>
+        <div class="stat"><b>11 <i>vs</i> 6 mo</b><small>supply, new (2015+) vs pre-1995 condos</small></div>
+        <div class="stat"><b>~6% under</b><small>asking, where closings landed; new held firmest</small></div>
+      </div>
+      <p style="margin-top:3pt;font-size:6.1pt;color:#55656F">Longboat, Lido &amp; downtown condos, trailing 12 months, from my daily MLS pull.</p></div>
   </div>
-  <div class="two">
-    <div class="card"><h3>Getting around</h3><p><b>Lido Beach:</b> 5 minutes up John Ringling Blvd; right on Ben Franklin for quieter North Lido. <b>Bay Runner trolley:</b> free, links Lido Beach, the Circle and downtown. <b>Parking:</b> 1,600+ city spaces in the Fillmore lot and N. Adams garage.</p></div>
-    <div class="card"><h3>If you only eat on the Circle once</h3><p><b>Columbia</b> for the 1905 salad and sangria · <b>Venezia</b> for pizza and people-watching · <b>Blu Kouzina</b> for octopus and meze · <b>Green Zebra</b> for breakfast before the beach.</p></div>
-  </div>
+  <div class="card wide"><div class="cols">
+    <div><h3>Getting around</h3><p><b>Lido Beach:</b> 5 minutes up John Ringling Blvd; right on Ben Franklin for quieter North Lido. <b>Bay Runner trolley:</b> free, links Lido Beach, the Circle and downtown. <b>Parking:</b> 1,600+ city spaces in the Fillmore lot and N. Adams garage.</p></div>
+    <div><h3>If you only eat here once</h3><p><b>Columbia</b> for the 1905 salad and sangria · <b>Venezia</b> for pizza and people-watching · <b>Blu Kouzina</b> for octopus and meze · <b>Green Zebra</b> for breakfast before the beach.</p></div>
+  </div></div>
   <div class="events"><span class="h">2026–27 season</span><b>Oct 31</b> Fright Night, 6–8pm · <b>Nov 7</b> Ferraris on the Circle · <b>Nov 14–15</b> Art Festival · <b>Dec 5</b> Holiday Night of Lights · <b>Dec</b> Porsches in the Park · <b>Jan 30–31</b> Art Festival · <b>Jan</b> Century of Cars · <b>May</b> Corvettes · <b>May 29–30</b> Fine Art Festival · <b>June</b> Craft Festival <span style="color:#8E9AA3">(2027 dates TBA)</span></div>
   <div class="contact"><img src="assets/adamson-group-logo.png" alt=""><div><div class="nm2">Ryan Adamson, PA</div><div class="r">Adamson Group · Coldwell Banker Realty<br>423 St. Armands Circle, Sarasota, FL 34236 · AdamsonFL.com</div></div><div class="ph2">(941) 713-9234<small>call or text Ryan directly</small></div></div>
 </div>"""
