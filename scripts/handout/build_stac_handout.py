@@ -6,9 +6,14 @@ quadrants tinted in the lamppost banner colours, every restaurant/sweet shop fro
 St. Armands layer numbered, Ryan's picks starred, and a QR to adamsonfl.com/circle.
 Back: listing slots, text line, sign-up, contact strip.
 
+Built to be re-edited in Adobe Express / Canva: live text in Playfair Display, Montserrat and
+Inter (all in both apps' font libraries), with only the map, the phone mockup and the QR
+flattened to 300-dpi PNGs. Page is 5.75 x 8.75 in (5.5 x 8.5 trim + 0.125 in bleed) with
+all text inside a 0.25 in safe margin.
+
 Usage (from repo root):
-    python3 scripts/handout/build_stac_handout.py <osm_vec.json> <out_dir>
-Produces <out_dir>/stac_handout.html and <out_dir>/stac_handout.pdf (Chromium via Playwright).
+    python3 scripts/handout/build_stac_handout.py scripts/handout/data/stac_osm_vec.json <out_dir>
+Produces <out_dir>/stac_handout_bleed.pdf, stac_handout_trim.pdf and assets/*.png.
 """
 import json, math, sys, os, re, subprocess
 import segno
@@ -22,15 +27,15 @@ pins = [p for p in json.load(open(f"{ROOT}/src/data/srqmap-pins.json")) if p.get
 # ---------------- geometry ----------------
 C = (27.3184, -82.5775)                       # map centre (park)
 THETA = math.radians(127)                     # rotate so bearing 233 (John Ringling -> Lido) is up
-S = 0.90                                      # pt per metre
-MW, MH = 356, 300                             # map box (pt)
+S = 0.80                                      # pt per metre
+MW, MH = 356, 262                             # map box (pt)
 def m(lat, lng):                              # lat/lng -> metres east/north of centre
     return ((lng - C[1]) * math.cos(math.radians(C[0])) * 111320, (lat - C[0]) * 111320)
 def scr(lat, lng):                            # -> map-box px (origin top-left)
     x, y = m(lat, lng)
     sx = x * math.cos(THETA) + y * math.sin(THETA)
     sy = x * math.sin(THETA) - y * math.cos(THETA)
-    return (MW / 2 - 4 + sx * S, MH / 2 - 22 + sy * S)
+    return (MW / 2 - 4 + sx * S, MH / 2 - 19 + sy * S)
 def bearing(lat, lng):
     x, y = m(lat, lng); return (math.degrees(math.atan2(x, y)) + 360) % 360
 def poly(pts): return " ".join(f"{x:.1f},{y:.1f}" for x, y in (scr(*p) for p in pts))
@@ -142,15 +147,6 @@ def label_roads():
         out.append(f'<text transform="translate({mx:.1f},{my:.1f}) rotate({ang:.1f})" font-family="Inter" font-size="{6.2 if big else 5.4}" font-weight="{600 if big else 500}" fill="#6E7F8C" text-anchor="middle" dy="2" letter-spacing=".04em">{short.upper()}</text>')
     return out
 svg += label_roads()
-# exits
-def exit_label(x, y, text, sub="", anchor="middle"):
-    s = f'<text x="{x:.1f}" y="{y:.1f}" font-family="Montserrat" font-weight="700" font-size="7" fill="{NAVY}" text-anchor="{anchor}" letter-spacing=".06em" stroke="{CREAM}" stroke-width="3" paint-order="stroke">{text}</text>'
-    if sub: s += f'<text x="{x:.1f}" y="{y + 8:.1f}" font-family="Inter" font-size="5.8" fill="#55656F" text-anchor="{anchor}" stroke="{CREAM}" stroke-width="2.5" paint-order="stroke">{sub}</text>'
-    return s
-svg.append(exit_label(MW - 8, 13, "▲ LIDO BEACH", "5 min walk · N. Lido to the right", "end"))
-svg.append(exit_label(MW / 2 + 8, MH - 14, "SARASOTA · DOWNTOWN ▼", "Ringling Causeway", "start"))
-svg.append(exit_label(MW - 8, MH / 2 + 50, "LONGBOAT KEY ▶", "N. Blvd of Presidents", "end"))
-svg.append(exit_label(8, MH / 2 - 76, "◀ SOUTH LIDO", "Ted Sperling Park", "start"))
 # restaurant markers (nudged apart where storefronts are shoulder to shoulder)
 MK = [[*scr(p["lat"], p["lng"])] for p in pins]
 for _ in range(60):
@@ -165,73 +161,124 @@ for p, (x, y) in zip(pins, MK):
     if star: svg.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="8.6" fill="none" stroke="{GOLD}" stroke-width="1.6"/>')
     svg.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="6.2" fill="{q["ink"]}" stroke="#fff" stroke-width="1.3"/>')
     svg.append(f'<text x="{x:.1f}" y="{y + 2.5:.1f}" font-family="Montserrat" font-weight="700" font-size="{6.8 if p["_n"] < 10 else 6.1}" fill="#fff" text-anchor="middle">{p["_n"]}</text>')
-# you are here (CB office, 423, Gold)
+# small CB office marker (no label; the back side says where we are)
 ox, oy = scr(27.31911, -82.57666)
-svg.append(f'<g transform="translate({ox:.1f},{oy:.1f})"><circle r="9" fill="{NAVY}" stroke="#fff" stroke-width="1.5"/><text y="3.4" font-size="9.5" fill="{GOLD}" text-anchor="middle">★</text></g>')
-svg.append(f'<text x="{ox - 12:.1f}" y="{oy + 1:.1f}" font-family="Montserrat" font-weight="700" font-size="6.2" fill="{NAVY}" text-anchor="end" letter-spacing=".05em">YOU ARE HERE</text><text x="{ox - 12:.1f}" y="{oy + 8:.1f}" font-family="Inter" font-size="5.4" fill="#55656F" text-anchor="end">Coldwell Banker · 423</text>')
-# compass
-nx, ny = 26, MH - 26
-na = 127
-svg.append(f'<g transform="translate({nx},{ny})"><circle r="13" fill="#fff" fill-opacity=".85" stroke="{ROADLINE}" stroke-width=".8"/>'
-           f'<g transform="rotate({na})"><polygon points="0,-10 3.2,0 -3.2,0" fill="{NAVY}"/><polygon points="0,10 3.2,0 -3.2,0" fill="#C9C3B6"/>'
-           f'<text y="-12.5" font-family="Montserrat" font-weight="700" font-size="6" fill="{NAVY}" text-anchor="middle">N</text></g></g>')
-MAP_SVG = f'<svg viewBox="0 0 {MW} {MH}" width="{MW}" height="{MH}" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="mc"><rect width="{MW}" height="{MH}" rx="12"/></clipPath></defs><g clip-path="url(#mc)">{"".join(svg)}</g><rect width="{MW}" height="{MH}" rx="12" fill="none" stroke="{ROADLINE}" stroke-width="1"/></svg>'
+svg.append(f'<g transform="translate({ox:.1f},{oy:.1f})"><circle r="6.5" fill="#fff" stroke="{NAVY}" stroke-width="1.2"/><text y="2.6" font-family="Montserrat" font-weight="700" font-size="5.2" fill="{NAVY}" text-anchor="middle">CB</text></g>')
+# compass (soft)
+nx, ny, na = 24, MH - 24, 127
+svg.append(f'<g transform="translate({nx},{ny})"><circle r="12" fill="#fff" fill-opacity=".8" stroke="{ROADLINE}" stroke-width=".8"/>'
+           f'<g transform="rotate({na})"><polygon points="0,-9 3,0 -3,0" fill="#6E7F8C"/><polygon points="0,9 3,0 -3,0" fill="#CFC9BC"/>'
+           f'<text y="-11.5" font-family="Montserrat" font-weight="700" font-size="5.5" fill="#6E7F8C" text-anchor="middle">N</text></g></g>')
+MAP_SVG = f'<svg viewBox="0 0 {MW} {MH}" width="{MW}" height="{MH}" xmlns="http://www.w3.org/2000/svg">{"".join(svg)}</svg>'
 
-# ---------------- QR ----------------
+# ---------------- flattened assets (300 dpi PNG) ----------------
+ASSETS = f"{OUT}/assets"; os.makedirs(ASSETS, exist_ok=True)
+import shutil as _sh
+FONT_SRC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fonts")
+if os.path.exists(f"{OUT}/fonts"): _sh.rmtree(f"{OUT}/fonts")
+_sh.copytree(FONT_SRC, f"{OUT}/fonts")
+FONT_CSS = open(f"{FONT_SRC}/fonts.css").read()
+open(f"{OUT}/_map.html", "w").write(f'<!doctype html><html><head><meta charset="utf-8"><style>{FONT_CSS} body{{margin:0;background:{CREAM}}}svg{{display:block}}</style></head><body>{MAP_SVG}</body></html>')
 QR_URL = "https://adamsonfl.com/circle"
-_qr = segno.make(QR_URL, error="m"); _qw, _qh = _qr.symbol_size(scale=1, border=1)
-qr_svg = _qr.svg_inline(scale=1, border=1, dark=NAVY, light=None).replace("<svg ", f'<svg viewBox="0 0 {_qw} {_qh}" ', 1)
+segno.make(QR_URL, error="m").save(f"{ASSETS}/qr-adamsonfl-circle.png", scale=24, border=2, dark=NAVY, light="#FFFFFF")
+
+PHONE_W, PHONE_H = 390, 844
+render = f"""
+import asyncio
+from playwright.async_api import async_playwright
+async def main():
+    async with async_playwright() as p:
+        b = await p.chromium.launch()
+        # map @ 300 dpi (pt -> px is 300/72)
+        pg = await b.new_page(viewport={{'width': {MW}, 'height': {MH}}}, device_scale_factor=300/72)
+        await pg.goto('file://{OUT}/_map.html', wait_until='networkidle'); await pg.evaluate('document.fonts.ready'); await pg.wait_for_timeout(500)
+        await pg.screenshot(path='{ASSETS}/map-st-armands-circle.png', clip={{'x':0,'y':0,'width':{MW},'height':{MH}}})
+        # live /circle page as a phone screen
+        ctx = await b.new_context(viewport={{'width': {PHONE_W}, 'height': {PHONE_H}}}, device_scale_factor=3, is_mobile=True, has_touch=True,
+                                  user_agent='Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1')
+        pg2 = await ctx.new_page()
+        await pg2.goto('https://adamsonfl.com/circle', wait_until='networkidle'); await pg2.wait_for_timeout(2500)
+        await pg2.screenshot(path='{ASSETS}/_screen.png')
+        await b.close()
+asyncio.run(main())
+"""
+subprocess.run([sys.executable, "-c", render], check=True, env={**os.environ, "PLAYWRIGHT_BROWSERS_PATH": os.environ.get("PLAYWRIGHT_BROWSERS_PATH", "/opt/pw-browsers")})
+
+# phone frame around the screenshot
+from PIL import Image, ImageDraw
+scr_img = Image.open(f"{ASSETS}/_screen.png").convert("RGBA")
+sw, sh = scr_img.size                                   # 1170 x 2532
+bez = 54; r_outer = 190; r_inner = 150
+W, H = sw + 2 * bez, sh + 2 * bez
+frame = Image.new("RGBA", (W + 80, H + 80), (0, 0, 0, 0))
+d = ImageDraw.Draw(frame)
+# soft shadow
+for i, a in ((36, 18), (28, 26), (20, 34)):
+    d.rounded_rectangle((40 - i // 2, 40 + 18 - i // 2, 40 + W + i // 2, 40 + 18 + H + i // 2), r_outer + i, fill=(10, 42, 64, a))
+d.rounded_rectangle((40, 40, 40 + W, 40 + H), r_outer, fill=(16, 24, 32, 255))
+d.rounded_rectangle((40 + 6, 40 + 6, 40 + W - 6, 40 + H - 6), r_outer - 6, outline=(70, 80, 90, 255), width=3)
+mask = Image.new("L", (sw, sh), 0); ImageDraw.Draw(mask).rounded_rectangle((0, 0, sw, sh), r_inner, fill=255)
+frame.paste(scr_img, (40 + bez, 40 + bez), mask)
+# dynamic island
+d.rounded_rectangle((40 + W // 2 - 190, 40 + bez + 30, 40 + W // 2 + 190, 40 + bez + 30 + 100), 50, fill=(16, 24, 32, 255))
+frame.save(f"{ASSETS}/phone-srqmap-circle.png")
+os.remove(f"{ASSETS}/_screen.png")
+import shutil; shutil.copy(f"{ROOT}/public/images/logos/adamson-group-black.png", f"{ASSETS}/adamson-group-logo.png")
 
 # ---------------- legend ----------------
 def legend_html():
-    cols = ["", ""]
-    half = math.ceil(len(pins) / 2)
+    cols = ["", ""]; half = math.ceil(len(pins) / 2)
     for i, p in enumerate(pins):
         q = Q[p["_q"]]
-        star = '<span class="star">★</span>' if p["name"] in PICKS else ""
+        star = ' <span class="star">★</span>' if p["name"] in PICKS else ""
         tag = ' <span class="sweet">sweets</span>' if p["_sweet"] else ""
         cols[0 if i < half else 1] += (f'<div class="row"><span class="n" style="background:{q["ink"]}">{p["_n"]}</span>'
                                       f'<span class="nm">{p["_short"]}{star}{tag}</span><span class="ad">{addr_short(p["address"])}</span></div>')
     return f'<div class="col">{cols[0]}</div><div class="col">{cols[1]}</div>'
 
-# ---------------- page ----------------
+# ---------------- page (5.75 x 8.75 with bleed; safe area 0.25 in inside trim) ----------------
+BLEED, SAFE = 9, 18           # pt
+PAD = BLEED + SAFE            # 27pt from page edge to content
 CSS = f"""
-@page {{ size: 5.5in 8.5in; margin: 0; }}
+@page {{ size: 5.75in 8.75in; margin: 0; }}
 * {{ box-sizing: border-box; }}
 body {{ margin:0; font-family: Inter, sans-serif; color:{INK}; -webkit-print-color-adjust: exact; print-color-adjust: exact; }}
-.page {{ width:5.5in; height:8.5in; padding:20pt 20pt 18pt; background:{CREAM}; position:relative; overflow:hidden; page-break-after: always; }}
+.page {{ width:5.75in; height:8.75in; padding:{PAD}pt; background:{CREAM}; position:relative; overflow:hidden; page-break-after: always; }}
 .page:last-child {{ page-break-after: auto; }}
-.tex {{ position:absolute; inset:0; background: radial-gradient(ellipse at 20% 0%, rgba(201,169,97,.10), transparent 55%), radial-gradient(ellipse at 100% 100%, rgba(46,134,171,.10), transparent 50%); pointer-events:none; }}
-h1 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:23pt; letter-spacing:-.01em; margin:0; color:{NAVY}; line-height:1; }}
-.kicker {{ font-family: Montserrat, sans-serif; font-weight:700; font-size:6.8pt; letter-spacing:.16em; color:{GOLD}; text-transform:uppercase; margin:0 0 4pt; }}
+h1 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:23pt; margin:0; color:{NAVY}; line-height:1; }}
+.kicker {{ font-family: Montserrat, sans-serif; font-weight:700; font-size:6.8pt; color:{GOLD}; text-transform:uppercase; margin:0 0 4pt; }}
 .sub {{ font-size:7.6pt; color:#55656F; margin:4pt 0 0; }}
 .head {{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:6pt; }}
 .est {{ font-family:'Playfair Display', serif; font-style:italic; font-size:8pt; color:#7A6A45; text-align:right; line-height:1.25; }}
-.map {{ display:block; }}
-.qlegend {{ display:flex; gap:9pt; margin:4pt 0 4pt; font-family:Montserrat, sans-serif; font-weight:600; font-size:6.3pt; letter-spacing:.06em; text-transform:uppercase; color:#55656F; align-items:center; }}
+.map {{ display:block; width:360pt; height:{round(360 * MH / MW)}pt; border-radius:10pt; }}
+.qlegend {{ display:flex; gap:9pt; margin:5pt 0 5pt; font-family:Montserrat, sans-serif; font-weight:600; font-size:6.3pt; text-transform:uppercase; color:#55656F; align-items:center; }}
 .qlegend i {{ display:inline-block; width:8pt; height:8pt; border-radius:2pt; margin-right:3pt; vertical-align:-1pt; }}
-.qlegend .hint {{ margin-left:auto; text-transform:none; letter-spacing:0; font-family:Inter; font-weight:400; font-size:6.4pt; }}
-.bottom {{ display:flex; gap:10pt; align-items:stretch; }}
-.legend {{ flex:1; display:flex; gap:8pt; }}
-.col {{ flex:1; }}
-.row {{ display:grid; grid-template-columns:11pt 1fr; column-gap:3pt; align-items:baseline; font-size:6.3pt; line-height:1.1; padding:.9pt 0; border-bottom:.4pt solid #E6DFD0; }}
+.qlegend .hint {{ margin-left:auto; text-transform:none; font-family:Inter; font-weight:400; font-size:6.4pt; }}
+.bottom {{ display:flex; gap:9pt; align-items:stretch; }}
+.legend {{ flex:1; display:flex; gap:7pt; }}
+.col {{ flex:1; min-width:0; }}
+.row {{ display:grid; grid-template-columns:11pt 1fr; column-gap:3pt; align-items:baseline; font-size:6.2pt; line-height:1.08; padding:.5pt 0; border-bottom:.4pt solid #E6DFD0; }}
 .n {{ color:#fff; font-family:Montserrat; font-weight:700; font-size:5.6pt; width:10pt; height:10pt; border-radius:50%; display:inline-grid; place-items:center; align-self:center; }}
 .nm {{ font-weight:600; color:{NAVY}; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }}
 .ad {{ grid-column:2; font-size:5.2pt; color:#7B8993; margin-top:-1pt; }}
-.star {{ color:{GOLD}; margin-left:2pt; }}
-.sweet {{ font-size:4.8pt; color:#9A4458; font-weight:600; letter-spacing:.05em; text-transform:uppercase; margin-left:3pt; }}
-.qr {{ width:104pt; flex:none; background:#fff; border:1pt solid {GOLD}; border-radius:9pt; padding:8pt 7pt 7pt; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:space-between; }}
-.qr svg {{ width:66pt; height:66pt; }}
-.qr .t {{ font-family:Montserrat; font-weight:700; font-size:6.4pt; letter-spacing:.08em; color:{NAVY}; text-transform:uppercase; margin:0 0 4pt; }}
-.qr .d {{ font-size:6.1pt; line-height:1.3; color:#55656F; margin:4pt 0 0; }}
-.qr .u {{ font-family:Montserrat; font-weight:700; font-size:6.6pt; color:{NAVY}; margin-top:3pt; }}
-.foot {{ position:absolute; left:20pt; right:20pt; bottom:9pt; display:flex; justify-content:space-between; font-size:5.2pt; color:#8E9AA3; }}
+.star {{ color:{GOLD}; }}
+.sweet {{ font-size:4.8pt; color:#9A4458; font-weight:600; text-transform:uppercase; margin-left:2pt; }}
+.promo {{ width:118pt; flex:none; background:#fff; border:1pt solid {GOLD}; border-radius:9pt; padding:7pt 7pt 6pt; display:flex; flex-direction:column; align-items:center; }}
+.promo .t {{ font-family:Montserrat; font-weight:700; font-size:6.4pt; color:{NAVY}; text-transform:uppercase; margin:0 0 5pt; text-align:center; }}
+.promo .pair {{ display:flex; gap:6pt; align-items:flex-end; }}
+.promo .phone {{ width:58pt; height:auto; display:block; }}
+.promo .qrbox {{ display:flex; flex-direction:column; align-items:center; gap:3pt; }}
+.promo .qr {{ width:46pt; height:46pt; display:block; }}
+.promo .scan {{ font-family:Montserrat; font-weight:700; font-size:5.6pt; color:{NAVY}; text-transform:uppercase; }}
+.promo .d {{ font-size:5.9pt; line-height:1.3; color:#55656F; margin:5pt 0 0; text-align:center; }}
+.promo .u {{ font-family:Montserrat; font-weight:700; font-size:6.4pt; color:{NAVY}; margin-top:3pt; }}
+.foot {{ position:absolute; left:{PAD}pt; right:{PAD}pt; bottom:{PAD - 8}pt; display:flex; justify-content:space-between; font-size:5.2pt; color:#8E9AA3; }}
 /* back */
 .back h2 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:17pt; color:{NAVY}; margin:0 0 3pt; line-height:1.1; }}
 .lead {{ font-size:7.8pt; line-height:1.4; color:#3B4A55; margin:0 0 8pt; }}
-.slots {{ display:grid; grid-template-columns:repeat(3,1fr); gap:7pt; margin-bottom:11pt; }}
+.slots {{ display:grid; grid-template-columns:repeat(3,1fr); gap:7pt; margin-bottom:9pt; }}
 .slot {{ background:#fff; border:1pt solid #E4DCCB; border-radius:8pt; overflow:hidden; }}
-.slot .ph {{ height:56pt; background:linear-gradient(135deg,#DCE7EC,#EEF2F4); display:grid; place-items:center; font-size:6pt; color:#8E9AA3; text-transform:uppercase; letter-spacing:.1em; font-family:Montserrat; }}
+.slot .ph {{ height:58pt; background:linear-gradient(135deg,#DCE7EC,#EEF2F4); display:grid; place-items:center; font-size:6pt; color:#8E9AA3; text-transform:uppercase; font-family:Montserrat; }}
 .slot .b {{ padding:5pt 6pt 6pt; }}
 .slot .p {{ font-family:Montserrat; font-weight:700; font-size:8.5pt; color:{NAVY}; }}
 .slot .a {{ font-size:6.4pt; color:#55656F; margin-top:1pt; }}
@@ -242,7 +289,7 @@ h1 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:23pt; le
 .band .s {{ font-size:6.8pt; color:#C8D3DB; margin-top:3pt; }}
 .two {{ display:grid; grid-template-columns:1fr 1fr; gap:8pt; margin-bottom:8pt; }}
 .card {{ background:#fff; border:1pt solid #E4DCCB; border-radius:9pt; padding:8pt 10pt; }}
-.card h3 {{ font-family:Montserrat; font-weight:700; font-size:7pt; letter-spacing:.1em; text-transform:uppercase; color:{GOLD}; margin:0 0 4pt; }}
+.card h3 {{ font-family:Montserrat; font-weight:700; font-size:7pt; text-transform:uppercase; color:{GOLD}; margin:0 0 4pt; }}
 .card p {{ font-size:7.2pt; line-height:1.4; margin:0; color:#3B4A55; }}
 .line {{ border-bottom:.7pt solid #B9C2C9; height:11pt; margin-top:5pt; }}
 .contact {{ display:flex; align-items:center; gap:10pt; border-top:1pt solid {GOLD}; padding-top:8pt; }}
@@ -254,27 +301,29 @@ h1 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:23pt; le
 """
 
 front = f"""
-<div class="page"><div class="tex"></div>
+<div class="page">
   <div class="head">
     <div><p class="kicker">A walking map · Lido Key, Sarasota</p><h1>St. Armands Circle</h1>
-      <p class="sub">Where to eat on the Circle, numbered by quadrant · map faces Lido Beach, the way you see it from our door</p></div>
+      <p class="sub">Where to eat on the Circle, by quadrant · Lido Beach is up, as you see it from our door</p></div>
     <div class="est">est. 1926<br>by John Ringling</div>
   </div>
-  <div class="map">{MAP_SVG}</div>
+  <img class="map" src="assets/map-st-armands-circle.png" alt="Map of St. Armands Circle">
   <div class="qlegend">
     <span><i style="background:{Q['GOLD']['fill']}"></i>Gold</span><span><i style="background:{Q['PINK']['fill']}"></i>Pink</span>
     <span><i style="background:{Q['AQUA']['fill']}"></i>Aqua</span><span><i style="background:{Q['PURPLE']['fill']}"></i>Purple</span>
-    <span class="hint">Quadrant colours match the lamppost banners &nbsp;·&nbsp; <span style="color:{GOLD}">★</span> Ryan's picks</span>
+    <span class="hint">Lamppost banner colours &nbsp;·&nbsp; <span style="color:{GOLD}">★</span> Ryan's picks &nbsp;·&nbsp; CB = our office</span>
   </div>
   <div class="bottom">
     <div class="legend">{legend_html()}</div>
-    <div class="qr"><p class="t">Take it with you</p>{qr_svg}<p class="d">Live version on your phone: every spot here with Ryan's take, hours &amp; directions, plus beaches, golf and this week's events.</p><p class="u">adamsonfl.com/circle</p></div>
+    <div class="promo"><p class="t">The live map, on your phone</p>
+      <div class="pair"><img class="phone" src="assets/phone-srqmap-circle.png" alt=""><div class="qrbox"><img class="qr" src="assets/qr-adamsonfl-circle.png" alt="QR code"><span class="scan">Scan me</span></div></div>
+      <p class="d">Every spot here with Ryan's take, hours and directions, plus beaches, golf and this week's events.</p><p class="u">adamsonfl.com/circle</p></div>
   </div>
   <div class="foot"><span>Map data © OpenStreetMap contributors (ODbL). Directory checked Oct 2026; the Circle changes, call ahead.</span><span>Ryan Adamson, PA · Coldwell Banker Realty · (941) 713-9234</span></div>
 </div>"""
 
 back = f"""
-<div class="page back"><div class="tex"></div>
+<div class="page back">
   <p class="kicker">From the office at 423, Gold quadrant</p>
   <h2>Curious what it costs to live a walk from the Circle?</h2>
   <p class="lead">I'm Ryan Adamson, the agent in the Coldwell Banker window on the Circle. Lido, St. Armands and Longboat Key are small markets where the good addresses trade quietly. Three I'd show you this week:</p>
@@ -292,26 +341,34 @@ back = f"""
     <div class="card"><h3>Getting around</h3><p><b>Lido Beach</b> is a 5-minute walk up John Ringling Blvd; turn right on Ben Franklin for quieter <b>North Lido</b>.<br><b>Bay Runner trolley</b> is free and links Lido Beach, the Circle and downtown (SarasotaBayRunner.com).<br><b>Parking:</b> 1,600+ city spaces: the Fillmore lot, the N. Adams garage and the streets off the Circle.</p></div>
     <div class="card"><h3>2026 on the Circle</h3><p style="font-size:6.6pt;line-height:1.45"><b>Oct 31</b> Fright Night trick-or-treat · <b>Nov 7</b> Ferraris on the Circle · <b>Nov 14–15</b> Art Festival &amp; Sidewalk Sale · <b>Dec 5</b> Holiday Night of Lights · <b>Dec 10</b> Porsches in the Park · <b>Jan 17</b> Art Festival · <b>Jan 24–25</b> Century of Cars · <b>May 2</b> Art Festival · <b>Jun 6–7</b> Corvettes on the Circle</p></div>
   </div>
-  <div class="contact"><img src="file://{ROOT}/public/images/logos/adamson-group-black.png" alt=""><div><div class="nm2">Ryan Adamson, PA</div><div class="r">Adamson Group · Coldwell Banker Realty<br>423 St. Armands Circle, Sarasota, FL 34236 · AdamsonFL.com</div></div><div class="ph2">(941) 713-9234<small>call or text · AdamsonFL.com</small></div></div>
+  <div class="contact"><img src="assets/adamson-group-logo.png" alt=""><div><div class="nm2">Ryan Adamson, PA</div><div class="r">Adamson Group · Coldwell Banker Realty<br>423 St. Armands Circle, Sarasota, FL 34236 · AdamsonFL.com</div></div><div class="ph2">(941) 713-9234<small>call or text · AdamsonFL.com</small></div></div>
 </div>"""
 
 html = f"""<!doctype html><html><head><meta charset="utf-8"><title>St. Armands Circle handout</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500&family=Montserrat:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>{CSS}</style></head><body>{front}{back}</body></html>"""
+<style>{FONT_CSS}
+{CSS}</style></head><body>{front}{back}</body></html>"""
 open(f"{OUT}/stac_handout.html", "w").write(html)
 
-# ---------------- PDF ----------------
 pw = f"""
 import asyncio
 from playwright.async_api import async_playwright
 async def main():
     async with async_playwright() as p:
         b = await p.chromium.launch(); pg = await b.new_page()
-        await pg.goto('file://{OUT}/stac_handout.html', wait_until='networkidle'); await pg.wait_for_timeout(800)
-        await pg.evaluate('document.fonts.ready')
-        await pg.pdf(path='{OUT}/stac_handout.pdf', width='5.5in', height='8.5in', print_background=True, margin={{'top':'0','right':'0','bottom':'0','left':'0'}})
+        await pg.goto('file://{OUT}/stac_handout.html', wait_until='networkidle'); await pg.evaluate('document.fonts.ready'); await pg.wait_for_timeout(600)
+        await pg.pdf(path='{OUT}/stac_handout_bleed.pdf', width='5.75in', height='8.75in', print_background=True, margin={{'top':'0','right':'0','bottom':'0','left':'0'}})
         await b.close()
 asyncio.run(main())
 """
 subprocess.run([sys.executable, "-c", pw], check=True, env={**os.environ, "PLAYWRIGHT_BROWSERS_PATH": os.environ.get("PLAYWRIGHT_BROWSERS_PATH", "/opt/pw-browsers")})
-print("wrote", f"{OUT}/stac_handout.pdf", "|", len(pins), "restaurants")
+# trim version: crop the bleed off
+try:
+    from pypdf import PdfReader, PdfWriter
+    rd = PdfReader(f"{OUT}/stac_handout_bleed.pdf"); wr = PdfWriter()
+    for pg in rd.pages:
+        pg.mediabox.lower_left = (BLEED, BLEED); pg.mediabox.upper_right = (414 - BLEED, 630 - BLEED); wr.add_page(pg)
+    wr.write(f"{OUT}/stac_handout_trim.pdf")
+except Exception as e:
+    print("trim pdf skipped:", e)
+os.remove(f"{OUT}/_map.html")
+print("wrote", OUT, "|", len(pins), "restaurants")
