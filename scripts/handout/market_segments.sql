@@ -2,7 +2,7 @@
 -- Trailing-12-month closed condos; months of supply = active / (closed12 / 12).
 with base as (
  select *,
-  case when year_built>=2015 then 'new (2015+)' when year_built>=1995 then 'mid (1995-2014)' else 'older (pre-1995)' end era,
+  case when year_built>=2024 then 'developer-era (2024+, mostly pre-construction; MoS not meaningful)' when year_built>=2015 then 'new resale (2015-2023)' when year_built>=1995 then 'mid (1995-2014)' else 'older (pre-1995)' end era,
   case when coalesce(waterfront_features,'') ilike '%Gulf%' or coalesce(waterfront_features,'') ilike '%Beach%' then 'Beachfront (Gulf)'
        when coalesce(waterfront_features,'') ilike '%Bay%' or coalesce(waterfront_features,'') ilike '%Intracoastal%' or coalesce(waterfront_features,'') ilike '%Canal%' then 'Bayfront'
        when coalesce(water_view,'') <> '' then 'Water view, not on water' else 'No water view' end seg

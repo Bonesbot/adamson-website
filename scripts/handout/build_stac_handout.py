@@ -385,7 +385,7 @@ back = f"""
       <div class="nums four">
         <div class="stat"><b>$817 <i>vs</i> $459</b><small>per sq ft, beachfront vs bayfront condos</small></div>
         <div class="stat"><b>4.3 <i>vs</i> 6.7 mo</b><small>supply: beachfront tight, bayfront a buyer's market</small></div>
-        <div class="stat"><b>11 <i>vs</i> 6 mo</b><small>supply, new (2015+) vs pre-1995 condos</small></div>
+        <div class="stat"><b>$918 <i>vs</i> $567</b><small>per sq ft, 2015+ resale vs pre-1995; same 5.7-month supply</small></div>
         <div class="stat"><b>~6% under</b><small>asking, where closings landed; new held firmest</small></div>
       </div>
       <p style="margin-top:3pt;font-size:6.1pt;color:#55656F">Longboat, Lido &amp; downtown condos, trailing 12 months, from my daily MLS pull.</p></div>
