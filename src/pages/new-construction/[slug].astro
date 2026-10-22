@@ -25,7 +25,11 @@ import ProjectStubBody from '@/components/newconstruction/ProjectStubBody.astro'
 import projectsData from '@/data/newconstruction/projects.json';
 
 export async function getStaticPaths() {
-  return projectsData.projects.map((p: any) => ({ params: { slug: p.slug } }));
+  // Projects with their own dedicated template (custom_page: true, e.g. mira-mar-sarasota.astro)
+  // are skipped here so the static page wins the route.
+  return projectsData.projects
+    .filter((p: any) => !p.custom_page)
+    .map((p: any) => ({ params: { slug: p.slug } }));
 }
 
 const { slug } = Astro.params;

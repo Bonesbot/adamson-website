@@ -1,0 +1,727 @@
+---
+/**
+ * /new-construction/mira-mar-sarasota : DEDICATED PROJECT PAGE
+ *
+ * Mira Mar gets its own template (instead of [slug].astro) because Ryan holds
+ * the developer's October 2026 broker toolkit: approved renderings, the
+ * features/amenities/fact sheets, and the full floor-plan set. Copy below uses
+ * the developer's approved marketing verbiage. Three floor plans are shown;
+ * the remaining plans, pricing by stack and floor, release schedule and the
+ * full brochure are deliberately held back behind the request form.
+ *
+ * Source: Drive "miramar - oct2026 broker toolkit" (Seaward Development).
+ * projects.json keeps the Mira Mar entry (custom_page: true) so the hub, area
+ * pillar and comparable-project rows still pick it up.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import BreadcrumbNav from '@/components/newconstruction/BreadcrumbNav.astro';
+import QuickFactsPanel from '@/components/newconstruction/QuickFactsPanel.astro';
+import LocationBlock from '@/components/newconstruction/LocationBlock.astro';
+import ComparableProjects from '@/components/newconstruction/ComparableProjects.astro';
+import FAQSchema from '@/components/seo/FAQSchema.astro';
+import SchedulerEmbed from '@/components/newconstruction/SchedulerEmbed.astro';
+import StickyMobileCta from '@/components/newconstruction/StickyMobileCta.astro';
+import DisclosureFooter from '@/components/newconstruction/DisclosureFooter.astro';
+import projectsData from '@/data/newconstruction/projects.json';
+
+const project: any = projectsData.projects.find((p: any) => p.slug === 'mira-mar-sarasota');
+const IMG = '/images/new-construction/mira-mar';
+const img = (name: string, sm = false) => `${IMG}/${name}${sm ? '-sm' : ''}.jpg`;
+const credit = 'Renderings courtesy of Seaward Development';
+
+const title = 'Mira Mar Residences, Sarasota';
+const description =
+  'Mira Mar Residences: 70 estate-style residences in two 18-story towers on South Palm Avenue, downtown Sarasota. Three and four bedrooms, 3,200 to 6,000 sq ft, priced from $4,165,000. Floor plans, amenities, deposit schedule and private tours with Ryan Adamson.';
+
+/* Hero stat strip */
+const stats = [
+  { value: '70', label: 'Residences' },
+  { value: '2 × 18', label: 'Towers, stories each' },
+  { value: '3 to 4', label: 'Bedrooms' },
+  { value: '3,200 to 6,000', label: 'Interior sq ft' },
+  { value: '$4.165M', label: 'Priced from' },
+  { value: 'Q1 2029', label: 'Projected completion' },
+];
+
+/* Gallery (developer renderings, approved for broker use) */
+const gallery = [
+  { src: 'mira-mar-hero-front', alt: 'Mira Mar Residences, two 18-story towers rising behind the restored 1922 Mira Mar on South Palm Avenue', caption: 'The towers from South Palm Avenue' },
+  { src: 'mira-mar-aerial-dusk', alt: 'Sunset view over Sarasota Bay and the marina from an upper-floor terrace at Mira Mar', caption: 'View from the upper floors at sunset' },
+  { src: 'mira-mar-palm-avenue-retail', alt: 'Restored Mira Mar building with boutiques and restaurants along South Palm Avenue', caption: 'Palm Avenue retail in the restored 1922 building' },
+  { src: 'mira-mar-courtyard', alt: 'Ground-floor courtyard at Mira Mar with dining under the loggia', caption: 'Ground-floor courtyard' },
+  { src: 'mira-mar-pool', alt: '70-foot resort-style lap pool with cabanas at Mira Mar', caption: '70-foot resort-style lap pool with cabanas' },
+  { src: 'mira-mar-owners-lounge', alt: 'The 1922 Owners\' Lounge bar at Mira Mar', caption: '1922 Owners\' Lounge' },
+  { src: 'mira-mar-garden-room', alt: 'Light-filled solarium Garden Room at Mira Mar', caption: 'Solarium Garden Room' },
+  { src: 'mira-mar-garden-terrace', alt: 'Garden Terrace with a long dining table under the trees at Mira Mar', caption: 'Garden Terrace dining' },
+  { src: 'mira-mar-sky-speakeasy', alt: 'Bayfront view from the 19th-floor Sky Speakeasy at Mira Mar', caption: '19th-floor Sky Speakeasy views' },
+  { src: 'mira-mar-spa-lobby', alt: 'Spa lobby of the Wellness Retreat at Mira Mar', caption: 'Wellness Retreat spa lobby' },
+  { src: 'mira-mar-fitness', alt: 'Fitness center with arched windows at Mira Mar', caption: 'Fitness center' },
+  { src: 'mira-mar-movement-studio', alt: 'Private indoor movement studio at Mira Mar', caption: 'Movement studio' },
+  { src: 'mira-mar-lobby-coffee-bar', alt: 'Coffee and beverage service in the Grand Residential Lobby at Mira Mar', caption: 'Grand Residential Lobby coffee bar' },
+  { src: 'mira-mar-porte-cochere', alt: 'Porte cochere and valet arrival at Mira Mar', caption: 'Porte cochère and valet' },
+  { src: 'mira-mar-dog-spa', alt: 'Dog spa at Mira Mar', caption: 'Dog spa' },
+  { src: 'mira-mar-owners-bedroom', alt: 'Owners\' bedroom with terrace and bay views in a Mira Mar penthouse', caption: 'Owners\' bedroom, penthouse' },
+  { src: 'mira-mar-terrace', alt: 'Private terrace overlooking Sarasota Bay at Mira Mar', caption: 'Private terrace' },
+];
+
+/* Residence features: developer features sheet, 1-14-26 */
+const residenceFeatures = [
+  'Three and four bedroom luxury residences, 3,200 to 6,000 interior square feet',
+  'Spacious and private outdoor terraces for true Florida living',
+  'Expansive window walls and sliding glass doors to terraces',
+  'Sweeping city and bay views',
+  'Private and secure elevator foyers',
+  'Open-concept kitchen, dining and great room for exceptional entertaining',
+  'Multiple designer finish selections to make your home truly yours',
+  'Chef\'s scullery',
+  'Thoughtfully planned custom cabinetry with luxurious countertop options',
+  'Chef-grade Sub-Zero® and Wolf® custom-paneled appliances',
+  'Summer kitchen with electric grill',
+  'Premium plumbing fixtures in kitchen and bathrooms',
+  'Convenient powder bathrooms off the living area',
+  'Expansive ceiling heights throughout',
+  'Owner\'s suites with custom built-in closets',
+  'Owner\'s bathrooms with walk-in showers and freestanding bathtubs',
+  'Double water closets in the owner\'s bathroom',
+  'Integrated technology system for climate and lighting control',
+  'Utility room with Electrolux washer and dryer plus base and upper cabinetry',
+  'Hurricane impact windows and doors',
+];
+
+/* Floor plans: three shown, the rest teased. Specs from the developer plan set (R15/R16, Oct 2026). */
+const featuredPlans = [
+  {
+    name: 'Residence 01', floors: 'Floors 7 to 11', beds: '3 Bed', baths: '3.5 Bath', den: 'Den',
+    interior: '3,412', terrace: '468', total: '3,880', image: 'mira-mar-plan-residence-01',
+    note: 'The corner three-bedroom with two terraces: a 24-foot great room, a scullery behind the kitchen, and a den that works as a fourth bedroom.',
+  },
+  {
+    name: 'Estate 06', floors: 'Floors 12 to 17', beds: '4 Bed', baths: '4.5 Bath', den: 'Den',
+    interior: '4,060', terrace: '627', total: '4,687', image: 'mira-mar-plan-estate-06',
+    note: 'The largest of the standard estate plans, with the deepest terrace in the building below the penthouse level.',
+  },
+  {
+    name: 'Penthouse 1901', floors: 'Floor 19', beds: '4 Bed', baths: '4.5 Bath', den: 'Den + Guest Cottage',
+    interior: '4,400', terrace: '295', total: '4,695', image: 'mira-mar-plan-penthouse-1901',
+    note: 'Every Mira Mar penthouse includes its own guest cottage across the elevator lobby: a private living room and bedroom for visiting family, with its own entry.',
+  },
+];
+
+const planMatrix = [
+  { tier: 'Residences', floors: 'Floors 7 to 11', plans: [
+    { name: 'Residence 01', spec: '3 Bed / 3.5 Bath / Den', interior: '3,412', total: '3,880', shown: true },
+    { name: 'Residence 02', spec: '3 Bed / 3.5 Bath / Den', interior: '3,302', total: '3,623' },
+    { name: 'Residence 03', spec: '3 Bed / 4.5 Bath / Den', interior: '3,734', total: '4,321' },
+    { name: 'Residence 04', spec: '3 Bed / 4.5 Bath / Den', interior: '3,734', total: '4,304' },
+    { name: 'Residence 05', spec: '3 Bed / 3.5 Bath / Den', interior: '3,302', total: '3,640' },
+    { name: 'Residence 06', spec: '4 Bed / 4.5 Bath / Den', interior: '4,060', total: '4,687' },
+  ]},
+  { tier: 'Estates', floors: 'Floors 12 to 17', plans: [
+    { name: 'Estate 01', spec: '4 Bed / 4.5 Bath', interior: '3,558', total: '3,831' },
+    { name: 'Estate 02', spec: '3 Bed / 3.5 Bath / Den', interior: '3,395', total: '3,625' },
+    { name: 'Estate 03', spec: '4 Bed / 4.5 Bath', interior: '3,855', total: '4,278' },
+    { name: 'Estate 05', spec: '3 Bed / 3.5 Bath / Den', interior: '3,395', total: '3,667' },
+    { name: 'Estate 06', spec: '4 Bed / 4.5 Bath / Den', interior: '4,060', total: '4,687', shown: true },
+  ]},
+  { tier: 'Penthouses', floors: 'Floors 18 and 19, each with a guest cottage', plans: [
+    { name: 'Penthouse 1801', spec: '4 Bed / 4.5 Bath', interior: '3,558', total: '3,831' },
+    { name: 'Penthouse 1802', spec: '3 Bed / 3.5 Bath / Den', interior: '3,395', total: '3,625' },
+    { name: 'Penthouse 1803', spec: '4 Bed / 4.5 Bath', interior: '3,855', total: '4,278' },
+    { name: 'Penthouse 1901', spec: '4 Bed / 4.5 Bath / Den', interior: '4,400', total: '4,695', shown: true },
+    { name: 'Penthouse 1903', spec: '5 Bed / 5.5 Bath', interior: '4,650', total: '5,063' },
+    { name: 'Penthouse 1804 / 1904', spec: '4 Bed / 5.5 Bath / Den, two levels', interior: '', total: '6,498' },
+    { name: 'Penthouse 1806 / 1906', spec: '5 Bed / 6.5 Bath / Den, two levels', interior: '', total: '6,629' },
+  ]},
+];
+
+/* Amenities by level: developer amenities sheet, 1-14-26 */
+const amenityLevels = [
+  {
+    name: 'Grand Residential Lobby', tag: 'Arrival', image: 'mira-mar-lobby-coffee-bar',
+    items: ['24-hour concierge', 'Mira Mar History Hall', 'Secure mail and package room', 'Dry-cleaning pick-up and drop-off', 'Coffee and beverage service', 'Balcony overlooking the landscaped courtyard and retail'],
+  },
+  {
+    name: 'Club Castille', tag: 'Sixth-floor amenity level', image: 'mira-mar-garden-room',
+    items: ['1922 Owners\' Lounge', 'Light-filled solarium Garden Room', 'Catering kitchen with dining and event space', 'Garden Terrace with freestanding feature fireplace', 'Mira Mar Hotel-inspired guest suites for resident guests', 'Golf simulator and putting green', 'Dog spa and outdoor dog park', 'Game and card parlor', 'Dedicated spaces for art and music', 'Professional center and workspaces', 'Kids\' club room', 'Outdoor kitchen and entertaining terrace', 'Resort-style lap pool with cabanas and lounge seating'],
+  },
+  {
+    name: 'Wellness Retreat', tag: 'A private world of wellness', image: 'mira-mar-spa-lobby',
+    items: ['State-of-the-art fitness center', 'Private indoor movement studio', 'Connected outdoor yoga and social lawn', 'Men\'s and women\'s locker rooms', 'Saunas, steam rooms and therapy pools', 'Massage therapy rooms', 'Wellness activities coordinator', 'Towel and beverage service at the pool and Wellness Retreat'],
+  },
+  {
+    name: 'Sky Speakeasy', tag: '19th floor', image: 'mira-mar-sky-speakeasy',
+    items: ['Breathtaking bayfront views from the 19th floor', 'Entertaining space with bar area, private dining and sunset terrace', 'Private resident beverage lockers'],
+  },
+];
+
+const services = [
+  'Five-star hospitality concierge', '24-hour lobby attendant', 'Dedicated on-site property manager',
+  'Full-time shipping and receiving porter', 'Dedicated luxury car and driver', 'Complimentary valet parking',
+  'Lifestyle activities coordinator', 'Professional resident handyman', 'Pool and spa steward', 'Secured Wi-Fi in all amenity areas',
+];
+
+/* History: developer brochure timeline (abridged) */
+const timeline = [
+  { year: '1922', text: 'Chicago industrialist Andrew McAnsh breaks ground on the Mira Mar Hotel, Apartments and Auditorium, the largest building project in Sarasota\'s history at the time.' },
+  { year: '1923', text: 'The Mira Mar Auditorium opens and the Mira Mar hosts a Metropolitan Opera concert. The hotel becomes downtown\'s social and cultural hub through the land boom.' },
+  { year: '1957', text: 'The hotel closes as travelers shift to the new motels along US 41. The hotel is later demolished; the Mira Mar Apartments along Palm Avenue survive.' },
+  { year: '2023', text: 'Seaward Development acquires the property and commits to a full rehabilitation of the historic building rather than demolition.' },
+  { year: '2025', text: 'The Sarasota City Commission approves the plan: restore the 1922 landmark for retail, restaurants and shops, and build two residential towers behind it.' },
+];
+
+const locationCallouts = [
+  { label: 'Palm and Main: fine dining, cafés, galleries', distance: '1 block', type: 'walk' as const },
+  { label: 'Sarasota Bayfront and Marina Jack', distance: '2 blocks', type: 'walk' as const },
+  { label: 'Selby Botanical Gardens', distance: 'About 10 min', type: 'walk' as const },
+  { label: 'Sarasota Opera House and the theater district', distance: 'About 8 min', type: 'walk' as const },
+  { label: 'St. Armands Circle and Lido Beach', distance: 'About 10 min', type: 'drive' as const },
+  { label: 'SRQ Airport', distance: 'About 15 min', type: 'drive' as const },
+];
+
+const faqs = [
+  {
+    question: 'How much do Mira Mar Residences cost?',
+    answer: 'Per the developer\'s current fact sheet, Mira Mar residences are priced from $4,165,000. The collection is 70 three- and four-bedroom residences of 3,200 to 6,000 interior square feet across two 18-story towers. Every residence includes two assigned parking spaces, and monthly condominium fees are quoted at $1.28 per total square foot. Pricing varies by stack, floor and view; ask Ryan for current pricing on a specific residence.',
+  },
+  {
+    question: 'What is the deposit schedule at Mira Mar?',
+    answer: 'The developer\'s published deposit schedule is 25% at contract, 15% when construction of the buyer\'s floor commences, and the 60% balance at closing. Contract terms should be confirmed against the condominium documents required under Section 718.503, Florida Statutes.',
+  },
+  {
+    question: 'When will Mira Mar be completed?',
+    answer: 'The developer projects completion in the first quarter of 2029, with groundbreaking anticipated for summer 2026. As with any pre-construction project, timelines can shift; Ryan tracks construction milestones and shares updates with clients under contract.',
+  },
+  {
+    question: 'What is happening with the historic 1922 Mira Mar building?',
+    answer: 'It is being fully restored, not demolished. The Mediterranean Revival Mira Mar Apartments along South Palm Avenue will be rehabilitated into high-end retail, restaurants and shops, with the two residential towers rising behind it. The project occupies roughly 1.5 acres with nearly 900 feet of street frontage, an entire downtown city block.',
+  },
+  {
+    question: 'Do the penthouses really include a guest cottage?',
+    answer: 'Yes. Each penthouse on floors 18 and 19 includes a separate guest cottage: a private living room and bedroom with its own entry off the elevator lobby, in addition to the main residence. The two-level penthouses (1804/1904 and 1806/1906) reach roughly 6,500 to 6,630 total square feet.',
+  },
+  {
+    question: 'Is Mira Mar pet friendly, and what about parking?',
+    answer: 'Mira Mar is pet friendly, with a dog spa and outdoor dog park on the Club Castille amenity level. Each residence includes two assigned parking spaces, and residents also have complimentary valet parking and a dedicated luxury car and driver.',
+  },
+  {
+    question: 'Why work with Ryan instead of going straight to the sales gallery?',
+    answer: 'The sales gallery represents the developer. Ryan represents you, at no cost to you, because the developer pays the commission. He reviews the full floor-plan set and pricing by floor with you, compares Mira Mar honestly against The Ritz-Carlton Residences, Rosewood Residences Lido Key, The Owen and the resale market, and walks the contract and deposit schedule before you sign.',
+  },
+];
+
+const jsonLd: Record<string, any>[] = [
+  {
+    '@type': 'Place',
+    name: 'Mira Mar Residences',
+    description,
+    url: 'https://adamsonfl.com/new-construction/mira-mar-sarasota',
+    image: `https://adamsonfl.com${img('mira-mar-hero-front')}`,
+    address: { '@type': 'PostalAddress', streetAddress: '47 S. Palm Avenue', addressLocality: 'Sarasota', addressRegion: 'FL', postalCode: '34236', addressCountry: 'US' },
+    geo: { '@type': 'GeoCoordinates', latitude: 27.3348, longitude: -82.543 },
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://adamsonfl.com/' },
+      { '@type': 'ListItem', position: 2, name: 'New Construction', item: 'https://adamsonfl.com/new-construction' },
+      { '@type': 'ListItem', position: 3, name: 'Downtown Sarasota', item: 'https://adamsonfl.com/new-construction/downtown-sarasota' },
+      { '@type': 'ListItem', position: 4, name: 'Mira Mar Residences', item: 'https://adamsonfl.com/new-construction/mira-mar-sarasota' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl="https://adamsonfl.com/new-construction/mira-mar-sarasota"
+  ogImage={img('mira-mar-hero-front')}
+  jsonLd={jsonLd}
+>
+
+  <!-- ───────────── HERO ───────────── -->
+  <section class="relative overflow-hidden min-h-[88vh] flex items-end">
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${img('mira-mar-hero-front')}'); background-color: var(--color-black);`} />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-black/95" />
+    <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
+    <div class="relative z-10 container pt-40 pb-16 md:pb-20">
+      <p class="section-label text-[var(--color-gold)] mb-4">Featured Project &middot; South Palm Avenue, Downtown Sarasota</p>
+      <h1 class="font-display text-white mb-3 max-w-4xl" style="line-height: 1.05;">Mira Mar Residences</h1>
+      <p class="font-display italic text-2xl md:text-3xl text-white/90 mb-5">The Last Great Address on South Palm Avenue</p>
+      <p class="text-lg md:text-xl text-white/75 max-w-2xl leading-relaxed mb-8">
+        Seventy estate-style residences in two 18-story towers, rising behind the fully restored 1922 Mira Mar. Three and four bedrooms, 3,200 to 6,000 square feet, priced from $4,165,000.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="#request" class="inline-flex items-center justify-center font-accent uppercase tracking-wider rounded bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] font-semibold text-sm px-8 py-4">Request Pricing &amp; Floor Plans</a>
+        <a href="#schedule" class="inline-flex items-center justify-center font-accent uppercase tracking-wider rounded border-2 border-white text-white hover:bg-white hover:text-black font-semibold text-sm px-8 py-4">Book a Private Tour</a>
+      </div>
+      <p class="mt-8 font-accent text-[10px] uppercase tracking-[0.15em] text-white/45">{credit}</p>
+    </div>
+  </section>
+
+  <!-- ───────────── STAT STRIP ───────────── -->
+  <section class="bg-black border-y border-white/10">
+    <div class="container">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 divide-x divide-y lg:divide-y-0 divide-white/10">
+        {stats.map((s) => (
+          <div class="px-4 py-6 text-center">
+            <p class="font-display text-2xl md:text-3xl text-[var(--color-gold)]">{s.value}</p>
+            <p class="font-accent text-[10px] uppercase tracking-[0.18em] text-white/50 mt-1">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <BreadcrumbNav leafLabel="Mira Mar Residences" />
+
+  <!-- ───────────── OVERVIEW + QUICK FACTS ───────────── -->
+  <section class="section dark-section">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div class="lg:col-span-2">
+          <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Overview</p>
+          <h2 class="accent-underline mb-6">A Reimagined Jewel on South Palm Avenue</h2>
+          <div class="text-white/70 text-lg leading-relaxed space-y-5">
+            <p>
+              Since its debut in 1922, Mira Mar has stood as a testament to Sarasota's rich history and enduring elegance. Now, for the first time in a century, Sarasota's most beloved historical building is being reimagined. Rising elegantly above South Palm Avenue, the revived and resplendent Mira Mar presents a limited collection of 70 estate-style residences across two 18-story towers.
+            </p>
+            <p>
+              Each home is designed to the highest standards, with sweeping views, refined interiors and private access to best-in-class amenities. This is more than a residence: it is a return to grace, a place where timeless architecture, coastal elegance and downtown vibrancy connect.
+            </p>
+            <p>
+              The site is the pinnacle address on South Palm Avenue: nearly 900 feet of street frontage, 1.5 acres of land and an entire city block in the heart of downtown, one block from the corner of Palm and Main with its fine dining, cafés and galleries. The historic Mira Mar Apartments are being fully rehabilitated into high-end retail, restaurants and shops at the base of the towers.
+            </p>
+          </div>
+
+          <div class="mt-10 bg-black border-l-4 border-[var(--color-gold)] rounded-r-lg p-6 md:p-8">
+            <p class="font-accent text-[10px] uppercase tracking-[0.2em] text-[var(--color-gold)] mb-3">Ryan's take</p>
+            <p class="text-white/80 leading-relaxed">
+              Downtown has had bigger towers and newer towers, but it has never had a project on a full city block of South Palm with a landmark at its feet. Mira Mar is the one I point to when a client wants true pre-construction pricing, the longest runway for floor-plan and finish selection of any tower in the core, and a service model built with Forbes Travel Guide's consulting division. Seaward is a local developer with a delivered track record here (Epoch, 7 One One Palm, Park Residences on Lido Key), which matters more than anything else in condominium development. The pricing-by-floor sheet, the release calendar and the full plan set are things I walk through in person; what is on this page is the starting point.
+            </p>
+            <p class="mt-4 text-sm text-white/50">Ryan Adamson, PA &middot; Coldwell Banker Realty, St. Armands Circle</p>
+          </div>
+        </div>
+        <div>
+          <QuickFactsPanel project={project} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── GALLERY ───────────── -->
+  <section class="section dark-section-elevated" id="gallery">
+    <div class="container">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+        <div>
+          <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Gallery</p>
+          <h2 class="accent-underline">Inside Mira Mar</h2>
+        </div>
+        <p class="text-sm text-white/50 max-w-md">Developer renderings, shared with permission. Tap any image to view it full screen.</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3" data-gallery>
+        {gallery.map((g, i) => (
+          <button
+            type="button"
+            class:list={['group relative overflow-hidden rounded-lg bg-black text-left focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)]', i === 0 ? 'col-span-2 row-span-2' : '']}
+            data-lightbox-src={img(g.src)}
+            data-lightbox-caption={g.caption}
+            aria-label={`Open: ${g.caption}`}
+          >
+            <img src={img(g.src, i !== 0)} alt={g.alt} loading={i < 4 ? 'eager' : 'lazy'} class="w-full h-full aspect-[3/2] object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+            <span class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-3 pt-8 pb-2 text-[11px] font-accent uppercase tracking-[0.12em] text-white/85">{g.caption}</span>
+          </button>
+        ))}
+      </div>
+      <p class="mt-4 font-accent text-[10px] uppercase tracking-[0.15em] text-white/40">{credit}</p>
+    </div>
+  </section>
+
+  <!-- ───────────── RESIDENCES ───────────── -->
+  <section class="section dark-section" id="residences">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div>
+          <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">The Residences</p>
+          <h2 class="accent-underline mb-6">A Sanctuary by the Bay</h2>
+          <div class="text-white/70 text-lg leading-relaxed space-y-5 mb-8">
+            <p>
+              Step into a world of warm, understated opulence. Each home is adorned with natural materials, sea-inspired textures and a soft, sun-washed palette that evokes serenity and ease. Gracious open-concept floor plans are complemented by private elevator access, expansive outdoor terraces and meticulously curated details, from designer fixtures to artisan finishes.
+            </p>
+            <p>
+              The heart of each residence, the chef's kitchen, is a true gathering space: marble countertops, custom-paneled Sub-Zero and Wolf appliances, and a grand island. The Owner's Suite offers a private retreat with spa-inspired ensuite baths, oversized soaking tubs, luminous stone finishes and access to peaceful terraces.
+            </p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <button type="button" class="group relative overflow-hidden rounded-lg" data-lightbox-src={img('mira-mar-owners-bedroom')} data-lightbox-caption="Owners' bedroom, penthouse">
+              <img src={img('mira-mar-owners-bedroom', true)} alt="Owners' bedroom with bay views" loading="lazy" class="w-full aspect-[3/2] object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+            </button>
+            <button type="button" class="group relative overflow-hidden rounded-lg" data-lightbox-src={img('mira-mar-terrace')} data-lightbox-caption="Private terrace">
+              <img src={img('mira-mar-terrace', true)} alt="Private terrace overlooking Sarasota Bay" loading="lazy" class="w-full aspect-[3/2] object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+            </button>
+          </div>
+        </div>
+        <div class="bg-black border border-white/10 rounded-lg p-6 md:p-8">
+          <p class="font-accent text-xs uppercase tracking-[0.2em] text-[var(--color-gold)] mb-2">Residence features</p>
+          <p class="font-display text-xl text-white mb-6">Seventy Residences. Two Towers. Eighteen Stories. Only One Mira Mar.</p>
+          <ul class="grid grid-cols-1 gap-y-2.5 text-sm text-white/75">
+            {residenceFeatures.map((f) => (
+              <li class="flex gap-3"><span class="text-[var(--color-gold)] mt-0.5">&#10038;</span><span>{f}</span></li>
+            ))}
+          </ul>
+          <p class="mt-6 text-xs text-white/40">Per the developer's features sheet, January 2026. Finishes and specifications subject to change.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── FLOOR PLANS ───────────── -->
+  <section class="section dark-section-elevated" id="floor-plans">
+    <div class="container">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+        <div>
+          <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Floor plans</p>
+          <h2 class="accent-underline">Three Plans to Start With</h2>
+        </div>
+        <p class="text-sm text-white/50 max-w-md">Eighteen plans across three tiers. Three are shown here; the full set with pricing by floor is shared in a private conversation.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+        {featuredPlans.map((p) => (
+          <article class="bg-black border border-white/10 rounded-lg overflow-hidden flex flex-col">
+            <button type="button" class="group relative bg-white" data-lightbox-src={img(p.image)} data-lightbox-caption={`${p.name}, ${p.beds} / ${p.baths} / ${p.den}`} aria-label={`View the ${p.name} floor plan`}>
+              <img src={img(p.image)} alt={`${p.name} floor plan, ${p.beds}, ${p.baths}, ${p.interior} interior sq ft`} loading="lazy" class="w-full aspect-[4/3] object-contain p-3 transition-transform duration-500 group-hover:scale-[1.03]" />
+              <span class="absolute bottom-3 right-3 font-accent text-[10px] uppercase tracking-[0.15em] bg-black/75 text-white px-2 py-1 rounded">Enlarge</span>
+            </button>
+            <div class="p-5 flex-1 flex flex-col">
+              <p class="font-accent text-[10px] uppercase tracking-[0.18em] text-[var(--color-gold)] mb-1">{p.floors}</p>
+              <h3 class="font-display text-2xl text-white mb-2">{p.name}</h3>
+              <p class="text-xs font-accent uppercase tracking-wider text-white/60 mb-4">{p.beds} &middot; {p.baths} &middot; {p.den}</p>
+              <dl class="grid grid-cols-3 gap-2 text-center border-y border-white/10 py-3 mb-4">
+                <div><dt class="font-accent text-[9px] uppercase tracking-[0.15em] text-white/40">Interior</dt><dd class="text-white font-semibold">{p.interior}</dd></div>
+                <div><dt class="font-accent text-[9px] uppercase tracking-[0.15em] text-white/40">Terrace</dt><dd class="text-white font-semibold">{p.terrace}</dd></div>
+                <div><dt class="font-accent text-[9px] uppercase tracking-[0.15em] text-white/40">Total</dt><dd class="text-[var(--color-gold)] font-semibold">{p.total}</dd></div>
+              </dl>
+              <p class="text-sm text-white/65 leading-relaxed flex-1">{p.note}</p>
+              <a href={`#request`} data-plan={p.name} class="plan-inquire mt-5 block text-center font-accent text-xs uppercase tracking-[0.15em] bg-[var(--color-cbgl-blue)] text-white px-4 py-3 rounded hover:bg-[var(--color-cbgl-blue-light)]">Pricing for {p.name}</a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Plan matrix -->
+      <div class="bg-black border border-white/10 rounded-lg overflow-hidden">
+        <div class="px-6 py-4 border-b border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <p class="font-accent text-xs uppercase tracking-[0.2em] text-white font-semibold">Every plan in the building</p>
+          <p class="text-xs text-white/50">Square footage from the developer's plan set. Drawings and pricing for the locked plans: request below.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
+          {planMatrix.map((tier) => (
+            <div class="p-6">
+              <p class="font-display text-xl text-white">{tier.tier}</p>
+              <p class="font-accent text-[10px] uppercase tracking-[0.15em] text-[var(--color-gold)] mb-4">{tier.floors}</p>
+              <ul class="divide-y divide-white/5">
+                {tier.plans.map((pl) => (
+                  <li class="py-2.5 flex items-start justify-between gap-3">
+                    <div>
+                      <p class="text-sm text-white">{pl.name}</p>
+                      <p class="text-xs text-white/50">{pl.spec}</p>
+                    </div>
+                    <div class="text-right shrink-0">
+                      <p class="text-sm text-white/85">{pl.total} <span class="text-white/40 text-xs">total sf</span></p>
+                      {pl.shown
+                        ? <a href="#floor-plans" class="text-[10px] font-accent uppercase tracking-[0.12em] text-[var(--color-cbgl-blue-light)]">Shown above</a>
+                        : <a href="#request" data-plan={pl.name} class="plan-inquire text-[10px] font-accent uppercase tracking-[0.12em] text-[var(--color-gold)]">&#128274; Request plan</a>}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── AMENITIES ───────────── -->
+  <section class="section dark-section" id="amenities">
+    <div class="container">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">Amenities</p>
+      <h2 class="accent-underline mb-4">Life in Perfect Balance</h2>
+      <p class="text-white/70 text-lg leading-relaxed max-w-3xl mb-12">
+        Mira Mar amenities elevate every aspect of daily life, indoors and out, crafting an environment where you can live, work and unwind in unmatched style. From the Grand Residential Lobby to the elevated sixth-floor Club Castille and the exclusive top-floor Sky Speakeasy, every space invites you to escape the ordinary. Nothing overlooked, everything elevated.
+      </p>
+
+      <div class="space-y-6">
+        {amenityLevels.map((lvl, i) => (
+          <div class={`grid grid-cols-1 lg:grid-cols-5 gap-0 bg-black border border-white/10 rounded-lg overflow-hidden`}>
+            <button type="button" class:list={['group relative lg:col-span-2 min-h-[240px]', i % 2 === 1 ? 'lg:order-2' : '']} data-lightbox-src={img(lvl.image)} data-lightbox-caption={lvl.name} aria-label={`View ${lvl.name}`}>
+              <img src={img(lvl.image, true)} alt={lvl.name} loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+            </button>
+            <div class="lg:col-span-3 p-6 md:p-8">
+              <p class="font-accent text-[10px] uppercase tracking-[0.18em] text-[var(--color-gold)] mb-1">{lvl.tag}</p>
+              <h3 class="font-display text-2xl text-white mb-4">{lvl.name}</h3>
+              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-sm text-white/75">
+                {lvl.items.map((it) => <li class="flex gap-2"><span class="text-[var(--color-cbgl-blue-light)]">&#8226;</span><span>{it}</span></li>)}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Services -->
+      <div class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <div>
+          <p class="font-accent text-[10px] uppercase tracking-[0.18em] text-[var(--color-gold)] mb-1">Luxury services</p>
+          <h3 class="font-display text-2xl text-white mb-3">A Once-in-a-Century Lifestyle</h3>
+          <p class="text-sm text-white/65 leading-relaxed">
+            Service standards and operating frameworks modeled on luxury hospitality, developed in collaboration with Forbes Travel Guide's consulting division, Atelier CX: a five-star, hospitality-inspired approach to resident engagement, amenity activation and lifestyle programming.
+          </p>
+        </div>
+        <ul class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {services.map((s) => (
+            <li class="bg-black border border-white/10 rounded px-4 py-3 text-sm text-white/80 flex items-center gap-3"><span class="text-[var(--color-gold)]">&#10038;</span>{s}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── HISTORY ───────────── -->
+  <section class="section dark-section-elevated" id="history">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">History</p>
+          <h2 class="accent-underline mb-6">A Story That Began Over a Century Ago</h2>
+          <p class="text-white/70 text-lg leading-relaxed mb-8">
+            Constructed during Sarasota's vibrant 1920s land boom, Mira Mar quickly emerged as a defining landmark of Mediterranean Revival architecture and one of the city's premier social and cultural destinations. Named for its sweeping "sea view," the Mira Mar welcomed an illustrious clientele of celebrities, athletes and dignitaries. Today that legacy is reimagined through a once-in-a-generation opportunity: 70 impeccably designed residences that unite heritage, artistry and modern sophistication.
+          </p>
+          <ol class="relative border-l border-white/15 pl-6 space-y-6">
+            {timeline.map((t) => (
+              <li class="relative">
+                <span class="absolute -left-[31px] top-1.5 w-2.5 h-2.5 rounded-full bg-[var(--color-gold)]"></span>
+                <p class="font-display text-xl text-[var(--color-gold)]">{t.year}</p>
+                <p class="text-sm text-white/70 leading-relaxed">{t.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div class="grid grid-cols-1 gap-3">
+          <button type="button" class="group relative overflow-hidden rounded-lg" data-lightbox-src={img('mira-mar-palm-avenue-retail')} data-lightbox-caption="The restored 1922 Mira Mar along South Palm Avenue">
+            <img src={img('mira-mar-palm-avenue-retail')} alt="The restored 1922 Mira Mar building with shops and restaurants along South Palm Avenue" loading="lazy" class="w-full aspect-[3/2] object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+          </button>
+          <button type="button" class="group relative overflow-hidden rounded-lg" data-lightbox-src={img('mira-mar-courtyard')} data-lightbox-caption="Ground-floor courtyard">
+            <img src={img('mira-mar-courtyard', true)} alt="Ground-floor courtyard at Mira Mar" loading="lazy" class="w-full aspect-[3/2] object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+          </button>
+          <p class="text-xs text-white/40">The developer's full historical newsletter, with archival photographs of the 1922 hotel and the Palm Room, is available from Ryan on request.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── TEAM ───────────── -->
+  <section class="section dark-section" id="team">
+    <div class="container">
+      <p class="section-label text-[var(--color-cbgl-blue-light)] mb-3">The team</p>
+      <h2 class="accent-underline mb-10">A Collective Pursuit of Greatness</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          { role: 'Developer', name: 'Seaward Development', text: 'Sarasota-based, with three decades of luxury custom homes and condominium communities including Epoch on South Palm Avenue, 7 One One Palm and Park Residences on Lido Key. Principals Michael Markovitz and Patrick DiPinto.' },
+          { role: 'Architect', name: 'Nichols Architects', text: 'Over 55 years in mixed-use work and the restoration of historic structures, including the St. Moritz and Seville hotels in Miami Beach. Designed Epoch in Sarasota.' },
+          { role: 'Historic architect', name: 'REG Architects', text: 'Rick Gonzalez is one of Florida\'s leading preservation architects, trustee emeritus of the Florida Trust for Historic Preservation and a former federal advisory council member.' },
+          { role: 'Interior design', name: 'Clear ph Design', text: 'More than 20 years creating inspired, brand-enhanced residential, hospitality and commercial interiors that evoke a distinct sense of place.' },
+        ].map((m) => (
+          <div class="bg-black border border-white/10 rounded-lg p-6">
+            <p class="font-accent text-[10px] uppercase tracking-[0.18em] text-[var(--color-gold)] mb-1">{m.role}</p>
+            <h3 class="font-display text-xl text-white mb-3">{m.name}</h3>
+            <p class="text-sm text-white/65 leading-relaxed">{m.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── LOCATION ───────────── -->
+  <LocationBlock address="47 S. Palm Avenue, Sarasota, FL 34236" lat={27.3348} lng={-82.543} callouts={locationCallouts} />
+
+  <!-- ───────────── REQUEST FORM (held-back items) ───────────── -->
+  <section id="request" class="cbgl-section py-16 md:py-20 scroll-mt-20">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
+        <div class="lg:col-span-2">
+          <p class="section-label text-white/70 mb-3">By request only</p>
+          <h2 class="font-display text-3xl md:text-4xl text-white mb-4" style="line-height: 1.15;">What I share in person, not on a web page</h2>
+          <p class="text-white/75 leading-relaxed mb-6">
+            The developer's broker toolkit runs deeper than any public page should. Tell me what you want to see and I will send it directly, or walk you through it on a call.
+          </p>
+          <ul class="space-y-3 text-sm text-white/85">
+            {[
+              'All 18 floor plans, with the view orientation for every stack',
+              'Current pricing by residence, floor and view premium',
+              'Release schedule and which stacks are moving',
+              'Deposit structure, contract terms and what to negotiate',
+              'The full brochure and the developer\'s historical newsletter',
+              'An honest comparison against The Ritz-Carlton Residences, Rosewood Lido Key, The Owen and downtown resale',
+            ].map((it) => (
+              <li class="flex gap-3"><span class="text-[var(--color-gold)]">&#128274;</span><span>{it}</span></li>
+            ))}
+          </ul>
+        </div>
+
+        <form name="mira-mar-request" method="POST" action="/.netlify/functions/community-lead" class="lg:col-span-3 bg-black/40 border border-white/20 rounded-lg p-6 md:p-8 space-y-5" data-slug="mira-mar-sarasota">
+          <input type="hidden" name="form-name" value="mira-mar-request" />
+          <input type="hidden" name="plan" value="" />
+          <p class="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="mm-name" class="block text-xs font-accent uppercase tracking-wider text-white/70 mb-2">Name</label>
+              <input id="mm-name" type="text" name="name" required autocomplete="name" class="w-full bg-black/60 border border-white/20 rounded px-4 py-3 text-white placeholder-white/30 focus:border-[var(--color-gold)] focus:outline-none" />
+            </div>
+            <div>
+              <label for="mm-email" class="block text-xs font-accent uppercase tracking-wider text-white/70 mb-2">Email</label>
+              <input id="mm-email" type="email" name="email" required autocomplete="email" class="w-full bg-black/60 border border-white/20 rounded px-4 py-3 text-white placeholder-white/30 focus:border-[var(--color-gold)] focus:outline-none" />
+            </div>
+          </div>
+          <div>
+            <label for="mm-phone" class="block text-xs font-accent uppercase tracking-wider text-white/70 mb-2">Phone <span class="text-white/40 normal-case tracking-normal">(optional, for a quick call)</span></label>
+            <input id="mm-phone" type="tel" name="phone" autocomplete="tel" class="w-full bg-black/60 border border-white/20 rounded px-4 py-3 text-white placeholder-white/30 focus:border-[var(--color-gold)] focus:outline-none" />
+          </div>
+
+          <fieldset>
+            <legend class="block text-xs font-accent uppercase tracking-wider text-white/70 mb-3">Send me</legend>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[
+                'All 18 floor plans', 'Pricing by floor and view', 'Release schedule', 'Deposit and contract terms', 'The full brochure', 'Comparison vs. Ritz, Rosewood and The Owen',
+              ].map((opt) => (
+                <label class="flex items-center gap-3 cursor-pointer text-white/85 hover:text-white">
+                  <input type="checkbox" name="wants" value={opt} class="accent-[var(--color-gold)]" />
+                  <span class="text-sm">{opt}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <div>
+            <label for="mm-message" class="block text-xs font-accent uppercase tracking-wider text-white/70 mb-2">Anything specific? <span class="text-white/40 normal-case tracking-normal">(a plan, a floor, a view, a timeline)</span></label>
+            <textarea id="mm-message" name="message" rows="3" class="w-full bg-black/60 border border-white/20 rounded px-4 py-3 text-white placeholder-white/30 focus:border-[var(--color-gold)] focus:outline-none"></textarea>
+          </div>
+
+          <label class="flex items-start gap-3 cursor-pointer text-white/60 text-xs">
+            <input type="checkbox" name="consent" required class="mt-0.5 accent-[var(--color-gold)]" />
+            <span>I agree to receive the requested materials and follow-up about Mira Mar from Ryan Adamson at Coldwell Banker Realty. Unsubscribe anytime.</span>
+          </label>
+
+          <button type="submit" class="w-full font-accent text-xs uppercase tracking-[0.2em] font-semibold bg-[var(--color-gold)] text-black px-6 py-4 rounded hover:bg-[var(--color-gold-light)] transition-colors">Send my Mira Mar package</button>
+          <p class="text-center text-xs text-white/50">Prefer to talk? <a href="tel:+19417139234" class="text-white underline underline-offset-2">(941) 713-9234</a></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── COMPARABLES ───────────── -->
+  <ComparableProjects currentSlug="mira-mar-sarasota" currentArea="downtown-sarasota" currentIsland={null} allProjects={projectsData.projects} />
+
+  <!-- ───────────── FAQ ───────────── -->
+  <FAQSchema faqs={faqs} heading="Mira Mar Residences FAQ" />
+
+  <!-- ───────────── BOOKING ───────────── -->
+  <SchedulerEmbed projectName="Mira Mar" />
+
+  <StickyMobileCta label="Request Mira Mar Pricing" href="#request" />
+
+  <DisclosureFooter showListingAttribution={false} showFactAttribution={true} lastVerified="October 2026" />
+  <section class="bg-black">
+    <div class="container pb-8 text-[11px] text-white/35 leading-relaxed space-y-2">
+      <p>Renderings, floor plans and project descriptions courtesy of Seaward Development and used with permission. Ryan Adamson and Coldwell Banker Realty are not the developer. Pricing, deposit schedule, fees, specifications and completion dates are per the developer's October 2026 marketing materials and are subject to change without notice.</p>
+      <p>ORAL REPRESENTATIONS CANNOT BE RELIED UPON AS CORRECTLY STATING REPRESENTATIONS OF THE DEVELOPER. FOR CORRECT REPRESENTATIONS, MAKE REFERENCE TO THE DEVELOPER'S BROCHURE AND TO THE DOCUMENTS REQUIRED BY SECTION 718.503, FLORIDA STATUTES, TO BE FURNISHED BY A DEVELOPER TO A BUYER OR LESSEE. THIS PROJECT HAS BEEN FILED IN THE STATE OF FLORIDA AND NO OTHER STATE. THIS IS NOT AN OFFER TO SELL OR SOLICITATION OF OFFERS TO BUY THE CONDOMINIUM UNITS IN STATES WHERE SUCH OFFER OR SOLICITATION CANNOT BE MADE. PRICES AND AVAILABILITY ARE SUBJECT TO CHANGE AT ANY TIME WITHOUT NOTICE.</p>
+    </div>
+  </section>
+
+  <!-- ───────────── LIGHTBOX ───────────── -->
+  <div id="mm-lightbox" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/95 p-4" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button type="button" id="mm-lb-close" class="absolute top-4 right-4 text-white/70 hover:text-white text-3xl leading-none px-3 py-1" aria-label="Close">&times;</button>
+    <button type="button" id="mm-lb-prev" class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-4xl px-3 py-2" aria-label="Previous">&#8249;</button>
+    <button type="button" id="mm-lb-next" class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-4xl px-3 py-2" aria-label="Next">&#8250;</button>
+    <figure class="max-w-6xl w-full text-center">
+      <img id="mm-lb-img" src="" alt="" class="mx-auto max-h-[82vh] w-auto max-w-full object-contain rounded bg-white/5" />
+      <figcaption id="mm-lb-cap" class="mt-3 font-accent text-xs uppercase tracking-[0.15em] text-white/70"></figcaption>
+      <p class="mt-1 font-accent text-[10px] uppercase tracking-[0.15em] text-white/35">{credit}</p>
+    </figure>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    /* Lightbox */
+    var triggers = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox-src]'));
+    var box = document.getElementById('mm-lightbox');
+    var imgEl = document.getElementById('mm-lb-img');
+    var capEl = document.getElementById('mm-lb-cap');
+    var idx = 0;
+    function show(i) {
+      idx = (i + triggers.length) % triggers.length;
+      var t = triggers[idx];
+      imgEl.src = t.getAttribute('data-lightbox-src');
+      imgEl.alt = t.getAttribute('data-lightbox-caption') || '';
+      capEl.textContent = t.getAttribute('data-lightbox-caption') || '';
+      box.classList.remove('hidden'); box.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+    function hide() {
+      box.classList.add('hidden'); box.classList.remove('flex');
+      imgEl.src = ''; document.body.style.overflow = '';
+    }
+    triggers.forEach(function (t, i) { t.addEventListener('click', function () { show(i); }); });
+    document.getElementById('mm-lb-close').addEventListener('click', hide);
+    document.getElementById('mm-lb-prev').addEventListener('click', function () { show(idx - 1); });
+    document.getElementById('mm-lb-next').addEventListener('click', function () { show(idx + 1); });
+    box.addEventListener('click', function (e) { if (e.target === box) hide(); });
+    document.addEventListener('keydown', function (e) {
+      if (box.classList.contains('hidden')) return;
+      if (e.key === 'Escape') hide();
+      if (e.key === 'ArrowLeft') show(idx - 1);
+      if (e.key === 'ArrowRight') show(idx + 1);
+    });
+
+    /* Plan-specific inquiries pre-fill the request form */
+    var form = document.querySelector('form[name="mira-mar-request"]');
+    if (!form) return;
+    var planField = form.querySelector('input[name="plan"]');
+    var msg = form.querySelector('textarea[name="message"]');
+    Array.prototype.forEach.call(document.querySelectorAll('.plan-inquire'), function (a) {
+      a.addEventListener('click', function () {
+        var p = a.getAttribute('data-plan') || '';
+        planField.value = p;
+        if (msg && !msg.value) msg.value = 'Please send pricing and the floor plan for ' + p + '.';
+        var cb = form.querySelector('input[name="wants"][value="Pricing by floor and view"]');
+        if (cb) cb.checked = true;
+      });
+    });
+
+    /* Submit through community-lead (spam check, Supabase, CRM, team email) */
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var fd = new FormData(form);
+      var btn = form.querySelector('button[type=submit]');
+      if (btn) btn.disabled = true;
+      var wants = fd.getAll('wants').join(', ') || '-';
+      var notes = ['Mira Mar request', 'Wants: ' + wants];
+      if (fd.get('plan')) notes.push('Plan: ' + fd.get('plan'));
+      if (fd.get('message')) notes.push('Message: ' + fd.get('message'));
+      fetch('/.netlify/functions/community-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: fd.get('name'), email: fd.get('email'), phone: fd.get('phone') || '',
+          notes: notes.join('\n'), lead_type: 'Buyer', community: 'Mira Mar Residences',
+          page: location.pathname, source: 'mira-mar-sarasota:request', 'bot-field': fd.get('bot-field') || ''
+        })
+      }).then(function (r) {
+        if (!r.ok) throw new Error('status ' + r.status);
+        window.location.href = '/thank-you/';
+      }).catch(function () { form.submit(); });
+    });
+  })();
+</script>
