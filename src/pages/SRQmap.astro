@@ -1,5 +1,5 @@
 ---
-// build-touch 2026-08-21: pin grooming (blurb cleanup, stale fixes, 15 new tourist pins), em dashes removed
+// build-touch 2026-10-21: St. Armands Circle restaurant layer (22 minor-tier pins, zoom-aware dots + hub pill)
 import allPins from '../data/srqmap-pins.json';
 import openHouses from '../data/srqmap-openhouses.json';
 import matchTable from '../data/srqmap-match.json';
@@ -210,6 +210,20 @@ const itemList = {
   .pin-marker .body svg{transform:rotate(-45deg);width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2}
   .pin-marker:hover{transform:translateY(-3px) scale(1.05)}
   .pin-marker.active{transform:translateY(-4px) scale(1.14);z-index:5}
+  /* Minor-tier pins (dense clusters like the St. Armands Circle restaurants): a small dot at
+     mid zoom, promoted to the full teardrop only when zoomed in tight. Hidden at the default zoom. */
+  .pin-dot{cursor:pointer;width:14px;height:14px;position:relative;transition:transform .15s ease}
+  .pin-dot .body{width:12px;height:12px;margin:1px;border-radius:50%;background:var(--c);border:2px solid rgba(255,255,255,.95);box-shadow:0 2px 6px -2px rgba(10,42,64,.6);opacity:.92}
+  .pin-dot:hover{transform:scale(1.35)}
+  .pin-dot.active{transform:scale(1.5);z-index:5}
+  .pin-dot.active .body{opacity:1;box-shadow:0 0 0 3px rgba(192,97,59,.3)}
+  .pin-marker.minor{width:24px;height:24px}
+  .pin-marker.minor .body{width:24px;height:24px;border-width:1.5px}
+  .pin-marker.minor .body svg{width:12px;height:12px}
+  /* Hub pill shown at low zoom in place of the hidden minor pins; tap to zoom into the Circle */
+  .pin-hub{cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;background:var(--paper);color:var(--navy);border:1.5px solid var(--c);border-radius:999px;padding:5px 10px 5px 7px;font:600 11px "Montserrat",sans-serif;letter-spacing:.03em;box-shadow:0 5px 12px -4px rgba(10,42,64,.5);transform:translate(-50%,8px);position:relative;left:50%;top:50%;transition:transform .15s ease}
+  .pin-hub .dot{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none}
+  .pin-hub:hover{transform:translate(-50%,8px) scale(1.06)}
   /* Locate-me control */
   .leaflet-control.locate-ctl{margin-bottom:10px;border:none;background:transparent;box-shadow:none}
   .locate-btn{width:36px;height:36px;display:grid;place-items:center;background:#fff;border:1px solid rgba(11,58,91,.12);border-radius:8px;cursor:pointer;color:var(--navy);padding:0;box-shadow:0 1px 5px rgba(10,42,64,.35)}
@@ -526,17 +540,57 @@ const itemList = {
   setTimeout(fit, 300);
   window.addEventListener('load', fit);
 
+  // ---- Minor-tier pins ----
+  // Pins tagged tier:"minor" (today: the St. Armands Circle restaurant layer, ~22 pins inside a
+  // 200 m ring) would swamp the map at the default zoom. They are hidden below MINOR_SHOW_ZOOM,
+  // drawn as small dots up to MINOR_FULL_ZOOM, and only become full teardrops once you are
+  // zoomed in tight on the Circle. A search query or a selected pin always wins over the hide.
+  var MINOR_SHOW_ZOOM = 15, MINOR_FULL_ZOOM = 17;
+  var HUBS = [
+    { id:'stac', group:'dining', lat:27.31845, lng:-82.57745, zoom:17, label:function(n){ return n+' places to eat on St. Armands Circle'; } }
+  ];
+  function minorMode(){ var z=map.getZoom(); return z<MINOR_SHOW_ZOOM ? 'hidden' : (z<MINOR_FULL_ZOOM ? 'dot' : 'full'); }
+  function minorShown(p){ return p.tier!=='minor' || minorMode()!=='hidden' || !!query || p._id===selectedId; }
+
   function buildMarkers(){
     PLACES.forEach(function(p){
       var c = GMAP[p.group].color;
-      var html = '<div class="pin-marker" style="--c:'+c+'"><div class="body">'+iconSvg(p.group)+'</div></div>';
-      var icon = L.divIcon({html:html, iconSize:[30,30], iconAnchor:[15,30]});
-      var m = L.marker([p.lat,p.lng],{icon:icon}).addTo(map);
+      var fullHtml = '<div class="pin-marker'+(p.tier==='minor'?' minor':'')+'" style="--c:'+c+'"><div class="body">'+iconSvg(p.group)+'</div></div>';
+      var full = p.tier==='minor'
+        ? L.divIcon({html:fullHtml, iconSize:[24,24], iconAnchor:[12,24]})
+        : L.divIcon({html:fullHtml, iconSize:[30,30], iconAnchor:[15,30]});
+      var dot = L.divIcon({html:'<div class="pin-dot" style="--c:'+c+'"><div class="body"></div></div>', iconSize:[14,14], iconAnchor:[7,7]});
+      var m = L.marker([p.lat,p.lng],{icon:full, zIndexOffset:(p.tier==='minor'?-100:0)});
+      if(p.tier!=='minor') m.addTo(map);
       m.on('click', function(){ select(p._id, true); });
-      markers[p._id] = {marker:m, place:p};
+      markers[p._id] = {marker:m, place:p, full:full, dot:dot, mode:'full'};
     });
   }
   buildMarkers();
+
+  var hubMarkers = {};
+  function buildHubs(){
+    HUBS.forEach(function(h){
+      var g=GMAP[h.group]; if(!g) return;
+      var n = PLACES.filter(function(p){ return p.place===h.id && p.group===h.group; }).length;
+      if(!n) return;
+      var html='<div class="pin-hub" style="--c:'+g.color+'"><span class="dot"></span>'+esc(h.label(n))+'</div>';
+      var icon=L.divIcon({html:html, className:'', iconSize:[0,0], iconAnchor:[0,0]});
+      var m=L.marker([h.lat,h.lng],{icon:icon, zIndexOffset:500});
+      m.on('click', function(){ map.flyTo([h.lat,h.lng], h.zoom, {duration:1}); });
+      hubMarkers[h.id]={marker:m, hub:h};
+    });
+  }
+  buildHubs();
+  function refreshHubs(){
+    var hidden = minorMode()==='hidden';
+    Object.keys(hubMarkers).forEach(function(k){
+      var hm=hubMarkers[k], on = hidden && active[hm.hub.group] && !query;
+      if(on && !map.hasLayer(hm.marker)) hm.marker.addTo(map);
+      if(!on && map.hasLayer(hm.marker)) map.removeLayer(hm.marker);
+    });
+  }
+  map.on('zoomend', function(){ refreshMarkers(); });
 
   var chipsEl = document.getElementById('chips');
   function renderChips(){
@@ -555,6 +609,7 @@ const itemList = {
   var countEl=document.getElementById('count');
   function matchesQuery(p){ if(!query) return true; return query.split(/\s+/).every(function(t){ return p._hay.indexOf(t)>=0; }); }
   function isVisible(p){ return active[p.group] && matchesQuery(p); }
+  function isOnMap(p){ return isVisible(p) && minorShown(p); }
   function visible(){ return PLACES.filter(isVisible); }
   function renderList(){
     var items=visible();
@@ -566,19 +621,27 @@ const itemList = {
       var card=document.createElement('div');
       card.className='card'+(p._id===selectedId?' active':'');
       card.style.setProperty('--c', g.color);
-      card.innerHTML='<div class="marker">'+iconSvg(p.group)+'</div><div><h3>'+esc(p.name)+'</h3><div class="meta"><span class="cat-label" style="color:'+g.color+'">'+esc(g.label)+'</span></div></div>';
+      var sub = p.place==='stac' ? ' · St. Armands'+(p.quadrant?' · '+esc(p.quadrant)+' quadrant':'') : '';
+      card.innerHTML='<div class="marker">'+iconSvg(p.group)+'</div><div><h3>'+esc(p.name)+'</h3><div class="meta"><span class="cat-label" style="color:'+g.color+'">'+esc(g.label)+'</span>'+sub+'</div></div>';
       card.onclick=function(){ select(p._id, true); };
       listEl.appendChild(card);
     });
   }
   function refreshMarkers(){
+    var mode = minorMode();
     Object.keys(markers).forEach(function(k){
-      var mk=markers[k], on=isVisible(mk.place);
+      var mk=markers[k], p=mk.place, on=isOnMap(p);
+      if(p.tier==='minor'){
+        // selected or searched minor pins render as the full teardrop even at low zoom
+        var want = (mode==='dot' && p._id!==selectedId && !query) ? 'dot' : 'full';
+        if(want!==mk.mode){ mk.marker.setIcon(want==='dot'?mk.dot:mk.full); mk.mode=want; }
+      }
       if(on && !map.hasLayer(mk.marker)) mk.marker.addTo(map);
       if(!on && map.hasLayer(mk.marker)) map.removeLayer(mk.marker);
       var el=mk.marker.getElement();
-      if(el){ var pm=el.querySelector('.pin-marker'); if(pm) pm.classList.toggle('active', mk.place._id===selectedId); }
+      if(el){ var pm=el.querySelector('.pin-marker,.pin-dot'); if(pm) pm.classList.toggle('active', p._id===selectedId); }
     });
+    refreshHubs();
   }
   function refresh(){ renderChips(); renderList(); refreshMarkers(); }
 
@@ -589,6 +652,7 @@ const itemList = {
     var g=GMAP[p.group];
     detailBody.style.setProperty('--c', g.color);
     var facts=[];
+    if(p.quadrant) facts.push(esc(p.quadrant)+' quadrant');
     if(p.price) facts.push(esc(p.price));
     if(p.vibe) facts.push(esc(p.vibe));
     if(p.good_for) facts.push(esc(p.good_for));
@@ -596,6 +660,7 @@ const itemList = {
     var blurbHtml = p.blurb ? '<p class="blurb">'+esc(p.blurb)+'</p>' : '';
     var tipHtml = p.tip ? '<div class="tip"><p class="tip-h">Ryan’s take</p><p>'+esc(p.tip)+'</p></div>' : '';
     var siteHtml = p.website ? '<a class="detail-link" href="'+esc(p.website)+'" target="_blank" rel="noopener">Visit website</a>' : '';
+    if(p.phone) siteHtml += '<a class="detail-link" href="tel:'+esc(String(p.phone).replace(/[^\d+]/g,''))+'">Call '+esc(p.name.split(' (')[0])+' · '+esc(p.phone)+'</a>';
     var marketHtml = p.market ? '<a class="detail-link" href="'+esc(p.market)+'" target="_blank" rel="noopener">Live market data for this area</a>' : '';
     var dirHtml = '<a class="detail-link" href="'+directionsUrl(p)+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>'+(userLatLng?'Directions from my location':'Get directions')+'</a>';
     var photos = Array.isArray(p.photos) ? p.photos.filter(Boolean) : [];
@@ -655,7 +720,7 @@ const itemList = {
     if(!active[p.group]){ active[p.group]=true; }
     document.getElementById('rail').classList.remove('collapsed');
     refresh(); showDetail(p);
-    if(fly) map.flyTo([p.lat,p.lng], Math.max(map.getZoom(),15), {duration:.8});
+    if(fly) map.flyTo([p.lat,p.lng], Math.max(map.getZoom(), p.tier==='minor' ? MINOR_FULL_ZOOM : 15), {duration:.8});
   }
 
   // ---- free-text search wiring ----
