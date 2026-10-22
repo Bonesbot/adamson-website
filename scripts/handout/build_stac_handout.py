@@ -121,9 +121,6 @@ for w, pts, t in road_lines:
     svg.append(f'<polyline points="{pts}" fill="none" stroke="{ROADLINE}" stroke-width="{w + 1.4}" stroke-linecap="round" stroke-linejoin="round"/>')
 for w, pts, t in road_lines:
     svg.append(f'<polyline points="{pts}" fill="none" stroke="{ROAD}" stroke-width="{w}" stroke-linecap="round" stroke-linejoin="round"/>')
-# centre park fountain
-cx, cy = scr(*C)
-svg.append(f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="9" fill="{WATER}" stroke="#9DBAC5" stroke-width=".8"/><circle cx="{cx:.1f}" cy="{cy:.1f}" r="2.2" fill="#9DBAC5"/>')
 # road-name labels along the longest in-box segment of each named street
 def label_roads():
     best = {}
@@ -161,9 +158,6 @@ for p, (x, y) in zip(pins, MK):
     if star: svg.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="8.6" fill="none" stroke="{GOLD}" stroke-width="1.6"/>')
     svg.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="6.2" fill="{q["ink"]}" stroke="#fff" stroke-width="1.3"/>')
     svg.append(f'<text x="{x:.1f}" y="{y + 2.5:.1f}" font-family="Montserrat" font-weight="700" font-size="{6.8 if p["_n"] < 10 else 6.1}" fill="#fff" text-anchor="middle">{p["_n"]}</text>')
-# small CB office marker (no label; the back side says where we are)
-ox, oy = scr(27.31911, -82.57666)
-svg.append(f'<g transform="translate({ox:.1f},{oy:.1f})"><circle r="6.5" fill="#fff" stroke="{NAVY}" stroke-width="1.2"/><text y="2.6" font-family="Montserrat" font-weight="700" font-size="5.2" fill="{NAVY}" text-anchor="middle">CB</text></g>')
 # compass (soft)
 nx, ny, na = 24, MH - 24, 127
 svg.append(f'<g transform="translate({nx},{ny})"><circle r="12" fill="#fff" fill-opacity=".8" stroke="{ROADLINE}" stroke-width=".8"/>'
@@ -181,6 +175,10 @@ FONT_CSS = open(f"{FONT_SRC}/fonts.css").read()
 open(f"{OUT}/_map.html", "w").write(f'<!doctype html><html><head><meta charset="utf-8"><style>{FONT_CSS} body{{margin:0;background:{CREAM}}}svg{{display:block}}</style></head><body>{MAP_SVG}</body></html>')
 QR_URL = "https://adamsonfl.com/circle"
 segno.make(QR_URL, error="m").save(f"{ASSETS}/qr-adamsonfl-circle.png", scale=24, border=2, dark=NAVY, light="#FFFFFF")
+NC_URL = "https://adamsonfl.com/new-construction/?utm_source=handout&utm_medium=print&utm_campaign=stac-map"
+segno.make(NC_URL, error="m").save(f"{ASSETS}/qr-new-construction.png", scale=24, border=2, dark=NAVY, light="#FFFFFF")
+for _img in ("mira-mar-hero.jpg", "ritz-carlton-residences-hero.jpg", "rosewood-residences-lido-hero.jpg"):
+    _sh.copy(f"{ROOT}/public/images/new-construction/{_img}", f"{ASSETS}/{_img}")
 
 PHONE_W, PHONE_H = 390, 844
 render = f"""
@@ -274,24 +272,29 @@ h1 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:23pt; ma
 .promo .u {{ font-family:Montserrat; font-weight:700; font-size:6.4pt; color:{NAVY}; margin-top:3pt; }}
 .foot {{ position:absolute; left:{PAD}pt; right:{PAD}pt; bottom:{PAD - 8}pt; display:flex; justify-content:space-between; font-size:5.2pt; color:#8E9AA3; }}
 /* back */
-.back h2 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:17pt; color:{NAVY}; margin:0 0 3pt; line-height:1.1; }}
+.back h2 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:15.5pt; color:{NAVY}; margin:0 0 3pt; line-height:1.1; }}
 .lead {{ font-size:7.8pt; line-height:1.4; color:#3B4A55; margin:0 0 8pt; }}
-.slots {{ display:grid; grid-template-columns:repeat(3,1fr); gap:7pt; margin-bottom:9pt; }}
+.slots {{ display:grid; grid-template-columns:repeat(3,1fr); gap:7pt; margin-bottom:8pt; }}
 .slot {{ background:#fff; border:1pt solid #E4DCCB; border-radius:8pt; overflow:hidden; }}
-.slot .ph {{ height:58pt; background:linear-gradient(135deg,#DCE7EC,#EEF2F4); display:grid; place-items:center; font-size:6pt; color:#8E9AA3; text-transform:uppercase; font-family:Montserrat; }}
+.slot .ph {{ height:50pt; background-size:cover; background-position:center; }}
+.slot .st {{ display:inline-block; font-family:Montserrat; font-weight:700; font-size:5pt; text-transform:uppercase; color:#fff; background:{NAVY}; border-radius:999pt; padding:2pt 5pt; margin:5pt 0 0 5pt; }}
+.nc-head {{ display:flex; align-items:center; gap:9pt; margin:0 0 6pt; }}
+.nc-head img {{ width:40pt; height:40pt; flex:none; }}
+.nc-head .u {{ font-family:Montserrat; font-weight:700; font-size:6.4pt; color:{NAVY}; }}
+.credit {{ font-size:4.8pt; color:#9AA5AD; margin:-5pt 0 7pt; }}
 .slot .b {{ padding:5pt 6pt 6pt; }}
-.slot .p {{ font-family:Montserrat; font-weight:700; font-size:8.5pt; color:{NAVY}; }}
-.slot .a {{ font-size:6.4pt; color:#55656F; margin-top:1pt; }}
+.slot .p {{ font-family:Montserrat; font-weight:700; font-size:7.2pt; color:{NAVY}; line-height:1.15; }}
+.slot .a {{ font-size:6pt; color:#55656F; margin-top:2pt; line-height:1.3; }}
 .slot .f {{ font-size:6pt; color:#7B8993; margin-top:2pt; }}
-.band {{ background:{NAVY}; color:#fff; border-radius:10pt; padding:12pt 14pt; margin-bottom:8pt; display:flex; align-items:center; gap:12pt; }}
-.band .big {{ font-family:'Playfair Display', serif; font-size:14.5pt; line-height:1.15; }}
+.band {{ background:{NAVY}; color:#fff; border-radius:10pt; padding:9pt 13pt; margin-bottom:7pt; display:flex; align-items:center; gap:12pt; }}
+.band .big {{ font-family:'Playfair Display', serif; font-size:13.5pt; line-height:1.12; }}
 .band .num {{ font-family:Montserrat; font-weight:700; font-size:15pt; color:{GOLD}; white-space:nowrap; }}
 .band .s {{ font-size:6.8pt; color:#C8D3DB; margin-top:3pt; }}
-.two {{ display:grid; grid-template-columns:1fr 1fr; gap:8pt; margin-bottom:8pt; }}
-.card {{ background:#fff; border:1pt solid #E4DCCB; border-radius:9pt; padding:8pt 10pt; }}
+.two {{ display:grid; grid-template-columns:1fr 1fr; gap:7pt; margin-bottom:7pt; }}
+.card {{ background:#fff; border:1pt solid #E4DCCB; border-radius:9pt; padding:7pt 9pt; }}
 .card h3 {{ font-family:Montserrat; font-weight:700; font-size:7pt; text-transform:uppercase; color:{GOLD}; margin:0 0 4pt; }}
-.card p {{ font-size:7.2pt; line-height:1.4; margin:0; color:#3B4A55; }}
-.line {{ border-bottom:.7pt solid #B9C2C9; height:11pt; margin-top:5pt; }}
+.card p {{ font-size:6.9pt; line-height:1.38; margin:0; color:#3B4A55; }}
+.line {{ border-bottom:.7pt solid #B9C2C9; height:9pt; margin-top:4pt; }}
 .contact {{ display:flex; align-items:center; gap:10pt; border-top:1pt solid {GOLD}; padding-top:8pt; }}
 .contact img {{ height:30pt; }}
 .contact .nm2 {{ font-family:'Playfair Display', serif; font-size:12.5pt; color:{NAVY}; line-height:1.05; }}
@@ -325,21 +328,22 @@ front = f"""
 back = f"""
 <div class="page back">
   <p class="kicker">From the office at 423, Gold quadrant</p>
-  <h2>Curious what it costs to live a walk from the Circle?</h2>
-  <p class="lead">I'm Ryan Adamson, the agent in the Coldwell Banker window on the Circle. Lido, St. Armands and Longboat Key are small markets where the good addresses trade quietly. Three I'd show you this week:</p>
+  <h2>The next generation of Sarasota towers is rising now.</h2>
+  <div class="nc-head"><p class="lead" style="margin:0">I'm Ryan Adamson, the agent in the Coldwell Banker window on the Circle. Sarasota is in the middle of its biggest luxury-condo cycle in a generation: beachfront on Lido, bayfront at The Quay, Palm Avenue downtown. Three worth knowing about, and a page that keeps you current on all of them:<br><span class="u">adamsonfl.com/new-construction</span></p><img src="assets/qr-new-construction.png" alt="QR code"></div>
   <div class="slots">
-    <div class="slot"><div class="ph">Photo</div><div class="b"><div class="p">$—</div><div class="a">Listing 1 · address</div><div class="f">beds · baths · sq ft</div></div></div>
-    <div class="slot"><div class="ph">Photo</div><div class="b"><div class="p">$—</div><div class="a">Listing 2 · address</div><div class="f">beds · baths · sq ft</div></div></div>
-    <div class="slot"><div class="ph">Photo</div><div class="b"><div class="p">$—</div><div class="a">Listing 3 · address</div><div class="f">beds · baths · sq ft</div></div></div>
+    <div class="slot"><div class="ph" style="background-image:url('assets/rosewood-residences-lido-hero.jpg')"><span class="st">Move-ins 2026</span></div><div class="b"><div class="p">Rosewood Residences Lido Key</div><div class="a">65 private beachfront residences on Lido, a 10-minute walk from this Circle. Rosewood's first stand-alone residential project.</div></div></div>
+    <div class="slot"><div class="ph" style="background-image:url('assets/ritz-carlton-residences-hero.jpg')"><span class="st">Completing late 2026</span></div><div class="b"><div class="p">The Ritz-Carlton Residences, Sarasota Bay</div><div class="a">78 flow-through residences at The Quay: bay on one side, skyline on the other, full Ritz-Carlton service.</div></div></div>
+    <div class="slot"><div class="ph" style="background-image:url('assets/mira-mar-hero.jpg')"><span class="st">Delivery 2028</span></div><div class="b"><div class="p">Mira Mar Residences</div><div class="a">70 estate-scale residences in two towers behind the restored 1922 Mira Mar on Palm Avenue, downtown.</div></div></div>
   </div>
-  <div class="band"><div><div class="big">Text me a question, get a real answer.</div><div class="s">"What does a two-bedroom on Longboat go for?" · "Which buildings allow weekly rentals?" · "Is there a festival this weekend?"</div></div><div class="num">941-XXX-XXXX</div></div>
+  <p class="credit">Renderings courtesy of The Ronto Group, Kolter Urban and Seaward Development. Pricing, availability and delivery change; ask for the current sheet.</p>
+  <div class="band"><div><div class="big">Text me anything about Sarasota.</div><div class="s">Prices on Longboat, which buildings allow rentals, where to have dinner tonight, what the Gulf is doing to insurance. A real answer from a local, not a bot.</div></div><div class="num">941-XXX-XXXX</div></div>
   <div class="two">
-    <div class="card"><h3>First word on new listings</h3><p>Island listings, including the ones that never hit the portals, plus a short monthly market note. No spam, unsubscribe any time.</p><div class="line"></div><p style="font-size:5.6pt;color:#8E9AA3;margin-top:2pt">name &amp; email or cell · hand it back to me, or text UPDATES to the number above</p></div>
+    <div class="card"><h3>Stay current on new condo releases</h3><p>New releases, price moves and delivery dates at these towers, plus island listings that never hit the portals and a short monthly market note. No spam, unsubscribe any time.</p><div class="line"></div><p style="font-size:5.6pt;color:#8E9AA3;margin-top:2pt">name &amp; email or cell · hand it back to me, or text UPDATES to the number above</p></div>
     <div class="card"><h3>Ryan's Circle picks</h3><p><b>Columbia</b> for the 1905 salad and sangria · <b>Venezia</b> for pizza and the best people-watching patio · <b>Blu Kouzina</b> for grilled octopus and meze · <b>Green Zebra</b> for breakfast or a smoothie before the beach.</p></div>
   </div>
   <div class="two">
     <div class="card"><h3>Getting around</h3><p><b>Lido Beach</b> is a 5-minute walk up John Ringling Blvd; turn right on Ben Franklin for quieter <b>North Lido</b>.<br><b>Bay Runner trolley</b> is free and links Lido Beach, the Circle and downtown (SarasotaBayRunner.com).<br><b>Parking:</b> 1,600+ city spaces: the Fillmore lot, the N. Adams garage and the streets off the Circle.</p></div>
-    <div class="card"><h3>2026 on the Circle</h3><p style="font-size:6.6pt;line-height:1.45"><b>Oct 31</b> Fright Night trick-or-treat · <b>Nov 7</b> Ferraris on the Circle · <b>Nov 14–15</b> Art Festival &amp; Sidewalk Sale · <b>Dec 5</b> Holiday Night of Lights · <b>Dec 10</b> Porsches in the Park · <b>Jan 17</b> Art Festival · <b>Jan 24–25</b> Century of Cars · <b>May 2</b> Art Festival · <b>Jun 6–7</b> Corvettes on the Circle</p></div>
+    <div class="card"><h3>2026–27 season on the Circle</h3><p style="font-size:6.3pt;line-height:1.42"><b>Oct 31</b> Fright Night trick-or-treat, 6–8pm · <b>Nov 7</b> Ferraris on the Circle · <b>Nov 14–15</b> Art Festival &amp; Sidewalk Sale · <b>Dec 5</b> Holiday Night of Lights, 5:30pm · <b>Dec</b> Porsches in the Park · <b>Jan 30–31</b> Art Festival · <b>Jan</b> Century of Cars · <b>May</b> Corvettes on the Circle · <b>May 29–30</b> Fine Art Festival · <b>June</b> Craft Festival &amp; Sidewalk Sale<br><span style="color:#8E9AA3">2027 dates set by each sponsor; see VisitStArmands.org</span></p></div>
   </div>
   <div class="contact"><img src="assets/adamson-group-logo.png" alt=""><div><div class="nm2">Ryan Adamson, PA</div><div class="r">Adamson Group · Coldwell Banker Realty<br>423 St. Armands Circle, Sarasota, FL 34236 · AdamsonFL.com</div></div><div class="ph2">(941) 713-9234<small>call or text · AdamsonFL.com</small></div></div>
 </div>"""
