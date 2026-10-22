@@ -95,3 +95,14 @@ https://adamsonfl.com/siesta-report/*    https://siestareport.com/              
 # scaffolded CMA win over these rules automatically). /mkt/ itself is the workspace index.
 /mkt/:slug/         /mkt/property.html            200
 /mkt/:slug          /mkt/property.html            200
+
+# ---------------------------------------------------------------------------
+# /circle : 2026-10-22 : St. Armands Circle handout QR
+# ---------------------------------------------------------------------------
+# Printed on the St. Armands vendor-map handout (floor time at the CB office).
+# Lands on SRQmap zoomed to the Circle with the dining layer on and a welcome line;
+# UTM so scans show in web_events; src=handout tags any lead that follows.
+# Change the target here, never the printed code. (srqmap.com is forwarded at
+# Cloudflare and drops the path, so the QR encodes adamsonfl.com/circle.)
+/circle   /srqmap/?at=27.3184,-82.5775,17&cat=dining,things&hi=Ryan%27s%20St.%20Armands%20map%20%E2%80%94%20tap%20any%20spot%20for%20his%20take&src=handout&utm_source=handout&utm_medium=print&utm_campaign=stac-map   302
+/Circle   /circle   301
