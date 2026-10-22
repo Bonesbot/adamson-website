@@ -21,3 +21,10 @@ select 'water', c.seg, count(*),
  round((select count(*) from active a where a.seg=c.seg)/(count(*)/12.0),1)
 from closed c where c.detected_area in ('longboat-key','st-armands-lido') group by c.seg
 order by 1,2;
+
+-- Five-year arc behind the card (InfoSparks rolling-12, condos, each September)
+select geo_key, metric, period, round(value::numeric,1) v from market_series
+where geo_type='zip' and geo_key in ('34228','34236') and property_type='condo' and calc='r12'
+  and metric in ('median_sales_price','median_price_per_sqft','months_supply','median_cdom','closed_sales')
+  and extract(month from period)=9 and period >= '2019-01-01'
+order by metric, geo_key, period;
