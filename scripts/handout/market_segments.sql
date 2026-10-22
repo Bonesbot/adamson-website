@@ -28,3 +28,22 @@ where geo_type='zip' and geo_key in ('34228','34236') and property_type='condo' 
   and metric in ('median_sales_price','median_price_per_sqft','months_supply','median_cdom','closed_sales')
   and extract(month from period)=9 and period >= '2019-01-01'
 order by metric, geo_key, period;
+
+-- "What does a condo cost here?" table: resale (days_to_contract > 1), buildings < 2024,
+-- era 2000+ vs pre-2000 x beachfront / bayfront / not-on-water (downtown), trailing 12 months
+with base as (
+ select *, case when coalesce(waterfront_features,'') ilike '%Gulf%' or coalesce(waterfront_features,'') ilike '%Beach%' then 'Beachfront'
+   when coalesce(waterfront_features,'') ilike '%Bay%' or coalesce(waterfront_features,'') ilike '%Intracoastal%' or coalesce(waterfront_features,'') ilike '%Canal%' or coalesce(waterfront_features,'') ilike '%Marina%' or coalesce(waterfront_features,'') ilike '%Lagoon%' then 'Bayfront'
+   else 'Not on water' end seg,
+   coalesce(monthly_condo_fee_amount, monthly_association_cost, total_annual_fees/12.0) fee_mo,
+   case when year_built>=2000 then '2000+' else 'pre-2000' end era
+ from raw_listings where detected_area in ('longboat-key','st-armands-lido','downtown-sarasota') and property_sub_type='Condominium' and year_built < 2024),
+closed as (select * from base where standard_status='Closed' and close_date >= current_date - interval '365 days' and days_to_contract > 1),
+active as (select * from base where standard_status='Active')
+select c.era, c.seg, count(*) closed12, (select count(*) from active a where a.seg=c.seg and a.era=c.era) active_now,
+ round((select count(*) from active a where a.seg=c.seg and a.era=c.era)/(count(*)/12.0),1) months_supply,
+ round(percentile_cont(0.5) within group (order by c.close_price_by_calculated_sqft)) med_ppsf,
+ round(percentile_cont(0.5) within group (order by c.current_price)) med_price,
+ round(percentile_cont(0.5) within group (order by c.fee_mo)) dues_mo,
+ round(percentile_cont(0.5) within group (order by c.days_to_contract)) days_to_contract
+from closed c group by 1,2 order by 1 desc, 2;

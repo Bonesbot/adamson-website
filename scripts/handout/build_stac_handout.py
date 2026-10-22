@@ -295,50 +295,61 @@ h1 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:23pt; ma
 .promo .u {{ font-family:Montserrat; font-weight:700; font-size:7pt; color:{NAVY}; margin-top:3pt; }}
 .foot {{ position:absolute; left:{PAD}pt; right:{PAD}pt; bottom:{PAD}pt; display:flex; justify-content:space-between; gap:12pt; font-size:5.8pt; color:#8E9AA3; }}
 /* back */
-.life {{ display:flex; gap:10pt; align-items:center; }}
+.life {{ display:flex; flex-direction:column; gap:5pt; align-items:stretch; }}
 .life ul {{ margin:4pt 0 0; padding:0; list-style:none; }}
-.life li {{ font-size:7pt; line-height:1.3; white-space:nowrap; color:{NAVY}; font-weight:600; }}
+.life li {{ font-size:6.9pt; line-height:1.3; white-space:nowrap; color:{NAVY}; font-weight:600; }}
 .life li span {{ color:{GOLD}; margin-right:4pt; }}
-.life .qrc {{ flex:none; text-align:center; }}
-.life .qrc img {{ width:54pt; height:54pt; display:block; margin:0 auto 2pt; }}
-.life .qrc small {{ font-family:Montserrat; font-weight:700; font-size:5.8pt; color:{NAVY}; display:block; line-height:1.2; }}
+.life .qrc {{ flex:none; text-align:center; display:flex; align-items:center; gap:7pt; justify-content:flex-start; }}
+.life .qrc img {{ width:56pt; height:56pt; display:block; margin:0; }}
+.life .qrc small {{ font-family:Montserrat; font-weight:700; font-size:6.2pt; color:{NAVY}; display:block; line-height:1.3; text-align:left; }}
 .nums {{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:6pt; margin-top:4pt; }}
 .nums.four {{ grid-template-columns:1fr 1fr; gap:4pt; margin-top:2pt; }}
-.card .kick {{ font-family:'Playfair Display', serif; font-style:italic; font-size:7.4pt; color:{NAVY}; margin:-3pt 0 2pt; }}
+.card .kick {{ font-family:'Playfair Display', serif; font-style:italic; font-size:7.2pt; color:{NAVY}; margin:-3pt 0 1pt; }}
 .stat b i {{ font-style:normal; font-family:Inter; font-weight:400; font-size:7pt; color:#8E9AA3; }}
 .stat {{ text-align:center; background:{CREAM}; border-radius:7pt; padding:3pt 3pt; }}
 .stat b {{ display:block; font-family:Montserrat; font-weight:700; font-size:9.2pt; color:{NAVY}; line-height:1; white-space:nowrap; }}
 .stat small {{ display:block; font-size:5.8pt; color:#55656F; margin-top:1.5pt; line-height:1.2; }}
-.card.wide {{ margin-bottom:4pt; }}
+.card.wide {{ margin-bottom:4pt; padding:5pt 9pt; }}
+.inl {{ font-size:6.8pt; line-height:1.4; margin:0; color:#3B4A55; }}
+.inl + .inl {{ margin-top:2.5pt; }}
+.inl .h {{ font-family:Montserrat; font-weight:700; font-size:6.6pt; text-transform:uppercase; color:{GOLD}; margin-right:4pt; }}
 .cols {{ display:grid; grid-template-columns:1fr 1fr; gap:10pt; }}
-.events {{ background:#fff; border:1pt solid #E4DCCB; border-radius:9pt; padding:4pt 9pt; margin-bottom:4pt; font-size:6.6pt; line-height:1.42; color:#3B4A55; }}
+.events {{ background:#fff; border:1pt solid #E4DCCB; border-radius:9pt; padding:3.5pt 9pt; margin-bottom:4pt; font-size:6.5pt; line-height:1.4; color:#3B4A55; }}
 .events b {{ color:{NAVY}; }}
 .events .h {{ font-family:Montserrat; font-weight:700; font-size:7pt; color:{GOLD}; text-transform:uppercase; margin-right:6pt; }}
 .back h2 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:15.5pt; color:{NAVY}; margin:0 0 2pt; line-height:1.1; }}
 .lead {{ font-size:7.6pt; line-height:1.38; color:#3B4A55; margin:0 0 6pt; }}
 .slots {{ display:grid; grid-template-columns:repeat(3,1fr); gap:7pt; margin-bottom:4pt; }}
 .slot {{ background:#fff; border:1pt solid #E4DCCB; border-radius:8pt; overflow:hidden; }}
-.slot .ph {{ height:36pt; background-size:cover; background-position:center; }}
+.slot .ph {{ height:30pt; background-size:cover; background-position:center; }}
 .slot .st {{ display:inline-block; font-family:Montserrat; font-weight:700; font-size:5pt; text-transform:uppercase; color:#fff; background:{NAVY}; border-radius:999pt; padding:2pt 5pt; margin:5pt 0 0 5pt; }}
 .nc-head {{ display:flex; align-items:center; gap:9pt; margin:0 0 4pt; }}
 .nc-head img {{ width:50pt; height:50pt; flex:none; }}
 .nc-head .u {{ font-family:Montserrat; font-weight:700; font-size:6.4pt; color:{NAVY}; }}
-.credit {{ font-size:5.4pt; color:#9AA5AD; margin:-3pt 0 6pt; }}
-.slot .b {{ padding:5pt 6pt 6pt; }}
+.credit {{ font-size:5.4pt; color:#9AA5AD; margin:-3pt 0 4pt; }}
+.slot .b {{ padding:4pt 6pt 5pt; }}
 .slot .p {{ font-family:Montserrat; font-weight:700; font-size:7.6pt; color:{NAVY}; line-height:1.15; }}
 .slot .a {{ font-size:6.5pt; color:#55656F; margin-top:2pt; line-height:1.3; }}
 .slot .pr {{ font-family:Montserrat; font-weight:700; font-size:7pt; color:{GOLD}; margin-top:3pt; }}
 .slot .f {{ font-size:6pt; color:#7B8993; margin-top:2pt; }}
-.band {{ background:{NAVY}; color:#fff; border-radius:10pt; padding:7pt 12pt; margin-bottom:4pt; display:flex; align-items:center; gap:12pt; }}
+.band {{ background:{NAVY}; color:#fff; border-radius:10pt; padding:6pt 12pt; margin-bottom:4pt; display:flex; align-items:center; gap:12pt; }}
 .band .big {{ font-family:'Playfair Display', serif; font-size:13pt; line-height:1.12; }}
 .band .num {{ font-family:Montserrat; font-weight:700; font-size:15pt; color:{GOLD}; white-space:nowrap; }}
-.band .s {{ font-size:7pt; color:#C8D3DB; margin-top:3pt; }}
+.band .s {{ font-size:6.8pt; color:#C8D3DB; margin-top:3pt; }}
 .two {{ display:grid; grid-template-columns:1fr 1fr; gap:7pt; margin-bottom:4pt; }}
+.two.mk {{ grid-template-columns:140pt 1fr; }}
+table.mkt {{ border-collapse:collapse; width:100%; font-size:6.7pt; margin-top:0; }}
+table.mkt th {{ font-family:Montserrat; font-weight:700; font-size:5.6pt; text-transform:uppercase; color:#55656F; text-align:right; padding:0 0 2pt; border-bottom:.6pt solid {GOLD}; }}
+table.mkt th:first-child, table.mkt td:first-child {{ text-align:left; }}
+table.mkt td {{ padding:1.5pt 0; border-bottom:.4pt solid #EDE7DA; text-align:right; font-variant-numeric:tabular-nums; }}
+table.mkt td:first-child {{ font-weight:600; color:{NAVY}; }}
+table.mkt tr.g td {{ font-family:Montserrat; font-weight:700; font-size:5.6pt; text-transform:uppercase; color:#8E9AA3; padding:3pt 0 .5pt; border-bottom:none; text-align:left; }}
+.mfoot {{ font-size:5.9pt; color:#55656F; margin:3pt 0 0; line-height:1.3; }}
 .card {{ background:#fff; border:1pt solid #E4DCCB; border-radius:9pt; padding:6pt 9pt; }}
 .card h3 {{ font-family:Montserrat; font-weight:700; font-size:7.4pt; text-transform:uppercase; color:{GOLD}; margin:0 0 4pt; }}
 .card p {{ font-size:7pt; line-height:1.34; margin:0; color:#3B4A55; }}
 .line {{ border-bottom:.7pt solid #B9C2C9; height:9pt; margin-top:4pt; }}
-.contact {{ display:flex; align-items:center; gap:10pt; border-top:1pt solid {GOLD}; padding-top:5pt; }}
+.contact {{ display:flex; align-items:center; gap:10pt; border-top:1pt solid {GOLD}; padding-top:4pt; }}
 .contact img {{ height:26pt; }}
 .contact .nm2 {{ font-family:'Playfair Display', serif; font-size:11.5pt; color:{NAVY}; line-height:1.05; }}
 .contact .r {{ font-size:7pt; color:#55656F; line-height:1.4; }}
@@ -372,30 +383,32 @@ back = f"""
 <div class="page back">
   <p class="kicker">From the office at 423, Gold quadrant</p>
   <h2>Curious what it costs to live a walk from here?</h2>
-  <div class="nc-head"><p class="lead" style="margin:0">I'm Ryan Adamson, in the Coldwell Banker window on the Circle. Sarasota is in its biggest luxury-residence cycle in a generation. Three worth knowing, and the page that keeps you current on all of them: <b>adamsonfl.com/new-construction</b></p><img src="assets/qr-new-construction.png" alt="QR code"></div>
+  <div class="nc-head"><p class="lead" style="margin:0">I'm Ryan Adamson, in the Coldwell Banker window on the Circle. Three new buildings worth knowing, and the page that keeps you current on all of them: <b>adamsonfl.com/new-construction</b></p><img src="assets/qr-new-construction.png" alt="QR code"></div>
   <div class="slots">
-    <div class="slot"><div class="ph" style="background-image:url('assets/rosewood-residences-lido-hero.jpg')"><span class="st">Move-ins 2026</span></div><div class="b"><div class="p">Rosewood Residences Lido Key</div><div class="a">65 private beachfront residences, a 10-minute walk from this Circle.</div><div class="pr">From $— </div></div></div>
-    <div class="slot"><div class="ph" style="background-image:url('assets/ritz-carlton-residences-hero.jpg')"><span class="st">Completing late 2026</span></div><div class="b"><div class="p">The Ritz-Carlton Residences, Sarasota Bay</div><div class="a">78 flow-through residences at The Quay with full Ritz-Carlton service.</div><div class="pr">From $— </div></div></div>
-    <div class="slot"><div class="ph" style="background-image:url('assets/mira-mar-hero.jpg')"><span class="st">Delivery 2028</span></div><div class="b"><div class="p">Mira Mar Residences</div><div class="a">70 estate-scale residences behind the restored 1922 Mira Mar, Palm Avenue.</div><div class="pr">From $— </div></div></div>
+    <div class="slot"><div class="ph" style="background-image:url('assets/rosewood-residences-lido-hero.jpg')"><span class="st">Move-ins 2026</span></div><div class="b"><div class="p">Rosewood Residences Lido Key</div><div class="a">65 beachfront residences, a 10-minute walk from here.</div><div class="pr">From $— </div></div></div>
+    <div class="slot"><div class="ph" style="background-image:url('assets/ritz-carlton-residences-hero.jpg')"><span class="st">Completing late 2026</span></div><div class="b"><div class="p">The Ritz-Carlton Residences, Sarasota Bay</div><div class="a">78 bayfront residences at The Quay, full Ritz-Carlton service.</div><div class="pr">From $— </div></div></div>
+    <div class="slot"><div class="ph" style="background-image:url('assets/mira-mar-hero.jpg')"><span class="st">Delivery 2028</span></div><div class="b"><div class="p">Mira Mar Residences</div><div class="a">70 residences behind the restored 1922 Mira Mar on Palm Ave.</div><div class="pr">From $— </div></div></div>
   </div>
   <p class="credit">Renderings courtesy of The Ronto Group, Kolter Urban and Seaward Development. Pricing and delivery change; scan for the current sheet.</p>
-  <div class="band"><div><div class="big">Text my assistant anything about Sarasota.</div><div class="s">Prices on Longboat, which buildings allow rentals, where to eat tonight, what insurance really costs on the water. Trained on my notes, answers in a minute, hands you to me when it matters.</div></div><div class="num">941-XXX-XXXX</div></div>
-  <div class="two">
-    <div class="card"><h3>Let's find your lifestyle</h3><div class="life"><div><p style="margin-bottom:2pt">Scan, then say one of these:</p><ul><li><span>›</span>"Toes in the sand."</li><li><span>›</span>"Gated golf, two bedrooms."</li><li><span>›</span>"A boat in the backyard."</li><li><span>›</span>"Walk to dinner, no car."</li></ul></div><div class="qrc"><img src="assets/qr-talk.png" alt="QR code"><small>adamsonfl.com/talk</small></div></div></div>
-    <div class="card"><h3>How's the market? It depends.</h3><p class="kick">The pace is 2019 again. The prices are not.</p>
-      <div class="nums four">
-        <div class="stat"><b>−17% <i>/</i> −9%</b><small>condo $/sq ft off peak: Longboat '23, Lido &amp; downtown '25</small></div>
-        <div class="stat"><b>+56% <i>/</i> +68%</b><small>above 2019 per sq ft; medians nearly doubled</small></div>
-        <div class="stat"><b>8.8 mo</b><small>Longboat condo supply, as in 2019; it was 1.1 in 2022</small></div>
-        <div class="stat"><b>$817 <i>vs</i> $459</b><small>per sq ft today, beachfront vs bayfront condos</small></div>
-      </div>
-      <p style="margin-top:3pt;font-size:6.1pt;color:#55656F">Closings now ~6% under asking; 2021–24 was full price. InfoSparks + my MLS pull, Sep 2026.</p></div>
+  <div class="band"><div><div class="big" style="font-size:12.5pt">Text my assistant anything about Sarasota.</div><div class="s">Prices on Longboat, which buildings allow rentals, where to eat tonight, what insurance really costs. Trained on my notes; hands you to me when it matters.</div></div><div class="num">941-XXX-XXXX</div></div>
+  <div class="two mk">
+    <div class="card"><h3>Let's find your lifestyle</h3><div class="life"><div><p style="margin-bottom:2pt">Scan, then say one of these:</p><ul><li><span>›</span>"Toes in the sand."</li><li><span>›</span>"Gated golf, two bedrooms."</li><li><span>›</span>"A boat in the backyard."</li><li><span>›</span>"Walk to dinner, no car."</li></ul></div><div class="qrc"><img src="assets/qr-talk.png" alt="QR code"><small>Scan to start<br>adamsonfl.com/talk</small></div></div></div>
+    <div class="card"><h3>What does a condo cost here?</h3><p class="kick">Resale medians, rolling 12 months.</p>
+      <table class="mkt"><tr><th>&nbsp;</th><th>Median</th><th>$ / sq ft</th><th>Dues / mo</th><th>Supply</th></tr>
+      <tr class="g"><td colspan="5">Built 2000 or later</td></tr>
+      <tr><td>Beachfront</td><td>$4.25M</td><td>$1,105</td><td>$5,580</td><td>6.0 mo</td></tr>
+      <tr><td>Bayfront</td><td>$2.78M</td><td>$952</td><td>$3,620</td><td>11.0 mo</td></tr>
+      <tr><td>Downtown</td><td>$1.48M</td><td>$767</td><td>$1,845</td><td>6.4 mo</td></tr>
+      <tr class="g"><td colspan="5">Built before 2000</td></tr>
+      <tr><td>Beachfront</td><td>$1.05M</td><td>$726</td><td>$1,720</td><td>4.3 mo</td></tr>
+      <tr><td>Bayfront</td><td>$725K</td><td>$489</td><td>$1,640</td><td>6.7 mo</td></tr>
+      <tr><td>Downtown</td><td>$682K</td><td>$509</td><td>$1,430</td><td>7.1 mo</td></tr>
+      </table>
+      <p class="mfoot">Beachfront goes under contract in ~2 months, modern bayfront in ~6: that is where the negotiating room is.<br><span style="color:#8E9AA3">Longboat, Lido &amp; Downtown SRQ · rolling 12 months, Stellar MLS · Oct 2026</span></p></div>
   </div>
-  <div class="card wide"><div class="cols">
-    <div><h3>Getting around</h3><p><b>Lido Beach:</b> 5 minutes up John Ringling Blvd; right on Ben Franklin for quieter North Lido. <b>Bay Runner trolley:</b> free, links Lido Beach, the Circle and downtown. <b>Parking:</b> 1,600+ city spaces in the Fillmore lot and N. Adams garage.</p></div>
-    <div><h3>If you only eat here once</h3><p><b>Columbia</b> for the 1905 salad and sangria · <b>Venezia</b> for pizza and people-watching · <b>Blu Kouzina</b> for octopus and meze · <b>Green Zebra</b> for breakfast before the beach.</p></div>
-  </div></div>
-  <div class="events"><span class="h">2026–27 season</span><b>Oct 31</b> Fright Night, 6–8pm · <b>Nov 7</b> Ferraris on the Circle · <b>Nov 14–15</b> Art Festival · <b>Dec 5</b> Holiday Night of Lights · <b>Dec</b> Porsches in the Park · <b>Jan 30–31</b> Art Festival · <b>Jan</b> Century of Cars · <b>May</b> Corvettes · <b>May 29–30</b> Fine Art Festival · <b>June</b> Craft Festival <span style="color:#8E9AA3">(2027 dates TBA)</span></div>
+  <div class="card wide"><p class="inl"><span class="h">Getting around</span> <b>Lido Beach</b> is 5 minutes up John Ringling Blvd (right on Ben Franklin for quieter North Lido) · the <b>Bay Runner trolley</b> is free and links Lido Beach, the Circle and downtown · <b>Parking:</b> 1,600+ city spaces in the Fillmore lot and N. Adams garage.</p>
+  <p class="inl"><span class="h">If you only eat here once</span> <b>Columbia</b> for the 1905 salad and sangria · <b>Venezia</b> for pizza and people-watching · <b>Blu Kouzina</b> for octopus and meze · <b>Green Zebra</b> for breakfast before the beach.</p></div>
+  <div class="events"><span class="h">2026–27 season</span><b>Oct 31</b> Fright Night · <b>Nov 7</b> Ferraris on the Circle · <b>Nov 14–15</b> Art Festival · <b>Dec 5</b> Holiday Night of Lights · <b>Dec</b> Porsches in the Park · <b>Jan</b> Century of Cars · <b>Jan 30–31</b> Art Festival · <b>May</b> Corvettes · <b>May 29–30</b> Fine Art Festival · <b>June</b> Craft Festival <span style="color:#8E9AA3">(2027 dates TBA)</span></div>
   <div class="contact"><img src="assets/adamson-group-logo.png" alt=""><div><div class="nm2">Ryan Adamson, PA</div><div class="r">Adamson Group · Coldwell Banker Realty<br>423 St. Armands Circle, Sarasota, FL 34236 · AdamsonFL.com</div></div><div class="ph2">(941) 713-9234<small>call or text Ryan directly</small></div></div>
 </div>"""
 
