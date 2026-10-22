@@ -200,7 +200,7 @@ _sl = json.load(open(f"{ROOT}/src/data/st-armands-lido-stats.json")); _lb = json
 MOS_SL = _sl["marketBalance"]["monthsOfSupplyCondo"]; MOS_LB = _lb["marketBalance"]["monthsOfSupplyCondo"]
 PPSF_SL = _sl["metrics"]["avgPricePerSqFt"]; PPSF_LB = _lb["metrics"]["avgPricePerSqFt"]
 CASH_LB, CASH_SL = 79, 78   # trailing-12-month closed sales paid cash, 34228 / 34236 (Supabase raw_listings, 2026-10-22)
-for _img in ("mira-mar-hero.jpg", "ritz-carlton-residences-hero.jpg", "rosewood-residences-lido-hero.jpg"):
+for _img in ("mira-mar-terrace.jpg", "ritz-carlton-residences-hero.jpg", "rosewood-residences-lido-hero.jpg"):
     _sh.copy(f"{ROOT}/public/images/new-construction/{_img}", f"{ASSETS}/{_img}")
 
 PHONE_W, PHONE_H = 390, 844
@@ -387,7 +387,7 @@ back = f"""
   <div class="slots">
     <div class="slot"><div class="ph" style="background-image:url('assets/rosewood-residences-lido-hero.jpg')"><span class="st">Move-ins 2026</span></div><div class="b"><div class="p">Rosewood Residences Lido Key</div><div class="a">65 beachfront residences, a 10-minute walk from here.</div><div class="pr">From $— </div></div></div>
     <div class="slot"><div class="ph" style="background-image:url('assets/ritz-carlton-residences-hero.jpg')"><span class="st">Completing late 2026</span></div><div class="b"><div class="p">The Ritz-Carlton Residences, Sarasota Bay</div><div class="a">78 bayfront residences at The Quay, full Ritz-Carlton service.</div><div class="pr">From $— </div></div></div>
-    <div class="slot"><div class="ph" style="background-image:url('assets/mira-mar-hero.jpg')"><span class="st">Delivery 2028</span></div><div class="b"><div class="p">Mira Mar Residences</div><div class="a">70 residences behind the restored 1922 Mira Mar on Palm Ave.</div><div class="pr">From $— </div></div></div>
+    <div class="slot"><div class="ph" style="background-image:url('assets/mira-mar-terrace.jpg');background-position:55% 40%"><span class="st">Delivery 2028</span></div><div class="b"><div class="p">Mira Mar Residences</div><div class="a">70 residences behind the restored 1922 Mira Mar on Palm Ave.</div><div class="pr">From $— </div></div></div>
   </div>
   <p class="credit">Renderings courtesy of The Ronto Group, Kolter Urban and Seaward Development. Pricing and delivery change; scan for the current sheet.</p>
   <div class="band"><div><div class="big" style="font-size:12.5pt">Text my assistant anything about Sarasota.</div><div class="s">Prices on Longboat, which buildings allow rentals, where to eat tonight, what insurance really costs. Trained on my notes; hands you to me when it matters.</div></div><div class="num">941-XXX-XXXX</div></div>
