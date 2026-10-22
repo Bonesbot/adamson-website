@@ -2,18 +2,18 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-21T10:43:51.985531+00:00",
+  "lastUpdated": "2026-10-22T10:42:49.332846+00:00",
   "counts": {
     "sold": 1267,
-    "pending": 32,
+    "pending": 33,
     "active": 237,
-    "total": 1299
+    "total": 1300
   },
   "metrics": {
-    "avgPrice": "$2,012,478",
-    "avgPricePerSqFt": "$803",
+    "avgPrice": "$2,011,230",
+    "avgPricePerSqFt": "$802",
     "avgYearBuilt": 1985,
-    "avgLivingSqFt": "2,192",
+    "avgLivingSqFt": "2,191",
     "avgLotSqFt": null,
     "avgDom": 88
   },
@@ -24,8 +24,8 @@
   "active": {
     "count": 237,
     "medianPrice": "$1,095,000",
-    "medianPricePerSqFt": "$684",
-    "waterfrontCount": 174,
+    "medianPricePerSqFt": "$693",
+    "waterfrontCount": 175,
     "newConstructionCount": 23
   },
   "sold": {
@@ -37,8 +37,8 @@
   },
   "monthsOfSupply": {
     "condo": 5.1,
-    "sfhVilla": 6.3,
-    "blended": 5.4,
+    "sfhVilla": 6.4,
+    "blended": 5.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,9 +54,9 @@
     }
   },
   "priceBands": {
-    "under900k": 99,
+    "under900k": 98,
     "band900kTo1_5m": 49,
-    "band1_5mTo3m": 44,
+    "band1_5mTo3m": 45,
     "band3mPlus": 45
   },
   "propertyTypes": [
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 130,
-      "avgPrice": "$822,659",
-      "avgPricePerSqFt": "$631",
-      "avgLivingSqFt": "1,338",
-      "avgDom": 143
+      "activeCount": 129,
+      "avgPrice": "$825,621",
+      "avgPricePerSqFt": "$634",
+      "avgLivingSqFt": "1,337",
+      "avgDom": 145
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 30,
-      "avgPrice": "$2,390,293",
+      "activeCount": 31,
+      "avgPrice": "$2,377,703",
       "avgPricePerSqFt": "$831",
-      "avgLivingSqFt": "2,591",
-      "avgDom": 116
+      "avgLivingSqFt": "2,585",
+      "avgDom": 113
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$6,750,000",
       "avgPricePerSqFt": "$1,778",
       "avgLivingSqFt": "3,741",
-      "avgDom": 152
+      "avgDom": 154
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$8,104,875",
       "avgPricePerSqFt": "$2,185",
       "avgLivingSqFt": "3,436",
-      "avgDom": 305
+      "avgDom": 306
     }
   ],
   "condoTiersScope": {
@@ -187,7 +187,7 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 79,
+      "activeCount": 80,
       "soldCount": 540,
       "soldMedianPricePerSqFt": "$886",
       "soldMedianPrice": "$1,397,000",
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 28,
+      "activeCount": 27,
       "soldCount": 110,
       "soldMedianPricePerSqFt": "$617",
       "soldMedianPrice": "$1,170,000",
@@ -231,12 +231,12 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.4,
+    "monthsOfSupply": 5.5,
     "monthsOfSupplyCondo": 5.1,
-    "monthsOfSupplySfhVilla": 6.3,
+    "monthsOfSupplySfhVilla": 6.4,
     "label": "balanced market",
     "activeCount": 237,
-    "sold365Count": 524,
+    "sold365Count": 521,
     "sold90Count": 105,
     "method": "active / (trailing-12mo closed / 12)"
   },
@@ -256,7 +256,7 @@
   },
   "boating": {
     "activeWithDock": 68,
-    "activeWaterfront": 174
+    "activeWaterfront": 175
   },
   "marketQuestions": [
     {
@@ -267,7 +267,7 @@
     {
       "facet": "balance",
       "q": "Is it a good time to buy on Longboat Key?",
-      "a": "With 237 active listings and roughly 44 closed sales a month (trailing 12 months), Longboat Key has about 5.4 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 237 active listings and roughly 43 closed sales a month (trailing 12 months), Longboat Key has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "speed",
@@ -277,7 +277,7 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Longboat Key homes have a dock?",
-      "a": "Of 174 active waterfront listings, 68 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 175 active waterfront listings, 68 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

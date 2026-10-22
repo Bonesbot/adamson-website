@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-21T10:43:58.240652+00:00",
+  "lastUpdated": "2026-10-22T10:42:57.776967+00:00",
   "counts": {
-    "sold": 954,
+    "sold": 956,
     "pending": 60,
-    "active": 215,
-    "total": 1014
+    "active": 214,
+    "total": 1016
   },
   "metrics": {
-    "avgPrice": "$559,572",
+    "avgPrice": "$559,583",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,042",
+    "avgLivingSqFt": "2,043",
     "avgLotSqFt": null,
     "avgDom": 79
   },
@@ -22,22 +22,22 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 215,
-    "medianPrice": "$409,000",
-    "medianPricePerSqFt": "$245",
+    "count": 214,
+    "medianPrice": "$404,500",
+    "medianPricePerSqFt": "$244",
     "waterfrontCount": 35,
-    "newConstructionCount": 40
+    "newConstructionCount": 39
   },
   "sold": {
-    "count": 170,
-    "medianPrice": "$475,000",
-    "medianDom": 56,
-    "saleToListRatio": "92.2%",
+    "count": 169,
+    "medianPrice": "$478,000",
+    "medianDom": 57,
+    "saleToListRatio": "92.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.5,
-    "sfhVilla": 3.0,
+    "condo": 5.4,
+    "sfhVilla": 2.9,
     "blended": 3.6,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 202,
+    "under900k": 201,
     "band900kTo1_5m": 11,
     "band1_5mTo3m": 2,
     "band3mPlus": 0
@@ -62,11 +62,24 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 215
+      "count": 214
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4707572",
+      "address": "4190 WESTBOURNE CIR",
+      "subdivision": "STONEYBROOK AT PALMER RANCH",
+      "soldPrice": "$649,000",
+      "soldDate": "2026-10-21",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,020",
+      "yearBuilt": 1994,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4704685",
       "address": "5310 CICERONE ST",
@@ -94,6 +107,19 @@
       "isWaterfront": false
     },
     {
+      "listingId": "A4688861",
+      "address": "4256 CENTRAL SARASOTA PKWY #321",
+      "subdivision": "PLAZA DE FLORES",
+      "soldPrice": "$225,000",
+      "soldDate": "2026-10-20",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,191",
+      "yearBuilt": 1998,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "A4702162",
       "address": "4300 CAMINO MADERA",
       "subdivision": "VILLA PALMERAS / PRESTANCIA",
@@ -105,32 +131,6 @@
       "yearBuilt": 1988,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "TB8499125",
-      "address": "8660 PALMER PARK CIR",
-      "subdivision": "PALMER RANCH PH 1",
-      "soldPrice": "$340,000",
-      "soldDate": "2026-10-17",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,724",
-      "yearBuilt": 2019,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4690117",
-      "address": "8615 WOODBRIAR DR",
-      "subdivision": "DEER CREEK",
-      "soldPrice": "$940,000",
-      "soldDate": "2026-10-16",
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "livingSqFt": "3,215",
-      "yearBuilt": 1991,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 33,
-      "avgPrice": "$321,532",
-      "avgPricePerSqFt": "$196",
-      "avgLivingSqFt": "1,641",
-      "avgDom": 120
+      "activeCount": 34,
+      "avgPrice": "$320,869",
+      "avgPricePerSqFt": "$197",
+      "avgLivingSqFt": "1,633",
+      "avgDom": 118
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 72,
-      "avgPrice": "$291,279",
+      "avgPrice": "$291,001",
       "avgPricePerSqFt": "$226",
       "avgLivingSqFt": "1,280",
-      "avgDom": 128
+      "avgDom": 129
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$373,467",
       "avgPricePerSqFt": "$212",
       "avgLivingSqFt": "1,779",
-      "avgDom": 70
+      "avgDom": 71
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$353,609",
       "avgPricePerSqFt": "$219",
       "avgLivingSqFt": "1,614",
-      "avgDom": 60
+      "avgDom": 61
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 48,
+      "activeCount": 47,
       "soldCount": 223,
       "soldMedianPricePerSqFt": "$257",
       "soldMedianPrice": "$475,000",
@@ -215,7 +215,7 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 132,
-      "soldCount": 525,
+      "soldCount": 527,
       "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$440,000",
       "lowSample": false
@@ -223,24 +223,24 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 3.6,
-    "monthsOfSupplyCondo": 5.5,
-    "monthsOfSupplySfhVilla": 3.0,
+    "monthsOfSupplyCondo": 5.4,
+    "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
-    "activeCount": 215,
-    "sold365Count": 718,
-    "sold90Count": 170,
+    "activeCount": 214,
+    "sold365Count": 719,
+    "sold90Count": 169,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 543,
-      "activeCount": 88,
+      "soldCount": 544,
+      "activeCount": 86,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$289"
     },
     "condo": {
-      "soldCount": 411,
-      "activeCount": 127,
+      "soldCount": 412,
+      "activeCount": 128,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 215 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 214 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,12 +263,12 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $409,000."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $404,500."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 56 days on market and closed at 92.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 57 days on market and closed at 92.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

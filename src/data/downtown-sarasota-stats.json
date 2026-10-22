@@ -2,15 +2,15 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-21T10:43:54.371096+00:00",
+  "lastUpdated": "2026-10-22T10:42:52.025103+00:00",
   "counts": {
-    "sold": 301,
-    "pending": 69,
-    "active": 181,
+    "sold": 303,
+    "pending": 67,
+    "active": 185,
     "total": 370
   },
   "metrics": {
-    "avgPrice": "$1,918,595",
+    "avgPrice": "$1,917,760",
     "avgPricePerSqFt": "$824",
     "avgYearBuilt": 2002,
     "avgLivingSqFt": "2,080",
@@ -22,23 +22,23 @@
     "maxPrice": "$14,450,000"
   },
   "active": {
-    "count": 181,
+    "count": 185,
     "medianPrice": "$1,950,000",
-    "medianPricePerSqFt": "$943",
+    "medianPricePerSqFt": "$932",
     "waterfrontCount": 54,
     "newConstructionCount": 82
   },
   "sold": {
-    "count": 43,
+    "count": 45,
     "medianPrice": "$1,100,000",
     "medianDom": 90,
-    "saleToListRatio": "85.8%",
+    "saleToListRatio": "86.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 9.2,
+    "condo": 9.4,
     "sfhVilla": 9.9,
-    "blended": 9.3,
+    "blended": 9.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,45 @@
     }
   },
   "priceBands": {
-    "under900k": 40,
-    "band900kTo1_5m": 36,
-    "band1_5mTo3m": 42,
+    "under900k": 43,
+    "band900kTo1_5m": 35,
+    "band1_5mTo3m": 44,
     "band3mPlus": 63
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 181
+      "count": 185
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4704663",
+      "address": "464 GOLDEN GATE PT #702",
+      "subdivision": "LA BELLASARA",
+      "soldPrice": "$4,000,000",
+      "soldDate": "2026-10-21",
+      "bedrooms": 3,
+      "bathrooms": 4.5,
+      "livingSqFt": "3,377",
+      "yearBuilt": 2006,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4705756",
+      "address": "111 S PINEAPPLE AVE #716",
+      "subdivision": "MARK SARASOTA CONDO",
+      "soldPrice": "$1,185,000",
+      "soldDate": "2026-10-21",
+      "bedrooms": 2,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,688",
+      "yearBuilt": 2019,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4701318",
       "address": "1771 RINGLING BLVD #1001",
@@ -105,32 +131,6 @@
       "yearBuilt": 1978,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4699007",
-      "address": "1771 RINGLING BLVD #1205",
-      "subdivision": "RIVO AT RINGLING",
-      "soldPrice": "$668,000",
-      "soldDate": "2026-10-13",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,483",
-      "yearBuilt": 2006,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4699760",
-      "address": "888 BLVD OF THE ARTS #707",
-      "subdivision": "CONDO ON THE BAY TOWER I",
-      "soldPrice": "$935,000",
-      "soldDate": "2026-10-02",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,288",
-      "yearBuilt": 1982,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -142,27 +142,27 @@
       "avgPrice": "$1,091,826",
       "avgPricePerSqFt": "$638",
       "avgLivingSqFt": "1,590",
-      "avgDom": 152
+      "avgDom": 153
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 23,
-      "avgPrice": "$1,884,791",
-      "avgPricePerSqFt": "$744",
-      "avgLivingSqFt": "2,190",
-      "avgDom": 98
+      "activeCount": 24,
+      "avgPrice": "$1,926,883",
+      "avgPricePerSqFt": "$749",
+      "avgLivingSqFt": "2,237",
+      "avgDom": 95
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 31,
-      "avgPrice": "$1,654,255",
-      "avgPricePerSqFt": "$755",
-      "avgLivingSqFt": "2,023",
-      "avgDom": 93
+      "activeCount": 34,
+      "avgPrice": "$1,607,232",
+      "avgPricePerSqFt": "$739",
+      "avgLivingSqFt": "2,008",
+      "avgDom": 86
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,395,938",
       "avgPricePerSqFt": "$1,418",
       "avgLivingSqFt": "2,965",
-      "avgDom": 218
+      "avgDom": 219
     }
   ],
   "condoTiersScope": {
@@ -197,15 +197,15 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 53,
-      "soldCount": 63,
-      "soldMedianPricePerSqFt": "$677",
+      "soldCount": 64,
+      "soldMedianPricePerSqFt": "$685",
       "soldMedianPrice": "$1,200,000",
       "lowSample": false
     },
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 69,
+      "activeCount": 72,
       "soldCount": 149,
       "soldMedianPricePerSqFt": "$791",
       "soldMedianPrice": "$1,475,000",
@@ -214,21 +214,21 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 58,
-      "soldCount": 83,
-      "soldMedianPricePerSqFt": "$549",
-      "soldMedianPrice": "$749,000",
+      "activeCount": 59,
+      "soldCount": 84,
+      "soldMedianPricePerSqFt": "$552",
+      "soldMedianPrice": "$749,495",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 9.3,
-    "monthsOfSupplyCondo": 9.2,
+    "monthsOfSupply": 9.4,
+    "monthsOfSupplyCondo": 9.4,
     "monthsOfSupplySfhVilla": 9.9,
     "label": "buyer's market",
-    "activeCount": 181,
-    "sold365Count": 234,
-    "sold90Count": 43,
+    "activeCount": 185,
+    "sold365Count": 236,
+    "sold90Count": 45,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -239,8 +239,8 @@
       "soldMedianPricePerSqFt": "$547"
     },
     "condo": {
-      "soldCount": 289,
-      "activeCount": 177,
+      "soldCount": 291,
+      "activeCount": 181,
       "soldMedianPrice": "$1,200,000",
       "soldMedianPricePerSqFt": "$717"
     }
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Downtown Sarasota a buyer's or seller's market right now?",
-      "a": "With 181 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 9.3 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 185 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 9.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Downtown Sarasota?",
-      "a": "Recently sold homes took a median 90 days on market and closed at 85.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 90 days on market and closed at 86.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
