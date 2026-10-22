@@ -59,10 +59,10 @@ WATER, PARK, ROAD, ROADLINE, HOUSE = "#CFE1E8", "#CDE0C5", "#FFFFFF", "#D8CFBE",
 
 # ---------------- restaurants (numbered, grouped by quadrant) ----------------
 PICKS = {"Columbia Restaurant", "Venezia Italian Restaurant", "Blu Kouzina", "Green Zebra (St Armands)"}
-SHORT = {"Nonno Umberto Italian Seafood & Steakhouse": "Nonno Umberto", "Tommy Bahama Restaurant & Bar": "Tommy Bahama Restaurant",
-         "Big Olaf Creamery (St. Armands)": "Big Olaf Creamery", "Kilwins Chocolates & Ice Cream": "Kilwins",
-         "Green Zebra (St Armands)": "Green Zebra Café", "Pinchers (opening late 2026)": "Pinchers (opening late 2026)",
-         "Ephesus Mediterranean Delights": "Ephesus Mediterranean", "I Love Candy & Ice Cream": "I Love Candy",
+SHORT = {"Nonno Umberto Italian Seafood & Steakhouse": "Nonno Umberto", "River Street Sweets": "River Street", "Settimi's Gelato": "Settimi's", "Cha Cha Coconuts": "Cha Cha Coconuts", "15 South by Napulè": "15 South", "Columbia Restaurant": "Columbia", "Tommy Bahama Restaurant & Bar": "Tommy Bahama",
+         "Big Olaf Creamery (St. Armands)": "Big Olaf", "Kilwins Chocolates & Ice Cream": "Kilwins",
+         "Green Zebra (St Armands)": "Green Zebra", "Pinchers (opening late 2026)": "Pinchers · late 2026",
+         "Ephesus Mediterranean Delights": "Ephesus", "I Love Candy & Ice Cream": "I Love Candy",
          "Cafe on St Armands": "Café on St. Armands", "Venezia Italian Restaurant": "Venezia", "Lynches Pub & Grub": "Lynches Pub"}
 def addr_short(a):
     a = a.split(",")[0]
@@ -194,6 +194,12 @@ QR_URL = "https://adamsonfl.com/circle"
 segno.make(QR_URL, error="m").save(f"{ASSETS}/qr-adamsonfl-circle.png", scale=24, border=2, dark=NAVY, light="#FFFFFF")
 NC_URL = "https://adamsonfl.com/new-construction/?utm_source=handout&utm_medium=print&utm_campaign=stac-map"
 segno.make(NC_URL, error="m").save(f"{ASSETS}/qr-new-construction.png", scale=24, border=2, dark=NAVY, light="#FFFFFF")
+TALK_URL = "https://adamsonfl.com/talk"
+segno.make(TALK_URL, error="m").save(f"{ASSETS}/qr-talk.png", scale=24, border=2, dark=NAVY, light="#FFFFFF")
+_sl = json.load(open(f"{ROOT}/src/data/st-armands-lido-stats.json")); _lb = json.load(open(f"{ROOT}/src/data/longboat-key-stats.json"))
+MOS_SL = _sl["marketBalance"]["monthsOfSupplyCondo"]; MOS_LB = _lb["marketBalance"]["monthsOfSupplyCondo"]
+PPSF_SL = _sl["metrics"]["avgPricePerSqFt"]; PPSF_LB = _lb["metrics"]["avgPricePerSqFt"]
+CASH_LB, CASH_SL = 79, 78   # trailing-12-month closed sales paid cash, 34228 / 34236 (Supabase raw_listings, 2026-10-22)
 for _img in ("mira-mar-hero.jpg", "ritz-carlton-residences-hero.jpg", "rosewood-residences-lido-hero.jpg"):
     _sh.copy(f"{ROOT}/public/images/new-construction/{_img}", f"{ASSETS}/{_img}")
 
@@ -248,7 +254,7 @@ def legend_html():
         star = ' <span class="star">★</span>' if p["name"] in PICKS else ""
         tag = ' <span class="sweet">sweets</span>' if p["_sweet"] else ""
         cols[0 if i < half else 1] += (f'<div class="row"><span class="n" style="background:{q["ink"]}">{p["_n"]}</span>'
-                                      f'<span class="nm">{p["_short"]}{star}{tag}</span><span class="ad">{addr_short(p["address"])}</span></div>')
+                                      f'<span class="nm">{p["_short"]}{star}{tag}</span></div>')
     return f'<div class="col">{cols[0]}</div><div class="col">{cols[1]}</div>'
 
 # ---------------- page (5.75 x 8.75 with bleed; safe area 0.25 in inside trim) ----------------
@@ -262,62 +268,77 @@ body {{ margin:0; font-family: Inter, sans-serif; color:{INK}; -webkit-print-col
 .page:last-child {{ page-break-after: auto; }}
 h1 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:23pt; margin:0; color:{NAVY}; line-height:1; }}
 .kicker {{ font-family: Montserrat, sans-serif; font-weight:700; font-size:6.8pt; color:{GOLD}; text-transform:uppercase; margin:0 0 4pt; }}
-.sub {{ font-size:7.6pt; color:#55656F; margin:4pt 0 0; }}
+.sub {{ font-size:8.2pt; color:#55656F; margin:4pt 0 0; }}
 .head {{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:6pt; }}
 .est {{ font-family:'Playfair Display', serif; font-style:italic; font-size:8pt; color:#7A6A45; text-align:right; line-height:1.25; }}
 .map {{ display:block; width:360pt; height:{round(360 * MH / MW)}pt; border-radius:10pt; }}
-.qlegend {{ display:flex; gap:9pt; margin:5pt 0 5pt; font-family:Montserrat, sans-serif; font-weight:600; font-size:6.3pt; text-transform:uppercase; color:#55656F; align-items:center; }}
+.qlegend {{ display:flex; gap:9pt; margin:5pt 0 5pt; font-family:Montserrat, sans-serif; font-weight:600; font-size:6.8pt; text-transform:uppercase; color:#55656F; align-items:center; }}
 .qlegend i {{ display:inline-block; width:8pt; height:8pt; border-radius:2pt; margin-right:3pt; vertical-align:-1pt; }}
-.qlegend .hint {{ margin-left:auto; text-transform:none; font-family:Inter; font-weight:400; font-size:6.4pt; }}
+.qlegend .hint {{ margin-left:auto; text-transform:none; font-family:Inter; font-weight:400; font-size:6.8pt; }}
 .bottom {{ display:flex; gap:9pt; align-items:stretch; }}
 .legend {{ flex:1; display:flex; gap:7pt; }}
 .col {{ flex:1; min-width:0; }}
-.row {{ display:grid; grid-template-columns:11pt 1fr; column-gap:3pt; align-items:baseline; font-size:6.2pt; line-height:1.08; padding:.5pt 0; border-bottom:.4pt solid #E6DFD0; }}
-.n {{ color:#fff; font-family:Montserrat; font-weight:700; font-size:5.6pt; width:10pt; height:10pt; border-radius:50%; display:inline-grid; place-items:center; align-self:center; }}
+.row {{ display:grid; grid-template-columns:13pt 1fr; column-gap:4pt; align-items:center; font-size:7.6pt; line-height:1.1; padding:2.1pt 0; border-bottom:.4pt solid #E6DFD0; }}
+.n {{ color:#fff; font-family:Montserrat; font-weight:700; font-size:6.6pt; width:12pt; height:12pt; border-radius:50%; display:inline-grid; place-items:center; align-self:center; }}
 .nm {{ font-weight:600; color:{NAVY}; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }}
 .ad {{ grid-column:2; font-size:5.2pt; color:#7B8993; margin-top:-1pt; }}
 .star {{ color:{GOLD}; }}
-.sweet {{ font-size:4.8pt; color:#9A4458; font-weight:600; text-transform:uppercase; margin-left:2pt; }}
-.promo {{ width:118pt; flex:none; background:#fff; border:1pt solid {GOLD}; border-radius:9pt; padding:7pt 7pt 6pt; display:flex; flex-direction:column; align-items:center; }}
+.sweet {{ font-size:5.6pt; color:#9A4458; font-weight:600; text-transform:uppercase; margin-left:2pt; }}
+.promo {{ width:124pt; flex:none; background:#fff; border:1pt solid {GOLD}; border-radius:9pt; padding:7pt 7pt 6pt; display:flex; flex-direction:column; align-items:center; }}
 .promo .t {{ font-family:Montserrat; font-weight:700; font-size:6.4pt; color:{NAVY}; text-transform:uppercase; margin:0 0 5pt; text-align:center; }}
 .promo .pair {{ display:flex; gap:6pt; align-items:flex-end; }}
-.promo .phone {{ width:58pt; height:auto; display:block; }}
+.promo .phone {{ width:46pt; height:auto; display:block; }}
 .promo .qrbox {{ display:flex; flex-direction:column; align-items:center; gap:3pt; }}
-.promo .qr {{ width:46pt; height:46pt; display:block; }}
-.promo .scan {{ font-family:Montserrat; font-weight:700; font-size:5.6pt; color:{NAVY}; text-transform:uppercase; }}
-.promo .d {{ font-size:5.9pt; line-height:1.3; color:#55656F; margin:5pt 0 0; text-align:center; }}
-.promo .u {{ font-family:Montserrat; font-weight:700; font-size:6.4pt; color:{NAVY}; margin-top:3pt; }}
-.foot {{ position:absolute; left:{PAD}pt; right:{PAD}pt; bottom:{PAD - 8}pt; display:flex; justify-content:space-between; font-size:5.2pt; color:#8E9AA3; }}
+.promo .qr {{ width:62pt; height:62pt; display:block; }}
+.promo .scan {{ font-family:Montserrat; font-weight:700; font-size:6.2pt; text-align:center; line-height:1.2; color:{NAVY}; text-transform:uppercase; }}
+.promo .d {{ font-size:6.6pt; line-height:1.32; color:#55656F; margin:5pt 0 0; text-align:center; }}
+.promo .u {{ font-family:Montserrat; font-weight:700; font-size:7pt; color:{NAVY}; margin-top:3pt; }}
+.foot {{ position:absolute; left:{PAD}pt; right:{PAD}pt; bottom:{PAD}pt; display:flex; justify-content:space-between; gap:12pt; font-size:5.8pt; color:#8E9AA3; }}
 /* back */
-.back h2 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:15.5pt; color:{NAVY}; margin:0 0 3pt; line-height:1.1; }}
-.lead {{ font-size:7.8pt; line-height:1.4; color:#3B4A55; margin:0 0 8pt; }}
-.slots {{ display:grid; grid-template-columns:repeat(3,1fr); gap:7pt; margin-bottom:8pt; }}
+.life {{ display:flex; gap:10pt; align-items:center; }}
+.life ul {{ margin:4pt 0 0; padding:0; list-style:none; }}
+.life li {{ font-size:7pt; line-height:1.35; white-space:nowrap; color:{NAVY}; font-weight:600; }}
+.life li span {{ color:{GOLD}; margin-right:4pt; }}
+.life .qrc {{ flex:none; text-align:center; }}
+.life .qrc img {{ width:54pt; height:54pt; display:block; margin:0 auto 2pt; }}
+.life .qrc small {{ font-family:Montserrat; font-weight:700; font-size:5.8pt; color:{NAVY}; display:block; line-height:1.2; }}
+.nums {{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:6pt; margin-top:4pt; }}
+.stat {{ text-align:center; background:{CREAM}; border-radius:7pt; padding:4pt 3pt; }}
+.stat b {{ display:block; font-family:Montserrat; font-weight:700; font-size:11pt; color:{NAVY}; line-height:1; }}
+.stat small {{ display:block; font-size:5.8pt; color:#55656F; margin-top:2pt; line-height:1.25; }}
+.events {{ background:#fff; border:1pt solid #E4DCCB; border-radius:9pt; padding:4pt 9pt; margin-bottom:5pt; font-size:6.6pt; line-height:1.42; color:#3B4A55; }}
+.events b {{ color:{NAVY}; }}
+.events .h {{ font-family:Montserrat; font-weight:700; font-size:7pt; color:{GOLD}; text-transform:uppercase; margin-right:6pt; }}
+.back h2 {{ font-family:'Playfair Display', serif; font-weight:600; font-size:15.5pt; color:{NAVY}; margin:0 0 2pt; line-height:1.1; }}
+.lead {{ font-size:7.6pt; line-height:1.38; color:#3B4A55; margin:0 0 6pt; }}
+.slots {{ display:grid; grid-template-columns:repeat(3,1fr); gap:7pt; margin-bottom:4pt; }}
 .slot {{ background:#fff; border:1pt solid #E4DCCB; border-radius:8pt; overflow:hidden; }}
-.slot .ph {{ height:50pt; background-size:cover; background-position:center; }}
+.slot .ph {{ height:40pt; background-size:cover; background-position:center; }}
 .slot .st {{ display:inline-block; font-family:Montserrat; font-weight:700; font-size:5pt; text-transform:uppercase; color:#fff; background:{NAVY}; border-radius:999pt; padding:2pt 5pt; margin:5pt 0 0 5pt; }}
-.nc-head {{ display:flex; align-items:center; gap:9pt; margin:0 0 6pt; }}
-.nc-head img {{ width:40pt; height:40pt; flex:none; }}
+.nc-head {{ display:flex; align-items:center; gap:9pt; margin:0 0 5pt; }}
+.nc-head img {{ width:54pt; height:54pt; flex:none; }}
 .nc-head .u {{ font-family:Montserrat; font-weight:700; font-size:6.4pt; color:{NAVY}; }}
-.credit {{ font-size:4.8pt; color:#9AA5AD; margin:-5pt 0 7pt; }}
+.credit {{ font-size:5.4pt; color:#9AA5AD; margin:-3pt 0 6pt; }}
 .slot .b {{ padding:5pt 6pt 6pt; }}
-.slot .p {{ font-family:Montserrat; font-weight:700; font-size:7.2pt; color:{NAVY}; line-height:1.15; }}
-.slot .a {{ font-size:6pt; color:#55656F; margin-top:2pt; line-height:1.3; }}
+.slot .p {{ font-family:Montserrat; font-weight:700; font-size:7.6pt; color:{NAVY}; line-height:1.15; }}
+.slot .a {{ font-size:6.5pt; color:#55656F; margin-top:2pt; line-height:1.3; }}
+.slot .pr {{ font-family:Montserrat; font-weight:700; font-size:7pt; color:{GOLD}; margin-top:3pt; }}
 .slot .f {{ font-size:6pt; color:#7B8993; margin-top:2pt; }}
-.band {{ background:{NAVY}; color:#fff; border-radius:10pt; padding:9pt 13pt; margin-bottom:7pt; display:flex; align-items:center; gap:12pt; }}
-.band .big {{ font-family:'Playfair Display', serif; font-size:13.5pt; line-height:1.12; }}
+.band {{ background:{NAVY}; color:#fff; border-radius:10pt; padding:8pt 12pt; margin-bottom:6pt; display:flex; align-items:center; gap:12pt; }}
+.band .big {{ font-family:'Playfair Display', serif; font-size:13pt; line-height:1.12; }}
 .band .num {{ font-family:Montserrat; font-weight:700; font-size:15pt; color:{GOLD}; white-space:nowrap; }}
-.band .s {{ font-size:6.8pt; color:#C8D3DB; margin-top:3pt; }}
-.two {{ display:grid; grid-template-columns:1fr 1fr; gap:7pt; margin-bottom:7pt; }}
-.card {{ background:#fff; border:1pt solid #E4DCCB; border-radius:9pt; padding:7pt 9pt; }}
-.card h3 {{ font-family:Montserrat; font-weight:700; font-size:7pt; text-transform:uppercase; color:{GOLD}; margin:0 0 4pt; }}
-.card p {{ font-size:6.9pt; line-height:1.38; margin:0; color:#3B4A55; }}
+.band .s {{ font-size:7pt; color:#C8D3DB; margin-top:3pt; }}
+.two {{ display:grid; grid-template-columns:1fr 1fr; gap:7pt; margin-bottom:5pt; }}
+.card {{ background:#fff; border:1pt solid #E4DCCB; border-radius:9pt; padding:6pt 9pt; }}
+.card h3 {{ font-family:Montserrat; font-weight:700; font-size:7.4pt; text-transform:uppercase; color:{GOLD}; margin:0 0 4pt; }}
+.card p {{ font-size:7.1pt; line-height:1.38; margin:0; color:#3B4A55; }}
 .line {{ border-bottom:.7pt solid #B9C2C9; height:9pt; margin-top:4pt; }}
-.contact {{ display:flex; align-items:center; gap:10pt; border-top:1pt solid {GOLD}; padding-top:8pt; }}
-.contact img {{ height:30pt; }}
-.contact .nm2 {{ font-family:'Playfair Display', serif; font-size:12.5pt; color:{NAVY}; line-height:1.05; }}
-.contact .r {{ font-size:6.6pt; color:#55656F; line-height:1.4; }}
+.contact {{ display:flex; align-items:center; gap:10pt; border-top:1pt solid {GOLD}; padding-top:6pt; }}
+.contact img {{ height:26pt; }}
+.contact .nm2 {{ font-family:'Playfair Display', serif; font-size:11.5pt; color:{NAVY}; line-height:1.05; }}
+.contact .r {{ font-size:7pt; color:#55656F; line-height:1.4; }}
 .contact .ph2 {{ margin-left:auto; text-align:right; font-family:Montserrat; font-weight:700; font-size:10pt; color:{NAVY}; }}
-.contact .ph2 small {{ display:block; font-family:Inter; font-weight:400; font-size:6.2pt; color:#55656F; }}
+.contact .ph2 small {{ display:block; font-family:Inter; font-weight:400; font-size:6.6pt; color:#55656F; }}
 """
 
 front = f"""
@@ -331,12 +352,12 @@ front = f"""
   <div class="qlegend">
     <span><i style="background:{Q['GOLD']['fill']}"></i>Gold</span><span><i style="background:{Q['PINK']['fill']}"></i>Pink</span>
     <span><i style="background:{Q['AQUA']['fill']}"></i>Aqua</span><span><i style="background:{Q['PURPLE']['fill']}"></i>Purple</span>
-    <span class="hint">Lamppost banner colours &nbsp;·&nbsp; <span style="color:{GOLD}">★</span> Ryan's picks &nbsp;·&nbsp; CB = our office</span>
+    <span class="hint">Colours match the lamppost banners &nbsp;·&nbsp; <span style="color:{GOLD}">★</span> Ryan's picks</span>
   </div>
   <div class="bottom">
     <div class="legend">{legend_html()}</div>
     <div class="promo"><p class="t">The live map, on your phone</p>
-      <div class="pair"><img class="phone" src="assets/phone-srqmap-circle.png" alt=""><div class="qrbox"><img class="qr" src="assets/qr-adamsonfl-circle.png" alt="QR code"><span class="scan">Scan me</span></div></div>
+      <div class="pair"><img class="phone" src="assets/phone-srqmap-circle.png" alt=""><div class="qrbox"><img class="qr" src="assets/qr-adamsonfl-circle.png" alt="QR code"><span class="scan">Scan for Ryan's notes on every spot</span></div></div>
       <p class="d">Every spot here with Ryan's take, hours and directions, plus beaches, golf and this week's events.</p><p class="u">adamsonfl.com/circle</p></div>
   </div>
   <div class="foot"><span>Map data © OpenStreetMap contributors (ODbL). Directory checked Oct 2026; the Circle changes, call ahead.</span><span>Ryan Adamson, PA · Coldwell Banker Realty · (941) 713-9234</span></div>
@@ -345,24 +366,25 @@ front = f"""
 back = f"""
 <div class="page back">
   <p class="kicker">From the office at 423, Gold quadrant</p>
-  <h2>The next generation of Sarasota towers is rising now.</h2>
-  <div class="nc-head"><p class="lead" style="margin:0">I'm Ryan Adamson, the agent in the Coldwell Banker window on the Circle. Sarasota is in the middle of its biggest luxury-condo cycle in a generation: beachfront on Lido, bayfront at The Quay, Palm Avenue downtown. Three worth knowing about, and a page that keeps you current on all of them:<br><span class="u">adamsonfl.com/new-construction</span></p><img src="assets/qr-new-construction.png" alt="QR code"></div>
+  <h2>Curious what it costs to live a walk from here?</h2>
+  <div class="nc-head"><p class="lead" style="margin:0">I'm Ryan Adamson, in the Coldwell Banker window on the Circle. Sarasota is in its biggest luxury-residence cycle in a generation. Three worth knowing, and the page that keeps you current on all of them: <b>adamsonfl.com/new-construction</b></p><img src="assets/qr-new-construction.png" alt="QR code"></div>
   <div class="slots">
-    <div class="slot"><div class="ph" style="background-image:url('assets/rosewood-residences-lido-hero.jpg')"><span class="st">Move-ins 2026</span></div><div class="b"><div class="p">Rosewood Residences Lido Key</div><div class="a">65 private beachfront residences on Lido, a 10-minute walk from this Circle. Rosewood's first stand-alone residential project.</div></div></div>
-    <div class="slot"><div class="ph" style="background-image:url('assets/ritz-carlton-residences-hero.jpg')"><span class="st">Completing late 2026</span></div><div class="b"><div class="p">The Ritz-Carlton Residences, Sarasota Bay</div><div class="a">78 flow-through residences at The Quay: bay on one side, skyline on the other, full Ritz-Carlton service.</div></div></div>
-    <div class="slot"><div class="ph" style="background-image:url('assets/mira-mar-hero.jpg')"><span class="st">Delivery 2028</span></div><div class="b"><div class="p">Mira Mar Residences</div><div class="a">70 estate-scale residences in two towers behind the restored 1922 Mira Mar on Palm Avenue, downtown.</div></div></div>
+    <div class="slot"><div class="ph" style="background-image:url('assets/rosewood-residences-lido-hero.jpg')"><span class="st">Move-ins 2026</span></div><div class="b"><div class="p">Rosewood Residences Lido Key</div><div class="a">65 private beachfront residences, a 10-minute walk from this Circle.</div><div class="pr">From $— </div></div></div>
+    <div class="slot"><div class="ph" style="background-image:url('assets/ritz-carlton-residences-hero.jpg')"><span class="st">Completing late 2026</span></div><div class="b"><div class="p">The Ritz-Carlton Residences, Sarasota Bay</div><div class="a">78 flow-through residences at The Quay with full Ritz-Carlton service.</div><div class="pr">From $— </div></div></div>
+    <div class="slot"><div class="ph" style="background-image:url('assets/mira-mar-hero.jpg')"><span class="st">Delivery 2028</span></div><div class="b"><div class="p">Mira Mar Residences</div><div class="a">70 estate-scale residences behind the restored 1922 Mira Mar, Palm Avenue.</div><div class="pr">From $— </div></div></div>
   </div>
-  <p class="credit">Renderings courtesy of The Ronto Group, Kolter Urban and Seaward Development. Pricing, availability and delivery change; ask for the current sheet.</p>
-  <div class="band"><div><div class="big">Text me anything about Sarasota.</div><div class="s">Prices on Longboat, which buildings allow rentals, where to have dinner tonight, what the Gulf is doing to insurance. A real answer from a local, not a bot.</div></div><div class="num">941-XXX-XXXX</div></div>
+  <p class="credit">Renderings courtesy of The Ronto Group, Kolter Urban and Seaward Development. Pricing and delivery change; scan for the current sheet.</p>
+  <div class="band"><div><div class="big">Text my assistant anything about Sarasota.</div><div class="s">Prices on Longboat, which buildings allow rentals, where to eat tonight, what insurance really costs on the water. Trained on my notes, answers in a minute, hands you to me when it matters.</div></div><div class="num">941-XXX-XXXX</div></div>
   <div class="two">
-    <div class="card"><h3>Stay current on new condo releases</h3><p>New releases, price moves and delivery dates at these towers, plus island listings that never hit the portals and a short monthly market note. No spam, unsubscribe any time.</p><div class="line"></div><p style="font-size:5.6pt;color:#8E9AA3;margin-top:2pt">name &amp; email or cell · hand it back to me, or text UPDATES to the number above</p></div>
-    <div class="card"><h3>Ryan's Circle picks</h3><p><b>Columbia</b> for the 1905 salad and sangria · <b>Venezia</b> for pizza and the best people-watching patio · <b>Blu Kouzina</b> for grilled octopus and meze · <b>Green Zebra</b> for breakfast or a smoothie before the beach.</p></div>
+    <div class="card"><h3>Let's find your lifestyle</h3><div class="life"><div><p style="margin-bottom:2pt">Scan, then just say one of these:</p><ul><li><span>›</span>"Toes in the sand."</li><li><span>›</span>"Gated golf, two bedrooms."</li><li><span>›</span>"A boat in the backyard."</li><li><span>›</span>"Walk to dinner, no car."</li></ul></div><div class="qrc"><img src="assets/qr-talk.png" alt="QR code"><small>adamsonfl.com/talk</small></div></div></div>
+    <div class="card"><h3>The islands, in three numbers</h3><div class="nums"><div class="stat"><b>{CASH_LB}%</b><small>cash sales, Longboat Key ({CASH_SL}% Lido &amp; downtown)</small></div><div class="stat"><b>{MOS_SL} mo</b><small>condo supply, Lido &amp; St. Armands ({MOS_LB} Longboat)</small></div><div class="stat"><b>{PPSF_LB}</b><small>avg per sq ft, Longboat ({PPSF_SL} Lido &amp; St. Armands)</small></div></div><p style="margin-top:4pt;font-size:6.4pt;color:#55656F">From my daily MLS pull. Translation: you have choices and leverage this season.</p></div>
   </div>
   <div class="two">
-    <div class="card"><h3>Getting around</h3><p><b>Lido Beach</b> is a 5-minute walk up John Ringling Blvd; turn right on Ben Franklin for quieter <b>North Lido</b>.<br><b>Bay Runner trolley</b> is free and links Lido Beach, the Circle and downtown (SarasotaBayRunner.com).<br><b>Parking:</b> 1,600+ city spaces: the Fillmore lot, the N. Adams garage and the streets off the Circle.</p></div>
-    <div class="card"><h3>2026–27 season on the Circle</h3><p style="font-size:6.3pt;line-height:1.42"><b>Oct 31</b> Fright Night trick-or-treat, 6–8pm · <b>Nov 7</b> Ferraris on the Circle · <b>Nov 14–15</b> Art Festival &amp; Sidewalk Sale · <b>Dec 5</b> Holiday Night of Lights, 5:30pm · <b>Dec</b> Porsches in the Park · <b>Jan 30–31</b> Art Festival · <b>Jan</b> Century of Cars · <b>May</b> Corvettes on the Circle · <b>May 29–30</b> Fine Art Festival · <b>June</b> Craft Festival &amp; Sidewalk Sale<br><span style="color:#8E9AA3">2027 dates set by each sponsor; see VisitStArmands.org</span></p></div>
+    <div class="card"><h3>Getting around</h3><p><b>Lido Beach:</b> 5 minutes up John Ringling Blvd; right on Ben Franklin for quieter North Lido. <b>Bay Runner trolley:</b> free, links Lido Beach, the Circle and downtown. <b>Parking:</b> 1,600+ city spaces in the Fillmore lot and N. Adams garage.</p></div>
+    <div class="card"><h3>If you only eat on the Circle once</h3><p><b>Columbia</b> for the 1905 salad and sangria · <b>Venezia</b> for pizza and people-watching · <b>Blu Kouzina</b> for octopus and meze · <b>Green Zebra</b> for breakfast before the beach.</p></div>
   </div>
-  <div class="contact"><img src="assets/adamson-group-logo.png" alt=""><div><div class="nm2">Ryan Adamson, PA</div><div class="r">Adamson Group · Coldwell Banker Realty<br>423 St. Armands Circle, Sarasota, FL 34236 · AdamsonFL.com</div></div><div class="ph2">(941) 713-9234<small>call or text · AdamsonFL.com</small></div></div>
+  <div class="events"><span class="h">2026–27 season</span><b>Oct 31</b> Fright Night, 6–8pm · <b>Nov 7</b> Ferraris on the Circle · <b>Nov 14–15</b> Art Festival · <b>Dec 5</b> Holiday Night of Lights · <b>Dec</b> Porsches in the Park · <b>Jan 30–31</b> Art Festival · <b>Jan</b> Century of Cars · <b>May</b> Corvettes · <b>May 29–30</b> Fine Art Festival · <b>June</b> Craft Festival <span style="color:#8E9AA3">(2027 dates TBA)</span></div>
+  <div class="contact"><img src="assets/adamson-group-logo.png" alt=""><div><div class="nm2">Ryan Adamson, PA</div><div class="r">Adamson Group · Coldwell Banker Realty<br>423 St. Armands Circle, Sarasota, FL 34236 · AdamsonFL.com</div></div><div class="ph2">(941) 713-9234<small>call or text Ryan directly</small></div></div>
 </div>"""
 
 html = f"""<!doctype html><html><head><meta charset="utf-8"><title>St. Armands Circle handout</title>
