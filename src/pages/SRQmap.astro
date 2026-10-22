@@ -220,10 +220,9 @@ const itemList = {
   .pin-marker.minor{width:24px;height:24px}
   .pin-marker.minor .body{width:24px;height:24px;border-width:1.5px}
   .pin-marker.minor .body svg{width:12px;height:12px}
-  /* Hub pill shown at low zoom in place of the hidden minor pins; tap to zoom into the Circle */
-  .pin-hub{cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;background:var(--paper);color:var(--navy);border:1.5px solid var(--c);border-radius:999px;padding:5px 10px 5px 7px;font:600 11px "Montserrat",sans-serif;letter-spacing:.03em;box-shadow:0 5px 12px -4px rgba(10,42,64,.5);transform:translate(-50%,8px);position:relative;left:50%;top:50%;transition:transform .15s ease}
-  .pin-hub .dot{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none}
-  .pin-hub:hover{transform:translate(-50%,8px) scale(1.06)}
+  /* Cluster bubble shown at low zoom in place of a dense pin group (St. Armands Circle); tap to zoom in */
+  .pin-hub{cursor:pointer;width:38px;height:38px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font:700 13px "Montserrat",sans-serif;letter-spacing:-.01em;border:2.5px solid rgba(255,255,255,.95);box-shadow:0 0 0 5px color-mix(in srgb,var(--c) 28%,transparent),0 5px 12px -4px rgba(10,42,64,.6);transition:transform .15s ease}
+  .pin-hub:hover{transform:scale(1.08)}
   /* Locate-me control */
   .leaflet-control.locate-ctl{margin-bottom:10px;border:none;background:transparent;box-shadow:none}
   .locate-btn{width:36px;height:36px;display:grid;place-items:center;background:#fff;border:1px solid rgba(11,58,91,.12);border-radius:8px;cursor:pointer;color:var(--navy);padding:0;box-shadow:0 1px 5px rgba(10,42,64,.35)}
@@ -550,7 +549,7 @@ const itemList = {
     { id:'stac', group:'dining', lat:27.31845, lng:-82.57745, zoom:17, label:function(n){ return n+' places to eat on St. Armands Circle'; } }
   ];
   function minorMode(){ var z=map.getZoom(); return z<MINOR_SHOW_ZOOM ? 'hidden' : (z<MINOR_FULL_ZOOM ? 'dot' : 'full'); }
-  function minorShown(p){ return p.tier!=='minor' || minorMode()!=='hidden' || !!query || p._id===selectedId; }
+  function minorShown(p){ return (p.tier!=='minor' && !p.place) || minorMode()!=='hidden' || !!query || p._id===selectedId; }
 
   function buildMarkers(){
     PLACES.forEach(function(p){
@@ -574,8 +573,8 @@ const itemList = {
       var g=GMAP[h.group]; if(!g) return;
       var n = PLACES.filter(function(p){ return p.place===h.id && p.group===h.group; }).length;
       if(!n) return;
-      var html='<div class="pin-hub" style="--c:'+g.color+'"><span class="dot"></span>'+esc(h.label(n))+'</div>';
-      var icon=L.divIcon({html:html, className:'', iconSize:[0,0], iconAnchor:[0,0]});
+      var html='<div class="pin-hub" style="--c:'+g.color+'" title="'+esc(h.label(n))+'" aria-label="'+esc(h.label(n))+'">'+n+'</div>';
+      var icon=L.divIcon({html:html, className:'', iconSize:[38,38], iconAnchor:[19,19]});
       var m=L.marker([h.lat,h.lng],{icon:icon, zIndexOffset:500});
       m.on('click', function(){ map.flyTo([h.lat,h.lng], h.zoom, {duration:1}); });
       hubMarkers[h.id]={marker:m, hub:h};
