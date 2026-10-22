@@ -19,7 +19,9 @@ FIX = {
     "cilantro-grill": (27.319160, -82.577030),   # 419A, between Cha Cha (417) and Cafe on St Armands (431)
     "blu-kouzina":    (27.319350, -82.578180),   # 25 N Blvd, between Lynches (19) and Ephesus (27)
     "starbucks-stac": (27.319330, -82.576400),   # 443E, between Cafe on St Armands (431) and Tommy Bahama (465)
-    "i-love-candy":   (27.318450, -82.576150),   # 440 JRB, between Crab & Fin (420) and Blue Dolphin (470)
+    "i-love-candy":   (27.318430, -82.576390),   # 440 JRB, nudged toward the Circle (Ryan, 2026-10-22)
+    "big-olaf-stac":  (27.318170, -82.578870),   # 561 N Washington, nudged toward the Circle (Ryan, 2026-10-22)
+    "le-colonne":     (27.317430, -82.577000),   # S Blvd of Presidents, just inside Nonno Umberto (Ryan, 2026-10-22)
 }
 WEB = {
     "15-south-napule": "https://www.15south-bynapule.com/",

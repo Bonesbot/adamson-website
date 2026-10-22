@@ -45,8 +45,8 @@ def centroid(pts):
 # quadrants are the sectors between the two boulevards (John Ringling ~60/240, Presidents ~345/165)
 def quadrant(b):
     if 345 <= b or b < 60: return "GOLD"
-    if 60 <= b < 165: return "AQUA"
-    if 165 <= b < 240: return "PURPLE"
+    if 60 <= b < 148: return "AQUA"      # S. Blvd of the Presidents runs at ~150; 22 S (even side) is Purple, 15 S (odd) Aqua
+    if 148 <= b < 240: return "PURPLE"
     return "PINK"
 Q = {  # banner colours, pulled toward the brand's soft coastal palette
     "GOLD":   dict(fill="#D9B968", ink="#8A6A1E", label="Gold"),
@@ -72,8 +72,25 @@ for p in pins:
     p["_q"] = quadrant(bearing(p["lat"], p["lng"]))
     p["_short"] = SHORT.get(p["name"], p["name"])
     p["_sweet"] = bool(re.search(r"ice cream|gelato|chocolate|candy|praline|coffee", p.get("food_style", ""), re.I))
-order = ["GOLD", "PINK", "AQUA", "PURPLE"]   # legend order (clockwise from the office)
-pins.sort(key=lambda p: (order.index(p["_q"]), p["_sweet"], p["_short"].lower()))
+# numbering: #1 Tommy Bahama, then counter-clockwise around the Circle (decreasing bearing)
+_tb = next(p for p in pins if p["name"].startswith("Tommy Bahama"))
+_b0 = bearing(_tb["lat"], _tb["lng"]) + 0.01
+# walk order: ring addresses by angle around the Circle; each side street is inserted where it
+# meets the ring and read outbound, the way you would walk it
+def _street(p):
+    a = p["address"].split(",")[0]; num = re.match(r"(\d+)", a); num = int(num.group(1)) if num else 0
+    if "St Armands Cir" in a: return None                                   # on the ring
+    side = "even" if num % 2 == 0 else "odd"                                 # which side of the street
+    if "John Ringling" in a: return ("JRB-SW" if num < 400 else "JRB-E-" + side)
+    return re.sub(r"^\d+\w*\s+", "", a) + "-" + side
+_grp = {}
+for p in pins:
+    st = _street(p); p["_ang"] = (_b0 - bearing(p["lat"], p["lng"])) % 360; p["_r"] = math.hypot(*m(p["lat"], p["lng"]))
+    if st: _grp.setdefault(st, []).append(p)
+for st, members in _grp.items():
+    near = min(members, key=lambda q: q["_r"])
+    for q in members: q["_anchor"] = near["_ang"]
+pins.sort(key=lambda p: (p.get("_anchor", p["_ang"]), p["_r"] if "_anchor" in p else 0))
 for i, p in enumerate(pins, 1): p["_n"] = i
 
 # ---------------- SVG map ----------------
@@ -307,7 +324,7 @@ front = f"""
 <div class="page">
   <div class="head">
     <div><p class="kicker">A walking map · Lido Key, Sarasota</p><h1>St. Armands Circle</h1>
-      <p class="sub">Where to eat on the Circle, by quadrant · Lido Beach is up, as you see it from our door</p></div>
+      <p class="sub">Where to eat on the Circle, numbered counter-clockwise · Lido Beach is up, as you see it from our door</p></div>
     <div class="est">est. 1926<br>by John Ringling</div>
   </div>
   <img class="map" src="assets/map-st-armands-circle.png" alt="Map of St. Armands Circle">
