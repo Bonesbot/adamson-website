@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-22T10:42:55.806192+00:00",
+  "lastUpdated": "2026-10-23T10:43:20.417195+00:00",
   "counts": {
     "sold": 324,
-    "pending": 26,
+    "pending": 28,
     "active": 97,
-    "total": 350
+    "total": 352
   },
   "metrics": {
-    "avgPrice": "$639,671",
-    "avgPricePerSqFt": "$329",
+    "avgPrice": "$637,358",
+    "avgPricePerSqFt": "$328",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,756",
+    "avgLivingSqFt": "1,753",
     "avgLotSqFt": null,
     "avgDom": 78
   },
@@ -38,7 +38,7 @@
   "monthsOfSupply": {
     "condo": 4.5,
     "sfhVilla": 4.9,
-    "blended": 4.7,
+    "blended": 4.8,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 50,
-      "avgPrice": "$355,304",
-      "avgPricePerSqFt": "$285",
-      "avgLivingSqFt": "1,236",
-      "avgDom": 96
+      "avgPrice": "$357,284",
+      "avgPricePerSqFt": "$288",
+      "avgLivingSqFt": "1,231",
+      "avgDom": 97
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$602,667",
       "avgPricePerSqFt": "$278",
       "avgLivingSqFt": "2,167",
-      "avgDom": 125
+      "avgDom": 126
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$591,300",
       "avgPricePerSqFt": "$347",
       "avgLivingSqFt": "1,706",
-      "avgDom": 185
+      "avgDom": 186
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$635,000",
       "avgPricePerSqFt": "$364",
       "avgLivingSqFt": "1,745",
-      "avgDom": 57
+      "avgDom": 58
     }
   ],
   "condoTiersScope": {
@@ -231,12 +231,12 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.7,
+    "monthsOfSupply": 4.8,
     "monthsOfSupplyCondo": 4.5,
     "monthsOfSupplySfhVilla": 4.9,
     "label": "seller's market",
     "activeCount": 97,
-    "sold365Count": 246,
+    "sold365Count": 245,
     "sold90Count": 63,
     "method": "active / (trailing-12mo closed / 12)"
   },
@@ -262,7 +262,7 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 97 active listings and roughly 20 closed sales a month (trailing 12 months), West Of Trail South has about 4.7 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 97 active listings and roughly 20 closed sales a month (trailing 12 months), West Of Trail South has about 4.8 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",

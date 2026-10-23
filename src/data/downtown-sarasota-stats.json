@@ -2,16 +2,16 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-22T10:42:52.025103+00:00",
+  "lastUpdated": "2026-10-23T10:43:18.006902+00:00",
   "counts": {
-    "sold": 303,
-    "pending": 67,
-    "active": 185,
+    "sold": 304,
+    "pending": 66,
+    "active": 187,
     "total": 370
   },
   "metrics": {
-    "avgPrice": "$1,917,760",
-    "avgPricePerSqFt": "$824",
+    "avgPrice": "$1,917,681",
+    "avgPricePerSqFt": "$823",
     "avgYearBuilt": 2002,
     "avgLivingSqFt": "2,080",
     "avgLotSqFt": null,
@@ -22,51 +22,64 @@
     "maxPrice": "$14,450,000"
   },
   "active": {
-    "count": 185,
-    "medianPrice": "$1,950,000",
+    "count": 187,
+    "medianPrice": "$1,929,000",
     "medianPricePerSqFt": "$932",
-    "waterfrontCount": 54,
+    "waterfrontCount": 55,
     "newConstructionCount": 82
   },
   "sold": {
-    "count": 45,
+    "count": 46,
     "medianPrice": "$1,100,000",
-    "medianDom": 90,
-    "saleToListRatio": "86.2%",
+    "medianDom": 88,
+    "saleToListRatio": "86.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 9.4,
+    "condo": 9.5,
     "sfhVilla": 9.9,
-    "blended": 9.4,
+    "blended": 9.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
     "medianMonthlyAssociation": "$1,795",
-    "medianMonthlyCondoFee": "$1,874",
+    "medianMonthlyCondoFee": "$1,867",
     "minMonthlyCondoFee": "$600",
     "maxMonthlyCondoFee": "$11,729",
     "condoFeeRange": {
       "min": 600,
-      "median": 1878,
+      "median": 1871,
       "max": 11729
     }
   },
   "priceBands": {
-    "under900k": 43,
+    "under900k": 44,
     "band900kTo1_5m": 35,
-    "band1_5mTo3m": 44,
+    "band1_5mTo3m": 45,
     "band3mPlus": 63
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 185
+      "count": 187
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4706440",
+      "address": "1221 N PALM AVE #305",
+      "subdivision": "FRANCES CARLTON",
+      "soldPrice": "$370,000",
+      "soldDate": "2026-10-22",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "676",
+      "yearBuilt": 1928,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4704663",
       "address": "464 GOLDEN GATE PT #702",
@@ -118,19 +131,6 @@
       "yearBuilt": 1926,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4704347",
-      "address": "101 SUNSET DR #103",
-      "subdivision": "LAWRENCE POINTE I",
-      "soldPrice": "$1,100,000",
-      "soldDate": "2026-10-14",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,693",
-      "yearBuilt": 1978,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -138,31 +138,31 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 43,
-      "avgPrice": "$1,091,826",
-      "avgPricePerSqFt": "$638",
-      "avgLivingSqFt": "1,590",
-      "avgDom": 153
+      "activeCount": 44,
+      "avgPrice": "$1,079,511",
+      "avgPricePerSqFt": "$637",
+      "avgLivingSqFt": "1,576",
+      "avgDom": 151
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 24,
-      "avgPrice": "$1,926,883",
+      "avgPrice": "$1,925,883",
       "avgPricePerSqFt": "$749",
       "avgLivingSqFt": "2,237",
-      "avgDom": 95
+      "avgDom": 96
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 34,
-      "avgPrice": "$1,607,232",
-      "avgPricePerSqFt": "$739",
-      "avgLivingSqFt": "2,008",
-      "avgDom": 86
+      "activeCount": 35,
+      "avgPrice": "$1,616,426",
+      "avgPricePerSqFt": "$751",
+      "avgLivingSqFt": "1,998",
+      "avgDom": 85
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,395,938",
       "avgPricePerSqFt": "$1,418",
       "avgLivingSqFt": "2,965",
-      "avgDom": 219
+      "avgDom": 220
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 53,
+      "activeCount": 54,
       "soldCount": 64,
       "soldMedianPricePerSqFt": "$685",
       "soldMedianPrice": "$1,200,000",
@@ -205,8 +205,8 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 72,
-      "soldCount": 149,
+      "activeCount": 73,
+      "soldCount": 150,
       "soldMedianPricePerSqFt": "$791",
       "soldMedianPrice": "$1,475,000",
       "lowSample": false
@@ -222,13 +222,13 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 9.4,
-    "monthsOfSupplyCondo": 9.4,
+    "monthsOfSupply": 9.5,
+    "monthsOfSupplyCondo": 9.5,
     "monthsOfSupplySfhVilla": 9.9,
     "label": "buyer's market",
-    "activeCount": 185,
+    "activeCount": 187,
     "sold365Count": 236,
-    "sold90Count": 45,
+    "sold90Count": 46,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -239,46 +239,46 @@
       "soldMedianPricePerSqFt": "$547"
     },
     "condo": {
-      "soldCount": 291,
-      "activeCount": 181,
+      "soldCount": 292,
+      "activeCount": 183,
       "soldMedianPrice": "$1,200,000",
-      "soldMedianPricePerSqFt": "$717"
+      "soldMedianPricePerSqFt": "$716"
     }
   },
   "boating": {
     "activeWithDock": 24,
-    "activeWaterfront": 54
+    "activeWaterfront": 55
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Downtown Sarasota a buyer's or seller's market right now?",
-      "a": "With 185 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 9.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 187 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 9.5 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Downtown Sarasota?",
-      "a": "Single-family homes sell around $863,750 ($547/sq ft), while condos, villas and townhouses sell around $1,200,000 ($717/sq ft)."
+      "a": "Single-family homes sell around $863,750 ($547/sq ft), while condos, villas and townhouses sell around $1,200,000 ($716/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Downtown Sarasota?",
-      "a": "Active listings run from $260,000 to $14,450,000, with a median asking price of $1,950,000."
+      "a": "Active listings run from $260,000 to $14,450,000, with a median asking price of $1,929,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Downtown Sarasota?",
-      "a": "Recently sold homes took a median 90 days on market and closed at 86.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 88 days on market and closed at 86.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Downtown Sarasota homes have a dock?",
-      "a": "Of 54 active waterfront listings, 24 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 55 active waterfront listings, 24 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Downtown Sarasota?",
-      "a": "The median monthly condo fee is $1,874 and the median monthly association fee is $1,795."
+      "a": "The median monthly condo fee is $1,867 and the median monthly association fee is $1,795."
     }
   ],
   "costBreakdown90": null
