@@ -119,3 +119,26 @@ team notes, "edit facts" overrides. Satellite toggle (Esri imagery).
 - Leads POST to the existing `srqmap-lead` function with `source: "listing:<slug>"`
   (message lands in raw_payload). No new table needed.
 - Full workflow: `LISTINGS_PLAYBOOK.md`.
+
+## Crawler files, canonicals and meta descriptions (2026-10-23 crawl audit)
+
+- `robots.txt`, `llms.txt` and (for SiestaReport) the sitemap are **generated per host**, not
+  static files in `public/`: `src/lib/crawlers.ts` builds them from the daily stats JSON, and
+  thin endpoints emit them (`src/pages/robots.txt.ts`, `src/pages/llms.txt.ts`,
+  `src-lll/pages/*.ts`, `src/pages/siesta-report/*.ts`). The hub's llms.txt prose lives in
+  `src/data/llms-adamsonfl.md`; the numbers section underneath it is appended at build time.
+  SiestaReport's files are rewritten onto that host in `public/_redirects` (`200!`).
+  Do not re-add `public/robots.txt` or `public/llms.txt`: both builds share `public/`, so a
+  static file there is served on every host.
+- Canonical URLs are normalised in `src/components/seo/Meta.astro` (`canonicalize()` in
+  `src/lib/seo.ts`) to the trailing-slash form Netlify serves with a 200; JSON-LD `url`/`item`
+  values on our own hosts are normalised the same way in `JsonLd.astro`. A canonical that 301s
+  left pages "Discovered but not crawled" in Bing.
+- Meta descriptions: one stat-led, citable claim, **under 155 characters**. `Meta.astro` clamps
+  anything longer as a backstop (Bing flags >160 as an SEO/GEO error, and answer engines quote
+  the description verbatim), but write them to fit. Generators (`gen_gulf_bay_pages.py`,
+  `gen_ccs_page.py`) and the area template already follow this.
+- Sitemap exclusions are per build target in `astro.config.mjs` (`SITEMAP_EXCLUDE`): noindex /
+  utility pages (thank-you, receipts, IDX wrapper shell, standalone forms, voice) stay out.
+- `propertyMix: "sfh"` in `areas.json` (Bird Key, West of Trail) suppresses condo tiers, condo
+  dues and the condo-fee FAQ for areas with no condos.

@@ -398,10 +398,9 @@ def render_page(s, template=None):
     snap, segs = s["snap"], s["segments"]
     total = len(s["ledger"])
     lo, hi = sq_range(s)
-    description = (f"Country Club Shores, Longboat Key (34228) single-family market: {snap['n']} closed sales "
-                   f"in the last 180 days, median {money(snap['md'])}, with canal-front, open-bayfront and "
-                   f"interior homes tracked separately, plus price per sqft, days on market and sale-to-list "
-                   f"ratios from live Stellar MLS data.")
+    # One citable claim under ~155 chars (Bing flags longer; AI answer engines quote it verbatim).
+    description = (f"Country Club Shores, Longboat Key: {snap['n']} closed sales in 180 days, median {money(snap['md'])}. "
+                   f"Canal-front vs bayfront tracked separately. Live Stellar MLS data, updated daily.")
     faq_share = (f"Most of the neighborhood sits on deep-water canals: {segs['canal']['n']} of the {total} "
                  f"single-family closings in the 12 months ending {long_date(as_of)} were canal-front homes, "
                  f"with a small number of open-bayfront point lots and interior homes along Gulf of Mexico Drive.")

@@ -524,9 +524,19 @@ def compute_extras(slug, conn, head):
     if boating.get("activeWaterfront"):
         q.append({"facet":"boating","q":f"Can I keep a boat — how many {name} homes have a dock?",
                   "a":f"Of {boating['activeWaterfront']} active waterfront listings, {boating.get('activeWithDock') or 0} include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."})
-    if head.get("median_monthly_condo_fee") or head.get("median_monthly_assoc"):
+    # Fees: only state the figures that exist. Bird Key (no condos) used to print
+    # "The median monthly condo fee is None" here, which AI crawlers quoted verbatim.
+    _condo = head.get("median_monthly_condo_fee")
+    _assoc = head.get("median_monthly_assoc")
+    if _condo and _assoc:
         q.append({"facet":"fees","q":f"What are typical HOA and condo fees on {name}?",
-                  "a":f"The median monthly condo fee is {fmt_currency(head.get('median_monthly_condo_fee'))} and the median monthly association fee is {fmt_currency(head.get('median_monthly_assoc'))}."})
+                  "a":f"The median monthly condo fee is {fmt_currency(_condo)} and the median monthly association fee is {fmt_currency(_assoc)}."})
+    elif _condo:
+        q.append({"facet":"fees","q":f"What are typical condo fees on {name}?",
+                  "a":f"The median monthly condo fee on {name} is {fmt_currency(_condo)}."})
+    elif _assoc:
+        q.append({"facet":"fees","q":f"What are typical HOA fees on {name}?",
+                  "a":f"The median monthly association fee on {name} is {fmt_currency(_assoc)}; most homes here are single-family, so there is no condo fee."})
 
     # ---- per-area customization: drop / rename generic questions, prepend cost question ----
     cfg = _faq_config(slug)

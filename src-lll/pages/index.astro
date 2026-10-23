@@ -18,7 +18,8 @@ const media: any = (areaMedia as any)['longboat-key'] || {};
 const names = { agentsShort: 'Anne and Ryan', agentsFull: 'Anne Schneider and Ryan Adamson' };
 const { asOfIso, faqs, summary } = buildAreaModel(stats, area, media, names);
 
-const description = `Longboat Key real estate market data from Anne Schneider and Ryan Adamson, Coldwell Banker Realty, St. Armands: ${stats.active.count} active listings, median sold price ${stats.sold.medianPrice} over the last ${stats.sold.windowDays} days, ${stats.marketBalance.monthsOfSupply} months of supply, with Gulf-front, bayfront, condo and single-family segments tracked separately from live Stellar MLS data.`;
+// One citable claim under ~155 chars: AI answer engines quote the description verbatim.
+const description = `Longboat Key real estate by the numbers: ${stats.active.count} for sale, median sold ${stats.sold.medianPrice}, ${stats.marketBalance.monthsOfSupply} months of supply. Daily Stellar MLS data. Anne Schneider & Ryan Adamson.`;
 
 const jsonLd = [
   {

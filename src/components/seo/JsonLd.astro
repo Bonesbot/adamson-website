@@ -3,17 +3,39 @@
  * JSON-LD Structured Data Component
  * Renders Schema.org structured data for AEO optimization.
  * Accepts a single schema object or an array of schemas.
+ *
+ * Every `url`, `item` and `@id` that points at one of our own domains is normalised
+ * to the trailing-slash form Netlify serves, so schema URLs always equal the page's
+ * canonical (answer engines cross-check the two when deciding what to cite).
  */
+import { canonicalize } from '@/lib/seo';
+
 interface Props {
   data: Record<string, any> | Record<string, any>[];
 }
 
 const { data } = Astro.props;
 
+const OWN_HOSTS = /^https:\/\/(adamsonfl\.com|longboatlido\.com|siestareport\.com)\//;
+const URL_KEYS = new Set(['url', 'item', '@id', 'sameAs']);
+
+function normalise(node: any, key?: string): any {
+  if (Array.isArray(node)) return node.map((n) => normalise(n, key));
+  if (node && typeof node === 'object') {
+    const out: Record<string, any> = {};
+    for (const [k, v] of Object.entries(node)) out[k] = normalise(v, k);
+    return out;
+  }
+  if (typeof node === 'string' && key && URL_KEYS.has(key) && OWN_HOSTS.test(node) && !/[?#]/.test(node)) {
+    return canonicalize(node);
+  }
+  return node;
+}
+
 // Wrap in @graph if multiple schemas
 const structuredData = Array.isArray(data)
-  ? { '@context': 'https://schema.org', '@graph': data }
-  : { '@context': 'https://schema.org', ...data };
+  ? { '@context': 'https://schema.org', '@graph': normalise(data) }
+  : { '@context': 'https://schema.org', ...normalise(data) };
 ---
 
 <script type="application/ld+json" set:html={JSON.stringify(structuredData, null, 0)} />

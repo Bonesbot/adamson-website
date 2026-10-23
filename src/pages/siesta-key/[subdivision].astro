@@ -41,7 +41,8 @@ const statCards = [
   h.activePsf ? { value: h.activePsf, label: 'Asking $/Sq Ft' } : null,
 ].filter(Boolean) as { value: string; label: string }[];
 
-const description = `${sub.name} on Siesta Key — live market data: ${h.sold12 || '—'} sales in the last 12 months, median ${h.soldMedian || '—'}, ${h.monthsOfSupply || '—'} months of supply. Community guide, recent sales, fees & FAQ from Ryan Adamson, Coldwell Banker.`;
+// One citable claim under ~155 chars (answer engines quote it verbatim; Bing flags longer).
+const description = `${sub.name}, Siesta Key: ${h.sold12 || '—'} sales in 12 months, median ${h.soldMedian || '—'}, ${h.monthsOfSupply || '—'} months of supply. Live Stellar MLS data, fees and FAQ, updated daily.`;
 
 const jsonLd = [
   {

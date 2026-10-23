@@ -17,6 +17,14 @@
 # what is printed, so both spellings are listed for clarity.
 
 https://www.siestareport.com/*  https://siestareport.com/:splat                              301!
+# Crawler files for the SiestaReport.com host (2026-10-23). The hub's own robots.txt,
+# llms.txt and sitemap were being served here verbatim, telling search engines and AI
+# crawlers that this host was adamsonfl.com. Generated under /siesta-report/ by the hub
+# build (src/pages/siesta-report/*.ts); forced so the hub's real files never shadow them.
+https://siestareport.com/robots.txt         /siesta-report/robots.txt         200!
+https://siestareport.com/llms.txt           /siesta-report/llms.txt           200!
+https://siestareport.com/sitemap-index.xml  /siesta-report/sitemap-index.xml  200!
+https://siestareport.com/sitemap-0.xml      /siesta-report/sitemap-0.xml      200!
 # /GBC serves the SiestaReport.com twin of the page (src/pages/siesta-report/gbc.astro:
 # SRLayout, no AdamsonFL nav), generated alongside the hub page by gen_gulf_bay_pages.py.
 # Renamed from /GB on 2026-09-14; the old path 301s here so the September proofs and any
@@ -27,6 +35,10 @@ https://siestareport.com/gb     https://siestareport.com/GBC                    
 https://siestareport.com/GB/*   https://siestareport.com/GBC/:splat                          301!
 https://siestareport.com/gb/*   https://siestareport.com/GBC/:splat                          301!
 https://siestareport.com/GBC    /siesta-report/gbc/                                          200
+# /GBC/ is the canonical form (trailing slash, matching every other page and the sitemap);
+# listed before the splat rules so it is not read as an empty ?qr= code.
+https://siestareport.com/GBC/   /siesta-report/gbc/                                          200
+https://siestareport.com/gbc/   /siesta-report/gbc/                                          200
 https://siestareport.com/gbc    /siesta-report/gbc/                                          200
 https://siestareport.com/GBC/*  /siesta-report/gbc/?qr=:splat&src=typed                      200
 https://siestareport.com/gbc/*  /siesta-report/gbc/?qr=:splat&src=typed                      200
