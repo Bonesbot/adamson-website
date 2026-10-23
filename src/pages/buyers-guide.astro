@@ -73,7 +73,7 @@ const dataAsOf = AREAS.map((a) => a.asOf).filter(Boolean).sort().pop() || null;
 const dataAsOfPretty = dataAsOf ? new Date(dataAsOf + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : null;
 
 const description =
-  "Answer five questions about how you want to live — beachfront, boating, golf, walkability — and get matched to the Sarasota neighborhoods that fit, scored against live Stellar MLS market data updated daily.";
+  "Which Sarasota neighborhood fits you? Answer five lifestyle questions (beach, boating, golf, walkability) and get matched using daily Stellar MLS data.";
 
 const guideFaqs = [
   { question: 'How does the Sarasota Buyer’s Guide match me to a neighborhood?', answer: 'The guide scores all nine Sarasota coverage areas — from Longboat Key to Palmer Ranch — against your lifestyle priorities (beach, boating, golf, walkability, privacy, schools), preferred home style, pace, and budget. Budget fit is checked against live Stellar MLS inventory by price band, refreshed daily through the Adamson Group data pipeline, so a match always reflects what is actually for sale right now.' },

@@ -34,7 +34,10 @@ const badge = l.badge || st.badge;
 const priceLabel = l.price_label || `${st.prefix} ${fmtPrice(l.price)}`;
 const fullAddress = `${l.address}, ${l.city}, ${l.state} ${l.zip}`;
 const pageTitle = `${l.address} — ${l.neighborhood}, ${l.city} FL`;
-const canonical = `https://adamsonfl.com/listings/${l.slug}`;
+const canonical = `https://adamsonfl.com/listings/${l.slug}/`;
+// Meta description: the facts an answer engine would quote, under ~155 chars. The long
+// listing copy stays in the body and JSON-LD.
+const metaDescription = `${l.address}, ${l.city} FL: ${l.beds} bed, ${l.baths} bath, ${Number(l.sqft).toLocaleString('en-US')} sq ft${l.year_built ? `, built ${l.year_built}` : ''}. ${l.price_label_short || priceLabel}. Listed by Ryan Adamson, Coldwell Banker.`;
 const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(l.map_query || fullAddress)}&t=m&z=13&output=embed&iwloc=near`;
 
 const residence = {
@@ -85,7 +88,7 @@ if (l.faq && l.faq.length) {
 
 <BaseLayout
   title={pageTitle}
-  description={l.description}
+  description={metaDescription}
   ogImage={l.hero_image}
   canonicalUrl={canonical}
   jsonLd={jsonLd}

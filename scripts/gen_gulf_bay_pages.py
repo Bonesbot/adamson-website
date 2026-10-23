@@ -264,7 +264,7 @@ SIDES = {
         "sr_path": "src/pages/siesta-report/gbc.astro",
         # /GBC since 2026-09-14 (was /GB). Legacy /GB and /gb 301 to it in public/_redirects
         # so the September proofs that printed the old path keep working.
-        "sr_url": "https://siestareport.com/GBC",
+        "sr_url": "https://siestareport.com/GBC/",
         # IDX Broker legacy Showcase widget bound (Edit-By-Hand querystring) to the
         # saved-link polygon sk-gulf-and-bay-beachside (slID 7854), Active only.
         "idx_widget_id": "50169",
@@ -1482,9 +1482,10 @@ def render_page(cfg, headline, ledger, lease, lease_n, lease_total, qs, as_of):
   />""" if cfg.get("idx_widget_id") else "")
     prices = [float(r["current_price"]) for r in headline if r["current_price"]]
     med = money(median(prices)) if prices else "—"
-    description = (f"{cfg['name']}, Siesta Key (34242) condo market: {len(headline)} closed sales in the last "
-                   f"{HEADLINE_WINDOW_DAYS} days, median {med}, {lease or 'n/a'} minimum lease period, plus median price "
-                   f"per sq ft, days on market and sale-vs-list ratios from live Stellar MLS data.")
+    # Meta description: one citable claim, under ~155 chars (Bing flags longer; AI answer
+    # engines quote this line verbatim). Full detail lives in the body and FAQ.
+    description = (f"{cfg['name']}, Siesta Key: {len(headline)} closed sales in {HEADLINE_WINDOW_DAYS} days, "
+                   f"median {med}, {lease or 'n/a'} minimum lease. Live Stellar MLS data, updated daily.")
 
     chips = "\n            ".join(f'<span class="gbc-chip">{c}</span>' for c in cfg["chips"])
     gallery = cfg.get("gallery") or GALLERY
@@ -1727,7 +1728,7 @@ HUB = '''---
 // Hub for the two Gulf & Bay Club associations: preserves the originally indexed URL.
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-const description = 'Gulf & Bay Club on Siesta Key is two separate condo associations — the Gulf-front community on Midnight Pass Road (one-month minimum lease) and Gulf & Bay Club Bayside across the road (one-week minimum lease). Compare both markets with live Stellar MLS data.';
+const description = 'Gulf & Bay Club, Siesta Key: two condo associations, one page. Gulf-front (one-month minimum lease) vs Bayside (one-week lease). Live Stellar MLS data.';
 
 const jsonLd = [
   {

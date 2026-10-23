@@ -22,7 +22,8 @@ const media: any = (areaMedia as any)['siesta-key'] || {};
 const names = { agentsShort: 'Kelli and Ryan', agentsFull: 'Kelli Eggen and Ryan Adamson' };
 const { asOfIso, faqs, summary } = buildAreaModel(stats, area, media, names);
 
-const description = `Siesta Key real estate market data from Kelli Eggen and Ryan Adamson, Coldwell Banker Realty: ${stats.active.count} active listings, median sold price ${stats.sold.medianPrice} over the last ${stats.sold.windowDays} days, ${stats.marketBalance.monthsOfSupply} months of supply, with Gulf-front, bayfront, condo and single-family segments tracked separately from live Stellar MLS data.`;
+// One citable claim under ~155 chars: AI answer engines quote the description verbatim.
+const description = `Siesta Key real estate by the numbers: ${stats.active.count} for sale, median sold ${stats.sold.medianPrice}, ${stats.marketBalance.monthsOfSupply} months of supply. Daily Stellar MLS data. Kelli Eggen & Ryan Adamson.`;
 
 const jsonLd = [
   {

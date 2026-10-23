@@ -140,7 +140,15 @@ const headlinePrice =
     ? `Average sold price: ${detailedStats.metrics.avgPrice}`
     : `Median home price: ${area.marketStats?.medianPrice || 'N/A'}`;
 
-const description = `${area.name} real estate market data, pricing trends, and neighborhood guide. ${headlinePrice}. Expert insights from Ryan Adamson, Coldwell Banker St. Armands.`;
+// Meta description: one citable, stat-led claim under ~155 chars. Bing flags anything
+// longer, and AI answer engines (ChatGPT, Perplexity, Claude, Grok) quote this line
+// verbatim when they cite a source, so lead with the numbers the page proves.
+const _active = detailedStats?.active?.count;
+const _soldMed = detailedStats?.sold?.medianPrice;
+const _mos = detailedStats?.marketBalance?.monthsOfSupply;
+const description = (_active && _soldMed && _mos)
+  ? `${area.name} real estate by the numbers: ${_active} for sale, median sold ${_soldMed}, ${_mos} months of supply. Daily Stellar MLS data from Ryan Adamson.`
+  : `${area.name} real estate by the numbers. ${headlinePrice}. Daily Stellar MLS data and neighborhood guide from Ryan Adamson, Coldwell Banker Realty, Sarasota.`;
 
 const jsonLd = [
   {
