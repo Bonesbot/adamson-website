@@ -2,15 +2,15 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-23T10:43:15.541379+00:00",
+  "lastUpdated": "2026-10-24T10:40:53.056278+00:00",
   "counts": {
-    "sold": 1267,
-    "pending": 33,
-    "active": 238,
-    "total": 1300
+    "sold": 1268,
+    "pending": 35,
+    "active": 235,
+    "total": 1303
   },
   "metrics": {
-    "avgPrice": "$2,011,230",
+    "avgPrice": "$2,009,645",
     "avgPricePerSqFt": "$802",
     "avgYearBuilt": 1985,
     "avgLivingSqFt": "2,191",
@@ -22,29 +22,29 @@
     "maxPrice": "$38,450,000"
   },
   "active": {
-    "count": 238,
-    "medianPrice": "$1,095,000",
-    "medianPricePerSqFt": "$688",
-    "waterfrontCount": 175,
+    "count": 235,
+    "medianPrice": "$1,090,000",
+    "medianPricePerSqFt": "$684",
+    "waterfrontCount": 172,
     "newConstructionCount": 23
   },
   "sold": {
-    "count": 104,
-    "medianPrice": "$905,000",
+    "count": 105,
+    "medianPrice": "$900,000",
     "medianDom": 95,
     "saleToListRatio": "96.5%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 5.1,
-    "sfhVilla": 6.4,
-    "blended": 5.5,
+    "sfhVilla": 6.2,
+    "blended": 5.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
     "medianMonthlyAssociation": "$1,600",
-    "medianMonthlyCondoFee": "$1,717",
+    "medianMonthlyCondoFee": "$1,712",
     "minMonthlyCondoFee": "$125",
     "maxMonthlyCondoFee": "$10,909",
     "condoFeeRange": {
@@ -55,18 +55,31 @@
   },
   "priceBands": {
     "under900k": 99,
-    "band900kTo1_5m": 49,
-    "band1_5mTo3m": 45,
+    "band900kTo1_5m": 48,
+    "band1_5mTo3m": 43,
     "band3mPlus": 45
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 238
+      "count": 235
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4706187",
+      "address": "1932 HARBOURSIDE DR #214",
+      "subdivision": "FAIRWAY BAY",
+      "soldPrice": "$449,000",
+      "soldDate": "2026-10-23",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,192",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4704578",
       "address": "4540 GULF OF MEXICO DR #204",
@@ -118,19 +131,6 @@
       "yearBuilt": 1973,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4694415",
-      "address": "602 SPANISH DR S #115",
-      "subdivision": "SPANISH MAIN YACHT CLUB CONDO",
-      "soldPrice": "$315,340",
-      "soldDate": "2026-10-15",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,427",
-      "yearBuilt": 1969,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 130,
-      "avgPrice": "$823,886",
-      "avgPricePerSqFt": "$633",
-      "avgLivingSqFt": "1,335",
-      "avgDom": 144
+      "activeCount": 128,
+      "avgPrice": "$802,704",
+      "avgPricePerSqFt": "$625",
+      "avgLivingSqFt": "1,320",
+      "avgDom": 143
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 31,
-      "avgPrice": "$2,377,703",
-      "avgPricePerSqFt": "$831",
-      "avgLivingSqFt": "2,585",
-      "avgDom": 114
+      "activeCount": 30,
+      "avgPrice": "$2,427,293",
+      "avgPricePerSqFt": "$848",
+      "avgLivingSqFt": "2,578",
+      "avgDom": 109
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$6,750,000",
       "avgPricePerSqFt": "$1,778",
       "avgLivingSqFt": "3,741",
-      "avgDom": 154
+      "avgDom": 156
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$8,104,875",
       "avgPricePerSqFt": "$2,185",
       "avgLivingSqFt": "3,436",
-      "avgDom": 307
+      "avgDom": 308
     }
   ],
   "condoTiersScope": {
@@ -187,7 +187,7 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 80,
+      "activeCount": 78,
       "soldCount": 540,
       "soldMedianPricePerSqFt": "$886",
       "soldMedianPrice": "$1,397,000",
@@ -196,9 +196,9 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 92,
-      "soldCount": 412,
-      "soldMedianPricePerSqFt": "$603",
+      "activeCount": 91,
+      "soldCount": 413,
+      "soldMedianPricePerSqFt": "$602",
       "soldMedianPrice": "$1,200,000",
       "lowSample": false
     },
@@ -231,13 +231,13 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.5,
+    "monthsOfSupply": 5.4,
     "monthsOfSupplyCondo": 5.1,
-    "monthsOfSupplySfhVilla": 6.4,
+    "monthsOfSupplySfhVilla": 6.2,
     "label": "balanced market",
-    "activeCount": 238,
-    "sold365Count": 521,
-    "sold90Count": 104,
+    "activeCount": 235,
+    "sold365Count": 522,
+    "sold90Count": 105,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,26 +248,26 @@
       "soldMedianPricePerSqFt": "$726"
     },
     "condo": {
-      "soldCount": 940,
-      "activeCount": 172,
+      "soldCount": 941,
+      "activeCount": 169,
       "soldMedianPrice": "$1,000,000",
       "soldMedianPricePerSqFt": "$646"
     }
   },
   "boating": {
     "activeWithDock": 68,
-    "activeWaterfront": 175
+    "activeWaterfront": 172
   },
   "marketQuestions": [
     {
       "facet": "cost",
       "q": "What do properties cost on Longboat Key?",
-      "a": "Over the past 90 days, 104 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $850,000 ($550/sq ft), while single-family homes closed around $1,935,000 ($700/sq ft). By location, Gulf-front and beachfront properties closed at a median $831 per square foot, compared with $517 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
+      "a": "Over the past 90 days, 105 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $850,000 ($539/sq ft), while single-family homes closed around $1,935,000 ($700/sq ft). By location, Gulf-front and beachfront properties closed at a median $831 per square foot, compared with $502 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
     },
     {
       "facet": "balance",
       "q": "Is it a good time to buy on Longboat Key?",
-      "a": "With 238 active listings and roughly 43 closed sales a month (trailing 12 months), Longboat Key has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 235 active listings and roughly 44 closed sales a month (trailing 12 months), Longboat Key has about 5.4 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "speed",
@@ -277,22 +277,22 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Longboat Key homes have a dock?",
-      "a": "Of 175 active waterfront listings, 68 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 172 active waterfront listings, 68 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Longboat Key?",
-      "a": "The median monthly condo fee is $1,717 and the median monthly association fee is $1,600."
+      "a": "The median monthly condo fee is $1,712 and the median monthly association fee is $1,600."
     }
   ],
   "costBreakdown90": {
     "windowDays": 90,
-    "soldCount": 104,
+    "soldCount": 105,
     "byPropertyType": {
       "condo": {
-        "soldCount": 80,
+        "soldCount": 81,
         "soldMedianPrice": "$850,000",
-        "soldMedianPricePerSqFt": "$550"
+        "soldMedianPricePerSqFt": "$539"
       },
       "single_family": {
         "soldCount": 24,
@@ -307,9 +307,9 @@
         "soldMedianPricePerSqFt": "$831"
       },
       "bay_canal": {
-        "soldCount": 37,
-        "soldMedianPrice": "$1,080,000",
-        "soldMedianPricePerSqFt": "$517"
+        "soldCount": 38,
+        "soldMedianPrice": "$1,040,000",
+        "soldMedianPricePerSqFt": "$502"
       }
     }
   }

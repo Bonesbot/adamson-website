@@ -2,43 +2,43 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-23T10:43:20.417195+00:00",
+  "lastUpdated": "2026-10-24T10:40:58.769001+00:00",
   "counts": {
-    "sold": 324,
+    "sold": 325,
     "pending": 28,
-    "active": 97,
-    "total": 352
+    "active": 100,
+    "total": 353
   },
   "metrics": {
-    "avgPrice": "$637,358",
+    "avgPrice": "$636,274",
     "avgPricePerSqFt": "$328",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,753",
+    "avgLivingSqFt": "1,751",
     "avgLotSqFt": null,
     "avgDom": 78
   },
   "range": {
     "minPrice": "$95,000",
-    "maxPrice": "$5,650,000"
+    "maxPrice": "$7,199,000"
   },
   "active": {
-    "count": 97,
-    "medianPrice": "$450,000",
-    "medianPricePerSqFt": "$318",
-    "waterfrontCount": 24,
-    "newConstructionCount": 2
+    "count": 100,
+    "medianPrice": "$457,500",
+    "medianPricePerSqFt": "$320",
+    "waterfrontCount": 26,
+    "newConstructionCount": 3
   },
   "sold": {
-    "count": 63,
-    "medianPrice": "$427,450",
+    "count": 64,
+    "medianPrice": "$431,669",
     "medianDom": 52,
-    "saleToListRatio": "87.7%",
+    "saleToListRatio": "87.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 4.5,
-    "sfhVilla": 4.9,
-    "blended": 4.8,
+    "sfhVilla": 5.2,
+    "blended": 4.9,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 77,
+    "under900k": 78,
     "band900kTo1_5m": 8,
-    "band1_5mTo3m": 9,
-    "band3mPlus": 3
+    "band1_5mTo3m": 10,
+    "band3mPlus": 4
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 97
+      "count": 100
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4707753",
+      "address": "1613 WHARF RD",
+      "subdivision": "TROPICAL SHORES",
+      "soldPrice": "$499,000",
+      "soldDate": "2026-10-23",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,781",
+      "yearBuilt": 1984,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4709977",
       "address": "4612 PINE HARRIER DR",
@@ -118,19 +131,6 @@
       "yearBuilt": 1980,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4689911",
-      "address": "1732 PINE HARRIER CIR",
-      "subdivision": "THE LANDINGS",
-      "soldPrice": "$850,000",
-      "soldDate": "2026-10-14",
-      "bedrooms": 4,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,500",
-      "yearBuilt": 1984,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 50,
-      "avgPrice": "$357,284",
-      "avgPricePerSqFt": "$288",
-      "avgLivingSqFt": "1,231",
-      "avgDom": 97
+      "activeCount": 51,
+      "avgPrice": "$365,475",
+      "avgPricePerSqFt": "$291",
+      "avgLivingSqFt": "1,243",
+      "avgDom": 96
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$602,667",
       "avgPricePerSqFt": "$278",
       "avgLivingSqFt": "2,167",
-      "avgDom": 126
+      "avgDom": 127
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$591,300",
       "avgPricePerSqFt": "$347",
       "avgLivingSqFt": "1,706",
-      "avgDom": 186
+      "avgDom": 187
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$635,000",
       "avgPricePerSqFt": "$364",
       "avgLivingSqFt": "1,745",
-      "avgDom": 58
+      "avgDom": 59
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 21,
+      "activeCount": 22,
       "soldCount": 70,
       "soldMedianPricePerSqFt": "$384",
       "soldMedianPrice": "$497,000",
@@ -205,16 +205,16 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 6,
-      "soldCount": 33,
-      "soldMedianPricePerSqFt": "$299",
+      "activeCount": 8,
+      "soldCount": 34,
+      "soldMedianPricePerSqFt": "$293",
       "soldMedianPrice": "$450,000",
       "lowSample": false
     },
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 3,
+      "activeCount": 4,
       "soldCount": 12,
       "soldMedianPricePerSqFt": "$317",
       "soldMedianPrice": "$622,500",
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 67,
+      "activeCount": 66,
       "soldCount": 206,
       "soldMedianPricePerSqFt": "$286",
       "soldMedianPrice": "$425,000",
@@ -231,58 +231,58 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.8,
+    "monthsOfSupply": 4.9,
     "monthsOfSupplyCondo": 4.5,
-    "monthsOfSupplySfhVilla": 4.9,
+    "monthsOfSupplySfhVilla": 5.2,
     "label": "seller's market",
-    "activeCount": 97,
-    "sold365Count": 245,
-    "sold90Count": 63,
+    "activeCount": 100,
+    "sold365Count": 246,
+    "sold90Count": 64,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 169,
-      "activeCount": 40,
-      "soldMedianPrice": "$534,900",
+      "soldCount": 170,
+      "activeCount": 42,
+      "soldMedianPrice": "$533,950",
       "soldMedianPricePerSqFt": "$325"
     },
     "condo": {
       "soldCount": 155,
-      "activeCount": 57,
+      "activeCount": 58,
       "soldMedianPrice": "$340,000",
       "soldMedianPricePerSqFt": "$253"
     }
   },
   "boating": {
-    "activeWithDock": 12,
-    "activeWaterfront": 24
+    "activeWithDock": 14,
+    "activeWaterfront": 26
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 97 active listings and roughly 20 closed sales a month (trailing 12 months), West Of Trail South has about 4.8 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 100 active listings and roughly 20 closed sales a month (trailing 12 months), West Of Trail South has about 4.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $534,900 ($325/sq ft), while condos, villas and townhouses sell around $340,000 ($253/sq ft)."
+      "a": "Single-family homes sell around $533,950 ($325/sq ft), while condos, villas and townhouses sell around $340,000 ($253/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $5,650,000, with a median asking price of $450,000."
+      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $457,500."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 52 days on market and closed at 87.7% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 52 days on market and closed at 87.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 24 active waterfront listings, 12 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 26 active waterfront listings, 14 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

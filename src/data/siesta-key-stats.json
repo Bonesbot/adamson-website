@@ -2,15 +2,15 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-23T10:43:17.181423+00:00",
+  "lastUpdated": "2026-10-24T10:40:55.190809+00:00",
   "counts": {
     "sold": 753,
     "pending": 34,
-    "active": 269,
+    "active": 273,
     "total": 787
   },
   "metrics": {
-    "avgPrice": "$1,348,035",
+    "avgPrice": "$1,347,921",
     "avgPricePerSqFt": "$699",
     "avgYearBuilt": 1979,
     "avgLivingSqFt": "1,774",
@@ -22,10 +22,10 @@
     "maxPrice": "$26,000,000"
   },
   "active": {
-    "count": 269,
+    "count": 273,
     "medianPrice": "$1,100,000",
-    "medianPricePerSqFt": "$735",
-    "waterfrontCount": 146,
+    "medianPricePerSqFt": "$739",
+    "waterfrontCount": 152,
     "newConstructionCount": 40
   },
   "sold": {
@@ -36,33 +36,33 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 7.0,
-    "sfhVilla": 6.6,
-    "blended": 6.8,
+    "condo": 7.1,
+    "sfhVilla": 6.7,
+    "blended": 6.9,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
     "medianMonthlyAssociation": "$1,158",
-    "medianMonthlyCondoFee": "$1,270",
+    "medianMonthlyCondoFee": "$1,263",
     "minMonthlyCondoFee": "$208",
     "maxMonthlyCondoFee": "$8,995",
     "condoFeeRange": {
       "min": 208,
-      "median": 1270,
+      "median": 1263,
       "max": 8995
     }
   },
   "priceBands": {
-    "under900k": 125,
-    "band900kTo1_5m": 43,
+    "under900k": 126,
+    "band900kTo1_5m": 44,
     "band1_5mTo3m": 51,
-    "band3mPlus": 50
+    "band3mPlus": 52
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 269
+      "count": 273
     }
   ],
   "buildingClasses": [],
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 159,
-      "avgPrice": "$809,539",
-      "avgPricePerSqFt": "$682",
-      "avgLivingSqFt": "1,183",
-      "avgDom": 126
+      "activeCount": 161,
+      "avgPrice": "$812,084",
+      "avgPricePerSqFt": "$683",
+      "avgLivingSqFt": "1,185",
+      "avgDom": 124
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,442,317",
       "avgPricePerSqFt": "$702",
       "avgLivingSqFt": "2,058",
-      "avgDom": 148
+      "avgDom": 149
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$1,976,780",
       "avgPricePerSqFt": "$880",
       "avgLivingSqFt": "2,137",
-      "avgDom": 128
+      "avgDom": 129
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,672,000",
       "avgPricePerSqFt": "$1,439",
       "avgLivingSqFt": "3,376",
-      "avgDom": 249
+      "avgDom": 250
     }
   ],
   "condoTiersScope": {
@@ -187,7 +187,7 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 65,
+      "activeCount": 68,
       "soldCount": 268,
       "soldMedianPricePerSqFt": "$749",
       "soldMedianPrice": "$1,000,000",
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 77,
+      "activeCount": 80,
       "soldCount": 234,
       "soldMedianPricePerSqFt": "$580",
       "soldMedianPrice": "$1,107,500",
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 43,
+      "activeCount": 41,
       "soldCount": 95,
       "soldMedianPricePerSqFt": "$584",
       "soldMedianPrice": "$731,000",
@@ -231,32 +231,32 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 6.8,
-    "monthsOfSupplyCondo": 7.0,
-    "monthsOfSupplySfhVilla": 6.6,
+    "monthsOfSupply": 6.9,
+    "monthsOfSupplyCondo": 7.1,
+    "monthsOfSupplySfhVilla": 6.7,
     "label": "balanced market",
-    "activeCount": 269,
-    "sold365Count": 473,
+    "activeCount": 273,
+    "sold365Count": 472,
     "sold90Count": 105,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 226,
-      "activeCount": 89,
+      "activeCount": 91,
       "soldMedianPrice": "$1,526,000",
       "soldMedianPricePerSqFt": "$661"
     },
     "condo": {
       "soldCount": 527,
-      "activeCount": 180,
+      "activeCount": 182,
       "soldMedianPrice": "$800,000",
       "soldMedianPricePerSqFt": "$627"
     }
   },
   "boating": {
-    "activeWithDock": 67,
-    "activeWaterfront": 146
+    "activeWithDock": 68,
+    "activeWaterfront": 152
   },
   "marketQuestions": [
     {
@@ -267,7 +267,7 @@
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 269 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 6.8 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 273 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 6.9 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -287,12 +287,12 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Siesta Key homes have a dock?",
-      "a": "Of 146 active waterfront listings, 67 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 152 active waterfront listings, 68 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Siesta Key?",
-      "a": "The median monthly condo fee is $1,270 and the median monthly association fee is $1,158."
+      "a": "The median monthly condo fee is $1,263 and the median monthly association fee is $1,158."
     }
   ],
   "costBreakdown90": null

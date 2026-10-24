@@ -2,43 +2,43 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-23T10:43:19.628896+00:00",
+  "lastUpdated": "2026-10-24T10:40:57.872460+00:00",
   "counts": {
-    "sold": 106,
-    "pending": 8,
-    "active": 41,
-    "total": 114
+    "sold": 107,
+    "pending": 6,
+    "active": 42,
+    "total": 113
   },
   "metrics": {
-    "avgPrice": "$1,073,664",
-    "avgPricePerSqFt": "$499",
+    "avgPrice": "$1,078,440",
+    "avgPricePerSqFt": "$500",
     "avgYearBuilt": 1972,
-    "avgLivingSqFt": "1,934",
+    "avgLivingSqFt": "1,943",
     "avgLotSqFt": null,
-    "avgDom": 106
+    "avgDom": 107
   },
   "range": {
     "minPrice": "$85,000",
     "maxPrice": "$22,900,000"
   },
   "active": {
-    "count": 41,
-    "medianPrice": "$750,000",
-    "medianPricePerSqFt": "$556",
+    "count": 42,
+    "medianPrice": "$737,500",
+    "medianPricePerSqFt": "$554",
     "waterfrontCount": 16,
     "newConstructionCount": 13
   },
   "sold": {
-    "count": 19,
+    "count": 20,
     "medianPrice": "$590,000",
-    "medianDom": 74,
-    "saleToListRatio": "86.3%",
+    "medianDom": 78,
+    "saleToListRatio": "85.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 7.5,
-    "sfhVilla": 5.1,
-    "blended": 5.5,
+    "sfhVilla": 5.2,
+    "blended": 5.6,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 22,
+    "under900k": 23,
     "band900kTo1_5m": 7,
     "band1_5mTo3m": 3,
     "band3mPlus": 9
@@ -62,11 +62,24 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 41
+      "count": 42
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4665647",
+      "address": "2830 BAY SHORE CIR",
+      "subdivision": "BAY HAVEN",
+      "soldPrice": "$1,201,000",
+      "soldDate": "2026-10-23",
+      "bedrooms": 6,
+      "bathrooms": 5.0,
+      "livingSqFt": "4,512",
+      "yearBuilt": 1925,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4701947",
       "address": "4875 BRYWILL CIR",
@@ -118,19 +131,6 @@
       "yearBuilt": 1958,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4697956",
-      "address": "859 PATTERSON DR",
-      "subdivision": "BAY HAVEN",
-      "soldPrice": "$675,000",
-      "soldDate": "2026-09-30",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "2,850",
-      "yearBuilt": 1951,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$594,950",
       "avgPricePerSqFt": "$494",
       "avgLivingSqFt": "1,211",
-      "avgDom": 90
+      "avgDom": 91
     },
     {
       "tier": "1990to2005",
@@ -172,7 +172,7 @@
       "avgPrice": "$567,875",
       "avgPricePerSqFt": "$595",
       "avgLivingSqFt": "956",
-      "avgDom": 128
+      "avgDom": 129
     }
   ],
   "condoTiersScope": {
@@ -206,7 +206,7 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 4,
-      "soldCount": 1,
+      "soldCount": 2,
       "soldMedianPricePerSqFt": null,
       "soldMedianPrice": null,
       "lowSample": true
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 21,
+      "activeCount": 22,
       "soldCount": 76,
       "soldMedianPricePerSqFt": "$393",
       "soldMedianPrice": "$572,500",
@@ -222,21 +222,21 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.5,
+    "monthsOfSupply": 5.6,
     "monthsOfSupplyCondo": 7.5,
-    "monthsOfSupplySfhVilla": 5.1,
+    "monthsOfSupplySfhVilla": 5.2,
     "label": "balanced market",
-    "activeCount": 41,
-    "sold365Count": 89,
-    "sold90Count": 19,
+    "activeCount": 42,
+    "sold365Count": 90,
+    "sold90Count": 20,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 86,
-      "activeCount": 31,
-      "soldMedianPrice": "$660,000",
-      "soldMedianPricePerSqFt": "$413"
+      "soldCount": 87,
+      "activeCount": 32,
+      "soldMedianPrice": "$665,000",
+      "soldMedianPricePerSqFt": "$412"
     },
     "condo": {
       "soldCount": 20,
@@ -253,22 +253,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 41 active listings and roughly 7 closed sales a month (trailing 12 months), West Of Trail North has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 42 active listings and roughly 8 closed sales a month (trailing 12 months), West Of Trail North has about 5.6 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail North?",
-      "a": "Single-family homes sell around $660,000 ($413/sq ft), while condos, villas and townhouses sell around $472,500 ($500/sq ft)."
+      "a": "Single-family homes sell around $665,000 ($412/sq ft), while condos, villas and townhouses sell around $472,500 ($500/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail North?",
-      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $750,000."
+      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $737,500."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 74 days on market and closed at 86.3% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 78 days on market and closed at 85.0% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

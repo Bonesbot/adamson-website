@@ -2,18 +2,18 @@
   "areaSlug": "west-bradenton",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-23T10:43:22.789828+00:00",
+  "lastUpdated": "2026-10-24T10:41:01.315910+00:00",
   "counts": {
-    "sold": 334,
+    "sold": 335,
     "pending": 51,
-    "active": 151,
-    "total": 385
+    "active": 154,
+    "total": 386
   },
   "metrics": {
-    "avgPrice": "$654,363",
+    "avgPrice": "$653,740",
     "avgPricePerSqFt": "$312",
     "avgYearBuilt": 1998,
-    "avgLivingSqFt": "1,980",
+    "avgLivingSqFt": "1,979",
     "avgLotSqFt": null,
     "avgDom": 97
   },
@@ -22,28 +22,28 @@
     "maxPrice": "$7,250,000"
   },
   "active": {
-    "count": 151,
-    "medianPrice": "$499,900",
-    "medianPricePerSqFt": "$285",
+    "count": 154,
+    "medianPrice": "$511,598",
+    "medianPricePerSqFt": "$289",
     "waterfrontCount": 54,
-    "newConstructionCount": 43
+    "newConstructionCount": 46
   },
   "sold": {
-    "count": 69,
-    "medianPrice": "$449,999",
-    "medianDom": 49,
-    "saleToListRatio": "101.2%",
+    "count": 70,
+    "medianPrice": "$431,974",
+    "medianDom": 50,
+    "saleToListRatio": "101.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 7.6,
-    "sfhVilla": 5.4,
-    "blended": 6.2,
+    "sfhVilla": 5.6,
+    "blended": 6.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$641",
+    "medianMonthlyAssociation": "$638",
     "medianMonthlyCondoFee": "$790",
     "minMonthlyCondoFee": "$105",
     "maxMonthlyCondoFee": "$3,869",
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 110,
+    "under900k": 113,
     "band900kTo1_5m": 23,
     "band1_5mTo3m": 14,
     "band3mPlus": 4
@@ -62,11 +62,24 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 151
+      "count": 154
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4689922",
+      "address": "4523 W INDEPENDENCE DR W",
+      "subdivision": "MOUNT VERNON PH 2",
+      "soldPrice": "$205,000",
+      "soldDate": "2026-10-23",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,409",
+      "yearBuilt": 1979,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "R4911367",
       "address": "4442 SUNSET GARDEN ST",
@@ -118,19 +131,6 @@
       "yearBuilt": 2026,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4704041",
-      "address": "6147 43RD ST W #3",
-      "subdivision": "EL CONQUISTADOR VILLAGE 1 SEC 2",
-      "soldPrice": "$279,000",
-      "soldDate": "2026-10-16",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,116",
-      "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [],
@@ -175,35 +175,35 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 76,
-      "soldCount": 177,
-      "soldMedianPricePerSqFt": "$250",
-      "soldMedianPrice": "$430,999",
+      "activeCount": 79,
+      "soldCount": 178,
+      "soldMedianPricePerSqFt": "$249",
+      "soldMedianPrice": "$430,500",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 6.2,
+    "monthsOfSupply": 6.3,
     "monthsOfSupplyCondo": 7.6,
-    "monthsOfSupplySfhVilla": 5.4,
+    "monthsOfSupplySfhVilla": 5.6,
     "label": "balanced market",
-    "activeCount": 151,
-    "sold365Count": 294,
-    "sold90Count": 69,
+    "activeCount": 154,
+    "sold365Count": 295,
+    "sold90Count": 70,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 144,
-      "activeCount": 61,
+      "activeCount": 63,
       "soldMedianPrice": "$750,000",
       "soldMedianPricePerSqFt": "$349"
     },
     "condo": {
-      "soldCount": 190,
-      "activeCount": 90,
+      "soldCount": 191,
+      "activeCount": 91,
       "soldMedianPrice": "$385,000",
-      "soldMedianPricePerSqFt": "$230"
+      "soldMedianPricePerSqFt": "$229"
     }
   },
   "boating": {
@@ -214,22 +214,22 @@
     {
       "facet": "balance",
       "q": "Is West Bradenton a buyer's or seller's market right now?",
-      "a": "With 151 active listings and roughly 24 closed sales a month (trailing 12 months), West Bradenton has about 6.2 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 154 active listings and roughly 25 closed sales a month (trailing 12 months), West Bradenton has about 6.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo in West Bradenton?",
-      "a": "Single-family homes sell around $750,000 ($349/sq ft), while condos, villas and townhouses sell around $385,000 ($230/sq ft)."
+      "a": "Single-family homes sell around $750,000 ($349/sq ft), while condos, villas and townhouses sell around $385,000 ($229/sq ft)."
     },
     {
       "facet": "range",
       "q": "What is the price range in West Bradenton?",
-      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $499,900."
+      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $511,598."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell in West Bradenton?",
-      "a": "Recently sold homes took a median 49 days on market and closed at 101.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 50 days on market and closed at 101.1% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
@@ -239,7 +239,7 @@
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees in West Bradenton?",
-      "a": "The median monthly condo fee is $790 and the median monthly association fee is $641."
+      "a": "The median monthly condo fee is $790 and the median monthly association fee is $638."
     }
   ],
   "costBreakdown90": null,
@@ -261,21 +261,21 @@
       "slug": "west-bradenton-coral-shores-cortez",
       "name": "Coral Shores / Cortez",
       "activeCount": 62,
-      "pendingCount": 14,
+      "pendingCount": 13,
       "activeMedianPrice": "$474,500",
-      "soldCount": 102,
+      "soldCount": 103,
       "soldMedianPrice": "$480,000",
-      "soldMedianPricePerSqFt": "$319",
+      "soldMedianPricePerSqFt": "$317",
       "soldMedianDom": 80,
-      "soldSingleFamilyShare": "58%",
+      "soldSingleFamilyShare": "57%",
       "lowSample": false
     },
     {
       "slug": "west-bradenton-seaflower",
       "name": "SeaFlower",
-      "activeCount": 24,
-      "pendingCount": 32,
-      "activeMedianPrice": "$574,999",
+      "activeCount": 27,
+      "pendingCount": 33,
+      "activeMedianPrice": "$569,999",
       "soldCount": 71,
       "soldMedianPrice": "$502,980",
       "soldMedianPricePerSqFt": "$264",
@@ -323,8 +323,8 @@
             "soldMedianPrice": "$661,520",
             "soldMedianPricePerSqFt": "$321",
             "soldMedianDom": 42,
-            "activeCount": 39,
-            "activeMedianPrice": "$882,990",
+            "activeCount": 41,
+            "activeMedianPrice": "$849,000",
             "lowSample": false
           }
         ],
@@ -348,16 +348,16 @@
           {
             "waterfront": "non_waterfront",
             "label": "Non-Waterfront",
-            "soldCount": 119,
-            "soldMedianPrice": "$370,000",
-            "soldMedianPricePerSqFt": "$204",
+            "soldCount": 120,
+            "soldMedianPrice": "$368,750",
+            "soldMedianPricePerSqFt": "$203",
             "soldMedianDom": 80,
-            "activeCount": 70,
-            "activeMedianPrice": "$302,500",
+            "activeCount": 71,
+            "activeMedianPrice": "$305,000",
             "lowSample": false
           }
         ],
-        "waterfrontPremiumPerSqFt": "32%"
+        "waterfrontPremiumPerSqFt": "33%"
       }
     ],
     "waterfrontDefinition": "Salt or brackish boating water: bay, harbor, saltwater canal, Intracoastal or lagoon frontage. Lake and pond lots are counted as non-waterfront.",

@@ -2,18 +2,18 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-23T10:43:18.006902+00:00",
+  "lastUpdated": "2026-10-24T10:40:56.093296+00:00",
   "counts": {
-    "sold": 304,
-    "pending": 66,
+    "sold": 305,
+    "pending": 67,
     "active": 187,
-    "total": 370
+    "total": 372
   },
   "metrics": {
-    "avgPrice": "$1,917,681",
-    "avgPricePerSqFt": "$823",
+    "avgPrice": "$1,910,352",
+    "avgPricePerSqFt": "$822",
     "avgYearBuilt": 2002,
-    "avgLivingSqFt": "2,080",
+    "avgLivingSqFt": "2,075",
     "avgLotSqFt": null,
     "avgDom": 101
   },
@@ -23,41 +23,41 @@
   },
   "active": {
     "count": 187,
-    "medianPrice": "$1,929,000",
-    "medianPricePerSqFt": "$932",
-    "waterfrontCount": 55,
+    "medianPrice": "$1,950,000",
+    "medianPricePerSqFt": "$933",
+    "waterfrontCount": 56,
     "newConstructionCount": 82
   },
   "sold": {
-    "count": 46,
+    "count": 47,
     "medianPrice": "$1,100,000",
-    "medianDom": 88,
-    "saleToListRatio": "86.4%",
+    "medianDom": 86,
+    "saleToListRatio": "86.6%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 9.5,
-    "sfhVilla": 9.9,
+    "condo": 9.4,
+    "sfhVilla": 10.0,
     "blended": 9.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,795",
-    "medianMonthlyCondoFee": "$1,867",
+    "medianMonthlyAssociation": "$1,810",
+    "medianMonthlyCondoFee": "$1,886",
     "minMonthlyCondoFee": "$600",
     "maxMonthlyCondoFee": "$11,729",
     "condoFeeRange": {
       "min": 600,
-      "median": 1871,
+      "median": 1895,
       "max": 11729
     }
   },
   "priceBands": {
-    "under900k": 44,
-    "band900kTo1_5m": 35,
-    "band1_5mTo3m": 45,
-    "band3mPlus": 63
+    "under900k": 42,
+    "band900kTo1_5m": 37,
+    "band1_5mTo3m": 44,
+    "band3mPlus": 64
   },
   "propertyTypes": [
     {
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4705425",
+      "address": "515 S OSPREY AVE",
+      "subdivision": "LAUREL PARK",
+      "soldPrice": "$2,375,000",
+      "soldDate": "2026-10-23",
+      "bedrooms": 4,
+      "bathrooms": 4.5,
+      "livingSqFt": "2,798",
+      "yearBuilt": 2018,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4706440",
       "address": "1221 N PALM AVE #305",
@@ -118,19 +131,6 @@
       "yearBuilt": 2006,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4694679",
-      "address": "411 BURNS COURT",
-      "subdivision": "BURNS COURT SUB OF",
-      "soldPrice": "$715,000",
-      "soldDate": "2026-10-15",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,345",
-      "yearBuilt": 1926,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,10 +138,10 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 44,
-      "avgPrice": "$1,079,511",
-      "avgPricePerSqFt": "$637",
-      "avgLivingSqFt": "1,576",
+      "activeCount": 43,
+      "avgPrice": "$1,087,430",
+      "avgPricePerSqFt": "$638",
+      "avgLivingSqFt": "1,584",
       "avgDom": 151
     },
     {
@@ -158,11 +158,11 @@
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 35,
-      "avgPrice": "$1,616,426",
-      "avgPricePerSqFt": "$751",
-      "avgLivingSqFt": "1,998",
-      "avgDom": 85
+      "activeCount": 36,
+      "avgPrice": "$1,699,997",
+      "avgPricePerSqFt": "$767",
+      "avgLivingSqFt": "2,066",
+      "avgDom": 83
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,395,938",
       "avgPricePerSqFt": "$1,418",
       "avgLivingSqFt": "2,965",
-      "avgDom": 220
+      "avgDom": 221
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 54,
+      "activeCount": 55,
       "soldCount": 64,
       "soldMedianPricePerSqFt": "$685",
       "soldMedianPrice": "$1,200,000",
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 73,
+      "activeCount": 72,
       "soldCount": 150,
       "soldMedianPricePerSqFt": "$791",
       "soldMedianPrice": "$1,475,000",
@@ -215,28 +215,28 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 59,
-      "soldCount": 84,
-      "soldMedianPricePerSqFt": "$552",
-      "soldMedianPrice": "$749,495",
+      "soldCount": 85,
+      "soldMedianPricePerSqFt": "$555",
+      "soldMedianPrice": "$749,990",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 9.5,
-    "monthsOfSupplyCondo": 9.5,
-    "monthsOfSupplySfhVilla": 9.9,
+    "monthsOfSupplyCondo": 9.4,
+    "monthsOfSupplySfhVilla": 10.0,
     "label": "buyer's market",
     "activeCount": 187,
-    "sold365Count": 236,
-    "sold90Count": 46,
+    "sold365Count": 237,
+    "sold90Count": 47,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 12,
+      "soldCount": 13,
       "activeCount": 4,
-      "soldMedianPrice": "$863,750",
-      "soldMedianPricePerSqFt": "$547"
+      "soldMedianPrice": "$885,000",
+      "soldMedianPricePerSqFt": "$563"
     },
     "condo": {
       "soldCount": 292,
@@ -246,8 +246,8 @@
     }
   },
   "boating": {
-    "activeWithDock": 24,
-    "activeWaterfront": 55
+    "activeWithDock": 25,
+    "activeWaterfront": 56
   },
   "marketQuestions": [
     {
@@ -258,27 +258,27 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Downtown Sarasota?",
-      "a": "Single-family homes sell around $863,750 ($547/sq ft), while condos, villas and townhouses sell around $1,200,000 ($716/sq ft)."
+      "a": "Single-family homes sell around $885,000 ($563/sq ft), while condos, villas and townhouses sell around $1,200,000 ($716/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Downtown Sarasota?",
-      "a": "Active listings run from $260,000 to $14,450,000, with a median asking price of $1,929,000."
+      "a": "Active listings run from $260,000 to $14,450,000, with a median asking price of $1,950,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Downtown Sarasota?",
-      "a": "Recently sold homes took a median 88 days on market and closed at 86.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 86 days on market and closed at 86.6% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Downtown Sarasota homes have a dock?",
-      "a": "Of 55 active waterfront listings, 24 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 56 active waterfront listings, 25 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Downtown Sarasota?",
-      "a": "The median monthly condo fee is $1,867 and the median monthly association fee is $1,795."
+      "a": "The median monthly condo fee is $1,886 and the median monthly association fee is $1,810."
     }
   ],
   "costBreakdown90": null
