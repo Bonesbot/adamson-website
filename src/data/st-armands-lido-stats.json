@@ -2,11 +2,11 @@
   "areaSlug": "st-armands-lido",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-25T10:41:52.778895+00:00",
+  "lastUpdated": "2026-10-26T10:41:51.474685+00:00",
   "counts": {
     "sold": 768,
     "pending": 13,
-    "active": 79,
+    "active": 78,
     "total": 781
   },
   "metrics": {
@@ -22,9 +22,9 @@
     "maxPrice": "$25,000,000"
   },
   "active": {
-    "count": 79,
-    "medianPrice": "$3,295,000",
-    "medianPricePerSqFt": "$971",
+    "count": 78,
+    "medianPrice": "$3,422,500",
+    "medianPricePerSqFt": "$1,002",
     "waterfrontCount": 40,
     "newConstructionCount": 20
   },
@@ -36,9 +36,9 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.3,
+    "condo": 5.2,
     "sfhVilla": 14.0,
-    "blended": 7.3,
+    "blended": 7.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 27,
+    "under900k": 26,
     "band900kTo1_5m": 6,
     "band1_5mTo3m": 6,
     "band3mPlus": 40
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 79
+      "count": 78
     }
   ],
   "buildingClasses": [],
@@ -138,10 +138,10 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 35,
-      "avgPrice": "$752,976",
-      "avgPricePerSqFt": "$679",
-      "avgLivingSqFt": "1,112",
+      "activeCount": 34,
+      "avgPrice": "$754,563",
+      "avgPricePerSqFt": "$681",
+      "avgLivingSqFt": "1,110",
       "avgDom": 159
     },
     {
@@ -152,7 +152,7 @@
       "avgPrice": "$5,753,333",
       "avgPricePerSqFt": "$1,291",
       "avgLivingSqFt": "4,354",
-      "avgDom": 89
+      "avgDom": 90
     },
     {
       "tier": "2006to2019",
@@ -172,7 +172,7 @@
       "avgPrice": "$9,670,000",
       "avgPricePerSqFt": "$2,276",
       "avgLivingSqFt": "4,187",
-      "avgDom": 603
+      "avgDom": 604
     }
   ],
   "condoTiersScope": {
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 30,
+      "activeCount": 29,
       "soldCount": 88,
       "soldMedianPricePerSqFt": "$661",
       "soldMedianPrice": "$822,500",
@@ -222,11 +222,11 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.3,
-    "monthsOfSupplyCondo": 5.3,
+    "monthsOfSupply": 7.2,
+    "monthsOfSupplyCondo": 5.2,
     "monthsOfSupplySfhVilla": 14.0,
     "label": "buyer's market",
-    "activeCount": 79,
+    "activeCount": 78,
     "sold365Count": 130,
     "sold90Count": 51,
     "method": "active / (trailing-12mo closed / 12)"
@@ -240,7 +240,7 @@
     },
     "condo": {
       "soldCount": 726,
-      "activeCount": 46,
+      "activeCount": 45,
       "soldMedianPrice": "$752,500",
       "soldMedianPricePerSqFt": "$560"
     }
@@ -258,7 +258,7 @@
     {
       "facet": "balance",
       "q": "Is St Armands Lido a buyer's or seller's market right now?",
-      "a": "With 79 active listings and roughly 11 closed sales a month (trailing 12 months), St Armands Lido has about 7.3 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 78 active listings and roughly 11 closed sales a month (trailing 12 months), St Armands Lido has about 7.2 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -268,7 +268,7 @@
     {
       "facet": "range",
       "q": "What's the price range on St Armands Lido?",
-      "a": "Active listings run from $229,000 to $25,000,000, with a median asking price of $3,295,000."
+      "a": "Active listings run from $229,000 to $25,000,000, with a median asking price of $3,422,500."
     },
     {
       "facet": "speed",

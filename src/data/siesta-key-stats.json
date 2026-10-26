@@ -2,11 +2,11 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-25T10:41:53.573568+00:00",
+  "lastUpdated": "2026-10-26T10:41:52.441168+00:00",
   "counts": {
     "sold": 753,
     "pending": 34,
-    "active": 273,
+    "active": 272,
     "total": 787
   },
   "metrics": {
@@ -22,11 +22,11 @@
     "maxPrice": "$26,000,000"
   },
   "active": {
-    "count": 273,
+    "count": 272,
     "medianPrice": "$1,100,000",
-    "medianPricePerSqFt": "$739",
-    "waterfrontCount": 152,
-    "newConstructionCount": 40
+    "medianPricePerSqFt": "$738",
+    "waterfrontCount": 151,
+    "newConstructionCount": 39
   },
   "sold": {
     "count": 105,
@@ -57,12 +57,12 @@
     "under900k": 126,
     "band900kTo1_5m": 44,
     "band1_5mTo3m": 51,
-    "band3mPlus": 52
+    "band3mPlus": 51
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 273
+      "count": 272
     }
   ],
   "buildingClasses": [],
@@ -142,7 +142,7 @@
       "avgPrice": "$812,084",
       "avgPricePerSqFt": "$683",
       "avgLivingSqFt": "1,185",
-      "avgDom": 125
+      "avgDom": 126
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,442,317",
       "avgPricePerSqFt": "$702",
       "avgLivingSqFt": "2,058",
-      "avgDom": 150
+      "avgDom": 151
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$1,976,780",
       "avgPricePerSqFt": "$880",
       "avgLivingSqFt": "2,137",
-      "avgDom": 130
+      "avgDom": 131
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 10,
-      "avgPrice": "$4,672,000",
-      "avgPricePerSqFt": "$1,439",
-      "avgLivingSqFt": "3,376",
-      "avgDom": 251
+      "activeCount": 9,
+      "avgPrice": "$4,716,111",
+      "avgPricePerSqFt": "$1,386",
+      "avgLivingSqFt": "3,503",
+      "avgDom": 221
     }
   ],
   "condoTiersScope": {
@@ -187,7 +187,7 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 68,
+      "activeCount": 67,
       "soldCount": 268,
       "soldMedianPricePerSqFt": "$749",
       "soldMedianPrice": "$1,000,000",
@@ -235,7 +235,7 @@
     "monthsOfSupplyCondo": 7.1,
     "monthsOfSupplySfhVilla": 6.8,
     "label": "balanced market",
-    "activeCount": 273,
+    "activeCount": 272,
     "sold365Count": 467,
     "sold90Count": 105,
     "method": "active / (trailing-12mo closed / 12)"
@@ -249,14 +249,14 @@
     },
     "condo": {
       "soldCount": 527,
-      "activeCount": 182,
+      "activeCount": 181,
       "soldMedianPrice": "$800,000",
       "soldMedianPricePerSqFt": "$627"
     }
   },
   "boating": {
     "activeWithDock": 68,
-    "activeWaterfront": 152
+    "activeWaterfront": 151
   },
   "marketQuestions": [
     {
@@ -267,7 +267,7 @@
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 273 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 7.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 272 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 7.0 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -287,7 +287,7 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Siesta Key homes have a dock?",
-      "a": "Of 152 active waterfront listings, 68 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 151 active waterfront listings, 68 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
