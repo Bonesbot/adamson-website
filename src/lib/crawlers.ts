@@ -39,8 +39,23 @@ const AI_AGENTS = [
   'xAI-Grok', 'DuckAssistBot', 'YouBot',
 ];
 
-export function robotsTxt(host: string, siteName: string): string {
-  const agents = AI_AGENTS.map((ua) => `User-agent: ${ua}\nAllow: /`).join('\n\n');
+/**
+ * Crawl-denied paths on the hub. /idx/* is a Netlify 200-proxy to IDX Broker,
+ * which sits behind Cloudflare: Cloudflare answers crawler user agents with a
+ * 403 challenge page, so every /idx/ URL Googlebot followed came back as
+ * "Blocked due to access forbidden (403)" in Search Console (2026-10-26).
+ * These are faceted search-result URLs with no SEO value and IDX serves its own
+ * canonicals, so the correct move is to keep crawlers out entirely.
+ * `/idx$` is anchored on purpose: a bare `Disallow: /idx` is a prefix match and
+ * would also block /idx-wrapper/, which carries its own noindex instead.
+ */
+export const IDX_DENY = ['/idx/', '/idx$'];
+
+export function robotsTxt(host: string, siteName: string, disallow: string[] = []): string {
+  // Paths that must not be crawled by ANY agent. Repeated under every user-agent
+  // block below, because a named block fully overrides the `*` block for that agent.
+  const deny = disallow.length ? '\n' + disallow.map((d) => `Disallow: ${d}`).join('\n') : '';
+  const agents = AI_AGENTS.map((ua) => `User-agent: ${ua}\nAllow: /${deny}`).join('\n\n');
   return `# ${siteName}
 # Host: ${host}
 # All crawlers welcome, including AI search and answer engines. Market data on this
@@ -48,7 +63,7 @@ export function robotsTxt(host: string, siteName: string): string {
 # Machine-readable summary: ${host}/llms.txt
 
 User-agent: *
-Allow: /
+Allow: /${deny}
 
 # Explicitly welcome AI search crawlers
 ${agents}

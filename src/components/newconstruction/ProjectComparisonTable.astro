@@ -55,7 +55,7 @@ const areaLabel = (area: string, island: string | null | undefined) =>
           {projects.map((p) => (
             <tr class="border-t border-white/5 hover:bg-[var(--color-dark)] transition-colors">
               <td class="px-4 py-4 font-semibold">
-                <a href={`/new-construction/${p.slug}`} class="text-white hover:text-[var(--color-gold)]">
+                <a href={`/new-construction/${p.slug}/`} class="text-white hover:text-[var(--color-gold)]">
                   {p.name}
                 </a>
               </td>

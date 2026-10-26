@@ -63,7 +63,9 @@ const tel = '19417139234';
 
 const pageTitle = 'Sarasota Area Guide: Beaches, Golf, Restaurants & Neighborhoods Map | AdamsonFL';
 const pageDesc = 'An interactive local map of Sarasota and the Keys from Ryan Adamson, PA: beach access points on Siesta, Lido and Longboat Key, public and private golf courses within 15 miles of St. Armands, top restaurants and bars, things to do, and this week’s local events.';
-const canonical = 'https://adamsonfl.com/srqmap';
+// Trailing slash: /srqmap 301s to /srqmap/, and a canonical that redirects is what
+// left pages "Discovered but not crawled" in Bing (see CLAUDE.md, 2026-10-23 audit).
+const canonical = 'https://adamsonfl.com/srqmap/';
 
 const itemList = {
   '@context': 'https://schema.org',

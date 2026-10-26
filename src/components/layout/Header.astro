@@ -6,14 +6,14 @@
  */
 const navItems: { label: string; href: string; pin?: boolean }[] = [
   { label: 'Home', href: '/' },
-  { label: 'Areas', href: '/areas' },
+  { label: 'Areas', href: '/areas/' },
   // SRQMAP-HIDDEN 2026-09-02: nav link removed while the map is hidden from the hub site.
   // Restore by uncommenting. (Page still live at /srqmap; srqmap.com redirects there.)
-  // { label: 'SRQ Map', href: '/srqmap', pin: true },
-  { label: "Buyer's Guide", href: '/buyers-guide' },
-  { label: 'Market Reports', href: '/market-reports' },
-  { label: 'About Ryan', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  // { label: 'SRQ Map', href: '/srqmap/', pin: true },
+  { label: "Buyer's Guide", href: '/buyers-guide/' },
+  { label: 'Market Reports', href: '/market-reports/' },
+  { label: 'About Ryan', href: '/about/' },
+  { label: 'Contact', href: '/contact/' },
 ];
 
 interface Props {
@@ -71,10 +71,10 @@ const currentPath = Astro.url.pathname;
         ))}
         <li>
           <a
-            href="/find-my-dream-home"
+            href="/find-my-dream-home/"
             class:list={[
               'font-accent whitespace-nowrap text-[11px] uppercase tracking-[0.08em] font-semibold px-3.5 py-2 rounded-full transition-colors duration-200',
-              currentPath === '/find-my-dream-home'
+              currentPath === '/find-my-dream-home/'
                 ? 'bg-[var(--color-gold-light)] text-black'
                 : 'bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)]',
             ]}
@@ -122,7 +122,7 @@ const currentPath = Astro.url.pathname;
       ))}
       <li>
         <a
-          href="/find-my-dream-home"
+          href="/find-my-dream-home/"
           class="inline-block font-accent text-sm uppercase tracking-wider py-2 px-4 rounded-full bg-[var(--color-gold)] text-black font-semibold"
         >
           Off-Market Properties

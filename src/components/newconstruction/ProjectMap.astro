@@ -52,7 +52,7 @@ const areaLabel = (p: Pin) =>
       <!-- Pin list — legend + accessible fallback -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-6">
         {pins.map((p) => (
-          <a href={`/new-construction/${p.slug}`} data-map-pin={p.slug} class="flex items-start gap-3 p-3 rounded hover:bg-[var(--color-dark)] transition-colors group">
+          <a href={`/new-construction/${p.slug}/`} data-map-pin={p.slug} class="flex items-start gap-3 p-3 rounded hover:bg-[var(--color-dark)] transition-colors group">
             <span
               class="mt-1 w-3 h-3 rounded-full flex-shrink-0"
               style={`background-color: ${colorFor(p.area, p.island)};`}
@@ -120,7 +120,7 @@ const areaLabel = (p: Pin) =>
       var popup = '<p class="nc-popup-name">' + p.name + '</p>'
         + '<p class="nc-popup-meta">' + areaLabel + (p.status ? ' &middot; ' + p.status : '') + '</p>'
         + (p.price_range ? '<p class="nc-popup-price">' + p.price_range + '</p>' : '')
-        + '<a class="nc-popup-link" href="/new-construction/' + p.slug + '">View project &rarr;</a>';
+        + '<a class="nc-popup-link" href="/new-construction/' + p.slug + '/">View project &rarr;</a>';
       var m = L.marker([p.lat, p.lng], { icon: icon }).addTo(map)
         .bindPopup(popup, { className: 'nc-popup', maxWidth: 260 });
       markers[p.slug] = m;

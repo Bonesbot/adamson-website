@@ -121,3 +121,16 @@ https://adamsonfl.com/siesta-report/*    https://siestareport.com/              
 
 # /talk : 2026-10-22 : "Let's find your lifestyle" QR on the St. Armands handout -> voice assistant
 /talk   /voice/?src=handout&utm_source=handout&utm_medium=print&utm_campaign=stac-map-talk   302
+
+# ---------------------------------------------------------------------------
+# Directory parents that 404'd : 2026-10-26 (GSC "Not found (404)")
+# ---------------------------------------------------------------------------
+# /siesta-key/ has four live children (gulf-and-bay-club, -beachfront, -bayside,
+# peppertree-bay) but never had an index page, and /longboat-key/ is the orphaned
+# parent of the Country Club Shores page retired on 2026-08-28. Google crawled both
+# parents and logged 404s. Send them to the area pages that actually cover them,
+# matching how /areas/lido-key and /areas/st-armands already consolidate.
+/siesta-key    /areas/siesta-key/      301
+/siesta-key/   /areas/siesta-key/      301
+/longboat-key  /areas/longboat-key/    301
+/longboat-key/ /areas/longboat-key/    301

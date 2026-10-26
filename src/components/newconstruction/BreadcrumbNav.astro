@@ -29,7 +29,9 @@ for (let i = 0; i < segments.length; i++) {
   const fallback = segments[i].replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
   crumbs.push({
     label: isLast && leafLabel ? leafLabel : labelMap[segments[i]] ?? fallback,
-    href: acc,
+    // Trailing slash: Netlify 301s the bare form, and this href feeds both the
+    // visible crumb and the BreadcrumbList `item` URL below, which must not redirect.
+    href: acc + '/',
   });
 }
 

@@ -8,7 +8,8 @@ const title = 'Request a Showing | The Adamson Group';
 const description = 'Pick a day and time that suits you and we will confirm your private showing, usually within the hour during business hours.';
 ---
 
-<BaseLayout title={title} description={description} standalone>
+{/* noIndex: sitemap-excluded in astro.config.mjs (standalone lead form) */}
+<BaseLayout title={title} description={description} standalone noIndex={true}>
   <section class="section dark-section" style="min-height:80vh;padding-top:120px;">
     <div class="container" style="max-width:720px;">
       <div class="rs-card">

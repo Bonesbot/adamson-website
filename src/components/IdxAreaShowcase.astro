@@ -45,7 +45,7 @@ const {
   areaName,
   viewAllUrl,
   label = 'Active Listings',
-  offMarketUrl = '/find-my-dream-home',
+  offMarketUrl = '/find-my-dream-home/',
   showOffMarketCta = true,
   heading,
   intro = 'Live from Stellar MLS. Updated continuously.',
@@ -158,6 +158,7 @@ const Heading = headingLevel;
       <div class="text-center mt-10">
         <a
           href={viewAllUrl}
+          rel="nofollow"
           class="inline-flex items-center justify-center font-accent uppercase tracking-wider transition-all duration-200 rounded bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] font-semibold text-sm px-8 py-4"
         >
           {viewAllLabel || <>View All {areaName} Listings</>}

@@ -244,7 +244,7 @@ const budgetFmt = "var d=this.value.replace(/[^0-9]/g,'');this.value=d?'$'+Numbe
         checked('must-haves').forEach((v) => p.append('must-haves', v));
         if (val('areas-other')) p.append('areas', val('areas-other'));
         if (val('must-haves-other')) p.append('must-haves', val('must-haves-other'));
-        const dest = '/dream-home-received?' + p.toString();
+        const dest = '/dream-home-received/?' + p.toString();
 
         // (1) Supabase via the function — guaranteed capture
         const data = {

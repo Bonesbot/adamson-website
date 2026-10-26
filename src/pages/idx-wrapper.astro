@@ -14,7 +14,8 @@ const title = "Search Sarasota & Bradenton MLS Listings | The Adamson Group";
 const description = "Live Stellar MLS property search for Sarasota, Longboat Key, Lido Key, Siesta Key, St. Armands, Bird Key, and Lakewood Ranch. Powered by IDX Broker.";
 ---
 
-<BaseLayout title={title} description={description}>
+{/* noIndex: sitemap-excluded in astro.config.mjs (IDX wrapper shell, nothing a search result should land on) */}
+<BaseLayout title={title} description={description} noIndex={true}>
   <!-- FontAwesome 4 — IDX detail markup uses .fa fa-* (FA4); without it,
        gallery arrows, the heart, and sidebar-link icons render as tofu boxes. -->
   <link rel="stylesheet"
@@ -42,7 +43,7 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
         <noscript>
           <p class="text-white/70 text-center py-12">
             JavaScript is required to load live MLS listings. Please enable JavaScript or
-            <a href="/contact" class="text-[var(--color-gold)] underline">contact Ryan directly</a>.
+            <a href="/contact/" class="text-[var(--color-gold)] underline">contact Ryan directly</a>.
           </p>
         </noscript>
         <div class="idx-loading">
@@ -255,7 +256,7 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
         bl.addEventListener('click', function (e) {
           e.preventDefault();
           if (history.length > 1) history.back();
-          else location.href = '/areas';
+          else location.href = '/areas/';
         });
       }
     }
@@ -298,7 +299,7 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
       var navBar = login ? login.parentElement : null;
       if (navBar && !navBar.querySelector('.idx-hp-btn')) {
         var hp = document.createElement('a');
-        hp.className = 'idx-hp-btn'; hp.href = '/home-platform';
+        hp.className = 'idx-hp-btn'; hp.href = '/home-platform/';
         hp.textContent = 'Home Platform';
         navBar.appendChild(hp);
       }
@@ -307,8 +308,8 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
       var m = location.pathname.match(/\/details\/listing\/[^/]+\/([^/]+)\/([^/?]+)/);
       var mls = m ? m[1] : '';
       var addr = m ? decodeURIComponent(m[2]).replace(/-/g, ' ').replace(/ FL \d{5}.*$/, '').trim() : '';
-      var showUrl = '/request-showing?intent=showing&mls=' + encodeURIComponent(mls) + '&addr=' + encodeURIComponent(addr);
-      var askUrl = '/request-showing?intent=question&mls=' + encodeURIComponent(mls) + '&addr=' + encodeURIComponent(addr);
+      var showUrl = '/request-showing/?intent=showing&mls=' + encodeURIComponent(mls) + '&addr=' + encodeURIComponent(addr);
+      var askUrl = '/request-showing/?intent=question&mls=' + encodeURIComponent(mls) + '&addr=' + encodeURIComponent(addr);
 
       var head = document.getElementById('IDX-detailsHead');
       if (head && !document.querySelector('.idx-cta-panel')) {
