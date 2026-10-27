@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-26T10:41:54.090828+00:00",
+  "lastUpdated": "2026-10-27T10:42:27.892379+00:00",
   "counts": {
-    "sold": 281,
-    "pending": 19,
-    "active": 88,
+    "sold": 282,
+    "pending": 18,
+    "active": 89,
     "total": 300
   },
   "metrics": {
-    "avgPrice": "$2,106,864",
+    "avgPrice": "$2,106,547",
     "avgPricePerSqFt": "$659",
     "avgYearBuilt": 1982,
     "avgLivingSqFt": "2,764",
@@ -22,17 +22,17 @@
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 88,
-    "medianPrice": "$2,125,000",
-    "medianPricePerSqFt": "$764",
+    "count": 89,
+    "medianPrice": "$2,150,000",
+    "medianPricePerSqFt": "$765",
     "waterfrontCount": 17,
-    "newConstructionCount": 26
+    "newConstructionCount": 27
   },
   "sold": {
-    "count": 43,
-    "medianPrice": "$1,750,000",
-    "medianDom": 125,
-    "saleToListRatio": "88.1%",
+    "count": 42,
+    "medianPrice": "$1,748,600",
+    "medianDom": 109,
+    "saleToListRatio": "88.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -57,16 +57,29 @@
     "under900k": 22,
     "band900kTo1_5m": 14,
     "band1_5mTo3m": 20,
-    "band3mPlus": 32
+    "band3mPlus": 33
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 88
+      "count": 89
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4704038",
+      "address": "2410 SIESTA DR",
+      "subdivision": "SOUTH GATE",
+      "soldPrice": "$1,200,000",
+      "soldDate": "2026-10-26",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,360",
+      "yearBuilt": 1955,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4689355",
       "address": "1717 ALTA VISTA ST",
@@ -118,19 +131,6 @@
       "yearBuilt": 1964,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4704809",
-      "address": "2439 GOLDENROD ST",
-      "subdivision": "SOUTH GATE",
-      "soldPrice": "$460,000",
-      "soldDate": "2026-10-16",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,983",
-      "yearBuilt": 1957,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$449,143",
       "avgPricePerSqFt": "$382",
       "avgLivingSqFt": "1,134",
-      "avgDom": 125
+      "avgDom": 126
     },
     {
       "tier": "1990to2005",
@@ -214,10 +214,10 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 70,
-      "soldCount": 236,
-      "soldMedianPricePerSqFt": "$575",
-      "soldMedianPrice": "$1,487,500",
+      "activeCount": 71,
+      "soldCount": 237,
+      "soldMedianPricePerSqFt": "$574",
+      "soldMedianPrice": "$1,485,000",
       "lowSample": false
     }
   ],
@@ -226,16 +226,16 @@
     "monthsOfSupplyCondo": 5.6,
     "monthsOfSupplySfhVilla": 4.8,
     "label": "seller's market",
-    "activeCount": 88,
-    "sold365Count": 217,
-    "sold90Count": 43,
+    "activeCount": 89,
+    "sold365Count": 218,
+    "sold90Count": 42,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 261,
-      "activeCount": 81,
-      "soldMedianPrice": "$1,615,000",
+      "soldCount": 262,
+      "activeCount": 82,
+      "soldMedianPrice": "$1,607,500",
       "soldMedianPricePerSqFt": "$642"
     },
     "condo": {
@@ -253,22 +253,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 88 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 4.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 89 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 4.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,615,000 ($642/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
+      "a": "Single-family homes sell around $1,607,500 ($642/sq ft), while condos, villas and townhouses sell around $322,500 ($320/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,125,000."
+      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,150,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 125 days on market and closed at 88.1% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 109 days on market and closed at 88.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

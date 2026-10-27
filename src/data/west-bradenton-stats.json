@@ -2,11 +2,11 @@
   "areaSlug": "west-bradenton",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-26T10:41:58.178484+00:00",
+  "lastUpdated": "2026-10-27T10:42:32.234885+00:00",
   "counts": {
-    "sold": 336,
-    "pending": 52,
-    "active": 153,
+    "sold": 337,
+    "pending": 51,
+    "active": 155,
     "total": 388
   },
   "metrics": {
@@ -22,23 +22,23 @@
     "maxPrice": "$7,250,000"
   },
   "active": {
-    "count": 153,
-    "medianPrice": "$499,900",
-    "medianPricePerSqFt": "$289",
+    "count": 155,
+    "medianPrice": "$499,000",
+    "medianPricePerSqFt": "$286",
     "waterfrontCount": 54,
-    "newConstructionCount": 45
+    "newConstructionCount": 46
   },
   "sold": {
-    "count": 67,
-    "medianPrice": "$409,999",
-    "medianDom": 52,
+    "count": 68,
+    "medianPrice": "$405,999",
+    "medianDom": 50,
     "saleToListRatio": "101.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 7.5,
+    "condo": 7.6,
     "sfhVilla": 5.5,
-    "blended": 6.2,
+    "blended": 6.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 113,
-    "band900kTo1_5m": 23,
+    "under900k": 115,
+    "band900kTo1_5m": 22,
     "band1_5mTo3m": 13,
-    "band3mPlus": 4
+    "band3mPlus": 5
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 153
+      "count": 155
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4706609",
+      "address": "3403 AVENIDA MADERA #B",
+      "subdivision": "TURNBERRY WOODS AT CONQUISTADOR SEC 2",
+      "soldPrice": "$399,000",
+      "soldDate": "2026-10-26",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,243",
+      "yearBuilt": 1984,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4689922",
       "address": "4523 W INDEPENDENCE DR W",
@@ -118,19 +131,6 @@
       "yearBuilt": 1974,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "O6390094",
-      "address": "4349 MARINA VIEW WAY",
-      "subdivision": "HUNTERS POINT",
-      "soldPrice": "$950,000",
-      "soldDate": "2026-10-16",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,658",
-      "yearBuilt": 2023,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [],
@@ -175,21 +175,21 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 78,
-      "soldCount": 179,
-      "soldMedianPricePerSqFt": "$248",
+      "activeCount": 80,
+      "soldCount": 180,
+      "soldMedianPricePerSqFt": "$247",
       "soldMedianPrice": "$430,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 6.2,
-    "monthsOfSupplyCondo": 7.5,
+    "monthsOfSupply": 6.3,
+    "monthsOfSupplyCondo": 7.6,
     "monthsOfSupplySfhVilla": 5.5,
     "label": "balanced market",
-    "activeCount": 153,
-    "sold365Count": 296,
-    "sold90Count": 67,
+    "activeCount": 155,
+    "sold365Count": 297,
+    "sold90Count": 68,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -200,10 +200,10 @@
       "soldMedianPricePerSqFt": "$349"
     },
     "condo": {
-      "soldCount": 192,
-      "activeCount": 91,
+      "soldCount": 193,
+      "activeCount": 93,
       "soldMedianPrice": "$385,000",
-      "soldMedianPricePerSqFt": "$229"
+      "soldMedianPricePerSqFt": "$228"
     }
   },
   "boating": {
@@ -214,22 +214,22 @@
     {
       "facet": "balance",
       "q": "Is West Bradenton a buyer's or seller's market right now?",
-      "a": "With 153 active listings and roughly 25 closed sales a month (trailing 12 months), West Bradenton has about 6.2 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 155 active listings and roughly 25 closed sales a month (trailing 12 months), West Bradenton has about 6.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo in West Bradenton?",
-      "a": "Single-family homes sell around $750,000 ($349/sq ft), while condos, villas and townhouses sell around $385,000 ($229/sq ft)."
+      "a": "Single-family homes sell around $750,000 ($349/sq ft), while condos, villas and townhouses sell around $385,000 ($228/sq ft)."
     },
     {
       "facet": "range",
       "q": "What is the price range in West Bradenton?",
-      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $499,900."
+      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $499,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell in West Bradenton?",
-      "a": "Recently sold homes took a median 52 days on market and closed at 101.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 50 days on market and closed at 101.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
@@ -247,22 +247,22 @@
     {
       "slug": "west-bradenton-el-con-img-aqua",
       "name": "El Conquistador / IMG / Aqua",
-      "activeCount": 56,
-      "pendingCount": 5,
-      "activeMedianPrice": "$352,500",
-      "soldCount": 111,
+      "activeCount": 59,
+      "pendingCount": 4,
+      "activeMedianPrice": "$355,000",
+      "soldCount": 112,
       "soldMedianPrice": "$385,000",
-      "soldMedianPricePerSqFt": "$212",
-      "soldMedianDom": 80,
+      "soldMedianPricePerSqFt": "$208",
+      "soldMedianDom": 78,
       "soldSingleFamilyShare": "33%",
       "lowSample": false
     },
     {
       "slug": "west-bradenton-coral-shores-cortez",
       "name": "Coral Shores / Cortez",
-      "activeCount": 62,
+      "activeCount": 61,
       "pendingCount": 13,
-      "activeMedianPrice": "$474,500",
+      "activeMedianPrice": "$450,000",
       "soldCount": 103,
       "soldMedianPrice": "$480,000",
       "soldMedianPricePerSqFt": "$317",
@@ -313,7 +313,7 @@
             "soldMedianPricePerSqFt": "$561",
             "soldMedianDom": 65,
             "activeCount": 22,
-            "activeMedianPrice": "$1,397,000",
+            "activeMedianPrice": "$1,399,000",
             "lowSample": false
           },
           {
@@ -348,16 +348,16 @@
           {
             "waterfront": "non_waterfront",
             "label": "Non-Waterfront",
-            "soldCount": 121,
-            "soldMedianPrice": "$367,500",
-            "soldMedianPricePerSqFt": "$202",
-            "soldMedianDom": 80,
-            "activeCount": 71,
+            "soldCount": 122,
+            "soldMedianPrice": "$368,750",
+            "soldMedianPricePerSqFt": "$200",
+            "soldMedianDom": 79,
+            "activeCount": 73,
             "activeMedianPrice": "$305,000",
             "lowSample": false
           }
         ],
-        "waterfrontPremiumPerSqFt": "33%"
+        "waterfrontPremiumPerSqFt": "35%"
       }
     ],
     "waterfrontDefinition": "Salt or brackish boating water: bay, harbor, saltwater canal, Intracoastal or lagoon frontage. Lake and pond lots are counted as non-waterfront.",
