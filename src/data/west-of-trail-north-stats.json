@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-27T10:42:28.724575+00:00",
+  "lastUpdated": "2026-10-28T10:42:56.805832+00:00",
   "counts": {
-    "sold": 107,
+    "sold": 108,
     "pending": 6,
     "active": 43,
-    "total": 113
+    "total": 114
   },
   "metrics": {
-    "avgPrice": "$1,078,440",
-    "avgPricePerSqFt": "$500",
-    "avgYearBuilt": 1972,
-    "avgLivingSqFt": "1,943",
+    "avgPrice": "$1,074,953",
+    "avgPricePerSqFt": "$501",
+    "avgYearBuilt": 1973,
+    "avgLivingSqFt": "1,937",
     "avgLotSqFt": null,
     "avgDom": 107
   },
@@ -23,20 +23,20 @@
   },
   "active": {
     "count": 43,
-    "medianPrice": "$750,000",
-    "medianPricePerSqFt": "$552",
-    "waterfrontCount": 16,
-    "newConstructionCount": 13
+    "medianPrice": "$725,000",
+    "medianPricePerSqFt": "$547",
+    "waterfrontCount": 15,
+    "newConstructionCount": 12
   },
   "sold": {
-    "count": 20,
+    "count": 21,
     "medianPrice": "$590,000",
-    "medianDom": 78,
+    "medianDom": 74,
     "saleToListRatio": "85.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 7.5,
+    "condo": 6.8,
     "sfhVilla": 5.4,
     "blended": 5.7,
     "method": "active / (trailing-12mo closed / 12)",
@@ -81,6 +81,19 @@
       "isWaterfront": false
     },
     {
+      "listingId": "A4691894",
+      "address": "4104 SARASOTA AVE",
+      "subdivision": "INDIAN BEACH HIGHLANDS",
+      "soldPrice": "$830,000",
+      "soldDate": "2026-10-23",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,342",
+      "yearBuilt": 2004,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "A4701947",
       "address": "4875 BRYWILL CIR",
       "subdivision": "SAPPHIRE SHORES",
@@ -118,19 +131,6 @@
       "yearBuilt": 1986,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4699901",
-      "address": "3525 IROQUOIS AVE",
-      "subdivision": "DESOTO TERRACE",
-      "soldPrice": "$400,000",
-      "soldDate": "2026-10-07",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,542",
-      "yearBuilt": 1958,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$594,950",
       "avgPricePerSqFt": "$494",
       "avgLivingSqFt": "1,211",
-      "avgDom": 94
+      "avgDom": 95
     },
     {
       "tier": "1990to2005",
@@ -168,11 +168,11 @@
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 8,
-      "avgPrice": "$567,875",
-      "avgPricePerSqFt": "$595",
-      "avgLivingSqFt": "956",
-      "avgDom": 132
+      "activeCount": 7,
+      "avgPrice": "$541,857",
+      "avgPricePerSqFt": "$600",
+      "avgLivingSqFt": "903",
+      "avgDom": 141
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 16,
+      "activeCount": 15,
       "soldCount": 27,
       "soldMedianPricePerSqFt": "$550",
       "soldMedianPrice": "$650,000",
@@ -214,40 +214,40 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 23,
-      "soldCount": 76,
+      "activeCount": 24,
+      "soldCount": 77,
       "soldMedianPricePerSqFt": "$393",
-      "soldMedianPrice": "$572,500",
+      "soldMedianPrice": "$575,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 5.7,
-    "monthsOfSupplyCondo": 7.5,
+    "monthsOfSupplyCondo": 6.8,
     "monthsOfSupplySfhVilla": 5.4,
     "label": "balanced market",
     "activeCount": 43,
-    "sold365Count": 90,
-    "sold90Count": 20,
+    "sold365Count": 91,
+    "sold90Count": 21,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 87,
-      "activeCount": 33,
-      "soldMedianPrice": "$665,000",
-      "soldMedianPricePerSqFt": "$412"
+      "soldCount": 88,
+      "activeCount": 34,
+      "soldMedianPrice": "$670,000",
+      "soldMedianPricePerSqFt": "$408"
     },
     "condo": {
       "soldCount": 20,
-      "activeCount": 10,
+      "activeCount": 9,
       "soldMedianPrice": "$472,500",
       "soldMedianPricePerSqFt": "$500"
     }
   },
   "boating": {
     "activeWithDock": 7,
-    "activeWaterfront": 16
+    "activeWaterfront": 15
   },
   "marketQuestions": [
     {
@@ -258,22 +258,22 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail North?",
-      "a": "Single-family homes sell around $665,000 ($412/sq ft), while condos, villas and townhouses sell around $472,500 ($500/sq ft)."
+      "a": "Single-family homes sell around $670,000 ($408/sq ft), while condos, villas and townhouses sell around $472,500 ($500/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail North?",
-      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $750,000."
+      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $725,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 78 days on market and closed at 85.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 74 days on market and closed at 85.0% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail North homes have a dock?",
-      "a": "Of 16 active waterfront listings, 7 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 15 active waterfront listings, 7 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

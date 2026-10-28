@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-27T10:42:31.408396+00:00",
+  "lastUpdated": "2026-10-28T10:42:59.365586+00:00",
   "counts": {
-    "sold": 959,
-    "pending": 62,
-    "active": 223,
-    "total": 1021
+    "sold": 962,
+    "pending": 64,
+    "active": 217,
+    "total": 1026
   },
   "metrics": {
-    "avgPrice": "$559,845",
-    "avgPricePerSqFt": "$262",
+    "avgPrice": "$561,303",
+    "avgPricePerSqFt": "$263",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,043",
+    "avgLivingSqFt": "2,047",
     "avgLotSqFt": null,
     "avgDom": 79
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 223,
+    "count": 217,
     "medianPrice": "$399,900",
-    "medianPricePerSqFt": "$243",
+    "medianPricePerSqFt": "$244",
     "waterfrontCount": 39,
-    "newConstructionCount": 39
+    "newConstructionCount": 37
   },
   "sold": {
-    "count": 161,
-    "medianPrice": "$478,000",
+    "count": 160,
+    "medianPrice": "$491,500",
     "medianDom": 58,
-    "saleToListRatio": "92.0%",
+    "saleToListRatio": "91.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.9,
-    "sfhVilla": 3.1,
-    "blended": 3.8,
+    "condo": 5.8,
+    "sfhVilla": 2.9,
+    "blended": 3.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,45 @@
     }
   },
   "priceBands": {
-    "under900k": 209,
-    "band900kTo1_5m": 12,
+    "under900k": 204,
+    "band900kTo1_5m": 11,
     "band1_5mTo3m": 2,
     "band3mPlus": 0
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 223
+      "count": 217
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4705215",
+      "address": "8708 WOODBRIAR DR",
+      "subdivision": "DEER CREEK",
+      "soldPrice": "$985,000",
+      "soldDate": "2026-10-27",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,715",
+      "yearBuilt": 1993,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "J1006496",
+      "address": "4957 GARDINERS BAY CIR",
+      "subdivision": "THE HAMPTONS",
+      "soldPrice": "$945,000",
+      "soldDate": "2026-10-27",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "3,050",
+      "yearBuilt": 2000,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4703593",
       "address": "3852 AMAPOLA LN",
@@ -77,6 +103,19 @@
       "bathrooms": 2.0,
       "livingSqFt": "1,904",
       "yearBuilt": 1995,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4696813",
+      "address": "12720 IRIS BLOSSOM RD",
+      "subdivision": "GARDENS AT BAY STREET",
+      "soldPrice": "$310,000",
+      "soldDate": "2026-10-26",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,463",
+      "yearBuilt": 2026,
       "propertyType": "Residential",
       "isWaterfront": false
     },
@@ -92,45 +131,6 @@
       "yearBuilt": 2023,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4707572",
-      "address": "4190 WESTBOURNE CIR",
-      "subdivision": "STONEYBROOK AT PALMER RANCH",
-      "soldPrice": "$649,000",
-      "soldDate": "2026-10-21",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,020",
-      "yearBuilt": 1994,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4704685",
-      "address": "5310 CICERONE ST",
-      "subdivision": "ESPLANADE/PALMER RANCH PH 4C",
-      "soldPrice": "$1,030,000",
-      "soldDate": "2026-10-20",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,391",
-      "yearBuilt": 2021,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4705103",
-      "address": "9570 HIGH GATE DR #1715",
-      "subdivision": "STONEYBROOK VERANDA GREENS",
-      "soldPrice": "$350,000",
-      "soldDate": "2026-10-20",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,333",
-      "yearBuilt": 1996,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 37,
-      "avgPrice": "$322,393",
+      "activeCount": 36,
+      "avgPrice": "$320,932",
       "avgPricePerSqFt": "$195",
-      "avgLivingSqFt": "1,652",
+      "avgLivingSqFt": "1,647",
       "avgDom": 113
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 77,
-      "avgPrice": "$289,604",
+      "activeCount": 76,
+      "avgPrice": "$289,598",
       "avgPricePerSqFt": "$227",
       "avgLivingSqFt": "1,274",
-      "avgDom": 122
+      "avgDom": 125
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$373,467",
       "avgPricePerSqFt": "$212",
       "avgLivingSqFt": "1,779",
-      "avgDom": 76
+      "avgDom": 77
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 15,
-      "avgPrice": "$349,183",
-      "avgPricePerSqFt": "$217",
-      "avgLivingSqFt": "1,610",
-      "avgDom": 68
+      "activeCount": 14,
+      "avgPrice": "$349,131",
+      "avgPricePerSqFt": "$218",
+      "avgLivingSqFt": "1,602",
+      "avgDom": 61
     }
   ],
   "condoTiersScope": {
@@ -196,9 +196,9 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 47,
-      "soldCount": 223,
-      "soldMedianPricePerSqFt": "$257",
+      "activeCount": 44,
+      "soldCount": 224,
+      "soldMedianPricePerSqFt": "$258",
       "soldMedianPrice": "$475,000",
       "lowSample": false
     },
@@ -214,33 +214,33 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 137,
-      "soldCount": 528,
+      "activeCount": 134,
+      "soldCount": 530,
       "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$440,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 3.8,
-    "monthsOfSupplyCondo": 5.9,
-    "monthsOfSupplySfhVilla": 3.1,
+    "monthsOfSupply": 3.7,
+    "monthsOfSupplyCondo": 5.8,
+    "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
-    "activeCount": 223,
-    "sold365Count": 710,
-    "sold90Count": 161,
+    "activeCount": 217,
+    "sold365Count": 712,
+    "sold90Count": 160,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 546,
-      "activeCount": 88,
+      "soldCount": 548,
+      "activeCount": 85,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$289"
     },
     "condo": {
-      "soldCount": 413,
-      "activeCount": 135,
+      "soldCount": 414,
+      "activeCount": 132,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 223 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.8 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 217 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.7 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 58 days on market and closed at 92.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 58 days on market and closed at 91.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

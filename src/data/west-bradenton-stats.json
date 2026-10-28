@@ -2,11 +2,11 @@
   "areaSlug": "west-bradenton",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-27T10:42:32.234885+00:00",
+  "lastUpdated": "2026-10-28T10:43:00.350992+00:00",
   "counts": {
-    "sold": 337,
-    "pending": 51,
-    "active": 155,
+    "sold": 338,
+    "pending": 50,
+    "active": 156,
     "total": 388
   },
   "metrics": {
@@ -22,8 +22,8 @@
     "maxPrice": "$7,250,000"
   },
   "active": {
-    "count": 155,
-    "medianPrice": "$499,000",
+    "count": 156,
+    "medianPrice": "$499,450",
     "medianPricePerSqFt": "$286",
     "waterfrontCount": 54,
     "newConstructionCount": 46
@@ -31,12 +31,12 @@
   "sold": {
     "count": 68,
     "medianPrice": "$405,999",
-    "medianDom": 50,
-    "saleToListRatio": "101.2%",
+    "medianDom": 57,
+    "saleToListRatio": "101.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 7.6,
+    "condo": 7.8,
     "sfhVilla": 5.5,
     "blended": 6.3,
     "method": "active / (trailing-12mo closed / 12)",
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 115,
-    "band900kTo1_5m": 22,
-    "band1_5mTo3m": 13,
+    "under900k": 116,
+    "band900kTo1_5m": 21,
+    "band1_5mTo3m": 14,
     "band3mPlus": 5
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 155
+      "count": 156
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "R4911358",
+      "address": "8125 FAIRCHILD AVE",
+      "subdivision": "SEAFLOWER",
+      "soldPrice": "$444,999",
+      "soldDate": "2026-10-26",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,671",
+      "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4706609",
       "address": "3403 AVENIDA MADERA #B",
@@ -118,19 +131,6 @@
       "yearBuilt": 1964,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "J1006408",
-      "address": "6124 43RD ST W #404A",
-      "subdivision": "EL CONQUISTADOR VILLAGE 1 SEC 1",
-      "soldPrice": "$150,000",
-      "soldDate": "2026-10-19",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,178",
-      "yearBuilt": 1974,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [],
@@ -157,7 +157,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 21,
+      "activeCount": 22,
       "soldCount": 37,
       "soldMedianPricePerSqFt": "$259",
       "soldMedianPrice": "$418,000",
@@ -176,19 +176,19 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 80,
-      "soldCount": 180,
-      "soldMedianPricePerSqFt": "$247",
+      "soldCount": 181,
+      "soldMedianPricePerSqFt": "$248",
       "soldMedianPrice": "$430,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 6.3,
-    "monthsOfSupplyCondo": 7.6,
+    "monthsOfSupplyCondo": 7.8,
     "monthsOfSupplySfhVilla": 5.5,
     "label": "balanced market",
-    "activeCount": 155,
-    "sold365Count": 297,
+    "activeCount": 156,
+    "sold365Count": 298,
     "sold90Count": 68,
     "method": "active / (trailing-12mo closed / 12)"
   },
@@ -200,10 +200,10 @@
       "soldMedianPricePerSqFt": "$349"
     },
     "condo": {
-      "soldCount": 193,
-      "activeCount": 93,
+      "soldCount": 194,
+      "activeCount": 94,
       "soldMedianPrice": "$385,000",
-      "soldMedianPricePerSqFt": "$228"
+      "soldMedianPricePerSqFt": "$229"
     }
   },
   "boating": {
@@ -214,22 +214,22 @@
     {
       "facet": "balance",
       "q": "Is West Bradenton a buyer's or seller's market right now?",
-      "a": "With 155 active listings and roughly 25 closed sales a month (trailing 12 months), West Bradenton has about 6.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 156 active listings and roughly 25 closed sales a month (trailing 12 months), West Bradenton has about 6.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo in West Bradenton?",
-      "a": "Single-family homes sell around $750,000 ($349/sq ft), while condos, villas and townhouses sell around $385,000 ($228/sq ft)."
+      "a": "Single-family homes sell around $750,000 ($349/sq ft), while condos, villas and townhouses sell around $385,000 ($229/sq ft)."
     },
     {
       "facet": "range",
       "q": "What is the price range in West Bradenton?",
-      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $499,000."
+      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $499,450."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell in West Bradenton?",
-      "a": "Recently sold homes took a median 50 days on market and closed at 101.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 57 days on market and closed at 101.1% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
@@ -247,9 +247,9 @@
     {
       "slug": "west-bradenton-el-con-img-aqua",
       "name": "El Conquistador / IMG / Aqua",
-      "activeCount": 59,
+      "activeCount": 61,
       "pendingCount": 4,
-      "activeMedianPrice": "$355,000",
+      "activeMedianPrice": "$365,000",
       "soldCount": 112,
       "soldMedianPrice": "$385,000",
       "soldMedianPricePerSqFt": "$208",
@@ -260,9 +260,9 @@
     {
       "slug": "west-bradenton-coral-shores-cortez",
       "name": "Coral Shores / Cortez",
-      "activeCount": 61,
+      "activeCount": 60,
       "pendingCount": 13,
-      "activeMedianPrice": "$450,000",
+      "activeMedianPrice": "$437,500",
       "soldCount": 103,
       "soldMedianPrice": "$480,000",
       "soldMedianPricePerSqFt": "$317",
@@ -274,12 +274,12 @@
       "slug": "west-bradenton-seaflower",
       "name": "SeaFlower",
       "activeCount": 27,
-      "pendingCount": 33,
+      "pendingCount": 32,
       "activeMedianPrice": "$569,999",
-      "soldCount": 71,
-      "soldMedianPrice": "$502,980",
-      "soldMedianPricePerSqFt": "$264",
-      "soldMedianDom": 35,
+      "soldCount": 72,
+      "soldMedianPrice": "$501,088",
+      "soldMedianPricePerSqFt": "$265",
+      "soldMedianDom": 39,
       "soldSingleFamilyShare": "46%",
       "lowSample": false
     },
@@ -313,7 +313,7 @@
             "soldMedianPricePerSqFt": "$561",
             "soldMedianDom": 65,
             "activeCount": 22,
-            "activeMedianPrice": "$1,399,000",
+            "activeMedianPrice": "$1,412,000",
             "lowSample": false
           },
           {
@@ -348,16 +348,16 @@
           {
             "waterfront": "non_waterfront",
             "label": "Non-Waterfront",
-            "soldCount": 122,
-            "soldMedianPrice": "$368,750",
-            "soldMedianPricePerSqFt": "$200",
-            "soldMedianDom": 79,
-            "activeCount": 73,
-            "activeMedianPrice": "$305,000",
+            "soldCount": 123,
+            "soldMedianPrice": "$370,000",
+            "soldMedianPricePerSqFt": "$202",
+            "soldMedianDom": 80,
+            "activeCount": 74,
+            "activeMedianPrice": "$307,500",
             "lowSample": false
           }
         ],
-        "waterfrontPremiumPerSqFt": "35%"
+        "waterfrontPremiumPerSqFt": "33%"
       }
     ],
     "waterfrontDefinition": "Salt or brackish boating water: bay, harbor, saltwater canal, Intracoastal or lagoon frontage. Lake and pond lots are counted as non-waterfront.",
