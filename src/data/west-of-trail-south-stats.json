@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-28T10:42:57.664910+00:00",
+  "lastUpdated": "2026-11-02T14:15:10.512889+00:00",
   "counts": {
-    "sold": 326,
-    "pending": 29,
-    "active": 97,
-    "total": 355
+    "sold": 328,
+    "pending": 28,
+    "active": 103,
+    "total": 356
   },
   "metrics": {
-    "avgPrice": "$634,732",
-    "avgPricePerSqFt": "$327",
+    "avgPrice": "$640,352",
+    "avgPricePerSqFt": "$328",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,748",
+    "avgLivingSqFt": "1,759",
     "avgLotSqFt": null,
     "avgDom": 78
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$7,199,000"
   },
   "active": {
-    "count": 97,
-    "medianPrice": "$450,000",
-    "medianPricePerSqFt": "$321",
-    "waterfrontCount": 24,
+    "count": 103,
+    "medianPrice": "$465,000",
+    "medianPricePerSqFt": "$324",
+    "waterfrontCount": 27,
     "newConstructionCount": 3
   },
   "sold": {
     "count": 62,
     "medianPrice": "$431,669",
-    "medianDom": 50,
-    "saleToListRatio": "88.5%",
+    "medianDom": 56,
+    "saleToListRatio": "87.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 4.3,
-    "sfhVilla": 5.1,
-    "blended": 4.8,
+    "condo": 4.5,
+    "sfhVilla": 5.6,
+    "blended": 5.1,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,45 @@
     }
   },
   "priceBands": {
-    "under900k": 75,
+    "under900k": 79,
     "band900kTo1_5m": 7,
     "band1_5mTo3m": 11,
-    "band3mPlus": 4
+    "band3mPlus": 6
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 97
+      "count": 103
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4688143",
+      "address": "4891 PEREGRINE PT E",
+      "subdivision": "THE LANDINGS",
+      "soldPrice": "$1,390,500",
+      "soldDate": "2026-10-30",
+      "bedrooms": 4,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,843",
+      "yearBuilt": 1983,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4678903",
+      "address": "5408 EAGLES POINT CIR #302",
+      "subdivision": "EAGLES POINT AT THE LANDINGS, BAYVIEW HOMES I",
+      "soldPrice": "$329,000",
+      "soldDate": "2026-10-28",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,768",
+      "yearBuilt": 1990,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4704524",
       "address": "1853 FIESTA DR",
@@ -105,32 +131,6 @@
       "yearBuilt": 1981,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4665433",
-      "address": "5560 CANNES CIR #3-106",
-      "subdivision": "PHILLIPPI LANDINGS",
-      "soldPrice": "$490,000",
-      "soldDate": "2026-10-20",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,825",
-      "yearBuilt": 2020,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4656077",
-      "address": "1347 LANDINGS DR #6",
-      "subdivision": "LANDINGS TREEHOUSE",
-      "soldPrice": "$570,000",
-      "soldDate": "2026-10-16",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,564",
-      "yearBuilt": 1981,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 48,
-      "avgPrice": "$361,590",
-      "avgPricePerSqFt": "$289",
-      "avgLivingSqFt": "1,241",
-      "avgDom": 98
+      "activeCount": 49,
+      "avgPrice": "$361,682",
+      "avgPricePerSqFt": "$287",
+      "avgLivingSqFt": "1,249",
+      "avgDom": 97
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 3,
-      "avgPrice": "$602,667",
-      "avgPricePerSqFt": "$278",
-      "avgLivingSqFt": "2,167",
-      "avgDom": 131
+      "activeCount": 4,
+      "avgPrice": "$625,750",
+      "avgPricePerSqFt": "$298",
+      "avgLivingSqFt": "2,110",
+      "avgDom": 103
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$591,300",
       "avgPricePerSqFt": "$347",
       "avgLivingSqFt": "1,706",
-      "avgDom": 191
+      "avgDom": 196
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$635,000",
       "avgPricePerSqFt": "$364",
       "avgLivingSqFt": "1,745",
-      "avgDom": 63
+      "avgDom": 68
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 21,
+      "activeCount": 24,
       "soldCount": 70,
       "soldMedianPricePerSqFt": "$384",
       "soldMedianPrice": "$497,000",
@@ -206,8 +206,8 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 8,
-      "soldCount": 34,
-      "soldMedianPricePerSqFt": "$293",
+      "soldCount": 35,
+      "soldMedianPricePerSqFt": "$288",
       "soldMedianPrice": "$450,000",
       "lowSample": false
     },
@@ -223,66 +223,66 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 65,
-      "soldCount": 206,
+      "activeCount": 68,
+      "soldCount": 207,
       "soldMedianPricePerSqFt": "$286",
       "soldMedianPrice": "$425,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.8,
-    "monthsOfSupplyCondo": 4.3,
-    "monthsOfSupplySfhVilla": 5.1,
-    "label": "seller's market",
-    "activeCount": 97,
-    "sold365Count": 245,
+    "monthsOfSupply": 5.1,
+    "monthsOfSupplyCondo": 4.5,
+    "monthsOfSupplySfhVilla": 5.6,
+    "label": "balanced market",
+    "activeCount": 103,
+    "sold365Count": 242,
     "sold90Count": 62,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 171,
-      "activeCount": 42,
-      "soldMedianPrice": "$534,900",
-      "soldMedianPricePerSqFt": "$325"
+      "soldCount": 172,
+      "activeCount": 46,
+      "soldMedianPrice": "$534,950",
+      "soldMedianPricePerSqFt": "$326"
     },
     "condo": {
-      "soldCount": 155,
-      "activeCount": 55,
-      "soldMedianPrice": "$340,000",
-      "soldMedianPricePerSqFt": "$253"
+      "soldCount": 156,
+      "activeCount": 57,
+      "soldMedianPrice": "$339,500",
+      "soldMedianPricePerSqFt": "$251"
     }
   },
   "boating": {
-    "activeWithDock": 14,
-    "activeWaterfront": 24
+    "activeWithDock": 16,
+    "activeWaterfront": 27
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 97 active listings and roughly 20 closed sales a month (trailing 12 months), West Of Trail South has about 4.8 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 103 active listings and roughly 20 closed sales a month (trailing 12 months), West Of Trail South has about 5.1 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $534,900 ($325/sq ft), while condos, villas and townhouses sell around $340,000 ($253/sq ft)."
+      "a": "Single-family homes sell around $534,950 ($326/sq ft), while condos, villas and townhouses sell around $339,500 ($251/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $450,000."
+      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $465,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 50 days on market and closed at 88.5% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 56 days on market and closed at 87.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 24 active waterfront listings, 14 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 27 active waterfront listings, 16 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

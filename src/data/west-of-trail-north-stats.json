@@ -2,29 +2,29 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-28T10:42:56.805832+00:00",
+  "lastUpdated": "2026-11-02T14:15:09.674961+00:00",
   "counts": {
     "sold": 108,
-    "pending": 6,
-    "active": 43,
-    "total": 114
+    "pending": 9,
+    "active": 40,
+    "total": 117
   },
   "metrics": {
-    "avgPrice": "$1,074,953",
+    "avgPrice": "$1,080,552",
     "avgPricePerSqFt": "$501",
     "avgYearBuilt": 1973,
-    "avgLivingSqFt": "1,937",
+    "avgLivingSqFt": "1,938",
     "avgLotSqFt": null,
-    "avgDom": 107
+    "avgDom": 104
   },
   "range": {
     "minPrice": "$85,000",
     "maxPrice": "$22,900,000"
   },
   "active": {
-    "count": 43,
-    "medianPrice": "$725,000",
-    "medianPricePerSqFt": "$547",
+    "count": 40,
+    "medianPrice": "$737,500",
+    "medianPricePerSqFt": "$549",
     "waterfrontCount": 15,
     "newConstructionCount": 12
   },
@@ -37,8 +37,8 @@
   },
   "monthsOfSupply": {
     "condo": 6.8,
-    "sfhVilla": 5.4,
-    "blended": 5.7,
+    "sfhVilla": 5.0,
+    "blended": 5.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,15 +54,15 @@
     }
   },
   "priceBands": {
-    "under900k": 24,
+    "under900k": 22,
     "band900kTo1_5m": 7,
-    "band1_5mTo3m": 3,
+    "band1_5mTo3m": 2,
     "band3mPlus": 9
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 43
+      "count": 40
     }
   ],
   "buildingClasses": [],
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 2,
-      "avgPrice": "$594,950",
-      "avgPricePerSqFt": "$494",
+      "avgPrice": "$592,450",
+      "avgPricePerSqFt": "$492",
       "avgLivingSqFt": "1,211",
-      "avgDom": 95
+      "avgDom": 16
     },
     {
       "tier": "1990to2005",
@@ -172,7 +172,7 @@
       "avgPrice": "$541,857",
       "avgPricePerSqFt": "$600",
       "avgLivingSqFt": "903",
-      "avgDom": 141
+      "avgDom": 146
     }
   ],
   "condoTiersScope": {
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 4,
+      "activeCount": 3,
       "soldCount": 2,
       "soldMedianPricePerSqFt": null,
       "soldMedianPrice": null,
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 24,
+      "activeCount": 22,
       "soldCount": 77,
       "soldMedianPricePerSqFt": "$393",
       "soldMedianPrice": "$575,000",
@@ -222,11 +222,11 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.7,
+    "monthsOfSupply": 5.3,
     "monthsOfSupplyCondo": 6.8,
-    "monthsOfSupplySfhVilla": 5.4,
+    "monthsOfSupplySfhVilla": 5.0,
     "label": "balanced market",
-    "activeCount": 43,
+    "activeCount": 40,
     "sold365Count": 91,
     "sold90Count": 21,
     "method": "active / (trailing-12mo closed / 12)"
@@ -234,7 +234,7 @@
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 88,
-      "activeCount": 34,
+      "activeCount": 31,
       "soldMedianPrice": "$670,000",
       "soldMedianPricePerSqFt": "$408"
     },
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 43 active listings and roughly 8 closed sales a month (trailing 12 months), West Of Trail North has about 5.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 40 active listings and roughly 8 closed sales a month (trailing 12 months), West Of Trail North has about 5.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,7 +263,7 @@
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail North?",
-      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $725,000."
+      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $737,500."
     },
     {
       "facet": "speed",

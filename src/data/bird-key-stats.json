@@ -2,20 +2,20 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-10-25T10:41:57.528317+00:00",
+  "lastUpdated": "2026-11-02T14:15:11.363807+00:00",
   "counts": {
     "sold": 43,
-    "pending": 1,
+    "pending": 2,
     "active": 13,
-    "total": 44
+    "total": 45
   },
   "metrics": {
-    "avgPrice": "$4,290,739",
-    "avgPricePerSqFt": "$1,108",
-    "avgYearBuilt": 1990,
-    "avgLivingSqFt": "3,728",
-    "avgLotSqFt": "14,411",
-    "avgDom": 125
+    "avgPrice": "$4,345,389",
+    "avgPricePerSqFt": "$1,113",
+    "avgYearBuilt": 1991,
+    "avgLivingSqFt": "3,760",
+    "avgLotSqFt": "14,758",
+    "avgDom": 123
   },
   "range": {
     "minPrice": "$990,000",
@@ -23,16 +23,16 @@
   },
   "active": {
     "count": 13,
-    "medianPrice": "$6,750,000",
+    "medianPrice": "$5,750,000",
     "medianPricePerSqFt": "$1,456",
-    "waterfrontCount": 8,
-    "newConstructionCount": 5
+    "waterfrontCount": 7,
+    "newConstructionCount": 6
   },
   "sold": {
-    "count": 8,
-    "medianPrice": "$4,106,250",
-    "medianDom": 152,
-    "saleToListRatio": "84.6%",
+    "count": 7,
+    "medianPrice": "$3,700,000",
+    "medianDom": 143,
+    "saleToListRatio": "85.6%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -43,7 +43,7 @@
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$108",
+    "medianMonthlyAssociation": "$109",
     "medianMonthlyCondoFee": null,
     "minMonthlyCondoFee": null,
     "maxMonthlyCondoFee": null,
@@ -149,7 +149,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 7,
+      "activeCount": 6,
       "soldCount": 26,
       "soldMedianPricePerSqFt": "$1,305",
       "soldMedianPrice": "$4,806,250",
@@ -167,7 +167,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 5,
+      "activeCount": 6,
       "soldCount": 15,
       "soldMedianPricePerSqFt": "$834",
       "soldMedianPrice": "$1,995,000",
@@ -181,7 +181,7 @@
     "label": "seller's market",
     "activeCount": 13,
     "sold365Count": 34,
-    "sold90Count": 8,
+    "sold90Count": 7,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -193,8 +193,8 @@
     }
   },
   "boating": {
-    "activeWithDock": 4,
-    "activeWaterfront": 8
+    "activeWithDock": 3,
+    "activeWaterfront": 7
   },
   "marketQuestions": [
     {
@@ -205,22 +205,22 @@
     {
       "facet": "range",
       "q": "What's the price range on Bird Key?",
-      "a": "Active listings run from $990,000 to $13,950,000, with a median asking price of $6,750,000."
+      "a": "Active listings run from $990,000 to $13,950,000, with a median asking price of $5,750,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Bird Key?",
-      "a": "Recently sold homes took a median 152 days on market and closed at 84.6% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 143 days on market and closed at 85.6% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Bird Key homes have a dock?",
-      "a": "Of 8 active waterfront listings, 4 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 7 active waterfront listings, 3 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA fees on Bird Key?",
-      "a": "The median monthly association fee on Bird Key is $108; most homes here are single-family, so there is no condo fee."
+      "a": "The median monthly association fee on Bird Key is $109; most homes here are single-family, so there is no condo fee."
     }
   ],
   "costBreakdown90": null
