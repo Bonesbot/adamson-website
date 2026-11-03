@@ -1,6 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#0A1F3C">
 <title>501 Gunwale Lane</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preload" as="image" href="hero-mobile.webp" media="(max-width: 767px) and (orientation: portrait)">
+<link rel="preload" as="image" href="hero-desktop.webp" media="not all and (max-width: 767px) and (orientation: portrait)">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap">
 <style>
 /* Layout: one navy hero band with video, then a sand page of short bands; every number from the stats contract */
@@ -26,13 +34,22 @@ a{color:inherit}
 .num{font-variant-numeric:tabular-nums}
 
 /* hero */
-.hero{position:relative;background:var(--navy);color:#fff;overflow:hidden;min-height:520px;display:flex;align-items:flex-end}
-.hero video,.hero .fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero{position:relative;background:var(--navy);color:#fff;overflow:hidden;min-height:clamp(560px,86vh,860px);display:flex;align-items:flex-end}
+.hero video,.hero .fallback,.hero .fallback img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:36% 50%}
+.hero .fallback img{display:block}
+.hero video{opacity:0;transition:opacity .6s ease}
+.hero video.is-playing{opacity:1}
 .hero .fallback{background:
   radial-gradient(120% 80% at 80% 20%, #1f4a7a 0%, transparent 55%),
   radial-gradient(90% 70% at 10% 90%, #0e2d55 0%, transparent 60%),
   linear-gradient(180deg,#0A1F3C 0%,#071428 100%)}
-.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,31,60,.15) 0%,rgba(10,31,60,.55) 55%,rgba(10,31,60,.92) 100%)}
+/* shade stays light over the house and deepens only where the text sits */
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,31,60,.12) 0%,rgba(10,31,60,.14) 42%,rgba(10,31,60,.62) 70%,rgba(10,31,60,.92) 100%)}
+@media (max-width:767px) and (orientation:portrait){
+  .hero{min-height:88svh}
+  .hero video,.hero .fallback img{object-position:50% 40%}
+  .hero .shade{background:linear-gradient(180deg,rgba(10,31,60,.12) 0%,rgba(10,31,60,.18) 34%,rgba(10,31,60,.7) 58%,rgba(10,31,60,.94) 100%)}
+}
 .hero .wrap{position:relative;padding-block:120px 44px;width:100%}
 .hero h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.05;margin-top:10px}
 .hero .sub{font-size:1.15rem;color:#dfe5ee;max-width:38em;margin-top:16px}
@@ -58,6 +75,8 @@ a{color:inherit}
 .rail{position:relative;height:14px;border-radius:7px;background:linear-gradient(90deg,var(--soft) 0%,var(--soft) 100%);margin:46px 0 10px}
 .rail .fill{position:absolute;top:0;bottom:0;left:30%;width:48%;border-radius:7px;background:linear-gradient(90deg,#d8c48f,var(--gold))}
 .rail .tick{position:absolute;top:-34px;transform:translateX(-50%);font-size:.82rem;color:var(--muted);white-space:nowrap}
+.rail .tick[style*="left:0"]{transform:none;text-align:left}
+.rail .tick[style*="left:100%"]{transform:translateX(-100%);text-align:right}  /* keep end labels inside the page on phones */
 .rail .tick b{display:block;font-family:var(--display);font-size:1.05rem;color:var(--fg)}
 .rail .mark{position:absolute;top:-6px;width:4px;height:26px;background:var(--navy);transform:translateX(-50%);border-radius:2px}
 :root[data-theme="dark"] .rail .mark{background:#fff}
@@ -137,20 +156,45 @@ footer p{max-width:72em;margin-top:8px}
 }
 @media (max-width:480px){
   .tiles{grid-template-columns:1fr;margin-top:-20px}
-  .hero{min-height:440px}
-  .hero .wrap{padding-block:90px 40px}
+  .hero .wrap{padding-block:90px max(40px,env(safe-area-inset-bottom,0px))}
   .rail .tick,.rail .lbl{font-size:.72rem}
   .band{padding-block:44px}
 }
 @media (prefers-reduced-motion: reduce){.hero video{display:none}}
 </style>
+</head>
+<body>
 
 <section class="hero">
-  <div class="fallback" aria-hidden="true"></div>
-  <!-- Hero drone video: drop the file at /mkt/501-gunwale/hero.mp4 (and hero.jpg as the poster). 12 to 20 seconds, canal-side approach, no audio. -->
-  <video autoplay muted loop playsinline poster="hero.jpg" aria-hidden="true">
-    <source src="hero.mp4" type="video/mp4">
+  <!-- Poster paints first (LCP); the video fades in over it once playing.
+       Phones in portrait get the 9:16 cut, everything else the 16:9 cut.
+       Re-render with automation/video/make_hero.sh (13.7 s seamless loop, no audio). -->
+  <picture class="fallback" aria-hidden="true">
+    <source media="(max-width: 767px) and (orientation: portrait)" type="image/webp" srcset="hero-mobile.webp">
+    <source media="(max-width: 767px) and (orientation: portrait)" srcset="hero-mobile.jpg">
+    <source type="image/webp" srcset="hero-desktop.webp">
+    <img src="hero-desktop.jpg" alt="" fetchpriority="high">
+  </picture>
+  <video id="heroVideo" autoplay muted loop playsinline disablepictureinpicture preload="auto" aria-hidden="true" tabindex="-1">
+    <source media="(max-width: 767px) and (orientation: portrait)" src="hero-mobile-av1.mp4" type='video/mp4; codecs="av01.0.08M.08"'>
+    <source media="(max-width: 767px) and (orientation: portrait)" src="hero-mobile.mp4" type="video/mp4">
+    <source src="hero-desktop-av1.mp4" type='video/mp4; codecs="av01.0.08M.08"'>
+    <source src="hero-desktop.mp4" type="video/mp4">
   </video>
+  <script>
+  (function(){
+    var v=document.getElementById('heroVideo'); if(!v) return;
+    var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var saveData=navigator.connection&&navigator.connection.saveData;
+    if(reduce||saveData){ v.parentNode.removeChild(v); return; }   // still image only
+    var show=function(){ if(v.currentTime>0){ v.classList.add('is-playing'); v.removeEventListener('timeupdate',show); } };
+    v.addEventListener('playing',show); v.addEventListener('timeupdate',show);
+    var p=v.play(); if(p&&p.catch) p.catch(function(){});
+    if('IntersectionObserver' in window){   // pause off-screen to save phone battery
+      new IntersectionObserver(function(es){ es[0].isIntersecting ? v.play().catch(function(){}) : v.pause(); }).observe(v);
+    }
+  })();
+  </script>
   <div class="shade" aria-hidden="true"></div>
   <div class="wrap">
     <p class="eyebrow">Country Club Shores · Longboat Key</p>
@@ -342,3 +386,5 @@ footer p{max-width:72em;margin-top:8px}
   });
 })();
 </script>
+</body>
+</html>

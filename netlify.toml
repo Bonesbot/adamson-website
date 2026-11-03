@@ -59,6 +59,13 @@
   [headers.values]
     X-Robots-Tag = "noindex, nofollow, noarchive"
 
+# /mkt/501-gunwale/: owner market overview for 501 Gunwale Ln (hand-shared,
+# never linked). Same belt-and-braces noindex as the field guide.
+[[headers]]
+  for = "/mkt/501-gunwale/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+
 # ---------------------------------------------------------------------------
 # mls-watchdog: off-machine dead-man's-switch for the daily MLS export.
 # Runs at 14:00 UTC (10am EDT / 9am EST), a few hours after the mini-PC job's
