@@ -1,0 +1,344 @@
+<title>501 Gunwale Lane</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap">
+<style>
+/* Layout: one navy hero band with video, then a sand page of short bands; every number from the stats contract */
+:root{
+  --navy:#0A1F3C; --navy-2:#12305a; --gold:#C9A961; --gold-ink:#8a6d2b;
+  --bg:#F7F4EE; --panel:#FFFFFF; --fg:#1b2434; --muted:#5c6675; --line:#e2dcd0; --soft:#efeadf;
+  --display:"Playfair Display",Georgia,"Times New Roman",serif;
+  --body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c1627; --panel:#132038; --fg:#eef0f4; --muted:#B4BECD; --line:#273553; --soft:#182a47; --gold-ink:#d9bd79; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0c1627; --panel:#132038; --fg:#eef0f4; --muted:#B4BECD; --line:#273553; --soft:#182a47; --gold-ink:#d9bd79; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 var(--body)}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.01em;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.band{padding-block:56px}
+.band + .band{border-top:1px solid var(--line)}
+.num{font-variant-numeric:tabular-nums}
+
+/* hero */
+.hero{position:relative;background:var(--navy);color:#fff;overflow:hidden;min-height:520px;display:flex;align-items:flex-end}
+.hero video,.hero .fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .fallback{background:
+  radial-gradient(120% 80% at 80% 20%, #1f4a7a 0%, transparent 55%),
+  radial-gradient(90% 70% at 10% 90%, #0e2d55 0%, transparent 60%),
+  linear-gradient(180deg,#0A1F3C 0%,#071428 100%)}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,31,60,.15) 0%,rgba(10,31,60,.55) 55%,rgba(10,31,60,.92) 100%)}
+.hero .wrap{position:relative;padding-block:120px 44px;width:100%}
+.hero h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.05;margin-top:10px}
+.hero .sub{font-size:1.15rem;color:#dfe5ee;max-width:38em;margin-top:16px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:26px;font-size:.9rem;color:#B4BECD}
+.hero .meta b{color:#fff;font-weight:600}
+.scrollcue{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:16px;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#B4BECD}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-34px;position:relative}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:20px 20px 18px;min-width:0;box-shadow:0 10px 30px rgba(10,31,60,.08)}
+.tile .k{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tile .v{font-family:var(--display);font-size:1.9rem;line-height:1.1;margin-top:8px;color:var(--fg)}
+.tile .s{font-size:.86rem;color:var(--muted);margin-top:8px}
+.tile.gold .v{color:var(--gold-ink)}
+
+/* section heads */
+.head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px 48px;align-items:end;margin-bottom:28px}
+.head h2{font-size:clamp(1.6rem,3.2vw,2.2rem);line-height:1.15}
+.head p{color:var(--muted);max-width:40em}
+
+/* range */
+.range{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:28px 24px 22px}
+.rail{position:relative;height:14px;border-radius:7px;background:linear-gradient(90deg,var(--soft) 0%,var(--soft) 100%);margin:46px 0 10px}
+.rail .fill{position:absolute;top:0;bottom:0;left:30%;width:48%;border-radius:7px;background:linear-gradient(90deg,#d8c48f,var(--gold))}
+.rail .tick{position:absolute;top:-34px;transform:translateX(-50%);font-size:.82rem;color:var(--muted);white-space:nowrap}
+.rail .tick b{display:block;font-family:var(--display);font-size:1.05rem;color:var(--fg)}
+.rail .mark{position:absolute;top:-6px;width:4px;height:26px;background:var(--navy);transform:translateX(-50%);border-radius:2px}
+:root[data-theme="dark"] .rail .mark{background:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .rail .mark{background:#fff}}
+.rail .lbl{position:absolute;top:28px;transform:translateX(-50%);font-size:.78rem;color:var(--muted);white-space:nowrap}
+.range .why{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 28px;margin-top:40px}
+.range .why div{min-width:0;font-size:.95rem}
+.range .why b{display:block;font-family:var(--display);font-weight:600;font-size:1.05rem;margin-bottom:4px}
+
+/* comps table */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+table{width:100%;border-collapse:collapse;font-size:.95rem;min-width:620px}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--soft)}
+td.r,th.r{text-align:right}
+tr:last-child td{border-bottom:0}
+td .note{display:block;font-size:.8rem;color:var(--muted);white-space:normal}
+.subject td{background:var(--soft);font-weight:600}
+.ref td{border-top:2px solid var(--line);color:var(--muted)}
+.ref td:first-child{color:var(--fg)}
+.caption{font-size:.84rem;color:var(--muted);margin-top:12px}
+
+/* list vs sold strip */
+.cuts{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:22px}
+.cut{min-width:0;border-left:3px solid var(--gold);padding:4px 0 4px 12px}
+.cut .pct{font-family:var(--display);font-size:1.5rem;line-height:1}
+.cut .who{font-size:.86rem;color:var(--muted);margin-top:6px}
+.cut.good{border-left-color:var(--navy)}
+:root[data-theme="dark"] .cut.good{border-left-color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .cut.good{border-left-color:#fff}}
+
+/* paths */
+.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.path{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:24px 22px;min-width:0;display:flex;flex-direction:column;gap:10px}
+.path h3{font-size:1.25rem}
+.path .when{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-ink)}
+.path p{color:var(--muted);font-size:.95rem}
+.path ul{margin:4px 0 0;padding-left:18px;font-size:.92rem;color:var(--fg)}
+.path li{margin:4px 0}
+
+/* ask */
+.ask{background:var(--navy);color:#fff}
+.ask .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}
+.ask h2{font-size:clamp(1.6rem,3.2vw,2.2rem);color:#fff;line-height:1.15}
+.ask p{color:#dfe5ee;margin-top:14px}
+.ask .people{display:grid;gap:14px;margin-top:26px}
+.person{display:flex;gap:14px;align-items:center}
+.person .ring{width:48px;height:48px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;font-family:var(--display);color:var(--gold);font-size:1.1rem;flex:none}
+.person b{display:block;color:#fff}
+.person span{font-size:.9rem;color:#B4BECD}
+.form{background:#fff;color:#1b2434;border-radius:6px;padding:22px}
+.form label{display:block;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:#5c6675;margin:12px 0 4px}
+.form label:first-child{margin-top:0}
+.form input,.form textarea{width:100%;font:inherit;padding:10px 12px;border:1px solid #d6d0c4;border-radius:4px;background:#fff;color:#1b2434}
+.form input:focus,.form textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+.form .hint{font-size:.8rem;color:#5c6675;margin-top:4px}
+.form button{margin-top:16px;width:100%;font:inherit;font-weight:600;padding:12px 16px;border:0;border-radius:4px;background:var(--navy);color:#fff;cursor:pointer}
+.form button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.form .ok{display:none;padding:14px;border-radius:4px;background:#f1ecdf;color:#1b2434;margin-top:12px}
+.form .ok.show{display:block}
+.form .err{color:#9b2c2c;font-size:.88rem;margin-top:8px}
+.quiet{font-size:.8rem;color:#B4BECD;margin-top:10px}
+
+/* footer */
+footer{padding-block:28px 40px;font-size:.8rem;color:var(--muted)}
+footer .logos{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:center;margin-bottom:14px;font-family:var(--display);color:var(--fg);font-size:.95rem}
+footer .logos span{opacity:.8}
+footer p{max-width:72em;margin-top:8px}
+
+@media (max-width:860px){
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .head{grid-template-columns:1fr}
+  .range .why{grid-template-columns:1fr}
+  .cuts{grid-template-columns:repeat(2,1fr)}
+  .paths{grid-template-columns:1fr}
+  .ask .wrap{grid-template-columns:1fr}
+}
+@media (max-width:480px){
+  .tiles{grid-template-columns:1fr;margin-top:-20px}
+  .hero{min-height:440px}
+  .hero .wrap{padding-block:90px 40px}
+  .rail .tick,.rail .lbl{font-size:.72rem}
+  .band{padding-block:44px}
+}
+@media (prefers-reduced-motion: reduce){.hero video{display:none}}
+</style>
+
+<section class="hero">
+  <div class="fallback" aria-hidden="true"></div>
+  <!-- Hero drone video: drop the file at /mkt/501-gunwale/hero.mp4 (and hero.jpg as the poster). 12 to 20 seconds, canal-side approach, no audio. -->
+  <video autoplay muted loop playsinline poster="hero.jpg" aria-hidden="true">
+    <source src="hero.mp4" type="video/mp4">
+  </video>
+  <div class="shade" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="eyebrow">Country Club Shores · Longboat Key</p>
+    <h1>501 Gunwale Lane</h1>
+    <p class="sub">What your street has done since 2020, what the right buyer pays for a 2020 build on the water, and three ways to sell if you ever decide to. No obligation, nothing to sign.</p>
+    <div class="meta">
+      <span>Prepared for the owners of 501 Gunwale</span>
+      <span><b>Anne Schneider</b> and <b>Ryan Adamson</b>, Coldwell Banker Realty</span>
+      <span>October 30, 2026</span>
+    </div>
+  </div>
+  <span class="scrollcue">Two minutes to read</span>
+</section>
+
+<section class="wrap">
+  <div class="tiles">
+    <div class="tile">
+      <div class="k">You bought in Oct 2020</div>
+      <div class="v num">$1,775,000</div>
+      <div class="s">New construction, $704 per sq ft, 119 days on market</div>
+    </div>
+    <div class="tile gold">
+      <div class="k">Your canals, last 12 months</div>
+      <div class="v num">$2.6MM</div>
+      <div class="s">Median of 22 canal-front sales in Country Club Shores, $1,020 median per sq ft</div>
+    </div>
+    <div class="tile">
+      <div class="k">Newer builds (2015 and later)</div>
+      <div class="v num">$1,130 to $1,380</div>
+      <div class="s">Per sq ft on canal sales this year; the two newest homes set the neighborhood high</div>
+    </div>
+    <div class="tile">
+      <div class="k">Longboat Key, single family</div>
+      <div class="v num">95 days</div>
+      <div class="s">Median time to contract, rolling 12 months; 9.3 months of supply, median price up 14%</div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="head">
+      <h2>Where 501 Gunwale likely sits today</h2>
+      <p>A range, not a number. The number inside it comes from a 20-minute walk-through: condition, upgrades since 2020, dock and lift, and what the two of you want the timeline to be.</p>
+    </div>
+    <div class="range">
+      <div class="rail" aria-label="Estimated value range for 501 Gunwale: $2.9 million to $3.5 million, against neighborhood sales from $1.5 million to $5.65 million">
+        <span class="tick" style="left:0"><b class="num">$1.5MM</b>lowest canal sale</span>
+        <span class="tick" style="left:30%"><b class="num">$2.9MM</b></span>
+        <span class="tick" style="left:78%"><b class="num">$3.5MM</b></span>
+        <span class="tick" style="left:100%"><b class="num">$5.65MM</b>new build, 4,216 sf</span>
+        <span class="fill"></span>
+        <span class="mark" style="left:54%"></span>
+        <span class="lbl" style="left:54%">2,523 sf at $1,150 to $1,390 per sq ft</span>
+      </div>
+      <div class="why">
+        <div><b>What pushes it up</b>A 2020 build on a 16,162 sq ft lot, well above the 10,000 to 12,400 sq ft norm on these canals. Seven houses from the bay, no bridges, 7,000 lb lift, natural gas, all block and impact glass. Buyers at this price are paying for modern and move-in ready.</div>
+        <div><b>What holds it</b>Square footage. The $3MM-plus buyer in Country Club Shores can also look at 3,400 to 4,100 sq ft homes from the 2000s. The answer is the lot, one-level living, 2020 systems and insurance costs, and we make that case in the listing, not after the first showing.</div>
+        <div><b>What we will not do</b>Open high and chase the market down. Four of your neighbors did this year and gave back 13% to 28% of their asking price while waiting five to ten months. The right opening price is the single biggest lever on your net.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="head">
+      <h2>Two sales bracket yours</h2>
+      <p>1005 Bogey is the floor: a 2017 custom build that was bigger than yours but two-story and dated inside. 548 Hornblower is the ceiling: 2015, 3,976 sq ft, three lots from the bay. A 2020 single-level build on an oversized lot sits between them. The adjusted column is each sale corrected for size, age, lot and finish to match 501 Gunwale.</p>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Address</th><th class="r">Built</th><th class="r">Sq ft</th><th class="r">Sold</th><th class="r">Per sq ft</th><th class="r">Days</th><th>Closed</th><th class="r">Adjusted to 501</th></tr></thead>
+        <tbody class="num">
+          <tr><td>548 Hornblower Ln<span class="note">The ceiling. 2015 build, 4 bed 5 bath, three lots from the bay, 20,000 lb lift. Listed at $5.65MM, sold 20% under.</span></td><td class="r">2015</td><td class="r">3,976</td><td class="r">$4,500,000</td><td class="r">$1,132</td><td class="r">153</td><td>Jul 2026</td><td class="r">$3,457,000</td></tr>
+          <tr class="subject"><td>501 Gunwale Ln<span class="note">Your home. 2020 single-level build, 16,162 sq ft lot, 7 houses from the bay, no bridges. Bought new for $1,775,000.</span></td><td class="r">2020</td><td class="r">2,523</td><td class="r">$1,775,000</td><td class="r">$704</td><td class="r">119</td><td>Oct 2020</td><td class="r">$2.9MM to $3.5MM</td></tr>
+          <tr><td>1005 Bogey Ln<span class="note">The floor. 2017 John Cannon build, two-story, 3 car garage, finishes that read early 2000s. Listed at $3.6MM, sold 28% under after 226 days.</span></td><td class="r">2017</td><td class="r">3,624</td><td class="r">$2,600,000</td><td class="r">$717</td><td class="r">226</td><td>Oct 2026</td><td class="r">$2,439,000</td></tr>
+          <tr class="ref"><td>510 Putter Ln<span class="note">For reference: the closest in size, fully renovated and turnkey, but a 1968 slab at the grade of its era. 501 was built in 2020 to current flood elevation, which is the difference buyers and insurers price first.</span></td><td class="r">1968</td><td class="r">2,253</td><td class="r">$2,600,000</td><td class="r">$1,154</td><td class="r">305</td><td>Jul 2026</td><td class="r">$2,978,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caption">Adjusted figures correct each sale for size, build year, lot and finish so it reads as if it were 501 Gunwale; the Bogey to Hornblower bracket is $2.44MM to $3.46MM; our range runs from its midpoint to just past its top, because a 2020 single-level build on the largest lot of the three earns the upper half. Days are cumulative days on market across every listing of the home. Stellar resets the clock when a home is relisted; we do not.</p>
+
+    <div class="cuts" aria-label="Original asking price versus sold price">
+      <div class="cut"><div class="pct num">-28%</div><div class="who">1005 Bogey, 226 days</div></div>
+      <div class="cut"><div class="pct num">-20%</div><div class="who">548 Hornblower, 153 days</div></div>
+      <div class="cut"><div class="pct num">-15%</div><div class="who">571 Birdie, 109 days</div></div>
+      <div class="cut"><div class="pct num">-13%</div><div class="who">510 Putter, 305 days</div></div>
+      <div class="cut good"><div class="pct num">-7%</div><div class="who">531 Wedge, 37 days, priced right from day one</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="head">
+      <h2>Three ways to sell, if you ever want to</h2>
+      <p>You may not. If you do, these are the real options on this island, with the tradeoffs stated plainly. Nothing here requires a decision today.</p>
+    </div>
+    <div class="paths">
+      <div class="path">
+        <div class="when">January to March</div>
+        <h3>Open market, in season</h3>
+        <p>Full exposure while the island is at its busiest. The most buyers, the best price discovery, the most showings.</p>
+        <ul><li>Pre-list designer walk-through and professional media</li><li>Priced to sell in the first 45 days, not to test</li><li>Showings scheduled around your calendar</li></ul>
+      </div>
+      <div class="path">
+        <div class="when">Any time, quietly</div>
+        <h3>Off-market first</h3>
+        <p>Three of this year's canal sales in Country Club Shores never had a sign in the yard. We take the home to our buyer database and the Coldwell Banker network before anyone else hears about it.</p>
+        <ul><li>No photos online, no open houses, no neighbors asking</li><li>Qualified buyers only, by appointment</li><li>Move to the open market only if you choose to</li></ul>
+      </div>
+      <div class="path">
+        <div class="when">No timeline</div>
+        <h3>Name your number</h3>
+        <p>Tell us the price that would make you move. Nothing signed. We only call if we have a buyer at that number.</p>
+        <ul><li>Zero commitment, zero paperwork</li><li>We watch the market for you in the meantime</li><li>Change your mind at any time</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band ask">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">A small ask</p>
+      <h2>Twenty minutes turns the range into a number.</h2>
+      <p>We walk the house, you tell us what has changed since 2020 and what you are thinking about, and within two days you have a written valuation and a plan you keep whether or not you ever list. Deb thought you might find it useful; we hope she is right.</p>
+      <div class="people">
+        <div class="person"><div class="ring">A</div><div><b>Anne Schneider</b><span>Coldwell Banker Realty, south Longboat Key</span></div></div>
+        <div class="person"><div class="ring">R</div><div><b>Ryan Adamson</b><span>Coldwell Banker Realty, St. Armands Circle · 941.713.9234</span></div></div>
+      </div>
+    </div>
+    <form class="form" id="askForm" novalidate>
+      <input type="text" name="bot-field" id="botField" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+      <label for="f-name">Name</label>
+      <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Denise">
+      <label for="f-email">Email</label>
+      <input id="f-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+      <label for="f-phone">Phone (optional)</label>
+      <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="941">
+      <label for="f-mmm">Name your number (optional)</label>
+      <input id="f-mmm" name="make_me_move" type="text" inputmode="numeric" placeholder="$">
+      <div class="hint">No agreement signed. We reach out only if we find a buyer at this amount.</div>
+      <label for="f-notes">Anything you want us to know</label>
+      <textarea id="f-notes" name="notes" rows="3" placeholder="Timing, questions, or just say hello"></textarea>
+      <button type="submit" id="f-submit">Ask for the walk-through</button>
+      <div class="err" id="f-err" role="alert"></div>
+      <div class="ok" id="f-ok">Thank you. Anne or Ryan will reach out within one business day.</div>
+      <p class="quiet" style="color:#5c6675">Prefer to call or text? Ryan is at 941.713.9234. Nothing you share here is shared further.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logos"><span>The Adamson Group</span><span>·</span><span>Anne Schneider</span><span>·</span><span>Coldwell Banker Realty</span></div>
+    <p>Sources: Stellar MLS closed and active listings for Country Club Shores, pulled October 30, 2026; Longboat Key (34228) single-family statistics from Stellar MLS InfoSparks, rolling 12 months through September 2026; your 2020 purchase from the public MLS record. Figures are reported as published and not re-derived.</p>
+    <p>This is a market overview prepared for the owners of 501 Gunwale Lane, not an appraisal and not a solicitation of a property already listed for sale. Values are estimates for discussion; an opinion of value for lending or legal purposes requires a licensed appraiser. Coldwell Banker Realty. Equal Housing Opportunity.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var form=document.getElementById('askForm');
+  var err=document.getElementById('f-err'), ok=document.getElementById('f-ok'), btn=document.getElementById('f-submit');
+  form.addEventListener('submit',function(e){
+    e.preventDefault(); err.textContent='';
+    var email=document.getElementById('f-email').value.trim();
+    if(!email||email.indexOf('@')<1){err.textContent='Please add an email so we can reply.';return;}
+    var mmm=document.getElementById('f-mmm').value.replace(/[^0-9]/g,'');
+    var notes=document.getElementById('f-notes').value.trim();
+    var payload={
+      name:document.getElementById('f-name').value.trim(),
+      email:email,
+      phone:document.getElementById('f-phone').value.trim(),
+      notes:notes,
+      lead_type:'Seller',
+      community:'Country Club Shores',
+      // routed to Ryan + Anne by the /longboat-key/ prefix in lead-routing.js
+      page:'/longboat-key/501-gunwale',
+      'bot-field':document.getElementById('botField').value
+    };
+    if(mmm) payload.make_me_move=mmm;
+    btn.disabled=true; btn.textContent='Sending';
+    fetch('https://adamsonfl.com/.netlify/functions/community-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+      .then(function(r){ if(!r.ok) throw new Error('bad'); ok.classList.add('show'); form.reset(); btn.textContent='Sent'; })
+      .catch(function(){ err.textContent='That did not go through. Call or text Ryan at 941.713.9234 and we will take it from there.'; btn.disabled=false; btn.textContent='Ask for the walk-through'; });
+  });
+})();
+</script>
