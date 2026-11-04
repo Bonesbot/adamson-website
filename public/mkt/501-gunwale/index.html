@@ -154,6 +154,12 @@ footer p{max-width:72em;margin-top:8px}
   .paths{grid-template-columns:1fr}
   .ask .wrap{grid-template-columns:1fr}
 }
+@media (max-width:640px){
+  /* range rail: price ticks above the bar, end markers below it, sq ft line under those */
+  .rail{margin:40px 0 104px}
+  .rail .tick[style*="left:0"],.rail .tick[style*="left:100%"]{top:24px}
+  .rail .lbl{top:74px;left:50% !important;white-space:normal;text-align:center;width:100%}
+}
 @media (max-width:480px){
   .tiles{grid-template-columns:1fr;margin-top:-20px}
   .hero .wrap{padding-block:90px max(40px,env(safe-area-inset-bottom,0px))}
