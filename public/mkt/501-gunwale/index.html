@@ -171,8 +171,10 @@ footer p{max-width:72em;margin-top:8px}
 .lot.check{border-style:dashed}
 :root[data-theme="dark"] .lot.bay{border-color:#fff;color:#fff}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lot.bay{border-color:#fff;color:#fff}}
-#activeTable{font-size:.88rem;min-width:900px}
-#activeTable th,#activeTable td{padding:10px 9px}
+#activeTable{font-size:.86rem;min-width:820px}
+#activeTable th,#activeTable td{padding:10px 8px}
+#activeTable td:first-child{white-space:normal;min-width:150px}
+#activeTable .badge{white-space:nowrap}
 #activeTable th{font-size:.68rem;letter-spacing:.06em}
 .cmagrid{display:grid;gap:18px}
 .comp{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
@@ -338,7 +340,7 @@ footer p{max-width:72em;margin-top:8px}
     </div>
     <div class="tablewrap">
       <table id="activeTable" aria-label="Active and pending listings in Country Club Shores">
-        <thead><tr><th>Address</th><th>Lot</th><th class="r">Built</th><th class="r">Heated sf</th><th class="r">Beds</th><th>Pool</th><th class="r">List price</th><th class="r">Per sf</th><th class="r">Days</th><th class="r">Original list</th></tr></thead>
+        <thead><tr><th>Address</th><th>Lot</th><th class="r">Built</th><th class="r">Heated sf</th><th class="r">Beds</th><th>Pool</th><th class="r">List price</th><th class="r">Per sf</th><th class="r">Days</th><th class="r">Orig. list</th></tr></thead>
         <tbody class="num" id="activeBody"><tr><td colspan="10" style="white-space:normal;color:var(--muted)">Loading today's listings</td></tr></tbody>
       </table>
     </div>
