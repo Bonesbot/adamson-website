@@ -61,6 +61,20 @@
 
 # /mkt/501-gunwale/: owner market overview for 501 Gunwale Ln (hand-shared,
 # never linked). Same belt-and-braces noindex as the field guide.
+# 2026-11-04: the page lives on longboatlido.com only. public/ is shared by both
+# builds, so the files still ship to the hub; this host-scoped 301 moves any
+# adamsonfl.com link already handed out onto the LongboatLido copy (same
+# pattern as the Country Club Shores hub move on 2026-08-28).
+[[redirects]]
+  from = "https://adamsonfl.com/mkt/501-gunwale/*"
+  to = "https://longboatlido.com/mkt/501-gunwale/:splat"
+  status = 301
+  force = true
+[[redirects]]
+  from = "https://www.adamsonfl.com/mkt/501-gunwale/*"
+  to = "https://longboatlido.com/mkt/501-gunwale/:splat"
+  status = 301
+  force = true
 [[headers]]
   for = "/mkt/501-gunwale/*"
   [headers.values]
