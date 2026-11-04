@@ -108,6 +108,19 @@ function listingCore(l, overrides, key) {
 }
 
 function findPricing(ai) {
+  // Home Platform's "Suggested list price" lives at agentInputs.price.value as free
+  // text ("$2,900,000 to $3,500,000"); the net-sheet sales price mirrors it as a
+  // min/max pair. Read the text first (it is what the CMA page prints), then the pair.
+  const text = ai.price && typeof ai.price.value === 'string' ? ai.price.value.trim() : null;
+  if (text) {
+    const nums = (text.match(/\d[\d,]{4,}/g) || []).map((n) => Number(n.replace(/,/g, ''))).filter((n) => n > 10000);
+    if (nums.length) return { low: Math.min(...nums), high: Math.max(...nums), text, raw: null };
+  }
+  const sp = ai.netsheets && ai.netsheets.generic && ai.netsheets.generic.salesPrice;
+  if (sp && (sp.minValue || sp.maxValue)) {
+    const lo = Number(sp.minValue) || null, hi = Number(sp.maxValue) || lo;
+    if (lo) return { low: lo, high: hi || lo, text: null, raw: null };
+  }
   const hits = {};
   const walk = (o, path, depth) => {
     if (!o || typeof o !== 'object' || depth > 4) return;
