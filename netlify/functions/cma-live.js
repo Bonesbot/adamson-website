@@ -95,7 +95,7 @@ function listingCore(l, overrides, key) {
     city: loc.city || null, state: loc.state || null, zip: loc.zipCode || null,
     lat: num(loc.latitude), lng: num(loc.longitude),
     status,
-    beds: num(size.bedrooms), baths: num(size.totalBathrooms) ?? num(size.bathrooms),
+    beds: num(size.bedrooms), baths: num(size.bathrooms) ?? num(size.totalBathrooms),  // Home Platform shows `bathrooms`
     sqft, lotSqft: num(size.lotSizeInSquareFeet), lotLabel: size.formattedLotSize || null,
     yearBuilt: yearBuilt(l, overrides, key),
     originalListPrice: listed, lastAskingPrice: preClose, closePrice: closed,

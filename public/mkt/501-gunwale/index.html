@@ -171,6 +171,9 @@ footer p{max-width:72em;margin-top:8px}
 .lot.check{border-style:dashed}
 :root[data-theme="dark"] .lot.bay{border-color:#fff;color:#fff}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lot.bay{border-color:#fff;color:#fff}}
+#activeTable{font-size:.88rem;min-width:900px}
+#activeTable th,#activeTable td{padding:10px 9px}
+#activeTable th{font-size:.68rem;letter-spacing:.06em}
 .cmagrid{display:grid;gap:18px}
 .comp{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
 .comp .gal{position:relative;background:#0e1a2e;min-height:280px}
@@ -178,7 +181,7 @@ footer p{max-width:72em;margin-top:8px}
 .comp .gal .nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:0;background:rgba(10,31,60,.72);color:#fff;font-size:1.3rem;line-height:1;cursor:pointer;display:grid;place-items:center}
 .comp .gal .nav.prev{left:10px}.comp .gal .nav.next{right:10px}
 .comp .gal .nav:focus-visible{outline:2px solid var(--gold)}
-.comp .gal .count{position:absolute;right:10px;bottom:10px;font-size:.74rem;background:rgba(10,31,60,.72);color:#fff;padding:3px 8px;border-radius:3px}
+.comp .gal .count{position:absolute;right:10px;bottom:66px;font-size:.74rem;background:rgba(10,31,60,.72);color:#fff;padding:3px 8px;border-radius:3px}
 .comp .thumbs{display:flex;gap:4px;overflow-x:auto;padding:6px;background:#0e1a2e;scrollbar-width:thin}
 .comp .thumbs img{width:56px;height:42px;object-fit:cover;flex:none;border-radius:2px;opacity:.55;cursor:pointer;border:2px solid transparent}
 .comp .thumbs img.on{opacity:1;border-color:var(--gold)}
@@ -469,7 +472,7 @@ footer p{max-width:72em;margin-top:8px}
   var money = function(n){ return n == null ? '—' : '$' + Math.round(n).toLocaleString('en-US'); };
   var mm = function(n){ return n == null ? '—' : '$' + (n/1e6).toFixed(n % 1e6 === 0 ? 1 : 2).replace(/\.?0+$/,'') + 'MM'; };
   var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
-  var fmtDate = function(iso){ if(!iso) return ''; var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); };
+  var fmtDate = function(iso){ if(!iso) return ''; var d = new Date(/^\d{4}-\d{2}-\d{2}$/.test(iso) ? iso + 'T12:00:00' : iso); return isNaN(d) ? '' : d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); };
 
   // ── active comps grid ──
   function lotPill(lot){
