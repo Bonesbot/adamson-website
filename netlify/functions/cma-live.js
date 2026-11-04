@@ -107,6 +107,25 @@ function listingCore(l, overrides, key) {
   };
 }
 
+function findPricing(ai) {
+  const hits = {};
+  const walk = (o, path, depth) => {
+    if (!o || typeof o !== 'object' || depth > 4) return;
+    for (const [k, v] of Object.entries(o)) {
+      if (/suggest|recommend|listPrice|priceRange|pricing/i.test(k) && !/compSearchQuery|netsheets|chartQuery/i.test(path)) hits[path ? `${path}.${k}` : k] = v;
+      if (v && typeof v === 'object' && !/compSearchQuery|netsheets|chartQuery|subjectProperty|appliedAdjustments|selectListingAttributes/i.test(k)) walk(v, path ? `${path}.${k}` : k, depth + 1);
+    }
+  };
+  walk(ai, '', 0);
+  // Pull out a low/high pair if one is recognizable; keep the raw hits for inspection.
+  let low = null, high = null;
+  const nums = [];
+  const dig = (v) => { if (typeof v === 'number' && v > 100000) nums.push(v); else if (v && typeof v === 'object') Object.values(v).forEach(dig); };
+  Object.values(hits).forEach(dig);
+  if (nums.length) { low = Math.min(...nums); high = Math.max(...nums); }
+  return { low, high, raw: Object.keys(hits).length ? hits : null };
+}
+
 function normalize(d) {
   const ai = d.agentInputs || {}, meta = d.CMAMetaData || {};
   const overrides = {};
@@ -139,6 +158,9 @@ function normalize(d) {
 
   const agent = d.primaryAgent || {};
   return {
+    // Agent-entered pricing (suggested list price / range). Home Platform stores it
+    // under agentInputs; the key is matched loosely so a rename upstream still lands.
+    pricing: findPricing(ai),
     cmaId: (d.cma && d.cma.cmaId) || null,
     version: (d.cma && d.cma.version) || null,
     title: meta.title || subject.address,
