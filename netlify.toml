@@ -65,6 +65,18 @@
 # builds, so the files still ship to the hub; this host-scoped 301 moves any
 # adamsonfl.com link already handed out onto the LongboatLido copy (same
 # pattern as the Country Club Shores hub move on 2026-08-28).
+# Netlify does not match the bare directory URL against a /* splat, so the
+# exact path gets its own rule (the splat still covers the hero assets).
+[[redirects]]
+  from = "https://adamsonfl.com/mkt/501-gunwale/"
+  to = "https://longboatlido.com/mkt/501-gunwale/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "https://www.adamsonfl.com/mkt/501-gunwale/"
+  to = "https://longboatlido.com/mkt/501-gunwale/"
+  status = 301
+  force = true
 [[redirects]]
   from = "https://adamsonfl.com/mkt/501-gunwale/*"
   to = "https://longboatlido.com/mkt/501-gunwale/:splat"
