@@ -176,34 +176,23 @@ footer p{max-width:72em;margin-top:8px}
 #activeTable td:first-child{white-space:normal;min-width:150px}
 #activeTable .badge{white-space:nowrap}
 #activeTable th{font-size:.68rem;letter-spacing:.06em}
-.cmagrid{display:grid;gap:18px}
-.comp{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
-.comp .gal{position:relative;background:#0e1a2e;min-height:280px}
-.comp .gal img.main{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#0e1a2e}
-.comp .gal .nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:0;background:rgba(10,31,60,.72);color:#fff;font-size:1.3rem;line-height:1;cursor:pointer;display:grid;place-items:center}
-.comp .gal .nav.prev{left:10px}.comp .gal .nav.next{right:10px}
-.comp .gal .nav:focus-visible{outline:2px solid var(--gold)}
-.comp .gal .count{position:absolute;right:10px;bottom:66px;font-size:.74rem;background:rgba(10,31,60,.72);color:#fff;padding:3px 8px;border-radius:3px}
-.comp .thumbs{display:flex;gap:4px;overflow-x:auto;padding:6px;background:#0e1a2e;scrollbar-width:thin}
-.comp .thumbs img{width:56px;height:42px;object-fit:cover;flex:none;border-radius:2px;opacity:.55;cursor:pointer;border:2px solid transparent}
-.comp .thumbs img.on{opacity:1;border-color:var(--gold)}
-.comp .body{padding:20px 22px 18px;min-width:0;display:flex;flex-direction:column;gap:12px}
-.comp .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
-.comp h3{font-size:1.25rem}
-.comp .sold{font-family:var(--display);font-size:1.35rem;white-space:nowrap}
-.comp .sold small{display:block;font-family:var(--body);font-size:.78rem;color:var(--muted);font-weight:400}
-.comp .facts{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.88rem;color:var(--muted)}
-.comp .facts b{color:var(--fg);font-weight:600}
-.ledger{border-top:1px solid var(--line);padding-top:10px;font-size:.9rem}
-.ledger .row{display:flex;justify-content:space-between;gap:12px;padding:5px 0}
-.ledger .row span:first-child{color:var(--muted)}
-.ledger .row.auto span:first-child{color:var(--muted);font-style:italic}
-.ledger .row.total{border-top:1px solid var(--line);margin-top:4px;padding-top:9px;font-weight:600}
-.ledger .row.total span:first-child{color:var(--fg)}
-.ledger .adj{font-family:var(--display);font-size:1.2rem;color:var(--gold-ink)}
-.cmasum{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
-.cmasum .tile .v{font-size:1.6rem}
-@media (max-width:860px){.comp{grid-template-columns:1fr}.cmasum{grid-template-columns:1fr}}
+.cma{background:var(--panel);border:1px solid var(--line);border-radius:6px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);overflow:hidden}
+.cma-range{padding:30px 28px;background:var(--navy);color:#fff;display:flex;flex-direction:column;justify-content:center}
+.cma-range .k{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.cma-range .v{font-family:var(--display);font-size:clamp(1.9rem,4vw,2.6rem);line-height:1.1;margin-top:10px}
+.cma-range .s{font-size:.86rem;color:#B4BECD;margin-top:10px}
+.cma-side{padding:26px 28px;display:flex;flex-direction:column;gap:18px;justify-content:center}
+.cma-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.cma-stats div{min-width:0}
+.cma-stats .k{display:block;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cma-stats b{display:block;font-family:var(--display);font-weight:600;font-size:1.2rem;margin-top:4px}
+.cma-stats small{display:block;font-size:.78rem;color:var(--muted);margin-top:2px}
+.cma-btn{display:inline-block;align-self:flex-start;font-weight:600;padding:12px 20px;border-radius:4px;background:var(--navy);color:#fff;text-decoration:none}
+.cma-btn:hover{background:var(--navy-2)}
+.cma-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+:root[data-theme="dark"] .cma-btn{background:var(--gold);color:#0A1F3C}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .cma-btn{background:var(--gold);color:#0A1F3C}}
+@media (max-width:860px){.cma{grid-template-columns:1fr}.cma-stats{grid-template-columns:1fr;gap:8px}}
 @media (prefers-reduced-motion: reduce){.hero video{display:none}}
 </style>
 </head>
@@ -351,16 +340,25 @@ footer p{max-width:72em;margin-top:8px}
 <section class="band" id="cmacomps">
   <div class="wrap">
     <div class="head">
-      <h2>The comparable sales, in full</h2>
-      <p>The same four sales from the formal analysis, with every listing photo so the adjustments make sense: kitchens, baths, pool areas, dock. Each line under a home is a correction that makes that sale read as if it were 501 Gunwale.</p>
+      <h2>The formal analysis</h2>
+      <p>The Coldwell Banker Home Platform report behind the range above: the four sales, every listing photo, and each correction that makes a sale read as if it were 501 Gunwale. It opens in its own window and updates whenever we revise it.</p>
     </div>
-    <div class="cmagrid" id="cmaGrid"><div class="tile" style="color:var(--muted)">Loading the analysis</div></div>
-    <div class="cmasum" id="cmaSum" hidden>
-      <div class="tile"><div class="k">Lowest adjusted</div><div class="v num" id="cmaLow"></div><div class="s" id="cmaLowWho"></div></div>
-      <div class="tile gold"><div class="k">Median adjusted</div><div class="v num" id="cmaMed"></div><div class="s">Four closed sales, each corrected to 501 Gunwale</div></div>
-      <div class="tile"><div class="k">Highest adjusted</div><div class="v num" id="cmaHigh"></div><div class="s" id="cmaHighWho"></div></div>
+    <div class="cma">
+      <div class="cma-range">
+        <div class="k">Suggested list price range</div>
+        <div class="v num" id="cmaRange">$2.9MM to $3.5MM</div>
+        <div class="s" id="cmaRangeSub">From the published analysis</div>
+      </div>
+      <div class="cma-side">
+        <div class="cma-stats" id="cmaStats" hidden>
+          <div><span class="k">Lowest adjusted sale</span><b class="num" id="cmaLow"></b><small id="cmaLowWho"></small></div>
+          <div><span class="k">Median adjusted</span><b class="num" id="cmaMed"></b><small>Four closed sales</small></div>
+          <div><span class="k">Highest adjusted sale</span><b class="num" id="cmaHigh"></b><small id="cmaHighWho"></small></div>
+        </div>
+        <a class="cma-btn" id="cmaOpen" href="https://www.homeplatform.com/listing-presentation/view/cma/cma-6a892e67-8852-44ec-89d7-db13c5ffa40a/v/latest?agent_id=6a68f0769020cc00019e537d" target="_blank" rel="noopener">Open the full analysis</a>
+        <p class="live-note" id="cmaNote">Opens in a new window.</p>
+      </div>
     </div>
-    <p class="live-note" id="cmaNote"></p>
   </div>
 </section>
 
@@ -508,54 +506,27 @@ footer p{max-width:72em;margin-top:8px}
     $('activeBody').innerHTML = '<tr><td colspan="10" style="white-space:normal;color:var(--muted)">Today’s listings are not loading right now. Call or text Ryan at 941.713.9234 and we will walk you through them.</td></tr>';
   });
 
-  // ── CMA comps from Home Platform ──
-  function gallery(c){
-    var m = c.media || [];
-    if (!m.length) return '<div class="gal"></div>';
-    var thumbs = m.slice(0, 40).map(function(x,i){ return '<img loading="lazy" src="' + esc(x.thumb || x.mid) + '" alt="" data-i="' + i + '"' + (i===0 ? ' class="on"' : '') + '>'; }).join('');
-    return '<div class="gal" data-n="' + m.length + '"><img class="main" src="' + esc(m[0].mid || m[0].full) + '" alt="' + esc(c.address) + ' photo 1 of ' + m.length + '">' +
-      '<button class="nav prev" type="button" aria-label="Previous photo">&#8249;</button><button class="nav next" type="button" aria-label="Next photo">&#8250;</button>' +
-      '<span class="count">1 / ' + m.length + '</span><div class="thumbs">' + thumbs + '</div></div>';
-  }
-  function compCard(c){
-    var facts = '<div class="facts"><span>Built <b>' + esc(c.yearBuilt || '—') + '</b></span><span><b>' + (c.sqft ? c.sqft.toLocaleString() : '—') + '</b> sf</span><span><b>' + esc(c.beds) + '</b> bed, <b>' + esc(c.baths) + '</b> bath</span>' +
-      (c.lotLabel ? '<span>Lot <b>' + esc(c.lotLabel) + '</b></span>' : '') + '<span>Per sf <b>' + (c.pricePerSqft ? '$' + c.pricePerSqft.toLocaleString() : '—') + '</b></span><span>Listed at <b>' + money(c.originalListPrice) + '</b></span><span><b>' + esc(c.cdom != null ? c.cdom : c.dom) + '</b> days</span></div>';
-    var lines = (c.adjustments || []).map(function(a){ return '<div class="row' + (a.auto ? ' auto' : '') + '"><span>' + esc(a.note) + '</span><span class="num">' + (a.amount > 0 ? '+ ' : a.amount < 0 ? '− ' : '') + money(Math.abs(a.amount)) + '</span></div>'; }).join('');
-    var ledger = '<div class="ledger">' + lines + '<div class="row total"><span>Adjusted to 501 Gunwale</span><span class="adj num">' + money(c.adjustedPrice) + '</span></div></div>';
-    return '<article class="comp" id="comp' + c.n + '">' + gallery(c) + '<div class="body"><div class="top"><h3>' + esc(c.address) + '</h3><div class="sold num">' + money(c.closePrice) + '<small>Sold ' + fmtDate(c.closedDate) + '</small></div></div>' + facts + ledger + '</div></article>';
-  }
-  function wireGalleries(root, comps){
-    root.querySelectorAll('.comp').forEach(function(card, idx){
-      var c = comps[idx], m = c.media || [], gal = card.querySelector('.gal'); if (!gal || !m.length) return;
-      var main = gal.querySelector('.main'), count = gal.querySelector('.count'), thumbs = gal.querySelectorAll('.thumbs img'), i = 0;
-      function show(n){
-        i = (n + m.length) % m.length; var x = m[i];
-        main.src = x.mid || x.full; main.alt = c.address + ' photo ' + (i+1) + ' of ' + m.length; count.textContent = (i+1) + ' / ' + m.length;
-        thumbs.forEach(function(t){ t.classList.toggle('on', +t.dataset.i === i); });
-        var on = gal.querySelector('.thumbs img.on'); if (on && on.scrollIntoView) on.scrollIntoView({block:'nearest', inline:'center', behavior:'smooth'});
-      }
-      gal.querySelector('.prev').addEventListener('click', function(){ show(i-1); });
-      gal.querySelector('.next').addEventListener('click', function(){ show(i+1); });
-      thumbs.forEach(function(t){ t.addEventListener('click', function(){ show(+t.dataset.i); }); });
-      main.addEventListener('error', function(){ main.style.visibility = 'hidden'; });
-      var x0 = null;
-      gal.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
-      gal.addEventListener('touchend', function(e){ if (x0 == null) return; var dx = e.changedTouches[0].clientX - x0; x0 = null; if (Math.abs(dx) > 40) show(dx < 0 ? i+1 : i-1); }, {passive:true});
-    });
-  }
+  // ── Home Platform CMA: suggested range + adjusted sales, link out for the rest ──
   fetch(FN + 'cma-live?cma=' + CMA.cma + '&agent=' + CMA.agent).then(function(r){ return r.json(); }).then(function(d){
-    if (!d.ok || !d.comps || !d.comps.length) throw new Error(d.error || 'no comps');
-    var grid = $('cmaGrid');
-    grid.innerHTML = d.comps.map(compCard).join('');
-    wireGalleries(grid, d.comps);
-    var s = d.summary, by = function(v){ var c = d.comps.filter(function(x){ return x.adjustedPrice === v; })[0]; return c ? c.address : ''; };
-    $('cmaLow').textContent = money(s.low); $('cmaLowWho').textContent = by(s.low);
-    $('cmaMed').textContent = money(s.median);
-    $('cmaHigh').textContent = money(s.high); $('cmaHighWho').textContent = by(s.high);
-    $('cmaSum').hidden = false;
-    $('cmaNote').innerHTML = 'From the Coldwell Banker Home Platform analysis for 501 Gunwale Lane, published ' + esc(fmtDate(d.publishedAt)) + (d.source === 'snapshot' ? ' (last saved copy)' : '') + '. Photos are the listing photos of record.' + (d.pdfUrl ? ' <a href="' + esc(d.pdfUrl) + '" target="_blank" rel="noopener">Open the full report (PDF)</a>' : '');
-  }).catch(function(e){
-    $('cmaGrid').innerHTML = '<div class="tile" style="color:var(--muted)">The full analysis is not loading right now. Ask Ryan or Anne for the PDF and we will send it the same day.</div>';
+    if (!d.ok) throw new Error(d.error || 'no cma');
+    var pr = d.pricing || {};
+    if (pr.low && pr.high) {
+      $('cmaRange').textContent = pr.low === pr.high ? mm(pr.low) : mm(pr.low) + ' to ' + mm(pr.high);
+      $('cmaRangeSub').textContent = 'From the analysis published ' + fmtDate(d.publishedAt);
+    } else {
+      $('cmaRangeSub').textContent = 'Analysis published ' + fmtDate(d.publishedAt);
+    }
+    var s = d.summary || {};
+    if (s.low != null) {
+      var by = function(v){ var c = (d.comps || []).filter(function(x){ return x.adjustedPrice === v; })[0]; return c ? c.address : ''; };
+      $('cmaLow').textContent = money(s.low); $('cmaLowWho').textContent = by(s.low);
+      $('cmaMed').textContent = money(s.median);
+      $('cmaHigh').textContent = money(s.high); $('cmaHighWho').textContent = by(s.high);
+      $('cmaStats').hidden = false;
+    }
+    $('cmaNote').textContent = 'Opens in a new window' + (d.source === 'snapshot' ? '; showing the last saved copy of the numbers.' : '.');
+  }).catch(function(){
+    $('cmaNote').textContent = 'Opens in a new window. If it does not load, ask Ryan or Anne for the PDF.';
   });
 })();
 </script>

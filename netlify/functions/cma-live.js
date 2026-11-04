@@ -95,7 +95,7 @@ function listingCore(l, overrides, key) {
     city: loc.city || null, state: loc.state || null, zip: loc.zipCode || null,
     lat: num(loc.latitude), lng: num(loc.longitude),
     status,
-    beds: num(size.bedrooms), baths: num(size.bathrooms) ?? num(size.totalBathrooms),  // Home Platform shows `bathrooms`
+    beds: num(size.bedrooms), baths: num(size.totalBathrooms) ?? num(size.bathrooms),
     sqft, lotSqft: num(size.lotSizeInSquareFeet), lotLabel: size.formattedLotSize || null,
     yearBuilt: yearBuilt(l, overrides, key),
     originalListPrice: listed, lastAskingPrice: preClose, closePrice: closed,
@@ -128,7 +128,9 @@ function normalize(d) {
   });
 
   const adjusted = comps.map((c) => c.adjustedPrice).filter((v) => v != null).sort((a, b) => a - b);
-  const median = adjusted.length ? (adjusted.length % 2 ? adjusted[(adjusted.length - 1) / 2] : Math.round((adjusted[adjusted.length / 2 - 1] + adjusted[adjusted.length / 2]) / 2)) : null;
+  // Home Platform reports the lower-middle value as "Median" on even counts; match it
+  // so the number on this page never disagrees with the CMA PDF.
+  const median = adjusted.length ? adjusted[Math.ceil(adjusted.length / 2) - 1] : null;
   const summary = {
     count: comps.length,
     low: adjusted[0] ?? null, high: adjusted[adjusted.length - 1] ?? null, median,
