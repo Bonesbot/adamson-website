@@ -2,11 +2,11 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-02T14:15:09.674961+00:00",
+  "lastUpdated": "2026-11-04T16:40:07.158430+00:00",
   "counts": {
     "sold": 108,
     "pending": 9,
-    "active": 40,
+    "active": 42,
     "total": 117
   },
   "metrics": {
@@ -22,23 +22,23 @@
     "maxPrice": "$22,900,000"
   },
   "active": {
-    "count": 40,
+    "count": 42,
     "medianPrice": "$737,500",
-    "medianPricePerSqFt": "$549",
-    "waterfrontCount": 15,
+    "medianPricePerSqFt": "$539",
+    "waterfrontCount": 16,
     "newConstructionCount": 12
   },
   "sold": {
-    "count": 21,
-    "medianPrice": "$590,000",
-    "medianDom": 74,
-    "saleToListRatio": "85.0%",
+    "count": 20,
+    "medianPrice": "$632,500",
+    "medianDom": 73,
+    "saleToListRatio": "84.8%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 6.8,
-    "sfhVilla": 5.0,
-    "blended": 5.3,
+    "sfhVilla": 5.3,
+    "blended": 5.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,15 +54,15 @@
     }
   },
   "priceBands": {
-    "under900k": 22,
+    "under900k": 23,
     "band900kTo1_5m": 7,
-    "band1_5mTo3m": 2,
+    "band1_5mTo3m": 3,
     "band3mPlus": 9
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 40
+      "count": 42
     }
   ],
   "buildingClasses": [],
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 2,
-      "avgPrice": "$592,450",
-      "avgPricePerSqFt": "$492",
+      "avgPrice": "$577,450",
+      "avgPricePerSqFt": "$479",
       "avgLivingSqFt": "1,211",
-      "avgDom": 16
+      "avgDom": 18
     },
     {
       "tier": "1990to2005",
@@ -172,7 +172,7 @@
       "avgPrice": "$541,857",
       "avgPricePerSqFt": "$600",
       "avgLivingSqFt": "903",
-      "avgDom": 146
+      "avgDom": 148
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 15,
+      "activeCount": 16,
       "soldCount": 27,
       "soldMedianPricePerSqFt": "$550",
       "soldMedianPrice": "$650,000",
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 22,
+      "activeCount": 23,
       "soldCount": 77,
       "soldMedianPricePerSqFt": "$393",
       "soldMedianPrice": "$575,000",
@@ -222,19 +222,19 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.3,
+    "monthsOfSupply": 5.5,
     "monthsOfSupplyCondo": 6.8,
-    "monthsOfSupplySfhVilla": 5.0,
+    "monthsOfSupplySfhVilla": 5.3,
     "label": "balanced market",
-    "activeCount": 40,
+    "activeCount": 42,
     "sold365Count": 91,
-    "sold90Count": 21,
+    "sold90Count": 20,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 88,
-      "activeCount": 31,
+      "activeCount": 33,
       "soldMedianPrice": "$670,000",
       "soldMedianPricePerSqFt": "$408"
     },
@@ -246,14 +246,14 @@
     }
   },
   "boating": {
-    "activeWithDock": 7,
-    "activeWaterfront": 15
+    "activeWithDock": 8,
+    "activeWaterfront": 16
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 40 active listings and roughly 8 closed sales a month (trailing 12 months), West Of Trail North has about 5.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 42 active listings and roughly 8 closed sales a month (trailing 12 months), West Of Trail North has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -268,12 +268,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 74 days on market and closed at 85.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 73 days on market and closed at 84.8% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail North homes have a dock?",
-      "a": "Of 15 active waterfront listings, 7 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 16 active waterfront listings, 8 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

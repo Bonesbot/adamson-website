@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-02T14:15:08.872795+00:00",
+  "lastUpdated": "2026-11-04T16:40:06.271390+00:00",
   "counts": {
-    "sold": 287,
-    "pending": 14,
-    "active": 93,
-    "total": 301
+    "sold": 288,
+    "pending": 15,
+    "active": 95,
+    "total": 303
   },
   "metrics": {
-    "avgPrice": "$2,109,416",
-    "avgPricePerSqFt": "$660",
+    "avgPrice": "$2,101,961",
+    "avgPricePerSqFt": "$658",
     "avgYearBuilt": 1982,
-    "avgLivingSqFt": "2,765",
+    "avgLivingSqFt": "2,763",
     "avgLotSqFt": null,
     "avgDom": 107
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$26,400,000"
   },
   "active": {
-    "count": 93,
-    "medianPrice": "$2,275,000",
-    "medianPricePerSqFt": "$765",
-    "waterfrontCount": 19,
+    "count": 95,
+    "medianPrice": "$2,295,000",
+    "medianPricePerSqFt": "$777",
+    "waterfrontCount": 21,
     "newConstructionCount": 28
   },
   "sold": {
-    "count": 45,
-    "medianPrice": "$1,747,200",
-    "medianDom": 77,
-    "saleToListRatio": "88.3%",
+    "count": 46,
+    "medianPrice": "$1,723,600",
+    "medianDom": 68,
+    "saleToListRatio": "88.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 5.6,
-    "sfhVilla": 5.1,
-    "blended": 5.1,
+    "sfhVilla": 5.2,
+    "blended": 5.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -55,14 +55,14 @@
   },
   "priceBands": {
     "under900k": 23,
-    "band900kTo1_5m": 14,
-    "band1_5mTo3m": 21,
-    "band3mPlus": 35
+    "band900kTo1_5m": 13,
+    "band1_5mTo3m": 22,
+    "band3mPlus": 37
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 93
+      "count": 95
     }
   ],
   "buildingClasses": [],
@@ -77,6 +77,19 @@
       "bathrooms": 3.0,
       "livingSqFt": "1,824",
       "yearBuilt": 1951,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4703724",
+      "address": "2253 GOLDENROD ST",
+      "subdivision": "SOUTH GATE",
+      "soldPrice": "$465,000",
+      "soldDate": "2026-10-30",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,278",
+      "yearBuilt": 1956,
       "propertyType": "Residential",
       "isWaterfront": false
     },
@@ -118,19 +131,6 @@
       "yearBuilt": 1969,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4704038",
-      "address": "2410 SIESTA DR",
-      "subdivision": "SOUTH GATE",
-      "soldPrice": "$1,200,000",
-      "soldDate": "2026-10-26",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,360",
-      "yearBuilt": 1955,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 7,
-      "avgPrice": "$447,814",
-      "avgPricePerSqFt": "$381",
+      "avgPrice": "$444,243",
+      "avgPricePerSqFt": "$378",
       "avgLivingSqFt": "1,134",
-      "avgDom": 132
+      "avgDom": 134
     },
     {
       "tier": "1990to2005",
@@ -187,7 +187,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 18,
+      "activeCount": 20,
       "soldCount": 31,
       "soldMedianPricePerSqFt": "$1,052",
       "soldMedianPrice": "$4,450,000",
@@ -215,28 +215,28 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 73,
-      "soldCount": 242,
-      "soldMedianPricePerSqFt": "$575",
-      "soldMedianPrice": "$1,487,500",
+      "soldCount": 243,
+      "soldMedianPricePerSqFt": "$574",
+      "soldMedianPrice": "$1,485,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.1,
+    "monthsOfSupply": 5.2,
     "monthsOfSupplyCondo": 5.6,
-    "monthsOfSupplySfhVilla": 5.1,
+    "monthsOfSupplySfhVilla": 5.2,
     "label": "balanced market",
-    "activeCount": 93,
-    "sold365Count": 218,
-    "sold90Count": 45,
+    "activeCount": 95,
+    "sold365Count": 219,
+    "sold90Count": 46,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 266,
-      "activeCount": 86,
-      "soldMedianPrice": "$1,607,500",
-      "soldMedianPricePerSqFt": "$643"
+      "soldCount": 267,
+      "activeCount": 88,
+      "soldMedianPrice": "$1,600,000",
+      "soldMedianPricePerSqFt": "$642"
     },
     "condo": {
       "soldCount": 21,
@@ -246,34 +246,34 @@
     }
   },
   "boating": {
-    "activeWithDock": 15,
-    "activeWaterfront": 19
+    "activeWithDock": 17,
+    "activeWaterfront": 21
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 93 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 5.1 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 95 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 5.2 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,607,500 ($643/sq ft), while condos, villas and townhouses sell around $315,000 ($317/sq ft)."
+      "a": "Single-family homes sell around $1,600,000 ($642/sq ft), while condos, villas and townhouses sell around $315,000 ($317/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,275,000."
+      "a": "Active listings run from $1,000 to $26,400,000, with a median asking price of $2,295,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 77 days on market and closed at 88.3% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 68 days on market and closed at 88.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail Core homes have a dock?",
-      "a": "Of 19 active waterfront listings, 15 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 21 active waterfront listings, 17 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
