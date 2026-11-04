@@ -101,6 +101,12 @@ https://adamsonfl.com/siesta-report/*    https://siestareport.com/              
 # One address, one slug. /mkt/<slug>/ is the CMA client page (real folder, wins over these
 # rules when it exists). The investment analyzer and its client report are single pages
 # served under the same slug via 200 rewrites; the pages read the slug from the path.
+# 2026-11-04: /mkt/501-gunwale/ lives on longboatlido.com only (the hub build prunes
+# the folder in postbuild; see scripts/prune-lll-only.mjs). Listed ahead of the
+# /mkt/:slug property rewrite below, which would otherwise swallow the path. Host-
+# scoped so the longboatlido build, which shares this file, keeps serving the page.
+https://adamsonfl.com/mkt/501-gunwale/*      https://longboatlido.com/mkt/501-gunwale/:splat  301!
+https://www.adamsonfl.com/mkt/501-gunwale/*  https://longboatlido.com/mkt/501-gunwale/:splat  301!
 /mkt/:slug/invest   /str-dashboard/index.html    200
 /mkt/:slug/report   /str-dashboard/report.html   200
 # Property home for slugs that have no CMA folder (real folders such as /mkt/admin/ and any
