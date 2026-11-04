@@ -160,6 +160,45 @@ footer p{max-width:72em;margin-top:8px}
   .rail .tick,.rail .lbl{font-size:.72rem}
   .band{padding-block:44px}
 }
+/* live sections: active comps grid + CMA comps (fed by cma-live / active-comps functions) */
+.live-note{font-size:.82rem;color:var(--muted);margin-top:10px}
+.live-note a{color:var(--gold-ink)}
+.badge{display:inline-block;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:var(--soft);color:var(--muted);vertical-align:middle;margin-left:6px}
+.badge.pend{background:#f3e6c4;color:#6b5420}
+.lot{display:inline-block;font-size:.78rem;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--fg);background:var(--panel)}
+.lot.bay{border-color:var(--navy);color:var(--navy)}
+.lot.canal{border-color:var(--gold);color:var(--gold-ink)}
+.lot.check{border-style:dashed}
+:root[data-theme="dark"] .lot.bay{border-color:#fff;color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lot.bay{border-color:#fff;color:#fff}}
+.cmagrid{display:grid;gap:18px}
+.comp{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+.comp .gal{position:relative;background:#0e1a2e;min-height:280px}
+.comp .gal img.main{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#0e1a2e}
+.comp .gal .nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:0;background:rgba(10,31,60,.72);color:#fff;font-size:1.3rem;line-height:1;cursor:pointer;display:grid;place-items:center}
+.comp .gal .nav.prev{left:10px}.comp .gal .nav.next{right:10px}
+.comp .gal .nav:focus-visible{outline:2px solid var(--gold)}
+.comp .gal .count{position:absolute;right:10px;bottom:10px;font-size:.74rem;background:rgba(10,31,60,.72);color:#fff;padding:3px 8px;border-radius:3px}
+.comp .thumbs{display:flex;gap:4px;overflow-x:auto;padding:6px;background:#0e1a2e;scrollbar-width:thin}
+.comp .thumbs img{width:56px;height:42px;object-fit:cover;flex:none;border-radius:2px;opacity:.55;cursor:pointer;border:2px solid transparent}
+.comp .thumbs img.on{opacity:1;border-color:var(--gold)}
+.comp .body{padding:20px 22px 18px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.comp .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+.comp h3{font-size:1.25rem}
+.comp .sold{font-family:var(--display);font-size:1.35rem;white-space:nowrap}
+.comp .sold small{display:block;font-family:var(--body);font-size:.78rem;color:var(--muted);font-weight:400}
+.comp .facts{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.88rem;color:var(--muted)}
+.comp .facts b{color:var(--fg);font-weight:600}
+.ledger{border-top:1px solid var(--line);padding-top:10px;font-size:.9rem}
+.ledger .row{display:flex;justify-content:space-between;gap:12px;padding:5px 0}
+.ledger .row span:first-child{color:var(--muted)}
+.ledger .row.auto span:first-child{color:var(--muted);font-style:italic}
+.ledger .row.total{border-top:1px solid var(--line);margin-top:4px;padding-top:9px;font-weight:600}
+.ledger .row.total span:first-child{color:var(--fg)}
+.ledger .adj{font-family:var(--display);font-size:1.2rem;color:var(--gold-ink)}
+.cmasum{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.cmasum .tile .v{font-size:1.6rem}
+@media (max-width:860px){.comp{grid-template-columns:1fr}.cmasum{grid-template-columns:1fr}}
 @media (prefers-reduced-motion: reduce){.hero video{display:none}}
 </style>
 </head>
@@ -288,6 +327,38 @@ footer p{max-width:72em;margin-top:8px}
   </div>
 </section>
 
+<section class="band" id="onmarket">
+  <div class="wrap">
+    <div class="head">
+      <h2>What is on the market right now</h2>
+      <p>Every single-family home for sale or under contract in Country Club Shores today, pulled from the MLS each morning, with 501 Gunwale placed where we would price it. Lot location is the first thing an island buyer sorts by, so it is the first column.</p>
+    </div>
+    <div class="tablewrap">
+      <table id="activeTable" aria-label="Active and pending listings in Country Club Shores">
+        <thead><tr><th>Address</th><th>Lot</th><th class="r">Built</th><th class="r">Heated sf</th><th class="r">Beds</th><th>Pool</th><th class="r">List price</th><th class="r">Per sf</th><th class="r">Days</th><th class="r">Original list</th></tr></thead>
+        <tbody class="num" id="activeBody"><tr><td colspan="10" style="white-space:normal;color:var(--muted)">Loading today's listings</td></tr></tbody>
+      </table>
+    </div>
+    <p class="caption" id="activeNote">Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year. Heated square feet per the MLS.</p>
+  </div>
+</section>
+
+<section class="band" id="cmacomps">
+  <div class="wrap">
+    <div class="head">
+      <h2>The comparable sales, in full</h2>
+      <p>The same four sales from the formal analysis, with every listing photo so the adjustments make sense: kitchens, baths, pool areas, dock. Each line under a home is a correction that makes that sale read as if it were 501 Gunwale.</p>
+    </div>
+    <div class="cmagrid" id="cmaGrid"><div class="tile" style="color:var(--muted)">Loading the analysis</div></div>
+    <div class="cmasum" id="cmaSum" hidden>
+      <div class="tile"><div class="k">Lowest adjusted</div><div class="v num" id="cmaLow"></div><div class="s" id="cmaLowWho"></div></div>
+      <div class="tile gold"><div class="k">Median adjusted</div><div class="v num" id="cmaMed"></div><div class="s">Four closed sales, each corrected to 501 Gunwale</div></div>
+      <div class="tile"><div class="k">Highest adjusted</div><div class="v num" id="cmaHigh"></div><div class="s" id="cmaHighWho"></div></div>
+    </div>
+    <p class="live-note" id="cmaNote"></p>
+  </div>
+</section>
+
 <section class="band">
   <div class="wrap">
     <div class="head">
@@ -383,6 +454,103 @@ footer p{max-width:72em;margin-top:8px}
     fetch('https://adamsonfl.com/.netlify/functions/community-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
       .then(function(r){ if(!r.ok) throw new Error('bad'); ok.classList.add('show'); form.reset(); btn.textContent='Sent'; })
       .catch(function(){ err.textContent='That did not go through. Call or text Ryan at 941.713.9234 and we will take it from there.'; btn.disabled=false; btn.textContent='Ask for the walk-through'; });
+  });
+})();
+</script>
+<script>
+(function(){
+  // ── page config: the only numbers typed here. Everything else is live. ──
+  var FN = 'https://adamsonfl.com/.netlify/functions/';
+  var CMA = { cma: 'cma-6a892e67-8852-44ec-89d7-db13c5ffa40a', agent: '6a68f0769020cc00019e537d' };
+  var SUBJECT = { address: '501 Gunwale Ln', lot: 'Canal', yearBuilt: 2020, sqft: 2523, beds: 3, pool: true, priceLow: 2900000, priceHigh: 3500000 };
+  var SUBDIVISION = 'COUNTRY CLUB SHORES';
+
+  var $ = function(id){ return document.getElementById(id); };
+  var money = function(n){ return n == null ? '—' : '$' + Math.round(n).toLocaleString('en-US'); };
+  var mm = function(n){ return n == null ? '—' : '$' + (n/1e6).toFixed(n % 1e6 === 0 ? 1 : 2).replace(/\.?0+$/,'') + 'MM'; };
+  var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+  var fmtDate = function(iso){ if(!iso) return ''; var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); };
+
+  // ── active comps grid ──
+  function lotPill(lot){
+    var cls = /bay/i.test(lot) ? 'bay' : /canal/i.test(lot) ? 'canal' : '';
+    if (/view|verify/i.test(lot)) cls += ' check';
+    return '<span class="lot ' + cls + '">' + esc(lot) + '</span>';
+  }
+  function activeRow(r, isSubject){
+    var days = r.dom == null ? '—' : (r.cdom && r.cdom !== r.dom ? r.dom + ' (' + r.cdom + ')' : r.dom);
+    var price = isSubject ? mm(SUBJECT.priceLow) + ' to ' + mm(SUBJECT.priceHigh) : money(r.listPrice);
+    var psf = isSubject ? '$' + Math.round(SUBJECT.priceLow/SUBJECT.sqft).toLocaleString() + ' to $' + Math.round(SUBJECT.priceHigh/SUBJECT.sqft).toLocaleString() : (r.pricePerSqft == null ? '—' : '$' + r.pricePerSqft.toLocaleString());
+    var badge = isSubject ? '<span class="badge">where we would land</span>' : (r.status === 'Pending' ? '<span class="badge pend">Pending</span>' : '');
+    return '<tr' + (isSubject ? ' class="subject"' : '') + '><td>' + esc(r.address) + badge + '</td><td>' + lotPill(r.lot) + '</td>' +
+      '<td class="r">' + esc(r.yearBuilt || '—') + '</td><td class="r">' + (r.sqft ? r.sqft.toLocaleString() : '—') + '</td><td class="r">' + esc(r.beds || '—') + '</td>' +
+      '<td>' + (r.pool ? 'Yes' : 'No') + '</td><td class="r">' + price + '</td><td class="r">' + psf + '</td><td class="r">' + (isSubject ? '—' : days) + '</td>' +
+      '<td class="r">' + (isSubject ? '—' : money(r.originalListPrice)) + '</td></tr>';
+  }
+  fetch(FN + 'active-comps?subdivision=' + encodeURIComponent(SUBDIVISION)).then(function(r){ return r.json(); }).then(function(d){
+    if (!d.ok) throw new Error(d.error || 'no data');
+    var rows = d.rows.slice().sort(function(a,b){ return (a.listPrice||0) - (b.listPrice||0); });
+    var html = '', placed = false;
+    rows.forEach(function(r){
+      if (!placed && (r.listPrice || 0) >= SUBJECT.priceLow) { html += activeRow(SUBJECT, true); placed = true; }
+      html += activeRow(r, false);
+    });
+    if (!placed) html += activeRow(SUBJECT, true);
+    $('activeBody').innerHTML = html;
+    var flagged = d.rows.filter(function(r){ return r.lotNote; });
+    $('activeNote').textContent = rows.length + ' listings as of ' + fmtDate(d.asOf) + '. Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year. Heated square feet per the MLS.' + (flagged.length ? ' A dashed lot pill means the MLS lists a water view without a waterfront flag; we confirm those by eye.' : '');
+  }).catch(function(e){
+    $('activeBody').innerHTML = '<tr><td colspan="10" style="white-space:normal;color:var(--muted)">Today’s listings are not loading right now. Call or text Ryan at 941.713.9234 and we will walk you through them.</td></tr>';
+  });
+
+  // ── CMA comps from Home Platform ──
+  function gallery(c){
+    var m = c.media || [];
+    if (!m.length) return '<div class="gal"></div>';
+    var thumbs = m.slice(0, 40).map(function(x,i){ return '<img loading="lazy" src="' + esc(x.thumb || x.mid) + '" alt="" data-i="' + i + '"' + (i===0 ? ' class="on"' : '') + '>'; }).join('');
+    return '<div class="gal" data-n="' + m.length + '"><img class="main" src="' + esc(m[0].mid || m[0].full) + '" alt="' + esc(c.address) + ' photo 1 of ' + m.length + '">' +
+      '<button class="nav prev" type="button" aria-label="Previous photo">&#8249;</button><button class="nav next" type="button" aria-label="Next photo">&#8250;</button>' +
+      '<span class="count">1 / ' + m.length + '</span><div class="thumbs">' + thumbs + '</div></div>';
+  }
+  function compCard(c){
+    var facts = '<div class="facts"><span>Built <b>' + esc(c.yearBuilt || '—') + '</b></span><span><b>' + (c.sqft ? c.sqft.toLocaleString() : '—') + '</b> sf</span><span><b>' + esc(c.beds) + '</b> bed, <b>' + esc(c.baths) + '</b> bath</span>' +
+      (c.lotLabel ? '<span>Lot <b>' + esc(c.lotLabel) + '</b></span>' : '') + '<span>Per sf <b>' + (c.pricePerSqft ? '$' + c.pricePerSqft.toLocaleString() : '—') + '</b></span><span>Listed at <b>' + money(c.originalListPrice) + '</b></span><span><b>' + esc(c.cdom != null ? c.cdom : c.dom) + '</b> days</span></div>';
+    var lines = (c.adjustments || []).map(function(a){ return '<div class="row' + (a.auto ? ' auto' : '') + '"><span>' + esc(a.note) + '</span><span class="num">' + (a.amount > 0 ? '+ ' : a.amount < 0 ? '− ' : '') + money(Math.abs(a.amount)) + '</span></div>'; }).join('');
+    var ledger = '<div class="ledger">' + lines + '<div class="row total"><span>Adjusted to 501 Gunwale</span><span class="adj num">' + money(c.adjustedPrice) + '</span></div></div>';
+    return '<article class="comp" id="comp' + c.n + '">' + gallery(c) + '<div class="body"><div class="top"><h3>' + esc(c.address) + '</h3><div class="sold num">' + money(c.closePrice) + '<small>Sold ' + fmtDate(c.closedDate) + '</small></div></div>' + facts + ledger + '</div></article>';
+  }
+  function wireGalleries(root, comps){
+    root.querySelectorAll('.comp').forEach(function(card, idx){
+      var c = comps[idx], m = c.media || [], gal = card.querySelector('.gal'); if (!gal || !m.length) return;
+      var main = gal.querySelector('.main'), count = gal.querySelector('.count'), thumbs = gal.querySelectorAll('.thumbs img'), i = 0;
+      function show(n){
+        i = (n + m.length) % m.length; var x = m[i];
+        main.src = x.mid || x.full; main.alt = c.address + ' photo ' + (i+1) + ' of ' + m.length; count.textContent = (i+1) + ' / ' + m.length;
+        thumbs.forEach(function(t){ t.classList.toggle('on', +t.dataset.i === i); });
+        var on = gal.querySelector('.thumbs img.on'); if (on && on.scrollIntoView) on.scrollIntoView({block:'nearest', inline:'center', behavior:'smooth'});
+      }
+      gal.querySelector('.prev').addEventListener('click', function(){ show(i-1); });
+      gal.querySelector('.next').addEventListener('click', function(){ show(i+1); });
+      thumbs.forEach(function(t){ t.addEventListener('click', function(){ show(+t.dataset.i); }); });
+      main.addEventListener('error', function(){ main.style.visibility = 'hidden'; });
+      var x0 = null;
+      gal.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+      gal.addEventListener('touchend', function(e){ if (x0 == null) return; var dx = e.changedTouches[0].clientX - x0; x0 = null; if (Math.abs(dx) > 40) show(dx < 0 ? i+1 : i-1); }, {passive:true});
+    });
+  }
+  fetch(FN + 'cma-live?cma=' + CMA.cma + '&agent=' + CMA.agent).then(function(r){ return r.json(); }).then(function(d){
+    if (!d.ok || !d.comps || !d.comps.length) throw new Error(d.error || 'no comps');
+    var grid = $('cmaGrid');
+    grid.innerHTML = d.comps.map(compCard).join('');
+    wireGalleries(grid, d.comps);
+    var s = d.summary, by = function(v){ var c = d.comps.filter(function(x){ return x.adjustedPrice === v; })[0]; return c ? c.address : ''; };
+    $('cmaLow').textContent = money(s.low); $('cmaLowWho').textContent = by(s.low);
+    $('cmaMed').textContent = money(s.median);
+    $('cmaHigh').textContent = money(s.high); $('cmaHighWho').textContent = by(s.high);
+    $('cmaSum').hidden = false;
+    $('cmaNote').innerHTML = 'From the Coldwell Banker Home Platform analysis for 501 Gunwale Lane, published ' + esc(fmtDate(d.publishedAt)) + (d.source === 'snapshot' ? ' (last saved copy)' : '') + '. Photos are the listing photos of record.' + (d.pdfUrl ? ' <a href="' + esc(d.pdfUrl) + '" target="_blank" rel="noopener">Open the full report (PDF)</a>' : '');
+  }).catch(function(e){
+    $('cmaGrid').innerHTML = '<div class="tile" style="color:var(--muted)">The full analysis is not loading right now. Ask Ryan or Anne for the PDF and we will send it the same day.</div>';
   });
 })();
 </script>
