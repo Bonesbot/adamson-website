@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#0A1F3C">
+<title>4539 Bay Club Drive</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preload" as="image" href="hero-mobile.webp" media="(max-width: 767px)">
+<link rel="preload" as="image" href="hero-desktop.webp" media="(min-width: 768px)">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap">
+<style>
+/* Phone first. One navy hero, then short sand bands. Every number on this page comes
+   from the Home Platform CMA of Sep 22, 2026 or the live MLS feed; nothing re-derived. */
+:root{
+  --navy:#0A1F3C; --navy-2:#12305a; --gold:#C9A961; --gold-ink:#8a6d2b;
+  --bg:#F7F4EE; --panel:#FFFFFF; --fg:#1b2434; --muted:#5c6675; --line:#e2dcd0; --soft:#efeadf;
+  --display:"Playfair Display",Georgia,"Times New Roman",serif;
+  --body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c1627; --panel:#132038; --fg:#eef0f4; --muted:#B4BECD; --line:#273553; --soft:#182a47; --gold-ink:#d9bd79; color-scheme:dark}}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 var(--body)}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.01em;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.band{padding-block:40px}
+.band + .band{border-top:1px solid var(--line)}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+
+/* hero: still photo, text pinned to the bottom, fits one phone screen */
+.hero{position:relative;background:var(--navy);color:#fff;overflow:hidden;min-height:78svh;display:flex;align-items:flex-end}
+.hero picture,.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,31,60,.08) 0%,rgba(10,31,60,.16) 36%,rgba(10,31,60,.72) 62%,rgba(10,31,60,.95) 100%)}
+.hero .wrap{position:relative;padding-block:96px max(36px,env(safe-area-inset-bottom,0px));width:100%}
+.hero h1{font-size:clamp(2.2rem,8vw,4rem);line-height:1.05;margin-top:8px}
+.hero .sub{font-size:1.05rem;color:#dfe5ee;max-width:36em;margin-top:14px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:20px;font-size:.86rem;color:#B4BECD}
+.hero .meta b{color:#fff;font-weight:600}
+@media (min-width:768px){.hero{min-height:clamp(540px,80vh,820px)}.hero .wrap{padding-block:120px 44px}.band{padding-block:56px}}
+
+/* tiles: 1 column on phones, 2 on tablets, 4 on desktop */
+.tiles{display:grid;grid-template-columns:1fr;gap:12px;margin-top:-22px;position:relative}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px 18px 16px;min-width:0;box-shadow:0 10px 30px rgba(10,31,60,.08)}
+.tile .k{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tile .v{font-family:var(--display);font-size:1.7rem;line-height:1.1;margin-top:6px;color:var(--fg)}
+.tile .s{font-size:.86rem;color:var(--muted);margin-top:6px}
+.tile.gold .v{color:var(--gold-ink)}
+@media (min-width:560px){.tiles{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:900px){.tiles{grid-template-columns:repeat(4,1fr);margin-top:-34px}.tile .v{font-size:1.9rem}}
+
+/* section heads */
+.head{display:grid;gap:10px;margin-bottom:22px}
+.head h2{font-size:clamp(1.5rem,5vw,2.2rem);line-height:1.15}
+.head p{color:var(--muted);max-width:44em}
+@media (min-width:860px){.head{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px 48px;align-items:end;margin-bottom:28px}}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:1fr;gap:10px}
+.gallery figure{margin:0;border-radius:8px;overflow:hidden;background:var(--soft);aspect-ratio:4/3}
+.gallery img{display:block;width:100%;height:100%;object-fit:cover}
+@media (min-width:600px){.gallery{grid-template-columns:repeat(3,1fr)}}
+.caption{font-size:.84rem;color:var(--muted);margin-top:12px}
+
+/* tables (desktop) */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--panel);-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{padding:11px 10px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:top}
+th{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--soft);position:sticky;top:0}
+td.r,th.r{text-align:right}
+tr:last-child td{border-bottom:0}
+td .sub{display:block;font-size:.78rem;color:var(--muted);white-space:normal;font-weight:400}
+td a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
+:root[data-theme="dark"] td a{color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) td a{color:#fff}}
+tr.subject td{background:var(--soft);font-weight:600}
+tr.same td{background:rgba(201,169,97,.10)}
+tr.same td:first-child{box-shadow:inset 3px 0 0 var(--gold)}
+.card.same{border-color:var(--gold);box-shadow:inset 3px 0 0 var(--gold)}
+.badge.same{background:var(--gold);color:#0A1F3C}
+.legend{display:inline-block;width:12px;height:12px;border-radius:2px;background:rgba(201,169,97,.35);border-left:3px solid var(--gold);vertical-align:-1px;margin-right:6px}
+.badge{display:inline-block;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:var(--navy);color:#fff;vertical-align:middle;margin-left:6px;white-space:nowrap}
+.badge.pend{background:#f3e6c4;color:#6b5420}
+.badge.snap{background:var(--soft);color:var(--muted);border:1px solid var(--line)}
+.badge.sold{background:#e3ecd9;color:#2f5b1f}
+.badge.off{background:var(--soft);color:var(--muted)}
+.pill{display:inline-block;font-size:.76rem;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--fg);background:var(--panel)}
+.pill.bay{border-color:var(--navy);color:var(--navy)}
+:root[data-theme="dark"] .pill.bay{border-color:#fff;color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pill.bay{border-color:#fff;color:#fff}}
+
+/* cards (phones): the same rows, stacked */
+.cards{display:grid;gap:10px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 14px 12px}
+.card.subject{background:var(--soft);border-color:var(--gold)}
+.card .top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.card .addr{font-weight:600;line-height:1.3}
+.card .addr a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
+:root[data-theme="dark"] .card .addr a{color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .card .addr a{color:#fff}}
+.card .where{font-size:.8rem;color:var(--muted);margin-top:2px}
+.card .price{font-family:var(--display);font-size:1.25rem;white-space:nowrap;text-align:right}
+.card .price small{display:block;font-family:var(--body);font-size:.78rem;color:var(--muted);font-weight:400}
+.card .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px 6px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+.card .facts div{min-width:0}
+.card .facts .k{display:block;font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card .facts b{display:block;font-weight:600;font-size:.92rem;margin-top:2px;white-space:nowrap}
+.card .note{font-size:.82rem;color:var(--muted);margin-top:10px}
+.card .office{font-size:.72rem;color:var(--muted);margin-top:8px}
+.tablewrap{display:none}
+@media (min-width:760px){.tablewrap{display:block}.cards{display:none}}
+
+/* stat strip under the live table */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;min-width:0}
+.stat .k{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.stat .v{font-family:var(--display);font-size:1.3rem;margin-top:4px}
+.stat .s{font-size:.78rem;color:var(--muted);margin-top:2px}
+@media (min-width:760px){.stats{grid-template-columns:repeat(4,1fr)}}
+
+/* paths */
+.paths{display:grid;grid-template-columns:1fr;gap:12px}
+.path{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 18px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.path h3{font-size:1.2rem}
+.path .when{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-ink)}
+.path p{color:var(--muted);font-size:.95rem}
+.path ul{margin:4px 0 0;padding-left:18px;font-size:.92rem;color:var(--fg)}
+.path li{margin:4px 0}
+@media (min-width:860px){.paths{grid-template-columns:repeat(3,1fr);gap:16px}}
+
+/* ask */
+.ask{background:var(--navy);color:#fff}
+.ask .wrap{display:grid;grid-template-columns:1fr;gap:28px}
+.ask h2{font-size:clamp(1.5rem,5vw,2.2rem);color:#fff;line-height:1.15}
+.ask p{color:#dfe5ee;margin-top:12px}
+.person{display:flex;gap:14px;align-items:center;margin-top:22px}
+.person .ring{width:48px;height:48px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;font-family:var(--display);color:var(--gold);font-size:1.1rem;flex:none}
+.person b{display:block;color:#fff}
+.person span{font-size:.9rem;color:#B4BECD}
+.person a{color:#fff;text-decoration:none}
+.form{background:#fff;color:#1b2434;border-radius:8px;padding:20px}
+.form label{display:block;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:#5c6675;margin:12px 0 4px}
+.form label:first-of-type{margin-top:0}
+.form input,.form textarea{width:100%;font:inherit;font-size:16px;padding:12px;border:1px solid #d6d0c4;border-radius:6px;background:#fff;color:#1b2434}
+.form input:focus,.form textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+.form .hint{font-size:.8rem;color:#5c6675;margin-top:4px}
+.form button{margin-top:16px;width:100%;font:inherit;font-weight:600;padding:14px 16px;border:0;border-radius:6px;background:var(--navy);color:#fff;cursor:pointer}
+.form .ok{display:none;padding:14px;border-radius:6px;background:#f1ecdf;color:#1b2434;margin-top:12px}
+.form .ok.show{display:block}
+.form .err{color:#9b2c2c;font-size:.88rem;margin-top:8px}
+.quiet{font-size:.8rem;color:#5c6675;margin-top:10px}
+@media (min-width:860px){.ask .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}}
+
+/* sticky call bar on phones */
+.callbar{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;gap:8px;padding:10px max(12px,env(safe-area-inset-right,0px)) max(10px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:rgba(247,244,238,.94);backdrop-filter:saturate(1.4) blur(8px);border-top:1px solid var(--line)}
+.callbar a{flex:1;text-align:center;font-weight:600;padding:12px;border-radius:6px;text-decoration:none;font-size:.95rem}
+.callbar .call{background:var(--navy);color:#fff}
+.callbar .text{background:var(--panel);color:var(--navy);border:1px solid var(--line)}
+body{padding-bottom:72px}
+@media (min-width:760px){.callbar{display:none}body{padding-bottom:0}}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .callbar{background:rgba(12,22,39,.92)}:root:not([data-theme="light"]) .callbar .text{color:#fff}}
+
+footer{padding-block:28px 40px;font-size:.78rem;color:var(--muted)}
+footer .logos{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;margin-bottom:12px;font-family:var(--display);color:var(--fg);font-size:.95rem}
+footer p{max-width:72em;margin-top:8px}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <picture aria-hidden="true">
+    <source media="(max-width: 767px)" type="image/webp" srcset="hero-mobile.webp">
+    <source media="(max-width: 767px)" srcset="hero-mobile.jpg">
+    <source type="image/webp" srcset="hero-desktop.webp">
+    <img src="hero-desktop.jpg" alt="" fetchpriority="high">
+  </picture>
+  <div class="shade" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="eyebrow">Conquistador Bay Club · Bradenton</p>
+    <h1>4539 Bay Club Drive</h1>
+    <p class="sub">Every true waterfront condo competing for your buyer right now, from Bradenton to Longboat Key, with your residence placed where it belongs. Pulled from the MLS each morning.</p>
+    <div class="meta">
+      <span>Prepared for the owners of 4539 Bay Club</span>
+      <span><b>Ryan Adamson</b>, Coldwell Banker Realty</span>
+      <span id="heroDate">November 6, 2026</span>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="tiles">
+    <div class="tile">
+      <div class="k">Your residence</div>
+      <div class="v num">1,760 sf</div>
+      <div class="s">2 bed, 2 bath, private elevator, new impact patio windows. Direct bayfront in a 28-residence community.</div>
+    </div>
+    <div class="tile gold">
+      <div class="k">Bay Club sales this year</div>
+      <div class="v num">$605,000 · $600,000</div>
+      <div class="s">4535 (2,100 sf, $288 per sq ft, 192 days) and 4557 (2,224 sf, $270 per sq ft, 14 days)</div>
+    </div>
+    <div class="tile">
+      <div class="k">Competing today</div>
+      <div class="v num" id="tileCount">—</div>
+      <div class="s" id="tileCountSub">Waterfront condos, 1,500+ sq ft, garage or carport, under $1MM</div>
+    </div>
+    <div class="tile">
+      <div class="k">Bay Club on the market now</div>
+      <div class="v num" id="tileCbc">—</div>
+      <div class="s" id="tileCbcSub">Live from the MLS</div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="building">
+  <div class="wrap">
+    <div class="head">
+      <h2>What Conquistador Bay Club has taught buyers this year</h2>
+      <p>Five residences in your five buildings have been on the market since early 2025. Two sold, two left the market, one is back on. The pattern is the pricing lesson for 4539. From the analysis prepared September 22, 2026.</p>
+    </div>
+    <div class="tablewrap">
+      <table aria-label="Recent activity in Conquistador Bay Club">
+        <thead><tr><th>Residence</th><th>Outcome</th><th class="r">Heated sf</th><th class="r">Bd / Ba</th><th class="r">First asked</th><th class="r">Result</th><th class="r">Per sf</th><th class="r">Days</th></tr></thead>
+        <tbody class="num" id="cbcTable"></tbody>
+      </table>
+    </div>
+    <div class="cards" id="cbcCards"></div>
+    <p class="caption">The two closings landed within $5,000 of each other. The one that opened at $730,000 took 192 days and gave back 17%; the one that opened at $599,000 was under contract in two weeks at full price. Source: Home Platform CMA, Sep 22, 2026, from Stellar MLS.</p>
+  </div>
+</section>
+
+<section class="band" id="onmarket">
+  <div class="wrap">
+    <div class="head">
+      <h2>Your competition, this morning</h2>
+      <p id="onmarketIntro">Every true waterfront condo a buyer at your price point is also touring today: 1,500 square feet or more, with a garage or carport, under $1MM, from west Bradenton through Longboat Key. Tap an address for the full listing and photos. Ordered by list price, highest first, with 4539 placed where we would price it. The other Conquistador Bay Club residences are marked in gold: same buildings, same bay, the truest comparison.</p>
+    </div>
+    <div class="tablewrap">
+      <table id="activeTable" aria-label="Active waterfront condo competition">
+        <thead><tr><th>Address</th><th>Water</th><th class="r">Built</th><th class="r">Heated sf</th><th class="r">Bd / Ba</th><th class="r">Garage</th><th class="r">Dues / mo</th><th class="r">List price</th><th class="r">Per sf</th><th class="r">Days</th><th class="r">Of orig.</th></tr></thead>
+        <tbody class="num" id="activeBody"><tr><td colspan="11" style="white-space:normal;color:var(--muted)">Loading today's listings</td></tr></tbody>
+      </table>
+    </div>
+    <div class="cards num" id="activeCards"><div class="card muted">Loading today's listings</div></div>
+    <div class="stats" id="activeStats" hidden>
+      <div class="stat"><div class="k">List price</div><div class="v num" id="stPrice"></div><div class="s" id="stPriceS"></div></div>
+      <div class="stat"><div class="k">Per sq ft</div><div class="v num" id="stPsf"></div><div class="s" id="stPsfS"></div></div>
+      <div class="stat"><div class="k">Heated sq ft</div><div class="v num" id="stSqft"></div><div class="s" id="stSqftS"></div></div>
+      <div class="stat"><div class="k">Days on market</div><div class="v num" id="stDom"></div><div class="s" id="stDomS"></div></div>
+    </div>
+    <p class="caption" id="activeNote">Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year. Dues are the MLS total annual fees divided by twelve.</p>
+  </div>
+</section>
+
+<section class="band" id="community">
+  <div class="wrap">
+    <div class="head">
+      <h2>Why the right buyer pays for Bay Club</h2>
+      <p>Twenty-eight residences across five elevated buildings, private two-car garages with elevator access, a riprap-protected bayfront with the Sarasota skyline across the water, and IMG Golf Club at the end of the path. Low density is the thing the big towers cannot offer, and it is the first line of the listing.</p>
+    </div>
+    <div class="gallery">
+      <figure><img src="cbc-1.jpg" srcset="cbc-1.webp" alt="Conquistador Bay Club buildings along Sarasota Bay from the air" loading="lazy"></figure>
+      <figure><img src="cbc-2.jpg" srcset="cbc-2.webp" alt="IMG Golf Club fairways running to Sarasota Bay beside Conquistador Bay Club" loading="lazy"></figure>
+      <figure><img src="cbc-3.jpg" srcset="cbc-3.webp" alt="The Conquistador Bay Club pool and spa from above" loading="lazy"></figure>
+    </div>
+    <p class="caption">Community and neighboring-residence photography. Professional photography of 4539 is part of the listing plan, not a cost to you.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="head">
+      <h2>Three ways to sell, if you ever want to</h2>
+      <p>You may not. If you do, these are the real options for a Bay Club residence, with the tradeoffs stated plainly. Nothing here requires a decision today.</p>
+    </div>
+    <div class="paths">
+      <div class="path">
+        <div class="when">January to March</div>
+        <h3>Open market, in season</h3>
+        <p>Full exposure while buyers are in town. The most showings, the best price discovery, and the building's own lesson applied: priced to sell in the first 45 days, not to test.</p>
+        <ul><li>Pre-list walk-through and professional media</li><li>Milestone, reserves and the 2025 roof told up front</li><li>Showings scheduled around your calendar</li></ul>
+      </div>
+      <div class="path">
+        <div class="when">Any time, quietly</div>
+        <h3>Off-market first</h3>
+        <p>We take the residence to our buyer database and the Coldwell Banker network before it is public. No photos online, no neighbors asking.</p>
+        <ul><li>Qualified buyers only, by appointment</li><li>Move to the open market only if you choose to</li><li>Your timeline, not the market's</li></ul>
+      </div>
+      <div class="path">
+        <div class="when">No timeline</div>
+        <h3>Name your number</h3>
+        <p>Tell us the price that would make you move. Nothing signed. We only call if we have a buyer at that number.</p>
+        <ul><li>Zero commitment, zero paperwork</li><li>We watch the market for you in the meantime</li><li>Change your mind at any time</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band ask" id="ask">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">A small ask</p>
+      <h2>Twenty minutes turns this page into a number.</h2>
+      <p>We walk the residence, you tell me what has changed and what you are thinking about, and within two days you have a written valuation and a plan you keep whether or not you ever list.</p>
+      <div class="person"><div class="ring">R</div><div><b>Ryan Adamson, PA</b><span>Coldwell Banker Realty · <a href="tel:+19417139234">941.713.9234</a> · <a href="mailto:Ryan@Adamson-Group.com">Ryan@Adamson-Group.com</a></span></div></div>
+    </div>
+    <form class="form" id="askForm" novalidate>
+      <input type="text" name="bot-field" id="botField" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+      <label for="f-name">Name</label>
+      <input id="f-name" name="name" type="text" autocomplete="name">
+      <label for="f-email">Email</label>
+      <input id="f-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+      <label for="f-phone">Phone (optional)</label>
+      <input id="f-phone" name="phone" type="tel" autocomplete="tel">
+      <label for="f-mmm">Name your number (optional)</label>
+      <input id="f-mmm" name="make_me_move" type="text" inputmode="numeric" placeholder="$">
+      <div class="hint">No agreement signed. We reach out only if we find a buyer at this amount.</div>
+      <label for="f-notes">Anything you want me to know</label>
+      <textarea id="f-notes" name="notes" rows="3" placeholder="Timing, questions, or just say hello"></textarea>
+      <button type="submit" id="f-submit">Ask for the walk-through</button>
+      <div class="err" id="f-err" role="alert"></div>
+      <div class="ok" id="f-ok">Thank you. Ryan will reach out within one business day.</div>
+      <p class="quiet">Prefer to call or text? 941.713.9234. Nothing you share here is shared further.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logos"><span>The Adamson Group</span><span>·</span><span>Coldwell Banker Realty</span></div>
+    <p>Sources: Stellar MLS active listings, refreshed each morning (date shown above the table); Conquistador Bay Club sales and listing history from the Coldwell Banker Home Platform comparative market analysis for 4539 Bay Club Drive dated September 22, 2026. Figures are reported as published and not re-derived.</p>
+    <p id="idxNote">Listings in the competition table are offered by the brokerages named with each listing and are displayed under the Stellar MLS Internet Data Exchange program. Information is deemed reliable but not guaranteed and may have changed since the last update.</p>
+    <p>This is a market overview prepared for the owners of 4539 Bay Club Drive, not an appraisal and not a solicitation of a property already listed for sale. Values are estimates for discussion; an opinion of value for lending or legal purposes requires a licensed appraiser. Coldwell Banker Realty. Equal Housing Opportunity.</p>
+  </div>
+</footer>
+
+<div class="callbar" aria-label="Contact Ryan">
+  <a class="call" href="tel:+19417139234">Call Ryan</a>
+  <a class="text" href="sms:+19417139234">Text</a>
+</div>
+
+<script>
+(function(){
+  // ── page config: the only things typed here. Everything in the live table comes from the MLS. ──
+  var FN = 'https://adamsonfl.com/.netlify/functions/';
+  var SET = '4539-bay-club';   // competition_sets.set_key (once the table exists); IDS below is the same roster for the ids= fallback
+  var IDS = ['A4707843','A4711413','A4660592','A4709314','A4708451','A4679944','TB8550356','A4709278','A4679886','A4652757','A4703911','A4674328','A4703351','A4710787','A4709355','A4669912','A4609759'];
+  // Pricing: set priceLow/priceHigh once the range is agreed. Until then the subject row pins to the top, unpriced.
+  var SUBJECT = { address: '4539 Bay Club Dr', subdivision: 'Conquistador Bay Club', city: 'Bradenton', water: 'Bay front', yearBuilt: 1984, sqft: 1760, beds: 2, baths: 2, garage: 2, hoaMonthly: 1400, priceLow: null, priceHigh: null };
+  var CBC_SUBDIVISION = /conquistador bay club/i;
+  // One-line notes under an address (by MLS number). Facts only, nothing a neighbor would mind reading.
+  var NOTES = {};
+  // Snapshot rows for MLS numbers outside the nightly import geography (west Bradenton 34209). Same shape as the live rows.
+  var SNAPSHOT_AS_OF = '2026-11-06';
+  var SNAPSHOT = [
+    {id:'A4679886',address:'395 Aruba Cir #303',city:'Bradenton',subdivision:'Marina Walk On One Particular Harbour 2',status:'Active',yearBuilt:2016,sqft:1664,beds:3,baths:3,garage:0,hoaMonthly:1518,water:'Bay view',listPrice:685000,pricePerSqft:412,dom:282,cdom:282,originalListPrice:749000,listOffice:"Premier Sotheby's International Realty"},
+    {id:'A4703911',address:'384 Aruba Cir #102',city:'Bradenton',subdivision:'Marina Walk On One Particular Harbour 2',status:'Active',yearBuilt:2017,sqft:1664,beds:3,baths:3,garage:0,hoaMonthly:1518,water:'Bay view',listPrice:724999,pricePerSqft:436,dom:71,cdom:71,originalListPrice:734999,listOffice:'Dalton Wade Inc'},
+    {id:'A4710787',address:'226 Sapphire Lake Dr #201',city:'Bradenton',subdivision:'Harbour Isle Ph 9 & Mangrove Walk Phase II',status:'Active',yearBuilt:2014,sqft:1994,beds:3,baths:3,garage:0,hoaMonthly:1208,water:'Lake front, bay view',listPrice:835000,pricePerSqft:419,dom:8,cdom:8,originalListPrice:835000,listOffice:'Keller Williams On The Water'},
+    {id:'A4709355',address:'291 Compass Point Dr #201',city:'Bradenton',subdivision:'Edgewater Walk II On Harbour Isle',status:'Active',yearBuilt:2017,sqft:1994,beds:2,baths:2,garage:2,hoaMonthly:1206,water:'Intracoastal view',listPrice:849000,pricePerSqft:426,dom:20,cdom:20,originalListPrice:849000,listOffice:'Dalton Wade Inc'}
+  ];
+  // Building history from the Sep 22, 2026 CMA (static by design; closings do not change).
+  var CBC = [
+    {address:'4535 Bay Club Dr',outcome:'Sold Jun 18, 2026',cls:'sold',sqft:2100,beds:2,baths:2,first:730000,result:605000,psf:288,days:192,note:'Opened at $730,000, sold 17% below the original ask'},
+    {address:'4557 Bay Club Dr',outcome:'Sold May 8, 2026',cls:'sold',sqft:2224,beds:2,baths:2,first:599000,result:600000,psf:270,days:14,note:'Opened at $599,000, under contract in two weeks at full price'},
+    {address:'4533 Bay Club Dr',outcome:'On the market',cls:'',sqft:2176,beds:2,baths:2,first:679000,result:null,psf:312,days:null,note:'Listed Oct 16, 2026; see the live table below',live:'A4709278'},
+    {address:'4565 Bay Club Dr #27',outcome:'Withdrawn, now relisted',cls:'off',sqft:2260,beds:3,baths:2,first:779000,result:null,psf:null,days:88,note:'88 days at $779,000 in early 2026; back on Oct 6 at $639,000',live:'A4708451'},
+    {address:'4555 Bay Club Dr #22',outcome:'Canceled',cls:'off',sqft:1820,beds:2,baths:2,first:850000,result:null,psf:null,days:464,note:'464 days, cut from $850,000 to $700,000, never sold'}
+  ];
+
+  var IDX_BASE = 'https://adamsonfl.com/idx/details/listing/d003/';
+  var $ = function(id){ return document.getElementById(id); };
+  var money = function(n){ return n == null ? '—' : '$' + Math.round(n).toLocaleString('en-US'); };
+  var k = function(n){ return n == null ? '—' : '$' + Math.round(n/1000).toLocaleString('en-US') + 'K'; };
+  var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+  var fmtDate = function(iso){ if(!iso) return ''; var d = new Date(/^\d{4}-\d{2}-\d{2}$/.test(iso) ? iso + 'T12:00:00' : iso); return isNaN(d) ? '' : d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}); };
+  var median = function(a){ a = a.filter(function(x){ return x != null; }).sort(function(x,y){ return x-y; }); if(!a.length) return null; var m = a.length >> 1; return a.length % 2 ? a[m] : (a[m-1]+a[m])/2; };
+  var minmax = function(a){ a = a.filter(function(x){ return x != null; }); return a.length ? [Math.min.apply(null,a), Math.max.apply(null,a)] : [null,null]; };
+
+  // ── building history (CMA) ──
+  (function(){
+    var t = '', c = '';
+    CBC.forEach(function(r){
+      var badge = '<span class="badge ' + r.cls + '">' + esc(r.outcome) + '</span>';
+      var link = r.live ? '<a href="' + IDX_BASE + r.live + '" target="_blank" rel="noopener">' + esc(r.address) + '</a>' : esc(r.address);
+      t += '<tr><td>' + link + '<span class="sub">' + esc(r.note) + '</span></td><td>' + badge + '</td><td class="r">' + r.sqft.toLocaleString() + '</td><td class="r">' + r.beds + ' / ' + r.baths + '</td><td class="r">' + money(r.first) + '</td><td class="r">' + (r.result ? money(r.result) : '—') + '</td><td class="r">' + (r.psf ? '$' + r.psf : '—') + '</td><td class="r">' + (r.days == null ? '—' : r.days) + '</td></tr>';
+      c += '<div class="card"><div class="top"><div><div class="addr">' + link + '</div><div class="where">' + badge + '</div></div><div class="price">' + (r.result ? money(r.result) : money(r.first)) + '<small>' + (r.result ? 'closed · first asked ' + k(r.first) : 'first asked') + '</small></div></div>' +
+           '<div class="facts"><div><span class="k">Heated sf</span><b>' + r.sqft.toLocaleString() + '</b></div><div><span class="k">Bd / Ba</span><b>' + r.beds + ' / ' + r.baths + '</b></div><div><span class="k">Per sf</span><b>' + (r.psf ? '$' + r.psf : '—') + '</b></div><div><span class="k">Days</span><b>' + (r.days == null ? '—' : r.days) + '</b></div></div>' +
+           '<div class="note">' + esc(r.note) + '</div></div>';
+    });
+    $('cbcTable').innerHTML = t; $('cbcCards').innerHTML = c;
+  })();
+
+  // ── live competition ──
+  function waterPill(w){ if(!w) return '<span class="pill">—</span>'; var cls = /front/i.test(w) ? ' bay' : ''; return '<span class="pill' + cls + '">' + esc(w) + '</span>'; }
+  function days(r){ return r.dom == null ? '—' : (r.cdom && r.cdom !== r.dom ? r.dom + ' (' + r.cdom + ')' : String(r.dom)); }
+  function pct(r){ return r.pctOfOriginal == null ? (r.listPrice && r.originalListPrice ? Math.round(r.listPrice / r.originalListPrice * 100) + '%' : '—') : Math.round(r.pctOfOriginal) + '%'; }
+  function addr(r, isSubject){
+    var a = isSubject || !r.idxUrl ? esc(r.address) : '<a href="' + esc(r.idxUrl) + '" target="_blank" rel="noopener">' + esc(r.address) + '</a>';
+    var badge = isSubject ? '<span class="badge">' + (SUBJECT.priceLow ? 'where we would land' : 'your residence') + '</span>' : (isSame(r) ? '<span class="badge same">Bay Club</span>' : '') + (r.status === 'Pending' ? '<span class="badge pend">Pending</span>' : '') + (r.snapshot ? '<span class="badge snap" title="Outside the nightly feed; as of ' + esc(r.snapshotAsOf || SNAPSHOT_AS_OF) + '">as of ' + esc(fmtDate(r.snapshotAsOf || SNAPSHOT_AS_OF).replace(/, \d{4}$/, '')) + '</span>' : '');
+    var note = NOTES[r.id];
+    return a + badge + '<span class="sub">' + esc([r.subdivision, r.city].filter(Boolean).join(' · ')) + (note ? ' · ' + esc(note) : '') + '</span>';
+  }
+  function subjectPrice(){
+    if (!SUBJECT.priceLow) return { price: 'To be set together', psf: '—' };
+    var lo = SUBJECT.priceLow, hi = SUBJECT.priceHigh || SUBJECT.priceLow;
+    return { price: lo === hi ? money(lo) : k(lo) + ' to ' + k(hi), psf: lo === hi ? '$' + Math.round(lo/SUBJECT.sqft) : '$' + Math.round(lo/SUBJECT.sqft) + ' to $' + Math.round(hi/SUBJECT.sqft) };
+  }
+  function isSame(r){ return CBC_SUBDIVISION.test(r.subdivision || ''); }
+  function row(r, isSubject){
+    var sp = isSubject ? subjectPrice() : null;
+    return '<tr' + (isSubject ? ' class="subject"' : (isSame(r) ? ' class="same"' : '')) + '><td style="white-space:normal;min-width:190px">' + addr(r, isSubject) + '</td><td>' + waterPill(r.water) + '</td>' +
+      '<td class="r">' + esc(r.yearBuilt || '—') + '</td><td class="r">' + (r.sqft ? r.sqft.toLocaleString() : '—') + '</td><td class="r">' + esc(r.beds || '—') + ' / ' + esc(r.baths || '—') + '</td>' +
+      '<td class="r">' + (r.garage == null ? '—' : r.garage) + '</td><td class="r">' + (r.hoaMonthly ? money(r.hoaMonthly) : '—') + '</td>' +
+      '<td class="r">' + (isSubject ? sp.price : money(r.listPrice)) + '</td><td class="r">' + (isSubject ? sp.psf : (r.pricePerSqft == null ? '—' : '$' + r.pricePerSqft)) + '</td>' +
+      '<td class="r">' + (isSubject ? '—' : days(r)) + '</td><td class="r">' + (isSubject ? '—' : pct(r)) + '</td></tr>';
+  }
+  function card(r, isSubject){
+    var sp = isSubject ? subjectPrice() : null;
+    var badge = isSubject ? '<span class="badge">' + (SUBJECT.priceLow ? 'where we would land' : 'your residence') + '</span>' : (isSame(r) ? '<span class="badge same">Bay Club</span>' : '') + (r.status === 'Pending' ? '<span class="badge pend">Pending</span>' : '') + (r.snapshot ? '<span class="badge snap">as of ' + esc(fmtDate(r.snapshotAsOf || SNAPSHOT_AS_OF).replace(/, \d{4}$/, '')) + '</span>' : '');
+    var a = isSubject || !r.idxUrl ? esc(r.address) : '<a href="' + esc(r.idxUrl) + '" target="_blank" rel="noopener">' + esc(r.address) + '</a>';
+    var note = NOTES[r.id];
+    return '<div class="card' + (isSubject ? ' subject' : (isSame(r) ? ' same' : '')) + '"><div class="top"><div><div class="addr">' + a + '</div><div class="where">' + esc([r.subdivision, r.city].filter(Boolean).join(' · ')) + ' ' + badge + '</div></div>' +
+      '<div class="price">' + (isSubject ? sp.price : money(r.listPrice)) + '<small>' + (isSubject ? sp.psf + ' per sf' : ((r.pricePerSqft == null ? '—' : '$' + r.pricePerSqft) + ' per sf')) + '</small></div></div>' +
+      '<div class="facts"><div><span class="k">Heated sf</span><b>' + (r.sqft ? r.sqft.toLocaleString() : '—') + '</b></div><div><span class="k">Bd / Ba</span><b>' + esc(r.beds || '—') + ' / ' + esc(r.baths || '—') + '</b></div><div><span class="k">Built</span><b>' + esc(r.yearBuilt || '—') + '</b></div><div><span class="k">Garage</span><b>' + (r.garage == null ? '—' : r.garage) + '</b></div>' +
+      '<div><span class="k">Water</span><b style="white-space:normal;font-size:.82rem">' + esc(r.water || '—') + '</b></div><div><span class="k">Dues / mo</span><b>' + (r.hoaMonthly ? money(r.hoaMonthly) : '—') + '</b></div><div><span class="k">Days</span><b>' + (isSubject ? '—' : days(r)) + '</b></div><div><span class="k">Of orig.</span><b>' + (isSubject ? '—' : pct(r)) + '</b></div></div>' +
+      (note ? '<div class="note">' + esc(note) + '</div>' : '') + (r.listOffice && !isSubject ? '<div class="office">Courtesy of ' + esc(r.listOffice) + '</div>' : '') + '</div>';
+  }
+  function render(d){
+    var rows = d.rows.slice();
+    // ids mode has no seed rows; add the page's snapshot for anything the feed does not carry
+    if (d.mode === 'ids') { var have = {}; rows.forEach(function(r){ have[r.id] = 1; }); SNAPSHOT.forEach(function(s){ if(!have[s.id]) { s.idxUrl = IDX_BASE + s.id; s.snapshot = true; s.snapshotAsOf = SNAPSHOT_AS_OF; rows.push(s); } }); }
+    rows = rows.filter(function(r){ return r.listPrice; }).sort(function(a,b){ return (b.listPrice||0) - (a.listPrice||0); });
+    var t = '', c = '', placed = false;
+    var place = function(){ t += row(SUBJECT, true); c += card(SUBJECT, true); placed = true; };
+    if (!SUBJECT.priceLow) place();
+    var top = SUBJECT.priceHigh || SUBJECT.priceLow;
+    rows.forEach(function(r){ if (!placed && top && (r.listPrice || 0) <= top) place(); t += row(r, false); c += card(r, false); });
+    if (!placed) place();
+    $('activeBody').innerHTML = t; $('activeCards').innerHTML = c;
+
+    var asOf = fmtDate(d.asOf);
+    var snaps = rows.filter(function(r){ return r.snapshot; }).length;
+    $('activeNote').innerHTML = '<span class="legend"></span>Gold rows are the other Conquistador Bay Club residences, the truest comps. Ordered by list price, highest first. ' + rows.length + ' listings' + (asOf ? ' as of ' + asOf : '') + '. Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year. Dues are the MLS total annual fees divided by twelve.' + (snaps ? ' ' + snaps + ' listings marked "as of" sit outside the nightly feed and were checked by hand on that date.' : '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace('&lt;span class="legend"&gt;&lt;/span&gt;','<span class="legend"></span>');
+    if (asOf) $('heroDate').textContent = asOf;
+
+    // stat strip: min, median, max of what is on the table (the rows themselves, nothing re-derived)
+    var P = rows.map(function(r){ return r.listPrice; }), S = rows.map(function(r){ return r.pricePerSqft; }), Q = rows.map(function(r){ return r.sqft; }), D = rows.map(function(r){ return r.dom; });
+    var mp = minmax(P), ms = minmax(S), mq = minmax(Q), md = minmax(D);
+    $('stPrice').textContent = k(median(P)) + ' median'; $('stPriceS').textContent = k(mp[0]) + ' to ' + k(mp[1]);
+    $('stPsf').textContent = '$' + Math.round(median(S)) + ' median'; $('stPsfS').textContent = '$' + ms[0] + ' to $' + ms[1];
+    $('stSqft').textContent = Math.round(median(Q)).toLocaleString() + ' median'; $('stSqftS').textContent = mq[0].toLocaleString() + ' to ' + mq[1].toLocaleString();
+    $('stDom').textContent = Math.round(median(D)) + ' median'; $('stDomS').textContent = md[0] + ' to ' + md[1] + ' days';
+    $('activeStats').hidden = false;
+
+    // tiles
+    $('tileCount').textContent = rows.length + ' listings';
+    $('tileCountSub').textContent = 'Median ' + k(median(P)) + ', $' + Math.round(median(S)) + ' per sq ft, ' + Math.round(median(D)) + ' median days' + (asOf ? ', as of ' + asOf.replace(/, \d{4}$/, '') : '');
+    var cbc = rows.filter(function(r){ return CBC_SUBDIVISION.test(r.subdivision || ''); });
+    if (cbc.length) {
+      $('tileCbc').textContent = cbc.map(function(r){ return k(r.listPrice); }).join(' · ');
+      $('tileCbcSub').textContent = cbc.map(function(r){ return r.address.replace(/ Bay Club Dr/i, '') + ' (' + (r.sqft ? r.sqft.toLocaleString() + ' sf, ' : '') + '$' + r.pricePerSqft + ' per sq ft, ' + days(r) + ' days)'; }).join('; ');
+    } else { $('tileCbc').textContent = 'None'; $('tileCbcSub').textContent = 'No other Bay Club residence is listed today'; }
+  }
+  function fail(){
+    var msg = 'Today’s listings are not loading right now. Call or text Ryan at 941.713.9234 and he will walk you through them.';
+    $('activeBody').innerHTML = '<tr><td colspan="11" style="white-space:normal;color:var(--muted)">' + msg + '</td></tr>';
+    $('activeCards').innerHTML = '<div class="card muted">' + msg + '</div>';
+  }
+  // Try the named set first (seed rows live in the database); fall back to the explicit roster.
+  fetch(FN + 'active-comps?set=' + encodeURIComponent(SET)).then(function(r){ return r.json(); }).then(function(d){
+    if (!d.ok) throw new Error(d.error || 'no set');
+    render(d);
+  }).catch(function(){
+    fetch(FN + 'active-comps?ids=' + IDS.join(',')).then(function(r){ return r.json(); }).then(function(d){ if(!d.ok) throw new Error(d.error || 'no data'); render(d); }).catch(fail);
+  });
+
+  // ── form ──
+  var form = $('askForm'), err = $('f-err'), ok = $('f-ok'), btn = $('f-submit');
+  form.addEventListener('submit', function(e){
+    e.preventDefault(); err.textContent = '';
+    var email = $('f-email').value.trim();
+    if (!email || email.indexOf('@') < 1) { err.textContent = 'Please add an email so I can reply.'; return; }
+    var mmm = $('f-mmm').value.replace(/[^0-9]/g, '');
+    var payload = { name: $('f-name').value.trim(), email: email, phone: $('f-phone').value.trim(), notes: $('f-notes').value.trim(), lead_type: 'Seller', community: 'Conquistador Bay Club', page: '/bradenton/4539-bay-club', 'bot-field': $('botField').value };
+    if (mmm) payload.make_me_move = mmm;
+    btn.disabled = true; btn.textContent = 'Sending';
+    fetch(FN + 'community-lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+      .then(function(r){ if (!r.ok) throw new Error('bad'); ok.classList.add('show'); form.reset(); btn.textContent = 'Sent'; })
+      .catch(function(){ err.textContent = 'That did not go through. Call or text Ryan at 941.713.9234.'; btn.disabled = false; btn.textContent = 'Ask for the walk-through'; });
+  });
+})();
+</script>
+</body>
+</html>
