@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-04T16:40:07.158430+00:00",
+  "lastUpdated": "2026-11-06T15:23:40.788904+00:00",
   "counts": {
-    "sold": 108,
-    "pending": 9,
-    "active": 42,
+    "sold": 109,
+    "pending": 8,
+    "active": 41,
     "total": 117
   },
   "metrics": {
-    "avgPrice": "$1,080,552",
+    "avgPrice": "$1,080,082",
     "avgPricePerSqFt": "$501",
     "avgYearBuilt": 1973,
     "avgLivingSqFt": "1,938",
@@ -22,23 +22,23 @@
     "maxPrice": "$22,900,000"
   },
   "active": {
-    "count": 42,
-    "medianPrice": "$737,500",
-    "medianPricePerSqFt": "$539",
-    "waterfrontCount": 16,
-    "newConstructionCount": 12
+    "count": 41,
+    "medianPrice": "$725,000",
+    "medianPricePerSqFt": "$530",
+    "waterfrontCount": 15,
+    "newConstructionCount": 11
   },
   "sold": {
     "count": 20,
-    "medianPrice": "$632,500",
-    "medianDom": 73,
-    "saleToListRatio": "84.8%",
+    "medianPrice": "$737,500",
+    "medianDom": 78,
+    "saleToListRatio": "82.8%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 6.8,
-    "sfhVilla": 5.3,
-    "blended": 5.5,
+    "sfhVilla": 5.1,
+    "blended": 5.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -57,16 +57,29 @@
     "under900k": 23,
     "band900kTo1_5m": 7,
     "band1_5mTo3m": 3,
-    "band3mPlus": 9
+    "band3mPlus": 8
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 42
+      "count": 41
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4659947",
+      "address": "455 ACACIA DR",
+      "subdivision": "SAPPHIRE SHORES",
+      "soldPrice": "$825,000",
+      "soldDate": "2026-11-03",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,994",
+      "yearBuilt": 1925,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4665647",
       "address": "2830 BAY SHORE CIR",
@@ -118,19 +131,6 @@
       "yearBuilt": 1980,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4696695",
-      "address": "831 HIGHLAND ST",
-      "subdivision": "HIGHLAND PINES",
-      "soldPrice": "$531,000",
-      "soldDate": "2026-10-07",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,519",
-      "yearBuilt": 1986,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$577,450",
       "avgPricePerSqFt": "$479",
       "avgLivingSqFt": "1,211",
-      "avgDom": 18
+      "avgDom": 20
     },
     {
       "tier": "1990to2005",
@@ -172,7 +172,7 @@
       "avgPrice": "$541,857",
       "avgPricePerSqFt": "$600",
       "avgLivingSqFt": "903",
-      "avgDom": 148
+      "avgDom": 150
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 16,
+      "activeCount": 15,
       "soldCount": 27,
       "soldMedianPricePerSqFt": "$550",
       "soldMedianPrice": "$650,000",
@@ -215,28 +215,28 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 23,
-      "soldCount": 77,
+      "soldCount": 78,
       "soldMedianPricePerSqFt": "$393",
-      "soldMedianPrice": "$575,000",
+      "soldMedianPrice": "$582,500",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.5,
+    "monthsOfSupply": 5.3,
     "monthsOfSupplyCondo": 6.8,
-    "monthsOfSupplySfhVilla": 5.3,
+    "monthsOfSupplySfhVilla": 5.1,
     "label": "balanced market",
-    "activeCount": 42,
-    "sold365Count": 91,
+    "activeCount": 41,
+    "sold365Count": 92,
     "sold90Count": 20,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 88,
-      "activeCount": 33,
-      "soldMedianPrice": "$670,000",
-      "soldMedianPricePerSqFt": "$408"
+      "soldCount": 89,
+      "activeCount": 32,
+      "soldMedianPrice": "$675,000",
+      "soldMedianPricePerSqFt": "$412"
     },
     "condo": {
       "soldCount": 20,
@@ -247,33 +247,33 @@
   },
   "boating": {
     "activeWithDock": 8,
-    "activeWaterfront": 16
+    "activeWaterfront": 15
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 42 active listings and roughly 8 closed sales a month (trailing 12 months), West Of Trail North has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 41 active listings and roughly 8 closed sales a month (trailing 12 months), West Of Trail North has about 5.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail North?",
-      "a": "Single-family homes sell around $670,000 ($408/sq ft), while condos, villas and townhouses sell around $472,500 ($500/sq ft)."
+      "a": "Single-family homes sell around $675,000 ($412/sq ft), while condos, villas and townhouses sell around $472,500 ($500/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail North?",
-      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $737,500."
+      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $725,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 73 days on market and closed at 84.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 78 days on market and closed at 82.8% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail North homes have a dock?",
-      "a": "Of 16 active waterfront listings, 8 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 15 active waterfront listings, 8 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
