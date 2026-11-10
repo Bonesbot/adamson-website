@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-06T15:23:43.289277+00:00",
+  "lastUpdated": "2026-11-10T12:08:10.145475+00:00",
   "counts": {
-    "sold": 984,
-    "pending": 54,
-    "active": 216,
-    "total": 1038
+    "sold": 987,
+    "pending": 57,
+    "active": 222,
+    "total": 1044
   },
   "metrics": {
-    "avgPrice": "$561,067",
-    "avgPricePerSqFt": "$263",
+    "avgPrice": "$559,510",
+    "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,046",
+    "avgLivingSqFt": "2,042",
     "avgLotSqFt": null,
     "avgDom": 78
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 216,
-    "medianPrice": "$399,250",
+    "count": 222,
+    "medianPrice": "$399,700",
     "medianPricePerSqFt": "$243",
-    "waterfrontCount": 41,
-    "newConstructionCount": 37
+    "waterfrontCount": 43,
+    "newConstructionCount": 38
   },
   "sold": {
-    "count": 159,
-    "medianPrice": "$475,000",
+    "count": 160,
+    "medianPrice": "$472,000",
     "medianDom": 59,
-    "saleToListRatio": "92.2%",
+    "saleToListRatio": "92.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.7,
+    "condo": 6.0,
     "sfhVilla": 2.9,
-    "blended": 3.6,
+    "blended": 3.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 202,
+    "under900k": 208,
     "band900kTo1_5m": 13,
     "band1_5mTo3m": 1,
     "band3mPlus": 0
@@ -62,11 +62,50 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 216
+      "count": 222
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4709930",
+      "address": "5562 RAIN LILY CT",
+      "subdivision": "HAMMOCK PRESERVE PH 1A",
+      "soldPrice": "$760,000",
+      "soldDate": "2026-11-09",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,110",
+      "yearBuilt": 2017,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4692990",
+      "address": "7341 FEATHERSTONE BLVD",
+      "subdivision": "STONEBRIDGE",
+      "soldPrice": "$670,000",
+      "soldDate": "2026-11-09",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "3,035",
+      "yearBuilt": 2001,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4695839",
+      "address": "3883 ALAMANDA DR",
+      "subdivision": "MIRA LAGO AT PALMER RANCH PH 3",
+      "soldPrice": "$370,000",
+      "soldDate": "2026-11-06",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,532",
+      "yearBuilt": 1996,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4696292",
       "address": "9540 HIGH GATE DR #1411",
@@ -92,45 +131,6 @@
       "yearBuilt": 2005,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4703913",
-      "address": "9550 HIGH GATE DR #1513",
-      "subdivision": "STONEYBROOK VERANDA GREENS 1",
-      "soldPrice": "$415,000",
-      "soldDate": "2026-11-03",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,414",
-      "yearBuilt": 1996,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4689649",
-      "address": "7198 DEL LAGO DR",
-      "subdivision": "MIRA LAGO AT PALMER RANCH PH 2",
-      "soldPrice": "$775,000",
-      "soldDate": "2026-11-02",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,471",
-      "yearBuilt": 1994,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4700486",
-      "address": "8737 PEBBLE CREEK LN",
-      "subdivision": "STONEYBROOK GOLF & COUNTRY CLUB",
-      "soldPrice": "$535,000",
-      "soldDate": "2026-11-02",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,265",
-      "yearBuilt": 1997,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 34,
-      "avgPrice": "$321,385",
-      "avgPricePerSqFt": "$194",
-      "avgLivingSqFt": "1,653",
+      "activeCount": 35,
+      "avgPrice": "$321,229",
+      "avgPricePerSqFt": "$193",
+      "avgLivingSqFt": "1,657",
       "avgDom": 120
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 77,
-      "avgPrice": "$290,166",
-      "avgPricePerSqFt": "$226",
-      "avgLivingSqFt": "1,281",
-      "avgDom": 124
+      "activeCount": 79,
+      "avgPrice": "$284,467",
+      "avgPricePerSqFt": "$224",
+      "avgLivingSqFt": "1,267",
+      "avgDom": 122
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$386,414",
       "avgPricePerSqFt": "$228",
       "avgLivingSqFt": "1,700",
-      "avgDom": 62
+      "avgDom": 65
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$352,446",
       "avgPricePerSqFt": "$217",
       "avgLivingSqFt": "1,621",
-      "avgDom": 72
+      "avgDom": 76
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 43,
+      "activeCount": 46,
       "soldCount": 224,
       "soldMedianPricePerSqFt": "$258",
       "soldMedianPrice": "$475,000",
@@ -205,75 +205,75 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 41,
-      "soldCount": 212,
-      "soldMedianPricePerSqFt": "$275",
-      "soldMedianPrice": "$597,500",
+      "activeCount": 43,
+      "soldCount": 213,
+      "soldMedianPricePerSqFt": "$276",
+      "soldMedianPrice": "$600,000",
       "lowSample": false
     },
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 132,
-      "soldCount": 546,
+      "activeCount": 133,
+      "soldCount": 548,
       "soldMedianPricePerSqFt": "$242",
       "soldMedianPrice": "$437,500",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 3.6,
-    "monthsOfSupplyCondo": 5.7,
+    "monthsOfSupply": 3.7,
+    "monthsOfSupplyCondo": 6.0,
     "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
-    "activeCount": 216,
-    "sold365Count": 723,
-    "sold90Count": 159,
+    "activeCount": 222,
+    "sold365Count": 722,
+    "sold90Count": 160,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 557,
-      "activeCount": 84,
+      "soldCount": 560,
+      "activeCount": 87,
       "soldMedianPrice": "$650,000",
-      "soldMedianPricePerSqFt": "$289"
+      "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
       "soldCount": 427,
-      "activeCount": 132,
+      "activeCount": 135,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
   },
   "boating": {
     "activeWithDock": 1,
-    "activeWaterfront": 41
+    "activeWaterfront": 43
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 216 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.6 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 222 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.7 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Palmer Ranch?",
-      "a": "Single-family homes sell around $650,000 ($289/sq ft), while condos, villas and townhouses sell around $325,000 ($211/sq ft)."
+      "a": "Single-family homes sell around $650,000 ($288/sq ft), while condos, villas and townhouses sell around $325,000 ($211/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $399,250."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $399,700."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 59 days on market and closed at 92.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 59 days on market and closed at 92.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 41 active waterfront listings, 1 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 43 active waterfront listings, 1 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
