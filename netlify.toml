@@ -69,6 +69,13 @@
   [headers.values]
     X-Robots-Tag = "noindex, nofollow, noarchive"
 
+# /mkt/5654-woodland-sage/: owner market overview for 5654 Woodland Sage Dr,
+# Promenade Estates, Palmer Ranch (2026-11-09; hand-shared, never linked).
+[[headers]]
+  for = "/mkt/5654-woodland-sage/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+
 # ---------------------------------------------------------------------------
 # mls-watchdog: off-machine dead-man's-switch for the daily MLS export.
 # Runs at 14:00 UTC (10am EDT / 9am EST), a few hours after the mini-PC job's

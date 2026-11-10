@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#0A1F3C">
+<title>5654 Woodland Sage Drive</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preload" as="image" href="hero-mobile.webp" media="(max-width: 767px)">
+<link rel="preload" as="image" href="hero-desktop.webp" media="(min-width: 768px)">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap">
+<style>
+/* Phone first. One navy hero, then short sand bands. Every number on this page comes
+   from Stellar MLS (closed history as of Nov 9, 2026), InfoSparks, or the live MLS feed. */
+:root{
+  --navy:#0A1F3C; --navy-2:#12305a; --gold:#C9A961; --gold-ink:#8a6d2b;
+  --bg:#F7F4EE; --panel:#FFFFFF; --fg:#1b2434; --muted:#5c6675; --line:#e2dcd0; --soft:#efeadf;
+  --navy-ink:#0A1F3C;
+  --display:"Playfair Display",Georgia,"Times New Roman",serif;
+  --body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c1627; --panel:#132038; --fg:#eef0f4; --muted:#B4BECD; --line:#273553; --soft:#182a47; --gold-ink:#d9bd79; --navy-ink:#ffffff; color-scheme:dark}}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 var(--body)}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.01em;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.band{padding-block:40px}
+.band + .band{border-top:1px solid var(--line)}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+
+/* hero: still photo, text pinned to the bottom, fits one phone screen */
+.hero{position:relative;background:var(--navy);color:#fff;overflow:hidden;min-height:78svh;display:flex;align-items:flex-end}
+.hero picture,.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,31,60,.08) 0%,rgba(10,31,60,.16) 36%,rgba(10,31,60,.72) 62%,rgba(10,31,60,.95) 100%)}
+.hero .wrap{position:relative;padding-block:96px max(36px,env(safe-area-inset-bottom,0px));width:100%}
+.hero h1{font-size:clamp(2.2rem,8vw,4rem);line-height:1.05;margin-top:8px}
+.hero .sub{font-size:1.05rem;color:#dfe5ee;max-width:36em;margin-top:14px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:20px;font-size:.86rem;color:#B4BECD}
+.hero .meta b{color:#fff;font-weight:600}
+@media (min-width:768px){.hero{min-height:clamp(540px,80vh,820px)}.hero .wrap{padding-block:120px 44px}.band{padding-block:56px}}
+
+/* tiles: 1 column on phones, 2 on tablets, 4 on desktop */
+.tiles{display:grid;grid-template-columns:1fr;gap:12px;margin-top:-22px;position:relative}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px 18px 16px;min-width:0;box-shadow:0 10px 30px rgba(10,31,60,.08)}
+.tile .k{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tile .v{font-family:var(--display);font-size:1.7rem;line-height:1.1;margin-top:6px;color:var(--fg)}
+.tile .s{font-size:.86rem;color:var(--muted);margin-top:6px}
+.tile.gold .v{color:var(--gold-ink)}
+@media (min-width:560px){.tiles{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:900px){.tiles{grid-template-columns:repeat(4,1fr);margin-top:-34px}.tile .v{font-size:1.9rem}}
+
+/* section heads */
+.head{display:grid;gap:10px;margin-bottom:22px}
+.head h2{font-size:clamp(1.5rem,5vw,2.2rem);line-height:1.15}
+.head p{color:var(--muted);max-width:44em}
+@media (min-width:860px){.head{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px 48px;align-items:end;margin-bottom:28px}}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:1fr;gap:10px}
+.gallery figure{margin:0;border-radius:8px;overflow:hidden;background:var(--soft);aspect-ratio:4/3}
+.gallery img{display:block;width:100%;height:100%;object-fit:cover}
+@media (min-width:600px){.gallery{grid-template-columns:repeat(3,1fr)}}
+.caption{font-size:.84rem;color:var(--muted);margin-top:12px}
+
+/* tables (desktop) */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--panel);-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{padding:11px 10px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:top}
+th{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--soft);position:sticky;top:0}
+td.r,th.r{text-align:right}
+tr:last-child td{border-bottom:0}
+td .sub{display:block;font-size:.78rem;color:var(--muted);white-space:normal;font-weight:400}
+td a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
+:root[data-theme="dark"] td a{color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) td a{color:#fff}}
+tr.subject td{background:var(--soft);font-weight:600}
+tr.same td{background:rgba(201,169,97,.10)}
+tr.same td:first-child{box-shadow:inset 3px 0 0 var(--gold)}
+.card.same{border-color:var(--gold);box-shadow:inset 3px 0 0 var(--gold)}
+.badge.same{background:var(--gold);color:#0A1F3C}
+.legend{display:inline-block;width:12px;height:12px;border-radius:2px;background:rgba(201,169,97,.35);border-left:3px solid var(--gold);vertical-align:-1px;margin-right:6px}
+.badge{display:inline-block;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:var(--navy);color:#fff;vertical-align:middle;margin-left:6px;white-space:nowrap}
+.badge.pend{background:#f3e6c4;color:#6b5420}
+.badge.snap{background:var(--soft);color:var(--muted);border:1px solid var(--line)}
+.badge.sold{background:#e3ecd9;color:#2f5b1f}
+.badge.off{background:var(--soft);color:var(--muted)}
+.pill{display:inline-block;font-size:.76rem;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--fg);background:var(--panel)}
+.pill.bay{border-color:var(--navy);color:var(--navy)}
+:root[data-theme="dark"] .pill.bay{border-color:#fff;color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pill.bay{border-color:#fff;color:#fff}}
+
+/* cards (phones): the same rows, stacked */
+.cards{display:grid;gap:10px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 14px 12px}
+.card.subject{background:var(--soft);border-color:var(--gold)}
+.card .top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.card .addr{font-weight:600;line-height:1.3}
+.card .addr a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
+:root[data-theme="dark"] .card .addr a{color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .card .addr a{color:#fff}}
+.card .where{font-size:.8rem;color:var(--muted);margin-top:2px}
+.card .price{font-family:var(--display);font-size:1.25rem;white-space:nowrap;text-align:right}
+.card .price small{display:block;font-family:var(--body);font-size:.78rem;color:var(--muted);font-weight:400}
+.card .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px 6px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+.card .facts div{min-width:0}
+.card .facts .k{display:block;font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card .facts b{display:block;font-weight:600;font-size:.92rem;margin-top:2px;white-space:nowrap}
+.card .note{font-size:.82rem;color:var(--muted);margin-top:10px}
+.card .office{font-size:.72rem;color:var(--muted);margin-top:8px}
+.tablewrap.full{display:none}
+.tablewrap.compact{display:block}
+.tablewrap.compact table{font-size:.84rem}
+.tablewrap.compact th,.tablewrap.compact td{padding:9px 7px}
+.tablewrap.compact td:first-child{white-space:normal;min-width:120px;line-height:1.25}
+.tablewrap.compact td .sub{font-size:.7rem}
+.tablewrap.compact .badge{margin-left:0;margin-top:3px;display:inline-block}
+.expand{display:inline-block;margin-top:10px;font-size:.84rem;font-weight:600;color:var(--navy);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:9px 14px;cursor:pointer;font-family:inherit}
+:root[data-theme="dark"] .expand{color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .expand{color:#fff}}
+.tablewrap.fs{position:fixed;inset:0;z-index:20;display:block;border:0;border-radius:0;overflow:auto;padding-top:48px;background:var(--panel)}
+.tablewrap.fs .fsbar{position:fixed;top:0;left:0;right:0;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:var(--navy);color:#fff;font-size:.86rem;z-index:1}
+.tablewrap.fs .fsbar button{font:inherit;font-weight:600;color:#fff;background:transparent;border:1px solid rgba(255,255,255,.5);border-radius:6px;padding:6px 12px}
+.tablewrap .fsbar{display:none}
+.tablewrap.fs .fsbar{display:flex}
+.tablewrap.fs table{min-width:900px}
+body.locked{overflow:hidden}
+@media (min-width:760px){.tablewrap.full{display:block}.tablewrap.compact,.expand{display:none}}
+@media (max-width:759px) and (orientation:landscape){.tablewrap.full{display:block}.tablewrap.compact,.expand{display:none}}
+.watch{display:grid;gap:10px;align-content:start}
+.watch .w{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:14px 16px}
+.watch .w b{display:block;color:var(--gold);font-family:var(--display);font-weight:600;font-size:1.05rem}
+.watch .w span{display:block;color:#dfe5ee;font-size:.92rem;margin-top:4px}
+
+/* stat strip under the live table */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;min-width:0}
+.stat .k{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.stat .v{font-family:var(--display);font-size:1.3rem;margin-top:4px}
+.stat .s{font-size:.78rem;color:var(--muted);margin-top:2px}
+@media (min-width:760px){.stats{grid-template-columns:repeat(4,1fr)}}
+
+/* paths */
+.paths{display:grid;grid-template-columns:1fr;gap:12px}
+.path{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 18px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.path h3{font-size:1.2rem}
+.path .when{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-ink)}
+.path p{color:var(--muted);font-size:.95rem}
+.path ul{margin:4px 0 0;padding-left:18px;font-size:.92rem;color:var(--fg)}
+.path li{margin:4px 0}
+@media (min-width:860px){.paths{grid-template-columns:repeat(3,1fr);gap:16px}}
+
+/* ask */
+.ask{background:var(--navy);color:#fff}
+.ask .wrap{display:grid;grid-template-columns:1fr;gap:28px}
+.ask h2{font-size:clamp(1.5rem,5vw,2.2rem);color:#fff;line-height:1.15}
+.ask p{color:#dfe5ee;margin-top:12px}
+.person{display:flex;gap:14px;align-items:center;margin-top:22px}
+.person .ring{width:48px;height:48px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;font-family:var(--display);color:var(--gold);font-size:1.1rem;flex:none}
+.person b{display:block;color:#fff}
+.person span{font-size:.9rem;color:#B4BECD}
+.person a{color:#fff;text-decoration:none}
+.form{background:#fff;color:#1b2434;border-radius:8px;padding:20px}
+.form label{display:block;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:#5c6675;margin:12px 0 4px}
+.form label:first-of-type{margin-top:0}
+.form input,.form textarea{width:100%;font:inherit;font-size:16px;padding:12px;border:1px solid #d6d0c4;border-radius:6px;background:#fff;color:#1b2434}
+.form input:focus,.form textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+.form .hint{font-size:.8rem;color:#5c6675;margin-top:4px}
+.form button{margin-top:16px;width:100%;font:inherit;font-weight:600;padding:14px 16px;border:0;border-radius:6px;background:var(--navy);color:#fff;cursor:pointer}
+.form .ok{display:none;padding:14px;border-radius:6px;background:#f1ecdf;color:#1b2434;margin-top:12px}
+.form .ok.show{display:block}
+.form .err{color:#9b2c2c;font-size:.88rem;margin-top:8px}
+.quiet{font-size:.8rem;color:#5c6675;margin-top:10px}
+@media (min-width:860px){.ask .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}}
+
+/* sticky call bar on phones */
+.callbar{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;gap:8px;padding:10px max(12px,env(safe-area-inset-right,0px)) max(10px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:rgba(247,244,238,.94);backdrop-filter:saturate(1.4) blur(8px);border-top:1px solid var(--line)}
+.callbar a{flex:1;text-align:center;font-weight:600;padding:12px;border-radius:6px;text-decoration:none;font-size:.95rem}
+.callbar .call{background:var(--navy);color:#fff}
+.callbar .text{background:var(--panel);color:var(--navy);border:1px solid var(--line)}
+body{padding-bottom:72px}
+@media (min-width:760px){.callbar{display:none}body{padding-bottom:0}}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .callbar{background:rgba(12,22,39,.92)}:root:not([data-theme="light"]) .callbar .text{color:#fff}}
+
+footer{padding-block:28px 40px;font-size:.78rem;color:var(--muted)}
+footer .logos{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;margin-bottom:12px;font-family:var(--display);color:var(--fg);font-size:.95rem}
+footer p{max-width:72em;margin-top:8px}
+
+/* this page: hero is the street photo (house on the right on desktop, portrait crop on phones) */
+.hero img{object-position:78% 40%}
+@media (max-width:767px){.hero img{object-position:50% 20%}}
+/* charts: a desktop and a phone drawing of each, so labels stay legible */
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px 14px 10px}
+.chart svg{display:block}
+.chart svg text{font-family:var(--body)}
+.chart svg.m{display:none}
+@media (max-width:599px){.chart svg.d{display:none}.chart svg.m{display:block}.chart{padding:12px 8px 6px}}
+.key{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.84rem;color:var(--muted);margin:2px 0 10px}
+.key i{display:inline-block;width:11px;height:11px;border-radius:50%;vertical-align:-1px;margin-right:6px}
+.key .nopool{border:2px solid var(--navy-ink);background:var(--panel)}
+.key .pool{background:var(--gold)}
+.key .subj{width:14px;border-radius:2px;background:var(--gold);opacity:.35}
+.lesson{display:grid;gap:10px;margin-top:16px}
+.lesson div{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:6px;padding:12px 14px;font-size:.95rem}
+.lesson b{font-family:var(--display);font-weight:600}
+@media (min-width:860px){.lesson{grid-template-columns:repeat(3,1fr)}}
+.gallery.two{grid-template-columns:1fr}
+.gallery picture{display:block;width:100%;height:100%}
+@media (min-width:600px){.gallery.two{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <picture aria-hidden="true">
+    <source media="(max-width: 767px)" type="image/webp" srcset="hero-mobile.webp">
+    <source media="(max-width: 767px)" srcset="hero-mobile.jpg">
+    <source type="image/webp" srcset="hero-desktop.webp">
+    <img src="hero-desktop.jpg" alt="" fetchpriority="high">
+  </picture>
+  <div class="shade" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="eyebrow">Promenade Estates · Palmer Ranch</p>
+    <h1>5654 Woodland Sage Drive</h1>
+    <p class="sub">What Promenade Estates has sold for this year, what is competing with 5654 for the same buyer today, and where Palmer Ranch sits after the 2022 run-up. The competition table refreshes from the MLS each morning.</p>
+    <div class="meta">
+      <span>Prepared for the owners of 5654 Woodland Sage</span>
+      <span><b>Ryan Adamson</b>, Coldwell Banker Realty</span>
+      <span id="heroDate">November 9, 2026</span>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="tiles">
+    <div class="tile">
+      <div class="k">Your home</div>
+      <div class="v num">2,600 sf</div>
+      <div class="s">5 bedrooms, DR Horton two-story, no private pool. Cul-de-sac lot with the lake behind.</div>
+    </div>
+    <div class="tile gold">
+      <div class="k">Same size, same street</div>
+      <div class="v num">$515,000</div>
+      <div class="s">5655 Woodland Sage, 2,631 sf, 5 bed, closed Aug 17, 2026. $196 per sq ft; first asked $599,900.</div>
+    </div>
+    <div class="tile">
+      <div class="k">Competing today</div>
+      <div class="v num" id="tileCount">—</div>
+      <div class="s" id="tileCountSub">Palmer Ranch homes, 4+ bedrooms, 2,200 to 3,100 sq ft, plus every Promenade listing</div>
+    </div>
+    <div class="tile">
+      <div class="k">Palmer Ranch, single family</div>
+      <div class="v num">$640,000</div>
+      <div class="s">Median sale, rolling 12 months to October: down 8% on the year, while sales rose 26% to 405. Median 43 days on market.</div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="promenade">
+  <div class="wrap">
+    <div class="head">
+      <h2>What Promenade Estates has taught buyers this year</h2>
+      <p>Every Promenade home sold since June 2025. Pool homes, mostly M/I Homes' 3,200 to 3,900 sq ft plans, trade in their own price tier. The homes without a private pool, like 5654, have a clear ceiling.</p>
+    </div>
+    <div class="chart">
+      <div class="key"><span><i class="nopool"></i>No private pool</span><span><i class="pool"></i>Private pool</span><span><i class="subj"></i>5654, about 2,600 sq ft</span></div>
+      <svg class="d" viewBox="0 0 720 380" role="img" aria-label="Promenade Estates closed sales since June 2025: heated square feet against sale price. Homes without a private pool top out at $623,638; pool homes sell from $750,000 to $1,075,000." style="width:100%;height:auto"><line x1="64" x2="700" y1="314.4" y2="314.4" stroke="var(--line)"/><text x="58" y="318.2" text-anchor="end" font-size="11" fill="var(--muted)">$400K</text><line x1="64" x2="700" y1="275.1" y2="275.1" stroke="var(--line)"/><text x="58" y="279.0" text-anchor="end" font-size="11" fill="var(--muted)">$500K</text><line x1="64" x2="700" y1="235.9" y2="235.9" stroke="var(--line)"/><text x="58" y="239.7" text-anchor="end" font-size="11" fill="var(--muted)">$600K</text><line x1="64" x2="700" y1="196.6" y2="196.6" stroke="var(--line)"/><text x="58" y="200.5" text-anchor="end" font-size="11" fill="var(--muted)">$700K</text><line x1="64" x2="700" y1="157.4" y2="157.4" stroke="var(--line)"/><text x="58" y="161.2" text-anchor="end" font-size="11" fill="var(--muted)">$800K</text><line x1="64" x2="700" y1="118.1" y2="118.1" stroke="var(--line)"/><text x="58" y="122.0" text-anchor="end" font-size="11" fill="var(--muted)">$900K</text><line x1="64" x2="700" y1="78.9" y2="78.9" stroke="var(--line)"/><text x="58" y="82.7" text-anchor="end" font-size="11" fill="var(--muted)">$1.0M</text><line x1="64" x2="700" y1="39.6" y2="39.6" stroke="var(--line)"/><text x="58" y="43.5" text-anchor="end" font-size="11" fill="var(--muted)">$1.1M</text><text x="64.0" y="351" text-anchor="middle" font-size="11" fill="var(--muted)">1,500</text><text x="186.3" y="351" text-anchor="middle" font-size="11" fill="var(--muted)">2,000</text><text x="308.6" y="351" text-anchor="middle" font-size="11" fill="var(--muted)">2,500</text><text x="430.9" y="351" text-anchor="middle" font-size="11" fill="var(--muted)">3,000</text><text x="553.2" y="351" text-anchor="middle" font-size="11" fill="var(--muted)">3,500</text><text x="675.5" y="351" text-anchor="middle" font-size="11" fill="var(--muted)">4,000</text><text x="382.0" y="376" text-anchor="middle" font-size="11" fill="var(--muted)">Heated square feet</text><rect x="320.8" y="20" width="36.7" height="314" fill="var(--gold)" opacity=".16"/><text x="339.2" y="33" text-anchor="middle" font-size="11" font-weight="600" fill="var(--gold-ink)">5654</text><line x1="64" x2="700" y1="226.6" y2="226.6" stroke="var(--navy-ink)" stroke-dasharray="4 4" opacity=".55"/><text x="70" y="220.6" font-size="11" fill="var(--muted)">Highest sale without a pool: $623,638</text><circle cx="423.6" cy="230.8" r="6" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>5748 Woodland Sage: 2,970 sf, $613,000, no private pool</title></circle><circle cx="475.4" cy="87.2" r="6" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>5516 Northern Juniper: 3,182 sf, $978,888, private pool</title></circle><circle cx="475.4" cy="110.3" r="6" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>12635 Night View: 3,182 sf, $920,000, private pool</title></circle><circle cx="108.5" cy="314.4" r="6" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>12667 Night View: 1,682 sf, $400,000, no private pool</title></circle><circle cx="523.1" cy="226.6" r="6" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>5715 Woodland Sage: 3,377 sf, $623,638, no private pool</title></circle><circle cx="197.3" cy="283.8" r="6" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>5625 Soft Skies: 2,045 sf, $478,000, no private pool</title></circle><circle cx="340.7" cy="269.2" r="6" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>5655 Woodland Sage: 2,631 sf, $515,000, no private pool</title></circle><circle cx="636.4" cy="49.4" r="6" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>5820 Millennium Silver: 3,840 sf, $1,075,000, private pool</title></circle><circle cx="197.3" cy="275.1" r="6" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>5744 Woodland Sage: 2,045 sf, $500,000, no private pool</title></circle><circle cx="636.4" cy="77.9" r="6" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>5820 Millennium Silver: 3,840 sf, $1,002,500, private pool</title></circle><circle cx="197.3" cy="281.6" r="6" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>5667 Woodland Sage: 2,045 sf, $483,500, no private pool</title></circle><circle cx="641.0" cy="69.1" r="6" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>12709 Lateral Root: 3,859 sf, $1,025,000, private pool</title></circle><circle cx="636.4" cy="98.5" r="6" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>12725 Lateral Root: 3,840 sf, $950,000, private pool</title></circle><circle cx="197.3" cy="291.2" r="6" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>5719 Woodland Sage: 2,045 sf, $459,000, no private pool</title></circle><circle cx="146.9" cy="296.7" r="6" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>12695 Night View: 1,839 sf, $445,000, no private pool</title></circle><circle cx="656.7" cy="97.7" r="6" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>5616 Soft Skies: 3,923 sf, $952,000, private pool</title></circle><circle cx="197.3" cy="286.9" r="6" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>12600 Night View: 2,045 sf, $470,000, no private pool</title></circle><circle cx="197.3" cy="271.2" r="6" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>12689 Promenade Estates: 2,045 sf, $510,000, no private pool</title></circle><circle cx="197.3" cy="275.1" r="6" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>12665 Promenade Estates: 2,045 sf, $500,000, no private pool</title></circle><circle cx="636.4" cy="84.8" r="6" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>5833 Millennium Silver: 3,840 sf, $985,000, private pool</title></circle><circle cx="146.9" cy="302.6" r="6" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>12712 Dusty Trail: 1,839 sf, $430,000, no private pool</title></circle><circle cx="146.9" cy="294.8" r="6" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>5688 Woodland Sage: 1,839 sf, $450,000, no private pool</title></circle><circle cx="340.7" cy="177.0" r="6" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>12716 Dusty Trail: 2,631 sf, $750,000, private pool</title></circle><circle cx="146.9" cy="300.6" r="6" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>12720 Dusty Trail: 1,839 sf, $435,000, no private pool</title></circle><text x="350.7" y="282.4" font-size="11" fill="var(--fg)">5655 Woodland Sage, $515,000</text></svg><svg class="m" viewBox="0 0 360 300" role="img" aria-label="Promenade Estates closed sales since June 2025: heated square feet against sale price. Homes without a private pool top out at $623,638; pool homes sell from $750,000 to $1,075,000." style="width:100%;height:auto"><line x1="44" x2="350" y1="242.9" y2="242.9" stroke="var(--line)"/><text x="38" y="246.7" text-anchor="end" font-size="11" fill="var(--muted)">$400K</text><line x1="44" x2="350" y1="182.4" y2="182.4" stroke="var(--line)"/><text x="38" y="186.2" text-anchor="end" font-size="11" fill="var(--muted)">$600K</text><line x1="44" x2="350" y1="121.9" y2="121.9" stroke="var(--line)"/><text x="38" y="125.7" text-anchor="end" font-size="11" fill="var(--muted)">$800K</text><line x1="44" x2="350" y1="61.4" y2="61.4" stroke="var(--line)"/><text x="38" y="65.2" text-anchor="end" font-size="11" fill="var(--muted)">$1.0M</text><text x="44.0" y="275" text-anchor="middle" font-size="11" fill="var(--muted)">1,500</text><text x="161.7" y="275" text-anchor="middle" font-size="11" fill="var(--muted)">2,500</text><text x="279.4" y="275" text-anchor="middle" font-size="11" fill="var(--muted)">3,500</text><text x="197.0" y="296" text-anchor="middle" font-size="11" fill="var(--muted)">Heated square feet</text><rect x="167.6" y="16" width="17.7" height="242" fill="var(--gold)" opacity=".16"/><text x="176.4" y="29" text-anchor="middle" font-size="11" font-weight="600" fill="var(--gold-ink)">5654</text><line x1="44" x2="350" y1="175.2" y2="175.2" stroke="var(--navy-ink)" stroke-dasharray="4 4" opacity=".55"/><text x="50" y="169.2" font-size="11" fill="var(--muted)">No-pool high: $623,638</text><circle cx="217.0" cy="178.4" r="4.5" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>5748 Woodland Sage: 2,970 sf, $613,000, no private pool</title></circle><circle cx="242.0" cy="67.8" r="4.5" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>5516 Northern Juniper: 3,182 sf, $978,888, private pool</title></circle><circle cx="242.0" cy="85.6" r="4.5" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>12635 Night View: 3,182 sf, $920,000, private pool</title></circle><circle cx="65.4" cy="242.9" r="4.5" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>12667 Night View: 1,682 sf, $400,000, no private pool</title></circle><circle cx="264.9" cy="175.2" r="4.5" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>5715 Woodland Sage: 3,377 sf, $623,638, no private pool</title></circle><circle cx="108.1" cy="219.3" r="4.5" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>5625 Soft Skies: 2,045 sf, $478,000, no private pool</title></circle><circle cx="177.1" cy="208.1" r="4.5" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>5655 Woodland Sage: 2,631 sf, $515,000, no private pool</title></circle><circle cx="319.4" cy="38.7" r="4.5" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>5820 Millennium Silver: 3,840 sf, $1,075,000, private pool</title></circle><circle cx="108.1" cy="212.6" r="4.5" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>5744 Woodland Sage: 2,045 sf, $500,000, no private pool</title></circle><circle cx="319.4" cy="60.6" r="4.5" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>5820 Millennium Silver: 3,840 sf, $1,002,500, private pool</title></circle><circle cx="108.1" cy="217.6" r="4.5" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>5667 Woodland Sage: 2,045 sf, $483,500, no private pool</title></circle><circle cx="321.6" cy="53.8" r="4.5" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>12709 Lateral Root: 3,859 sf, $1,025,000, private pool</title></circle><circle cx="319.4" cy="76.5" r="4.5" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>12725 Lateral Root: 3,840 sf, $950,000, private pool</title></circle><circle cx="108.1" cy="225.0" r="4.5" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>5719 Woodland Sage: 2,045 sf, $459,000, no private pool</title></circle><circle cx="83.9" cy="229.3" r="4.5" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>12695 Night View: 1,839 sf, $445,000, no private pool</title></circle><circle cx="329.2" cy="75.9" r="4.5" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>5616 Soft Skies: 3,923 sf, $952,000, private pool</title></circle><circle cx="108.1" cy="221.7" r="4.5" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>12600 Night View: 2,045 sf, $470,000, no private pool</title></circle><circle cx="108.1" cy="209.6" r="4.5" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>12689 Promenade Estates: 2,045 sf, $510,000, no private pool</title></circle><circle cx="108.1" cy="212.6" r="4.5" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>12665 Promenade Estates: 2,045 sf, $500,000, no private pool</title></circle><circle cx="319.4" cy="65.9" r="4.5" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>5833 Millennium Silver: 3,840 sf, $985,000, private pool</title></circle><circle cx="83.9" cy="233.8" r="4.5" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>12712 Dusty Trail: 1,839 sf, $430,000, no private pool</title></circle><circle cx="83.9" cy="227.8" r="4.5" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>5688 Woodland Sage: 1,839 sf, $450,000, no private pool</title></circle><circle cx="177.1" cy="137.0" r="4.5" fill="var(--gold)" stroke="var(--panel)" stroke-width="1.5"><title>12716 Dusty Trail: 2,631 sf, $750,000, private pool</title></circle><circle cx="83.9" cy="232.3" r="4.5" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="2"><title>12720 Dusty Trail: 1,839 sf, $435,000, no private pool</title></circle><text x="185.6" y="221.3" font-size="11" fill="var(--fg)">5655: $515K</text></svg>
+    </div>
+    <p class="caption">24 closed sales, Promenade Estates (all phases), June 1, 2025 to November 9, 2026. Hover or tap a dot for the address. Source: Stellar MLS.</p>
+
+    <div class="tablewrap full" style="margin-top:22px">
+      <table aria-label="DR Horton two-story homes in Promenade Estates: what they asked and how they ended">
+        <thead><tr><th>Home</th><th>Outcome</th><th class="r">Heated sf</th><th class="r">Bd / Ba</th><th>Pool</th><th class="r">First asked</th><th class="r">Result</th><th class="r">Per sf</th><th class="r">Days</th></tr></thead>
+        <tbody class="num" id="histTable"></tbody>
+      </table>
+    </div>
+    <div class="tablewrap compact" style="margin-top:22px">
+      <table aria-label="Promenade two-story homes, compact">
+        <thead><tr><th>Home</th><th class="r">Asked</th><th class="r">Result</th><th class="r">Days</th></tr></thead>
+        <tbody class="num" id="histCompact"></tbody>
+      </table>
+    </div>
+    <div class="lesson">
+      <div><b>The ceiling.</b> No Promenade home without a private pool has closed above $623,638 since June 2025. Four no-pool listings that opened at $750,000 or more have left the market since: three expired, and one sold 22% below its first price.</div>
+      <div><b>The pricing lesson.</b> 5748 Woodland Sage opened at $629,000 and closed at $613,000 in 46 days. 5655, the same size as 5654, opened at $599,900, sat 111 days, relisted, and closed at $515,000.</div>
+      <div><b>What buyers pay for.</b> 12716 Dusty Trail, the same 2,631 sq ft size with a private pool on the lake, sold for $750,000 in June 2025. The one-story 2,045 sq ft plan has sold seven times since December, $459,000 to $510,000.</div>
+    </div>
+    <p class="caption">Days are cumulative MLS days on market across relistings. Source: Stellar MLS closed, expired and canceled listings for Promenade Estates, as of November 9, 2026.</p>
+  </div>
+</section>
+
+<section class="band" id="onmarket">
+  <div class="wrap">
+    <div class="head">
+      <h2>Your competition, this morning</h2>
+      <p id="onmarketIntro">Every home a buyer at your price point is also touring today: every Promenade Estates listing, plus Palmer Ranch homes with four or more bedrooms between 2,200 and 3,100 sq ft, priced $450,000 to $800,000. Tap an address for the full listing and photos. Ordered by list price, lowest first, with 5654 placed where we price it, so you can see how much of the field sits below us. Promenade listings are marked in gold: same builder, same amenities, the truest comparison.</p>
+    </div>
+    <div class="tablewrap full" id="activeWrap">
+      <div class="fsbar"><span>Your competition, every column</span><button type="button" id="fsClose">Close</button></div>
+      <table id="activeTable" aria-label="Active and pending competition for 5654 Woodland Sage">
+        <thead><tr><th>Address</th><th>Lot</th><th class="r">Built</th><th class="r">Heated sf</th><th class="r">Bd / Ba</th><th>Pool</th><th class="r">List price</th><th class="r">Per sf</th><th class="r">Days</th><th class="r">Orig. list</th></tr></thead>
+        <tbody class="num" id="activeBody"><tr><td colspan="10" style="white-space:normal;color:var(--muted)">Loading today's listings</td></tr></tbody>
+      </table>
+    </div>
+    <div class="tablewrap compact">
+      <table aria-label="Active competition, compact">
+        <thead><tr><th>Address</th><th class="r">List price</th><th class="r">Per sf</th><th class="r">Sq ft</th><th class="r">Days</th></tr></thead>
+        <tbody class="num" id="activeCompact"><tr><td colspan="5" style="white-space:normal;color:var(--muted)">Loading today's listings</td></tr></tbody>
+      </table>
+    </div>
+    <button type="button" class="expand" id="fsOpen">See every column (turn your phone sideways, or tap)</button>
+    <div class="stats" id="activeStats" hidden>
+      <div class="stat"><div class="k">List price</div><div class="v num" id="stPrice"></div><div class="s" id="stPriceS"></div></div>
+      <div class="stat"><div class="k">Per sq ft</div><div class="v num" id="stPsf"></div><div class="s" id="stPsfS"></div></div>
+      <div class="stat"><div class="k">Heated sq ft</div><div class="v num" id="stSqft"></div><div class="s" id="stSqftS"></div></div>
+      <div class="stat"><div class="k">Days on market</div><div class="v num" id="stDom"></div><div class="s" id="stDomS"></div></div>
+    </div>
+    <p class="caption" id="activeNote">Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year. Heated square feet per the MLS.</p>
+  </div>
+</section>
+
+<section class="band" id="market">
+  <div class="wrap">
+    <div class="head">
+      <h2>Palmer Ranch, after the run-up</h2>
+      <p>The median single-family sale in Palmer Ranch climbed from about $445,000 before 2021 to $749,500 in January 2024. It has eased 15% since, and buyers have come back: closed sales over the last 12 months are up 26% on the year before.</p>
+    </div>
+    <div class="chart">
+      <div class="key"><span>Median sale price, single family, Palmer Ranch (34238), rolling 12 months</span></div>
+      <svg class="d" viewBox="0 0 720 300" role="img" aria-label="Palmer Ranch 34238 single-family median sale price, rolling 12 months: about $445,000 through 2020, peak $749,500 in January 2024, $640,000 in October 2026" style="width:100%;height:auto"><line x1="64" x2="696" y1="266.0" y2="266.0" stroke="var(--line)"/><text x="58" y="269.9" text-anchor="end" font-size="11" fill="var(--muted)">$400K</text><line x1="64" x2="696" y1="205.5" y2="205.5" stroke="var(--line)"/><text x="58" y="209.3" text-anchor="end" font-size="11" fill="var(--muted)">$500K</text><line x1="64" x2="696" y1="145.0" y2="145.0" stroke="var(--line)"/><text x="58" y="148.8" text-anchor="end" font-size="11" fill="var(--muted)">$600K</text><line x1="64" x2="696" y1="84.5" y2="84.5" stroke="var(--line)"/><text x="58" y="88.3" text-anchor="end" font-size="11" fill="var(--muted)">$700K</text><line x1="64" x2="696" y1="24.0" y2="24.0" stroke="var(--line)"/><text x="58" y="27.9" text-anchor="end" font-size="11" fill="var(--muted)">$800K</text><text x="64.0" y="292" text-anchor="middle" font-size="11" fill="var(--muted)">2019</text><text x="145.5" y="292" text-anchor="middle" font-size="11" fill="var(--muted)">2020</text><text x="227.1" y="292" text-anchor="middle" font-size="11" fill="var(--muted)">2021</text><text x="308.6" y="292" text-anchor="middle" font-size="11" fill="var(--muted)">2022</text><text x="390.2" y="292" text-anchor="middle" font-size="11" fill="var(--muted)">2023</text><text x="471.7" y="292" text-anchor="middle" font-size="11" fill="var(--muted)">2024</text><text x="553.3" y="292" text-anchor="middle" font-size="11" fill="var(--muted)">2025</text><text x="634.8" y="292" text-anchor="middle" font-size="11" fill="var(--muted)">2026</text><polyline points="64.0,236.5 84.4,240.5 104.8,240.5 125.2,244.8 145.5,238.8 165.9,239.4 186.3,239.0 206.7,235.8 227.1,235.5 247.5,224.3 267.9,214.0 288.3,196.4 308.6,175.9 329.0,160.1 349.4,126.9 369.8,108.7 390.2,98.7 410.6,80.9 431.0,72.4 451.4,70.9 471.7,54.6 492.1,70.1 512.5,72.4 532.9,75.4 553.3,86.1 573.7,77.8 594.1,84.5 614.5,85.1 634.8,97.4 655.2,105.7 675.6,117.8 696.0,120.8" fill="none" stroke="var(--navy-ink)" stroke-width="2.5" stroke-linejoin="round"/><circle cx="471.7" cy="54.6" r="4.5" fill="var(--navy-ink)"/><text x="471.7" y="45.6" text-anchor="middle" font-size="11" fill="var(--fg)">$749,500 peak, Jan 2024</text><circle cx="696.0" cy="120.8" r="5" fill="var(--gold)"/><text x="690.0" y="139.8" text-anchor="end" font-size="11" font-weight="600" fill="var(--fg)">$640,000, Oct 2026</text></svg><svg class="m" viewBox="0 0 360 240" role="img" aria-label="Palmer Ranch 34238 single-family median sale price, rolling 12 months: about $445,000 through 2020, peak $749,500 in January 2024, $640,000 in October 2026" style="width:100%;height:auto"><line x1="44" x2="350" y1="210.0" y2="210.0" stroke="var(--line)"/><text x="38" y="213.8" text-anchor="end" font-size="11" fill="var(--muted)">$400K</text><line x1="44" x2="350" y1="163.0" y2="163.0" stroke="var(--line)"/><text x="38" y="166.8" text-anchor="end" font-size="11" fill="var(--muted)">$500K</text><line x1="44" x2="350" y1="116.0" y2="116.0" stroke="var(--line)"/><text x="38" y="119.8" text-anchor="end" font-size="11" fill="var(--muted)">$600K</text><line x1="44" x2="350" y1="69.0" y2="69.0" stroke="var(--line)"/><text x="38" y="72.8" text-anchor="end" font-size="11" fill="var(--muted)">$700K</text><line x1="44" x2="350" y1="22.0" y2="22.0" stroke="var(--line)"/><text x="38" y="25.9" text-anchor="end" font-size="11" fill="var(--muted)">$800K</text><text x="44.0" y="232" text-anchor="middle" font-size="11" fill="var(--muted)">2019</text><text x="123.0" y="232" text-anchor="middle" font-size="11" fill="var(--muted)">2021</text><text x="201.9" y="232" text-anchor="middle" font-size="11" fill="var(--muted)">2023</text><text x="280.9" y="232" text-anchor="middle" font-size="11" fill="var(--muted)">2025</text><polyline points="44.0,187.1 53.9,190.2 63.7,190.2 73.6,193.5 83.5,188.8 93.4,189.3 103.2,189.0 113.1,186.5 123.0,186.3 132.8,177.6 142.7,169.6 152.6,156.0 162.5,140.0 172.3,127.8 182.2,101.9 192.1,87.8 201.9,80.0 211.8,66.2 221.7,59.6 231.5,58.4 241.4,45.7 251.3,57.8 261.2,59.6 271.0,62.0 280.9,70.2 290.8,63.8 300.6,69.0 310.5,69.5 320.4,79.0 330.3,85.5 340.1,94.8 350.0,97.2" fill="none" stroke="var(--navy-ink)" stroke-width="2.5" stroke-linejoin="round"/><circle cx="241.4" cy="45.7" r="4.5" fill="var(--navy-ink)"/><text x="241.4" y="36.7" text-anchor="middle" font-size="11" fill="var(--fg)">$750K peak</text><circle cx="350.0" cy="97.2" r="5" fill="var(--gold)"/><text x="344.0" y="116.2" text-anchor="end" font-size="11" font-weight="600" fill="var(--fg)">$640K, Oct 2026</text></svg>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="k">Median sale</div><div class="v num">$640,000</div><div class="s">$699,000 a year earlier</div></div>
+      <div class="stat"><div class="k">Per sq ft</div><div class="v num">$288</div><div class="s">Median, $302 a year earlier</div></div>
+      <div class="stat"><div class="k">Months of supply</div><div class="v num">3.8</div><div class="s">Down from 5.8 a year earlier</div></div>
+      <div class="stat"><div class="k">Sale to list</div><div class="v num">96.7%</div><div class="s">Median; 43 median days on market</div></div>
+    </div>
+    <p class="caption">Rolling 12 months through October 2026. Source: Stellar MLS via InfoSparks (ShowingTime), reported as published. The zip-wide figures include older and larger homes; Promenade's own sales above are the better guide to 5654's price.</p>
+  </div>
+</section>
+
+<section class="band" id="home">
+  <div class="wrap">
+    <div class="head">
+      <h2>What the listing leads with</h2>
+      <p>A quiet cul-de-sac, a fenced yard the full width of the lot, and the lake behind it. Five bedrooms at Promenade's no-pool price point is a family buyer's home, and the photography is built for that buyer.</p>
+    </div>
+    <div class="gallery two">
+      <figure><picture><source type="image/webp" srcset="photo-1.webp"><img src="photo-1.jpg" alt="5654 Woodland Sage Drive from the air, circled, on a cul-de-sac with the lake behind it" loading="lazy"></picture></figure>
+      <figure><picture><source type="image/webp" srcset="photo-2.webp"><img src="photo-2.jpg" alt="The fenced back yard and covered patio at 5654 Woodland Sage Drive" loading="lazy"></picture></figure>
+    </div>
+  </div>
+</section>
+
+<section class="band ask" id="ask">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">While we are on the market</p>
+      <h2>This page is how we watch the competition together.</h2>
+      <p>It refreshes from the MLS every morning. When a competitor cuts its price, goes under contract, or a new one appears, you will hear from me the same day, and we decide together whether 5654 holds or moves. Showing feedback gets read against this table, not in a vacuum.</p>
+      <div class="person"><div class="ring">R</div><div><b>Ryan Adamson, PA</b><span>Coldwell Banker Realty · <a href="tel:+19417139234">941.713.9234</a> · <a href="mailto:Ryan@Adamson-Group.com">Ryan@Adamson-Group.com</a></span></div></div>
+    </div>
+    <div class="watch">
+      <div class="w"><b>Price position</b><span id="wPos">Where 5654 sits in the stack, and how much of the competition is priced below it.</span></div>
+      <div class="w"><b>Promenade first</b><span id="wProm">The other Promenade listings are the buyer's direct alternatives. If one cuts or goes pending, we talk that day.</span></div>
+      <div class="w"><b>Days on market</b><span>Ours against the field's median, so a slow week reads as the market or as the price, not a guess.</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logos"><span>The Adamson Group</span><span>·</span><span>Coldwell Banker Realty</span></div>
+    <p>Sources: Stellar MLS active and pending listings, refreshed each morning (date shown under the competition table); Promenade Estates closed, expired and canceled listings from Stellar MLS as of November 9, 2026; Palmer Ranch (34238) single-family statistics from Stellar MLS InfoSparks, rolling 12 months through October 2026. Figures are reported as published and not re-derived.</p>
+    <p>Listings in the competition table are offered by the brokerages named with each listing and are displayed under the Stellar MLS Internet Data Exchange program. Information is deemed reliable but not guaranteed and may have changed since the last update.</p>
+    <p>This is a market overview prepared for the owners of 5654 Woodland Sage Drive, not an appraisal. Values are estimates for discussion; an opinion of value for lending or legal purposes requires a licensed appraiser. Coldwell Banker Realty. Equal Housing Opportunity.</p>
+  </div>
+</footer>
+
+<div class="callbar" aria-label="Contact Ryan">
+  <a class="call" href="tel:+19417139234">Call Ryan</a>
+  <a class="text" href="sms:+19417139234">Text</a>
+</div>
+
+<script>
+(function(){
+  // ── page config: the only things typed here. Everything in the live table comes from the MLS. ──
+  var FN = 'https://adamsonfl.com/.netlify/functions/';
+  // Competition = every Promenade listing (live, by subdivision) + Palmer Ranch homes that fit (live, by criteria).
+  var PROMENADE = 'PROMENADE ESTATES';
+  var CRITERIA = 'zip=34238&sqftMin=2200&sqftMax=3100&bedsMin=4&priceMin=450000&priceMax=800000';
+  // Pricing: set priceLow/priceHigh once the number is agreed. Until then the subject row pins to the top, unpriced.
+  var SUBJECT = { address: '5654 Woodland Sage Dr', subdivision: 'Promenade Estates', city: 'Sarasota', lot: 'Lake view', yearBuilt: null, sqft: 2600, beds: 5, baths: null, pool: false, priceLow: null, priceHigh: null };
+  var SAME = /promenade estates/i;
+  var NOTES = {};   // one-line notes under an address, by MLS number
+  // Promenade two-story history (Stellar MLS, as of Nov 9, 2026). Static by design; closings do not change.
+  var HIST = [
+    {address:'5655 Woodland Sage Dr',outcome:'Sold Aug 17, 2026',cls:'sold',sqft:2631,beds:5,baths:3,pool:false,first:599900,result:515000,psf:196,days:158,note:'Same size as 5654. Opened Dec 2025 at $599,900, canceled after 111 days; relisted at $569,000'},
+    {address:'5748 Woodland Sage Dr',outcome:'Sold Oct 10, 2026',cls:'sold',sqft:2970,beds:5,baths:3,pool:false,first:629000,result:613000,psf:206,days:46,note:'Priced near the market from day one; closed at 97% of its first ask'},
+    {address:'5715 Woodland Sage Dr',outcome:'Sold Aug 28, 2026',cls:'sold',sqft:3377,beds:4,baths:3,pool:false,first:795000,result:623638,psf:185,days:153,note:'Three listings: $795,000 canceled, $749,000 expired, then $675,000 sold'},
+    {address:'12770 Indigo Breeze Dr',outcome:'Expired Aug 2026',cls:'off',sqft:2934,beds:5,baths:3,pool:false,first:750000,result:null,psf:null,days:65,note:'DR Horton, 2023; cut to $699,000 and expired unsold'},
+    {address:'5755 Woodland Sage Dr',outcome:'Expired Aug 2026',cls:'off',sqft:3633,beds:5,baths:3,pool:false,first:819000,result:null,psf:null,days:178,note:'178 days at $819,000, expired unsold'},
+    {address:'12716 Dusty Trail Dr',outcome:'Sold Jun 27, 2025',cls:'sold',sqft:2631,beds:5,baths:3,pool:true,first:825000,result:750000,psf:285,days:91,note:'Same 2,631 sq ft size, with a private pool on the lake'}
+  ];
+
+  var IDX_BASE = 'https://adamsonfl.com/idx/details/listing/d003/';
+  var $ = function(id){ return document.getElementById(id); };
+  var money = function(n){ return n == null ? '—' : '$' + Math.round(n).toLocaleString('en-US'); };
+  var k = function(n){ return n == null ? '—' : '$' + Math.round(n/1000).toLocaleString('en-US') + 'K'; };
+  var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+  var fmtDate = function(iso){ if(!iso) return ''; var d = new Date(/^\d{4}-\d{2}-\d{2}$/.test(iso) ? iso + 'T12:00:00' : iso); return isNaN(d) ? '' : d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}); };
+  var median = function(a){ a = a.filter(function(x){ return x != null; }).sort(function(x,y){ return x-y; }); if(!a.length) return null; var m = a.length >> 1; return a.length % 2 ? a[m] : (a[m-1]+a[m])/2; };
+  var minmax = function(a){ a = a.filter(function(x){ return x != null; }); return a.length ? [Math.min.apply(null,a), Math.max.apply(null,a)] : [null,null]; };
+
+  // ── Promenade history ──
+  (function(){
+    var t = '', c = '';
+    HIST.forEach(function(r){
+      var badge = '<span class="badge ' + r.cls + '">' + esc(r.outcome) + '</span>';
+      t += '<tr><td>' + esc(r.address) + '<span class="sub">' + esc(r.note) + '</span></td><td>' + badge + '</td><td class="r">' + r.sqft.toLocaleString() + '</td><td class="r">' + r.beds + ' / ' + r.baths + '</td><td>' + (r.pool ? 'Yes' : 'No') + '</td><td class="r">' + money(r.first) + '</td><td class="r">' + (r.result ? money(r.result) : '—') + '</td><td class="r">' + (r.psf ? '$' + r.psf : '—') + '</td><td class="r">' + r.days + '</td></tr>';
+      c += '<tr><td>' + esc(r.address) + '<br>' + badge + '<span class="sub">' + r.sqft.toLocaleString() + ' sf · ' + r.beds + '/' + r.baths + (r.pool ? ' · pool' : '') + (r.psf ? ' · $' + r.psf + ' per sf' : '') + '</span></td><td class="r">' + k(r.first) + '</td><td class="r">' + (r.result ? k(r.result) : '—') + '</td><td class="r">' + r.days + '</td></tr>';
+    });
+    $('histTable').innerHTML = t; $('histCompact').innerHTML = c;
+  })();
+
+  // ── live competition ──
+  function lotPill(w){ if(!w) return '<span class="pill">Interior</span>'; var cls = /front/i.test(w) ? ' bay' : ''; return '<span class="pill' + cls + '">' + esc(w) + '</span>'; }
+  function days(r){ return r.dom == null ? '—' : (r.cdom && r.cdom !== r.dom ? r.dom + ' (' + r.cdom + ')' : String(r.dom)); }
+  function isSame(r){ return SAME.test(r.subdivision || ''); }
+  // MLS phase suffixes read badly ("Promenade Estates Ph Ii"); show the community name.
+  function sub(r){ return String(r.subdivision || '').replace(/\s+(ph|phase|unit)\s+[\w-]+$/i, '').replace(/\s+on palmer ranch$/i, '').replace(/\s+at palmer ranch$/i, ''); }
+  function badges(r, isSubject, short){
+    if (isSubject) return '<span class="badge">' + (SUBJECT.priceLow ? (short ? 'where we land' : 'where we would land') : 'your home') + '</span>';
+    return (isSame(r) ? '<span class="badge same">Promenade</span>' : '') + (r.status === 'Pending' ? '<span class="badge pend">Pending</span>' : '');
+  }
+  function addr(r, isSubject){
+    var a = isSubject || !r.idxUrl ? esc(r.address) : '<a href="' + esc(r.idxUrl) + '" target="_blank" rel="noopener">' + esc(r.address) + '</a>';
+    var note = NOTES[r.id];
+    return a + badges(r, isSubject) + '<span class="sub">' + esc(sub(r)) + (note ? ' · ' + esc(note) : '') + (r.listOffice && !isSubject ? ' · ' + esc(r.listOffice) : '') + '</span>';
+  }
+  function subjectPrice(){
+    if (!SUBJECT.priceLow) return { price: 'To be set together', short: 'TBD', psf: '—' };
+    var lo = SUBJECT.priceLow, hi = SUBJECT.priceHigh || lo;
+    return { price: lo === hi ? money(lo) : k(lo) + ' to ' + k(hi), short: lo === hi ? k(lo) : k(lo) + ' to ' + k(hi), psf: lo === hi ? '$' + Math.round(lo/SUBJECT.sqft) : '$' + Math.round(lo/SUBJECT.sqft) + ' to $' + Math.round(hi/SUBJECT.sqft) };
+  }
+  function cls(r, isSubject){ return isSubject ? ' class="subject"' : (isSame(r) ? ' class="same"' : ''); }
+  function row(r, isSubject){
+    var sp = isSubject ? subjectPrice() : null;
+    var lot = isSubject ? SUBJECT.lot : r.water;
+    return '<tr' + cls(r, isSubject) + '><td style="white-space:normal;min-width:200px">' + addr(r, isSubject) + '</td><td>' + lotPill(lot) + '</td>' +
+      '<td class="r">' + esc(r.yearBuilt || '—') + '</td><td class="r">' + (r.sqft ? r.sqft.toLocaleString() : '—') + '</td><td class="r">' + esc(r.beds || '—') + ' / ' + esc(r.baths || '—') + '</td>' +
+      '<td>' + (r.pool ? 'Yes' : 'No') + '</td>' +
+      '<td class="r">' + (isSubject ? sp.price : money(r.listPrice)) + '</td><td class="r">' + (isSubject ? sp.psf : (r.pricePerSqft == null ? '—' : '$' + r.pricePerSqft)) + '</td>' +
+      '<td class="r">' + (isSubject ? '—' : days(r)) + '</td><td class="r">' + (isSubject ? '—' : money(r.originalListPrice)) + '</td></tr>';
+  }
+  function compact(r, isSubject){
+    var sp = isSubject ? subjectPrice() : null;
+    var a = isSubject || !r.idxUrl ? esc(r.address) : '<a href="' + esc(r.idxUrl) + '" target="_blank" rel="noopener">' + esc(r.address) + '</a>';
+    return '<tr' + cls(r, isSubject) + '><td>' + a + ' ' + badges(r, isSubject, true) + '<span class="sub">' + esc(sub(r)) + (r.pool ? ' · pool' : '') + '</span></td>' +
+      '<td class="r">' + (isSubject ? sp.short : k(r.listPrice)) + '</td>' +
+      '<td class="r">' + (isSubject ? sp.psf : (r.pricePerSqft == null ? '—' : '$' + r.pricePerSqft)) + '</td><td class="r">' + (r.sqft ? r.sqft.toLocaleString() : '—') + '</td><td class="r">' + (isSubject ? '—' : days(r)) + '</td></tr>';
+  }
+  function render(rows, asOfIso){
+    rows = rows.filter(function(r){ return r.listPrice; }).sort(function(a,b){ return (a.listPrice||0) - (b.listPrice||0); });
+    var t = '', c = '', placed = false, below = 0;
+    var place = function(){ t += row(SUBJECT, true); c += compact(SUBJECT, true); placed = true; };
+    if (!SUBJECT.priceLow) place();
+    rows.forEach(function(r){ if (!placed && (r.listPrice || 0) >= SUBJECT.priceLow) place(); if (!placed) below++; t += row(r, false); c += compact(r, false); });
+    if (!placed) place();
+    $('activeBody').innerHTML = t; $('activeCompact').innerHTML = c;
+    if (SUBJECT.priceLow && rows.length) {
+      var pctBelow = Math.round(below / rows.length * 100);
+      $('wPos').textContent = below + ' of ' + rows.length + ' competitors (' + pctBelow + '%) are priced below 5654 today. ' + (pctBelow >= 60 ? 'That is an uphill field; our price has to be earned by condition and the lot.' : pctBelow <= 35 ? 'Most of the field is above us; we are positioned to be the value in the set.' : 'We sit in the middle of the field; showings decide this one.');
+    }
+    var asOf = fmtDate(asOfIso);
+    $('activeNote').innerHTML = '<span class="legend"></span>' + esc('Gold rows are the other Promenade Estates listings, the truest comps. Ordered by list price, lowest first. ' + rows.length + ' listings' + (asOf ? ' as of ' + asOf : '') + '. Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year. Lot is the MLS water view or frontage; Interior means none is listed.');
+    if (asOf) $('heroDate').textContent = asOf;
+    if (!rows.length) return;
+    var P = rows.map(function(r){ return r.listPrice; }), S = rows.map(function(r){ return r.pricePerSqft; }), Q = rows.map(function(r){ return r.sqft; }), D = rows.map(function(r){ return r.dom; });
+    var mp = minmax(P), ms = minmax(S), mq = minmax(Q), md = minmax(D);
+    $('stPrice').textContent = k(median(P)) + ' median'; $('stPriceS').textContent = k(mp[0]) + ' to ' + k(mp[1]);
+    $('stPsf').textContent = '$' + Math.round(median(S)) + ' median'; $('stPsfS').textContent = '$' + ms[0] + ' to $' + ms[1];
+    $('stSqft').textContent = Math.round(median(Q)).toLocaleString() + ' median'; $('stSqftS').textContent = mq[0].toLocaleString() + ' to ' + mq[1].toLocaleString();
+    $('stDom').textContent = Math.round(median(D)) + ' median'; $('stDomS').textContent = md[0] + ' to ' + md[1] + ' days';
+    $('activeStats').hidden = false;
+    $('tileCount').textContent = rows.length + ' listings';
+    $('tileCountSub').textContent = 'Median ' + k(median(P)) + ', $' + Math.round(median(S)) + ' per sq ft, ' + Math.round(median(D)) + ' median days' + (asOf ? ', as of ' + asOf.replace(/, \d{4}$/, '') : '');
+    var prom = rows.filter(function(r){ return isSame(r) && !r.pool && (r.beds || 0) >= 4 && (r.sqft || 0) >= 2200; });
+    if (prom.length) $('wProm').textContent = prom.length + ' Promenade home' + (prom.length === 1 ? '' : 's') + ' with four or more bedrooms and no pool ' + (prom.length === 1 ? 'is' : 'are') + ' listed today, ' + k(Math.min.apply(null, prom.map(function(r){ return r.listPrice; }))) + ' to ' + k(Math.max.apply(null, prom.map(function(r){ return r.listPrice; }))) + '. They are the buyer’s direct alternatives; if one cuts or goes pending, we talk that day.';
+  }
+  function fail(){
+    var msg = 'Today’s listings are not loading right now. Call or text Ryan at 941.713.9234 and he will walk you through them.';
+    $('activeBody').innerHTML = '<tr><td colspan="10" style="white-space:normal;color:var(--muted)">' + msg + '</td></tr>';
+    $('activeCompact').innerHTML = '<tr><td colspan="5" style="white-space:normal;color:var(--muted)">' + msg + '</td></tr>';
+  }
+  var wrap = $('activeWrap');
+  $('fsOpen').addEventListener('click', function(){ wrap.classList.add('fs'); document.body.classList.add('locked'); });
+  $('fsClose').addEventListener('click', function(){ wrap.classList.remove('fs'); document.body.classList.remove('locked'); });
+
+  var get = function(qs){ return fetch(FN + 'active-comps?' + qs).then(function(r){ return r.json(); }).then(function(d){ if(!d.ok) throw new Error(d.error || 'no data'); return d; }); };
+  Promise.allSettled([get('subdivision=' + encodeURIComponent(PROMENADE)), get(CRITERIA)]).then(function(res){
+    var ok = res.filter(function(x){ return x.status === 'fulfilled'; }).map(function(x){ return x.value; });
+    if (!ok.length) return fail();
+    var seen = {}, rows = [], asOf = null;
+    ok.forEach(function(d){
+      asOf = asOf || d.asOf;
+      d.rows.forEach(function(r){ if (seen[r.id]) return; if (r.postalCode && !/^34238/.test(r.postalCode)) return; seen[r.id] = 1; rows.push(r); });
+    });
+    render(rows, asOf);
+  }).catch(fail);
+})();
+</script>
+</body>
+</html>

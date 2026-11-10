@@ -17,6 +17,9 @@
 //      MLS numbers that are not in raw_listings (outside the import geography)
 //      come back in `missing` so the page can fall back to a dated snapshot.
 //
+//   C) Criteria inside one zip (live roster; see Mode C in the handler):
+//      GET /.netlify/functions/active-comps?zip=34238&sqftMin=2200&sqftMax=3100&bedsMin=4&priceMax=800000
+//
 //   -> { ok, asOf, mode, rows: [{ id, idxUrl, address, city, subdivision, status,
 //        lot, lotNote, water, floor, yearBuilt, sqft, beds, baths, garage, pool,
 //        hoaMonthly, listPrice, pricePerSqft, dom, cdom, originalListPrice,
@@ -187,6 +190,32 @@ exports.handler = async (event) => {
       extra = { ids, missing, set: setMeta ? { key: setMeta.set_key, title: setMeta.title, criteria: setMeta.criteria, preset: setMeta.preset, notes: setMeta.notes || {}, seededAt: setMeta.seeded_at || null } : null };
       const asOf = await asOfDate(db);
       return out(200, { ok: true, asOf, mode, rows, ...extra }, { 'Cache-Control': 'public, max-age=900, stale-while-revalidate=3600' });
+    }
+
+    // Mode C: criteria within one zip (2026-11-09, first used by /mkt/5654-woodland-sage/).
+    // Live, so a new listing that fits shows up the next morning without editing the page.
+    //   GET ?zip=34238&sqftMin=2200&sqftMax=3100&bedsMin=4&priceMin=450000&priceMax=800000
+    //       [&builtMin=2015][&status=Active,Pending][&type=Single Family Residence]
+    if (q.zip) {
+      mode = 'criteria';
+      const zip = String(q.zip).trim();
+      if (!/^\d{5}$/.test(zip)) return out(400, { error: 'bad zip' });
+      const intOr = (v) => (v != null && /^\d{1,8}$/.test(String(v).trim()) ? parseInt(v, 10) : null);
+      const crit = { zip, sqftMin: intOr(q.sqftMin), sqftMax: intOr(q.sqftMax), bedsMin: intOr(q.bedsMin), priceMin: intOr(q.priceMin), priceMax: intOr(q.priceMax), builtMin: intOr(q.builtMin) };
+      const statuses = (q.status || 'Active,Pending').split(',').map((s) => s.trim()).filter((s) => /^[A-Za-z ]{3,20}$/.test(s));
+      const type = (q.type || 'Single Family Residence').trim();
+      if (!/^[A-Za-z ]{3,40}$/.test(type)) return out(400, { error: 'bad type' });
+      const p = new URLSearchParams({ select: SELECT, postal_code: `like.${zip}*`, standard_status: `in.(${statuses.join(',')})`, property_sub_type: `ilike.*${type}*`, order: 'current_price.asc', limit: '200' });
+      const range = (col, lo, hi) => { if (lo != null) p.append(col, `gte.${lo}`); if (hi != null) p.append(col, `lte.${hi}`); };
+      range('living_area', crit.sqftMin, crit.sqftMax);
+      range('current_price', crit.priceMin, crit.priceMax);
+      range('bedrooms_total', crit.bedsMin, null);
+      range('year_built', crit.builtMin, null);
+      const r = await fetch(`${db.url}/rest/v1/raw_listings?${p}`, { headers: db.headers });
+      if (!r.ok) throw new Error(`supabase ${r.status}: ${(await r.text()).slice(0, 200)}`);
+      data = await r.json();
+      const asOf = await asOfDate(db);
+      return out(200, { ok: true, asOf, mode, criteria: crit, statuses, rows: data.map(shape) }, { 'Cache-Control': 'public, max-age=900, stale-while-revalidate=3600' });
     }
 
     // Mode A: one subdivision.
