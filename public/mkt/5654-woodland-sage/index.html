@@ -225,6 +225,36 @@ footer p{max-width:72em;margin-top:8px}
 .pill.bayst{border-color:var(--fail);color:var(--fail);font-weight:600}
 .pill.ours{border-color:var(--gold);color:var(--gold-ink);font-weight:600}
 b.bayst{color:var(--fail);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.chip{font:inherit;font-size:.86rem;padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg);cursor:pointer}
+.chip span{opacity:.7}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip.on{background:var(--gold);color:#0A1F3C;border-color:var(--gold)}}
+.chart.pp{position:relative}
+#ppChart text{font-family:var(--body)}
+#ppChart .ln{cursor:pointer;outline:none}
+#ppChart .addr{opacity:.55;pointer-events:none}
+#ppChart.picking .ln:not(.on){opacity:.2}
+#ppChart.picking .rl{opacity:.15}
+#ppChart .ln.on .vis{stroke-width:3.4}
+#ppChart .ln.on .addr{opacity:1;font-weight:600}
+#ppChart .ln:focus-visible .vis{stroke-width:3.6}
+.pop{position:absolute;z-index:3;width:min(330px,calc(100% - 16px));background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(10,31,60,.18);padding:14px 14px 12px;font-size:.88rem}
+.pop .px{position:absolute;top:4px;right:6px;border:0;background:none;font-size:1.4rem;line-height:1;color:var(--muted);cursor:pointer;padding:4px 6px}
+.pop .pt{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding-right:22px}
+.pop .pt b{font-family:var(--display);font-size:1.05rem}
+.pop .pt .badge{margin-left:0}
+.pop .pw{color:var(--muted);font-size:.8rem;margin-top:2px}
+.pop .pf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.pop .pf span{display:block;font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.pop .pf b{font-weight:600}
+.pop .pf b span{display:inline;font-size:inherit;letter-spacing:0;text-transform:none;color:inherit}
+.pop .pf b span.bayst{color:var(--fail)}
+.pop p{margin-top:10px;color:var(--muted);font-size:.84rem}
+.pop a{display:inline-block;margin-top:8px;font-weight:600;color:var(--navy);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pop a{color:#fff}:root:not([data-theme="light"]) .pop{box-shadow:0 12px 32px rgba(0,0,0,.45)}}
+@media (max-width:599px){.pop{position:relative;width:auto;margin-top:10px;box-shadow:none}}
+.pop .mls{display:block;margin-top:8px;font-size:.74rem;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -278,41 +308,208 @@ b.bayst{color:var(--fail);font-weight:600}
   <div class="wrap">
     <div class="head">
       <h2>Where $649,000 sits</h2>
-      <p>Only the homes a buyer will hold 5654 against: Promenade's DR Horton two-story plans, two-car garage, no private pool, 2,600 to 3,600 sq ft. Each line is one listing, from its first asking price to how it ended. Every sale landed in the shaded band. Every listing that asked $649K or more has expired, been canceled, or is still waiting. The table also shows where each lot sits, because the lot is what sets 5654 apart.</p>
+      <p>Promenade's DR Horton homes only: two-car garage, four or more bedrooms, no private pool, every listing in the last 365 days. Each line is one listing, from its first asking price to how it ended. Every sale landed in the shaded band; every listing that asked $649K or more has expired, been canceled, or is still waiting. Tap any line for the home's details.</p>
+    </div>
+    <div class="chips" role="group" aria-label="Which homes to show">
+      <button type="button" class="chip on" data-band="all">All DR Horton two-story plans <span id="cAll"></span></button>
+      <button type="button" class="chip" data-band="mid">2,300 to 3,300 sq ft <span id="cMid"></span></button>
     </div>
     <div class="stats" style="margin:0 0 14px">
-      <div class="stat"><div class="k">Typical sale</div><div class="v num">$613,000</div><div class="s">Median of 3 sales; $196 per sq ft</div></div>
-      <div class="stat"><div class="k">Highest sale</div><div class="v num">$623,638</div><div class="s">5715 Woodland Sage, 3,377 sf, Aug 2026</div></div>
-      <div class="stat"><div class="k">5654 list price</div><div class="v num" style="color:var(--gold-ink)">$649,000</div><div class="s">$247 per sq ft; $25,362 above the highest sale</div></div>
-      <div class="stat"><div class="k">Asked $649K or more</div><div class="v num">0 of 7 sold</div><div class="s">4 expired or canceled, 3 still listed</div></div>
+      <div class="stat"><div class="k">Typical sale</div><div class="v num" id="sMed"></div><div class="s" id="sMedS"></div></div>
+      <div class="stat"><div class="k">Highest sale</div><div class="v num" id="sHi"></div><div class="s" id="sHiS"></div></div>
+      <div class="stat"><div class="k">5654 list price</div><div class="v num" style="color:var(--gold-ink)">$649,000</div><div class="s" id="sOurS"></div></div>
+      <div class="stat"><div class="k">Asked $649K or more</div><div class="v num" id="sAbove"></div><div class="s" id="sAboveS"></div></div>
     </div>
-    <div class="chart">
+    <div class="chart pp" id="ppWrap">
       <div class="key"><span><i class="ksold"></i>Sold</span><span><i class="kfail">×</i>Expired or canceled</span><span><i class="kact"></i>Still on market</span><span><i class="ksubj"></i>5654 at $649K</span></div>
-      <svg class="d" viewBox="0 0 720 400" role="img" aria-label="DR Horton two-story homes in Promenade Estates, two-car garage, no pool: each listing from first ask to outcome. All three sales closed between $515K and $623,638. Every listing that asked $649K or more expired, was canceled, or is still on the market. 5654 is listed at $649,000." style="width:100%;height:auto"><line x1="64" x2="704" y1="332.4" y2="332.4" stroke="var(--line)"/><text x="58" y="336.2" text-anchor="end" font-size="11" fill="var(--muted)">$500K</text><line x1="64" x2="704" y1="288.3" y2="288.3" stroke="var(--line)"/><text x="58" y="292.1" text-anchor="end" font-size="11" fill="var(--muted)">$550K</text><line x1="64" x2="704" y1="244.3" y2="244.3" stroke="var(--line)"/><text x="58" y="248.1" text-anchor="end" font-size="11" fill="var(--muted)">$600K</text><line x1="64" x2="704" y1="200.2" y2="200.2" stroke="var(--line)"/><text x="58" y="204.0" text-anchor="end" font-size="11" fill="var(--muted)">$650K</text><line x1="64" x2="704" y1="156.2" y2="156.2" stroke="var(--line)"/><text x="58" y="160.0" text-anchor="end" font-size="11" fill="var(--muted)">$700K</text><line x1="64" x2="704" y1="112.1" y2="112.1" stroke="var(--line)"/><text x="58" y="115.9" text-anchor="end" font-size="11" fill="var(--muted)">$750K</text><line x1="64" x2="704" y1="68.1" y2="68.1" stroke="var(--line)"/><text x="58" y="71.9" text-anchor="end" font-size="11" fill="var(--muted)">$800K</text><line x1="64" x2="704" y1="24.0" y2="24.0" stroke="var(--line)"/><text x="58" y="27.8" text-anchor="end" font-size="11" fill="var(--muted)">$850K</text><text x="87.8" y="368" text-anchor="middle" font-size="11" fill="var(--muted)">Dec ’25</text><text x="179.8" y="368" text-anchor="middle" font-size="11" fill="var(--muted)">Feb</text><text x="267.4" y="368" text-anchor="middle" font-size="11" fill="var(--muted)">Apr</text><text x="358.0" y="368" text-anchor="middle" font-size="11" fill="var(--muted)">Jun</text><text x="448.6" y="368" text-anchor="middle" font-size="11" fill="var(--muted)">Aug</text><text x="539.2" y="368" text-anchor="middle" font-size="11" fill="var(--muted)">Oct</text><text x="629.8" y="368" text-anchor="middle" font-size="11" fill="var(--muted)">Dec ’26</text><rect x="64" y="223.4" width="640" height="95.7" fill="var(--navy-ink)" opacity=".08"/><text x="70" y="313.2" font-size="11" font-weight="600" fill="var(--navy-ink)">Where they sold: $515K to $624K</text><line x1="310.5" y1="244.4" x2="332.8" y2="271.6" stroke="var(--navy-ink)" stroke-width="1.2" stroke-dasharray="2 3" opacity=".7"/><line x1="280.8" y1="90.1" x2="289.7" y2="113.0" stroke="var(--fail)" stroke-width="1.2" stroke-dasharray="2 3" opacity=".7"/><line x1="414.4" y1="132.4" x2="432.3" y2="178.2" stroke="var(--navy-ink)" stroke-width="1.2" stroke-dasharray="2 3" opacity=".7"/><g><title>5655 Woodland Sage: canceled Apr 30, 2026, first asked $599,900, last asked $599,900</title><line x1="87.8" y1="244.4" x2="310.5" y2="244.4" stroke="var(--fail)" stroke-width="2"/><circle cx="87.8" cy="244.4" r="3" fill="var(--panel)" stroke="var(--fail)" stroke-width="1.5"/><path d="M305.0 238.9L316.0 249.9M305.0 249.9L316.0 238.9" stroke="var(--fail)" stroke-width="2.5" stroke-linecap="round"/></g><g><title>5715 Woodland Sage: canceled Apr 10, 2026, first asked $795,000, last asked $775,000</title><line x1="211.0" y1="72.5" x2="280.8" y2="90.1" stroke="var(--fail)" stroke-width="2"/><circle cx="211.0" cy="72.5" r="3" fill="var(--panel)" stroke="var(--fail)" stroke-width="1.5"/><path d="M275.3 84.6L286.3 95.6M275.3 95.6L286.3 84.6" stroke="var(--fail)" stroke-width="2.5" stroke-linecap="round"/></g><g><title>5755 Woodland Sage: expired Aug 10, 2026, first asked $819,000, last asked $819,000</title><line x1="191.7" y1="51.3" x2="462.0" y2="51.3" stroke="var(--fail)" stroke-width="2"/><circle cx="191.7" cy="51.3" r="3" fill="var(--panel)" stroke="var(--fail)" stroke-width="1.5"/><path d="M456.5 45.8L467.5 56.8M456.5 56.8L467.5 45.8" stroke="var(--fail)" stroke-width="2.5" stroke-linecap="round"/></g><g><title>12770 Indigo Breeze: expired Aug 5, 2026, first asked $750,000, last asked $699,000</title><line x1="264.5" y1="112.1" x2="454.5" y2="157.0" stroke="var(--fail)" stroke-width="2"/><circle cx="264.5" cy="112.1" r="3" fill="var(--panel)" stroke="var(--fail)" stroke-width="1.5"/><path d="M449.0 151.5L460.0 162.5M449.0 162.5L460.0 151.5" stroke="var(--fail)" stroke-width="2.5" stroke-linecap="round"/></g><g><title>5715 Woodland Sage: expired Jul 9, 2026, first asked $749,000, last asked $727,000</title><line x1="289.7" y1="113.0" x2="414.4" y2="132.4" stroke="var(--fail)" stroke-width="2"/><circle cx="289.7" cy="113.0" r="3" fill="var(--panel)" stroke="var(--fail)" stroke-width="1.5"/><path d="M408.9 126.9L419.9 137.9M408.9 137.9L419.9 126.9" stroke="var(--fail)" stroke-width="2.5" stroke-linecap="round"/></g><g><title>5655 Woodland Sage: sold Aug 17, 2026, first asked $569,000, sold for $515,000</title><line x1="332.8" y1="271.6" x2="472.4" y2="319.2" stroke="var(--navy-ink)" stroke-width="2"/><circle cx="332.8" cy="271.6" r="3" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="1.5"/><circle cx="472.4" cy="319.2" r="6.0" fill="var(--navy-ink)"/></g><g><title>5715 Woodland Sage: sold Aug 28, 2026, first asked $675,000, sold for $623,638</title><line x1="432.3" y1="178.2" x2="488.7" y2="223.4" stroke="var(--navy-ink)" stroke-width="2"/><circle cx="432.3" cy="178.2" r="3" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="1.5"/><circle cx="488.7" cy="223.4" r="6.0" fill="var(--navy-ink)"/></g><g><title>5748 Woodland Sage: sold Oct 10, 2026, first asked $629,000, sold for $613,000</title><line x1="462.0" y1="218.7" x2="552.5" y2="232.8" stroke="var(--navy-ink)" stroke-width="2"/><circle cx="462.0" cy="218.7" r="3" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="1.5"/><circle cx="552.5" cy="232.8" r="6.0" fill="var(--navy-ink)"/></g><g><title>12664 Night View: on market today, first asked $795,000, last asked $749,000</title><line x1="383.3" y1="72.5" x2="600.1" y2="113.0" stroke="var(--muted)" stroke-width="2" stroke-dasharray="5 4"/><circle cx="383.3" cy="72.5" r="3" fill="var(--panel)" stroke="var(--muted)" stroke-width="1.5"/><circle cx="600.1" cy="113.0" r="5.5" fill="var(--panel)" stroke="var(--muted)" stroke-width="2"/></g><g><title>12760 Lateral Root: on market today, first asked $785,000, last asked $670,000</title><line x1="445.6" y1="81.3" x2="600.1" y2="182.6" stroke="var(--muted)" stroke-width="2" stroke-dasharray="5 4"/><circle cx="445.6" cy="81.3" r="3" fill="var(--panel)" stroke="var(--muted)" stroke-width="1.5"/><circle cx="600.1" cy="182.6" r="5.5" fill="var(--panel)" stroke="var(--muted)" stroke-width="2"/></g><g><title>5728 Woodland Sage: on market today, first asked $779,000, last asked $764,900</title><line x1="542.1" y1="86.6" x2="600.1" y2="99.0" stroke="var(--muted)" stroke-width="2" stroke-dasharray="5 4"/><circle cx="542.1" cy="86.6" r="3" fill="var(--panel)" stroke="var(--muted)" stroke-width="1.5"/><circle cx="600.1" cy="99.0" r="5.5" fill="var(--panel)" stroke="var(--muted)" stroke-width="2"/></g><g><title>5731 Woodland Sage: on market today, first asked $635,000, last asked $635,000</title><line x1="570.4" y1="213.4" x2="600.1" y2="213.4" stroke="var(--muted)" stroke-width="2" stroke-dasharray="5 4"/><circle cx="570.4" cy="213.4" r="3" fill="var(--panel)" stroke="var(--muted)" stroke-width="1.5"/><circle cx="600.1" cy="213.4" r="5.5" fill="var(--panel)" stroke="var(--muted)" stroke-width="2"/></g><line x1="64" x2="704" y1="201.1" y2="201.1" stroke="var(--gold)" stroke-width="2.5" stroke-dasharray="7 4"/><text x="70" y="194.1" font-size="12" font-weight="700" fill="var(--gold-ink)">5654 at $649,000</text><text x="454.0" y="41.3" text-anchor="end" font-size="11" fill="var(--fg)">5755 expired, $819K</text><text x="290.8" y="92.1" text-anchor="start" font-size="11" fill="var(--fg)">5715 canceled, $775K</text><text x="422.4" y="122.4" text-anchor="start" font-size="11" fill="var(--fg)">5715 expired, $727K</text><text x="462.5" y="173.0" text-anchor="start" font-size="11" fill="var(--fg)">12770 expired, $699K</text><text x="310.5" y="232.4" text-anchor="middle" font-size="11" fill="var(--fg)">5655 canceled, $600K</text><text x="482.4" y="323.2" text-anchor="start" font-size="11" fill="var(--fg)">5655 sold, $515K (backs to Bay St)</text><text x="488.7" y="243.4" text-anchor="middle" font-size="11" fill="var(--fg)">5715 sold, $624K</text><text x="562.5" y="247.8" text-anchor="start" font-size="11" fill="var(--fg)">5748 sold, $613K</text><text x="610.1" y="99.0" text-anchor="start" font-size="11" fill="var(--fg)">5728, $765K</text><text x="610.1" y="119.0" text-anchor="start" font-size="11" fill="var(--fg)">12664, $749K</text><text x="610.1" y="186.6" text-anchor="start" font-size="11" fill="var(--fg)">12760, $670K</text><text x="610.1" y="227.4" text-anchor="start" font-size="11" fill="var(--fg)">5731, $635K</text><text x="600.1" y="18" text-anchor="middle" font-size="11" fill="var(--muted)">Today</text><line x1="600.1" x2="600.1" y1="24" y2="350" stroke="var(--line)" stroke-width="1"/></svg><svg class="m" viewBox="0 0 360 330" role="img" aria-label="DR Horton two-story homes in Promenade Estates, two-car garage, no pool: each listing from first ask to outcome. All three sales closed between $515K and $623,638. Every listing that asked $649K or more expired, was canceled, or is still on the market. 5654 is listed at $649,000." style="width:100%;height:auto"><line x1="44" x2="352" y1="275.2" y2="275.2" stroke="var(--line)"/><text x="38" y="279.0" text-anchor="end" font-size="11" fill="var(--muted)">$500K</text><line x1="44" x2="352" y1="201.1" y2="201.1" stroke="var(--line)"/><text x="38" y="204.9" text-anchor="end" font-size="11" fill="var(--muted)">$600K</text><line x1="44" x2="352" y1="127.1" y2="127.1" stroke="var(--line)"/><text x="38" y="130.9" text-anchor="end" font-size="11" fill="var(--muted)">$700K</text><line x1="44" x2="352" y1="53.0" y2="53.0" stroke="var(--line)"/><text x="38" y="56.8" text-anchor="end" font-size="11" fill="var(--muted)">$800K</text><text x="81.1" y="308" text-anchor="middle" font-size="11" fill="var(--muted)">Jan ’26</text><text x="152.2" y="308" text-anchor="middle" font-size="11" fill="var(--muted)">Apr</text><text x="224.1" y="308" text-anchor="middle" font-size="11" fill="var(--muted)">Jul</text><text x="296.7" y="308" text-anchor="middle" font-size="11" fill="var(--muted)">Oct</text><rect x="44" y="183.6" width="308" height="80.5" fill="var(--navy-ink)" opacity=".08"/><text x="50" y="258.1" font-size="11" font-weight="600" fill="var(--navy-ink)">Sold: $515K to $624K</text><line x1="175.1" y1="201.2" x2="186.9" y2="224.1" stroke="var(--navy-ink)" stroke-width="1.2" stroke-dasharray="2 3" opacity=".7"/><line x1="159.3" y1="71.5" x2="164.0" y2="90.8" stroke="var(--fail)" stroke-width="1.2" stroke-dasharray="2 3" opacity=".7"/><line x1="230.4" y1="107.1" x2="239.9" y2="145.6" stroke="var(--navy-ink)" stroke-width="1.2" stroke-dasharray="2 3" opacity=".7"/><g><title>5655 Woodland Sage: canceled Apr 30, 2026, first asked $599,900, last asked $599,900</title><line x1="56.6" y1="201.2" x2="175.1" y2="201.2" stroke="var(--fail)" stroke-width="2"/><circle cx="56.6" cy="201.2" r="3" fill="var(--panel)" stroke="var(--fail)" stroke-width="1.5"/><path d="M170.6 196.7L179.6 205.7M170.6 205.7L179.6 196.7" stroke="var(--fail)" stroke-width="2.5" stroke-linecap="round"/></g><g><title>5715 Woodland Sage: canceled Apr 10, 2026, first asked $795,000, last asked $775,000</title><line x1="122.2" y1="56.7" x2="159.3" y2="71.5" stroke="var(--fail)" stroke-width="2"/><circle cx="122.2" cy="56.7" r="3" fill="var(--panel)" stroke="var(--fail)" stroke-width="1.5"/><path d="M154.8 67.0L163.8 76.0M154.8 76.0L163.8 67.0" stroke="var(--fail)" stroke-width="2.5" stroke-linecap="round"/></g><g><title>5755 Woodland Sage: expired Aug 10, 2026, first asked $819,000, last asked $819,000</title><line x1="111.9" y1="39.0" x2="255.7" y2="39.0" stroke="var(--fail)" stroke-width="2"/><circle cx="111.9" cy="39.0" r="3" fill="var(--panel)" stroke="var(--fail)" stroke-width="1.5"/><path d="M251.2 34.5L260.2 43.5M251.2 43.5L260.2 34.5" stroke="var(--fail)" stroke-width="2.5" stroke-linecap="round"/></g><g><title>12770 Indigo Breeze: expired Aug 5, 2026, first asked $750,000, last asked $699,000</title><line x1="150.6" y1="90.1" x2="251.7" y2="127.8" stroke="var(--fail)" stroke-width="2"/><circle cx="150.6" cy="90.1" r="3" fill="var(--panel)" stroke="var(--fail)" stroke-width="1.5"/><path d="M247.2 123.3L256.2 132.3M247.2 132.3L256.2 123.3" stroke="var(--fail)" stroke-width="2.5" stroke-linecap="round"/></g><g><title>5715 Woodland Sage: expired Jul 9, 2026, first asked $749,000, last asked $727,000</title><line x1="164.0" y1="90.8" x2="230.4" y2="107.1" stroke="var(--fail)" stroke-width="2"/><circle cx="164.0" cy="90.8" r="3" fill="var(--panel)" stroke="var(--fail)" stroke-width="1.5"/><path d="M225.9 102.6L234.9 111.6M225.9 111.6L234.9 102.6" stroke="var(--fail)" stroke-width="2.5" stroke-linecap="round"/></g><g><title>5655 Woodland Sage: sold Aug 17, 2026, first asked $569,000, sold for $515,000</title><line x1="186.9" y1="224.1" x2="261.2" y2="264.1" stroke="var(--navy-ink)" stroke-width="2"/><circle cx="186.9" cy="224.1" r="3" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="1.5"/><circle cx="261.2" cy="264.1" r="5.0" fill="var(--navy-ink)"/></g><g><title>5715 Woodland Sage: sold Aug 28, 2026, first asked $675,000, sold for $623,638</title><line x1="239.9" y1="145.6" x2="269.9" y2="183.6" stroke="var(--navy-ink)" stroke-width="2"/><circle cx="239.9" cy="145.6" r="3" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="1.5"/><circle cx="269.9" cy="183.6" r="5.0" fill="var(--navy-ink)"/></g><g><title>5748 Woodland Sage: sold Oct 10, 2026, first asked $629,000, sold for $613,000</title><line x1="255.7" y1="179.7" x2="303.8" y2="191.5" stroke="var(--navy-ink)" stroke-width="2"/><circle cx="255.7" cy="179.7" r="3" fill="var(--panel)" stroke="var(--navy-ink)" stroke-width="1.5"/><circle cx="303.8" cy="191.5" r="5.0" fill="var(--navy-ink)"/></g><g><title>12664 Night View: on market today, first asked $795,000, last asked $749,000</title><line x1="213.8" y1="56.7" x2="329.1" y2="90.8" stroke="var(--muted)" stroke-width="2" stroke-dasharray="5 4"/><circle cx="213.8" cy="56.7" r="3" fill="var(--panel)" stroke="var(--muted)" stroke-width="1.5"/><circle cx="329.1" cy="90.8" r="4.5" fill="var(--panel)" stroke="var(--muted)" stroke-width="2"/></g><g><title>12760 Lateral Root: on market today, first asked $785,000, last asked $670,000</title><line x1="247.0" y1="64.1" x2="329.1" y2="149.3" stroke="var(--muted)" stroke-width="2" stroke-dasharray="5 4"/><circle cx="247.0" cy="64.1" r="3" fill="var(--panel)" stroke="var(--muted)" stroke-width="1.5"/><circle cx="329.1" cy="149.3" r="4.5" fill="var(--panel)" stroke="var(--muted)" stroke-width="2"/></g><g><title>5728 Woodland Sage: on market today, first asked $779,000, last asked $764,900</title><line x1="298.3" y1="68.6" x2="329.1" y2="79.0" stroke="var(--muted)" stroke-width="2" stroke-dasharray="5 4"/><circle cx="298.3" cy="68.6" r="3" fill="var(--panel)" stroke="var(--muted)" stroke-width="1.5"/><circle cx="329.1" cy="79.0" r="4.5" fill="var(--panel)" stroke="var(--muted)" stroke-width="2"/></g><g><title>5731 Woodland Sage: on market today, first asked $635,000, last asked $635,000</title><line x1="313.3" y1="175.2" x2="329.1" y2="175.2" stroke="var(--muted)" stroke-width="2" stroke-dasharray="5 4"/><circle cx="313.3" cy="175.2" r="3" fill="var(--panel)" stroke="var(--muted)" stroke-width="1.5"/><circle cx="329.1" cy="175.2" r="4.5" fill="var(--panel)" stroke="var(--muted)" stroke-width="2"/></g><line x1="44" x2="352" y1="164.8" y2="164.8" stroke="var(--gold)" stroke-width="2.5" stroke-dasharray="7 4"/><text x="50" y="157.8" font-size="11" font-weight="700" fill="var(--gold-ink)">5654 at $649,000</text></svg>
+      <svg id="ppChart" role="img" aria-label="Promenade Estates DR Horton listings in the last 365 days, each drawn from first asking price to outcome, against 5654's $649,000 list price" style="width:100%;height:auto;display:block"></svg>
+      <div class="pop" id="ppPop" role="dialog" aria-live="polite" hidden></div>
     </div>
-    <p class="caption">Lines run from each listing's first asking price to its sale price, or to its last asking price if it expired, was canceled or is still listed. Dotted links join a home's relistings. Tap a line for the address. Price cuts in between are not drawn.</p>
-
-    <div class="tablewrap full" style="margin-top:22px">
-      <table aria-label="DR Horton two-story homes in Promenade Estates, ordered by final price, with 5654 at $649,000">
-        <thead><tr><th>Home</th><th>Lot</th><th>Outcome</th><th class="r">Heated sf</th><th class="r">Built</th><th class="r">First ask</th><th class="r">Sold / last ask</th><th class="r">Per sf</th><th class="r">Days</th></tr></thead>
-        <tbody class="num"><tr><td style="white-space:normal;min-width:190px">5655 Woodland Sage<span class="sub">5 bed. Same Hayden plan as 5654. Relisted at $569,000; 158 days in all</span></td><td><span class="pill bayst">Backs to Bay St</span></td><td><span class="badge sold">Sold</span><span class="sub">Aug 2026</span></td><td class="r">2,631</td><td class="r">2020</td><td class="r">$569,000</td><td class="r">$515,000</td><td class="r">$196</td><td class="r">47 (158)</td></tr><tr><td style="white-space:normal;min-width:190px">5655 Woodland Sage<span class="sub">5 bed. Same Hayden plan as 5654; canceled after 111 days</span></td><td><span class="pill bayst">Backs to Bay St</span></td><td><span class="badge fail">Canceled</span><span class="sub">Apr 2026</span></td><td class="r">2,631</td><td class="r">2020</td><td class="r">$599,900</td><td class="r">$599,900</td><td class="r">$228</td><td class="r">111</td></tr><tr><td style="white-space:normal;min-width:190px">5748 Woodland Sage<span class="sub">5 bed. Priced near the market from day one; sold at 97% of first ask</span></td><td><span class="pill">Lakefront</span></td><td><span class="badge sold">Sold</span><span class="sub">Oct 2026</span></td><td class="r">2,970</td><td class="r">2022</td><td class="r">$629,000</td><td class="r">$613,000</td><td class="r">$206</td><td class="r">46</td></tr><tr><td style="white-space:normal;min-width:190px">5715 Woodland Sage<span class="sub">4 bed. Third listing; sold 22% below its first ask in February</span></td><td><span class="pill">Water view</span></td><td><span class="badge sold">Sold</span><span class="sub">Aug 2026</span></td><td class="r">3,377</td><td class="r">2022</td><td class="r">$675,000</td><td class="r">$623,638</td><td class="r">$185</td><td class="r">25 (153)</td></tr><tr><td style="white-space:normal;min-width:190px">5731 Woodland Sage<span class="sub">4 bed. On market since Oct 22, no cuts</span></td><td><span class="pill">Cul-de-sac, pond view</span></td><td><span class="badge snap">On market</span><span class="sub">today</span></td><td class="r">2,826</td><td class="r">2022</td><td class="r">$635,000</td><td class="r">$635,000</td><td class="r">$225</td><td class="r">19</td></tr><tr class="subject"><td style="white-space:normal;min-width:190px">5654 Woodland Sage<span class="badge">our list price</span><span class="sub">5 bed. Listed at $649,000: $25,362 above the highest sale in this class</span></td><td><span class="pill ours">Cul-de-sac edge, deep lot</span></td><td>Coming soon</td><td class="r">2,631</td><td class="r">2020</td><td class="r">$649,000</td><td class="r">$649,000</td><td class="r">$247</td><td class="r">—</td></tr><tr><td style="white-space:normal;min-width:190px">12760 Lateral Root<span class="sub">5 bed. Same Hayden plan, built 2023; cut from $785,000</span></td><td><span class="pill">Interior</span></td><td><span class="badge snap">On market</span><span class="sub">today</span></td><td class="r">2,631</td><td class="r">2023</td><td class="r">$785,000</td><td class="r">$670,000</td><td class="r">$255</td><td class="r">103</td></tr><tr><td style="white-space:normal;min-width:190px">12770 Indigo Breeze<span class="sub">5 bed. Cut from $750,000, expired unsold</span></td><td><span class="pill">Pond view</span></td><td><span class="badge fail">Expired</span><span class="sub">Aug 2026</span></td><td class="r">2,934</td><td class="r">2023</td><td class="r">$750,000</td><td class="r">$699,000</td><td class="r">$238</td><td class="r">65</td></tr><tr><td style="white-space:normal;min-width:190px">5715 Woodland Sage<span class="sub">4 bed. Second listing; cut from $749,000, expired</span></td><td><span class="pill">Water view</span></td><td><span class="badge fail">Expired</span><span class="sub">Jul 2026</span></td><td class="r">3,377</td><td class="r">2022</td><td class="r">$749,000</td><td class="r">$727,000</td><td class="r">$215</td><td class="r">84 (128)</td></tr><tr><td style="white-space:normal;min-width:190px">12664 Night View<span class="sub">5 bed. On market; cut from $795,000, latest cut Nov 10</span></td><td><span class="pill">Lake view, oversized</span></td><td><span class="badge snap">On market</span><span class="sub">today</span></td><td class="r">3,633</td><td class="r">2020</td><td class="r">$795,000</td><td class="r">$749,000</td><td class="r">$206</td><td class="r">126</td></tr><tr><td style="white-space:normal;min-width:190px">5728 Woodland Sage<span class="sub">5 bed. On market; cut from $779,000 on Nov 10</span></td><td><span class="pill">Lake view</span></td><td><span class="badge snap">On market</span><span class="sub">today</span></td><td class="r">3,633</td><td class="r">2023</td><td class="r">$779,000</td><td class="r">$764,900</td><td class="r">$211</td><td class="r">32</td></tr><tr><td style="white-space:normal;min-width:190px">5715 Woodland Sage<span class="sub">4 bed. First of three listings; opened at $795,000</span></td><td><span class="pill">Water view</span></td><td><span class="badge fail">Canceled</span><span class="sub">Apr 2026</span></td><td class="r">3,377</td><td class="r">2022</td><td class="r">$795,000</td><td class="r">$775,000</td><td class="r">$229</td><td class="r">44</td></tr><tr><td style="white-space:normal;min-width:190px">5755 Woodland Sage<span class="sub">5 bed. 178 days at $819,000, expired unsold</span></td><td><span class="pill">Cul-de-sac</span></td><td><span class="badge fail">Expired</span><span class="sub">Aug 2026</span></td><td class="r">3,633</td><td class="r">2022</td><td class="r">$819,000</td><td class="r">$819,000</td><td class="r">$225</td><td class="r">178</td></tr></tbody>
-      </table>
-    </div>
-    <div class="tablewrap compact" style="margin-top:22px">
-      <table aria-label="DR Horton two-story homes, compact">
-        <thead><tr><th>Home</th><th class="r">Sold / ask</th><th class="r">Per sf</th><th class="r">Days</th></tr></thead>
-        <tbody class="num"><tr><td>5655 Woodland Sage<br><span class="badge sold">Sold</span><span class="sub">2,631 sf · Aug 2026 · <b class="bayst">Backs to Bay St</b></span></td><td class="r">$515K</td><td class="r">$196</td><td class="r">47 (158)</td></tr><tr><td>5655 Woodland Sage<br><span class="badge fail">Canceled</span><span class="sub">2,631 sf · Apr 2026 · <b class="bayst">Backs to Bay St</b></span></td><td class="r">$600K</td><td class="r">$228</td><td class="r">111</td></tr><tr><td>5748 Woodland Sage<br><span class="badge sold">Sold</span><span class="sub">2,970 sf · Oct 2026 · lakefront</span></td><td class="r">$613K</td><td class="r">$206</td><td class="r">46</td></tr><tr><td>5715 Woodland Sage<br><span class="badge sold">Sold</span><span class="sub">3,377 sf · Aug 2026 · water view</span></td><td class="r">$624K</td><td class="r">$185</td><td class="r">25 (153)</td></tr><tr><td>5731 Woodland Sage<br><span class="badge snap">On market</span><span class="sub">2,826 sf · today · cul-de-sac, pond view</span></td><td class="r">$635K</td><td class="r">$225</td><td class="r">19</td></tr><tr class="subject"><td>5654 Woodland Sage <span class="badge">ours</span><span class="sub">2,631 sf · cul-de-sac edge, deep lot</span></td><td class="r">$649K</td><td class="r">$247</td><td class="r">—</td></tr><tr><td>12760 Lateral Root<br><span class="badge snap">On market</span><span class="sub">2,631 sf · today · interior</span></td><td class="r">$670K</td><td class="r">$255</td><td class="r">103</td></tr><tr><td>12770 Indigo Breeze<br><span class="badge fail">Expired</span><span class="sub">2,934 sf · Aug 2026 · pond view</span></td><td class="r">$699K</td><td class="r">$238</td><td class="r">65</td></tr><tr><td>5715 Woodland Sage<br><span class="badge fail">Expired</span><span class="sub">3,377 sf · Jul 2026 · water view</span></td><td class="r">$727K</td><td class="r">$215</td><td class="r">84 (128)</td></tr><tr><td>12664 Night View<br><span class="badge snap">On market</span><span class="sub">3,633 sf · today · lake view, oversized</span></td><td class="r">$749K</td><td class="r">$206</td><td class="r">126</td></tr><tr><td>5728 Woodland Sage<br><span class="badge snap">On market</span><span class="sub">3,633 sf · today · lake view</span></td><td class="r">$765K</td><td class="r">$211</td><td class="r">32</td></tr><tr><td>5715 Woodland Sage<br><span class="badge fail">Canceled</span><span class="sub">3,377 sf · Apr 2026 · water view</span></td><td class="r">$775K</td><td class="r">$229</td><td class="r">44</td></tr><tr><td>5755 Woodland Sage<br><span class="badge fail">Expired</span><span class="sub">3,633 sf · Aug 2026 · cul-de-sac</span></td><td class="r">$819K</td><td class="r">$225</td><td class="r">178</td></tr></tbody>
-      </table>
-    </div>
-    <p class="caption">Ordered by sold or last asking price, lowest first, with 5654 placed at $649,000. A relisted home appears once per listing; Days shows that listing's days on market with the total across relistings in parentheses.</p>
+    <p class="caption">Lines run from each listing's first asking price to its sale price, or to its last asking price if it expired, was canceled or is still listed; price cuts in between are not drawn. Dotted links join a home's relistings. Tap a line, or tab to it, for the details.</p>
     <div class="lesson">
-      <div><b>The ceiling.</b> No DR Horton two-story without a pool has sold in Promenade for more than $623,638. At $649,000, 5654 asks $25,362 more than that.</div>
-      <div><b>Above our price.</b> 7 listings in this class have asked $649K or more. None sold: 4 expired or were canceled, and 3 are still on the market after 32 to 126 days.</div>
+      <div><b>The ceiling.</b> No Promenade DR Horton two-story without a pool has sold for more than $623,638 in the last year. At $649,000, 5654 asks $25,362 more than that.</div>
+      <div><b>Above our price.</b> Seven listings have asked $649K or more. None sold: four expired or were canceled, and three are still on the market after 32 to 126 days.</div>
       <div><b>The lot is the difference.</b> 5655, the same Hayden plan across the cul-de-sac, backs to the Bay St wall and sold for $515,000 after 158 days. 5654 sits on the north side: a 60-foot driveway, a 140-foot-deep yard and a peekaboo lake view, with no Bay St behind it. The one lakefront two-story, 5748, sold for $613,000.</div>
     </div>
-    <p class="caption">One DR Horton two-story with a private pool sold in the period: 12716 Dusty Trail, the same 2,631 sq ft plan, for $750,000 in June 2025. It is left out because 5654 has no pool. Lot locations: Backs to Bay St comes from DR Horton's 2020 site plan (5655 is Lot 155, on the Bay St wall); the others are as each listing reports them in the MLS. Builder check: DR Horton's 2020 site plan for Promenade covers 255 of the community's 352 homesites, in its Express and Premium series, and shows 5654's lot, #152, as a Hayden. The courts it leaves out, Northern Juniper and Native Henna, hold M/I's three-car homes. Source: Stellar MLS closed, expired, canceled and active listings for Promenade Estates, as of November 11, 2026.</p>
+    <p class="caption">Lot locations: Backs to Bay St comes from DR Horton's 2020 site plan (5655 is Lot 155, on the Bay St wall); the others are as each listing reports them in the MLS. Builder check: DR Horton's 2020 site plan for Promenade covers 255 of the community's 352 homesites, in its Express and Premium series, and shows 5654's lot, #152, as a Hayden; the courts it leaves out, Northern Juniper and Native Henna, hold M/I's three-car homes. Source: Stellar MLS closed, expired, canceled and active listings for Promenade Estates, November 12, 2025 to November 11, 2026.</p>
   </div>
 </section>
+<script>
+(function(){
+  // Promenade Estates, DR Horton (2-car garage), 4+ bedrooms, no private pool, listed or closed in the last 365 days.
+  // One row per MLS listing; relists are separate rows. Stellar MLS via Supabase, as of Nov 11, 2026.
+  var TODAY = '2026-11-11', OUR = 649000, OUR_SF = 2631;
+  var L = [
+    {id:'A4668681',a:'5655 Woodland Sage',st:'Canceled',f:599900,p:599900,s:'2025-12-01',e:'2026-04-30',dom:111,cdom:111,sf:2631,bd:5,ba:'3',yb:2020,lot:'Backs to Bay St',bay:1,n:'Same Hayden plan as 5654. Canceled after 111 days, then relisted lower.'},
+    {id:'A4683005',a:'5715 Woodland Sage',st:'Canceled',f:795000,p:775000,s:'2026-02-22',e:'2026-04-10',dom:44,cdom:44,sf:3377,bd:4,ba:'3',yb:2022,lot:'Water view',n:'First of three listings.'},
+    {id:'A4682200',a:'5755 Woodland Sage',st:'Expired',f:819000,p:819000,s:'2026-02-09',e:'2026-08-10',dom:178,cdom:178,sf:3633,bd:5,ba:'3.5',yb:2022,lot:'Cul-de-sac',n:'178 days at $819,000 with no price cut; expired unsold.'},
+    {id:'A4684723',a:'12770 Indigo Breeze',st:'Expired',f:750000,p:699000,s:'2026-03-30',e:'2026-08-05',dom:65,cdom:65,sf:2934,bd:5,ba:'3',yb:2023,lot:'Pond view',lb:1,n:'Cut from $750,000 to $699,000; expired unsold.'},
+    {id:'A4689452',a:'5715 Woodland Sage',st:'Expired',f:749000,p:727000,s:'2026-04-16',e:'2026-07-09',dom:84,cdom:128,sf:3377,bd:4,ba:'3',yb:2022,lot:'Water view',n:'Second listing; cut to $727,000 and expired.'},
+    {id:'TB8509031',a:'5655 Woodland Sage',st:'Sold',f:569000,p:515000,s:'2026-05-15',e:'2026-08-17',dom:47,cdom:158,sf:2631,bd:5,ba:'3',yb:2020,lot:'Backs to Bay St',bay:1,fin:'Conventional',n:'Same Hayden plan as 5654, across the cul-de-sac. Sold 14% below its first $599,900 ask.'},
+    {id:'C7528581',a:'5715 Woodland Sage',st:'Sold',f:675000,p:623638,s:'2026-07-21',e:'2026-08-28',dom:25,cdom:153,sf:3377,bd:4,ba:'3',yb:2022,lot:'Water view',fin:'Cash',n:'Third listing. Sold 22% below the $795,000 it first asked in February.'},
+    {id:'A4702609',a:'5748 Woodland Sage',st:'Sold',f:629000,p:613000,s:'2026-08-10',e:'2026-10-10',dom:46,cdom:46,sf:2970,bd:5,ba:'3',yb:2022,lot:'Lakefront',fin:'Conventional',n:'Priced near the market from day one; sold at 97% of its first ask.'},
+    {id:'O6417741',a:'12664 Night View',st:'Active',f:795000,p:749000,s:'2026-06-18',e:TODAY,dom:126,cdom:126,sf:3633,bd:5,ba:'3.5',yb:2020,lot:'Lake view, oversized lot',n:'Cut from $795,000; latest cut Nov 10.'},
+    {id:'A4701716',a:'12760 Lateral Root',st:'Active',f:785000,p:670000,s:'2026-07-30',e:TODAY,dom:103,cdom:103,sf:2631,bd:5,ba:'3',yb:2023,lot:'Interior',n:'Same Hayden plan as 5654, built 2023. Cut from $785,000.'},
+    {id:'A4708580',a:'5728 Woodland Sage',st:'Active',f:779000,p:764900,s:'2026-10-03',e:TODAY,dom:32,cdom:32,sf:3633,bd:5,ba:'3.5',yb:2023,lot:'Lake view',n:'Cut from $779,000 on Nov 10.'},
+    {id:'N6146289',a:'5731 Woodland Sage',st:'Active',f:635000,p:635000,s:'2026-10-22',e:TODAY,dom:19,cdom:19,sf:2826,bd:4,ba:'3',yb:2022,lot:'Cul-de-sac, pond view',n:'On the market since Oct 22, no cuts.'}
+  ];
+  var IDX = 'https://adamsonfl.com/idx/details/listing/d003/';
+  var NS = 'http://www.w3.org/2000/svg';
+  var $ = function(id){ return document.getElementById(id); };
+  var M = function(n){ return '$' + Math.round(n).toLocaleString('en-US'); };
+  var K = function(n){ return '$' + Math.round(n/1000) + 'K'; };
+  var D = function(s){ return new Date(s + 'T12:00:00'); };
+  var fd = function(s){ return D(s).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); };
+  var esc = function(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+  var COL = {Sold:'var(--navy-ink)', Expired:'var(--fail)', Canceled:'var(--fail)', Active:'var(--muted)'};
+  var band = 'all', sel = null;
+  var svg = $('ppChart'), pop = $('ppPop'), wrap = $('ppWrap');
+  function rows(){ return L.filter(function(r){ return band === 'all' || (r.sf >= 2300 && r.sf <= 3300); }); }
+  function el(tag, at, parent){ var x = document.createElementNS(NS, tag); for (var k in at) x.setAttribute(k, at[k]); if (parent) parent.appendChild(x); return x; }
+  function homes(rs){ var h = {}; rs.forEach(function(r){ h[r.a] = 1; }); return Object.keys(h).length; }
+  $('cAll').textContent = '(' + homes(L) + ' homes)';
+  $('cMid').textContent = '(' + homes(L.filter(function(r){ return r.sf >= 2300 && r.sf <= 3300; })) + ' homes)';
+
+  function stats(rs){
+    var sold = rs.filter(function(r){ return r.st === 'Sold'; }).sort(function(a,b){ return a.p - b.p; });
+    var above = rs.filter(function(r){ return r.p >= OUR; });
+    if (sold.length){
+      var m = sold.length % 2 ? sold[sold.length >> 1].p : (sold[sold.length/2-1].p + sold[sold.length/2].p) / 2;
+      var hi = sold[sold.length-1];
+      $('sMed').textContent = M(m); $('sMedS').textContent = (sold.length === 1 ? 'One sale' : 'Median of ' + sold.length + ' sales') + ', ' + K(sold[0].p) + ' to ' + K(hi.p);
+      $('sHi').textContent = M(hi.p); $('sHiS').textContent = hi.a + ', ' + hi.sf.toLocaleString() + ' sf, ' + D(hi.e).toLocaleDateString('en-US',{month:'short',year:'numeric'});
+      $('sOurS').textContent = '$' + Math.round(OUR/OUR_SF) + ' per sq ft; ' + M(OUR - hi.p) + ' above the highest sale';
+    }
+    var fail = above.filter(function(r){ return r.st !== 'Active' && r.st !== 'Sold'; }).length, act = above.filter(function(r){ return r.st === 'Active'; }).length;
+    $('sAbove').textContent = above.filter(function(r){ return r.st === 'Sold'; }).length + ' of ' + above.length + ' sold';
+    $('sAboveS').textContent = fail + ' expired or canceled, ' + act + ' still listed';
+  }
+
+  function draw(){
+    var rs = rows();
+    var phone = wrap.clientWidth < 600;
+    var W = phone ? 360 : 720, H = phone ? 340 : 410, L0 = phone ? 44 : 64, R0 = W - (phone ? 10 : 16), T0 = phone ? 14 : 24, B0 = H - 34;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var x0 = D('2025-11-10'), x1 = D(phone ? '2026-12-05' : '2026-12-20');
+    var vals = rs.map(function(r){ return r.f; }).concat(rs.map(function(r){ return r.p; }), [OUR]);
+    var y0 = Math.floor((Math.min.apply(null, vals) - 15000) / 50000) * 50000, y1 = Math.ceil((Math.max.apply(null, vals) + 15000) / 50000) * 50000;
+    var X = function(s){ return L0 + (D(s) - x0) / (x1 - x0) * (R0 - L0); };
+    var Y = function(v){ return B0 - (v - y0) / (y1 - y0) * (B0 - T0); };
+    var fs = phone ? 10 : 11, step = (phone || y1 - y0 > 300000) ? 100000 : 50000;
+    for (var v = Math.ceil(y0/step)*step; v <= y1; v += step){
+      el('line', {x1:L0, x2:R0, y1:Y(v), y2:Y(v), stroke:'var(--line)'}, svg);
+      el('text', {x:L0-6, y:Y(v)+3.8, 'text-anchor':'end', 'font-size':fs, fill:'var(--muted)'}, svg).textContent = K(v);
+    }
+    ['2025-12-01','2026-02-01','2026-04-01','2026-06-01','2026-08-01','2026-10-01','2026-12-01'].forEach(function(m, i){
+      if (phone && i % 2) return; if (X(m) > R0 - 16) return;
+      var d = D(m), lab = d.toLocaleDateString('en-US',{month:'short'}) + (d.getMonth() === 11 || (phone && i === 0) ? ' ’' + String(d.getFullYear()).slice(2) : '');
+      el('text', {x:X(m), y:B0+18, 'text-anchor':'middle', 'font-size':fs, fill:'var(--muted)'}, svg).textContent = lab;
+    });
+    el('line', {x1:X(TODAY), x2:X(TODAY), y1:T0, y2:B0, stroke:'var(--line)'}, svg);
+    el('text', {x:X(TODAY), y:T0-4, 'text-anchor':'middle', 'font-size':fs, fill:'var(--muted)'}, svg).textContent = 'Today';
+    var sold = rs.filter(function(r){ return r.st === 'Sold'; });
+    if (sold.length){
+      var lo = Math.min.apply(null, sold.map(function(r){ return r.p; })), hi = Math.max.apply(null, sold.map(function(r){ return r.p; }));
+      el('rect', {x:L0, y:Y(hi), width:R0-L0, height:Math.max(2, Y(lo)-Y(hi)), fill:'var(--navy-ink)', opacity:'.08'}, svg);
+      el('text', {x:L0+6, y:Y(lo)-6, 'font-size':fs, 'font-weight':600, fill:'var(--navy-ink)'}, svg).textContent = (phone ? 'Sold: ' : 'Where they sold: ') + K(lo) + (lo === hi ? '' : ' to ' + K(hi));
+    }
+    // relist links
+    var by = {};
+    rs.forEach(function(r){ (by[r.a] = by[r.a] || []).push(r); });
+    Object.keys(by).forEach(function(a){
+      var g = by[a].slice().sort(function(p, q){ return D(p.s) - D(q.s); });
+      for (var i = 1; i < g.length; i++) el('line', {x1:X(g[i-1].e), y1:Y(g[i-1].p), x2:X(g[i].s), y2:Y(g[i].f), stroke:COL[g[i].st], 'stroke-width':1.2, 'stroke-dasharray':'2 3', opacity:.7, 'class':'rl', 'data-a':a}, svg);
+    });
+    // 5654
+    var ours = el('g', {'class':'ln ours', tabindex:0, role:'button', 'aria-label':'5654 Woodland Sage, our list price $649,000'}, svg);
+    el('line', {x1:L0, x2:R0, y1:Y(OUR), y2:Y(OUR), stroke:'transparent', 'stroke-width':16}, ours);
+    el('line', {x1:L0, x2:R0, y1:Y(OUR), y2:Y(OUR), stroke:'var(--gold)', 'stroke-width':2.5, 'stroke-dasharray':'7 4'}, ours);
+    el('text', {x:L0+6, y:Y(OUR)-7, 'font-size':phone ? 11 : 12, 'font-weight':700, fill:'var(--gold-ink)'}, ours).textContent = '5654 at $649,000';
+    ours.addEventListener('click', function(ev){ ev.stopPropagation(); open(-1, ev); });
+    ours.addEventListener('keydown', function(ev){ if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); open(-1, null); } });
+    // listings
+    rs.forEach(function(r){
+      var i = L.indexOf(r), c = COL[r.st], xa = X(r.s), ya = Y(r.f), xb = X(r.e), yb = Y(r.p);
+      var g = el('g', {'class':'ln', 'data-i':i, tabindex:0, role:'button', 'aria-label':r.a + ', ' + (r.st === 'Active' ? 'on market at ' : r.st === 'Sold' ? 'sold for ' : r.st.toLowerCase() + ' at ') + M(r.p)}, svg);
+      var pid = 'pp' + i;
+      el('path', {id:pid, d:'M' + xa + ' ' + ya + 'L' + xb + ' ' + yb, fill:'none', stroke:'none'}, g);
+      el('line', {x1:xa, y1:ya, x2:xb, y2:yb, stroke:'transparent', 'stroke-width':18, 'stroke-linecap':'round'}, g);
+      el('line', {x1:xa, y1:ya, x2:xb, y2:yb, stroke:c, 'stroke-width':2.2, 'stroke-dasharray':r.st === 'Active' ? '5 4' : 'none', 'class':'vis'}, g);
+      el('circle', {cx:xa, cy:ya, r:3, fill:'var(--panel)', stroke:c, 'stroke-width':1.5}, g);
+      var s = phone ? 4.5 : 5.5;
+      if (r.st === 'Sold') el('circle', {cx:xb, cy:yb, r:s+.5, fill:c}, g);
+      else if (r.st === 'Active') el('circle', {cx:xb, cy:yb, r:s, fill:'var(--panel)', stroke:c, 'stroke-width':2}, g);
+      else el('path', {d:'M'+(xb-s)+' '+(yb-s)+'L'+(xb+s)+' '+(yb+s)+'M'+(xb-s)+' '+(yb+s)+'L'+(xb+s)+' '+(yb-s), stroke:c, 'stroke-width':2.5, 'stroke-linecap':'round'}, g);
+      // faint address along the line: full street name if it fits, else the house number
+      var len = Math.hypot(xb - xa, yb - ya), full = r.a, num = r.a.split(' ')[0], cw = fs * 0.56;
+      var lab = len > full.length * cw + 22 ? full : (len > num.length * cw + 16 ? num : '');
+      if (lab){
+        var t = el('text', {'font-size':fs, fill:c, 'class':'addr', dy:r.lb ? fs + 3 : -5}, g);
+        var tp = el('textPath', {href:'#' + pid, startOffset:'50%', 'text-anchor':'middle'}, t);
+        tp.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#' + pid);
+        tp.textContent = lab;
+      }
+      g.addEventListener('click', function(ev){ ev.stopPropagation(); open(i, ev); });
+      g.addEventListener('keydown', function(ev){ if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); open(i, null); } });
+    });
+    stats(rs);
+    if (sel !== null && (sel === -1 || rs.indexOf(L[sel]) >= 0)) highlight(sel); else close();
+  }
+
+  function highlight(i){
+    svg.classList.add('picking');
+    Array.prototype.forEach.call(svg.querySelectorAll('.ln'), function(g){
+      var on = i === -1 ? g.classList.contains('ours') : (+g.getAttribute('data-i') === i || (L[+g.getAttribute('data-i')] && L[+g.getAttribute('data-i')].a === L[i].a));
+      g.classList.toggle('on', !!on);
+    });
+  }
+  function fact(k, v){ return '<div><span>' + k + '</span><b>' + v + '</b></div>'; }
+  function open(i, ev){
+    sel = i; highlight(i);
+    var h;
+    if (i === -1){
+      h = '<div class="pt"><b>5654 Woodland Sage</b><span class="badge">our list price</span></div>' +
+        '<div class="pf">' + fact('List price', M(OUR)) + fact('Per sq ft', '$' + Math.round(OUR/OUR_SF)) + fact('Heated sf', OUR_SF.toLocaleString()) + fact('Beds', '5') + fact('Built', '2020, Hayden plan') + fact('Lot', '#152, cul-de-sac edge') + '</div>' +
+        '<p>A 60-foot driveway, a 140-foot-deep yard and a peekaboo lake view, with no Bay St behind it.</p>';
+    } else {
+      var r = L[i], b = {Sold:'sold', Expired:'fail', Canceled:'fail', Active:'snap'}[r.st];
+      var when = r.st === 'Active' ? 'Listed ' + fd(r.s) : (r.st === 'Sold' ? 'Sold ' : r.st + ' ') + fd(r.e);
+      var others = L.filter(function(x){ return x.a === r.a && x !== r; }).length;
+      h = '<div class="pt"><b>' + esc(r.a) + '</b><span class="badge ' + b + '">' + (r.st === 'Active' ? 'On market' : r.st) + '</span></div>' +
+        '<div class="pw">' + esc(when) + (others ? ' · listing ' + (L.filter(function(x){ return x.a === r.a && D(x.s) <= D(r.s); }).length) + ' of ' + (others + 1) : '') + '</div>' +
+        '<div class="pf">' + fact('First ask', M(r.f)) + fact(r.st === 'Sold' ? 'Sold for' : 'Last ask', M(r.p)) + fact('Per sq ft', '$' + Math.round(r.p / r.sf)) + fact('Days', r.dom + (r.cdom !== r.dom ? ' (' + r.cdom + ' total)' : '')) +
+        fact('Heated sf', r.sf.toLocaleString()) + fact('Beds / baths', r.bd + ' / ' + r.ba) + fact('Built', r.yb) + fact('Lot', '<span class="' + (r.bay ? 'bayst' : '') + '">' + esc(r.lot) + '</span>') + (r.fin ? fact('Financing', r.fin) : '') + '</div>' +
+        '<p>' + esc(r.n) + '</p>' + (r.st === 'Active' ? '<a href="' + IDX + encodeURIComponent(r.id) + '" target="_blank" rel="noopener">Full listing and photos</a>' : '<span class="mls">MLS ' + esc(r.id) + '</span>');
+    }
+    pop.innerHTML = '<button type="button" class="px" aria-label="Close">×</button>' + h;
+    pop.hidden = false;
+    pop.querySelector('.px').addEventListener('click', function(e){ e.stopPropagation(); close(); });
+    // phones: the card sits under the chart. Wider screens: beside the tap, away from the line.
+    if (wrap.clientWidth < 600){ pop.style.left = ''; pop.style.top = ''; pop.scrollIntoView({block:'nearest', behavior:'smooth'}); return; }
+    var wr = wrap.getBoundingClientRect(), pw = pop.offsetWidth, ph = pop.offsetHeight;
+    var cx = ev && ev.clientX ? ev.clientX - wr.left : wr.width / 2, cy = ev && ev.clientY ? ev.clientY - wr.top : wr.height / 2;
+    var left = cx < wr.width / 2 ? cx + 24 : cx - pw - 24;
+    left = Math.max(8, Math.min(wr.width - pw - 8, left));
+    var top = Math.max(8, Math.min(wr.height - ph - 8, cy - ph / 2));
+    pop.style.left = left + 'px'; pop.style.top = top + 'px';
+  }
+  function close(){ sel = null; pop.hidden = true; svg.classList.remove('picking'); Array.prototype.forEach.call(svg.querySelectorAll('.ln.on'), function(g){ g.classList.remove('on'); }); }
+  wrap.addEventListener('click', function(e){ if (!pop.contains(e.target)) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+  Array.prototype.forEach.call(document.querySelectorAll('.chips .chip'), function(b){
+    b.addEventListener('click', function(){
+      band = b.getAttribute('data-band');
+      Array.prototype.forEach.call(document.querySelectorAll('.chips .chip'), function(x){ x.classList.toggle('on', x === b); });
+      draw();
+    });
+  });
+  var lastW = 0;
+  window.addEventListener('resize', function(){ if (Math.abs(wrap.clientWidth - lastW) > 40){ lastW = wrap.clientWidth; draw(); } });
+  lastW = wrap.clientWidth; draw();
+})();
+</script>
+
 
 <section class="band" id="onmarket">
   <div class="wrap">
