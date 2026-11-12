@@ -54,7 +54,8 @@ a{color:inherit}
 .tile .s{font-size:.86rem;color:var(--muted);margin-top:6px}
 .tile.gold .v{color:var(--gold-ink)}
 @media (min-width:560px){.tiles{grid-template-columns:repeat(2,1fr)}}
-@media (min-width:900px){.tiles{grid-template-columns:repeat(4,1fr);margin-top:-34px}.tile .v{font-size:1.9rem}}
+@media (min-width:900px){.tiles{grid-template-columns:repeat(3,1fr);margin-top:-34px}.tile .v{font-size:1.9rem}}
+@media (min-width:560px) and (max-width:899px){.tiles .tile:last-child:nth-child(odd){grid-column:1 / -1}}
 
 /* section heads */
 .head{display:grid;gap:10px;margin-bottom:22px}
@@ -95,6 +96,40 @@ tr.same td:first-child{box-shadow:inset 3px 0 0 var(--gold)}
 .pill.bay{border-color:var(--navy);color:var(--navy)}
 :root[data-theme="dark"] .pill.bay{border-color:#fff;color:#fff}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pill.bay{border-color:#fff;color:#fff}}
+
+/* pros / cons under a residence */
+tr.pcrow td{white-space:normal;padding-top:0;font-size:.84rem;line-height:1.45}
+tr.has-pc td{border-bottom:0}
+tr.pcrow.same td,tr.pcrow td{background:inherit}
+.pc{display:grid;gap:4px;padding:10px 12px;border-radius:6px;background:var(--soft);max-width:60em}
+.pc b{font-weight:600}
+.pc .pro b{color:#2f5b1f}
+.pc .con b{color:#9b2c2c}
+:root[data-theme="dark"] .pc .pro b{color:#9fd18a}
+:root[data-theme="dark"] .pc .con b{color:#f0a3a3}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pc .pro b{color:#9fd18a}:root:not([data-theme="light"]) .pc .con b{color:#f0a3a3}}
+.photos{font:inherit;font-weight:inherit;color:var(--navy);background:none;border:0;padding:0;cursor:pointer;text-align:left;text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
+:root[data-theme="dark"] .photos{color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .photos{color:#fff}}
+.photos .cam{display:inline-block;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:2px 7px;border-radius:3px;border:1px solid var(--gold);color:var(--gold-ink);margin-left:6px;vertical-align:middle;white-space:nowrap}
+.tile .photos{font-weight:600;color:var(--fg)}
+
+/* lightbox: swipe on phones, arrows on desktop */
+.lb{position:fixed;inset:0;z-index:30;background:#060e1c;color:#fff;display:none;flex-direction:column}
+.lb.open{display:flex}
+.lb .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:max(10px,env(safe-area-inset-top,0px)) 14px 10px;font-size:.9rem}
+.lb .bar b{font-family:var(--display);font-weight:600;font-size:1.05rem}
+.lb .bar button{font:inherit;font-weight:600;color:#fff;background:transparent;border:1px solid rgba(255,255,255,.5);border-radius:6px;padding:7px 14px;cursor:pointer}
+.lb .track{flex:1;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.lb .track::-webkit-scrollbar{display:none}
+.lb figure{flex:0 0 100%;margin:0;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 10px;min-width:0}
+.lb img{max-width:100%;max-height:calc(100svh - 190px);object-fit:contain;border-radius:4px}
+.lb figcaption{font-size:.84rem;color:#B4BECD;margin-top:10px;text-align:center}
+.lb .foot{padding:10px 16px max(14px,env(safe-area-inset-bottom,0px));font-size:.86rem;color:#dfe5ee;text-align:center}
+.lb .foot .count{color:#B4BECD;font-size:.8rem;margin-top:6px}
+.lb .nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(10,31,60,.6);color:#fff;font-size:1.4rem;cursor:pointer;display:none}
+.lb .prev{left:14px}.lb .next{right:14px}
+@media (min-width:760px) and (hover:hover){.lb .nav{display:block}}
 
 /* cards (phones): the same rows, stacked */
 .cards{display:grid;gap:10px}
@@ -145,6 +180,7 @@ body.locked{overflow:hidden}
 .stat .v{font-family:var(--display);font-size:1.3rem;margin-top:4px}
 .stat .s{font-size:.78rem;color:var(--muted);margin-top:2px}
 @media (min-width:760px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stats[hidden]{display:none}
 
 /* paths */
 .paths{display:grid;grid-template-columns:1fr;gap:12px}
@@ -206,7 +242,7 @@ footer p{max-width:72em;margin-top:8px}
   <div class="wrap">
     <p class="eyebrow">Conquistador Bay Club · Bradenton</p>
     <h1>4539 Bay Club Drive</h1>
-    <p class="sub">Every true waterfront condo competing with 4539 for the same buyer, from Bradenton to Longboat Key, with your residence placed where we price it. Refreshed from the MLS each morning for as long as we are on the market.</p>
+    <p class="sub">What Conquistador Bay Club has sold for this year, what each residence offered, and the Bay Club homes competing with 4539 for the same buyer today. Refreshed from the MLS each morning for as long as we are on the market.</p>
     <div class="meta">
       <span>Prepared for the owners of 4539 Bay Club</span>
       <span><b>Ryan Adamson</b>, Coldwell Banker Realty</span>
@@ -225,12 +261,7 @@ footer p{max-width:72em;margin-top:8px}
     <div class="tile gold">
       <div class="k">Bay Club sales this year</div>
       <div class="v num">$605,000 · $600,000</div>
-      <div class="s">4535 (2,100 sf, $288 per sq ft, 192 days) and 4557 (2,224 sf, $270 per sq ft, 14 days)</div>
-    </div>
-    <div class="tile">
-      <div class="k">Competing today</div>
-      <div class="v num" id="tileCount">—</div>
-      <div class="s" id="tileCountSub">Waterfront condos, 1,500+ sq ft, garage or carport, under $1MM</div>
+      <div class="s"><button type="button" class="photos" data-gallery="4535">4535</button> (2,100 sf, $288 per sq ft, 192 days) and the <button type="button" class="photos" data-gallery="4557">4557 penthouse</button> (2,224 sf, $270 per sq ft, 14 days). Tap either for photos.</div>
     </div>
     <div class="tile">
       <div class="k">Bay Club on the market now</div>
@@ -244,7 +275,7 @@ footer p{max-width:72em;margin-top:8px}
   <div class="wrap">
     <div class="head">
       <h2>What Conquistador Bay Club has taught buyers this year</h2>
-      <p>Five residences in your five buildings have been on the market since early 2025. Two sold, two left the market, one is back on. The pattern is the pricing lesson for 4539. From the analysis prepared September 22, 2026.</p>
+      <p>Five residences in your five buildings have been on the market since early 2025. Two sold, two left the market, one is back on. The pattern is the pricing lesson for 4539. Tap either closing for its photos. From the analysis prepared September 22, 2026.</p>
     </div>
     <div class="tablewrap full">
       <table aria-label="Recent activity in Conquistador Bay Club">
@@ -266,17 +297,17 @@ footer p{max-width:72em;margin-top:8px}
   <div class="wrap">
     <div class="head">
       <h2>Your competition, this morning</h2>
-      <p id="onmarketIntro">Every true waterfront condo a buyer at your price point is also touring today: 1,500 square feet or more, with a garage or carport, under $1MM, from west Bradenton through Longboat Key. Tap an address for the full listing and photos. Ordered by list price, lowest first, with 4539 placed where we price it, so you can see at a glance how much of the field sits below us. The other Conquistador Bay Club residences are marked in gold: same buildings, same bay, the truest comparison.</p>
+      <p id="onmarketIntro">The other Conquistador Bay Club residences on the market today: same buildings, same bay, and the first homes a buyer for 4539 will compare it to. Tap an address for the full listing and photos. Ordered by list price, lowest first, with 4539 placed where we price it.</p>
     </div>
     <div class="tablewrap full" id="activeWrap">
       <div class="fsbar"><span>Your competition, every column</span><button type="button" id="fsClose">Close</button></div>
-      <table id="activeTable" aria-label="Active waterfront condo competition">
-        <thead><tr><th>Address</th><th>Water</th><th class="r">Built</th><th class="r">Heated sf</th><th class="r">Bd / Ba</th><th class="r">Garage</th><th class="r">Dues / mo</th><th class="r">List price</th><th class="r">Per sf</th><th class="r">Days</th><th class="r">Of orig.</th></tr></thead>
-        <tbody class="num" id="activeBody"><tr><td colspan="11" style="white-space:normal;color:var(--muted)">Loading today's listings</td></tr></tbody>
+      <table id="activeTable" aria-label="Conquistador Bay Club residences on the market">
+        <thead><tr><th>Address</th><th>Water</th><th class="r">Built</th><th class="r">Heated sf</th><th class="r">Bd / Ba</th><th class="r">List price</th><th class="r">Per sf</th><th class="r">Days</th><th class="r">Of orig.</th></tr></thead>
+        <tbody class="num" id="activeBody"><tr><td colspan="9" style="white-space:normal;color:var(--muted)">Loading today's listings</td></tr></tbody>
       </table>
     </div>
     <div class="tablewrap compact">
-      <table aria-label="Active waterfront condo competition, compact">
+      <table aria-label="Conquistador Bay Club residences on the market, compact">
         <thead><tr><th>Address</th><th class="r">List price</th><th class="r">Per sf</th><th class="r">Sq ft</th><th class="r">Days</th></tr></thead>
         <tbody class="num" id="activeCompact"><tr><td colspan="5" style="white-space:normal;color:var(--muted)">Loading today's listings</td></tr></tbody>
       </table>
@@ -288,7 +319,7 @@ footer p{max-width:72em;margin-top:8px}
       <div class="stat"><div class="k">Heated sq ft</div><div class="v num" id="stSqft"></div><div class="s" id="stSqftS"></div></div>
       <div class="stat"><div class="k">Days on market</div><div class="v num" id="stDom"></div><div class="s" id="stDomS"></div></div>
     </div>
-    <p class="caption" id="activeNote">Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year. Dues are the MLS total annual fees divided by twelve.</p>
+    <p class="caption" id="activeNote">Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year. Every Bay Club residence has a private garage.</p>
   </div>
 </section>
 
@@ -317,8 +348,8 @@ footer p{max-width:72em;margin-top:8px}
       <div class="person"><div class="ring">R</div><div><b>Ryan Adamson, PA</b><span>Coldwell Banker Realty · <a href="tel:+19417139234">941.713.9234</a> · <a href="mailto:Ryan@Adamson-Group.com">Ryan@Adamson-Group.com</a></span></div></div>
     </div>
     <div class="watch">
-      <div class="w"><b>Price position</b><span id="wPos">Where 4539 sits in the stack, and how much of the competition is priced below it.</span></div>
-      <div class="w"><b>Days on market</b><span>Ours against the field's median, so a slow week reads as the market or as the price, not a guess.</span></div>
+      <div class="w"><b>Price position</b><span id="wPos">Where 4539 sits against the other Bay Club residences listed today.</span></div>
+      <div class="w"><b>Days on market</b><span>Ours against the other Bay Club listings, so a slow week reads as the market or as the price, not a guess.</span></div>
       <div class="w"><b>Bay Club first</b><span>4533 and 4565 #27 are the buyer's direct alternatives. If either moves, we talk that day.</span></div>
     </div>
   </div>
@@ -328,10 +359,19 @@ footer p{max-width:72em;margin-top:8px}
   <div class="wrap">
     <div class="logos"><span>The Adamson Group</span><span>·</span><span>Coldwell Banker Realty</span></div>
     <p>Sources: Stellar MLS active listings, refreshed each morning (date shown above the table); Conquistador Bay Club sales and listing history from the Coldwell Banker Home Platform comparative market analysis for 4539 Bay Club Drive dated September 22, 2026. Figures are reported as published and not re-derived.</p>
+    <p>Photos of 4535 and 4557 Bay Club Drive are from their listings when they were on the market; rooms marked "Virtually staged" show digitally added furniture.</p>
     <p id="idxNote">Listings in the competition table are offered by the brokerages named with each listing and are displayed under the Stellar MLS Internet Data Exchange program. Information is deemed reliable but not guaranteed and may have changed since the last update.</p>
     <p>This is a market overview prepared for the owners of 4539 Bay Club Drive, not an appraisal. Values are estimates for discussion; an opinion of value for lending or legal purposes requires a licensed appraiser. Coldwell Banker Realty. Equal Housing Opportunity.</p>
   </div>
 </footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lbTitle">
+  <div class="bar"><b id="lbTitle"></b><button type="button" id="lbClose">Close</button></div>
+  <div class="track" id="lbTrack"></div>
+  <button type="button" class="nav prev" id="lbPrev" aria-label="Previous photo">&#8249;</button>
+  <button type="button" class="nav next" id="lbNext" aria-label="Next photo">&#8250;</button>
+  <div class="foot"><div id="lbNote"></div><div class="count" id="lbCount"></div></div>
+</div>
 
 <div class="callbar" aria-label="Contact Ryan">
   <a class="call" href="tel:+19417139234">Call Ryan</a>
@@ -347,6 +387,27 @@ footer p{max-width:72em;margin-top:8px}
   // Pricing: set priceLow/priceHigh once the range is agreed. Until then the subject row pins to the top, unpriced.
   var SUBJECT = { address: '4539 Bay Club Dr', subdivision: 'Conquistador Bay Club', city: 'Bradenton', water: 'Bay front', yearBuilt: 1984, sqft: 1760, beds: 2, baths: 2, garage: 2, hoaMonthly: 1400, priceLow: null, priceHigh: null };
   var CBC_SUBDIVISION = /conquistador bay club/i;
+  // Live table shows Bay Club residences only (the wider waterfront roster stays in IDS for the day we want it back).
+  var CBC_ONLY = true;
+  // Pros / cons shown under a live listing, by MLS number. Ryan's read, in his words.
+  var PROSCONS = {
+    'A4708451': { pros: '3 bedroom plan, end unit with unobstructed sunset views, all windows updated, separate AC for the patio room, “move in ready” for the right buyer.',
+                  cons: 'Darker tones in the kitchen and flooring (not currently in style), master bedroom on the back side (no view).' }
+  };
+  // Photo sets for the closed sales (opened from the building history and the sales tile).
+  var GALLERIES = {
+    '4535': { title: '4535 Bay Club Dr', note: 'Sold Jun 18, 2026 · $605,000 · 192 days', photos: [
+      ['comps/4535-1', 'Living and dining under the vaulted ceiling, bay beyond', 'Virtually staged'],
+      ['comps/4535-2', 'Living room, fireplace and sliders to the patio', 'Virtually staged'],
+      ['comps/4535-3', 'Sunset from the enclosed patio', ''],
+      ['comps/4535-4', 'Updated kitchen and breakfast nook', ''],
+      ['comps/4535-5', 'Kitchen desk and glass-front cabinetry', ''] ] },
+    '4557': { title: '4557 Bay Club Dr · Penthouse', note: 'Sold May 8, 2026 · $600,000 · 14 days', photos: [
+      ['comps/4557-1', 'The 800 sq ft rooftop deck over Sarasota Bay', 'Virtually staged'],
+      ['comps/4557-2', 'Living room with direct bay views', ''],
+      ['comps/4557-3', 'Master suite facing the water', ''],
+      ['comps/4557-4', 'Rooftop deck at sunset', ''] ] }
+  };
   // One-line notes under an address (by MLS number). Facts only, nothing a neighbor would mind reading.
   var NOTES = {};
   // Snapshot rows for MLS numbers outside the nightly import geography (west Bradenton 34209). Same shape as the live rows.
@@ -359,8 +420,12 @@ footer p{max-width:72em;margin-top:8px}
   ];
   // Building history from the Sep 22, 2026 CMA (static by design; closings do not change).
   var CBC = [
-    {address:'4535 Bay Club Dr',outcome:'Sold Jun 18, 2026',cls:'sold',sqft:2100,beds:2,baths:2,first:730000,result:605000,psf:288,days:192,note:'Opened at $730,000, sold 17% below the original ask'},
-    {address:'4557 Bay Club Dr',outcome:'Sold May 8, 2026',cls:'sold',sqft:2224,beds:2,baths:2,first:599000,result:600000,psf:270,days:14,note:'Opened at $599,000, under contract in two weeks at full price'},
+    {address:'4535 Bay Club Dr',outcome:'Sold Jun 18, 2026',cls:'sold',sqft:2100,beds:2,baths:2,first:730000,result:605000,psf:288,days:192,note:'Opened at $730,000, sold 17% below the original ask',gallery:'4535',
+     pros:'Great sunset views from multiple rooms, updated kitchen, all impact windows, vaulted ceilings (top floor).',
+     cons:'Original sliders on the back patio; master bath (tub) needed updating.'},
+    {address:'4557 Bay Club Dr',label:'4557 Bay Club Dr · Penthouse',outcome:'Sold May 8, 2026',cls:'sold',sqft:2224,beds:2,baths:2,first:599000,result:600000,psf:270,days:14,note:'Opened at $599,000, under contract in two weeks at full price',gallery:'4557',
+     pros:'Penthouse with an 800 sq ft rooftop deck, option to create a 3rd bedroom with the floor plan, vaulted ceilings, direct water views from the master suite.',
+     cons:'Required a total renovation (flooring, kitchen, bathrooms); sunsets blocked for a portion of the year.'},
     {address:'4533 Bay Club Dr',outcome:'On the market',cls:'',sqft:2176,beds:2,baths:2,first:679000,result:null,psf:312,days:null,note:'Listed Oct 16, 2026; see the live table below',live:'A4709278'},
     {address:'4565 Bay Club Dr #27',outcome:'Withdrawn, now relisted',cls:'off',sqft:2260,beds:3,baths:2,first:779000,result:null,psf:null,days:88,note:'88 days at $779,000 in early 2026; back on Oct 6 at $639,000',live:'A4708451'},
     {address:'4555 Bay Club Dr #22',outcome:'Canceled',cls:'off',sqft:1820,beds:2,baths:2,first:850000,result:null,psf:null,days:464,note:'464 days, cut from $850,000 to $700,000, never sold'}
@@ -375,14 +440,25 @@ footer p{max-width:72em;margin-top:8px}
   var median = function(a){ a = a.filter(function(x){ return x != null; }).sort(function(x,y){ return x-y; }); if(!a.length) return null; var m = a.length >> 1; return a.length % 2 ? a[m] : (a[m-1]+a[m])/2; };
   var minmax = function(a){ a = a.filter(function(x){ return x != null; }); return a.length ? [Math.min.apply(null,a), Math.max.apply(null,a)] : [null,null]; };
 
+  // Pros / cons as a full-width row under its residence, so it reads on a phone.
+  function pcRow(pc, cols, cls){
+    if (!pc || !(pc.pros || pc.cons)) return '';
+    return '<tr class="pcrow' + (cls ? ' ' + cls : '') + '"><td colspan="' + cols + '"><div class="pc">' +
+      (pc.pros ? '<div class="pro"><b>Pros:</b> ' + esc(pc.pros) + '</div>' : '') +
+      (pc.cons ? '<div class="con"><b>Cons:</b> ' + esc(pc.cons) + '</div>' : '') + '</div></td></tr>';
+  }
+
   // ── building history (CMA) ──
   (function(){
     var t = '', c = '';
     CBC.forEach(function(r){
       var badge = '<span class="badge ' + r.cls + '">' + esc(r.outcome) + '</span>';
-      var link = r.live ? '<a href="' + IDX_BASE + r.live + '" target="_blank" rel="noopener">' + esc(r.address) + '</a>' : esc(r.address);
-      t += '<tr><td>' + link + '<span class="sub">' + esc(r.note) + '</span></td><td>' + badge + '</td><td class="r">' + r.sqft.toLocaleString() + '</td><td class="r">' + r.beds + ' / ' + r.baths + '</td><td class="r">' + money(r.first) + '</td><td class="r">' + (r.result ? money(r.result) : '—') + '</td><td class="r">' + (r.psf ? '$' + r.psf : '—') + '</td><td class="r">' + (r.days == null ? '—' : r.days) + '</td></tr>';
-      c += '<tr><td>' + link + '<br>' + badge + '<span class="sub">' + r.sqft.toLocaleString() + ' sf · ' + r.beds + '/' + r.baths + (r.psf ? ' · $' + r.psf + ' per sf' : '') + '</span></td><td class="r">' + k(r.first) + '</td><td class="r">' + (r.result ? k(r.result) : '—') + '</td><td class="r">' + (r.days == null ? '—' : r.days) + '</td></tr>';
+      var name = esc(r.label || r.address);
+      var link = r.gallery ? '<button type="button" class="photos" data-gallery="' + r.gallery + '">' + name + '<span class="cam">Photos</span></button>'
+               : r.live ? '<a href="' + IDX_BASE + r.live + '" target="_blank" rel="noopener">' + name + '</a>' : name;
+      var hasPc = r.pros || r.cons, trc = hasPc ? ' class="has-pc"' : '';
+      t += '<tr' + trc + '><td>' + link + '<span class="sub">' + esc(r.note) + '</span></td><td>' + badge + '</td><td class="r">' + r.sqft.toLocaleString() + '</td><td class="r">' + r.beds + ' / ' + r.baths + '</td><td class="r">' + money(r.first) + '</td><td class="r">' + (r.result ? money(r.result) : '—') + '</td><td class="r">' + (r.psf ? '$' + r.psf : '—') + '</td><td class="r">' + (r.days == null ? '—' : r.days) + '</td></tr>' + pcRow(r, 8);
+      c += '<tr' + trc + '><td>' + link + '<br>' + badge + '<span class="sub">' + esc(r.note) + '</span><span class="sub">' + r.sqft.toLocaleString() + ' sf · ' + r.beds + '/' + r.baths + (r.psf ? ' · $' + r.psf + ' per sf' : '') + '</span></td><td class="r">' + k(r.first) + '</td><td class="r">' + (r.result ? k(r.result) : '—') + '</td><td class="r">' + (r.days == null ? '—' : r.days) + '</td></tr>' + pcRow(r, 4);
     });
     $('cbcTable').innerHTML = t; $('cbcCompact').innerHTML = c;
   })();
@@ -393,7 +469,7 @@ footer p{max-width:72em;margin-top:8px}
   function pct(r){ return r.pctOfOriginal == null ? (r.listPrice && r.originalListPrice ? Math.round(r.listPrice / r.originalListPrice * 100) + '%' : '—') : Math.round(r.pctOfOriginal) + '%'; }
   function addr(r, isSubject){
     var a = isSubject || !r.idxUrl ? esc(r.address) : '<a href="' + esc(r.idxUrl) + '" target="_blank" rel="noopener">' + esc(r.address) + '</a>';
-    var badge = isSubject ? '<span class="badge">' + (SUBJECT.priceLow ? 'where we would land' : 'your residence') + '</span>' : (isSame(r) ? '<span class="badge same">Bay Club</span>' : '') + (r.status === 'Pending' ? '<span class="badge pend">Pending</span>' : '') + (r.snapshot ? '<span class="badge snap" title="Outside the nightly feed; as of ' + esc(r.snapshotAsOf || SNAPSHOT_AS_OF) + '">as of ' + esc(fmtDate(r.snapshotAsOf || SNAPSHOT_AS_OF).replace(/, \d{4}$/, '')) + '</span>' : '');
+    var badge = isSubject ? '<span class="badge">' + (SUBJECT.priceLow ? 'where we would land' : 'your residence') + '</span>' : (isSame(r) && !CBC_ONLY ? '<span class="badge same">Bay Club</span>' : '') + (r.status === 'Pending' ? '<span class="badge pend">Pending</span>' : '') + (r.snapshot ? '<span class="badge snap" title="Outside the nightly feed; as of ' + esc(r.snapshotAsOf || SNAPSHOT_AS_OF) + '">as of ' + esc(fmtDate(r.snapshotAsOf || SNAPSHOT_AS_OF).replace(/, \d{4}$/, '')) + '</span>' : '');
     var note = NOTES[r.id];
     return a + badge + '<span class="sub">' + esc([r.subdivision, r.city].filter(Boolean).join(' · ')) + (note ? ' · ' + esc(note) : '') + '</span>';
   }
@@ -403,28 +479,33 @@ footer p{max-width:72em;margin-top:8px}
     return { price: lo === hi ? money(lo) : k(lo) + ' to ' + k(hi), psf: lo === hi ? '$' + Math.round(lo/SUBJECT.sqft) : '$' + Math.round(lo/SUBJECT.sqft) + ' to $' + Math.round(hi/SUBJECT.sqft) };
   }
   function isSame(r){ return CBC_SUBDIVISION.test(r.subdivision || ''); }
+  function trOpen(r, isSubject){
+    var cls = [];
+    if (isSubject) cls.push('subject'); else if (isSame(r) && !CBC_ONLY) cls.push('same');
+    if (!isSubject && PROSCONS[r.id]) cls.push('has-pc');
+    return '<tr' + (cls.length ? ' class="' + cls.join(' ') + '"' : '') + '>';
+  }
   function row(r, isSubject){
     var sp = isSubject ? subjectPrice() : null;
-    return '<tr' + (isSubject ? ' class="subject"' : (isSame(r) ? ' class="same"' : '')) + '><td style="white-space:normal;min-width:190px">' + addr(r, isSubject) + '</td><td>' + waterPill(r.water) + '</td>' +
+    return trOpen(r, isSubject) + '<td style="white-space:normal;min-width:190px">' + addr(r, isSubject) + '</td><td>' + waterPill(r.water) + '</td>' +
       '<td class="r">' + esc(r.yearBuilt || '—') + '</td><td class="r">' + (r.sqft ? r.sqft.toLocaleString() : '—') + '</td><td class="r">' + esc(r.beds || '—') + ' / ' + esc(r.baths || '—') + '</td>' +
-      '<td class="r">' + (r.garage == null ? '—' : r.garage) + '</td><td class="r">' + (r.hoaMonthly ? money(r.hoaMonthly) : '—') + '</td>' +
       '<td class="r">' + (isSubject ? sp.price : money(r.listPrice)) + '</td><td class="r">' + (isSubject ? sp.psf : (r.pricePerSqft == null ? '—' : '$' + r.pricePerSqft)) + '</td>' +
-      '<td class="r">' + (isSubject ? '—' : days(r)) + '</td><td class="r">' + (isSubject ? '—' : pct(r)) + '</td></tr>';
+      '<td class="r">' + (isSubject ? '—' : days(r)) + '</td><td class="r">' + (isSubject ? '—' : pct(r)) + '</td></tr>' + (isSubject ? '' : pcRow(PROSCONS[r.id], 9));
   }
   function compact(r, isSubject){
     var sp = isSubject ? subjectPrice() : null;
     var a = isSubject || !r.idxUrl ? esc(r.address) : '<a href="' + esc(r.idxUrl) + '" target="_blank" rel="noopener">' + esc(r.address) + '</a>';
-    var badge = isSubject ? '<span class="badge">' + (SUBJECT.priceLow ? 'where we land' : 'your residence') + '</span>' : (isSame(r) ? '<span class="badge same">Bay Club</span>' : '') + (r.status === 'Pending' ? '<span class="badge pend">Pending</span>' : '') + (r.snapshot ? '<span class="badge snap">as of ' + esc(fmtDate(r.snapshotAsOf || SNAPSHOT_AS_OF).replace(/, \d{4}$/, '')) + '</span>' : '');
+    var badge = isSubject ? '<span class="badge">' + (SUBJECT.priceLow ? 'where we land' : 'your residence') + '</span>' : (isSame(r) && !CBC_ONLY ? '<span class="badge same">Bay Club</span>' : '') + (r.status === 'Pending' ? '<span class="badge pend">Pending</span>' : '') + (r.snapshot ? '<span class="badge snap">as of ' + esc(fmtDate(r.snapshotAsOf || SNAPSHOT_AS_OF).replace(/, \d{4}$/, '')) + '</span>' : '');
     var where = (r.subdivision || '') + (r.city ? ' · ' + r.city : '');
-    return '<tr' + (isSubject ? ' class="subject"' : (isSame(r) ? ' class="same"' : '')) + '><td>' + a + (badge ? ' ' + badge : '') + '<span class="sub">' + esc(where) + '</span></td>' +
+    return trOpen(r, isSubject) + '<td>' + a + (badge ? ' ' + badge : '') + '<span class="sub">' + esc(where) + '</span></td>' +
       '<td class="r">' + (isSubject ? (SUBJECT.priceLow ? k(SUBJECT.priceLow) + (SUBJECT.priceHigh && SUBJECT.priceHigh !== SUBJECT.priceLow ? ' to ' + k(SUBJECT.priceHigh) : '') : 'TBD') : k(r.listPrice)) + '</td>' +
-      '<td class="r">' + (isSubject ? sp.psf : (r.pricePerSqft == null ? '—' : '$' + r.pricePerSqft)) + '</td><td class="r">' + (r.sqft ? r.sqft.toLocaleString() : '—') + '</td><td class="r">' + (isSubject ? '—' : days(r)) + '</td></tr>';
+      '<td class="r">' + (isSubject ? sp.psf : (r.pricePerSqft == null ? '—' : '$' + r.pricePerSqft)) + '</td><td class="r">' + (r.sqft ? r.sqft.toLocaleString() : '—') + '</td><td class="r">' + (isSubject ? '—' : days(r)) + '</td></tr>' + (isSubject ? '' : pcRow(PROSCONS[r.id], 5));
   }
   function render(d){
     var rows = d.rows.slice();
     // ids mode has no seed rows; add the page's snapshot for anything the feed does not carry
     if (d.mode === 'ids') { var have = {}; rows.forEach(function(r){ have[r.id] = 1; }); SNAPSHOT.forEach(function(s){ if(!have[s.id]) { s.idxUrl = IDX_BASE + s.id; s.snapshot = true; s.snapshotAsOf = SNAPSHOT_AS_OF; rows.push(s); } }); }
-    rows = rows.filter(function(r){ return r.listPrice; }).sort(function(a,b){ return (a.listPrice||0) - (b.listPrice||0); });
+    rows = rows.filter(function(r){ return r.listPrice && (!CBC_ONLY || isSame(r)); }).sort(function(a,b){ return (a.listPrice||0) - (b.listPrice||0); });
     var t = '', c = '', placed = false, below = 0;
     var place = function(){ t += row(SUBJECT, true); c += compact(SUBJECT, true); placed = true; };
     if (!SUBJECT.priceLow) place();
@@ -433,15 +514,20 @@ footer p{max-width:72em;margin-top:8px}
     $('activeBody').innerHTML = t; $('activeCompact').innerHTML = c;
     if (SUBJECT.priceLow) {
       var pctBelow = Math.round(below / rows.length * 100);
-      $('wPos').textContent = below + ' of ' + rows.length + ' competitors (' + pctBelow + '%) are priced below 4539 today. ' + (pctBelow >= 60 ? 'That is an uphill field; our price has to be earned by condition and the bay.' : pctBelow <= 35 ? 'Most of the field is above us; we are positioned to be the value in the set.' : 'We sit in the middle of the field; showings decide this one.');
+      $('wPos').textContent = CBC_ONLY
+        ? below + ' of ' + rows.length + ' Bay Club ' + (rows.length === 1 ? 'listing is' : 'listings are') + ' priced below 4539 today.'
+        : below + ' of ' + rows.length + ' competitors (' + pctBelow + '%) are priced below 4539 today. ' + (pctBelow >= 60 ? 'That is an uphill field; our price has to be earned by condition and the bay.' : pctBelow <= 35 ? 'Most of the field is above us; we are positioned to be the value in the set.' : 'We sit in the middle of the field; showings decide this one.');
     }
 
     var asOf = fmtDate(d.asOf);
     var snaps = rows.filter(function(r){ return r.snapshot; }).length;
-    $('activeNote').innerHTML = '<span class="legend"></span>' + esc('Gold rows are the other Conquistador Bay Club residences, the truest comps. Ordered by list price, lowest first. ' + rows.length + ' listings' + (asOf ? ' as of ' + asOf : '') + '. Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year. Dues are the MLS total annual fees divided by twelve.' + (snaps ? ' ' + snaps + ' listings marked "as of" sit outside the nightly feed and were checked by hand on that date.' : ''));
+    $('activeNote').innerHTML = CBC_ONLY
+      ? esc(rows.length + ' Bay Club ' + (rows.length === 1 ? 'residence' : 'residences') + ' on the market' + (asOf ? ' as of ' + asOf : '') + '. Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year. Every Bay Club residence has a private garage. Pros and cons are Ryan\u2019s read from touring the market.')
+      : '<span class="legend"></span>' + esc('Gold rows are the other Conquistador Bay Club residences, the truest comps. Ordered by list price, lowest first. ' + rows.length + ' listings' + (asOf ? ' as of ' + asOf : '') + '. Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year.' + (snaps ? ' ' + snaps + ' listings marked "as of" sit outside the nightly feed and were checked by hand on that date.' : ''));
     if (asOf) $('heroDate').textContent = asOf;
 
     // stat strip: min, median, max of what is on the table (the rows themselves, nothing re-derived)
+    if (!CBC_ONLY && rows.length) {
     var P = rows.map(function(r){ return r.listPrice; }), S = rows.map(function(r){ return r.pricePerSqft; }), Q = rows.map(function(r){ return r.sqft; }), D = rows.map(function(r){ return r.dom; });
     var mp = minmax(P), ms = minmax(S), mq = minmax(Q), md = minmax(D);
     $('stPrice').textContent = k(median(P)) + ' median'; $('stPriceS').textContent = k(mp[0]) + ' to ' + k(mp[1]);
@@ -449,10 +535,8 @@ footer p{max-width:72em;margin-top:8px}
     $('stSqft').textContent = Math.round(median(Q)).toLocaleString() + ' median'; $('stSqftS').textContent = mq[0].toLocaleString() + ' to ' + mq[1].toLocaleString();
     $('stDom').textContent = Math.round(median(D)) + ' median'; $('stDomS').textContent = md[0] + ' to ' + md[1] + ' days';
     $('activeStats').hidden = false;
+    }
 
-    // tiles
-    $('tileCount').textContent = rows.length + ' listings';
-    $('tileCountSub').textContent = 'Median ' + k(median(P)) + ', $' + Math.round(median(S)) + ' per sq ft, ' + Math.round(median(D)) + ' median days' + (asOf ? ', as of ' + asOf.replace(/, \d{4}$/, '') : '');
     var cbc = rows.filter(function(r){ return CBC_SUBDIVISION.test(r.subdivision || ''); });
     if (cbc.length) {
       $('tileCbc').textContent = cbc.map(function(r){ return k(r.listPrice); }).join(' · ');
@@ -461,9 +545,35 @@ footer p{max-width:72em;margin-top:8px}
   }
   function fail(){
     var msg = 'Today’s listings are not loading right now. Call or text Ryan at 941.713.9234 and he will walk you through them.';
-    $('activeBody').innerHTML = '<tr><td colspan="11" style="white-space:normal;color:var(--muted)">' + msg + '</td></tr>';
+    $('activeBody').innerHTML = '<tr><td colspan="9" style="white-space:normal;color:var(--muted)">' + msg + '</td></tr>';
     $('activeCompact').innerHTML = '<tr><td colspan="5" style="white-space:normal;color:var(--muted)">' + msg + '</td></tr>';
   }
+  // ── photo galleries ──
+  var lb = $('lb'), track = $('lbTrack'), cur = null, lastFocus = null;
+  function lbUpdate(){
+    if (!cur) return;
+    var i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+    $('lbCount').textContent = 'Photo ' + Math.min(i + 1, cur.photos.length) + ' of ' + cur.photos.length + ' · swipe for more';
+  }
+  function lbOpen(key, from){
+    var g = GALLERIES[key]; if (!g) return;
+    cur = g; lastFocus = from || null;
+    $('lbTitle').textContent = g.title; $('lbNote').textContent = g.note;
+    track.innerHTML = g.photos.map(function(p, i){
+      return '<figure><picture><source type="image/webp" srcset="' + p[0] + '.webp"><img src="' + p[0] + '.jpg" alt="' + esc(g.title + ': ' + p[1]) + '"' + (i > 1 ? ' loading="lazy"' : '') + '></picture>' +
+        '<figcaption>' + esc(p[1]) + (p[2] ? ' · <em>' + esc(p[2]) + '</em>' : '') + '</figcaption></figure>';
+    }).join('');
+    lb.classList.add('open'); document.body.classList.add('locked'); track.scrollLeft = 0; lbUpdate(); $('lbClose').focus();
+  }
+  function lbClose(){ lb.classList.remove('open'); document.body.classList.remove('locked'); cur = null; if (lastFocus) lastFocus.focus(); }
+  function lbStep(n){ track.scrollBy({ left: n * track.clientWidth, behavior: 'smooth' }); }
+  document.addEventListener('click', function(e){ var b = e.target.closest && e.target.closest('[data-gallery]'); if (b) { e.preventDefault(); lbOpen(b.getAttribute('data-gallery'), b); } });
+  $('lbClose').addEventListener('click', lbClose);
+  $('lbPrev').addEventListener('click', function(){ lbStep(-1); });
+  $('lbNext').addEventListener('click', function(){ lbStep(1); });
+  track.addEventListener('scroll', function(){ window.requestAnimationFrame(lbUpdate); }, { passive: true });
+  document.addEventListener('keydown', function(e){ if (!cur) return; if (e.key === 'Escape') lbClose(); else if (e.key === 'ArrowRight') lbStep(1); else if (e.key === 'ArrowLeft') lbStep(-1); });
+
   // full-screen table on phones
   var wrap = $('activeWrap');
   $('fsOpen').addEventListener('click', function(){ wrap.classList.add('fs'); document.body.classList.add('locked'); });
