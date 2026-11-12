@@ -142,3 +142,16 @@ team notes, "edit facts" overrides. Satellite toggle (Esri imagery).
   utility pages (thank-you, receipts, IDX wrapper shell, standalone forms, voice) stay out.
 - `propertyMix: "sfh"` in `areas.json` (Bird Key, West of Trail) suppresses condo tiers, condo
   dues and the condo-fee FAQ for areas with no condos.
+
+## IDX wrapper styles are self-contained (since 2026-11-12)
+
+IDX Broker keeps its own saved copy of `/idx-wrapper/` and serves every IDX page (search,
+results, property details) inside it. A hashed `/_astro/*.css` link in that copy breaks the
+moment a build renames the file, so:
+- `scripts/inline-idx-wrapper-css.mjs` (npm postbuild) folds the wrapper's `/_astro` stylesheets
+  into `dist/idx-wrapper/index.html`; the build fails if one is left linked.
+- The wrapper's own styles in `src/pages/idx-wrapper.astro` are `<style is:inline>` (gallery
+  chevrons, gold buttons, branding live there).
+- `public/_astro/` holds the three stylesheet names IDX's saved copy linked on 2026-11-12
+  (`SRQmap.DEJB0eVp.css`, `about.SinFrbS1.css`, `idx-wrapper.CxL-1z3O.css`). They can be deleted
+  once IDX Broker has refreshed its copy of the wrapper (its page source shows no `/_astro/` css).

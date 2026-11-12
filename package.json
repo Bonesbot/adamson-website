@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "fetch-data": "tsx scripts/fetch-market-data.ts",
-    "postbuild": "node scripts/prune-lll-only.mjs"
+    "postbuild": "node scripts/prune-lll-only.mjs && node scripts/inline-idx-wrapper-css.mjs"
   },
   "dependencies": {
     "astro": "^5.0.0",
