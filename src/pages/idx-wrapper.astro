@@ -142,6 +142,23 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
     background-color: var(--color-gold-light, #d4b87a) !important;
   }
 
+  /* Photo gallery arrows: plain black chevrons, not the gold pill above.  */
+  /* A soft white halo keeps them visible on dark photos.                  */
+  .idx-wrapper-shell button.idx-arrow,
+  .idx-wrapper-shell button.idx-arrow:hover {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  .idx-wrapper-shell button.idx-arrow .fa {
+    color: #000 !important;
+    font-size: 28px;
+    text-shadow: 0 0 3px #fff, 0 0 8px rgba(255, 255, 255, 0.85);
+  }
+  .idx-wrapper-shell button.idx-arrow:hover .fa { opacity: 0.65; }
+
   /* Hide the generic ShareThis / AddThis social row (off-brand) */
   .idx-wrapper-shell .sharethis-inline-share-buttons,
   .idx-wrapper-shell .addthis_inline_share_toolbox {
