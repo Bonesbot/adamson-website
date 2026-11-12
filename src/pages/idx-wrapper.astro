@@ -157,6 +157,39 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
   }
   .idx-wrapper-shell button.idx-arrow:hover .fa { opacity: 0.65; }
 
+  /* IDX photo gallery page (/idx/photogallery/...): photos at full width, stacked, */
+  /* edge to edge on a phone, so they read large and pinch-zoom works.            */
+  #IDX-main.IDX-page-photogallery .IDX-showcaseSlide {
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 0 8px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+  #IDX-main.IDX-page-photogallery img.IDX-detailsPrimaryImg {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 auto !important;
+  }
+  #IDX-main.IDX-page-photogallery #IDX-showcaseSlides { max-width: 1200px; margin: 0 auto; }
+  @media (max-width: 767px) {
+    #IDX-main.IDX-page-photogallery #IDX-showcaseSlides {
+      width: 100vw !important;
+      max-width: none;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+    #IDX-main.IDX-page-photogallery .IDX-showcaseSlide { margin-bottom: 4px !important; }
+  }
+
   /* Hide the generic ShareThis / AddThis social row (off-brand) */
   .idx-wrapper-shell .sharethis-inline-share-buttons,
   .idx-wrapper-shell .addthis_inline_share_toolbox {
