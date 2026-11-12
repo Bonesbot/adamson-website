@@ -2,43 +2,43 @@
   "areaSlug": "west-bradenton",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-10T12:08:11.066788+00:00",
+  "lastUpdated": "2026-11-12T15:52:03.223357+00:00",
   "counts": {
-    "sold": 355,
-    "pending": 44,
-    "active": 161,
-    "total": 399
+    "sold": 357,
+    "pending": 46,
+    "active": 159,
+    "total": 403
   },
   "metrics": {
-    "avgPrice": "$656,186",
+    "avgPrice": "$656,089",
     "avgPricePerSqFt": "$313",
-    "avgYearBuilt": 1997,
-    "avgLivingSqFt": "1,980",
+    "avgYearBuilt": 1998,
+    "avgLivingSqFt": "1,981",
     "avgLotSqFt": null,
     "avgDom": 95
   },
   "range": {
     "minPrice": "$92,000",
-    "maxPrice": "$7,250,000"
+    "maxPrice": "$6,890,000"
   },
   "active": {
-    "count": 161,
+    "count": 159,
     "medianPrice": "$499,000",
     "medianPricePerSqFt": "$286",
-    "waterfrontCount": 61,
-    "newConstructionCount": 46
+    "waterfrontCount": 60,
+    "newConstructionCount": 44
   },
   "sold": {
-    "count": 75,
-    "medianPrice": "$449,999",
-    "medianDom": 60,
-    "saleToListRatio": "100.8%",
+    "count": 74,
+    "medianPrice": "$444,999",
+    "medianDom": 56,
+    "saleToListRatio": "101.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 8.3,
-    "sfhVilla": 5.3,
-    "blended": 6.3,
+    "condo": 8.4,
+    "sfhVilla": 5.1,
+    "blended": 6.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 122,
+    "under900k": 120,
     "band900kTo1_5m": 21,
     "band1_5mTo3m": 13,
     "band3mPlus": 5
@@ -62,11 +62,37 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 161
+      "count": 159
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "R4911428",
+      "address": "8128 LAUREL GARDEN AVE",
+      "subdivision": "SEAFLOWER",
+      "soldPrice": "$430,000",
+      "soldDate": "2026-11-09",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,671",
+      "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "R4910016",
+      "address": "8215 SEAFLOWER PKWY",
+      "subdivision": "SEAFLOWER",
+      "soldPrice": "$409,999",
+      "soldDate": "2026-11-06",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "1,698",
+      "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "J1006898",
       "address": "7607 MERRITT AVE",
@@ -105,32 +131,6 @@
       "yearBuilt": 1969,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "TB8530994",
-      "address": "7621 FULHAM AVE",
-      "subdivision": "SEAFLOWER PH I SUBPH IA AND IB-1 PB82/60",
-      "soldPrice": "$685,000",
-      "soldDate": "2026-10-30",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,080",
-      "yearBuilt": 2026,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "R4909734",
-      "address": "8103 SEAFLOWER PKWY",
-      "subdivision": "SEAFLOWER",
-      "soldPrice": "$569,999",
-      "soldDate": "2026-10-30",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,406",
-      "yearBuilt": 2025,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [],
@@ -157,7 +157,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 22,
+      "activeCount": 24,
       "soldCount": 37,
       "soldMedianPricePerSqFt": "$259",
       "soldMedianPrice": "$418,000",
@@ -166,7 +166,7 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 15,
+      "activeCount": 14,
       "soldCount": 23,
       "soldMedianPricePerSqFt": "$267",
       "soldMedianPrice": "$407,500",
@@ -175,66 +175,66 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 78,
-      "soldCount": 194,
+      "activeCount": 75,
+      "soldCount": 196,
       "soldMedianPricePerSqFt": "$253",
-      "soldMedianPrice": "$444,999",
+      "soldMedianPrice": "$443,750",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 6.3,
-    "monthsOfSupplyCondo": 8.3,
-    "monthsOfSupplySfhVilla": 5.3,
+    "monthsOfSupply": 6.2,
+    "monthsOfSupplyCondo": 8.4,
+    "monthsOfSupplySfhVilla": 5.1,
     "label": "balanced market",
-    "activeCount": 161,
+    "activeCount": 159,
     "sold365Count": 307,
-    "sold90Count": 75,
+    "sold90Count": 74,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 153,
-      "activeCount": 60,
+      "activeCount": 59,
       "soldMedianPrice": "$750,000",
       "soldMedianPricePerSqFt": "$350"
     },
     "condo": {
-      "soldCount": 202,
-      "activeCount": 101,
-      "soldMedianPrice": "$390,000",
-      "soldMedianPricePerSqFt": "$234"
+      "soldCount": 204,
+      "activeCount": 100,
+      "soldMedianPrice": "$392,500",
+      "soldMedianPricePerSqFt": "$235"
     }
   },
   "boating": {
-    "activeWithDock": 42,
-    "activeWaterfront": 61
+    "activeWithDock": 41,
+    "activeWaterfront": 60
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Bradenton a buyer's or seller's market right now?",
-      "a": "With 161 active listings and roughly 26 closed sales a month (trailing 12 months), West Bradenton has about 6.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 159 active listings and roughly 26 closed sales a month (trailing 12 months), West Bradenton has about 6.2 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo in West Bradenton?",
-      "a": "Single-family homes sell around $750,000 ($350/sq ft), while condos, villas and townhouses sell around $390,000 ($234/sq ft)."
+      "a": "Single-family homes sell around $750,000 ($350/sq ft), while condos, villas and townhouses sell around $392,500 ($235/sq ft)."
     },
     {
       "facet": "range",
       "q": "What is the price range in West Bradenton?",
-      "a": "Active listings run from $92,000 to $7,250,000, with a median asking price of $499,000."
+      "a": "Active listings run from $92,000 to $6,890,000, with a median asking price of $499,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell in West Bradenton?",
-      "a": "Recently sold homes took a median 60 days on market and closed at 100.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 56 days on market and closed at 101.0% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat in West Bradenton, and how many homes have a dock?",
-      "a": "Of 61 active waterfront listings, 42 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 60 active waterfront listings, 41 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
@@ -249,19 +249,19 @@
       "name": "El Conquistador / IMG / Aqua",
       "activeCount": 63,
       "pendingCount": 5,
-      "activeMedianPrice": "$350,000",
-      "soldCount": 108,
-      "soldMedianPrice": "$375,250",
-      "soldMedianPricePerSqFt": "$198",
+      "activeMedianPrice": "$355,000",
+      "soldCount": 106,
+      "soldMedianPrice": "$375,000",
+      "soldMedianPricePerSqFt": "$190",
       "soldMedianDom": 75,
-      "soldSingleFamilyShare": "31%",
+      "soldSingleFamilyShare": "30%",
       "lowSample": false
     },
     {
       "slug": "west-bradenton-coral-shores-cortez",
       "name": "Coral Shores / Cortez",
       "activeCount": 61,
-      "pendingCount": 14,
+      "pendingCount": 15,
       "activeMedianPrice": "$575,000",
       "soldCount": 107,
       "soldMedianPrice": "$480,000",
@@ -273,21 +273,21 @@
     {
       "slug": "west-bradenton-seaflower",
       "name": "SeaFlower",
-      "activeCount": 27,
+      "activeCount": 25,
       "pendingCount": 25,
-      "activeMedianPrice": "$569,990",
-      "soldCount": 80,
-      "soldMedianPrice": "$516,495",
-      "soldMedianPricePerSqFt": "$266",
+      "activeMedianPrice": "$569,999",
+      "soldCount": 82,
+      "soldMedianPrice": "$506,485",
+      "soldMedianPricePerSqFt": "$265",
       "soldMedianDom": 42,
-      "soldSingleFamilyShare": "45%",
+      "soldSingleFamilyShare": "44%",
       "lowSample": false
     },
     {
       "slug": "west-bradenton-tidy-island",
       "name": "Tidy Island",
       "activeCount": 10,
-      "pendingCount": 0,
+      "pendingCount": 1,
       "activeMedianPrice": "$810,000",
       "soldCount": 12,
       "soldMedianPrice": "$675,000",
@@ -312,23 +312,23 @@
             "soldMedianPrice": "$1,275,000",
             "soldMedianPricePerSqFt": "$570",
             "soldMedianDom": 61,
-            "activeCount": 22,
+            "activeCount": 21,
             "activeMedianPrice": "$1,399,000",
             "lowSample": false
           },
           {
             "waterfront": "non_waterfront",
             "label": "Non-Waterfront",
-            "soldCount": 103,
-            "soldMedianPrice": "$680,000",
-            "soldMedianPricePerSqFt": "$325",
+            "soldCount": 101,
+            "soldMedianPrice": "$675,000",
+            "soldMedianPricePerSqFt": "$323",
             "soldMedianDom": 35,
             "activeCount": 38,
             "activeMedianPrice": "$890,945",
             "lowSample": false
           }
         ],
-        "waterfrontPremiumPerSqFt": "75%"
+        "waterfrontPremiumPerSqFt": "77%"
       },
       {
         "propertyType": "attached",
@@ -341,23 +341,23 @@
             "soldMedianPrice": "$420,000",
             "soldMedianPricePerSqFt": "$270",
             "soldMedianDom": 101,
-            "activeCount": 24,
-            "activeMedianPrice": "$619,000",
+            "activeCount": 25,
+            "activeMedianPrice": "$599,000",
             "lowSample": false
           },
           {
             "waterfront": "non_waterfront",
             "label": "Non-Waterfront",
-            "soldCount": 128,
-            "soldMedianPrice": "$375,000",
-            "soldMedianPricePerSqFt": "$214",
+            "soldCount": 130,
+            "soldMedianPrice": "$375,250",
+            "soldMedianPricePerSqFt": "$215",
             "soldMedianDom": 79,
-            "activeCount": 77,
-            "activeMedianPrice": "$315,000",
+            "activeCount": 75,
+            "activeMedianPrice": "$319,000",
             "lowSample": false
           }
         ],
-        "waterfrontPremiumPerSqFt": "26%"
+        "waterfrontPremiumPerSqFt": "25%"
       }
     ],
     "waterfrontDefinition": "Salt or brackish boating water: bay, harbor, saltwater canal, Intracoastal or lagoon frontage. Lake and pond lots are counted as non-waterfront.",

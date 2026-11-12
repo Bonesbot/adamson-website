@@ -2,41 +2,41 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-10T12:08:07.521382+00:00",
+  "lastUpdated": "2026-11-12T15:51:59.922837+00:00",
   "counts": {
-    "sold": 109,
+    "sold": 110,
     "pending": 8,
-    "active": 43,
-    "total": 117
+    "active": 44,
+    "total": 118
   },
   "metrics": {
-    "avgPrice": "$1,080,082",
-    "avgPricePerSqFt": "$501",
-    "avgYearBuilt": 1973,
-    "avgLivingSqFt": "1,938",
+    "avgPrice": "$1,098,436",
+    "avgPricePerSqFt": "$506",
+    "avgYearBuilt": 1972,
+    "avgLivingSqFt": "1,945",
     "avgLotSqFt": null,
-    "avgDom": 104
+    "avgDom": 112
   },
   "range": {
     "minPrice": "$85,000",
     "maxPrice": "$22,900,000"
   },
   "active": {
-    "count": 43,
-    "medianPrice": "$750,000",
-    "medianPricePerSqFt": "$530",
+    "count": 44,
+    "medianPrice": "$775,000",
+    "medianPricePerSqFt": "$551",
     "waterfrontCount": 15,
-    "newConstructionCount": 11
+    "newConstructionCount": 12
   },
   "sold": {
     "count": 19,
-    "medianPrice": "$800,000",
+    "medianPrice": "$675,000",
     "medianDom": 74,
-    "saleToListRatio": "83.9%",
+    "saleToListRatio": "85.6%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 6.8,
+    "condo": 7.1,
     "sfhVilla": 5.4,
     "blended": 5.7,
     "method": "active / (trailing-12mo closed / 12)",
@@ -55,18 +55,31 @@
   },
   "priceBands": {
     "under900k": 23,
-    "band900kTo1_5m": 8,
-    "band1_5mTo3m": 4,
-    "band3mPlus": 8
+    "band900kTo1_5m": 9,
+    "band1_5mTo3m": 5,
+    "band3mPlus": 7
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 43
+      "count": 44
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4698705",
+      "address": "1709 N TAMIAMI TRL #505",
+      "subdivision": "THE STRAND OF SARASOTA",
+      "soldPrice": "$475,000",
+      "soldDate": "2026-11-10",
+      "bedrooms": 1,
+      "bathrooms": 2.0,
+      "livingSqFt": "855",
+      "yearBuilt": 2022,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4659947",
       "address": "455 ACACIA DR",
@@ -118,19 +131,6 @@
       "yearBuilt": 1960,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4687776",
-      "address": "1040 SYLVAN DR",
-      "subdivision": "SYLVAN SHORES",
-      "soldPrice": "$1,350,000",
-      "soldDate": "2026-10-13",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,949",
-      "yearBuilt": 1980,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 2,
-      "avgPrice": "$577,450",
-      "avgPricePerSqFt": "$479",
+      "avgPrice": "$562,450",
+      "avgPricePerSqFt": "$467",
       "avgLivingSqFt": "1,211",
-      "avgDom": 24
+      "avgDom": 26
     },
     {
       "tier": "1990to2005",
@@ -168,11 +168,11 @@
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 7,
-      "avgPrice": "$541,857",
-      "avgPricePerSqFt": "$600",
-      "avgLivingSqFt": "903",
-      "avgDom": 154
+      "activeCount": 8,
+      "avgPrice": "$564,875",
+      "avgPricePerSqFt": "$592",
+      "avgLivingSqFt": "956",
+      "avgDom": 145
     }
   ],
   "condoTiersScope": {
@@ -197,8 +197,8 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 15,
-      "soldCount": 27,
-      "soldMedianPricePerSqFt": "$550",
+      "soldCount": 28,
+      "soldMedianPricePerSqFt": "$553",
       "soldMedianPrice": "$650,000",
       "lowSample": false
     },
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 24,
+      "activeCount": 25,
       "soldCount": 78,
       "soldMedianPricePerSqFt": "$393",
       "soldMedianPrice": "$582,500",
@@ -223,11 +223,11 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 5.7,
-    "monthsOfSupplyCondo": 6.8,
+    "monthsOfSupplyCondo": 7.1,
     "monthsOfSupplySfhVilla": 5.4,
     "label": "balanced market",
-    "activeCount": 43,
-    "sold365Count": 91,
+    "activeCount": 44,
+    "sold365Count": 92,
     "sold90Count": 19,
     "method": "active / (trailing-12mo closed / 12)"
   },
@@ -239,10 +239,10 @@
       "soldMedianPricePerSqFt": "$412"
     },
     "condo": {
-      "soldCount": 20,
-      "activeCount": 9,
-      "soldMedianPrice": "$472,500",
-      "soldMedianPricePerSqFt": "$500"
+      "soldCount": 21,
+      "activeCount": 10,
+      "soldMedianPrice": "$475,000",
+      "soldMedianPricePerSqFt": "$509"
     }
   },
   "boating": {
@@ -253,22 +253,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 43 active listings and roughly 8 closed sales a month (trailing 12 months), West Of Trail North has about 5.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 44 active listings and roughly 8 closed sales a month (trailing 12 months), West Of Trail North has about 5.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail North?",
-      "a": "Single-family homes sell around $675,000 ($412/sq ft), while condos, villas and townhouses sell around $472,500 ($500/sq ft)."
+      "a": "Single-family homes sell around $675,000 ($412/sq ft), while condos, villas and townhouses sell around $475,000 ($509/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail North?",
-      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $750,000."
+      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $775,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 74 days on market and closed at 83.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 74 days on market and closed at 85.6% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

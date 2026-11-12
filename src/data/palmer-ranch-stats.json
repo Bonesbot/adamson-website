@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-10T12:08:10.145475+00:00",
+  "lastUpdated": "2026-11-12T15:52:02.388715+00:00",
   "counts": {
-    "sold": 987,
-    "pending": 57,
-    "active": 222,
-    "total": 1044
+    "sold": 988,
+    "pending": 61,
+    "active": 220,
+    "total": 1049
   },
   "metrics": {
-    "avgPrice": "$559,510",
+    "avgPrice": "$559,296",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,042",
+    "avgLivingSqFt": "2,040",
     "avgLotSqFt": null,
     "avgDom": 78
   },
@@ -22,17 +22,17 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 222,
-    "medianPrice": "$399,700",
-    "medianPricePerSqFt": "$243",
-    "waterfrontCount": 43,
-    "newConstructionCount": 38
+    "count": 220,
+    "medianPrice": "$399,250",
+    "medianPricePerSqFt": "$242",
+    "waterfrontCount": 41,
+    "newConstructionCount": 37
   },
   "sold": {
-    "count": 160,
-    "medianPrice": "$472,000",
+    "count": 159,
+    "medianPrice": "$477,000",
     "medianDom": 59,
-    "saleToListRatio": "92.3%",
+    "saleToListRatio": "92.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 208,
-    "band900kTo1_5m": 13,
+    "under900k": 207,
+    "band900kTo1_5m": 12,
     "band1_5mTo3m": 1,
     "band3mPlus": 0
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 222
+      "count": 220
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4708189",
+      "address": "4106 HEARTHSTONE DR",
+      "subdivision": "HUNTINGTON POINTE",
+      "soldPrice": "$615,000",
+      "soldDate": "2026-11-10",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,137",
+      "yearBuilt": 1992,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4709930",
       "address": "5562 RAIN LILY CT",
@@ -118,19 +131,6 @@
       "yearBuilt": 1996,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4700528",
-      "address": "7617 CAMMINARE DR",
-      "subdivision": "VILLAGEWALK",
-      "soldPrice": "$368,000",
-      "soldDate": "2026-11-04",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,534",
-      "yearBuilt": 2005,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,40 +139,40 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 35,
-      "avgPrice": "$321,229",
-      "avgPricePerSqFt": "$193",
+      "avgPrice": "$321,589",
+      "avgPricePerSqFt": "$194",
       "avgLivingSqFt": "1,657",
-      "avgDom": 120
+      "avgDom": 121
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 79,
-      "avgPrice": "$284,467",
-      "avgPricePerSqFt": "$224",
+      "activeCount": 78,
+      "avgPrice": "$282,679",
+      "avgPricePerSqFt": "$223",
       "avgLivingSqFt": "1,267",
-      "avgDom": 122
+      "avgDom": 121
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
       "activeCount": 7,
-      "avgPrice": "$386,414",
-      "avgPricePerSqFt": "$228",
+      "avgPrice": "$384,986",
+      "avgPricePerSqFt": "$227",
       "avgLivingSqFt": "1,700",
-      "avgDom": 65
+      "avgDom": 67
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 14,
-      "avgPrice": "$352,446",
+      "avgPrice": "$352,268",
       "avgPricePerSqFt": "$217",
       "avgLivingSqFt": "1,621",
-      "avgDom": 76
+      "avgDom": 78
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 46,
+      "activeCount": 45,
       "soldCount": 224,
       "soldMedianPricePerSqFt": "$258",
       "soldMedianPrice": "$475,000",
@@ -205,16 +205,16 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 43,
-      "soldCount": 213,
+      "activeCount": 41,
+      "soldCount": 214,
       "soldMedianPricePerSqFt": "$276",
-      "soldMedianPrice": "$600,000",
+      "soldMedianPrice": "$602,500",
       "lowSample": false
     },
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 133,
+      "activeCount": 134,
       "soldCount": 548,
       "soldMedianPricePerSqFt": "$242",
       "soldMedianPrice": "$437,500",
@@ -226,34 +226,34 @@
     "monthsOfSupplyCondo": 6.0,
     "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
-    "activeCount": 222,
-    "sold365Count": 722,
-    "sold90Count": 160,
+    "activeCount": 220,
+    "sold365Count": 718,
+    "sold90Count": 159,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 560,
-      "activeCount": 87,
+      "soldCount": 561,
+      "activeCount": 86,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
       "soldCount": 427,
-      "activeCount": 135,
+      "activeCount": 134,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
   },
   "boating": {
     "activeWithDock": 1,
-    "activeWaterfront": 43
+    "activeWaterfront": 41
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 222 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.7 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 220 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.7 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,17 +263,17 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $399,700."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $399,250."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 59 days on market and closed at 92.3% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 59 days on market and closed at 92.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 43 active waterfront listings, 1 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 41 active waterfront listings, 1 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

@@ -2,30 +2,30 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-10T12:08:05.789949+00:00",
+  "lastUpdated": "2026-11-12T15:51:58.275931+00:00",
   "counts": {
     "sold": 312,
-    "pending": 71,
-    "active": 197,
-    "total": 383
+    "pending": 72,
+    "active": 201,
+    "total": 384
   },
   "metrics": {
-    "avgPrice": "$1,914,078",
-    "avgPricePerSqFt": "$824",
+    "avgPrice": "$1,912,479",
+    "avgPricePerSqFt": "$823",
     "avgYearBuilt": 2002,
-    "avgLivingSqFt": "2,077",
+    "avgLivingSqFt": "2,076",
     "avgLotSqFt": null,
-    "avgDom": 100
+    "avgDom": 101
   },
   "range": {
     "minPrice": "$260,000",
     "maxPrice": "$14,450,000"
   },
   "active": {
-    "count": 197,
-    "medianPrice": "$1,929,000",
+    "count": 201,
+    "medianPrice": "$1,950,000",
     "medianPricePerSqFt": "$929",
-    "waterfrontCount": 58,
+    "waterfrontCount": 59,
     "newConstructionCount": 81
   },
   "sold": {
@@ -36,33 +36,33 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 9.6,
+    "condo": 9.8,
     "sfhVilla": 15.0,
-    "blended": 10.0,
+    "blended": 10.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,811",
-    "medianMonthlyCondoFee": "$1,895",
+    "medianMonthlyAssociation": "$1,814",
+    "medianMonthlyCondoFee": "$1,903",
     "minMonthlyCondoFee": "$173",
     "maxMonthlyCondoFee": "$11,729",
     "condoFeeRange": {
       "min": 173,
-      "median": 1896,
+      "median": 1903,
       "max": 11729
     }
   },
   "priceBands": {
-    "under900k": 45,
-    "band900kTo1_5m": 39,
-    "band1_5mTo3m": 50,
-    "band3mPlus": 63
+    "under900k": 46,
+    "band900kTo1_5m": 38,
+    "band1_5mTo3m": 52,
+    "band3mPlus": 65
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 197
+      "count": 201
     }
   ],
   "buildingClasses": [],
@@ -138,30 +138,30 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 48,
-      "avgPrice": "$1,184,948",
-      "avgPricePerSqFt": "$688",
-      "avgLivingSqFt": "1,607",
-      "avgDom": 141
+      "activeCount": 49,
+      "avgPrice": "$1,184,847",
+      "avgPricePerSqFt": "$691",
+      "avgLivingSqFt": "1,601",
+      "avgDom": 134
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 24,
-      "avgPrice": "$2,051,883",
-      "avgPricePerSqFt": "$758",
-      "avgLivingSqFt": "2,365",
-      "avgDom": 98
+      "activeCount": 26,
+      "avgPrice": "$2,113,084",
+      "avgPricePerSqFt": "$767",
+      "avgLivingSqFt": "2,438",
+      "avgDom": 93
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 38,
-      "avgPrice": "$1,750,655",
-      "avgPricePerSqFt": "$767",
-      "avgLivingSqFt": "2,101",
+      "activeCount": 39,
+      "avgPrice": "$1,768,177",
+      "avgPricePerSqFt": "$777",
+      "avgLivingSqFt": "2,099",
       "avgDom": 94
     },
     {
@@ -169,10 +169,10 @@
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 79,
-      "avgPrice": "$4,250,418",
-      "avgPricePerSqFt": "$1,385",
-      "avgLivingSqFt": "2,917",
-      "avgDom": 214
+      "avgPrice": "$4,296,051",
+      "avgPricePerSqFt": "$1,386",
+      "avgLivingSqFt": "2,949",
+      "avgDom": 207
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 57,
+      "activeCount": 58,
       "soldCount": 66,
       "soldMedianPricePerSqFt": "$696",
       "soldMedianPrice": "$1,215,000",
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 78,
+      "activeCount": 81,
       "soldCount": 154,
       "soldMedianPricePerSqFt": "$785",
       "soldMedianPrice": "$1,462,500",
@@ -222,11 +222,11 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 10.0,
-    "monthsOfSupplyCondo": 9.6,
+    "monthsOfSupply": 10.2,
+    "monthsOfSupplyCondo": 9.8,
     "monthsOfSupplySfhVilla": 15.0,
     "label": "buyer's market",
-    "activeCount": 197,
+    "activeCount": 201,
     "sold365Count": 237,
     "sold90Count": 40,
     "method": "active / (trailing-12mo closed / 12)"
@@ -240,20 +240,20 @@
     },
     "condo": {
       "soldCount": 299,
-      "activeCount": 189,
+      "activeCount": 193,
       "soldMedianPrice": "$1,200,000",
       "soldMedianPricePerSqFt": "$720"
     }
   },
   "boating": {
     "activeWithDock": 25,
-    "activeWaterfront": 58
+    "activeWaterfront": 59
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Downtown Sarasota a buyer's or seller's market right now?",
-      "a": "With 197 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 10.0 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 201 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 10.2 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,7 +263,7 @@
     {
       "facet": "range",
       "q": "What's the price range on Downtown Sarasota?",
-      "a": "Active listings run from $260,000 to $14,450,000, with a median asking price of $1,929,000."
+      "a": "Active listings run from $260,000 to $14,450,000, with a median asking price of $1,950,000."
     },
     {
       "facet": "speed",
@@ -273,12 +273,12 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Downtown Sarasota homes have a dock?",
-      "a": "Of 58 active waterfront listings, 25 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 59 active waterfront listings, 25 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Downtown Sarasota?",
-      "a": "The median monthly condo fee is $1,895 and the median monthly association fee is $1,811."
+      "a": "The median monthly condo fee is $1,903 and the median monthly association fee is $1,814."
     }
   ],
   "costBreakdown90": null

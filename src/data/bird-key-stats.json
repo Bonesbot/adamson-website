@@ -2,43 +2,43 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-10T12:08:09.208582+00:00",
+  "lastUpdated": "2026-11-12T15:52:01.611503+00:00",
   "counts": {
-    "sold": 43,
+    "sold": 44,
     "pending": 3,
-    "active": 14,
-    "total": 46
+    "active": 13,
+    "total": 47
   },
   "metrics": {
-    "avgPrice": "$4,336,793",
-    "avgPricePerSqFt": "$1,117",
+    "avgPrice": "$4,315,691",
+    "avgPricePerSqFt": "$1,118",
     "avgYearBuilt": 1991,
-    "avgLivingSqFt": "3,743",
-    "avgLotSqFt": "14,754",
-    "avgDom": 121
+    "avgLivingSqFt": "3,724",
+    "avgLotSqFt": "14,759",
+    "avgDom": 118
   },
   "range": {
     "minPrice": "$990,000",
     "maxPrice": "$13,950,000"
   },
   "active": {
-    "count": 14,
-    "medianPrice": "$5,624,500",
-    "medianPricePerSqFt": "$1,278",
-    "waterfrontCount": 8,
+    "count": 13,
+    "medianPrice": "$5,750,000",
+    "medianPricePerSqFt": "$1,333",
+    "waterfrontCount": 7,
     "newConstructionCount": 4
   },
   "sold": {
-    "count": 6,
-    "medianPrice": "$4,106,250",
-    "medianDom": 108,
-    "saleToListRatio": "86.5%",
+    "count": 7,
+    "medianPrice": "$3,700,000",
+    "medianDom": 143,
+    "saleToListRatio": "87.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": null,
-    "sfhVilla": 4.9,
-    "blended": 4.9,
+    "sfhVilla": 4.5,
+    "blended": 4.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -53,12 +53,12 @@
     "under900k": 0,
     "band900kTo1_5m": 0,
     "band1_5mTo3m": 4,
-    "band3mPlus": 10
+    "band3mPlus": 9
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 14
+      "count": 13
     }
   ],
   "buildingClasses": [
@@ -68,6 +68,19 @@
     }
   ],
   "recentSoldComps": [
+    {
+      "listingId": "A4677779",
+      "address": "425 PARTRIDGE CIR",
+      "subdivision": "BIRD KEY SUB",
+      "soldPrice": "$1,650,000",
+      "soldDate": "2026-11-10",
+      "bedrooms": 2,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,308",
+      "yearBuilt": 1961,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4705169",
       "address": "516 SPOONBILL WAY",
@@ -119,19 +132,6 @@
       "yearBuilt": 1985,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4696960",
-      "address": "465 E ROYAL FLAMINGO DR",
-      "subdivision": "BIRD KEY SUB",
-      "soldPrice": "$4,512,500",
-      "soldDate": "2026-09-03",
-      "bedrooms": 4,
-      "bathrooms": 4.0,
-      "livingSqFt": "2,846",
-      "yearBuilt": 1973,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [],
@@ -149,7 +149,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 7,
+      "activeCount": 6,
       "soldCount": 26,
       "soldMedianPricePerSqFt": "$1,305",
       "soldMedianPrice": "$4,806,250",
@@ -168,54 +168,54 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 6,
-      "soldCount": 15,
-      "soldMedianPricePerSqFt": "$834",
-      "soldMedianPrice": "$1,995,000",
+      "soldCount": 16,
+      "soldMedianPricePerSqFt": "$810",
+      "soldMedianPrice": "$1,960,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 4.9,
+    "monthsOfSupply": 4.5,
     "monthsOfSupplyCondo": null,
-    "monthsOfSupplySfhVilla": 4.9,
+    "monthsOfSupplySfhVilla": 4.5,
     "label": "seller's market",
-    "activeCount": 14,
-    "sold365Count": 34,
-    "sold90Count": 6,
+    "activeCount": 13,
+    "sold365Count": 35,
+    "sold90Count": 7,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 43,
-      "activeCount": 14,
-      "soldMedianPrice": "$3,950,000",
-      "soldMedianPricePerSqFt": "$1,109"
+      "soldCount": 44,
+      "activeCount": 13,
+      "soldMedianPrice": "$3,900,000",
+      "soldMedianPricePerSqFt": "$1,095"
     }
   },
   "boating": {
     "activeWithDock": 3,
-    "activeWaterfront": 8
+    "activeWaterfront": 7
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Bird Key a buyer's or seller's market right now?",
-      "a": "With 14 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 4.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 13 active listings and roughly 3 closed sales a month (trailing 12 months), Bird Key has about 4.5 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Bird Key?",
-      "a": "Active listings run from $990,000 to $13,950,000, with a median asking price of $5,624,500."
+      "a": "Active listings run from $990,000 to $13,950,000, with a median asking price of $5,750,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Bird Key?",
-      "a": "Recently sold homes took a median 108 days on market and closed at 86.5% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 143 days on market and closed at 87.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Bird Key homes have a dock?",
-      "a": "Of 8 active waterfront listings, 3 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 7 active waterfront listings, 3 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

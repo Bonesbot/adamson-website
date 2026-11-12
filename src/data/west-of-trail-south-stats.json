@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-10T12:08:08.380806+00:00",
+  "lastUpdated": "2026-11-12T15:52:00.732744+00:00",
   "counts": {
-    "sold": 336,
-    "pending": 23,
-    "active": 112,
-    "total": 359
+    "sold": 337,
+    "pending": 25,
+    "active": 114,
+    "total": 362
   },
   "metrics": {
-    "avgPrice": "$637,307",
-    "avgPricePerSqFt": "$327",
+    "avgPrice": "$638,476",
+    "avgPricePerSqFt": "$326",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,757",
+    "avgLivingSqFt": "1,764",
     "avgLotSqFt": null,
     "avgDom": 77
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$7,199,000"
   },
   "active": {
-    "count": 112,
+    "count": 114,
     "medianPrice": "$496,400",
-    "medianPricePerSqFt": "$325",
-    "waterfrontCount": 33,
+    "medianPricePerSqFt": "$326",
+    "waterfrontCount": 36,
     "newConstructionCount": 3
   },
   "sold": {
-    "count": 65,
-    "medianPrice": "$416,000",
-    "medianDom": 48,
-    "saleToListRatio": "87.9%",
+    "count": 64,
+    "medianPrice": "$413,000",
+    "medianDom": 50,
+    "saleToListRatio": "88.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.0,
+    "condo": 5.2,
     "sfhVilla": 5.8,
-    "blended": 5.4,
+    "blended": 5.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -56,17 +56,30 @@
   "priceBands": {
     "under900k": 84,
     "band900kTo1_5m": 9,
-    "band1_5mTo3m": 13,
-    "band3mPlus": 6
+    "band1_5mTo3m": 14,
+    "band3mPlus": 7
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 112
+      "count": 114
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4691697",
+      "address": "1720 GLENHOUSE DR #326",
+      "subdivision": "PELICAN COVE XIV",
+      "soldPrice": "$200,000",
+      "soldDate": "2026-11-10",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "731",
+      "yearBuilt": 1979,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4703203",
       "address": "6343 HOLLYWOOD BLVD",
@@ -118,19 +131,6 @@
       "yearBuilt": 1976,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4707357",
-      "address": "6451 ELMWOOD AVE #H",
-      "subdivision": "ISLAND REACH",
-      "soldPrice": "$320,000",
-      "soldDate": "2026-11-04",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "966",
-      "yearBuilt": 1949,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 52,
-      "avgPrice": "$374,260",
+      "activeCount": 54,
+      "avgPrice": "$372,009",
       "avgPricePerSqFt": "$289",
-      "avgLivingSqFt": "1,286",
-      "avgDom": 95
+      "avgLivingSqFt": "1,280",
+      "avgDom": 93
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 4,
-      "avgPrice": "$625,750",
-      "avgPricePerSqFt": "$298",
-      "avgLivingSqFt": "2,110",
-      "avgDom": 111
+      "activeCount": 5,
+      "avgPrice": "$1,240,600",
+      "avgPricePerSqFt": "$491",
+      "avgLivingSqFt": "2,275",
+      "avgDom": 91
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$940,975",
       "avgPricePerSqFt": "$448",
       "avgLivingSqFt": "1,942",
-      "avgDom": 154
+      "avgDom": 156
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$635,000",
       "avgPricePerSqFt": "$364",
       "avgLivingSqFt": "1,745",
-      "avgDom": 76
+      "avgDom": 78
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 29,
+      "activeCount": 32,
       "soldCount": 71,
       "soldMedianPricePerSqFt": "$370",
       "soldMedianPrice": "$495,000",
@@ -223,51 +223,51 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 70,
-      "soldCount": 213,
-      "soldMedianPricePerSqFt": "$288",
-      "soldMedianPrice": "$425,000",
+      "activeCount": 69,
+      "soldCount": 214,
+      "soldMedianPricePerSqFt": "$287",
+      "soldMedianPrice": "$423,750",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.4,
-    "monthsOfSupplyCondo": 5.0,
+    "monthsOfSupply": 5.5,
+    "monthsOfSupplyCondo": 5.2,
     "monthsOfSupplySfhVilla": 5.8,
     "label": "balanced market",
-    "activeCount": 112,
+    "activeCount": 114,
     "sold365Count": 248,
-    "sold90Count": 65,
+    "sold90Count": 64,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 175,
-      "activeCount": 51,
+      "activeCount": 50,
       "soldMedianPrice": "$534,900",
       "soldMedianPricePerSqFt": "$327"
     },
     "condo": {
-      "soldCount": 161,
-      "activeCount": 61,
+      "soldCount": 162,
+      "activeCount": 64,
       "soldMedianPrice": "$335,000",
-      "soldMedianPricePerSqFt": "$253"
+      "soldMedianPricePerSqFt": "$255"
     }
   },
   "boating": {
     "activeWithDock": 19,
-    "activeWaterfront": 33
+    "activeWaterfront": 36
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 112 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.4 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 114 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $534,900 ($327/sq ft), while condos, villas and townhouses sell around $335,000 ($253/sq ft)."
+      "a": "Single-family homes sell around $534,900 ($327/sq ft), while condos, villas and townhouses sell around $335,000 ($255/sq ft)."
     },
     {
       "facet": "range",
@@ -277,12 +277,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 48 days on market and closed at 87.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 50 days on market and closed at 88.0% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 33 active waterfront listings, 19 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 36 active waterfront listings, 19 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
