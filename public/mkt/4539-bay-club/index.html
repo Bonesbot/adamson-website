@@ -197,7 +197,7 @@ body.locked{overflow:hidden}
 .ask .wrap{display:grid;grid-template-columns:1fr;gap:28px}
 .ask h2{font-size:clamp(1.5rem,5vw,2.2rem);color:#fff;line-height:1.15}
 .ask p{color:#dfe5ee;margin-top:12px}
-.person{display:flex;gap:14px;align-items:center;margin-top:22px}
+.person{display:flex;gap:14px;align-items:center}
 .person .ring{width:48px;height:48px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;font-family:var(--display);color:var(--gold);font-size:1.1rem;flex:none}
 .person b{display:block;color:#fff}
 .person span{font-size:.9rem;color:#B4BECD}
@@ -213,7 +213,7 @@ body.locked{overflow:hidden}
 .form .ok.show{display:block}
 .form .err{color:#9b2c2c;font-size:.88rem;margin-top:8px}
 .quiet{font-size:.8rem;color:#5c6675;margin-top:10px}
-@media (min-width:860px){.ask .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}}
+@media (min-width:860px){.ask .wrap{grid-template-columns:1fr}}
 
 /* sticky call bar on phones */
 .callbar{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;gap:8px;padding:10px max(12px,env(safe-area-inset-right,0px)) max(10px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:rgba(247,244,238,.94);backdrop-filter:saturate(1.4) blur(8px);border-top:1px solid var(--line)}
@@ -275,7 +275,7 @@ footer p{max-width:72em;margin-top:8px}
   <div class="wrap">
     <div class="head">
       <h2>What Conquistador Bay Club has taught buyers this year</h2>
-      <p>Five residences in your five buildings have been on the market since early 2025. Two sold, two left the market, one is back on. The pattern is the pricing lesson for 4539. Tap either closing for its photos. From the analysis prepared September 22, 2026.</p>
+      <p>Since early 2025, two Bay Club residences have sold and two left the market without selling; one of those is back on today. Tap either closing for its photos.</p>
     </div>
     <div class="tablewrap full">
       <table aria-label="Recent activity in Conquistador Bay Club">
@@ -302,8 +302,8 @@ footer p{max-width:72em;margin-top:8px}
     <div class="tablewrap full" id="activeWrap">
       <div class="fsbar"><span>Your competition, every column</span><button type="button" id="fsClose">Close</button></div>
       <table id="activeTable" aria-label="Conquistador Bay Club residences on the market">
-        <thead><tr><th>Address</th><th>Water</th><th class="r">Built</th><th class="r">Heated sf</th><th class="r">Bd / Ba</th><th class="r">List price</th><th class="r">Per sf</th><th class="r">Days</th><th class="r">Of orig.</th></tr></thead>
-        <tbody class="num" id="activeBody"><tr><td colspan="9" style="white-space:normal;color:var(--muted)">Loading today's listings</td></tr></tbody>
+        <thead><tr><th>Address</th><th>Water</th><th class="r">Heated sf</th><th class="r">Bd / Ba</th><th class="r">List price</th><th class="r">Per sf</th><th class="r">Days</th><th class="r">Of orig.</th></tr></thead>
+        <tbody class="num" id="activeBody"><tr><td colspan="8" style="white-space:normal;color:var(--muted)">Loading today's listings</td></tr></tbody>
       </table>
     </div>
     <div class="tablewrap compact">
@@ -319,7 +319,7 @@ footer p{max-width:72em;margin-top:8px}
       <div class="stat"><div class="k">Heated sq ft</div><div class="v num" id="stSqft"></div><div class="s" id="stSqftS"></div></div>
       <div class="stat"><div class="k">Days on market</div><div class="v num" id="stDom"></div><div class="s" id="stDomS"></div></div>
     </div>
-    <p class="caption" id="activeNote">Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year. Every Bay Club residence has a private garage.</p>
+    <p class="caption" id="activeNote">Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Every Bay Club residence was built in 1984 and has a private garage.</p>
   </div>
 </section>
 
@@ -327,7 +327,7 @@ footer p{max-width:72em;margin-top:8px}
   <div class="wrap">
     <div class="head">
       <h2>Why the right buyer pays for Bay Club</h2>
-      <p>Twenty-eight residences across five elevated buildings, private two-car garages with elevator access, a riprap-protected bayfront with the Sarasota skyline across the water, and IMG Golf Club at the end of the path. Low density is the thing the big towers cannot offer, and it is the first line of the listing.</p>
+      <p>Twenty-eight residences across five elevated buildings, private two-car garages with elevator access, a riprap-protected bayfront with the Sarasota skyline across the water, and IMG Golf Club at the end of the path. Low density with private garages and front-row bay views is something the big towers cannot offer.</p>
     </div>
     <div class="gallery">
       <figure><img src="cbc-1.jpg" srcset="cbc-1.webp" alt="Conquistador Bay Club buildings along Sarasota Bay from the air" loading="lazy"></figure>
@@ -341,17 +341,7 @@ footer p{max-width:72em;margin-top:8px}
 
 <section class="band ask" id="ask">
   <div class="wrap">
-    <div>
-      <p class="eyebrow">While we are on the market</p>
-      <h2>This page is how we watch the competition together.</h2>
-      <p>It refreshes from the MLS every morning. When a competitor cuts its price, goes under contract, or a new one appears, you will hear from me the same day, and we decide together whether 4539 holds or moves. Showing feedback gets read against this table, not in a vacuum.</p>
-      <div class="person"><div class="ring">R</div><div><b>Ryan Adamson, PA</b><span>Coldwell Banker Realty · <a href="tel:+19417139234">941.713.9234</a> · <a href="mailto:Ryan@Adamson-Group.com">Ryan@Adamson-Group.com</a></span></div></div>
-    </div>
-    <div class="watch">
-      <div class="w"><b>Price position</b><span id="wPos">Where 4539 sits against the other Bay Club residences listed today.</span></div>
-      <div class="w"><b>Days on market</b><span>Ours against the other Bay Club listings, so a slow week reads as the market or as the price, not a guess.</span></div>
-      <div class="w"><b>Bay Club first</b><span>4533 and 4565 #27 are the buyer's direct alternatives. If either moves, we talk that day.</span></div>
-    </div>
+    <div class="person"><div class="ring">R</div><div><b>Ryan Adamson, PA</b><span>Coldwell Banker Realty · <a href="tel:+19417139234">941.713.9234</a> · <a href="mailto:Ryan@Adamson-Group.com">Ryan@Adamson-Group.com</a></span></div></div>
   </div>
 </section>
 
@@ -428,7 +418,6 @@ footer p{max-width:72em;margin-top:8px}
     {address:'4557 Bay Club Dr',label:'4557 Bay Club Dr · Penthouse',outcome:'Sold May 8, 2026',cls:'sold',sqft:2224,beds:2,baths:2,first:599000,result:600000,psf:270,days:14,note:'Opened at $599,000, under contract in two weeks at full price',gallery:'4557',
      pros:'Penthouse with an 800 sq ft rooftop deck, option to create a 3rd bedroom with the floor plan, vaulted ceilings, direct water views from the master suite.',
      cons:'Required a total renovation (flooring, kitchen, bathrooms); sunsets blocked for a portion of the year.'},
-    {address:'4533 Bay Club Dr',outcome:'On the market',cls:'',sqft:2176,beds:2,baths:2,first:679000,result:null,psf:312,days:null,note:'Listed Oct 16, 2026; see the live table below',live:'A4709278'},
     {address:'4565 Bay Club Dr #27',outcome:'Withdrawn, now relisted',cls:'off',sqft:2260,beds:3,baths:2,first:779000,result:null,psf:null,days:88,note:'88 days at $779,000 in early 2026; back on Oct 6 at $639,000',live:'A4708451'},
     {address:'4555 Bay Club Dr #22',outcome:'Canceled',cls:'off',sqft:1820,beds:2,baths:2,first:850000,result:null,psf:null,days:464,note:'464 days, cut from $850,000 to $700,000, never sold'}
   ];
@@ -490,9 +479,9 @@ footer p{max-width:72em;margin-top:8px}
   function row(r, isSubject){
     var sp = isSubject ? subjectPrice() : null;
     return trOpen(r, isSubject) + '<td style="white-space:normal;min-width:190px">' + addr(r, isSubject) + '</td><td>' + waterPill(r.water) + '</td>' +
-      '<td class="r">' + esc(r.yearBuilt || '—') + '</td><td class="r">' + (r.sqft ? r.sqft.toLocaleString() : '—') + '</td><td class="r">' + esc(r.beds || '—') + ' / ' + esc(r.baths || '—') + '</td>' +
+      '<td class="r">' + (r.sqft ? r.sqft.toLocaleString() : '—') + '</td><td class="r">' + esc(r.beds || '—') + ' / ' + esc(r.baths || '—') + '</td>' +
       '<td class="r">' + (isSubject ? sp.price : money(r.listPrice)) + '</td><td class="r">' + (isSubject ? sp.psf : (r.pricePerSqft == null ? '—' : '$' + r.pricePerSqft)) + '</td>' +
-      '<td class="r">' + (isSubject ? '—' : days(r)) + '</td><td class="r">' + (isSubject ? '—' : pct(r)) + '</td></tr>' + (isSubject ? '' : pcRow(PROSCONS[r.id], 9));
+      '<td class="r">' + (isSubject ? '—' : days(r)) + '</td><td class="r">' + (isSubject ? '—' : pct(r)) + '</td></tr>' + (isSubject ? '' : pcRow(PROSCONS[r.id], 8));
   }
   function compact(r, isSubject){
     var sp = isSubject ? subjectPrice() : null;
@@ -516,7 +505,7 @@ footer p{max-width:72em;margin-top:8px}
     $('activeBody').innerHTML = t; $('activeCompact').innerHTML = c;
     if (SUBJECT.priceLow) {
       var pctBelow = Math.round(below / rows.length * 100);
-      $('wPos').textContent = CBC_ONLY
+      if ($('wPos')) $('wPos').textContent = CBC_ONLY
         ? below + ' of ' + rows.length + ' Bay Club ' + (rows.length === 1 ? 'listing is' : 'listings are') + ' priced below 4539 today.'
         : below + ' of ' + rows.length + ' competitors (' + pctBelow + '%) are priced below 4539 today. ' + (pctBelow >= 60 ? 'That is an uphill field; our price has to be earned by condition and the bay.' : pctBelow <= 35 ? 'Most of the field is above us; we are positioned to be the value in the set.' : 'We sit in the middle of the field; showings decide this one.');
     }
@@ -524,7 +513,7 @@ footer p{max-width:72em;margin-top:8px}
     var asOf = fmtDate(d.asOf);
     var snaps = rows.filter(function(r){ return r.snapshot; }).length;
     $('activeNote').innerHTML = CBC_ONLY
-      ? esc(rows.length + ' Bay Club ' + (rows.length === 1 ? 'residence' : 'residences') + ' on the market' + (asOf ? ' as of ' + asOf : '') + '. Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year. Every Bay Club residence has a private garage. Pros and cons are Ryan\u2019s read.')
+      ? esc(rows.length + ' Bay Club ' + (rows.length === 1 ? 'residence' : 'residences') + ' on the market' + (asOf ? ' as of ' + asOf : '') + '. Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Every Bay Club residence was built in 1984 and has a private garage. Pros and cons are Ryan\u2019s read.')
       : '<span class="legend"></span>' + esc('Gold rows are the other Conquistador Bay Club residences, the truest comps. Ordered by list price, lowest first. ' + rows.length + ' listings' + (asOf ? ' as of ' + asOf : '') + '. Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year.' + (snaps ? ' ' + snaps + ' listings marked "as of" sit outside the nightly feed and were checked by hand on that date.' : ''));
     if (asOf) $('heroDate').textContent = asOf;
 
@@ -547,7 +536,7 @@ footer p{max-width:72em;margin-top:8px}
   }
   function fail(){
     var msg = 'Today’s listings are not loading right now. Call or text Ryan at 941.713.9234 and he will walk you through them.';
-    $('activeBody').innerHTML = '<tr><td colspan="9" style="white-space:normal;color:var(--muted)">' + msg + '</td></tr>';
+    $('activeBody').innerHTML = '<tr><td colspan="8" style="white-space:normal;color:var(--muted)">' + msg + '</td></tr>';
     $('activeCompact').innerHTML = '<tr><td colspan="5" style="white-space:normal;color:var(--muted)">' + msg + '</td></tr>';
   }
   // ── photo galleries ──
