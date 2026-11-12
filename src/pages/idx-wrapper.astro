@@ -180,6 +180,19 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
     margin: 0 auto !important;
   }
   #IDX-main.IDX-page-photogallery #IDX-showcaseSlides { max-width: 1200px; margin: 0 auto; }
+
+  /* Gallery page: listing facts as a compact two-column block so photos start sooner. */
+  #IDX-main.IDX-page-photogallery .IDX-propertyInfoList {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 16px;
+    padding: 10px 14px !important;
+    margin: 0 0 12px !important;
+  }
+  #IDX-main.IDX-page-photogallery .IDX-propertyInfoList li { margin: 0 !important; padding: 2px 0 !important; font-size: 0.9rem; line-height: 1.4; }
+  #IDX-main.IDX-page-photogallery #IDX-propertyInfoAddress { grid-column: 1 / -1; }
+  #IDX-main.IDX-page-photogallery #IDX-previousPage { display: flex; gap: 10px; margin-bottom: 12px; }
+  #IDX-main.IDX-page-photogallery #IDX-previousPage .IDX-btn { flex: 1; margin: 0 !important; }
   @media (max-width: 767px) {
     #IDX-main.IDX-page-photogallery #IDX-showcaseSlides {
       width: 100vw !important;
@@ -285,6 +298,18 @@ const description = "Live Stellar MLS property search for Sarasota, Longboat Key
   .idx-wrapper-shell button.idx-fields-toggle { display:block; width:100%; text-align:center; margin:1rem 0; padding:.7rem; border:1px dashed rgba(10,37,64,.35) !important; border-radius:10px !important; background-color:#fff !important; color:var(--color-cbgl-blue,#0a2540) !important; font-weight:600; cursor:pointer; }
   .idx-wrapper-shell button.idx-fields-toggle:hover { background-color:#f6f1e4 !important; }
 </style>
+<script is:inline>
+  // IDX photo gallery: "Return to Previous Page" is an empty link that relies on history.
+  // Opened in a fresh tab there is none, so fall back to the referring page, else the listing.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('#IDX-returnToPreviousPage');
+    if (!a) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    if (history.length > 1) { history.back(); return; }
+    var go = document.getElementById('IDX-goToProperty');
+    location.href = document.referrer || (go && go.href) || '/';
+  }, true);
+</script>
 </BaseLayout>
 
 

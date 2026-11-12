@@ -449,7 +449,7 @@ footer p{max-width:72em;margin-top:8px}
       var badge = '<span class="badge ' + r.cls + '">' + esc(r.outcome) + '</span>';
       var name = esc(r.label || r.address);
       var link = r.gallery ? '<button type="button" class="photos" data-gallery="' + r.gallery + '">' + name + '<span class="cam">Photos</span></button>'
-               : r.live ? '<a href="' + IDX_PHOTOS + r.live + '" target="_blank" rel="noopener">' + name + '</a>' : name;
+               : r.live ? '<a href="' + IDX_PHOTOS + r.live + '">' + name + '</a>' : name;
       var hasPc = r.pros || r.cons, trc = hasPc ? ' class="has-pc"' : '';
       t += '<tr' + trc + '><td>' + link + '<span class="sub">' + esc(r.note) + '</span></td><td>' + badge + '</td><td class="r">' + r.sqft.toLocaleString() + '</td><td class="r">' + r.beds + ' / ' + r.baths + '</td><td class="r">' + money(r.first) + '</td><td class="r">' + (r.result ? money(r.result) : '—') + '</td><td class="r">' + (r.psf ? '$' + r.psf : '—') + '</td><td class="r">' + (r.days == null ? '—' : r.days) + '</td></tr>' + pcRow(r, 8);
       c += '<tr' + trc + '><td>' + link + '<br>' + badge + '<span class="sub">' + esc(r.note) + '</span><span class="sub">' + r.sqft.toLocaleString() + ' sf · ' + r.beds + '/' + r.baths + (r.psf ? ' · $' + r.psf + ' per sf' : '') + '</span></td><td class="r">' + k(r.first) + '</td><td class="r">' + (r.result ? k(r.result) : '—') + '</td><td class="r">' + (r.days == null ? '—' : r.days) + '</td></tr>' + pcRow(r, 4);
@@ -462,7 +462,7 @@ footer p{max-width:72em;margin-top:8px}
   function days(r){ return r.dom == null ? '—' : (r.cdom && r.cdom !== r.dom ? r.dom + ' (' + r.cdom + ')' : String(r.dom)); }
   function pct(r){ return r.pctOfOriginal == null ? (r.listPrice && r.originalListPrice ? Math.round(r.listPrice / r.originalListPrice * 100) + '%' : '—') : Math.round(r.pctOfOriginal) + '%'; }
   function addr(r, isSubject){
-    var a = isSubject || !r.idxUrl ? esc(r.address) : '<a href="' + esc(photosUrl(r.idxUrl)) + '" target="_blank" rel="noopener">' + esc(r.address) + '</a>';
+    var a = isSubject || !r.idxUrl ? esc(r.address) : '<a href="' + esc(photosUrl(r.idxUrl)) + '">' + esc(r.address) + '</a>';
     var badge = isSubject ? '<span class="badge">' + (SUBJECT.priceLow ? 'where we would land' : 'your residence') + '</span>' : (isSame(r) && !CBC_ONLY ? '<span class="badge same">Bay Club</span>' : '') + (r.status === 'Pending' ? '<span class="badge pend">Pending</span>' : '') + (r.snapshot ? '<span class="badge snap" title="Outside the nightly feed; as of ' + esc(r.snapshotAsOf || SNAPSHOT_AS_OF) + '">as of ' + esc(fmtDate(r.snapshotAsOf || SNAPSHOT_AS_OF).replace(/, \d{4}$/, '')) + '</span>' : '');
     var note = NOTES[r.id];
     return a + badge + '<span class="sub">' + esc([r.subdivision, r.city].filter(Boolean).join(' · ')) + (note ? ' · ' + esc(note) : '') + '</span>';
@@ -488,7 +488,7 @@ footer p{max-width:72em;margin-top:8px}
   }
   function compact(r, isSubject){
     var sp = isSubject ? subjectPrice() : null;
-    var a = isSubject || !r.idxUrl ? esc(r.address) : '<a href="' + esc(photosUrl(r.idxUrl)) + '" target="_blank" rel="noopener">' + esc(r.address) + '</a>';
+    var a = isSubject || !r.idxUrl ? esc(r.address) : '<a href="' + esc(photosUrl(r.idxUrl)) + '">' + esc(r.address) + '</a>';
     var badge = isSubject ? '<span class="badge">' + (SUBJECT.priceLow ? 'where we land' : 'your residence') + '</span>' : (isSame(r) && !CBC_ONLY ? '<span class="badge same">Bay Club</span>' : '') + (r.status === 'Pending' ? '<span class="badge pend">Pending</span>' : '') + (r.snapshot ? '<span class="badge snap">as of ' + esc(fmtDate(r.snapshotAsOf || SNAPSHOT_AS_OF).replace(/, \d{4}$/, '')) + '</span>' : '');
     var where = (r.subdivision || '') + (r.city ? ' · ' + r.city : '');
     return trOpen(r, isSubject) + '<td>' + a + (badge ? ' ' + badge : '') + '<span class="sub">' + esc(where) + '</span></td>' +
