@@ -522,7 +522,7 @@ footer p{max-width:72em;margin-top:8px}
     var asOf = fmtDate(d.asOf);
     var snaps = rows.filter(function(r){ return r.snapshot; }).length;
     $('activeNote').innerHTML = CBC_ONLY
-      ? esc(rows.length + ' Bay Club ' + (rows.length === 1 ? 'residence' : 'residences') + ' on the market' + (asOf ? ' as of ' + asOf : '') + '. Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year. Every Bay Club residence has a private garage. Pros and cons are Ryan\u2019s read from touring the market.')
+      ? esc(rows.length + ' Bay Club ' + (rows.length === 1 ? 'residence' : 'residences') + ' on the market' + (asOf ? ' as of ' + asOf : '') + '. Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year. Every Bay Club residence has a private garage. Pros and cons are Ryan\u2019s read.')
       : '<span class="legend"></span>' + esc('Gold rows are the other Conquistador Bay Club residences, the truest comps. Ordered by list price, lowest first. ' + rows.length + ' listings' + (asOf ? ' as of ' + asOf : '') + '. Days are Stellar MLS days on market for the current listing; a relisted home shows its cumulative count in parentheses. Built is the MLS year built, never an effective year.' + (snaps ? ' ' + snaps + ' listings marked "as of" sit outside the nightly feed and were checked by hand on that date.' : ''));
     if (asOf) $('heroDate').textContent = asOf;
 
