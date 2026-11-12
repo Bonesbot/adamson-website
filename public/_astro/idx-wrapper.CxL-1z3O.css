@@ -1,1 +1,33 @@
 .idx-wrapper-section{min-height:80vh;padding-top:120px}.idx-wrapper-shell{background:#fff;color:#1a1a1a;border-radius:12px;padding:clamp(1.25rem,4vw,3rem);min-height:600px;box-shadow:0 24px 60px #00000059;font-family:var(--font-body, "Inter", system-ui, sans-serif)}.idx-wrapper-shell a{color:var(--color-cbgl-blue, #0a2540)}.idx-wrapper-shell a:hover{color:var(--color-gold, #c9a961)}.idx-wrapper-shell h1,.idx-wrapper-shell h2,.idx-wrapper-shell h3,.idx-wrapper-shell h4,.idx-wrapper-shell strong{color:var(--color-cbgl-blue, #0a2540);font-family:var(--font-display, "Playfair Display", Georgia, serif)}.idx-loading{display:flex;align-items:center;justify-content:center;min-height:400px}.idx-loading p{color:#00000073!important}.idx-wrapper-shell:has(.IDX-wrapper) .idx-loading,.idx-wrapper-shell:has(.IDX-resultsContainer) .idx-loading,.idx-wrapper-shell:has(.IDX-detailsBody) .idx-loading,.idx-wrapper-shell:has([class*=idx-details]) .idx-loading,.idx-wrapper-shell:has([class*=idx-results]) .idx-loading{display:none}.idx-wrapper-shell .idx-details__price,.IDX-resultsPrice,.IDX-detailsPrice{color:var(--color-cbgl-blue, #0a2540)!important;font-weight:700}.idx-wrapper-shell .fa{color:var(--color-gold, #c9a961);font-family:FontAwesome!important}.idx-wrapper-shell button,.idx-wrapper-shell input[type=submit],.IDX-quicksearchSubmit,.IDX-detailsContactBtn,.IDX-btn-primary{background-color:var(--color-gold, #c9a961)!important;color:#000!important;border:none!important;border-radius:999px!important;font-weight:600}.idx-wrapper-shell button:hover,.idx-wrapper-shell input[type=submit]:hover,.IDX-quicksearchSubmit:hover,.IDX-detailsContactBtn:hover{background-color:var(--color-gold-light, #d4b87a)!important}.idx-wrapper-shell button.idx-arrow,.idx-wrapper-shell button.idx-arrow:hover{background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}.idx-wrapper-shell button.idx-arrow .fa{color:#000!important;font-size:28px;text-shadow:0 0 3px #fff,0 0 8px rgba(255,255,255,.85)}.idx-wrapper-shell button.idx-arrow:hover .fa{opacity:.65}.idx-wrapper-shell .sharethis-inline-share-buttons,.idx-wrapper-shell .addthis_inline_share_toolbox{display:none!important}.idx-back-link{display:inline-block;color:var(--color-gold, #c9a961);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:.85rem}.idx-back-link:hover{color:#fff}#IDX-detailsContainer-greatSchools,#IDX-panel-greatSchools,#IDX-panel-body-greatSchools,#GS_schoolSearchWidget,.idx-wrapper-shell iframe.greatschools{display:none!important}@media(max-width:640px){.idx-wrapper-section{padding-top:84px;min-height:0}.idx-wrapper-shell{padding:1rem;border-radius:8px;box-shadow:0 12px 30px #0000004d;overflow-x:hidden}.idx-wrapper-shell img,.idx-wrapper-shell iframe,.idx-wrapper-shell table{max-width:100%}.idx-wrapper-shell .idx-text{font-size:1rem;line-height:1.35}}.idx-attribution-min{font-size:.72rem!important;line-height:1.4!important;color:#00000073!important}.idx-attribution-min a{color:#00000080!important}.idx-wrapper-shell a[href*="/idx/userlogin"],.idx-wrapper-shell a[href*="/idx/usersignup"],.idx-wrapper-shell .IDX-signupLoginToggle{display:none!important}.idx-hp-btn{display:inline-block;background:var(--color-cbgl-blue,#0a2540);color:#fff!important;border-radius:999px;padding:.45rem 1.1rem;font-weight:600;font-size:.85rem;text-decoration:none}.idx-hp-btn:hover{background:var(--color-gold,#c9a961);color:#000!important}.idx-wrapper-shell .IDX-similar-listings{display:none!important}.idx-cta-panel{background:var(--color-cbgl-blue,#0a2540);border-radius:12px;padding:1.25rem 1.5rem;margin:1.25rem 0;display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}.idx-cta-panel .idx-cta-lead{color:#fff!important;font-weight:600;margin-right:auto;font-size:1rem;font-family:var(--font-display,Georgia,serif)}.idx-cta-btn{display:inline-block;border-radius:999px;padding:.7rem 1.4rem;font-weight:700;text-decoration:none;font-size:.95rem}a.idx-cta-btn--gold{background:var(--color-gold,#c9a961);color:#000!important}a.idx-cta-btn--gold:hover{background:#d4b87a;color:#000!important}a.idx-cta-btn--ghost{border:1px solid rgba(255,255,255,.6);color:#fff!important}a.idx-cta-btn--ghost:hover{border-color:var(--color-gold,#c9a961);color:var(--color-gold,#c9a961)!important}.idx-cta-call{width:100%;color:#ffffffa6!important;font-size:.8rem;margin:0}.idx-cta-call a{color:var(--color-gold,#c9a961)!important}.idx-wrapper-shell form.IDX-contactForm,.idx-wrapper-shell .IDX-detailsContactBtn,.idx-wrapper-shell a[href*="/idx/moreinfo"]{display:none!important}.idx-fields-collapsed #IDX-fieldsWrapper{display:none}#IDX-walkscoreContainer,#ws-walkscore-tile,.idx-wrapper-shell iframe[src*=walkscore]{display:none!important}ai-redesign-widget,#ai-redesign-widget-idx,.ai-redesign-tool-launch{display:none!important}.idx-field__ag .idx-label{display:block}.idx-cta-panel--below{margin-top:1.5rem}.idx-wrapper-shell button.idx-fields-toggle{display:block;width:100%;text-align:center;margin:1rem 0;padding:.7rem;border:1px dashed rgba(10,37,64,.35)!important;border-radius:10px!important;background-color:#fff!important;color:var(--color-cbgl-blue,#0a2540)!important;font-weight:600;cursor:pointer}.idx-wrapper-shell button.idx-fields-toggle:hover{background-color:#f6f1e4!important}
+  /* IDX photo gallery page (/idx/photogallery/...): photos at full width, stacked, */
+  /* edge to edge on a phone, so they read large and pinch-zoom works.            */
+  #IDX-main.IDX-page-photogallery .IDX-showcaseSlide {
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 0 8px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+  #IDX-main.IDX-page-photogallery img.IDX-detailsPrimaryImg {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 auto !important;
+  }
+  #IDX-main.IDX-page-photogallery #IDX-showcaseSlides { max-width: 1200px; margin: 0 auto; }
+  @media (max-width: 767px) {
+    #IDX-main.IDX-page-photogallery #IDX-showcaseSlides {
+      width: 100vw !important;
+      max-width: none;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+    #IDX-main.IDX-page-photogallery .IDX-showcaseSlide { margin-bottom: 4px !important; }
+  }
