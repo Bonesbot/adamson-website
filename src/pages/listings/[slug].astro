@@ -258,9 +258,12 @@ if (faqs.length) {
       <h2 class="font-display text-white text-3xl md:text-4xl font-bold text-center mb-14">Key Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {l.features.map((f: any) => (
-          <div class="bg-[#111111] border border-white/[0.06] rounded-lg p-8 hover:border-[var(--color-gold)]/40 transition-colors">
-            <h3 class="font-display text-[var(--color-gold)] text-xl font-semibold mb-3">{f.title}</h3>
-            <p class="text-white/70 text-sm leading-relaxed">{f.text}</p>
+          <div class="bg-[#111111] border border-white/[0.06] rounded-lg overflow-hidden hover:border-[var(--color-gold)]/40 transition-colors">
+            {f.photo && <img src={f.photo} alt={f.title} loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover" style={f.photo_focus ? `object-position:${f.photo_focus}` : undefined} />}
+            <div class="p-8">
+              <h3 class="font-display text-[var(--color-gold)] text-xl font-semibold mb-3">{f.title}</h3>
+              <p class="text-white/70 text-sm leading-relaxed">{f.text}</p>
+            </div>
           </div>
         ))}
       </div>
