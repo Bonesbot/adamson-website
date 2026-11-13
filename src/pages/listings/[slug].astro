@@ -64,6 +64,8 @@ const faqs = (l.faq || []).filter(live);
 const lifeCols = (l.lifestyle?.items || []).length >= 8 ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
 const isolated = !!l.standalone;
 const leadEndpoint = l.lead_endpoint === 'community' ? '/.netlify/functions/community-lead' : '/.netlify/functions/srqmap-lead';
+// Hero crop: hero_focus / hero_focus_mobile are CSS object-position values (e.g. "50% 100%" = bottom).
+const heroFocus = `--fp:${l.hero_focus || '50% 50%'};--fpm:${l.hero_focus_mobile || l.hero_focus || '50% 50%'}`;
 const statCols = (l.stats || []).length > 4 ? 'md:grid-cols-3 lg:grid-cols-6' : 'md:grid-cols-4';
 const ICONS: Record<string, string> = {
   splash: 'M12 3c3 4 5 6.5 5 9a5 5 0 0 1-10 0c0-2.5 2-5 5-9z',
@@ -152,6 +154,8 @@ if (faqs.length) {
   .lb-close{position:absolute;top:16px;right:20px;background:none;border:none;color:rgba(255,255,255,.75);font-size:34px;cursor:pointer;line-height:1}
   .lb-close:hover{color:#fff}
   .lb-count{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-family:var(--font-accent);font-size:12px;letter-spacing:.12em;color:rgba(255,255,255,.65)}
+  .lst-hero-media{object-position:var(--fpm,50% 50%)}
+  @media (min-width:768px){.lst-hero-media{object-position:var(--fp,50% 50%)}}
   .lst-callout{background:linear-gradient(180deg,#000 0,#000 50%,#0A0A0A 50%,#0A0A0A 100%)}
   .lst-callout-card{background:linear-gradient(135deg,#FBF7EE 0%,#F3EAD6 100%);box-shadow:0 20px 60px rgba(0,0,0,.45)}
   .lst-callout-card .lst-eyebrow,.lst-life .lst-eyebrow{color:#9C7C34}
@@ -167,8 +171,11 @@ if (faqs.length) {
   <!-- ══════════ HERO ══════════ -->
   <section class="relative min-h-[86vh] flex items-end overflow-hidden">
     {l.hero_video
-      ? <video class="absolute inset-0 w-full h-full object-cover" src={l.hero_video} poster={l.hero_image} autoplay muted loop playsinline preload="metadata" aria-label={`Video of ${l.address}`}></video>
-      : <img src={l.hero_image} alt={`${l.address} — ${l.neighborhood}`} class="absolute inset-0 w-full h-full object-cover" fetchpriority="high" />}
+      ? <video class="lst-hero-media absolute inset-0 w-full h-full object-cover" style={heroFocus} src={l.hero_video} poster={l.hero_image} autoplay muted loop playsinline preload="metadata" aria-label={`Video of ${l.address}`}></video>
+      : <picture>
+          {l.hero_image_mobile && <source media="(max-width: 767px)" srcset={l.hero_image_mobile} />}
+          <img src={l.hero_image} alt={`${l.address} — ${l.neighborhood}`} class="lst-hero-media absolute inset-0 w-full h-full object-cover" style={heroFocus} fetchpriority="high" />
+        </picture>}
     <div class="absolute inset-0" style="background:linear-gradient(to bottom, rgba(0,0,0,.42) 0%, rgba(0,0,0,.12) 40%, rgba(0,0,0,.82) 100%)"></div>
     <div class="container relative z-10 pb-16 pt-40">
       <span class="inline-block font-accent text-[10px] uppercase tracking-[0.2em] font-bold px-3.5 py-1.5 rounded-full mb-5 bg-[var(--color-gold)] text-black">{badge}</span>
