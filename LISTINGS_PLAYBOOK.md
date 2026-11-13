@@ -54,6 +54,23 @@ photos, tour URLs and re-push with `--push-only`.
 | `faq[]` | FAQPage schema (AEO gold — 2-4 buyer questions with factual answers) |
 | `noindex` | Keep search engines away from quiet off-market teasers |
 
+## Optional blocks (opt-in per listing; first used on 5654-woodland-sage-dr, Nov 2026)
+
+Listings that omit these render exactly as before.
+
+| Field | Drives |
+|---|---|
+| `hero_video` | MP4 hero (autoplay, muted, loop); `hero_image` becomes its poster/fallback |
+| `quick_facts[]` | Pill row under the stat bar (year, construction, flood zone, HOA, CDD) |
+| `callout` | Light "early CTA" band right after the stats: eyebrow, title, text, bullets[], button, href, pick, footnote (used for the 2027 Amendment 3 homestead note) |
+| `lifestyle` | Cream community section: items[] {icon,title,text} (icons: splash, pool, play, ball, paw, fit, sun, school, home), nearby[] {place,dist}, schools {title, items[] {name,detail}, note} |
+| `co_agent` | Second agent card + schema offeredBy + form copy: name, title, phone, tel, email, photo, brokerage |
+| `cta` | Copy overrides: hero_primary, hero_pick, agent_button, form_eyebrow, form_title, form_intro, interests[] (tap chips, sent as "Interested in: ..." in the lead message), form_button, success_title, success_text |
+| `floor_plans[]` | Multiple floor-plan images (first/second floor) instead of `floor_plan` |
+| `photo_groups[]` | Photo tour split into titled groups {title, photos[]}; one shared lightbox |
+
+`data-pick` on a CTA link pre-ticks the matching interest chip, so "Ask About a Year-End Closing" arrives tagged.
+
 ## Photos
 
 Photo URLs can be hotlinked (current Lindrick page hotlinks 941props.com) but the

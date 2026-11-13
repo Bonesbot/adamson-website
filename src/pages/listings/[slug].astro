@@ -40,6 +40,30 @@ const canonical = `https://adamsonfl.com/listings/${l.slug}/`;
 const metaDescription = `${l.address}, ${l.city} FL: ${l.beds} bed, ${l.baths} bath, ${Number(l.sqft).toLocaleString('en-US')} sq ft${l.year_built ? `, built ${l.year_built}` : ''}. ${l.price_label_short || priceLabel}. Listed by Ryan Adamson, Coldwell Banker.`;
 const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(l.map_query || fullAddress)}&t=m&z=13&output=embed&iwloc=near`;
 
+// ── Optional, opt-in blocks (2026-11, first used by 5654-woodland-sage-dr). Listings that
+// don't set these render exactly as before. See LISTINGS_PLAYBOOK.md "Optional blocks".
+const cta = l.cta || {};
+const coAgent = l.co_agent || null;
+const agentNames = coAgent ? `Ryan or ${coAgent.name.split(' ')[0]}` : 'Ryan';
+// photo_groups [{title, photos[]}] wins over the flat photos[] list; the flat list is still
+// what schema/og use, so we derive it when only groups are given.
+const photoGroups: { title: string; photos: string[] }[] =
+  (l.photo_groups && l.photo_groups.length) ? l.photo_groups : [{ title: '', photos: l.photos || [] }];
+const allPhotos: string[] = photoGroups.flatMap((g) => g.photos);
+const floorPlans: string[] = (l.floor_plans && l.floor_plans.length) ? l.floor_plans : (l.floor_plan ? [l.floor_plan] : []);
+const statCols = (l.stats || []).length > 4 ? 'md:grid-cols-3 lg:grid-cols-6' : 'md:grid-cols-4';
+const ICONS: Record<string, string> = {
+  splash: 'M12 3c3 4 5 6.5 5 9a5 5 0 0 1-10 0c0-2.5 2-5 5-9z',
+  pool:   'M2 17c2 0 2-1.5 4-1.5S8 17 10 17s2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5M2 21c2 0 2-1.5 4-1.5S8 21 10 21s2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5M8 13V5a2 2 0 0 1 4 0M16 13V5a2 2 0 0 0-4 0M8 9h8',
+  play:   'M4 21V8l4-4 4 4v13M12 12l8 8M4 13h8M18 4v4',
+  ball:   'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM3 12h18M12 3c-3 3-3 15 0 18M12 3c3 3 3 15 0 18',
+  paw:    'M8 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM16 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM5 15a1.7 1.7 0 1 0 0-3.4A1.7 1.7 0 0 0 5 15zM19 15a1.7 1.7 0 1 0 0-3.4 1.7 1.7 0 0 0 0 3.4zM12 13c-3 0-5 3-5 5 0 1.5 1.5 2 2.5 2 1 0 1.5-.5 2.5-.5s1.5.5 2.5.5c1 0 2.5-.5 2.5-2 0-2-2-5-5-5z',
+  fit:    'M2 12h2M20 12h2M6 8v8M18 8v8M4 10v4M20 10v4M6 12h12',
+  sun:    'M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4',
+  school: 'M2 9l10-5 10 5-10 5-10-5zM6 11v5c3 2 9 2 12 0v-5M22 9v6',
+  home:   'M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6',
+};
+
 const residence = {
   '@type': 'SingleFamilyResidence',
   name: l.address,
@@ -57,14 +81,19 @@ const jsonLd: any[] = [
     url: canonical,
     name: pageTitle,
     description: l.description,
-    image: (l.photos || []).slice(0, 8),
+    image: allPhotos.slice(0, 8),
     about: residence,
     offers: {
       '@type': 'Offer',
       price: l.price,
       priceCurrency: 'USD',
       availability: st.avail,
-      offeredBy: { '@type': 'RealEstateAgent', name: 'Ryan Adamson, PA', telephone: '+1-941-713-9234', email: 'Ryan@Adamson-Group.com', url: 'https://adamsonfl.com/about' },
+      offeredBy: coAgent
+        ? [
+            { '@type': 'RealEstateAgent', name: 'Ryan Adamson, PA', telephone: '+1-941-713-9234', email: 'Ryan@Adamson-Group.com', url: 'https://adamsonfl.com/about' },
+            { '@type': 'RealEstateAgent', name: coAgent.name, ...(coAgent.phone ? { telephone: coAgent.phone } : {}), ...(coAgent.email ? { email: coAgent.email } : {}) },
+          ]
+        : { '@type': 'RealEstateAgent', name: 'Ryan Adamson, PA', telephone: '+1-941-713-9234', email: 'Ryan@Adamson-Group.com', url: 'https://adamsonfl.com/about' },
     },
   },
   {
@@ -107,23 +136,33 @@ if (l.faq && l.faq.length) {
   .lb-close{position:absolute;top:16px;right:20px;background:none;border:none;color:rgba(255,255,255,.75);font-size:34px;cursor:pointer;line-height:1}
   .lb-close:hover{color:#fff}
   .lb-count{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-family:var(--font-accent);font-size:12px;letter-spacing:.12em;color:rgba(255,255,255,.65)}
+  .lst-callout{background:linear-gradient(180deg,#000 0,#000 50%,#0A0A0A 50%,#0A0A0A 100%)}
+  .lst-callout-card{background:linear-gradient(135deg,#FBF7EE 0%,#F3EAD6 100%);box-shadow:0 20px 60px rgba(0,0,0,.45)}
+  .lst-callout-card .lst-eyebrow,.lst-life .lst-eyebrow{color:#9C7C34}
+  .lst-life{background:#F7F2E7}
+  .lst-chip span{display:inline-block;font-size:13px;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.78);cursor:pointer;transition:all .15s;user-select:none}
+  .lst-chip span:hover{border-color:rgba(197,165,90,.6)}
+  .lst-chip input:checked + span{background:var(--color-gold);border-color:var(--color-gold);color:#000;font-weight:600}
+  .lst-chip input:focus-visible + span{outline:2px solid var(--color-gold-light);outline-offset:2px}
   .gallery-grid img{cursor:pointer;transition:opacity .2s ease,transform .25s ease}
   .gallery-grid img:hover{opacity:.85;transform:scale(1.015)}
 </style>
 
   <!-- ══════════ HERO ══════════ -->
   <section class="relative min-h-[86vh] flex items-end overflow-hidden">
-    <img src={l.hero_image} alt={`${l.address} — ${l.neighborhood}`} class="absolute inset-0 w-full h-full object-cover" fetchpriority="high" />
+    {l.hero_video
+      ? <video class="absolute inset-0 w-full h-full object-cover" src={l.hero_video} poster={l.hero_image} autoplay muted loop playsinline preload="metadata" aria-label={`Video of ${l.address}`}></video>
+      : <img src={l.hero_image} alt={`${l.address} — ${l.neighborhood}`} class="absolute inset-0 w-full h-full object-cover" fetchpriority="high" />}
     <div class="absolute inset-0" style="background:linear-gradient(to bottom, rgba(0,0,0,.42) 0%, rgba(0,0,0,.12) 40%, rgba(0,0,0,.82) 100%)"></div>
     <div class="container relative z-10 pb-16 pt-40">
       <span class="inline-block font-accent text-[10px] uppercase tracking-[0.2em] font-bold px-3.5 py-1.5 rounded-full mb-5 bg-[var(--color-gold)] text-black">{badge}</span>
-      <p class="lst-eyebrow mb-3">{l.tagline}</p>
+      <p class="lst-eyebrow mb-3" style="text-shadow:0 1px 10px rgba(0,0,0,.65)">{l.tagline}</p>
       <h1 class="font-display text-white font-bold leading-[1.05]" style="font-size:clamp(2.4rem,6vw,4.5rem)">{l.address}</h1>
       <p class="text-white/80 text-lg mt-3">{l.neighborhood} · {l.city}, {l.state} {l.zip}</p>
       <p class="font-display text-[var(--color-gold-light)] text-2xl md:text-3xl font-semibold mt-5">{priceLabel}</p>
       {l.open_house && <p class="font-accent uppercase tracking-[0.15em] text-sm text-white mt-3 font-semibold">{l.open_house}</p>}
       <div class="flex flex-wrap gap-4 mt-8">
-        <a href="#inquire" class="font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-3.5 rounded-full bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] transition-colors">Request a Private Showing</a>
+        <a href="#inquire" data-pick={cta.hero_pick || ''} class="font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-3.5 rounded-full bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] transition-colors">{cta.hero_primary || 'Request a Private Showing'}</a>
         <a href="tel:19417139234" class="font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-3.5 rounded-full border border-white/40 text-white hover:border-[var(--color-gold)] hover:text-[var(--color-gold)] transition-colors">Call (941) 713-9234</a>
       </div>
     </div>
@@ -141,7 +180,7 @@ if (l.faq && l.faq.length) {
   <!-- ══════════ STAT BAR ══════════ -->
   <section class="bg-black border-y border-white/[0.06]">
     <div class="container py-12">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
+      <div class={`grid grid-cols-2 ${statCols} gap-10 text-center`}>
         {l.stats.map((s: any) => (
           <div>
             <div class="lst-stat-num">{s.value}</div>
@@ -149,8 +188,45 @@ if (l.faq && l.faq.length) {
           </div>
         ))}
       </div>
+      {l.quick_facts && l.quick_facts.length > 0 && (
+        <ul class="mt-10 pt-8 border-t border-white/[0.06] flex flex-wrap justify-center gap-x-2 gap-y-3">
+          {l.quick_facts.map((q: string) => (
+            <li class="font-accent text-[11px] uppercase tracking-[0.16em] text-white/75 px-4 py-2 rounded-full border border-white/[0.12]">{q}</li>
+          ))}
+        </ul>
+      )}
     </div>
   </section>
+
+  {l.callout && (
+  <!-- ══════════ CALLOUT (opt-in; e.g. homestead / year-end timing) ══════════ -->
+  <section class="lst-callout py-14">
+    <div class="container">
+      <div class="lst-callout-card grid lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-12 items-center rounded-2xl p-8 md:p-12">
+        <div>
+          {l.callout.eyebrow && <p class="lst-eyebrow mb-3">{l.callout.eyebrow}</p>}
+          <h2 class="font-display text-[#141414] text-3xl md:text-4xl font-bold leading-tight">{l.callout.title}</h2>
+          {l.callout.text && <p class="text-[#3a3630] mt-4 leading-relaxed">{l.callout.text}</p>}
+          {l.callout.button && (
+            <a href={l.callout.href || '#inquire'} data-pick={l.callout.pick || ''} class="inline-block mt-7 font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-3.5 rounded-full bg-[#141414] text-[var(--color-gold-light)] hover:bg-black transition-colors">{l.callout.button}</a>
+          )}
+        </div>
+        <div>
+          {l.callout.bullets && (
+            <ul class="space-y-4">
+              {l.callout.bullets.map((b: string) => (
+                <li class="flex gap-3 text-[#2b2823] text-[15px] leading-relaxed">
+                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-gold)]"></span><span>{b}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {l.callout.footnote && <p class="text-[#6b655b] text-xs mt-6 leading-relaxed">{l.callout.footnote}</p>}
+        </div>
+      </div>
+    </div>
+  </section>
+  )}
 
   <!-- ══════════ KEY FEATURES ══════════ -->
   <section class="bg-[#0A0A0A] py-20">
@@ -168,11 +244,85 @@ if (l.faq && l.faq.length) {
     </div>
   </section>
 
+  {l.lifestyle && (
+  <!-- ══════════ LIFESTYLE (opt-in; warm light section) ══════════ -->
+  <section class="lst-life py-20">
+    <div class="container">
+      {l.lifestyle.eyebrow && <p class="lst-eyebrow text-center mb-3">{l.lifestyle.eyebrow}</p>}
+      <h2 class="font-display text-[#141414] text-3xl md:text-4xl font-bold text-center">{l.lifestyle.title}</h2>
+      {l.lifestyle.intro && <p class="text-[#4a453d] text-center max-w-2xl mx-auto mt-4 leading-relaxed">{l.lifestyle.intro}</p>}
+      {l.lifestyle.items && (
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-12">
+          {l.lifestyle.items.map((it: any) => (
+            <div class="bg-white rounded-xl p-5 md:p-7 border border-[#e8e0cf] hover:border-[var(--color-gold)] hover:-translate-y-0.5 transition-all">
+              {it.icon && ICONS[it.icon] && (
+                <svg viewBox="0 0 24 24" class="h-8 w-8 mb-4" fill="none" stroke="#B08F45" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={ICONS[it.icon]} /></svg>
+              )}
+              <h3 class="font-display text-[#141414] text-lg md:text-xl font-semibold">{it.title}</h3>
+              {it.text && <p class="text-[#5a554c] text-sm leading-relaxed mt-2">{it.text}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+      {(l.lifestyle.nearby || l.lifestyle.schools) && (
+        <div class="grid md:grid-cols-2 gap-6 mt-8">
+          {l.lifestyle.nearby && (
+            <div class="bg-[#141414] rounded-xl p-7 md:p-8">
+              <p class="lst-eyebrow mb-5">{l.lifestyle.nearby_title || 'Weekend Radius'}</p>
+              <ul class="divide-y divide-white/[0.08]">
+                {l.lifestyle.nearby.map((n: any) => (
+                  <li class="flex justify-between gap-4 py-3 text-sm"><span class="text-white/85">{n.place}</span><span class="text-[var(--color-gold-light)] whitespace-nowrap">{n.dist}</span></li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {l.lifestyle.schools && (
+            <div class="bg-[#141414] rounded-xl p-7 md:p-8">
+              <p class="lst-eyebrow mb-5">{l.lifestyle.schools.title || 'Schools'}</p>
+              <ul class="divide-y divide-white/[0.08]">
+                {l.lifestyle.schools.items.map((s: any) => (
+                  <li class="flex justify-between gap-4 py-3 text-sm"><span class="text-white/85">{s.name}</span><span class="text-[var(--color-gold-light)] whitespace-nowrap">{s.detail}</span></li>
+                ))}
+              </ul>
+              {l.lifestyle.schools.note && <p class="text-white/40 text-xs mt-4 leading-relaxed">{l.lifestyle.schools.note}</p>}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  </section>
+  )}
+
   <!-- ══════════ PRICE + AGENT CTA ══════════ -->
   <section class="bg-black py-20 text-center border-y border-white/[0.06]">
     <div class="container-narrow">
       <p class="font-display text-white text-3xl md:text-5xl font-bold">{priceLabel}</p>
       {l.open_house && <p class="font-accent uppercase tracking-[0.18em] text-[var(--color-gold)] mt-4 font-semibold">{l.open_house}</p>}
+      {coAgent ? (
+      <div class="mt-10 flex flex-col items-center">
+        <img src="/images/logos/adamson-group-black.png" alt="Adamson Group" class="h-14 w-auto" style="filter: invert(1) brightness(100);" />
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl">
+          <div class="border border-white/[0.08] rounded-xl p-6 flex flex-col items-center gap-1.5">
+            <img src="/images/ryan-adamson-transparent.webp" alt="Ryan Adamson" class="h-20 w-20 rounded-full object-cover object-top bg-[#1a1a1a]" loading="lazy" />
+            <p class="font-accent text-[10px] uppercase tracking-[0.2em] text-white/50 mt-3">Listing Agent</p>
+            <p class="text-white font-semibold">Ryan Adamson, PA</p>
+            <a href="tel:19417139234" class="text-[var(--color-gold)] hover:text-[var(--color-gold-light)]">(941) 713-9234</a>
+            <a href="mailto:Ryan@Adamson-Group.com" class="text-white/60 hover:text-[var(--color-gold)] text-sm">Ryan@Adamson-Group.com</a>
+          </div>
+          <div class="border border-white/[0.08] rounded-xl p-6 flex flex-col items-center gap-1.5">
+            {coAgent.photo
+              ? <img src={coAgent.photo} alt={coAgent.name} class="h-20 w-20 rounded-full object-cover object-top bg-[#1a1a1a]" loading="lazy" />
+              : <div class="h-20 w-20 rounded-full grid place-items-center bg-[#1a1a1a] border border-[var(--color-gold)]/40 font-display text-2xl text-[var(--color-gold)]">{coAgent.name.split(' ').map((p: string) => p[0]).join('')}</div>}
+            <p class="font-accent text-[10px] uppercase tracking-[0.2em] text-white/50 mt-3">{coAgent.title || 'Co-Listing Agent'}</p>
+            <p class="text-white font-semibold">{coAgent.name}</p>
+            {coAgent.phone && <a href={`tel:${coAgent.tel || coAgent.phone.replace(/\D/g, '')}`} class="text-[var(--color-gold)] hover:text-[var(--color-gold-light)]">{coAgent.phone}</a>}
+            {coAgent.email && <a href={`mailto:${coAgent.email}`} class="text-white/60 hover:text-[var(--color-gold)] text-sm">{coAgent.email}</a>}
+          </div>
+        </div>
+        <p class="text-white/40 text-xs mt-5">{coAgent.brokerage || 'Coldwell Banker Realty'}</p>
+        <a href="#inquire" class="mt-6 font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-3.5 rounded-full bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] transition-colors">{cta.agent_button || 'Schedule Your Tour Today'}</a>
+      </div>
+      ) : (
       <div class="mt-10 flex flex-col items-center gap-2">
         <img src="/images/logos/adamson-group-black.png" alt="Adamson Group" class="h-14 w-auto" style="filter: invert(1) brightness(100);" />
         <p class="text-white font-semibold mt-3">Ryan Adamson, PA</p>
@@ -180,6 +330,7 @@ if (l.faq && l.faq.length) {
         <a href="mailto:Ryan@Adamson-Group.com" class="text-white/60 hover:text-[var(--color-gold)] text-sm">Ryan@Adamson-Group.com</a>
         <a href="#inquire" class="mt-6 font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-3.5 rounded-full bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] transition-colors">Schedule Your Tour Today</a>
       </div>
+      )}
     </div>
   </section>
 
@@ -206,12 +357,19 @@ if (l.faq && l.faq.length) {
   </section>
   )}
 
-  {l.floor_plan && (
+  {floorPlans.length > 0 && (
   <section class="bg-black py-20 border-y border-white/[0.06]">
-    <div class="container-narrow text-center">
+    <div class={floorPlans.length > 1 ? 'container text-center' : 'container-narrow text-center'}>
       <p class="lst-eyebrow mb-3">The Layout</p>
-      <h2 class="font-display text-white text-3xl font-bold mb-10">Floor Plan</h2>
-      <img src={l.floor_plan} alt={`Floor plan — ${l.address}`} class="mx-auto rounded-lg bg-white p-4 max-h-[900px] w-auto" loading="lazy" />
+      <h2 class="font-display text-white text-3xl font-bold mb-10">{floorPlans.length > 1 ? 'Floor Plans' : 'Floor Plan'}</h2>
+      <div class={floorPlans.length > 1 ? 'grid md:grid-cols-2 gap-6' : ''}>
+        {floorPlans.map((fp: string, i: number) => (
+          <figure>
+            <a href={fp} target="_blank" rel="noopener"><img src={fp} alt={`Floor plan${floorPlans.length > 1 ? ` (level ${i + 1})` : ''} — ${l.address}`} class="mx-auto rounded-lg bg-white p-4 max-h-[900px] w-auto" loading="lazy" /></a>
+            {floorPlans.length > 1 && <figcaption class="font-accent text-[11px] uppercase tracking-[0.2em] text-white/50 mt-3">{i === 0 ? 'First Floor' : i === 1 ? 'Second Floor' : `Level ${i + 1}`}</figcaption>}
+          </figure>
+        ))}
+      </div>
     </div>
   </section>
   )}
@@ -232,10 +390,20 @@ if (l.faq && l.faq.length) {
     <div class="container">
       <p class="lst-eyebrow text-center mb-3">Every Angle</p>
       <h2 class="font-display text-white text-3xl font-bold text-center mb-10">Photo Tour</h2>
-      <div class="gallery-grid grid grid-cols-2 md:grid-cols-3 gap-3" id="galleryGrid">
-        {(l.photos || []).map((src: string, i: number) => (
-          <img src={src} alt={`${l.address} — photo ${i + 1}`} loading="lazy" decoding="async" class="w-full aspect-[4/3] object-cover rounded" data-idx={i} />
-        ))}
+      <div id="galleryGrid">
+        {photoGroups.map((g, gi) => {
+          const offset = photoGroups.slice(0, gi).reduce((n, x) => n + x.photos.length, 0);
+          return (
+            <div class={gi > 0 ? 'mt-14' : ''}>
+              {g.title && <h3 class="font-accent text-[12px] uppercase tracking-[0.22em] text-[var(--color-gold)] mb-5 text-center">{g.title}</h3>}
+              <div class="gallery-grid grid grid-cols-2 md:grid-cols-3 gap-3">
+                {g.photos.map((src: string, i: number) => (
+                  <img src={src} alt={`${l.address} — ${g.title ? g.title.toLowerCase() + ', ' : ''}photo ${i + 1}`} loading="lazy" decoding="async" class="w-full aspect-[4/3] object-cover rounded" data-idx={offset + i} />
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   </section>
@@ -274,9 +442,9 @@ if (l.faq && l.faq.length) {
   <!-- ══════════ INQUIRY / LEAD CAPTURE ══════════ -->
   <section id="inquire" class="bg-[#0A0A0A] py-24 border-t border-white/[0.06]">
     <div class="container-narrow">
-      <p class="lst-eyebrow text-center mb-3">Private Inquiry</p>
-      <h2 class="font-display text-white text-3xl md:text-4xl font-bold text-center mb-4">Request a Showing or More Information</h2>
-      <p class="text-white/60 text-center text-sm mb-12 max-w-xl mx-auto">Your inquiry goes directly to Ryan Adamson — no teams, no call centers. Expect a personal response within hours.</p>
+      <p class="lst-eyebrow text-center mb-3">{cta.form_eyebrow || 'Private Inquiry'}</p>
+      <h2 class="font-display text-white text-3xl md:text-4xl font-bold text-center mb-4">{cta.form_title || 'Request a Showing or More Information'}</h2>
+      <p class="text-white/60 text-center text-sm mb-12 max-w-xl mx-auto">{cta.form_intro || 'Your inquiry goes directly to Ryan Adamson — no teams, no call centers. Expect a personal response within hours.'}</p>
 
       <form id="listingForm" class="max-w-xl mx-auto" novalidate data-slug={l.slug}>
         <input type="text" name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
@@ -286,15 +454,25 @@ if (l.faq && l.faq.length) {
         </div>
         <input type="email" name="email" required placeholder="Email address *" autocomplete="email" class="mt-4 w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white placeholder-white/25 focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm" />
         <input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel" class="mt-4 w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white placeholder-white/25 focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm" />
+        {cta.interests && cta.interests.length > 0 && (
+          <fieldset class="mt-6">
+            <legend class="font-accent text-[11px] uppercase tracking-[0.18em] text-white/55 mb-3">{cta.interests_label || 'I’m interested in… (tap any)'}</legend>
+            <div class="flex flex-wrap gap-2" id="interestChips">
+              {cta.interests.map((t: string) => (
+                <label class="lst-chip"><input type="checkbox" name="interest" value={t} class="sr-only" /><span>{t}</span></label>
+              ))}
+            </div>
+          </fieldset>
+        )}
         <textarea name="message" rows="4" placeholder={`I'd like to know more about ${l.address}…`} class="mt-4 w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white placeholder-white/25 focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm"></textarea>
         <p id="listingFormErr" class="hidden text-red-400 text-sm mt-3">Please provide your first name and a valid email address.</p>
-        <button type="submit" id="listingFormBtn" class="mt-6 w-full font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-4 rounded-full bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] transition-colors disabled:opacity-60">Send Inquiry</button>
-        <p class="text-white/35 text-xs text-center mt-4">No spam, ever. Your details go straight to Ryan Adamson, PA · Coldwell Banker Realty.</p>
+        <button type="submit" id="listingFormBtn" class="mt-6 w-full font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-4 rounded-full bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] transition-colors disabled:opacity-60" data-label={cta.form_button || 'Send Inquiry'}>{cta.form_button || 'Send Inquiry'}</button>
+        <p class="text-white/35 text-xs text-center mt-4">{coAgent ? `No spam, ever. Your details go straight to Ryan Adamson, PA and ${coAgent.name} · Coldwell Banker Realty.` : 'No spam, ever. Your details go straight to Ryan Adamson, PA · Coldwell Banker Realty.'}</p>
       </form>
 
       <div id="listingFormOk" class="hidden max-w-xl mx-auto text-center py-10">
-        <p class="font-display text-[var(--color-gold)] text-3xl font-semibold mb-3">Thank you.</p>
-        <p class="text-white/75">Your inquiry about {l.address} is on its way to Ryan. He'll reach out personally — usually within a few hours.</p>
+        <p class="font-display text-[var(--color-gold)] text-3xl font-semibold mb-3">{cta.success_title || 'Thank you.'}</p>
+        <p class="text-white/75">{cta.success_text || `Your inquiry about ${l.address} is on its way to ${agentNames}. ${coAgent ? 'One of us' : 'He'}'ll reach out personally — usually within a few hours.`}</p>
         <a href="tel:19417139234" class="inline-block mt-6 font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-3.5 rounded-full border border-[var(--color-gold)] text-[var(--color-gold)]">Or call now: (941) 713-9234</a>
       </div>
     </div>
@@ -373,6 +551,14 @@ if (l.faq && l.faq.length) {
     });
   }
 
+  /* ── CTA links with data-pick pre-tick the matching interest chip on the form ── */
+  document.querySelectorAll('a[data-pick]').forEach(function(a){
+    var want=a.getAttribute('data-pick'); if(!want) return;
+    a.addEventListener('click', function(){
+      document.querySelectorAll('#interestChips input').forEach(function(c){ if(c.value===want) c.checked=true; });
+    });
+  });
+
   /* ── Inquiry form → srqmap-lead fn (Supabase + IDX; message kept in raw_payload) ── */
   var form=document.getElementById('listingForm');
   if(form){
@@ -388,13 +574,17 @@ if (l.faq && l.faq.length) {
         last_name:(form.querySelector('[name="last_name"]').value||'').trim(),
         email:email,
         phone:(form.querySelector('[name="phone"]').value||'').trim(),
-        message:(form.querySelector('[name="message"]').value||'').trim(),
+        message:(function(){
+          var picks=Array.prototype.slice.call(form.querySelectorAll('[name="interest"]:checked')).map(function(x){return x.value;});
+          var msg=(form.querySelector('[name="message"]').value||'').trim();
+          return (picks.length?('Interested in: '+picks.join(', ')+(msg?' | ':'')):'')+msg;
+        })(),
         'bot-field':(form.querySelector('[name="bot-field"]')||{}).value||'',
         source:'listing:'+(form.getAttribute('data-slug')||'unknown')
       })})
       .then(function(r){ if(!r.ok) throw new Error('bad'); return r.json(); })
       .then(function(){ form.classList.add('hidden'); ok.classList.remove('hidden'); })
-      .catch(function(){ btn.disabled=false; btn.textContent='Send Inquiry'; err.textContent='Something went wrong — please try again or call (941) 713-9234.'; err.classList.remove('hidden'); });
+      .catch(function(){ btn.disabled=false; btn.textContent=btn.getAttribute('data-label')||'Send Inquiry'; err.textContent='Something went wrong — please try again or call (941) 713-9234.'; err.classList.remove('hidden'); });
     });
   }
 })();
