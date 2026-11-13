@@ -152,25 +152,6 @@
         "text": "A full gym in the clubhouse. Nap time just became workout time."
       }
     ],
-    "nearby_title": "Weekend Radius",
-    "nearby": [
-      {
-        "place": "Unlimited family fun",
-        "dist": "Your backyard & cul-de-sac"
-      },
-      {
-        "place": "Evie’s at Spanish Point, by bike",
-        "dist": "≈ 3 mi"
-      },
-      {
-        "place": "Nokomis Beach & Siesta Key",
-        "dist": "≈ 7 mi"
-      },
-      {
-        "place": "Venice, Downtown Sarasota & UTC",
-        "dist": "Short drives"
-      }
-    ],
     "schools": {
       "title": "The School Run",
       "items": [
@@ -236,8 +217,8 @@
     "/images/listings/5654-woodland-sage-dr/floor-plan-2.jpg"
   ],
   "map_query": "5654 Woodland Sage Dr, Sarasota, FL 34238",
-  "lat": 0,
-  "lng": 0,
+  "lat": 27.19881,
+  "lng": -82.451175,
   "photos": [],
   "photo_groups": [
     {
@@ -374,5 +355,396 @@
   "lead_endpoint": "community",
   "hero_focus": "50% 80%",
   "hero_focus_mobile": "51% 50%",
-  "hero_image_mobile": "/images/listings/5654-woodland-sage-dr/hero-aerial-clean.jpg"
+  "hero_image_mobile": "/images/listings/5654-woodland-sage-dr/hero-aerial-clean.jpg",
+  "fun_map": {
+    "eyebrow": "Around the Neighborhood",
+    "title": "Your Family Fun Map",
+    "intro": "The pool, the bus stop, Evie’s and the big Costco run, all close to home. Tap any spot to see how close (zoom out for Nokomis Beach).",
+    "home": {
+      "title": "5654 Woodland Sage Dr",
+      "note": "Unlimited family fun: your backyard & cul-de-sac",
+      "photo": "/images/listings/5654-woodland-sage-dr/hero-aerial-clean.jpg"
+    },
+    "pins": [
+      {
+        "id": "busstop",
+        "icon": "🚌",
+        "color": "#F2B705",
+        "title": "School Bus Stop",
+        "note": "Community stop for school mornings",
+        "dist": "≈ 1-min walk",
+        "lat": 27.197988,
+        "lng": -82.451468,
+        "zoom": 18
+      },
+      {
+        "id": "amenity",
+        "icon": "💦",
+        "color": "#2E8BC0",
+        "title": "Promenade Estates Amenity Center",
+        "note": "Pool, splash park, tot lot, courts, gym & dog park",
+        "dist": "≈ 0.6 mi · 9-min bike",
+        "lat": 27.205714,
+        "lng": -82.454158,
+        "photo": "/images/listings/5654-woodland-sage-dr/community-03.jpg",
+        "zoom": 16
+      },
+      {
+        "id": "evies",
+        "icon": "🌴",
+        "color": "#2F9E8F",
+        "title": "Evie’s at Spanish Point",
+        "note": "Waterfront tiki, cornhole on the lawn, Little Sarasota Bay views",
+        "dist": "≈ 2.6 mi · 16-min bike",
+        "lat": 27.1952274,
+        "lng": -82.4918647,
+        "photo": "/images/listings/5654-woodland-sage-dr/evies-spanish-point.jpg"
+      },
+      {
+        "id": "pineview",
+        "icon": "🎒",
+        "color": "#8E6AC8",
+        "title": "Pine View School",
+        "note": "Gifted program, eligibility-based admission",
+        "dist": "≈ 3.5 mi · 11-min drive",
+        "lat": 27.1865252,
+        "lng": -82.4795404
+      },
+      {
+        "id": "costco",
+        "icon": "🛒",
+        "color": "#D9534F",
+        "title": "Costco",
+        "note": "8201 S Tamiami Trl, for the big weekend stock-up",
+        "dist": "≈ 4.6 mi · 11-min drive",
+        "lat": 27.2343302,
+        "lng": -82.4913995
+      },
+      {
+        "id": "nokomis",
+        "icon": "🏖️",
+        "color": "#F28C38",
+        "title": "Nokomis Beach",
+        "note": "Gulf sand, sunsets and the North Jetty nearby",
+        "dist": "≈ 7.5 mi · 15-min drive",
+        "lat": 27.1240384,
+        "lng": -82.4704093,
+        "photo": "/images/listings/5654-woodland-sage-dr/area-04.jpg",
+        "fit": false
+      }
+    ],
+    "route": {
+      "to": "evies",
+      "label": "Bike route to Evie’s (≈ 2.6 mi)",
+      "color": "#2F9E8F",
+      "coords": [
+        [
+          27.198215,
+          -82.450934
+        ],
+        [
+          27.198212,
+          -82.450944
+        ],
+        [
+          27.19807,
+          -82.451247
+        ],
+        [
+          27.197899,
+          -82.451511
+        ],
+        [
+          27.197788,
+          -82.451682
+        ],
+        [
+          27.197002,
+          -82.452843
+        ],
+        [
+          27.196881,
+          -82.453056
+        ],
+        [
+          27.196782,
+          -82.453282
+        ],
+        [
+          27.196712,
+          -82.453507
+        ],
+        [
+          27.196661,
+          -82.453799
+        ],
+        [
+          27.196646,
+          -82.454013
+        ],
+        [
+          27.196647,
+          -82.454242
+        ],
+        [
+          27.196653,
+          -82.455478
+        ],
+        [
+          27.196653,
+          -82.455678
+        ],
+        [
+          27.196665,
+          -82.458476
+        ],
+        [
+          27.196665,
+          -82.458898
+        ],
+        [
+          27.196664,
+          -82.459625
+        ],
+        [
+          27.196653,
+          -82.459909
+        ],
+        [
+          27.196606,
+          -82.46041
+        ],
+        [
+          27.1965,
+          -82.461339
+        ],
+        [
+          27.196457,
+          -82.4618
+        ],
+        [
+          27.196436,
+          -82.462101
+        ],
+        [
+          27.196442,
+          -82.462248
+        ],
+        [
+          27.196437,
+          -82.46301
+        ],
+        [
+          27.196428,
+          -82.463326
+        ],
+        [
+          27.19641,
+          -82.463628
+        ],
+        [
+          27.196393,
+          -82.463856
+        ],
+        [
+          27.196358,
+          -82.464464
+        ],
+        [
+          27.196339,
+          -82.46505
+        ],
+        [
+          27.196337,
+          -82.465082
+        ],
+        [
+          27.196337,
+          -82.465387
+        ],
+        [
+          27.196318,
+          -82.465402
+        ],
+        [
+          27.196259,
+          -82.465404
+        ],
+        [
+          27.196261,
+          -82.465567
+        ],
+        [
+          27.19626,
+          -82.467613
+        ],
+        [
+          27.19626,
+          -82.468575
+        ],
+        [
+          27.19626,
+          -82.468671
+        ],
+        [
+          27.19626,
+          -82.469134
+        ],
+        [
+          27.19626,
+          -82.46921
+        ],
+        [
+          27.19626,
+          -82.469743
+        ],
+        [
+          27.19626,
+          -82.470458
+        ],
+        [
+          27.196259,
+          -82.473918
+        ],
+        [
+          27.196259,
+          -82.475603
+        ],
+        [
+          27.196259,
+          -82.476988
+        ],
+        [
+          27.196259,
+          -82.477671
+        ],
+        [
+          27.196259,
+          -82.477968
+        ],
+        [
+          27.196288,
+          -82.478491
+        ],
+        [
+          27.196302,
+          -82.478788
+        ],
+        [
+          27.196311,
+          -82.479129
+        ],
+        [
+          27.196317,
+          -82.480123
+        ],
+        [
+          27.19632,
+          -82.481339
+        ],
+        [
+          27.196331,
+          -82.481976
+        ],
+        [
+          27.196338,
+          -82.482384
+        ],
+        [
+          27.196345,
+          -82.482791
+        ],
+        [
+          27.196345,
+          -82.4831
+        ],
+        [
+          27.196341,
+          -82.483487
+        ],
+        [
+          27.19634,
+          -82.483626
+        ],
+        [
+          27.196338,
+          -82.484552
+        ],
+        [
+          27.196328,
+          -82.486212
+        ],
+        [
+          27.196326,
+          -82.486723
+        ],
+        [
+          27.196322,
+          -82.487653
+        ],
+        [
+          27.196317,
+          -82.48854
+        ],
+        [
+          27.19632,
+          -82.489397
+        ],
+        [
+          27.196321,
+          -82.489787
+        ],
+        [
+          27.196322,
+          -82.48988
+        ],
+        [
+          27.196281,
+          -82.490117
+        ],
+        [
+          27.196213,
+          -82.490236
+        ],
+        [
+          27.195991,
+          -82.490221
+        ],
+        [
+          27.195838,
+          -82.490209
+        ],
+        [
+          27.195687,
+          -82.490189
+        ],
+        [
+          27.195522,
+          -82.49017
+        ],
+        [
+          27.195333,
+          -82.49014
+        ],
+        [
+          27.195324,
+          -82.49046
+        ],
+        [
+          27.195312,
+          -82.490864
+        ],
+        [
+          27.195301,
+          -82.491263
+        ],
+        [
+          27.195309,
+          -82.491864
+        ]
+      ]
+    },
+    "also": "Also close: Siesta Key beach (≈ 7 mi), plus Venice, Downtown Sarasota and UTC, all short drives.",
+    "footnote": "Distances and times are approximate routing estimates from the house."
+  }
 }

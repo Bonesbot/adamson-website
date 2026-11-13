@@ -142,6 +142,19 @@ if (faqs.length) {
   isolated={isolated}
 >
 
+<style is:global>
+  /* Fun-map markers & popups are created by Leaflet at runtime, so they need global (unscoped) rules. */
+  #funMap .fm-pin span{display:grid;place-items:center;border-radius:999px;border:3px solid #fff;box-shadow:0 6px 16px rgba(0,0,0,.35);line-height:1}
+  #funMap .fm-card img{width:100%;height:110px;object-fit:cover;border-radius:8px 8px 0 0;display:block}
+  #funMap .fm-card-b{padding:10px 4px 4px;display:flex;flex-direction:column;gap:3px;font-family:Inter,system-ui,sans-serif}
+  #funMap .fm-card-b strong{font-size:14px;color:#141414}
+  #funMap .fm-card-b span{font-size:12px;color:#555;line-height:1.35}
+  #funMap .fm-card-b em{font-style:normal;font-size:12px;color:#9C7C34;font-weight:600}
+  #funMap .fm-card-b a{font-size:12px;color:#141414;font-weight:600;margin-top:4px;text-decoration:underline}
+  #funMap .leaflet-popup-content{margin:8px}
+  #funMap .leaflet-popup-content-wrapper{border-radius:12px}
+</style>
+
 <style>
   .lst-eyebrow{font-family:var(--font-accent);font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--color-gold)}
   .lst-stat-num{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--color-gold);line-height:1}
@@ -154,6 +167,15 @@ if (faqs.length) {
   .lb-close{position:absolute;top:16px;right:20px;background:none;border:none;color:rgba(255,255,255,.75);font-size:34px;cursor:pointer;line-height:1}
   .lb-close:hover{color:#fff}
   .lb-count{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-family:var(--font-accent);font-size:12px;letter-spacing:.12em;color:rgba(255,255,255,.65)}
+  .fm-map{height:520px;background:#e8e4da}
+  @media (max-width:1023px){.fm-map{height:420px}}
+  .fm-item{width:100%;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;background:#141414;border:1px solid rgba(255,255,255,.07);transition:border-color .15s,transform .15s;cursor:pointer}
+  .fm-item:hover{border-color:rgba(197,165,90,.55);transform:translateX(2px)}
+  .fm-home{background:linear-gradient(135deg,#1d1a12,#141414);border-color:rgba(197,165,90,.35)}
+  .fm-dot{flex:none;width:36px;height:36px;border-radius:999px;display:grid;place-items:center;font-size:17px;border:2px solid #fff}
+  .fm-t{display:block;color:#fff;font-size:14px;font-weight:600;line-height:1.25}
+  .fm-n{display:block;color:rgba(255,255,255,.55);font-size:12px;line-height:1.35;margin-top:2px}
+  .fm-d{flex:none;color:var(--color-gold-light);font-size:12px;text-align:right;max-width:90px;line-height:1.3}
   .lst-hero-media{object-position:var(--fpm,50% 50%)}
   @media (min-width:768px){.lst-hero-media{object-position:var(--fp,50% 50%)}}
   .lst-callout{background:linear-gradient(180deg,#000 0,#000 50%,#0A0A0A 50%,#0A0A0A 100%)}
@@ -294,7 +316,7 @@ if (faqs.length) {
         </div>
       )}
       {(l.lifestyle.nearby || l.lifestyle.schools) && (
-        <div class="grid md:grid-cols-2 gap-6 mt-8">
+        <div class={(l.lifestyle.nearby && l.lifestyle.schools) ? 'grid md:grid-cols-2 gap-6 mt-8' : 'max-w-2xl mx-auto mt-8'}>
           {l.lifestyle.nearby && (
             <div class="bg-[#141414] rounded-xl p-7 md:p-8">
               <p class="lst-eyebrow mb-5">{l.lifestyle.nearby_title || 'Weekend Radius'}</p>
@@ -404,6 +426,81 @@ if (faqs.length) {
   )}
 
   <!-- ══════════ MAP ══════════ -->
+  {l.fun_map ? (
+  <section class="bg-[#0A0A0A] py-20" id="funMapSection">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <div class="container">
+      <p class="lst-eyebrow text-center mb-3">{l.fun_map.eyebrow || 'The Location'}</p>
+      <h2 class="font-display text-white text-3xl md:text-4xl font-bold text-center">{l.fun_map.title || `${l.neighborhood} · ${l.city}`}</h2>
+      {l.fun_map.intro && <p class="text-white/60 text-center max-w-2xl mx-auto mt-4 mb-10 text-sm leading-relaxed">{l.fun_map.intro}</p>}
+      <div class="grid lg:grid-cols-[1fr_360px] gap-6 items-start">
+        <div id="funMap" class="fm-map rounded-xl overflow-hidden border border-[var(--color-gold)]/30" role="region" aria-label={`Map of ${l.address} and nearby places`}></div>
+        <ol class="fm-legend space-y-2" id="funLegend">
+          <li><button type="button" data-pin="home" class="fm-item fm-home">
+            <span class="fm-dot" style="background:var(--color-gold)">🏡</span>
+            <span class="flex-1 text-left"><span class="fm-t">{l.fun_map.home?.title || l.address}</span><span class="fm-n">{l.fun_map.home?.note}</span></span>
+          </button></li>
+          {l.fun_map.pins.map((p: any) => (
+            <li><button type="button" data-pin={p.id} class="fm-item">
+              <span class="fm-dot" style={`background:${p.color}`}>{p.icon}</span>
+              <span class="flex-1 text-left"><span class="fm-t">{p.title}</span><span class="fm-n">{p.note}</span></span>
+              <span class="fm-d">{p.dist}</span>
+            </button></li>
+          ))}
+          {l.fun_map.also && <li class="text-white/45 text-xs leading-relaxed px-2 pt-2">{l.fun_map.also}</li>}
+        </ol>
+      </div>
+      {l.fun_map.footnote && <p class="text-white/35 text-xs mt-5 text-center">{l.fun_map.footnote}</p>}
+    </div>
+    <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script is:inline define:vars={{ fm: l.fun_map, homeLL: [l.lat, l.lng], addr: l.address }}>
+    (function(){
+      if(!window.L) return;
+      var el=document.getElementById('funMap'); if(!el) return;
+      var mobile=L.Browser.mobile;
+      var map=L.map(el,{scrollWheelZoom:false, dragging:!mobile, tap:false, zoomControl:false, attributionControl:true});
+      L.control.zoom({position:'topright'}).addTo(map);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19, attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+      function icon(emoji,bg,big){
+        var sz=big?54:40;
+        return L.divIcon({className:'fm-pin', iconSize:[sz,sz], iconAnchor:[sz/2,sz/2], popupAnchor:[0,-sz/2],
+          html:'<span style="background:'+bg+';width:'+sz+'px;height:'+sz+'px;font-size:'+(big?26:19)+'px">'+emoji+'</span>'});
+      }
+      function dirLink(ll){ return 'https://www.google.com/maps/dir/?api=1&origin='+homeLL[0]+','+homeLL[1]+'&destination='+ll[0]+','+ll[1]; }
+      function card(o,isHome){
+        return '<div class="fm-card">'+(o.photo?'<img src="'+o.photo+'" alt="">':'')+
+          '<div class="fm-card-b"><strong>'+o.title+'</strong>'+(o.note?'<span>'+o.note+'</span>':'')+
+          (o.dist?'<em>'+o.dist+'</em>':'')+
+          (isHome?'':'<a href="'+dirLink([o.lat,o.lng])+'" target="_blank" rel="noopener">Directions from the house →</a>')+'</div></div>';
+      }
+      var markers={}, bounds=[homeLL];
+      if(fm.route && fm.route.coords){
+        L.polyline(fm.route.coords,{color:'#ffffff',weight:9,opacity:.85,lineCap:'round'}).addTo(map);
+        L.polyline(fm.route.coords,{color:fm.route.color||'#2F9E8F',weight:4,dashArray:'1 9',lineCap:'round'}).addTo(map)
+          .bindTooltip(fm.route.label||'Bike route',{sticky:true});
+      }
+      fm.pins.forEach(function(p){
+        var m=L.marker([p.lat,p.lng],{icon:icon(p.icon,p.color,false),title:p.title}).addTo(map).bindPopup(card(p,false),{maxWidth:240,minWidth:220});
+        markers[p.id]=m; if(p.fit!==false) bounds.push([p.lat,p.lng]);
+      });
+      var h=fm.home||{};
+      markers.home=L.marker(homeLL,{icon:icon('🏡','#C5A55A',true),title:addr,zIndexOffset:1000}).addTo(map)
+        .bindPopup(card({title:h.title||addr,note:h.note,photo:h.photo},true),{maxWidth:240,minWidth:220});
+      map.fitBounds(bounds,{padding:[36,36]});
+      document.querySelectorAll('#funLegend [data-pin]').forEach(function(b){
+        b.addEventListener('click',function(){
+          var m=markers[b.getAttribute('data-pin')]; if(!m) return;
+          if(window.innerWidth<1024) el.scrollIntoView({behavior:'smooth',block:'center'});
+          var id=b.getAttribute('data-pin'), pz=(fm.pins.filter(function(x){return x.id===id;})[0]||{}).zoom;
+          map.flyTo(m.getLatLng(), Math.max(map.getZoom(), pz || (id==='home'?16:14)), {duration:.6});
+          setTimeout(function(){ m.openPopup(); },650);
+        });
+      });
+      if(mobile){ el.addEventListener('click',function(){ map.dragging.enable(); },{once:true}); }
+    })();
+    </script>
+  </section>
+  ) : (
   <section class="bg-[#0A0A0A] py-20">
     <div class="container">
       <p class="lst-eyebrow text-center mb-3">The Location</p>
@@ -413,6 +510,7 @@ if (faqs.length) {
       </div>
     </div>
   </section>
+  )}
 
   <!-- ══════════ PHOTO TOUR ══════════ -->
   <section class="bg-black py-20 border-t border-white/[0.06]">
