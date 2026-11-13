@@ -20,8 +20,11 @@ interface Props {
   /** Landing-page mode: dual logos only, no nav, no mobile menu. The page stands
    *  on its own and shouldn't offer twelve ways to leave it. */
   standalone?: boolean;
+  /** Isolated: like standalone, but the logos are not a link back to the hub and a call button sits right. */
+  isolated?: boolean;
 }
-const { standalone = false } = Astro.props;
+const { standalone = false, isolated = false } = Astro.props;
+const LogoWrap = isolated ? 'div' : 'a';
 
 const currentPath = Astro.url.pathname;
 ---
@@ -33,7 +36,7 @@ const currentPath = Astro.url.pathname;
   <div class="container">
     <nav class="flex items-center justify-between gap-4 h-20" aria-label="Main navigation">
       <!-- Logos: Adamson Group + Coldwell Banker (side by side like existing site) -->
-      <a href="/" class="flex items-center gap-3 shrink-0 group">
+      <LogoWrap href={isolated ? undefined : '/'} class="flex items-center gap-3 shrink-0 group">
         <!-- Adamson Group Logo (inverted to white for dark bg) -->
         <img
           src="/images/logos/adamson-group-black.png"
@@ -49,7 +52,10 @@ const currentPath = Astro.url.pathname;
           alt="Coldwell Banker Realty"
           class="hidden sm:block h-7 w-auto"
         />
-      </a>
+      </LogoWrap>
+      {isolated && (
+        <a href="tel:19417139234" class="font-accent text-[11px] uppercase tracking-[0.15em] font-semibold px-5 py-2.5 rounded-full border border-white/40 text-white hover:border-[var(--color-gold)] hover:text-[var(--color-gold)] transition-colors">(941) 713-9234</a>
+      )}
 
       <!-- Desktop Navigation -->
       {!standalone && (

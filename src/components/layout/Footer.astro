@@ -12,8 +12,10 @@ interface Props {
    * Threaded through BaseLayout, so a page sets it once.
    */
   office?: 'st-armands' | 'siesta-key';
+  /** Isolated single-property pages: brokerage + contact + legal only, no links into the site. */
+  isolated?: boolean;
 }
-const { office = 'st-armands' } = Astro.props;
+const { office = 'st-armands', isolated = false } = Astro.props;
 
 const OFFICES = {
   'st-armands': {
@@ -63,6 +65,18 @@ const areas = [
 <!-- CBGL blue accent line at top of footer -->
 <div class="h-1 bg-gradient-to-r from-[var(--color-cbgl-blue)] via-[var(--color-cbgl-blue-light)] to-[var(--color-cbgl-blue)]"></div>
 
+{isolated ? (
+<footer class="bg-black text-white/80">
+  <div class="container py-12 text-center">
+    <img src="/images/logos/adamson-group-black.png" alt="Adamson Group" class="h-12 w-auto mx-auto mb-4" style="filter: invert(1) brightness(100);" />
+    <img src="/images/logos/cb-horz-white.png" alt="Coldwell Banker Realty" class="h-6 w-auto mx-auto mb-6 opacity-80" />
+    <p class="text-sm text-white/60">{cbOffice.name} · {cbOffice.street}, {cbOffice.city}</p>
+    <p class="text-sm text-white/60 mt-1"><a href="tel:+19417139234" class="hover:text-[var(--color-gold)]">(941) 713-9234</a> · <a href="mailto:Ryan&#64;Adamson-Group&#46;com" class="hover:text-[var(--color-gold)]">Ryan&#64;Adamson-Group&#46;com</a></p>
+    <p class="text-xs text-white/30 mt-8 max-w-3xl mx-auto">Information deemed reliable but not guaranteed. Property is subject to prior sale, change or withdrawal without notice. Listing information courtesy of Stellar MLS.</p>
+    <p class="text-xs text-white/30 mt-3">&copy; {currentYear} Adamson Group · Coldwell Banker Realty · Equal Housing Opportunity. Each office is independently owned and operated.</p>
+  </div>
+</footer>
+) : (
 <footer class="bg-black text-white/80">
   <div class="container py-16">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
@@ -175,3 +189,4 @@ const areas = [
     </div>
   </div>
 </footer>
+)}

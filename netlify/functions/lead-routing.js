@@ -28,6 +28,15 @@ const DEFAULT_ROUTE = {
 
 const ROUTES = [
   {
+    // 5654 Woodland Sage Dr listing page (co-listed with Alex Chau).
+    // Notifications go to Ryan ONLY, by request (Nov 13, 2026): don't add Alex here.
+    match: /^\/listings\/5654-woodland-sage-dr\b/i,
+    label: '5654 Woodland Sage: Ryan + Alex',
+    agents: 'Ryan Adamson + Alex Chau',
+    notify: ['Ryan@Adamson-Group.com'],
+    signature: 'Ryan Adamson & Alex Chau',
+  },
+  {
     // Siesta Key — Ryan + Kelli Eggen partnership (all Siesta Key community pages)
     match: /^\/siesta-key\//i,
     label: 'Siesta Key — Ryan + Kelli',

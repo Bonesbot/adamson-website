@@ -232,7 +232,7 @@ async function sendCourtesyReply(lead) {
     what,
     'Expect a personal reply within the hour during business hours.',
     '',
-    'Ryan Adamson & Anne Schneider',
+    (lead.route && lead.route.signature) || 'Ryan Adamson & Anne Schneider',
     'The Adamson Group · Coldwell Banker Global Luxury, St. Armands',
     '(941) 713-9234',
     '',

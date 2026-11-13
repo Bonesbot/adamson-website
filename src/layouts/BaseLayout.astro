@@ -14,6 +14,8 @@ interface Props {
   noIndex?: boolean;
   /** Landing-page mode: header shows the logos only, no site nav. */
   standalone?: boolean;
+  /** Truly standalone (single-property pages): logos are not links, footer has no site links. */
+  isolated?: boolean;
   /** Which Coldwell Banker office the footer names. Siesta Key pages use 'siesta-key'. */
   office?: 'st-armands' | 'siesta-key';
 }
@@ -26,6 +28,7 @@ const {
   jsonLd,
   noIndex = false,
   standalone = false,
+  isolated = false,
   office = 'st-armands',
 } = Astro.props;
 
@@ -70,10 +73,10 @@ import SiteAnalytics from '../components/analytics/SiteAnalytics.astro';
   </head>
   <body class="min-h-screen flex flex-col">
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <Header standalone={standalone} />
+    <Header standalone={standalone || isolated} isolated={isolated} />
     <main id="main-content" class="flex-1">
       <slot />
     </main>
-    <Footer office={office} />
+    <Footer office={office} isolated={isolated} />
   </body>
 </html>

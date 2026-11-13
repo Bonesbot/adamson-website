@@ -51,6 +51,19 @@ const photoGroups: { title: string; photos: string[] }[] =
   (l.photo_groups && l.photo_groups.length) ? l.photo_groups : [{ title: '', photos: l.photos || [] }];
 const allPhotos: string[] = photoGroups.flatMap((g) => g.photos);
 const floorPlans: string[] = (l.floor_plans && l.floor_plans.length) ? l.floor_plans : (l.floor_plan ? [l.floor_plan] : []);
+// Time-boxed content: any block with `expires` (ISO date-time) is dropped at build time once
+// past, and hidden in the browser the moment it passes (data-expires), so a page that is
+// not rebuilt still rolls it off on schedule.
+const nowMs = Date.now();
+const live = (x: any) => !x || !x.expires || Date.parse(x.expires) > nowMs;
+const callout = l.callout && live(l.callout) ? l.callout : null;
+const interests = (cta.interests || [])
+  .map((t: any) => (typeof t === 'string' ? { label: t } : t))
+  .filter(live);
+const faqs = (l.faq || []).filter(live);
+const lifeCols = (l.lifestyle?.items || []).length >= 8 ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
+const isolated = !!l.standalone;
+const leadEndpoint = l.lead_endpoint === 'community' ? '/.netlify/functions/community-lead' : '/.netlify/functions/srqmap-lead';
 const statCols = (l.stats || []).length > 4 ? 'md:grid-cols-3 lg:grid-cols-6' : 'md:grid-cols-4';
 const ICONS: Record<string, string> = {
   splash: 'M12 3c3 4 5 6.5 5 9a5 5 0 0 1-10 0c0-2.5 2-5 5-9z',
@@ -90,12 +103,14 @@ const jsonLd: any[] = [
       availability: st.avail,
       offeredBy: coAgent
         ? [
-            { '@type': 'RealEstateAgent', name: 'Ryan Adamson, PA', telephone: '+1-941-713-9234', email: 'Ryan@Adamson-Group.com', url: 'https://adamsonfl.com/about' },
+            { '@type': 'RealEstateAgent', name: 'Ryan Adamson, PA', telephone: '+1-941-713-9234', email: 'Ryan@Adamson-Group.com', ...(isolated ? {} : { url: 'https://adamsonfl.com/about' }) },
             { '@type': 'RealEstateAgent', name: coAgent.name, ...(coAgent.phone ? { telephone: coAgent.phone } : {}), ...(coAgent.email ? { email: coAgent.email } : {}) },
           ]
         : { '@type': 'RealEstateAgent', name: 'Ryan Adamson, PA', telephone: '+1-941-713-9234', email: 'Ryan@Adamson-Group.com', url: 'https://adamsonfl.com/about' },
     },
   },
+];
+if (!isolated) jsonLd.push(
   {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -104,13 +119,13 @@ const jsonLd: any[] = [
       { '@type': 'ListItem', position: 2, name: 'Featured Listings', item: 'https://adamsonfl.com/listings' },
       { '@type': 'ListItem', position: 3, name: l.address, item: canonical },
     ],
-  },
-];
-if (l.faq && l.faq.length) {
+  }
+);
+if (faqs.length) {
   jsonLd.push({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: l.faq.map((f: any) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    mainEntity: faqs.map((f: any) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
   });
 }
 ---
@@ -122,6 +137,7 @@ if (l.faq && l.faq.length) {
   canonicalUrl={canonical}
   jsonLd={jsonLd}
   noIndex={!!l.noindex}
+  isolated={isolated}
 >
 
 <style>
@@ -198,30 +214,30 @@ if (l.faq && l.faq.length) {
     </div>
   </section>
 
-  {l.callout && (
+  {callout && (
   <!-- ══════════ CALLOUT (opt-in; e.g. homestead / year-end timing) ══════════ -->
-  <section class="lst-callout py-14">
+  <section class="lst-callout py-14" data-expires={callout.expires || undefined}>
     <div class="container">
       <div class="lst-callout-card grid lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-12 items-center rounded-2xl p-8 md:p-12">
         <div>
-          {l.callout.eyebrow && <p class="lst-eyebrow mb-3">{l.callout.eyebrow}</p>}
-          <h2 class="font-display text-[#141414] text-3xl md:text-4xl font-bold leading-tight">{l.callout.title}</h2>
-          {l.callout.text && <p class="text-[#3a3630] mt-4 leading-relaxed">{l.callout.text}</p>}
-          {l.callout.button && (
-            <a href={l.callout.href || '#inquire'} data-pick={l.callout.pick || ''} class="inline-block mt-7 font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-3.5 rounded-full bg-[#141414] text-[var(--color-gold-light)] hover:bg-black transition-colors">{l.callout.button}</a>
+          {callout.eyebrow && <p class="lst-eyebrow mb-3">{callout.eyebrow}</p>}
+          <h2 class="font-display text-[#141414] text-3xl md:text-4xl font-bold leading-tight">{callout.title}</h2>
+          {callout.text && <p class="text-[#3a3630] mt-4 leading-relaxed">{callout.text}</p>}
+          {callout.button && (
+            <a href={callout.href || '#inquire'} data-pick={callout.pick || ''} class="inline-block mt-7 font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-3.5 rounded-full bg-[#141414] text-[var(--color-gold-light)] hover:bg-black transition-colors">{callout.button}</a>
           )}
         </div>
         <div>
-          {l.callout.bullets && (
+          {callout.bullets && (
             <ul class="space-y-4">
-              {l.callout.bullets.map((b: string) => (
+              {callout.bullets.map((b: string) => (
                 <li class="flex gap-3 text-[#2b2823] text-[15px] leading-relaxed">
                   <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-gold)]"></span><span>{b}</span>
                 </li>
               ))}
             </ul>
           )}
-          {l.callout.footnote && <p class="text-[#6b655b] text-xs mt-6 leading-relaxed">{l.callout.footnote}</p>}
+          {callout.footnote && <p class="text-[#6b655b] text-xs mt-6 leading-relaxed">{callout.footnote}</p>}
         </div>
       </div>
     </div>
@@ -252,14 +268,17 @@ if (l.faq && l.faq.length) {
       <h2 class="font-display text-[#141414] text-3xl md:text-4xl font-bold text-center">{l.lifestyle.title}</h2>
       {l.lifestyle.intro && <p class="text-[#4a453d] text-center max-w-2xl mx-auto mt-4 leading-relaxed">{l.lifestyle.intro}</p>}
       {l.lifestyle.items && (
-        <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-12">
+        <div class={`grid grid-cols-2 ${lifeCols} gap-4 md:gap-6 mt-12`}>
           {l.lifestyle.items.map((it: any) => (
-            <div class="bg-white rounded-xl p-5 md:p-7 border border-[#e8e0cf] hover:border-[var(--color-gold)] hover:-translate-y-0.5 transition-all">
-              {it.icon && ICONS[it.icon] && (
+            <div class="bg-white rounded-xl overflow-hidden border border-[#e8e0cf] hover:border-[var(--color-gold)] hover:-translate-y-0.5 transition-all">
+              {it.photo && <img src={it.photo} alt={it.title} loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover" />}
+              <div class={it.photo ? 'p-4 md:p-5' : 'p-5 md:p-7'}>
+              {!it.photo && it.icon && ICONS[it.icon] && (
                 <svg viewBox="0 0 24 24" class="h-8 w-8 mb-4" fill="none" stroke="#B08F45" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={ICONS[it.icon]} /></svg>
               )}
               <h3 class="font-display text-[#141414] text-lg md:text-xl font-semibold">{it.title}</h3>
               {it.text && <p class="text-[#5a554c] text-sm leading-relaxed mt-2">{it.text}</p>}
+              </div>
             </div>
           ))}
         </div>
@@ -271,7 +290,7 @@ if (l.faq && l.faq.length) {
               <p class="lst-eyebrow mb-5">{l.lifestyle.nearby_title || 'Weekend Radius'}</p>
               <ul class="divide-y divide-white/[0.08]">
                 {l.lifestyle.nearby.map((n: any) => (
-                  <li class="flex justify-between gap-4 py-3 text-sm"><span class="text-white/85">{n.place}</span><span class="text-[var(--color-gold-light)] whitespace-nowrap">{n.dist}</span></li>
+                  <li class="flex justify-between gap-4 py-3 text-sm"><span class="text-white/85">{n.place}</span><span class="text-[var(--color-gold-light)] text-right">{n.dist}</span></li>
                 ))}
               </ul>
             </div>
@@ -414,7 +433,7 @@ if (l.faq && l.faq.length) {
       <p class="lst-eyebrow text-center mb-3">Open House</p>
       <h2 class="font-display text-white text-3xl md:text-4xl font-bold text-center mb-3">RSVP for the Open House</h2>
       <p id="rsvpWhen" class="font-accent uppercase tracking-[0.15em] text-[var(--color-gold)] text-center text-sm mb-10 font-semibold"></p>
-      <form id="rsvpForm" class="max-w-xl mx-auto" novalidate data-slug={l.slug}>
+      <form id="rsvpForm" class="max-w-xl mx-auto" novalidate data-slug={l.slug} data-endpoint={leadEndpoint} data-address={l.address}>
         <input type="text" name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input type="text" name="first_name" required placeholder="First name *" autocomplete="given-name" class="w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white placeholder-white/25 focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm" />
@@ -446,7 +465,7 @@ if (l.faq && l.faq.length) {
       <h2 class="font-display text-white text-3xl md:text-4xl font-bold text-center mb-4">{cta.form_title || 'Request a Showing or More Information'}</h2>
       <p class="text-white/60 text-center text-sm mb-12 max-w-xl mx-auto">{cta.form_intro || 'Your inquiry goes directly to Ryan Adamson — no teams, no call centers. Expect a personal response within hours.'}</p>
 
-      <form id="listingForm" class="max-w-xl mx-auto" novalidate data-slug={l.slug}>
+      <form id="listingForm" class="max-w-xl mx-auto" novalidate data-slug={l.slug} data-endpoint={leadEndpoint} data-address={l.address}>
         <input type="text" name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input type="text" name="first_name" required placeholder="First name *" autocomplete="given-name" class="w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white placeholder-white/25 focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm" />
@@ -454,12 +473,12 @@ if (l.faq && l.faq.length) {
         </div>
         <input type="email" name="email" required placeholder="Email address *" autocomplete="email" class="mt-4 w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white placeholder-white/25 focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm" />
         <input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel" class="mt-4 w-full px-4 py-3 bg-[#111111] border border-white/[0.08] text-white placeholder-white/25 focus:border-[var(--color-gold)] focus:outline-none transition-colors rounded text-sm" />
-        {cta.interests && cta.interests.length > 0 && (
+        {interests.length > 0 && (
           <fieldset class="mt-6">
             <legend class="font-accent text-[11px] uppercase tracking-[0.18em] text-white/55 mb-3">{cta.interests_label || 'I’m interested in… (tap any)'}</legend>
             <div class="flex flex-wrap gap-2" id="interestChips">
-              {cta.interests.map((t: string) => (
-                <label class="lst-chip"><input type="checkbox" name="interest" value={t} class="sr-only" /><span>{t}</span></label>
+              {interests.map((t: any) => (
+                <label class="lst-chip" data-expires={t.expires || undefined}><input type="checkbox" name="interest" value={t.label} class="sr-only" /><span>{t.label}</span></label>
               ))}
             </div>
           </fieldset>
@@ -489,6 +508,18 @@ if (l.faq && l.faq.length) {
 
 <script is:inline>
 (function(){
+  /* ── Time-boxed blocks roll off client-side even if the page isn't rebuilt ── */
+  document.querySelectorAll('[data-expires]').forEach(function(el){
+    var t=Date.parse(el.getAttribute('data-expires')); if(t && Date.now()>=t){ el.remove(); }
+  });
+  /* ── Lead payload: srqmap-lead takes it as-is; community-lead (Supabase + Zoho +
+     team email + Home Platform) wants name/notes/page/community ── */
+  function shapeLead(f,p,leadType){
+    if(!/community-lead/.test(f.getAttribute('data-endpoint')||'')) return p;
+    return { name:[p.first_name,p.last_name].filter(Boolean).join(' '), email:p.email, phone:p.phone||'',
+      notes:p.message||'', lead_type:leadType||'Buyer', community:f.getAttribute('data-address')||'',
+      page:location.pathname, source:p.source, 'bot-field':p['bot-field']||'' };
+  }
   /* ── Lightbox ── */
   var grid=document.getElementById('galleryGrid');
   var lb=document.getElementById('lightbox'), lbImg=document.getElementById('lbImg'), lbCount=document.getElementById('lbCount');
@@ -539,12 +570,12 @@ if (l.faq && l.faq.length) {
       var guests=(rform.querySelector('[name="guests"]').value||'1');
       var note=(rform.querySelector('[name="note"]').value||'').trim();
       var whenv=((document.getElementById('ohWhen')||{}).textContent||'').trim();
-      fetch('/.netlify/functions/srqmap-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      fetch(rform.getAttribute('data-endpoint'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(shapeLead(rform,{
         first_name:first, email:email, guests:guests,
         message:'RSVP ('+guests+' guest'+(guests==='1'?'':'s')+') for open house '+whenv+(note?(' - '+note):''),
         'bot-field':(rform.querySelector('[name="bot-field"]')||{}).value||'',
         source:'rsvp:'+(rform.getAttribute('data-slug')||'unknown')
-      })})
+      }, 'Showing'))})
       .then(function(r){ if(!r.ok) throw new Error('bad'); return r.json(); })
       .then(function(){ rform.classList.add('hidden'); rok.classList.remove('hidden'); })
       .catch(function(){ rbtn.disabled=false; rbtn.textContent='Reserve My Spot'; rerr.textContent='Something went wrong - please try again or call (941) 713-9234.'; rerr.classList.remove('hidden'); });
@@ -569,7 +600,8 @@ if (l.faq && l.faq.length) {
       var email=(form.querySelector('[name="email"]').value||'').trim();
       if(!first || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ err.classList.remove('hidden'); return; }
       err.classList.add('hidden'); btn.disabled=true; btn.textContent='Sending…';
-      fetch('/.netlify/functions/srqmap-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      var picked=Array.prototype.slice.call(form.querySelectorAll('[name="interest"]:checked')).map(function(x){return x.value;});
+      fetch(form.getAttribute('data-endpoint'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(shapeLead(form,{
         first_name:first,
         last_name:(form.querySelector('[name="last_name"]').value||'').trim(),
         email:email,
@@ -581,7 +613,7 @@ if (l.faq && l.faq.length) {
         })(),
         'bot-field':(form.querySelector('[name="bot-field"]')||{}).value||'',
         source:'listing:'+(form.getAttribute('data-slug')||'unknown')
-      })})
+      }, picked.some(function(v){return /showing/i.test(v);})?'Showing':'Buyer'))})
       .then(function(r){ if(!r.ok) throw new Error('bad'); return r.json(); })
       .then(function(){ form.classList.add('hidden'); ok.classList.remove('hidden'); })
       .catch(function(){ btn.disabled=false; btn.textContent=btn.getAttribute('data-label')||'Send Inquiry'; err.textContent='Something went wrong — please try again or call (941) 713-9234.'; err.classList.remove('hidden'); });
