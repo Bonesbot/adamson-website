@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-12T15:52:00.732744+00:00",
+  "lastUpdated": "2026-11-13T11:52:43.372876+00:00",
   "counts": {
     "sold": 337,
-    "pending": 25,
-    "active": 114,
-    "total": 362
+    "pending": 26,
+    "active": 113,
+    "total": 363
   },
   "metrics": {
-    "avgPrice": "$638,476",
+    "avgPrice": "$637,541",
     "avgPricePerSqFt": "$326",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,764",
+    "avgLivingSqFt": "1,762",
     "avgLotSqFt": null,
     "avgDom": 77
   },
@@ -22,9 +22,9 @@
     "maxPrice": "$7,199,000"
   },
   "active": {
-    "count": 114,
-    "medianPrice": "$496,400",
-    "medianPricePerSqFt": "$326",
+    "count": 113,
+    "medianPrice": "$497,800",
+    "medianPricePerSqFt": "$325",
     "waterfrontCount": 36,
     "newConstructionCount": 3
   },
@@ -36,7 +36,7 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.2,
+    "condo": 5.1,
     "sfhVilla": 5.8,
     "blended": 5.5,
     "method": "active / (trailing-12mo closed / 12)",
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 84,
+    "under900k": 83,
     "band900kTo1_5m": 9,
     "band1_5mTo3m": 14,
     "band3mPlus": 7
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 114
+      "count": 113
     }
   ],
   "buildingClasses": [],
@@ -138,10 +138,10 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 54,
-      "avgPrice": "$372,009",
-      "avgPricePerSqFt": "$289",
-      "avgLivingSqFt": "1,280",
+      "activeCount": 53,
+      "avgPrice": "$373,387",
+      "avgPricePerSqFt": "$288",
+      "avgLivingSqFt": "1,287",
       "avgDom": 93
     },
     {
@@ -152,7 +152,7 @@
       "avgPrice": "$1,240,600",
       "avgPricePerSqFt": "$491",
       "avgLivingSqFt": "2,275",
-      "avgDom": 91
+      "avgDom": 92
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$940,975",
       "avgPricePerSqFt": "$448",
       "avgLivingSqFt": "1,942",
-      "avgDom": 156
+      "avgDom": 158
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$635,000",
       "avgPricePerSqFt": "$364",
       "avgLivingSqFt": "1,745",
-      "avgDom": 78
+      "avgDom": 79
     }
   ],
   "condoTiersScope": {
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 69,
+      "activeCount": 68,
       "soldCount": 214,
       "soldMedianPricePerSqFt": "$287",
       "soldMedianPrice": "$423,750",
@@ -232,10 +232,10 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 5.5,
-    "monthsOfSupplyCondo": 5.2,
+    "monthsOfSupplyCondo": 5.1,
     "monthsOfSupplySfhVilla": 5.8,
     "label": "balanced market",
-    "activeCount": 114,
+    "activeCount": 113,
     "sold365Count": 248,
     "sold90Count": 64,
     "method": "active / (trailing-12mo closed / 12)"
@@ -249,7 +249,7 @@
     },
     "condo": {
       "soldCount": 162,
-      "activeCount": 64,
+      "activeCount": 63,
       "soldMedianPrice": "$335,000",
       "soldMedianPricePerSqFt": "$255"
     }
@@ -262,7 +262,7 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 114 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 113 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -272,7 +272,7 @@
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $496,400."
+      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $497,800."
     },
     {
       "facet": "speed",

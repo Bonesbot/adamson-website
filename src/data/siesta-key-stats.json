@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-12T15:51:57.440308+00:00",
+  "lastUpdated": "2026-11-13T11:52:40.248419+00:00",
   "counts": {
-    "sold": 771,
+    "sold": 772,
     "pending": 31,
-    "active": 281,
-    "total": 802
+    "active": 286,
+    "total": 803
   },
   "metrics": {
-    "avgPrice": "$1,342,135",
+    "avgPrice": "$1,341,516",
     "avgPricePerSqFt": "$697",
     "avgYearBuilt": 1979,
-    "avgLivingSqFt": "1,771",
+    "avgLivingSqFt": "1,770",
     "avgLotSqFt": null,
     "avgDom": 102
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$26,000,000"
   },
   "active": {
-    "count": 281,
+    "count": 286,
     "medianPrice": "$1,100,000",
-    "medianPricePerSqFt": "$742",
-    "waterfrontCount": 164,
-    "newConstructionCount": 41
+    "medianPricePerSqFt": "$741",
+    "waterfrontCount": 165,
+    "newConstructionCount": 42
   },
   "sold": {
     "count": 103,
-    "medianPrice": "$1,100,000",
-    "medianDom": 87,
-    "saleToListRatio": "89.8%",
+    "medianPrice": "$1,070,000",
+    "medianDom": 84,
+    "saleToListRatio": "89.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 7.1,
-    "sfhVilla": 7.2,
-    "blended": 7.1,
+    "condo": 7.3,
+    "sfhVilla": 7.3,
+    "blended": 7.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 130,
-    "band900kTo1_5m": 44,
+    "under900k": 132,
+    "band900kTo1_5m": 46,
     "band1_5mTo3m": 51,
-    "band3mPlus": 56
+    "band3mPlus": 57
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 281
+      "count": 286
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4704350",
+      "address": "1600 COVE II PL #412",
+      "subdivision": "MIDNIGHT COVE II",
+      "soldPrice": "$550,000",
+      "soldDate": "2026-11-12",
+      "bedrooms": 2,
+      "bathrooms": 1.5,
+      "livingSqFt": "860",
+      "yearBuilt": 1979,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4680425",
       "address": "5880 MIDNIGHT PASS RD #804",
@@ -118,19 +131,6 @@
       "yearBuilt": 1972,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4703004",
-      "address": "4937 OXFORD DR",
-      "subdivision": "SIESTA BEACH",
-      "soldPrice": "$1,800,000",
-      "soldDate": "2026-11-05",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,539",
-      "yearBuilt": 1974,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 166,
-      "avgPrice": "$807,401",
-      "avgPricePerSqFt": "$688",
-      "avgLivingSqFt": "1,177",
-      "avgDom": 117
+      "activeCount": 169,
+      "avgPrice": "$803,412",
+      "avgPricePerSqFt": "$684",
+      "avgLivingSqFt": "1,176",
+      "avgDom": 116
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,496,986",
       "avgPricePerSqFt": "$763",
       "avgLivingSqFt": "1,997",
-      "avgDom": 144
+      "avgDom": 145
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$2,626,800",
       "avgPricePerSqFt": "$970",
       "avgLivingSqFt": "2,640",
-      "avgDom": 86
+      "avgDom": 87
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,826,111",
       "avgPricePerSqFt": "$1,456",
       "avgLivingSqFt": "3,417",
-      "avgDom": 209
+      "avgDom": 210
     }
   ],
   "condoTiersScope": {
@@ -187,7 +187,7 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 74,
+      "activeCount": 73,
       "soldCount": 275,
       "soldMedianPricePerSqFt": "$753",
       "soldMedianPrice": "$1,000,000",
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 86,
+      "activeCount": 88,
       "soldCount": 237,
       "soldMedianPricePerSqFt": "$582",
       "soldMedianPrice": "$1,115,000",
@@ -206,8 +206,8 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 44,
-      "soldCount": 97,
-      "soldMedianPricePerSqFt": "$584",
+      "soldCount": 98,
+      "soldMedianPricePerSqFt": "$588",
       "soldMedianPrice": "$730,000",
       "lowSample": false
     },
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 73,
+      "activeCount": 77,
       "soldCount": 150,
       "soldMedianPricePerSqFt": "$575",
       "soldMedianPrice": "$773,125",
@@ -231,32 +231,32 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.1,
-    "monthsOfSupplyCondo": 7.1,
-    "monthsOfSupplySfhVilla": 7.2,
+    "monthsOfSupply": 7.3,
+    "monthsOfSupplyCondo": 7.3,
+    "monthsOfSupplySfhVilla": 7.3,
     "label": "buyer's market",
-    "activeCount": 281,
-    "sold365Count": 473,
+    "activeCount": 286,
+    "sold365Count": 470,
     "sold90Count": 103,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 231,
-      "activeCount": 94,
+      "activeCount": 96,
       "soldMedianPrice": "$1,527,000",
       "soldMedianPricePerSqFt": "$666"
     },
     "condo": {
-      "soldCount": 540,
-      "activeCount": 187,
-      "soldMedianPrice": "$795,500",
-      "soldMedianPricePerSqFt": "$627"
+      "soldCount": 541,
+      "activeCount": 190,
+      "soldMedianPrice": "$795,000",
+      "soldMedianPricePerSqFt": "$628"
     }
   },
   "boating": {
-    "activeWithDock": 73,
-    "activeWaterfront": 164
+    "activeWithDock": 75,
+    "activeWaterfront": 165
   },
   "marketQuestions": [
     {
@@ -267,12 +267,12 @@
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 281 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 7.1 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 286 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 7.3 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Siesta Key?",
-      "a": "Single-family homes sell around $1,527,000 ($666/sq ft), while condos, villas and townhouses sell around $795,500 ($627/sq ft)."
+      "a": "Single-family homes sell around $1,527,000 ($666/sq ft), while condos, villas and townhouses sell around $795,000 ($628/sq ft)."
     },
     {
       "facet": "range",
@@ -282,12 +282,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 87 days on market and closed at 89.8% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 84 days on market and closed at 89.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Siesta Key homes have a dock?",
-      "a": "Of 164 active waterfront listings, 73 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 165 active waterfront listings, 75 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

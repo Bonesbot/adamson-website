@@ -2,15 +2,15 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-12T15:52:02.388715+00:00",
+  "lastUpdated": "2026-11-13T11:52:44.921902+00:00",
   "counts": {
-    "sold": 988,
-    "pending": 61,
-    "active": 220,
-    "total": 1049
+    "sold": 989,
+    "pending": 63,
+    "active": 221,
+    "total": 1052
   },
   "metrics": {
-    "avgPrice": "$559,296",
+    "avgPrice": "$558,972",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
     "avgLivingSqFt": "2,040",
@@ -22,17 +22,17 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 220,
-    "medianPrice": "$399,250",
-    "medianPricePerSqFt": "$242",
+    "count": 221,
+    "medianPrice": "$399,500",
+    "medianPricePerSqFt": "$243",
     "waterfrontCount": 41,
-    "newConstructionCount": 37
+    "newConstructionCount": 36
   },
   "sold": {
-    "count": 159,
+    "count": 157,
     "medianPrice": "$477,000",
     "medianDom": 59,
-    "saleToListRatio": "92.4%",
+    "saleToListRatio": "92.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -55,18 +55,31 @@
   },
   "priceBands": {
     "under900k": 207,
-    "band900kTo1_5m": 12,
+    "band900kTo1_5m": 13,
     "band1_5mTo3m": 1,
     "band3mPlus": 0
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 220
+      "count": 221
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4688140",
+      "address": "3862 WILSHIRE CIR W #107",
+      "subdivision": "LAKESHORE VILLAGE",
+      "soldPrice": "$337,000",
+      "soldDate": "2026-11-12",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,606",
+      "yearBuilt": 1985,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4708189",
       "address": "4106 HEARTHSTONE DR",
@@ -118,19 +131,6 @@
       "yearBuilt": 1996,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4696292",
-      "address": "9540 HIGH GATE DR #1411",
-      "subdivision": "STONEYBROOK VERANDA GREENS 1",
-      "soldPrice": "$440,000",
-      "soldDate": "2026-11-05",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,661",
-      "yearBuilt": 1996,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,37 +142,37 @@
       "avgPrice": "$321,589",
       "avgPricePerSqFt": "$194",
       "avgLivingSqFt": "1,657",
-      "avgDom": 121
+      "avgDom": 122
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 78,
-      "avgPrice": "$282,679",
+      "activeCount": 79,
+      "avgPrice": "$282,455",
       "avgPricePerSqFt": "$223",
-      "avgLivingSqFt": "1,267",
+      "avgLivingSqFt": "1,263",
       "avgDom": 121
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 7,
-      "avgPrice": "$384,986",
-      "avgPricePerSqFt": "$227",
-      "avgLivingSqFt": "1,700",
-      "avgDom": 67
+      "activeCount": 8,
+      "avgPrice": "$396,225",
+      "avgPricePerSqFt": "$234",
+      "avgLivingSqFt": "1,697",
+      "avgDom": 59
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 14,
-      "avgPrice": "$352,268",
-      "avgPricePerSqFt": "$217",
-      "avgLivingSqFt": "1,621",
-      "avgDom": 78
+      "activeCount": 13,
+      "avgPrice": "$352,827",
+      "avgPricePerSqFt": "$219",
+      "avgLivingSqFt": "1,613",
+      "avgDom": 72
     }
   ],
   "condoTiersScope": {
@@ -196,9 +196,9 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 45,
-      "soldCount": 224,
-      "soldMedianPricePerSqFt": "$258",
+      "activeCount": 46,
+      "soldCount": 225,
+      "soldMedianPricePerSqFt": "$257",
       "soldMedianPrice": "$475,000",
       "lowSample": false
     },
@@ -226,9 +226,9 @@
     "monthsOfSupplyCondo": 6.0,
     "monthsOfSupplySfhVilla": 2.9,
     "label": "seller's market",
-    "activeCount": 220,
-    "sold365Count": 718,
-    "sold90Count": 159,
+    "activeCount": 221,
+    "sold365Count": 717,
+    "sold90Count": 157,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -239,8 +239,8 @@
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 427,
-      "activeCount": 134,
+      "soldCount": 428,
+      "activeCount": 135,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 220 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.7 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 221 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.7 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,12 +263,12 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $399,250."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $399,500."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 59 days on market and closed at 92.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 59 days on market and closed at 92.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
