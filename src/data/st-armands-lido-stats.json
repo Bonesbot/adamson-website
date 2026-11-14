@@ -2,18 +2,18 @@
   "areaSlug": "st-armands-lido",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-13T11:52:39.426916+00:00",
+  "lastUpdated": "2026-11-14T11:52:36.269452+00:00",
   "counts": {
     "sold": 776,
-    "pending": 13,
-    "active": 79,
-    "total": 789
+    "pending": 14,
+    "active": 78,
+    "total": 790
   },
   "metrics": {
-    "avgPrice": "$1,667,824",
+    "avgPrice": "$1,668,624",
     "avgPricePerSqFt": "$701",
     "avgYearBuilt": 1982,
-    "avgLivingSqFt": "1,931",
+    "avgLivingSqFt": "1,932",
     "avgLotSqFt": null,
     "avgDom": 108
   },
@@ -22,9 +22,9 @@
     "maxPrice": "$25,000,000"
   },
   "active": {
-    "count": 79,
-    "medianPrice": "$3,590,000",
-    "medianPricePerSqFt": "$1,043",
+    "count": 78,
+    "medianPrice": "$3,620,000",
+    "medianPricePerSqFt": "$1,049",
     "waterfrontCount": 41,
     "newConstructionCount": 21
   },
@@ -37,8 +37,8 @@
   },
   "monthsOfSupply": {
     "condo": 4.6,
-    "sfhVilla": 15.2,
-    "blended": 6.9,
+    "sfhVilla": 14.8,
+    "blended": 6.8,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -56,13 +56,13 @@
   "priceBands": {
     "under900k": 24,
     "band900kTo1_5m": 6,
-    "band1_5mTo3m": 7,
+    "band1_5mTo3m": 6,
     "band3mPlus": 42
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 79
+      "count": 78
     }
   ],
   "buildingClasses": [],
@@ -142,7 +142,7 @@
       "avgPrice": "$723,876",
       "avgPricePerSqFt": "$695",
       "avgLivingSqFt": "1,043",
-      "avgDom": 156
+      "avgDom": 157
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$5,604,000",
       "avgPricePerSqFt": "$1,213",
       "avgLivingSqFt": "4,452",
-      "avgDom": 126
+      "avgDom": 127
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$2,825,000",
       "avgPricePerSqFt": "$1,148",
       "avgLivingSqFt": "2,460",
-      "avgDom": 2
+      "avgDom": 3
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$9,670,000",
       "avgPricePerSqFt": "$2,276",
       "avgLivingSqFt": "4,187",
-      "avgDom": 622
+      "avgDom": 623
     }
   ],
   "condoTiersScope": {
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 29,
+      "activeCount": 28,
       "soldCount": 89,
       "soldMedianPricePerSqFt": "$648",
       "soldMedianPrice": "$750,000",
@@ -222,11 +222,11 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 6.9,
+    "monthsOfSupply": 6.8,
     "monthsOfSupplyCondo": 4.6,
-    "monthsOfSupplySfhVilla": 15.2,
+    "monthsOfSupplySfhVilla": 14.8,
     "label": "balanced market",
-    "activeCount": 79,
+    "activeCount": 78,
     "sold365Count": 137,
     "sold90Count": 56,
     "method": "active / (trailing-12mo closed / 12)"
@@ -234,7 +234,7 @@
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 42,
-      "activeCount": 37,
+      "activeCount": 36,
       "soldMedianPrice": "$2,837,500",
       "soldMedianPricePerSqFt": "$960"
     },
@@ -258,7 +258,7 @@
     {
       "facet": "balance",
       "q": "Is St Armands Lido a buyer's or seller's market right now?",
-      "a": "With 79 active listings and roughly 11 closed sales a month (trailing 12 months), St Armands Lido has about 6.9 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 78 active listings and roughly 11 closed sales a month (trailing 12 months), St Armands Lido has about 6.8 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -268,7 +268,7 @@
     {
       "facet": "range",
       "q": "What's the price range on St Armands Lido?",
-      "a": "Active listings run from $229,000 to $25,000,000, with a median asking price of $3,590,000."
+      "a": "Active listings run from $229,000 to $25,000,000, with a median asking price of $3,620,000."
     },
     {
       "facet": "speed",

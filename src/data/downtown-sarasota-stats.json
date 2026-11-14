@@ -2,48 +2,48 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-13T11:52:41.035159+00:00",
+  "lastUpdated": "2026-11-14T11:52:37.905940+00:00",
   "counts": {
-    "sold": 312,
-    "pending": 72,
-    "active": 202,
-    "total": 384
+    "sold": 315,
+    "pending": 71,
+    "active": 207,
+    "total": 386
   },
   "metrics": {
-    "avgPrice": "$1,912,479",
-    "avgPricePerSqFt": "$823",
+    "avgPrice": "$1,913,373",
+    "avgPricePerSqFt": "$824",
     "avgYearBuilt": 2002,
     "avgLivingSqFt": "2,076",
     "avgLotSqFt": null,
-    "avgDom": 101
+    "avgDom": 100
   },
   "range": {
     "minPrice": "$260,000",
     "maxPrice": "$14,450,000"
   },
   "active": {
-    "count": 202,
+    "count": 207,
     "medianPrice": "$1,950,000",
-    "medianPricePerSqFt": "$930",
-    "waterfrontCount": 60,
-    "newConstructionCount": 81
+    "medianPricePerSqFt": "$929",
+    "waterfrontCount": 62,
+    "newConstructionCount": 83
   },
   "sold": {
-    "count": 39,
-    "medianPrice": "$1,185,000",
-    "medianDom": 85,
-    "saleToListRatio": "86.9%",
+    "count": 42,
+    "medianPrice": "$1,155,000",
+    "medianDom": 73,
+    "saleToListRatio": "87.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 9.9,
+    "condo": 10.1,
     "sfhVilla": 15.0,
-    "blended": 10.3,
+    "blended": 10.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
-    "medianMonthlyAssociation": "$1,819",
+    "medianMonthlyAssociation": "$1,814",
     "medianMonthlyCondoFee": "$1,903",
     "minMonthlyCondoFee": "$173",
     "maxMonthlyCondoFee": "$11,729",
@@ -54,19 +54,58 @@
     }
   },
   "priceBands": {
-    "under900k": 46,
+    "under900k": 49,
     "band900kTo1_5m": 38,
     "band1_5mTo3m": 53,
-    "band3mPlus": 65
+    "band3mPlus": 67
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 202
+      "count": 207
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4713072",
+      "address": "688 GOLDEN GATE POINT #201",
+      "subdivision": "SIX88 SARASOTA",
+      "soldPrice": "$1,950,000",
+      "soldDate": "2026-11-13",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,088",
+      "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4702381",
+      "address": "1771 RINGLING BLVD #903",
+      "subdivision": "RIVO AT RINGLING",
+      "soldPrice": "$630,000",
+      "soldDate": "2026-11-12",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,440",
+      "yearBuilt": 2006,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "N6142129",
+      "address": "770 S PALM AVE #1201",
+      "subdivision": "EMBASSY HOUSE",
+      "soldPrice": "$625,000",
+      "soldDate": "2026-11-12",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,636",
+      "yearBuilt": 1975,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4683134",
       "address": "707 S GULFSTREAM AVE #307",
@@ -92,45 +131,6 @@
       "yearBuilt": 2006,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4679133",
-      "address": "35 WATERGATE DR #1403",
-      "subdivision": "THE TOWER RESIDENCES",
-      "soldPrice": "$2,650,000",
-      "soldDate": "2026-10-28",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,990",
-      "yearBuilt": 2003,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4670232",
-      "address": "50 CENTRAL AVE #14B",
-      "subdivision": "PLAZA AT 05 POINTS RESIDENCES",
-      "soldPrice": "$1,250,000",
-      "soldDate": "2026-10-27",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,671",
-      "yearBuilt": 2005,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "TB8542058",
-      "address": "301 QUAY COMMONS #1410",
-      "subdivision": "BAYSO SARASOTA",
-      "soldPrice": "$1,915,000",
-      "soldDate": "2026-10-26",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,184",
-      "yearBuilt": 2023,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,41 +138,41 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 50,
-      "avgPrice": "$1,204,230",
-      "avgPricePerSqFt": "$695",
-      "avgLivingSqFt": "1,616",
-      "avgDom": 133
+      "activeCount": 49,
+      "avgPrice": "$1,179,316",
+      "avgPricePerSqFt": "$689",
+      "avgLivingSqFt": "1,601",
+      "avgDom": 136
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 27,
-      "avgPrice": "$2,077,414",
-      "avgPricePerSqFt": "$764",
-      "avgLivingSqFt": "2,411",
-      "avgDom": 90
+      "activeCount": 29,
+      "avgPrice": "$1,974,075",
+      "avgPricePerSqFt": "$749",
+      "avgLivingSqFt": "2,320",
+      "avgDom": 85
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 39,
-      "avgPrice": "$1,768,177",
-      "avgPricePerSqFt": "$777",
-      "avgLivingSqFt": "2,099",
-      "avgDom": 95
+      "activeCount": 41,
+      "avgPrice": "$1,761,437",
+      "avgPricePerSqFt": "$784",
+      "avgLivingSqFt": "2,075",
+      "avgDom": 91
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 79,
-      "avgPrice": "$4,294,785",
-      "avgPricePerSqFt": "$1,385",
-      "avgLivingSqFt": "2,949",
-      "avgDom": 208
+      "activeCount": 81,
+      "avgPrice": "$4,294,784",
+      "avgPricePerSqFt": "$1,388",
+      "avgLivingSqFt": "2,945",
+      "avgDom": 204
     }
   ],
   "condoTiersScope": {
@@ -196,8 +196,8 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 59,
-      "soldCount": 66,
+      "activeCount": 61,
+      "soldCount": 68,
       "soldMedianPricePerSqFt": "$696",
       "soldMedianPrice": "$1,215,000",
       "lowSample": false
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 81,
+      "activeCount": 82,
       "soldCount": 154,
       "soldMedianPricePerSqFt": "$785",
       "soldMedianPrice": "$1,462,500",
@@ -214,21 +214,21 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 61,
-      "soldCount": 85,
-      "soldMedianPricePerSqFt": "$555",
-      "soldMedianPrice": "$749,990",
+      "activeCount": 63,
+      "soldCount": 86,
+      "soldMedianPricePerSqFt": "$552",
+      "soldMedianPrice": "$749,495",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 10.3,
-    "monthsOfSupplyCondo": 9.9,
+    "monthsOfSupply": 10.4,
+    "monthsOfSupplyCondo": 10.1,
     "monthsOfSupplySfhVilla": 15.0,
     "label": "buyer's market",
-    "activeCount": 202,
-    "sold365Count": 236,
-    "sold90Count": 39,
+    "activeCount": 207,
+    "sold365Count": 239,
+    "sold90Count": 42,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -239,26 +239,26 @@
       "soldMedianPricePerSqFt": "$563"
     },
     "condo": {
-      "soldCount": 299,
-      "activeCount": 195,
+      "soldCount": 302,
+      "activeCount": 200,
       "soldMedianPrice": "$1,200,000",
-      "soldMedianPricePerSqFt": "$720"
+      "soldMedianPricePerSqFt": "$718"
     }
   },
   "boating": {
-    "activeWithDock": 26,
-    "activeWaterfront": 60
+    "activeWithDock": 27,
+    "activeWaterfront": 62
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Downtown Sarasota a buyer's or seller's market right now?",
-      "a": "With 202 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 10.3 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 207 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 10.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Downtown Sarasota?",
-      "a": "Single-family homes sell around $885,000 ($563/sq ft), while condos, villas and townhouses sell around $1,200,000 ($720/sq ft)."
+      "a": "Single-family homes sell around $885,000 ($563/sq ft), while condos, villas and townhouses sell around $1,200,000 ($718/sq ft)."
     },
     {
       "facet": "range",
@@ -268,17 +268,17 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Downtown Sarasota?",
-      "a": "Recently sold homes took a median 85 days on market and closed at 86.9% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 73 days on market and closed at 87.1% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Downtown Sarasota homes have a dock?",
-      "a": "Of 60 active waterfront listings, 26 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 62 active waterfront listings, 27 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Downtown Sarasota?",
-      "a": "The median monthly condo fee is $1,903 and the median monthly association fee is $1,819."
+      "a": "The median monthly condo fee is $1,903 and the median monthly association fee is $1,814."
     }
   ],
   "costBreakdown90": null

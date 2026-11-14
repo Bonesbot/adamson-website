@@ -2,10 +2,10 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-13T11:52:43.372876+00:00",
+  "lastUpdated": "2026-11-14T11:52:40.256313+00:00",
   "counts": {
-    "sold": 337,
-    "pending": 26,
+    "sold": 338,
+    "pending": 25,
     "active": 113,
     "total": 363
   },
@@ -29,16 +29,16 @@
     "newConstructionCount": 3
   },
   "sold": {
-    "count": 64,
-    "medianPrice": "$413,000",
-    "medianDom": 50,
-    "saleToListRatio": "88.0%",
+    "count": 65,
+    "medianPrice": "$416,000",
+    "medianDom": 48,
+    "saleToListRatio": "88.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 5.1,
     "sfhVilla": 5.8,
-    "blended": 5.5,
+    "blended": 5.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "TB8556877",
+      "address": "2851 HARDEE DR",
+      "subdivision": "GULF GATE WOODS",
+      "soldPrice": "$574,900",
+      "soldDate": "2026-11-13",
+      "bedrooms": 4,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,110",
+      "yearBuilt": 1976,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4691697",
       "address": "1720 GLENHOUSE DR #326",
@@ -118,19 +131,6 @@
       "yearBuilt": 1975,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4706475",
-      "address": "1601 BAYHOUSE POINT DR #204",
-      "subdivision": "PELICAN COVE I",
-      "soldPrice": "$335,000",
-      "soldDate": "2026-11-05",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,770",
-      "yearBuilt": 1976,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$373,387",
       "avgPricePerSqFt": "$288",
       "avgLivingSqFt": "1,287",
-      "avgDom": 93
+      "avgDom": 94
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,240,600",
       "avgPricePerSqFt": "$491",
       "avgLivingSqFt": "2,275",
-      "avgDom": 92
+      "avgDom": 93
     },
     {
       "tier": "2006to2019",
@@ -172,7 +172,7 @@
       "avgPrice": "$635,000",
       "avgPricePerSqFt": "$364",
       "avgLivingSqFt": "1,745",
-      "avgDom": 79
+      "avgDom": 80
     }
   ],
   "condoTiersScope": {
@@ -224,28 +224,28 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 68,
-      "soldCount": 214,
-      "soldMedianPricePerSqFt": "$287",
-      "soldMedianPrice": "$423,750",
+      "soldCount": 215,
+      "soldMedianPricePerSqFt": "$286",
+      "soldMedianPrice": "$425,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.5,
+    "monthsOfSupply": 5.4,
     "monthsOfSupplyCondo": 5.1,
     "monthsOfSupplySfhVilla": 5.8,
     "label": "balanced market",
     "activeCount": 113,
-    "sold365Count": 248,
-    "sold90Count": 64,
+    "sold365Count": 249,
+    "sold90Count": 65,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 175,
+      "soldCount": 176,
       "activeCount": 50,
-      "soldMedianPrice": "$534,900",
-      "soldMedianPricePerSqFt": "$327"
+      "soldMedianPrice": "$534,950",
+      "soldMedianPricePerSqFt": "$326"
     },
     "condo": {
       "soldCount": 162,
@@ -262,12 +262,12 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 113 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 113 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.4 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $534,900 ($327/sq ft), while condos, villas and townhouses sell around $335,000 ($255/sq ft)."
+      "a": "Single-family homes sell around $534,950 ($326/sq ft), while condos, villas and townhouses sell around $335,000 ($255/sq ft)."
     },
     {
       "facet": "range",
@@ -277,7 +277,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 50 days on market and closed at 88.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 48 days on market and closed at 88.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

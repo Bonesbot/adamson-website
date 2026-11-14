@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-13T11:52:41.819407+00:00",
+  "lastUpdated": "2026-11-14T11:52:38.692878+00:00",
   "counts": {
     "sold": 289,
-    "pending": 16,
+    "pending": 17,
     "active": 98,
-    "total": 305
+    "total": 306
   },
   "metrics": {
-    "avgPrice": "$2,123,485",
-    "avgPricePerSqFt": "$664",
+    "avgPrice": "$2,118,032",
+    "avgPricePerSqFt": "$663",
     "avgYearBuilt": 1982,
-    "avgLivingSqFt": "2,772",
+    "avgLivingSqFt": "2,767",
     "avgLotSqFt": null,
     "avgDom": 107
   },
@@ -24,7 +24,7 @@
   "active": {
     "count": 98,
     "medianPrice": "$1,972,500",
-    "medianPricePerSqFt": "$746",
+    "medianPricePerSqFt": "$763",
     "waterfrontCount": 22,
     "newConstructionCount": 26
   },
@@ -36,9 +36,9 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 6.0,
-    "sfhVilla": 5.4,
-    "blended": 5.4,
+    "condo": 5.1,
+    "sfhVilla": 5.5,
+    "blended": 5.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,8 +54,8 @@
     }
   },
   "priceBands": {
-    "under900k": 27,
-    "band900kTo1_5m": 14,
+    "under900k": 26,
+    "band900kTo1_5m": 15,
     "band1_5mTo3m": 21,
     "band3mPlus": 36
   },
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 7,
-      "avgPrice": "$480,700",
-      "avgPricePerSqFt": "$401",
-      "avgLivingSqFt": "1,172",
-      "avgDom": 112
+      "activeCount": 6,
+      "avgPrice": "$485,000",
+      "avgPricePerSqFt": "$408",
+      "avgLivingSqFt": "1,158",
+      "avgDom": 132
     },
     {
       "tier": "1990to2005",
@@ -196,7 +196,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 2,
+      "activeCount": 1,
       "soldCount": 7,
       "soldMedianPricePerSqFt": null,
       "soldMedianPrice": null,
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 74,
+      "activeCount": 75,
       "soldCount": 244,
       "soldMedianPricePerSqFt": "$575",
       "soldMedianPrice": "$1,487,500",
@@ -222,25 +222,25 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.4,
-    "monthsOfSupplyCondo": 6.0,
-    "monthsOfSupplySfhVilla": 5.4,
+    "monthsOfSupply": 5.5,
+    "monthsOfSupplyCondo": 5.1,
+    "monthsOfSupplySfhVilla": 5.5,
     "label": "balanced market",
     "activeCount": 98,
-    "sold365Count": 216,
+    "sold365Count": 214,
     "sold90Count": 44,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 268,
-      "activeCount": 91,
+      "activeCount": 92,
       "soldMedianPrice": "$1,607,500",
       "soldMedianPricePerSqFt": "$643"
     },
     "condo": {
       "soldCount": 21,
-      "activeCount": 7,
+      "activeCount": 6,
       "soldMedianPrice": "$315,000",
       "soldMedianPricePerSqFt": "$317"
     }
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 98 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 5.4 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 98 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
