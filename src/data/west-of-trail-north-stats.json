@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-14T11:52:39.448129+00:00",
+  "lastUpdated": "2026-11-15T12:06:58.692316+00:00",
   "counts": {
-    "sold": 110,
-    "pending": 8,
+    "sold": 111,
+    "pending": 7,
     "active": 43,
     "total": 118
   },
   "metrics": {
-    "avgPrice": "$1,098,436",
+    "avgPrice": "$1,098,268",
     "avgPricePerSqFt": "$506",
     "avgYearBuilt": 1972,
     "avgLivingSqFt": "1,945",
@@ -29,16 +29,16 @@
     "newConstructionCount": 12
   },
   "sold": {
-    "count": 18,
-    "medianPrice": "$737,500",
-    "medianDom": 78,
-    "saleToListRatio": "85.7%",
+    "count": 19,
+    "medianPrice": "$675,000",
+    "medianDom": 74,
+    "saleToListRatio": "86.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 7.1,
-    "sfhVilla": 5.3,
-    "blended": 5.6,
+    "sfhVilla": 5.2,
+    "blended": 5.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4709376",
+      "address": "844 PATTERSON DR",
+      "subdivision": "BAY HAVEN",
+      "soldPrice": "$630,000",
+      "soldDate": "2026-11-13",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,348",
+      "yearBuilt": 1949,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4698705",
       "address": "1709 N TAMIAMI TRL #505",
@@ -118,19 +131,6 @@
       "yearBuilt": 2004,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4701947",
-      "address": "4875 BRYWILL CIR",
-      "subdivision": "SAPPHIRE SHORES",
-      "soldPrice": "$1,300,000",
-      "soldDate": "2026-10-14",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,478",
-      "yearBuilt": 1960,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$562,450",
       "avgPricePerSqFt": "$467",
       "avgLivingSqFt": "1,211",
-      "avgDom": 28
+      "avgDom": 29
     },
     {
       "tier": "1990to2005",
@@ -172,7 +172,7 @@
       "avgPrice": "$564,875",
       "avgPricePerSqFt": "$592",
       "avgLivingSqFt": "956",
-      "avgDom": 147
+      "avgDom": 148
     }
   ],
   "condoTiersScope": {
@@ -215,28 +215,28 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 24,
-      "soldCount": 78,
-      "soldMedianPricePerSqFt": "$393",
-      "soldMedianPrice": "$582,500",
+      "soldCount": 79,
+      "soldMedianPricePerSqFt": "$394",
+      "soldMedianPrice": "$590,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.6,
+    "monthsOfSupply": 5.5,
     "monthsOfSupplyCondo": 7.1,
-    "monthsOfSupplySfhVilla": 5.3,
+    "monthsOfSupplySfhVilla": 5.2,
     "label": "balanced market",
     "activeCount": 43,
-    "sold365Count": 92,
-    "sold90Count": 18,
+    "sold365Count": 93,
+    "sold90Count": 19,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 89,
+      "soldCount": 90,
       "activeCount": 33,
-      "soldMedianPrice": "$675,000",
-      "soldMedianPricePerSqFt": "$412"
+      "soldMedianPrice": "$670,000",
+      "soldMedianPricePerSqFt": "$413"
     },
     "condo": {
       "soldCount": 21,
@@ -253,12 +253,12 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 43 active listings and roughly 8 closed sales a month (trailing 12 months), West Of Trail North has about 5.6 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 43 active listings and roughly 8 closed sales a month (trailing 12 months), West Of Trail North has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail North?",
-      "a": "Single-family homes sell around $675,000 ($412/sq ft), while condos, villas and townhouses sell around $475,000 ($509/sq ft)."
+      "a": "Single-family homes sell around $670,000 ($413/sq ft), while condos, villas and townhouses sell around $475,000 ($509/sq ft)."
     },
     {
       "facet": "range",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 78 days on market and closed at 85.7% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 74 days on market and closed at 86.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-14T11:52:40.256313+00:00",
+  "lastUpdated": "2026-11-15T12:06:59.457225+00:00",
   "counts": {
     "sold": 338,
-    "pending": 25,
+    "pending": 26,
     "active": 113,
-    "total": 363
+    "total": 364
   },
   "metrics": {
-    "avgPrice": "$637,541",
+    "avgPrice": "$637,534",
     "avgPricePerSqFt": "$326",
     "avgYearBuilt": 1980,
     "avgLivingSqFt": "1,762",
@@ -23,10 +23,10 @@
   },
   "active": {
     "count": 113,
-    "medianPrice": "$497,800",
-    "medianPricePerSqFt": "$325",
+    "medianPrice": "$495,000",
+    "medianPricePerSqFt": "$324",
     "waterfrontCount": 36,
-    "newConstructionCount": 3
+    "newConstructionCount": 2
   },
   "sold": {
     "count": 65,
@@ -37,8 +37,8 @@
   },
   "monthsOfSupply": {
     "condo": 5.1,
-    "sfhVilla": 5.8,
-    "blended": 5.4,
+    "sfhVilla": 5.9,
+    "blended": 5.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -142,7 +142,7 @@
       "avgPrice": "$373,387",
       "avgPricePerSqFt": "$288",
       "avgLivingSqFt": "1,287",
-      "avgDom": 94
+      "avgDom": 95
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,240,600",
       "avgPricePerSqFt": "$491",
       "avgLivingSqFt": "2,275",
-      "avgDom": 93
+      "avgDom": 94
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$940,975",
       "avgPricePerSqFt": "$448",
       "avgLivingSqFt": "1,942",
-      "avgDom": 158
+      "avgDom": 160
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 1,
-      "avgPrice": "$635,000",
-      "avgPricePerSqFt": "$364",
-      "avgLivingSqFt": "1,745",
-      "avgDom": 80
+      "activeCount": 0,
+      "avgPrice": null,
+      "avgPricePerSqFt": null,
+      "avgLivingSqFt": null,
+      "avgDom": null
     }
   ],
   "condoTiersScope": {
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 9,
+      "activeCount": 8,
       "soldCount": 36,
       "soldMedianPricePerSqFt": "$293",
       "soldMedianPrice": "$450,000",
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 68,
+      "activeCount": 69,
       "soldCount": 215,
       "soldMedianPricePerSqFt": "$286",
       "soldMedianPrice": "$425,000",
@@ -231,25 +231,25 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.4,
+    "monthsOfSupply": 5.5,
     "monthsOfSupplyCondo": 5.1,
-    "monthsOfSupplySfhVilla": 5.8,
+    "monthsOfSupplySfhVilla": 5.9,
     "label": "balanced market",
     "activeCount": 113,
-    "sold365Count": 249,
+    "sold365Count": 247,
     "sold90Count": 65,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 176,
-      "activeCount": 50,
+      "activeCount": 51,
       "soldMedianPrice": "$534,950",
       "soldMedianPricePerSqFt": "$326"
     },
     "condo": {
       "soldCount": 162,
-      "activeCount": 63,
+      "activeCount": 62,
       "soldMedianPrice": "$335,000",
       "soldMedianPricePerSqFt": "$255"
     }
@@ -262,7 +262,7 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 113 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.4 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 113 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -272,7 +272,7 @@
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $497,800."
+      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $495,000."
     },
     {
       "facet": "speed",
