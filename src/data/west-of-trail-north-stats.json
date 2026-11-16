@@ -2,11 +2,11 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-15T12:06:58.692316+00:00",
+  "lastUpdated": "2026-11-16T12:11:03.193531+00:00",
   "counts": {
     "sold": 111,
     "pending": 7,
-    "active": 43,
+    "active": 44,
     "total": 118
   },
   "metrics": {
@@ -22,11 +22,11 @@
     "maxPrice": "$22,900,000"
   },
   "active": {
-    "count": 43,
-    "medianPrice": "$800,000",
-    "medianPricePerSqFt": "$556",
-    "waterfrontCount": 15,
-    "newConstructionCount": 12
+    "count": 44,
+    "medianPrice": "$892,500",
+    "medianPricePerSqFt": "$559",
+    "waterfrontCount": 16,
+    "newConstructionCount": 13
   },
   "sold": {
     "count": 19,
@@ -37,8 +37,8 @@
   },
   "monthsOfSupply": {
     "condo": 7.1,
-    "sfhVilla": 5.2,
-    "blended": 5.5,
+    "sfhVilla": 5.4,
+    "blended": 5.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -57,12 +57,12 @@
     "under900k": 22,
     "band900kTo1_5m": 9,
     "band1_5mTo3m": 5,
-    "band3mPlus": 7
+    "band3mPlus": 8
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 43
+      "count": 44
     }
   ],
   "buildingClasses": [],
@@ -142,7 +142,7 @@
       "avgPrice": "$562,450",
       "avgPricePerSqFt": "$467",
       "avgLivingSqFt": "1,211",
-      "avgDom": 29
+      "avgDom": 30
     },
     {
       "tier": "1990to2005",
@@ -172,7 +172,7 @@
       "avgPrice": "$564,875",
       "avgPricePerSqFt": "$592",
       "avgLivingSqFt": "956",
-      "avgDom": 148
+      "avgDom": 149
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 15,
+      "activeCount": 16,
       "soldCount": 28,
       "soldMedianPricePerSqFt": "$553",
       "soldMedianPrice": "$650,000",
@@ -222,11 +222,11 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.5,
+    "monthsOfSupply": 5.7,
     "monthsOfSupplyCondo": 7.1,
-    "monthsOfSupplySfhVilla": 5.2,
+    "monthsOfSupplySfhVilla": 5.4,
     "label": "balanced market",
-    "activeCount": 43,
+    "activeCount": 44,
     "sold365Count": 93,
     "sold90Count": 19,
     "method": "active / (trailing-12mo closed / 12)"
@@ -234,7 +234,7 @@
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 90,
-      "activeCount": 33,
+      "activeCount": 34,
       "soldMedianPrice": "$670,000",
       "soldMedianPricePerSqFt": "$413"
     },
@@ -247,13 +247,13 @@
   },
   "boating": {
     "activeWithDock": 9,
-    "activeWaterfront": 15
+    "activeWaterfront": 16
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 43 active listings and roughly 8 closed sales a month (trailing 12 months), West Of Trail North has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 44 active listings and roughly 8 closed sales a month (trailing 12 months), West Of Trail North has about 5.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,7 +263,7 @@
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail North?",
-      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $800,000."
+      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $892,500."
     },
     {
       "facet": "speed",
@@ -273,7 +273,7 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail North homes have a dock?",
-      "a": "Of 15 active waterfront listings, 9 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 16 active waterfront listings, 9 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

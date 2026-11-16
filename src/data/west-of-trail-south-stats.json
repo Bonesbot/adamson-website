@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-15T12:06:59.457225+00:00",
+  "lastUpdated": "2026-11-16T12:11:04.066547+00:00",
   "counts": {
     "sold": 338,
-    "pending": 26,
-    "active": 113,
-    "total": 364
+    "pending": 27,
+    "active": 112,
+    "total": 365
   },
   "metrics": {
-    "avgPrice": "$637,534",
-    "avgPricePerSqFt": "$326",
+    "avgPrice": "$645,376",
+    "avgPricePerSqFt": "$328",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,762",
+    "avgLivingSqFt": "1,767",
     "avgLotSqFt": null,
     "avgDom": 77
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$7,199,000"
   },
   "active": {
-    "count": 113,
-    "medianPrice": "$495,000",
-    "medianPricePerSqFt": "$324",
-    "waterfrontCount": 36,
+    "count": 112,
+    "medianPrice": "$492,450",
+    "medianPricePerSqFt": "$323",
+    "waterfrontCount": 35,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 65,
-    "medianPrice": "$416,000",
+    "count": 64,
+    "medianPrice": "$421,725",
     "medianDom": 48,
-    "saleToListRatio": "88.2%",
+    "saleToListRatio": "88.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 5.1,
-    "sfhVilla": 5.9,
-    "blended": 5.5,
+    "sfhVilla": 5.8,
+    "blended": 5.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -57,12 +57,12 @@
     "under900k": 83,
     "band900kTo1_5m": 9,
     "band1_5mTo3m": 14,
-    "band3mPlus": 7
+    "band3mPlus": 6
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 113
+      "count": 112
     }
   ],
   "buildingClasses": [],
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 53,
-      "avgPrice": "$373,387",
+      "avgPrice": "$372,915",
       "avgPricePerSqFt": "$288",
       "avgLivingSqFt": "1,287",
-      "avgDom": 95
+      "avgDom": 96
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,240,600",
       "avgPricePerSqFt": "$491",
       "avgLivingSqFt": "2,275",
-      "avgDom": 94
+      "avgDom": 95
     },
     {
       "tier": "2006to2019",
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 32,
+      "activeCount": 31,
       "soldCount": 71,
       "soldMedianPricePerSqFt": "$370",
       "soldMedianPrice": "$495,000",
@@ -231,19 +231,19 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.5,
+    "monthsOfSupply": 5.4,
     "monthsOfSupplyCondo": 5.1,
-    "monthsOfSupplySfhVilla": 5.9,
+    "monthsOfSupplySfhVilla": 5.8,
     "label": "balanced market",
-    "activeCount": 113,
+    "activeCount": 112,
     "sold365Count": 247,
-    "sold90Count": 65,
+    "sold90Count": 64,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 176,
-      "activeCount": 51,
+      "activeCount": 50,
       "soldMedianPrice": "$534,950",
       "soldMedianPricePerSqFt": "$326"
     },
@@ -255,14 +255,14 @@
     }
   },
   "boating": {
-    "activeWithDock": 19,
-    "activeWaterfront": 36
+    "activeWithDock": 18,
+    "activeWaterfront": 35
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 113 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 112 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.4 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -272,17 +272,17 @@
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $495,000."
+      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $492,450."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 48 days on market and closed at 88.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 48 days on market and closed at 88.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 36 active waterfront listings, 19 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 35 active waterfront listings, 18 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
