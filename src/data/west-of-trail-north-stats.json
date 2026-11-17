@@ -2,42 +2,42 @@
   "areaSlug": "west-of-trail-north",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-16T12:11:03.193531+00:00",
+  "lastUpdated": "2026-11-17T12:02:00.504534+00:00",
   "counts": {
-    "sold": 111,
+    "sold": 112,
     "pending": 7,
-    "active": 44,
-    "total": 118
+    "active": 45,
+    "total": 119
   },
   "metrics": {
-    "avgPrice": "$1,098,268",
-    "avgPricePerSqFt": "$506",
+    "avgPrice": "$1,102,106",
+    "avgPricePerSqFt": "$508",
     "avgYearBuilt": 1972,
-    "avgLivingSqFt": "1,945",
+    "avgLivingSqFt": "1,944",
     "avgLotSqFt": null,
-    "avgDom": 112
+    "avgDom": 111
   },
   "range": {
     "minPrice": "$85,000",
     "maxPrice": "$22,900,000"
   },
   "active": {
-    "count": 44,
-    "medianPrice": "$892,500",
-    "medianPricePerSqFt": "$559",
+    "count": 45,
+    "medianPrice": "$800,000",
+    "medianPricePerSqFt": "$556",
     "waterfrontCount": 16,
     "newConstructionCount": 13
   },
   "sold": {
-    "count": 19,
-    "medianPrice": "$675,000",
-    "medianDom": 74,
-    "saleToListRatio": "86.3%",
+    "count": 20,
+    "medianPrice": "$737,500",
+    "medianDom": 73,
+    "saleToListRatio": "86.8%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 7.1,
-    "sfhVilla": 5.4,
+    "sfhVilla": 5.5,
     "blended": 5.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 22,
+    "under900k": 24,
     "band900kTo1_5m": 9,
-    "band1_5mTo3m": 5,
+    "band1_5mTo3m": 4,
     "band3mPlus": 8
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 44
+      "count": 45
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4666700",
+      "address": "942 VIRGINIA DR",
+      "subdivision": "BAY HAVEN",
+      "soldPrice": "$960,000",
+      "soldDate": "2026-11-16",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,239",
+      "yearBuilt": 1950,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4709376",
       "address": "844 PATTERSON DR",
@@ -118,19 +131,6 @@
       "yearBuilt": 1925,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4691894",
-      "address": "4104 SARASOTA AVE",
-      "subdivision": "INDIAN BEACH HIGHLANDS",
-      "soldPrice": "$830,000",
-      "soldDate": "2026-10-23",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,342",
-      "yearBuilt": 2004,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$562,450",
       "avgPricePerSqFt": "$467",
       "avgLivingSqFt": "1,211",
-      "avgDom": 30
+      "avgDom": 31
     },
     {
       "tier": "1990to2005",
@@ -172,7 +172,7 @@
       "avgPrice": "$564,875",
       "avgPricePerSqFt": "$592",
       "avgLivingSqFt": "956",
-      "avgDom": 149
+      "avgDom": 150
     }
   ],
   "condoTiersScope": {
@@ -214,9 +214,9 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 24,
-      "soldCount": 79,
-      "soldMedianPricePerSqFt": "$394",
+      "activeCount": 25,
+      "soldCount": 80,
+      "soldMedianPricePerSqFt": "$395",
       "soldMedianPrice": "$590,000",
       "lowSample": false
     }
@@ -224,19 +224,19 @@
   "marketBalance": {
     "monthsOfSupply": 5.7,
     "monthsOfSupplyCondo": 7.1,
-    "monthsOfSupplySfhVilla": 5.4,
+    "monthsOfSupplySfhVilla": 5.5,
     "label": "balanced market",
-    "activeCount": 44,
-    "sold365Count": 93,
-    "sold90Count": 19,
+    "activeCount": 45,
+    "sold365Count": 94,
+    "sold90Count": 20,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 90,
-      "activeCount": 34,
-      "soldMedianPrice": "$670,000",
-      "soldMedianPricePerSqFt": "$413"
+      "soldCount": 91,
+      "activeCount": 35,
+      "soldMedianPrice": "$675,000",
+      "soldMedianPricePerSqFt": "$414"
     },
     "condo": {
       "soldCount": 21,
@@ -253,22 +253,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail North a buyer's or seller's market right now?",
-      "a": "With 44 active listings and roughly 8 closed sales a month (trailing 12 months), West Of Trail North has about 5.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 45 active listings and roughly 8 closed sales a month (trailing 12 months), West Of Trail North has about 5.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail North?",
-      "a": "Single-family homes sell around $670,000 ($413/sq ft), while condos, villas and townhouses sell around $475,000 ($509/sq ft)."
+      "a": "Single-family homes sell around $675,000 ($414/sq ft), while condos, villas and townhouses sell around $475,000 ($509/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail North?",
-      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $892,500."
+      "a": "Active listings run from $85,000 to $22,900,000, with a median asking price of $800,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail North?",
-      "a": "Recently sold homes took a median 74 days on market and closed at 86.3% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 73 days on market and closed at 86.8% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

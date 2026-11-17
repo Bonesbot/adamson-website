@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-16T12:11:04.066547+00:00",
+  "lastUpdated": "2026-11-17T12:02:01.279351+00:00",
   "counts": {
-    "sold": 338,
-    "pending": 27,
-    "active": 112,
+    "sold": 339,
+    "pending": 26,
+    "active": 114,
     "total": 365
   },
   "metrics": {
-    "avgPrice": "$645,376",
+    "avgPrice": "$645,297",
     "avgPricePerSqFt": "$328",
     "avgYearBuilt": 1980,
     "avgLivingSqFt": "1,767",
@@ -22,23 +22,23 @@
     "maxPrice": "$7,199,000"
   },
   "active": {
-    "count": 112,
-    "medianPrice": "$492,450",
+    "count": 114,
+    "medianPrice": "$486,950",
     "medianPricePerSqFt": "$323",
     "waterfrontCount": 35,
     "newConstructionCount": 2
   },
   "sold": {
     "count": 64,
-    "medianPrice": "$421,725",
-    "medianDom": 48,
+    "medianPrice": "$431,669",
+    "medianDom": 50,
     "saleToListRatio": "88.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.1,
+    "condo": 5.2,
     "sfhVilla": 5.8,
-    "blended": 5.4,
+    "blended": 5.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 83,
-    "band900kTo1_5m": 9,
+    "under900k": 86,
+    "band900kTo1_5m": 8,
     "band1_5mTo3m": 14,
     "band3mPlus": 6
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 112
+      "count": 114
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4695955",
+      "address": "5420 EAGLES POINT CIR #406",
+      "subdivision": "EAGLES POINT AT THE LANDINGS",
+      "soldPrice": "$740,000",
+      "soldDate": "2026-11-16",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,165",
+      "yearBuilt": 1993,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "TB8556877",
       "address": "2851 HARDEE DR",
@@ -118,19 +131,6 @@
       "yearBuilt": 1971,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "TB8511188",
-      "address": "1624 STICKNEY POINT RD #101",
-      "subdivision": "CASTEL DEL MARE",
-      "soldPrice": "$365,000",
-      "soldDate": "2026-11-05",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,021",
-      "yearBuilt": 1975,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 53,
-      "avgPrice": "$372,915",
-      "avgPricePerSqFt": "$288",
-      "avgLivingSqFt": "1,287",
-      "avgDom": 96
+      "activeCount": 55,
+      "avgPrice": "$373,696",
+      "avgPricePerSqFt": "$291",
+      "avgLivingSqFt": "1,280",
+      "avgDom": 94
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,240,600",
       "avgPricePerSqFt": "$491",
       "avgLivingSqFt": "2,275",
-      "avgDom": 95
+      "avgDom": 96
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$940,975",
       "avgPricePerSqFt": "$448",
       "avgLivingSqFt": "1,942",
-      "avgDom": 160
+      "avgDom": 162
     },
     {
       "tier": "2020plus",
@@ -206,8 +206,8 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 8,
-      "soldCount": 36,
-      "soldMedianPricePerSqFt": "$293",
+      "soldCount": 37,
+      "soldMedianPricePerSqFt": "$299",
       "soldMedianPrice": "$450,000",
       "lowSample": false
     },
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 69,
+      "activeCount": 71,
       "soldCount": 215,
       "soldMedianPricePerSqFt": "$286",
       "soldMedianPrice": "$425,000",
@@ -231,12 +231,12 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.4,
-    "monthsOfSupplyCondo": 5.1,
+    "monthsOfSupply": 5.5,
+    "monthsOfSupplyCondo": 5.2,
     "monthsOfSupplySfhVilla": 5.8,
     "label": "balanced market",
-    "activeCount": 112,
-    "sold365Count": 247,
+    "activeCount": 114,
+    "sold365Count": 248,
     "sold90Count": 64,
     "method": "active / (trailing-12mo closed / 12)"
   },
@@ -248,10 +248,10 @@
       "soldMedianPricePerSqFt": "$326"
     },
     "condo": {
-      "soldCount": 162,
-      "activeCount": 62,
+      "soldCount": 163,
+      "activeCount": 64,
       "soldMedianPrice": "$335,000",
-      "soldMedianPricePerSqFt": "$255"
+      "soldMedianPricePerSqFt": "$256"
     }
   },
   "boating": {
@@ -262,22 +262,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 112 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.4 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 114 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $534,950 ($326/sq ft), while condos, villas and townhouses sell around $335,000 ($255/sq ft)."
+      "a": "Single-family homes sell around $534,950 ($326/sq ft), while condos, villas and townhouses sell around $335,000 ($256/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $492,450."
+      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $486,950."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 48 days on market and closed at 88.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 50 days on market and closed at 88.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
