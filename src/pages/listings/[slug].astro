@@ -379,6 +379,7 @@ if (faqs.length) {
         </div>
         <p class="text-white/40 text-xs mt-5">{coAgent.brokerage || 'Coldwell Banker Realty'}</p>
         <a href="#inquire" class="mt-6 font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-3.5 rounded-full bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] transition-colors">{cta.agent_button || 'Schedule Your Tour Today'}</a>
+        {l.handout && <a href={l.handout} target="_blank" rel="noopener" class="mt-4 font-accent text-[11px] uppercase tracking-[0.15em] font-semibold px-6 py-3 rounded-full border border-white/30 text-white hover:border-[var(--color-gold)] hover:text-[var(--color-gold)] transition-colors">Download the Property Handout (PDF)</a>}
       </div>
       ) : (
       <div class="mt-10 flex flex-col items-center gap-2">
@@ -387,6 +388,7 @@ if (faqs.length) {
         <a href="tel:19417139234" class="text-[var(--color-gold)] hover:text-[var(--color-gold-light)]">(941) 713-9234</a>
         <a href="mailto:Ryan@Adamson-Group.com" class="text-white/60 hover:text-[var(--color-gold)] text-sm">Ryan@Adamson-Group.com</a>
         <a href="#inquire" class="mt-6 font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-3.5 rounded-full bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] transition-colors">Schedule Your Tour Today</a>
+        {l.handout && <a href={l.handout} target="_blank" rel="noopener" class="mt-4 font-accent text-[11px] uppercase tracking-[0.15em] font-semibold px-6 py-3 rounded-full border border-white/30 text-white hover:border-[var(--color-gold)] hover:text-[var(--color-gold)] transition-colors">Download the Property Handout (PDF)</a>}
       </div>
       )}
     </div>

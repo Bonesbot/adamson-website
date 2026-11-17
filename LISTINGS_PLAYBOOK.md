@@ -68,6 +68,7 @@ Listings that omit these render exactly as before.
 | `cta` | Copy overrides: hero_primary, hero_pick, agent_button, form_eyebrow, form_title, form_intro, interests[] (tap chips, sent as "Interested in: ..." in the lead message), form_button, success_title, success_text |
 | `floor_plans[]` | Multiple floor-plan images (first/second floor) instead of `floor_plan` |
 | `photo_groups[]` | Photo tour split into titled groups {title, photos[]}; one shared lightbox |
+| `handout` | PDF handout link under the agent cards; file lives in `public/handouts/<slug>.pdf`, print-shop version and build kit in `design_assets/handouts/<slug>/` |
 
 `data-pick` on a CTA link pre-ticks the matching interest chip, so "Ask About a Year-End Closing" arrives tagged.
 
