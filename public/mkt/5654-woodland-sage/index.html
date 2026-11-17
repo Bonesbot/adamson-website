@@ -329,7 +329,7 @@ b.bayst{color:var(--fail);font-weight:600}
     <div class="lesson">
       <div><b>The ceiling.</b> No Promenade DR Horton two-story without a pool has sold for more than $623,638 in the last year. At $649,000, 5654 asks $25,362 more than that.</div>
       <div><b>Above our price.</b> Seven listings have asked $649K or more. None sold: four expired or were canceled, and three are still on the market after 32 to 126 days.</div>
-      <div><b>The lot is the difference.</b> 5655, the same Hayden plan across the cul-de-sac, backs to the Bay St wall and sold for $515,000 after 158 days. 5654 sits on the north side: a 60-foot driveway, a 140-foot-deep yard and a peekaboo lake view, with no Bay St behind it. The one lakefront two-story, 5748, sold for $613,000.</div>
+      <div><b>The lot is the difference.</b> 5655, the same Hayden plan across the cul-de-sac, backs to the Bay St wall and sold for $515,000 after 158 days. 5654 sits on the north side: a 60-foot driveway, a 140-foot-deep lot and a peekaboo lake view, with no Bay St behind it. The one lakefront two-story, 5748, sold for $613,000.</div>
     </div>
     <p class="caption">Lot locations: Backs to Bay St comes from DR Horton's 2020 site plan (5655 is Lot 155, on the Bay St wall); the others are as each listing reports them in the MLS. Builder check: DR Horton's 2020 site plan for Promenade covers 255 of the community's 352 homesites, in its Express and Premium series, and shows 5654's lot, #152, as a Hayden; the courts it leaves out, Northern Juniper and Native Henna, hold M/I's three-car homes. Source: Stellar MLS closed, expired, canceled and active listings for Promenade Estates, November 12, 2025 to November 11, 2026.</p>
   </div>
@@ -471,7 +471,7 @@ b.bayst{color:var(--fail);font-weight:600}
     if (i === -1){
       h = '<div class="pt"><b>5654 Woodland Sage</b><span class="badge">our list price</span></div>' +
         '<div class="pf">' + fact('List price', M(OUR)) + fact('Per sq ft', '$' + Math.round(OUR/OUR_SF)) + fact('Heated sf', OUR_SF.toLocaleString()) + fact('Beds', '5') + fact('Built', '2020, Hayden plan') + fact('Lot', '#152, cul-de-sac edge') + '</div>' +
-        '<p>A 60-foot driveway, a 140-foot-deep yard and a peekaboo lake view, with no Bay St behind it.</p>';
+        '<p>A 60-foot driveway, a 140-foot-deep lot and a peekaboo lake view, with no Bay St behind it.</p>';
     } else {
       var r = L[i], b = {Sold:'sold', Expired:'fail', Canceled:'fail', Active:'snap'}[r.st];
       var when = r.st === 'Active' ? 'Listed ' + fd(r.s) : (r.st === 'Sold' ? 'Sold ' : r.st + ' ') + fd(r.e);
