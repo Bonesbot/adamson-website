@@ -2,16 +2,16 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-17T12:01:59.665098+00:00",
+  "lastUpdated": "2026-11-18T12:02:51.761088+00:00",
   "counts": {
-    "sold": 289,
-    "pending": 19,
-    "active": 96,
+    "sold": 291,
+    "pending": 17,
+    "active": 98,
     "total": 308
   },
   "metrics": {
-    "avgPrice": "$2,109,990",
-    "avgPricePerSqFt": "$663",
+    "avgPrice": "$2,109,771",
+    "avgPricePerSqFt": "$662",
     "avgYearBuilt": 1982,
     "avgLivingSqFt": "2,758",
     "avgLotSqFt": null,
@@ -22,22 +22,22 @@
     "maxPrice": "$28,000,000"
   },
   "active": {
-    "count": 96,
-    "medianPrice": "$2,022,500",
-    "medianPricePerSqFt": "$763",
+    "count": 98,
+    "medianPrice": "$2,072,500",
+    "medianPricePerSqFt": "$766",
     "waterfrontCount": 23,
-    "newConstructionCount": 26
+    "newConstructionCount": 27
   },
   "sold": {
-    "count": 43,
-    "medianPrice": "$1,750,000",
-    "medianDom": 59,
-    "saleToListRatio": "88.0%",
+    "count": 45,
+    "medianPrice": "$1,747,200",
+    "medianDom": 47,
+    "saleToListRatio": "88.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 5.1,
-    "sfhVilla": 5.4,
+    "sfhVilla": 5.5,
     "blended": 5.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -57,16 +57,42 @@
     "under900k": 24,
     "band900kTo1_5m": 14,
     "band1_5mTo3m": 21,
-    "band3mPlus": 37
+    "band3mPlus": 39
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 96
+      "count": 98
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4707110",
+      "address": "3012 HYDE PARK ST",
+      "subdivision": "SOUTH GATE UNIT 27",
+      "soldPrice": "$600,000",
+      "soldDate": "2026-11-17",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,953",
+      "yearBuilt": 1972,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "TB8545219",
+      "address": "2720 GOLDENROD ST",
+      "subdivision": "SOUTH GATE",
+      "soldPrice": "$482,500",
+      "soldDate": "2026-11-16",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,547",
+      "yearBuilt": 1957,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4706028",
       "address": "1550 EASTBROOK DR",
@@ -105,32 +131,6 @@
       "yearBuilt": 1956,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4698526",
-      "address": "3921 MARAVIC PL",
-      "subdivision": "MOLLER SUB",
-      "soldPrice": "$2,025,000",
-      "soldDate": "2026-10-29",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,666",
-      "yearBuilt": 2005,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4691436",
-      "address": "2436 GOLDENROD ST",
-      "subdivision": "SOUTH GATE",
-      "soldPrice": "$735,000",
-      "soldDate": "2026-10-27",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,862",
-      "yearBuilt": 1957,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$485,000",
       "avgPricePerSqFt": "$408",
       "avgLivingSqFt": "1,158",
-      "avgDom": 134
+      "avgDom": 136
     },
     {
       "tier": "1990to2005",
@@ -197,10 +197,10 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 1,
-      "soldCount": 7,
-      "soldMedianPricePerSqFt": null,
-      "soldMedianPrice": null,
-      "lowSample": true
+      "soldCount": 8,
+      "soldMedianPricePerSqFt": "$619",
+      "soldMedianPrice": "$1,322,500",
+      "lowSample": false
     },
     {
       "segment": "other_wf",
@@ -214,29 +214,29 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 72,
-      "soldCount": 244,
-      "soldMedianPricePerSqFt": "$575",
-      "soldMedianPrice": "$1,487,500",
+      "activeCount": 74,
+      "soldCount": 245,
+      "soldMedianPricePerSqFt": "$574",
+      "soldMedianPrice": "$1,485,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 5.4,
     "monthsOfSupplyCondo": 5.1,
-    "monthsOfSupplySfhVilla": 5.4,
+    "monthsOfSupplySfhVilla": 5.5,
     "label": "balanced market",
-    "activeCount": 96,
-    "sold365Count": 214,
-    "sold90Count": 43,
+    "activeCount": 98,
+    "sold365Count": 216,
+    "sold90Count": 45,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 268,
-      "activeCount": 90,
-      "soldMedianPrice": "$1,607,500",
-      "soldMedianPricePerSqFt": "$643"
+      "soldCount": 270,
+      "activeCount": 92,
+      "soldMedianPrice": "$1,600,000",
+      "soldMedianPricePerSqFt": "$642"
     },
     "condo": {
       "soldCount": 21,
@@ -253,22 +253,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 96 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 5.4 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 98 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 5.4 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,607,500 ($643/sq ft), while condos, villas and townhouses sell around $315,000 ($317/sq ft)."
+      "a": "Single-family homes sell around $1,600,000 ($642/sq ft), while condos, villas and townhouses sell around $315,000 ($317/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $1,000 to $28,000,000, with a median asking price of $2,022,500."
+      "a": "Active listings run from $1,000 to $28,000,000, with a median asking price of $2,072,500."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 59 days on market and closed at 88.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 47 days on market and closed at 88.1% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

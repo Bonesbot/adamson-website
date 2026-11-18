@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-17T12:02:01.279351+00:00",
+  "lastUpdated": "2026-11-18T12:02:53.501416+00:00",
   "counts": {
-    "sold": 339,
-    "pending": 26,
-    "active": 114,
-    "total": 365
+    "sold": 340,
+    "pending": 28,
+    "active": 111,
+    "total": 368
   },
   "metrics": {
-    "avgPrice": "$645,297",
+    "avgPrice": "$643,264",
     "avgPricePerSqFt": "$328",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,767",
+    "avgLivingSqFt": "1,765",
     "avgLotSqFt": null,
     "avgDom": 77
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$7,199,000"
   },
   "active": {
-    "count": 114,
-    "medianPrice": "$486,950",
-    "medianPricePerSqFt": "$323",
+    "count": 111,
+    "medianPrice": "$489,900",
+    "medianPricePerSqFt": "$325",
     "waterfrontCount": 35,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 64,
-    "medianPrice": "$431,669",
-    "medianDom": 50,
+    "count": 65,
+    "medianPrice": "$435,888",
+    "medianDom": 48,
     "saleToListRatio": "88.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.2,
-    "sfhVilla": 5.8,
-    "blended": 5.5,
+    "condo": 5.1,
+    "sfhVilla": 5.5,
+    "blended": 5.3,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 86,
-    "band900kTo1_5m": 8,
-    "band1_5mTo3m": 14,
+    "under900k": 83,
+    "band900kTo1_5m": 9,
+    "band1_5mTo3m": 13,
     "band3mPlus": 6
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 114
+      "count": 111
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4707877",
+      "address": "4887 PEREGRINE POINT CIR E",
+      "subdivision": "LANDINGS UNIT 1",
+      "soldPrice": "$1,085,000",
+      "soldDate": "2026-11-17",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "livingSqFt": "2,417",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4695955",
       "address": "5420 EAGLES POINT CIR #406",
@@ -118,19 +131,6 @@
       "yearBuilt": 1957,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4662030",
-      "address": "7460 MARIANA DR",
-      "subdivision": "GULF GATE WOODS",
-      "soldPrice": "$485,000",
-      "soldDate": "2026-11-05",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,418",
-      "yearBuilt": 1971,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 55,
-      "avgPrice": "$373,696",
-      "avgPricePerSqFt": "$291",
-      "avgLivingSqFt": "1,280",
-      "avgDom": 94
+      "activeCount": 54,
+      "avgPrice": "$374,952",
+      "avgPricePerSqFt": "$292",
+      "avgLivingSqFt": "1,279",
+      "avgDom": 93
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,240,600",
       "avgPricePerSqFt": "$491",
       "avgLivingSqFt": "2,275",
-      "avgDom": 96
+      "avgDom": 97
     },
     {
       "tier": "2006to2019",
@@ -223,33 +223,33 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 71,
-      "soldCount": 215,
-      "soldMedianPricePerSqFt": "$286",
+      "activeCount": 68,
+      "soldCount": 216,
+      "soldMedianPricePerSqFt": "$287",
       "soldMedianPrice": "$425,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.5,
-    "monthsOfSupplyCondo": 5.2,
-    "monthsOfSupplySfhVilla": 5.8,
+    "monthsOfSupply": 5.3,
+    "monthsOfSupplyCondo": 5.1,
+    "monthsOfSupplySfhVilla": 5.5,
     "label": "balanced market",
-    "activeCount": 114,
-    "sold365Count": 248,
-    "sold90Count": 64,
+    "activeCount": 111,
+    "sold365Count": 249,
+    "sold90Count": 65,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 176,
-      "activeCount": 50,
-      "soldMedianPrice": "$534,950",
-      "soldMedianPricePerSqFt": "$326"
+      "soldCount": 177,
+      "activeCount": 48,
+      "soldMedianPrice": "$535,000",
+      "soldMedianPricePerSqFt": "$327"
     },
     "condo": {
       "soldCount": 163,
-      "activeCount": 64,
+      "activeCount": 63,
       "soldMedianPrice": "$335,000",
       "soldMedianPricePerSqFt": "$256"
     }
@@ -262,22 +262,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 114 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 111 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.3 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $534,950 ($326/sq ft), while condos, villas and townhouses sell around $335,000 ($256/sq ft)."
+      "a": "Single-family homes sell around $535,000 ($327/sq ft), while condos, villas and townhouses sell around $335,000 ($256/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $486,950."
+      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $489,900."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 50 days on market and closed at 88.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 48 days on market and closed at 88.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

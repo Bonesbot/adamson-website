@@ -2,11 +2,11 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-17T12:01:58.853070+00:00",
+  "lastUpdated": "2026-11-18T12:02:50.911606+00:00",
   "counts": {
     "sold": 316,
     "pending": 74,
-    "active": 207,
+    "active": 209,
     "total": 390
   },
   "metrics": {
@@ -22,9 +22,9 @@
     "maxPrice": "$14,450,000"
   },
   "active": {
-    "count": 207,
-    "medianPrice": "$1,950,000",
-    "medianPricePerSqFt": "$918",
+    "count": 209,
+    "medianPrice": "$1,929,000",
+    "medianPricePerSqFt": "$907",
     "waterfrontCount": 55,
     "newConstructionCount": 84
   },
@@ -36,9 +36,9 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 10.1,
+    "condo": 10.2,
     "sfhVilla": 14.2,
-    "blended": 10.3,
+    "blended": 10.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,15 +54,15 @@
     }
   },
   "priceBands": {
-    "under900k": 49,
-    "band900kTo1_5m": 38,
+    "under900k": 50,
+    "band900kTo1_5m": 39,
     "band1_5mTo3m": 54,
     "band3mPlus": 66
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 207
+      "count": 209
     }
   ],
   "buildingClasses": [],
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 51,
-      "avgPrice": "$1,188,931",
-      "avgPricePerSqFt": "$687",
-      "avgLivingSqFt": "1,620",
-      "avgDom": 134
+      "activeCount": 52,
+      "avgPrice": "$1,171,356",
+      "avgPricePerSqFt": "$681",
+      "avgLivingSqFt": "1,604",
+      "avgDom": 132
     },
     {
       "tier": "1990to2005",
@@ -152,17 +152,17 @@
       "avgPrice": "$1,973,903",
       "avgPricePerSqFt": "$748",
       "avgLivingSqFt": "2,320",
-      "avgDom": 76
+      "avgDom": 77
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 38,
-      "avgPrice": "$1,690,655",
-      "avgPricePerSqFt": "$780",
-      "avgLivingSqFt": "2,010",
-      "avgDom": 96
+      "activeCount": 39,
+      "avgPrice": "$1,682,972",
+      "avgPricePerSqFt": "$775",
+      "avgLivingSqFt": "2,017",
+      "avgDom": 95
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,277,159",
       "avgPricePerSqFt": "$1,381",
       "avgLivingSqFt": "2,954",
-      "avgDom": 204
+      "avgDom": 205
     }
   ],
   "condoTiersScope": {
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 62,
+      "activeCount": 64,
       "soldCount": 87,
       "soldMedianPricePerSqFt": "$549",
       "soldMedianPrice": "$749,000",
@@ -222,11 +222,11 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 10.3,
-    "monthsOfSupplyCondo": 10.1,
+    "monthsOfSupply": 10.4,
+    "monthsOfSupplyCondo": 10.2,
     "monthsOfSupplySfhVilla": 14.2,
     "label": "buyer's market",
-    "activeCount": 207,
+    "activeCount": 209,
     "sold365Count": 240,
     "sold90Count": 43,
     "method": "active / (trailing-12mo closed / 12)"
@@ -240,7 +240,7 @@
     },
     "condo": {
       "soldCount": 303,
-      "activeCount": 200,
+      "activeCount": 202,
       "soldMedianPrice": "$1,200,000",
       "soldMedianPricePerSqFt": "$717"
     }
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Downtown Sarasota a buyer's or seller's market right now?",
-      "a": "With 207 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 10.3 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 209 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 10.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,7 +263,7 @@
     {
       "facet": "range",
       "q": "What's the price range on Downtown Sarasota?",
-      "a": "Active listings run from $260,000 to $14,450,000, with a median asking price of $1,950,000."
+      "a": "Active listings run from $260,000 to $14,450,000, with a median asking price of $1,929,000."
     },
     {
       "facet": "speed",
