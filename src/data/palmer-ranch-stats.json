@@ -2,15 +2,15 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-18T12:02:55.298691+00:00",
+  "lastUpdated": "2026-11-19T12:17:44.883368+00:00",
   "counts": {
-    "sold": 994,
-    "pending": 60,
-    "active": 226,
-    "total": 1054
+    "sold": 997,
+    "pending": 59,
+    "active": 229,
+    "total": 1056
   },
   "metrics": {
-    "avgPrice": "$559,308",
+    "avgPrice": "$559,266",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
     "avgLivingSqFt": "2,041",
@@ -22,23 +22,23 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 226,
-    "medianPrice": "$400,000",
+    "count": 229,
+    "medianPrice": "$410,000",
     "medianPricePerSqFt": "$244",
-    "waterfrontCount": 39,
-    "newConstructionCount": 36
+    "waterfrontCount": 40,
+    "newConstructionCount": 37
   },
   "sold": {
-    "count": 151,
-    "medianPrice": "$475,000",
-    "medianDom": 57,
+    "count": 152,
+    "medianPrice": "$472,000",
+    "medianDom": 58,
     "saleToListRatio": "92.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 6.1,
-    "sfhVilla": 3.0,
-    "blended": 3.8,
+    "condo": 6.3,
+    "sfhVilla": 3.1,
+    "blended": 3.9,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 212,
+    "under900k": 215,
     "band900kTo1_5m": 13,
     "band1_5mTo3m": 1,
     "band3mPlus": 0
@@ -62,11 +62,37 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 226
+      "count": 229
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4700743",
+      "address": "7596 CALLE FACIL",
+      "subdivision": "PRESTANCIA",
+      "soldPrice": "$835,000",
+      "soldDate": "2026-11-18",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,173",
+      "yearBuilt": 1989,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4700233",
+      "address": "4708 SWEETMEADOW CIR",
+      "subdivision": "TURTLE ROCK",
+      "soldPrice": "$710,000",
+      "soldDate": "2026-11-18",
+      "bedrooms": 5,
+      "bathrooms": 5.0,
+      "livingSqFt": "3,785",
+      "yearBuilt": 2000,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4699893",
       "address": "4041 CROCKERS LAKE BLVD #24",
@@ -77,6 +103,19 @@
       "bathrooms": 1.0,
       "livingSqFt": "572",
       "yearBuilt": 1995,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4693723",
+      "address": "3825 WILSHIRE CIR #1",
+      "subdivision": "LAKESHORE VILLAGE SOUTH",
+      "soldPrice": "$320,000",
+      "soldDate": "2026-11-16",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,223",
+      "yearBuilt": 1985,
       "propertyType": "Residential",
       "isWaterfront": false
     },
@@ -92,45 +131,6 @@
       "yearBuilt": 2016,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4706322",
-      "address": "4933 THAMES LN",
-      "subdivision": "WELLINGTON CHASE",
-      "soldPrice": "$380,000",
-      "soldDate": "2026-11-13",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,413",
-      "yearBuilt": 1996,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "N6145222",
-      "address": "12300 MARSH POINTE RD",
-      "subdivision": "HAMMOCK PRESERVE PH 1A-4 1B &",
-      "soldPrice": "$1,010,000",
-      "soldDate": "2026-11-12",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,834",
-      "yearBuilt": 2018,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4688140",
-      "address": "3862 WILSHIRE CIR W #107",
-      "subdivision": "LAKESHORE VILLAGE",
-      "soldPrice": "$337,000",
-      "soldDate": "2026-11-12",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,606",
-      "yearBuilt": 1985,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,21 +138,21 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 35,
-      "avgPrice": "$319,303",
-      "avgPricePerSqFt": "$194",
-      "avgLivingSqFt": "1,641",
-      "avgDom": 125
+      "activeCount": 36,
+      "avgPrice": "$327,656",
+      "avgPricePerSqFt": "$197",
+      "avgLivingSqFt": "1,660",
+      "avgDom": 113
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 79,
-      "avgPrice": "$281,356",
+      "activeCount": 80,
+      "avgPrice": "$282,964",
       "avgPricePerSqFt": "$222",
-      "avgLivingSqFt": "1,263",
-      "avgDom": 122
+      "avgLivingSqFt": "1,268",
+      "avgDom": 121
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$396,225",
       "avgPricePerSqFt": "$234",
       "avgLivingSqFt": "1,697",
-      "avgDom": 64
+      "avgDom": 65
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 12,
-      "avgPrice": "$352,312",
-      "avgPricePerSqFt": "$220",
-      "avgLivingSqFt": "1,601",
-      "avgDom": 79
+      "activeCount": 13,
+      "avgPrice": "$361,750",
+      "avgPricePerSqFt": "$227",
+      "avgLivingSqFt": "1,595",
+      "avgDom": 74
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 45,
+      "activeCount": 47,
       "soldCount": 225,
       "soldMedianPricePerSqFt": "$257",
       "soldMedianPrice": "$475,000",
@@ -205,7 +205,7 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 39,
+      "activeCount": 40,
       "soldCount": 215,
       "soldMedianPricePerSqFt": "$276",
       "soldMedianPrice": "$605,000",
@@ -215,45 +215,45 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 142,
-      "soldCount": 552,
+      "soldCount": 555,
       "soldMedianPricePerSqFt": "$242",
-      "soldMedianPrice": "$432,750",
+      "soldMedianPrice": "$435,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 3.8,
-    "monthsOfSupplyCondo": 6.1,
-    "monthsOfSupplySfhVilla": 3.0,
+    "monthsOfSupply": 3.9,
+    "monthsOfSupplyCondo": 6.3,
+    "monthsOfSupplySfhVilla": 3.1,
     "label": "seller's market",
-    "activeCount": 226,
+    "activeCount": 229,
     "sold365Count": 712,
-    "sold90Count": 151,
+    "sold90Count": 152,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 564,
+      "soldCount": 566,
       "activeCount": 92,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$288"
     },
     "condo": {
-      "soldCount": 430,
-      "activeCount": 134,
+      "soldCount": 431,
+      "activeCount": 137,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
   },
   "boating": {
     "activeWithDock": 1,
-    "activeWaterfront": 39
+    "activeWaterfront": 40
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 226 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.8 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 229 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,17 +263,17 @@
     {
       "facet": "range",
       "q": "What's the price range on Palmer Ranch?",
-      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $400,000."
+      "a": "Active listings run from $110,000 to $3,199,000, with a median asking price of $410,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 57 days on market and closed at 92.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 58 days on market and closed at 92.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 39 active waterfront listings, 1 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 40 active waterfront listings, 1 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

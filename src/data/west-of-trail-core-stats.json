@@ -2,20 +2,20 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-18T12:02:51.761088+00:00",
+  "lastUpdated": "2026-11-19T12:17:40.975827+00:00",
   "counts": {
-    "sold": 291,
+    "sold": 292,
     "pending": 17,
     "active": 98,
-    "total": 308
+    "total": 309
   },
   "metrics": {
-    "avgPrice": "$2,109,771",
+    "avgPrice": "$2,106,176",
     "avgPricePerSqFt": "$662",
     "avgYearBuilt": 1982,
-    "avgLivingSqFt": "2,758",
+    "avgLivingSqFt": "2,756",
     "avgLotSqFt": null,
-    "avgDom": 106
+    "avgDom": 107
   },
   "range": {
     "minPrice": "$1,000",
@@ -26,13 +26,13 @@
     "medianPrice": "$2,072,500",
     "medianPricePerSqFt": "$766",
     "waterfrontCount": 23,
-    "newConstructionCount": 27
+    "newConstructionCount": 26
   },
   "sold": {
-    "count": 45,
-    "medianPrice": "$1,747,200",
-    "medianDom": 47,
-    "saleToListRatio": "88.1%",
+    "count": 46,
+    "medianPrice": "$1,723,600",
+    "medianDom": 53,
+    "saleToListRatio": "88.0%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -67,6 +67,19 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4688029",
+      "address": "1714 WALDEMERE ST",
+      "subdivision": "HUDSON BAYOU",
+      "soldPrice": "$1,450,000",
+      "soldDate": "2026-11-17",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,003",
+      "yearBuilt": 2000,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4707110",
       "address": "3012 HYDE PARK ST",
@@ -116,19 +129,6 @@
       "bathrooms": 3.0,
       "livingSqFt": "1,824",
       "yearBuilt": 1951,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4703724",
-      "address": "2253 GOLDENROD ST",
-      "subdivision": "SOUTH GATE",
-      "soldPrice": "$465,000",
-      "soldDate": "2026-10-30",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,278",
-      "yearBuilt": 1956,
       "propertyType": "Residential",
       "isWaterfront": false
     }
@@ -215,9 +215,9 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 74,
-      "soldCount": 245,
-      "soldMedianPricePerSqFt": "$574",
-      "soldMedianPrice": "$1,485,000",
+      "soldCount": 246,
+      "soldMedianPricePerSqFt": "$575",
+      "soldMedianPrice": "$1,480,000",
       "lowSample": false
     }
   ],
@@ -228,12 +228,12 @@
     "label": "balanced market",
     "activeCount": 98,
     "sold365Count": 216,
-    "sold90Count": 45,
+    "sold90Count": 46,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 270,
+      "soldCount": 271,
       "activeCount": 92,
       "soldMedianPrice": "$1,600,000",
       "soldMedianPricePerSqFt": "$642"
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 47 days on market and closed at 88.1% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 53 days on market and closed at 88.0% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

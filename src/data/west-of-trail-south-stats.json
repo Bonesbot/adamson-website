@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-18T12:02:53.501416+00:00",
+  "lastUpdated": "2026-11-19T12:17:43.302864+00:00",
   "counts": {
-    "sold": 340,
+    "sold": 341,
     "pending": 28,
     "active": 111,
-    "total": 368
+    "total": 369
   },
   "metrics": {
-    "avgPrice": "$643,264",
+    "avgPrice": "$642,524",
     "avgPricePerSqFt": "$328",
     "avgYearBuilt": 1980,
-    "avgLivingSqFt": "1,765",
+    "avgLivingSqFt": "1,764",
     "avgLotSqFt": null,
     "avgDom": 77
   },
@@ -23,14 +23,14 @@
   },
   "active": {
     "count": 111,
-    "medianPrice": "$489,900",
-    "medianPricePerSqFt": "$325",
-    "waterfrontCount": 35,
+    "medianPrice": "$497,800",
+    "medianPricePerSqFt": "$328",
+    "waterfrontCount": 34,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 65,
-    "medianPrice": "$435,888",
+    "count": 66,
+    "medianPrice": "$431,669",
     "medianDom": 48,
     "saleToListRatio": "88.4%",
     "windowDays": 90
@@ -54,8 +54,8 @@
     }
   },
   "priceBands": {
-    "under900k": 83,
-    "band900kTo1_5m": 9,
+    "under900k": 82,
+    "band900kTo1_5m": 10,
     "band1_5mTo3m": 13,
     "band3mPlus": 6
   },
@@ -94,6 +94,19 @@
       "isWaterfront": false
     },
     {
+      "listingId": "N6146064",
+      "address": "1657 BROOKHOUSE CIR #152",
+      "subdivision": "PELICAN COVE XVI",
+      "soldPrice": "$230,000",
+      "soldDate": "2026-11-16",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,080",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "TB8556877",
       "address": "2851 HARDEE DR",
       "subdivision": "GULF GATE WOODS",
@@ -118,19 +131,6 @@
       "yearBuilt": 1979,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4703203",
-      "address": "6343 HOLLYWOOD BLVD",
-      "subdivision": "EMERALD HARBOR",
-      "soldPrice": "$970,000",
-      "soldDate": "2026-11-05",
-      "bedrooms": 4,
-      "bathrooms": 3.0,
-      "livingSqFt": "2,527",
-      "yearBuilt": 1957,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,9 +139,9 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 54,
-      "avgPrice": "$374,952",
+      "avgPrice": "$376,691",
       "avgPricePerSqFt": "$292",
-      "avgLivingSqFt": "1,279",
+      "avgLivingSqFt": "1,283",
       "avgDom": 93
     },
     {
@@ -152,7 +152,7 @@
       "avgPrice": "$1,240,600",
       "avgPricePerSqFt": "$491",
       "avgLivingSqFt": "2,275",
-      "avgDom": 97
+      "avgDom": 98
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$940,975",
       "avgPricePerSqFt": "$448",
       "avgLivingSqFt": "1,942",
-      "avgDom": 162
+      "avgDom": 164
     },
     {
       "tier": "2020plus",
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 31,
+      "activeCount": 30,
       "soldCount": 71,
       "soldMedianPricePerSqFt": "$370",
       "soldMedianPrice": "$495,000",
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 8,
+      "activeCount": 9,
       "soldCount": 37,
       "soldMedianPricePerSqFt": "$299",
       "soldMedianPrice": "$450,000",
@@ -224,8 +224,8 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 68,
-      "soldCount": 216,
-      "soldMedianPricePerSqFt": "$287",
+      "soldCount": 217,
+      "soldMedianPricePerSqFt": "$286",
       "soldMedianPrice": "$425,000",
       "lowSample": false
     }
@@ -236,8 +236,8 @@
     "monthsOfSupplySfhVilla": 5.5,
     "label": "balanced market",
     "activeCount": 111,
-    "sold365Count": 249,
-    "sold90Count": 65,
+    "sold365Count": 250,
+    "sold90Count": 66,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,15 +248,15 @@
       "soldMedianPricePerSqFt": "$327"
     },
     "condo": {
-      "soldCount": 163,
+      "soldCount": 164,
       "activeCount": 63,
       "soldMedianPrice": "$335,000",
-      "soldMedianPricePerSqFt": "$256"
+      "soldMedianPricePerSqFt": "$255"
     }
   },
   "boating": {
     "activeWithDock": 18,
-    "activeWaterfront": 35
+    "activeWaterfront": 34
   },
   "marketQuestions": [
     {
@@ -267,12 +267,12 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $535,000 ($327/sq ft), while condos, villas and townhouses sell around $335,000 ($256/sq ft)."
+      "a": "Single-family homes sell around $535,000 ($327/sq ft), while condos, villas and townhouses sell around $335,000 ($255/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $489,900."
+      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $497,800."
     },
     {
       "facet": "speed",
@@ -282,7 +282,7 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 35 active waterfront listings, 18 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 34 active waterfront listings, 18 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

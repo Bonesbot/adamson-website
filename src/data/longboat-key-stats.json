@@ -2,15 +2,15 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-18T12:02:48.087667+00:00",
+  "lastUpdated": "2026-11-19T12:17:30.906561+00:00",
   "counts": {
-    "sold": 1292,
-    "pending": 31,
-    "active": 276,
-    "total": 1323
+    "sold": 1293,
+    "pending": 32,
+    "active": 274,
+    "total": 1325
   },
   "metrics": {
-    "avgPrice": "$2,000,905",
+    "avgPrice": "$2,000,577",
     "avgPricePerSqFt": "$801",
     "avgYearBuilt": 1985,
     "avgLivingSqFt": "2,187",
@@ -22,22 +22,22 @@
     "maxPrice": "$30,300,000"
   },
   "active": {
-    "count": 276,
+    "count": 274,
     "medianPrice": "$1,137,000",
     "medianPricePerSqFt": "$715",
-    "waterfrontCount": 199,
+    "waterfrontCount": 198,
     "newConstructionCount": 28
   },
   "sold": {
-    "count": 94,
+    "count": 92,
     "medianPrice": "$950,000",
-    "medianDom": 80,
-    "saleToListRatio": "98.2%",
+    "medianDom": 68,
+    "saleToListRatio": "98.5%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.9,
-    "sfhVilla": 8.1,
+    "condo": 5.8,
+    "sfhVilla": 8.0,
     "blended": 6.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -49,20 +49,20 @@
     "maxMonthlyCondoFee": "$10,909",
     "condoFeeRange": {
       "min": 125,
-      "median": 1717,
+      "median": 1718,
       "max": 10909
     }
   },
   "priceBands": {
     "under900k": 112,
-    "band900kTo1_5m": 52,
-    "band1_5mTo3m": 53,
-    "band3mPlus": 59
+    "band900kTo1_5m": 50,
+    "band1_5mTo3m": 52,
+    "band3mPlus": 60
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 276
+      "count": 274
     }
   ],
   "buildingClasses": [],
@@ -79,6 +79,19 @@
       "yearBuilt": 2002,
       "propertyType": "Residential",
       "isWaterfront": true
+    },
+    {
+      "listingId": "A4707428",
+      "address": "4380 EXETER DR #101",
+      "subdivision": "LONGBOAT HARBOUR",
+      "soldPrice": "$362,000",
+      "soldDate": "2026-11-14",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,376",
+      "yearBuilt": 1970,
+      "propertyType": "Residential",
+      "isWaterfront": false
     },
     {
       "listingId": "A4705030",
@@ -118,19 +131,6 @@
       "yearBuilt": 1977,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "D6146366",
-      "address": "4440 EXETER DR #106",
-      "subdivision": "LONGBOAT HARBOUR",
-      "soldPrice": "$625,000",
-      "soldDate": "2026-11-12",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,376",
-      "yearBuilt": 1970,
-      "propertyType": "Residential",
-      "isWaterfront": true
     }
   ],
   "condoTiers": [
@@ -138,41 +138,41 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 146,
-      "avgPrice": "$835,880",
-      "avgPricePerSqFt": "$618",
-      "avgLivingSqFt": "1,361",
+      "activeCount": 144,
+      "avgPrice": "$829,489",
+      "avgPricePerSqFt": "$615",
+      "avgLivingSqFt": "1,354",
       "avgDom": 138
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 37,
-      "avgPrice": "$2,663,582",
-      "avgPricePerSqFt": "$951",
+      "activeCount": 36,
+      "avgPrice": "$2,672,432",
+      "avgPricePerSqFt": "$952",
       "avgLivingSqFt": "2,531",
-      "avgDom": 101
+      "avgDom": 105
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 2,
-      "avgPrice": "$6,650,000",
-      "avgPricePerSqFt": "$1,750",
-      "avgLivingSqFt": "3,741",
-      "avgDom": 180
+      "activeCount": 3,
+      "avgPrice": "$6,383,333",
+      "avgPricePerSqFt": "$1,664",
+      "avgLivingSqFt": "3,801",
+      "avgDom": 121
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 8,
-      "avgPrice": "$8,750,625",
-      "avgPricePerSqFt": "$2,179",
+      "avgPrice": "$8,700,625",
+      "avgPricePerSqFt": "$2,156",
       "avgLivingSqFt": "3,575",
-      "avgDom": 149
+      "avgDom": 114
     }
   ],
   "condoTiersScope": {
@@ -187,7 +187,7 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 94,
+      "activeCount": 93,
       "soldCount": 552,
       "soldMedianPricePerSqFt": "$873",
       "soldMedianPrice": "$1,391,250",
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 100,
+      "activeCount": 101,
       "soldCount": 422,
       "soldMedianPricePerSqFt": "$603",
       "soldMedianPrice": "$1,200,000",
@@ -206,15 +206,15 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 38,
-      "soldCount": 111,
-      "soldMedianPricePerSqFt": "$620",
-      "soldMedianPrice": "$1,175,000",
+      "soldCount": 112,
+      "soldMedianPricePerSqFt": "$617",
+      "soldMedianPrice": "$1,170,000",
       "lowSample": false
     },
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 5,
+      "activeCount": 4,
       "soldCount": 22,
       "soldMedianPricePerSqFt": "$460",
       "soldMedianPrice": "$1,175,000",
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 39,
+      "activeCount": 38,
       "soldCount": 185,
       "soldMedianPricePerSqFt": "$479",
       "soldMedianPrice": "$850,000",
@@ -232,12 +232,12 @@
   ],
   "marketBalance": {
     "monthsOfSupply": 6.5,
-    "monthsOfSupplyCondo": 5.9,
-    "monthsOfSupplySfhVilla": 8.1,
+    "monthsOfSupplyCondo": 5.8,
+    "monthsOfSupplySfhVilla": 8.0,
     "label": "balanced market",
-    "activeCount": 276,
-    "sold365Count": 510,
-    "sold90Count": 94,
+    "activeCount": 274,
+    "sold365Count": 509,
+    "sold90Count": 92,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -248,36 +248,36 @@
       "soldMedianPricePerSqFt": "$727"
     },
     "condo": {
-      "soldCount": 957,
-      "activeCount": 194,
+      "soldCount": 958,
+      "activeCount": 192,
       "soldMedianPrice": "$1,000,000",
       "soldMedianPricePerSqFt": "$646"
     }
   },
   "boating": {
     "activeWithDock": 75,
-    "activeWaterfront": 199
+    "activeWaterfront": 198
   },
   "marketQuestions": [
     {
       "facet": "cost",
       "q": "What do properties cost on Longboat Key?",
-      "a": "Over the past 90 days, 94 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $850,000 ($573/sq ft), while single-family homes closed around $1,850,000 ($683/sq ft). By location, Gulf-front and beachfront properties closed at a median $784 per square foot, compared with $539 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
+      "a": "Over the past 90 days, 92 properties have closed on Longboat Key. By property type, condos, villas and townhouses closed at a median $870,000 ($569/sq ft), while single-family homes closed around $1,850,000 ($683/sq ft). By location, Gulf-front and beachfront properties closed at a median $775 per square foot, compared with $542 for bay- and canal-front homes. These are blended medians \u2014 actual value varies widely with a property's build era, specific views, amenities and level of updating. For a precise valuation on an investment this significant, lean on Ryan Adamson's local market guidance."
     },
     {
       "facet": "balance",
       "q": "Is it a good time to buy on Longboat Key?",
-      "a": "With 276 active listings and roughly 42 closed sales a month (trailing 12 months), Longboat Key has about 6.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 274 active listings and roughly 42 closed sales a month (trailing 12 months), Longboat Key has about 6.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Longboat Key?",
-      "a": "Recently sold homes took a median 80 days on market and closed at 98.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 68 days on market and closed at 98.5% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Longboat Key homes have a dock?",
-      "a": "Of 199 active waterfront listings, 75 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 198 active waterfront listings, 75 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
@@ -287,12 +287,12 @@
   ],
   "costBreakdown90": {
     "windowDays": 90,
-    "soldCount": 94,
+    "soldCount": 92,
     "byPropertyType": {
       "condo": {
-        "soldCount": 71,
-        "soldMedianPrice": "$850,000",
-        "soldMedianPricePerSqFt": "$573"
+        "soldCount": 69,
+        "soldMedianPrice": "$870,000",
+        "soldMedianPricePerSqFt": "$569"
       },
       "single_family": {
         "soldCount": 23,
@@ -302,14 +302,14 @@
     },
     "byWaterfront": {
       "gulf_beachfront": {
-        "soldCount": 38,
-        "soldMedianPrice": "$955,000",
-        "soldMedianPricePerSqFt": "$784"
+        "soldCount": 37,
+        "soldMedianPrice": "$960,000",
+        "soldMedianPricePerSqFt": "$775"
       },
       "bay_canal": {
-        "soldCount": 31,
+        "soldCount": 30,
         "soldMedianPrice": "$1,400,000",
-        "soldMedianPricePerSqFt": "$539"
+        "soldMedianPricePerSqFt": "$542"
       }
     }
   }
