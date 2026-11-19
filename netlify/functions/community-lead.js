@@ -193,7 +193,7 @@ async function sendTeamNotification(lead, zohoId) {
     `New ${kind.toLowerCase()} lead from the ${lead.community || 'website'} landing page.`,
     '',
     `Name:      ${lead.name || '-'}`,
-    `Email:     ${lead.email}`,
+    `Email:     ${lead.email || '-'}`,
     `Phone:     ${lead.phone || '-'}`,
     `Lead Type: ${lead.lead_type}`,
     `Community: ${lead.community || '-'}`,
@@ -288,7 +288,7 @@ async function queueGmailDraft(lead, zohoId) {
     `New ${kind.toLowerCase()} lead from the ${lead.community || 'website'} landing page.`,
     '',
     `Name:      ${lead.name || '—'}`,
-    `Email:     ${lead.email}`,
+    `Email:     ${lead.email || '-'}`,
     `Phone:     ${lead.phone || '—'}`,
     `Lead Type: ${lead.lead_type}`,
     `Community: ${lead.community || '—'}`,
@@ -439,12 +439,15 @@ export const handler = async (event) => {
       body = JSON.parse(raw || '{}');
     }
 
-    if (!body.email || !String(body.email).trim()) {
-      return done(400, { error: 'Email is required' });
+    // Email OR a real phone number: the quick-tap and gate forms ask for first name + mobile only.
+    const hasEmail = Boolean(body.email && String(body.email).trim());
+    const hasPhone = String(body.phone || '').replace(/\D/g, '').length >= 10;
+    if (!hasEmail && !hasPhone) {
+      return done(400, { error: 'Email or phone is required' });
     }
     lead = {
       name: (body.name || '').trim() || null,
-      email: String(body.email).trim(),
+      email: hasEmail ? String(body.email).trim() : null,
       phone: (body.phone || '').trim() || null,
       // free text the visitor typed: unit number, view, size, timing. Capped because it
       // rides into Zoho's Description and a Gmail draft, neither of which wants an essay.
@@ -520,7 +523,7 @@ export const handler = async (event) => {
 
   // ── Home platform forward (after Supabase write + our own notifications) ────
   // Failure logs to the function console and never breaks the visitor response.
-  if (!flagged) try {
+  if (!flagged && lead.email) try {
     const { first, last } = splitName(lead.name);
     const fwd = await forwardLeadToHomePlatform({
       firstName: first || '',

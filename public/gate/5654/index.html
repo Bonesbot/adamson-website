@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Open House · 5654 Woodland Sage Drive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box} html,body{margin:0;height:100%}
+  body{background:#141414;color:#fff;font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;min-height:100%;padding:22px 20px 26px}
+  .logo{height:30px;margin:4px 0 18px}
+  .eyebrow{font-family:Montserrat,sans-serif;font-weight:700;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#C5A55A;text-align:center}
+  h1{font-family:'Playfair Display',Georgia,serif;font-size:26px;line-height:1.2;text-align:center;margin:8px 0 4px}
+  .when{color:#cfcfcf;font-size:14px;text-align:center;margin:0 0 18px}
+  .card{width:100%;max-width:420px;background:#F7F2E7;color:#141414;border-radius:16px;padding:22px 20px 20px;text-align:center;border-top:4px solid #C5A55A}
+  .card .lab{font-family:Montserrat,sans-serif;font-weight:700;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#9C7C34}
+  .code{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:76px;line-height:1;letter-spacing:.12em;margin:10px 0 10px;padding-left:.12em}
+  .hint{font-size:15px;line-height:1.45;color:#2b2823;margin:0}
+  .msg{font-family:'Playfair Display',Georgia,serif;font-size:24px;line-height:1.25;margin:8px 0 8px}
+  .btns{width:100%;max-width:420px;display:flex;flex-direction:column;gap:10px;margin-top:16px}
+  .btn{display:block;width:100%;text-align:center;font-family:Montserrat,sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:16px 14px;border-radius:999px;text-decoration:none;border:0;cursor:pointer}
+  .gold{background:#C5A55A;color:#141414} .line{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)}
+  form{display:none;width:100%;max-width:420px;margin-top:12px;gap:10px;flex-direction:column}
+  form.on{display:flex}
+  input{width:100%;padding:15px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:#1d1d1d;color:#fff;font-size:16px}
+  .ok{display:none;text-align:center;color:#E8D5A3;font-weight:600;margin-top:14px} .ok.on{display:block}
+  .err{display:none;color:#ff9c9c;font-size:13px;text-align:center} .err.on{display:block}
+  .foot{margin-top:auto;padding-top:22px;font-size:12px;color:#9a9a9a;text-align:center;line-height:1.6}
+  .foot a{color:#E8D5A3}
+  [hidden]{display:none !important}
+</style>
+</head>
+<body>
+  <img class="logo" src="/images/logos/cb-horz-white.png" alt="Coldwell Banker Realty">
+  <div class="eyebrow">Welcome to the open house</div>
+  <h1>5654 Woodland Sage Drive</h1>
+  <p class="when" id="when">Sunday, November 22 · 12 to 3 PM</p>
+
+  <div class="card" id="cardOpen" hidden>
+    <div class="lab">Gate code</div>
+    <div class="code" id="code"></div>
+    <p class="hint">Enter it on the keypad, then follow Woodland Sage Drive to the cul-de-sac.</p>
+  </div>
+  <div class="card" id="cardClosed" hidden>
+    <div class="lab">Gate access</div>
+    <div class="msg" id="closedMsg">Open house Sunday, 12 to 3 PM</div>
+    <p class="hint">Text Ryan for gate access and he’ll get you in.</p>
+  </div>
+
+  <div class="btns">
+    <button class="btn gold" id="hereBtn" type="button">Let Ryan know I’m here</button>
+    <a class="btn line" href="sms:+19417139234?&body=Hi%20Ryan%2C%20I%27m%20at%20the%20gate%20for%205654%20Woodland%20Sage.">Text Ryan · 941.713.9234</a>
+  </div>
+  <form id="f" novalidate>
+    <input type="text" name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+    <input name="first" placeholder="First name" autocomplete="given-name">
+    <input name="phone" type="tel" placeholder="Mobile number" autocomplete="tel" inputmode="tel">
+    <div class="err" id="err">Add a first name and a 10-digit number, or just text Ryan.</div>
+    <button class="btn gold" type="submit" id="send">Send</button>
+  </form>
+  <div class="ok" id="ok">Thanks! Ryan knows you’re here. Come on in.</div>
+
+  <div class="foot">
+    Waiting in line? <a href="https://embed.ricoh360.com/2aa576a0-cef9-4d2f-b15c-5be95734975f">Walk the home in 360°</a><br>
+    Ryan Adamson, PA &amp; Alex Chau · Coldwell Banker Realty
+  </div>
+<script>
+(function(){
+  var T0=Date.now();
+  fetch('/.netlify/functions/gate-code?id=5654',{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+    if(d && d.open && d.code){ document.getElementById('code').textContent=d.code; document.getElementById('cardOpen').hidden=false; }
+    else{
+      if(d && d.ended) document.getElementById('closedMsg').textContent='The open house has ended';
+      document.getElementById('cardClosed').hidden=false;
+    }
+  }).catch(function(){ document.getElementById('cardClosed').hidden=false; });
+  var f=document.getElementById('f'), here=document.getElementById('hereBtn'), err=document.getElementById('err'), send=document.getElementById('send');
+  here.addEventListener('click',function(){ f.classList.add('on'); here.hidden=true; f.first.focus(); });
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var first=(f.first.value||'').trim(), phone=(f.phone.value||'').trim();
+    if(!first || phone.replace(/\D/g,'').length<10){ err.classList.add('on'); return; }
+    err.classList.remove('on'); send.disabled=true; send.textContent='Sending…';
+    fetch('/.netlify/functions/community-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      name:first, phone:phone, email:'', notes:'At the gate for the open house (scanned the gate QR).', lead_type:'Showing',
+      community:'5654 Woodland Sage Dr', page:location.pathname, source:'gate:5654-woodland-sage-dr', 'bot-field':f['bot-field'].value||'',
+      _meta:{ts:Date.now()-T0,h:location.hostname,p:location.pathname}
+    })}).then(function(r){ if(!r.ok) throw 0; f.classList.remove('on'); document.getElementById('ok').classList.add('on'); })
+    .catch(function(){ send.disabled=false; send.textContent='Send'; err.textContent='That didn’t go through. Please text Ryan instead.'; err.classList.add('on'); });
+  });
+})();
+</script>
+</body>
+</html>

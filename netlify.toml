@@ -96,3 +96,10 @@
 # ---------------------------------------------------------------------------
 [functions."zhvf-refresh"]
   schedule = "0 12 1,15 * *"
+
+# Open-house gate pages (hand-shared via QR at the gate; never linked or indexed).
+[[headers]]
+  for = "/gate/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+    Cache-Control = "no-store"

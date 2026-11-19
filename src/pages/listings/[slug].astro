@@ -178,6 +178,12 @@ if (faqs.length) {
   .fm-d{flex:none;color:var(--color-gold-light);font-size:12px;text-align:right;max-width:90px;line-height:1.3}
   .lst-hero-media{object-position:var(--fpm,50% 50%)}
   @media (min-width:768px){.lst-hero-media{object-position:var(--fp,50% 50%)}}
+  .qa-btn{font-family:var(--font-accent);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:11px 18px;border-radius:999px;border:1px solid rgba(197,165,90,.6);color:#fff;background:transparent;cursor:pointer;transition:all .15s;display:inline-block}
+  .qa-btn:hover,.qa-btn.on{background:var(--color-gold);border-color:var(--color-gold);color:#000}
+  .qa-text{border-color:rgba(255,255,255,.35)}
+  #quickAsk{scroll-margin-top:90px}
+  #ohHero{display:none}  /* the top banner replaces the in-hero pill */
+  @media (max-width:640px){#ohBanner #ohWhen{font-size:12.5px}}
   .lst-callout{background:linear-gradient(180deg,#000 0,#000 50%,#0A0A0A 50%,#0A0A0A 100%)}
   .lst-callout-card{background:linear-gradient(135deg,#FBF7EE 0%,#F3EAD6 100%);box-shadow:0 20px 60px rgba(0,0,0,.45)}
   .lst-callout-card .lst-eyebrow,.lst-life .lst-eyebrow{color:#9C7C34}
@@ -192,6 +198,14 @@ if (faqs.length) {
 
   <!-- ══════════ HERO ══════════ -->
   <section class="relative min-h-[86vh] flex items-end overflow-hidden">
+    <!-- OPEN HOUSE BANNER (top of page; smart, self-expiring) -->
+    <div id="ohBanner" class="absolute top-20 left-0 right-0 z-20 bg-[var(--color-gold)] text-black shadow-lg" hidden data-slug={l.slug} data-oh={JSON.stringify(l.open_houses || [])}>
+      <div class="container py-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center">
+        <span class="font-accent text-[11px] uppercase tracking-[0.22em] font-bold">Open House</span>
+        <span id="ohWhen" class="font-semibold text-sm"></span>
+        <a href="#quickAsk" class="font-accent text-[10px] uppercase tracking-[0.15em] font-bold px-4 py-1.5 rounded-full bg-black text-[var(--color-gold)] hover:bg-[#111] transition-colors">I’m coming</a>
+      </div>
+    </div>
     {l.hero_video
       ? <video class="lst-hero-media absolute inset-0 w-full h-full object-cover" style={heroFocus} src={l.hero_video} poster={l.hero_image} autoplay muted loop playsinline preload="metadata" aria-label={`Video of ${l.address}`}></video>
       : <picture>
@@ -220,12 +234,29 @@ if (faqs.length) {
     </div>
   </section>
 
-  <!-- OPEN HOUSE BANNER (smart, self-expiring) -->
-  <section id="ohBanner" class="bg-[var(--color-gold)] text-black" hidden data-slug={l.slug} data-oh={JSON.stringify(l.open_houses || [])}>
-    <div class="container py-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-center">
-      <span class="font-accent text-[11px] uppercase tracking-[0.22em] font-bold">Open House</span>
-      <span id="ohWhen" class="font-semibold text-sm"></span>
-      <a href="#rsvp" class="font-accent text-[11px] uppercase tracking-[0.15em] font-bold px-5 py-2 rounded-full bg-black text-[var(--color-gold)] hover:bg-[#111] transition-colors">RSVP</a>
+
+  <!-- QUICK ASK (shown with the open-house banner; first name + mobile only) -->
+  <section id="quickAsk" class="bg-[#0A0A0A] border-b border-[var(--color-gold)]/30" hidden data-slug={l.slug} data-address={l.address}>
+    <div class="container py-7 text-center">
+      <p class="font-display text-white text-xl md:text-2xl font-semibold" id="qaLine">Thinking about stopping by?</p>
+      <div class="flex flex-wrap justify-center gap-2.5 mt-4" id="qaBtns">
+        <button type="button" data-q="I'll be there" class="qa-btn">I’ll be there</button>
+        <button type="button" data-q="Can I see it sooner?" class="qa-btn">Can I see it sooner?</button>
+        <button type="button" data-q="Quick question" class="qa-btn">Quick question</button>
+        <a class="qa-btn qa-text" href={`sms:+19417139234?&body=${encodeURIComponent(`Hi Ryan, question about ${l.address}: `)}`}>Text Ryan</a>
+      </div>
+      <form id="qaForm" class="hidden max-w-md mx-auto mt-5" novalidate>
+        <input type="text" name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
+        <p class="text-white/60 text-sm mb-3" id="qaPicked"></p>
+        <div class="grid grid-cols-2 gap-3">
+          <input type="text" name="first" placeholder="First name" autocomplete="given-name" class="w-full px-4 py-3 bg-[#111111] border border-white/[0.12] text-white placeholder-white/30 focus:border-[var(--color-gold)] focus:outline-none rounded text-base" />
+          <input type="tel" name="phone" placeholder="Mobile number" autocomplete="tel" inputmode="tel" class="w-full px-4 py-3 bg-[#111111] border border-white/[0.12] text-white placeholder-white/30 focus:border-[var(--color-gold)] focus:outline-none rounded text-base" />
+        </div>
+        <p id="qaErr" class="hidden text-red-400 text-sm mt-3">Add a first name and a 10-digit number, or just text Ryan.</p>
+        <button type="submit" id="qaSend" class="mt-4 w-full font-accent text-xs uppercase tracking-[0.15em] font-semibold px-7 py-3.5 rounded-full bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold-light)] transition-colors disabled:opacity-60">Send to Ryan</button>
+        <p class="text-white/35 text-xs mt-3">That’s it. Ryan will text or call you back personally.</p>
+      </form>
+      <p id="qaOk" class="hidden font-display text-[var(--color-gold)] text-xl font-semibold mt-5">Got it! Ryan will be in touch shortly.</p>
     </div>
   </section>
 
@@ -674,8 +705,32 @@ if (faqs.length) {
       var w3=document.getElementById('ohHeroWhen'); if(w3) w3.textContent=whenTxt;
       var oh3=document.getElementById('ohHero'); if(oh3) oh3.hidden=false;
       ohBanner.hidden=false;
+      var qa=document.getElementById('quickAsk');
+      if(qa){ qa.hidden=false; var wd=next.s.toLocaleDateString('en-US',{weekday:'long',timeZone:'America/New_York'}); document.getElementById('qaLine').textContent='Thinking about stopping by '+wd+'?'; qa.setAttribute('data-when',whenTxt); }
       var rs=document.getElementById('rsvp'); if(rs) rs.hidden=false;
     }
+  }
+  /* Quick ask: tap a choice, leave first name + mobile -> community-lead (Ryan only) */
+  var qa=document.getElementById('quickAsk');
+  if(qa){
+    var qf=document.getElementById('qaForm'), qpick='', qerr=document.getElementById('qaErr'), qsend=document.getElementById('qaSend');
+    qa.querySelectorAll('button[data-q]').forEach(function(b){ b.addEventListener('click',function(){
+      qpick=b.getAttribute('data-q'); qa.querySelectorAll('button[data-q]').forEach(function(x){ x.classList.toggle('on',x===b); });
+      document.getElementById('qaPicked').textContent=qpick==='Quick question'?'Leave your number and Ryan will reach out.':'Great. Where should Ryan reach you?';
+      qf.classList.remove('hidden'); qf.querySelector('[name="first"]').focus();
+    }); });
+    qf.addEventListener('submit',function(e){
+      e.preventDefault();
+      var first=(qf.querySelector('[name="first"]').value||'').trim(), phone=(qf.querySelector('[name="phone"]').value||'').trim();
+      if(!first || phone.replace(/\D/g,'').length<10){ qerr.classList.remove('hidden'); return; }
+      qerr.classList.add('hidden'); qsend.disabled=true; qsend.textContent='Sending…';
+      fetch('/.netlify/functions/community-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+        name:first, phone:phone, email:'', notes:'Quick tap: "'+qpick+'" (open house '+(qa.getAttribute('data-when')||'')+')',
+        lead_type:'Buyer', community:qa.getAttribute('data-address')||'', page:location.pathname,
+        source:'quick:'+(qa.getAttribute('data-slug')||'unknown'), 'bot-field':(qf.querySelector('[name="bot-field"]')||{}).value||''
+      })}).then(function(r){ if(!r.ok) throw 0; qf.classList.add('hidden'); document.getElementById('qaBtns').classList.add('hidden'); document.getElementById('qaOk').classList.remove('hidden'); })
+      .catch(function(){ qsend.disabled=false; qsend.textContent='Send to Ryan'; qerr.textContent='That didn’t go through. Please text or call (941) 713-9234.'; qerr.classList.remove('hidden'); });
+    });
   }
   var rform=document.getElementById('rsvpForm');
   if(rform){
