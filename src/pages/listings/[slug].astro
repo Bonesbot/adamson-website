@@ -203,9 +203,12 @@ if (faqs.length) {
     <!-- OPEN HOUSE BANNER (top of page; smart, self-expiring) -->
     <div id="ohBanner" class="absolute top-20 left-0 right-0 z-20 bg-[var(--color-gold)] text-black shadow-[0_6px_24px_rgba(0,0,0,.35)] border-y-2 border-black/80" hidden data-slug={l.slug} data-oh={JSON.stringify(l.open_houses || [])}>
       <div class="container py-3 md:py-3.5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-center">
-        <span class="inline-flex items-center gap-2 font-accent text-[13px] md:text-[15px] uppercase tracking-[0.2em] font-extrabold"><span class="oh-dot" aria-hidden="true"></span>Open House</span>
-        <span id="ohWhen" class="font-bold text-[15px] md:text-xl leading-tight"></span>
+        <span class="inline-flex items-center gap-2 font-accent text-sm md:text-base uppercase tracking-[0.2em] font-black"><span class="oh-dot" aria-hidden="true"></span>Open House</span>
+        <span id="ohWhen" class="font-extrabold text-base md:text-[22px] leading-tight"></span>
         <a href="#quickAsk" class="font-accent text-[11px] md:text-xs uppercase tracking-[0.15em] font-bold px-5 py-2 rounded-full bg-black text-[var(--color-gold)] hover:bg-[#111] transition-colors">I’m coming</a>
+      </div>
+      <div id="ohGate" hidden class="border-t border-black/25 bg-black/10">
+        <div class="container py-2 text-center font-extrabold text-[15px] md:text-lg leading-snug"><span id="ohGateNote"></span><span id="ohGateCode" hidden> &nbsp;·&nbsp; Gate code <span id="ohCode" class="inline-block px-2.5 py-0.5 rounded bg-black text-[var(--color-gold)] tracking-[0.12em] whitespace-nowrap"></span></span></div>
       </div>
     </div>
     </div>
@@ -708,6 +711,11 @@ if (faqs.length) {
       var w3=document.getElementById('ohHeroWhen'); if(w3) w3.textContent=whenTxt;
       var oh3=document.getElementById('ohHero'); if(oh3) oh3.hidden=false;
       ohBanner.hidden=false;
+      var o0=ohs.filter(function(o){ return new Date(o.start).getTime()===next.s.getTime(); })[0]||{};
+      if(o0.gate_note){ document.getElementById('ohGateNote').textContent=o0.gate_note; document.getElementById('ohGate').hidden=false; }
+      /* gate code comes from Supabase via the gate-code function, never from this repo */
+      if(o0.gate_id){ fetch('/.netlify/functions/gate-code?id='+encodeURIComponent(o0.gate_id),{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+        if(d&&d.open&&d.code){ document.getElementById('ohCode').textContent=d.code; document.getElementById('ohGateCode').hidden=false; document.getElementById('ohGate').hidden=false; } }).catch(function(){}); }
       var qa=document.getElementById('quickAsk');
       if(qa){ qa.hidden=false; var wd=next.s.toLocaleDateString('en-US',{weekday:'long',timeZone:'America/New_York'}); document.getElementById('qaLine').textContent='Thinking about stopping by '+wd+'?'; qa.setAttribute('data-when',whenTxt); }
       var rs=document.getElementById('rsvp'); if(rs) rs.hidden=false;
