@@ -2,16 +2,16 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-19T12:17:43.302864+00:00",
+  "lastUpdated": "2026-11-20T12:06:10.997970+00:00",
   "counts": {
-    "sold": 341,
-    "pending": 28,
+    "sold": 343,
+    "pending": 26,
     "active": 111,
     "total": 369
   },
   "metrics": {
-    "avgPrice": "$642,524",
-    "avgPricePerSqFt": "$328",
+    "avgPrice": "$642,330",
+    "avgPricePerSqFt": "$327",
     "avgYearBuilt": 1980,
     "avgLivingSqFt": "1,764",
     "avgLotSqFt": null,
@@ -29,14 +29,14 @@
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 66,
+    "count": 68,
     "medianPrice": "$431,669",
-    "medianDom": 48,
-    "saleToListRatio": "88.4%",
+    "medianDom": 46,
+    "saleToListRatio": "88.5%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.1,
+    "condo": 5.0,
     "sfhVilla": 5.5,
     "blended": 5.3,
     "method": "active / (trailing-12mo closed / 12)",
@@ -67,6 +67,32 @@
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4707433",
+      "address": "6741 AVENUE D",
+      "subdivision": "BAY VIEW ACRES",
+      "soldPrice": "$850,000",
+      "soldDate": "2026-11-19",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,651",
+      "yearBuilt": 1985,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4710404",
+      "address": "1627 BROOKHOUSE DR #263",
+      "subdivision": "PELICAN COVE XVI",
+      "soldPrice": "$250,000",
+      "soldDate": "2026-11-19",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,077",
+      "yearBuilt": 1980,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4707877",
       "address": "4887 PEREGRINE POINT CIR E",
@@ -105,32 +131,6 @@
       "yearBuilt": 1980,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "TB8556877",
-      "address": "2851 HARDEE DR",
-      "subdivision": "GULF GATE WOODS",
-      "soldPrice": "$574,900",
-      "soldDate": "2026-11-13",
-      "bedrooms": 4,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,110",
-      "yearBuilt": 1976,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4691697",
-      "address": "1720 GLENHOUSE DR #326",
-      "subdivision": "PELICAN COVE XIV",
-      "soldPrice": "$200,000",
-      "soldDate": "2026-11-10",
-      "bedrooms": 1,
-      "bathrooms": 1.0,
-      "livingSqFt": "731",
-      "yearBuilt": 1979,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 54,
-      "avgPrice": "$376,691",
+      "avgPrice": "$376,415",
       "avgPricePerSqFt": "$292",
       "avgLivingSqFt": "1,283",
-      "avgDom": 93
+      "avgDom": 94
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,240,600",
       "avgPricePerSqFt": "$491",
       "avgLivingSqFt": "2,275",
-      "avgDom": 98
+      "avgDom": 99
     },
     {
       "tier": "2006to2019",
@@ -197,9 +197,9 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 30,
-      "soldCount": 71,
-      "soldMedianPricePerSqFt": "$370",
-      "soldMedianPrice": "$495,000",
+      "soldCount": 72,
+      "soldMedianPricePerSqFt": "$366",
+      "soldMedianPrice": "$485,000",
       "lowSample": false
     },
     {
@@ -224,34 +224,34 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 68,
-      "soldCount": 217,
-      "soldMedianPricePerSqFt": "$286",
+      "soldCount": 218,
+      "soldMedianPricePerSqFt": "$287",
       "soldMedianPrice": "$425,000",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 5.3,
-    "monthsOfSupplyCondo": 5.1,
+    "monthsOfSupplyCondo": 5.0,
     "monthsOfSupplySfhVilla": 5.5,
     "label": "balanced market",
     "activeCount": 111,
-    "sold365Count": 250,
-    "sold90Count": 66,
+    "sold365Count": 252,
+    "sold90Count": 68,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 177,
+      "soldCount": 178,
       "activeCount": 48,
       "soldMedianPrice": "$535,000",
       "soldMedianPricePerSqFt": "$327"
     },
     "condo": {
-      "soldCount": 164,
+      "soldCount": 165,
       "activeCount": 63,
       "soldMedianPrice": "$335,000",
-      "soldMedianPricePerSqFt": "$255"
+      "soldMedianPricePerSqFt": "$253"
     }
   },
   "boating": {
@@ -267,7 +267,7 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $535,000 ($327/sq ft), while condos, villas and townhouses sell around $335,000 ($255/sq ft)."
+      "a": "Single-family homes sell around $535,000 ($327/sq ft), while condos, villas and townhouses sell around $335,000 ($253/sq ft)."
     },
     {
       "facet": "range",
@@ -277,7 +277,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 48 days on market and closed at 88.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 46 days on market and closed at 88.5% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
