@@ -183,7 +183,9 @@ if (faqs.length) {
   .qa-text{border-color:rgba(255,255,255,.35)}
   #quickAsk{scroll-margin-top:90px}
   #ohHero{display:none}  /* the top banner replaces the in-hero pill */
-  @media (max-width:640px){#ohBanner #ohWhen{font-size:12.5px}}
+  .oh-dot{width:10px;height:10px;border-radius:50%;background:#B3261E;box-shadow:0 0 0 0 rgba(179,38,30,.6);animation:ohPulse 1.8s infinite}
+  @keyframes ohPulse{0%{box-shadow:0 0 0 0 rgba(179,38,30,.6)}70%{box-shadow:0 0 0 9px rgba(179,38,30,0)}100%{box-shadow:0 0 0 0 rgba(179,38,30,0)}}
+  @media (prefers-reduced-motion:reduce){.oh-dot{animation:none}}
   .lst-callout{background:linear-gradient(180deg,#000 0,#000 50%,#0A0A0A 50%,#0A0A0A 100%)}
   .lst-callout-card{background:linear-gradient(135deg,#FBF7EE 0%,#F3EAD6 100%);box-shadow:0 20px 60px rgba(0,0,0,.45)}
   .lst-callout-card .lst-eyebrow,.lst-life .lst-eyebrow{color:#9C7C34}
@@ -199,12 +201,13 @@ if (faqs.length) {
   <!-- ══════════ HERO ══════════ -->
   <section class="relative min-h-[86vh] flex items-end overflow-hidden">
     <!-- OPEN HOUSE BANNER (top of page; smart, self-expiring) -->
-    <div id="ohBanner" class="absolute top-20 left-0 right-0 z-20 bg-[var(--color-gold)] text-black shadow-lg" hidden data-slug={l.slug} data-oh={JSON.stringify(l.open_houses || [])}>
-      <div class="container py-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center">
-        <span class="font-accent text-[11px] uppercase tracking-[0.22em] font-bold">Open House</span>
-        <span id="ohWhen" class="font-semibold text-sm"></span>
-        <a href="#quickAsk" class="font-accent text-[10px] uppercase tracking-[0.15em] font-bold px-4 py-1.5 rounded-full bg-black text-[var(--color-gold)] hover:bg-[#111] transition-colors">I’m coming</a>
+    <div id="ohBanner" class="absolute top-20 left-0 right-0 z-20 bg-[var(--color-gold)] text-black shadow-[0_6px_24px_rgba(0,0,0,.35)] border-y-2 border-black/80" hidden data-slug={l.slug} data-oh={JSON.stringify(l.open_houses || [])}>
+      <div class="container py-3 md:py-3.5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-center">
+        <span class="inline-flex items-center gap-2 font-accent text-[13px] md:text-[15px] uppercase tracking-[0.2em] font-extrabold"><span class="oh-dot" aria-hidden="true"></span>Open House</span>
+        <span id="ohWhen" class="font-bold text-[15px] md:text-xl leading-tight"></span>
+        <a href="#quickAsk" class="font-accent text-[11px] md:text-xs uppercase tracking-[0.15em] font-bold px-5 py-2 rounded-full bg-black text-[var(--color-gold)] hover:bg-[#111] transition-colors">I’m coming</a>
       </div>
+    </div>
     </div>
     {l.hero_video
       ? <video class="lst-hero-media absolute inset-0 w-full h-full object-cover" style={heroFocus} src={l.hero_video} poster={l.hero_image} autoplay muted loop playsinline preload="metadata" aria-label={`Video of ${l.address}`}></video>
@@ -693,8 +696,8 @@ if (faqs.length) {
   if(ohBanner){
     var ohs=[]; try{ ohs=JSON.parse(ohBanner.getAttribute('data-oh')||'[]'); }catch(e){}
     var nowMs=Date.now();
-    var next=ohs.map(function(o){ return {s:new Date(o.start), e:new Date(o.end)}; })
-      .filter(function(o){ return o.e.getTime()>nowMs; })
+    var next=ohs.map(function(o){ return {s:new Date(o.start), e:new Date(o.end), h:new Date(o.hide_after||o.end)}; })
+      .filter(function(o){ return o.h.getTime()>nowMs; })
       .sort(function(a,b){ return a.s-b.s; })[0];
     if(next){
       var dstr=next.s.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',timeZone:'America/New_York'});
