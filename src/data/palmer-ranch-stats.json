@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-20T12:06:12.611798+00:00",
+  "lastUpdated": "2026-11-21T12:01:42.745593+00:00",
   "counts": {
-    "sold": 1000,
-    "pending": 55,
+    "sold": 1001,
+    "pending": 58,
     "active": 233,
-    "total": 1055
+    "total": 1059
   },
   "metrics": {
-    "avgPrice": "$558,710",
+    "avgPrice": "$559,245",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,040",
+    "avgLivingSqFt": "2,041",
     "avgLotSqFt": null,
     "avgDom": 78
   },
@@ -24,14 +24,14 @@
   "active": {
     "count": 233,
     "medianPrice": "$415,000",
-    "medianPricePerSqFt": "$244",
-    "waterfrontCount": 42,
-    "newConstructionCount": 37
+    "medianPricePerSqFt": "$245",
+    "waterfrontCount": 41,
+    "newConstructionCount": 36
   },
   "sold": {
-    "count": 153,
-    "medianPrice": "$475,000",
-    "medianDom": 57,
+    "count": 154,
+    "medianPrice": "$476,000",
+    "medianDom": 56,
     "saleToListRatio": "92.2%",
     "windowDays": 90
   },
@@ -94,6 +94,19 @@
       "isWaterfront": true
     },
     {
+      "listingId": "A4701166",
+      "address": "8945 WHITEMARSH AVE",
+      "subdivision": "STONEYBROOK GOLF & COUNTRY CLUB",
+      "soldPrice": "$595,000",
+      "soldDate": "2026-11-19",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,812",
+      "yearBuilt": 1995,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "A4701048",
       "address": "8621 RAIN SONG RD",
       "subdivision": "SUNRISE PRESERVE",
@@ -118,19 +131,6 @@
       "yearBuilt": 1989,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4700233",
-      "address": "4708 SWEETMEADOW CIR",
-      "subdivision": "TURTLE ROCK",
-      "soldPrice": "$710,000",
-      "soldDate": "2026-11-18",
-      "bedrooms": 5,
-      "bathrooms": 5.0,
-      "livingSqFt": "3,785",
-      "yearBuilt": 2000,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,30 +139,30 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 36,
-      "avgPrice": "$327,656",
+      "avgPrice": "$327,378",
       "avgPricePerSqFt": "$197",
       "avgLivingSqFt": "1,660",
-      "avgDom": 114
+      "avgDom": 115
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 81,
-      "avgPrice": "$281,810",
+      "avgPrice": "$281,748",
       "avgPricePerSqFt": "$222",
       "avgLivingSqFt": "1,263",
-      "avgDom": 123
+      "avgDom": 124
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
       "activeCount": 8,
-      "avgPrice": "$396,225",
-      "avgPricePerSqFt": "$234",
+      "avgPrice": "$393,850",
+      "avgPricePerSqFt": "$233",
       "avgLivingSqFt": "1,697",
-      "avgDom": 66
+      "avgDom": 67
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$361,750",
       "avgPricePerSqFt": "$227",
       "avgLivingSqFt": "1,595",
-      "avgDom": 75
+      "avgDom": 76
     }
   ],
   "condoTiersScope": {
@@ -197,15 +197,15 @@
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 48,
-      "soldCount": 226,
+      "soldCount": 227,
       "soldMedianPricePerSqFt": "$258",
-      "soldMedianPrice": "$472,500",
+      "soldMedianPrice": "$475,000",
       "lowSample": false
     },
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 42,
+      "activeCount": 41,
       "soldCount": 216,
       "soldMedianPricePerSqFt": "$277",
       "soldMedianPrice": "$606,000",
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 143,
+      "activeCount": 144,
       "soldCount": 556,
       "soldMedianPricePerSqFt": "$242",
       "soldMedianPrice": "$437,500",
@@ -227,16 +227,16 @@
     "monthsOfSupplySfhVilla": 3.1,
     "label": "seller's market",
     "activeCount": 233,
-    "sold365Count": 714,
-    "sold90Count": 153,
+    "sold365Count": 712,
+    "sold90Count": 154,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 568,
+      "soldCount": 569,
       "activeCount": 95,
       "soldMedianPrice": "$650,000",
-      "soldMedianPricePerSqFt": "$288"
+      "soldMedianPricePerSqFt": "$289"
     },
     "condo": {
       "soldCount": 432,
@@ -247,18 +247,18 @@
   },
   "boating": {
     "activeWithDock": 1,
-    "activeWaterfront": 42
+    "activeWaterfront": 41
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 233 active listings and roughly 60 closed sales a month (trailing 12 months), Palmer Ranch has about 3.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 233 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Palmer Ranch?",
-      "a": "Single-family homes sell around $650,000 ($288/sq ft), while condos, villas and townhouses sell around $325,000 ($211/sq ft)."
+      "a": "Single-family homes sell around $650,000 ($289/sq ft), while condos, villas and townhouses sell around $325,000 ($211/sq ft)."
     },
     {
       "facet": "range",
@@ -268,12 +268,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 57 days on market and closed at 92.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 56 days on market and closed at 92.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 42 active waterfront listings, 1 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 41 active waterfront listings, 1 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

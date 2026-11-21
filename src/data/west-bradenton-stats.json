@@ -2,15 +2,15 @@
   "areaSlug": "west-bradenton",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-20T12:06:13.688904+00:00",
+  "lastUpdated": "2026-11-21T12:01:43.511378+00:00",
   "counts": {
-    "sold": 364,
+    "sold": 365,
     "pending": 52,
     "active": 159,
-    "total": 416
+    "total": 417
   },
   "metrics": {
-    "avgPrice": "$657,915",
+    "avgPrice": "$657,498",
     "avgPricePerSqFt": "$312",
     "avgYearBuilt": 1997,
     "avgLivingSqFt": "1,992",
@@ -23,16 +23,16 @@
   },
   "active": {
     "count": 159,
-    "medianPrice": "$515,000",
-    "medianPricePerSqFt": "$289",
+    "medianPrice": "$499,900",
+    "medianPricePerSqFt": "$281",
     "waterfrontCount": 57,
-    "newConstructionCount": 44
+    "newConstructionCount": 46
   },
   "sold": {
-    "count": 72,
+    "count": 73,
     "medianPrice": "$444,999",
-    "medianDom": 46,
-    "saleToListRatio": "101.6%",
+    "medianDom": 45,
+    "saleToListRatio": "101.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -81,6 +81,19 @@
       "isWaterfront": true
     },
     {
+      "listingId": "R4911587",
+      "address": "8129 FAIRCHILD AVE",
+      "subdivision": "SEAFLOWER",
+      "soldPrice": "$435,000",
+      "soldDate": "2026-11-18",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,671",
+      "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "A4704270",
       "address": "3500 EL CONQUISTADOR PKWY #252",
       "subdivision": "VALENCIA GARDEN II",
@@ -118,19 +131,6 @@
       "yearBuilt": 2026,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "TB8543129",
-      "address": "7618 SEAFLOWER PKWY",
-      "subdivision": "SEAFLOWER PH I",
-      "soldPrice": "$550,000",
-      "soldDate": "2026-11-16",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,830",
-      "yearBuilt": 2025,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [],
@@ -157,7 +157,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 25,
+      "activeCount": 24,
       "soldCount": 38,
       "soldMedianPricePerSqFt": "$264",
       "soldMedianPrice": "$434,000",
@@ -175,10 +175,10 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 77,
-      "soldCount": 201,
+      "activeCount": 78,
+      "soldCount": 202,
       "soldMedianPricePerSqFt": "$254",
-      "soldMedianPrice": "$444,999",
+      "soldMedianPrice": "$443,750",
       "lowSample": false
     }
   ],
@@ -189,20 +189,20 @@
     "label": "balanced market",
     "activeCount": 159,
     "sold365Count": 309,
-    "sold90Count": 72,
+    "sold90Count": 73,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 157,
-      "activeCount": 59,
+      "activeCount": 57,
       "soldMedianPrice": "$750,000",
       "soldMedianPricePerSqFt": "$350"
     },
     "condo": {
-      "soldCount": 207,
-      "activeCount": 100,
-      "soldMedianPrice": "$394,999",
+      "soldCount": 208,
+      "activeCount": 102,
+      "soldMedianPrice": "$395,500",
       "soldMedianPricePerSqFt": "$235"
     }
   },
@@ -219,17 +219,17 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo in West Bradenton?",
-      "a": "Single-family homes sell around $750,000 ($350/sq ft), while condos, villas and townhouses sell around $394,999 ($235/sq ft)."
+      "a": "Single-family homes sell around $750,000 ($350/sq ft), while condos, villas and townhouses sell around $395,500 ($235/sq ft)."
     },
     {
       "facet": "range",
       "q": "What is the price range in West Bradenton?",
-      "a": "Active listings run from $92,000 to $6,890,000, with a median asking price of $515,000."
+      "a": "Active listings run from $92,000 to $6,890,000, with a median asking price of $499,900."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell in West Bradenton?",
-      "a": "Recently sold homes took a median 46 days on market and closed at 101.6% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 45 days on market and closed at 101.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
@@ -247,13 +247,13 @@
     {
       "slug": "west-bradenton-el-con-img-aqua",
       "name": "El Conquistador / IMG / Aqua",
-      "activeCount": 66,
-      "pendingCount": 7,
-      "activeMedianPrice": "$374,000",
-      "soldCount": 106,
+      "activeCount": 64,
+      "pendingCount": 8,
+      "activeMedianPrice": "$366,500",
+      "soldCount": 105,
       "soldMedianPrice": "$375,000",
-      "soldMedianPricePerSqFt": "$190",
-      "soldMedianDom": 70,
+      "soldMedianPricePerSqFt": "$191",
+      "soldMedianDom": 73,
       "soldSingleFamilyShare": "31%",
       "lowSample": false
     },
@@ -273,14 +273,14 @@
     {
       "slug": "west-bradenton-seaflower",
       "name": "SeaFlower",
-      "activeCount": 24,
-      "pendingCount": 26,
-      "activeMedianPrice": "$568,999",
-      "soldCount": 84,
-      "soldMedianPrice": "$501,088",
-      "soldMedianPricePerSqFt": "$265",
-      "soldMedianDom": 42,
-      "soldSingleFamilyShare": "43%",
+      "activeCount": 26,
+      "pendingCount": 25,
+      "activeMedianPrice": "$567,999",
+      "soldCount": 85,
+      "soldMedianPrice": "$499,195",
+      "soldMedianPricePerSqFt": "$264",
+      "soldMedianDom": 41,
+      "soldSingleFamilyShare": "42%",
       "lowSample": false
     },
     {
@@ -323,8 +323,8 @@
             "soldMedianPrice": "$680,000",
             "soldMedianPricePerSqFt": "$323",
             "soldMedianDom": 35,
-            "activeCount": 39,
-            "activeMedianPrice": "$875,000",
+            "activeCount": 37,
+            "activeMedianPrice": "$898,900",
             "lowSample": false
           }
         ],
@@ -349,11 +349,11 @@
             "waterfront": "non_waterfront",
             "label": "Non-Waterfront",
             "soldCount": 131,
-            "soldMedianPrice": "$375,500",
+            "soldMedianPrice": "$383,999",
             "soldMedianPricePerSqFt": "$215",
             "soldMedianDom": 78,
-            "activeCount": 74,
-            "activeMedianPrice": "$344,500",
+            "activeCount": 76,
+            "activeMedianPrice": "$350,000",
             "lowSample": false
           }
         ],
