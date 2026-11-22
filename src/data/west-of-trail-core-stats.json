@@ -2,18 +2,18 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-21T12:01:39.618955+00:00",
+  "lastUpdated": "2026-11-22T12:09:51.937759+00:00",
   "counts": {
     "sold": 294,
-    "pending": 15,
-    "active": 104,
-    "total": 309
+    "pending": 16,
+    "active": 103,
+    "total": 310
   },
   "metrics": {
-    "avgPrice": "$2,101,163",
+    "avgPrice": "$2,102,208",
     "avgPricePerSqFt": "$661",
     "avgYearBuilt": 1982,
-    "avgLivingSqFt": "2,756",
+    "avgLivingSqFt": "2,760",
     "avgLotSqFt": null,
     "avgDom": 107
   },
@@ -22,9 +22,9 @@
     "maxPrice": "$28,000,000"
   },
   "active": {
-    "count": 104,
-    "medianPrice": "$2,022,500",
-    "medianPricePerSqFt": "$763",
+    "count": 103,
+    "medianPrice": "$1,995,000",
+    "medianPricePerSqFt": "$765",
     "waterfrontCount": 23,
     "newConstructionCount": 26
   },
@@ -56,13 +56,13 @@
   "priceBands": {
     "under900k": 27,
     "band900kTo1_5m": 15,
-    "band1_5mTo3m": 22,
+    "band1_5mTo3m": 21,
     "band3mPlus": 40
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 104
+      "count": 103
     }
   ],
   "buildingClasses": [],
@@ -142,7 +142,7 @@
       "avgPrice": "$487,000",
       "avgPricePerSqFt": "$395",
       "avgLivingSqFt": "1,215",
-      "avgDom": 119
+      "avgDom": 120
     },
     {
       "tier": "1990to2005",
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 80,
+      "activeCount": 79,
       "soldCount": 247,
       "soldMedianPricePerSqFt": "$577",
       "soldMedianPrice": "$1,485,000",
@@ -226,15 +226,15 @@
     "monthsOfSupplyCondo": 6.0,
     "monthsOfSupplySfhVilla": 5.8,
     "label": "balanced market",
-    "activeCount": 104,
-    "sold365Count": 216,
+    "activeCount": 103,
+    "sold365Count": 214,
     "sold90Count": 48,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 273,
-      "activeCount": 97,
+      "activeCount": 96,
       "soldMedianPrice": "$1,600,000",
       "soldMedianPricePerSqFt": "$644"
     },
@@ -246,14 +246,14 @@
     }
   },
   "boating": {
-    "activeWithDock": 16,
+    "activeWithDock": 15,
     "activeWaterfront": 23
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 104 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 5.8 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 103 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 5.8 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -263,7 +263,7 @@
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $1,000 to $28,000,000, with a median asking price of $2,022,500."
+      "a": "Active listings run from $1,000 to $28,000,000, with a median asking price of $1,995,000."
     },
     {
       "facet": "speed",
@@ -273,7 +273,7 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail Core homes have a dock?",
-      "a": "Of 23 active waterfront listings, 16 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 23 active waterfront listings, 15 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

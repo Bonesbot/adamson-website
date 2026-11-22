@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-21T12:01:41.244865+00:00",
+  "lastUpdated": "2026-11-22T12:09:53.556666+00:00",
   "counts": {
-    "sold": 343,
-    "pending": 25,
+    "sold": 345,
+    "pending": 23,
     "active": 116,
     "total": 368
   },
   "metrics": {
-    "avgPrice": "$643,263",
+    "avgPrice": "$641,315",
     "avgPricePerSqFt": "$327",
     "avgYearBuilt": 1980,
     "avgLivingSqFt": "1,766",
@@ -29,10 +29,10 @@
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 68,
-    "medianPrice": "$431,669",
+    "count": 70,
+    "medianPrice": "$440,444",
     "medianDom": 46,
-    "saleToListRatio": "88.5%",
+    "saleToListRatio": "88.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -68,6 +68,19 @@
   "buildingClasses": [],
   "recentSoldComps": [
     {
+      "listingId": "A4695466",
+      "address": "1541 CARIBBEAN DR",
+      "subdivision": "CORAL COVE",
+      "soldPrice": "$4,275,000",
+      "soldDate": "2026-11-20",
+      "bedrooms": 5,
+      "bathrooms": 5.0,
+      "livingSqFt": "6,035",
+      "yearBuilt": 2004,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
       "listingId": "A4707433",
       "address": "6741 AVENUE D",
       "subdivision": "BAY VIEW ACRES",
@@ -77,6 +90,19 @@
       "bathrooms": 2.0,
       "livingSqFt": "1,651",
       "yearBuilt": 1985,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4708576",
+      "address": "1510 PELICAN POINT DR #BA270",
+      "subdivision": "PELICAN COVE VI",
+      "soldPrice": "$608,000",
+      "soldDate": "2026-11-19",
+      "bedrooms": 3,
+      "bathrooms": 3.0,
+      "livingSqFt": "1,635",
+      "yearBuilt": 1978,
       "propertyType": "Residential",
       "isWaterfront": false
     },
@@ -105,32 +131,6 @@
       "yearBuilt": 1980,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4695955",
-      "address": "5420 EAGLES POINT CIR #406",
-      "subdivision": "EAGLES POINT AT THE LANDINGS",
-      "soldPrice": "$740,000",
-      "soldDate": "2026-11-16",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,165",
-      "yearBuilt": 1993,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "N6146064",
-      "address": "1657 BROOKHOUSE CIR #152",
-      "subdivision": "PELICAN COVE XVI",
-      "soldPrice": "$230,000",
-      "soldDate": "2026-11-16",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,080",
-      "yearBuilt": 1980,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$374,200",
       "avgPricePerSqFt": "$293",
       "avgLivingSqFt": "1,273",
-      "avgDom": 94
+      "avgDom": 95
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,179,667",
       "avgPricePerSqFt": "$505",
       "avgLivingSqFt": "2,148",
-      "avgDom": 83
+      "avgDom": 84
     },
     {
       "tier": "2006to2019",
@@ -197,18 +197,18 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 31,
-      "soldCount": 72,
-      "soldMedianPricePerSqFt": "$366",
-      "soldMedianPrice": "$485,000",
+      "soldCount": 73,
+      "soldMedianPricePerSqFt": "$370",
+      "soldMedianPrice": "$495,000",
       "lowSample": false
     },
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
       "activeCount": 9,
-      "soldCount": 37,
-      "soldMedianPricePerSqFt": "$299",
-      "soldMedianPrice": "$450,000",
+      "soldCount": 38,
+      "soldMedianPricePerSqFt": "$307",
+      "soldMedianPrice": "$457,500",
       "lowSample": false
     },
     {
@@ -236,22 +236,22 @@
     "monthsOfSupplySfhVilla": 5.7,
     "label": "balanced market",
     "activeCount": 116,
-    "sold365Count": 252,
-    "sold90Count": 68,
+    "sold365Count": 253,
+    "sold90Count": 70,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 178,
+      "soldCount": 179,
       "activeCount": 50,
       "soldMedianPrice": "$535,000",
       "soldMedianPricePerSqFt": "$327"
     },
     "condo": {
-      "soldCount": 165,
+      "soldCount": 166,
       "activeCount": 66,
       "soldMedianPrice": "$335,000",
-      "soldMedianPricePerSqFt": "$253"
+      "soldMedianPricePerSqFt": "$255"
     }
   },
   "boating": {
@@ -267,7 +267,7 @@
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $535,000 ($327/sq ft), while condos, villas and townhouses sell around $335,000 ($253/sq ft)."
+      "a": "Single-family homes sell around $535,000 ($327/sq ft), while condos, villas and townhouses sell around $335,000 ($255/sq ft)."
     },
     {
       "facet": "range",
@@ -277,7 +277,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 46 days on market and closed at 88.5% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 46 days on market and closed at 88.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

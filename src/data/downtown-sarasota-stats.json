@@ -2,16 +2,16 @@
   "areaSlug": "downtown-sarasota",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-21T12:01:38.783019+00:00",
+  "lastUpdated": "2026-11-22T12:09:51.180745+00:00",
   "counts": {
-    "sold": 321,
-    "pending": 72,
-    "active": 209,
+    "sold": 322,
+    "pending": 71,
+    "active": 210,
     "total": 393
   },
   "metrics": {
-    "avgPrice": "$1,936,826",
-    "avgPricePerSqFt": "$827",
+    "avgPrice": "$1,936,777",
+    "avgPricePerSqFt": "$826",
     "avgYearBuilt": 2002,
     "avgLivingSqFt": "2,093",
     "avgLotSqFt": null,
@@ -22,23 +22,23 @@
     "maxPrice": "$14,450,000"
   },
   "active": {
-    "count": 209,
-    "medianPrice": "$1,917,000",
-    "medianPricePerSqFt": "$903",
+    "count": 210,
+    "medianPrice": "$1,923,000",
+    "medianPricePerSqFt": "$905",
     "waterfrontCount": 57,
-    "newConstructionCount": 82
+    "newConstructionCount": 83
   },
   "sold": {
-    "count": 48,
-    "medianPrice": "$1,225,000",
-    "medianDom": 58,
-    "saleToListRatio": "88.3%",
+    "count": 49,
+    "medianPrice": "$1,200,000",
+    "medianDom": 55,
+    "saleToListRatio": "88.5%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 10.0,
+    "condo": 10.1,
     "sfhVilla": 14.2,
-    "blended": 10.3,
+    "blended": 10.4,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,15 +54,15 @@
     }
   },
   "priceBands": {
-    "under900k": 51,
-    "band900kTo1_5m": 39,
-    "band1_5mTo3m": 53,
+    "under900k": 52,
+    "band900kTo1_5m": 38,
+    "band1_5mTo3m": 54,
     "band3mPlus": 66
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 209
+      "count": 210
     }
   ],
   "buildingClasses": [],
@@ -77,6 +77,19 @@
       "bathrooms": 3.5,
       "livingSqFt": "2,263",
       "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4702950",
+      "address": "101 S GULFSTREAM AVE #14D",
+      "subdivision": "DOLPHIN TOWER",
+      "soldPrice": "$569,750",
+      "soldDate": "2026-11-20",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,220",
+      "yearBuilt": 1974,
       "propertyType": "Residential",
       "isWaterfront": false
     },
@@ -118,19 +131,6 @@
       "yearBuilt": 2024,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4690816",
-      "address": "111 S PINEAPPLE AVE #1013",
-      "subdivision": "MARK SARASOTA CONDOMINIUM",
-      "soldPrice": "$1,425,000",
-      "soldDate": "2026-11-17",
-      "bedrooms": 2,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,577",
-      "yearBuilt": 2019,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 53,
-      "avgPrice": "$1,162,255",
-      "avgPricePerSqFt": "$676",
+      "avgPrice": "$1,155,651",
+      "avgPricePerSqFt": "$672",
       "avgLivingSqFt": "1,604",
-      "avgDom": 133
+      "avgDom": 134
     },
     {
       "tier": "1990to2005",
@@ -152,27 +152,27 @@
       "avgPrice": "$2,124,606",
       "avgPricePerSqFt": "$762",
       "avgLivingSqFt": "2,429",
-      "avgDom": 77
+      "avgDom": 78
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
       "activeCount": 39,
-      "avgPrice": "$1,682,972",
-      "avgPricePerSqFt": "$775",
+      "avgPrice": "$1,681,844",
+      "avgPricePerSqFt": "$774",
       "avgLivingSqFt": "2,017",
-      "avgDom": 98
+      "avgDom": 99
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 80,
-      "avgPrice": "$4,341,625",
-      "avgPricePerSqFt": "$1,390",
-      "avgLivingSqFt": "2,976",
-      "avgDom": 202
+      "activeCount": 81,
+      "avgPrice": "$4,324,691",
+      "avgPricePerSqFt": "$1,389",
+      "avgLivingSqFt": "2,967",
+      "avgDom": 200
     }
   ],
   "condoTiersScope": {
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 88,
+      "activeCount": 89,
       "soldCount": 157,
       "soldMedianPricePerSqFt": "$791",
       "soldMedianPrice": "$1,475,000",
@@ -215,20 +215,20 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 64,
-      "soldCount": 87,
-      "soldMedianPricePerSqFt": "$549",
-      "soldMedianPrice": "$749,000",
+      "soldCount": 88,
+      "soldMedianPricePerSqFt": "$548",
+      "soldMedianPrice": "$739,500",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 10.3,
-    "monthsOfSupplyCondo": 10.0,
+    "monthsOfSupply": 10.4,
+    "monthsOfSupplyCondo": 10.1,
     "monthsOfSupplySfhVilla": 14.2,
     "label": "buyer's market",
-    "activeCount": 209,
+    "activeCount": 210,
     "sold365Count": 243,
-    "sold90Count": 48,
+    "sold90Count": 49,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -239,9 +239,9 @@
       "soldMedianPricePerSqFt": "$563"
     },
     "condo": {
-      "soldCount": 308,
-      "activeCount": 202,
-      "soldMedianPrice": "$1,212,500",
+      "soldCount": 309,
+      "activeCount": 203,
+      "soldMedianPrice": "$1,200,000",
       "soldMedianPricePerSqFt": "$720"
     }
   },
@@ -253,22 +253,22 @@
     {
       "facet": "balance",
       "q": "Is Downtown Sarasota a buyer's or seller's market right now?",
-      "a": "With 209 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 10.3 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 210 active listings and roughly 20 closed sales a month (trailing 12 months), Downtown Sarasota has about 10.4 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Downtown Sarasota?",
-      "a": "Single-family homes sell around $885,000 ($563/sq ft), while condos, villas and townhouses sell around $1,212,500 ($720/sq ft)."
+      "a": "Single-family homes sell around $885,000 ($563/sq ft), while condos, villas and townhouses sell around $1,200,000 ($720/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on Downtown Sarasota?",
-      "a": "Active listings run from $260,000 to $14,450,000, with a median asking price of $1,917,000."
+      "a": "Active listings run from $260,000 to $14,450,000, with a median asking price of $1,923,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Downtown Sarasota?",
-      "a": "Recently sold homes took a median 58 days on market and closed at 88.3% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 55 days on market and closed at 88.5% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

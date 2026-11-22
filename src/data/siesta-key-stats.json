@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-21T12:01:37.882860+00:00",
+  "lastUpdated": "2026-11-22T12:09:50.407651+00:00",
   "counts": {
     "sold": 778,
-    "pending": 36,
+    "pending": 37,
     "active": 296,
-    "total": 814
+    "total": 815
   },
   "metrics": {
-    "avgPrice": "$1,347,552",
-    "avgPricePerSqFt": "$698",
+    "avgPrice": "$1,346,175",
+    "avgPricePerSqFt": "$697",
     "avgYearBuilt": 1979,
-    "avgLivingSqFt": "1,774",
+    "avgLivingSqFt": "1,772",
     "avgLotSqFt": null,
     "avgDom": 101
   },
@@ -36,9 +36,9 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 7.9,
+    "condo": 8.0,
     "sfhVilla": 7.2,
-    "blended": 7.6,
+    "blended": 7.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -139,10 +139,10 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 176,
-      "avgPrice": "$789,845",
-      "avgPricePerSqFt": "$680",
+      "avgPrice": "$790,584",
+      "avgPricePerSqFt": "$681",
       "avgLivingSqFt": "1,163",
-      "avgDom": 115
+      "avgDom": 116
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,491,112",
       "avgPricePerSqFt": "$735",
       "avgLivingSqFt": "2,084",
-      "avgDom": 135
+      "avgDom": 136
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$2,626,800",
       "avgPricePerSqFt": "$970",
       "avgLivingSqFt": "2,640",
-      "avgDom": 95
+      "avgDom": 96
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,826,111",
       "avgPricePerSqFt": "$1,456",
       "avgLivingSqFt": "3,417",
-      "avgDom": 218
+      "avgDom": 219
     }
   ],
   "condoTiersScope": {
@@ -231,12 +231,12 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.6,
-    "monthsOfSupplyCondo": 7.9,
+    "monthsOfSupply": 7.7,
+    "monthsOfSupplyCondo": 8.0,
     "monthsOfSupplySfhVilla": 7.2,
     "label": "buyer's market",
     "activeCount": 296,
-    "sold365Count": 467,
+    "sold365Count": 464,
     "sold90Count": 102,
     "method": "active / (trailing-12mo closed / 12)"
   },
@@ -267,7 +267,7 @@
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 296 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 7.6 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 296 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 7.7 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
