@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-22T12:09:55.042092+00:00",
+  "lastUpdated": "2026-11-23T12:12:50.417784+00:00",
   "counts": {
     "sold": 1002,
-    "pending": 60,
-    "active": 231,
-    "total": 1062
+    "pending": 62,
+    "active": 229,
+    "total": 1064
   },
   "metrics": {
-    "avgPrice": "$559,139",
-    "avgPricePerSqFt": "$263",
+    "avgPrice": "$559,336",
+    "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,040",
+    "avgLivingSqFt": "2,041",
     "avgLotSqFt": null,
     "avgDom": 78
   },
@@ -22,16 +22,16 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 231,
+    "count": 229,
     "medianPrice": "$415,000",
     "medianPricePerSqFt": "$245",
     "waterfrontCount": 41,
-    "newConstructionCount": 35
+    "newConstructionCount": 33
   },
   "sold": {
-    "count": 155,
-    "medianPrice": "$477,000",
-    "medianDom": 57,
+    "count": 154,
+    "medianPrice": "$480,500",
+    "medianDom": 56,
     "saleToListRatio": "92.2%",
     "windowDays": 90
   },
@@ -54,15 +54,15 @@
     }
   },
   "priceBands": {
-    "under900k": 215,
-    "band900kTo1_5m": 15,
+    "under900k": 214,
+    "band900kTo1_5m": 14,
     "band1_5mTo3m": 1,
     "band3mPlus": 0
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 231
+      "count": 229
     }
   ],
   "buildingClasses": [],
@@ -142,7 +142,7 @@
       "avgPrice": "$327,378",
       "avgPricePerSqFt": "$197",
       "avgLivingSqFt": "1,660",
-      "avgDom": 116
+      "avgDom": 117
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$281,958",
       "avgPricePerSqFt": "$222",
       "avgLivingSqFt": "1,264",
-      "avgDom": 126
+      "avgDom": 127
     },
     {
       "tier": "2006to2019",
@@ -162,17 +162,17 @@
       "avgPrice": "$393,850",
       "avgPricePerSqFt": "$233",
       "avgLivingSqFt": "1,697",
-      "avgDom": 68
+      "avgDom": 69
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
-      "activeCount": 12,
-      "avgPrice": "$351,479",
-      "avgPricePerSqFt": "$219",
-      "avgLivingSqFt": "1,601",
-      "avgDom": 83
+      "activeCount": 11,
+      "avgPrice": "$351,623",
+      "avgPricePerSqFt": "$221",
+      "avgLivingSqFt": "1,590",
+      "avgDom": 73
     }
   ],
   "condoTiersScope": {
@@ -196,7 +196,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 48,
+      "activeCount": 46,
       "soldCount": 228,
       "soldMedianPricePerSqFt": "$259",
       "soldMedianPrice": "$475,000",
@@ -226,21 +226,21 @@
     "monthsOfSupplyCondo": 6.3,
     "monthsOfSupplySfhVilla": 3.1,
     "label": "seller's market",
-    "activeCount": 231,
+    "activeCount": 229,
     "sold365Count": 708,
-    "sold90Count": 155,
+    "sold90Count": 154,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 570,
-      "activeCount": 95,
+      "activeCount": 94,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$289"
     },
     "condo": {
       "soldCount": 432,
-      "activeCount": 136,
+      "activeCount": 135,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
     }
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 231 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 229 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 57 days on market and closed at 92.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 56 days on market and closed at 92.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
