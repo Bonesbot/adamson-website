@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-23T12:12:45.375280+00:00",
+  "lastUpdated": "2026-11-24T12:13:38.890134+00:00",
   "counts": {
     "sold": 778,
-    "pending": 39,
-    "active": 296,
-    "total": 817
+    "pending": 42,
+    "active": 297,
+    "total": 820
   },
   "metrics": {
-    "avgPrice": "$1,344,318",
-    "avgPricePerSqFt": "$697",
+    "avgPrice": "$1,339,421",
+    "avgPricePerSqFt": "$695",
     "avgYearBuilt": 1979,
-    "avgLivingSqFt": "1,771",
+    "avgLivingSqFt": "1,767",
     "avgLotSqFt": null,
     "avgDom": 100
   },
@@ -22,22 +22,22 @@
     "maxPrice": "$26,000,000"
   },
   "active": {
-    "count": 296,
-    "medianPrice": "$1,099,000",
-    "medianPricePerSqFt": "$725",
-    "waterfrontCount": 171,
-    "newConstructionCount": 43
+    "count": 297,
+    "medianPrice": "$1,100,000",
+    "medianPricePerSqFt": "$740",
+    "waterfrontCount": 174,
+    "newConstructionCount": 44
   },
   "sold": {
-    "count": 100,
-    "medianPrice": "$1,022,500",
-    "medianDom": 78,
-    "saleToListRatio": "89.3%",
+    "count": 99,
+    "medianPrice": "$1,050,000",
+    "medianDom": 77,
+    "saleToListRatio": "89.4%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 7.9,
-    "sfhVilla": 7.3,
+    "sfhVilla": 7.4,
     "blended": 7.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -54,15 +54,15 @@
     }
   },
   "priceBands": {
-    "under900k": 138,
-    "band900kTo1_5m": 45,
-    "band1_5mTo3m": 53,
-    "band3mPlus": 60
+    "under900k": 136,
+    "band900kTo1_5m": 46,
+    "band1_5mTo3m": 54,
+    "band3mPlus": 61
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 296
+      "count": 297
     }
   ],
   "buildingClasses": [],
@@ -139,9 +139,9 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 173,
-      "avgPrice": "$793,225",
-      "avgPricePerSqFt": "$685",
-      "avgLivingSqFt": "1,159",
+      "avgPrice": "$805,243",
+      "avgPricePerSqFt": "$690",
+      "avgLivingSqFt": "1,165",
       "avgDom": 117
     },
     {
@@ -152,7 +152,7 @@
       "avgPrice": "$1,491,112",
       "avgPricePerSqFt": "$735",
       "avgLivingSqFt": "2,084",
-      "avgDom": 137
+      "avgDom": 138
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$2,689,000",
       "avgPricePerSqFt": "$1,042",
       "avgLivingSqFt": "2,557",
-      "avgDom": 81
+      "avgDom": 82
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,826,111",
       "avgPricePerSqFt": "$1,456",
       "avgLivingSqFt": "3,417",
-      "avgDom": 220
+      "avgDom": 221
     }
   ],
   "condoTiersScope": {
@@ -187,7 +187,7 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 78,
+      "activeCount": 81,
       "soldCount": 276,
       "soldMedianPricePerSqFt": "$755",
       "soldMedianPrice": "$1,000,000",
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 78,
+      "activeCount": 76,
       "soldCount": 151,
       "soldMedianPricePerSqFt": "$576",
       "soldMedianPrice": "$775,000",
@@ -233,17 +233,17 @@
   "marketBalance": {
     "monthsOfSupply": 7.7,
     "monthsOfSupplyCondo": 7.9,
-    "monthsOfSupplySfhVilla": 7.3,
+    "monthsOfSupplySfhVilla": 7.4,
     "label": "buyer's market",
-    "activeCount": 296,
+    "activeCount": 297,
     "sold365Count": 464,
-    "sold90Count": 100,
+    "sold90Count": 99,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 236,
-      "activeCount": 100,
+      "activeCount": 101,
       "soldMedianPrice": "$1,538,500",
       "soldMedianPricePerSqFt": "$668"
     },
@@ -256,7 +256,7 @@
   },
   "boating": {
     "activeWithDock": 77,
-    "activeWaterfront": 171
+    "activeWaterfront": 174
   },
   "marketQuestions": [
     {
@@ -267,7 +267,7 @@
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 296 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 7.7 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 297 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 7.7 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -277,17 +277,17 @@
     {
       "facet": "range",
       "q": "What's the price range on Siesta Key?",
-      "a": "Active listings run from $225,000 to $26,000,000, with a median asking price of $1,099,000."
+      "a": "Active listings run from $225,000 to $26,000,000, with a median asking price of $1,100,000."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 78 days on market and closed at 89.3% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 77 days on market and closed at 89.4% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Siesta Key homes have a dock?",
-      "a": "Of 171 active waterfront listings, 77 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 174 active waterfront listings, 77 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

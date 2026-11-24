@@ -2,20 +2,20 @@
   "areaSlug": "bird-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-14T11:52:41.063965+00:00",
+  "lastUpdated": "2026-11-24T12:13:42.981104+00:00",
   "counts": {
     "sold": 44,
-    "pending": 3,
+    "pending": 4,
     "active": 13,
-    "total": 47
+    "total": 48
   },
   "metrics": {
-    "avgPrice": "$4,315,691",
-    "avgPricePerSqFt": "$1,118",
-    "avgYearBuilt": 1991,
-    "avgLivingSqFt": "3,724",
-    "avgLotSqFt": "14,759",
-    "avgDom": 118
+    "avgPrice": "$4,302,359",
+    "avgPricePerSqFt": "$1,123",
+    "avgYearBuilt": 1992,
+    "avgLivingSqFt": "3,704",
+    "avgLotSqFt": "14,702",
+    "avgDom": 116
   },
   "range": {
     "minPrice": "$990,000",
@@ -24,15 +24,15 @@
   "active": {
     "count": 13,
     "medianPrice": "$5,750,000",
-    "medianPricePerSqFt": "$1,333",
+    "medianPricePerSqFt": "$1,418",
     "waterfrontCount": 7,
     "newConstructionCount": 4
   },
   "sold": {
-    "count": 7,
-    "medianPrice": "$3,700,000",
-    "medianDom": 143,
-    "saleToListRatio": "87.3%",
+    "count": 6,
+    "medianPrice": "$2,687,500",
+    "medianDom": 192,
+    "saleToListRatio": "85.9%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -64,7 +64,7 @@
   "buildingClasses": [
     {
       "class": "low-rise",
-      "count": 8
+      "count": 7
     }
   ],
   "recentSoldComps": [
@@ -181,7 +181,7 @@
     "label": "seller's market",
     "activeCount": 13,
     "sold365Count": 33,
-    "sold90Count": 7,
+    "sold90Count": 6,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
@@ -210,7 +210,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Bird Key?",
-      "a": "Recently sold homes took a median 143 days on market and closed at 87.3% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 192 days on market and closed at 85.9% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",

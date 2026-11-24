@@ -2,15 +2,15 @@
   "areaSlug": "west-bradenton",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-23T12:12:51.289943+00:00",
+  "lastUpdated": "2026-11-24T12:13:44.687728+00:00",
   "counts": {
-    "sold": 365,
-    "pending": 53,
-    "active": 159,
+    "sold": 366,
+    "pending": 52,
+    "active": 160,
     "total": 418
   },
   "metrics": {
-    "avgPrice": "$657,779",
+    "avgPrice": "$657,731",
     "avgPricePerSqFt": "$312",
     "avgYearBuilt": 1997,
     "avgLivingSqFt": "1,991",
@@ -22,22 +22,22 @@
     "maxPrice": "$6,890,000"
   },
   "active": {
-    "count": 159,
-    "medianPrice": "$499,900",
-    "medianPricePerSqFt": "$281",
-    "waterfrontCount": 57,
+    "count": 160,
+    "medianPrice": "$507,450",
+    "medianPricePerSqFt": "$282",
+    "waterfrontCount": 58,
     "newConstructionCount": 46
   },
   "sold": {
-    "count": 72,
-    "medianPrice": "$440,000",
+    "count": 73,
+    "medianPrice": "$444,999",
     "medianDom": 45,
     "saleToListRatio": "101.6%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 8.5,
-    "sfhVilla": 5.1,
+    "sfhVilla": 5.2,
     "blended": 6.2,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
@@ -55,18 +55,31 @@
   },
   "priceBands": {
     "under900k": 118,
-    "band900kTo1_5m": 22,
+    "band900kTo1_5m": 23,
     "band1_5mTo3m": 13,
     "band3mPlus": 6
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 159
+      "count": 160
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "TB8520803",
+      "address": "8206 MERRITT AVE",
+      "subdivision": "SEAFLOWER",
+      "soldPrice": "$824,990",
+      "soldDate": "2026-11-23",
+      "bedrooms": 4,
+      "bathrooms": 3.0,
+      "livingSqFt": "2,702",
+      "yearBuilt": 2026,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4701007",
       "address": "4223 ROYAL PALM DR",
@@ -118,19 +131,6 @@
       "yearBuilt": 1995,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "R4911586",
-      "address": "8203 FAIRCHILD AVE",
-      "subdivision": "SEAFLOWER",
-      "soldPrice": "$450,654",
-      "soldDate": "2026-11-17",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,671",
-      "yearBuilt": 2026,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [],
@@ -148,7 +148,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 46,
+      "activeCount": 47,
       "soldCount": 101,
       "soldMedianPricePerSqFt": "$324",
       "soldMedianPrice": "$599,000",
@@ -176,28 +176,28 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 78,
-      "soldCount": 202,
-      "soldMedianPricePerSqFt": "$254",
-      "soldMedianPrice": "$443,750",
+      "soldCount": 203,
+      "soldMedianPricePerSqFt": "$255",
+      "soldMedianPrice": "$444,999",
       "lowSample": false
     }
   ],
   "marketBalance": {
     "monthsOfSupply": 6.2,
     "monthsOfSupplyCondo": 8.5,
-    "monthsOfSupplySfhVilla": 5.1,
+    "monthsOfSupplySfhVilla": 5.2,
     "label": "balanced market",
-    "activeCount": 159,
-    "sold365Count": 307,
-    "sold90Count": 72,
+    "activeCount": 160,
+    "sold365Count": 308,
+    "sold90Count": 73,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 157,
-      "activeCount": 56,
-      "soldMedianPrice": "$750,000",
-      "soldMedianPricePerSqFt": "$350"
+      "soldCount": 158,
+      "activeCount": 57,
+      "soldMedianPrice": "$752,500",
+      "soldMedianPricePerSqFt": "$349"
     },
     "condo": {
       "soldCount": 208,
@@ -207,24 +207,24 @@
     }
   },
   "boating": {
-    "activeWithDock": 36,
-    "activeWaterfront": 57
+    "activeWithDock": 37,
+    "activeWaterfront": 58
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Bradenton a buyer's or seller's market right now?",
-      "a": "With 159 active listings and roughly 26 closed sales a month (trailing 12 months), West Bradenton has about 6.2 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 160 active listings and roughly 26 closed sales a month (trailing 12 months), West Bradenton has about 6.2 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo in West Bradenton?",
-      "a": "Single-family homes sell around $750,000 ($350/sq ft), while condos, villas and townhouses sell around $395,500 ($235/sq ft)."
+      "a": "Single-family homes sell around $752,500 ($349/sq ft), while condos, villas and townhouses sell around $395,500 ($235/sq ft)."
     },
     {
       "facet": "range",
       "q": "What is the price range in West Bradenton?",
-      "a": "Active listings run from $92,000 to $6,890,000, with a median asking price of $499,900."
+      "a": "Active listings run from $92,000 to $6,890,000, with a median asking price of $507,450."
     },
     {
       "facet": "speed",
@@ -234,7 +234,7 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat in West Bradenton, and how many homes have a dock?",
-      "a": "Of 57 active waterfront listings, 36 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 58 active waterfront listings, 37 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
@@ -260,9 +260,9 @@
     {
       "slug": "west-bradenton-coral-shores-cortez",
       "name": "Coral Shores / Cortez",
-      "activeCount": 59,
+      "activeCount": 60,
       "pendingCount": 18,
-      "activeMedianPrice": "$575,000",
+      "activeMedianPrice": "$577,500",
       "soldCount": 107,
       "soldMedianPrice": "$485,000",
       "soldMedianPricePerSqFt": "$321",
@@ -274,13 +274,13 @@
       "slug": "west-bradenton-seaflower",
       "name": "SeaFlower",
       "activeCount": 26,
-      "pendingCount": 25,
+      "pendingCount": 24,
       "activeMedianPrice": "$567,999",
-      "soldCount": 85,
-      "soldMedianPrice": "$499,195",
-      "soldMedianPricePerSqFt": "$264",
-      "soldMedianDom": 41,
-      "soldSingleFamilyShare": "42%",
+      "soldCount": 86,
+      "soldMedianPrice": "$501,088",
+      "soldMedianPricePerSqFt": "$265",
+      "soldMedianDom": 42,
+      "soldSingleFamilyShare": "43%",
       "lowSample": false
     },
     {
@@ -312,23 +312,23 @@
             "soldMedianPrice": "$1,230,500",
             "soldMedianPricePerSqFt": "$574",
             "soldMedianDom": 65,
-            "activeCount": 19,
-            "activeMedianPrice": "$1,700,000",
+            "activeCount": 20,
+            "activeMedianPrice": "$1,649,500",
             "lowSample": false
           },
           {
             "waterfront": "non_waterfront",
             "label": "Non-Waterfront",
-            "soldCount": 102,
-            "soldMedianPrice": "$682,500",
-            "soldMedianPricePerSqFt": "$324",
-            "soldMedianDom": 36,
+            "soldCount": 103,
+            "soldMedianPrice": "$685,000",
+            "soldMedianPricePerSqFt": "$323",
+            "soldMedianDom": 37,
             "activeCount": 37,
             "activeMedianPrice": "$898,900",
             "lowSample": false
           }
         ],
-        "waterfrontPremiumPerSqFt": "77%"
+        "waterfrontPremiumPerSqFt": "78%"
       },
       {
         "propertyType": "attached",

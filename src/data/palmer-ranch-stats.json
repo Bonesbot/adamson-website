@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-23T12:12:50.417784+00:00",
+  "lastUpdated": "2026-11-24T12:13:43.898616+00:00",
   "counts": {
-    "sold": 1002,
-    "pending": 62,
+    "sold": 1006,
+    "pending": 59,
     "active": 229,
-    "total": 1064
+    "total": 1065
   },
   "metrics": {
-    "avgPrice": "$559,336",
+    "avgPrice": "$559,170",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,041",
+    "avgLivingSqFt": "2,040",
     "avgLotSqFt": null,
     "avgDom": 78
   },
@@ -25,14 +25,14 @@
     "count": 229,
     "medianPrice": "$415,000",
     "medianPricePerSqFt": "$245",
-    "waterfrontCount": 41,
+    "waterfrontCount": 40,
     "newConstructionCount": 33
   },
   "sold": {
-    "count": 154,
-    "medianPrice": "$480,500",
-    "medianDom": 56,
-    "saleToListRatio": "92.2%",
+    "count": 155,
+    "medianPrice": "$475,000",
+    "medianDom": 57,
+    "saleToListRatio": "92.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -68,6 +68,45 @@
   "buildingClasses": [],
   "recentSoldComps": [
     {
+      "listingId": "A4705063",
+      "address": "8674 RAIN SONG RD #310",
+      "subdivision": "SUNRISE PRESERVE AT PALMER RANCH",
+      "soldPrice": "$407,000",
+      "soldDate": "2026-11-23",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,674",
+      "yearBuilt": 2020,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4702303",
+      "address": "4138 CENTRAL SARASOTA PKWY #1516",
+      "subdivision": "BELLA VILLINO IV",
+      "soldPrice": "$130,000",
+      "soldDate": "2026-11-23",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "661",
+      "yearBuilt": 1998,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4694778",
+      "address": "5157 COTE DU RHONE WAY",
+      "subdivision": "SILVER OAK",
+      "soldPrice": "$700,000",
+      "soldDate": "2026-11-20",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "2,489",
+      "yearBuilt": 2004,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
       "listingId": "A4705496",
       "address": "8967 GREY OAKS AVE",
       "subdivision": "STONEYBROOK GOLF & COUNTRY CLUB",
@@ -92,45 +131,6 @@
       "yearBuilt": 1989,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4672385",
-      "address": "5451 LAGO MAGGIO ST",
-      "subdivision": "ESPLANADE ON PALMER RANCH",
-      "soldPrice": "$690,000",
-      "soldDate": "2026-11-19",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,918",
-      "yearBuilt": 2022,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4701166",
-      "address": "8945 WHITEMARSH AVE",
-      "subdivision": "STONEYBROOK GOLF & COUNTRY CLUB",
-      "soldPrice": "$595,000",
-      "soldDate": "2026-11-19",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,812",
-      "yearBuilt": 1995,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4701048",
-      "address": "8621 RAIN SONG RD",
-      "subdivision": "SUNRISE PRESERVE",
-      "soldPrice": "$445,000",
-      "soldDate": "2026-11-19",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,677",
-      "yearBuilt": 2019,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,37 +142,37 @@
       "avgPrice": "$327,378",
       "avgPricePerSqFt": "$197",
       "avgLivingSqFt": "1,660",
-      "avgDom": 117
+      "avgDom": 118
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 80,
-      "avgPrice": "$281,958",
-      "avgPricePerSqFt": "$222",
-      "avgLivingSqFt": "1,264",
-      "avgDom": 127
+      "activeCount": 79,
+      "avgPrice": "$279,889",
+      "avgPricePerSqFt": "$221",
+      "avgLivingSqFt": "1,261",
+      "avgDom": 129
     },
     {
       "tier": "2006to2019",
       "label": "2006 \u2013 2019",
       "rangeLabel": "2006 through 2019",
-      "activeCount": 8,
-      "avgPrice": "$393,850",
-      "avgPricePerSqFt": "$233",
-      "avgLivingSqFt": "1,697",
-      "avgDom": 69
+      "activeCount": 9,
+      "avgPrice": "$402,311",
+      "avgPricePerSqFt": "$241",
+      "avgLivingSqFt": "1,678",
+      "avgDom": 62
     },
     {
       "tier": "2020plus",
       "label": "2020 & Newer",
       "rangeLabel": "2020 or newer",
       "activeCount": 11,
-      "avgPrice": "$351,623",
-      "avgPricePerSqFt": "$221",
+      "avgPrice": "$350,714",
+      "avgPricePerSqFt": "$220",
       "avgLivingSqFt": "1,590",
-      "avgDom": 73
+      "avgDom": 74
     }
   ],
   "condoTiersScope": {
@@ -196,8 +196,8 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 46,
-      "soldCount": 228,
+      "activeCount": 45,
+      "soldCount": 230,
       "soldMedianPricePerSqFt": "$259",
       "soldMedianPrice": "$475,000",
       "lowSample": false
@@ -205,7 +205,7 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 41,
+      "activeCount": 40,
       "soldCount": 216,
       "soldMedianPricePerSqFt": "$277",
       "soldMedianPrice": "$606,000",
@@ -214,10 +214,10 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 142,
-      "soldCount": 556,
+      "activeCount": 144,
+      "soldCount": 558,
       "soldMedianPricePerSqFt": "$242",
-      "soldMedianPrice": "$437,500",
+      "soldMedianPrice": "$432,750",
       "lowSample": false
     }
   ],
@@ -227,19 +227,19 @@
     "monthsOfSupplySfhVilla": 3.1,
     "label": "seller's market",
     "activeCount": 229,
-    "sold365Count": 708,
-    "sold90Count": 154,
+    "sold365Count": 712,
+    "sold90Count": 155,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 570,
+      "soldCount": 571,
       "activeCount": 94,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$289"
     },
     "condo": {
-      "soldCount": 432,
+      "soldCount": 435,
       "activeCount": 135,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
@@ -247,7 +247,7 @@
   },
   "boating": {
     "activeWithDock": 1,
-    "activeWaterfront": 41
+    "activeWaterfront": 40
   },
   "marketQuestions": [
     {
@@ -268,12 +268,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 56 days on market and closed at 92.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 57 days on market and closed at 92.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Palmer Ranch homes have a dock?",
-      "a": "Of 41 active waterfront listings, 1 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 40 active waterfront listings, 1 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
