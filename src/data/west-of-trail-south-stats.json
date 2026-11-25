@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-24T12:13:42.190774+00:00",
+  "lastUpdated": "2026-11-25T12:02:33.200347+00:00",
   "counts": {
-    "sold": 345,
-    "pending": 22,
-    "active": 121,
+    "sold": 348,
+    "pending": 19,
+    "active": 122,
     "total": 367
   },
   "metrics": {
-    "avgPrice": "$642,613",
+    "avgPrice": "$642,497",
     "avgPricePerSqFt": "$328",
     "avgYearBuilt": 1980,
     "avgLivingSqFt": "1,767",
@@ -22,23 +22,23 @@
     "maxPrice": "$7,199,000"
   },
   "active": {
-    "count": 121,
-    "medianPrice": "$495,000",
+    "count": 122,
+    "medianPrice": "$496,400",
     "medianPricePerSqFt": "$326",
-    "waterfrontCount": 35,
+    "waterfrontCount": 37,
     "newConstructionCount": 2
   },
   "sold": {
-    "count": 70,
-    "medianPrice": "$440,444",
-    "medianDom": 46,
-    "saleToListRatio": "88.4%",
+    "count": 71,
+    "medianPrice": "$427,450",
+    "medianDom": 44,
+    "saleToListRatio": "88.1%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.8,
-    "sfhVilla": 5.7,
-    "blended": 5.7,
+    "condo": 5.7,
+    "sfhVilla": 5.8,
+    "blended": 5.8,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,58 @@
     }
   },
   "priceBands": {
-    "under900k": 91,
+    "under900k": 90,
     "band900kTo1_5m": 10,
-    "band1_5mTo3m": 14,
-    "band3mPlus": 6
+    "band1_5mTo3m": 15,
+    "band3mPlus": 7
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 121
+      "count": 122
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4692347",
+      "address": "1720 KESTRAL PARK WAY S #49",
+      "subdivision": "LANDINGS CARRIAGEHOUSE I",
+      "soldPrice": "$517,500",
+      "soldDate": "2026-11-24",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,744",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
+      "listingId": "A4706219",
+      "address": "1638 STARLING DR #105",
+      "subdivision": "LANDINGS SOUTH",
+      "soldPrice": "$275,000",
+      "soldDate": "2026-11-24",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,712",
+      "yearBuilt": 1987,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4690836",
+      "address": "7205 CURTISS AVENUE 1A AVE #1A",
+      "subdivision": "CROSSINGS",
+      "soldPrice": "$160,000",
+      "soldDate": "2026-11-24",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,065",
+      "yearBuilt": 1982,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4695466",
       "address": "1541 CARIBBEAN DR",
@@ -92,45 +131,6 @@
       "yearBuilt": 1985,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4708576",
-      "address": "1510 PELICAN POINT DR #BA270",
-      "subdivision": "PELICAN COVE VI",
-      "soldPrice": "$608,000",
-      "soldDate": "2026-11-19",
-      "bedrooms": 3,
-      "bathrooms": 3.0,
-      "livingSqFt": "1,635",
-      "yearBuilt": 1978,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4710404",
-      "address": "1627 BROOKHOUSE DR #263",
-      "subdivision": "PELICAN COVE XVI",
-      "soldPrice": "$250,000",
-      "soldDate": "2026-11-19",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,077",
-      "yearBuilt": 1980,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4707877",
-      "address": "4887 PEREGRINE POINT CIR E",
-      "subdivision": "LANDINGS UNIT 1",
-      "soldPrice": "$1,085,000",
-      "soldDate": "2026-11-17",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "2,417",
-      "yearBuilt": 1980,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$368,665",
       "avgPricePerSqFt": "$289",
       "avgLivingSqFt": "1,270",
-      "avgDom": 90
+      "avgDom": 91
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,089,714",
       "avgPricePerSqFt": "$482",
       "avgLivingSqFt": "2,071",
-      "avgDom": 74
+      "avgDom": 75
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$940,975",
       "avgPricePerSqFt": "$448",
       "avgLivingSqFt": "1,942",
-      "avgDom": 168
+      "avgDom": 170
     },
     {
       "tier": "2020plus",
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 31,
+      "activeCount": 33,
       "soldCount": 73,
       "soldMedianPricePerSqFt": "$370",
       "soldMedianPrice": "$495,000",
@@ -215,74 +215,74 @@
       "segment": "other_wf",
       "label": "Other waterfront",
       "activeCount": 4,
-      "soldCount": 13,
-      "soldMedianPricePerSqFt": "$338",
-      "soldMedianPrice": "$645,000",
+      "soldCount": 14,
+      "soldMedianPricePerSqFt": "$317",
+      "soldMedianPrice": "$622,500",
       "lowSample": false
     },
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 75,
-      "soldCount": 218,
-      "soldMedianPricePerSqFt": "$287",
-      "soldMedianPrice": "$425,000",
+      "activeCount": 74,
+      "soldCount": 220,
+      "soldMedianPricePerSqFt": "$286",
+      "soldMedianPrice": "$423,750",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.7,
-    "monthsOfSupplyCondo": 5.8,
-    "monthsOfSupplySfhVilla": 5.7,
+    "monthsOfSupply": 5.8,
+    "monthsOfSupplyCondo": 5.7,
+    "monthsOfSupplySfhVilla": 5.8,
     "label": "balanced market",
-    "activeCount": 121,
-    "sold365Count": 253,
-    "sold90Count": 70,
+    "activeCount": 122,
+    "sold365Count": 254,
+    "sold90Count": 71,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 179,
-      "activeCount": 50,
+      "activeCount": 51,
       "soldMedianPrice": "$535,000",
       "soldMedianPricePerSqFt": "$327"
     },
     "condo": {
-      "soldCount": 166,
+      "soldCount": 169,
       "activeCount": 71,
       "soldMedianPrice": "$335,000",
-      "soldMedianPricePerSqFt": "$255"
+      "soldMedianPricePerSqFt": "$253"
     }
   },
   "boating": {
-    "activeWithDock": 18,
-    "activeWaterfront": 35
+    "activeWithDock": 20,
+    "activeWaterfront": 37
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 121 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 122 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.8 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail South?",
-      "a": "Single-family homes sell around $535,000 ($327/sq ft), while condos, villas and townhouses sell around $335,000 ($255/sq ft)."
+      "a": "Single-family homes sell around $535,000 ($327/sq ft), while condos, villas and townhouses sell around $335,000 ($253/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $495,000."
+      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $496,400."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail South?",
-      "a": "Recently sold homes took a median 46 days on market and closed at 88.4% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 44 days on market and closed at 88.1% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many West Of Trail South homes have a dock?",
-      "a": "Of 35 active waterfront listings, 18 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 37 active waterfront listings, 20 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",

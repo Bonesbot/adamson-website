@@ -2,15 +2,15 @@
   "areaSlug": "west-of-trail-core",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-24T12:13:40.617019+00:00",
+  "lastUpdated": "2026-11-25T12:02:31.674690+00:00",
   "counts": {
-    "sold": 294,
-    "pending": 18,
-    "active": 101,
+    "sold": 295,
+    "pending": 17,
+    "active": 104,
     "total": 312
   },
   "metrics": {
-    "avgPrice": "$2,097,479",
+    "avgPrice": "$2,097,319",
     "avgPricePerSqFt": "$661",
     "avgYearBuilt": 1982,
     "avgLivingSqFt": "2,752",
@@ -22,23 +22,23 @@
     "maxPrice": "$28,000,000"
   },
   "active": {
-    "count": 101,
-    "medianPrice": "$2,050,000",
-    "medianPricePerSqFt": "$767",
+    "count": 104,
+    "medianPrice": "$2,022,500",
+    "medianPricePerSqFt": "$766",
     "waterfrontCount": 24,
-    "newConstructionCount": 26
+    "newConstructionCount": 28
   },
   "sold": {
-    "count": 47,
-    "medianPrice": "$1,747,200",
-    "medianDom": 47,
-    "saleToListRatio": "88.0%",
+    "count": 48,
+    "medianPrice": "$1,748,600",
+    "medianDom": 45,
+    "saleToListRatio": "88.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
     "condo": 6.0,
-    "sfhVilla": 5.6,
-    "blended": 5.7,
+    "sfhVilla": 5.8,
+    "blended": 5.8,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 25,
+    "under900k": 26,
     "band900kTo1_5m": 15,
-    "band1_5mTo3m": 20,
-    "band3mPlus": 41
+    "band1_5mTo3m": 21,
+    "band3mPlus": 42
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 101
+      "count": 104
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4707260",
+      "address": "1749 LINCOLN PARK CIR",
+      "subdivision": "LINCOLN PARK ON HUDSON BAYOU",
+      "soldPrice": "$3,300,000",
+      "soldDate": "2026-11-23",
+      "bedrooms": 4,
+      "bathrooms": 3.5,
+      "livingSqFt": "3,020",
+      "yearBuilt": 2001,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
     {
       "listingId": "A4683855",
       "address": "1504 S LODGE DR",
@@ -118,19 +131,6 @@
       "yearBuilt": 1972,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "TB8545219",
-      "address": "2720 GOLDENROD ST",
-      "subdivision": "SOUTH GATE",
-      "soldPrice": "$482,500",
-      "soldDate": "2026-11-16",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,547",
-      "yearBuilt": 1957,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$487,000",
       "avgPricePerSqFt": "$395",
       "avgLivingSqFt": "1,215",
-      "avgDom": 122
+      "avgDom": 123
     },
     {
       "tier": "1990to2005",
@@ -188,9 +188,9 @@
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
       "activeCount": 22,
-      "soldCount": 32,
+      "soldCount": 33,
       "soldMedianPricePerSqFt": "$1,052",
-      "soldMedianPrice": "$4,850,000",
+      "soldMedianPrice": "$4,450,000",
       "lowSample": false
     },
     {
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 76,
+      "activeCount": 79,
       "soldCount": 247,
       "soldMedianPricePerSqFt": "$577",
       "soldMedianPrice": "$1,485,000",
@@ -222,21 +222,21 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.7,
+    "monthsOfSupply": 5.8,
     "monthsOfSupplyCondo": 6.0,
-    "monthsOfSupplySfhVilla": 5.6,
+    "monthsOfSupplySfhVilla": 5.8,
     "label": "balanced market",
-    "activeCount": 101,
-    "sold365Count": 214,
-    "sold90Count": 47,
+    "activeCount": 104,
+    "sold365Count": 215,
+    "sold90Count": 48,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 273,
-      "activeCount": 94,
-      "soldMedianPrice": "$1,600,000",
-      "soldMedianPricePerSqFt": "$644"
+      "soldCount": 274,
+      "activeCount": 97,
+      "soldMedianPrice": "$1,607,500",
+      "soldMedianPricePerSqFt": "$645"
     },
     "condo": {
       "soldCount": 21,
@@ -253,22 +253,22 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail Core a buyer's or seller's market right now?",
-      "a": "With 101 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 5.7 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 104 active listings and roughly 18 closed sales a month (trailing 12 months), West Of Trail Core has about 5.8 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on West Of Trail Core?",
-      "a": "Single-family homes sell around $1,600,000 ($644/sq ft), while condos, villas and townhouses sell around $315,000 ($317/sq ft)."
+      "a": "Single-family homes sell around $1,607,500 ($645/sq ft), while condos, villas and townhouses sell around $315,000 ($317/sq ft)."
     },
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail Core?",
-      "a": "Active listings run from $1,000 to $28,000,000, with a median asking price of $2,050,000."
+      "a": "Active listings run from $1,000 to $28,000,000, with a median asking price of $2,022,500."
     },
     {
       "facet": "speed",
       "q": "How quickly do homes sell on West Of Trail Core?",
-      "a": "Recently sold homes took a median 47 days on market and closed at 88.0% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 45 days on market and closed at 88.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
