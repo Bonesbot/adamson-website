@@ -2,18 +2,18 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-25T12:02:34.744128+00:00",
+  "lastUpdated": "2026-11-26T12:01:31.129416+00:00",
   "counts": {
-    "sold": 1007,
+    "sold": 1009,
     "pending": 60,
-    "active": 228,
-    "total": 1067
+    "active": 230,
+    "total": 1069
   },
   "metrics": {
-    "avgPrice": "$559,214",
+    "avgPrice": "$558,963",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
-    "avgLivingSqFt": "2,042",
+    "avgLivingSqFt": "2,041",
     "avgLotSqFt": null,
     "avgDom": 78
   },
@@ -22,11 +22,11 @@
     "maxPrice": "$3,199,000"
   },
   "active": {
-    "count": 228,
+    "count": 230,
     "medianPrice": "$415,000",
     "medianPricePerSqFt": "$245",
     "waterfrontCount": 41,
-    "newConstructionCount": 33
+    "newConstructionCount": 35
   },
   "sold": {
     "count": 154,
@@ -37,8 +37,8 @@
   },
   "monthsOfSupply": {
     "condo": 6.3,
-    "sfhVilla": 3.0,
-    "blended": 3.8,
+    "sfhVilla": 3.1,
+    "blended": 3.9,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,32 @@
     }
   },
   "priceBands": {
-    "under900k": 214,
-    "band900kTo1_5m": 13,
+    "under900k": 215,
+    "band900kTo1_5m": 14,
     "band1_5mTo3m": 1,
     "band3mPlus": 0
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 228
+      "count": 230
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4708424",
+      "address": "12028 LEGACY ESTATES BLVD",
+      "subdivision": "LEGACY ESTATES ON PALMER RANCH",
+      "soldPrice": "$1,100,000",
+      "soldDate": "2026-11-24",
+      "bedrooms": 3,
+      "bathrooms": 3.5,
+      "livingSqFt": "2,862",
+      "yearBuilt": 2017,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4709441",
       "address": "4735 WHITE TAIL LN",
@@ -107,28 +120,15 @@
       "isWaterfront": false
     },
     {
-      "listingId": "A4694778",
-      "address": "5157 COTE DU RHONE WAY",
-      "subdivision": "SILVER OAK",
-      "soldPrice": "$700,000",
-      "soldDate": "2026-11-20",
+      "listingId": "A4706365",
+      "address": "7632 BERGAMO AVE",
+      "subdivision": "VILLAGEWALK",
+      "soldPrice": "$365,000",
+      "soldDate": "2026-11-21",
       "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,489",
+      "bathrooms": 2.5,
+      "livingSqFt": "1,672",
       "yearBuilt": 2004,
-      "propertyType": "Residential",
-      "isWaterfront": false
-    },
-    {
-      "listingId": "A4705496",
-      "address": "8967 GREY OAKS AVE",
-      "subdivision": "STONEYBROOK GOLF & COUNTRY CLUB",
-      "soldPrice": "$750,000",
-      "soldDate": "2026-11-19",
-      "bedrooms": 3,
-      "bathrooms": 2.0,
-      "livingSqFt": "2,315",
-      "yearBuilt": 1995,
       "propertyType": "Residential",
       "isWaterfront": false
     }
@@ -139,20 +139,20 @@
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
       "activeCount": 36,
-      "avgPrice": "$327,378",
+      "avgPrice": "$327,239",
       "avgPricePerSqFt": "$197",
       "avgLivingSqFt": "1,660",
-      "avgDom": 119
+      "avgDom": 120
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
       "activeCount": 79,
-      "avgPrice": "$279,762",
+      "avgPrice": "$279,584",
       "avgPricePerSqFt": "$221",
       "avgLivingSqFt": "1,261",
-      "avgDom": 130
+      "avgDom": 131
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$400,756",
       "avgPricePerSqFt": "$241",
       "avgLivingSqFt": "1,678",
-      "avgDom": 63
+      "avgDom": 64
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$350,714",
       "avgPricePerSqFt": "$220",
       "avgLivingSqFt": "1,590",
-      "avgDom": 75
+      "avgDom": 76
     }
   ],
   "condoTiersScope": {
@@ -196,8 +196,8 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 45,
-      "soldCount": 230,
+      "activeCount": 46,
+      "soldCount": 232,
       "soldMedianPricePerSqFt": "$259",
       "soldMedianPrice": "$475,000",
       "lowSample": false
@@ -214,7 +214,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 142,
+      "activeCount": 143,
       "soldCount": 559,
       "soldMedianPricePerSqFt": "$243",
       "soldMedianPrice": "$435,000",
@@ -222,24 +222,24 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 3.8,
+    "monthsOfSupply": 3.9,
     "monthsOfSupplyCondo": 6.3,
-    "monthsOfSupplySfhVilla": 3.0,
+    "monthsOfSupplySfhVilla": 3.1,
     "label": "seller's market",
-    "activeCount": 228,
-    "sold365Count": 711,
+    "activeCount": 230,
+    "sold365Count": 713,
     "sold90Count": 154,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 572,
-      "activeCount": 93,
+      "soldCount": 573,
+      "activeCount": 95,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$289"
     },
     "condo": {
-      "soldCount": 435,
+      "soldCount": 436,
       "activeCount": 135,
       "soldMedianPrice": "$325,000",
       "soldMedianPricePerSqFt": "$211"
@@ -253,7 +253,7 @@
     {
       "facet": "balance",
       "q": "Is Palmer Ranch a buyer's or seller's market right now?",
-      "a": "With 228 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.8 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 230 active listings and roughly 59 closed sales a month (trailing 12 months), Palmer Ranch has about 3.9 months of supply \u2014 a seller's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",

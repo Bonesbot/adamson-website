@@ -2,18 +2,18 @@
   "areaSlug": "siesta-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-25T12:02:29.976598+00:00",
+  "lastUpdated": "2026-11-26T12:01:26.064722+00:00",
   "counts": {
-    "sold": 779,
-    "pending": 41,
-    "active": 299,
-    "total": 820
+    "sold": 781,
+    "pending": 42,
+    "active": 297,
+    "total": 823
   },
   "metrics": {
-    "avgPrice": "$1,339,276",
+    "avgPrice": "$1,338,689",
     "avgPricePerSqFt": "$695",
     "avgYearBuilt": 1979,
-    "avgLivingSqFt": "1,767",
+    "avgLivingSqFt": "1,769",
     "avgLotSqFt": null,
     "avgDom": 100
   },
@@ -22,23 +22,23 @@
     "maxPrice": "$26,000,000"
   },
   "active": {
-    "count": 299,
+    "count": 297,
     "medianPrice": "$1,100,000",
-    "medianPricePerSqFt": "$740",
-    "waterfrontCount": 175,
-    "newConstructionCount": 44
+    "medianPricePerSqFt": "$742",
+    "waterfrontCount": 173,
+    "newConstructionCount": 45
   },
   "sold": {
-    "count": 99,
-    "medianPrice": "$995,000",
-    "medianDom": 71,
-    "saleToListRatio": "89.3%",
+    "count": 100,
+    "medianPrice": "$987,500",
+    "medianDom": 78,
+    "saleToListRatio": "89.2%",
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 8.0,
+    "condo": 7.8,
     "sfhVilla": 7.5,
-    "blended": 7.8,
+    "blended": 7.7,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,19 +54,45 @@
     }
   },
   "priceBands": {
-    "under900k": 137,
+    "under900k": 135,
     "band900kTo1_5m": 46,
-    "band1_5mTo3m": 55,
-    "band3mPlus": 61
+    "band1_5mTo3m": 54,
+    "band3mPlus": 62
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 299
+      "count": 297
     }
   ],
   "buildingClasses": [],
   "recentSoldComps": [
+    {
+      "listingId": "A4700807",
+      "address": "801 EDGEMERE LN",
+      "subdivision": "SIESTA BEACH",
+      "soldPrice": "$1,225,000",
+      "soldDate": "2026-11-25",
+      "bedrooms": 3,
+      "bathrooms": 2.0,
+      "livingSqFt": "1,542",
+      "yearBuilt": 1969,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
+    {
+      "listingId": "A4651929",
+      "address": "6713 MIDNIGHT PASS RD #4",
+      "subdivision": "CASA SIESTA",
+      "soldPrice": "$305,000",
+      "soldDate": "2026-11-24",
+      "bedrooms": 1,
+      "bathrooms": 1.0,
+      "livingSqFt": "598",
+      "yearBuilt": 1974,
+      "propertyType": "Residential",
+      "isWaterfront": false
+    },
     {
       "listingId": "A4699270",
       "address": "5451 SHADOW LAWN DR",
@@ -105,32 +131,6 @@
       "yearBuilt": 1982,
       "propertyType": "Residential",
       "isWaterfront": true
-    },
-    {
-      "listingId": "A4683544",
-      "address": "5920 MIDNIGHT PASS RD #1003",
-      "subdivision": "SARASOTA SURF & RACQUET",
-      "soldPrice": "$1,254,775",
-      "soldDate": "2026-11-18",
-      "bedrooms": 2,
-      "bathrooms": 2.0,
-      "livingSqFt": "1,334",
-      "yearBuilt": 1971,
-      "propertyType": "Residential",
-      "isWaterfront": true
-    },
-    {
-      "listingId": "A4706305",
-      "address": "643 CALLE DEL OTONO",
-      "subdivision": "SARASOTA BEACH",
-      "soldPrice": "$850,000",
-      "soldDate": "2026-11-16",
-      "bedrooms": 2,
-      "bathrooms": 1.5,
-      "livingSqFt": "725",
-      "yearBuilt": 1961,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -138,11 +138,11 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 174,
-      "avgPrice": "$804,264",
-      "avgPricePerSqFt": "$690",
-      "avgLivingSqFt": "1,165",
-      "avgDom": 117
+      "activeCount": 171,
+      "avgPrice": "$796,942",
+      "avgPricePerSqFt": "$692",
+      "avgLivingSqFt": "1,149",
+      "avgDom": 118
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$1,491,112",
       "avgPricePerSqFt": "$735",
       "avgLivingSqFt": "2,084",
-      "avgDom": 139
+      "avgDom": 140
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$2,689,000",
       "avgPricePerSqFt": "$1,042",
       "avgLivingSqFt": "2,557",
-      "avgDom": 83
+      "avgDom": 84
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$4,826,111",
       "avgPricePerSqFt": "$1,456",
       "avgLivingSqFt": "3,417",
-      "avgDom": 222
+      "avgDom": 223
     }
   ],
   "condoTiersScope": {
@@ -187,7 +187,7 @@
     {
       "segment": "gulf_beachfront",
       "label": "Gulf / Beachfront",
-      "activeCount": 81,
+      "activeCount": 80,
       "soldCount": 276,
       "soldMedianPricePerSqFt": "$755",
       "soldMedianPrice": "$1,000,000",
@@ -196,7 +196,7 @@
     {
       "segment": "bay_canal",
       "label": "Bay / Canal-front",
-      "activeCount": 90,
+      "activeCount": 89,
       "soldCount": 240,
       "soldMedianPricePerSqFt": "$582",
       "soldMedianPrice": "$1,115,000",
@@ -224,39 +224,39 @@
       "segment": "none",
       "label": "No water",
       "activeCount": 76,
-      "soldCount": 152,
+      "soldCount": 154,
       "soldMedianPricePerSqFt": "$575",
       "soldMedianPrice": "$773,125",
       "lowSample": false
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 7.8,
-    "monthsOfSupplyCondo": 8.0,
+    "monthsOfSupply": 7.7,
+    "monthsOfSupplyCondo": 7.8,
     "monthsOfSupplySfhVilla": 7.5,
     "label": "buyer's market",
-    "activeCount": 299,
-    "sold365Count": 462,
-    "sold90Count": 99,
+    "activeCount": 297,
+    "sold365Count": 463,
+    "sold90Count": 100,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 237,
-      "activeCount": 102,
-      "soldMedianPrice": "$1,527,000",
-      "soldMedianPricePerSqFt": "$667"
+      "soldCount": 238,
+      "activeCount": 103,
+      "soldMedianPrice": "$1,526,000",
+      "soldMedianPricePerSqFt": "$668"
     },
     "condo": {
-      "soldCount": 542,
-      "activeCount": 197,
-      "soldMedianPrice": "$795,500",
+      "soldCount": 543,
+      "activeCount": 194,
+      "soldMedianPrice": "$795,000",
       "soldMedianPricePerSqFt": "$628"
     }
   },
   "boating": {
-    "activeWithDock": 77,
-    "activeWaterfront": 175
+    "activeWithDock": 78,
+    "activeWaterfront": 173
   },
   "marketQuestions": [
     {
@@ -267,12 +267,12 @@
     {
       "facet": "balance",
       "q": "Is Siesta Key a buyer's or seller's market right now?",
-      "a": "With 299 active listings and roughly 38 closed sales a month (trailing 12 months), Siesta Key has about 7.8 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 297 active listings and roughly 39 closed sales a month (trailing 12 months), Siesta Key has about 7.7 months of supply \u2014 a buyer's market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
       "q": "What does a single-family home cost versus a condo on Siesta Key?",
-      "a": "Single-family homes sell around $1,527,000 ($667/sq ft), while condos, villas and townhouses sell around $795,500 ($628/sq ft)."
+      "a": "Single-family homes sell around $1,526,000 ($668/sq ft), while condos, villas and townhouses sell around $795,000 ($628/sq ft)."
     },
     {
       "facet": "range",
@@ -282,12 +282,12 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Siesta Key?",
-      "a": "Recently sold homes took a median 71 days on market and closed at 89.3% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 78 days on market and closed at 89.2% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
       "q": "Can I keep a boat \u2014 how many Siesta Key homes have a dock?",
-      "a": "Of 175 active waterfront listings, 77 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 173 active waterfront listings, 78 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
