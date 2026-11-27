@@ -2,15 +2,15 @@
   "areaSlug": "palmer-ranch",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-26T12:01:31.129416+00:00",
+  "lastUpdated": "2026-11-27T12:21:19.203250+00:00",
   "counts": {
-    "sold": 1009,
-    "pending": 60,
+    "sold": 1010,
+    "pending": 59,
     "active": 230,
     "total": 1069
   },
   "metrics": {
-    "avgPrice": "$558,963",
+    "avgPrice": "$558,939",
     "avgPricePerSqFt": "$262",
     "avgYearBuilt": 2001,
     "avgLivingSqFt": "2,041",
@@ -29,10 +29,10 @@
     "newConstructionCount": 35
   },
   "sold": {
-    "count": 154,
-    "medianPrice": "$476,000",
-    "medianDom": 56,
-    "saleToListRatio": "92.2%",
+    "count": 149,
+    "medianPrice": "$469,000",
+    "medianDom": 57,
+    "saleToListRatio": "92.3%",
     "windowDays": 90
   },
   "monthsOfSupply": {
@@ -81,6 +81,19 @@
       "isWaterfront": false
     },
     {
+      "listingId": "A4708422",
+      "address": "5924 MARIPOSA LN",
+      "subdivision": "ISLES OF SARASOTA UNIT 2B",
+      "soldPrice": "$770,000",
+      "soldDate": "2026-11-24",
+      "bedrooms": 4,
+      "bathrooms": 4.0,
+      "livingSqFt": "2,521",
+      "yearBuilt": 2007,
+      "propertyType": "Residential",
+      "isWaterfront": true
+    },
+    {
       "listingId": "A4709441",
       "address": "4735 WHITE TAIL LN",
       "subdivision": "DEER CREEK",
@@ -118,19 +131,6 @@
       "yearBuilt": 1998,
       "propertyType": "Residential",
       "isWaterfront": false
-    },
-    {
-      "listingId": "A4706365",
-      "address": "7632 BERGAMO AVE",
-      "subdivision": "VILLAGEWALK",
-      "soldPrice": "$365,000",
-      "soldDate": "2026-11-21",
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "livingSqFt": "1,672",
-      "yearBuilt": 2004,
-      "propertyType": "Residential",
-      "isWaterfront": false
     }
   ],
   "condoTiers": [
@@ -142,7 +142,7 @@
       "avgPrice": "$327,239",
       "avgPricePerSqFt": "$197",
       "avgLivingSqFt": "1,660",
-      "avgDom": 120
+      "avgDom": 121
     },
     {
       "tier": "1990to2005",
@@ -152,7 +152,7 @@
       "avgPrice": "$279,584",
       "avgPricePerSqFt": "$221",
       "avgLivingSqFt": "1,261",
-      "avgDom": 131
+      "avgDom": 132
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$400,756",
       "avgPricePerSqFt": "$241",
       "avgLivingSqFt": "1,678",
-      "avgDom": 64
+      "avgDom": 65
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$350,714",
       "avgPricePerSqFt": "$220",
       "avgLivingSqFt": "1,590",
-      "avgDom": 76
+      "avgDom": 77
     }
   ],
   "condoTiersScope": {
@@ -206,9 +206,9 @@
       "segment": "other_wf",
       "label": "Other waterfront",
       "activeCount": 41,
-      "soldCount": 216,
+      "soldCount": 217,
       "soldMedianPricePerSqFt": "$277",
-      "soldMedianPrice": "$606,000",
+      "soldMedianPrice": "$607,000",
       "lowSample": false
     },
     {
@@ -227,13 +227,13 @@
     "monthsOfSupplySfhVilla": 3.1,
     "label": "seller's market",
     "activeCount": 230,
-    "sold365Count": 713,
-    "sold90Count": 154,
+    "sold365Count": 711,
+    "sold90Count": 149,
     "method": "active / (trailing-12mo closed / 12)"
   },
   "propertyTypeSplit": {
     "single_family": {
-      "soldCount": 573,
+      "soldCount": 574,
       "activeCount": 95,
       "soldMedianPrice": "$650,000",
       "soldMedianPricePerSqFt": "$289"
@@ -268,7 +268,7 @@
     {
       "facet": "speed",
       "q": "How quickly do homes sell on Palmer Ranch?",
-      "a": "Recently sold homes took a median 56 days on market and closed at 92.2% of original list price (trailing 90 days)."
+      "a": "Recently sold homes took a median 57 days on market and closed at 92.3% of original list price (trailing 90 days)."
     },
     {
       "facet": "boating",
