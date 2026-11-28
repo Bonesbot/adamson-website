@@ -2,11 +2,11 @@
   "areaSlug": "longboat-key",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-27T12:21:12.695597+00:00",
+  "lastUpdated": "2026-11-28T11:54:34.371283+00:00",
   "counts": {
     "sold": 1300,
     "pending": 35,
-    "active": 286,
+    "active": 288,
     "total": 1335
   },
   "metrics": {
@@ -22,9 +22,9 @@
     "maxPrice": "$30,300,000"
   },
   "active": {
-    "count": 286,
+    "count": 288,
     "medianPrice": "$1,192,500",
-    "medianPricePerSqFt": "$720",
+    "medianPricePerSqFt": "$719",
     "waterfrontCount": 203,
     "newConstructionCount": 28
   },
@@ -37,14 +37,14 @@
   },
   "monthsOfSupply": {
     "condo": 6.2,
-    "sfhVilla": 8.3,
+    "sfhVilla": 8.4,
     "blended": 6.8,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
     "medianMonthlyAssociation": "$1,600",
-    "medianMonthlyCondoFee": "$1,717",
+    "medianMonthlyCondoFee": "$1,718",
     "minMonthlyCondoFee": "$125",
     "maxMonthlyCondoFee": "$10,909",
     "condoFeeRange": {
@@ -55,14 +55,14 @@
   },
   "priceBands": {
     "under900k": 115,
-    "band900kTo1_5m": 52,
-    "band1_5mTo3m": 54,
+    "band900kTo1_5m": 53,
+    "band1_5mTo3m": 55,
     "band3mPlus": 65
   },
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 286
+      "count": 288
     }
   ],
   "buildingClasses": [],
@@ -138,10 +138,10 @@
       "tier": "pre1990",
       "label": "Pre-1990",
       "rangeLabel": "before 1990",
-      "activeCount": 152,
-      "avgPrice": "$839,766",
+      "activeCount": 154,
+      "avgPrice": "$847,522",
       "avgPricePerSqFt": "$623",
-      "avgLivingSqFt": "1,348",
+      "avgLivingSqFt": "1,362",
       "avgDom": 137
     },
     {
@@ -152,7 +152,7 @@
       "avgPrice": "$2,717,096",
       "avgPricePerSqFt": "$961",
       "avgLivingSqFt": "2,553",
-      "avgDom": 108
+      "avgDom": 109
     },
     {
       "tier": "2006to2019",
@@ -162,7 +162,7 @@
       "avgPrice": "$5,661,250",
       "avgPricePerSqFt": "$1,509",
       "avgLivingSqFt": "3,687",
-      "avgDom": 97
+      "avgDom": 98
     },
     {
       "tier": "2020plus",
@@ -172,7 +172,7 @@
       "avgPrice": "$8,700,625",
       "avgPricePerSqFt": "$2,156",
       "avgLivingSqFt": "3,575",
-      "avgDom": 121
+      "avgDom": 122
     }
   ],
   "condoTiersScope": {
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 41,
+      "activeCount": 42,
       "soldCount": 113,
       "soldMedianPricePerSqFt": "$615",
       "soldMedianPrice": "$1,165,000",
@@ -223,7 +223,7 @@
     {
       "segment": "none",
       "label": "No water",
-      "activeCount": 42,
+      "activeCount": 43,
       "soldCount": 185,
       "soldMedianPricePerSqFt": "$479",
       "soldMedianPrice": "$850,000",
@@ -233,9 +233,9 @@
   "marketBalance": {
     "monthsOfSupply": 6.8,
     "monthsOfSupplyCondo": 6.2,
-    "monthsOfSupplySfhVilla": 8.3,
+    "monthsOfSupplySfhVilla": 8.4,
     "label": "balanced market",
-    "activeCount": 286,
+    "activeCount": 288,
     "sold365Count": 506,
     "sold90Count": 90,
     "method": "active / (trailing-12mo closed / 12)"
@@ -249,7 +249,7 @@
     },
     "condo": {
       "soldCount": 965,
-      "activeCount": 202,
+      "activeCount": 204,
       "soldMedianPrice": "$1,000,000",
       "soldMedianPricePerSqFt": "$646"
     }
@@ -267,7 +267,7 @@
     {
       "facet": "balance",
       "q": "Is it a good time to buy on Longboat Key?",
-      "a": "With 286 active listings and roughly 42 closed sales a month (trailing 12 months), Longboat Key has about 6.8 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 288 active listings and roughly 42 closed sales a month (trailing 12 months), Longboat Key has about 6.8 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "speed",
@@ -282,7 +282,7 @@
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on Longboat Key?",
-      "a": "The median monthly condo fee is $1,717 and the median monthly association fee is $1,600."
+      "a": "The median monthly condo fee is $1,718 and the median monthly association fee is $1,600."
     }
   ],
   "costBreakdown90": {

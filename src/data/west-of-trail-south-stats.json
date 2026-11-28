@@ -2,11 +2,11 @@
   "areaSlug": "west-of-trail-south",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-27T12:21:17.609924+00:00",
+  "lastUpdated": "2026-11-28T11:54:40.398903+00:00",
   "counts": {
     "sold": 348,
     "pending": 19,
-    "active": 122,
+    "active": 123,
     "total": 367
   },
   "metrics": {
@@ -22,9 +22,9 @@
     "maxPrice": "$7,199,000"
   },
   "active": {
-    "count": 122,
-    "medianPrice": "$496,400",
-    "medianPricePerSqFt": "$326",
+    "count": 123,
+    "medianPrice": "$497,800",
+    "medianPricePerSqFt": "$325",
     "waterfrontCount": 37,
     "newConstructionCount": 2
   },
@@ -36,25 +36,25 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 5.8,
+    "condo": 5.9,
     "sfhVilla": 5.9,
-    "blended": 5.8,
+    "blended": 5.9,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
   "fees": {
     "medianMonthlyAssociation": "$842",
-    "medianMonthlyCondoFee": "$936",
+    "medianMonthlyCondoFee": "$937",
     "minMonthlyCondoFee": "$160",
     "maxMonthlyCondoFee": "$1,710",
     "condoFeeRange": {
       "min": 160,
-      "median": 936,
+      "median": 937,
       "max": 1710
     }
   },
   "priceBands": {
-    "under900k": 90,
+    "under900k": 91,
     "band900kTo1_5m": 10,
     "band1_5mTo3m": 15,
     "band3mPlus": 7
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 122
+      "count": 123
     }
   ],
   "buildingClasses": [],
@@ -142,17 +142,17 @@
       "avgPrice": "$368,665",
       "avgPricePerSqFt": "$289",
       "avgLivingSqFt": "1,270",
-      "avgDom": 93
+      "avgDom": 94
     },
     {
       "tier": "1990to2005",
       "label": "1990 \u2013 2005",
       "rangeLabel": "1990 through 2005",
-      "activeCount": 7,
-      "avgPrice": "$1,089,714",
-      "avgPricePerSqFt": "$482",
-      "avgLivingSqFt": "2,071",
-      "avgDom": 77
+      "activeCount": 8,
+      "avgPrice": "$1,028,375",
+      "avgPricePerSqFt": "$460",
+      "avgLivingSqFt": "2,058",
+      "avgDom": 68
     },
     {
       "tier": "2006to2019",
@@ -205,7 +205,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 11,
+      "activeCount": 12,
       "soldCount": 38,
       "soldMedianPricePerSqFt": "$307",
       "soldMedianPrice": "$457,500",
@@ -231,11 +231,11 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 5.8,
-    "monthsOfSupplyCondo": 5.8,
+    "monthsOfSupply": 5.9,
+    "monthsOfSupplyCondo": 5.9,
     "monthsOfSupplySfhVilla": 5.9,
     "label": "balanced market",
-    "activeCount": 122,
+    "activeCount": 123,
     "sold365Count": 251,
     "sold90Count": 70,
     "method": "active / (trailing-12mo closed / 12)"
@@ -249,7 +249,7 @@
     },
     "condo": {
       "soldCount": 169,
-      "activeCount": 71,
+      "activeCount": 72,
       "soldMedianPrice": "$335,000",
       "soldMedianPricePerSqFt": "$253"
     }
@@ -262,7 +262,7 @@
     {
       "facet": "balance",
       "q": "Is West Of Trail South a buyer's or seller's market right now?",
-      "a": "With 122 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.8 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 123 active listings and roughly 21 closed sales a month (trailing 12 months), West Of Trail South has about 5.9 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -272,7 +272,7 @@
     {
       "facet": "range",
       "q": "What's the price range on West Of Trail South?",
-      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $496,400."
+      "a": "Active listings run from $95,000 to $7,199,000, with a median asking price of $497,800."
     },
     {
       "facet": "speed",
@@ -287,7 +287,7 @@
     {
       "facet": "fees",
       "q": "What are typical HOA and condo fees on West Of Trail South?",
-      "a": "The median monthly condo fee is $936 and the median monthly association fee is $842."
+      "a": "The median monthly condo fee is $937 and the median monthly association fee is $842."
     }
   ],
   "costBreakdown90": null

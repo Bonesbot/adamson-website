@@ -2,11 +2,11 @@
   "areaSlug": "west-bradenton",
   "source": "supabase",
   "status": "ok",
-  "lastUpdated": "2026-11-27T12:21:20.064960+00:00",
+  "lastUpdated": "2026-11-28T11:54:42.752856+00:00",
   "counts": {
     "sold": 369,
     "pending": 49,
-    "active": 165,
+    "active": 167,
     "total": 418
   },
   "metrics": {
@@ -22,10 +22,10 @@
     "maxPrice": "$6,890,000"
   },
   "active": {
-    "count": 165,
+    "count": 167,
     "medianPrice": "$469,999",
     "medianPricePerSqFt": "$279",
-    "waterfrontCount": 60,
+    "waterfrontCount": 61,
     "newConstructionCount": 46
   },
   "sold": {
@@ -36,9 +36,9 @@
     "windowDays": 90
   },
   "monthsOfSupply": {
-    "condo": 8.8,
-    "sfhVilla": 5.2,
-    "blended": 6.4,
+    "condo": 9.0,
+    "sfhVilla": 5.3,
+    "blended": 6.5,
     "method": "active / (trailing-12mo closed / 12)",
     "windowDays": 365
   },
@@ -54,7 +54,7 @@
     }
   },
   "priceBands": {
-    "under900k": 124,
+    "under900k": 126,
     "band900kTo1_5m": 22,
     "band1_5mTo3m": 13,
     "band3mPlus": 6
@@ -62,7 +62,7 @@
   "propertyTypes": [
     {
       "type": "Residential",
-      "count": 165
+      "count": 167
     }
   ],
   "buildingClasses": [],
@@ -157,7 +157,7 @@
     {
       "segment": "waterview",
       "label": "Water view (not waterfront)",
-      "activeCount": 25,
+      "activeCount": 26,
       "soldCount": 38,
       "soldMedianPricePerSqFt": "$264",
       "soldMedianPrice": "$434,000",
@@ -166,7 +166,7 @@
     {
       "segment": "other_wf",
       "label": "Other waterfront",
-      "activeCount": 11,
+      "activeCount": 12,
       "soldCount": 23,
       "soldMedianPricePerSqFt": "$267",
       "soldMedianPrice": "$407,500",
@@ -183,11 +183,11 @@
     }
   ],
   "marketBalance": {
-    "monthsOfSupply": 6.4,
-    "monthsOfSupplyCondo": 8.8,
-    "monthsOfSupplySfhVilla": 5.2,
+    "monthsOfSupply": 6.5,
+    "monthsOfSupplyCondo": 9.0,
+    "monthsOfSupplySfhVilla": 5.3,
     "label": "balanced market",
-    "activeCount": 165,
+    "activeCount": 167,
     "sold365Count": 310,
     "sold90Count": 69,
     "method": "active / (trailing-12mo closed / 12)"
@@ -195,26 +195,26 @@
   "propertyTypeSplit": {
     "single_family": {
       "soldCount": 160,
-      "activeCount": 57,
+      "activeCount": 58,
       "soldMedianPrice": "$750,000",
       "soldMedianPricePerSqFt": "$349"
     },
     "condo": {
       "soldCount": 209,
-      "activeCount": 108,
+      "activeCount": 109,
       "soldMedianPrice": "$396,000",
       "soldMedianPricePerSqFt": "$235"
     }
   },
   "boating": {
     "activeWithDock": 37,
-    "activeWaterfront": 60
+    "activeWaterfront": 61
   },
   "marketQuestions": [
     {
       "facet": "balance",
       "q": "Is West Bradenton a buyer's or seller's market right now?",
-      "a": "With 165 active listings and roughly 26 closed sales a month (trailing 12 months), West Bradenton has about 6.4 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
+      "a": "With 167 active listings and roughly 26 closed sales a month (trailing 12 months), West Bradenton has about 6.5 months of supply \u2014 a balanced market (under 5 favors sellers, over 7 favors buyers)."
     },
     {
       "facet": "type",
@@ -234,7 +234,7 @@
     {
       "facet": "boating",
       "q": "Can I keep a boat in West Bradenton, and how many homes have a dock?",
-      "a": "Of 60 active waterfront listings, 37 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
+      "a": "Of 61 active waterfront listings, 37 include a private dock; bay- and canal-front homes with a dock and lift command a clear premium over those without."
     },
     {
       "facet": "fees",
@@ -247,7 +247,7 @@
     {
       "slug": "west-bradenton-el-con-img-aqua",
       "name": "El Conquistador / IMG / Aqua",
-      "activeCount": 68,
+      "activeCount": 69,
       "pendingCount": 8,
       "activeMedianPrice": "$355,000",
       "soldCount": 105,
@@ -260,9 +260,9 @@
     {
       "slug": "west-bradenton-coral-shores-cortez",
       "name": "Coral Shores / Cortez",
-      "activeCount": 60,
+      "activeCount": 61,
       "pendingCount": 17,
-      "activeMedianPrice": "$537,000",
+      "activeMedianPrice": "$575,000",
       "soldCount": 108,
       "soldMedianPrice": "$482,500",
       "soldMedianPricePerSqFt": "$321",
@@ -323,8 +323,8 @@
             "soldMedianPrice": "$677,500",
             "soldMedianPricePerSqFt": "$323",
             "soldMedianDom": 36,
-            "activeCount": 37,
-            "activeMedianPrice": "$875,000",
+            "activeCount": 38,
+            "activeMedianPrice": "$862,000",
             "lowSample": false
           }
         ],
@@ -352,8 +352,8 @@
             "soldMedianPrice": "$384,499",
             "soldMedianPricePerSqFt": "$216",
             "soldMedianDom": 79,
-            "activeCount": 79,
-            "activeMedianPrice": "$340,000",
+            "activeCount": 80,
+            "activeMedianPrice": "$339,500",
             "lowSample": false
           }
         ],
